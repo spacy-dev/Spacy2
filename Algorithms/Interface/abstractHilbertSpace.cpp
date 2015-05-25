@@ -4,7 +4,7 @@
 
 #include "abstractFunctionSpaceElement.hh"
 #include "abstractScalarProduct.hh"
-#include "hilbertspacenorm.hh"
+#include "../hilbertSpaceNorm.hh"
 
 namespace Algorithm
 {

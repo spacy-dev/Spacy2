@@ -56,8 +56,6 @@ namespace Algorithm
   }
 
 
-  StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion() = default;
-
   StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, int maxit, double eps)
     : CGTerminationCriterion(maxit), tol2(tol*tol), eps2(eps*eps)
   {}

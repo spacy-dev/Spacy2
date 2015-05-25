@@ -13,7 +13,10 @@ namespace Algorithm
   public:
     virtual ~AbstractLinearSolver(){}
 
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const = 0;
+    virtual FunctionSpaceElement operator()(const FunctionSpaceElement&, const FunctionSpaceElement& y) const
+    {
+      return (*this)(y);
+    }
 
     virtual FunctionSpaceElement operator()(const FunctionSpaceElement& y) const = 0;
   };

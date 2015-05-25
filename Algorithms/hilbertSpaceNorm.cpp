@@ -1,7 +1,7 @@
-#include "hilbertspacenorm.hh"
+#include "hilbertSpaceNorm.hh"
 
-#include "abstractScalarProduct.hh"
-#include "abstractFunctionSpaceElement.hh"
+#include "Interface/abstractScalarProduct.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
 
 #include <cmath>
 

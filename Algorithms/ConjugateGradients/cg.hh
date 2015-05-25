@@ -8,14 +8,12 @@ namespace Algorithm
   /**
    * Standard preconditioned conjugate gradient method.
    */
-  template <class Matrix>
-  using CG = CGBase<Matrix,CGImplementationType::STANDARD>;
+  using CG = CGBase<CGImplementationType::STANDARD>;
 
   /**
    * Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is encountered.
    */
-  template <class Matrix>
-  using TCG = CGBase<Matrix,CGImplementationType::TRUNCATED>;
+  using TCG = CGBase<CGImplementationType::TRUNCATED>;
 
   /**
    * Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by \f$A\f$ and the preconditioner by \f$P\f$.
@@ -23,8 +21,7 @@ namespace Algorithm
    * restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the
    * regularization are neglishible.
    */
-  template <class Matrix>
-  using RCG = CGBase<Matrix,CGImplementationType::REGULARIZED>;
+  using RCG = CGBase<CGImplementationType::REGULARIZED>;
 
   /**
    * Hybrid preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction
@@ -33,8 +30,7 @@ namespace Algorithm
    * restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the
    * regularization are neglishible.
    */
-  template <class Matrix>
-  using HCG = CGBase<Matrix,CGImplementationType::HYBRID>;
+  using HCG = CGBase<CGImplementationType::HYBRID>;
 }
 
 #endif // ALGORITHM_CG_HH

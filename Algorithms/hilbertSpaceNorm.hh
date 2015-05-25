@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "abstractNorm.hh"
+#include "Interface/abstractNorm.hh"
 
 namespace Algorithm
 {

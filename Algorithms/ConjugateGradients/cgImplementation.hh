@@ -85,7 +85,7 @@ namespace Algorithm
    * The implementation follows Deuflhard/Weiser, Section 5.3.3.
    *
    */
-  template<class Matrix, CGImplementationType Impl = CGImplementationType::STANDARD>
+  template<CGImplementationType Impl = CGImplementationType::STANDARD>
   class CGBase : public CG_Detail::ChooseRegularization<Impl>
   {
     enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
@@ -98,7 +98,7 @@ namespace Algorithm
      * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
      * \param eps_ estimate for the maximal attainable accuracy (default=false).
      */
-    CGBase(const Operator<Matrix>& A, const Operator<Matrix>& P, bool verbose_ = true, double eps_ = 1e-12)
+    CGBase(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
         A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >()), verbose(verbose_)
     {
@@ -111,17 +111,17 @@ namespace Algorithm
      * @param b right hand side
      * @param tolerance tolerance of the termination criterion
      */
-    FunctionSpaceElement apply(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance)
+    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance)
     {
       terminate->setTolerance(tolerance);
-      apply(x,b);
+      solve(x,b);
     }
 
     /**
      * @param x initial guess
      * @param b right hand side
      */
-    FunctionSpaceElement apply(const FunctionSpaceElement& x, const FunctionSpaceElement& b)
+    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b)
     {
       this->initializeRegularization();
       if( Impl == CGImplementationType::STANDARD || Impl == CGImplementationType::TRUNCATED )
@@ -130,9 +130,7 @@ namespace Algorithm
       {
         FunctionSpaceElement y = x;
         while( result != Result::Converged && result != Result::TruncatedAtNonConvexity )
-        {
           y = cgLoop(x,b);
-        }
         return y;
       }
     }
@@ -219,6 +217,8 @@ namespace Algorithm
         q *= beta; q += Qr;  //  q = Qr + beta*q
         Pq *= beta; Pq += r; // Pq = r + beta*Pq
       }
+
+      return x;
     }
 
     /// Set string pre.
@@ -282,8 +282,8 @@ namespace Algorithm
       }
     }
 
-    const Operator<Matrix>& A_;
-    const Operator<Matrix>& P_;
+    const Operator& A_;
+    const Operator& P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
     bool verbose = false; ///
     Result result = Result::Failed; ///< information on the way cg did terminate

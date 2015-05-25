@@ -11,7 +11,7 @@ namespace Algorithm
   class CGTerminationCriterion
   {
   public:
-    explicit CGTerminationCriterion(unsigned maxIter = 1000) noexcept;
+    explicit CGTerminationCriterion(unsigned maxIter = 1000) noexcept ;
 
     virtual ~CGTerminationCriterion();
 
@@ -113,7 +113,7 @@ namespace Algorithm
     using CGTerminationCriterion::maximalNumberOfIterations_;
     using CGTerminationCriterion::reachedMaximalNumberOfIterations_;
   public:
-    StrakosTichyEnergyErrorTerminationCriterion();
+    StrakosTichyEnergyErrorTerminationCriterion() = default;
 
     /**
      * \brief constructor
