@@ -1,0 +1,10 @@
+language: cpp
+install:
+  - sudo pip install cpp-coveralls
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+after_success:
+  - coveralls --root .. -E ".*googletest.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" --gcov-options '\-lp'
