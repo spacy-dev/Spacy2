@@ -4,12 +4,12 @@
 
 ### Download
 Download via
-
-git clone https://github.com/lubkoll/FSA.git
+  - git clone https://github.com/lubkoll/FSA.git
 
 ### Installation
 Go to downloadd folder, i.e.
   - cd FSA
+and type
   - mkdir build
   - cd build
   - cmake ..
