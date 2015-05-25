@@ -10,6 +10,9 @@ namespace Algorithm
   class AbstractScalarProduct;
   class AbstractFunctionSpaceElement;
 
+  /**
+   * @brief Norm induced by a scalar product.
+   */
   class HilbertSpaceNorm : public AbstractNorm
   {
   public:
