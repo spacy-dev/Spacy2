@@ -1,6 +1,7 @@
-#ifndef AFFINECOVARIANTNEWTON_HH
-#define AFFINECOVARIANTNEWTON_HH
+#ifndef ALGORITHM_ALGORITHM_NEWTON_HH
+#define ALGORITHM_ALGORITHM_NEWTON_HH
 
+#include <cassert>
 #include <iostream>
 #include <memory>
 
@@ -91,10 +92,5 @@ namespace Algorithm
     double thetaMax_ = 0.75, thetaAim_ = 0.5;
     bool verbose_ = false;
   };
-
-  auto makeNewton(Operator& F, bool verbose = false)
-  {
-    return Newton(F,verbose);
-  }
 }
-#endif // AFFINECOVARIANTNEWTON_HH
+#endif // ALGORITHM_ALGORITHM_NEWTON_HH

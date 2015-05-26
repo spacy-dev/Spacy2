@@ -3,14 +3,14 @@
 //#include <armadillo>
 
 //#include "../../RFFGen/src/RFFGen.hh"
-//#include "ConjugateGradients/cg.hh"
-//#include "FunctionSpaces/RealNumbers/realSpace.hh"
+//#include "Algorithm/ConjugateGradients/cg.hh"
 //#include "FunctionSpaces/VectorSpace/vectorSpace.hh"
-//#include "Test/scalarRFFGenOperator.hh"
-//#include "Newton/affinecovariantnewton.hh"
-//#include "spaces.hh"
 //#include "FunctionSpaces/VectorSpace/cgSolver.hh"
-//#include "ConjugateGradients/jacobipreconditioner.hh"
+//#include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
+
+#include "Test/scalarRFFGenOperator.hh"
+#include "Algorithm/newton.hh"
+#include "spaces.hh"
 
 //namespace Algorithm
 //{
@@ -59,9 +59,15 @@ using namespace std;
 
 int main()
 {
-  cout << "Hello World!" << endl;
-//  using namespace RFFGen::CMath;
-//  using namespace Algorithm;
+  using namespace Algorithm;
+
+  using Spaces::R; // Real numbers
+
+  auto A = TestOperator(R); // operator
+  auto newton = Newton(A,true);
+  cout << "sol: " << newton.solve() << endl;
+
+  //  using namespace RFFGen::CMath;
 //  using Vector = arma::vec::fixed<10>;
 //  FunctionSpace vectorSpace(std::make_unique<VectorSpace<Vector> >());
 //  auto v0 = vectorSpace.element();
@@ -72,39 +78,12 @@ int main()
 //  CGSolver cg(B);//,jacobi);
 //  auto vsol = cg(v0,rhs);
 //  cout << vsol << endl;
-//  //  FunctionSpace R(std::make_unique<RealNumbers>());
-//  using Spaces::R;
-//  //  ExampleOperator_1 A(R);
+  //  FunctionSpace R(std::make_unique<RealNumbers>());
+  //  ExampleOperator_1 A(R);
 //  auto f = Exp() - 2;
 //  auto A = Algorithm::makeScalarRFFGenOperator( f , R );
-//  //  CG<double> cg(A);
-//  auto newton = Algorithm::makeNewton(A,true);
-//  //  AffineCovariantNewton<double> newton(A,true);
-//  using Algorithm::Norm;
-//  auto x = R.element();
-//  auto dx = R.element();
-//  dx.coefficient(0) = 1;
-//  //  auto x2 = R2.element();
-//  auto y = A(x);
-//  auto z = A.d1(x);
-//  auto sp = R.getScalarProduct();
-//  auto norm = R.getNorm();
-//  cout << x.spaceIndex() << endl;
-//  cout << x << endl;
-//  x.coefficient(0) = 5;
-//  cout << x << endl;
-//  //  cout << x2.spaceIndex() << endl;
-//  //  cout << x << endl;
-//  //  cout << x2 << endl;
-//  //  cout << "norm: " << (dynamic_cast<const HilbertSpaceNorm*>(&norm)!=nullptr) << endl;
-//  cout << norm(x) << endl;
-//  //  cout << "sp: " << (dynamic_cast<const RealProduct*>(&sp)!=nullptr) << endl;
-//  cout << sp(x,x) << endl;
-//  cout << x*x << endl;
-//  cout << "y: " << y << endl;
-//  cout << "z: " << z << endl;
-//  auto sol = newton.solve(x);
-//  cout << "sol: " << sol << endl;
+  //  CG<double> cg(A);
+
   return 0;
 }
 

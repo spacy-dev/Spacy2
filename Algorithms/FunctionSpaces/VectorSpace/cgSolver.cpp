@@ -3,7 +3,7 @@
 #include "../../Util/invalidargumentexception.hh"
 #include "../../operator.hh"
 #include "vectorSpaceElement.hh"
-#include "../ConjugateGradients/jacobipreconditioner.hh"
+#include "../Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
 namespace Algorithm
 {

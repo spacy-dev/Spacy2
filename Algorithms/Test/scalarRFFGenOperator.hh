@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_TEST_SCALAR_RFFGEN_OPERATOR_HH
 #define ALGORITHM_TEST_SCALAR_RFFGEN_OPERATOR_HH
 
+#include <cmath>
+
 #include "../operator.hh"
 #include "../functionSpace.hh"
 #include "../functionSpaceElement.hh"

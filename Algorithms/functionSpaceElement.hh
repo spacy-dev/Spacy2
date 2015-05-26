@@ -28,8 +28,6 @@ namespace Algorithm
 
     /**
      * @brief Constructor
-     * @param implementation actual implementation
-     * @param space function space this function space element belongs to
      */
     FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation);
 
