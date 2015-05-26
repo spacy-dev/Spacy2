@@ -1,6 +1,7 @@
 #include "abstractHilbertSpace.hh"
 
 #include "../Util/invalidargumentexception.hh"
+#include "../Util/incompatiblespaceexception.hh"
 
 #include "abstractFunctionSpaceElement.hh"
 #include "abstractScalarProduct.hh"
@@ -38,6 +39,7 @@ namespace Algorithm
   double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
   {
     if( dynamic_cast<const AbstractHilbertSpace*>(&x.getSpace()) == nullptr ) throw InvalidArgumentException("operator*(const AbstractFunctionSpaceElement&,const AbstractFunctionSpaceElement)");
+    if( x.getSpace().index() != y.getSpace().index()) throw IncompatibleSpaceException("operator*(scalar product)",x.getSpace().index(),y.getSpace().index());
 
     auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.getSpace()).getScalarProduct();
     return sp->operator()(x,y);
