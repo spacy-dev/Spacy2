@@ -63,6 +63,19 @@ int main()
 
   using Spaces::R; // Real numbers
 
+  auto x = R.element();
+  auto y = R.element();
+
+  // set function value
+  x.coefficient(0) = -2;
+  y.coefficient(0) = 1;
+  auto norm = R.getNorm();
+  auto sp = R.getScalarProduct();
+  cout << "|x| = " << norm(x) << endl;
+  cout << "|y| = " << norm(y) << endl;
+  cout << "(x,y) = " << sp(x,y) << endl;
+  cout << "or equivalently: x*y = " << x*y << endl;
+
   auto A = TestOperator(R); // operator
   auto newton = Newton(A,true);
   cout << "sol: " << newton.solve() << endl;
