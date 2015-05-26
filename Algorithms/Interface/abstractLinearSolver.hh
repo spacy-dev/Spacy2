@@ -20,8 +20,6 @@ namespace Algorithm
 
     virtual FunctionSpaceElement operator()(const FunctionSpaceElement& y) const = 0;
   };
-
-
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACTLINEARSOLVER_HH

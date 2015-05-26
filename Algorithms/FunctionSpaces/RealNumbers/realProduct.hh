@@ -6,9 +6,11 @@
 
 namespace Algorithm
 {
+  /// Scalar product for RealSpace.
   class RealProduct : public AbstractScalarProduct
   {
-    double operator()(const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&) const final override;
+    /// Compute x*y.
+    double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
   };
 }
 
