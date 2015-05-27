@@ -20,7 +20,7 @@ namespace Algorithm
     FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
 
   private:
-    std::unique_ptr<Operator> P_;
+    Operator P_;
     mutable CG cg;
   };
 }

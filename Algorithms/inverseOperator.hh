@@ -14,7 +14,7 @@ namespace Algorithm
   class InverseOperator
   {
   public:
-    InverseOperator(std::unique_ptr<AbstractLinearSolver>&& impl);
+    InverseOperator(std::shared_ptr<AbstractLinearSolver> impl);
 
     /**
      * @brief Compute \f$F^{-1}y\f$ from initial guess \f$x\f$.

@@ -76,7 +76,7 @@ int main()
   cout << "(x,y) = " << sp(x,y) << endl;
   cout << "or equivalently: x*y = " << x*y << endl;
 
-  auto A = TestOperator(R); // operator
+  auto A = DifferentiableOperator( std::make_shared<TestOperator>(R) ); // operator
   auto newton = Newton(A,true);
   cout << "sol: " << newton.solve() << endl;
 

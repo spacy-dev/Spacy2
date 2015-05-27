@@ -7,8 +7,8 @@
 
 namespace Algorithm
 {
-  InverseOperator::InverseOperator(std::unique_ptr<AbstractLinearSolver>&& impl)
-    : impl_(std::move(impl))
+  InverseOperator::InverseOperator(std::shared_ptr<AbstractLinearSolver> impl)
+    : impl_(impl)
   {}
 
   FunctionSpaceElement InverseOperator::operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const

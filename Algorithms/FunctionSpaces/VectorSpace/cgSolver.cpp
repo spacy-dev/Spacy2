@@ -8,8 +8,8 @@
 namespace Algorithm
 {
   CGSolver::CGSolver(const Operator &A)
-    : P_(std::make_unique<JacobiPreconditioner>(A)),
-      cg(A,*P_)
+    : P_(jacobi(A)),
+      cg(A,P_)
   {}
 
   FunctionSpaceElement CGSolver::operator ()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const
@@ -22,7 +22,7 @@ namespace Algorithm
   {
 //    if(  dynamic_cast<const VectorSpaceElement*>(&y.impl()) == nullptr ) throw InvalidArgumentException("CGSolver::operator()(const FunctionSpaceElement&)");
 
-    auto x = P_->getRange().element();
+    auto x = P_.getRange().element();
 
     return (*this)(x,y);
   }

@@ -1,56 +1,36 @@
 #ifndef ALGORITHM_OPERATOR_HH
 #define ALGORITHM_OPERATOR_HH
 
+#include <functional>
+#include <memory>
+
 #include "functionSpace.hh"
 #include "functionSpaceElement.hh"
 
 namespace Algorithm
 {
+  class AbstractOperator;
+  class AbstractDifferentiableOperator;
+  class AbstractFunctionSpaceElement;
   class FunctionSpaceElement;
 
   class Operator
   {
   public:
-    Operator(const FunctionSpace& domain, const FunctionSpace& range);
+    Operator(std::shared_ptr<AbstractOperator> impl);
 
-    virtual ~Operator(){}
+    void setArgument(const FunctionSpaceElement& x) const;
 
-    virtual void update(const FunctionSpaceElement& x);
+    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
 
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement& x) const = 0;
+    FunctionSpaceElement operator()() const;
 
     const FunctionSpace& getRange() const;
 
     const FunctionSpace& getDomain() const;
-
-    virtual FunctionSpaceElement d1(const FunctionSpaceElement&) const;
 
   protected:
-    const FunctionSpace& domain_;
-    const FunctionSpace& range_;
-  };
-
-
-  class Functional
-  {
-  public:
-    Functional(const FunctionSpace& domain, const FunctionSpace& range);
-
-    virtual ~Functional(){}
-
-    virtual void setArgument(const FunctionSpaceElement& x) = 0;
-
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement& y) const = 0;
-
-    virtual FunctionSpaceElement d1(const FunctionSpaceElement& y, const FunctionSpaceElement& dy) const = 0;
-
-    const FunctionSpace& getRange() const;
-
-    const FunctionSpace& getDomain() const;
-
-  private:
-    const FunctionSpace& domain_;
-    const FunctionSpace& range_;
+    mutable std::shared_ptr<AbstractOperator> impl_ = nullptr;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

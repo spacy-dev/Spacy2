@@ -2,6 +2,7 @@
 #define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 
 #include "../functionSpaceElement.hh"
+#include "../inverseOperator.hh"
 
 namespace Algorithm
 {
@@ -12,10 +13,10 @@ namespace Algorithm
     {
       AffineCovariant(const Newton& method) : newton(method) {}
 
-      double operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
+      double operator()(InverseOperator& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
       {
         auto trial = x + dx;
-        auto ds = newton.FInv_(-newton.F_(trial));
+        auto ds = DFInv_(-newton.F_(trial));
 
         auto dxNorm = newton.norm_(dx);
         auto theta = newton.norm_(ds)/dxNorm;
@@ -23,7 +24,7 @@ namespace Algorithm
         while( theta > newton.thetaMax_)
         {
           trial = x + nu*dx;
-          ds = newton.FInv_( -newton.F_(trial) + (1-nu) * newton.F_(x) );
+          ds = DFInv_( -newton.F_(trial) + (1-nu) * newton.F_(x) );
 
           theta = newton.norm_(ds)/(nu*dxNorm);
           nu = std::min(1., newton.thetaAim_*nu/theta);

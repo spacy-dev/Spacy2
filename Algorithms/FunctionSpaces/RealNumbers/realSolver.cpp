@@ -14,6 +14,9 @@ namespace Algorithm
   {
     if(  dynamic_cast<const Real*>(&y.impl()) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
 
-    return 1. / A_.d1(makeElement<Real>(1.,A_.getDomain().impl())).coefficient(0) * y;
+    auto dx = A_.getDomain().element();
+    dx.coefficient(0) = 1.;
+
+    return 1. / A_(dx).coefficient(0) * y;
   }
 }

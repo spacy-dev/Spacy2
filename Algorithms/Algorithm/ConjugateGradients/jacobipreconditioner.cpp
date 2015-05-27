@@ -1,39 +1,42 @@
 #include "jacobipreconditioner.hh"
 
-#include "../Util/callofundefinedfunctionexception.hh"
-
 namespace Algorithm
 {
   JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
-    : Operator( A.getRange() , A.getDomain() ),
-      diag(A.getDomain().element().size(),0.)
+    : diag_(A.getDomain().element().size(),0.),
+      domain_(A.getDomain()),
+      range_(A.getRange()),
+      result_(range_.element())
+
   {
     auto x = A.getDomain().element();
     for(unsigned int i=0; i<x.size(); ++i)
     {
       x.coefficient(i) = 1;
-      diag[i] = 1/A(x).coefficient(i);
+      diag_[i] = 1/A(x).coefficient(i);
       x.coefficient(i) = 0;
     }
   }
 
-  void JacobiPreconditioner::update(const FunctionSpaceElement& x)
+  void JacobiPreconditioner::setArgument(const FunctionSpaceElement& x)
   {
-    throw CallOfUndefinedFunctionException("JacobiPreconditioner::update");
-  }
-
-  FunctionSpaceElement JacobiPreconditioner::operator()(const FunctionSpaceElement& x) const
-  {
-    auto y = x;
-
+    result_ = x;
     for(unsigned i = 0; i<x.size(); ++i)
-      y.coefficient(i) *= diag[i];
-
-    return y;
+      result_.coefficient(i) *= diag_[i];
   }
 
-  FunctionSpaceElement JacobiPreconditioner::d1(const FunctionSpaceElement& dx) const
+  FunctionSpaceElement JacobiPreconditioner::operator()() const
   {
-    throw CallOfUndefinedFunctionException("JacobiPreconditioner::d1");
+    return result_;
+  }
+
+  const FunctionSpace& JacobiPreconditioner::getDomain() const
+  {
+    return domain_;
+  }
+
+  const FunctionSpace& JacobiPreconditioner::getRange() const
+  {
+    return range_;
   }
 }

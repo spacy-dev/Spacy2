@@ -9,6 +9,8 @@
 #include "../FunctionSpaces/RealNumbers/realSolver.hh"
 #include "../functionSpaceElement.hh"
 #include "../norm.hh"
+#include "../derivative.hh"
+#include "../differentiableOperator.hh"
 #include "../operator.hh"
 #include "dampingStrategies.hh"
 
@@ -19,14 +21,16 @@ namespace Algorithm
   class Newton
   {
   public:
-    Newton(Operator& F, bool verbose = false)
-      : F_(F), norm_(F_.getDomain().getNorm()), FInv_(std::make_unique<RealSolver>(F_)),
+    Newton(DifferentiableOperator& F, bool verbose = false)
+      : F_(F),
+        norm_(F_.getDomain().getNorm()),
         dampingFactor_(DampingStrategy::AffineCovariant<Newton>(*this)),
         verbose_(verbose)
     {}
 
-    Newton(Operator& F, const std::function<double(const FunctionSpaceElement&, const FunctionSpaceElement&)>& dampingStrategy, bool verbose = false)
-      : F_(F), norm_(F_.getDomain().getNorm()), FInv_(std::make_unique<RealSolver>(F_)),
+    Newton(DifferentiableOperator& F, const std::function<double(InverseOperator&, const FunctionSpaceElement&, const FunctionSpaceElement&)>& dampingStrategy, bool verbose = false)
+      : F_(F),
+        norm_(F_.getDomain().getNorm()),
         dampingFactor_(dampingStrategy),
         verbose_(verbose)
     {}
@@ -40,12 +44,16 @@ namespace Algorithm
     FunctionSpaceElement solve(const FunctionSpaceElement& x0) const
     {
       if( verbose_ ) std::cout << "Starting newton iteration with initial guess: " << x0;
+
+      Operator DF = derivative(F_);
+      InverseOperator DFInv(std::make_shared<RealSolver>(DF));
+
       auto x = x0;
       for(unsigned i = 1; i <= maxIterations_; ++i)
       {
         if( verbose_ ) std::cout << "Iteration: " << i << ", ";
 
-        auto dx = FInv_(x,-F_(x));
+        auto dx = DFInv(-F_(x));
 
         if( norm_(dx) < relativeAccuracy_ * norm_(x) )
         {
@@ -53,7 +61,7 @@ namespace Algorithm
           return x;
         }
 
-        x += dampingFactor_(x,dx)*dx;
+        x += dampingFactor_(DFInv,x,dx)*dx;
       }
 
       return x;
@@ -83,11 +91,10 @@ namespace Algorithm
 
   private:
     friend class DampingStrategy::AffineCovariant<Newton>;
-    Operator& F_;
+    DifferentiableOperator& F_;
     Norm norm_;
-    InverseOperator FInv_;
-    std::function<double(const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
-    unsigned maxIterations_ = 1000;
+    std::function<double(InverseOperator&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
+    unsigned maxIterations_ = 10;
     double relativeAccuracy_ = 1e-6;
     double thetaMax_ = 0.75, thetaAim_ = 0.5;
     bool verbose_ = false;

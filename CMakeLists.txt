@@ -23,3 +23,4 @@ add_executable(Test Algorithms/main.cpp)
 target_link_libraries(Test algorithms )
 
 SET(CMAKE_CXX_FLAGS "-std=c++1y")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage -std=c++11")

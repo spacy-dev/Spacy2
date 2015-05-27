@@ -1,31 +1,36 @@
 #include "operator.hh"
 
-#include "Util/callofundefinedfunctionexception.hh"
+#include "Interface/abstractOperator.hh"
 
 namespace Algorithm
 {
-  Operator::Operator(const FunctionSpace& domain, const FunctionSpace& range)
-    : domain_(domain), range_(range)
+  Operator::Operator(std::shared_ptr<AbstractOperator> impl)
+    : impl_(impl)
   {}
+
+  void Operator::setArgument(const FunctionSpaceElement &x) const
+  {
+    impl_->setArgument(x);
+  }
+
+  FunctionSpaceElement Operator::operator()() const
+  {
+    return (*impl_)();
+  }
+
+  FunctionSpaceElement Operator::operator()(const FunctionSpaceElement& x) const
+  {
+    setArgument(x);
+    return (*this)();
+  }
 
   const FunctionSpace& Operator::getRange() const
   {
-    return range_;
+    return impl_->getRange();
   }
 
   const FunctionSpace& Operator::getDomain() const
   {
-    return domain_;
+    return impl_->getDomain();
   }
-
-  void Operator::update(const FunctionSpaceElement& x)
-  {
-    throw CallOfUndefinedFunctionException("Operator::update");
-  }
-
-  FunctionSpaceElement Operator::d1(const FunctionSpaceElement&) const
-  {
-    throw CallOfUndefinedFunctionException("Operator::d1");
-  }
-
 }
