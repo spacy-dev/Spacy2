@@ -52,10 +52,19 @@ namespace Algorithm
     const AbstractBanachSpace& space_;
   };
 
-//  inline std::unique_ptr<AbstractFunctionSpaceElement> operator+(AbstractFunctionSpaceElement x, const AbstractFunctionSpaceElement& y);
-//  Real   operator* (const Real&, double);
-//  Real   operator* (double, const Real&);
-//  Real   operator+ (const Real&, const Real&);
+  class AbstractProductSpaceElement : AbstractFunctionSpaceElement
+  {
+  public:
+
+    virtual AbstractProductSpaceElement& add_primal(const AbstractProductSpaceElement&) = 0;
+
+    virtual AbstractProductSpaceElement& add_dual(const AbstractProductSpaceElement&) = 0;
+
+    virtual AbstractProductSpaceElement& subtract_primal(const AbstractProductSpaceElement&) = 0;
+
+    virtual AbstractProductSpaceElement& subtract_dual(const AbstractProductSpaceElement&) = 0;
+
+  };
 
   std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element);
 }

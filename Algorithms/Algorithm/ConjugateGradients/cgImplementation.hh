@@ -114,7 +114,7 @@ namespace Algorithm
     FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance)
     {
       terminate->setTolerance(tolerance);
-      solve(x,b);
+      return solve(x,b);
     }
 
     /**

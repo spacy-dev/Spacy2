@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../../Interface/abstractFunctionSpaceElement.hh"
+#include "../../Interface/abstractHilbertSpace.hh"
 
 namespace Algorithm
 {
@@ -17,13 +18,13 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const AbstractBanachSpace& space);
+    Real(double x, const AbstractHilbertSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const AbstractBanachSpace& space);
+    explicit Real(const AbstractHilbertSpace& space);
 
     /**
      * @brief Get a copy of this real number.

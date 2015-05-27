@@ -7,17 +7,17 @@
 
 namespace Algorithm
 {
-  Real::Real(double x, const AbstractBanachSpace &space)
+  Real::Real(double x, const AbstractHilbertSpace &space)
     : AbstractFunctionSpaceElement(space), x_(1,x)
   {}
 
-  Real::Real(const AbstractBanachSpace& space)
+  Real::Real(const AbstractHilbertSpace &space)
     : Real(0.,space)
   {}
 
   std::unique_ptr<AbstractFunctionSpaceElement> Real::clone() const
   {
-    return std::make_unique<Real>(x_[0],this->space_);
+    return std::make_unique<Real>(x_[0],dynamic_cast<const AbstractHilbertSpace&>(this->space_) );
   }
 
   Real& Real::operator+=(const AbstractFunctionSpaceElement& y)
@@ -42,7 +42,7 @@ namespace Algorithm
 
   std::unique_ptr<AbstractFunctionSpaceElement> Real::operator- () const
   {
-    return std::make_unique<Real>(-x_[0],this->space_);
+    return std::make_unique<Real>(-x_[0],dynamic_cast<const AbstractHilbertSpace&>(this->space_) );
   }
 
   unsigned Real::size() const
