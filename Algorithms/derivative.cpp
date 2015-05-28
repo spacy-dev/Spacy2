@@ -2,32 +2,35 @@
 
 namespace Algorithm
 {
-  Derivative::Derivative(const DifferentiableOperator& A)
-    : A_(A), dx_( A_.getDomain().element() )
-  {}
-
-  void Derivative::setArgument(const FunctionSpaceElement& dx)
+  Derivative::Derivative(const AbstractDifferentiableOperator &A, const AbstractFunctionSpaceElement& x)
+    : A_(dynamic_cast<AbstractDifferentiableOperator*>(A.clone().release())),
+      x_(x)
   {
-    dx_ = dx;
+    (*A_)(x_);
   }
 
-  FunctionSpaceElement Derivative::operator()() const
+  std::unique_ptr<AbstractOperator> Derivative::clone() const
   {
-    return A_.d1(dx_);
+    return std::make_unique<Derivative>(*A_,x_);
+  }
+
+  std::unique_ptr<AbstractFunctionSpaceElement> Derivative::operator()(const AbstractFunctionSpaceElement& dx) const
+  {
+    return A_->d1(dx);
   }
 
   const FunctionSpace& Derivative::getDomain() const
   {
-    return A_.getDomain();
+    return A_->getDomain();
   }
 
   const FunctionSpace& Derivative::getRange() const
   {
-    return A_.getRange();
+    return A_->getRange();
   }
 
-  Operator derivative(const DifferentiableOperator& A)
+  Operator derivative(const DifferentiableOperator& A, const FunctionSpaceElement& x)
   {
-    return Operator(std::make_shared<Derivative>(A));
+    return Operator(std::make_shared<Derivative>(A.impl(),x.impl()));
   }
 }

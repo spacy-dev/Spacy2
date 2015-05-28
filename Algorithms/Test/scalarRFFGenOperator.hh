@@ -54,25 +54,24 @@ namespace Algorithm
 
     ~TestOperator(){}
 
-    void setArgument(const FunctionSpaceElement &x) override
+    std::unique_ptr<AbstractOperator> clone() const
     {
-      x_ = x;
+      return std::make_unique<TestOperator>(space_);
+    }
+//    void setArgument(const AbstractFunctionSpaceElement &x) override
+//    {
+//      x_ = &x;
+//    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
+    {
+      x_ = &x;
+      return std::make_unique<Real>( exp(x_->coefficient(0))-2 , this->getRange().impl() );
     }
 
-    FunctionSpaceElement operator()() const override
+    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
     {
-      return makeElement<Real>( exp(x_.coefficient(0))-2 , this->getRange().impl() );
-    }
-
-    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) override
-    {
-      setArgument(x);
-      return makeElement<Real>( exp(x_.coefficient(0))*dx.coefficient(0) , this->getRange().impl() );
-    }
-
-    FunctionSpaceElement d1(const FunctionSpaceElement &dx) const override
-    {
-      return makeElement<Real>( exp(x_.coefficient(0))*dx.coefficient(0) , this->getRange().impl() );
+      return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0) , this->getRange().impl() );
     }
 
     const FunctionSpace& getDomain() const override
@@ -86,7 +85,7 @@ namespace Algorithm
     }
 
   private:
-    FunctionSpaceElement x_;
+    mutable const AbstractFunctionSpaceElement* x_;
     const FunctionSpace& space_;
   };
 }

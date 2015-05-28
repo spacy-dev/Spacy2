@@ -10,22 +10,22 @@ namespace Algorithm
   class Derivative : public AbstractOperator
   {
   public:
-    Derivative(const DifferentiableOperator& A);
+    Derivative(const AbstractDifferentiableOperator& A, const AbstractFunctionSpaceElement& x);
 
-    void setArgument(const FunctionSpaceElement& dx) override;
+    std::unique_ptr<AbstractOperator> clone() const override;
 
-    FunctionSpaceElement operator()() const override;
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override;
 
     const FunctionSpace& getDomain() const override;
 
     const FunctionSpace& getRange() const override;
 
   private:
-    const DifferentiableOperator& A_;
-    FunctionSpaceElement dx_;
+    std::unique_ptr<AbstractDifferentiableOperator> A_;
+    const AbstractFunctionSpaceElement& x_;
   };
 
-  Operator derivative(const DifferentiableOperator& A);
+  Operator derivative(const DifferentiableOperator& A, const FunctionSpaceElement& x);
 }
 
 #endif // DERIVATIVE_HH

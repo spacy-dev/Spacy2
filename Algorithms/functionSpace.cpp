@@ -10,6 +10,10 @@ namespace Algorithm
     : impl_(std::move(implementation)), norm_(impl_->getNorm()), sp_(impl_->getScalarProduct())
   {}
 
+//  FunctionSpace::FunctionSpace(const AbstractHilbertSpace& implementation)
+//    : FunctionSpace(implementation.clone())
+//  {}
+
   void FunctionSpace::setScalarProduct(const ScalarProduct& sp)
   {
     sp_ = sp;

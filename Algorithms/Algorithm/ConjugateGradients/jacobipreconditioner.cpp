@@ -5,8 +5,7 @@ namespace Algorithm
   JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
     : diag_(A.getDomain().element().size(),0.),
       domain_(A.getDomain()),
-      range_(A.getRange()),
-      result_(range_.element())
+      range_(A.getRange())
 
   {
     auto x = A.getDomain().element();
@@ -18,16 +17,26 @@ namespace Algorithm
     }
   }
 
-  void JacobiPreconditioner::setArgument(const FunctionSpaceElement& x)
+//  void JacobiPreconditioner::setArgument(const FunctionSpaceElement& x)
+//  {
+//    result_ = x;
+//    for(unsigned i = 0; i<x.size(); ++i)
+//      result_.coefficient(i) *= diag_[i];
+//  }
+
+
+  std::unique_ptr<AbstractOperator> JacobiPreconditioner::clone() const
   {
-    result_ = x;
-    for(unsigned i = 0; i<x.size(); ++i)
-      result_.coefficient(i) *= diag_[i];
+    return std::make_unique<JacobiPreconditioner>(*this);
   }
 
-  FunctionSpaceElement JacobiPreconditioner::operator()() const
+
+  std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const
   {
-    return result_;
+    auto y = x.clone();
+    for(unsigned i = 0; i < x.size(); ++i)
+      y->coefficient(i) *= diag_[i];
+    return y;
   }
 
   const FunctionSpace& JacobiPreconditioner::getDomain() const

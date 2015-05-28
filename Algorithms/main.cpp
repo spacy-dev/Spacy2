@@ -8,6 +8,7 @@
 //#include "FunctionSpaces/VectorSpace/cgSolver.hh"
 //#include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "Test/scalarRFFGenOperator.hh"
 #include "Algorithm/newton.hh"
 #include "spaces.hh"
@@ -75,6 +76,25 @@ int main()
   cout << "|y| = " << norm(y) << endl;
   cout << "(x,y) = " << sp(x,y) << endl;
   cout << "or equivalently: x*y = " << x*y << endl;
+
+
+  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> ,
+                                             DualSpaces<RealSpace> >() );
+  auto x2 = R2.element();
+  auto y2 = R2.element();
+  y2.coefficient(0) = x2.coefficient(0) = 1;
+  y2.coefficient(1) = 2;
+  auto norm2 = R2.getNorm();
+  auto sp2 = R2.getScalarProduct();
+
+  cout << "x2: " << x2 << endl;
+  cout << "y2: " << y2 << endl;
+  cout << "|x2| = " << norm2(x2) << endl;
+  cout << "x2*y2 = " << x2*y2 << endl;
+  cout << (x2 += primal(y2)) << endl;
+  cout << (x2 += dual(y2)) << endl;
+  cout << ( dual(x2) + y2  ) << endl;
+
 
   auto A = DifferentiableOperator( std::make_shared<TestOperator>(R) ); // operator
   auto newton = Newton(A,true);

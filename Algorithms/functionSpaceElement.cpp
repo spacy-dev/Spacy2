@@ -3,6 +3,8 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "functionSpace.hh"
+#include "FunctionSpaces/ProductSpace/primalProductSpaceElement.hh"
+#include "FunctionSpaces/ProductSpace/dualProductSpaceElement.hh"
 
 #include <utility>
 
@@ -19,6 +21,7 @@ namespace Algorithm
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
   {
     impl_  = y.impl().clone();
+    return *this;
   }
 
   void FunctionSpaceElement::print(std::ostream& os) const
@@ -85,15 +88,28 @@ namespace Algorithm
     return x.impl() * y.impl();
   }
 
-
-  FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y)
-  {
-    return x += y;
-  }
-
-
   std::ostream& operator<<(std::ostream& os, const FunctionSpaceElement& x)
   {
     return os << x.impl();
+  }
+
+  FunctionSpaceElement primal(FunctionSpaceElement& x)
+  {
+    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
+  }
+
+  FunctionSpaceElement primal(const FunctionSpaceElement& x)
+  {
+    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
+  }
+
+  FunctionSpaceElement dual(FunctionSpaceElement& x)
+  {
+    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
+  }
+
+  FunctionSpaceElement dual(const FunctionSpaceElement& x)
+  {
+    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
   }
 }

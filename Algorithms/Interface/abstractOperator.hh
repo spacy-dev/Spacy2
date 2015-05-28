@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH
 #define ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH
 
+#include <memory>
+
 #include "../functionSpaceElement.hh"
 
 namespace Algorithm
@@ -12,9 +14,9 @@ namespace Algorithm
   public:
     virtual ~AbstractOperator(){}
     
-    virtual void setArgument(const FunctionSpaceElement&) = 0;
+    virtual std::unique_ptr<AbstractOperator> clone() const = 0;
 
-    virtual FunctionSpaceElement operator()() const = 0;
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
     virtual const FunctionSpace& getDomain() const = 0;
 

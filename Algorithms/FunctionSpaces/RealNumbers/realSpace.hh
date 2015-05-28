@@ -11,6 +11,7 @@ namespace Algorithm
   class AbstractScalarProduct;
   class AbstractFunctionSpaceElement;
 
+  /// Space of real numbers.
   class RealSpace : public AbstractHilbertSpace
   {
   public:

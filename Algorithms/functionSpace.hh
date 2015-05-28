@@ -5,7 +5,7 @@
 
 #include "functionSpaceElement.hh"
 #include "norm.hh"
-#include "scalarproduct.hh"
+#include "scalarProduct.hh"
 
 namespace Algorithm
 {
@@ -22,6 +22,8 @@ namespace Algorithm
      * @brief Construct function space from implementation derived from AbstractHilbertSpace.
      */
     explicit FunctionSpace(std::unique_ptr<AbstractHilbertSpace>&& implementation);
+
+//    explicit FunctionSpace(const AbstractHilbertSpace& implementation);
 
     /**
      * @brief Change scalar product.

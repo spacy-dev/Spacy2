@@ -1,4 +1,4 @@
-#include "scalarproduct.hh"
+#include "scalarProduct.hh"
 
 Algorithm::ScalarProduct::ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation)
   : impl(std::move(implementation))

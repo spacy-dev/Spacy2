@@ -8,20 +8,20 @@ namespace Algorithm
     : impl_(impl)
   {}
 
-  void Operator::setArgument(const FunctionSpaceElement &x) const
-  {
-    impl_->setArgument(x);
-  }
+//  void Operator::setArgument(const FunctionSpaceElement &x)
+//  {
+//    impl_->setArgument(x.impl());
+//  }
 
-  FunctionSpaceElement Operator::operator()() const
-  {
-    return (*impl_)();
-  }
+//  FunctionSpaceElement Operator::operator()() const
+//  {
+//    return (*impl_)();
+//  }
 
   FunctionSpaceElement Operator::operator()(const FunctionSpaceElement& x) const
   {
-    setArgument(x);
-    return (*this)();
+//    setArgument(x);
+    return (*impl_)(x.impl());
   }
 
   const FunctionSpace& Operator::getRange() const

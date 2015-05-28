@@ -45,13 +45,14 @@ namespace Algorithm
     {
       if( verbose_ ) std::cout << "Starting newton iteration with initial guess: " << x0;
 
-      Operator DF = derivative(F_);
-      InverseOperator DFInv(std::make_shared<RealSolver>(DF));
 
       auto x = x0;
       for(unsigned i = 1; i <= maxIterations_; ++i)
       {
         if( verbose_ ) std::cout << "Iteration: " << i << ", ";
+
+        Operator DF = derivative(F_,x);
+        InverseOperator DFInv(std::make_shared<RealSolver>(DF));
 
         auto dx = DFInv(-F_(x));
 

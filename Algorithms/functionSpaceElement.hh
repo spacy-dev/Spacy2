@@ -106,6 +106,14 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> impl_;
   };
 
+  FunctionSpaceElement primal(FunctionSpaceElement& x);
+
+  FunctionSpaceElement primal(const FunctionSpaceElement& x);
+
+  FunctionSpaceElement dual(FunctionSpaceElement& x);
+
+  FunctionSpaceElement dual(const FunctionSpaceElement& x);
+
   /**
    * \brief Construct function space element from arguments for its implementation.
    */
@@ -140,7 +148,11 @@ namespace Algorithm
   /**
    * @brief Compute \f$z=x+y\f$.
    */
-  FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y);
+  inline FunctionSpaceElement operator+(const FunctionSpaceElement& x, const FunctionSpaceElement& y)
+  {
+    auto z(x);
+    return z += y;
+  }
 
   auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl());
 

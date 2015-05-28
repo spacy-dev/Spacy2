@@ -5,9 +5,12 @@
 #include <memory>
 #include <vector>
 
+#include "../Util/callofundefinedfunctionexception.hh"
+
 namespace Algorithm
 {
   class AbstractBanachSpace;
+  template <class> class Restriction;
 
   class AbstractFunctionSpaceElement
   {
@@ -22,9 +25,24 @@ namespace Algorithm
 
     virtual AbstractFunctionSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) = 0;
 
+    virtual AbstractFunctionSpaceElement& operator+=(const Restriction<AbstractFunctionSpaceElement>&)
+    {
+      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
+    }
+
     virtual AbstractFunctionSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) = 0;
 
+    virtual AbstractFunctionSpaceElement& operator-=(const Restriction<AbstractFunctionSpaceElement>&)
+    {
+      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
+    }
+
     virtual AbstractFunctionSpaceElement& operator*=(double) = 0;
+
+    virtual AbstractFunctionSpaceElement& operator*=(const Restriction<AbstractFunctionSpaceElement>&)
+    {
+      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
+    }
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator- () const = 0;
 
@@ -50,20 +68,6 @@ namespace Algorithm
 
   protected:
     const AbstractBanachSpace& space_;
-  };
-
-  class AbstractProductSpaceElement : AbstractFunctionSpaceElement
-  {
-  public:
-
-    virtual AbstractProductSpaceElement& add_primal(const AbstractProductSpaceElement&) = 0;
-
-    virtual AbstractProductSpaceElement& add_dual(const AbstractProductSpaceElement&) = 0;
-
-    virtual AbstractProductSpaceElement& subtract_primal(const AbstractProductSpaceElement&) = 0;
-
-    virtual AbstractProductSpaceElement& subtract_dual(const AbstractProductSpaceElement&) = 0;
-
   };
 
   std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element);

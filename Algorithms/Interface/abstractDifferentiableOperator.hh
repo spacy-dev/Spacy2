@@ -8,9 +8,7 @@ namespace Algorithm
   class AbstractDifferentiableOperator : public AbstractOperator
   {
   public:
-    virtual FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) = 0;
-
-    virtual FunctionSpaceElement d1(const FunctionSpaceElement& dx) const = 0;
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& dx) const = 0;
   };
 }
 

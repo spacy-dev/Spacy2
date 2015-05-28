@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
 #define ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
 
+#include <memory>
 #include <vector>
 
 #include "../Interface/abstractOperator.hh"
@@ -16,9 +17,9 @@ namespace Algorithm
   public:
     JacobiPreconditioner(const Operator& A);
 
-    void setArgument(const FunctionSpaceElement& x) override;
+    std::unique_ptr<AbstractOperator> clone() const;
 
-    FunctionSpaceElement operator()() const override;
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
 
     const FunctionSpace& getDomain() const override;
 
@@ -28,7 +29,6 @@ namespace Algorithm
     std::vector<double> diag_;
     const FunctionSpace& domain_;
     const FunctionSpace& range_;
-    FunctionSpaceElement result_;
   };
 
   Operator jacobi(const Operator& A)

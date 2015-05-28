@@ -1,3 +1,9 @@
 [submodule "External/googletest"]
 	path = External/googletest
 	url = https://github.com/svn2github/googletest.git
+[submodule "build/RFFGen"]
+	path = build/RFFGen
+	url = https://github.com/lubkoll/RFFGen.git
+[submodule "External/RFFGen"]
+	path = External/RFFGen
+	url = https://github.com/lubkoll/RFFGen.git

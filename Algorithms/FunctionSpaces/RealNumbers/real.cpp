@@ -63,8 +63,9 @@ namespace Algorithm
     return x_[i];
   }
 
-  void Real::print(std::ostream&) const
+  void Real::print(std::ostream& os) const
   {
-    std::cout << x_[0] << std::endl;
+    os << "Space index: " << this->space_.index() << "\n";
+    os << x_[0] << std::endl;
   }
 }

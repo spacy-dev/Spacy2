@@ -19,18 +19,18 @@ namespace Algorithm
   public:
     Operator(std::shared_ptr<AbstractOperator> impl);
 
-    void setArgument(const FunctionSpaceElement& x) const;
+//    void setArgument(const FunctionSpaceElement& x);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
 
-    FunctionSpaceElement operator()() const;
+//    FunctionSpaceElement operator()() const;
 
     const FunctionSpace& getRange() const;
 
     const FunctionSpace& getDomain() const;
 
   protected:
-    mutable std::shared_ptr<AbstractOperator> impl_ = nullptr;
+    std::shared_ptr<AbstractOperator> impl_ = nullptr;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH
