@@ -106,14 +106,6 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> impl_;
   };
 
-  FunctionSpaceElement primal(FunctionSpaceElement& x);
-
-  FunctionSpaceElement primal(const FunctionSpaceElement& x);
-
-  FunctionSpaceElement dual(FunctionSpaceElement& x);
-
-  FunctionSpaceElement dual(const FunctionSpaceElement& x);
-
   /**
    * \brief Construct function space element from arguments for its implementation.
    */

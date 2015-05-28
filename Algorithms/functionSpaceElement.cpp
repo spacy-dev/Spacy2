@@ -92,24 +92,4 @@ namespace Algorithm
   {
     return os << x.impl();
   }
-
-  FunctionSpaceElement primal(FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement primal(const FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement dual(FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement dual(const FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
-  }
 }
