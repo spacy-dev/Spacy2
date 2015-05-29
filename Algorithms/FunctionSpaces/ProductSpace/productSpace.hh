@@ -9,7 +9,7 @@
 namespace Algorithm
 {
   class AbstractNorm;
-  class AbstractScalarProduct;
+  class AbstractDualPairing;
   class AbstractFunctionSpaceElement;
 
   /// Space of real numbers.
@@ -28,13 +28,13 @@ namespace Algorithm
   private:
     void setNormImpl(std::shared_ptr<AbstractNorm>) override;
 
-    void setScalarProductImpl(std::shared_ptr<AbstractScalarProduct>) override;
+    void setScalarProductImpl(std::shared_ptr<AbstractDualPairing>) override;
 
-    std::shared_ptr<AbstractScalarProduct> getScalarProductImpl() const override;
+    std::shared_ptr<AbstractDualPairing> getScalarProductImpl() const override;
 
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
 
-    std::shared_ptr<AbstractScalarProduct> sp_;
+    std::shared_ptr<AbstractDualPairing> sp_;
 
     std::vector<std::unique_ptr<AbstractBanachSpace> > primalSpaces_;
     std::vector<std::unique_ptr<AbstractBanachSpace> > dualSpaces_;
@@ -77,10 +77,15 @@ namespace Algorithm
   }
 
 
-//  template <unsigned nPrimal, unsigned nDual, class... Spaces>
   template <class PrimalSpaces, class DualSpaces=DualSpaces<> >
   std::unique_ptr<ProductSpace> makeProductSpace()
   {
+//    auto ps = std::vector<std::unique_ptr<AbstractBanachSpace> >();
+//    ps.push_back( std::make_unique<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply() ) );
+//    auto ds = std::vector<std::unique_ptr<AbstractBanachSpace> >();
+//    ds.push_back( std::make_unique<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<DualSpaces>::apply() ) );
+
+//    return std::make_unique<ProductSpace>( std::move(ps) , std::move(ds) );
     return std::make_unique<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply(),
                                            ProductSpaceDetail::CreateSpaceVector<DualSpaces>::apply() );
   }

@@ -5,10 +5,11 @@
 #include <vector>
 
 #include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Interface/abstractHilbertSpace.hh"
 
 namespace Algorithm
 {
+   class AbstractBanachSpace;
+
   /// Real number.
   class Real : public AbstractFunctionSpaceElement
   {
@@ -18,13 +19,18 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const AbstractHilbertSpace& space);
+    Real(double x, const AbstractBanachSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const AbstractHilbertSpace& space);
+    explicit Real(const AbstractBanachSpace& space);
+
+    /**
+     * @brief copy data to y.
+     */
+    void copyTo(AbstractFunctionSpaceElement& y) const final override;
 
     /**
      * @brief Get a copy of this real number.
@@ -55,10 +61,17 @@ namespace Algorithm
     /// Number of entries in coefficient vector (=1).
     unsigned size() const final override;
 
+    operator double() const
+    {
+      return x_[0];
+    }
+
   private:
     friend class RealProduct;
     std::vector<double> x_;
   };
+
+  bool isRealElement(const AbstractFunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_REAL_NUMBERS_REAL_HH

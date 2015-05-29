@@ -21,12 +21,12 @@ namespace Algorithm
     this->norm_ = norm;
   }
 
-  void RealSpace::setScalarProductImpl(std::shared_ptr<AbstractScalarProduct> sp)
+  void RealSpace::setScalarProductImpl(std::shared_ptr<AbstractDualPairing> sp)
   {
     sp_ = sp;
   }
 
-  std::shared_ptr<AbstractScalarProduct> RealSpace::getScalarProductImpl() const
+  std::shared_ptr<AbstractDualPairing> RealSpace::getScalarProductImpl() const
   {
     return sp_;
   }

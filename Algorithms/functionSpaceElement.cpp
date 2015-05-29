@@ -2,12 +2,18 @@
 
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
+#include "FunctionSpaces/RealNumbers/real.hh"
+#include "Util/invalidargumentexception.hh"
 #include "functionSpace.hh"
 
 #include <utility>
 
 namespace Algorithm
 {
+  FunctionSpaceElement::FunctionSpaceElement()
+    : impl_(nullptr)
+  {}
+
   FunctionSpaceElement::FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation)
     : impl_(std::move(implementation))
   {}
@@ -81,6 +87,25 @@ namespace Algorithm
   }
 
   // free functions
+  FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y)
+  {
+    return x += y;
+  }
+
+  FunctionSpaceElement operator+(double a, FunctionSpaceElement x)
+  {
+    if( !isRealElement(x.impl()) ) throw InvalidArgumentException("operator+(double,const FunctionSpaceElement&)");
+
+    dynamic_cast<Real&>(x.impl()).coefficient(0) += a;
+
+    return x;
+  }
+
+  FunctionSpaceElement operator+(const FunctionSpaceElement& x, double a)
+  {
+    return a + x;
+  }
+
   auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl())
   {
     return x.impl() * y.impl();

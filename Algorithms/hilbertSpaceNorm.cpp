@@ -1,13 +1,13 @@
 #include "hilbertSpaceNorm.hh"
 
-#include "Interface/abstractScalarProduct.hh"
+#include "Interface/abstractDualPairing.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 
 #include <cmath>
 
 namespace Algorithm
 {
-  HilbertSpaceNorm::HilbertSpaceNorm(std::shared_ptr<AbstractScalarProduct> sp)
+  HilbertSpaceNorm::HilbertSpaceNorm(std::shared_ptr<AbstractDualPairing> sp)
     : sp_(sp)
   {}
 

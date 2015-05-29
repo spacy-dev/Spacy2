@@ -1,10 +1,11 @@
-#include "operator.hh"
+#include "functional.hh"
 
-#include "Interface/abstractOperator.hh"
+#include "Interface/abstractFunctional.hh"
+#include "functionSpaceElement.hh"
 
 namespace Algorithm
 {
-  Operator::Operator(std::shared_ptr<AbstractOperator> impl)
+  Functional::Functional(std::shared_ptr<AbstractFunctional> impl)
     : impl_(impl)
   {}
 
@@ -18,14 +19,9 @@ namespace Algorithm
 //    return (*impl_)();
 //  }
 
-  FunctionSpaceElement Operator::operator()(const FunctionSpaceElement& x) const
+  double Functional::operator()(const FunctionSpaceElement& x) const
   {
 //    setArgument(x);
     return (*impl_)(x.impl());
-  }
-
-  const AbstractOperator& Operator::impl() const
-  {
-    return *impl_;
   }
 }

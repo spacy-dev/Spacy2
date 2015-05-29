@@ -1,5 +1,7 @@
 #include "derivative.hh"
 
+#include "Interface/abstractDifferentiableOperator.hh"
+
 namespace Algorithm
 {
   Derivative::Derivative(const AbstractDifferentiableOperator &A, const AbstractFunctionSpaceElement& x)
@@ -19,18 +21,18 @@ namespace Algorithm
     return A_->d1(dx);
   }
 
-  const FunctionSpace& Derivative::getDomain() const
+  const AbstractBanachSpace& Derivative::getDomain() const
   {
     return A_->getDomain();
   }
 
-  const FunctionSpace& Derivative::getRange() const
+  const AbstractBanachSpace& Derivative::getRange() const
   {
     return A_->getRange();
   }
 
   Operator derivative(const DifferentiableOperator& A, const FunctionSpaceElement& x)
   {
-    return Operator(std::make_shared<Derivative>(A.impl(),x.impl()));
+    return Operator(std::make_shared<Derivative>(A.impl(),x.impl()) );
   }
 }

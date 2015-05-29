@@ -8,7 +8,7 @@
 namespace Algorithm
 {
   class AbstractNorm;
-  class AbstractScalarProduct;
+  class AbstractDualPairing;
   class AbstractFunctionSpaceElement;
 
   /// Space of real numbers.
@@ -20,13 +20,13 @@ namespace Algorithm
   private:
     void setNormImpl(std::shared_ptr<AbstractNorm>) override;
 
-    void setScalarProductImpl(std::shared_ptr<AbstractScalarProduct>) override;
+    void setScalarProductImpl(std::shared_ptr<AbstractDualPairing>) override;
 
-    std::shared_ptr<AbstractScalarProduct> getScalarProductImpl() const override;
+    std::shared_ptr<AbstractDualPairing> getScalarProductImpl() const override;
 
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
 
-    std::shared_ptr<AbstractScalarProduct> sp_;
+    std::shared_ptr<AbstractDualPairing> sp_;
   };
 }
 

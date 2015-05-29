@@ -1,19 +1,18 @@
 #include "abstractHilbertSpace.hh"
 
-#include "../Util/invalidargumentexception.hh"
-#include "../Util/incompatiblespaceexception.hh"
-
 #include "abstractFunctionSpaceElement.hh"
-#include "abstractScalarProduct.hh"
+#include "abstractDualPairing.hh"
 #include "../hilbertSpaceNorm.hh"
 
 namespace Algorithm
 {
   AbstractHilbertSpace::AbstractHilbertSpace()
     : norm_(nullptr)
-  {}
+  {
+    dualSpace_ = this;
+  }
 
-  void AbstractHilbertSpace::setScalarProduct(std::shared_ptr<AbstractScalarProduct> sp)
+  void AbstractHilbertSpace::setScalarProduct(std::shared_ptr<AbstractDualPairing> sp)
   {
     setScalarProductImpl(sp);
     setNorm(std::make_shared<HilbertSpaceNorm>(getScalarProduct()));
@@ -25,7 +24,7 @@ namespace Algorithm
   }
 
 
-  std::shared_ptr<AbstractScalarProduct> AbstractHilbertSpace::getScalarProduct() const
+  std::shared_ptr<AbstractDualPairing> AbstractHilbertSpace::getScalarProduct() const
   {
     return getScalarProductImpl();
   }
@@ -35,13 +34,19 @@ namespace Algorithm
     return norm_;
   }
 
-
-  double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
+  void AbstractHilbertSpace::setDualPairingImpl(std::shared_ptr<AbstractDualPairing> dp)
   {
-    if( dynamic_cast<const AbstractHilbertSpace*>(&x.getSpace()) == nullptr ) throw InvalidArgumentException("operator*(const AbstractFunctionSpaceElement&,const AbstractFunctionSpaceElement)");
-    if( x.getSpace().index() != y.getSpace().index()) throw IncompatibleSpaceException("operator*(scalar product)",x.getSpace().index(),y.getSpace().index());
+    setScalarProductImpl(dp);
+  }
 
-    auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.getSpace()).getScalarProduct();
-    return sp->operator()(x,y);
+  std::shared_ptr<AbstractDualPairing> AbstractHilbertSpace::getDualPairingImpl() const
+  {
+    return getScalarProductImpl();
+  }
+
+
+  bool isHilbertSpace(const AbstractBanachSpace& space)
+  {
+    return dynamic_cast<const AbstractHilbertSpace*>(&space) != nullptr;
   }
 }

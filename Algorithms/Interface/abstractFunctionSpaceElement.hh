@@ -5,8 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include "../Util/callofundefinedfunctionexception.hh"
-
 namespace Algorithm
 {
   class AbstractBanachSpace;
@@ -18,10 +16,7 @@ namespace Algorithm
 
     virtual ~AbstractFunctionSpaceElement() = default;
 
-    virtual void copyTo(AbstractFunctionSpaceElement&) const
-    {
-      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::copyTo");
-    }
+    virtual void copyTo(AbstractFunctionSpaceElement&) const = 0;
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> clone() const = 0;
 

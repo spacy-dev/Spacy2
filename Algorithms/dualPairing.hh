@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_SCALARPRODUCT_HH
-#define ALGORITHM_SCALARPRODUCT_HH
+#ifndef ALGORITHM_DUAL_PAIRING_HH
+#define ALGORITHM_DUAL_PAIRING_HH
 
 #include <memory>
 #include <utility>
@@ -12,10 +12,10 @@ namespace Algorithm
   /**
    * @brief Scalar product class. Plug your implementations in here.
    */
-  class ScalarProduct
+  class DualPairing
   {
   public:
-    explicit ScalarProduct(std::shared_ptr<AbstractDualPairing> implementation);
+    explicit DualPairing(std::shared_ptr<AbstractDualPairing> implementation);
 
     /**
      * @brief Compute scalar product \f$(x,y)\f$, where the particular scalar product is given by the function space to which x and y belong.
@@ -27,4 +27,4 @@ namespace Algorithm
   };
 }
 
-#endif // ALGORITHMS_SCALARPRODUCT_HH
+#endif // ALGORITHM_DUAL_PAIRING_HH

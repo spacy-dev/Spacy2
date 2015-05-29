@@ -1,10 +1,10 @@
 #include "scalarProduct.hh"
 
-Algorithm::ScalarProduct::ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation)
-  : impl(std::move(implementation))
+Algorithm::ScalarProduct::ScalarProduct(std::shared_ptr<AbstractDualPairing> implementation)
+  : impl_(std::move(implementation))
 {}
 
-auto Algorithm::ScalarProduct::operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractScalarProduct>()(x.impl(),y.impl()))
+auto Algorithm::ScalarProduct::operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractDualPairing>()(x.impl(),y.impl()))
 {
-  return (*impl)(x.impl(),y.impl());
+  return (*impl_)(x.impl(),y.impl());
 }

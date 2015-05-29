@@ -142,7 +142,7 @@ namespace Algorithm
   {
     if( i > size() ) throw std::out_of_range("In ProductSpaceElement::coefficient(" + std::to_string(i) + ").");
 
-    if( i < primalSize() )
+    if( !disablePrimal_ && i < primalSize() )
     {
       unsigned j = i;
       unsigned elementId = 0;
@@ -154,7 +154,7 @@ namespace Algorithm
       return primalVariables_[elementId]->coefficient(j);
     }
 
-    unsigned j = i-primalSize();
+    unsigned j =  disablePrimal_ ? i : i-primalSize();
     unsigned elementId = 0;
     while ( j >= dualVariables_[elementId]->size() )
     {
@@ -197,6 +197,31 @@ namespace Algorithm
     for( auto& v : primalVariables_ ) v->print(os);
     os << "Dual variables:\n";
     for( auto& v : dualVariables_ ) v->print(os);
+  }
+
+  void ProductSpaceElement::reset() const
+  {
+    disablePrimal_ = disableDual_ = false;
+  }
+
+  void ProductSpaceElement::disablePrimal() const
+  {
+    disablePrimal_ = true;
+  }
+
+  void ProductSpaceElement::disableDual() const
+  {
+    disableDual_ = true;
+  }
+
+  bool ProductSpaceElement::isPrimalEnabled() const
+  {
+    return !disablePrimal_;
+  }
+
+  bool ProductSpaceElement::isDualEnabled() const
+  {
+    return !disableDual_;
   }
 
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x)

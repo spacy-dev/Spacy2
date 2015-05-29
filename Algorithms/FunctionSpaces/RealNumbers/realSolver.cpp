@@ -1,6 +1,7 @@
 #include "realSolver.hh"
 
 #include "../../Util/invalidargumentexception.hh"
+#include "../../Interface/abstractOperator.hh"
 #include "../../operator.hh"
 #include "real.hh"
 
@@ -14,9 +15,9 @@ namespace Algorithm
   {
     if(  dynamic_cast<const Real*>(&y.impl()) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
 
-    auto dx = A_.getDomain().element();
-    dx.coefficient(0) = 1.;
+    auto dx = A_.impl().getDomain().element();
+    dx->coefficient(0) = 1.;
 
-    return 1. / A_(dx).coefficient(0) * y;
+    return 1. / A_.impl()(*dx)->coefficient(0) * y;
   }
 }

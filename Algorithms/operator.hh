@@ -10,8 +10,6 @@
 namespace Algorithm
 {
   class AbstractOperator;
-  class AbstractDifferentiableOperator;
-  class AbstractFunctionSpaceElement;
   class FunctionSpaceElement;
 
   class Operator
@@ -25,12 +23,11 @@ namespace Algorithm
 
 //    FunctionSpaceElement operator()() const;
 
-    const FunctionSpace& getRange() const;
-
-    const FunctionSpace& getDomain() const;
+    const AbstractOperator& impl() const;
 
   protected:
     std::shared_ptr<AbstractOperator> impl_ = nullptr;
+
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

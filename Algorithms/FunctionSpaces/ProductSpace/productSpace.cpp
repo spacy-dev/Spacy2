@@ -50,12 +50,12 @@ namespace Algorithm
     this->norm_ = norm;
   }
 
-  void ProductSpace::setScalarProductImpl(std::shared_ptr<AbstractScalarProduct> sp)
+  void ProductSpace::setScalarProductImpl(std::shared_ptr<AbstractDualPairing> sp)
   {
     sp_ = sp;
   }
 
-  std::shared_ptr<AbstractScalarProduct> ProductSpace::getScalarProductImpl() const
+  std::shared_ptr<AbstractDualPairing> ProductSpace::getScalarProductImpl() const
   {
     return sp_;
   }

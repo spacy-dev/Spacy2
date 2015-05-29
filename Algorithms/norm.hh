@@ -15,6 +15,7 @@ namespace Algorithm
   class Norm
   {
   public:
+    Norm() = default;
     explicit Norm(std::shared_ptr<AbstractNorm> implementation);
 
     /**
@@ -23,7 +24,7 @@ namespace Algorithm
     auto operator()(const FunctionSpaceElement& x) const -> decltype(std::declval<AbstractNorm>()(x.impl()));
 
   private:
-    std::shared_ptr<AbstractNorm> impl_;
+    std::shared_ptr<AbstractNorm> impl_ = nullptr;
   };
 }
 

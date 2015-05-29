@@ -60,22 +60,41 @@ namespace Algorithm
     /// Number of entries in coefficient vector (=1).
     unsigned size() const final override;
 
-    void reset() const
+    void reset() const;
+
+    void disablePrimal() const;
+
+    void disableDual() const;
+
+    bool isPrimalEnabled() const;
+
+    bool isDualEnabled() const;
+
+    FunctionSpaceElement primalElement() const
     {
-      disablePrimal_ = disableDual_ = false;
+      return FunctionSpaceElement( ProductSpaceElement(primalVariables_,{},this->getSpace()).clone() );
     }
 
-    void disablePrimal() const { disablePrimal_ = true; }
-    void disableDual() const { disableDual_ = true; }
+    const AbstractFunctionSpaceElement& primalVariable(unsigned i) const
+    {
+      return *primalVariables_[i];
+    }
+
+    FunctionSpaceElement dualElement() const
+    {
+      return FunctionSpaceElement( ProductSpaceElement({},dualVariables_,this->getSpace()).clone() ) ;
+    }
+
+    const AbstractFunctionSpaceElement& dualVariable(unsigned i) const
+    {
+      return *dualVariables_[i];
+    }
 
   private:
     unsigned primalSize() const;
     unsigned dualSize() const;
 
     friend class ProductSpaceProduct;
-    friend const AbstractFunctionSpaceElement& primalVariable(const AbstractFunctionSpaceElement& x, unsigned i);
-    friend const AbstractFunctionSpaceElement& dualVariable(const AbstractFunctionSpaceElement& x, unsigned i);
-
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > primalVariables_;
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > dualVariables_;
     mutable bool disablePrimal_ = false;

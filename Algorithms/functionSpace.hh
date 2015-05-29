@@ -5,12 +5,12 @@
 
 #include "functionSpaceElement.hh"
 #include "norm.hh"
-#include "scalarProduct.hh"
+#include "dualPairing.hh"
 
 namespace Algorithm
 {
   class FunctionSpaceElement;
-  class AbstractHilbertSpace;
+  class AbstractBanachSpace;
 
   /**
    * @brief A function space. Creates function space elements and admits access to norm and, for Hilbert spaces, scalar product.
@@ -19,21 +19,24 @@ namespace Algorithm
   {
   public:
     /**
-     * @brief Construct function space from implementation derived from AbstractHilbertSpace.
+     * @brief Construct function space from implementation derived from AbstractBanachSpace.
      */
-    explicit FunctionSpace(std::unique_ptr<AbstractHilbertSpace>&& implementation);
+    explicit FunctionSpace(std::shared_ptr<AbstractBanachSpace> implementation);
 
-//    explicit FunctionSpace(const AbstractHilbertSpace& implementation);
+    FunctionSpace& operator=(const FunctionSpace&) = delete;
+//    explicit FunctionSpace(const AbstractBanachSpace& implementation);
 
     /**
      * @brief Change scalar product.
      */
-    void setScalarProduct(const ScalarProduct& sp);
+    void setDualPairing(const DualPairing& sp);
 
     /**
      * @brief Access scalar product.
      */
-    const ScalarProduct& getScalarProduct() const;
+    const DualPairing& getDualPairing() const;
+
+    const DualPairing& getScalarProduct() const;
 
     /**
      * @brief Access norm.
@@ -53,13 +56,18 @@ namespace Algorithm
     /**
      * @brief Access implementation.
      */
-    AbstractHilbertSpace const& impl() const;
+    AbstractBanachSpace const& impl() const;
+
+    void setDualSpace(FunctionSpace& Y);
+
+    const FunctionSpace* getDualSpace() const;
 
   private:
     friend class FunctionSpaceElement;
-    std::unique_ptr<AbstractHilbertSpace> impl_;
+    std::shared_ptr<AbstractBanachSpace> impl_;
     Norm norm_;
-    ScalarProduct sp_;
+    DualPairing dp_;
+    FunctionSpace* dualSpace_ = nullptr;
   };
 }
 #endif // ALGORITHM_FUNCTION_SPACE_HH

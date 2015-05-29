@@ -22,9 +22,7 @@ namespace Algorithm
   class FunctionSpaceElement
   {
   public:
-    FunctionSpaceElement()
-      : impl_(nullptr)
-    {}
+    FunctionSpaceElement();
 
     /**
      * @brief Constructor
@@ -121,10 +119,9 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(const Arithmetic& a, const FunctionSpaceElement& x)
+  auto operator*(const Arithmetic& a, FunctionSpaceElement x)
   {
-    auto z(x);
-    return z *= a;
+    return x *= a;
   }
 
 
@@ -141,11 +138,11 @@ namespace Algorithm
   /**
    * @brief Compute \f$z=x+y\f$.
    */
-  inline FunctionSpaceElement operator+(const FunctionSpaceElement& x, const FunctionSpaceElement& y)
-  {
-    auto z(x);
-    return z += y;
-  }
+  FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y);
+
+  FunctionSpaceElement operator+(double a, FunctionSpaceElement x);
+
+  FunctionSpaceElement operator+(const FunctionSpaceElement& x, double a);
 
   auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl());
 

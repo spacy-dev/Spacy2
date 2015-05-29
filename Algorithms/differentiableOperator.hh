@@ -1,23 +1,20 @@
 #ifndef DIFFERENTIABLEOPERATOR_HH
 #define DIFFERENTIABLEOPERATOR_HH
 
-#include "functionSpaceElement.hh"
 #include "operator.hh"
-
-#include "Interface/abstractDifferentiableOperator.hh"
 
 namespace Algorithm
 {
+  class AbstractDifferentiableOperator;
+  class FunctionSpace;
+  class FunctionSpaceElement;
+
   class DifferentiableOperator : public Operator
   {
   public:
     DifferentiableOperator(std::shared_ptr<AbstractDifferentiableOperator> impl);
 
-//    DifferentiableOperator(const DifferentiableOperator&);
-
-//    DifferentiableOperator& operator=(const DifferentiableOperator&);
-
-    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+//    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
     FunctionSpaceElement d1(const FunctionSpaceElement& dx) const;
 

@@ -3,11 +3,10 @@
 
 #include <memory>
 
-#include "../functionSpaceElement.hh"
-
 namespace Algorithm
 {
-  class FunctionSpace;
+  class AbstractBanachSpace;
+  class AbstractFunctionSpaceElement;
 
   class AbstractOperator
   {
@@ -18,9 +17,9 @@ namespace Algorithm
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
-    virtual const FunctionSpace& getDomain() const = 0;
+    virtual const AbstractBanachSpace& getDomain() const = 0;
 
-    virtual const FunctionSpace& getRange() const = 0;
+    virtual const AbstractBanachSpace& getRange() const = 0;
   };
 }
 

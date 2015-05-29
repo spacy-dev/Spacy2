@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "../Interface/abstractDifferentiableOperator.hh"
+#include "../Interface/abstractTwiceDifferentiableOperator.hh"
 #include "../functionSpace.hh"
 #include "../functionSpaceElement.hh"
 #include "../FunctionSpaces/RealNumbers/real.hh"
@@ -49,6 +50,10 @@ namespace Algorithm
   {
   public:
     TestOperator(const FunctionSpace& space)
+      : space_(space.impl())
+    {}
+
+    TestOperator(const AbstractBanachSpace& space)
       : space_(space)
     {}
 
@@ -66,27 +71,82 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
     {
       x_ = &x;
-      return std::make_unique<Real>( exp(x_->coefficient(0))-2 , this->getRange().impl() );
+      return std::make_unique<Real>( exp(x_->coefficient(0))-2 , getRange() );
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
     {
-      return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0) , this->getRange().impl() );
+      return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    const FunctionSpace& getDomain() const override
+    const AbstractBanachSpace& getDomain() const override
     {
       return space_;
     }
 
-    const FunctionSpace& getRange() const override
+    const AbstractBanachSpace& getRange() const override
     {
       return space_;
     }
 
   private:
     mutable const AbstractFunctionSpaceElement* x_;
-    const FunctionSpace& space_;
+    const AbstractBanachSpace& space_;
+  };
+
+  class TestOperator2 : public AbstractTwiceDifferentiableOperator
+  {
+  public:
+    TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
+      : domain_(domain.impl()), range_(range.impl())
+    {}
+
+    TestOperator2(const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+      : domain_(domain), range_(range)
+    {}
+
+    ~TestOperator2(){}
+
+    std::unique_ptr<AbstractOperator> clone() const
+    {
+      return std::make_unique<TestOperator2>(domain_,range_);
+    }
+//    void setArgument(const AbstractFunctionSpaceElement &x) override
+//    {
+//      x_ = &x;
+//    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
+    {
+      x_ = &x;
+      return std::make_unique<Real>( exp(x_->coefficient(0))-2*x_->coefficient(1) , getRange() );
+    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
+    {
+      auto val = exp(x_->coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
+      return std::make_unique<Real>( val , getRange() );
+    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
+    {
+      return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0)*dy.coefficient(0) , getRange() );
+    }
+
+    const AbstractBanachSpace& getDomain() const override
+    {
+      return domain_;
+    }
+
+    const AbstractBanachSpace& getRange() const override
+    {
+      return range_;
+    }
+
+  private:
+    mutable const AbstractFunctionSpaceElement* x_;
+    const AbstractBanachSpace& domain_;
+    const AbstractBanachSpace& range_;
   };
 }
 

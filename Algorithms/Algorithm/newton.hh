@@ -23,28 +23,27 @@ namespace Algorithm
   public:
     Newton(DifferentiableOperator& F, bool verbose = false)
       : F_(F),
-        norm_(F_.getDomain().getNorm()),
         dampingFactor_(DampingStrategy::AffineCovariant<Newton>(*this)),
         verbose_(verbose)
     {}
 
     Newton(DifferentiableOperator& F, const std::function<double(InverseOperator&, const FunctionSpaceElement&, const FunctionSpaceElement&)>& dampingStrategy, bool verbose = false)
       : F_(F),
-        norm_(F_.getDomain().getNorm()),
         dampingFactor_(dampingStrategy),
         verbose_(verbose)
     {}
 
-    FunctionSpaceElement solve() const
-    {
-      auto x0 = F_.getDomain().element();
-      return solve(x0);
-    }
+//    FunctionSpaceElement solve() const
+//    {
+//      auto x0 = F_.getDomain().element();
+//      return solve(x0);
+//    }
 
-    FunctionSpaceElement solve(const FunctionSpaceElement& x0) const
+    FunctionSpaceElement solve(const FunctionSpaceElement& x0)
     {
       if( verbose_ ) std::cout << "Starting newton iteration with initial guess: " << x0;
 
+      norm_ = Norm( x0.impl().getSpace().getNorm() );
 
       auto x = x0;
       for(unsigned i = 1; i <= maxIterations_; ++i)
@@ -93,12 +92,12 @@ namespace Algorithm
   private:
     friend class DampingStrategy::AffineCovariant<Newton>;
     DifferentiableOperator& F_;
-    Norm norm_;
     std::function<double(InverseOperator&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
     unsigned maxIterations_ = 10;
     double relativeAccuracy_ = 1e-6;
     double thetaMax_ = 0.75, thetaAim_ = 0.5;
     bool verbose_ = false;
+    Norm norm_;
   };
 }
 #endif // ALGORITHM_ALGORITHM_NEWTON_HH

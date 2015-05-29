@@ -1,28 +1,32 @@
 #include "functionSpace.hh"
 
-#include "../Interface/abstractHilbertSpace.hh"
-
-#include <utility>
+#include "../Interface/abstractBanachSpace.hh"
 
 namespace Algorithm
 {
-  FunctionSpace::FunctionSpace(std::unique_ptr<AbstractHilbertSpace>&& implementation)
-    : impl_(std::move(implementation)), norm_(impl_->getNorm()), sp_(impl_->getScalarProduct())
+  FunctionSpace::FunctionSpace(std::shared_ptr<AbstractBanachSpace> implementation)
+    : impl_(implementation), norm_(impl_->getNorm()), dp_(impl_->getDualPairing())
   {}
 
-//  FunctionSpace::FunctionSpace(const AbstractHilbertSpace& implementation)
+//  FunctionSpace::FunctionSpace(const AbstractBanachSpace& implementation)
 //    : FunctionSpace(implementation.clone())
 //  {}
 
-  void FunctionSpace::setScalarProduct(const ScalarProduct& sp)
+  void FunctionSpace::setDualPairing(const DualPairing& dp)
   {
-    sp_ = sp;
+    dp_ = dp;
   }
 
-  const ScalarProduct& FunctionSpace::getScalarProduct() const
+  const DualPairing& FunctionSpace::getDualPairing() const
   {
-    return sp_;
+    return dp_;
   }
+
+  const DualPairing& FunctionSpace::getScalarProduct() const
+  {
+    return dp_;
+  }
+
 
   const Norm& FunctionSpace::getNorm() const
   {
@@ -39,8 +43,19 @@ namespace Algorithm
     return impl_->index();
   }
 
-  AbstractHilbertSpace const& FunctionSpace::impl() const
+  AbstractBanachSpace const& FunctionSpace::impl() const
   {
     return *impl_;
   }
+
+  void FunctionSpace::setDualSpace(FunctionSpace& Y)
+  {
+    dualSpace_ = &Y;
+  }
+
+  const FunctionSpace* FunctionSpace::getDualSpace() const
+  {
+    return dualSpace_;
+  }
+
 }
