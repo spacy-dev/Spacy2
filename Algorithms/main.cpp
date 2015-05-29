@@ -9,6 +9,7 @@
 //#include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
 #include "FunctionSpaces/ProductSpace/productSpace.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Test/scalarRFFGenOperator.hh"
 #include "Algorithm/newton.hh"
 #include "spaces.hh"
@@ -56,12 +57,30 @@
 //  };
 //}
 
+struct T0
+{
+  virtual void apply() = 0;
+};
+
+struct T1 : T0 {
+  void apply() override { std::cout << "a" << std::endl; }
+};
+
+struct T2 : T0
+{
+  void apply() override { std::cout << "b" << std::endl; }
+};
+
+struct T3 : T2, T1{
+  void apply() override { T1::apply(); T2::apply();}
+};
+
 using namespace std;
 
 int main()
 {
   using namespace Algorithm;
-
+  T3().apply();
   using Spaces::R; // Real numbers
 
   auto x = R.element();
@@ -92,8 +111,17 @@ int main()
   cout << "|x2| = " << norm2(x2) << endl;
   cout << "x2*y2 = " << x2*y2 << endl;
   cout << (x2 += primal(y2)) << endl;
-  cout << (x2 += dual(y2)) << endl;
-  cout << ( dual(x2) + y2  ) << endl;
+  primal(x2) += y2;
+  cout << x2 << endl;
+  primal(x2) += dual(y2);
+  cout << x2 << endl;
+  cout << "z: " << endl;
+  auto z = (dual(x2) += y2);
+  cout << z << endl;
+  z = dual(x2) + y2;
+  cout << "z2: " << z << endl;
+//  cout << (x2 += dual(y2)) << endl;
+//  cout << ( dual(x2) + y2  ) << endl;
 
 
   auto A = DifferentiableOperator( std::make_shared<TestOperator>(R) ); // operator

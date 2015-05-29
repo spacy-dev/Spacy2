@@ -1,17 +1,11 @@
 #include "productSpaceElement.hh"
 
-#include "primalProductSpaceElement.hh"
-#include "dualProductSpaceElement.hh"
-
 #include "productSpace.hh"
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
 #include "../../Util/invalidargumentexception.hh"
 
-#include <algorithm>
-#include <iostream>
+#include <numeric>
 #include <stdexcept>
-#include <utility>
 
 namespace Algorithm
 {
@@ -42,45 +36,79 @@ namespace Algorithm
 
   std::unique_ptr<AbstractFunctionSpaceElement> ProductSpaceElement::clone() const
   {
-    return std::make_unique<ProductSpaceElement>(primalVariables_,dualVariables_,this->space_);
+    auto primalVars = cloneVariables(primalVariables_);
+    if(disablePrimal_) for(auto& var : primalVars) *var *= 0;
+    auto dualVars = cloneVariables(dualVariables_);
+    if(disableDual_) for(auto& var : dualVars) *var *= 0;
+    reset();
+    return std::make_unique<ProductSpaceElement>(primalVars,dualVars,this->getSpace());
+  }
+
+  void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
+  {
+    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::copyTo");
+
+    ProductSpaceElement& y_ = dynamic_cast<ProductSpaceElement&>(y);
+
+    if( !disablePrimal_ && !y_.disablePrimal_ )
+      y_.primalVariables_ = cloneVariables(primalVariables_);
+
+    if( !disableDual_ && !y_.disableDual_ )
+      y_.dualVariables_ = cloneVariables(dualVariables_);
+
+    reset();
+    y_.reset();
   }
 
   ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isAnyProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator+=");
+    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator+=");
 
-    if(!isDualProductSpaceElement(y))
+    const ProductSpaceElement& y_ = dynamic_cast<const ProductSpaceElement&>(y);
+
+    if(!disablePrimal_ && !y_.disablePrimal_)
       for(auto i = 0u; i < primalVariables_.size(); ++i)
-        (*primalVariables_[i]) += primalVariable(y,i);
+        *primalVariables_[i] += *y_.primalVariables_[i];
 
-    if(!isPrimalProductSpaceElement(y))
+    if(!disableDual_ && !y_.disableDual_)
       for(auto i = 0u; i < dualVariables_.size(); ++i)
-        (*dualVariables_[i]) += dualVariable(y,i);
+        *dualVariables_[i] += *y_.dualVariables_[i];
 
+    reset();
+    y_.reset();
     return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isAnyProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator-=");
+    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator-=");
 
-    if(!isDualProductSpaceElement(y))
+    const ProductSpaceElement& y_ = dynamic_cast<const ProductSpaceElement&>(y);
+
+    if(!disablePrimal_ && !y_.disablePrimal_)
       for(auto i = 0u; i < primalVariables_.size(); ++i)
-        (*primalVariables_[i]) -= primalVariable(y,i);
+        (*primalVariables_[i]) -= *y_.primalVariables_[i];
 
-    if(!isPrimalProductSpaceElement(y))
+    if(!disableDual_ && !y_.disableDual_)
       for(auto i = 0u; i < dualVariables_.size(); ++i)
-        (*dualVariables_[i]) -= dualVariable(y,i);
+        (*dualVariables_[i]) -= *y_.dualVariables_[i];
 
+    reset();
+    y_.reset();
     return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator*=(double a)
   {
-    for(auto i = 0u; i < primalVariables_.size(); ++i) (*primalVariables_[i]) *= a;
+    if(!disablePrimal_)
+      for(auto i = 0u; i < primalVariables_.size(); ++i)
+        *primalVariables_[i] *= a;
 
-    for(auto i = 0u; i < dualVariables_.size(); ++i) (*dualVariables_[i]) *= a;
+    if(!disableDual_)
+      for(auto i = 0u; i < dualVariables_.size(); ++i)
+        *dualVariables_[i] *= a;
 
+    reset();
     return *this;
   }
 
@@ -134,7 +162,6 @@ namespace Algorithm
       ++elementId;
     }
     return dualVariables_[elementId]->coefficient(j);
-    // return x_[i];
   }
 
   const double& ProductSpaceElement::coefficient(unsigned i) const
@@ -172,62 +199,33 @@ namespace Algorithm
     for( auto& v : dualVariables_ ) v->print(os);
   }
 
-  bool isAnyProductSpaceElement(const AbstractFunctionSpaceElement &x)
-  {
-    return isProductSpaceElement(x) || isPrimalProductSpaceElement(x) || isDualProductSpaceElement(x);
-  }
-
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x)
   {
     return dynamic_cast<const ProductSpaceElement*>(&x) != nullptr;
   }
 
-  const AbstractFunctionSpaceElement& primalVariable(const AbstractFunctionSpaceElement& x, unsigned i)
+
+  FunctionSpaceElement& primal(FunctionSpaceElement &x)
   {
-    if( isProductSpaceElement_PrimalReference(x) )  return *dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_PrimalReference&>(x).productSpaceElement_  ).primalVariables_[i];
-    if( isProductSpaceElement_PrimalConstReference(x) ) return *dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_PrimalConstReference&>(x).productSpaceElement_ ).primalVariables_[i];
-    return *dynamic_cast<const ProductSpaceElement&>(x).primalVariables_[i];
+    dynamic_cast<ProductSpaceElement&>(x.impl()).disableDual();
+    return x;
   }
 
-  const AbstractFunctionSpaceElement& dualVariable(const AbstractFunctionSpaceElement& x, unsigned i)
+  const FunctionSpaceElement& primal(const FunctionSpaceElement &x)
   {
-    if( isProductSpaceElement_DualReference(x) )  return *dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_DualReference&>(x).productSpaceElement_  ).dualVariables_[i];
-    if( isProductSpaceElement_DualConstReference(x) ) return *dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_DualConstReference&>(x).productSpaceElement_ ).dualVariables_[i];
-    return *dynamic_cast<const ProductSpaceElement&>(x).dualVariables_[i];
+    dynamic_cast<const ProductSpaceElement&>(x.impl()).disableDual();
+    return x;
   }
 
-
-  unsigned primalVariableSize(const AbstractFunctionSpaceElement& x)
+  FunctionSpaceElement& dual(FunctionSpaceElement &x)
   {
-    if( isProductSpaceElement_PrimalReference(x) )  return dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_PrimalReference&>(x).productSpaceElement_  ).primalVariables_.size();
-    if( isProductSpaceElement_PrimalConstReference(x) ) return dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_PrimalConstReference&>(x).productSpaceElement_ ).primalVariables_.size();
-    return dynamic_cast<const ProductSpaceElement&>(x).primalVariables_.size();
+    dynamic_cast<ProductSpaceElement&>(x.impl()).disablePrimal();
+    return x;
   }
 
-  unsigned dualVariableSize(const AbstractFunctionSpaceElement& x)
+  const FunctionSpaceElement& dual(const FunctionSpaceElement &x)
   {
-    if( isProductSpaceElement_DualReference(x) )  return dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_DualReference&>(x).productSpaceElement_  ).dualVariables_.size();
-    if( isProductSpaceElement_DualConstReference(x) ) return dynamic_cast<const ProductSpaceElement&>( dynamic_cast<const ProductSpaceElement_DualConstReference&>(x).productSpaceElement_ ).dualVariables_.size();
-    return dynamic_cast<const ProductSpaceElement&>(x).dualVariables_.size();
-  }
-
-  FunctionSpaceElement primal(FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement primal(const FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_PrimalConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement dual(FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualReference >(dynamic_cast<ProductSpaceElement&>(x.impl())) );
-  }
-
-  FunctionSpaceElement dual(const FunctionSpaceElement& x)
-  {
-    return FunctionSpaceElement( std::make_unique< ProductSpaceElement_DualConstReference >(dynamic_cast<const ProductSpaceElement&>(x.impl())) );
+    dynamic_cast<const ProductSpaceElement&>(x.impl()).disablePrimal();
+    return x;
   }
 }

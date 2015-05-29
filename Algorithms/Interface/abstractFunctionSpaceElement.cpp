@@ -18,7 +18,6 @@ namespace Algorithm
     return space_;
   }
 
-
   std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element)
   {
     element.print(os);

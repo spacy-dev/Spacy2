@@ -121,9 +121,10 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(const Arithmetic& a, FunctionSpaceElement x)
+  auto operator*(const Arithmetic& a, const FunctionSpaceElement& x)
   {
-    return x *= a;
+    auto z(x);
+    return z *= a;
   }
 
 
@@ -132,7 +133,7 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(FunctionSpaceElement x, const Arithmetic& a)
+  auto operator*(const FunctionSpaceElement& x, const Arithmetic& a)
   {
     return a*x;
   }

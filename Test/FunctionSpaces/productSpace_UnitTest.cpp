@@ -65,6 +65,9 @@ TEST(ProductSpaceTest,PurePrimalElementSumTest)
   z = x + dual(y);
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 1. );
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 0. );
+  z = y + dual(x);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 2. );
   z = dual(x) + y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 1. );
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 2. );
@@ -278,6 +281,44 @@ TEST(ProductSpaceTest,MixedElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*y , 3.);
   EXPECT_DOUBLE_EQ( x*dual(y) , 3.);
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 3.);
+}
+
+TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
+{
+  using namespace Algorithm;
+  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto x = R2.element();
+  auto y = R2.element();
+  x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
+  y.coefficient(1) = 3;
+
+  auto z = 2*y;
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
+
+  z = 2*primal(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 0. );
+
+  z = 2*dual(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
+
+  primal(z) = 3*primal(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 3. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
+
+  primal(z) = 3*dual(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
+
+  dual(z) = 3*primal(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 0. );
+
+  dual(z) = 3*dual(y);
+  EXPECT_DOUBLE_EQ( z.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( z.coefficient(1) , 9. );
 }
 
 TEST(ProductSpaceTest,ScalarProductTest)

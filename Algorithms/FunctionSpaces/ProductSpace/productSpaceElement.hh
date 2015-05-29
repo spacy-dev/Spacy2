@@ -34,6 +34,8 @@ namespace Algorithm
      */
     std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override;
 
+    void copyTo(AbstractFunctionSpaceElement &) const final override;
+
     /// Print to os.
     void print(std::ostream& os) const final override;
 
@@ -58,42 +60,38 @@ namespace Algorithm
     /// Number of entries in coefficient vector (=1).
     unsigned size() const final override;
 
+    void reset() const
+    {
+      disablePrimal_ = disableDual_ = false;
+    }
+
+    void disablePrimal() const { disablePrimal_ = true; }
+    void disableDual() const { disableDual_ = true; }
+
   private:
     unsigned primalSize() const;
     unsigned dualSize() const;
 
     friend class ProductSpaceProduct;
-    friend class ProductSpaceElement_PrimalReference;
-    friend class ProductSpaceElement_PrimalConstReference;
-    friend class ProductSpaceElement_DualReference;
-    friend class ProductSpaceElement_DualConstReference;
     friend const AbstractFunctionSpaceElement& primalVariable(const AbstractFunctionSpaceElement& x, unsigned i);
     friend const AbstractFunctionSpaceElement& dualVariable(const AbstractFunctionSpaceElement& x, unsigned i);
-    friend unsigned primalVariableSize(const AbstractFunctionSpaceElement& x);
-    friend unsigned dualVariableSize(const AbstractFunctionSpaceElement& x);
+
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > primalVariables_;
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > dualVariables_;
+    mutable bool disablePrimal_ = false;
+    mutable bool disableDual_ = false;
   };
-
-  bool isAnyProductSpaceElement(const AbstractFunctionSpaceElement& x);
 
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x);
 
-  const AbstractFunctionSpaceElement& primalVariable(const AbstractFunctionSpaceElement& x, unsigned i);
 
-  const AbstractFunctionSpaceElement& dualVariable(const AbstractFunctionSpaceElement& x, unsigned i);
+  FunctionSpaceElement& primal(FunctionSpaceElement& x);
 
-  unsigned primalVariableSize(const AbstractFunctionSpaceElement& x);
+  const FunctionSpaceElement& primal(const FunctionSpaceElement& x);
 
-  unsigned dualVariableSize(const AbstractFunctionSpaceElement& x);
+  FunctionSpaceElement& dual(FunctionSpaceElement& x);
 
-  FunctionSpaceElement primal(FunctionSpaceElement& x);
-
-  FunctionSpaceElement primal(const FunctionSpaceElement& x);
-
-  FunctionSpaceElement dual(FunctionSpaceElement& x);
-
-  FunctionSpaceElement dual(const FunctionSpaceElement& x);
+  const FunctionSpaceElement& dual(const FunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_PRODUCT_SPACE_ELEMENT_HH

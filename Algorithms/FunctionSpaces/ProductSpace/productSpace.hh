@@ -5,8 +5,6 @@
 #include <vector>
 
 #include "../../Interface/abstractHilbertSpace.hh"
-#include "primalProductSpaceElement.hh"
-#include "dualProductSpaceElement.hh"
 
 namespace Algorithm
 {

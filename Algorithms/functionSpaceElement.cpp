@@ -3,8 +3,6 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "functionSpace.hh"
-#include "FunctionSpaces/ProductSpace/primalProductSpaceElement.hh"
-#include "FunctionSpaces/ProductSpace/dualProductSpaceElement.hh"
 
 #include <utility>
 
@@ -20,7 +18,7 @@ namespace Algorithm
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
   {
-    impl_  = y.impl().clone();
+    y.impl().copyTo(*impl_);
     return *this;
   }
 

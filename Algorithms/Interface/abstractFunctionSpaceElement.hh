@@ -10,7 +10,6 @@
 namespace Algorithm
 {
   class AbstractBanachSpace;
-  template <class> class Restriction;
 
   class AbstractFunctionSpaceElement
   {
@@ -19,30 +18,20 @@ namespace Algorithm
 
     virtual ~AbstractFunctionSpaceElement() = default;
 
+    virtual void copyTo(AbstractFunctionSpaceElement&) const
+    {
+      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::copyTo");
+    }
+
     virtual std::unique_ptr<AbstractFunctionSpaceElement> clone() const = 0;
 
     virtual void print(std::ostream&) const = 0;
 
     virtual AbstractFunctionSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) = 0;
 
-    virtual AbstractFunctionSpaceElement& operator+=(const Restriction<AbstractFunctionSpaceElement>&)
-    {
-      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
-    }
-
     virtual AbstractFunctionSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) = 0;
 
-    virtual AbstractFunctionSpaceElement& operator-=(const Restriction<AbstractFunctionSpaceElement>&)
-    {
-      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
-    }
-
     virtual AbstractFunctionSpaceElement& operator*=(double) = 0;
-
-    virtual AbstractFunctionSpaceElement& operator*=(const Restriction<AbstractFunctionSpaceElement>&)
-    {
-      throw CallOfUndefinedFunctionException("AbstractFunctionSpaceElement::+=(const Restriction&)");
-    }
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator- () const = 0;
 
