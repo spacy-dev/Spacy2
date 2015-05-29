@@ -90,7 +90,7 @@ int main()
   x.coefficient(0) = -2;
   y.coefficient(0) = 1;
   auto norm = R.getNorm();
-  auto sp = R.getScalarProduct();
+  auto sp = R.getDualPairing();
   cout << "|x| = " << norm(x) << endl;
   cout << "|y| = " << norm(y) << endl;
   cout << "(x,y) = " << sp(x,y) << endl;
@@ -104,7 +104,7 @@ int main()
   y2.coefficient(0) = x2.coefficient(0) = 1;
   y2.coefficient(1) = 2;
   auto norm2 = R2.getNorm();
-  auto sp2 = R2.getScalarProduct();
+  auto sp2 = R2.getDualPairing();
 
   cout << "x2: " << x2 << endl;
   cout << "y2: " << y2 << endl;
@@ -126,7 +126,7 @@ int main()
 
   auto A = DifferentiableOperator( std::make_shared<TestOperator>(R) ); // operator
   auto newton = Newton(A,true);
-  cout << "sol: " << newton.solve() << endl;
+  cout << "sol: " << newton.solve(x) << endl;
 
   //  using namespace RFFGen::CMath;
 //  using Vector = arma::vec::fixed<10>;

@@ -30,10 +30,12 @@ namespace Algorithm
 
     void setDualSpace(AbstractBanachSpace& dualSpace);
 
-    AbstractBanachSpace* getDualSpace() const;
+    const AbstractBanachSpace& getDualSpace() const;
+
+    bool hasDualSpace() const;
 
   protected:
-    AbstractBanachSpace* dualSpace_ = nullptr;
+    const AbstractBanachSpace* dualSpace_ = nullptr;
 
   private:
     virtual void setNormImpl(std::shared_ptr<AbstractNorm>) = 0;

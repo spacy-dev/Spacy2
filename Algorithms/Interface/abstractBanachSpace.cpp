@@ -41,10 +41,16 @@ namespace Algorithm
     dualSpace_ = &dualSpace;
   }
 
-  AbstractBanachSpace* AbstractBanachSpace::getDualSpace() const
+  const AbstractBanachSpace& AbstractBanachSpace::getDualSpace() const
   {
-    return dualSpace_;
+    return *dualSpace_;
   }
+
+  bool AbstractBanachSpace::hasDualSpace() const
+  {
+    return dualSpace_ != nullptr;
+  }
+
 
 
   double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
@@ -57,9 +63,9 @@ namespace Algorithm
       auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.getSpace()).getScalarProduct();
       return sp->operator ()(x,y);
     }
-    if( x.getSpace().getDualSpace() != nullptr && x.getSpace().getDualSpace()->index() == y.spaceIndex() )
+    if( x.getSpace().hasDualSpace() && x.getSpace().getDualSpace().index() == y.spaceIndex() )
       return x.getSpace().getDualPairing()->operator ()(x,y);
-    if( y.getSpace().getDualPairing() != nullptr && y.getSpace().getDualSpace()->index() == x.spaceIndex() )
+    if( y.getSpace().hasDualSpace() && y.getSpace().getDualSpace().index() == x.spaceIndex() )
       return y.getSpace().getDualPairing()->operator ()(y,x);
 
     throw InvalidArgumentException("operator*(const AbstractFunctionSpaceElement&,const AbstractFunctionSpaceElement&)");
