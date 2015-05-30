@@ -8,8 +8,8 @@
 //#include "FunctionSpaces/VectorSpace/cgSolver.hh"
 //#include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
-#include "FunctionSpaces/ProductSpace/productSpace.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpace.hh"
+#include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
 #include "Test/scalarRFFGenOperator.hh"
 #include "Algorithm/newton.hh"
 #include "spaces.hh"
@@ -79,10 +79,12 @@ using namespace std;
 
 int main()
 {
+  cout << "start" << endl;
   using namespace Algorithm;
   T3().apply();
   using Spaces::R; // Real numbers
 
+  cout << "bla" << endl;
   auto x = R.element();
   auto y = R.element();
 
@@ -97,8 +99,9 @@ int main()
   cout << "or equivalently: x*y = " << x*y << endl;
 
 
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> ,
-                                             DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> ,
+                                             PackSpaces<RealSpace> >() );
+  cout << "get x2" << endl;
   auto x2 = R2.element();
   auto y2 = R2.element();
   y2.coefficient(0) = x2.coefficient(0) = 1;

@@ -11,12 +11,12 @@ TEST(TrackingTypeCostFunctional,D0Test)
 {
   using namespace Algorithm;
   auto R = FunctionSpace( std::make_unique<RealSpace>() );
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto reference = R2.element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;
-  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).primalVariable(0);
+  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
   TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();
@@ -31,12 +31,12 @@ TEST(TrackingTypeCostFunctional,D1Test)
 {
   using namespace Algorithm;
   auto R = FunctionSpace( std::make_unique<RealSpace>() );
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto reference = R2.element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;
-  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).primalVariable(0);
+  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
   TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();
@@ -53,12 +53,12 @@ TEST(TrackingTypeCostFunctional,D2Test)
 {
   using namespace Algorithm;
   auto R = FunctionSpace( std::make_unique<RealSpace>() );
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto reference = R2.element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;
-  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).primalVariable(0);
+  const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
   TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();

@@ -6,24 +6,30 @@
 
 namespace Algorithm
 {
+  AbstractBanachSpace::AbstractBanachSpace(const AbstractBanachSpace* dualSpace, std::shared_ptr<AbstractNorm> norm)
+    : dualSpace_(dualSpace), norm_(norm)
+  {
+    std::cout << "Creating space number " << index_ << "." << std::endl;
+  }
+
   void AbstractBanachSpace::setNorm(std::shared_ptr<AbstractNorm> norm)
   {
-    setNormImpl(norm);
+    norm_ = norm;
   }
 
   std::shared_ptr<AbstractNorm> AbstractBanachSpace::getNorm() const
   {
-    return getNormImpl();
+    return norm_;
   }
 
   void AbstractBanachSpace::setDualPairing(std::shared_ptr<AbstractDualPairing> dp)
   {
-    setDualPairingImpl(dp);
+    dp_ = dp;
   }
 
   std::shared_ptr<AbstractDualPairing> AbstractBanachSpace::getDualPairing() const
   {
-    return getDualPairingImpl();
+    return dp_;
   }
 
   std::unique_ptr<AbstractFunctionSpaceElement> AbstractBanachSpace::element() const

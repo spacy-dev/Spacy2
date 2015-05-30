@@ -18,15 +18,7 @@ namespace Algorithm
     RealSpace();
 
   private:
-    void setNormImpl(std::shared_ptr<AbstractNorm>) override;
-
-    void setScalarProductImpl(std::shared_ptr<AbstractDualPairing>) override;
-
-    std::shared_ptr<AbstractDualPairing> getScalarProductImpl() const override;
-
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
-
-    std::shared_ptr<AbstractDualPairing> sp_;
   };
 }
 

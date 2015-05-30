@@ -3,7 +3,8 @@
 #include "productSpaceElement.hh"
 #include "../../Util/incompatiblespaceexception.hh"
 #include "../../Util/invalidargumentexception.hh"
-#include "../../Interface/abstractHilbertSpace.hh"
+#include "../../Interface/abstractBanachSpace.hh"
+#include "../../Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm
 {
@@ -17,16 +18,8 @@ namespace Algorithm
 
     auto result = 0.;
 
-    if( !x_.disablePrimal_ && !y_.disablePrimal_ )
-      for(auto i=0u; i<x_.primalVariables_.size(); ++i)
-        result += *x_.primalVariables_[i] * *y_.primalVariables_[i];
-
-    if( !x_.disableDual_ && !y_.disableDual_ )
-      for(auto i=0u; i<x_.dualVariables_.size(); ++i)
-        result += *x_.dualVariables_[i] * *y_.dualVariables_[i];
-
-    x_.reset();
-    y_.reset();
+    for(auto i=0u; i<x_.size(); ++i)
+      result += *x_.variables()[i] * *y_.variables()[i];
 
     return result;
   }

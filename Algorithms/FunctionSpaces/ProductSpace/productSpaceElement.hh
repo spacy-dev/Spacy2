@@ -20,8 +20,7 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& primalVariables,
-                        const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& dualVariables, const AbstractBanachSpace& space);
+    ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables, const AbstractBanachSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
@@ -60,57 +59,20 @@ namespace Algorithm
     /// Number of entries in coefficient vector (=1).
     unsigned size() const final override;
 
-    void reset() const;
+    AbstractFunctionSpaceElement& variable(unsigned i);
 
-    void disablePrimal() const;
+    const AbstractFunctionSpaceElement& variable(unsigned i) const;
 
-    void disableDual() const;
+    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables();
 
-    bool isPrimalEnabled() const;
-
-    bool isDualEnabled() const;
-
-    FunctionSpaceElement primalElement() const
-    {
-      return FunctionSpaceElement( ProductSpaceElement(primalVariables_,{},this->getSpace()).clone() );
-    }
-
-    const AbstractFunctionSpaceElement& primalVariable(unsigned i) const
-    {
-      return *primalVariables_[i];
-    }
-
-    FunctionSpaceElement dualElement() const
-    {
-      return FunctionSpaceElement( ProductSpaceElement({},dualVariables_,this->getSpace()).clone() ) ;
-    }
-
-    const AbstractFunctionSpaceElement& dualVariable(unsigned i) const
-    {
-      return *dualVariables_[i];
-    }
+    const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables() const;
 
   private:
-    unsigned primalSize() const;
-    unsigned dualSize() const;
+    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > variables_;
 
-    friend class ProductSpaceProduct;
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > primalVariables_;
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > dualVariables_;
-    mutable bool disablePrimal_ = false;
-    mutable bool disableDual_ = false;
   };
 
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x);
-
-
-  FunctionSpaceElement& primal(FunctionSpaceElement& x);
-
-  const FunctionSpaceElement& primal(const FunctionSpaceElement& x);
-
-  FunctionSpaceElement& dual(FunctionSpaceElement& x);
-
-  const FunctionSpaceElement& dual(const FunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_PRODUCT_SPACE_ELEMENT_HH

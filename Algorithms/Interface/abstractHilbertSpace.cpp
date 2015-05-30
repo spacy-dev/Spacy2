@@ -2,48 +2,28 @@
 
 #include "abstractFunctionSpaceElement.hh"
 #include "abstractDualPairing.hh"
+#include "abstractNorm.hh"
+#include "abstractDualPairing.hh"
 #include "../hilbertSpaceNorm.hh"
 
 namespace Algorithm
 {
-  AbstractHilbertSpace::AbstractHilbertSpace()
-    : norm_(nullptr)
+  AbstractHilbertSpace::AbstractHilbertSpace(std::shared_ptr<AbstractDualPairing> sp)
+    : AbstractBanachSpace(this,std::make_shared<HilbertSpaceNorm>(sp))
   {
-    dualSpace_ = this;
+    this->dp_ = sp;
   }
 
   void AbstractHilbertSpace::setScalarProduct(std::shared_ptr<AbstractDualPairing> sp)
   {
-    setScalarProductImpl(sp);
-    setNorm(std::make_shared<HilbertSpaceNorm>(getScalarProduct()));
+    setDualPairing(sp);
+    setNorm(std::make_shared<HilbertSpaceNorm>(sp));
   }
-
-  void AbstractHilbertSpace::setNormImpl(std::shared_ptr<AbstractNorm> norm)
-  {
-    norm_ = norm;
-  }
-
 
   std::shared_ptr<AbstractDualPairing> AbstractHilbertSpace::getScalarProduct() const
   {
-    return getScalarProductImpl();
+    return getDualPairing();
   }
-
-  std::shared_ptr<AbstractNorm> AbstractHilbertSpace::getNormImpl() const
-  {
-    return norm_;
-  }
-
-  void AbstractHilbertSpace::setDualPairingImpl(std::shared_ptr<AbstractDualPairing> dp)
-  {
-    setScalarProductImpl(dp);
-  }
-
-  std::shared_ptr<AbstractDualPairing> AbstractHilbertSpace::getDualPairingImpl() const
-  {
-    return getScalarProductImpl();
-  }
-
 
   bool isHilbertSpace(const AbstractBanachSpace& space)
   {

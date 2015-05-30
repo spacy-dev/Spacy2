@@ -14,6 +14,8 @@ namespace Algorithm
   class AbstractBanachSpace
   {
   public:
+    AbstractBanachSpace(const AbstractBanachSpace* dualSpace, std::shared_ptr<AbstractNorm> norm);
+
     virtual ~AbstractBanachSpace() = default;
 
     void setNorm(std::shared_ptr<AbstractNorm> norm);
@@ -36,16 +38,10 @@ namespace Algorithm
 
   protected:
     const AbstractBanachSpace* dualSpace_ = nullptr;
+    std::shared_ptr<AbstractNorm> norm_ = nullptr;
+    std::shared_ptr<AbstractDualPairing> dp_;
 
   private:
-    virtual void setNormImpl(std::shared_ptr<AbstractNorm>) = 0;
-
-    virtual std::shared_ptr<AbstractNorm> getNormImpl() const = 0;
-
-    virtual void setDualPairingImpl(std::shared_ptr<AbstractDualPairing> dp) = 0;
-
-    virtual std::shared_ptr<AbstractDualPairing> getDualPairingImpl() const = 0;
-
     virtual std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const = 0;
 
     const unsigned index_ = spaceIndex++;

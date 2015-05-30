@@ -4,46 +4,46 @@
 #include "../../Algorithms/norm.hh"
 #include "../../Algorithms/scalarProduct.hh"
 #include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
-#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpace.hh"
-#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpace.hh"
+#include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
 
-TEST(ProductSpaceTest,PurePrimalElementTest)
+TEST(PrimalDualProductSpaceTest,PurePrimalElementTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(ProductSpaceTest,PureDualElementTest)
+TEST(PrimalDualProductSpaceTest,PureDualElementTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<> , DualSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(ProductSpaceTest,MixedElementTest)
+TEST(PrimalDualProductSpaceTest,MixedElementTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(ProductSpaceTest,PurePrimalElementSumTest)
+TEST(PrimalDualProductSpaceTest,PurePrimalElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
@@ -105,10 +105,10 @@ TEST(ProductSpaceTest,PurePrimalElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(ProductSpaceTest,PureDualElementSumTest)
+TEST(PrimalDualProductSpaceTest,PureDualElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<> , DualSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
@@ -167,10 +167,10 @@ TEST(ProductSpaceTest,PureDualElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(ProductSpaceTest,MixedElementSumTest)
+TEST(PrimalDualProductSpaceTest,MixedElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
@@ -229,10 +229,10 @@ TEST(ProductSpaceTest,MixedElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(ProductSpaceTest,PurePrimalElementProductTest)
+TEST(PrimalDualProductSpaceTest,PurePrimalElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -247,10 +247,10 @@ TEST(ProductSpaceTest,PurePrimalElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 0.);
 }
 
-TEST(ProductSpaceTest,PureDualElementProductTest)
+TEST(PrimalDualProductSpaceTest,PureDualElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<> , DualSpaces<RealSpace,RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -265,10 +265,10 @@ TEST(ProductSpaceTest,PureDualElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 4.);
 }
 
-TEST(ProductSpaceTest,MixedElementProductTest)
+TEST(PrimalDualProductSpaceTest,MixedElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -283,10 +283,10 @@ TEST(ProductSpaceTest,MixedElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 3.);
 }
 
-TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
+TEST(PrimalDualProductSpaceTest,MixedElementArithmeticProductTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -321,10 +321,10 @@ TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 9. );
 }
 
-TEST(ProductSpaceTest,ScalarProductTest)
+TEST(PrimalDualProductSpaceTest,ScalarProductTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
@@ -333,10 +333,10 @@ TEST(ProductSpaceTest,ScalarProductTest)
   EXPECT_DOUBLE_EQ( x*y, R2.getScalarProduct()(x,y) );
 }
 
-TEST(ProductSpaceTest,NormTest)
+TEST(PrimalDualProductSpaceTest,NormTest)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PrimalSpaces<RealSpace> , DualSpaces<RealSpace> >() );
+  auto R2 = FunctionSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 3;

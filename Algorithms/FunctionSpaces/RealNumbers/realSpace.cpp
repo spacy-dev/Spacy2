@@ -1,35 +1,12 @@
 #include "realSpace.hh"
 
-#include "../../Util/invalidargumentexception.hh"
-
-#include "../../hilbertSpaceNorm.hh"
-
 #include "real.hh"
 #include "realProduct.hh"
 
 namespace Algorithm
 {
-  RealSpace::RealSpace()
-  {
-    this->setScalarProduct( std::make_shared<RealProduct>() );
-  }
-
-  void RealSpace::setNormImpl(std::shared_ptr<AbstractNorm> norm)
-  {
-    if( dynamic_cast<const HilbertSpaceNorm*>(norm.get()) == nullptr ) throw InvalidArgumentException("RealSpace::setNormImpl");
-
-    this->norm_ = norm;
-  }
-
-  void RealSpace::setScalarProductImpl(std::shared_ptr<AbstractDualPairing> sp)
-  {
-    sp_ = sp;
-  }
-
-  std::shared_ptr<AbstractDualPairing> RealSpace::getScalarProductImpl() const
-  {
-    return sp_;
-  }
+  RealSpace::RealSpace() : AbstractHilbertSpace(std::make_shared<RealProduct>())
+  {}
 
   std::unique_ptr<AbstractFunctionSpaceElement> RealSpace::elementImpl() const
   {

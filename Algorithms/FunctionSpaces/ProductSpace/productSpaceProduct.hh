@@ -1,12 +1,11 @@
 #ifndef ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
 #define ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
 #include "../../Interface/abstractDualPairing.hh"
 
 namespace Algorithm
 {
-  template <class> class Restriction;
+  class AbstractFunctionSpaceElement;
 
   /// Scalar product for RealSpace.
   class ProductSpaceProduct : public AbstractDualPairing
