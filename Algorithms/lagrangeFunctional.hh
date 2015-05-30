@@ -1,38 +1,38 @@
-#ifndef ALGORITHM_LAGRANGEFUNCTIONAL_HH
-#define ALGORITHM_LAGRANGEFUNCTIONAL_HH
+//#ifndef ALGORITHM_LAGRANGEFUNCTIONAL_HH
+//#define ALGORITHM_LAGRANGEFUNCTIONAL_HH
 
-#include <memory>
+//#include <memory>
 
-#include "twiceDifferentiableFunctional.hh"
-#include "twiceDifferentiableOperator.hh"
-#include "functionSpaceElement.hh"
+//#include "twiceDifferentiableFunctional.hh"
+//#include "twiceDifferentiableOperator.hh"
+//#include "functionSpaceElement.hh"
 
-namespace Algorithm
-{
-  class AbstractFunctionSpaceElement;
-  class FunctionSpace;
-  class ProductSpaceElement;
+//namespace Algorithm
+//{
+//  class AbstractFunctionSpaceElement;
+//  class FunctionSpace;
+//  class ProductSpaceElement;
 
-  class LagrangeFunctional
-  {
-  public:
-    LagrangeFunctional(const TwiceDifferentiableFunctional& costFunctional, const TwiceDifferentiableOperator& contraint);
+//  class LagrangeFunctional
+//  {
+//  public:
+//    LagrangeFunctional(const TwiceDifferentiableFunctional& costFunctional, const TwiceDifferentiableOperator& contraint);
 
-    double operator()(const FunctionSpaceElement& x) const;
+//    double operator()(const FunctionSpaceElement& x) const;
 
-    double d1(const FunctionSpaceElement& dx) const;
+//    double d1(const FunctionSpaceElement& dx) const;
 
-    double d2(const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
+//    double d2(const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
 
-    const TwiceDifferentiableFunctional& getCostFunctional() const;
+//    const TwiceDifferentiableFunctional& getCostFunctional() const;
 
-    const TwiceDifferentiableOperator& getConstraint() const;
+//    const TwiceDifferentiableOperator& getConstraint() const;
 
-  private:
-    TwiceDifferentiableFunctional costFunctional_;
-    TwiceDifferentiableOperator constraint_;
-    mutable FunctionSpaceElement x_, y_, p_;
-  };
-}
+//  private:
+//    TwiceDifferentiableFunctional costFunctional_;
+//    TwiceDifferentiableOperator constraint_;
+//    mutable FunctionSpaceElement x_, y_, p_;
+//  };
+//}
 
-#endif // ALGORITHM_LAGRANGEFUNCTIONAL_HH
+//#endif // ALGORITHM_LAGRANGEFUNCTIONAL_HH
