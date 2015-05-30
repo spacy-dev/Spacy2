@@ -25,5 +25,11 @@ namespace Algorithm
     std::shared_ptr<AbstractC0Operator> impl_ = nullptr;
 
   };
+
+  template <class Implementation, class... Args>
+  C0Operator makeC0Operator(Args&&... args)
+  {
+    return C0Operator( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+  }
 }
 #endif // ALGORITHM_C0_OPERATOR_HH

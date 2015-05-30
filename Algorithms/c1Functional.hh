@@ -24,5 +24,11 @@ namespace Algorithm
   private:
     std::shared_ptr<AbstractC1Functional> impl_;
   };
+
+  template <class Implementation, class... Args>
+  C1Functional makeC1Functional(Args&&... args)
+  {
+    return C1Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+  }
 }
 #endif // ALGORITHM_C1_FUNCTIONAL_HH

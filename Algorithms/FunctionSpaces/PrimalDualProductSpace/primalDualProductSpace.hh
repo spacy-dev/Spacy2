@@ -22,7 +22,11 @@ namespace Algorithm
     PrimalDualProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces,
                  std::vector<std::unique_ptr<AbstractBanachSpace> >&& dualSpaces);
 
+    ProductSpace& getPrimalProductSpace();
+
     const ProductSpace& getPrimalProductSpace() const;
+
+    ProductSpace& getDualProductSpace();
 
     const ProductSpace& getDualProductSpace() const;
 
@@ -30,7 +34,7 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
 
     ProductSpace primalSpaces_;
-    std::unique_ptr<ProductSpace> dualSpaces_;
+    ProductSpace dualSpaces_;
   };
 
 

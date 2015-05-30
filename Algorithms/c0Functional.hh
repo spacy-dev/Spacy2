@@ -22,5 +22,11 @@ namespace Algorithm
   protected:
     std::shared_ptr<AbstractC0Functional> impl_ = nullptr;
   };
+
+  template <class Implementation, class... Args>
+  C0Functional makeC0Functional(Args&&... args)
+  {
+    return C0Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+  }
 }
 #endif // ALGORITHM_OPERATOR_HH
