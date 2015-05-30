@@ -44,7 +44,7 @@ TEST(TrackingTypeCostFunctional,D1Test)
   y.coefficient(0) = 1;
   y.coefficient(1) = 1;
   J(x);
-  EXPECT_DOUBLE_EQ( J.d1(y) , 1. );
+  EXPECT_DOUBLE_EQ( J.d1(y) , -1. );
   J(y);
   EXPECT_DOUBLE_EQ( J.d1(y) , 3. );
 }

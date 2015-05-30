@@ -6,6 +6,7 @@
 
 #include "../FunctionSpaces/RealNumbers/real.hh"
 #include "../FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "../FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
 #include "../Util/invalidargumentexception.hh"
 
 namespace Algorithm
@@ -29,6 +30,7 @@ namespace Algorithm
 
   double TrackingTypeCostFunctional::operator()(const AbstractFunctionSpaceElement& x) const
   {
+    if( isPrimalDualProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
     if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::operator()");
 
     x_.reset( dynamic_cast<ProductSpaceElement*>(x.clone().release()) );
@@ -57,7 +59,8 @@ namespace Algorithm
     const auto& dx_ = dynamic_cast<const ProductSpaceElement&>(dx);
 
     auto stateDifference = referenceState_->clone();
-    *stateDifference -= x_->variable(stateId_);
+    *stateDifference *= -1;
+    *stateDifference += x_->variable(stateId_);
 
     return (*stateDifference * dx_.variable(stateId_))
         + alpha_ * ( x_->variable(controlId_) * dx_.variable(controlId_) );
@@ -70,7 +73,7 @@ namespace Algorithm
     const auto& dx_ = dynamic_cast<const ProductSpaceElement&>(dx);
     const auto& dy_ = dynamic_cast<const ProductSpaceElement&>(dy);
 
-    return (dx_.variable(stateId_) * dy_.variable(stateId_))
+    return dx_.variable(stateId_) * dy_.variable(stateId_)
         + alpha_ * ( dx_.variable(controlId_) * dy_.variable(controlId_) );
   }
 

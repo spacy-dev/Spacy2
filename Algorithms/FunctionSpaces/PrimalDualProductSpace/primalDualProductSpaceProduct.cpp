@@ -9,8 +9,8 @@ namespace Algorithm
 {
   double PrimalDualProductSpaceProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
   {
-    if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
-    if( !isPrimalDualProductSpaceElement(x) && !isPrimalDualProductSpaceElement(y) ) throw InvalidArgumentException("PrimalDualProductSpaceProduct");
+    if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("PrimalDualProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
+    if( !isPrimalDualProductSpaceElement(x) || !isPrimalDualProductSpaceElement(y) ) throw InvalidArgumentException("PrimalDualProductSpaceProduct");
 
     const auto& x_ = dynamic_cast<const PrimalDualProductSpaceElement&>(x);
     const auto& y_ = dynamic_cast<const PrimalDualProductSpaceElement&>(y);

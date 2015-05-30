@@ -67,7 +67,7 @@ add_library(algorithms ${SRC_LIST})
 add_library(operators ${OPERATOR_SRC_LIST})
 target_link_libraries(operators algorithms)
 add_executable(Test Algorithms/main.cpp)
-target_link_libraries(Test algorithms )
+target_link_libraries(Test algorithms operators)
 
 if(BuildTest)
     aux_source_directory(Test TEST_SRC_LIST)

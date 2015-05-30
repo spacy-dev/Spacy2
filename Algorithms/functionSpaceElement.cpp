@@ -7,6 +7,7 @@
 #include "functionSpace.hh"
 
 #include <utility>
+#include <iostream>
 
 namespace Algorithm
 {
@@ -18,13 +19,30 @@ namespace Algorithm
     : impl_(std::move(implementation))
   {}
 
+  FunctionSpaceElement::FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation)
+    : impl_(implementation.clone())
+  {}
+
+
   FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
     : impl_(y.impl().clone())
-  {}
+  { std::cout << "cloning fse" << std::endl; }
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
   {
-    y.impl().copyTo(*impl_);
+    if( impl_ != nullptr)
+      y.impl().copyTo(*impl_);
+    else
+      impl_ = y.impl().clone();
+    return *this;
+  }
+
+  FunctionSpaceElement& FunctionSpaceElement::operator=(const AbstractFunctionSpaceElement& implementation)
+  {
+    if( impl_ != nullptr )
+      implementation.copyTo(*impl_);
+    else
+      impl_ = implementation.clone();
     return *this;
   }
 

@@ -29,9 +29,13 @@ namespace Algorithm
      */
     FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation);
 
+    FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation);
+
     FunctionSpaceElement(const FunctionSpaceElement&);
 
     FunctionSpaceElement& operator=(const FunctionSpaceElement&);
+
+    FunctionSpaceElement& operator=(const AbstractFunctionSpaceElement& implementation);
 
     /**
      * @brief print information on this function space element
@@ -101,7 +105,7 @@ namespace Algorithm
     unsigned size() const;
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> impl_;
+    std::unique_ptr<AbstractFunctionSpaceElement> impl_ = nullptr;
   };
 
   /**

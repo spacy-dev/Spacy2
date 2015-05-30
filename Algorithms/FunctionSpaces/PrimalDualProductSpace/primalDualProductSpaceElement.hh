@@ -92,14 +92,22 @@ namespace Algorithm
 //      return FunctionSpaceElement( PrimalDualProductSpaceElement({},dualVariables_,this->getSpace()).clone() ) ;
 //    }
 
+    const ProductSpaceElement& primalElement() const
+    {
+      return primalProductSpaceElement_;
+    }
+
+    const ProductSpaceElement& dualElement() const
+    {
+      return dualProductSpaceElement_;
+    }
+
     const AbstractFunctionSpaceElement& dualVariable(unsigned i) const
     {
       return dualProductSpaceElement_.variable(i);
     }
 
   private:
-
-    friend class PrimalDualProductSpaceProduct;
     ProductSpaceElement primalProductSpaceElement_;
     ProductSpaceElement dualProductSpaceElement_;
     mutable bool disablePrimal_ = false;

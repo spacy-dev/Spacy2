@@ -12,14 +12,16 @@ namespace Algorithm
 {
   PrimalDualProductSpaceElement::PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& primalVariables, const AbstractBanachSpace& space)
     : AbstractFunctionSpaceElement(space),
-      primalProductSpaceElement_(primalVariables,space), dualProductSpaceElement_({},space)
+      primalProductSpaceElement_(primalVariables,dynamic_cast<const PrimalDualProductSpace&>(space).getPrimalProductSpace()),
+      dualProductSpaceElement_({},dynamic_cast<const PrimalDualProductSpace&>(space).getDualProductSpace())
   {}
 
 
   PrimalDualProductSpaceElement::PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > &primalVariables,
                                            const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > &dualVariables, const AbstractBanachSpace& space)
     : AbstractFunctionSpaceElement(space),
-      primalProductSpaceElement_(primalVariables,space), dualProductSpaceElement_(dualVariables,space)
+      primalProductSpaceElement_(primalVariables,dynamic_cast<const PrimalDualProductSpace&>(space).getPrimalProductSpace()),
+      dualProductSpaceElement_(dualVariables,dynamic_cast<const PrimalDualProductSpace&>(space).getDualProductSpace())
   {}
 
   PrimalDualProductSpaceElement::PrimalDualProductSpaceElement(const PrimalDualProductSpace &space)

@@ -119,18 +119,23 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
     {
       x_ = &x;
-      return std::make_unique<Real>( exp(x_->coefficient(0))-2*x_->coefficient(1) , getRange() );
+      auto result = range_.element();
+      result->coefficient(0) = exp(x_->coefficient(0))-2*x_->coefficient(1);
+      return std::move(result);
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
     {
-      auto val = exp(x_->coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
-      return std::make_unique<Real>( val , getRange() );
+      auto result = range_.element();
+      result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
+      return std::move(result);
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
     {
-      return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0)*dy.coefficient(0) , getRange() );
+      auto result = range_.element();
+      result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0)*dy.coefficient(0);
+      return std::move(result);
     }
 
     const AbstractBanachSpace& getDomain() const override
