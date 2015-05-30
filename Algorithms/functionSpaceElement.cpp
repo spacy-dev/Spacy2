@@ -7,7 +7,6 @@
 #include "functionSpace.hh"
 
 #include <utility>
-#include <iostream>
 
 namespace Algorithm
 {
@@ -26,7 +25,7 @@ namespace Algorithm
 
   FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
     : impl_(y.impl().clone())
-  { std::cout << "cloning fse" << std::endl; }
+  {}
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
   {

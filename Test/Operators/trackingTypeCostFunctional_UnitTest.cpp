@@ -5,7 +5,7 @@
 #include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
 #include "../../Algorithms/FunctionSpaces/ProductSpace/productSpace.hh"
 #include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "../../Algorithms/twiceDifferentiableFunctional.hh"
+#include "../../Algorithms/c2Functional.hh"
 
 TEST(TrackingTypeCostFunctional,D0Test)
 {
@@ -17,7 +17,7 @@ TEST(TrackingTypeCostFunctional,D0Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();
   auto y = R2.element();
@@ -37,7 +37,7 @@ TEST(TrackingTypeCostFunctional,D1Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();
   auto y = R2.element();
@@ -59,7 +59,7 @@ TEST(TrackingTypeCostFunctional,D2Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,R2,R));
 
   auto x = R2.element();
   auto y = R2.element();

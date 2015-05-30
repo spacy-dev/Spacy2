@@ -5,17 +5,17 @@
 
 namespace Algorithm
 {
-  class Operator;
+  class C0Operator;
 
   class RealSolver : public AbstractLinearSolver
   {
   public:
-    RealSolver(const Operator& A);
+    RealSolver(const C0Operator& A);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
 
   private:
-    const Operator& A_;
+    const C0Operator& A_;
   };
 }
 

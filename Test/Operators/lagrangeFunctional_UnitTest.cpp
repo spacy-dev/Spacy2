@@ -8,14 +8,17 @@
 #include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpace.hh"
 #include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
-#include "../../Algorithms/Interface/abstractTwiceDifferentiableOperator.hh"
+#include "../../Algorithms/Interface/abstractC0Operator.hh"
+#include "../../Algorithms/Interface/abstractC2Operator.hh"
 #include "../../Algorithms/lagrangeFunctional.hh"
 #include "../../Algorithms/Operators/trackingTypeCostFunctional.hh"
+#include "../../Algorithms/functionSpace.hh"
+#include "../../Algorithms/functionSpaceElement.hh"
 
 
 using namespace Algorithm;
 
-class TestOperator2 : public AbstractTwiceDifferentiableOperator
+class TestOperator2 : public AbstractC2Operator
 {
 public:
   TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
@@ -28,7 +31,7 @@ public:
 
   ~TestOperator2(){}
 
-  std::unique_ptr<AbstractOperator> clone() const
+  std::unique_ptr<AbstractC0Operator> clone() const
   {
     return std::make_unique<TestOperator2>(domain_,range_);
   }
@@ -85,8 +88,8 @@ TEST(LagrangeFunctionalTest, D0Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
-  TwiceDifferentiableOperator c(std::make_shared<TestOperator2>(Y,P));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
+  C2Operator c(std::make_shared<TestOperator2>(Y,P));
   LagrangeFunctional L(J,c);
 
   auto x = X.element();
@@ -115,8 +118,8 @@ TEST(LagrangeFunctionalTest, D1Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
-  TwiceDifferentiableOperator c(std::make_shared<TestOperator2>(Y,P));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
+  C2Operator c(std::make_shared<TestOperator2>(Y,P));
   LagrangeFunctional L(J,c);
 
   auto x = X.element();
@@ -153,8 +156,8 @@ TEST(LagrangeFunctionalTest, D2Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  TwiceDifferentiableFunctional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
-  TwiceDifferentiableOperator c(std::make_shared<TestOperator2>(Y,P));
+  C2Functional J(std::make_shared<TrackingTypeCostFunctional>(alpha,referenceState,Y,P));
+  C2Operator c(std::make_shared<TestOperator2>(Y,P));
   LagrangeFunctional L(J,c);
 
   auto x = X.element();

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "../Interface/abstractTwiceDifferentiableFunctional.hh"
+#include "../Interface/abstractC2Functional.hh"
 //#include "../twiceDifferentiableFunctional.hh"
 
 namespace Algorithm
@@ -13,14 +13,14 @@ namespace Algorithm
   class ProductSpaceElement;
   class FunctionSpace;
 
-  class TrackingTypeCostFunctional : public AbstractTwiceDifferentiableFunctional
+  class TrackingTypeCostFunctional : public AbstractC2Functional
   {
   public:
     TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const FunctionSpace& domain, const FunctionSpace& range);
 
     TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
 
-    std::unique_ptr<AbstractFunctional> clone() const final override;
+    std::unique_ptr<AbstractC0Functional> clone() const final override;
 
     double operator()(const AbstractFunctionSpaceElement& x) const final override;
 

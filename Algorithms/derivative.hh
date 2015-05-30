@@ -1,21 +1,21 @@
 #ifndef ALGORITHM_DERIVATIVE_HH
 #define ALGORITHM_DERIVATIVE_HH
 
-#include "differentiableOperator.hh"
-#include "operator.hh"
+#include "c0Operator.hh"
+#include "c1Operator.hh"
 
-#include "Interface/abstractOperator.hh"
+#include "Interface/abstractC0Operator.hh"
 
 namespace Algorithm
 {
-  class AbstractDifferentiableOperator;
+  class AbstractC1Operator;
 
-  class Derivative : public AbstractOperator
+  class Derivative : public AbstractC0Operator
   {
   public:
-    Derivative(const AbstractDifferentiableOperator& A, const AbstractFunctionSpaceElement& x);
+    Derivative(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x);
 
-    std::unique_ptr<AbstractOperator> clone() const override;
+    std::unique_ptr<AbstractC0Operator> clone() const override;
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override;
 
@@ -24,23 +24,23 @@ namespace Algorithm
     const AbstractBanachSpace& getRange() const override;
 
   private:
-    std::unique_ptr<AbstractDifferentiableOperator> A_;
+    std::unique_ptr<AbstractC1Operator> A_;
     const AbstractFunctionSpaceElement& x_;
   };
 
-  Operator derivative(const DifferentiableOperator& A, const FunctionSpaceElement& x);
+  C0Operator derivative(const C1Operator& A, const FunctionSpaceElement& x);
 
 
   template <class Operator> class DerivativeMapping;
 
   template <>
-  class DerivativeMapping<DifferentiableOperator> : public AbstractOperator
+  class DerivativeMapping<C1Operator> : public AbstractC0Operator
   {
   public:
-    DerivativeMapping(const AbstractDifferentiableOperator& A, const AbstractFunctionSpaceElement& x, const AbstractBanachSpace& range);
+    DerivativeMapping(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x, const AbstractBanachSpace& range);
 
   private:
-    const AbstractDifferentiableOperator& A_;
+    const AbstractC1Operator& A_;
     const AbstractFunctionSpaceElement& x_;
     const AbstractBanachSpace& range;
   };

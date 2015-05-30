@@ -8,19 +8,19 @@
 
 namespace Algorithm
 {
-  class Operator;
+  class C0Operator;
 
   class CGSolver : public AbstractLinearSolver
   {
   public:
-    CGSolver(const Operator& A);
+    CGSolver(const C0Operator& A);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement &x, const FunctionSpaceElement& y) const final override;
 
 //    FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
 
   private:
-    Operator P_;
+    C0Operator P_;
     mutable CG cg;
   };
 }

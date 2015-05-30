@@ -1,17 +1,17 @@
-#ifndef ALGORITHM_FUNCTIONAL_HH
-#define ALGORITHM_FUNCTIONAL_HH
+#ifndef ALGORITHM_C0_FUNCTIONAL_HH
+#define ALGORITHM_C0_FUNCTIONAL_HH
 
 #include <memory>
 
 namespace Algorithm
 {
-  class AbstractFunctional;
+  class AbstractC0Functional;
   class FunctionSpaceElement;
 
-  class Functional
+  class C0Functional
   {
   public:
-    Functional(std::shared_ptr<AbstractFunctional> impl);
+    C0Functional(std::shared_ptr<AbstractC0Functional> impl);
 
 //    void setArgument(const FunctionSpaceElement& x);
 
@@ -20,7 +20,7 @@ namespace Algorithm
 //    FunctionSpaceElement operator()() const;
 
   protected:
-    std::shared_ptr<AbstractFunctional> impl_ = nullptr;
+    std::shared_ptr<AbstractC0Functional> impl_ = nullptr;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

@@ -4,20 +4,20 @@
 #include <memory>
 #include <vector>
 
-#include "../Interface/abstractOperator.hh"
+#include "../Interface/abstractC0Operator.hh"
 #include "../functionSpace.hh"
-#include "../operator.hh"
+#include "../c0Operator.hh"
 
 namespace Algorithm
 {
   class FunctionSpaceElement;
 
-  class JacobiPreconditioner : public AbstractOperator
+  class JacobiPreconditioner : public AbstractC0Operator
   {
   public:
-    JacobiPreconditioner(const Operator& A);
+    JacobiPreconditioner(const C0Operator& A);
 
-    std::unique_ptr<AbstractOperator> clone() const;
+    std::unique_ptr<AbstractC0Operator> clone() const;
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
 
@@ -31,9 +31,9 @@ namespace Algorithm
     const AbstractBanachSpace& range_;
   };
 
-  Operator jacobi(const Operator& A)
+  C0Operator jacobi(const C0Operator& A)
   {
-    return Operator(std::make_shared<JacobiPreconditioner>(A));
+    return C0Operator(std::make_shared<JacobiPreconditioner>(A));
   }
 }
 #endif // JACOBIPRECONDITIONER_HH

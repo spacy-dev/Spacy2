@@ -20,7 +20,7 @@
 #include <tuple>
 #include <utility>
 
-#include "../operator.hh"
+#include "../c0Operator.hh"
 #include "../functionSpaceElement.hh"
 #include "../Util/singularoperatorexception.hh"
 
@@ -98,7 +98,7 @@ namespace Algorithm
      * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
      * \param eps_ estimate for the maximal attainable accuracy (default=false).
      */
-    CGBase(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
+    CGBase(const C0Operator& A, const C0Operator& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
         A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >()), verbose(verbose_)
     {
@@ -282,8 +282,8 @@ namespace Algorithm
       }
     }
 
-    const Operator& A_;
-    const Operator& P_;
+    const C0Operator& A_;
+    const C0Operator& P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
     bool verbose = false; ///
     Result result = Result::Failed; ///< information on the way cg did terminate

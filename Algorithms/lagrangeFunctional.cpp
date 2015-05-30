@@ -5,7 +5,7 @@
 #include <iostream>
 namespace Algorithm
 {
-  LagrangeFunctional::LagrangeFunctional(const TwiceDifferentiableFunctional& costFunctional, const TwiceDifferentiableOperator& constraint)
+  LagrangeFunctional::LagrangeFunctional(const C2Functional& costFunctional, const C2Operator& constraint)
     : f_(costFunctional), c_(constraint)
   {}
 
@@ -115,12 +115,12 @@ namespace Algorithm
     return f_.d2(dxy_,dyy_) + p_ * c_.d2(dxy_,dyy_) + dyp_ * c_.d1(dxy_) + dxp_ * c_.d1(dyy_);
   }
 
-  const TwiceDifferentiableFunctional& LagrangeFunctional::getCostFunctional() const
+  const C2Functional &LagrangeFunctional::getCostFunctional() const
   {
     return f_;
   }
 
-  const TwiceDifferentiableOperator& LagrangeFunctional::getConstraint() const
+  const C2Operator& LagrangeFunctional::getConstraint() const
   {
     return c_;
   }

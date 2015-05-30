@@ -2,7 +2,7 @@
 
 namespace Algorithm
 {
-  JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
+  JacobiPreconditioner::JacobiPreconditioner(const C0Operator& A)
     : diag_(A.impl().getDomain().element()->size(),0.),
       domain_(A.impl().getRange()),
       range_(A.impl().getDomain())
@@ -25,7 +25,7 @@ namespace Algorithm
 //  }
 
 
-  std::unique_ptr<AbstractOperator> JacobiPreconditioner::clone() const
+  std::unique_ptr<AbstractC0Operator> JacobiPreconditioner::clone() const
   {
     return std::make_unique<JacobiPreconditioner>(*this);
   }

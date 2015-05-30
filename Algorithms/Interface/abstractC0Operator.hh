@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH
-#define ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH
+#ifndef ALGORITHM_INTERFACE_ABSTRACT_C0_OPERATOR_HH
+#define ALGORITHM_INTERFACE_ABSTRACT_C0_OPERATOR_HH
 
 #include <memory>
 
@@ -8,12 +8,12 @@ namespace Algorithm
   class AbstractBanachSpace;
   class AbstractFunctionSpaceElement;
 
-  class AbstractOperator
+  class AbstractC0Operator
   {
   public:
-    virtual ~AbstractOperator(){}
+    virtual ~AbstractC0Operator(){}
     
-    virtual std::unique_ptr<AbstractOperator> clone() const = 0;
+    virtual std::unique_ptr<AbstractC0Operator> clone() const = 0;
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
@@ -23,4 +23,4 @@ namespace Algorithm
   };
 }
 
-#endif // ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH
+#endif // ALGORITHM_INTERFACE_ABSTRACT_C0_OPERATOR_HH

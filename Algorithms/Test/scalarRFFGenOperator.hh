@@ -3,8 +3,8 @@
 
 #include <cmath>
 
-#include "../Interface/abstractDifferentiableOperator.hh"
-#include "../Interface/abstractTwiceDifferentiableOperator.hh"
+#include "../Interface/abstractC1Operator.hh"
+#include "../Interface/abstractC2Operator.hh"
 #include "../functionSpace.hh"
 #include "../functionSpaceElement.hh"
 #include "../FunctionSpaces/RealNumbers/real.hh"
@@ -46,7 +46,7 @@ namespace Algorithm
 //    return ScalarRFFGenOperator<Function>(f,space);
 //  }
 
-  class TestOperator : public AbstractDifferentiableOperator
+  class TestOperator : public AbstractC1Operator
   {
   public:
     TestOperator(const FunctionSpace& space)
@@ -59,7 +59,7 @@ namespace Algorithm
 
     ~TestOperator(){}
 
-    std::unique_ptr<AbstractOperator> clone() const
+    std::unique_ptr<AbstractC0Operator> clone() const
     {
       return std::make_unique<TestOperator>(space_);
     }
@@ -94,7 +94,7 @@ namespace Algorithm
     const AbstractBanachSpace& space_;
   };
 
-  class TestOperator2 : public AbstractTwiceDifferentiableOperator
+  class TestOperator2 : public AbstractC2Operator
   {
   public:
     TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
@@ -107,7 +107,7 @@ namespace Algorithm
 
     ~TestOperator2(){}
 
-    std::unique_ptr<AbstractOperator> clone() const
+    std::unique_ptr<AbstractC0Operator> clone() const
     {
       return std::make_unique<TestOperator2>(domain_,range_);
     }

@@ -1,17 +1,19 @@
 #include "derivative.hh"
 
-#include "Interface/abstractDifferentiableOperator.hh"
+#include "functionSpaceElement.hh"
+
+#include "Interface/abstractC1Operator.hh"
 
 namespace Algorithm
 {
-  Derivative::Derivative(const AbstractDifferentiableOperator &A, const AbstractFunctionSpaceElement& x)
-    : A_(dynamic_cast<AbstractDifferentiableOperator*>(A.clone().release())),
+  Derivative::Derivative(const AbstractC1Operator &A, const AbstractFunctionSpaceElement& x)
+    : A_(dynamic_cast<AbstractC1Operator*>(A.clone().release())),
       x_(x)
   {
     (*A_)(x_);
   }
 
-  std::unique_ptr<AbstractOperator> Derivative::clone() const
+  std::unique_ptr<AbstractC0Operator> Derivative::clone() const
   {
     return std::make_unique<Derivative>(*A_,x_);
   }
@@ -31,8 +33,8 @@ namespace Algorithm
     return A_->getRange();
   }
 
-  Operator derivative(const DifferentiableOperator& A, const FunctionSpaceElement& x)
+  C0Operator derivative(const C1Operator& A, const FunctionSpaceElement& x)
   {
-    return Operator(std::make_shared<Derivative>(A.impl(),x.impl()) );
+    return C0Operator(std::make_shared<Derivative>(A.impl(),x.impl()) );
   }
 }

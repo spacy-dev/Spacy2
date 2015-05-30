@@ -1,13 +1,13 @@
 #include "cgSolver.hh"
 
 #include "../../Util/invalidargumentexception.hh"
-#include "../../operator.hh"
+#include "../../c0Operator.hh"
 #include "vectorSpaceElement.hh"
 #include "../Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
 namespace Algorithm
 {
-  CGSolver::CGSolver(const Operator &A)
+  CGSolver::CGSolver(const C0Operator &A)
     : P_(jacobi(A)),
       cg(A,P_)
   {}

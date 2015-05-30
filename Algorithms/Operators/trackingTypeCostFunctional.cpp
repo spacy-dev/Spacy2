@@ -23,7 +23,7 @@ namespace Algorithm
       referenceState_(referenceState.clone())
   {}
 
-  std::unique_ptr<AbstractFunctional> TrackingTypeCostFunctional::clone() const
+  std::unique_ptr<AbstractC0Functional> TrackingTypeCostFunctional::clone() const
   {
     return std::make_unique<TrackingTypeCostFunctional>(alpha_,*referenceState_,domain_,range_);
   }

@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "twiceDifferentiableFunctional.hh"
-#include "twiceDifferentiableOperator.hh"
+#include "c2Functional.hh"
+#include "c2Operator.hh"
 #include "functionSpaceElement.hh"
 
 namespace Algorithm
@@ -16,7 +16,7 @@ namespace Algorithm
   class LagrangeFunctional
   {
   public:
-    LagrangeFunctional(const TwiceDifferentiableFunctional& costFunctional, const TwiceDifferentiableOperator& contraint);
+    LagrangeFunctional(const C2Functional& costFunctional, const C2Operator& contraint);
 
     double operator()(const FunctionSpaceElement& x) const;
 
@@ -24,17 +24,17 @@ namespace Algorithm
 
     double d2(const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
 
-    const TwiceDifferentiableFunctional& getCostFunctional() const;
+    const C2Functional& getCostFunctional() const;
 
-    const TwiceDifferentiableOperator& getConstraint() const;
+    const C2Operator& getConstraint() const;
 
     const FunctionSpaceElement& getStateVariable() const;
 
     const FunctionSpaceElement& getLagrangeMultiplier() const;
 
   private:
-    TwiceDifferentiableFunctional f_;
-    TwiceDifferentiableOperator c_;
+    C2Functional f_;
+    C2Operator c_;
     mutable FunctionSpaceElement x_, y_, p_;
   };
 }

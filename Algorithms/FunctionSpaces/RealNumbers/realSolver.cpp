@@ -1,13 +1,13 @@
 #include "realSolver.hh"
 
 #include "../../Util/invalidargumentexception.hh"
-#include "../../Interface/abstractOperator.hh"
-#include "../../operator.hh"
+#include "../../Interface/abstractC0Operator.hh"
+#include "../../c0Operator.hh"
 #include "real.hh"
 
 namespace Algorithm
 {
-  RealSolver::RealSolver(const Operator &A)
+  RealSolver::RealSolver(const C0Operator &A)
     : A_(A)
   {}
 
