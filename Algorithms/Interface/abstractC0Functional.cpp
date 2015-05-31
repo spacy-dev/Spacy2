@@ -8,6 +8,12 @@ namespace Algorithm
 
   AbstractC0Functional::~AbstractC0Functional(){}
 
+  double AbstractC0Functional::operator ()(const AbstractFunctionSpaceElement& x)
+  {
+    setArgument(x);
+    return d0();
+  }
+
   const AbstractBanachSpace& AbstractC0Functional::getDomain() const
   {
     return domain_;

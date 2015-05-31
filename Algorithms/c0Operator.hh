@@ -19,6 +19,8 @@ namespace Algorithm
 
 //    FunctionSpaceElement operator()() const;
 
+    AbstractC0Operator& impl();
+
     const AbstractC0Operator& impl() const;
 
   protected:

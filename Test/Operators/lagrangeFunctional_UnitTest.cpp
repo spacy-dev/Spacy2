@@ -35,14 +35,13 @@ public:
   {
     return std::make_unique<TestOperator2>(getDomain(),getRange());
   }
-//    void setArgument(const AbstractFunctionSpaceElement &x) override
-//    {
-//      x_ = &x;
-//    }
-
-  std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
+  void setArgument(const AbstractFunctionSpaceElement &x) override
   {
     x_ = &x;
+  }
+
+  std::unique_ptr<AbstractFunctionSpaceElement> d0() const override
+  {
     auto result = getRange().element();
     result->coefficient(0) = exp(x_->coefficient(0))-2*x_->coefficient(1);
     return std::move(result);

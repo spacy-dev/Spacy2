@@ -17,7 +17,13 @@ namespace Algorithm
     
     virtual std::unique_ptr<AbstractC0Operator> clone() const = 0;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
+    virtual void setArgument(const AbstractFunctionSpaceElement& x) = 0;
+
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&);// const = 0;
+
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> d0() const = 0;
+
+    virtual void getMatrix(const double* begin, const double* end) const;
 
     const AbstractBanachSpace& getDomain() const;
 

@@ -11,6 +11,8 @@ namespace Algorithm
     AbstractC2Functional(const AbstractBanachSpace& domain);
 
     virtual double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const = 0;
+
+    virtual void getMatrix(const double* begin, const double* end) const;
   };
 }
 

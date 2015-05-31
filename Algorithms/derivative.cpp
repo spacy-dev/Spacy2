@@ -34,14 +34,29 @@ namespace Algorithm
         return std::make_unique<C1OperatorDerivative>(*A_,*x_);
       }
 
-      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override
+      void setArgument(const AbstractFunctionSpaceElement& dx)
       {
-        return A_->d1(dx);
+        dx_ = dx.clone();
       }
+
+      std::unique_ptr<AbstractFunctionSpaceElement> d0()const override
+      {
+        return A_->d1(*dx_);
+      }
+
+      void getMatrix(const double* begin, const double* end) const
+      {
+        return A_->getMatrix(begin,end);
+      }
+
+//      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override
+//      {
+//        return A_->d1(dx);
+//      }
 
     private:
       std::unique_ptr<AbstractC1Operator> A_;
-      std::unique_ptr<AbstractFunctionSpaceElement> x_;
+      std::unique_ptr<AbstractFunctionSpaceElement> x_, dx_;
     };
 
     class C2OperatorDerivative : public AbstractC1Operator
@@ -60,15 +75,30 @@ namespace Algorithm
         return std::make_unique<C2OperatorDerivative>(*A_,*x_);
       }
 
-      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override
+      void setArgument(const AbstractFunctionSpaceElement& dx)
       {
         dx_ = dx.clone();
+      }
+
+      std::unique_ptr<AbstractFunctionSpaceElement> d0()const override
+      {
         return A_->d1(*dx_);
       }
+
+//      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& dx) const override
+//      {
+//        dx_ = dx.clone();
+//        return A_->d1(*dx_);
+//      }
 
       std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& dy) const override
       {
         return A_->d2(*dx_,dy);
+      }
+
+      void getMatrix(const double* begin, const double* end) const
+      {
+        return A_->getMatrix(begin,end);
       }
 
     private:
@@ -94,14 +124,24 @@ namespace Algorithm
         return std::make_unique<C1FunctionalDerivative>(*A_,*x_);
       }
 
-      double operator()(const AbstractFunctionSpaceElement& dx) const override
+      void setArgument(const AbstractFunctionSpaceElement &dx) override
       {
-        return A_->d1(dx);
+        dx_ = dx.clone();
+      }
+
+//      double operator()(const AbstractFunctionSpaceElement& dx) const override
+//      {
+//        return A_->d1(dx);
+//      }
+
+      double d0() const override
+      {
+        return A_->d1(*dx_);
       }
 
     private:
       std::unique_ptr<AbstractC1Functional> A_;
-      std::unique_ptr<AbstractFunctionSpaceElement> x_;
+      std::unique_ptr<AbstractFunctionSpaceElement> x_, dx_;
     };
 
     class C2FunctionalDerivative : public AbstractC1Functional
@@ -120,9 +160,19 @@ namespace Algorithm
         return std::make_unique<C2FunctionalDerivative>(*A_,*x_);
       }
 
-      double operator()(const AbstractFunctionSpaceElement& dx) const override
+      void setArgument(const AbstractFunctionSpaceElement &dx)
       {
         dx_ = dx.clone();
+      }
+
+//      double operator()(const AbstractFunctionSpaceElement& dx) const override
+//      {
+//        dx_ = dx.clone();
+//        return A_->d1(*dx_);
+//      }
+
+      double d0() const override
+      {
         return A_->d1(*dx_);
       }
 

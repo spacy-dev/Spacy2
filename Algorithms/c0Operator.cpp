@@ -25,6 +25,11 @@ namespace Algorithm
     return (*impl_)(x.impl());
   }
 
+  AbstractC0Operator& C0Operator::impl()
+  {
+    return *impl_;
+  }
+
   const AbstractC0Operator& C0Operator::impl() const
   {
     return *impl_;

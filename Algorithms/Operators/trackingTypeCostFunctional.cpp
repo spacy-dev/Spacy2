@@ -30,13 +30,29 @@ namespace Algorithm
     return std::make_unique<TrackingTypeCostFunctional>(alpha_,*referenceState_,getDomain());
   }
 
-  double TrackingTypeCostFunctional::operator()(const AbstractFunctionSpaceElement& x) const
+  void TrackingTypeCostFunctional::setArgument(const AbstractFunctionSpaceElement &x)
   {
     if( isPrimalDualProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
     if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::operator()");
-
     x_.reset( dynamic_cast<ProductSpaceElement*>(x.clone().release()) );
+  }
 
+//  double TrackingTypeCostFunctional::operator()(const AbstractFunctionSpaceElement& x) const
+//  {
+//    if( isPrimalDualProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
+//    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::operator()");
+
+//    x_.reset( dynamic_cast<ProductSpaceElement*>(x.clone().release()) );
+
+//    auto stateDifference = referenceState_->clone();
+//    *stateDifference -= x_->variable(stateId_);
+
+//    return 0.5 * (*stateDifference * *stateDifference)
+//        + 0.5 * alpha_ * ( x_->variable(controlId_) * x_->variable(controlId_) );
+//  }
+
+  double TrackingTypeCostFunctional::d0() const
+  {
     auto stateDifference = referenceState_->clone();
     *stateDifference -= x_->variable(stateId_);
 

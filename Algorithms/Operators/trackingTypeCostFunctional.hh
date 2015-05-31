@@ -22,7 +22,11 @@ namespace Algorithm
 
     std::unique_ptr<AbstractC0Functional> clone() const final override;
 
-    double operator()(const AbstractFunctionSpaceElement& x) const final override;
+    void setArgument(const AbstractFunctionSpaceElement &x) final override;
+
+//    double operator()(const AbstractFunctionSpaceElement& x) const final override;
+
+    double d0() const final override;
 
     double d1(const AbstractFunctionSpaceElement& dx) const final override;
 

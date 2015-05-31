@@ -17,12 +17,19 @@ namespace Algorithm
   public:
     JacobiPreconditioner(const C0Operator& A);
 
+    JacobiPreconditioner(const JacobiPreconditioner& other);
+
     std::unique_ptr<AbstractC0Operator> clone() const;
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
+    void setArgument(const AbstractFunctionSpaceElement& x);
+
+    std::unique_ptr<AbstractFunctionSpaceElement> d0() const override;
+
+//    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
 
   private:
     std::vector<double> diag_;
+    std::unique_ptr<AbstractFunctionSpaceElement> x_ = nullptr;
   };
 
   C0Operator jacobi(const C0Operator& A)

@@ -1,5 +1,15 @@
 #include "abstractC2Functional.hh"
 
-Algorithm::AbstractC2Functional::AbstractC2Functional(const AbstractBanachSpace &domain)
-  : Algorithm::AbstractC1Functional(domain)
-{}
+#include "../Util/callofundefinedfunctionexception.hh"
+
+namespace Algorithm
+{
+  AbstractC2Functional::AbstractC2Functional(const AbstractBanachSpace &domain)
+    : AbstractC1Functional(domain)
+  {}
+
+  void AbstractC2Functional::getMatrix(const double *, const double *) const
+  {
+    throw CallOfUndefinedFunctionException("AbstractC2Functional::getMatrix");
+  }
+}
