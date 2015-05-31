@@ -1,7 +1,7 @@
 #include "c0Functional.hh"
 
-#include "Interface/abstractC0Functional.hh"
 #include "functionSpaceElement.hh"
+#include "Interface/abstractC0Functional.hh"
 
 namespace Algorithm
 {

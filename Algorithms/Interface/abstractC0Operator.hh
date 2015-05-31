@@ -11,15 +11,21 @@ namespace Algorithm
   class AbstractC0Operator
   {
   public:
-    virtual ~AbstractC0Operator(){}
+    AbstractC0Operator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+
+    virtual ~AbstractC0Operator();
     
     virtual std::unique_ptr<AbstractC0Operator> clone() const = 0;
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
-    virtual const AbstractBanachSpace& getDomain() const = 0;
+    const AbstractBanachSpace& getDomain() const;
 
-    virtual const AbstractBanachSpace& getRange() const = 0;
+    const AbstractBanachSpace& getRange() const;
+
+  private:
+    const AbstractBanachSpace& domain_;
+    const AbstractBanachSpace& range_;
   };
 }
 

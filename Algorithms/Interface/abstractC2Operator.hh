@@ -8,6 +8,8 @@ namespace Algorithm
   class AbstractC2Operator : public AbstractC1Operator
   {
   public:
+    AbstractC2Operator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+
     virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement&) const = 0;
   };
 }

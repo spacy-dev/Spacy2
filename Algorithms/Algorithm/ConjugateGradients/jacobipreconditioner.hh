@@ -21,14 +21,8 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
 
-    const AbstractBanachSpace& getDomain() const override;
-
-    const AbstractBanachSpace& getRange() const override;
-
   private:
     std::vector<double> diag_;
-    const AbstractBanachSpace& domain_;
-    const AbstractBanachSpace& range_;
   };
 
   C0Operator jacobi(const C0Operator& A)

@@ -3,11 +3,10 @@
 
 #include <memory>
 
-#include "../functionSpaceElement.hh"
-
 namespace Algorithm
 {
   class AbstractBanachSpace;
+  class AbstractFunctionSpaceElement;
 
   class AbstractC0Functional
   {

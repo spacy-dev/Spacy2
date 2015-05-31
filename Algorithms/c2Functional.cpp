@@ -1,5 +1,6 @@
 #include "c2Functional.hh"
 
+#include "functionSpaceElement.hh"
 #include "Interface/abstractC2Functional.hh"
 
 namespace Algorithm

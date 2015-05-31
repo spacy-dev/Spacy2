@@ -49,19 +49,19 @@ namespace Algorithm
   class TestOperator : public AbstractC1Operator
   {
   public:
-    TestOperator(const FunctionSpace& space)
-      : space_(space.impl())
+    TestOperator(const AbstractBanachSpace& space)
+      : AbstractC1Operator(space,space)
     {}
 
-    TestOperator(const AbstractBanachSpace& space)
-      : space_(space)
+    TestOperator(const FunctionSpace& space)
+      : TestOperator(space.impl())
     {}
 
     ~TestOperator(){}
 
     std::unique_ptr<AbstractC0Operator> clone() const
     {
-      return std::make_unique<TestOperator>(space_);
+      return std::make_unique<TestOperator>(getDomain());
     }
 //    void setArgument(const AbstractFunctionSpaceElement &x) override
 //    {
@@ -79,37 +79,26 @@ namespace Algorithm
       return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    const AbstractBanachSpace& getDomain() const override
-    {
-      return space_;
-    }
-
-    const AbstractBanachSpace& getRange() const override
-    {
-      return space_;
-    }
-
   private:
     mutable const AbstractFunctionSpaceElement* x_;
-    const AbstractBanachSpace& space_;
   };
 
   class TestOperator2 : public AbstractC2Operator
   {
   public:
-    TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
-      : domain_(domain.impl()), range_(range.impl())
+    TestOperator2(const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+      : AbstractC2Operator(domain,range)
     {}
 
-    TestOperator2(const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
-      : domain_(domain), range_(range)
+    TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
+      : TestOperator2(domain.impl(),range.impl())
     {}
 
     ~TestOperator2(){}
 
     std::unique_ptr<AbstractC0Operator> clone() const
     {
-      return std::make_unique<TestOperator2>(domain_,range_);
+      return std::make_unique<TestOperator2>(getDomain(),getRange());
     }
 //    void setArgument(const AbstractFunctionSpaceElement &x) override
 //    {
@@ -119,39 +108,27 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
     {
       x_ = &x;
-      auto result = range_.element();
+      auto result = getRange().element();
       result->coefficient(0) = exp(x_->coefficient(0))-2*x_->coefficient(1);
       return std::move(result);
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
     {
-      auto result = range_.element();
+      auto result = getRange().element();
       result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
       return std::move(result);
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
     {
-      auto result = range_.element();
+      auto result = getRange().element();
       result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0)*dy.coefficient(0);
       return std::move(result);
     }
 
-    const AbstractBanachSpace& getDomain() const override
-    {
-      return domain_;
-    }
-
-    const AbstractBanachSpace& getRange() const override
-    {
-      return range_;
-    }
-
   private:
     mutable const AbstractFunctionSpaceElement* x_;
-    const AbstractBanachSpace& domain_;
-    const AbstractBanachSpace& range_;
   };
 }
 

@@ -22,7 +22,8 @@ namespace Algorithm
     {
     public:
       C1OperatorDerivative(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x)
-        : A_(dynamic_cast<AbstractC1Operator*>(A.clone().release())),
+        : AbstractC0Operator(A.getDomain(),A.getRange()),
+          A_(dynamic_cast<AbstractC1Operator*>(A.clone().release())),
           x_(x.clone())
       {
         (*A_)(*x_);
@@ -38,16 +39,6 @@ namespace Algorithm
         return A_->d1(dx);
       }
 
-      const AbstractBanachSpace& getDomain() const override
-      {
-        return A_->getDomain();
-      }
-
-      const AbstractBanachSpace& getRange() const override
-      {
-        return A_->getRange();
-      }
-
     private:
       std::unique_ptr<AbstractC1Operator> A_;
       std::unique_ptr<AbstractFunctionSpaceElement> x_;
@@ -57,7 +48,8 @@ namespace Algorithm
     {
     public:
       C2OperatorDerivative(const AbstractC2Operator& A, const AbstractFunctionSpaceElement& x)
-        : A_(dynamic_cast<AbstractC2Operator*>(A.clone().release())),
+        : AbstractC1Operator(A.getDomain(),A.getRange()),
+          A_(dynamic_cast<AbstractC2Operator*>(A.clone().release())),
           x_(x.clone())
       {
         (*A_)(*x_);
@@ -77,16 +69,6 @@ namespace Algorithm
       std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& dy) const override
       {
         return A_->d2(*dx_,dy);
-      }
-
-      const AbstractBanachSpace& getDomain() const override
-      {
-        return A_->getDomain();
-      }
-
-      const AbstractBanachSpace& getRange() const override
-      {
-        return A_->getRange();
       }
 
     private:

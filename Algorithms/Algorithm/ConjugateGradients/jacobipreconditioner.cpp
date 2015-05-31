@@ -3,9 +3,8 @@
 namespace Algorithm
 {
   JacobiPreconditioner::JacobiPreconditioner(const C0Operator& A)
-    : diag_(A.impl().getDomain().element()->size(),0.),
-      domain_(A.impl().getRange()),
-      range_(A.impl().getDomain())
+    : AbstractC0Operator(A.impl().getDomain(),A.impl().getRange()),
+      diag_(A.impl().getDomain().element()->size(),0.)
 
   {
     auto x = A.impl().getDomain().element();
@@ -37,15 +36,5 @@ namespace Algorithm
     for(unsigned i = 0; i < x.size(); ++i)
       y->coefficient(i) *= diag_[i];
     return y;
-  }
-
-  const AbstractBanachSpace& JacobiPreconditioner::getDomain() const
-  {
-    return domain_;
-  }
-
-  const AbstractBanachSpace& JacobiPreconditioner::getRange() const
-  {
-    return range_;
   }
 }
