@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include <armadillo>
+//#include <armadillo>
 
-#include "../../RFFGen/RFFGen/RFFGen.hh"
+//#include "../../RFFGen/RFFGen/RFFGen.hh"
 //#include "../../RFFGen/src/RFFGen.hh"
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractC0Operator.hh"
@@ -156,17 +156,17 @@ int main()
   auto newton = Newton(A,true);
   cout << "sol: " << newton.solve(x) << endl;
 
-    using namespace RFFGen::CMath;
-  using Vector = arma::vec::fixed<10>;
-  FunctionSpace vectorSpace(std::make_unique<VectorSpace<Vector> >());
-  auto v0 = vectorSpace.element();
-  auto rhs = vectorSpace.element();
-  for(unsigned i=0; i<rhs.size(); ++i) rhs.coefficient(i) = (i==0 || i+1==rhs.size()) ? 3 : 4;
-  auto B = makeC0Operator<Algorithm::Test2Operator<decltype(v0)> >(vectorSpace);
-//  auto jacobi = jacobiPreconditioner(B);
-  CGSolver cg(B);//,jacobi);
-  auto vsol = cg(v0,rhs);
-  cout << vsol << endl;
+//    using namespace RFFGen::CMath;
+//  using Vector = arma::vec::fixed<10>;
+//  FunctionSpace vectorSpace(std::make_unique<VectorSpace<Vector> >());
+//  auto v0 = vectorSpace.element();
+//  auto rhs = vectorSpace.element();
+//  for(unsigned i=0; i<rhs.size(); ++i) rhs.coefficient(i) = (i==0 || i+1==rhs.size()) ? 3 : 4;
+//  auto B = makeC0Operator<Algorithm::Test2Operator<decltype(v0)> >(vectorSpace);
+////  auto jacobi = jacobiPreconditioner(B);
+//  CGSolver cg(B);//,jacobi);
+//  auto vsol = cg(v0,rhs);
+//  cout << vsol << endl;
 //    FunctionSpace R(std::make_unique<RealNumbers>());
 //    ExampleOperator_1 A(R);
 //  auto f = Exp() - 2;
