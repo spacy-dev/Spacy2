@@ -1,2 +1,0 @@
-/usr/bin/ar cr liboperators.a  CMakeFiles/operators.dir/Algorithms/Operators/trackingTypeCostFunctional.cpp.o
-/usr/bin/ranlib liboperators.a
