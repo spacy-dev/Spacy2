@@ -47,7 +47,7 @@ namespace Algorithm
 
   void FunctionSpaceElement::print(std::ostream& os) const
   {
-    return impl_->print(os);
+    return impl().print(os);
   }
 
   AbstractFunctionSpaceElement& FunctionSpaceElement::impl()
@@ -62,7 +62,7 @@ namespace Algorithm
 
   unsigned FunctionSpaceElement::spaceIndex() const
   {
-    return impl_->getSpace().index();
+    return impl().getSpace().index();
   }
 
   bool FunctionSpaceElement::operator==(const FunctionSpaceElement& y) const
@@ -73,34 +73,34 @@ namespace Algorithm
 
   FunctionSpaceElement& FunctionSpaceElement::operator+=(const FunctionSpaceElement& y)
   {
-    *impl_ += y.impl();
+    impl() += y.impl();
     return *this;
   }
 
   FunctionSpaceElement& FunctionSpaceElement::operator-=(const FunctionSpaceElement& y)
   {
-    *impl_ -= y.impl();
+    impl() -= y.impl();
     return *this;
   }
 
   FunctionSpaceElement FunctionSpaceElement::operator-() const
   {
-    return FunctionSpaceElement(-(*impl_));
+    return FunctionSpaceElement(-impl());
   }
 
   double& FunctionSpaceElement::coefficient(unsigned i)
   {
-    return impl_->coefficient(i);
+    return impl().coefficient(i);
   }
 
   const double& FunctionSpaceElement::coefficient(unsigned i) const
   {
-    return impl_->coefficient(i);
+    return impl().coefficient(i);
   }
 
   unsigned FunctionSpaceElement::size() const
   {
-    return impl_->size();
+    return impl().size();
   }
 
   // free functions

@@ -5,6 +5,7 @@
 
 namespace Algorithm
 {
+  class C0Operator;
   class FunctionSpaceElement;
   class AbstractLinearSolver;
 
@@ -14,7 +15,15 @@ namespace Algorithm
   class InverseOperator
   {
   public:
-    InverseOperator(std::shared_ptr<AbstractLinearSolver> impl);
+    InverseOperator(std::unique_ptr<AbstractLinearSolver>&& impl);
+
+    InverseOperator(const C0Operator& A);
+
+    InverseOperator(InverseOperator&& other);
+
+    InverseOperator& operator=(InverseOperator&& other);
+
+    InverseOperator& operator=(const InverseOperator&) = delete;
 
     /**
      * @brief Compute \f$F^{-1}y\f$ from initial guess \f$x\f$.
@@ -27,7 +36,7 @@ namespace Algorithm
     FunctionSpaceElement operator()(const FunctionSpaceElement& y) const;
 
   private:
-    std::shared_ptr<AbstractLinearSolver> impl_;
+    std::unique_ptr<AbstractLinearSolver> impl_;
   };
 }
 

@@ -50,10 +50,11 @@ namespace Algorithm
       {
         if( verbose_ ) std::cout << "Iteration: " << i << ", ";
 
-        C0Operator DF = derivative(F_,x);
-        InverseOperator DFInv(std::make_shared<RealSolver>(DF));
+        F_.setArgument(x);
+        C0Operator DF = derivative(F_);
+        InverseOperator DFInv(DF);
 
-        auto dx = DFInv(-F_(x));
+        auto dx = DFInv(-F_());
 
         if( norm_(dx) < relativeAccuracy_ * norm_(x) )
         {

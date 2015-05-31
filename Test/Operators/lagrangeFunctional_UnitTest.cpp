@@ -47,6 +47,13 @@ public:
     return std::move(result);
   }
 
+  std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement &x) const override
+  {
+    auto result = getRange().element();
+    result->coefficient(0) = exp(x.coefficient(0))-2*x.coefficient(1);
+    return std::move(result);
+  }
+
   std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
   {
     auto result = getRange().element();

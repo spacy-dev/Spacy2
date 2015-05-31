@@ -17,34 +17,16 @@ namespace Algorithm
   {
   public:
     VectorSpace()
-    {
-      this->setScalarProduct( std::make_shared< l2Product<Vector> >() );
-    }
+      : AbstractHilbertSpace( std::make_shared< l2Product<Vector> >() )
+    {}
 
   private:
-    void setNormImpl(std::shared_ptr<AbstractNorm> norm) override
-    {
-      if( dynamic_cast<const HilbertSpaceNorm*>(norm.get()) == nullptr ) throw InvalidArgumentException("RealSpace::setNormImpl");
-
-      this->norm_ = norm;
-    }
-
-    void setScalarProductImpl(std::shared_ptr<AbstractScalarProduct> sp) override
-    {
-      sp_ = sp;
-    }
-
-    std::shared_ptr<AbstractScalarProduct> getScalarProductImpl() const override
-    {
-      return sp_;
-    }
-
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override
     {
       return std::make_unique< VectorSpaceElement<Vector> >(*this);
     }
 
-    std::shared_ptr<AbstractScalarProduct> sp_;
+    std::shared_ptr<AbstractDualPairing> sp_;
   };
 }
 

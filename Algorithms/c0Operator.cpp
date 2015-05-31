@@ -9,20 +9,20 @@ namespace Algorithm
     : impl_(impl)
   {}
 
-//  void Operator::setArgument(const FunctionSpaceElement &x)
-//  {
-//    impl_->setArgument(x.impl());
-//  }
+  void C0Operator::setArgument(const FunctionSpaceElement &x)
+  {
+    impl().setArgument(x.impl());
+  }
 
-//  FunctionSpaceElement Operator::operator()() const
-//  {
-//    return (*impl_)();
-//  }
+  FunctionSpaceElement C0Operator::operator()() const
+  {
+    return impl().d0();
+  }
 
   FunctionSpaceElement C0Operator::operator()(const FunctionSpaceElement& x) const
   {
 //    setArgument(x);
-    return (*impl_)(x.impl());
+    return impl()(x.impl());
   }
 
   AbstractC0Operator& C0Operator::impl()

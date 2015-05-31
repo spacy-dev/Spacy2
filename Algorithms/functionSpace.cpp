@@ -35,12 +35,17 @@ namespace Algorithm
 
   FunctionSpaceElement FunctionSpace::element() const
   {
-    return FunctionSpaceElement(impl_->element());
+    return FunctionSpaceElement(impl().element());
   }
 
   unsigned FunctionSpace::index() const
   {
-    return impl_->index();
+    return impl().index();
+  }
+
+  AbstractBanachSpace& FunctionSpace::impl()
+  {
+    return *impl_;
   }
 
   AbstractBanachSpace const& FunctionSpace::impl() const

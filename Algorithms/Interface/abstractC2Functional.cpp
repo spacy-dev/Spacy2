@@ -8,8 +8,8 @@ namespace Algorithm
     : AbstractC1Functional(domain)
   {}
 
-  void AbstractC2Functional::getMatrix(const double *, const double *) const
+  std::unique_ptr<AbstractLinearSolver> AbstractC2Functional::inverse() const
   {
-    throw CallOfUndefinedFunctionException("AbstractC2Functional::getMatrix");
+    throw CallOfUndefinedFunctionException("AbstractC2Functional::inverse");
   }
 }

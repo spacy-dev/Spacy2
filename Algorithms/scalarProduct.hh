@@ -22,6 +22,11 @@ namespace Algorithm
      */
     auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractDualPairing>()(x.impl(),y.impl()));
 
+    /**
+     * @brief Access implementation.
+     */
+    AbstractDualPairing const& impl() const;
+
   private:
     std::shared_ptr<AbstractDualPairing> impl_;
   };

@@ -7,10 +7,14 @@ namespace Algorithm
 {
   class AbstractBanachSpace;
   class AbstractFunctionSpaceElement;
+  class AbstractLinearSolver;
 
   class AbstractC0Operator
   {
   public:
+    using iterator = std::iterator<std::forward_iterator_tag,double>;
+    using const_iterator = std::iterator<std::forward_iterator_tag,const double>;
+
     AbstractC0Operator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
 
     virtual ~AbstractC0Operator();
@@ -19,11 +23,11 @@ namespace Algorithm
 
     virtual void setArgument(const AbstractFunctionSpaceElement& x) = 0;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&);// const = 0;
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> d0() const = 0;
 
-    virtual void getMatrix(const double* begin, const double* end) const;
+    virtual std::unique_ptr<AbstractLinearSolver> inverse() const;
 
     const AbstractBanachSpace& getDomain() const;
 

@@ -9,19 +9,28 @@ namespace Algorithm
     : impl_(impl)
   {}
 
-//  void C0Functional::setArgument(const FunctionSpaceElement &x)
-//  {
-//    impl_->setArgument(x.impl());
-//  }
-
-//  FunctionSpaceElement C0Functional::operator()() const
-//  {
-//    return (*impl_)();
-//  }
-
-  double C0Functional::operator()(const FunctionSpaceElement& x) const
+  void C0Functional::setArgument(const FunctionSpaceElement &x)
   {
-//    setArgument(x);
-    return (*impl_)(x.impl());
+    impl().setArgument(x.impl());
+  }
+
+  double C0Functional::operator()() const
+  {
+    return impl().d0();
+  }
+
+  double C0Functional::operator()(const FunctionSpaceElement& x)
+  {
+    return impl()(x.impl());
+  }
+
+  AbstractC0Functional& C0Functional::impl()
+  {
+    return *impl_;
+  }
+
+  const AbstractC0Functional& C0Functional::impl() const
+  {
+    return *impl_;
   }
 }

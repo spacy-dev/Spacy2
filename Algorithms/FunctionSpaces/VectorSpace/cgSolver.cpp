@@ -8,7 +8,7 @@
 namespace Algorithm
 {
   CGSolver::CGSolver(const C0Operator &A)
-    : P_(jacobi(A)),
+    : P_(jacobiPreconditioner(A)),
       cg(A,P_)
   {}
 
@@ -18,12 +18,12 @@ namespace Algorithm
     return cg.solve(x,y);
   }
 
-//  FunctionSpaceElement CGSolver::operator ()(const FunctionSpaceElement& y) const
-//  {
-////    if(  dynamic_cast<const VectorSpaceElement*>(&y.impl()) == nullptr ) throw InvalidArgumentException("CGSolver::operator()(const FunctionSpaceElement&)");
+  FunctionSpaceElement CGSolver::operator ()(const FunctionSpaceElement& y) const
+  {
+//    if(  dynamic_cast<const VectorSpaceElement*>(&y.impl()) == nullptr ) throw InvalidArgumentException("CGSolver::operator()(const FunctionSpaceElement&)");
 
 //    auto x = P_.getRange().element();
 
-//    return (*this)(x,y);
-//  }
+    return (*this)(P_.impl().getRange().element(),y);
+  }
 }

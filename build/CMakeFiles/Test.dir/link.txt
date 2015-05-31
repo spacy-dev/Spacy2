@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused -fprofile-arcs -ftest-coverage -std=c++1y -O0 -g    CMakeFiles/Test.dir/Algorithms/main.cpp.o  -o Test  -L/home/ignaz/lib/armadillo-4.650.4 -rdynamic libalgorithms.a liboperators.a libalgorithms.a -Wl,-rpath,/home/ignaz/lib/armadillo-4.650.4 

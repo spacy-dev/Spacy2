@@ -13,11 +13,15 @@ namespace Algorithm
   public:
     C0Functional(std::shared_ptr<AbstractC0Functional> impl);
 
-//    void setArgument(const FunctionSpaceElement& x);
+    void setArgument(const FunctionSpaceElement& x);
 
-    double operator()(const FunctionSpaceElement& x) const;
+    double operator()(const FunctionSpaceElement& x);
 
-//    FunctionSpaceElement operator()() const;
+    double operator()() const;
+
+    AbstractC0Functional& impl();
+
+    const AbstractC0Functional& impl() const;
 
   protected:
     std::shared_ptr<AbstractC0Functional> impl_ = nullptr;

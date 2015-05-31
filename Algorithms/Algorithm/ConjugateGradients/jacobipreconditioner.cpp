@@ -42,11 +42,16 @@ namespace Algorithm
     return y;
   }
 
-//  std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const
-//  {
-//    auto y = x.clone();
-//    for(unsigned i = 0; i < x.size(); ++i)
-//      y->coefficient(i) *= diag_[i];
-//    return y;
-//  }
+  C0Operator jacobiPreconditioner(const C0Operator& A)
+  {
+    return C0Operator(std::make_shared<JacobiPreconditioner>(A));
+  }
+
+  std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const
+  {
+    auto y = x.clone();
+    for(unsigned i = 0; i < x.size(); ++i)
+      y->coefficient(i) *= diag_[i];
+    return y;
+  }
 }

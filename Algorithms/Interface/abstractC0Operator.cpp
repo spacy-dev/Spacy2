@@ -12,11 +12,11 @@ namespace Algorithm
 
   AbstractC0Operator::~AbstractC0Operator(){}
 
-  std::unique_ptr<AbstractFunctionSpaceElement> AbstractC0Operator::operator()(const AbstractFunctionSpaceElement& x)
-  {
-    setArgument(x);
-    return d0();
-  }
+//  std::unique_ptr<AbstractFunctionSpaceElement> AbstractC0Operator::operator()(const AbstractFunctionSpaceElement& x)
+//  {
+//    setArgument(x);
+//    return d0();
+//  }
 
   const AbstractBanachSpace& AbstractC0Operator::getDomain() const
   {
@@ -28,8 +28,8 @@ namespace Algorithm
     return range_;
   }
 
-  void AbstractC0Operator::getMatrix(const double *begin, const double *end) const
+  std::unique_ptr<AbstractLinearSolver> AbstractC0Operator::inverse()  const
   {
-    throw CallOfUndefinedFunctionException("AbstractC0Operawtor::getMatrix");
+    throw CallOfUndefinedFunctionException("AbstractC0Operawtor::inverse");
   }
 }

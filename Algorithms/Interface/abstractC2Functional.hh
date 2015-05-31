@@ -5,6 +5,8 @@
 
 namespace Algorithm
 {
+  class AbstractLinearSolver;
+
   class AbstractC2Functional : public AbstractC1Functional
   {
   public:
@@ -12,7 +14,7 @@ namespace Algorithm
 
     virtual double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const = 0;
 
-    virtual void getMatrix(const double* begin, const double* end) const;
+    virtual std::unique_ptr<AbstractLinearSolver> inverse() const;
   };
 }
 

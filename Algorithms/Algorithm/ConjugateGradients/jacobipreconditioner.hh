@@ -25,16 +25,13 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> d0() const override;
 
-//    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override;
 
   private:
     std::vector<double> diag_;
     std::unique_ptr<AbstractFunctionSpaceElement> x_ = nullptr;
   };
 
-  C0Operator jacobi(const C0Operator& A)
-  {
-    return C0Operator(std::make_shared<JacobiPreconditioner>(A));
-  }
+  C0Operator jacobiPreconditioner(const C0Operator& A);
 }
 #endif // JACOBIPRECONDITIONER_HH

@@ -1,0 +1,6 @@
+/home/ignaz/C++/FSA/build/CMakeFiles/Test.dir
+/home/ignaz/C++/FSA/build/CMakeFiles/algorithms.dir
+/home/ignaz/C++/FSA/build/CMakeFiles/git_update.dir
+/home/ignaz/C++/FSA/build/CMakeFiles/gtest.dir
+/home/ignaz/C++/FSA/build/CMakeFiles/operators.dir
+/home/ignaz/C++/FSA/build/CMakeFiles/unit_tests.dir

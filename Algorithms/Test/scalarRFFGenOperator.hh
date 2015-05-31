@@ -8,6 +8,7 @@
 #include "../functionSpace.hh"
 #include "../functionSpaceElement.hh"
 #include "../FunctionSpaces/RealNumbers/real.hh"
+#include "../FunctionSpaces/RealNumbers/realSolver.hh"
 
 namespace Algorithm
 {
@@ -49,6 +50,10 @@ namespace Algorithm
   class TestOperator : public AbstractC1Operator
   {
   public:
+    TestOperator(const AbstractBanachSpace& space, const AbstractFunctionSpaceElement& x)
+      : AbstractC1Operator(space,space), x_(x.clone())
+    {}
+
     TestOperator(const AbstractBanachSpace& space)
       : AbstractC1Operator(space,space)
     {}
@@ -61,39 +66,35 @@ namespace Algorithm
 
     std::unique_ptr<AbstractC0Operator> clone() const
     {
-      return std::make_unique<TestOperator>(getDomain());
+      return std::make_unique<TestOperator>(getDomain(),*x_);
     }
     void setArgument(const AbstractFunctionSpaceElement &x) override
     {
-      x_ = &x;
-      deriv_ = exp(x_->coefficient(0));
+      x_ = x.clone();
     }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d0() const override
     {
-      return std::make_unique<Real>( exp(x_->coefficient(0))-2 , getRange() );
+      return operator()(*x_);
     }
 
-//    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
-//    {
-//      x_ = &x;
-//      return std::make_unique<Real>( exp(x_->coefficient(0))-2 , getRange() );
-//    }
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
+    {
+      return std::make_unique<Real>( exp(x.coefficient(0))-2 , getRange() );
+    }
 
     std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
     {
       return std::make_unique<Real>( exp(x_->coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    void getMatrix(const double* begin, const double* end) const override
+    virtual std::unique_ptr<AbstractLinearSolver> inverse() const
     {
-      begin = &deriv_;
-      end = &deriv_;
+      return std::make_unique<RealSolver>(exp(x_->coefficient(0)));
     }
 
   private:
-    mutable const AbstractFunctionSpaceElement* x_;
-    double deriv_ = 0.;
+    std::unique_ptr<AbstractFunctionSpaceElement> x_ = nullptr;
   };
 
   class TestOperator2 : public AbstractC2Operator
@@ -122,6 +123,13 @@ namespace Algorithm
     {
       auto result = getRange().element();
       result->coefficient(0) = exp(x_->coefficient(0))-2*x_->coefficient(1);
+      return std::move(result);
+    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement &x) const override
+    {
+      auto result = getRange().element();
+      result->coefficient(0) = exp(x.coefficient(0))-2*x.coefficient(1);
       return std::move(result);
     }
 

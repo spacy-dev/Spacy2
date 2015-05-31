@@ -17,7 +17,7 @@ namespace Algorithm
 
     FunctionSpaceElement operator()(const FunctionSpaceElement &x, const FunctionSpaceElement& y) const final override;
 
-//    FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
+    FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
 
   private:
     C0Operator P_;

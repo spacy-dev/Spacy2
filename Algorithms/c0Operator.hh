@@ -13,11 +13,11 @@ namespace Algorithm
   public:
     C0Operator(std::shared_ptr<AbstractC0Operator> impl);
 
-//    void setArgument(const FunctionSpaceElement& x);
+    void setArgument(const FunctionSpaceElement& x);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
 
-//    FunctionSpaceElement operator()() const;
+    FunctionSpaceElement operator()() const;
 
     AbstractC0Operator& impl();
 
@@ -25,7 +25,6 @@ namespace Algorithm
 
   protected:
     std::shared_ptr<AbstractC0Operator> impl_ = nullptr;
-
   };
 
   template <class Implementation, class... Args>

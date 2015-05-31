@@ -18,7 +18,7 @@ namespace Algorithm
   public:
     LagrangeFunctional(const C2Functional& costFunctional, const C2Operator& contraint);
 
-    double operator()(const FunctionSpaceElement& x) const;
+    double operator()(const FunctionSpaceElement& x);
 
     double d1(const FunctionSpaceElement& dx) const;
 

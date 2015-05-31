@@ -56,6 +56,11 @@ namespace Algorithm
     /**
      * @brief Access implementation.
      */
+    AbstractBanachSpace& impl();
+
+    /**
+     * @brief Access implementation.
+     */
     AbstractBanachSpace const& impl() const;
 
     void setDualSpace(FunctionSpace& Y);

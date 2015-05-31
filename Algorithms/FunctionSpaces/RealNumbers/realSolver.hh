@@ -10,12 +10,12 @@ namespace Algorithm
   class RealSolver : public AbstractLinearSolver
   {
   public:
-    RealSolver(const C0Operator& A);
+    RealSolver(double value);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
 
   private:
-    const C0Operator& A_;
+    double value_;
   };
 }
 

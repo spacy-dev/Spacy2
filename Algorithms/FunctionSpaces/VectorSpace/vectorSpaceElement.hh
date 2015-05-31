@@ -8,14 +8,8 @@
 #include "../../Util/invalidargumentexception.hh"
 
 namespace Algorithm
-{
-  template <class> class VectorSpaceElement;
-
-  template <class Vector>
-  bool isVectorSpaceElement(const AbstractFunctionSpaceElement& y)
-  {
-    return dynamic_cast< const VectorSpaceElement<Vector>& >(&y) != nullptr;
-  }
+{  
+  template <class> bool isVectorSpaceElement(const AbstractFunctionSpaceElement&);
 
   template <class Vector>
   class VectorSpaceElement : public AbstractFunctionSpaceElement
@@ -93,6 +87,14 @@ namespace Algorithm
     friend class L2Product;
     Vector v_;
   };
+
+  template <class Vector>
+  bool isVectorSpaceElement(const AbstractFunctionSpaceElement& y)
+  {
+    return dynamic_cast< const VectorSpaceElement<Vector>* >(&y) != nullptr;
+  }
+
+
 }
 
 #endif // ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_ELEMENT_HH

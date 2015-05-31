@@ -9,13 +9,15 @@ namespace Algorithm
     : f_(costFunctional), c_(constraint)
   {}
 
-  double LagrangeFunctional::operator()(const FunctionSpaceElement& x) const
+  double LagrangeFunctional::operator()(const FunctionSpaceElement& x)
   {
     if( !isPrimalDualProductSpaceElement(x.impl())) throw InvalidArgumentException("LagrangeFunctional::operator()");
 
     const auto& y = dynamic_cast<const PrimalDualProductSpaceElement&>(x.impl());
 
     y_ = y.primalElement();
+    f_.setArgument(y_);
+    c_.setArgument(y_);
     if( !y.isDualEnabled() )
     {
       x_ = x;
@@ -25,7 +27,7 @@ namespace Algorithm
     x_ = x;
     p_ = y.dualElement();
 
-    return f_(y_) + p_ * c_(y_);
+    return f_() + p_ * c_();
   }
 
   double LagrangeFunctional::d1(const FunctionSpaceElement& dx) const
@@ -45,10 +47,10 @@ namespace Algorithm
     if( !dx_.isPrimalEnabled() )
     {
       dx_.reset();
-      return dxp_ * c_(y_);
+      return dxp_ * c_();
     }
 
-    return f_.d1(dxy_) + p_ * c_.d1(dxy_) + dxp_ * c_(y_);
+    return f_.d1(dxy_) + p_ * c_.d1(dxy_) + dxp_ * c_();
   }
 
   double LagrangeFunctional::d2(const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const
