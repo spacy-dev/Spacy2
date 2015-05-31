@@ -18,6 +18,13 @@ namespace Algorithm
     return space_;
   }
 
+  AbstractFunctionSpaceElement& AbstractFunctionSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
+  {
+    auto z = y.clone();
+    *z *= a;
+    return *this +=*z;
+  }
+
   std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element)
   {
     element.print(os);

@@ -14,6 +14,14 @@ namespace Algorithm
   class AbstractFunctionSpaceElement;
   class FunctionSpace;
 
+  class FunctionSpaceElement;
+
+  struct Scale
+  {
+    double a;
+    const FunctionSpaceElement& x;
+  };
+
   /**
    * @brief Representation of a function space element.
    *
@@ -73,6 +81,11 @@ namespace Algorithm
      * @brief In-place summation.
      */
     FunctionSpaceElement& operator+=(const FunctionSpaceElement& y);
+
+    /**
+     * @brief Axpy for \f$ x += a*y \f$.
+     */
+    FunctionSpaceElement& operator+=(Scale&& y);
 
     /**
      * @brief In-place subtraction.

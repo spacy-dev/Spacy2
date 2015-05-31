@@ -24,6 +24,8 @@ namespace Algorithm
 
     virtual AbstractFunctionSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) = 0;
 
+    virtual AbstractFunctionSpaceElement& axpy(double a, const AbstractFunctionSpaceElement& y);
+
     virtual AbstractFunctionSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) = 0;
 
     virtual AbstractFunctionSpaceElement& operator*=(double) = 0;

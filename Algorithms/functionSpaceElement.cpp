@@ -77,6 +77,12 @@ namespace Algorithm
     return *this;
   }
 
+  FunctionSpaceElement& FunctionSpaceElement::operator+=(Scale&& s)
+  {
+    impl().axpy(s.a,s.x.impl());
+    return *this;
+  }
+
   FunctionSpaceElement& FunctionSpaceElement::operator-=(const FunctionSpaceElement& y)
   {
     impl() -= y.impl();
