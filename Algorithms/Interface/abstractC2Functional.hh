@@ -8,6 +8,8 @@ namespace Algorithm
   class AbstractC2Functional : public AbstractC1Functional
   {
   public:
+    AbstractC2Functional(const AbstractBanachSpace& domain);
+
     virtual double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const = 0;
   };
 }

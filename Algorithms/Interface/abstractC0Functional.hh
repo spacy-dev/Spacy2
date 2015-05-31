@@ -12,7 +12,9 @@ namespace Algorithm
   class AbstractC0Functional
   {
   public:
-    virtual ~AbstractC0Functional(){}
+    AbstractC0Functional(const AbstractBanachSpace& domain);
+
+    virtual ~AbstractC0Functional();
     
     virtual std::unique_ptr<AbstractC0Functional> clone() const = 0;
 
@@ -22,7 +24,10 @@ namespace Algorithm
 
 //    virtual double operator()() const = 0;
 
-    virtual const AbstractBanachSpace& getDomain() const = 0;
+    const AbstractBanachSpace& getDomain() const;
+
+  private:
+    const AbstractBanachSpace& domain_;
   };
 }
 

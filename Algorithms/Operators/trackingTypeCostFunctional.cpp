@@ -12,20 +12,22 @@
 namespace Algorithm
 {
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const FunctionSpace &domain, const FunctionSpace &range)
-    : alpha_(alpha), domain_(domain.impl()), range_(range.impl()),
+                                                         const FunctionSpace &domain)
+    : AbstractC2Functional(domain.impl()),
+      alpha_(alpha),
       referenceState_(referenceState.clone())
   {}
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
-    : alpha_(alpha), domain_(domain), range_(range),
+                                                         const AbstractBanachSpace &domain)
+    : AbstractC2Functional(domain),
+      alpha_(alpha),
       referenceState_(referenceState.clone())
   {}
 
   std::unique_ptr<AbstractC0Functional> TrackingTypeCostFunctional::clone() const
   {
-    return std::make_unique<TrackingTypeCostFunctional>(alpha_,*referenceState_,domain_,range_);
+    return std::make_unique<TrackingTypeCostFunctional>(alpha_,*referenceState_,getDomain());
   }
 
   double TrackingTypeCostFunctional::operator()(const AbstractFunctionSpaceElement& x) const
@@ -40,16 +42,6 @@ namespace Algorithm
 
     return 0.5 * (*stateDifference * *stateDifference)
         + 0.5 * alpha_ * ( x_->variable(controlId_) * x_->variable(controlId_) );
-  }
-
-  const AbstractBanachSpace& TrackingTypeCostFunctional::getDomain() const
-  {
-    return domain_;
-  }
-
-  const AbstractBanachSpace &TrackingTypeCostFunctional::getRange() const
-  {
-    return range_;
   }
 
   double TrackingTypeCostFunctional::d1(const AbstractFunctionSpaceElement& dx) const

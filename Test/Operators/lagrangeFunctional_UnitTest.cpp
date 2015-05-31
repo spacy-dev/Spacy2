@@ -88,7 +88,7 @@ TEST(LagrangeFunctionalTest, D0Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y,P);
+  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y);
   auto c = makeC2Operator<TestOperator2>(Y,P);
   LagrangeFunctional L(J,c);
 
@@ -118,7 +118,7 @@ TEST(LagrangeFunctionalTest, D1Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y,P);
+  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y);
   auto c = makeC2Operator<TestOperator2>(Y,P);
   LagrangeFunctional L(J,c);
 
@@ -156,7 +156,7 @@ TEST(LagrangeFunctionalTest, D2Test)
 
   double alpha = 3;
   const auto& referenceState = dynamic_cast<const ProductSpaceElement&>(reference.impl()).variable(0);
-  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y,P);
+  auto J = makeC2Functional<TrackingTypeCostFunctional>(alpha,referenceState,Y);
   auto c = makeC2Operator<TestOperator2>(Y,P);
   LagrangeFunctional L(J,c);
 

@@ -100,7 +100,8 @@ namespace Algorithm
     {
     public:
       C1FunctionalDerivative(const AbstractC1Functional& A, const AbstractFunctionSpaceElement& x)
-        : A_(dynamic_cast<AbstractC1Functional*>(A.clone().release())),
+        : AbstractC0Functional(A.getDomain()),
+          A_(dynamic_cast<AbstractC1Functional*>(A.clone().release())),
           x_(x.clone())
       {
         (*A_)(*x_);
@@ -116,11 +117,6 @@ namespace Algorithm
         return A_->d1(dx);
       }
 
-      const AbstractBanachSpace& getDomain() const override
-      {
-        return A_->getDomain();
-      }
-
     private:
       std::unique_ptr<AbstractC1Functional> A_;
       std::unique_ptr<AbstractFunctionSpaceElement> x_;
@@ -130,7 +126,8 @@ namespace Algorithm
     {
     public:
       C2FunctionalDerivative(const AbstractC2Functional& A, const AbstractFunctionSpaceElement& x)
-        : A_(dynamic_cast<AbstractC2Functional*>(A.clone().release())),
+        : AbstractC1Functional(A.getDomain()),
+          A_(dynamic_cast<AbstractC2Functional*>(A.clone().release())),
           x_(x.clone())
       {
         (*A_)(*x_);
@@ -150,11 +147,6 @@ namespace Algorithm
       double d1(const AbstractFunctionSpaceElement& dy) const override
       {
         return A_->d2(*dx_,dy);
-      }
-
-      const AbstractBanachSpace& getDomain() const override
-      {
-        return A_->getDomain();
       }
 
     private:
