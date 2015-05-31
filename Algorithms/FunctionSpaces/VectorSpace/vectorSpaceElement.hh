@@ -153,6 +153,16 @@ namespace Algorithm
       return v_.size(); // todo generalize
     }
 
+    Vector& impl()
+    {
+      return v_;
+    }
+
+    const Vector& impl() const
+    {
+      return v_;
+    }
+
   private:
     friend class L2Product;
     Vector v_;
