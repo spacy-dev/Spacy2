@@ -3,12 +3,82 @@
 
 #include <memory>
 #include <vector>
+#include <utility>
 
 #include "../../Interface/abstractFunctionSpaceElement.hh"
 #include "../../Util/invalidargumentexception.hh"
+#include "../../Util/voider.hh"
 
 namespace Algorithm
 {  
+  namespace VectorSpaceDetail
+  {
+    template <class Vector>
+    using TryCall_Coefficients = decltype( std::declval<Vector>().coefficients() );
+
+    template <class Vector, class = void> struct HasCall_Coefficients : std::false_type {};
+    template <class Vector> struct HasCall_Coefficients<Vector, void_t<TryCall_Coefficients<Vector> > > : std::true_type {};
+
+    template <class Vector>
+    using TryCall_Zeros = decltype( std::declval<Vector>().zeros() );
+
+    template <class Vector, class = void> struct HasCall_Zeros : std::false_type {};
+    template <class Vector> struct HasCall_Zeros<Vector, void_t<TryCall_Zeros<Vector> > > : std::true_type {};
+
+
+    template <class Vector, bool>
+    struct MakeZero
+    {
+      static void apply(Vector& v)
+      {
+        v = 0.;
+      }
+    };
+
+    template <class Vector>
+    struct MakeZero<Vector,true>
+    {
+      static void apply(Vector& v)
+      {
+        v.zeros();
+      }
+    };
+
+    template <class Vector>
+    void makeZero(Vector &v)
+    {
+      MakeZero<Vector,HasCall_Zeros<Vector>::value>::apply(v);
+    }
+
+    template <class Vector, bool>
+    struct AccessCoefficients
+    {
+      static double& apply(Vector& v, unsigned i) { return v[i]; }
+
+      static const double& apply(const Vector& v, unsigned i) { return v[i]; }
+    };
+
+    template <class Vector>
+    struct AccessCoefficients<Vector,true>
+    {
+      static double& apply(Vector& v, unsigned i) { return v.coefficients()[i]; }
+
+      static const double& apply(const Vector& v, unsigned i) { return v.coefficients()[i]; }
+    };
+
+    template <class Vector>
+    double& accessCoefficients(Vector& v, unsigned i)
+    {
+      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
+    }
+
+    template <class Vector>
+    const double& accessCoefficients(const Vector& v, unsigned i)
+    {
+      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
+    }
+  }
+
   template <class> bool isVectorSpaceElement(const AbstractFunctionSpaceElement&);
 
   template <class Vector>
@@ -22,7 +92,7 @@ namespace Algorithm
     explicit VectorSpaceElement(const AbstractBanachSpace& space)
       : AbstractFunctionSpaceElement(space)// todo: generalize init
     {
-      v_.zeros();
+      VectorSpaceDetail::makeZero(v_);
     }
 
     void copyTo(AbstractFunctionSpaceElement& y) const override
@@ -34,7 +104,7 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override
     {
-      return std::make_unique<VectorSpaceElement>(v_,this->getSpace());
+      return std::make_unique<VectorSpaceElement>(v_,getSpace());
     }
 
     void print(std::ostream& os) const final override
@@ -70,12 +140,12 @@ namespace Algorithm
 
     double& coefficient(unsigned i) final override
     {
-      return v_[i]; // todo generalize access
+      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     const double& coefficient(unsigned i) const final override
     {
-      return v_[i]; // todo generalize access
+      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     unsigned size() const
