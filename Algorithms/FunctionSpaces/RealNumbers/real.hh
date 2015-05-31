@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm
 {

@@ -1,8 +1,8 @@
 #include "productSpace.hh"
 
-#include "../../Util/invalidargumentexception.hh"
+#include "Util/invalidargumentexception.hh"
 
-#include "../../hilbertSpaceNorm.hh"
+#include "hilbertSpaceNorm.hh"
 
 #include "productSpaceElement.hh"
 #include "productSpaceProduct.hh"

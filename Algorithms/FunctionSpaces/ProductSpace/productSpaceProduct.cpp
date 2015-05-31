@@ -1,10 +1,10 @@
 #include "productSpaceProduct.hh"
 
 #include "productSpaceElement.hh"
-#include "../../Util/incompatiblespaceexception.hh"
-#include "../../Util/invalidargumentexception.hh"
-#include "../../Interface/abstractBanachSpace.hh"
-#include "../../Interface/abstractFunctionSpaceElement.hh"
+#include "Util/incompatiblespaceexception.hh"
+#include "Util/invalidargumentexception.hh"
+#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm
 {

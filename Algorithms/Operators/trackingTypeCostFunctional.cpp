@@ -1,13 +1,13 @@
 #include "trackingTypeCostFunctional.hh"
 
-#include "../functionSpace.hh"
+#include "functionSpace.hh"
 
-#include "../Interface/abstractBanachSpace.hh"
+#include "Interface/abstractBanachSpace.hh"
 
-#include "../FunctionSpaces/RealNumbers/real.hh"
-#include "../FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "../FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
-#include "../Util/invalidargumentexception.hh"
+#include "FunctionSpaces/RealNumbers/real.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
+#include "Util/invalidargumentexception.hh"
 
 namespace Algorithm
 {

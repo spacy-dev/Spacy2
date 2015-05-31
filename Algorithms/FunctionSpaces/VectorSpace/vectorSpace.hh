@@ -3,9 +3,9 @@
 
 #include <memory>
 
-#include "../../Interface/abstractHilbertSpace.hh"
-#include "../../hilbertSpaceNorm.hh"
-#include "../../Util/invalidargumentexception.hh"
+#include "Interface/abstractHilbertSpace.hh"
+#include "hilbertSpaceNorm.hh"
+#include "Util/invalidargumentexception.hh"
 
 #include "l2Product.hh"
 #include "vectorSpaceElement.hh"

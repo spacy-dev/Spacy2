@@ -4,8 +4,8 @@
 #include <memory>
 #include <vector>
 
-#include "../../Interface/abstractHilbertSpace.hh"
-#include "../ProductSpace/productSpace.hh"
+#include "Interface/abstractHilbertSpace.hh"
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
 
 namespace Algorithm
 {

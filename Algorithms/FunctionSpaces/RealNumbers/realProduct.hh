@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 #define ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Interface/abstractDualPairing.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractDualPairing.hh"
 
 namespace Algorithm
 {

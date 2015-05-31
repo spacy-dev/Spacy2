@@ -1,8 +1,8 @@
 #include "realSolver.hh"
 
-#include "../../Util/invalidargumentexception.hh"
-#include "../../Interface/abstractC0Operator.hh"
-#include "../../c0Operator.hh"
+#include "Util/invalidargumentexception.hh"
+#include "Interface/abstractC0Operator.hh"
+#include "c0Operator.hh"
 #include "real.hh"
 #include <iostream>
 namespace Algorithm

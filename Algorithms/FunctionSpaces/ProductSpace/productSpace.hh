@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "../../Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractHilbertSpace.hh"
 
 namespace Algorithm
 {

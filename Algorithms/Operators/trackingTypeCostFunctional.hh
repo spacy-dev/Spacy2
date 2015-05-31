@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "../Interface/abstractC2Functional.hh"
+#include "Interface/abstractC2Functional.hh"
 //#include "../twiceDifferentiableFunctional.hh"
 
 namespace Algorithm

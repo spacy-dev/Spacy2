@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_REALNUMBERS_REALSOLVER_HH
 #define ALGORITHM_REALNUMBERS_REALSOLVER_HH
 
-#include "../../Interface/abstractLinearSolver.hh"
+#include "Interface/abstractLinearSolver.hh"
 
 namespace Algorithm
 {

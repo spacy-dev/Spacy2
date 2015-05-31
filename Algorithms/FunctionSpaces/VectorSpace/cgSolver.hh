@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "../../Algorithm/ConjugateGradients/cg.hh"
-#include "../../Interface/abstractLinearSolver.hh"
+#include "Algorithm/ConjugateGradients/cg.hh"
+#include "Interface/abstractLinearSolver.hh"
 
 namespace Algorithm
 {

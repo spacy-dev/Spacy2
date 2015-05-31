@@ -1,9 +1,9 @@
 #include "cgSolver.hh"
 
-#include "../../Util/invalidargumentexception.hh"
-#include "../../c0Operator.hh"
+#include "Util/invalidargumentexception.hh"
+#include "c0Operator.hh"
 #include "vectorSpaceElement.hh"
-#include "../Algorithm/ConjugateGradients/jacobipreconditioner.hh"
+#include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
 namespace Algorithm
 {

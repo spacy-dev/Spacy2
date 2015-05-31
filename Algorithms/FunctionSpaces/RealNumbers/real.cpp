@@ -1,7 +1,7 @@
 #include "real.hh"
 
-#include "../../Interface/abstractBanachSpace.hh"
-#include "../../Util/invalidargumentexception.hh"
+#include "Interface/abstractBanachSpace.hh"
+#include "Util/invalidargumentexception.hh"
 
 #include <iostream>
 #include <stdexcept>

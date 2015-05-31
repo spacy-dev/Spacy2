@@ -20,9 +20,9 @@
 #include <tuple>
 #include <utility>
 
-#include "../c0Operator.hh"
-#include "../functionSpaceElement.hh"
-#include "../Util/singularoperatorexception.hh"
+#include "c0Operator.hh"
+#include "functionSpaceElement.hh"
+#include "Util/singularoperatorexception.hh"
 
 #include "cgTerminationCriteria.hh"
 

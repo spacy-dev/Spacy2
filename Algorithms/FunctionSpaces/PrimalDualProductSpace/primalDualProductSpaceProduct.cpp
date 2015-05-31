@@ -1,9 +1,9 @@
 #include "primalDualProductSpaceProduct.hh"
 
 #include "primalDualProductSpaceElement.hh"
-#include "../../Util/incompatiblespaceexception.hh"
-#include "../../Util/invalidargumentexception.hh"
-#include "../../Interface/abstractBanachSpace.hh"
+#include "Util/incompatiblespaceexception.hh"
+#include "Util/invalidargumentexception.hh"
+#include "Interface/abstractBanachSpace.hh"
 
 namespace Algorithm
 {

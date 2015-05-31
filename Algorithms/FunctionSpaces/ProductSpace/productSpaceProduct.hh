@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
 #define ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
 
-#include "../../Interface/abstractDualPairing.hh"
+#include "Interface/abstractDualPairing.hh"
 
 namespace Algorithm
 {

@@ -1,8 +1,8 @@
 #include "primalDualProductSpace.hh"
 
-#include "../../Util/invalidargumentexception.hh"
+#include "Util/invalidargumentexception.hh"
 
-#include "../../hilbertSpaceNorm.hh"
+#include "hilbertSpaceNorm.hh"
 
 #include "primalDualProductSpaceElement.hh"
 #include "primalDualProductSpaceProduct.hh"

@@ -4,8 +4,8 @@
 #include <memory>
 #include <vector>
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../functionSpaceElement.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+#include "functionSpaceElement.hh"
 
 namespace Algorithm
 {

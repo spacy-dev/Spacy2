@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "../Interface/abstractC0Operator.hh"
-#include "../functionSpace.hh"
-#include "../c0Operator.hh"
+#include "Interface/abstractC0Operator.hh"
+#include "functionSpace.hh"
+#include "c0Operator.hh"
 
 namespace Algorithm
 {

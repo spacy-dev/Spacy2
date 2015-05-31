@@ -47,9 +47,7 @@ set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest-
 set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest_main.cc PROPERTIES GENERATED 1)
 
 link_directories(/home/ignaz/lib/armadillo-4.650.4/)
-include_directories(Algorithms/Interface)
-include_directories(Algorithms/RealNumbers)
-include_directories(Algorithms/Test)
+include_directories(Algorithms)
 
 aux_source_directory(Algorithms/. SRC_LIST)
 aux_source_directory(Algorithms/Algorithm SRC_LIST)

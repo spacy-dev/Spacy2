@@ -1,6 +1,6 @@
 #include "functionSpace.hh"
 
-#include "../Interface/abstractBanachSpace.hh"
+#include "Interface/abstractBanachSpace.hh"
 
 namespace Algorithm
 {

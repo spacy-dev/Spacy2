@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "../../Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractHilbertSpace.hh"
 
 namespace Algorithm
 {
