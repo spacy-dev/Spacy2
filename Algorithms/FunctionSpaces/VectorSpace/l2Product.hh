@@ -18,9 +18,10 @@ namespace Algorithm
       if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("l2Product",x.spaceIndex(),y.spaceIndex());
       if( dynamic_cast<const VectorSpaceElement<Vector>*>(&x) == nullptr || dynamic_cast<const VectorSpaceElement<Vector>*>(&y) == nullptr ) throw InvalidArgumentException("l2Product");
 
-      auto result = 0.;
-      for(unsigned int i=0; i<x.size(); ++i) result += x.coefficient(i) * y.coefficient(i);
-      return result;
+      return dynamic_cast<const VectorSpaceElement<Vector>&>(x).impl() * dynamic_cast<const VectorSpaceElement<Vector>&>(y).impl() ;
+//      auto result = 0.;
+//      for(unsigned int i=0; i<x.size(); ++i) result += x.coefficient(i) * y.coefficient(i);
+//      return result;
     }
   };
 }

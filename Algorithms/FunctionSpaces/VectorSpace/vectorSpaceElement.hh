@@ -13,11 +13,12 @@ namespace Algorithm
 {  
   namespace VectorSpaceDetail
   {
-    template <class Vector>
-    using TryCall_Coefficients = decltype( std::declval<Vector>().coefficients() );
+//    template <class Vector>
+//    using TryCall_Coefficients = decltype( boost::fusion::at_c<0>(std::declval<Vector>().data) );
 
-    template <class Vector, class = void> struct HasCall_Coefficients : std::false_type {};
-    template <class Vector> struct HasCall_Coefficients<Vector, void_t<TryCall_Coefficients<Vector> > > : std::true_type {};
+//    template <class Vector, class = void> struct HasCall_Coefficients : std::false_type {};
+//    template <class Vector> struct HasCall_Coefficients<Vector, void_t<TryCall_Coefficients<Vector> > > : std::true_type {};
+
 
     template <class Vector>
     using TryCall_Zeros = decltype( std::declval<Vector>().zeros() );
@@ -31,7 +32,7 @@ namespace Algorithm
     {
       static void apply(Vector& v)
       {
-        v = 0.;
+        v *= 0.;
       }
     };
 
@@ -50,32 +51,58 @@ namespace Algorithm
       MakeZero<Vector,HasCall_Zeros<Vector>::value>::apply(v);
     }
 
-    template <class Vector, bool>
-    struct AccessCoefficients
-    {
-      static double& apply(Vector& v, unsigned i) { return v[i]; }
+//    template <class Vector, bool>
+//    struct AccessCoefficients
+//    {
+//      static double& apply(Vector& v, unsigned i) { return v[i]; }
 
-      static const double& apply(const Vector& v, unsigned i) { return v[i]; }
+//      static const double& apply(const Vector& v, unsigned i) { return v[i]; }
+//    };
+
+//    template <class Vector>
+//    struct AccessCoefficients<Vector,true>
+//    {
+//      static double& apply(Vector& v, unsigned i) { return boost::fusion::at_c<0>(v.data)[i][0]; }
+
+//      static const double& apply(const Vector& v, unsigned i) { return boost::fusion::at_c<0>(v.data)[i][0]; }
+//    };
+
+//    template <class Vector>
+//    double& accessCoefficients(Vector& v, unsigned i)
+//    {
+//      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
+//    }
+
+//    template <class Vector>
+//    const double& accessCoefficients(const Vector& v, unsigned i)
+//    {
+//      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
+//    }
+
+
+    template <class Vector>
+    using TryCall_Size = decltype( std::declval<Vector>().size() );
+
+    template <class Vector, class = void> struct HasCall_Size : std::false_type {};
+    template <class Vector> struct HasCall_Size< Vector , void_t< TryCall_Size<Vector> > > : std::true_type{};
+
+    template <bool>
+    struct Size
+    {
+      template <class Vector>
+      static unsigned apply(const Vector& v) { return v.size(); }
+    };
+
+    template <> struct Size<false>
+    {
+      template <class Vector>
+      static unsigned apply(const Vector& v) { return v.dim(); }
     };
 
     template <class Vector>
-    struct AccessCoefficients<Vector,true>
+    unsigned size(const Vector& v)
     {
-      static double& apply(Vector& v, unsigned i) { return v.coefficients()[i]; }
-
-      static const double& apply(const Vector& v, unsigned i) { return v.coefficients()[i]; }
-    };
-
-    template <class Vector>
-    double& accessCoefficients(Vector& v, unsigned i)
-    {
-      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
-    }
-
-    template <class Vector>
-    const double& accessCoefficients(const Vector& v, unsigned i)
-    {
-      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
+      return Size< HasCall_Size<Vector>::value >::apply(v);
     }
   }
 
@@ -89,11 +116,11 @@ namespace Algorithm
       : AbstractFunctionSpaceElement(space), v_(v)
     {}
 
-    explicit VectorSpaceElement(const AbstractBanachSpace& space)
-      : AbstractFunctionSpaceElement(space)// todo: generalize init
-    {
-      VectorSpaceDetail::makeZero(v_);
-    }
+//    explicit VectorSpaceElement(const AbstractBanachSpace& space)
+//      : AbstractFunctionSpaceElement(space)// todo: generalize init
+//    {
+//      VectorSpaceDetail::makeZero(v_);
+//    }
 
     void copyTo(AbstractFunctionSpaceElement& y) const override
     {
@@ -109,9 +136,14 @@ namespace Algorithm
 
     void print(std::ostream& os) const final override
     {
-      os << v_; // todo generalize output
+//      os << v_; // todo generalize output
     }
 
+    VectorSpaceElement& operator=(const Vector& v)
+    {
+      v_ = v;
+      return *this;
+    }
 
     VectorSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override
     {
@@ -135,22 +167,24 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override
     {
-      return std::make_unique<VectorSpaceElement>(-v_,this->getSpace());
+      auto v = std::make_unique<VectorSpaceElement>(v_,this->getSpace());
+      *v *= -1;
+      return std::move(v);
     }
 
     double& coefficient(unsigned i) final override
     {
-      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
+//      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     const double& coefficient(unsigned i) const final override
     {
-      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
+//      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     unsigned size() const
     {
-      return v_.size(); // todo generalize
+      return VectorSpaceDetail::size(v_); // todo generalize
     }
 
     Vector& impl()
