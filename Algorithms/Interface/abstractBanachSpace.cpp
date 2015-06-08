@@ -49,6 +49,7 @@ namespace Algorithm
 
   const AbstractBanachSpace& AbstractBanachSpace::getDualSpace() const
   {
+    if( dualSpace_ == nullptr ) throw InvalidArgumentException("AbstractBanachSpace::getDualSpace");
     return *dualSpace_;
   }
 

@@ -225,10 +225,10 @@ namespace Algorithm
     double squaredRelativeError() const noexcept;
 
     double tol2 = 1e-24, minTol2 = 0.0625;
-    unsigned lookAhead_ = 50;
+    unsigned lookAhead_ = 10;
     std::vector<double> scaledGamma2 = std::vector<double>{};
     double energyNorm2 = 0;
-    double eps2 = 1e-24, stepLength2 = 0.;
+    double eps2 = 1e-30, stepLength2 = 0.;
   };
 
   using RelativeEnergyError = StrakosTichyEnergyErrorTerminationCriterion;

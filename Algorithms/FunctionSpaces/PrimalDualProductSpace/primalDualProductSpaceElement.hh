@@ -35,12 +35,15 @@ namespace Algorithm
     /**
      * @brief Get a copy of this real number.
      */
-    std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override;
+    PrimalDualProductSpaceElement* cloneImpl() const final override;
 
     void copyTo(AbstractFunctionSpaceElement &) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
+
+    /// Assignment.
+    PrimalDualProductSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
     PrimalDualProductSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override;
@@ -82,6 +85,12 @@ namespace Algorithm
 //      return FunctionSpaceElement( PrimalDualProductSpaceElement(primalVariables_,{},this->getSpace()).clone() );
 //    }
 
+
+    AbstractFunctionSpaceElement& primalVariable(unsigned i)
+    {
+      return primalProductSpaceElement_.variable(i);
+    }
+
     const AbstractFunctionSpaceElement& primalVariable(unsigned i) const
     {
       return primalProductSpaceElement_.variable(i);
@@ -100,6 +109,11 @@ namespace Algorithm
     const ProductSpaceElement& dualElement() const
     {
       return dualProductSpaceElement_;
+    }
+
+    AbstractFunctionSpaceElement& dualVariable(unsigned i)
+    {
+      return dualProductSpaceElement_.variable(i);
     }
 
     const AbstractFunctionSpaceElement& dualVariable(unsigned i) const

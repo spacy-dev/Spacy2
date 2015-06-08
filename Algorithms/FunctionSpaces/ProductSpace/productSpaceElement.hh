@@ -28,15 +28,13 @@ namespace Algorithm
      */
     explicit ProductSpaceElement(const AbstractBanachSpace& space);
 
-    /**
-     * @brief Get a copy of this real number.
-     */
-    std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override;
-
     void copyTo(AbstractFunctionSpaceElement &) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
+
+    /// Assignment.
+    ProductSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
     ProductSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override;
@@ -67,7 +65,12 @@ namespace Algorithm
 
     const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables() const;
 
-  private:
+  private:    
+    /**
+     * @brief Get a copy of this real number.
+     */
+    ProductSpaceElement* cloneImpl() const final override;
+
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > variables_;
 
   };

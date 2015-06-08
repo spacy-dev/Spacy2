@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 #define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 
-#include "../functionSpaceElement.hh"
-#include "../inverseOperator.hh"
+#include "functionSpaceElement.hh"
+#include "linearSolver.hh"
 
 namespace Algorithm
 {
@@ -13,7 +13,7 @@ namespace Algorithm
     {
       AffineCovariant(const Newton& method) : newton(method) {}
 
-      double operator()(InverseOperator& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
+      double operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
       {
         auto trial = x + dx;
         auto ds = DFInv_(-newton.F_(trial));

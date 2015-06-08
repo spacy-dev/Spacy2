@@ -1,17 +1,5 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*                                                                           */
-/*  This file is part of the library KASKADE 7                               */
-/*    see http://www.zib.de/en/numerik/software/kaskade-7.html               */
-/*                                                                           */
-/*  Copyright (C) 2002-2013 Zuse Institute Berlin                            */
-/*                                                                           */
-/*  KASKADE 7 is distributed under the terms of the ZIB Academic License.    */
-/*    see $KASKADE/academic.txt                                              */
-/*                                                                           */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-#ifndef CG_ImplEMENTATION_HH
-#define CG_ImplEMENTATION_HH
+#ifndef ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
+#define ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
 
 #include <cassert>
 #include <cmath>
@@ -20,7 +8,7 @@
 #include <tuple>
 #include <utility>
 
-#include "c0Operator.hh"
+#include "operator.hh"
 #include "functionSpaceElement.hh"
 #include "Util/singularoperatorexception.hh"
 
@@ -98,7 +86,7 @@ namespace Algorithm
      * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
      * \param eps_ estimate for the maximal attainable accuracy (default=false).
      */
-    CGBase(const C0Operator& A, const C0Operator& P, bool verbose_ = true, double eps_ = 1e-12)
+    CGBase(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
         A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >()), verbose(verbose_)
     {
@@ -182,6 +170,7 @@ namespace Algorithm
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
+        std::cout << pre << "step " << step << std::endl;
         auto Aq = A_(q);
         auto qAq = q*Aq;
         auto qPq = q*Pq;
@@ -200,6 +189,7 @@ namespace Algorithm
         // convergence test
         if (*terminate)
         {
+          if( verbose ) std::cout << pre << "Terminating in iteration " << step << ".\n";
           result = terminate->reachedMaximalNumberOfIterations() ? Result::Failed : Result::Converged;
           break;
         }
@@ -224,10 +214,10 @@ namespace Algorithm
     /// Set string pre.
     void initPre()
     {
-      if(Impl == CGImplementationType::STANDARD) pre = std::string("KASKADE CG: ");
-      if(Impl == CGImplementationType::TRUNCATED) pre = std::string("KASKADE TCG: ");
-      if(Impl == CGImplementationType::REGULARIZED) pre = std::string("KASKADE RCG: ");
-      if(Impl == CGImplementationType::HYBRID) pre = std::string("KASKADE HCG: ");
+      if(Impl == CGImplementationType::STANDARD) pre = std::string("CG: ");
+      if(Impl == CGImplementationType::TRUNCATED) pre = std::string("TCG: ");
+      if(Impl == CGImplementationType::REGULARIZED) pre = std::string("RCG: ");
+      if(Impl == CGImplementationType::HYBRID) pre = std::string("HCG: ");
     }
 
     /// Check step length.
@@ -259,8 +249,6 @@ namespace Algorithm
         }
 
         throw SingularOperatorException("CG::terminateOnNonconvexity");
-        //            result = Result::EncounteredNonConvexity;
-        //            return true;
       }
 
       if( Impl == CGImplementationType::TRUNCATED || ( Impl == CGImplementationType::HYBRID && terminate->minimalDecreaseAchieved() ) )
@@ -282,13 +270,13 @@ namespace Algorithm
       }
     }
 
-    const C0Operator& A_;
-    const C0Operator& P_;
+    const Operator& A_;
+    const Operator& P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
     bool verbose = false; ///
     Result result = Result::Failed; ///< information on the way cg did terminate
     double energyNorm2 = 0.; ///< energy norm squared
     std::string pre = std::string("Algorithm CG: "); ///< output
   };
-} // namespace Kaskade
-#endif
+}
+#endif // ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH

@@ -5,22 +5,24 @@
 
 #include "Algorithm/ConjugateGradients/cg.hh"
 #include "Interface/abstractLinearSolver.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm
 {
-  class C0Operator;
+  class Operator;
+  class LinearOperator;
+  class AbstractOperator;
 
   class CGSolver : public AbstractLinearSolver
   {
   public:
-    CGSolver(const C0Operator& A);
+    CGSolver(const Operator& A);
+    CGSolver(const LinearOperator& A);
 
-    FunctionSpaceElement operator()(const FunctionSpaceElement &x, const FunctionSpaceElement& y) const final override;
-
-    FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& y) const final override;
 
   private:
-    C0Operator P_;
+    Operator P_;
     mutable CG cg;
   };
 }

@@ -2,7 +2,6 @@
 #define ALGORITHM_REAL_NUMBERS_REAL_HH
 
 #include <memory>
-#include <vector>
 
 #include "Interface/abstractFunctionSpaceElement.hh"
 
@@ -32,13 +31,11 @@ namespace Algorithm
      */
     void copyTo(AbstractFunctionSpaceElement& y) const final override;
 
-    /**
-     * @brief Get a copy of this real number.
-     */
-    std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override;
-
     /// Print to os.
     void print(std::ostream& os) const final override;
+
+    /// Assignment.
+    Real& operator=(const AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
     Real& operator+=(const AbstractFunctionSpaceElement& y) final override;
@@ -63,12 +60,17 @@ namespace Algorithm
 
     operator double() const
     {
-      return x_[0];
+      return x_;
     }
 
   private:
+    /**
+     * @brief Get a copy of this real number.
+     */
+    Real* cloneImpl() const final override;
+
     friend class RealProduct;
-    std::vector<double> x_;
+    double x_;
   };
 
   bool isRealElement(const AbstractFunctionSpaceElement& x);

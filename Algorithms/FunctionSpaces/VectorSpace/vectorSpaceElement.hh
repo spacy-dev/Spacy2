@@ -51,13 +51,13 @@ namespace Algorithm
       MakeZero<Vector,HasCall_Zeros<Vector>::value>::apply(v);
     }
 
-//    template <class Vector, bool>
-//    struct AccessCoefficients
-//    {
-//      static double& apply(Vector& v, unsigned i) { return v[i]; }
+    template <class Vector, bool>
+    struct AccessCoefficients
+    {
+      static double& apply(Vector& v, unsigned i) { return v[i]; }
 
-//      static const double& apply(const Vector& v, unsigned i) { return v[i]; }
-//    };
+      static const double& apply(const Vector& v, unsigned i) { return v[i]; }
+    };
 
 //    template <class Vector>
 //    struct AccessCoefficients<Vector,true>
@@ -67,17 +67,17 @@ namespace Algorithm
 //      static const double& apply(const Vector& v, unsigned i) { return boost::fusion::at_c<0>(v.data)[i][0]; }
 //    };
 
-//    template <class Vector>
-//    double& accessCoefficients(Vector& v, unsigned i)
-//    {
-//      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
-//    }
+    template <class Vector>
+    double& accessCoefficients(Vector& v, unsigned i)
+    {
+      return AccessCoefficients< Vector ,/* HasCall_Coefficients<Vector>::value*/false >::apply(v,i);
+    }
 
-//    template <class Vector>
-//    const double& accessCoefficients(const Vector& v, unsigned i)
-//    {
-//      return AccessCoefficients< Vector , HasCall_Coefficients<Vector>::value >::apply(v,i);
-//    }
+    template <class Vector>
+    const double& accessCoefficients(const Vector& v, unsigned i)
+    {
+      return AccessCoefficients< Vector , /*HasCall_Coefficients<Vector>::value */false>::apply(v,i);
+    }
 
 
     template <class Vector>
@@ -112,15 +112,15 @@ namespace Algorithm
   class VectorSpaceElement : public AbstractFunctionSpaceElement
   {
   public:
-    VectorSpaceElement(const Vector& v, const AbstractBanachSpace& space)
+    VectorSpaceElement(const AbstractBanachSpace& space, const Vector& v)
       : AbstractFunctionSpaceElement(space), v_(v)
     {}
 
-//    explicit VectorSpaceElement(const AbstractBanachSpace& space)
-//      : AbstractFunctionSpaceElement(space)// todo: generalize init
-//    {
-//      VectorSpaceDetail::makeZero(v_);
-//    }
+    explicit VectorSpaceElement(const AbstractBanachSpace& space)
+      : AbstractFunctionSpaceElement(space)// todo: generalize init
+    {
+      VectorSpaceDetail::makeZero(v_);
+    }
 
     void copyTo(AbstractFunctionSpaceElement& y) const override
     {
@@ -128,15 +128,9 @@ namespace Algorithm
 
       dynamic_cast<VectorSpaceElement<Vector>&>(y).v_ = v_;
     }
-
-    std::unique_ptr<AbstractFunctionSpaceElement> clone() const final override
-    {
-      return std::make_unique<VectorSpaceElement>(v_,getSpace());
-    }
-
     void print(std::ostream& os) const final override
     {
-//      os << v_; // todo generalize output
+      os << v_; // todo generalize output
     }
 
     VectorSpaceElement& operator=(const Vector& v)
@@ -144,6 +138,14 @@ namespace Algorithm
       v_ = v;
       return *this;
     }
+
+    VectorSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override
+    {
+      if( !isVectorSpaceElement<Vector>(y) ) throw InvalidArgumentException("VectorSpaceElement::operator=");
+      v_ = dynamic_cast<const VectorSpaceElement&>(y).v_; // todo generalize
+      return *this;
+    }
+
 
     VectorSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override
     {
@@ -167,19 +169,19 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override
     {
-      auto v = std::make_unique<VectorSpaceElement>(v_,this->getSpace());
+      auto v = std::make_unique<VectorSpaceElement>(this->getSpace(),v_);
       *v *= -1;
       return std::move(v);
     }
 
     double& coefficient(unsigned i) final override
     {
-//      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
+      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     const double& coefficient(unsigned i) const final override
     {
-//      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
+      return VectorSpaceDetail::accessCoefficients(v_,i); // todo generalize access
     }
 
     unsigned size() const
@@ -197,7 +199,12 @@ namespace Algorithm
       return v_;
     }
 
-  private:
+  private:    
+    VectorSpaceElement* cloneImpl() const final override
+    {
+      return new VectorSpaceElement(getSpace(),v_);
+    }
+
     friend class L2Product;
     Vector v_;
   };

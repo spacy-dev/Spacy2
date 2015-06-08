@@ -1,8 +1,6 @@
 #include "realSolver.hh"
 
 #include "Util/invalidargumentexception.hh"
-#include "Interface/abstractC0Operator.hh"
-#include "c0Operator.hh"
 #include "real.hh"
 #include <iostream>
 namespace Algorithm
@@ -11,10 +9,12 @@ namespace Algorithm
     : value_(value)
   {}
 
-  FunctionSpaceElement RealSolver::operator ()(const FunctionSpaceElement& y) const
+  std::unique_ptr<AbstractFunctionSpaceElement> RealSolver::operator ()(const AbstractFunctionSpaceElement& y) const
   {
-    if(  dynamic_cast<const Real*>(&y.impl()) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
+    if(  dynamic_cast<const Real*>(&y) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
 
-    return 1. / value_ * y;
+    auto x = Algorithm::clone(y);
+    *x *= 1./value_;
+    return x;
   }
 }

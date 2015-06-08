@@ -20,7 +20,7 @@ namespace Algorithm
 
   AbstractFunctionSpaceElement& AbstractFunctionSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
   {
-    auto z = y.clone();
+    auto z = clone(y);
     *z *= a;
     return *this +=*z;
   }

@@ -1,29 +1,24 @@
 #include "cgSolver.hh"
 
-#include "Util/invalidargumentexception.hh"
-#include "c0Operator.hh"
-#include "vectorSpaceElement.hh"
+#include "operator.hh"
 #include "Algorithm/ConjugateGradients/jacobipreconditioner.hh"
 
 namespace Algorithm
 {
-  CGSolver::CGSolver(const C0Operator &A)
+  CGSolver::CGSolver(const Operator &A)
     : P_(jacobiPreconditioner(A)),
       cg(A,P_)
   {}
 
-  FunctionSpaceElement CGSolver::operator ()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const
+  CGSolver::CGSolver(const LinearOperator &A)
+    : P_(jacobiPreconditioner(A)),
+      cg(A,P_,true)
+  {}
+
+  std::unique_ptr<AbstractFunctionSpaceElement> CGSolver::operator ()(const AbstractFunctionSpaceElement& y) const
   {
-    //if(  dynamic_cast<const VectorSpaceElement*>(&y.impl()) == nullptr ) throw InvalidArgumentException("CGSolver::operator()(const FunctionSpaceElement&)");
-    return cg.solve(x,y);
-  }
-
-  FunctionSpaceElement CGSolver::operator ()(const FunctionSpaceElement& y) const
-  {
-//    if(  dynamic_cast<const VectorSpaceElement*>(&y.impl()) == nullptr ) throw InvalidArgumentException("CGSolver::operator()(const FunctionSpaceElement&)");
-
-//    auto x = P_.getRange().element();
-
-    return (*this)(P_.impl().getRange().element(),y);
+    auto z = cg.solve( FunctionSpaceElement( P_.impl().getRange().element() ) ,
+                     FunctionSpaceElement( clone(y) ) );
+    return clone(z.impl());
   }
 }

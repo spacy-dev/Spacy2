@@ -28,16 +28,6 @@ namespace Algorithm
     : AbstractFunctionSpaceElement(space), primalProductSpaceElement_(space.getPrimalProductSpace()), dualProductSpaceElement_(space.getDualProductSpace())
   {}
 
-  std::unique_ptr<AbstractFunctionSpaceElement> PrimalDualProductSpaceElement::clone() const
-  {
-    auto primalVars = cloneVariables(primalProductSpaceElement_.variables());
-    if(disablePrimal_) for(auto& var : primalVars) *var *= 0;
-    auto dualVars = cloneVariables(dualProductSpaceElement_.variables());
-    if(disableDual_) for(auto& var : dualVars) *var *= 0;
-    reset();
-    return std::make_unique<PrimalDualProductSpaceElement>(primalVars,dualVars,this->getSpace());
-  }
-
   void PrimalDualProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
   {
     if( !isPrimalDualProductSpaceElement(y) ) throw InvalidArgumentException("PrimalDualProductSpaceElement::copyTo");
@@ -52,6 +42,25 @@ namespace Algorithm
 
     reset();
     y_.reset();
+  }
+
+  PrimalDualProductSpaceElement& PrimalDualProductSpaceElement::operator=(const AbstractFunctionSpaceElement& y)
+  {
+    if( !isPrimalDualProductSpaceElement(y) ) throw InvalidArgumentException("PrimalDualProductSpaceElement::operator+=");
+
+    const PrimalDualProductSpaceElement& y_ = dynamic_cast<const PrimalDualProductSpaceElement&>(y);
+
+    if(!disablePrimal_ && !y_.disablePrimal_)
+      for(auto i = 0u; i < primalProductSpaceElement_.variables().size(); ++i)
+        *primalProductSpaceElement_.variables()[i] = *y_.primalProductSpaceElement_.variables()[i];
+
+    if(!disableDual_ && !y_.disableDual_)
+      for(auto i = 0u; i < dualProductSpaceElement_.variables().size(); ++i)
+        *dualProductSpaceElement_.variables()[i] = *y_.dualProductSpaceElement_.variables()[i];
+
+    reset();
+    y_.reset();
+    return *this;
   }
 
   PrimalDualProductSpaceElement& PrimalDualProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
@@ -244,5 +253,15 @@ namespace Algorithm
   {
     dynamic_cast<const PrimalDualProductSpaceElement&>(x.impl()).disablePrimal();
     return x;
+  }
+
+  PrimalDualProductSpaceElement* PrimalDualProductSpaceElement::cloneImpl() const
+  {
+    auto primalVars = cloneVariables(primalProductSpaceElement_.variables());
+    if(disablePrimal_) for(auto& var : primalVars) *var *= 0;
+    auto dualVars = cloneVariables(dualProductSpaceElement_.variables());
+    if(disableDual_) for(auto& var : dualVars) *var *= 0;
+    reset();
+    return new PrimalDualProductSpaceElement(primalVars,dualVars,this->getSpace());
   }
 }

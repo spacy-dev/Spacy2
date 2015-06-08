@@ -12,7 +12,7 @@ namespace Algorithm
   public:
     RealSolver(double value);
 
-    FunctionSpaceElement operator()(const FunctionSpaceElement& y) const final override;
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& y) const final override;
 
   private:
     double value_;

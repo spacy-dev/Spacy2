@@ -5,13 +5,13 @@
 #include <iostream>
 #include <memory>
 
-#include "../inverseOperator.hh"
-#include "../FunctionSpaces/RealNumbers/realSolver.hh"
-#include "../functionSpaceElement.hh"
-#include "../norm.hh"
-#include "../derivative.hh"
-#include "../c1Operator.hh"
-#include "../c0Operator.hh"
+#include "linearOperator.hh"
+#include "FunctionSpaces/RealNumbers/realSolver.hh"
+#include "functionSpaceElement.hh"
+#include "norm.hh"
+#include "derivative.hh"
+#include "c1Operator.hh"
+#include "operator.hh"
 #include "dampingStrategies.hh"
 
 #include <functional>
@@ -27,7 +27,7 @@ namespace Algorithm
         verbose_(verbose)
     {}
 
-    Newton(C1Operator& F, const std::function<double(InverseOperator&, const FunctionSpaceElement&, const FunctionSpaceElement&)>& dampingStrategy, bool verbose = false)
+    Newton(C1Operator& F, const std::function<double(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&)>& dampingStrategy, bool verbose = false)
       : F_(F),
         dampingFactor_(dampingStrategy),
         verbose_(verbose)
@@ -51,8 +51,7 @@ namespace Algorithm
         if( verbose_ ) std::cout << "Iteration: " << i << ", ";
 
         F_.setArgument(x);
-        C0Operator DF = derivative(F_);
-        InverseOperator DFInv(DF);
+        LinearSolver DFInv(F_.getLinearization().getSolver());
 
         auto dx = DFInv(-F_());
 
@@ -93,7 +92,7 @@ namespace Algorithm
   private:
     friend class DampingStrategy::AffineCovariant<Newton>;
     C1Operator& F_;
-    std::function<double(InverseOperator&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
+    std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
     unsigned maxIterations_ = 10;
     double relativeAccuracy_ = 1e-6;
     double thetaMax_ = 0.75, thetaAim_ = 0.5;

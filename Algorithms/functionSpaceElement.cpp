@@ -19,12 +19,12 @@ namespace Algorithm
   {}
 
   FunctionSpaceElement::FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation)
-    : impl_(implementation.clone())
+    : impl_(clone(implementation))
   {}
 
 
   FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
-    : impl_(y.impl().clone())
+    : impl_( clone(y.impl()) )
   {}
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
@@ -32,7 +32,7 @@ namespace Algorithm
     if( impl_ != nullptr)
       y.impl().copyTo(*impl_);
     else
-      impl_ = y.impl().clone();
+      impl_ = clone( y.impl() );
     return *this;
   }
 
@@ -41,7 +41,7 @@ namespace Algorithm
     if( impl_ != nullptr )
       implementation.copyTo(*impl_);
     else
-      impl_ = implementation.clone();
+      impl_ = clone( implementation );
     return *this;
   }
 

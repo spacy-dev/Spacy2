@@ -1,25 +1,31 @@
 #ifndef ALGORITHM_C1_FUNCTIONAL_HH
 #define ALGORITHM_C1_FUNCTIONAL_HH
 
-#include "c0Functional.hh"
+#include "functional.hh"
 
 namespace Algorithm
 {
   class AbstractC1Functional;
   class FunctionSpaceElement;
 
-  class C1Functional : public C0Functional
+  class C1Functional : public Functional
   {
   public:
     C1Functional(std::shared_ptr<AbstractC1Functional> impl);
 
-//    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+    void setArgument(const FunctionSpaceElement& x);
+
+    double operator()() const;
 
     double d1(const FunctionSpaceElement& dx) const;
+
+    FunctionSpaceElement d1() const;
 
     AbstractC1Functional& impl();
 
     const AbstractC1Functional& impl() const;
+
+    using Functional::operator();
 
   private:
     std::shared_ptr<AbstractC1Functional> impl_;

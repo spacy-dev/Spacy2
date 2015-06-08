@@ -13,7 +13,7 @@ namespace Algorithm
   {
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > clonedVariables;
 
-    for(const auto& var : variables) clonedVariables.emplace_back<std::unique_ptr<AbstractFunctionSpaceElement> >(var->clone());
+    for(const auto& var : variables) clonedVariables.emplace_back<std::unique_ptr<AbstractFunctionSpaceElement> >( clone(*var) );
 
     return clonedVariables;
   }
@@ -29,17 +29,22 @@ namespace Algorithm
     for (auto i=0u; i<spaces.size(); ++i) variables_.push_back(spaces[i]->element());
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> ProductSpaceElement::clone() const
-  {
-    return std::make_unique<ProductSpaceElement>(cloneVariables(variables_),this->getSpace());
-  }
-
   void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
   {
     if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::copyTo");
 
     dynamic_cast<ProductSpaceElement&>(y).variables_ = cloneVariables(variables_);
 
+  }
+
+  ProductSpaceElement& ProductSpaceElement::operator=(const AbstractFunctionSpaceElement& y)
+  {
+    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator=");
+
+    for(auto i = 0u; i < variables_.size(); ++i)
+      *variables_[i] = *dynamic_cast<const ProductSpaceElement&>(y).variables_[i];
+
+    return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
@@ -135,6 +140,12 @@ namespace Algorithm
   {
     return variables_;
   }
+
+  ProductSpaceElement* ProductSpaceElement::cloneImpl() const
+  {
+    return new ProductSpaceElement(cloneVariables(variables_),this->getSpace());
+  }
+
 
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x)
   {

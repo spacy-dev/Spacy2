@@ -5,11 +5,13 @@
 #include <memory>
 #include <vector>
 
+#include "Util/cloneable.hh"
+
 namespace Algorithm
 {
   class AbstractBanachSpace;
 
-  class AbstractFunctionSpaceElement
+  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>
   {
   public:
     explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);
@@ -18,9 +20,9 @@ namespace Algorithm
 
     virtual void copyTo(AbstractFunctionSpaceElement&) const = 0;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> clone() const = 0;
-
     virtual void print(std::ostream&) const = 0;
+
+    virtual AbstractFunctionSpaceElement& operator=(const AbstractFunctionSpaceElement& y) = 0;
 
     virtual AbstractFunctionSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) = 0;
 

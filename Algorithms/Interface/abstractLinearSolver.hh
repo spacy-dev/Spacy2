@@ -1,25 +1,19 @@
-#ifndef ALGORITHM_INTERFACE_ABSTRACTLINEARSOLVER_HH
-#define ALGORITHM_INTERFACE_ABSTRACTLINEARSOLVER_HH
+#ifndef ALGORITHM_INTERFACE_ABSTRACT_LINEAR_SOLVER_HH
+#define ALGORITHM_INTERFACE_ABSTRACT_LINEAR_SOLVER_HH
 
 #include <memory>
-#include <utility>
-
-#include "../functionSpaceElement.hh"
 
 namespace Algorithm
 {
+  class AbstractFunctionSpaceElement;
+
   class AbstractLinearSolver
   {
   public:
-    virtual ~AbstractLinearSolver(){}
+    ~AbstractLinearSolver(){}
 
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement&, const FunctionSpaceElement& y) const
-    {
-      return (*this)(y);
-    }
-
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement& y) const = 0;
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
   };
 }
 
-#endif // ALGORITHM_INTERFACE_ABSTRACTLINEARSOLVER_HH
+#endif // ALGORITHM_INTERFACE_ABSTRACT_LINEAR_SOLVER_HH

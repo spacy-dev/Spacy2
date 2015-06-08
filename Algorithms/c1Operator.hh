@@ -3,26 +3,37 @@
 
 #include <utility>
 
-#include "c0Operator.hh"
+#include "functionSpaceElement.hh"
+#include "linearOperator.hh"
+#include "operator.hh"
 
 namespace Algorithm
 {
   class AbstractC1Operator;
   class FunctionSpace;
-  class FunctionSpaceElement;
 
-  class C1Operator : public C0Operator
+  class C1Operator : public Operator
   {
   public:
     C1Operator(std::shared_ptr<AbstractC1Operator> impl);
+
+    void setArgument(const FunctionSpaceElement& x);
+
+    FunctionSpaceElement getArgument() const;
+
+    FunctionSpaceElement operator()() const;
 
 //    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
     FunctionSpaceElement d1(const FunctionSpaceElement& dx) const;
 
+    LinearOperator getLinearization() const;
+
     AbstractC1Operator& impl();
 
     const AbstractC1Operator& impl() const;
+
+    using Operator::operator ();
 
   private:
     std::shared_ptr<AbstractC1Operator> impl_;

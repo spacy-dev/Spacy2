@@ -1,7 +1,8 @@
 #include "c2Functional.hh"
 
+#include "c1Operator.hh"
 #include "functionSpaceElement.hh"
-#include "Interface/abstractC2Functional.hh"
+#include "Interface/Functional/abstractC2Functional.hh"
 
 namespace Algorithm
 {
@@ -10,9 +11,19 @@ namespace Algorithm
       impl_(impl)
   {}
 
+  FunctionSpaceElement C2Functional::d2(const FunctionSpaceElement &dx) const
+  {
+    return FunctionSpaceElement( impl().d2(dx.impl()) );
+  }
+
   double C2Functional::d2(const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
   {
-    return impl_->d2(dx.impl(),dy.impl());
+    return impl().d2(dx.impl(),dy.impl());
+  }
+
+  C1Operator C2Functional::getDerivative() const
+  {
+    return C1Operator( impl().getDerivative());
   }
 
 

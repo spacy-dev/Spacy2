@@ -2,80 +2,112 @@
 #define ALGORITHM_OPERATORS_KASKADE_OPERATOR_HH
 
 #include "functionSpace.hh"
-#include "../Interface/abstractC0Operator.hh"
-#include "../FunctionSpaces/VectorSpace/vectorSpaceElement.hh"
+#include "Interface/Operator/abstractOperator.hh"
+#include "Interface/Operator/abstractC1Operator.hh"
+#include "FunctionSpaces/KaskadeVectorSpace/vectorSpaceElement.hh"
 
 namespace Algorithm
 {
   template <class Functional>
-  class KaskadeOperator : public AbstractC0Operator
+  class KaskadeOperator : public AbstractOperator
   {
     using VariableSet = typename Functional::AnsatzVars::Representation;
     using Vector = typename Functional::AnsatzVars::template CoefficientVectorRepresentation<>::type;
-    using Assembler = Kaskade::VariationalFunctionalAssembler<Kaskade::LinearizationAt<Functional> >;
-    using Operator = Kaskade::AssembledGalerkinOperator<Assembler>;
+    using Assembler = ::Kaskade::VariationalFunctionalAssembler<::Kaskade::LinearizationAt<Functional> >;
+    using KaskOperator = ::Kaskade::AssembledGalerkinOperator<Assembler>;
   public:
+      KaskadeOperator(const VariableSet& x, const Functional& f, Assembler& assembler, const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+        : AbstractOperator(domain,range),
+          x_(x), assembler_(assembler),
+          f_(f), A_(std::make_unique<KaskOperator>(assembler_))
+      {}
+
     KaskadeOperator(const VariableSet& x, const Functional& f, Assembler& assembler, const FunctionSpace& domain, const FunctionSpace& range)
-      : AbstractC0Operator(domain.impl(),range.impl()),
-        x_(x), assembler_(assembler),
-        f_(f), A_(std::make_unique<Operator>(assembler_))
+        : KaskadeOperator(x,f,assembler,domain.impl(),range.impl())
     {}
 
     KaskadeOperator(const KaskadeOperator& g)
-      : AbstractC0Operator(g.getDomain(),g.getRange()),
+      : AbstractOperator(g.getDomain(),g.getRange()),
         x_(g.x_), assembler_(g.assembler_),
-        f_(g.f_), A_(std::make_unique<Operator>(assembler_))
+        f_(g.f_), A_(std::make_unique<KaskOperator>(assembler_))
     {}
-
-    std::unique_ptr<AbstractC0Operator> clone() const final override
-    {
-      return std::make_unique<KaskadeOperator>(*this);
-    }
-
-    void setArgument(const AbstractFunctionSpaceElement &x) final override
-    {
-      const auto& y = dynamic_cast< const VectorSpaceElement<Vector>& >(x);
-      boost::fusion::at_c<0>(x_.data).coefficients() = boost::fusion::at_c<0>(y.impl().data);
-      assembler_.assemble(Kaskade::linearization(f_,x_));
-      A_ = std::make_unique< Operator >(assembler_);
-    }
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override
     {
-      auto y = x.clone();
+      auto y = clone(x);
 
-      A_->apply( dynamic_cast< const VectorSpaceElement<Vector>& >(x).impl() ,
-                 dynamic_cast< VectorSpaceElement<Vector>& >(*y).impl() );
+      A_->apply( dynamic_cast< const ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(x).impl() ,
+                 dynamic_cast< ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(*y).impl() );
 
       return y;
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> d0() const final override
+  private:
+    KaskadeOperator* cloneImpl() const final override
     {
-      return nullptr;
+      return new KaskadeOperator(*this);
     }
 
-//    double d1(const AbstractFunctionSpaceElement& dx) const final override
-//    {
-//      return *gradient * dx;
-//    }
-
-//    double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const final override
-//    {
-//     const auto& dx_ = dynamic_cast< const VectorSpaceElement<Vector>& >(dx);
-//     const auto& dy_ = dynamic_cast< const VectorSpaceElement<Vector>& >(dy);
-
-//     auto b = dx_.impl();
-//     A.apply(dx_.impl(),b);
-//     return b*dy_.impl();
-//    }
-
-  private:
     VariableSet x_;
     Assembler& assembler_;
     Functional f_;
-    std::unique_ptr< Operator > A_;
+    std::unique_ptr< KaskOperator > A_;
+  };
 
+  template <class Functional>
+  class KaskadeC1Operator : public AbstractC1Operator
+  {
+    using VariableSet = typename Functional::AnsatzVars::Representation;
+    using Vector = typename Functional::AnsatzVars::template CoefficientVectorRepresentation<>::type;
+    using Assembler = ::Kaskade::VariationalFunctionalAssembler<::Kaskade::LinearizationAt<Functional> >;
+    using KaskOperator = ::Kaskade::AssembledGalerkinOperator<Assembler>;
+  public:
+      KaskadeC1Operator(const VariableSet& x, const Functional& f, Assembler& assembler, const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+        : AbstractC1Operator(domain,range),
+          x_(x), assembler_(assembler),
+          f_(f), A_(std::make_unique<KaskOperator>(assembler_))
+      {}
+
+    KaskadeC1Operator(const VariableSet& x, const Functional& f, Assembler& assembler, const FunctionSpace& domain, const FunctionSpace& range)
+        : KaskadeC1Operator(x,f,assembler,domain.impl(),range.impl())
+    {}
+
+    KaskadeC1Operator(const KaskadeC1Operator& g)
+      : AbstractC1Operator(g.getDomain(),g.getRange()),
+        x_(g.x_), assembler_(g.assembler_),
+        f_(g.f_), A_(std::make_unique<KaskOperator>(assembler_))
+    {}
+
+    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override
+    {
+      auto y = clone(x);
+
+      A_->apply( dynamic_cast< const ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(x).impl() ,
+                 dynamic_cast< ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(*y).impl() );
+
+      return y;
+    }
+
+    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& dx) const final override
+    {
+      auto y = clone(dx);
+
+      A_->apply( dynamic_cast< const ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(dx).impl() ,
+                 dynamic_cast< ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(*y).impl() );
+
+      return y;
+    }
+
+  private:
+    KaskadeC1Operator* cloneImpl() const final override
+    {
+      return new KaskadeC1Operator(*this);
+    }
+
+    VariableSet x_;
+    Assembler& assembler_;
+    Functional f_;
+    std::unique_ptr< KaskOperator > A_;
   };
 }
 
