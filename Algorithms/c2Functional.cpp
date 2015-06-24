@@ -11,20 +11,23 @@ namespace Algorithm
       impl_(impl)
   {}
 
-  FunctionSpaceElement C2Functional::d2(const FunctionSpaceElement &dx) const
+  FunctionSpaceElement C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
   {
-    return FunctionSpaceElement( impl().d2(dx.impl()) );
+    return FunctionSpaceElement( impl().getHessian( x.impl() )( dx.impl() ) );
+    //return FunctionSpaceElement( impl().d2( x.impl() , dx.impl() ) );
   }
 
-  double C2Functional::d2(const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
+  double C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
   {
-    return impl().d2(dx.impl(),dy.impl());
+    auto dfdx = impl().getHessian( x.impl() ) ( dx.impl() );
+    return (*dfdx) ( dy.impl() );
+//    return impl().d2( x.impl() , dx.impl() ) ( dy.impl() );
   }
 
-  C1Operator C2Functional::getDerivative() const
-  {
-    return C1Operator( impl().getDerivative());
-  }
+//  C1Operator C2Functional::getDerivative() const
+//  {
+//    return C1Operator( impl().getDerivative());
+//  }
 
 
   AbstractC2Functional& C2Functional::impl()

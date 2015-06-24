@@ -9,7 +9,6 @@
 #include "FunctionSpaces/RealNumbers/realSolver.hh"
 #include "functionSpaceElement.hh"
 #include "norm.hh"
-#include "derivative.hh"
 #include "c1Operator.hh"
 #include "operator.hh"
 #include "dampingStrategies.hh"
@@ -50,10 +49,9 @@ namespace Algorithm
       {
         if( verbose_ ) std::cout << "Iteration: " << i << ", ";
 
-        F_.setArgument(x);
-        LinearSolver DFInv(F_.getLinearization().getSolver());
+        LinearSolver DFInv(F_.getLinearization(x));
 
-        auto dx = DFInv(-F_());
+        auto dx = DFInv(-F_(x));
 
         if( norm_(dx) < relativeAccuracy_ * norm_(x) )
         {

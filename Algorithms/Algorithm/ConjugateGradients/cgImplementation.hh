@@ -165,15 +165,15 @@ namespace Algorithm
       auto q = Qr;
       auto Pq = r; // required only for regularized or hybrid conjugate gradient methods
 
-      auto sigma = std::abs(Qr*r); // preconditioned residual norm squared
+      auto sigma = std::abs( r(Qr) ); // preconditioned residual norm squared
 
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
         std::cout << pre << "step " << step << std::endl;
         auto Aq = A_(q);
-        auto qAq = q*Aq;
-        auto qPq = q*Pq;
+        auto qAq = Aq(q);//q*Aq;
+        auto qPq = Pq(q);//q*Pq;
 
         auto alpha = sigma/qAq;
 
@@ -200,7 +200,7 @@ namespace Algorithm
         Qr = P_(r);
 
         // determine new search direction
-        auto sigmaNew = std::abs(Qr*r); // sigma = <Qr,r>
+        auto sigmaNew = std::abs( r(Qr) ); // sigma = <Qr,r>
         auto beta = sigmaNew/sigma;
         sigma = sigmaNew;
 

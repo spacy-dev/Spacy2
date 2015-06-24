@@ -4,6 +4,7 @@
 
 #include "Util/invalidargumentexception.hh"
 
+#include <cassert>
 #include <numeric>
 #include <stdexcept>
 
@@ -82,6 +83,17 @@ namespace Algorithm
     return std::make_unique<ProductSpaceElement>(primal,this->getSpace());
   }
 
+  double ProductSpaceElement::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+  {
+    auto result = 0.;
+    const auto& y_  = dynamic_cast<const ProductSpaceElement&>(y);
+    assert( variables().size() == y_.variables().size() );
+    for(auto i=0u; i<variables().size(); ++i)
+      result += variable(i)( y_.variable(i) );
+
+    return result;
+  }
+
   unsigned ProductSpaceElement::size() const
   {
     return std::accumulate( begin(variables_) , end(variables_), 0.0,
@@ -116,7 +128,7 @@ namespace Algorithm
 
   void ProductSpaceElement::print(std::ostream& os) const
   {
-    os << "Space index: " << this->space_.index() << "\n";
+    os << "Space index: " << getSpace().index() << "\n";
     os << "Variables:\n";
     for( auto& v : variables_ ) v->print(os);
   }

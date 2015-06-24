@@ -55,6 +55,12 @@ namespace Algorithm
     return std::make_unique<Real>(-x_, this->getSpace() );
   }
 
+  double Real::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+  {
+    return x_ * dynamic_cast<const Real&>(y).x_;
+  }
+
+
   unsigned Real::size() const
   {
     return 1;
@@ -75,7 +81,7 @@ namespace Algorithm
 
   void Real::print(std::ostream& os) const
   {
-    os << "Space index: " << this->space_.index() << "\n";
+    os << "Space index: " << getSpace().index() << "\n";
     os << x_ << std::endl;
   }
 

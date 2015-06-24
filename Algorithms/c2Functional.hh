@@ -13,9 +13,9 @@ namespace Algorithm
   public:
     C2Functional(std::shared_ptr<AbstractC2Functional> impl);
 
-    FunctionSpaceElement d2(const FunctionSpaceElement& dx) const;
+    FunctionSpaceElement d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
 
-    double d2(const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
+    double d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
 
     C1Operator getDerivative() const;
 

@@ -5,40 +5,45 @@
 namespace Algorithm
 {
   AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
-    : AbstractOperator(domain,range), linearization_(*this,solver)
+    : AbstractOperator(domain,range), solver_(solver)//, linearization_(*this,solver)
   {}
 
   AbstractC1Operator::AbstractC1Operator(const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
-    : AbstractOperator(domain,range), linearization_(*this)
+    : AbstractOperator(domain,range)//, linearization_(*this)
   {}
 
-  std::unique_ptr<AbstractFunctionSpaceElement> AbstractC1Operator::d0() const
-  {
-    return (*this)(getArgument());
-  }
+//  std::unique_ptr<AbstractFunctionSpaceElement> AbstractC1Operator::d0() const
+//  {
+//    return (*this)(getArgument());
+//  }
 
-  void AbstractC1Operator::setArgument(const AbstractFunctionSpaceElement &x)
-  {
-    x_ = Algorithm::clone(x);
-  }
+//  void AbstractC1Operator::setArgument(const AbstractFunctionSpaceElement &x)
+//  {
+//    x_ = clone(x);
+//  }
 
-  const AbstractFunctionSpaceElement& AbstractC1Operator::getArgument() const
-  {
-    return *x_;
-  }
+//  const AbstractFunctionSpaceElement& AbstractC1Operator::getArgument() const
+//  {
+//    return *x_;
+//  }
 
 //  std::unique_ptr<AbstractFunctionSpaceElement> AbstractC1Operator::d1(const AbstractFunctionSpaceElement& dx) const
 //  {
 //    return (*d1_)(dx);
 //  }
 
-  LinearizedOperator& AbstractC1Operator::getLinearization()
+//  LinearizedOperator& AbstractC1Operator::getLinearization()
+//  {
+//    return linearization_;
+//  }
+
+  LinearizedOperator AbstractC1Operator::getLinearization(const AbstractFunctionSpaceElement& x) const
   {
-    return linearization_;
+    return makeLinearization(x);
   }
 
-  const LinearizedOperator& AbstractC1Operator::getLinearization() const
+  LinearizedOperator AbstractC1Operator::makeLinearization(const AbstractFunctionSpaceElement& x) const
   {
-    return linearization_;
+    return LinearizedOperator(*this,x,solver_);
   }
 }

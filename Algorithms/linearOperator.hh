@@ -19,6 +19,10 @@ namespace Algorithm
 
     LinearOperator(const LinearizedOperator& impl);
 
+    LinearOperator(const LinearOperator&);
+
+    LinearOperator& operator=(const LinearOperator&);
+
     FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
 
     LinearSolver getSolver() const;
@@ -28,7 +32,7 @@ namespace Algorithm
     const AbstractLinearOperator& impl() const;
 
   private:
-    const AbstractLinearOperator& impl_;
+    std::unique_ptr<AbstractLinearOperator> impl_;
   };
 
 //  class LinearizedOperator

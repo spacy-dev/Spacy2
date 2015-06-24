@@ -3,11 +3,11 @@
 
 #include <cmath>
 
-#include "../Interface/Operator/abstractC1Operator.hh"
-#include "../functionSpace.hh"
-#include "../functionSpaceElement.hh"
-#include "../FunctionSpaces/RealNumbers/real.hh"
-#include "../FunctionSpaces/RealNumbers/realSolver.hh"
+#include "Interface/Operator/abstractC1Operator.hh"
+#include "hilbertSpace.hh"
+#include "functionSpaceElement.hh"
+#include "FunctionSpaces/RealNumbers/real.hh"
+#include "FunctionSpaces/RealNumbers/realSolver.hh"
 
 namespace Algorithm
 {
@@ -49,52 +49,58 @@ namespace Algorithm
   class TestOperator : public AbstractC1Operator
   {
   public:
-    TestOperator(const AbstractBanachSpace& space, const AbstractFunctionSpaceElement& x)
-      : AbstractC1Operator(space,space)
-    {
-      setArgument(x);
-      updateSolver();
-    }
+//    TestOperator(const AbstractBanachSpace& space, const AbstractFunctionSpaceElement& x)
+//      : AbstractC1Operator(space,space)
+//    {
+//      setArgument(x);
+//      updateSolver();
+//    }
 
     TestOperator(const AbstractBanachSpace& space)
       : AbstractC1Operator(space,space)
     {}
 
-    TestOperator(const FunctionSpace& space)
+    TestOperator(const HilbertSpace& space)
       : TestOperator(space.impl())
     {}
 
     ~TestOperator(){}
 
-    void setArgument(const AbstractFunctionSpaceElement &x)
-    {
-      AbstractC1Operator::setArgument(x);
-      updateSolver();
-    }
-
-    std::unique_ptr<AbstractOperator> clone() const
-    {
-      return std::make_unique<TestOperator>(getDomain(),getArgument());
-    }
+//    void setArgument(const AbstractFunctionSpaceElement &x)
+//    {
+//      AbstractC1Operator::setArgument(x);
+//      updateSolver();
+//    }
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
     {
       return std::make_unique<Real>( exp(x.coefficient(0))-2 , getRange() );
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
-    {
-      return std::make_unique<Real>( exp(getArgument().coefficient(0))*dx.coefficient(0) , getRange() );
-    }
 
   private:
-    void updateSolver()
+    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement &dx) const override
     {
-      solver_ = std::make_shared<RealSolver>(exp(getArgument().coefficient(0)));
-      getLinearization().setSolver(solver_);
+      return std::make_unique<Real>( exp(x.coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    std::shared_ptr<AbstractLinearSolver> solver_;
+    AbstractOperator* cloneImpl() const
+    {
+      return new TestOperator(getDomain());
+    }
+
+    LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const override
+    {
+      return LinearizedOperator(*this,x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
+    }
+
+//    void updateSolver()
+//    {
+//      solver_ = std::make_shared<RealSolver>(exp(getArgument().coefficient(0)));
+//      getLinearization().setSolver(solver_);
+//    }
+
+    //std::shared_ptr<AbstractLinearSolver> solver_;
 
 //    virtual std::unique_ptr<AbstractLinearOperator> getLinearization() const
 //    {
@@ -109,7 +115,7 @@ namespace Algorithm
 //      : AbstractC2Operator(domain,range)
 //    {}
 
-//    TestOperator2(const FunctionSpace& domain, const FunctionSpace& range)
+//    TestOperator2(const HilbertSpace& domain, const HilbertSpace& range)
 //      : TestOperator2(domain.impl(),range.impl())
 //    {}
 

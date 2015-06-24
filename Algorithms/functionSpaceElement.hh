@@ -98,6 +98,11 @@ namespace Algorithm
     FunctionSpaceElement operator-() const;
 
     /**
+     * \brief Apply as dual element.
+     */
+    double operator()(const FunctionSpaceElement& y) const;
+
+    /**
      * @brief Equality check.
      */
     bool operator==(const FunctionSpaceElement& y) const;

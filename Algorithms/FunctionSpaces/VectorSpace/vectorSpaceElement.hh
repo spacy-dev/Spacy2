@@ -205,6 +205,13 @@ namespace Algorithm
       return new VectorSpaceElement(getSpace(),v_);
     }
 
+    double applyAsDualTo(const AbstractFunctionSpaceElement &y) const final override
+    {
+      const auto& y_ = dynamic_cast<const VectorSpaceElement&>(y);
+
+      return dot( v_ , y_.v_ );
+    }
+
     friend class L2Product;
     Vector v_;
   };

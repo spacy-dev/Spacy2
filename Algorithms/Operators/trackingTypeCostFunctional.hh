@@ -8,26 +8,22 @@
 namespace Algorithm
 {
   class AbstractFunctionSpaceElement;
-  class AbstractBanachSpace;
+  class AbstractHilbertSpace;
   class ProductSpaceElement;
-  class FunctionSpace;
+  class HilbertSpace;
 
   class TrackingTypeCostFunctional : public AbstractC2Functional
   {
   public:
-    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const FunctionSpace& domain);
+    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const HilbertSpace& domain);
 
-    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const AbstractBanachSpace& domain);
+    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const AbstractHilbertSpace& domain);
 
-    void setArgument(const AbstractFunctionSpaceElement &x) final override;
+//    void setArgument(const AbstractFunctionSpaceElement &x) final override;
 
-    double operator()(const AbstractFunctionSpaceElement& x) const final override;
+    double d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const final override;
 
-    std::unique_ptr<AbstractFunctionSpaceElement> d1() const final override;
-
-    std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx) const final override;
-
-    double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement&) const final override;
+    std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const final override;
 
     void setStateId(unsigned stateId);
 
@@ -37,6 +33,8 @@ namespace Algorithm
     using AbstractC2Functional::d2;
   private:
     TrackingTypeCostFunctional* cloneImpl() const final override;
+
+    double d0(const AbstractFunctionSpaceElement& x) const final override;
 
     double alpha_;
     unsigned stateId_ = 0;

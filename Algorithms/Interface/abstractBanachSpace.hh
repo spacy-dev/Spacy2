@@ -6,7 +6,7 @@
 
 namespace Algorithm
 {
-  class AbstractDualPairing;
+  class AbstractScalarProduct;
   class AbstractNorm;
 
   static unsigned spaceIndex = 0;
@@ -14,7 +14,7 @@ namespace Algorithm
   class AbstractBanachSpace
   {
   public:
-    AbstractBanachSpace(const AbstractBanachSpace* dualSpace, std::shared_ptr<AbstractNorm> norm);
+    AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm);
 
     virtual ~AbstractBanachSpace() = default;
 
@@ -22,32 +22,28 @@ namespace Algorithm
 
     std::shared_ptr<AbstractNorm> getNorm() const;
 
-    void setDualPairing(std::shared_ptr<AbstractDualPairing> dp);
-
-    std::shared_ptr<AbstractDualPairing> getDualPairing() const;
-
     std::unique_ptr<AbstractFunctionSpaceElement> element() const;
 
     unsigned index() const;
 
-    void setDualSpace(AbstractBanachSpace& dualSpace);
+    void addPrimalSpace(const AbstractBanachSpace& primalSpace);
 
-    const AbstractBanachSpace& getDualSpace() const;
+    void addDualSpace(const AbstractBanachSpace& dualSpace);
 
-    bool hasDualSpace() const;
+    bool isPrimalWRT(const AbstractBanachSpace& dualSpace) const;
+
+    bool isDualWRT(const AbstractBanachSpace& primalSpace) const;
 
   protected:
-    const AbstractBanachSpace* dualSpace_ = nullptr;
     std::shared_ptr<AbstractNorm> norm_ = nullptr;
-    std::shared_ptr<AbstractDualPairing> dp_;
 
   private:
     virtual std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const = 0;
 
-    const unsigned index_ = spaceIndex++;
-};
+    std::vector<unsigned> primalSpaces_, dualSpaces_;
 
-  double operator* (const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&);
+    const unsigned index_ = spaceIndex++;
+  };
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_BANACH_SPACE_HH

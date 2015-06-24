@@ -9,7 +9,7 @@
 namespace Algorithm
 {
   class AbstractNorm;
-  class AbstractDualPairing;
+  class AbstractScalarProduct;
   class AbstractFunctionSpaceElement;
 
   /// Space of real numbers.

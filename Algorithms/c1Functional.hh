@@ -13,19 +13,17 @@ namespace Algorithm
   public:
     C1Functional(std::shared_ptr<AbstractC1Functional> impl);
 
-    void setArgument(const FunctionSpaceElement& x);
+//    void setArgument(const FunctionSpaceElement& x);
 
-    double operator()() const;
+  //  double operator()(const FunctionSpaceElement& x) const;
 
-    double d1(const FunctionSpaceElement& dx) const;
-
-    FunctionSpaceElement d1() const;
+    double d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
 
     AbstractC1Functional& impl();
 
     const AbstractC1Functional& impl() const;
 
-    using Functional::operator();
+    //using Functional::operator();
 
   private:
     std::shared_ptr<AbstractC1Functional> impl_;

@@ -34,6 +34,8 @@ namespace Algorithm
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator- () const = 0;
 
+    double operator()(const AbstractFunctionSpaceElement& y) const;
+
     /**
      * @brief Size of coefficient vector.
      */
@@ -53,8 +55,10 @@ namespace Algorithm
 
     const AbstractBanachSpace& getSpace() const;
 
-
   protected:
+    virtual double applyAsDualTo(const AbstractFunctionSpaceElement& y) const = 0;
+
+  private:
     const AbstractBanachSpace& space_;
   };
 

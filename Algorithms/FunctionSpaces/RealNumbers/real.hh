@@ -69,6 +69,9 @@ namespace Algorithm
      */
     Real* cloneImpl() const final override;
 
+    /// Apply as dual element.
+    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
+
     friend class RealProduct;
     double x_;
   };

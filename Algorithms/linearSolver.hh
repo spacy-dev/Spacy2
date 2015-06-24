@@ -9,12 +9,13 @@
 namespace Algorithm
 {
   class AbstractLinearSolver;
+  class LinearOperator;
   class C1Operator;
 
   class LinearSolver
   {
   public:
-    LinearSolver(const C1Operator& A);
+    LinearSolver(const LinearOperator& A);
 
     LinearSolver(std::shared_ptr<AbstractLinearSolver> impl);
 

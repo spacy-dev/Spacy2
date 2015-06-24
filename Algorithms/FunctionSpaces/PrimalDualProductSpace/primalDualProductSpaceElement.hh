@@ -122,6 +122,9 @@ namespace Algorithm
     }
 
   private:
+    /// Apply as dual element.
+    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
+
     ProductSpaceElement primalProductSpaceElement_;
     ProductSpaceElement dualProductSpaceElement_;
     mutable bool disablePrimal_ = false;

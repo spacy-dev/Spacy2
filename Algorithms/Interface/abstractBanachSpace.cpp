@@ -1,13 +1,10 @@
 #include "abstractBanachSpace.hh"
-#include "abstractDualPairing.hh"
 #include "abstractHilbertSpace.hh"
-
-#include "../Util/invalidargumentexception.hh"
 
 namespace Algorithm
 {
-  AbstractBanachSpace::AbstractBanachSpace(const AbstractBanachSpace* dualSpace, std::shared_ptr<AbstractNorm> norm)
-    : dualSpace_(dualSpace), norm_(norm)
+  AbstractBanachSpace::AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm)
+    : norm_(norm)
   {
     std::cout << "Creating space number " << index_ << "." << std::endl;
   }
@@ -22,16 +19,6 @@ namespace Algorithm
     return norm_;
   }
 
-  void AbstractBanachSpace::setDualPairing(std::shared_ptr<AbstractDualPairing> dp)
-  {
-    dp_ = dp;
-  }
-
-  std::shared_ptr<AbstractDualPairing> AbstractBanachSpace::getDualPairing() const
-  {
-    return dp_;
-  }
-
   std::unique_ptr<AbstractFunctionSpaceElement> AbstractBanachSpace::element() const
   {
     return elementImpl();
@@ -42,41 +29,31 @@ namespace Algorithm
     return index_;
   }
 
-  void AbstractBanachSpace::setDualSpace(AbstractBanachSpace& dualSpace)
+  void AbstractBanachSpace::addPrimalSpace(const AbstractBanachSpace& primalSpace)
   {
-    dualSpace_ = &dualSpace;
+    primalSpaces_.push_back(primalSpace.index());
   }
 
-  const AbstractBanachSpace& AbstractBanachSpace::getDualSpace() const
+  void AbstractBanachSpace::addDualSpace(const AbstractBanachSpace& dualSpace)
   {
-    if( dualSpace_ == nullptr ) throw InvalidArgumentException("AbstractBanachSpace::getDualSpace");
-    return *dualSpace_;
+    dualSpaces_.push_back(dualSpace.index());
   }
 
-  bool AbstractBanachSpace::hasDualSpace() const
+  bool AbstractBanachSpace::isPrimalWRT(const AbstractBanachSpace& dualSpace) const
   {
-    return dualSpace_ != nullptr;
+    for( auto index : dualSpaces_ )
+      if( index == dualSpace.index() )
+        return true;
+
+    return false;
   }
 
-
-
-  double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
+  bool AbstractBanachSpace::isDualWRT(const AbstractBanachSpace& primalSpace) const
   {
-//    if( dynamic_cast<const AbstractHilbertSpace*>(&x.getSpace()) == nullptr ) throw InvalidArgumentException("operator*(const AbstractFunctionSpaceElement&,const AbstractFunctionSpaceElement)");
-    //if( x.getSpace().index() != y.getSpace().index()) throw IncompatibleSpaceException("operator*(scalar product)",x.getSpace().index(),y.getSpace().index());
+    for( auto index : primalSpaces_ )
+      if( index == primalSpace.index() )
+        return true;
 
-    if( isHilbertSpace(x.getSpace()) && isHilbertSpace(y.getSpace()) && x.spaceIndex() == y.spaceIndex() )
-    {
-      auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.getSpace()).getScalarProduct();
-      return sp->operator ()(x,y);
-    }
-    if( x.getSpace().hasDualSpace() && x.getSpace().getDualSpace().index() == y.spaceIndex() )
-      return x.getSpace().getDualPairing()->operator ()(x,y);
-    if( y.getSpace().hasDualSpace() && y.getSpace().getDualSpace().index() == x.spaceIndex() )
-      return y.getSpace().getDualPairing()->operator ()(y,x);
-
-    throw InvalidArgumentException("operator*(const AbstractFunctionSpaceElement&,const AbstractFunctionSpaceElement&)");
-    auto dp = dynamic_cast<const AbstractBanachSpace&>(x.getSpace()).getDualPairing();
-    return dp->operator()(x,y);
+    return false;
   }
 }

@@ -2,7 +2,7 @@
 #define ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
 
 #include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Interface/abstractDualPairing.hh"
+#include "../../Interface/abstractScalarProduct.hh"
 #include "../../Util/incompatiblespaceexception.hh"
 #include "../../Util/invalidargumentexception.hh"
 
@@ -11,7 +11,7 @@
 namespace Algorithm
 {
   template <class Vector>
-  class l2Product : public AbstractDualPairing
+  class l2Product : public AbstractScalarProduct
   {
     double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override
     {

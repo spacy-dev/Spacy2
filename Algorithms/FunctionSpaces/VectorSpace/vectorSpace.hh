@@ -26,7 +26,7 @@ namespace Algorithm
       return std::make_unique< VectorSpaceElement<Vector> >(*this);
     }
 
-    std::shared_ptr<AbstractDualPairing> sp_;
+    std::shared_ptr<AbstractScalarProduct> sp_;
   };
 }
 

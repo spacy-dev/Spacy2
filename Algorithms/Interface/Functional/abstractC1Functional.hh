@@ -2,6 +2,7 @@
 #define ALGORITHM_INTERFACE_ABSTRACT_C1_FUNCTIONAL_HH
 
 #include "abstractFunctional.hh"
+#include "Interface/Operator/linearizedOperator.hh"
 
 namespace Algorithm
 {
@@ -12,18 +13,23 @@ namespace Algorithm
   public:
     AbstractC1Functional(const AbstractBanachSpace& domain);
 
-    virtual double d0() const;
 
-    virtual double d1(const AbstractFunctionSpaceElement& dx) const = 0;
+//    virtual double d0() const;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> d1() const = 0;
+//    virtual double d1(const AbstractFunctionSpaceElement& dx) const = 0;
 
-    virtual void setArgument(const AbstractFunctionSpaceElement& x);
+//    LinearizedOperator getLinearization(const AbstractFunctionSpaceElement& x) const;
 
-    const AbstractFunctionSpaceElement& getArgument() const;
+    virtual double d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
 
-  private:
-    std::shared_ptr<AbstractFunctionSpaceElement> x_;
+//    virtual LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const;
+
+//    virtual void setArgument(const AbstractFunctionSpaceElement& x);
+
+//    const AbstractFunctionSpaceElement& getArgument() const;
+
+//  private:
+//    std::shared_ptr<AbstractFunctionSpaceElement> x_;
   };
 }
 

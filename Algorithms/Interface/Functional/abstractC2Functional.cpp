@@ -10,18 +10,28 @@ namespace Algorithm
     : AbstractC1Functional(domain)
   {}
 
-  double AbstractC2Functional::d1(const AbstractFunctionSpaceElement &dx) const
+  Hessian AbstractC2Functional::getHessian(const AbstractFunctionSpaceElement& x) const
   {
-    return (*(derivative_->d0())) * dx;
+    return makeHessian(x);
   }
 
-  std::shared_ptr<AbstractC1Operator> AbstractC2Functional::getDerivative() const
+  Hessian AbstractC2Functional::makeHessian(const AbstractFunctionSpaceElement& x) const
   {
-    return derivative_;
+    return Hessian(*this,x);
   }
 
-  void AbstractC2Functional::setDerivative(std::shared_ptr<AbstractC1Operator> derivative)
-  {
-    derivative_ = derivative;
-  }
+//  double AbstractC2Functional::d1(const AbstractFunctionSpaceElement &dx) const
+//  {
+//    return (*(derivative_->d0())) ( dx );
+//  }
+
+//  std::shared_ptr<AbstractC1Operator> AbstractC2Functional::getDerivative() const
+//  {
+//    return derivative_;
+//  }
+
+//  void AbstractC2Functional::setDerivative(std::shared_ptr<AbstractC1Operator> derivative)
+//  {
+//    derivative_ = derivative;
+//  }
 }

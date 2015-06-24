@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Interface/Operator/abstractOperator.hh"
-#include "functionSpace.hh"
+#include "banachSpace.hh"
 #include "operator.hh"
 #include "linearOperator.hh"
 

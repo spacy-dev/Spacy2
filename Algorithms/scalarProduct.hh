@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "Interface/abstractDualPairing.hh"
+#include "Interface/abstractScalarProduct.hh"
 #include "functionSpaceElement.hh"
 
 namespace Algorithm
@@ -15,20 +15,20 @@ namespace Algorithm
   class ScalarProduct
   {
   public:
-    explicit ScalarProduct(std::shared_ptr<AbstractDualPairing> implementation);
+    explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);
 
     /**
      * @brief Compute scalar product \f$(x,y)\f$, where the particular scalar product is given by the function space to which x and y belong.
      */
-    auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractDualPairing>()(x.impl(),y.impl()));
+    auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractScalarProduct>()(x.impl(),y.impl()));
 
     /**
      * @brief Access implementation.
      */
-    AbstractDualPairing const& impl() const;
+    AbstractScalarProduct const& impl() const;
 
   private:
-    std::shared_ptr<AbstractDualPairing> impl_;
+    std::shared_ptr<AbstractScalarProduct> impl_;
   };
 }
 

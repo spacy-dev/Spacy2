@@ -4,6 +4,7 @@
 
 #include "Util/invalidargumentexception.hh"
 
+#include <cassert>
 #include <numeric>
 #include <stdexcept>
 #include <type_traits>
@@ -121,7 +122,23 @@ namespace Algorithm
     for(auto& var : primalProductSpaceElement_.variables()) primal.push_back( -*var );
     std::decay_t<decltype(dualProductSpaceElement_.variables())> dual;
     for(auto& var : dualProductSpaceElement_.variables()) dual.push_back( -*var );
-    return std::make_unique<PrimalDualProductSpaceElement>(primal,dual,this->space_);
+    return std::make_unique<PrimalDualProductSpaceElement>(primal,dual,getSpace());
+  }
+
+  double PrimalDualProductSpaceElement::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+  {
+    auto result = 0.;
+    const auto& y_ = dynamic_cast<const PrimalDualProductSpaceElement&>(y);
+    assert( primalProductSpaceElement_.variables().size() == y_.primalProductSpaceElement_.variables().size() );
+    assert( dualProductSpaceElement_.variables().size()   == y_.dualProductSpaceElement_.variables().size() );
+
+    for(auto i=0u; i<primalProductSpaceElement_.variables().size(); ++i)
+      result += primalProductSpaceElement_.variable(i)( y_.primalProductSpaceElement_.variable(i) );
+
+    for(auto i=0u; i<dualProductSpaceElement_.variables().size(); ++i)
+      result += dualProductSpaceElement_.variable(i)( y_.dualProductSpaceElement_.variable(i) );
+
+    return result;
   }
 
   unsigned PrimalDualProductSpaceElement::size() const
@@ -193,7 +210,7 @@ namespace Algorithm
 
   void PrimalDualProductSpaceElement::print(std::ostream& os) const
   {
-    os << "Space index: " << this->space_.index() << "\n";
+    os << "Space index: " << getSpace().index() << "\n";
     os << "Primal variables:\n";
     for( auto& v : primalProductSpaceElement_.variables() ) v->print(os);
     os << "Dual variables:\n";

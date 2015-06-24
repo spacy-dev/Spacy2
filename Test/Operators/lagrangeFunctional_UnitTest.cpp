@@ -11,7 +11,7 @@
 #include "../../Algorithms/Interface/Operator/abstractOperator.hh"
 #include "../../Algorithms/lagrangeFunctional.hh"
 #include "../../Algorithms/Operators/trackingTypeCostFunctional.hh"
-#include "../../Algorithms/functionSpace.hh"
+#include "../../Algorithms/hilbertSpace.hh"
 #include "../../Algorithms/functionSpaceElement.hh"
 
 

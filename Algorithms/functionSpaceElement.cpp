@@ -4,7 +4,7 @@
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "Util/invalidargumentexception.hh"
-#include "functionSpace.hh"
+#include "banachSpace.hh"
 
 #include <utility>
 
@@ -92,6 +92,11 @@ namespace Algorithm
   FunctionSpaceElement FunctionSpaceElement::operator-() const
   {
     return FunctionSpaceElement(-impl());
+  }
+
+  double FunctionSpaceElement::operator()(const FunctionSpaceElement& y) const
+  {
+    return impl()( y.impl() );
   }
 
   double& FunctionSpaceElement::coefficient(unsigned i)

@@ -17,21 +17,18 @@ namespace Algorithm
 
     AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
 
-    virtual void setArgument(const AbstractFunctionSpaceElement& x);
+    LinearizedOperator getLinearization(const AbstractFunctionSpaceElement& x) const;
 
-    const AbstractFunctionSpaceElement& getArgument() const;
+  protected:
+    friend class LinearizedOperator;
 
-    std::unique_ptr<AbstractFunctionSpaceElement> d0() const;
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& dx) const = 0;
+    virtual LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const;
 
-    LinearizedOperator& getLinearization();
-
-    const LinearizedOperator& getLinearization() const;
-
-  private:
-    std::shared_ptr<AbstractFunctionSpaceElement> x_;
-    LinearizedOperator linearization_;
+    std::shared_ptr<AbstractLinearSolver> solver_;
+//    std::shared_ptr<AbstractFunctionSpaceElement> x_;
+//    LinearizedOperator linearization_;
   };
 }
 

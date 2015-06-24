@@ -10,29 +10,24 @@ namespace Algorithm
       impl_(impl)
   {}
 
-  void C1Operator::setArgument(const FunctionSpaceElement &x)
+//  void C1Operator::setArgument(const FunctionSpaceElement &x)
+//  {
+//    impl().setArgument(x.impl());
+//  }
+
+//  FunctionSpaceElement C1Operator::getArgument() const
+//  {
+//    return FunctionSpaceElement( clone( impl().getArgument())  );
+//  }
+
+  FunctionSpaceElement C1Operator::operator ()(const FunctionSpaceElement& x) const
   {
-    impl().setArgument(x.impl());
+    return impl()(x.impl());
   }
 
-  FunctionSpaceElement C1Operator::getArgument() const
+  LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const
   {
-    return FunctionSpaceElement( clone( impl().getArgument())  );
-  }
-
-  FunctionSpaceElement C1Operator::operator ()() const
-  {
-    return impl().d0();
-  }
-
-  FunctionSpaceElement C1Operator::d1(const FunctionSpaceElement &dx) const
-  {
-    return FunctionSpaceElement( impl().d1(dx.impl()) );
-  }
-
-  LinearOperator C1Operator::getLinearization() const
-  {
-    return LinearOperator( impl().getLinearization() );
+    return LinearOperator( impl().getLinearization(x.impl()) );
   }
 
   AbstractC1Operator& C1Operator::impl()

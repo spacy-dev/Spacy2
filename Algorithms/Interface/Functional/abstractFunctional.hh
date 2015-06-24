@@ -17,9 +17,12 @@ namespace Algorithm
 
     virtual ~AbstractFunctional();
     
-    virtual double operator()(const AbstractFunctionSpaceElement&) const = 0;
+    double operator()(const AbstractFunctionSpaceElement& x) const;
 
     const AbstractBanachSpace& getDomain() const;
+
+  protected:
+    virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
 
   private:
     const AbstractBanachSpace& domain_;

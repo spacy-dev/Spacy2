@@ -13,9 +13,9 @@ namespace Algorithm
   class LinearizedOperator : public AbstractLinearOperator
   {
   public:
-    LinearizedOperator(const AbstractC1Operator& A);
+    LinearizedOperator(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x);
 
-    LinearizedOperator(const AbstractC1Operator& A, std::shared_ptr<AbstractLinearSolver> solver);
+    LinearizedOperator(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
 
@@ -27,6 +27,7 @@ namespace Algorithm
     LinearizedOperator* cloneImpl() const;
 
     const AbstractC1Operator& A_;
+    const AbstractFunctionSpaceElement& x_;
     std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
   };
 }

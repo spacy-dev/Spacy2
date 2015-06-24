@@ -2,11 +2,12 @@
 
 #include "Interface/abstractLinearSolver.hh"
 #include "c1Operator.hh"
+#include "linearOperator.hh"
 
 namespace Algorithm
 {
-  LinearSolver::LinearSolver(const C1Operator& A)
-    : impl_( A.getLinearization().getSolver().impl_ )
+  LinearSolver::LinearSolver(const LinearOperator& A)
+    : impl_( A.impl().getSolver() )
   {}
 
   LinearSolver::LinearSolver(std::shared_ptr<AbstractLinearSolver> impl)

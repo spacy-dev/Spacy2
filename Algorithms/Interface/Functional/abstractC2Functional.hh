@@ -2,8 +2,7 @@
 #define ALGORITHM_INTERFACE_ABSTRACT_C2_FUNCTIONAL_HH
 
 #include "abstractC1Functional.hh"
-#include "Interface/Operator/abstractC1Operator.hh"
-#include "Interface/Operator/linearizedOperator.hh"
+#include "hessian.hh"
 
 namespace Algorithm
 {
@@ -14,19 +13,24 @@ namespace Algorithm
   public:
     AbstractC2Functional(const AbstractBanachSpace& domain);
 
-    double d1(const AbstractFunctionSpaceElement &dx) const override;
+//    double d1(const AbstractFunctionSpaceElement &dx) const override;
+    Hessian getHessian(const AbstractFunctionSpaceElement& x) const;
 
-    virtual double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const = 0;
+  protected:
+    virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement &dx) const = 0;
+    virtual Hessian makeHessian(const AbstractFunctionSpaceElement& x) const;
+    //    virtual double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const = 0;
 
-    std::shared_ptr<AbstractC1Operator> getDerivative() const;
+//    virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement &dx) const = 0;
 
-    void setDerivative(std::shared_ptr<AbstractC1Operator> derivative);
+//    std::shared_ptr<AbstractC1Operator> getDerivative() const;
 
-    using AbstractC1Functional::d1;
-  private:
-    std::shared_ptr<AbstractC1Operator> derivative_;
+//    void setDerivative(std::shared_ptr<AbstractC1Operator> derivative);
+
+//    using AbstractC1Functional::d1;
+//  private:
+//    std::shared_ptr<AbstractC1Operator> derivative_;
   };
 }
 

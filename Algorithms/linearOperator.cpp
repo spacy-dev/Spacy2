@@ -4,22 +4,26 @@
 
 namespace Algorithm
 {
+  LinearOperator::LinearOperator(const LinearOperator& B)
+    : Operator(*this), impl_(clone(B.impl()))
+  {}
+
   LinearOperator::LinearOperator(const LinearizedOperator& impl)
-    : Operator(nullptr), impl_(impl)
+    : Operator(nullptr), impl_(clone(impl))
   {}
 
   LinearOperator::LinearOperator(const AbstractLinearOperator& impl)
-    : Operator(nullptr), impl_(impl)
+    : Operator(nullptr), impl_(clone(impl))
   {}
 
   FunctionSpaceElement LinearOperator::operator()(const FunctionSpaceElement& x) const
   {
-    return impl_(x.impl());
+    return impl()(x.impl());
   }
 
   LinearSolver LinearOperator::getSolver() const
   {
-    return LinearSolver( impl_.getSolver() );
+    return LinearSolver( impl().getSolver() );
   }
 
 //  AbstractLinearOperator& LinearOperator::impl()
@@ -29,7 +33,7 @@ namespace Algorithm
 
   const AbstractLinearOperator& LinearOperator::impl() const
   {
-    return impl_;
+    return *impl_;
   }
 
 

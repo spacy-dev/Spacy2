@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "../../Algorithms/Operators/trackingTypeCostFunctional.hh"
-#include "../../Algorithms/functionSpace.hh"
+#include "../../Algorithms/hilbertSpace.hh"
 #include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
 #include "../../Algorithms/FunctionSpaces/ProductSpace/productSpace.hh"
 #include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -10,7 +10,7 @@
 TEST(TrackingTypeCostFunctional,D0Test)
 {
   using namespace Algorithm;
-  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = HilbertSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto reference = R2.element();
   reference.coefficient(0) = 1;
 
@@ -22,17 +22,15 @@ TEST(TrackingTypeCostFunctional,D0Test)
   auto y = R2.element();
   y.coefficient(0) = 1;
   y.coefficient(1) = 1;
-  J.setArgument(x);
-  EXPECT_DOUBLE_EQ( J() , 0.5 );
-  J.setArgument(y);
-  EXPECT_DOUBLE_EQ( J() , 1.5 );
+  EXPECT_DOUBLE_EQ( J(x) , 0.5 );
+  EXPECT_DOUBLE_EQ( J(y) , 1.5 );
 }
 
 TEST(TrackingTypeCostFunctional,D1Test)
 {
   using namespace Algorithm;
-  auto R = FunctionSpace( std::make_unique<RealSpace>() );
-  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+  auto R = HilbertSpace( std::make_unique<RealSpace>() );
+  auto R2 = HilbertSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
   auto reference = R2.element();
   reference.coefficient(0) = 1;
 
@@ -44,8 +42,7 @@ TEST(TrackingTypeCostFunctional,D1Test)
   auto y = R2.element();
   y.coefficient(0) = 1;
   y.coefficient(1) = 1;
-  J.setArgument(x);
-  EXPECT_DOUBLE_EQ( J.d1(y) , -1. );
+  EXPECT_DOUBLE_EQ( J.d1(x,y) , -1. );
 //  J.setArgument(y);
 //  EXPECT_DOUBLE_EQ( J.d1(y) , 3. );
 }
@@ -53,8 +50,8 @@ TEST(TrackingTypeCostFunctional,D1Test)
 //TEST(TrackingTypeCostFunctional,D2Test)
 //{
 //  using namespace Algorithm;
-//  auto R = FunctionSpace( std::make_unique<RealSpace>() );
-//  auto R2 = FunctionSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+//  auto R = HilbertSpace( std::make_unique<RealSpace>() );
+//  auto R2 = HilbertSpace( makeProductSpace< PackSpaces<RealSpace,RealSpace> >() );
 //  auto reference = R2.element();
 //  reference.coefficient(0) = 1;
 

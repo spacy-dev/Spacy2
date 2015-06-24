@@ -17,17 +17,15 @@ namespace Algorithm
   public:
     C1Operator(std::shared_ptr<AbstractC1Operator> impl);
 
-    void setArgument(const FunctionSpaceElement& x);
+//    void setArgument(const FunctionSpaceElement& x);
 
-    FunctionSpaceElement getArgument() const;
+//    FunctionSpaceElement getArgument() const;
 
-    FunctionSpaceElement operator()() const;
+    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
 
 //    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
-    FunctionSpaceElement d1(const FunctionSpaceElement& dx) const;
-
-    LinearOperator getLinearization() const;
+    LinearOperator getLinearization(const FunctionSpaceElement& x) const;
 
     AbstractC1Operator& impl();
 

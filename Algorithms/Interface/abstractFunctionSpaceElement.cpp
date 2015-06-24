@@ -2,6 +2,8 @@
 
 #include "abstractBanachSpace.hh"
 
+#include "Util/invalidargumentexception.hh"
+
 namespace Algorithm
 {
   AbstractFunctionSpaceElement::AbstractFunctionSpaceElement(const AbstractBanachSpace& space)
@@ -23,6 +25,12 @@ namespace Algorithm
     auto z = clone(y);
     *z *= a;
     return *this +=*z;
+  }
+
+  double AbstractFunctionSpaceElement::operator()(const AbstractFunctionSpaceElement& y) const
+  {
+    if( !getSpace().isDualWRT( y.getSpace() ) ) throw InvalidArgumentException("AbstractFunctionSpaceElement::operator()");
+    return applyAsDualTo(y);
   }
 
   std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element)

@@ -2,12 +2,12 @@
 #define ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 
 #include "Interface/abstractFunctionSpaceElement.hh"
-#include "Interface/abstractDualPairing.hh"
+#include "Interface/abstractScalarProduct.hh"
 
 namespace Algorithm
 {
   /// Scalar product for RealSpace.
-  class RealProduct : public AbstractDualPairing
+  class RealProduct : public AbstractScalarProduct
   {
     /// Compute x*y.
     double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;

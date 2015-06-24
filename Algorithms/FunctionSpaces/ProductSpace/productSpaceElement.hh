@@ -54,7 +54,7 @@ namespace Algorithm
     /// Access value.
     const double& coefficient(unsigned) const final override;
 
-    /// Number of entries in coefficient vector (=1).
+    /// Number of entries in coefficient vector.
     unsigned size() const final override;
 
     AbstractFunctionSpaceElement& variable(unsigned i);
@@ -70,6 +70,9 @@ namespace Algorithm
      * @brief Get a copy of this real number.
      */
     ProductSpaceElement* cloneImpl() const final override;
+
+    /// Apply as dual element.
+    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
 
     std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > variables_;
 

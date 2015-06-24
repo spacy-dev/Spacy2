@@ -7,7 +7,7 @@
 
 namespace Algorithm
 {
-  class AbstractDualPairing;
+  class AbstractScalarProduct;
   class AbstractFunctionSpaceElement;
 
   /**
@@ -19,7 +19,7 @@ namespace Algorithm
     /**
      * @brief Construct Hilbert space norm from a scalar product.
      */
-    explicit HilbertSpaceNorm(std::shared_ptr<Algorithm::AbstractDualPairing> sp);
+    explicit HilbertSpaceNorm(std::shared_ptr<Algorithm::AbstractScalarProduct> sp);
 
     /// Compute \f$(x,y)\f$.
     double scalarProduct(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const;
@@ -30,7 +30,7 @@ namespace Algorithm
     /// Compute \f$\|x\|^2=(x,x)\f$.
     double squared(const AbstractFunctionSpaceElement& x) const final override;
 
-    std::shared_ptr<AbstractDualPairing> sp_;
+    std::shared_ptr<AbstractScalarProduct> sp_;
   };
 }
 
