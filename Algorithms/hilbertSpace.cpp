@@ -9,10 +9,6 @@ namespace Algorithm
       norm_(impl().getNorm()), sp_(impl().getScalarProduct())
   {}
 
-//  HilbertSpace::HilbertSpace(const AbstractBanachSpace& implementation)
-//    : HilbertSpace(implementation.clone())
-//  {}
-
   void HilbertSpace::setScalarProduct(const ScalarProduct& sp)
   {
     sp_ = sp;

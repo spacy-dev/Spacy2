@@ -21,17 +21,13 @@ namespace Algorithm
 
 //    FunctionSpaceElement getArgument() const;
 
-    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
-
-//    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+    FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
 
     LinearOperator getLinearization(const FunctionSpaceElement& x) const;
 
     AbstractC1Operator& impl();
 
     const AbstractC1Operator& impl() const;
-
-    using Operator::operator ();
 
   private:
     std::shared_ptr<AbstractC1Operator> impl_;

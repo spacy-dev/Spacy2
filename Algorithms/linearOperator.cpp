@@ -26,10 +26,10 @@ namespace Algorithm
     return LinearSolver( impl().getSolver() );
   }
 
-//  AbstractLinearOperator& LinearOperator::impl()
-//  {
-//    return impl_;
-//  }
+  AbstractLinearOperator& LinearOperator::impl()
+  {
+    return *impl_;
+  }
 
   const AbstractLinearOperator& LinearOperator::impl() const
   {

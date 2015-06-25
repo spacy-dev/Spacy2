@@ -27,7 +27,7 @@ namespace Algorithm
 
     LinearSolver getSolver() const;
 
-//    AbstractLinearOperator& impl() override;
+    AbstractLinearOperator& impl();
 
     const AbstractLinearOperator& impl() const;
 

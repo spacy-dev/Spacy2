@@ -20,9 +20,9 @@ namespace Algorithm
 //    return FunctionSpaceElement( clone( impl().getArgument())  );
 //  }
 
-  FunctionSpaceElement C1Operator::operator ()(const FunctionSpaceElement& x) const
+  FunctionSpaceElement C1Operator::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
   {
-    return impl()(x.impl());
+    return FunctionSpaceElement( impl().getLinearization(x.impl())( dx.impl() ) );
   }
 
   LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const

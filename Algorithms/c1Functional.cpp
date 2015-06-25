@@ -20,10 +20,10 @@ namespace Algorithm
 //    return impl().d0();
 //  }
 
-//  double C1Functional::d1(const FunctionSpaceElement &dx) const
-//  {
-//    return impl().d1(dx.impl());
-//  }
+  double C1Functional::d1(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
+  {
+    return impl().d1(x.impl(),dx.impl());
+  }
 
 //  FunctionSpaceElement C1Functional::d1() const
 //  {

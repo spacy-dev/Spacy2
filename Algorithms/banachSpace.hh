@@ -23,9 +23,6 @@ namespace Algorithm
      */
     explicit BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation);
 
-    BanachSpace& operator=(const BanachSpace&) = delete;
-//    explicit BanachSpace(const AbstractBanachSpace& implementation);
-
     /**
      * @brief Access norm.
      */

@@ -24,9 +24,6 @@ namespace Algorithm
      */
     explicit HilbertSpace(std::shared_ptr<AbstractHilbertSpace> implementation);
 
-    HilbertSpace& operator=(const HilbertSpace&) = delete;
-//    explicit HilbertSpace(const AbstractBanachSpace& implementation);
-
     /**
      * @brief Change scalar product.
      */

@@ -15,7 +15,7 @@ namespace Algorithm
 
   std::unique_ptr<AbstractFunctionSpaceElement> Hessian::operator ()(const AbstractFunctionSpaceElement& dx) const
   {
-    return A_.getHessian(x_)(dx);
+    return A_.d2(x_,dx);
   }
 
   std::shared_ptr<AbstractLinearSolver> Hessian::getSolver() const

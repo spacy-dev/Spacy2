@@ -10,10 +10,6 @@ namespace Algorithm
     : impl_(std::move(implementation)), norm_(impl().getNorm())
   {}
 
-//  BanachSpace::BanachSpace(const AbstractBanachSpace& implementation)
-//    : BanachSpace(implementation.clone())
-//  {}
-
   const Norm& BanachSpace::getNorm() const
   {
     return norm_;
