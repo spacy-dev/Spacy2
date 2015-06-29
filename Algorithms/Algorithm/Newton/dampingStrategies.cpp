@@ -23,12 +23,13 @@ namespace Algorithm
       auto nu = std::min(1., p_.thetaAim()/theta);
       while( theta > p_.thetaMax())
       {
+        if( !p_.regularityTestPassed(nu) ) break;
+
         trial = x + nu*dx;
         ds = DFInv_( -F_(trial) + (1-nu) * F_(x) );
-
         theta = norm_(ds)/(nu*dxNorm);
+
         nu = std::min(1., p_.thetaAim()*nu/theta);
-        if( !p_.regularityTestPassed(nu) ) break;
       }
 
       return nu;
@@ -39,7 +40,7 @@ namespace Algorithm
       : p_(p), F_(F), norm_(norm)
     {}
 
-    double AffineContravariant::operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
+    double AffineContravariant::operator()(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
     {
       auto nu = 1.;
       auto norm_F_x = norm_(F_(x));
@@ -48,6 +49,8 @@ namespace Algorithm
 
       while( true )
       {
+        if( !p_.regularityTestPassed(nu) ) break;
+
         auto trial = x + nu*dx;
 
         auto norm_F_trial = norm_(F_(trial));

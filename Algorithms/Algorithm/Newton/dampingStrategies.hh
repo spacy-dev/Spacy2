@@ -11,8 +11,9 @@ namespace Algorithm
 
   namespace Newton_DampingStrategy
   {
-    struct AffineCovariant
+    class AffineCovariant
     {
+    public:
       AffineCovariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
 
       double operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
@@ -23,11 +24,12 @@ namespace Algorithm
       const Norm& norm_;
     };
 
-    struct AffineContravariant
+    class AffineContravariant
     {
+    public:
       AffineContravariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
 
-      double operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+      double operator()(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
     private:
       const NewtonParameter& p_;
