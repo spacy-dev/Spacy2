@@ -120,6 +120,11 @@ namespace Algorithm
     return x += y;
   }
 
+  FunctionSpaceElement operator-(FunctionSpaceElement x, const FunctionSpaceElement& y)
+  {
+    return x -= y;
+  }
+
   FunctionSpaceElement operator+(double a, FunctionSpaceElement x)
   {
     if( !isRealElement(x.impl()) ) throw InvalidArgumentException("operator+(double,const FunctionSpaceElement&)");

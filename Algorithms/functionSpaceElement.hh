@@ -162,6 +162,8 @@ namespace Algorithm
    */
   FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y);
 
+  FunctionSpaceElement operator-(FunctionSpaceElement x, const FunctionSpaceElement& y);
+
   FunctionSpaceElement operator+(double a, FunctionSpaceElement x);
 
   FunctionSpaceElement operator+(const FunctionSpaceElement& x, double a);
