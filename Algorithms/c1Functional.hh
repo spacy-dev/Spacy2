@@ -2,6 +2,7 @@
 #define ALGORITHM_C1_FUNCTIONAL_HH
 
 #include "functional.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
@@ -13,20 +14,7 @@ namespace Algorithm
   public:
     C1Functional(std::shared_ptr<AbstractC1Functional> impl);
 
-//    void setArgument(const FunctionSpaceElement& x);
-
-  //  double operator()(const FunctionSpaceElement& x) const;
-
     double d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
-
-    AbstractC1Functional& impl();
-
-    const AbstractC1Functional& impl() const;
-
-    //using Functional::operator();
-
-  private:
-    std::shared_ptr<AbstractC1Functional> impl_;
   };
 
   template <class Implementation, class... Args>

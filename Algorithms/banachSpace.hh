@@ -4,8 +4,8 @@
 #include <memory>
 #include <utility>
 
-#include "functionSpaceElement.hh"
 #include "norm.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
@@ -15,13 +15,15 @@ namespace Algorithm
   /**
    * @brief Banach space. Creates function space elements and admits access to norm.
    */
-  class BanachSpace
+  class BanachSpace : public SharedImpl<AbstractBanachSpace>
   {
   public:
     /**
      * @brief Construct function space from implementation derived from AbstractBanachSpace.
      */
     explicit BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation);
+
+    void setNorm(const Norm& norm);
 
     /**
      * @brief Access norm.
@@ -38,19 +40,8 @@ namespace Algorithm
      */
     unsigned index() const;
 
-    /**
-     * @brief Access implementation.
-     */
-    AbstractBanachSpace& impl();
-
-    /**
-     * @brief Access implementation.
-     */
-    AbstractBanachSpace const& impl() const;
-
   private:
     friend class FunctionSpaceElement;
-    std::shared_ptr<AbstractBanachSpace> impl_;
     Norm norm_;
   };
 

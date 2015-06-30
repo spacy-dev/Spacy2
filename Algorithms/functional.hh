@@ -3,24 +3,19 @@
 
 #include <memory>
 
+#include "Util/impl.hh"
+
 namespace Algorithm
 {
   class AbstractFunctional;
   class FunctionSpaceElement;
 
-  class Functional
+  class Functional : public SharedImpl<AbstractFunctional>
   {
   public:
     Functional(std::shared_ptr<Algorithm::AbstractFunctional> impl);
 
     double operator()(const FunctionSpaceElement& x);
-
-    AbstractFunctional& impl();
-
-    const AbstractFunctional& impl() const;
-
-  protected:
-    std::shared_ptr<AbstractFunctional> impl_ = nullptr;
   };
 
   template <class Implementation, class... Args>

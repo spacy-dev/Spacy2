@@ -17,20 +17,7 @@ namespace Algorithm
   public:
     C2Operator(std::shared_ptr<AbstractC2Operator> impl);
 
-//    void setArgument(const FunctionSpaceElement& x);
-
-//    FunctionSpaceElement getArgument() const;
-
     FunctionSpaceElement d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
-
-//    LinearOperator getLinearization(const FunctionSpaceElement& x) const;
-
-    AbstractC2Operator& impl();
-
-    const AbstractC2Operator& impl() const;
-
-  private:
-    std::shared_ptr<AbstractC2Operator> impl_;
   };
 
   template <class Implementation, class... Args>

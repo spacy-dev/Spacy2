@@ -1,31 +1,22 @@
 #include "hilbertSpace.hh"
 
 #include "Interface/abstractBanachSpace.hh"
+#include "hilbertSpaceNorm.hh"
 
 namespace Algorithm
 {
   HilbertSpace::HilbertSpace(std::shared_ptr<AbstractHilbertSpace> implementation)
     : BanachSpace( std::static_pointer_cast<AbstractBanachSpace>( implementation ) ),
-      norm_(impl().getNorm()), sp_(impl().getScalarProduct())
+      sp_(implementation->getScalarProduct())
   {}
 
   void HilbertSpace::setScalarProduct(const ScalarProduct& sp)
   {
-    sp_ = sp;
+    dynamic_cast<AbstractHilbertSpace&>( impl() ).setScalarProduct( sp.sharedImpl() );
   }
 
-  const ScalarProduct& HilbertSpace::getScalarProduct() const
+  ScalarProduct HilbertSpace::getScalarProduct() const
   {
-    return sp_;
-  }
-
-  AbstractHilbertSpace& HilbertSpace::impl()
-  {
-    return dynamic_cast<AbstractHilbertSpace&>(BanachSpace::impl());
-  }
-
-  AbstractHilbertSpace const& HilbertSpace::impl() const
-  {
-    return dynamic_cast<const AbstractHilbertSpace&>(BanachSpace::impl());
+    return ScalarProduct( dynamic_cast<const AbstractHilbertSpace&>( impl() ).getScalarProduct() );
   }
 }

@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Interface/abstractHilbertSpace.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
@@ -27,7 +28,7 @@ namespace Algorithm
    *
    * This class is the base class for all variables. Their specific form is specified in an Implementation derived from AbstractFunctionSpaceElement.
    */
-  class FunctionSpaceElement
+  class FunctionSpaceElement : public UniqueImpl<AbstractFunctionSpaceElement>
   {
   public:
     FunctionSpaceElement();
@@ -51,16 +52,6 @@ namespace Algorithm
     void print(std::ostream&) const;
 
     /**
-     * @brief Access to the underlying implementation.
-     */
-    AbstractFunctionSpaceElement& impl();
-
-    /**
-     * @brief Access to the underlying implementation.
-     */
-    const AbstractFunctionSpaceElement& impl() const;
-
-    /**
      * @brief Access index of the underlying function space.
      */
     unsigned spaceIndex() const;
@@ -73,7 +64,7 @@ namespace Algorithm
               class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
     FunctionSpaceElement& operator*=(const Arithmetic& a)
     {
-      (*impl_) *= a;
+      impl() *= a;
       return *this;
     }
 
@@ -121,9 +112,6 @@ namespace Algorithm
      * @brief Size of coefficient vector.
      */
     unsigned size() const;
-
-  private:
-    std::unique_ptr<AbstractFunctionSpaceElement> impl_ = nullptr;
   };
 
   /**

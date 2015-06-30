@@ -6,37 +6,16 @@
 namespace Algorithm
 {
   C1Operator::C1Operator(std::shared_ptr<AbstractC1Operator> impl)
-    : Operator(impl),
-      impl_(impl)
+    : Operator(std::static_pointer_cast<AbstractOperator>(impl))
   {}
-
-//  void C1Operator::setArgument(const FunctionSpaceElement &x)
-//  {
-//    impl().setArgument(x.impl());
-//  }
-
-//  FunctionSpaceElement C1Operator::getArgument() const
-//  {
-//    return FunctionSpaceElement( clone( impl().getArgument())  );
-//  }
 
   FunctionSpaceElement C1Operator::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
   {
-    return FunctionSpaceElement( impl().getLinearization(x.impl())( dx.impl() ) );
+    return FunctionSpaceElement( dynamic_cast<const AbstractC1Operator&>( impl() ).getLinearization(x.impl())( dx.impl() ) );
   }
 
   LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const
   {
-    return LinearOperator( impl().getLinearization(x.impl()) );
-  }
-
-  AbstractC1Operator& C1Operator::impl()
-  {
-    return *impl_;
-  }
-
-  const AbstractC1Operator& C1Operator::impl() const
-  {
-    return *impl_;
+    return LinearOperator( dynamic_cast<const AbstractC1Operator&>( impl() ).getLinearization(x.impl()) );
   }
 }

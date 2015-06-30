@@ -29,7 +29,6 @@ namespace Algorithm
     }
 
   private:
-    friend class Newton_DampingStrategy::AffineCovariant;
     const C1Operator& F_;
     std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
     Norm norm_;

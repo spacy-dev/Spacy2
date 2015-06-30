@@ -6,13 +6,13 @@
 
 #include "Interface/abstractScalarProduct.hh"
 #include "functionSpaceElement.hh"
-
+#include "Util/impl.hh"
 namespace Algorithm
 {
   /**
    * @brief Scalar product class. Plug your implementations in here.
    */
-  class ScalarProduct
+  class ScalarProduct : public SharedImpl<AbstractScalarProduct>
   {
   public:
     explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);
@@ -21,14 +21,6 @@ namespace Algorithm
      * @brief Compute scalar product \f$(x,y)\f$, where the particular scalar product is given by the function space to which x and y belong.
      */
     auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractScalarProduct>()(x.impl(),y.impl()));
-
-    /**
-     * @brief Access implementation.
-     */
-    AbstractScalarProduct const& impl() const;
-
-  private:
-    std::shared_ptr<AbstractScalarProduct> impl_;
   };
 }
 

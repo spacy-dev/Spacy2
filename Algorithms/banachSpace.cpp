@@ -1,14 +1,18 @@
 #include "banachSpace.hh"
 
 #include "Interface/abstractBanachSpace.hh"
-
-#include <utility>
+#include "functionSpaceElement.hh"
 
 namespace Algorithm
 {
   BanachSpace::BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation)
-    : impl_(std::move(implementation)), norm_(impl().getNorm())
+    : SharedImpl<AbstractBanachSpace>(implementation), norm_(impl().getNorm())
   {}
+
+  void BanachSpace::setNorm(const Norm &norm)
+  {
+    norm_ = norm;
+  }
 
   const Norm& BanachSpace::getNorm() const
   {
@@ -23,15 +27,5 @@ namespace Algorithm
   unsigned BanachSpace::index() const
   {
     return impl().index();
-  }
-
-  AbstractBanachSpace& BanachSpace::impl()
-  {
-    return *impl_;
-  }
-
-  AbstractBanachSpace const& BanachSpace::impl() const
-  {
-    return *impl_;
   }
 }

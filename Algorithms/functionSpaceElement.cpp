@@ -11,53 +11,43 @@
 namespace Algorithm
 {
   FunctionSpaceElement::FunctionSpaceElement()
-    : impl_(nullptr)
+    : UniqueImpl<AbstractFunctionSpaceElement>(nullptr)
   {}
 
   FunctionSpaceElement::FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation)
-    : impl_(std::move(implementation))
+    : UniqueImpl<AbstractFunctionSpaceElement>(std::move(implementation))
   {}
 
   FunctionSpaceElement::FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation)
-    : impl_(clone(implementation))
+    : FunctionSpaceElement(clone(implementation))
   {}
 
 
   FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
-    : impl_( clone(y.impl()) )
+    : FunctionSpaceElement( clone(y.impl()) )
   {}
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
   {
-    if( impl_ != nullptr)
-      y.impl().copyTo(*impl_);
+    if( !implIsNullPtr() )
+      y.impl().copyTo(impl());
     else
-      impl_ = clone( y.impl() );
+      setImpl( clone( y.impl() ) );
     return *this;
   }
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const AbstractFunctionSpaceElement& implementation)
   {
-    if( impl_ != nullptr )
-      implementation.copyTo(*impl_);
+    if( !implIsNullPtr() )
+      implementation.copyTo(impl());
     else
-      impl_ = clone( implementation );
+      setImpl( clone( implementation ) );
     return *this;
   }
 
   void FunctionSpaceElement::print(std::ostream& os) const
   {
     return impl().print(os);
-  }
-
-  AbstractFunctionSpaceElement& FunctionSpaceElement::impl()
-  {
-    return *impl_;
-  }
-
-  const AbstractFunctionSpaceElement& FunctionSpaceElement::impl() const
-  {
-    return *impl_;
   }
 
   unsigned FunctionSpaceElement::spaceIndex() const

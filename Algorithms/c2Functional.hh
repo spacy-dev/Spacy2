@@ -18,14 +18,6 @@ namespace Algorithm
     double d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
 
     C1Operator getDerivative() const;
-
-    AbstractC2Functional& impl();
-
-    const AbstractC2Functional& impl() const;
-
-    using C1Functional::operator ();
-  private:
-    std::shared_ptr<AbstractC2Functional> impl_;
   };
 
   template <class Implementation, class... Args>

@@ -4,15 +4,16 @@
 #include <memory>
 #include <utility>
 
-#include "Interface/abstractNorm.hh"
 #include "functionSpaceElement.hh"
+#include "Interface/abstractNorm.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
   /**
    * @brief Norm class. Plug your implementations in here.
    */
-  class Norm
+  class Norm : public SharedImpl<AbstractNorm>
   {
   public:
     Norm() = default;
@@ -22,9 +23,6 @@ namespace Algorithm
      * @brief Compute \f$\|x\|\f$.
      */
     auto operator()(const FunctionSpaceElement& x) const -> decltype(std::declval<AbstractNorm>()(x.impl()));
-
-  private:
-    std::shared_ptr<AbstractNorm> impl_ = nullptr;
   };
 }
 

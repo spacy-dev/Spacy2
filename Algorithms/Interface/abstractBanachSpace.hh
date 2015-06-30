@@ -36,10 +36,9 @@ namespace Algorithm
 
   protected:
     std::shared_ptr<AbstractNorm> norm_ = nullptr;
-
-  private:
     virtual std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const = 0;
 
+  private:
     std::vector<unsigned> primalSpaces_, dualSpaces_;
 
     const unsigned index_ = spaceIndex++;

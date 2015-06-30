@@ -4,15 +4,16 @@
 #include <memory>
 #include <utility>
 
-#include "functionSpaceElement.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
   class AbstractLinearSolver;
   class LinearOperator;
   class C1Operator;
+  class FunctionSpaceElement;
 
-  class LinearSolver
+  class LinearSolver : public SharedImpl<AbstractLinearSolver>
   {
   public:
     LinearSolver(const LinearOperator& A);
@@ -20,13 +21,6 @@ namespace Algorithm
     LinearSolver(std::shared_ptr<AbstractLinearSolver> impl);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
-
-    AbstractLinearSolver& impl();
-
-    const AbstractLinearSolver& impl() const;
-
-  private:
-    std::shared_ptr<AbstractLinearSolver> impl_;
   };
 
   template <class Implementation, class... Args>

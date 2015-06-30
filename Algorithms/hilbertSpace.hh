@@ -32,21 +32,9 @@ namespace Algorithm
     /**
      * @brief Access scalar product.
      */
-    const ScalarProduct& getScalarProduct() const;
-
-    /**
-     * @brief Access implementation.
-     */
-    AbstractHilbertSpace& impl();
-
-    /**
-     * @brief Access implementation.
-     */
-    AbstractHilbertSpace const& impl() const;
+    ScalarProduct getScalarProduct() const;
 
   private:
-    friend class FunctionSpaceElement;
-    Norm norm_;
     ScalarProduct sp_;
   };
 

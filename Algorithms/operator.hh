@@ -2,25 +2,20 @@
 #define ALGORITHM_OPERATOR_HH
 
 #include <memory>
+
 #include "Interface/Operator/abstractOperator.hh"
+#include "Util/impl.hh"
 
 namespace Algorithm
 {
   class FunctionSpaceElement;
 
-  class Operator
+  class Operator : public SharedImpl<AbstractOperator>
   {
   public:
     Operator(std::shared_ptr<AbstractOperator> impl);
 
-    virtual FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
-
-    AbstractOperator& impl();
-
-    const AbstractOperator& impl() const;
-
-  protected:
-    std::shared_ptr<AbstractOperator> impl_ = nullptr;
+    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
   };
 
   template <class Implementation, class... Args>

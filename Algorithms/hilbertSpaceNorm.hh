@@ -30,6 +30,7 @@ namespace Algorithm
     /// Compute \f$\|x\|^2=(x,x)\f$.
     double squared(const AbstractFunctionSpaceElement& x) const final override;
 
+  private:
     std::shared_ptr<AbstractScalarProduct> sp_;
   };
 }
