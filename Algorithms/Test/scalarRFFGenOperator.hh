@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "Interface/Operator/abstractC1Operator.hh"
+#include "Interface/Operator/linearizedOperator.hh"
 #include "hilbertSpace.hh"
 #include "functionSpaceElement.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
@@ -91,7 +92,7 @@ namespace Algorithm
 
     LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const override
     {
-      return LinearizedOperator(*this,x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
+      return LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
     }
 
 //    void updateSolver()

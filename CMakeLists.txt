@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 2.8)
 set (Algorithms_VERSION_MAJOR 1)
 set (Algorithms_VERSION_MINOR 0)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 option(BuildTest "BuildTest" ON)
 
 set(CMAKE_MODULE_PATH
@@ -15,11 +17,11 @@ set(CMAKE_MODULE_PATH
 include(ConfigSafeGuards)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused")
+    set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused -Wpedantic")
     set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O0 -g")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1y")
-#    set(CMAKE_CXX_LINK_FLAGS "-fprofile-arcs -ftest-coverage")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
+    set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1y")
 endif()
 
 include_directories(
@@ -46,11 +48,18 @@ add_dependencies(gtest git_update)
 set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest-all.cc  PROPERTIES GENERATED 1)
 set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest_main.cc PROPERTIES GENERATED 1)
 
+
+#find_package(DOLFIN)
+
+
 #link_directories(/home/ignaz/lib/armadillo-4.650.4/)
 include_directories(Algorithms)
 #include_directories(/home/ignaz/C++/RFFGen/RFFGen)
+#include_directories(${DOLFIN_INCLUDE_DIRS})
+#include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
 
 aux_source_directory(Algorithms/. SRC_LIST)
+aux_source_directory(Algorithms/Adapter/Fenics SRC_LIST)
 aux_source_directory(Algorithms/Algorithm SRC_LIST)
 aux_source_directory(Algorithms/Algorithm/ConjugateGradients SRC_LIST)
 #aux_source_directory(Algorithms/Algorithm/CompositeStep SRC_LIST)
@@ -64,19 +73,19 @@ aux_source_directory(Algorithms/FunctionSpaces/VectorSpace SRC_LIST)
 aux_source_directory(Algorithms/FunctionSpaces/ProductSpace SRC_LIST)
 aux_source_directory(Algorithms/FunctionSpaces/PrimalDualProductSpace SRC_LIST)
 aux_source_directory(Algorithms/Operators OPERATOR_SRC_LIST)
-aux_source_directory(Algorithms/Test SRC_LIST)
+#aux_source_directory(Algorithms/Test SRC_LIST)
 aux_source_directory(Algorithms/Util SRC_LIST)
-add_library(algorithms ${SRC_LIST})
-add_library(operators ${OPERATOR_SRC_LIST})
-target_link_libraries(operators algorithms)
-add_executable(Test Algorithms/main.cpp)
-target_link_libraries(Test operators armadillo)
+add_library(algorithms ${SRC_LIST} ${OPERATOR_SRC_LIST})
+#add_library(operators ${OPERATOR_SRC_LIST})
+#target_link_libraries(operators algorithms)
+#add_executable(Test Algorithms/main.cpp)
+#target_link_libraries(Test operators armadillo)
 
-#if(BuildTest)
+if(BuildTest)
     aux_source_directory(Test TEST_SRC_LIST)
     aux_source_directory(Test/FunctionSpaces TEST_SRC_LIST)
     aux_source_directory(Test/Operators TEST_SRC_LIST)
     add_executable(unit_tests ${TEST_SRC_LIST})
     add_dependencies(unit_tests gtest)
-    target_link_libraries(unit_tests algorithms operators gtest pthread)
-#endif()
+    target_link_libraries(unit_tests algorithms gtest pthread)
+endif()

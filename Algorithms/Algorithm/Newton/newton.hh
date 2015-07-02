@@ -20,7 +20,9 @@ namespace Algorithm
   public:
     explicit Newton(const C1Operator& F);
 
-    FunctionSpaceElement solve(const FunctionSpaceElement& x0);
+    FunctionSpaceElement solve() const;
+
+    FunctionSpaceElement solve(const FunctionSpaceElement& x0) const;
 
     template <class DampingStrategy>
     void setDampingStrategy()
@@ -31,8 +33,10 @@ namespace Algorithm
   private:
     const C1Operator& F_;
     std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
-    Norm norm_;
+    mutable Norm norm_;
   };
+
+  Newton localNewton(const C1Operator& F);
 
   Newton affineCovariantNewton(const C1Operator& F);
 

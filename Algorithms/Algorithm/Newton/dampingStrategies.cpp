@@ -18,6 +18,8 @@ namespace Algorithm
       auto trial = x + dx;
       auto ds = DFInv_(-F_(trial));
 
+      std::cout << "0 ds: " << norm_(ds) << ", dx: " << norm_(dx) << ", x: " << norm_(x) << ", trial: " << norm_(trial) << std::endl;
+
       auto dxNorm = norm_(dx);
       auto theta = norm_(ds)/dxNorm;
       auto nu = std::min(1., p_.thetaAim()/theta);
@@ -28,6 +30,8 @@ namespace Algorithm
         trial = x + nu*dx;
         ds = DFInv_( -F_(trial) + (1-nu) * F_(x) );
         theta = norm_(ds)/(nu*dxNorm);
+        std::cout << "nu: " << nu << ", theta: " << theta << std::endl;
+        std::cout << "0 ds: " << norm_(ds) << ", dx: " << norm_(dx) << ", x: " << norm_(x) << ", trial: " << norm_(trial) << std::endl;
 
         nu = std::min(1., p_.thetaAim()*nu/theta);
       }
@@ -74,5 +78,13 @@ namespace Algorithm
       return nu;
     }
 
+
+    Undamped::Undamped(const NewtonParameter&, const C1Operator& F, const Norm& norm)
+    {}
+
+    double Undamped::operator()(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&)
+    {
+      return 1;
+    }
   }
 }

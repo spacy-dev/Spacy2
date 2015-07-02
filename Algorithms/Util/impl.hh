@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <utility>
+#include <stdexcept>
 
 namespace Algorithm
 {
@@ -79,6 +80,7 @@ namespace Algorithm
      */
     Type& impl()
     {
+      if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::unique_ptr<...> >.");
       return *impl_;
     }
 
@@ -87,6 +89,7 @@ namespace Algorithm
      */
     const Type& impl() const
     {
+      if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::unique_ptr<...> >.");
       return *impl_;
     }
 
@@ -118,6 +121,7 @@ namespace Algorithm
      */
     Type& impl()
     {
+      if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::shared_ptr<...> >.");
       return *impl_;
     }
 
@@ -127,6 +131,7 @@ namespace Algorithm
      */
     const Type& impl() const
     {
+      if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::shared_ptr<...> >.");
       return *impl_;
     }
 

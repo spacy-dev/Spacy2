@@ -15,7 +15,12 @@ namespace Algorithm
       dampingFactor_(Newton_DampingStrategy::AffineCovariant(*this,F_,norm_))
   {}
 
-  FunctionSpaceElement Newton::solve(const FunctionSpaceElement& x0)
+  FunctionSpaceElement Newton::solve() const
+  {
+    return solve( FunctionSpaceElement( F_.impl().getDomain().element() ) );
+  }
+
+  FunctionSpaceElement Newton::solve(const FunctionSpaceElement& x0) const
   {
     if( isVerbose() ) std::cout << "Starting newton iteration with initial guess: " << x0;
 
@@ -26,6 +31,7 @@ namespace Algorithm
     {
       if( isVerbose() ) std::cout << "Iteration: " << i << ", ";
 
+      auto fx = F_(x);
       LinearSolver DFInv(F_.getLinearization(x));
       auto dx = DFInv(-F_(x));
 
@@ -36,14 +42,21 @@ namespace Algorithm
       }
 
       auto nu = dampingFactor_(DFInv,x,dx);
-      if( isVerbose() ) std::cout << "nu = " << nu << ", |dx| = " << norm_(dx) << std::endl;
       if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
       x += nu*dx;
+      if( isVerbose() ) std::cout << "nu = " << nu << ", |dx| = " << norm_(dx) << ", |x| = " << norm_(x) << std::endl;
     }
 
     return x;
   }
 
+
+  Newton localNewton(const C1Operator& F)
+  {
+    auto newton = Newton( F );
+    newton.setDampingStrategy<Newton_DampingStrategy::Undamped>();
+    return newton;
+  }
 
   Newton affineCovariantNewton(const C1Operator& F)
   {

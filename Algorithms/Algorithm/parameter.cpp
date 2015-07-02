@@ -12,6 +12,10 @@ namespace Algorithm
     relativeAccuracy_ = relativeAccuracy;
   }
 
+  void Parameter::setEps(double eps) noexcept
+  {
+    eps_ = eps;
+  }
   void Parameter::setMaxSteps(unsigned maxSteps) noexcept
   {
     maxSteps_ = maxSteps;
@@ -30,6 +34,11 @@ namespace Algorithm
   double Parameter::relativeAccuracy() const noexcept
   {
     return relativeAccuracy_;
+  }
+
+  double Parameter::eps() const noexcept
+  {
+    return eps_;
   }
 
   unsigned Parameter::maxSteps() const noexcept

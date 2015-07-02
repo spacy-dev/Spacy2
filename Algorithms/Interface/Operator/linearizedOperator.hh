@@ -3,19 +3,19 @@
 
 #include <memory>
 
+#include "abstractC1Operator.hh"
 #include "abstractLinearOperator.hh"
 
 namespace Algorithm
 {
-  class AbstractC1Operator;
   class AbstractFunctionSpaceElement;
 
   class LinearizedOperator : public AbstractLinearOperator
   {
   public:
-    LinearizedOperator(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x);
+    LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x);
 
-    LinearizedOperator(const AbstractC1Operator& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
+    LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
 
@@ -26,7 +26,7 @@ namespace Algorithm
   private:
     LinearizedOperator* cloneImpl() const;
 
-    const AbstractC1Operator& A_;
+    std::unique_ptr<AbstractC1Operator> A_;
     const AbstractFunctionSpaceElement& x_;
     std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
   };

@@ -39,6 +39,14 @@ namespace Algorithm
       double muPrime = -1.;
       double norm_F_x_old = -1;
     };
+
+    class Undamped
+    {
+    public:
+      Undamped(const NewtonParameter&, const C1Operator& F, const Norm& norm);
+
+      double operator()(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&);
+    };
   }
 }
 

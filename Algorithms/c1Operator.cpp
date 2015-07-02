@@ -2,6 +2,7 @@
 
 #include "functionSpaceElement.hh"
 #include "Interface/Operator/abstractC1Operator.hh"
+#include "Interface/Operator/linearizedOperator.hh"
 
 namespace Algorithm
 {

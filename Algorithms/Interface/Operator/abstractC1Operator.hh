@@ -4,11 +4,13 @@
 #include <memory>
 
 #include "abstractOperator.hh"
-#include "linearizedOperator.hh"
+//#include "linearizedOperator.hh"
 
 namespace Algorithm
 {
   class AbstractLinearizedOperator;
+  class AbstractLinearSolver;
+  class LinearizedOperator;
 
   class AbstractC1Operator : public AbstractOperator
   {
@@ -26,9 +28,7 @@ namespace Algorithm
 
     virtual LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const;
 
-    std::shared_ptr<AbstractLinearSolver> solver_;
-//    std::shared_ptr<AbstractFunctionSpaceElement> x_;
-//    LinearizedOperator linearization_;
+    mutable std::shared_ptr<AbstractLinearSolver> solver_;
   };
 }
 
