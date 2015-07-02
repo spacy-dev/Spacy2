@@ -17,10 +17,10 @@ namespace Algorithm
   class PrimalDualProductSpace : public AbstractHilbertSpace
   {
   public:
-    PrimalDualProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces);
+    PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces);
 
-    PrimalDualProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces,
-                 std::vector<std::unique_ptr<AbstractBanachSpace> >&& dualSpaces);
+    PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces,
+                 std::vector<std::shared_ptr<AbstractBanachSpace> >&& dualSpaces);
 
     ProductSpace& getPrimalProductSpace();
 
@@ -39,9 +39,9 @@ namespace Algorithm
 
 
   template <class PrimalSpaces, class DualSpaces=PackSpaces<> >
-  std::unique_ptr<PrimalDualProductSpace> makePrimalDualProductSpace()
+  std::shared_ptr<PrimalDualProductSpace> makePrimalDualProductSpace()
   {
-    return std::make_unique<PrimalDualProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply(),
+    return std::make_shared<PrimalDualProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply(),
                                                      ProductSpaceDetail::CreateSpaceVector<DualSpaces>::apply() );
   }
 }

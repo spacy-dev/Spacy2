@@ -16,14 +16,14 @@ namespace Algorithm
   class ProductSpace : public AbstractHilbertSpace
   {
   public:
-    ProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces);
+    ProductSpace(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces);
 
-    const std::vector<std::unique_ptr<AbstractBanachSpace> >& getSpaces() const;
+    const std::vector<std::shared_ptr<AbstractBanachSpace> >& getSpaces() const;
 
   private:
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
 
-    std::vector<std::unique_ptr<AbstractBanachSpace> > spaces_;
+    std::vector<std::shared_ptr<AbstractBanachSpace> > spaces_;
   };
 
   template <class... Spaces_> struct PackSpaces {};
@@ -35,19 +35,19 @@ namespace Algorithm
     template <>
     struct CreateSpaceVectorImpl<>
     {
-      static std::vector<std::unique_ptr<AbstractBanachSpace> > apply()
+      static std::vector<std::shared_ptr<AbstractBanachSpace> > apply()
       {
-        return std::vector<std::unique_ptr<AbstractBanachSpace> >();
+        return std::vector<std::shared_ptr<AbstractBanachSpace> >();
       }
     };
 
     template <class Space, class... Spaces>
     struct CreateSpaceVectorImpl<Space,Spaces...>
     {
-      static std::vector<std::unique_ptr<AbstractBanachSpace> > apply()
+      static std::vector<std::shared_ptr<AbstractBanachSpace> > apply()
       {
         auto spaces = CreateSpaceVectorImpl<Spaces...>::apply();
-        spaces.push_back(std::make_unique<Space>());
+        spaces.push_back(std::make_shared<Space>());
         return spaces;
       }
     };
@@ -60,9 +60,9 @@ namespace Algorithm
 
 
   template <class PrimalSpaces, class DualSpaces=PackSpaces<> >
-  std::unique_ptr<ProductSpace> makeProductSpace()
+  std::shared_ptr<ProductSpace> makeProductSpace()
   {
-    return std::make_unique<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply() );
+    return std::make_shared<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply() );
   }
 }
 

@@ -7,16 +7,14 @@
 #include "productSpaceElement.hh"
 #include "productSpaceProduct.hh"
 
-#include <utility>
-
 namespace Algorithm
 {
-  ProductSpace::ProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& spaces)
+  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces)
     : AbstractHilbertSpace(std::make_shared<ProductSpaceProduct>()),
-      spaces_(std::move(spaces))
+      spaces_(spaces)
   {}
 
-  const std::vector<std::unique_ptr<AbstractBanachSpace> >& ProductSpace::getSpaces() const
+  const std::vector<std::shared_ptr<AbstractBanachSpace> >& ProductSpace::getSpaces() const
   {
     return spaces_;
   }

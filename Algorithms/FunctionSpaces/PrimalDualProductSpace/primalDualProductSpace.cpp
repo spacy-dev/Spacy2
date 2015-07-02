@@ -12,13 +12,13 @@
 
 namespace Algorithm
 {
-  PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces)
+  PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces)
     : AbstractHilbertSpace(std::make_shared<PrimalDualProductSpaceProduct>()),
       primalSpaces_(std::move(primalSpaces)), dualSpaces_({})
   {}
 
-  PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::unique_ptr<AbstractBanachSpace> >&& primalSpaces,
-               std::vector<std::unique_ptr<AbstractBanachSpace> >&& dualSpaces)
+  PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces,
+               std::vector<std::shared_ptr<AbstractBanachSpace> >&& dualSpaces)
     : AbstractHilbertSpace(std::make_shared<PrimalDualProductSpaceProduct>()),
       primalSpaces_(std::move(primalSpaces)),
       dualSpaces_( std::move(dualSpaces) )
