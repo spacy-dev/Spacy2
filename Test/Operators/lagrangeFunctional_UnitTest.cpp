@@ -23,19 +23,19 @@ using namespace Algorithm;
 class TestOperator2 : public AbstractC2Operator
 {
 public:
-  TestOperator2(const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+  TestOperator2(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
     : AbstractC2Operator(domain,range)
   {}
 
   TestOperator2(const BanachSpace& domain, const BanachSpace& range)
-    : TestOperator2(domain.impl(),range.impl())
+    : TestOperator2(domain.sharedImpl(),range.sharedImpl())
   {}
 
   ~TestOperator2(){}
 
   TestOperator2* cloneImpl() const
   {
-    return new TestOperator2(getDomain(),getRange());
+    return new TestOperator2(getSharedDomain(),getSharedRange());
   }
 
   std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement &x) const override

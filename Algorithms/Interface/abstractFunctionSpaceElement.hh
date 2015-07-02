@@ -6,13 +6,13 @@
 #include <vector>
 
 #include "Util/cloneable.hh"
-#include "Util/epsParameter.hh"
+#include "Util/addEps.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
 
-  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>, public EpsParameter
+  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>, public AddEps
   {
   public:
     explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);

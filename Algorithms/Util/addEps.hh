@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_UTIL_EPSPARAMETER_HH
-#define ALGORITHM_UTIL_EPSPARAMETER_HH
+#ifndef ALGORITHM_UTIL_ADD_EPS_HH
+#define ALGORITHM_UTIL_ADD_EPS_HH
 
 
 namespace Algorithm
@@ -7,7 +7,7 @@ namespace Algorithm
   /**
  * @brief Parameter class for maximal attainable accuracy.
  */
-  class EpsParameter
+  class AddEps
   {
   public:
     /**
@@ -25,4 +25,4 @@ namespace Algorithm
   };
 }
 
-#endif // ALGORITHM_UTIL_EPSPARAMETER_HH
+#endif // ALGORITHM_UTIL_ADD_EPS_HH

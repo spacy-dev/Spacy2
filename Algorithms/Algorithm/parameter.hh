@@ -1,14 +1,14 @@
 #ifndef ALGORITHM_ALGORITHM_PARAMETERS_HH
 #define ALGORITHM_ALGORITHM_PARAMETERS_HH
 
-#include "Util/epsParameter.hh"
+#include "Util/addEps.hh"
 
 namespace Algorithm
 {
   /**
    * @brief Basic parameters for simple algorithms.
    */
-  class Parameter : public EpsParameter
+  class Parameter : public AddEps
   {
   public:
     /**
