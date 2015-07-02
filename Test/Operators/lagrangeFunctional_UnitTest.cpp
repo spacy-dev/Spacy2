@@ -63,9 +63,9 @@ public:
 TEST(LagrangeFunctionalTest, D0Test)
 {
   BanachSpace X( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> , PackSpaces<RealSpace> >() );
-  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getPrimalProductSpace();
-  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getDualProductSpace();
-  FunctionSpaceElement reference = Y.element();
+  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedPrimalProductSpace();
+  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedDualProductSpace();
+  FunctionSpaceElement reference = Y->element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;
@@ -93,9 +93,9 @@ TEST(LagrangeFunctionalTest, D0Test)
 TEST(LagrangeFunctionalTest, D1Test)
 {
   BanachSpace X( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> , PackSpaces<RealSpace> >() );
-  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getPrimalProductSpace();
-  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getDualProductSpace();
-  FunctionSpaceElement reference = Y.element();
+  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedPrimalProductSpace();
+  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedDualProductSpace();
+  FunctionSpaceElement reference = Y->element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;
@@ -130,9 +130,9 @@ TEST(LagrangeFunctionalTest, D1Test)
 TEST(LagrangeFunctionalTest, D2Test)
 {
   BanachSpace X( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> , PackSpaces<RealSpace> >() );
-  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getPrimalProductSpace();
-  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getDualProductSpace();
-  FunctionSpaceElement reference = Y.element();
+  const auto& Y = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedPrimalProductSpace();
+  const auto& P = dynamic_cast<const PrimalDualProductSpace&>(X.impl()).getSharedDualProductSpace();
+  FunctionSpaceElement reference = Y->element();
   reference.coefficient(0) = 1;
 
   double alpha = 3;

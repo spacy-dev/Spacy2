@@ -14,32 +14,42 @@ namespace Algorithm
 {
   PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces)
     : AbstractHilbertSpace(std::make_shared<PrimalDualProductSpaceProduct>()),
-      primalSpaces_(std::move(primalSpaces)), dualSpaces_({})
+      primalSpaces_(std::make_shared<ProductSpace>(std::move(primalSpaces))), dualSpaces_({})
   {}
 
   PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces,
                std::vector<std::shared_ptr<AbstractBanachSpace> >&& dualSpaces)
     : AbstractHilbertSpace(std::make_shared<PrimalDualProductSpaceProduct>()),
-      primalSpaces_(std::move(primalSpaces)),
-      dualSpaces_( std::move(dualSpaces) )
+      primalSpaces_( std::make_shared<ProductSpace>(std::move(primalSpaces)) ),
+      dualSpaces_( std::make_shared<ProductSpace>(std::move(dualSpaces)) )
   {}
 
   ProductSpace& PrimalDualProductSpace::getPrimalProductSpace()
   {
-    return primalSpaces_;
+    return *primalSpaces_;
   }
 
   const ProductSpace& PrimalDualProductSpace::getPrimalProductSpace() const
+  {
+    return *primalSpaces_;
+  }
+
+  std::shared_ptr<AbstractBanachSpace> PrimalDualProductSpace::getSharedPrimalProductSpace() const
   {
     return primalSpaces_;
   }
 
   ProductSpace& PrimalDualProductSpace::getDualProductSpace()
   {
-    return dualSpaces_;
+    return *dualSpaces_;
   }
 
   const ProductSpace& PrimalDualProductSpace::getDualProductSpace() const
+  {
+    return *dualSpaces_;
+  }
+
+  std::shared_ptr<AbstractBanachSpace> PrimalDualProductSpace::getSharedDualProductSpace() const
   {
     return dualSpaces_;
   }

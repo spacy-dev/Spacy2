@@ -26,15 +26,19 @@ namespace Algorithm
 
     const ProductSpace& getPrimalProductSpace() const;
 
+    std::shared_ptr<AbstractBanachSpace> getSharedPrimalProductSpace() const;
+
     ProductSpace& getDualProductSpace();
 
     const ProductSpace& getDualProductSpace() const;
 
+    std::shared_ptr<AbstractBanachSpace> getSharedDualProductSpace() const;
+
   private:
     std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
 
-    ProductSpace primalSpaces_;
-    ProductSpace dualSpaces_;
+    std::shared_ptr<ProductSpace> primalSpaces_;
+    std::shared_ptr<ProductSpace> dualSpaces_;
   };
 
 
