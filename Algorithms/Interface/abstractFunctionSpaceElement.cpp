@@ -1,6 +1,7 @@
 #include "abstractFunctionSpaceElement.hh"
 
 #include "abstractBanachSpace.hh"
+#include "abstractNorm.hh"
 
 #include "Util/invalidargumentexception.hh"
 
@@ -19,6 +20,15 @@ namespace Algorithm
   {
     return space_;
   }
+
+  bool AbstractFunctionSpaceElement::equals(const AbstractFunctionSpaceElement& y) const
+  {
+    auto y_ = clone(y);
+    *y_ -= *this;
+    const auto& norm_ = getSpace().getNorm();
+    return norm_(*y_) < eps();
+  }
+
 
   AbstractFunctionSpaceElement& AbstractFunctionSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
   {

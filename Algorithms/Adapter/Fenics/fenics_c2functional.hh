@@ -13,7 +13,7 @@ namespace Algorithm
   class Fenics_C2Functional : public AbstractC2Functional
   {
   public:
-    Fenics_C2Functional(const dolfin::Form& a, const dolfin::Form& L, const std::vector<const dolfin::DirichletBC*>& bcs, const AbstractBanachSpace& space)
+    Fenics_C2Functional(const dolfin::Form& a, const dolfin::Form& L, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<AbstractBanachSpace> space)
       : AbstractC2Functional(space), a_(a), L_(L), bcs_(bcs)
     {}
 
@@ -68,7 +68,7 @@ namespace Algorithm
 
     Fenics_C2Functional* cloneImpl() const
     {
-      return new Fenics_C2Functional(a_,L_,bcs_,getDomain());
+      return new Fenics_C2Functional(a_,L_,bcs_,getSharedDomain());
     }
 
     const dolfin::Form& a_;

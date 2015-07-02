@@ -4,7 +4,7 @@
 
 namespace Algorithm
 {
-  AbstractC1Functional::AbstractC1Functional(const AbstractBanachSpace &domain)
+  AbstractC1Functional::AbstractC1Functional(std::shared_ptr<AbstractBanachSpace> domain)
     : AbstractFunctional(domain)
   {}
 

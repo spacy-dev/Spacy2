@@ -50,19 +50,19 @@ namespace Algorithm
   class TestOperator : public AbstractC1Operator
   {
   public:
-//    TestOperator(const AbstractBanachSpace& space, const AbstractFunctionSpaceElement& x)
+//    TestOperator(const std::shared_ptr<AbstractBanachSpace> space, const AbstractFunctionSpaceElement& x)
 //      : AbstractC1Operator(space,space)
 //    {
 //      setArgument(x);
 //      updateSolver();
 //    }
 
-    TestOperator(const AbstractBanachSpace& space)
+    TestOperator(std::shared_ptr<AbstractBanachSpace> space)
       : AbstractC1Operator(space,space)
     {}
 
     TestOperator(const HilbertSpace& space)
-      : TestOperator(space.impl())
+      : TestOperator(space.sharedImpl())
     {}
 
     ~TestOperator(){}
@@ -87,7 +87,7 @@ namespace Algorithm
 
     AbstractOperator* cloneImpl() const
     {
-      return new TestOperator(getDomain());
+      return new TestOperator(getSharedDomain());
     }
 
     LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const override
@@ -112,7 +112,7 @@ namespace Algorithm
 //  class TestOperator2 : public AbstractC2Operator
 //  {
 //  public:
-//    TestOperator2(const AbstractBanachSpace& domain, const AbstractBanachSpace& range)
+//    TestOperator2(const std::shared_ptr<AbstractBanachSpace> domain, const std::shared_ptr<AbstractBanachSpace> range)
 //      : AbstractC2Operator(domain,range)
 //    {}
 

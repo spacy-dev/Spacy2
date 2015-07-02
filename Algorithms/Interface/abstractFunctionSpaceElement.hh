@@ -6,12 +6,13 @@
 #include <vector>
 
 #include "Util/cloneable.hh"
+#include "Util/epsParameter.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
 
-  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>
+  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>, public EpsParameter
   {
   public:
     explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);
@@ -54,6 +55,8 @@ namespace Algorithm
     unsigned spaceIndex() const;
 
     const AbstractBanachSpace& getSpace() const;
+
+    bool equals(const AbstractFunctionSpaceElement& y) const;
 
   protected:
     virtual double applyAsDualTo(const AbstractFunctionSpaceElement& y) const = 0;

@@ -8,7 +8,7 @@
 #include "Interface/abstractScalarProduct.hh"
 
 #include "fenics_functionSpaceElement.hh"
-#include "fenics_l2scalarProduct.hh"
+#include "fenics_scalarProducts.hh"
 
 #include "hilbertSpace.hh"
 

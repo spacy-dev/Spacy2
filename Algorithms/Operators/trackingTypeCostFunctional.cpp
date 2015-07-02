@@ -12,18 +12,18 @@
 namespace Algorithm
 {
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const HilbertSpace &domain)
-    : AbstractC2Functional(domain.impl()),
+                                                         std::shared_ptr<AbstractBanachSpace> domain)
+    : AbstractC2Functional(domain),
       alpha_(alpha),
       referenceState_( clone(referenceState) )
   {}
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const AbstractHilbertSpace& domain)
-    : AbstractC2Functional(domain),
-      alpha_(alpha),
-      referenceState_( clone(referenceState) )
+                                                         const HilbertSpace &domain)
+    : TrackingTypeCostFunctional(alpha, referenceState, domain.sharedImpl())
   {}
+
+
 
 //  void TrackingTypeCostFunctional::setArgument(const AbstractFunctionSpaceElement &x)
 //  {
@@ -95,7 +95,7 @@ namespace Algorithm
 
   TrackingTypeCostFunctional* TrackingTypeCostFunctional::cloneImpl() const
   {
-    return new TrackingTypeCostFunctional(alpha_,*referenceState_,dynamic_cast<const AbstractHilbertSpace&>(getDomain()));
+    return new TrackingTypeCostFunctional(alpha_,*referenceState_,getSharedDomain());
   }
 
 }

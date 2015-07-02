@@ -4,7 +4,7 @@
 
 namespace Algorithm
 {
-  AbstractLinearOperator::AbstractLinearOperator(const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
+  AbstractLinearOperator::AbstractLinearOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
     : AbstractOperator(domain,range)
   {}
 }

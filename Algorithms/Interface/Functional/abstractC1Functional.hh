@@ -11,7 +11,7 @@ namespace Algorithm
   class AbstractC1Functional : public AbstractFunctional
   {
   public:
-    AbstractC1Functional(const AbstractBanachSpace& domain);
+    AbstractC1Functional(std::shared_ptr<AbstractBanachSpace> domain);
 
 
 //    virtual double d0() const;

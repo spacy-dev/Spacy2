@@ -1,12 +1,14 @@
 #ifndef ALGORITHM_ALGORITHM_PARAMETERS_HH
 #define ALGORITHM_ALGORITHM_PARAMETERS_HH
 
+#include "Util/epsParameter.hh"
+
 namespace Algorithm
 {
   /**
    * @brief Basic parameters for simple algorithms.
    */
-  class Parameter
+  class Parameter : public EpsParameter
   {
   public:
     /**
@@ -18,11 +20,6 @@ namespace Algorithm
      * @brief Set relative accuracy.
      */
     void setRelativeAccuracy(double) noexcept;
-
-    /**
-     * @brief Set maximal attainable accuracy.
-     */
-    void setEps(double) noexcept;
 
     /**
      * @brief Set maximal number of steps/iterations for iterative solvers.
@@ -45,11 +42,6 @@ namespace Algorithm
     double relativeAccuracy() const noexcept;
 
     /**
-     * @brief Get maximal attainable accuracy.
-     */
-    double eps() const noexcept;
-
-    /**
      * @brief Get maximal number of steps/iterations for iterative solvers.
      */
     unsigned maxSteps() const noexcept;
@@ -62,7 +54,6 @@ namespace Algorithm
   private:
     double absoluteAccuracy_ = 1e-12;
     double relativeAccuracy_ = 1e-6;
-    double eps_ = 1e-15;
     unsigned maxSteps_ = 100;
     bool verbose_ = false;
   };

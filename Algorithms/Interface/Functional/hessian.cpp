@@ -6,11 +6,11 @@
 namespace Algorithm
 {
   Hessian::Hessian(const AbstractC2Functional &A, const AbstractFunctionSpaceElement& x)
-    : AbstractLinearOperator(A.getDomain(),A.getDomain()), A_(A), x_(x)
+    : AbstractLinearOperator(A.getSharedDomain(),A.getSharedDomain()), A_(A), x_(x)
   {}
 
   Hessian::Hessian(const AbstractC2Functional &A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-    : AbstractLinearOperator(A.getDomain(),A.getDomain()), A_(A), x_(x), solver_(solver)
+    : AbstractLinearOperator(A.getSharedDomain(),A.getSharedDomain()), A_(A), x_(x), solver_(solver)
   {}
 
   std::unique_ptr<AbstractFunctionSpaceElement> Hessian::operator ()(const AbstractFunctionSpaceElement& dx) const

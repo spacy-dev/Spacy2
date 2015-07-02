@@ -15,19 +15,26 @@ namespace Algorithm
   public:
     using Base = AbstractOperator;
 
-    AbstractOperator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+    AbstractOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
     virtual ~AbstractOperator();
     
     virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
+    AbstractBanachSpace& getDomain();
+
     const AbstractBanachSpace& getDomain() const;
+
+    AbstractBanachSpace& getRange();
 
     const AbstractBanachSpace& getRange() const;
 
+    std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+
+    std::shared_ptr<AbstractBanachSpace> getSharedRange() const;
+
   private:
-    const AbstractBanachSpace& domain_;
-    const AbstractBanachSpace& range_;
+    std::shared_ptr<AbstractBanachSpace> domain_, range_;
   };
 }
 

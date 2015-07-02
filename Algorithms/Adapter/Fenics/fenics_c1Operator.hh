@@ -21,16 +21,16 @@ namespace Algorithm
   class Fenics_C1Operator : public AbstractC1Operator
   {
   public:
-    explicit Fenics_C1Operator(const AbstractBanachSpace& space)
+    explicit Fenics_C1Operator(std::shared_ptr<AbstractBanachSpace> space)
       : AbstractC1Operator(space,space), F_(nullptr), J_(nullptr)
     {}
 
-    Fenics_C1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const AbstractBanachSpace& space)
+    Fenics_C1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<AbstractBanachSpace> space)
       : AbstractC1Operator(space,space), F_(&F), J_(&J), bcs_(bcs)
     {}
 
     Fenics_C1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
-      : AbstractC1Operator(space.impl(),space.impl()), F_(&F), J_(&J), bcs_(bcs)
+      : Fenics_C1Operator(F,J,bcs,space.sharedImpl())
     {}
 
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override
@@ -59,6 +59,10 @@ namespace Algorithm
     void assemble(const Fenics_Vector& x) const
     {
       if( F_ == nullptr || J_ == nullptr ) return;
+
+      if( oldX_ != nullptr && oldX_->equals(x) ) return;
+      oldX_ = clone(x);
+
       F_->u = x.impl();
       J_->u = x.impl();
       A_ = x.impl().vector()->factory().create_matrix();
@@ -81,7 +85,13 @@ namespace Algorithm
 
     Fenics_C1Operator* cloneImpl() const
     {
-      return new Fenics_C1Operator(getDomain());
+      return new Fenics_C1Operator(getSharedDomain());
+    }
+
+    LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const
+    {
+      assemble(fenics_Vector(x));
+      return LinearizedOperator(clone(*this),x,solver_);
     }
 
     mutable ResidualForm* F_;
@@ -89,6 +99,7 @@ namespace Algorithm
     std::vector<const dolfin::DirichletBC*> bcs_;
     mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
     mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
+    mutable std::unique_ptr<Fenics_Vector> oldX_ = nullptr;
   };
 
   template <class ResidualForm, class JacobianForm>

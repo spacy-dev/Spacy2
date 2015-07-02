@@ -14,7 +14,12 @@ namespace Algorithm
     norm_ = norm;
   }
 
-  std::shared_ptr<AbstractNorm> AbstractBanachSpace::getNorm() const
+  const AbstractNorm& AbstractBanachSpace::getNorm() const
+  {
+    return *norm_;
+  }
+
+  std::shared_ptr<AbstractNorm> AbstractBanachSpace::getSharedNorm() const
   {
     return norm_;
   }

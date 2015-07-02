@@ -17,7 +17,7 @@ namespace Algorithm
   public:
     TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const HilbertSpace& domain);
 
-    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, const AbstractHilbertSpace& domain);
+    TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState, std::shared_ptr<AbstractBanachSpace> domain);
 
 //    void setArgument(const AbstractFunctionSpaceElement &x) final override;
 

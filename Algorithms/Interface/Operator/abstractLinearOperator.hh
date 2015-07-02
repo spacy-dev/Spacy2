@@ -13,7 +13,7 @@ namespace Algorithm
   class AbstractLinearOperator : public AbstractOperator
   {
   public:
-    AbstractLinearOperator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+    AbstractLinearOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
     virtual std::shared_ptr<AbstractLinearSolver> getSolver() const = 0;
   };

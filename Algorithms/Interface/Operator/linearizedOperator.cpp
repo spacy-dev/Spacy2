@@ -6,16 +6,20 @@
 
 #include <stdexcept>
 #include <utility>
+#include <iostream>
 
 namespace Algorithm
 {
   LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x)
-    : AbstractLinearOperator(A->getDomain(),A->getRange()), A_(std::move(A)), x_(x)
+    : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(x)
   {}
 
   LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-    : AbstractLinearOperator(A->getDomain(),A->getRange()), A_(std::move(A)), x_(x), solver_(solver)
-  {}
+    : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(x), solver_(solver)
+  {
+    if(solver_==nullptr) std::cout << "construct linearized operator without solver" << std::endl;
+    else std::cout << "construct linearized operator with solver" << std::endl;
+  }
 
   std::unique_ptr<AbstractFunctionSpaceElement> LinearizedOperator::operator ()(const AbstractFunctionSpaceElement& dx) const
   {

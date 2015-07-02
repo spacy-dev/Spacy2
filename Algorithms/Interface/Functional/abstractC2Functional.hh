@@ -11,7 +11,7 @@ namespace Algorithm
   class AbstractC2Functional : public AbstractC1Functional
   {
   public:
-    AbstractC2Functional(const AbstractBanachSpace& domain);
+    AbstractC2Functional(std::shared_ptr<AbstractBanachSpace> domain);
 
 //    double d1(const AbstractFunctionSpaceElement &dx) const override;
     Hessian getHessian(const AbstractFunctionSpaceElement& x) const;

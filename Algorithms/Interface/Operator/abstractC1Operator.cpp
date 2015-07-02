@@ -5,11 +5,11 @@
 
 namespace Algorithm
 {
-  AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
+  AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
     : AbstractOperator(domain,range), solver_(solver)
   {}
 
-  AbstractC1Operator::AbstractC1Operator(const AbstractBanachSpace &domain, const AbstractBanachSpace &range)
+  AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
     : AbstractOperator(domain,range)
   {}
 

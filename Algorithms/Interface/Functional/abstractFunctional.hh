@@ -13,7 +13,7 @@ namespace Algorithm
   class AbstractFunctional : public Cloneable<AbstractFunctional>
   {
   public:
-    AbstractFunctional(const AbstractBanachSpace& domain);
+    AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);
 
     virtual ~AbstractFunctional();
     
@@ -21,11 +21,13 @@ namespace Algorithm
 
     const AbstractBanachSpace& getDomain() const;
 
+    std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+
   protected:
     virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
 
   private:
-    const AbstractBanachSpace& domain_;
+    std::shared_ptr<AbstractBanachSpace> domain_;
   };
 }
 

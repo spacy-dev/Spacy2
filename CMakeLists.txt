@@ -20,12 +20,11 @@ if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
     set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused -Wpedantic")
     set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O0 -g")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
-    set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1y")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1y")
 endif()
 
 include_directories(
-    ${PROJECT_SOURCE_DIR}/RFFGen
+#    ${PROJECT_SOURCE_DIR}/RFFGen
     ${PROJECT_SOURCE_DIR}/External/googletest
     ${PROJECT_SOURCE_DIR}/External/googletest/include
     )
@@ -59,7 +58,7 @@ include_directories(Algorithms)
 #include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
 
 aux_source_directory(Algorithms/. SRC_LIST)
-aux_source_directory(Algorithms/Adapter/Fenics SRC_LIST)
+#aux_source_directory(Algorithms/Adapter/Fenics SRC_LIST)
 aux_source_directory(Algorithms/Algorithm SRC_LIST)
 aux_source_directory(Algorithms/Algorithm/ConjugateGradients SRC_LIST)
 #aux_source_directory(Algorithms/Algorithm/CompositeStep SRC_LIST)

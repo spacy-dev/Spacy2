@@ -4,7 +4,7 @@
 namespace Algorithm
 {
   JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
-    : AbstractOperator(A.impl().getDomain(),A.impl().getRange()),
+    : AbstractOperator(A.impl().getSharedDomain(),A.impl().getSharedRange()),
       diag_(A.impl().getDomain().element()->size(),1.)
 
   {
@@ -19,7 +19,7 @@ namespace Algorithm
   }
 
   JacobiPreconditioner::JacobiPreconditioner(const LinearOperator& A)
-    : AbstractOperator(A.impl().getDomain(),A.impl().getRange()),
+    : AbstractOperator(A.impl().getSharedDomain(),A.impl().getSharedRange()),
       diag_(A.impl().getDomain().element()->size(),1.)
 
   {
@@ -35,7 +35,7 @@ namespace Algorithm
 
 
   JacobiPreconditioner::JacobiPreconditioner(const JacobiPreconditioner& other)
-    : AbstractOperator(other.getDomain(), other.getRange()),
+    : AbstractOperator(other.getSharedDomain(), other.getSharedRange()),
       diag_(other.diag_), x_( clone(other.x_))
   {}
 

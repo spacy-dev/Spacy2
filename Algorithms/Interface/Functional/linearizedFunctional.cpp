@@ -6,7 +6,7 @@
 namespace Algorithm
 {
   LinearizedFunctional::LinearizedFunctional(const AbstractC2Functional &A, const AbstractFunctionSpaceElement& x)
-    : AbstractFunctional(A.getDomain()), A_(A), x_(x)
+    : AbstractFunctional(A.getSharedDomain()), A_(A), x_(x)
   {}
 
   double LinearizedFunctional::d0(const AbstractFunctionSpaceElement& dx) const

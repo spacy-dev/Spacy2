@@ -24,14 +24,13 @@ namespace Algorithm
   {
     if( isVerbose() ) std::cout << "Starting newton iteration with initial guess: " << x0;
 
-    norm_ = Norm( x0.impl().getSpace().getNorm() );
+    norm_ = Norm( x0.impl().getSpace().getSharedNorm() );
 
     auto x = x0;
     for(unsigned i = 1; i <= maxSteps(); ++i)
     {
       if( isVerbose() ) std::cout << "Iteration: " << i << ", ";
 
-      auto fx = F_(x);
       LinearSolver DFInv(F_.getLinearization(x));
       auto dx = DFInv(-F_(x));
 

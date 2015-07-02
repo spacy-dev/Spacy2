@@ -5,7 +5,7 @@
 
 namespace Algorithm
 {
-  AbstractFunctional::AbstractFunctional(const AbstractBanachSpace& domain)
+  AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain)
     : domain_(domain)
   {}
 
@@ -20,6 +20,12 @@ namespace Algorithm
 
   const AbstractBanachSpace& AbstractFunctional::getDomain() const
   {
+    return *domain_;
+  }
+
+  std::shared_ptr<AbstractBanachSpace> AbstractFunctional::getSharedDomain() const
+  {
     return domain_;
   }
+
 }

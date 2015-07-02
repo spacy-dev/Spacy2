@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "abstractC1Operator.hh"
-#include "linearizedOperator.hh"
 
 namespace Algorithm
 {
@@ -13,22 +12,15 @@ namespace Algorithm
   class AbstractC2Operator : public AbstractC1Operator
   {
   public:
-    AbstractC2Operator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+    AbstractC2Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-    AbstractC2Operator(std::shared_ptr<AbstractLinearSolver> solver, const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
-
-    //LinearizedOperator getLinearization(const AbstractFunctionSpaceElement& x) const;
+    AbstractC2Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
     virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,
                                                              const AbstractFunctionSpaceElement& dx,
                                                              const AbstractFunctionSpaceElement& dy) const = 0;
 
   protected:
-    friend class LinearizedOperator;
-
-
-//    virtual LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const;
-
     std::shared_ptr<AbstractLinearSolver> solver_;
   };
 }

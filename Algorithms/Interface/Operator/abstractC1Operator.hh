@@ -15,9 +15,9 @@ namespace Algorithm
   class AbstractC1Operator : public AbstractOperator
   {
   public:
-    AbstractC1Operator(const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+    AbstractC1Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-    AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, const AbstractBanachSpace& domain, const AbstractBanachSpace& range);
+    AbstractC1Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
     LinearizedOperator getLinearization(const AbstractFunctionSpaceElement& x) const;
 
