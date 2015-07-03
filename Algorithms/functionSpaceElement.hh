@@ -4,17 +4,16 @@
 #include <iostream>
 #include <memory>
 #include <type_traits>
-#include <vector>
+#include <utility>
 
+#include "Interface/abstractFunctionSpaceElement.hh"
 #include "Interface/abstractHilbertSpace.hh"
 #include "Util/impl.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
-  class AbstractFunctionSpaceElement;
   class FunctionSpace;
-
   class FunctionSpaceElement;
 
   struct Scale
@@ -31,19 +30,32 @@ namespace Algorithm
   class FunctionSpaceElement : public UniqueImpl<AbstractFunctionSpaceElement>
   {
   public:
+    /// Default constructor.
     FunctionSpaceElement();
 
     /**
-     * @brief Constructor
+     * @brief Construct FunctionSpaceElement from implementation.
      */
     FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation);
 
+    /**
+     * @brief Construct FunctionSpaceElement from implementation.
+     */
     FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation);
 
+    /**
+     * @brief Copy constructor.
+     */
     FunctionSpaceElement(const FunctionSpaceElement&);
 
+    /**
+     * @brief Copy assignment.
+     */
     FunctionSpaceElement& operator=(const FunctionSpaceElement&);
 
+    /**
+     * @brief Assign from implementation.
+     */
     FunctionSpaceElement& operator=(const AbstractFunctionSpaceElement& implementation);
 
     /**
@@ -115,12 +127,13 @@ namespace Algorithm
   };
 
   /**
-   * \brief Construct function space element from arguments for its implementation.
+   * @brief Convenient generation of function space element from implementation arguments.
+   * @return FunctionSpaceElement( std::make_shared<Implementation>(std::forward<Args>(args)...) )
    */
   template <class Implementation, class... Args>
   FunctionSpaceElement makeElement(Args&&... args)
   {
-    return FunctionSpaceElement( std::make_unique<Implementation>(args...) );
+    return FunctionSpaceElement( std::make_unique<Implementation>(std::forward<Args>(args)...) );
   }
 
 
@@ -150,12 +163,28 @@ namespace Algorithm
    */
   FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y);
 
+  /**
+   * @brief Compute \f$z=x-y\f$.
+   */
   FunctionSpaceElement operator-(FunctionSpaceElement x, const FunctionSpaceElement& y);
 
+  /**
+   * @brief Compute \f$z=a+x\f$.
+   * @param a
+   * @param x function space element with implementation of type Real.
+   */
   FunctionSpaceElement operator+(double a, FunctionSpaceElement x);
 
+  /**
+   * @brief Compute \f$z=a+x\f$.
+   * @param a
+   * @param x function space element with implementation of type Real.
+   */
   FunctionSpaceElement operator+(const FunctionSpaceElement& x, double a);
 
+  /**
+   * @brief Compute \f$z=x*y=(x,y)\f$.
+   */
   auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl());
 
 
@@ -163,15 +192,6 @@ namespace Algorithm
    * @brief Print function space element to os.
    */
   std::ostream& operator<<(std::ostream& os, const FunctionSpaceElement& x);
-
-  /**
-   * \brief Create function space element of type Implementation from args... .
-   */
-  template <class Implementation, class... Args>
-  FunctionSpaceElement createFunctionSpaceElement(Args&&... args)
-  {
-    return FunctionSpaceElement(std::make_unique<Implementation>(args...));
-  }
 }
 
 #endif // ALGORITHM_FUNCTIONSPACEELEMENT_HH

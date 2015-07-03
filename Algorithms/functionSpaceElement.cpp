@@ -57,7 +57,7 @@ namespace Algorithm
 
   bool FunctionSpaceElement::operator==(const FunctionSpaceElement& y) const
   {
-    return (this == &y);
+    return impl().equals( y.impl() );
   }
 
 

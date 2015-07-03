@@ -13,7 +13,7 @@ namespace Algorithm
   class AbstractBanachSpace;
 
   /**
-   * @brief Banach space. Creates function space elements and admits access to norm.
+   * @brief Banach space \f$X\f$. Creates function space elements and admits access to norm.
    */
   class BanachSpace : public SharedImpl<AbstractBanachSpace>
   {
@@ -23,6 +23,9 @@ namespace Algorithm
      */
     explicit BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation);
 
+    /**
+     * @brief Change norm of space.
+     */
     void setNorm(const Norm& norm);
 
     /**
@@ -45,6 +48,10 @@ namespace Algorithm
     Norm norm_;
   };
 
+  /**
+   * @brief Convenient generation of banach space from implementation arguments.
+   * @return BanachSpace(std::make_shared<Implementation>(std::forward<Args>(args)...))
+   */
   template <class Implementation, class... Args>
   auto makeBanachSpace(Args&&... args)
   {
