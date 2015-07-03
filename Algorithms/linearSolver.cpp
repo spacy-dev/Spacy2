@@ -8,11 +8,11 @@
 namespace Algorithm
 {
   LinearSolver::LinearSolver(const LinearOperator& A)
-    : SharedImpl<AbstractLinearSolver>( A.impl().getSolver() )
+    : Mixin::SharedImpl<AbstractLinearSolver>( A.impl().getSolver() )
   {}
 
   LinearSolver::LinearSolver(std::shared_ptr<AbstractLinearSolver> impl)
-    : SharedImpl<AbstractLinearSolver>(impl)
+    : Mixin::SharedImpl<AbstractLinearSolver>(impl)
   {}
 
   FunctionSpaceElement LinearSolver::operator ()(const FunctionSpaceElement& x) const

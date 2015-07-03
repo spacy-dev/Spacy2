@@ -1,10 +1,10 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
 #define ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Interface/abstractScalarProduct.hh"
-#include "../../Util/incompatiblespaceexception.hh"
-#include "../../Util/invalidargumentexception.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractScalarProduct.hh"
+#include "Util/Exceptions/incompatibleSpaceException.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 #include "vectorSpaceElement.hh"
 

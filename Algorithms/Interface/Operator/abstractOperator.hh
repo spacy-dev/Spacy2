@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "Util/cloneable.hh"
+#include "Util/Mixins/cloneable.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
   class AbstractFunctionSpaceElement;
 
-  class AbstractOperator : public Cloneable<AbstractOperator>
+  class AbstractOperator : public Mixin::Cloneable<AbstractOperator>
   {
   public:
     using Base = AbstractOperator;

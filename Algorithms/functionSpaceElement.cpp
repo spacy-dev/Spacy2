@@ -3,7 +3,7 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 #include "banachSpace.hh"
 
 #include <utility>
@@ -11,11 +11,11 @@
 namespace Algorithm
 {
   FunctionSpaceElement::FunctionSpaceElement()
-    : UniqueImpl<AbstractFunctionSpaceElement>(nullptr)
+    : Mixin::UniqueImpl<AbstractFunctionSpaceElement>(nullptr)
   {}
 
   FunctionSpaceElement::FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation)
-    : UniqueImpl<AbstractFunctionSpaceElement>(std::move(implementation))
+    : Mixin::UniqueImpl<AbstractFunctionSpaceElement>(std::move(implementation))
   {}
 
   FunctionSpaceElement::FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation)

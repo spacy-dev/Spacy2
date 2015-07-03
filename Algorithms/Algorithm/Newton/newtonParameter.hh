@@ -3,21 +3,12 @@
 
 #include "Algorithm/parameter.hh"
 #include "Algorithm/regularityTest.hh"
+#include "Util/Mixins/contractionRate.hh"
 
 namespace Algorithm
 {
-  class NewtonParameter : public Parameter, public RegularityTest
-  {
-  public:
-    void setThetaAim(double) noexcept;
-    void setThetaMax(double) noexcept;
-
-    double thetaAim() const noexcept;
-    double thetaMax() const noexcept;
-
-  private:
-    double thetaMax_ = 0.75, thetaAim_ = 0.5;
-  };
+  class NewtonParameter : public Parameter, public RegularityTest, public Mixin::ContractionRate
+  {};
 }
 
 #endif // NEWTONPARAMETER_HH

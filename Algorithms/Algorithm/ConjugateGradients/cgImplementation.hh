@@ -10,7 +10,7 @@
 
 #include "operator.hh"
 #include "functionSpaceElement.hh"
-#include "Util/singularoperatorexception.hh"
+#include "Util/Exceptions/singularOperatorException.hh"
 
 #include "cgTerminationCriteria.hh"
 

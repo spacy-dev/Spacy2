@@ -1,8 +1,8 @@
 #include "productSpaceProduct.hh"
 
 #include "productSpaceElement.hh"
-#include "Util/incompatiblespaceexception.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/incompatibleSpaceException.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 

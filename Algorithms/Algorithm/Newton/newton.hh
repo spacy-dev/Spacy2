@@ -6,7 +6,6 @@
 #include "norm.hh"
 
 #include "newtonParameter.hh"
-#include "dampingStrategies.hh"
 
 namespace Algorithm
 {
@@ -30,9 +29,16 @@ namespace Algorithm
       dampingFactor_ = DampingStrategy(*this,F_,norm_);
     }
 
+    template <class TerminationCriterion>
+    void setTerminationCriterion()
+    {
+      terminationCriterion_ = TerminationCriterion(F_,norm_,relativeAccuracy(),verbose());
+    }
+
   private:
     const C1Operator& F_;
     std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
+    std::function<bool(double,const FunctionSpaceElement&, const FunctionSpaceElement&)> terminationCriterion_;
     mutable Norm norm_;
   };
 

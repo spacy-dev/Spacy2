@@ -1,8 +1,8 @@
 #include "primalDualProductSpaceProduct.hh"
 
 #include "primalDualProductSpaceElement.hh"
-#include "Util/incompatiblespaceexception.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/incompatibleSpaceException.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 #include "Interface/abstractBanachSpace.hh"
 
 namespace Algorithm

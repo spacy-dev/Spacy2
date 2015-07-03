@@ -4,13 +4,13 @@
 #include <memory>
 
 #include "Interface/Operator/abstractOperator.hh"
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
   class FunctionSpaceElement;
 
-  class Operator : public SharedImpl<AbstractOperator>
+  class Operator : public Mixin::SharedImpl<AbstractOperator>
   {
   public:
     Operator(std::shared_ptr<AbstractOperator> impl);

@@ -1,8 +1,8 @@
 #include "realProduct.hh"
 
 #include "real.hh"
-#include "Util/incompatiblespaceexception.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/incompatibleSpaceException.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {

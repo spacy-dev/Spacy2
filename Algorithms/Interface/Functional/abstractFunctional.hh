@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "Util/cloneable.hh"
+#include "Util/Mixins/cloneable.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
   class AbstractFunctionSpaceElement;
 
-  class AbstractFunctional : public Cloneable<AbstractFunctional>
+  class AbstractFunctional : public Mixin::Cloneable<AbstractFunctional>
   {
   public:
     AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);

@@ -1,6 +1,6 @@
 #include "realSolver.hh"
 
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 #include "real.hh"
 #include <iostream>
 namespace Algorithm

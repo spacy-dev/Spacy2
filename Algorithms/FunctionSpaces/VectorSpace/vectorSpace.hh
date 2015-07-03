@@ -5,7 +5,7 @@
 
 #include "Interface/abstractHilbertSpace.hh"
 #include "hilbertSpaceNorm.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 #include "l2Product.hh"
 #include "vectorSpaceElement.hh"

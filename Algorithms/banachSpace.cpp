@@ -6,7 +6,7 @@
 namespace Algorithm
 {
   BanachSpace::BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation)
-    : SharedImpl<AbstractBanachSpace>(implementation), norm_(impl().getSharedNorm())
+    : Mixin::SharedImpl<AbstractBanachSpace>(implementation), norm_(impl().getSharedNorm())
   {}
 
   void BanachSpace::setNorm(const Norm &norm)

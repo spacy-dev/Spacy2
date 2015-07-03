@@ -22,8 +22,8 @@ namespace Algorithm
 
       auto dxNorm = norm_(dx);
       auto theta = norm_(ds)/dxNorm;
-      auto nu = std::min(1., p_.thetaAim()/theta);
-      while( theta > p_.thetaMax())
+      auto nu = std::min(1., p_.desiredContraction()/theta);
+      while( !p_.admissibleContraction( theta ) )
       {
         if( !p_.regularityTestPassed(nu) ) break;
 
@@ -33,7 +33,7 @@ namespace Algorithm
         std::cout << "nu: " << nu << ", theta: " << theta << std::endl;
         std::cout << "0 ds: " << norm_(ds) << ", dx: " << norm_(dx) << ", x: " << norm_(x) << ", trial: " << norm_(trial) << std::endl;
 
-        nu = std::min(1., p_.thetaAim()*nu/theta);
+        nu = std::min(1., p_.desiredContraction()*nu/theta);
       }
 
       return nu;

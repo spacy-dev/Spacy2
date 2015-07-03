@@ -6,14 +6,14 @@
 
 #include "functionSpaceElement.hh"
 #include "Interface/abstractNorm.hh"
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
   /**
    * @brief Norm class. Plug your implementations in here.
    */
-  class Norm : public SharedImpl<AbstractNorm>
+  class Norm : public Mixin::SharedImpl<AbstractNorm>
   {
   public:
     Norm() = default;

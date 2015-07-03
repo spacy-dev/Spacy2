@@ -5,9 +5,9 @@
 #include <vector>
 #include <utility>
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Util/invalidargumentexception.hh"
-#include "../../Util/voider.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/voider.hh"
 
 namespace Algorithm
 {  

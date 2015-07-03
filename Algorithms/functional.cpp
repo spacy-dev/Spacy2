@@ -6,7 +6,7 @@
 namespace Algorithm
 {
   Functional::Functional(std::shared_ptr<AbstractFunctional> impl)
-    : SharedImpl<AbstractFunctional>(impl)
+    : Mixin::SharedImpl<AbstractFunctional>(impl)
   {}
 
   double Functional::operator()(const FunctionSpaceElement& x)

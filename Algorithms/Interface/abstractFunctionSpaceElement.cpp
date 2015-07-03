@@ -3,7 +3,7 @@
 #include "abstractBanachSpace.hh"
 #include "abstractNorm.hh"
 
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {

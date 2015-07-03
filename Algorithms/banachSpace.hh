@@ -5,7 +5,7 @@
 #include <utility>
 
 #include "norm.hh"
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -15,7 +15,7 @@ namespace Algorithm
   /**
    * @brief Banach space \f$X\f$. Creates function space elements and admits access to norm.
    */
-  class BanachSpace : public SharedImpl<AbstractBanachSpace>
+  class BanachSpace : public Mixin::SharedImpl<AbstractBanachSpace>
   {
   public:
     /**

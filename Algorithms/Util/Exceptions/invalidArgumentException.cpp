@@ -1,4 +1,4 @@
-#include "invalidargumentexception.hh"
+#include "invalidArgumentException.hh"
 
 namespace Algorithm
 {

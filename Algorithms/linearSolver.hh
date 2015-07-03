@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -13,7 +13,7 @@ namespace Algorithm
   class C1Operator;
   class FunctionSpaceElement;
 
-  class LinearSolver : public SharedImpl<AbstractLinearSolver>
+  class LinearSolver : public Mixin::SharedImpl<AbstractLinearSolver>
   {
   public:
     LinearSolver(const LinearOperator& A);

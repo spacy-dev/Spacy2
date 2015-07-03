@@ -6,13 +6,14 @@
 
 #include "Interface/abstractScalarProduct.hh"
 #include "functionSpaceElement.hh"
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
+
 namespace Algorithm
 {
   /**
    * @brief Scalar product class. Plug your implementations in here.
    */
-  class ScalarProduct : public SharedImpl<AbstractScalarProduct>
+  class ScalarProduct : public Mixin::SharedImpl<AbstractScalarProduct>
   {
   public:
     explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);

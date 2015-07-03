@@ -4,7 +4,7 @@
 #include "abstractNorm.hh"
 #include "hilbertSpaceNorm.hh"
 
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {

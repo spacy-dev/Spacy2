@@ -2,7 +2,7 @@
 
 #include "productSpace.hh"
 
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 #include <cassert>
 #include <numeric>

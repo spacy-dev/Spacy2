@@ -1,4 +1,4 @@
-#include "incompatiblespaceexception.hh"
+#include "incompatibleSpaceException.hh"
 
 namespace Algorithm
 {

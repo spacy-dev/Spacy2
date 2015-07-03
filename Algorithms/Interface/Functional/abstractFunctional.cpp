@@ -1,7 +1,7 @@
 #include "abstractFunctional.hh"
 
 #include "Interface/abstractBanachSpace.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {

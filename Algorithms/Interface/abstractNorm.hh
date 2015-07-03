@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_INTERFACE_ABSTRACT_NORM_HH
 #define ALGORITHM_INTERFACE_ABSTRACT_NORM_HH
 
-#include "../Util/callofundefinedfunctionexception.hh"
-
 namespace Algorithm
 {
   class AbstractFunctionSpaceElement;

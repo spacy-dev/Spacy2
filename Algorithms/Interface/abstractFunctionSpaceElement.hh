@@ -5,14 +5,14 @@
 #include <memory>
 #include <vector>
 
-#include "Util/cloneable.hh"
-#include "Util/addEps.hh"
+#include "Util/Mixins/cloneable.hh"
+#include "Util/Mixins/eps.hh"
 
 namespace Algorithm
 {
   class AbstractBanachSpace;
 
-  class AbstractFunctionSpaceElement : public Cloneable<AbstractFunctionSpaceElement>, public AddEps
+  class AbstractFunctionSpaceElement : public Mixin::Cloneable<AbstractFunctionSpaceElement>, public Mixin::Eps
   {
   public:
     explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);

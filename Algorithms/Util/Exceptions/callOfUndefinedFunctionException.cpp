@@ -1,4 +1,4 @@
-#include "callofundefinedfunctionexception.hh"
+#include "callOfUndefinedFunctionException.hh"
 
 namespace Algorithm
 {

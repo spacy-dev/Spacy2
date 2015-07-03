@@ -8,7 +8,7 @@
 
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "Interface/abstractHilbertSpace.hh"
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -27,7 +27,7 @@ namespace Algorithm
    *
    * This class is the base class for all variables. Their specific form is specified in an Implementation derived from AbstractFunctionSpaceElement.
    */
-  class FunctionSpaceElement : public UniqueImpl<AbstractFunctionSpaceElement>
+  class FunctionSpaceElement : public Mixin::UniqueImpl<AbstractFunctionSpaceElement>
   {
   public:
     /// Default constructor.

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "Util/impl.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -13,7 +13,7 @@ namespace Algorithm
   /**
    * @brief A functional \f$F\f$.
    */
-  class Functional : public SharedImpl<AbstractFunctional>
+  class Functional : public Mixin::SharedImpl<AbstractFunctional>
   {
   public:
     /**

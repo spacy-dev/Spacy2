@@ -7,7 +7,7 @@
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {

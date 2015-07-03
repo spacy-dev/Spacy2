@@ -1,7 +1,7 @@
 #include "lagrangeFunctional.hh"
 
 #include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
-#include "Util/invalidargumentexception.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 #include <iostream>
 namespace Algorithm
 {
