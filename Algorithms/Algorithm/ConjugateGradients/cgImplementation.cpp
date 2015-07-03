@@ -18,7 +18,7 @@ namespace Algorithm
 
     // class Regularization
     Regularization::Regularization(double eps, bool verbose) noexcept
-      : eps_(eps), verbose_(verbose)
+      : Mixin::Eps(eps), Mixin::Verbosity(verbose)
     {}
 
     void Regularization::initializeRegularization() noexcept
@@ -33,11 +33,11 @@ namespace Algorithm
 
     void Regularization::updateRegularization(double qAq, double qPq)
     {
-      double oldTheta = theta > 0 ? theta : eps_;
+      double oldTheta = theta > 0 ? theta : eps();
       theta += (1-qAq)/std::abs(qPq);
-      if( verbose_ ) std::cout << "Computed regularization parameter: " << theta << std::endl;
+      if( verbose() ) std::cout << "Computed regularization parameter: " << theta << std::endl;
       theta = std::min(std::max(minIncrease*oldTheta,theta),maxIncrease*oldTheta);
-      if( verbose_ ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
+      if( verbose() ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
     }
   }
 }

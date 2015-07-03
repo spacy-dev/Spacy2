@@ -11,6 +11,8 @@
 #include "operator.hh"
 #include "functionSpaceElement.hh"
 #include "Util/Exceptions/singularOperatorException.hh"
+#include "Util/Mixins/eps.hh"
+#include "Util/Mixins/verbosity.hh"
 
 #include "cgTerminationCriteria.hh"
 
@@ -32,7 +34,7 @@ namespace Algorithm
     };
 
 
-    struct Regularization
+    struct Regularization : Mixin::Eps, Mixin::Verbosity
     {
       Regularization(double eps, bool verbose) noexcept;
 
@@ -49,16 +51,14 @@ namespace Algorithm
       }
 
     private:
-      double theta = 0, eps_ = 1e-16;
-      bool verbose_ = 0;
+      double theta = 0;
       unsigned maxIncrease = 1000, minIncrease = 2;
     };
 
 
     template <CGImplementationType Impl>
     using ChooseRegularization = typename std::conditional< ( Impl==CGImplementationType::STANDARD || Impl==CGImplementationType::TRUNCATED ),
-    NoRegularization,
-    Regularization >::type;
+    NoRegularization , Regularization >::type;
   } // end namespace CG_Detail
 
 
@@ -74,7 +74,7 @@ namespace Algorithm
    *
    */
   template<CGImplementationType Impl = CGImplementationType::STANDARD>
-  class CGBase : public CG_Detail::ChooseRegularization<Impl>
+  class CGBase : public CG_Detail::ChooseRegularization<Impl>, public Mixin::Verbosity
   {
     enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
   public:
@@ -88,10 +88,11 @@ namespace Algorithm
      */
     CGBase(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
-        A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >()), verbose(verbose_)
+        Mixin::Verbosity(verbose_),
+        A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >())
     {
       initPre();
-      terminate->setMaximalAttainableAccuracy(eps_);
+      terminate->setEps(eps_);
     }
 
     /**
@@ -101,7 +102,7 @@ namespace Algorithm
      */
     FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance)
     {
-      terminate->setTolerance(tolerance);
+      terminate->setRelativeAccuracy(tolerance);
       return solve(x,b);
     }
 
@@ -170,7 +171,6 @@ namespace Algorithm
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
-        std::cout << pre << "step " << step << std::endl;
         auto Aq = A_(q);
         auto qAq = Aq(q);//q*Aq;
         auto qPq = Pq(q);//q*Pq;
@@ -189,7 +189,7 @@ namespace Algorithm
         // convergence test
         if (*terminate)
         {
-          if( verbose ) std::cout << pre << "Terminating in iteration " << step << ".\n";
+          if( verbose() ) std::cout << pre << "Terminating in iteration " << step << ".\n";
           result = terminate->reachedMaximalNumberOfIterations() ? Result::Failed : Result::Converged;
           break;
         }
@@ -225,7 +225,7 @@ namespace Algorithm
     {
       if( terminate->vanishingStep() )
       {
-        if( verbose ) std::cout << pre << "Terminating due to numerically almost vanishing step." << std::endl;
+        if( verbose() ) std::cout << pre << "Terminating due to numerically almost vanishing step." << std::endl;
         result = Result::Converged;
         return true;
       }
@@ -242,7 +242,7 @@ namespace Algorithm
 
       if( Impl == CGImplementationType::STANDARD )
       {
-        if( verbose )
+        if( verbose() )
         {
           std::cout << pre << "Direction of negative curvature encountered in standard CG Implementation!" << std::endl;
           std::cout << pre << "Either something is wrong with your operator or you should use TCG, RCG or HCG. Terminating CG!" << std::endl;
@@ -256,7 +256,7 @@ namespace Algorithm
         // At least do something to retain a little chance to get out of the nonconvexity. If a nonconvexity is encountered in the first step something probably went wrong
         // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
         if( step == 1 ) x += q;
-        if( verbose ) std::cout << pre << "Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
+        if( verbose() ) std::cout << pre << "Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
         result = Result::TruncatedAtNonConvexity;
         return true;
       }
@@ -264,7 +264,7 @@ namespace Algorithm
       if( Impl == CGImplementationType::HYBRID || Impl == CGImplementationType::REGULARIZED )
       {
         this->updateRegularization(qAq,qPq);
-        if( verbose ) std::cout << pre << "Regularizing at nonconvexity in iteration " << step << "." << std::endl;
+        if( verbose() ) std::cout << pre << "Regularizing at nonconvexity in iteration " << step << "." << std::endl;
         result = Result::EncounteredNonConvexity;
         return true;
       }
@@ -273,8 +273,7 @@ namespace Algorithm
     const Operator& A_;
     const Operator& P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
-    bool verbose = false; ///
-    Result result = Result::Failed; ///< information on the way cg did terminate
+    Result result = Result::Failed; ///< information about reason for termination
     double energyNorm2 = 0.; ///< energy norm squared
     std::string pre = std::string("Algorithm CG: "); ///< output
   };

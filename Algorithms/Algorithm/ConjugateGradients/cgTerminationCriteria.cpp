@@ -8,7 +8,7 @@
 namespace Algorithm
 {
   CGTerminationCriterion::CGTerminationCriterion(unsigned maxIter) noexcept
-    : maximalNumberOfIterations_(maxIter)
+    : Mixin::MaxSteps(maxIter)
   {}
 
   CGTerminationCriterion::~CGTerminationCriterion() {}
@@ -34,22 +34,6 @@ namespace Algorithm
     return false;
   }
 
-  double CGTerminationCriterion::getMaximalAttainableAccuracy() const
-  {
-    assert("not implemented");
-    return 0.;
-  }
-
-  void CGTerminationCriterion::setMaximalNumberOfIterations(unsigned maxIter) noexcept
-  {
-    maximalNumberOfIterations_ = maxIter;
-  }
-
-  unsigned CGTerminationCriterion::getMaximalNumberOfIterations() const noexcept
-  {
-    return maximalNumberOfIterations_;
-  }
-
   bool CGTerminationCriterion::reachedMaximalNumberOfIterations() const noexcept
   {
     return reachedMaximalNumberOfIterations_;
@@ -57,18 +41,25 @@ namespace Algorithm
 
 
   StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, int maxit, double eps)
-    : CGTerminationCriterion(maxit), tol2(tol*tol), eps2(eps*eps)
-  {}
+    : CGTerminationCriterion(maxit)
+  {
+    setRelativeAccuracy(tol);
+    setEps(eps);
+    setMaxSteps(maxit);
+  }
 
 
   StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, double minTol, int maxit, double eps)
-    : CGTerminationCriterion(maxit), tol2(tol*tol), minTol2(minTol*minTol), eps2(eps*eps)
-  {}
+    : StrakosTichyEnergyErrorTerminationCriterion(tol,maxit,eps)
+  {
+    minTol2 = minTol*minTol;
+  }
 
 
   StrakosTichyEnergyErrorTerminationCriterion::operator bool() const
   {
-    return scaledGamma2.size() > maximalNumberOfIterations_ || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < std::max(tol2,eps2) );
+    auto tol = std::max( relativeAccuracy() , eps() );
+    return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
   }
 
 
@@ -81,23 +72,13 @@ namespace Algorithm
 
   bool StrakosTichyEnergyErrorTerminationCriterion::vanishingStep() const noexcept
   {
-    return stepLength2 < eps2 * energyNorm2 || stepLength2 == 0;
+    return stepLength2 < eps() * eps() * energyNorm2 || stepLength2 == 0;
   }
 
   void StrakosTichyEnergyErrorTerminationCriterion::clear() noexcept
   {
     scaledGamma2.clear();
     energyNorm2 = 0;
-  }
-
-  void StrakosTichyEnergyErrorTerminationCriterion::setTolerance(double tol) noexcept
-  {
-    tol2 = tol*tol;
-  }
-
-  double StrakosTichyEnergyErrorTerminationCriterion::getTolerance() const noexcept
-  {
-    return sqrt(tol2);
   }
 
   void StrakosTichyEnergyErrorTerminationCriterion::setMinimalTolerance(double tol) noexcept
@@ -109,16 +90,6 @@ namespace Algorithm
   double StrakosTichyEnergyErrorTerminationCriterion::getMinimalTolerance() const noexcept
   {
     return sqrt(minTol2);
-  }
-
-  void StrakosTichyEnergyErrorTerminationCriterion::setMaximalAttainableAccuracy(double eps) noexcept
-  {
-    eps2 = eps*eps;
-  }
-
-  double StrakosTichyEnergyErrorTerminationCriterion::getMaximalAttainableAccuracy() const noexcept
-  {
-    return sqrt(eps2);
   }
 
   void StrakosTichyEnergyErrorTerminationCriterion::setLookAhead(unsigned lookAhead) noexcept

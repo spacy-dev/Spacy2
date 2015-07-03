@@ -19,7 +19,7 @@ namespace Algorithm
     explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);
 
     /**
-     * @brief Compute scalar product \f$(x,y)\f$, where the particular scalar product is given by the function space to which x and y belong.
+     * @brief Compute scalar product \f$(x,y)\f$.
      */
     auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractScalarProduct>()(x.impl(),y.impl()));
   };

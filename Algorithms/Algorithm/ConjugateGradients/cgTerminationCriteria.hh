@@ -2,13 +2,14 @@
 #define ALGORITHM_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
 
 #include <vector>
+#include "Util/Mixins/mixins.hh"
 
 namespace Algorithm
 {
   /**
    * \brief Interface for termination criteria for conjugate gradient methods.
    */
-  class CGTerminationCriterion
+  class CGTerminationCriterion : public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps
   {
   public:
     explicit CGTerminationCriterion(unsigned maxIter = 1000) noexcept ;
@@ -40,24 +41,6 @@ namespace Algorithm
      */
     virtual void clear() = 0;
 
-    /**
-     * \brief set requested (relative) tolerance
-     *
-     * \param tol the requested (relative) tolerance
-     */
-    virtual void setTolerance(double tol) = 0;
-
-    /**
-     * \brief get requested (relative) tolerance
-     *
-     * \return the requested (relative) tolerance
-     */
-    virtual double getTolerance() const = 0;
-
-
-    void setMaximalNumberOfIterations(unsigned maxIter) noexcept;
-    unsigned getMaximalNumberOfIterations() const noexcept;
-
     bool reachedMaximalNumberOfIterations() const noexcept;
 
     /**
@@ -74,9 +57,6 @@ namespace Algorithm
      * \return the requested minimal (relative) tolerance
      */
     virtual double getMinimalTolerance() const;
-
-    virtual void setMaximalAttainableAccuracy(double eps) = 0;
-    virtual double getMaximalAttainableAccuracy() const;
 
     /**
      * @brief set look-ahead parameter if required by the termination criterion.
@@ -170,20 +150,6 @@ namespace Algorithm
     void clear() noexcept final override;
 
     /**
-     * \brief set requested (relative) tolerance
-     *
-     * \param tol the requested (relative) tolerance
-     */
-    void setTolerance(double tol) noexcept final override;
-
-    /**
-     * \brief get requested (relative) tolerance
-     *
-     * \return the requested (relative) tolerance
-     */
-    double getTolerance() const noexcept final override;
-
-    /**
      * \brief set requested minimal (relative) tolerance
      * Only required in the hybrid conjugate gradient method.
      *
@@ -197,11 +163,6 @@ namespace Algorithm
      * \return the requested minimal (relative) tolerance
      */
     double getMinimalTolerance() const noexcept final override;
-
-
-    void setMaximalAttainableAccuracy(double eps) noexcept final override;
-    double getMaximalAttainableAccuracy() const noexcept final override;
-
 
     /**
      * \brief set requested lookahead value
@@ -224,11 +185,11 @@ namespace Algorithm
      */
     double squaredRelativeError() const noexcept;
 
-    double tol2 = 1e-24, minTol2 = 0.0625;
+    double minTol2 = 0.0625;
     unsigned lookAhead_ = 10;
     std::vector<double> scaledGamma2 = std::vector<double>{};
     double energyNorm2 = 0;
-    double eps2 = 1e-30, stepLength2 = 0.;
+    double stepLength2 = 0.;
   };
 
   using RelativeEnergyError = StrakosTichyEnergyErrorTerminationCriterion;
