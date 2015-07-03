@@ -17,7 +17,7 @@ namespace Algorithm
     /**
      * @brief Construct differentiable functional from implementation.
      */
-    C1Functional(std::shared_ptr<AbstractC1Functional> impl);
+    C1Functional(std::unique_ptr<AbstractC1Functional>&& impl);
 
     /**
      * @brief Compute first directional derivative \f$F(x)'dx\f$ at \f$x\f$ in direction \f$dx\f$.
@@ -32,7 +32,7 @@ namespace Algorithm
   template <class Implementation, class... Args>
   C1Functional makeC1Functional(Args&&... args)
   {
-    return C1Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+    return C1Functional( std::make_unique<Implementation>(std::forward<Args>(args)...) );
   }
 }
 #endif // ALGORITHM_C1_FUNCTIONAL_HH

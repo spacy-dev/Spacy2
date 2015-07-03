@@ -1,11 +1,11 @@
 #ifndef ALGORITHM_ADAPTER_FENICS_HH
 #define ALGORITHM_ADAPTER_FENICS_HH
 
-#include "Fenics/fenics_c1Operator.hh"
-#include "Fenics/fenics_c2functional.hh"
-#include "Fenics/fenics_functionSpaceElement.hh"
-#include "Fenics/fenics_hilbertSpace.hh"
-#include "Fenics/fenics_scalarProducts.hh"
+#include "Fenics/c1Operator.hh"
+#include "Fenics/c2Functional.hh"
+#include "Fenics/hilbertSpace.hh"
+#include "Fenics/scalarProducts.hh"
+#include "Fenics/vector.hh"
 
 #endif // ALGORITHM_ADAPTER_FENICS_HH
 

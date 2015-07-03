@@ -23,18 +23,18 @@ namespace Algorithm
   {}
 
 
-  FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
-    : FunctionSpaceElement( clone(y.impl()) )
-  {}
+//  FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
+//    : FunctionSpaceElement( clone(y.impl()) )
+//  {}
 
-  FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
-  {
-    if( !implIsNullPtr() )
-      y.impl().copyTo(impl());
-    else
-      setImpl( clone( y.impl() ) );
-    return *this;
-  }
+//  FunctionSpaceElement& FunctionSpaceElement::operator=(const FunctionSpaceElement& y)
+//  {
+//    if( !implIsNullPtr() )
+//      y.impl().copyTo(impl());
+//    else
+//      setImpl( clone( y.impl() ) );
+//    return *this;
+//  }
 
   FunctionSpaceElement& FunctionSpaceElement::operator=(const AbstractFunctionSpaceElement& implementation)
   {

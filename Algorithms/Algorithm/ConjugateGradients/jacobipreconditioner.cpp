@@ -55,12 +55,12 @@ namespace Algorithm
 
   Operator jacobiPreconditioner(const Operator& A)
   {
-    return Operator(std::make_shared<JacobiPreconditioner>(A));
+    return Operator(std::make_unique<JacobiPreconditioner>(A));
   }
 
   Operator jacobiPreconditioner(const LinearOperator& A)
   {
-    return Operator(std::make_shared<JacobiPreconditioner>(A));
+    return Operator(std::make_unique<JacobiPreconditioner>(A));
   }
 
   std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const

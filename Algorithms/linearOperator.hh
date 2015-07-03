@@ -35,6 +35,8 @@ namespace Algorithm
     std::unique_ptr<AbstractLinearOperator> impl_;
   };
 
+  LinearSolver operator^(const LinearOperator& A, int k);
+
 //  class LinearizedOperator
 //  {
 //  public:

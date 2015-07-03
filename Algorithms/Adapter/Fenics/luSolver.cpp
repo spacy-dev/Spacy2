@@ -1,6 +1,6 @@
-#include "fenics_LUSolver.hh"
+#include "luSolver.hh"
 
-#include "fenics_functionSpaceElement.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
@@ -24,7 +24,7 @@ namespace Algorithm
     }
   }
 
-  Fenics_LUSolver::Fenics_LUSolver(const dolfin::GenericMatrix& A)
+  Fenics::LUSolver::LUSolver(const dolfin::GenericMatrix& A)
     : A_(std::make_unique<dolfin::Matrix>( A ))
   {
     auto parameters = default_parameters();
@@ -32,9 +32,9 @@ namespace Algorithm
     solver.parameters["symmetric"] = (bool) parameters["symmetric"];
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> Fenics_LUSolver::operator()(const AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<AbstractFunctionSpaceElement> Fenics::LUSolver::operator()(const AbstractFunctionSpaceElement& x) const
   {
-    const auto& x_ = fenics_Vector(x);
+    const auto& x_ = toVector(x);
     auto y = clone(x_);
 
     // Solve linear system

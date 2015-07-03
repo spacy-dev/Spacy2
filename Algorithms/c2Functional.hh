@@ -17,7 +17,7 @@ namespace Algorithm
     /**
      * @brief Construct twice differentiable functional from implementation.
      */
-    C2Functional(std::shared_ptr<AbstractC2Functional> impl);
+    C2Functional(std::unique_ptr<AbstractC2Functional>&& impl);
 
     /**
      * @brief Compute element of dual space \f$F(x)''dx\f$.
@@ -42,7 +42,7 @@ namespace Algorithm
   template <class Implementation, class... Args>
   C2Functional makeC2Functional(Args&&... args)
   {
-    return C2Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+    return C2Functional( std::make_unique<Implementation>(std::forward<Args>(args)...) );
   }
 }
 #endif // ALGORITHM_C2_FUNCTIONAL_HH

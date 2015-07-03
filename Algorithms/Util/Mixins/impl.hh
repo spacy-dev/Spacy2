@@ -5,6 +5,9 @@
 #include <utility>
 #include <stdexcept>
 
+#include "Util/voider.hh"
+#include "cloneable.hh"
+
 namespace Algorithm
 {
   namespace Mixin
@@ -64,11 +67,11 @@ namespace Algorithm
     template <class Type>
     using CRefImpl = Impl<const Type&>;
 
-    template <class Type>
-    class Impl< std::unique_ptr<Type> >
+    template < class Type , class = void >
+    class UniqueImpl
     {
     public:
-      explicit Impl(std::unique_ptr<Type>&& impl)
+      explicit UniqueImpl(std::unique_ptr<Type>&& impl)
         : impl_(std::move(impl))
       {}
 
@@ -104,16 +107,68 @@ namespace Algorithm
       std::unique_ptr<Type> impl_;
     };
 
-    template <class Type>
-    using UniqueImpl = Impl< std::unique_ptr<Type> >;
-
-    template <class Type>
-    class Impl< std::shared_ptr<Type> >
+    template < class Type >
+    class UniqueImpl< Type , std::enable_if_t<std::is_base_of<Cloneable<Type>,Type>::value> >
     {
     public:
-      Impl() = default;
+      explicit UniqueImpl(std::unique_ptr<Type>&& impl)
+        : impl_(std::move(impl))
+      {}
 
-      explicit Impl(std::shared_ptr<Type> impl)
+      UniqueImpl(const UniqueImpl& other)
+        : impl_(clone(other.impl()))
+      {}
+
+      UniqueImpl(UniqueImpl&&) = default;
+
+      UniqueImpl& operator=(const UniqueImpl& other)
+      {
+        impl_ = clone(other.impl());
+        return *this;
+      }
+
+      UniqueImpl& operator=(UniqueImpl&&) = default;
+
+      void setImpl(std::unique_ptr<Type>&& impl)
+      {
+        impl_ = std::move(impl);
+      }
+
+      /**
+     * @brief Access implementation.
+     */
+      Type& impl()
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::unique_ptr<...> >.");
+        return *impl_;
+      }
+
+      /**
+     * @brief Access implementation.
+     */
+      const Type& impl() const
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in Impl<std::unique_ptr<...> >.");
+        return *impl_;
+      }
+
+      bool implIsNullPtr() const
+      {
+        return impl_ == nullptr;
+      }
+
+    private:
+      std::unique_ptr<Type> impl_;
+    };
+
+
+    template <class Type>
+    class SharedImpl
+    {
+    public:
+      SharedImpl() = default;
+
+      explicit SharedImpl(std::shared_ptr<Type> impl)
         : impl_(impl)
       {}
 
@@ -145,9 +200,6 @@ namespace Algorithm
     private:
       std::shared_ptr<Type> impl_;
     };
-
-    template <class Type>
-    using SharedImpl = Impl< std::shared_ptr<Type> >;
   }
 }
 

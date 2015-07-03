@@ -1,12 +1,13 @@
 #include "functional.hh"
 
 #include "functionSpaceElement.hh"
-#include "Interface/Functional/abstractFunctional.hh"
+
+#include <utility>
 
 namespace Algorithm
 {
-  Functional::Functional(std::shared_ptr<AbstractFunctional> impl)
-    : Mixin::SharedImpl<AbstractFunctional>(impl)
+  Functional::Functional(std::unique_ptr<AbstractFunctional>&& impl)
+    : Mixin::UniqueImpl<AbstractFunctional>(std::move(impl))
   {}
 
   double Functional::operator()(const FunctionSpaceElement& x)

@@ -6,8 +6,8 @@
 
 namespace Algorithm
 {
-  C1Functional::C1Functional(std::shared_ptr<AbstractC1Functional> impl)
-    : Functional(std::static_pointer_cast<AbstractFunctional>(impl))
+  C1Functional::C1Functional(std::unique_ptr<AbstractC1Functional>&& impl)
+    : Functional(std::unique_ptr<AbstractFunctional>(impl.release()))
   {}
 
   double C1Functional::d1(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const

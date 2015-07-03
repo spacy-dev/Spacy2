@@ -44,8 +44,8 @@ namespace Algorithm
 
   Newton localNewton(const C1Operator& F);
 
-  Newton affineCovariantNewton(const C1Operator& F);
+  Newton covariantNewton(const C1Operator& F);
 
-  Newton affineContravariantNewton(const C1Operator& F);
+  Newton contravariantNewton(const C1Operator& F);
 }
 #endif // ALGORITHM_ALGORITHM_NEWTON_HH

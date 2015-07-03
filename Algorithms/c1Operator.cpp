@@ -6,8 +6,8 @@
 
 namespace Algorithm
 {
-  C1Operator::C1Operator(std::shared_ptr<AbstractC1Operator> impl)
-    : Operator(std::static_pointer_cast<AbstractOperator>(impl))
+  C1Operator::C1Operator(std::unique_ptr<AbstractC1Operator>&& impl)
+    : Operator(std::unique_ptr<AbstractOperator>(impl.release()))
   {}
 
   FunctionSpaceElement C1Operator::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const

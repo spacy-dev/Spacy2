@@ -35,10 +35,10 @@ namespace Algorithm
     {
       if( verbose() ) std::cout << "Iteration: " << i << ", ";
 
-      LinearSolver DFInv(F_.getLinearization(x));
+      auto DF = F_.getLinearization(x);
 
-      auto dx = DFInv(-F_(x));
-      auto nu = dampingFactor_(DFInv,x,dx);
+      auto dx = (DF^-1)(-F_(x));
+      auto nu = dampingFactor_(DF^-1,x,dx);
       x += nu*dx;
 
       if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
@@ -59,12 +59,12 @@ namespace Algorithm
     return newton;
   }
 
-  Newton affineCovariantNewton(const C1Operator& F)
+  Newton covariantNewton(const C1Operator& F)
   {
     return Newton( F );
   }
 
-  Newton affineContravariantNewton(const C1Operator& F)
+  Newton contravariantNewton(const C1Operator& F)
   {
     auto newton = Newton( F );
     newton.setDampingStrategy<Newton_DampingStrategy::AffineContravariant>();

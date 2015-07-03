@@ -10,10 +10,10 @@ namespace Algorithm
 {
   class FunctionSpaceElement;
 
-  class Operator : public Mixin::SharedImpl<AbstractOperator>
+  class Operator : public Mixin::UniqueImpl<AbstractOperator>
   {
   public:
-    Operator(std::shared_ptr<AbstractOperator> impl);
+    Operator(std::unique_ptr<AbstractOperator>&& impl);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
   };
@@ -21,7 +21,7 @@ namespace Algorithm
   template <class Implementation, class... Args>
   Operator makeOperator(Args&&... args)
   {
-    return Operator( std::make_shared<Implementation>(std::forward<Args>(args)...) );
+    return Operator( std::make_unique<Implementation>(std::forward<Args>(args)...) );
   }
 }
 #endif // ALGORITHM_OPERATOR_HH

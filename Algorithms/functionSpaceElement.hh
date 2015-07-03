@@ -46,12 +46,12 @@ namespace Algorithm
     /**
      * @brief Copy constructor.
      */
-    FunctionSpaceElement(const FunctionSpaceElement&);
+    FunctionSpaceElement(const FunctionSpaceElement&) = default;
 
     /**
      * @brief Copy assignment.
      */
-    FunctionSpaceElement& operator=(const FunctionSpaceElement&);
+    FunctionSpaceElement& operator=(const FunctionSpaceElement&) = default;
 
     /**
      * @brief Assign from implementation.
