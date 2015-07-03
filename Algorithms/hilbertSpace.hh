@@ -20,7 +20,7 @@ namespace Algorithm
   {
   public:
     /**
-     * @brief Construct function space from implementation derived from AbstractBanachSpace.
+     * @brief Construct function space from implementation derived from AbstractHilbertSpace.
      */
     explicit HilbertSpace(std::shared_ptr<AbstractHilbertSpace> implementation);
 
@@ -38,6 +38,10 @@ namespace Algorithm
     ScalarProduct sp_;
   };
 
+  /**
+   * @brief Convenient generation of hilbert space from implementation arguments.
+   * @return HilbertSpace(std::make_shared<Implementation>(std::forward<Args>(args)...))
+   */
   template <class Implementation, class... Args>
   auto makeHilbertSpace(Args&&... args)
   {

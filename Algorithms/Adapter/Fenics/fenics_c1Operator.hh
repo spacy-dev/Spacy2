@@ -36,7 +36,7 @@ namespace Algorithm
     std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override
     {
       const auto& x_ = fenics_Vector(x);
-      assemble(x_);
+      assembleF(x_);
       auto y = clone(x_);
       *y->impl().vector() = *b_;
 
@@ -48,7 +48,7 @@ namespace Algorithm
       const auto& x_ = fenics_Vector(x);
       const auto& dx_ = fenics_Vector(dx);
 
-      assemble(x_);
+      assembleJ(x_);
       auto y = clone(x_);
       A_->mult(*dx_.impl().vector(), *y->impl().vector());
 
@@ -56,29 +56,42 @@ namespace Algorithm
     }
 
   private:
-    void assemble(const Fenics_Vector& x) const
+    void assembleF(const Fenics_Vector& x) const
     {
-      if( F_ == nullptr || J_ == nullptr ) return;
+      if( F_ == nullptr ) return;
 
-      if( oldX_ != nullptr && oldX_->equals(x) ) return;
-      oldX_ = clone(x);
+      if( oldX_F != nullptr && oldX_F->equals(x) ) return;
+      oldX_F = clone(x);
 
       F_->u = x.impl();
-      J_->u = x.impl();
-      A_ = x.impl().vector()->factory().create_matrix();
       b_ = x.impl().vector()->factory().create_vector();
 
       // Assemble right-hand side
       dolfin::Assembler assembler;
       assembler.assemble(*b_, *F_);
+
+      // Apply boundary conditions
+      for(const auto& bc : bcs_)
+        bc->apply( *b_ , *x.impl().vector() );
+    }
+
+    void assembleJ(const Fenics_Vector& x) const
+    {
+      if( J_ == nullptr ) return;
+
+      if( oldX_J != nullptr && oldX_J->equals(x) ) return;
+      oldX_J = clone(x);
+
+      J_->u = x.impl();
+      A_ = x.impl().vector()->factory().create_matrix();
+
+      // Assemble right-hand side
+      dolfin::Assembler assembler;
       assembler.assemble(*A_, *J_);
 
       // Apply boundary conditions
       for(const auto& bc : bcs_)
-      {
-        bc->apply( *b_ , *x.impl().vector() );
         bc->apply( *A_ );
-      }
 
       solver_ = std::make_shared<Fenics_LUSolver>( *A_ );
     }
@@ -90,7 +103,8 @@ namespace Algorithm
 
     LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const
     {
-      assemble(fenics_Vector(x));
+      assembleF(fenics_Vector(x));
+      assembleJ(fenics_Vector(x));
       return LinearizedOperator(clone(*this),x,solver_);
     }
 
@@ -99,7 +113,7 @@ namespace Algorithm
     std::vector<const dolfin::DirichletBC*> bcs_;
     mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
     mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-    mutable std::unique_ptr<Fenics_Vector> oldX_ = nullptr;
+    mutable std::unique_ptr<Fenics_Vector> oldX_F, oldX_J = nullptr;
   };
 
   template <class ResidualForm, class JacobianForm>
