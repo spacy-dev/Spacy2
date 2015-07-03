@@ -3,15 +3,17 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "functionSpaceElement.hh"
 
+#include <utility>
+
 namespace Algorithm
 {
   BanachSpace::BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation)
     : Mixin::SharedImpl<AbstractBanachSpace>(implementation), norm_(impl().getSharedNorm())
   {}
 
-  void BanachSpace::setNorm(const Norm &norm)
+  void BanachSpace::setNorm(Norm&& norm)
   {
-    norm_ = norm;
+    norm_ = std::move(norm);
   }
 
   const Norm& BanachSpace::getNorm() const

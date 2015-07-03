@@ -21,6 +21,12 @@ namespace Algorithm
      */
     explicit HilbertSpaceNorm(std::shared_ptr<Algorithm::AbstractScalarProduct> sp);
 
+    HilbertSpaceNorm(const HilbertSpaceNorm&) = delete;
+    HilbertSpaceNorm& operator=(const HilbertSpaceNorm&) = delete;
+
+    HilbertSpaceNorm(HilbertSpaceNorm&&) = default;
+    HilbertSpaceNorm& operator=(HilbertSpaceNorm&&) = default;
+
     /// Compute \f$(x,y)\f$.
     double scalarProduct(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const;
 

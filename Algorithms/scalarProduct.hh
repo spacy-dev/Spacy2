@@ -18,6 +18,12 @@ namespace Algorithm
   public:
     explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);
 
+    ScalarProduct(const ScalarProduct&) = delete;
+    ScalarProduct& operator=(const ScalarProduct&) = delete;
+
+    ScalarProduct(ScalarProduct&&) = default;
+    ScalarProduct& operator=(ScalarProduct&&) = default;
+
     /**
      * @brief Compute scalar product \f$(x,y)\f$.
      */

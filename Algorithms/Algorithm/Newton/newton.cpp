@@ -9,6 +9,7 @@
 #include "dampingStrategies.hh"
 #include "Algorithm/terminationCriteria.hh"
 
+#include <chrono>
 #include <iostream>
 
 namespace Algorithm
@@ -26,14 +27,15 @@ namespace Algorithm
 
   FunctionSpaceElement Newton::solve(const FunctionSpaceElement& x0) const
   {
-    if( verbose() ) std::cout << "Starting newton iteration with initial guess: " << x0;
-
+    using namespace std::chrono;
+    if( verbose() ) std::cout << "Starting newton iteration." << std::endl;
+    auto startTime = high_resolution_clock::now();
     norm_ = Norm( x0.impl().getSpace().getSharedNorm() );
 
     auto x = x0;
     for(unsigned i = 1; i <= maxSteps(); ++i)
     {
-      if( verbose() ) std::cout << "Iteration: " << i << ", ";
+      if( verbose() ) std::cout << "Iteration " << i << ": ";
 
       auto DF = F_.getLinearization(x);
 
@@ -43,9 +45,13 @@ namespace Algorithm
 
       if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
 
-      if( verbose() ) std::cout << "nu = " << nu << ", |dx| = " << norm_(dx) << ", |x| = " << norm_(x) << std::endl;
+      if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm_(x) << ", |dx| = " << norm_(dx) << std::endl;
 
-      if( terminationCriterion_(nu,x,dx)) return x;
+      if( terminationCriterion_(nu,x,dx))
+      {
+        if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
+        return x;
+      }
     }
 
     return x;

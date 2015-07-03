@@ -20,6 +20,12 @@ namespace Algorithm
 
     LinearSolver(std::shared_ptr<AbstractLinearSolver> impl);
 
+    LinearSolver(const LinearSolver&) = delete;
+    LinearSolver& operator=(const LinearSolver&) = delete;
+
+    LinearSolver(LinearSolver&&) = default;
+    LinearSolver& operator=(LinearSolver&&) = default;
+
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
   };
 

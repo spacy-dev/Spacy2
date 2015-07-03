@@ -32,7 +32,7 @@ namespace Algorithm
     /**
      * @brief Change norm of space.
      */
-    void setNorm(const Norm& norm);
+    void setNorm(Norm&& norm);
 
     /**
      * @brief Access norm.

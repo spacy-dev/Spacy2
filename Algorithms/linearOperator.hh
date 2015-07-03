@@ -10,29 +10,18 @@
 
 namespace Algorithm
 {
-  class LinearizedOperator;
-
   class LinearOperator : public Operator
   {
   public:
     LinearOperator(const AbstractLinearOperator& impl);
 
-    LinearOperator(const LinearizedOperator& impl);
+//    LinearOperator(const LinearOperator&);
 
-    LinearOperator(const LinearOperator&);
+//    LinearOperator& operator=(const LinearOperator&);
 
-    LinearOperator& operator=(const LinearOperator&);
-
-    FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
+//    FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
 
     LinearSolver getSolver() const;
-
-    AbstractLinearOperator& impl();
-
-    const AbstractLinearOperator& impl() const;
-
-  private:
-    std::unique_ptr<AbstractLinearOperator> impl_;
   };
 
   LinearSolver operator^(const LinearOperator& A, int k);

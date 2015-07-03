@@ -19,6 +19,12 @@ namespace Algorithm
     Norm() = default;
     explicit Norm(std::shared_ptr<AbstractNorm> implementation);
 
+    Norm(const Norm&) = delete;
+    Norm& operator=(const Norm&) = delete;
+
+    Norm(Norm&&) = default;
+    Norm& operator=(Norm&&) = default;
+
     /**
      * @brief Compute \f$\|x\|\f$.
      */
