@@ -51,7 +51,7 @@ namespace Algorithm
     /**
      * @brief Copy assignment.
      */
-    FunctionSpaceElement& operator=(const FunctionSpaceElement&) = default;
+    FunctionSpaceElement& operator=(const FunctionSpaceElement&);
 
     /**
      * @brief Assign from implementation.
