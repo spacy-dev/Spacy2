@@ -7,35 +7,38 @@
 
 namespace Algorithm
 {
-  class AbstractBanachSpace;
-  class AbstractFunctionSpaceElement;
-
-  class AbstractOperator : public Mixin::Cloneable<AbstractOperator>
+  namespace Interface
   {
-  public:
-    using Base = AbstractOperator;
+    class AbstractBanachSpace;
+    class AbstractFunctionSpaceElement;
 
-    AbstractOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+    class AbstractOperator : public Mixin::Cloneable<AbstractOperator>
+    {
+    public:
+      using Base = AbstractOperator;
 
-    virtual ~AbstractOperator();
-    
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
+      AbstractOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-    AbstractBanachSpace& getDomain();
+      virtual ~AbstractOperator();
 
-    const AbstractBanachSpace& getDomain() const;
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
-    AbstractBanachSpace& getRange();
+      AbstractBanachSpace& getDomain();
 
-    const AbstractBanachSpace& getRange() const;
+      const AbstractBanachSpace& getDomain() const;
 
-    std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+      AbstractBanachSpace& getRange();
 
-    std::shared_ptr<AbstractBanachSpace> getSharedRange() const;
+      const AbstractBanachSpace& getRange() const;
 
-  private:
-    std::shared_ptr<AbstractBanachSpace> domain_, range_;
-  };
+      std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+
+      std::shared_ptr<AbstractBanachSpace> getSharedRange() const;
+
+    private:
+      std::shared_ptr<AbstractBanachSpace> domain_, range_;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_OPERATOR_HH

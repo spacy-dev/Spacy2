@@ -5,6 +5,8 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractFunctionSpaceElement;
+
   CGSolver::CGSolver(const Operator &A)
     : P_(jacobiPreconditioner(A)),
       cg(A,P_)

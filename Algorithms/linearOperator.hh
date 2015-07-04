@@ -13,7 +13,7 @@ namespace Algorithm
   class LinearOperator : public Operator
   {
   public:
-    LinearOperator(const AbstractLinearOperator& impl);
+    LinearOperator(const Interface::AbstractLinearOperator& impl);
 
 //    LinearOperator(const LinearOperator&);
 

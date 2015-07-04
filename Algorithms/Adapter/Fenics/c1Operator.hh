@@ -21,11 +21,11 @@ namespace Algorithm
   namespace Fenics
   {
     template <class ResidualForm, class JacobianForm>
-    class C1Operator : public AbstractC1Operator
+    class C1Operator : public Interface::AbstractC1Operator
     {
     public:
-      C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<AbstractBanachSpace> space)
-        : AbstractC1Operator( space , space ),
+      C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
+        : Interface::AbstractC1Operator( space , space ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
           bcs_( bcs )
@@ -38,17 +38,17 @@ namespace Algorithm
         : C1Operator(F,J,bcs,space.sharedImpl())
       {}
 
-      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
         const auto& x_ = toVector(x);
         assembleF(x_);
         auto y = clone(x_);
         *y->impl().vector() = *b_;
 
-        return std::unique_ptr<AbstractFunctionSpaceElement>( y.release() );
+        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
       }
 
-      std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx) const final override
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
         const auto& x_ = toVector(x);
         const auto& dx_ = toVector(dx);
@@ -57,7 +57,7 @@ namespace Algorithm
         auto y = clone(x_);
         A_->mult(*dx_.impl().vector(), *y->impl().vector());
 
-        return std::unique_ptr<AbstractFunctionSpaceElement>( y.release() );
+        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
       }
 
     private:
@@ -102,11 +102,11 @@ namespace Algorithm
         return new C1Operator(F_,J_,bcs_,getSharedDomain());
       }
 
-      LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const
+      Interface::LinearizedOperator makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
       {
         assembleF(toVector(x));
         assembleJ(toVector(x));
-        return LinearizedOperator(clone(*this),x,solver_);
+        return Interface::LinearizedOperator(clone(*this),x,solver_);
       }
 
       mutable ResidualForm F_;

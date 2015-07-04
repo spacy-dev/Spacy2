@@ -10,6 +10,8 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractFunctionSpaceElement;
+
   FunctionSpaceElement::FunctionSpaceElement()
     : Mixin::UniqueImpl<AbstractFunctionSpaceElement>(nullptr)
   {}

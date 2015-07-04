@@ -7,10 +7,10 @@
 namespace Algorithm
 {
   /// Scalar product for RealSpace.
-  class RealProduct : public AbstractScalarProduct
+  class RealProduct : public Interface::AbstractScalarProduct
   {
     /// Compute x*y.
-    double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+    double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
   };
 }
 

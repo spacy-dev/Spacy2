@@ -5,17 +5,17 @@
 
 namespace Algorithm
 {
-  LinearizedFunctional::LinearizedFunctional(const AbstractC2Functional &A, const AbstractFunctionSpaceElement& x)
-    : AbstractFunctional(A.getSharedDomain()), A_(A), x_(x)
+  Interface::LinearizedFunctional::LinearizedFunctional(const Interface::AbstractC2Functional &A, const Interface::AbstractFunctionSpaceElement& x)
+    : Interface::AbstractFunctional(A.getSharedDomain()), A_(A), x_(x)
   {}
 
-  double LinearizedFunctional::d0(const AbstractFunctionSpaceElement& dx) const
+  double Interface::LinearizedFunctional::d0(const Interface::AbstractFunctionSpaceElement& dx) const
   {
     return A_.d1(x_,dx);
   }
 
-  LinearizedFunctional* LinearizedFunctional::cloneImpl() const
+  Interface::LinearizedFunctional* Interface::LinearizedFunctional::cloneImpl() const
   {
-    return new LinearizedFunctional(A_,x_);
+    return new Interface::LinearizedFunctional(A_,x_);
   }
 }

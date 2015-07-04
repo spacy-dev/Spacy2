@@ -13,13 +13,13 @@ namespace Algorithm
   /**
    * @brief A functional \f$F\f$.
    */
-  class Functional : public Mixin::UniqueImpl<AbstractFunctional>
+  class Functional : public Mixin::UniqueImpl<Interface::AbstractFunctional>
   {
   public:
     /**
      * @brief Construct functional from implementation.
      */
-    Functional(std::unique_ptr<Algorithm::AbstractFunctional>&& impl);
+    Functional(std::unique_ptr<Interface::AbstractFunctional>&& impl);
 
     /**
      * @brief Evaluate functional \f$F\f$ at \f$x\f$.

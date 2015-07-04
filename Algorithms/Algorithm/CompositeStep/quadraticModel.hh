@@ -4,6 +4,8 @@
 #include <cassert>
 #include <limits>
 
+#include "Util/Mixins/eps.hh"
+
 namespace Algorithm
 {
   class ScalarProduct;
@@ -23,7 +25,7 @@ namespace Algorithm
       double constant_, linear_, quadratic_;
     };
 
-    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional& f);
+    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional& f, const FunctionSpaceElement& x);
 
     QuadraticModel makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp);
 
@@ -40,7 +42,7 @@ namespace Algorithm
       double omega_;
     };
 
-    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const LagrangeFunctional& f, double omega);
+    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const LagrangeFunctional& f, const FunctionSpaceElement& x, double omega);
 
     template <class Model>
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)
@@ -61,20 +63,6 @@ namespace Algorithm
 
       return tmin;
     }
-
-
-    class LipschitzConstant
-    {
-    public:
-
-      LipschitzConstant& operator=(double newOmega);
-
-      operator double() const;
-
-
-    private:
-      double omega = 1e-3, omegaMin = 1e-15, omegaOld = 1e-3, maxFactor = 1e6;
-    };
   }
 }
 

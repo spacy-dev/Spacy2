@@ -11,9 +11,9 @@
 namespace Algorithm
 {
   template <class Vector>
-  class l2Product : public AbstractScalarProduct
+  class l2Product : public Interface::AbstractScalarProduct
   {
-    double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override
+    double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override
     {
       if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("l2Product",x.spaceIndex(),y.spaceIndex());
       if( dynamic_cast<const VectorSpaceElement<Vector>*>(&x) == nullptr || dynamic_cast<const VectorSpaceElement<Vector>*>(&y) == nullptr ) throw InvalidArgumentException("l2Product");

@@ -11,6 +11,9 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpaceElement;
+
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
                                                          std::shared_ptr<AbstractBanachSpace> domain)
     : AbstractC2Functional(domain),

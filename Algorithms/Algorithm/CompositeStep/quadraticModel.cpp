@@ -21,11 +21,11 @@ namespace Algorithm
     }
 
 
-    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional &L)
+    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional &L, const FunctionSpaceElement& x)
     {
-      auto constant = nu*L.d1(primal(dn)) + 0.5*nu*nu*L.d2(primal(dn),primal(dn));
-      auto linear = L.d1(primal(dt)) + nu*L.d2(dn,dt);
-      auto quadratic = 0.5*L.d2(primal(dt),primal(dt));
+      auto constant = nu*L.d1(x,primal(dn)) + 0.5*nu*nu*L.d2(x,primal(dn),primal(dn));
+      auto linear = L.d1(x,primal(dt)) + nu*L.d2(x,dn,dt);
+      auto quadratic = 0.5*L.d2(x,primal(dt),primal(dt));
 
       return QuadraticModel( constant, linear, quadratic );
     }
@@ -36,9 +36,10 @@ namespace Algorithm
       return QuadraticModel( sp(primal(dn),primal(dn))*nu*nu , sp(primal(dn),primal(dt))*2*nu , sp(primal(dt),primal(dt)) );
     }
 
-    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const LagrangeFunctional& f, double omega)
+    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp,
+                              const LagrangeFunctional& f, const FunctionSpaceElement& x, double omega)
     {
-      return CubicModel( makeQuadraticModel(nu,dn,dt,f), makeQuadraticNormModel(nu,dn,dt,sp), omega );
+      return CubicModel( makeQuadraticModel(nu,dn,dt,f,x), makeQuadraticNormModel(nu,dn,dt,sp), omega );
     }
 
     CubicModel::CubicModel(const QuadraticModel& quadraticModel, const QuadraticModel& squaredNorm, double omega)
@@ -48,22 +49,6 @@ namespace Algorithm
     double CubicModel::operator()(double t) const
     {
       return quadraticModel_(t) + omega_/6 * pow( squaredNorm_(t), 1.5 );
-    }
-
-
-    LipschitzConstant& LipschitzConstant::operator=(double newOmega)
-    {
-      omegaOld = omega;
-      if( newOmega < 0 ) omega = 0.1*omegaOld;
-
-      omega = std::max(omega,omegaMin);
-      omega = std::min(omega,omegaOld*maxFactor);
-      return *this;
-    }
-
-    LipschitzConstant::operator double() const
-    {
-      return omega;
     }
   }
 }

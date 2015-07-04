@@ -9,7 +9,8 @@
 
 namespace Algorithm
 {
-  class AbstractC2Operator;
+  namespace Interface { class AbstractC2Operator; }
+
   class FunctionSpace;
 
   /**
@@ -21,7 +22,7 @@ namespace Algorithm
     /**
      * @brief Construct twice differentiable operator \f$A\f$ from implementation.
      */
-    C2Operator(std::unique_ptr<AbstractC2Operator>&& impl);
+    C2Operator(std::unique_ptr<Interface::AbstractC2Operator>&& impl);
 
     /**
      * @brief Compute second directional derivative \f$A(x)'(dx,dy)\f$ at \f$x\f$ in direction \f$dx\f$ and \f$dy\f$.

@@ -12,17 +12,17 @@ namespace Algorithm
 {
   namespace Fenics
   {
-    class l2ScalarProduct : public AbstractScalarProduct
+    class l2ScalarProduct : public Interface::AbstractScalarProduct
     {
     public:
-      double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
     };
 
-    class EnergyScalarProduct : public AbstractScalarProduct
+    class EnergyScalarProduct : public Interface::AbstractScalarProduct
     {
     public:
       explicit EnergyScalarProduct(const dolfin::GenericMatrix& A);
-      double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
 
     private:
       const dolfin::GenericMatrix& A_;

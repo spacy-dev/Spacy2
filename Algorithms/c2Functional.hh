@@ -5,7 +5,8 @@
 
 namespace Algorithm
 {
-  class AbstractC2Functional;
+  namespace Interface{ class AbstractC2Functional; }
+
   class C1Operator;
 
   /**
@@ -17,7 +18,7 @@ namespace Algorithm
     /**
      * @brief Construct twice differentiable functional from implementation.
      */
-    C2Functional(std::unique_ptr<AbstractC2Functional>&& impl);
+    C2Functional(std::unique_ptr<Interface::AbstractC2Functional>&& impl);
 
     /**
      * @brief Compute element of dual space \f$F(x)''dx\f$.
@@ -33,6 +34,16 @@ namespace Algorithm
      * @brief Get \f$dF(x,dx) = F(x)'dx\f$.
      */
     C1Operator getDerivative() const;
+
+    /**
+     * \brief Access implementation.
+     */
+    Interface::AbstractC2Functional& impl();
+
+    /**
+     * \brief Access implementation.
+     */
+    const Interface::AbstractC2Functional& impl() const;
   };
 
   /**

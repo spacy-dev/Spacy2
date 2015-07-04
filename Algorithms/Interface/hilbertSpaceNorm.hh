@@ -1,0 +1,47 @@
+#ifndef ALGORITHM_INTERFACE_HILBERTSPACENORM_HH
+#define ALGORITHM_INTERFACE_HILBERTSPACENORM_HH
+
+#include <memory>
+
+#include "Interface/abstractNorm.hh"
+
+namespace Algorithm
+{
+  namespace Interface
+  {
+    class AbstractScalarProduct;
+    class AbstractFunctionSpaceElement;
+
+    /**
+   * @brief Norm induced by a scalar product.
+   */
+    class HilbertSpaceNorm : public AbstractNorm
+    {
+    public:
+      /**
+     * @brief Construct Hilbert space norm from a scalar product.
+     */
+      explicit HilbertSpaceNorm(std::shared_ptr<AbstractScalarProduct> sp);
+
+      HilbertSpaceNorm(const HilbertSpaceNorm&) = delete;
+      HilbertSpaceNorm& operator=(const HilbertSpaceNorm&) = delete;
+
+      HilbertSpaceNorm(HilbertSpaceNorm&&) = default;
+      HilbertSpaceNorm& operator=(HilbertSpaceNorm&&) = default;
+
+      /// Compute \f$(x,y)\f$.
+      double scalarProduct(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const;
+
+      /// Compute \f$\|x\|\f$.
+      double operator()(const AbstractFunctionSpaceElement& x) const final override;
+
+      /// Compute \f$\|x\|^2=(x,x)\f$.
+      double squared(const AbstractFunctionSpaceElement& x) const final override;
+
+    private:
+      std::shared_ptr<AbstractScalarProduct> sp_;
+    };
+  }
+}
+
+#endif // ALGORITHM_INTERFACE_HILBERTSPACENORM_HH

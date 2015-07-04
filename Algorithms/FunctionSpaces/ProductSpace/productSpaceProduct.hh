@@ -5,14 +5,14 @@
 
 namespace Algorithm
 {
-  class AbstractFunctionSpaceElement;
+  namespace Interface { class AbstractFunctionSpaceElement; }
 
   /// Scalar product for RealSpace.
-  class ProductSpaceProduct : public AbstractScalarProduct
+  class ProductSpaceProduct : public Interface::AbstractScalarProduct
   {
   public:
     /// Compute x*y.
-    double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+    double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
   };
 }
 

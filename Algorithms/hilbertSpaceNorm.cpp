@@ -1,28 +1,18 @@
 #include "hilbertSpaceNorm.hh"
 
-#include "Interface/abstractScalarProduct.hh"
-#include "Interface/abstractFunctionSpaceElement.hh"
-
-#include <cmath>
-
 namespace Algorithm
 {
-  HilbertSpaceNorm::HilbertSpaceNorm(std::shared_ptr<AbstractScalarProduct> sp)
-    : sp_(sp)
+  HilbertSpaceNorm::HilbertSpaceNorm(std::shared_ptr<Interface::HilbertSpaceNorm> implementation)
+    : Norm(std::static_pointer_cast<Interface::AbstractNorm>(implementation))
   {}
 
-  double HilbertSpaceNorm::operator()(const AbstractFunctionSpaceElement& x) const
+  double HilbertSpaceNorm::scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const
   {
-    return sqrt((*sp_)(x,x));
+    return dynamic_cast<const Interface::HilbertSpaceNorm&>(impl()).scalarProduct( x.impl() , y.impl() );
   }
 
-  double HilbertSpaceNorm::squared(const AbstractFunctionSpaceElement &x) const
+  double HilbertSpaceNorm::squared(const FunctionSpaceElement& x) const
   {
-    return (*sp_)(x,x);
-  }
-
-  double HilbertSpaceNorm::scalarProduct(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &y) const
-  {
-    return (*sp_)(x,y);
+    return scalarProduct(x,x);
   }
 }

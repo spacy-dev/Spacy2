@@ -7,22 +7,25 @@
 
 namespace Algorithm
 {
-  class AbstractC2Functional;
-  class AbstractFunctionSpaceElement;
-
-  class LinearizedFunctional : public AbstractFunctional
+  namespace Interface
   {
-  public:
-    LinearizedFunctional(const AbstractC2Functional& A, const AbstractFunctionSpaceElement& x);
+    class AbstractC2Functional;
+    class AbstractFunctionSpaceElement;
 
-  private:
-    double d0(const AbstractFunctionSpaceElement& dx) const final override;
+    class LinearizedFunctional : public AbstractFunctional
+    {
+    public:
+      LinearizedFunctional(const AbstractC2Functional& A, const AbstractFunctionSpaceElement& x);
 
-    LinearizedFunctional* cloneImpl() const;
+    private:
+      double d0(const AbstractFunctionSpaceElement& dx) const final override;
 
-    const AbstractC2Functional& A_;
-    const AbstractFunctionSpaceElement& x_;
-  };
+      LinearizedFunctional* cloneImpl() const;
+
+      const AbstractC2Functional& A_;
+      const AbstractFunctionSpaceElement& x_;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_LINEARIZED_FUNCTIONAL_HH

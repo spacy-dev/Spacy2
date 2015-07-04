@@ -5,27 +5,29 @@
 
 namespace Algorithm
 {
-  AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain)
-    : domain_(domain)
-  {}
-
-  AbstractFunctional::~AbstractFunctional(){}
-
-  double AbstractFunctional::operator ()(const AbstractFunctionSpaceElement& x) const
+  namespace Interface
   {
-    if( getDomain().index() != x.getSpace().index() ) throw InvalidArgumentException("AbstractFunctional::operator() (incompatible space ids)");
+    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain)
+      : domain_(domain)
+    {}
 
-    return d0(x);
+    AbstractFunctional::~AbstractFunctional(){}
+
+    double AbstractFunctional::operator ()(const AbstractFunctionSpaceElement& x) const
+    {
+      if( getDomain().index() != x.getSpace().index() ) throw InvalidArgumentException("AbstractFunctional::operator() (incompatible space ids)");
+
+      return d0(x);
+    }
+
+    const AbstractBanachSpace& AbstractFunctional::getDomain() const
+    {
+      return *domain_;
+    }
+
+    std::shared_ptr<AbstractBanachSpace> AbstractFunctional::getSharedDomain() const
+    {
+      return domain_;
+    }
   }
-
-  const AbstractBanachSpace& AbstractFunctional::getDomain() const
-  {
-    return *domain_;
-  }
-
-  std::shared_ptr<AbstractBanachSpace> AbstractFunctional::getSharedDomain() const
-  {
-    return domain_;
-  }
-
 }

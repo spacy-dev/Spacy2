@@ -7,12 +7,12 @@ namespace Algorithm
 {
   class C0Operator;
 
-  class RealSolver : public AbstractLinearSolver
+  class RealSolver : public Interface::AbstractLinearSolver
   {
   public:
     RealSolver(double value);
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& y) const final override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& y) const final override;
 
   private:
     double value_;

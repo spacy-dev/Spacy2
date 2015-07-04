@@ -3,17 +3,20 @@
 
 namespace Algorithm
 {
-  class AbstractFunctionSpaceElement;
-
-  class AbstractNorm
+  namespace Interface
   {
-  public:
-    virtual ~AbstractNorm(){}
+    class AbstractFunctionSpaceElement;
 
-    virtual double operator()(const AbstractFunctionSpaceElement&) const = 0;
+    class AbstractNorm
+    {
+    public:
+      virtual ~AbstractNorm(){}
 
-    virtual double squared(const AbstractFunctionSpaceElement&) const = 0;
-  };
+      virtual double operator()(const AbstractFunctionSpaceElement&) const = 0;
+
+      virtual double squared(const AbstractFunctionSpaceElement&) const = 0;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_NORM_HH

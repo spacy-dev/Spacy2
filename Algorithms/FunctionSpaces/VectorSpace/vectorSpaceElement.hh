@@ -106,23 +106,23 @@ namespace Algorithm
     }
   }
 
-  template <class> bool isVectorSpaceElement(const AbstractFunctionSpaceElement&);
+  template <class> bool isVectorSpaceElement(const Interface::AbstractFunctionSpaceElement&);
 
   template <class Vector>
-  class VectorSpaceElement : public AbstractFunctionSpaceElement
+  class VectorSpaceElement : public Interface::AbstractFunctionSpaceElement
   {
   public:
-    VectorSpaceElement(const AbstractBanachSpace& space, const Vector& v)
-      : AbstractFunctionSpaceElement(space), v_(v)
+    VectorSpaceElement(const Interface::AbstractBanachSpace& space, const Vector& v)
+      : Interface::AbstractFunctionSpaceElement(space), v_(v)
     {}
 
-    explicit VectorSpaceElement(const AbstractBanachSpace& space)
-      : AbstractFunctionSpaceElement(space)// todo: generalize init
+    explicit VectorSpaceElement(const Interface::AbstractBanachSpace& space)
+      : Interface::AbstractFunctionSpaceElement(space)// todo: generalize init
     {
       VectorSpaceDetail::makeZero(v_);
     }
 
-    void copyTo(AbstractFunctionSpaceElement& y) const override
+    void copyTo(Interface::AbstractFunctionSpaceElement& y) const override
     {
       if( !isVectorSpaceElement<Vector>(y) ) throw InvalidArgumentException("VectorSpaceElement::operator+=");
 
@@ -139,7 +139,7 @@ namespace Algorithm
       return *this;
     }
 
-    VectorSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override
+    VectorSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& y) final override
     {
       if( !isVectorSpaceElement<Vector>(y) ) throw InvalidArgumentException("VectorSpaceElement::operator=");
       v_ = dynamic_cast<const VectorSpaceElement&>(y).v_; // todo generalize
@@ -147,14 +147,14 @@ namespace Algorithm
     }
 
 
-    VectorSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override
+    VectorSpaceElement& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override
     {
       if( !isVectorSpaceElement<Vector>(y) ) throw InvalidArgumentException("VectorSpaceElement::operator+=");
       v_ += dynamic_cast<const VectorSpaceElement&>(y).v_; // todo generalize
       return *this;
     }
 
-    VectorSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) final override
+    VectorSpaceElement& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override
     {
       if( !isVectorSpaceElement<Vector>(y) ) throw InvalidArgumentException("VectorSpaceElement::operator-=");
       v_ -= dynamic_cast<const VectorSpaceElement&>(y).v_; // todo generalize
@@ -167,7 +167,7 @@ namespace Algorithm
       return *this;
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override
     {
       auto v = std::make_unique<VectorSpaceElement>(this->getSpace(),v_);
       *v *= -1;
@@ -205,7 +205,7 @@ namespace Algorithm
       return new VectorSpaceElement(getSpace(),v_);
     }
 
-    double applyAsDualTo(const AbstractFunctionSpaceElement &y) const final override
+    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement &y) const final override
     {
       const auto& y_ = dynamic_cast<const VectorSpaceElement&>(y);
 
@@ -217,7 +217,7 @@ namespace Algorithm
   };
 
   template <class Vector>
-  bool isVectorSpaceElement(const AbstractFunctionSpaceElement& y)
+  bool isVectorSpaceElement(const Interface::AbstractFunctionSpaceElement& y)
   {
     return dynamic_cast< const VectorSpaceElement<Vector>* >(&y) != nullptr;
   }

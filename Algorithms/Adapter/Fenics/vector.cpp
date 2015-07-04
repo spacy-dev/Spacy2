@@ -4,6 +4,9 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpaceElement;
+
   namespace Fenics
   {
     Vector::Vector(const AbstractBanachSpace& space, const dolfin::Function& v)
@@ -52,7 +55,7 @@ namespace Algorithm
 
     std::unique_ptr<AbstractFunctionSpaceElement> Vector::operator- () const
     {
-      auto v = clone( this );
+      auto v = clone( *this );
       *v *= -1;
       return std::move(v);
     }

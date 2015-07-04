@@ -8,17 +8,17 @@
 
 namespace Algorithm
 {
-  class AbstractLinearSolver;
+  namespace Interface { class AbstractLinearSolver; }
   class LinearOperator;
   class C1Operator;
   class FunctionSpaceElement;
 
-  class LinearSolver : public Mixin::SharedImpl<AbstractLinearSolver>
+  class LinearSolver : public Mixin::SharedImpl<Interface::AbstractLinearSolver>
   {
   public:
     LinearSolver(const LinearOperator& A);
 
-    LinearSolver(std::shared_ptr<AbstractLinearSolver> impl);
+    LinearSolver(std::shared_ptr<Interface::AbstractLinearSolver> impl);
 
     LinearSolver(const LinearSolver&) = delete;
     LinearSolver& operator=(const LinearSolver&) = delete;

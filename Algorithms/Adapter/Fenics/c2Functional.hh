@@ -14,11 +14,11 @@ namespace Algorithm
   namespace Fenics
   {
     template <class BilinearForm, class LinearForm>
-    class C2Functional : public AbstractC2Functional
+    class C2Functional : public Interface::AbstractC2Functional
     {
     public:
-      C2Functional(const BilinearForm& a, const LinearForm& L, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<AbstractBanachSpace> space)
-        : AbstractC2Functional( space ),
+      C2Functional(const BilinearForm& a, const LinearForm& L, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
+        : Interface::AbstractC2Functional( space ),
           a_( a.function_space(0) , a.functionSpace(1) ),
           L_( L.function_space(0) ),
           bcs_( bcs )
@@ -27,7 +27,7 @@ namespace Algorithm
         copyCoefficients(L,L_);
       }
 
-      double d0(const AbstractFunctionSpaceElement& x) const final override
+      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
         const auto& x_ = toVector(x);
         assemble(x_);
@@ -37,7 +37,7 @@ namespace Algorithm
         return Ax->impl().vector()->inner( *x_.impl().vector() ) + b_->inner( *x_.impl().vector() );
       }
 
-      double d1(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx) const final override
+      double d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
         const auto& x_ = toVector(x);
         const auto& dx_ = toVector(dx);
@@ -48,7 +48,7 @@ namespace Algorithm
         return Ax->impl().vector()->inner( *dx_.impl().vector() ) + b_->inner( *dx_.impl().vector() );
       }
 
-      std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx) const final override
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
         const auto& x_ = toVector(x);
         const auto& dx_ = toVector(dx);
@@ -57,7 +57,7 @@ namespace Algorithm
         auto Ax = clone(x_);
         A_->mult(*dx_.impl().vector(), *Ax->impl().vector());
 
-        return std::unique_ptr<AbstractFunctionSpaceElement>( Ax.release() );
+        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( Ax.release() );
       }
 
     private:

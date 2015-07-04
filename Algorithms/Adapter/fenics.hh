@@ -4,6 +4,7 @@
 #include "Fenics/c1Operator.hh"
 #include "Fenics/c2Functional.hh"
 #include "Fenics/hilbertSpace.hh"
+#include "Fenics/quadraticFunctional.hh"
 #include "Fenics/scalarProducts.hh"
 #include "Fenics/vector.hh"
 

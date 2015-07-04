@@ -6,6 +6,8 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractFunctionSpaceElement;
+
   namespace Fenics
   {
     double l2ScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const

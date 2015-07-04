@@ -7,15 +7,18 @@
 
 namespace Algorithm
 {
-  class AbstractBanachSpace;
-  class AbstractLinearSolver;
-
-  class AbstractLinearOperator : public AbstractOperator
+  namespace Interface
   {
-  public:
-    AbstractLinearOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+    class AbstractBanachSpace;
+    class AbstractLinearSolver;
 
-    virtual std::shared_ptr<AbstractLinearSolver> getSolver() const = 0;
-  };
+    class AbstractLinearOperator : public AbstractOperator
+    {
+    public:
+      AbstractLinearOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+
+      virtual std::shared_ptr<AbstractLinearSolver> getSolver() const = 0;
+    };
+  }
 }
 #endif // ALGORITHM_INTERFACE_ABSTRACT_LINEAR_OPERATOR_HH

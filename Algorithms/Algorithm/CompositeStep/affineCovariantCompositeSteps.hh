@@ -1,75 +1,72 @@
-//#ifndef ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
-//#define ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
+#ifndef ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
+#define ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
 
-//#include "../functionSpaceElement.hh"
-//#include "../../lagrangeFunctional.hh"
+#include <memory>
 
-//#include "../parameter.hh"
-//#include "quadraticModel.hh"
+#include "functionSpaceElement.hh"
+#include "../../lagrangeFunctional.hh"
 
-//namespace Algorithm
-//{
-//  class CubicModel;
-//  class Norm;
-//  class ScalarProduct;
+#include "../parameter.hh"
+#include "quadraticModel.hh"
+#include "Algorithm/lipschitzConstant.hh"
 
-//  struct CompositeStepParameter : Parameter
-//  {
-//    double thetaNormal;
-//    double thetaMax;
-//    double thetaAim;
+#include "norm.hh"
 
-//    double rhoElbow;
+namespace Algorithm
+{
+  class CubicModel;
 
-//    double etaMin;
+  struct CompositeStepParameter : Parameter
+  {
+    double thetaNormal;
+    double thetaMax;
+    double thetaAim;
 
-//    double nuMin = 1e-9;
-//    double tauMin = 1e-9;
-//    double tauMax = 1.;
+    double rhoElbow;
 
-//    double dampingTolerance;
+    double etaMin;
 
-//    double eps = 1e-12; // maximal attainable tolerance
-//    double sqrt_eps = 1e-6;
-//    double cbrt_eps = 1e-4;
-//  };
+    double nuMin = 1e-9;
+    double tauMin = 1e-9;
+    double tauMax = 1.;
 
-//  class AffineCovariantCompositeSteps
-//  {
-//    enum class AcceptanceTest;
-//  public:
-//    AffineCovariantCompositeSteps();
+    double dampingTolerance;
+  };
 
-//    int solve(FunctionSpaceElement& x0);
+  class AffineCovariantCompositeSteps : public CompositeStepParameter
+  {
+    enum class AcceptanceTest;
+  public:
+    AffineCovariantCompositeSteps(const LagrangeFunctional& L);
 
-//  private:
-//    FunctionSpaceElement computeNormalStep();
-//    FunctionSpaceElement computeSimplifiedNormalStep();
-//    FunctionSpaceElement computeTangentialStep();
-//    bool convergenceTest();
+    int solve(FunctionSpaceElement& x0);
 
-//    void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
-//    double updateOmegaL(const FunctionSpaceElement& secondOrderCorrected, double tau, double norm_x, double norm_dx, const CubicModel& cubic);
+  private:
+    FunctionSpaceElement computeNormalStep(const FunctionSpaceElement& x);
+    FunctionSpaceElement computeSimplifiedNormalStep();
+    FunctionSpaceElement computeTangentialStep();
+    bool convergenceTest();
 
-//    double computeNormalStepDampingFactor(double normDn) const;
-//    double computeTangentialStepDampingFactor(double normdn, double normDt, const CubicModel& cubic) const;
+    void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
+    double updateOmegaL(const FunctionSpaceElement& secondOrderCorrected, double tau, double norm_x, double norm_dx, const CubicModel& cubic);
 
-//    bool acceptedSteps(double nu, double tau, double normDx, double eta);
-//    bool undamped(double val) const;
-//    bool regularityTestFailed(double nu, double tau) const;
+    double computeNormalStepDampingFactor(double normDn) const;
+    double computeTangentialStepDampingFactor(double normdn, double normDt, const CubicModel& cubic) const;
 
-//    LagrangeFunctional L;
-//    CompositeStepParameter param;
+    bool acceptedSteps(double nu, double tau, double normDx, double eta);
+    bool undamped(double val) const;
+    bool regularityTestFailed(double nu, double tau) const;
 
-//    LipschitzConstant omegaL, omegaC;
-//    double thetaC;
+    const LagrangeFunctional& L_;
 
-//    LinearSolver normalSolver;
-//    LinearSolver tangentialSolver;
+    LipschitzConstant omegaL, omegaC;
+    double thetaC;
 
-//    Norm norm;
-//    ScalarProduct sp;
-//  };
-//}
+    std::unique_ptr<LinearSolver> normalSolver = nullptr;
+    std::unique_ptr<LinearSolver> tangentialSolver = nullptr;
 
-//#endif // ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
+    Norm norm;
+  };
+}
+
+#endif // ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH

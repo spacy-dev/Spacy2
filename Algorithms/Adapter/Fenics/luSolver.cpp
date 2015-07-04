@@ -32,7 +32,7 @@ namespace Algorithm
     solver.parameters["symmetric"] = (bool) parameters["symmetric"];
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> Fenics::LUSolver::operator()(const AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<Interface::AbstractFunctionSpaceElement> Fenics::LUSolver::operator()(const Interface::AbstractFunctionSpaceElement& x) const
   {
     const auto& x_ = toVector(x);
     auto y = clone(x_);
@@ -40,6 +40,6 @@ namespace Algorithm
     // Solve linear system
     solver.solve( *A_ , *y->impl().vector(), *x_.impl().vector() );
 
-    return std::unique_ptr<AbstractFunctionSpaceElement>( y.release() );
+    return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
   }
 }

@@ -4,21 +4,32 @@
 #include "functionSpaceElement.hh"
 #include "Interface/Functional/abstractC1Functional.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
+#include "Interface/Functional/hessian.hh"
 
 namespace Algorithm
 {
-  C2Functional::C2Functional(std::unique_ptr<AbstractC2Functional>&& impl)
-    : C1Functional(std::unique_ptr<AbstractC1Functional>(impl.release()))
+  C2Functional::C2Functional(std::unique_ptr<Interface::AbstractC2Functional>&& impl)
+    : C1Functional(std::unique_ptr<Interface::AbstractC1Functional>(impl.release()))
   {}
 
   FunctionSpaceElement C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
   {
-    return FunctionSpaceElement( dynamic_cast<const AbstractC2Functional&>( impl() ).getHessian( x.impl() )( dx.impl() ) );
+    return FunctionSpaceElement( impl().getHessian( x.impl() )( dx.impl() ) );
   }
 
   double C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
   {
-    auto dfdx = dynamic_cast<const AbstractC2Functional&>( impl() ).getHessian( x.impl() ) ( dx.impl() );
+    auto dfdx = impl().getHessian( x.impl() ) ( dx.impl() );
     return (*dfdx) ( dy.impl() );
+  }
+
+  Interface::AbstractC2Functional& C2Functional::impl()
+  {
+    return dynamic_cast<Interface::AbstractC2Functional&>( C1Functional::impl() );
+  }
+
+  const Interface::AbstractC2Functional& C2Functional::impl() const
+  {
+    return dynamic_cast<const Interface::AbstractC2Functional&>( C1Functional::impl() );
   }
 }

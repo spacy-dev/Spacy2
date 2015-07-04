@@ -3,33 +3,36 @@
 
 #include <memory>
 
+#include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/Operator/abstractLinearOperator.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
-  class AbstractC2Functional;
-  class AbstractFunctionSpaceElement;
-
-  class Hessian : public AbstractLinearOperator
+  namespace Interface
   {
-  public:
-    Hessian(const AbstractC2Functional& A, const AbstractFunctionSpaceElement& x);
+    class AbstractFunctionSpaceElement;
 
-    Hessian(const AbstractC2Functional& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
+    class Hessian : public AbstractLinearOperator, public Mixin::UniqueImpl<AbstractC2Functional>
+    {
+    public:
+      Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x);
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
+      Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
 
-    std::shared_ptr<AbstractLinearSolver> getSolver() const final override;
+      std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
 
-    void setSolver(std::shared_ptr<AbstractLinearSolver> solver);
+      std::shared_ptr<AbstractLinearSolver> getSolver() const final override;
 
-  private:
-    Hessian* cloneImpl() const;
+      void setSolver(std::shared_ptr<AbstractLinearSolver> solver);
 
-    const AbstractC2Functional& A_;
-    const AbstractFunctionSpaceElement& x_;
-    std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
-  };
+    private:
+      Hessian* cloneImpl() const;
+
+      const AbstractFunctionSpaceElement& x_;
+      std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_HESSIAN_HH

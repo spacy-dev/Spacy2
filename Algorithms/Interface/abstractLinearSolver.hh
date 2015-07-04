@@ -5,15 +5,18 @@
 
 namespace Algorithm
 {
-  class AbstractFunctionSpaceElement;
-
-  class AbstractLinearSolver
+  namespace Interface
   {
-  public:
-    ~AbstractLinearSolver(){}
+    class AbstractFunctionSpaceElement;
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
-  };
+    class AbstractLinearSolver
+    {
+    public:
+      ~AbstractLinearSolver(){}
+
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_LINEAR_SOLVER_HH

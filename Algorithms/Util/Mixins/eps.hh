@@ -27,6 +27,16 @@ namespace Algorithm
        */
       double eps() const noexcept;
 
+      /**
+       * @brief Get square root of maximal attainable accuracy.
+       */
+      double sqrtEps() const noexcept;
+
+      /**
+       * @brief Get third root of maximal attainable accuracy.
+       */
+      double cbrtEps() const noexcept;
+
     private:
       double eps_ = 1e-15;
     };

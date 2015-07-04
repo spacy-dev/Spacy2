@@ -7,10 +7,10 @@
 
 namespace Algorithm
 {
-   class AbstractBanachSpace;
+  namespace Interface { class AbstractBanachSpace; }
 
   /// Real number.
-  class Real : public AbstractFunctionSpaceElement
+  class Real : public Interface::AbstractFunctionSpaceElement
   {
   public:
     /**
@@ -18,36 +18,36 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const AbstractBanachSpace& space);
+    Real(double x, const Interface::AbstractBanachSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const AbstractBanachSpace& space);
+    explicit Real(const Interface::AbstractBanachSpace& space);
 
     /**
      * @brief copy data to y.
      */
-    void copyTo(AbstractFunctionSpaceElement& y) const final override;
+    void copyTo(Interface::AbstractFunctionSpaceElement& y) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
 
     /// Assignment.
-    Real& operator=(const AbstractFunctionSpaceElement& y) final override;
+    Real& operator=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
-    Real& operator+=(const AbstractFunctionSpaceElement& y) final override;
+    Real& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place subtraction.
-    Real& operator-=(const AbstractFunctionSpaceElement& y) final override;
+    Real& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place multiplication.
     Real& operator*=(double) final override;
 
     /// Get -x.
-    std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override;
 
     /// Access value.
     double& coefficient(unsigned) final override;
@@ -70,13 +70,13 @@ namespace Algorithm
     Real* cloneImpl() const final override;
 
     /// Apply as dual element.
-    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
+    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override;
 
     friend class RealProduct;
     double x_;
   };
 
-  bool isRealElement(const AbstractFunctionSpaceElement& x);
+  bool isRealElement(const Interface::AbstractFunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_REAL_NUMBERS_REAL_HH

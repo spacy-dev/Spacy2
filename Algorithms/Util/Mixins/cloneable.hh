@@ -32,13 +32,13 @@ namespace Algorithm
     template <class T>
     auto cloneInMixin(T* t)
     {
-      return clone(*t);
+      return cloneInMixin(*t);
     }
 
     template <class T>
     auto cloneInMixin(const std::unique_ptr<T>& t)
     {
-      return clone(*t);
+      return cloneInMixin(*t);
     }
   }
 

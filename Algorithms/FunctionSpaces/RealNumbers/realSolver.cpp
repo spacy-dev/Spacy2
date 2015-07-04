@@ -9,7 +9,7 @@ namespace Algorithm
     : value_(value)
   {}
 
-  std::unique_ptr<AbstractFunctionSpaceElement> RealSolver::operator ()(const AbstractFunctionSpaceElement& y) const
+  std::unique_ptr<Interface::AbstractFunctionSpaceElement> RealSolver::operator ()(const Interface::AbstractFunctionSpaceElement& y) const
   {
     if(  dynamic_cast<const Real*>(&y) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
 

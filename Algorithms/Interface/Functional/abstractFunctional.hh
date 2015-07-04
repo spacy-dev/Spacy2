@@ -7,28 +7,31 @@
 
 namespace Algorithm
 {
-  class AbstractBanachSpace;
-  class AbstractFunctionSpaceElement;
-
-  class AbstractFunctional : public Mixin::Cloneable<AbstractFunctional>
+  namespace Interface
   {
-  public:
-    AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);
+    class AbstractBanachSpace;
+    class AbstractFunctionSpaceElement;
 
-    virtual ~AbstractFunctional();
-    
-    double operator()(const AbstractFunctionSpaceElement& x) const;
+    class AbstractFunctional : public Mixin::Cloneable<AbstractFunctional>
+    {
+    public:
+      AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);
 
-    const AbstractBanachSpace& getDomain() const;
+      virtual ~AbstractFunctional();
 
-    std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+      double operator()(const AbstractFunctionSpaceElement& x) const;
 
-  protected:
-    virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
+      const AbstractBanachSpace& getDomain() const;
 
-  private:
-    std::shared_ptr<AbstractBanachSpace> domain_;
-  };
+      std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+
+    protected:
+      virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
+
+    private:
+      std::shared_ptr<AbstractBanachSpace> domain_;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_C0_FUNCTIONAL_HH

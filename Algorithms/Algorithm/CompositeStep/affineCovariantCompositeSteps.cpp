@@ -7,7 +7,8 @@
 
 //  enum class AffineCovariantCompositeSteps::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-//  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps()
+//  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const LagrangeFunctional& L)
+//    : L_(L)
 //  {
 //  }
 
@@ -16,7 +17,7 @@
 //    auto x = x0;
 //    double norm_x = norm(x);
 
-//    for(unsigned step = 1; step < param.maxSteps; ++step)
+//    for(unsigned step = 1; step < maxSteps(); ++step)
 //    {
 //      auto dx = x;
 

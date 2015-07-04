@@ -11,6 +11,9 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpaceElement;
+
   PrimalDualProductSpaceElement::PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& primalVariables, const AbstractBanachSpace& space)
     : AbstractFunctionSpaceElement(space),
       primalProductSpaceElement_(primalVariables,dynamic_cast<const PrimalDualProductSpace&>(space).getPrimalProductSpace()),

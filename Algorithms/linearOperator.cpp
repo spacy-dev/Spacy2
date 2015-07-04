@@ -5,13 +5,13 @@
 
 namespace Algorithm
 {
-  LinearOperator::LinearOperator(const AbstractLinearOperator& impl)
-    : Operator(std::unique_ptr<AbstractOperator>( clone(impl).release() ))
+  LinearOperator::LinearOperator(const Interface::AbstractLinearOperator& impl)
+    : Operator(std::unique_ptr<Interface::AbstractOperator>( clone(impl).release() ))
   {}
 
   LinearSolver LinearOperator::getSolver() const
   {
-    return LinearSolver( dynamic_cast<const AbstractLinearOperator&>(impl()).getSolver() );
+    return LinearSolver( dynamic_cast<const Interface::AbstractLinearOperator&>(impl()).getSolver() );
   }
 
   LinearSolver operator^(const LinearOperator& A, int k)

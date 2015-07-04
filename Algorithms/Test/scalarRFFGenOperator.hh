@@ -47,18 +47,18 @@ namespace Algorithm
 //    return ScalarRFFGenOperator<Function>(f,space);
 //  }
 
-  class TestOperator : public AbstractC1Operator
+  class TestOperator : public Interface::AbstractC1Operator
   {
   public:
-//    TestOperator(const std::shared_ptr<AbstractBanachSpace> space, const AbstractFunctionSpaceElement& x)
-//      : AbstractC1Operator(space,space)
+//    TestOperator(const std::shared_ptr<Interface::AbstractBanachSpace> space, const Interface::AbstractFunctionSpaceElement& x)
+//      : Interface::AbstractC1Operator(space,space)
 //    {
 //      setArgument(x);
 //      updateSolver();
 //    }
 
-    TestOperator(std::shared_ptr<AbstractBanachSpace> space)
-      : AbstractC1Operator(space,space)
+    TestOperator(std::shared_ptr<Interface::AbstractBanachSpace> space)
+      : Interface::AbstractC1Operator(space,space)
     {}
 
     TestOperator(const HilbertSpace& space)
@@ -67,32 +67,32 @@ namespace Algorithm
 
     ~TestOperator(){}
 
-//    void setArgument(const AbstractFunctionSpaceElement &x)
+//    void setArgument(const Interface::AbstractFunctionSpaceElement &x)
 //    {
-//      AbstractC1Operator::setArgument(x);
+//      Interface::AbstractC1Operator::setArgument(x);
 //      updateSolver();
 //    }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const override
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const override
     {
       return std::make_unique<Real>( exp(x.coefficient(0))-2 , getRange() );
     }
 
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement &dx) const override
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement &dx) const override
     {
       return std::make_unique<Real>( exp(x.coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    AbstractOperator* cloneImpl() const
+    Interface::AbstractOperator* cloneImpl() const
     {
       return new TestOperator(getSharedDomain());
     }
 
-    LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const override
+    Interface::LinearizedOperator makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const override
     {
-      return LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
+      return Interface::LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
     }
 
 //    void updateSolver()

@@ -8,6 +8,9 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpaceElement;
+
   Real::Real(double x, const AbstractBanachSpace &space)
     : AbstractFunctionSpaceElement(space), x_(x)
   {}

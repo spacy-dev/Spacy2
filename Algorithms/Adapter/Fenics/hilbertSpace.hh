@@ -17,18 +17,18 @@ namespace Algorithm
   namespace Fenics
   {
     template <class FenicsSpace>
-    class HilbertSpace : public AbstractHilbertSpace
+    class HilbertSpace : public Interface::AbstractHilbertSpace
     {
     public:
       HilbertSpace(const FenicsSpace& space, const dolfin::Function& dummy)
-        : AbstractHilbertSpace(std::make_shared<l2ScalarProduct>()),
+        : Interface::AbstractHilbertSpace(std::make_shared<l2ScalarProduct>()),
           space_(space), dummy_(dummy)
       {
         *dummy_.vector() *= 0.;
       }
 
     private:
-      std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const
       {
         return std::make_unique< Vector >(*this,dummy_);
       }

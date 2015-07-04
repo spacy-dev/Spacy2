@@ -13,11 +13,11 @@ namespace Algorithm
   /**
    * @brief Norm class. Plug your implementations in here.
    */
-  class Norm : public Mixin::SharedImpl<AbstractNorm>
+  class Norm : public Mixin::SharedImpl<Interface::AbstractNorm>
   {
   public:
     Norm() = default;
-    explicit Norm(std::shared_ptr<AbstractNorm> implementation);
+    explicit Norm(std::shared_ptr<Interface::AbstractNorm> implementation);
 
     Norm(const Norm&) = delete;
     Norm& operator=(const Norm&) = delete;
@@ -28,7 +28,7 @@ namespace Algorithm
     /**
      * @brief Compute \f$\|x\|\f$.
      */
-    auto operator()(const FunctionSpaceElement& x) const -> decltype(std::declval<AbstractNorm>()(x.impl()));
+    auto operator()(const FunctionSpaceElement& x) const -> decltype(std::declval<Interface::AbstractNorm>()(x.impl()));
   };
 }
 

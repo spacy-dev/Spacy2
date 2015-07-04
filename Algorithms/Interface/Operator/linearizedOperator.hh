@@ -8,28 +8,31 @@
 
 namespace Algorithm
 {
-  class AbstractFunctionSpaceElement;
-
-  class LinearizedOperator : public AbstractLinearOperator
+  namespace Interface
   {
-  public:
-    LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x);
+    class AbstractFunctionSpaceElement;
 
-    LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
+    class LinearizedOperator : public AbstractLinearOperator
+    {
+    public:
+      LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x);
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
+      LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
 
-    std::shared_ptr<AbstractLinearSolver> getSolver() const final override;
+      std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
 
-    void setSolver(std::shared_ptr<AbstractLinearSolver> solver);
+      std::shared_ptr<AbstractLinearSolver> getSolver() const final override;
 
-  private:
-    LinearizedOperator* cloneImpl() const;
+      void setSolver(std::shared_ptr<AbstractLinearSolver> solver);
 
-    std::unique_ptr<AbstractC1Operator> A_;
-    const AbstractFunctionSpaceElement& x_;
-    std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
-  };
+    private:
+      LinearizedOperator* cloneImpl() const;
+
+      std::unique_ptr<AbstractC1Operator> A_;
+      const AbstractFunctionSpaceElement& x_;
+      std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_LINEARIZED_OPERATOR_HH

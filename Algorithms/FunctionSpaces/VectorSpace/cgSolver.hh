@@ -13,13 +13,13 @@ namespace Algorithm
   class LinearOperator;
   class AbstractOperator;
 
-  class CGSolver : public AbstractLinearSolver
+  class CGSolver : public Interface::AbstractLinearSolver
   {
   public:
     CGSolver(const Operator& A);
     CGSolver(const LinearOperator& A);
 
-    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& y) const final override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& y) const final override;
 
   private:
     Operator P_;

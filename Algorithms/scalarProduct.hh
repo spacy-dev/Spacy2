@@ -13,10 +13,10 @@ namespace Algorithm
   /**
    * @brief Scalar product class. Plug your implementations in here.
    */
-  class ScalarProduct : public Mixin::SharedImpl<AbstractScalarProduct>
+  class ScalarProduct : public Mixin::SharedImpl<Interface::AbstractScalarProduct>
   {
   public:
-    explicit ScalarProduct(std::shared_ptr<AbstractScalarProduct> implementation);
+    explicit ScalarProduct(std::shared_ptr<Interface::AbstractScalarProduct> implementation);
 
     ScalarProduct(const ScalarProduct&) = delete;
     ScalarProduct& operator=(const ScalarProduct&) = delete;
@@ -27,7 +27,7 @@ namespace Algorithm
     /**
      * @brief Compute scalar product \f$(x,y)\f$.
      */
-    auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<AbstractScalarProduct>()(x.impl(),y.impl()));
+    auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<Interface::AbstractScalarProduct>()(x.impl(),y.impl()));
   };
 }
 

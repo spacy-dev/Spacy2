@@ -12,12 +12,12 @@ namespace Algorithm
 {
   namespace Fenics
   {
-    class LUSolver : public AbstractLinearSolver
+    class LUSolver : public Interface::AbstractLinearSolver
     {
     public:
       explicit LUSolver(const dolfin::GenericMatrix& A);
 
-      std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement& x) const final override;
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
 
     private:
       std::unique_ptr<dolfin::GenericMatrix> A_;

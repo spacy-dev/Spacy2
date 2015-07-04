@@ -9,33 +9,34 @@
 
 namespace Algorithm
 {
-  class AbstractNorm;
-  class AbstractScalarProduct;
-  class AbstractFunctionSpaceElement;
+  namespace Interface
+  {
+    class AbstractFunctionSpaceElement;
+   }
 
   /// Space of real numbers.
-  class PrimalDualProductSpace : public AbstractHilbertSpace
+  class PrimalDualProductSpace : public Interface::AbstractHilbertSpace
   {
   public:
-    PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces);
+    PrimalDualProductSpace(std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >&& primalSpaces);
 
-    PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces,
-                 std::vector<std::shared_ptr<AbstractBanachSpace> >&& dualSpaces);
+    PrimalDualProductSpace(std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >&& primalSpaces,
+                 std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >&& dualSpaces);
 
     ProductSpace& getPrimalProductSpace();
 
     const ProductSpace& getPrimalProductSpace() const;
 
-    std::shared_ptr<AbstractBanachSpace> getSharedPrimalProductSpace() const;
+    std::shared_ptr<Interface::AbstractBanachSpace> getSharedPrimalProductSpace() const;
 
     ProductSpace& getDualProductSpace();
 
     const ProductSpace& getDualProductSpace() const;
 
-    std::shared_ptr<AbstractBanachSpace> getSharedDualProductSpace() const;
+    std::shared_ptr<Interface::AbstractBanachSpace> getSharedDualProductSpace() const;
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override;
 
     std::shared_ptr<ProductSpace> primalSpaces_;
     std::shared_ptr<ProductSpace> dualSpaces_;

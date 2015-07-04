@@ -1,15 +1,15 @@
-#include "lagrangeFunctional.hh"
+#include "optimalControlLagrangian.hh"
 
 #include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {
-  LagrangeFunctional::LagrangeFunctional(const C2Functional& costFunctional, const C2Operator& constraint)
-    : f_(costFunctional), c_(constraint)
+  OptimalControlLagrangian::OptimalControlLagrangian(const C2Functional& costFunctional, const C2Operator& state, const C2Operator& control)
+    : f_(costFunctional), state_(state), control_(control)
   {}
 
-  double LagrangeFunctional::operator()(const FunctionSpaceElement& x)
+  double OptimalControlLagrangian::operator()(const FunctionSpaceElement& x)
   {
     if( !isPrimalDualProductSpaceElement(x.impl())) throw InvalidArgumentException("LagrangeFunctional::operator()");
 
@@ -23,10 +23,10 @@ namespace Algorithm
 
     FunctionSpaceElement p_ = y.dualElement();
 
-    return f_(y_) + p_ * c_(y_);
+    return f_(y_) + p_ * ( state_(y_) + control_(y_) );
   }
 
-  double LagrangeFunctional::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
+  double OptimalControlLagrangian::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
   {
     if( !isPrimalDualProductSpaceElement(dx.impl())) throw InvalidArgumentException("LagrangeFunctional::d1");
 
@@ -39,20 +39,20 @@ namespace Algorithm
     if( !dx_.isDualEnabled() )
     {
       dx_.reset();
-      return f_.d1(y_,dxy_) + p_ * c_.d1(y_,dxy_);
+      return f_.d1(y_,dxy_) + p_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) );
     }
 
-    FunctionSpaceElement dxp_ = dx_.dualElement();//FunctionSpaceElement( dx_.dualElement().clone() );
+    FunctionSpaceElement dxp_ = dx_.dualElement();
     if( !dx_.isPrimalEnabled() )
     {
       dx_.reset();
-      return dxp_ * c_(y_);
+      return dxp_ * ( state_(y_) + control_(y_) );
     }
 
-    return f_.d1(y_,dxy_) + p_ * c_.d1(y_,dxy_) + dxp_ * c_(y_);
+    return f_.d1(y_,dxy_) + p_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) ) + dxp_ * ( state_(y_) + control_(y_) );
   }
 
-  double LagrangeFunctional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const
+  double OptimalControlLagrangian::d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const
   {
     if( !isPrimalDualProductSpaceElement(dx.impl()) || !isPrimalDualProductSpaceElement(dy.impl())) throw InvalidArgumentException("LagrangeFunctional::d2");
 
@@ -70,26 +70,26 @@ namespace Algorithm
     FunctionSpaceElement y_ = dynamic_cast<const PrimalDualProductSpaceElement&>(x.impl()).primalElement();
     FunctionSpaceElement p_ = dynamic_cast<const PrimalDualProductSpaceElement&>(x.impl()).dualElement();
 
-    FunctionSpaceElement dxy_ = dx_.primalElement();//FunctionSpaceElement( dynamic_cast<const ProductSpaceElement&>(dx.impl()).primalElement().clone() );
-    FunctionSpaceElement dyy_ = dy_.primalElement();//FunctionSpaceElement( dynamic_cast<const ProductSpaceElement&>(dy.impl()).primalElement().clone() );
+    FunctionSpaceElement dxy_ = dx_.primalElement();
+    FunctionSpaceElement dyy_ = dy_.primalElement();
 
-    FunctionSpaceElement dxp_ = dx_.dualElement();// FunctionSpaceElement( dynamic_cast<const ProductSpaceElement&>(dx.impl()).dualElement().clone() );
-    FunctionSpaceElement dyp_ = dy_.dualElement();//FunctionSpaceElement( dynamic_cast<const ProductSpaceElement&>(dy.impl()).dualElement().clone() );
+    FunctionSpaceElement dxp_ = dx_.dualElement();
+    FunctionSpaceElement dyp_ = dy_.dualElement();
 
     if( !dx_.isDualEnabled() )
     {
       if( !dy_.isDualEnabled() )
       {
         reset(dx_,dy_);
-        return f_.d2(y_,dxy_,dyy_) + p_ * c_.d2(y_,dxy_,dyy_);
+        return f_.d2(y_,dxy_,dyy_) + p_ * ( state_.d2(y_,dxy_,dyy_) + control_.d2(y_,dxy_,dyy_) );
       }
       if( !dy_.isPrimalEnabled() )
       {
         reset(dx_,dy_);
-        return dyp_ * c_.d1(y_,dxy_);
+        return dyp_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) );
       }
       reset(dx_,dy_);
-      return f_.d2(y_,dxy_,dyy_) + p_ * c_.d2(y_,dxy_,dyy_) + dyp_ * c_.d1(y_,dxy_);
+      return f_.d2(y_,dxy_,dyy_) + p_ * ( state_.d2(y_,dxy_,dyy_) + control_.d2(y_,dxy_,dyy_) ) + dyp_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) );
     }
 
     if( !dy_.isDualEnabled() )
@@ -97,35 +97,43 @@ namespace Algorithm
       if( !dx_.isPrimalEnabled() )
       {
         reset(dx_,dy_);
-        return dxp_ * c_.d1(y_,dyy_);
+        return dxp_ * ( state_.d1(y_,dyy_) + control_.d1(y_,dyy_) );
       }
       reset(dx_,dy_);
-      return f_.d2(y_,dxy_,dyy_) + dxp_ * c_.d1(y_,dyy_);
+      return f_.d2(y_,dxy_,dyy_) + dxp_ * ( state_.d1(y_,dyy_) + control_.d1(y_,dyy_) );
     }
 
     if( !dx_.isPrimalEnabled() )
     {
       reset(dx_,dy_);
-      return dxp_ * c_.d1(y_,dyy_);
+      return dxp_ * ( state_.d1(y_,dyy_) + control_.d1(y_,dyy_) );
     }
 
     if( !dy_.isPrimalEnabled() )
     {
       reset(dx_,dy_);
-      return dyp_ * c_.d1(y_,dxy_);
+      return dyp_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) );
     }
 
     reset(dx_,dy_);
-    return f_.d2(y_,dxy_,dyy_) + p_ * c_.d2(y_,dxy_,dyy_) + dyp_ * c_.d1(y_,dxy_) + dxp_ * c_.d1(y_,dyy_);
+    return f_.d2(y_,dxy_,dyy_) +
+        p_ * ( state_.d2(y_,dxy_,dyy_) + control_.d2(y_,dxy_,dyy_) ) +
+        dyp_ * ( state_.d1(y_,dxy_) + control_.d1(y_,dxy_) ) +
+        dxp_ * ( state_.d1(y_,dyy_) + control_.d1(y_,dyy_) );
   }
 
-  const C2Functional &LagrangeFunctional::getCostFunctional() const
+  const C2Functional &OptimalControlLagrangian::getCostFunctional() const
   {
     return f_;
   }
 
-  const C2Operator& LagrangeFunctional::getConstraint() const
+  const C2Operator& OptimalControlLagrangian::getStateOperator() const
   {
-    return c_;
+    return state_;
+  }
+
+  const C2Operator& OptimalControlLagrangian::getControlOperator() const
+  {
+    return control_;
   }
 }

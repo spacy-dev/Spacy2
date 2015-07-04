@@ -5,23 +5,23 @@
 #include <utility>
 
 #include "norm.hh"
+#include "Interface/abstractBanachSpace.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
   class FunctionSpaceElement;
-  class AbstractBanachSpace;
 
   /**
    * @brief Banach space \f$X\f$. Creates function space elements and admits access to norm.
    */
-  class BanachSpace : public Mixin::SharedImpl<AbstractBanachSpace>
+  class BanachSpace : public Mixin::SharedImpl<Interface::AbstractBanachSpace>
   {
   public:
     /**
      * @brief Construct function space from implementation derived from AbstractBanachSpace.
      */
-    explicit BanachSpace(std::shared_ptr<AbstractBanachSpace> implementation);
+    explicit BanachSpace(std::shared_ptr<Interface::AbstractBanachSpace> implementation);
 
     BanachSpace(const BanachSpace&) = delete;
     BanachSpace& operator=(const BanachSpace&) = delete;

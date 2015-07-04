@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Interface/abstractHilbertSpace.hh"
-#include "hilbertSpaceNorm.hh"
+#include "Interface/hilbertSpaceNorm.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 #include "l2Product.hh"
@@ -13,20 +13,20 @@
 namespace Algorithm
 {
   template <class Vector>
-  class VectorSpace : public AbstractHilbertSpace
+  class VectorSpace : public Interface::AbstractHilbertSpace
   {
   public:
     VectorSpace()
-      : AbstractHilbertSpace( std::make_shared< l2Product<Vector> >() )
+      : Interface::AbstractHilbertSpace( std::make_shared< l2Product<Vector> >() )
     {}
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override
     {
       return std::make_unique< VectorSpaceElement<Vector> >(*this);
     }
 
-    std::shared_ptr<AbstractScalarProduct> sp_;
+    std::shared_ptr<Interface::AbstractScalarProduct> sp_;
   };
 }
 

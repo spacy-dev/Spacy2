@@ -9,10 +9,10 @@
 
 namespace Algorithm
 {
-  std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables);
+  std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables);
 
   /// Real number.
-  class ProductSpaceElement : public AbstractFunctionSpaceElement
+  class ProductSpaceElement : public Interface::AbstractFunctionSpaceElement
   {
   public:
     /**
@@ -20,33 +20,33 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables, const AbstractBanachSpace& space);
+    ProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables, const Interface::AbstractBanachSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit ProductSpaceElement(const AbstractBanachSpace& space);
+    explicit ProductSpaceElement(const Interface::AbstractBanachSpace& space);
 
-    void copyTo(AbstractFunctionSpaceElement &) const final override;
+    void copyTo(Interface::AbstractFunctionSpaceElement &) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
 
     /// Assignment.
-    ProductSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
-    ProductSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place subtraction.
-    ProductSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place multiplication.
     ProductSpaceElement& operator*=(double) final override;
 
     /// Get -x.
-    std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override;
 
     /// Access value.
     double& coefficient(unsigned) final override;
@@ -57,13 +57,13 @@ namespace Algorithm
     /// Number of entries in coefficient vector.
     unsigned size() const final override;
 
-    AbstractFunctionSpaceElement& variable(unsigned i);
+    Interface::AbstractFunctionSpaceElement& variable(unsigned i);
 
-    const AbstractFunctionSpaceElement& variable(unsigned i) const;
+    const Interface::AbstractFunctionSpaceElement& variable(unsigned i) const;
 
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables();
+    std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables();
 
-    const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables() const;
+    const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables() const;
 
   private:    
     /**
@@ -72,13 +72,13 @@ namespace Algorithm
     ProductSpaceElement* cloneImpl() const final override;
 
     /// Apply as dual element.
-    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
+    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override;
 
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > variables_;
+    std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> > variables_;
 
   };
 
-  bool isProductSpaceElement(const AbstractFunctionSpaceElement& x);
+  bool isProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_PRODUCT_SPACE_ELEMENT_HH

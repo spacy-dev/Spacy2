@@ -7,22 +7,25 @@
 
 namespace Algorithm
 {
-  class AbstractLinearizedOperator;
-
-  class AbstractC2Operator : public AbstractC1Operator
+  namespace Interface
   {
-  public:
-    AbstractC2Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+    class AbstractLinearizedOperator;
 
-    AbstractC2Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+    class AbstractC2Operator : public AbstractC1Operator
+    {
+    public:
+      AbstractC2Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-    virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,
-                                                             const AbstractFunctionSpaceElement& dx,
-                                                             const AbstractFunctionSpaceElement& dy) const = 0;
+      AbstractC2Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-  protected:
-    std::shared_ptr<AbstractLinearSolver> solver_;
-  };
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,
+                                                               const AbstractFunctionSpaceElement& dx,
+                                                               const AbstractFunctionSpaceElement& dy) const = 0;
+
+    protected:
+      std::shared_ptr<AbstractLinearSolver> solver_;
+    };
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_C2_OPERATOR_HH

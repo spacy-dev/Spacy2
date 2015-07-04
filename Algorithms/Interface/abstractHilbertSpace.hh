@@ -6,27 +6,30 @@
 
 namespace Algorithm
 {
-  class AbstractNorm;
-  class AbstractFunctionSpaceElement;
-
-  class AbstractHilbertSpace : public AbstractBanachSpace
+  namespace Interface
   {
-  public:
-    AbstractHilbertSpace(std::shared_ptr<AbstractScalarProduct> sp);
+    class AbstractNorm;
+    class AbstractFunctionSpaceElement;
 
-    virtual ~AbstractHilbertSpace() = default;
+    class AbstractHilbertSpace : public AbstractBanachSpace
+    {
+    public:
+      AbstractHilbertSpace(std::shared_ptr<AbstractScalarProduct> sp);
 
-    void setScalarProduct(std::shared_ptr<AbstractScalarProduct> sp);
+      virtual ~AbstractHilbertSpace() = default;
 
-    std::shared_ptr<AbstractScalarProduct> getScalarProduct() const;
+      void setScalarProduct(std::shared_ptr<AbstractScalarProduct> sp);
 
-  private:
-    std::shared_ptr<AbstractScalarProduct> sp_;
-  };
+      std::shared_ptr<AbstractScalarProduct> getScalarProduct() const;
 
-  bool isHilbertSpace(const AbstractBanachSpace& space);
+    private:
+      std::shared_ptr<AbstractScalarProduct> sp_;
+    };
 
-  double operator* (const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&);
+    bool isHilbertSpace(const AbstractBanachSpace& space);
+
+    double operator* (const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&);
+  }
 }
 
 #endif // ALGORITHM_INTERFACE_ABSTRACT_HILBERT_SPACE_HH

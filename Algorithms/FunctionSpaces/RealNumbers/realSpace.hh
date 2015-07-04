@@ -7,18 +7,16 @@
 
 namespace Algorithm
 {
-  class AbstractNorm;
-  class AbstractScalarProduct;
-  class AbstractFunctionSpaceElement;
+  namespace Interface { class AbstractFunctionSpaceElement; }
 
   /// Space of real numbers.
-  class RealSpace : public AbstractHilbertSpace
+  class RealSpace : public Interface::AbstractHilbertSpace
   {
   public:
     RealSpace();
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override;
   };
 }
 

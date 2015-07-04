@@ -8,7 +8,8 @@
 
 namespace Algorithm
 {
-  class AbstractC1Operator;
+  namespace Interface { class AbstractC1Operator; }
+
   class FunctionSpace;
 
   /**
@@ -20,7 +21,7 @@ namespace Algorithm
     /**
      * @brief Construct differentiable operator \f$A\f$ from implementation.
      */
-    C1Operator(std::unique_ptr<AbstractC1Operator>&& impl);
+    C1Operator(std::unique_ptr<Interface::AbstractC1Operator>&& impl);
 
     /**
      * @brief Compute first directional derivative \f$A(x)'dx\f$ at \f$x\f$ in direction \f$dx\f$.

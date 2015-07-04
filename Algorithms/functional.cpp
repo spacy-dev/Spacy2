@@ -6,8 +6,8 @@
 
 namespace Algorithm
 {
-  Functional::Functional(std::unique_ptr<AbstractFunctional>&& impl)
-    : Mixin::UniqueImpl<AbstractFunctional>(std::move(impl))
+  Functional::Functional(std::unique_ptr<Interface::AbstractFunctional>&& impl)
+    : Mixin::UniqueImpl<Interface::AbstractFunctional>(std::move(impl))
   {}
 
   double Functional::operator()(const FunctionSpaceElement& x)

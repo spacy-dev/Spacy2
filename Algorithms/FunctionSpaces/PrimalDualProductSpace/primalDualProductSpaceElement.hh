@@ -13,7 +13,7 @@ namespace Algorithm
   class PrimalDualProductSpace;
 
   /// Real number.
-  class PrimalDualProductSpaceElement : public AbstractFunctionSpaceElement
+  class PrimalDualProductSpaceElement : public Interface::AbstractFunctionSpaceElement
   {
   public:
     /**
@@ -21,10 +21,10 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& primalVariables, const AbstractBanachSpace& space);
+    PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& primalVariables, const Interface::AbstractBanachSpace& space);
 
-    PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& primalVariables,
-                        const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& dualVariables, const AbstractBanachSpace& space);
+    PrimalDualProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& primalVariables,
+                        const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& dualVariables, const Interface::AbstractBanachSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
@@ -37,25 +37,25 @@ namespace Algorithm
      */
     PrimalDualProductSpaceElement* cloneImpl() const final override;
 
-    void copyTo(AbstractFunctionSpaceElement &) const final override;
+    void copyTo(Interface::AbstractFunctionSpaceElement &) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
 
     /// Assignment.
-    PrimalDualProductSpaceElement& operator=(const AbstractFunctionSpaceElement& y) final override;
+    PrimalDualProductSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place summation.
-    PrimalDualProductSpaceElement& operator+=(const AbstractFunctionSpaceElement& y) final override;
+    PrimalDualProductSpaceElement& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place subtraction.
-    PrimalDualProductSpaceElement& operator-=(const AbstractFunctionSpaceElement& y) final override;
+    PrimalDualProductSpaceElement& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
     /// In-place multiplication.
     PrimalDualProductSpaceElement& operator*=(double) final override;
 
     /// Get -x.
-    std::unique_ptr<AbstractFunctionSpaceElement> operator- () const final override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override;
 
     /// Access value.
     double& coefficient(unsigned) final override;
@@ -86,12 +86,12 @@ namespace Algorithm
 //    }
 
 
-    AbstractFunctionSpaceElement& primalVariable(unsigned i)
+    Interface::AbstractFunctionSpaceElement& primalVariable(unsigned i)
     {
       return primalProductSpaceElement_.variable(i);
     }
 
-    const AbstractFunctionSpaceElement& primalVariable(unsigned i) const
+    const Interface::AbstractFunctionSpaceElement& primalVariable(unsigned i) const
     {
       return primalProductSpaceElement_.variable(i);
     }
@@ -111,19 +111,19 @@ namespace Algorithm
       return dualProductSpaceElement_;
     }
 
-    AbstractFunctionSpaceElement& dualVariable(unsigned i)
+    Interface::AbstractFunctionSpaceElement& dualVariable(unsigned i)
     {
       return dualProductSpaceElement_.variable(i);
     }
 
-    const AbstractFunctionSpaceElement& dualVariable(unsigned i) const
+    const Interface::AbstractFunctionSpaceElement& dualVariable(unsigned i) const
     {
       return dualProductSpaceElement_.variable(i);
     }
 
   private:
     /// Apply as dual element.
-    double applyAsDualTo(const AbstractFunctionSpaceElement& y) const final override;
+    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override;
 
     ProductSpaceElement primalProductSpaceElement_;
     ProductSpaceElement dualProductSpaceElement_;
@@ -131,7 +131,7 @@ namespace Algorithm
     mutable bool disableDual_ = false;
   };
 
-  bool isPrimalDualProductSpaceElement(const AbstractFunctionSpaceElement& x);
+  bool isPrimalDualProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x);
 
 
   FunctionSpaceElement& primal(FunctionSpaceElement& x);

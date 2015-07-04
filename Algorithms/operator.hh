@@ -10,10 +10,10 @@ namespace Algorithm
 {
   class FunctionSpaceElement;
 
-  class Operator : public Mixin::UniqueImpl<AbstractOperator>
+  class Operator : public Mixin::UniqueImpl<Interface::AbstractOperator>
   {
   public:
-    Operator(std::unique_ptr<AbstractOperator>&& impl);
+    Operator(std::unique_ptr<Interface::AbstractOperator>&& impl);
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
   };

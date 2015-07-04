@@ -10,8 +10,9 @@
 
 namespace Algorithm
 {
+  namespace Interface { class AbstractHilbertSpace; }
+
   class FunctionSpaceElement;
-  class AbstractHilbertSpace;
 
   /**
    * @brief A function space. Creates function space elements and admits access to norm and, for Hilbert spaces, scalar product.
@@ -20,9 +21,9 @@ namespace Algorithm
   {
   public:
     /**
-     * @brief Construct function space from implementation derived from AbstractHilbertSpace.
+     * @brief Construct function space from implementation derived from Interface::AbstractHilbertSpace.
      */
-    explicit HilbertSpace(std::shared_ptr<AbstractHilbertSpace> implementation);
+    explicit HilbertSpace(std::shared_ptr<Interface::AbstractHilbertSpace> implementation);
 
     /**
      * @brief Change scalar product.

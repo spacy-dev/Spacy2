@@ -12,7 +12,6 @@
 
 namespace Algorithm
 {
-  class AbstractBanachSpace;
   class FunctionSpace;
   class FunctionSpaceElement;
 
@@ -27,7 +26,7 @@ namespace Algorithm
    *
    * This class is the base class for all variables. Their specific form is specified in an Implementation derived from AbstractFunctionSpaceElement.
    */
-  class FunctionSpaceElement : public Mixin::UniqueImpl<AbstractFunctionSpaceElement>
+  class FunctionSpaceElement : public Mixin::UniqueImpl<Interface::AbstractFunctionSpaceElement>
   {
   public:
     /// Default constructor.
@@ -36,12 +35,12 @@ namespace Algorithm
     /**
      * @brief Construct FunctionSpaceElement from implementation.
      */
-    FunctionSpaceElement(std::unique_ptr<AbstractFunctionSpaceElement>&& implementation);
+    FunctionSpaceElement(std::unique_ptr<Interface::AbstractFunctionSpaceElement>&& implementation);
 
     /**
      * @brief Construct FunctionSpaceElement from implementation.
      */
-    FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation);
+    FunctionSpaceElement(const Interface::AbstractFunctionSpaceElement& implementation);
 
     /**
      * @brief Copy constructor.
@@ -56,7 +55,7 @@ namespace Algorithm
     /**
      * @brief Assign from implementation.
      */
-    FunctionSpaceElement& operator=(const AbstractFunctionSpaceElement& implementation);
+    FunctionSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& implementation);
 
     /**
      * @brief print information on this function space element

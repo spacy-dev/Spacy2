@@ -6,6 +6,8 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractFunctionSpaceElement;
+
   double RealProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("RealProduct",x.spaceIndex(),y.spaceIndex());

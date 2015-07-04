@@ -8,22 +8,24 @@
 
 namespace Algorithm
 {
-  class AbstractNorm;
-  class AbstractScalarProduct;
-  class AbstractFunctionSpaceElement;
+  namespace Interface
+  {
+    class AbstractNorm;
+    class AbstractFunctionSpaceElement;
+  }
 
   /// Space of real numbers.
-  class ProductSpace : public AbstractHilbertSpace
+  class ProductSpace : public Interface::AbstractHilbertSpace
   {
   public:
-    ProductSpace(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces);
+    ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces);
 
-    const std::vector<std::shared_ptr<AbstractBanachSpace> >& getSpaces() const;
+    const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& getSpaces() const;
 
   private:
-    std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const override;
+    std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override;
 
-    std::vector<std::shared_ptr<AbstractBanachSpace> > spaces_;
+    std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > spaces_;
   };
 
   template <class... Spaces_> struct PackSpaces {};
@@ -35,16 +37,16 @@ namespace Algorithm
     template <>
     struct CreateSpaceVectorImpl<>
     {
-      static std::vector<std::shared_ptr<AbstractBanachSpace> > apply()
+      static std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > apply()
       {
-        return std::vector<std::shared_ptr<AbstractBanachSpace> >();
+        return std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >();
       }
     };
 
     template <class Space, class... Spaces>
     struct CreateSpaceVectorImpl<Space,Spaces...>
     {
-      static std::vector<std::shared_ptr<AbstractBanachSpace> > apply()
+      static std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > apply()
       {
         auto spaces = CreateSpaceVectorImpl<Spaces...>::apply();
         spaces.push_back(std::make_shared<Space>());

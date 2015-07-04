@@ -2,8 +2,6 @@
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 
-#include "hilbertSpaceNorm.hh"
-
 #include "primalDualProductSpaceElement.hh"
 #include "primalDualProductSpaceProduct.hh"
 
@@ -12,6 +10,10 @@
 
 namespace Algorithm
 {
+  using Interface::AbstractBanachSpace;
+  using Interface::AbstractHilbertSpace;
+  using Interface::AbstractFunctionSpaceElement;
+
   PrimalDualProductSpace::PrimalDualProductSpace(std::vector<std::shared_ptr<AbstractBanachSpace> >&& primalSpaces)
     : AbstractHilbertSpace(std::make_shared<PrimalDualProductSpaceProduct>()),
       primalSpaces_(std::make_shared<ProductSpace>(std::move(primalSpaces))), dualSpaces_({})
