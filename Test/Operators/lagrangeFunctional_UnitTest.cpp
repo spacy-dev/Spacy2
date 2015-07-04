@@ -20,11 +20,11 @@
 
 using namespace Algorithm;
 
-class TestOperator2 : public AbstractC2Operator
+class TestOperator2 : public Interface::AbstractC2Operator
 {
 public:
-  TestOperator2(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
-    : AbstractC2Operator(domain,range)
+  TestOperator2(std::shared_ptr<Interface::AbstractBanachSpace> domain, std::shared_ptr<Interface::AbstractBanachSpace> range)
+    : Interface::AbstractC2Operator(domain,range)
   {}
 
   TestOperator2(const BanachSpace& domain, const BanachSpace& range)
@@ -38,21 +38,21 @@ public:
     return new TestOperator2(getSharedDomain(),getSharedRange());
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement &x) const override
+  std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement &x) const override
   {
     auto result = getRange().element();
     result->coefficient(0) = exp(x.coefficient(0))-2*x.coefficient(1);
     return std::move(result);
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement &dx) const override
+  std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement &dx) const override
   {
     auto result = getRange().element();
     result->coefficient(0) = exp(x.coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
     return std::move(result);
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
+  std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx, const Interface::AbstractFunctionSpaceElement& dy) const
   {
     auto result = getRange().element();
     result->coefficient(0) = exp(x.coefficient(0))*dx.coefficient(0)*dy.coefficient(0);
