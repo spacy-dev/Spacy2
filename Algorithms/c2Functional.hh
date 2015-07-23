@@ -2,6 +2,7 @@
 #define ALGORITHM_C2_FUNCTIONAL_HH
 
 #include "c1Functional.hh"
+#include "linearOperator.hh"
 
 namespace Algorithm
 {
@@ -35,6 +36,9 @@ namespace Algorithm
      */
     C1Operator getDerivative() const;
 
+
+    LinearOperator hessian(const FunctionSpaceElement& x) const;
+
     /**
      * \brief Access implementation.
      */
@@ -45,15 +49,5 @@ namespace Algorithm
      */
     const Interface::AbstractC2Functional& impl() const;
   };
-
-  /**
-   * @brief Convenient generation of twice differentiable functional from implementation arguments.
-   * @return C2Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  C2Functional makeC2Functional(Args&&... args)
-  {
-    return C2Functional( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
 }
 #endif // ALGORITHM_C2_FUNCTIONAL_HH

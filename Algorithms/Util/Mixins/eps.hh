@@ -15,7 +15,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets maximal attainable accuracy.
        */
-      explicit Eps(double eps = 1e-15);
+      explicit Eps(double eps = 1e-15) noexcept;
 
       /**
        * @brief Set maximal attainable accuracy.

@@ -24,17 +24,7 @@ namespace Algorithm
     /**
      * @brief Evaluate functional \f$F\f$ at \f$x\f$.
      */
-    double operator()(const FunctionSpaceElement& x);
+    double operator()(const FunctionSpaceElement& x) const;
   };
-
-  /**
-   * @brief Convenient generation of functional from implementation arguments.
-   * @return Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  Functional makeFunctional(Args&&... args)
-  {
-    return Functional( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
 }
 #endif // ALGORITHM_FUNCTIONAL_HH

@@ -43,29 +43,6 @@ namespace Algorithm
   {}
 
 
-  void JacobiPreconditioner::setArgument(const AbstractFunctionSpaceElement& x)
-  {
-    x_ = clone(x);
-  }
-
-//  std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::d0() const
-//  {
-//    auto y = x_->clone();
-//    for(unsigned i = 0; i < y->size(); ++i)
-//      y->coefficient(i) *= diag_[i];
-//    return y;
-//  }
-
-  Operator jacobiPreconditioner(const Operator& A)
-  {
-    return Operator(std::make_unique<JacobiPreconditioner>(A));
-  }
-
-  Operator jacobiPreconditioner(const LinearOperator& A)
-  {
-    return Operator(std::make_unique<JacobiPreconditioner>(A));
-  }
-
   std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const
   {
     auto y = clone(x);
@@ -77,5 +54,16 @@ namespace Algorithm
   JacobiPreconditioner* JacobiPreconditioner::cloneImpl() const
   {
     return new JacobiPreconditioner(*this);
+  }
+
+
+  Operator jacobiPreconditioner(const Operator& A)
+  {
+    return Operator(std::make_unique<JacobiPreconditioner>(A));
+  }
+
+  Operator jacobiPreconditioner(const LinearOperator& A)
+  {
+    return Operator(std::make_unique<JacobiPreconditioner>(A));
   }
 }

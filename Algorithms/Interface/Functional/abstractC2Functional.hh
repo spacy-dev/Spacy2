@@ -17,10 +17,12 @@ namespace Algorithm
 
       Hessian getHessian(const AbstractFunctionSpaceElement& x) const;
 
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
+
+      virtual double d2(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx, const AbstractFunctionSpaceElement& dy) const;
+
     protected:
       friend class Hessian;
-
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
 
       virtual Hessian makeHessian(const AbstractFunctionSpaceElement& x) const;
 

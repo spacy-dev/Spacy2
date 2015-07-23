@@ -54,7 +54,7 @@ namespace Algorithm
 
   unsigned FunctionSpaceElement::spaceIndex() const
   {
-    return impl().getSpace().index();
+    return impl().space().index();
   }
 
   bool FunctionSpaceElement::operator==(const FunctionSpaceElement& y) const
@@ -105,6 +105,12 @@ namespace Algorithm
   {
     return impl().size();
   }
+
+  bool FunctionSpaceElement::isAdmissible() const
+  {
+    return impl().isAdmissible();
+  }
+
 
   // free functions
   FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y)

@@ -29,7 +29,7 @@ namespace Algorithm
       LinearizedOperator* cloneImpl() const;
 
       std::unique_ptr<AbstractC1Operator> A_;
-      const AbstractFunctionSpaceElement& x_;
+      std::unique_ptr<AbstractFunctionSpaceElement> x_;
       std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
     };
   }

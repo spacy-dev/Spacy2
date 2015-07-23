@@ -19,5 +19,10 @@ namespace Algorithm
   {
     return FunctionSpaceElement( impl()(x.impl()) );
   }
+
+  bool LinearSolver::encounteredNonconvexity() const
+  {
+    return impl().encounteredNonconvexity();
+  }
 }
 

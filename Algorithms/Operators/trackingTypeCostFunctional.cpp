@@ -6,8 +6,9 @@
 
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
+
+#include <utility>
 
 namespace Algorithm
 {
@@ -15,22 +16,26 @@ namespace Algorithm
   using Interface::AbstractFunctionSpaceElement;
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         std::shared_ptr<AbstractBanachSpace> domain)
+                                                         std::shared_ptr<AbstractBanachSpace> domain,
+                                                         std::unique_ptr<Interface::AbstractOperator>&& My,
+                                                         std::unique_ptr<Interface::AbstractOperator>&& Mu)
     : AbstractC2Functional(domain),
       alpha_(alpha),
-      referenceState_( clone(referenceState) )
+      referenceState_( clone(referenceState) ),
+      My_(std::move(My)),
+      Mu_(std::move(Mu))
   {}
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const HilbertSpace &domain)
-    : TrackingTypeCostFunctional(alpha, referenceState, domain.sharedImpl())
+                                                         const HilbertSpace &domain, std::unique_ptr<Interface::AbstractOperator>&& My, std::unique_ptr<Interface::AbstractOperator>&& Mu)
+    : TrackingTypeCostFunctional(alpha, referenceState, domain.sharedImpl(), std::move(My), std::move(Mu))
   {}
 
 
 
 //  void TrackingTypeCostFunctional::setArgument(const AbstractFunctionSpaceElement &x)
 //  {
-//    if( isPrimalDualProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
+//    if( isProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
 //    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::setArgument");
 //    AbstractC2Functional::setArgument(x);
 ////    x_ = clone( dynamic_cast<const ProductSpaceElement&>(x) );
@@ -43,25 +48,29 @@ namespace Algorithm
     const auto& x_ =  dynamic_cast<const ProductSpaceElement&>(x);
 
     auto stateDifference = clone(*referenceState_);
-    *stateDifference -= x_.variable(stateId_);
+    *stateDifference -= x_.variable(stateIndex());
 
-    return 0.5 * (*stateDifference * *stateDifference)
-        + 0.5 * alpha_ * ( x_.variable(controlId_) * x_.variable(controlId_) );
+    return 0.5 * (*(*My_)(*stateDifference)) (*stateDifference)
+        + 0.5 * alpha_ * ( *(*Mu_)( x_.variable(controlIndex()) ) ) ( x_.variable(controlIndex()) );
   }
 
-  double TrackingTypeCostFunctional::d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const
+  std::unique_ptr<AbstractFunctionSpaceElement> TrackingTypeCostFunctional::d1(const AbstractFunctionSpaceElement& x) const
   {
-    auto y = getDomain().element();
+    auto tmp = getDomain().element();
 
     const auto& x_ =  dynamic_cast<const ProductSpaceElement&>(x);
-    auto& y_ = dynamic_cast<ProductSpaceElement&>(*y);
+    auto& tmp_ = dynamic_cast<ProductSpaceElement&>(*tmp);
 
-    x_.variable(stateId_).copyTo( y_.variable(stateId_) );
-    y_.variable(stateId_) -= *referenceState_;
-    y_.variable(controlId_) = x_.variable(controlId_);
-    y_.variable(controlId_) *= alpha_;
+    x_.variable(stateIndex()).copyTo( tmp_.variable(stateIndex()) );
+    tmp_.variable(stateIndex()) -= *referenceState_;
+    tmp_.variable(controlIndex()) = x_.variable(controlIndex());
+    tmp_.variable(controlIndex()) *= alpha_;
 
-    return (*y)(dx);
+//    return (*y)(dx);
+    auto y = (*My_)(tmp_.variable(stateIndex()));
+    *y   += *(*Mu_)(tmp_.variable(controlIndex()));
+    return std::move(y);
+//    return (*(*My_)(y_.variable(stateId_))) ( dx_.variable(stateId_) ) + (*(*Mu_)(y_.variable(controlId_))) ( dx_.variable(controlId_));
   }
 
   std::unique_ptr<AbstractFunctionSpaceElement> TrackingTypeCostFunctional::d2(const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement& dx) const
@@ -70,7 +79,7 @@ namespace Algorithm
 
     auto y = clone(dx);
     auto& y_ = dynamic_cast<ProductSpaceElement&>(*y);
-    y_.variable(controlId_) *= alpha_;
+    y_.variable(controlIndex()) *= alpha_;
     return y;
   }
 
@@ -86,19 +95,9 @@ namespace Algorithm
 //        + alpha_ * ( dx_.variable(controlId_) * dy_.variable(controlId_) );
 //  }
 
-  void TrackingTypeCostFunctional::setStateId(unsigned stateId)
-  {
-    stateId_ = stateId;
-  }
-
-  void TrackingTypeCostFunctional::setControlId(unsigned controlId)
-  {
-    controlId_ = controlId;
-  }
-
   TrackingTypeCostFunctional* TrackingTypeCostFunctional::cloneImpl() const
   {
-    return new TrackingTypeCostFunctional(alpha_,*referenceState_,getSharedDomain());
+    return new TrackingTypeCostFunctional(alpha_,*referenceState_,getSharedDomain(),clone(My_),clone(Mu_));
   }
 
 }

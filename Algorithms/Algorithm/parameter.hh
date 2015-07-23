@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_ALGORITHM_PARAMETERS_HH
 #define ALGORITHM_ALGORITHM_PARAMETERS_HH
 
-#include "Util/Mixins/mixins.hh"
+#include "Util/mixins.hh"
 
 namespace Algorithm
 {

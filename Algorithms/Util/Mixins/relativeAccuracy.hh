@@ -14,7 +14,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets relative accuracy.
        */
-      explicit RelativeAccuracy(double relativeAccuracy = 1e-12);
+      explicit RelativeAccuracy(double relativeAccuracy = 1e-12) noexcept;
 
       /**
        * @brief Set relative accuracy.

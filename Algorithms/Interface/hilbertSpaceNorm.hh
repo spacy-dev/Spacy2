@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "Interface/abstractNorm.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -15,7 +16,7 @@ namespace Algorithm
     /**
    * @brief Norm induced by a scalar product.
    */
-    class HilbertSpaceNorm : public AbstractNorm
+    class HilbertSpaceNorm : public AbstractNorm, public Mixin::SharedImpl<AbstractScalarProduct>
     {
     public:
       /**
@@ -37,9 +38,6 @@ namespace Algorithm
 
       /// Compute \f$\|x\|^2=(x,x)\f$.
       double squared(const AbstractFunctionSpaceElement& x) const final override;
-
-    private:
-      std::shared_ptr<AbstractScalarProduct> sp_;
     };
   }
 }

@@ -11,7 +11,7 @@ namespace Algorithm
 
   double Interface::LinearizedFunctional::d0(const Interface::AbstractFunctionSpaceElement& dx) const
   {
-    return A_.d1(x_,dx);
+    return (*A_.d1(x_))(dx);
   }
 
   Interface::LinearizedFunctional* Interface::LinearizedFunctional::cloneImpl() const

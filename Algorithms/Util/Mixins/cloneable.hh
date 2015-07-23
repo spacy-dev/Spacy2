@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXINS_CLONEABLE_HH
 #define ALGORITHM_UTIL_MIXINS_CLONEABLE_HH
 
+#include <cassert>
 #include <memory>
 
 namespace Algorithm
@@ -32,12 +33,14 @@ namespace Algorithm
     template <class T>
     auto cloneInMixin(T* t)
     {
+      assert(t != nullptr);
       return cloneInMixin(*t);
     }
 
     template <class T>
     auto cloneInMixin(const std::unique_ptr<T>& t)
     {
+      assert(t != nullptr);
       return cloneInMixin(*t);
     }
   }

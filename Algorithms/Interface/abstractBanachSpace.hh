@@ -28,7 +28,7 @@ namespace Algorithm
 
       std::unique_ptr<AbstractFunctionSpaceElement> element() const;
 
-      unsigned index() const;
+      unsigned index() const noexcept;
 
       void addPrimalSpace(const AbstractBanachSpace& primalSpace);
 
@@ -43,7 +43,7 @@ namespace Algorithm
       virtual std::unique_ptr<AbstractFunctionSpaceElement> elementImpl() const = 0;
 
     private:
-      std::vector<unsigned> primalSpaces_, dualSpaces_;
+      std::vector<unsigned> primalSpaces_, dualSpaces_; ///< primal and dual spaces with respect to this space
 
       const unsigned index_ = spaceIndex++;
     };

@@ -25,6 +25,8 @@ namespace Algorithm
      */
     double d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
 
+    FunctionSpaceElement d1(const FunctionSpaceElement &x) const;
+
     /**
      * \brief Access implementation.
      */
@@ -35,15 +37,5 @@ namespace Algorithm
      */
     const Interface::AbstractC1Functional& impl() const;
   };
-
-  /**
-   * @brief Convenient generation of differentiable functional from implementation arguments.
-   * @return C1Functional( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  C1Functional makeC1Functional(Args&&... args)
-  {
-    return C1Functional( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
 }
 #endif // ALGORITHM_C1_FUNCTIONAL_HH

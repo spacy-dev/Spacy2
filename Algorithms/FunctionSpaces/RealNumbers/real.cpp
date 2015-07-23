@@ -55,7 +55,7 @@ namespace Algorithm
 
   std::unique_ptr<AbstractFunctionSpaceElement> Real::operator- () const
   {
-    return std::make_unique<Real>(-x_, this->getSpace() );
+    return std::make_unique<Real>(-x_, this->space() );
   }
 
   double Real::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
@@ -84,7 +84,7 @@ namespace Algorithm
 
   void Real::print(std::ostream& os) const
   {
-    os << "Space index: " << getSpace().index() << "\n";
+    os << "Space index: " << space().index() << "\n";
     os << x_ << std::endl;
   }
 

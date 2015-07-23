@@ -4,7 +4,7 @@
 #include "abstractNorm.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
-
+#include <iostream>
 namespace Algorithm
 {
   namespace Interface
@@ -18,7 +18,7 @@ namespace Algorithm
       return space_.index();
     }
 
-    const AbstractBanachSpace& AbstractFunctionSpaceElement::getSpace() const
+    const AbstractBanachSpace& AbstractFunctionSpaceElement::space() const
     {
       return space_;
     }
@@ -27,8 +27,15 @@ namespace Algorithm
     {
       auto y_ = clone(y);
       *y_ -= *this;
-      const auto& norm_ = getSpace().getNorm();
+      const auto& norm_ = space().getNorm();
+      std::cout << "equals norm: " << norm_(*y_) << ", y: " << norm_(y) << std::endl;
+      std::cout << (norm_(*y_) < eps()) << std::endl;
       return norm_(*y_) < eps();
+    }
+
+    bool AbstractFunctionSpaceElement::isAdmissible() const
+    {
+      return true;
     }
 
 
@@ -41,7 +48,7 @@ namespace Algorithm
 
     double AbstractFunctionSpaceElement::operator()(const AbstractFunctionSpaceElement& y) const
     {
-      if( !getSpace().isDualWRT( y.getSpace() ) ) throw InvalidArgumentException("AbstractFunctionSpaceElement::operator()");
+      if( !space().isDualWRT( y.space() ) ) throw InvalidArgumentException("AbstractFunctionSpaceElement::operator()");
       return applyAsDualTo(y);
     }
 

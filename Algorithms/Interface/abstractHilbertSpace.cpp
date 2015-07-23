@@ -35,9 +35,9 @@ namespace Algorithm
 
     double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
     {
-      if( isHilbertSpace(x.getSpace()) && isHilbertSpace(y.getSpace()) && x.spaceIndex() == y.spaceIndex() )
+      if( isHilbertSpace(x.space()) && isHilbertSpace(y.space()) && x.spaceIndex() == y.spaceIndex() )
       {
-        auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.getSpace()).getScalarProduct();
+        auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.space()).getScalarProduct();
         return sp->operator ()(x,y);
       }
 

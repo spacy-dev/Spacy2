@@ -56,9 +56,11 @@ namespace Algorithm
 
       unsigned spaceIndex() const;
 
-      const AbstractBanachSpace& getSpace() const;
+      const AbstractBanachSpace& space() const;
 
       bool equals(const AbstractFunctionSpaceElement& y) const;
+
+      virtual bool isAdmissible() const;
 
     protected:
       virtual double applyAsDualTo(const AbstractFunctionSpaceElement& y) const = 0;

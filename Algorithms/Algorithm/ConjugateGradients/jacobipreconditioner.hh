@@ -22,10 +22,6 @@ namespace Algorithm
 
     JacobiPreconditioner(const JacobiPreconditioner& other);
 
-    void setArgument(const Interface::AbstractFunctionSpaceElement& x);
-
-//    std::unique_ptr<Interface::AbstractFunctionSpaceElement> d0() const override;
-
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const override;
 
   private:

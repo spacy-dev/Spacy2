@@ -2,8 +2,7 @@
 
 #include "../../functionSpaceElement.hh"
 #include "../../scalarProduct.hh"
-#include "../../lagrangeFunctional.hh"
-#include "../../FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
+#include "../../c2Functional.hh"
 
 #include <cmath>
 
@@ -21,11 +20,11 @@ namespace Algorithm
     }
 
 
-    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional &L, const FunctionSpaceElement& x)
+    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const C2Functional &L, const FunctionSpaceElement& x)
     {
-      auto constant = nu*L.d1(x,primal(dn)) + 0.5*nu*nu*L.d2(x,primal(dn),primal(dn));
-      auto linear = L.d1(x,primal(dt)) + nu*L.d2(x,dn,dt);
-      auto quadratic = 0.5*L.d2(x,primal(dt),primal(dt));
+      auto constant = L(x) + nu*L.d1(x,dn) + 0.5*nu*nu*L.d2(x,dn,dn);
+      auto linear = L.d1(x,dt) + nu*L.d2(x,dn,dt);
+      auto quadratic = 0.5*L.d2(x,dt,dt);
 
       return QuadraticModel( constant, linear, quadratic );
     }
@@ -33,11 +32,11 @@ namespace Algorithm
 
     QuadraticModel makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp)
     {
-      return QuadraticModel( sp(primal(dn),primal(dn))*nu*nu , sp(primal(dn),primal(dt))*2*nu , sp(primal(dt),primal(dt)) );
+      return QuadraticModel( sp(dn,dn)*nu*nu , sp(dn,dt)*2*nu , sp(dt,dt) );
     }
 
     CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp,
-                              const LagrangeFunctional& f, const FunctionSpaceElement& x, double omega)
+                              const C2Functional& f, const FunctionSpaceElement& x, double omega)
     {
       return CubicModel( makeQuadraticModel(nu,dn,dt,f,x), makeQuadraticNormModel(nu,dn,dt,sp), omega );
     }

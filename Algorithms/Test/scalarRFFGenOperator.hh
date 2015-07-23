@@ -85,14 +85,14 @@ namespace Algorithm
       return std::make_unique<Real>( exp(x.coefficient(0))*dx.coefficient(0) , getRange() );
     }
 
-    Interface::AbstractOperator* cloneImpl() const
+    TestOperator* cloneImpl() const
     {
       return new TestOperator(getSharedDomain());
     }
 
     Interface::LinearizedOperator makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const override
     {
-      return Interface::LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>(exp(x.coefficient(0))));
+      return Interface::LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>( exp(x.coefficient(0)) , getSharedRange() , getSharedDomain() ));
     }
 
 //    void updateSolver()

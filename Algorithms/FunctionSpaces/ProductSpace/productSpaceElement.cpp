@@ -1,12 +1,12 @@
 #include "productSpaceElement.hh"
 
-#include "productSpace.hh"
-
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 #include <cassert>
 #include <numeric>
 #include <stdexcept>
+
+#include <iostream>
 
 namespace Algorithm
 {
@@ -22,68 +22,140 @@ namespace Algorithm
     return clonedVariables;
   }
 
-  ProductSpaceElement::ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > &variables, const AbstractBanachSpace& space)
+  namespace
+  {
+    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables,
+                                                                               const std::vector<unsigned>& ids)
+    {
+      std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > clonedVariables;
+
+      for( unsigned i : ids ) clonedVariables.emplace_back< std::unique_ptr<AbstractFunctionSpaceElement> >( clone(variables[i]) );
+
+      return clonedVariables;
+    }
+  }
+
+  ProductSpaceElement::ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > &variables, const ProductSpace& space)
     : AbstractFunctionSpaceElement(space), variables_(cloneVariables(variables))
   {}
 
-  ProductSpaceElement::ProductSpaceElement(const AbstractBanachSpace& space)
+  ProductSpaceElement::ProductSpaceElement(const ProductSpace& space)
     : AbstractFunctionSpaceElement(space)
   {
-    const auto& spaces = dynamic_cast<const ProductSpace&>(space).getSpaces();
+    const auto& spaces = dynamic_cast<const ProductSpace&>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i) variables_.push_back(spaces[i]->element());
   }
 
   void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
   {
-    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::copyTo");
+    auto& y_ = toProductSpaceElement(y);
 
-    dynamic_cast<ProductSpaceElement&>(y).variables_ = cloneVariables(variables_);
+    if( ( !isPrimalEnabled() && !y_.isDualEnabled() ) ||
+        ( !isDualEnabled() && !y_.isPrimalEnabled() ) )
+    {
+      reset(y_);
+      return;
+    }
+
+    if( !isPrimalEnabled() || !y_.isPrimalEnabled() )
+    {
+      for( unsigned i : space().dualSubSpaceIds() ) y_.variables()[i] = clone(variable(i));
+      reset(y_);
+      return;
+    }
+
+    if( !isDualEnabled() || !y_.isDualEnabled() )
+    {
+      for( unsigned i : space().primalSubSpaceIds() ) y_.variables()[i] = clone(variable(i));
+      reset(y_);
+      return;
+    }
+
+    y_.variables_ = cloneVariables(variables_);
 
   }
 
   ProductSpaceElement& ProductSpaceElement::operator=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator=");
+    const auto& y_ = toProductSpaceElement(y);
 
-    for(auto i = 0u; i < variables_.size(); ++i)
-      *variables_[i] = *dynamic_cast<const ProductSpaceElement&>(y).variables_[i];
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variables()[i] = clone( y_.variable(i) );
 
+    if( isDualEnabled() && y_.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variables()[i] = clone( y_.variable(i) );
+
+    reset(y_);
     return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator+=");
+    const auto& y_ = toProductSpaceElement(y);
 
-    for(auto i = 0u; i < variables_.size(); ++i)
-      *variables_[i] += *dynamic_cast<const ProductSpaceElement&>(y).variables_[i];
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i) += y_.variable(i);
 
+    if( isDualEnabled() && y_.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i) += y_.variable(i);
+
+    reset(y_);
     return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceElement::operator-=");
+    const auto& y_ = toProductSpaceElement(y);
 
-    for(auto i = 0u; i < variables_.size(); ++i)
-      (*variables_[i]) -= *dynamic_cast<const ProductSpaceElement&>(y).variables_[i];
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i) -= y_.variable(i);
 
+    if( isDualEnabled() && y_.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i) -= y_.variable(i);
+
+    reset(y_);
     return *this;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator*=(double a)
   {
-    for(auto i = 0u; i < variables_.size(); ++i)
-      *variables_[i] *= a;
+    if( isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i) *= a;
 
+    if( isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i) *= a;
+
+    reset();
     return *this;
   }
 
   std::unique_ptr<AbstractFunctionSpaceElement> ProductSpaceElement::operator- () const
   {
-    decltype(variables_) primal;
-    for(auto& var : variables_) primal.push_back( -*var );
-    return std::make_unique<ProductSpaceElement>(primal,this->getSpace());
+    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > vars = cloneVariables(variables());
+    if( isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        vars[i] = -variable(i);
+    else
+      for( unsigned i : space().primalSubSpaceIds() )
+        vars[i] = clone(variable(i));
+
+    if( isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        vars[i] = -variable(i);
+    else
+      for( unsigned i : space().dualSubSpaceIds() )
+        vars[i] = clone(variable(i));
+
+    reset();
+    return std::make_unique<ProductSpaceElement>(vars,space());
   }
 
   double ProductSpaceElement::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
@@ -91,9 +163,15 @@ namespace Algorithm
     auto result = 0.;
     const auto& y_  = dynamic_cast<const ProductSpaceElement&>(y);
     assert( variables().size() == y_.variables().size() );
-    for(auto i=0u; i<variables().size(); ++i)
-      result += variable(i)( y_.variable(i) );
 
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      for( auto i : space().primalSubSpaceIds() )
+        result += variable(i)( y_.variable(i) );
+    if( isDualEnabled() && y_.isDualEnabled() )
+      for( auto i : space().dualSubSpaceIds() )
+        result += variable(i)( y_.variable(i) );
+
+    reset(y_);
     return result;
   }
 
@@ -131,7 +209,7 @@ namespace Algorithm
 
   void ProductSpaceElement::print(std::ostream& os) const
   {
-    os << "Space index: " << getSpace().index() << "\n";
+    os << "Space index: " << space().index() << "\n";
     os << "Variables:\n";
     for( auto& v : variables_ ) v->print(os);
   }
@@ -158,12 +236,58 @@ namespace Algorithm
 
   ProductSpaceElement* ProductSpaceElement::cloneImpl() const
   {
-    return new ProductSpaceElement(cloneVariables(variables_),this->getSpace());
+    auto vars = cloneVariables(variables());
+    if( !isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        *vars[i] *= 0;
+    if( !isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        *vars[i] *= 0;
+
+    reset();
+    return new ProductSpaceElement(vars,space());
   }
+
+
+  ProductSpaceElement ProductSpaceElement::primalElement() const
+  {
+    return ProductSpaceElement( cloneVariables(variables(),space().primalSubSpaceIds()) , space().primalSubSpace() );
+  }
+
+  ProductSpaceElement ProductSpaceElement::dualElement() const
+  {
+    return ProductSpaceElement( cloneVariables(variables(),space().dualSubSpaceIds()) , space().dualSubSpace() );
+  }
+
+  const ProductSpace& ProductSpaceElement::space() const
+  {
+    return dynamic_cast<const ProductSpace&>(AbstractFunctionSpaceElement::space());
+  }
+
 
 
   bool isProductSpaceElement(const AbstractFunctionSpaceElement& x)
   {
     return dynamic_cast<const ProductSpaceElement*>(&x) != nullptr;
   }
+
+
+
+  ProductSpaceElement& toProductSpaceElement(Interface::AbstractFunctionSpaceElement& x)
+  {
+    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("toProductSpaceElement");
+    return dynamic_cast<ProductSpaceElement&>(x);
+  }
+
+  const ProductSpaceElement& toProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x)
+  {
+    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("toProductSpaceElement");
+    return dynamic_cast<const ProductSpaceElement&>(x);
+  }
+
+  FunctionSpaceElement primalElement(const FunctionSpaceElement& x)
+  {
+    return FunctionSpaceElement( toProductSpaceElement(x.impl()).primalElement() );
+  }
+
 }

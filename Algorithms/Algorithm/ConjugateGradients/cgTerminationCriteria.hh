@@ -2,7 +2,7 @@
 #define ALGORITHM_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
 
 #include <vector>
-#include "Util/Mixins/mixins.hh"
+#include "Util/mixins.hh"
 
 namespace Algorithm
 {
@@ -78,7 +78,7 @@ namespace Algorithm
     virtual bool minimalDecreaseAchieved() const;
 
   protected:
-    unsigned maximalNumberOfIterations_ = 1000;
+    unsigned maximalNumberOfIterations_ = 50;
     bool reachedMaximalNumberOfIterations_ = false;
   };
 

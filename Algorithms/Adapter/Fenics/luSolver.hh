@@ -7,6 +7,7 @@
 #include <dolfin.h>
 
 #include "Interface/abstractLinearSolver.hh"
+#include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 namespace Algorithm
 {
@@ -15,14 +16,41 @@ namespace Algorithm
     class LUSolver : public Interface::AbstractLinearSolver
     {
     public:
-      explicit LUSolver(const dolfin::GenericMatrix& A);
+      LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& productSpace,
+               std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range);
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
 
     private:
-      std::unique_ptr<dolfin::GenericMatrix> A_;
+      LUSolver* cloneImpl() const;
+
+      std::shared_ptr<dolfin::GenericMatrix> A_;
       mutable dolfin::LUSolver solver;
+      const dolfin::FunctionSpace& productSpace_;
     };
+
+//    std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const dolfin::GenericMatrix& A);
+
+//    template <class... Args>
+//    std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const Args&...);
+
+
+//    class TransposedLUSolver : public Interface::AbstractLinearSolver
+//    {
+//    public:
+//      explicit TransposedLUSolver(const dolfin::GenericMatrix& A);
+
+//      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
+
+//    private:
+//      std::unique_ptr<dolfin::GenericMatrix> A_;
+//      mutable dolfin::LUSolver solver;
+//    };
+
+//    std::shared_ptr<Interface::AbstractLinearSolver> createTransposedLUSolver(const dolfin::GenericMatrix& A);
+
+//    template <class... Args>
+//    std::shared_ptr<Interface::AbstractLinearSolver> createTransposedLUSolver(const Args&...);
   }
 }
 

@@ -14,7 +14,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Set maximal number of steps/iterations.
        */
-      explicit MaxSteps(unsigned maxSteps = 100);
+      explicit MaxSteps(unsigned maxSteps = 100) noexcept;
 
       /**
        * @brief Set maximal number of steps/iterations for iterative solvers.

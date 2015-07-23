@@ -34,19 +34,6 @@ namespace Algorithm
      * @brief Access scalar product.
      */
     ScalarProduct getScalarProduct() const;
-
-  private:
-    ScalarProduct sp_;
   };
-
-  /**
-   * @brief Convenient generation of hilbert space from implementation arguments.
-   * @return HilbertSpace(std::make_shared<Implementation>(std::forward<Args>(args)...))
-   */
-  template <class Implementation, class... Args>
-  auto makeHilbertSpace(Args&&... args)
-  {
-    return HilbertSpace(std::make_unique<Implementation>(std::forward<Args>(args)...));
-  }
 }
 #endif // ALGORITHM_HILBERT_SPACE_HH

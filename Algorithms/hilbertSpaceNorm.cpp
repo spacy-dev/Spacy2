@@ -15,4 +15,19 @@ namespace Algorithm
   {
     return scalarProduct(x,x);
   }
+
+  Interface::HilbertSpaceNorm& HilbertSpaceNorm::impl()
+  {
+    return dynamic_cast<Interface::HilbertSpaceNorm&>(Norm::impl());
+  }
+
+  const Interface::HilbertSpaceNorm& HilbertSpaceNorm::impl() const
+  {
+    return dynamic_cast<const Interface::HilbertSpaceNorm&>(Norm::impl());
+  }
+
+  std::shared_ptr<Interface::HilbertSpaceNorm> HilbertSpaceNorm::sharedImpl() const
+  {
+    return std::static_pointer_cast<Interface::HilbertSpaceNorm>(Norm::sharedImpl());
+  }
 }

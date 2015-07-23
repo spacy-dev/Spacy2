@@ -11,17 +11,18 @@ namespace Algorithm
 {
   namespace Interface
   {
-    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x)
-      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(x)
+    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
+      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(clone(x)), solver_(solver)
     {}
 
-    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(x), solver_(solver)
+    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x)
+      : LinearizedOperator(std::move(A), x, nullptr)
     {}
+
 
     std::unique_ptr<AbstractFunctionSpaceElement> LinearizedOperator::operator ()(const AbstractFunctionSpaceElement& dx) const
     {
-      return A_->d1(x_,dx);
+      return A_->d1(*x_,dx);
     }
 
     std::shared_ptr<AbstractLinearSolver> LinearizedOperator::getSolver() const
@@ -37,7 +38,7 @@ namespace Algorithm
 
     LinearizedOperator* LinearizedOperator::cloneImpl() const
     {
-      return new LinearizedOperator(clone(A_),x_,solver_);
+      return new LinearizedOperator(clone(A_),*x_,solver_);
     }
   }
 }

@@ -23,10 +23,10 @@ namespace Algorithm
 
       LinearizedOperator getLinearization(const AbstractFunctionSpaceElement& x) const;
 
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
+
     protected:
       friend class LinearizedOperator;
-
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const = 0;
 
       virtual LinearizedOperator makeLinearization(const AbstractFunctionSpaceElement& x) const;
 

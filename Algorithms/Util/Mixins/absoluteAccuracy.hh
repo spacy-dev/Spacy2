@@ -14,7 +14,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets absolute accuracy.
        */
-      explicit AbsoluteAccuracy(double absoluteAccuracy = 1e-12);
+      explicit AbsoluteAccuracy(double absoluteAccuracy = 1e-12) noexcept;
 
       /**
        * @brief Set absolute accuracy.

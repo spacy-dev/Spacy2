@@ -5,6 +5,7 @@
 
 #include "linearOperator.hh"
 #include "operator.hh"
+#include "Interface/Operator/abstractC1Operator.hh"
 
 namespace Algorithm
 {
@@ -27,20 +28,21 @@ namespace Algorithm
      * @brief Compute first directional derivative \f$A(x)'dx\f$ at \f$x\f$ in direction \f$dx\f$.
      */
     FunctionSpaceElement d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
+
     /**
      * @brief Get linearization \f$A(x)'\f$ at \f$x\f$.
      */
     LinearOperator getLinearization(const FunctionSpaceElement& x) const;
-  };
 
-  /**
-   * @brief Convenient generation of differentiable operator from implementation arguments.
-   * @return C1Operator( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  C1Operator makeC1Operator(Args&&... args)
-  {
-    return C1Operator( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
+    /**
+     * \brief Access implementation.
+     */
+    Interface::AbstractC1Operator& impl();
+
+    /**
+     * \brief Access implementation.
+     */
+    const Interface::AbstractC1Operator& impl() const;
+  };
 }
 #endif // ALGORITHM_C1_OPERATOR_HH

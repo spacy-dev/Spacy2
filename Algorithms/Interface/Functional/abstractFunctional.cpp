@@ -15,7 +15,7 @@ namespace Algorithm
 
     double AbstractFunctional::operator ()(const AbstractFunctionSpaceElement& x) const
     {
-      if( getDomain().index() != x.getSpace().index() ) throw InvalidArgumentException("AbstractFunctional::operator() (incompatible space ids)");
+      if( getDomain().index() != x.space().index() ) throw InvalidArgumentException("AbstractFunctional::operator() (incompatible space ids)");
 
       return d0(x);
     }

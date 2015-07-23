@@ -123,17 +123,12 @@ namespace Algorithm
      * @brief Size of coefficient vector.
      */
     unsigned size() const;
-  };
 
-  /**
-   * @brief Convenient generation of function space element from implementation arguments.
-   * @return FunctionSpaceElement( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  FunctionSpaceElement makeElement(Args&&... args)
-  {
-    return FunctionSpaceElement( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
+    /**
+     * @brief Checks if a function space is admissible in the case that the search space is a subset of a function space which is not a subspace.
+     */
+    bool isAdmissible() const;
+  };
 
 
   /**
@@ -141,7 +136,7 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(const Arithmetic& a, FunctionSpaceElement x)
+  FunctionSpaceElement operator*(const Arithmetic& a, FunctionSpaceElement x)
   {
     return x *= a;
   }

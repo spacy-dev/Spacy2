@@ -169,7 +169,7 @@ namespace Algorithm
 
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override
     {
-      auto v = std::make_unique<VectorSpaceElement>(this->getSpace(),v_);
+      auto v = std::make_unique<VectorSpaceElement>(this->space(),v_);
       *v *= -1;
       return std::move(v);
     }
@@ -202,7 +202,7 @@ namespace Algorithm
   private:    
     VectorSpaceElement* cloneImpl() const final override
     {
-      return new VectorSpaceElement(getSpace(),v_);
+      return new VectorSpaceElement(space(),v_);
     }
 
     double applyAsDualTo(const Interface::AbstractFunctionSpaceElement &y) const final override

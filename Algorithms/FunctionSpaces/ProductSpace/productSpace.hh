@@ -4,7 +4,9 @@
 #include <memory>
 #include <vector>
 
+#include "hilbertSpace.hh"
 #include "Interface/abstractHilbertSpace.hh"
+#include "Util/create.hh"
 
 namespace Algorithm
 {
@@ -14,19 +16,42 @@ namespace Algorithm
     class AbstractFunctionSpaceElement;
   }
 
-  /// Space of real numbers.
+
   class ProductSpace : public Interface::AbstractHilbertSpace
   {
   public:
-    ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces);
+    explicit ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces);
 
-    const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& getSpaces() const;
+    ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces,
+                 const std::vector<unsigned>& primalSubSpaceIds,
+                 const std::vector<unsigned>& dualSubSpaceIds);
+
+    const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& subSpaces() const;
+
+    const Interface::AbstractBanachSpace& subSpace(unsigned i) const;
+
+    std::shared_ptr<Interface::AbstractBanachSpace> sharedSubSpace(unsigned i) const;
+
+    const ProductSpace& primalSubSpace() const;
+
+    const ProductSpace& dualSubSpace() const;
+
+    std::shared_ptr<ProductSpace> sharedPrimalSubSpace() const;
+
+    std::shared_ptr<ProductSpace> sharedDualSubSpace() const;
+
+    const std::vector<unsigned>& primalSubSpaceIds() const;
+
+    const std::vector<unsigned>& dualSubSpaceIds() const;
 
   private:
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override;
 
     std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > spaces_;
+    std::vector<unsigned> primalSubSpaceIds_, dualSubSpaceIds_;
+    std::shared_ptr<ProductSpace> primalSpace_, dualSpace_;
   };
+
 
   template <class... Spaces_> struct PackSpaces {};
 
@@ -61,11 +86,11 @@ namespace Algorithm
   }
 
 
-  template <class PrimalSpaces, class DualSpaces=PackSpaces<> >
-  std::shared_ptr<ProductSpace> makeProductSpace()
-  {
-    return std::make_shared<ProductSpace>( ProductSpaceDetail::CreateSpaceVector<PrimalSpaces>::apply() );
-  }
+  HilbertSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces);
+
+  HilbertSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces,
+                                const std::vector<unsigned>& primalSubSpaceIds,
+                                const std::vector<unsigned>& dualSubSpaceIds = {});
 }
 
 #endif // ALGORITHM_FUNCTION_SPACES_PRODUCTSPACE_HH

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-Algorithm::Mixin::Eps::Eps(double eps)
+Algorithm::Mixin::Eps::Eps(double eps) noexcept
   : eps_(eps)
 {}
 

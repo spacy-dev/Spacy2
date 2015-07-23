@@ -12,7 +12,12 @@ namespace Algorithm
 
   double C1Functional::d1(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
   {
-    return impl().d1(x.impl(),dx.impl());
+    return ( *impl().d1(x.impl()) )(dx.impl());
+  }
+
+  FunctionSpaceElement C1Functional::d1(const FunctionSpaceElement &x) const
+  {
+    return FunctionSpaceElement( impl().d1(x.impl()) );
   }
 
   Interface::AbstractC1Functional& C1Functional::impl()

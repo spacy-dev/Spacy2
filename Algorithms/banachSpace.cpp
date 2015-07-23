@@ -8,17 +8,17 @@
 namespace Algorithm
 {
   BanachSpace::BanachSpace(std::shared_ptr<Interface::AbstractBanachSpace> implementation)
-    : Mixin::SharedImpl<Interface::AbstractBanachSpace>(implementation), norm_(impl().getSharedNorm())
+    : Mixin::SharedImpl<Interface::AbstractBanachSpace>(implementation)
   {}
 
-  void BanachSpace::setNorm(Norm&& norm)
+  void BanachSpace::setNorm(const Norm& norm)
   {
-    norm_ = std::move(norm);
+    impl().setNorm(norm.sharedImpl());
   }
 
-  const Norm& BanachSpace::getNorm() const
+  Norm BanachSpace::getNorm() const
   {
-    return norm_;
+    return Norm( impl().getSharedNorm() );
   }
 
   FunctionSpaceElement BanachSpace::element() const

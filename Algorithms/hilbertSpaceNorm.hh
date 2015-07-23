@@ -16,6 +16,21 @@ namespace Algorithm
     double scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const;
 
     double squared(const FunctionSpaceElement& x) const;
+
+    /**
+     * \brief Access implementation.
+     */
+    Interface::HilbertSpaceNorm& impl();
+
+    /**
+     * \brief Access implementation.
+     */
+    const Interface::HilbertSpaceNorm& impl() const;
+
+    /**
+     * \brief Access implementation.
+     */
+    std::shared_ptr<Interface::HilbertSpaceNorm> sharedImpl() const;
   };
 }
 

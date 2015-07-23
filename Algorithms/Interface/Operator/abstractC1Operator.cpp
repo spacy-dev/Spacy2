@@ -24,5 +24,6 @@ namespace Algorithm
     {
       return LinearizedOperator(clone(*this),x,solver_);
     }
+
   }
 }

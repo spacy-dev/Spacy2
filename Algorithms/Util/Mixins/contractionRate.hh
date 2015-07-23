@@ -14,7 +14,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets desired and maximal contraction rate.
        */
-      explicit ContractionRate(double desiredContraction = 0.5, double maximalContraction = 0.75);
+      explicit ContractionRate(double desiredContraction = 0.5, double maximalContraction = 0.75) noexcept;
 
       /**
        * @brief Set desired contraction rate.

@@ -13,7 +13,7 @@ namespace Algorithm
   class FunctionSpaceElement;
 
   /**
-   * @brief Banach space \f$X\f$. Creates function space elements and admits access to norm.
+   * @brief Banach space \f$(X,\|\cdot\|)\f$. Creates function space elements and admits access to norm.
    */
   class BanachSpace : public Mixin::SharedImpl<Interface::AbstractBanachSpace>
   {
@@ -32,12 +32,12 @@ namespace Algorithm
     /**
      * @brief Change norm of space.
      */
-    void setNorm(Norm&& norm);
+    void setNorm(const Norm& norm);
 
     /**
      * @brief Access norm.
      */
-    const Norm& getNorm() const;
+    Norm getNorm() const;
 
     /**
      * @brief Create new function space element.
@@ -48,20 +48,6 @@ namespace Algorithm
      * @brief Access unique index of the function space.
      */
     unsigned index() const;
-
-  private:
-    friend class FunctionSpaceElement;
-    Norm norm_;
   };
-
-  /**
-   * @brief Convenient generation of banach space from implementation arguments.
-   * @return BanachSpace(std::make_shared<Implementation>(std::forward<Args>(args)...))
-   */
-  template <class Implementation, class... Args>
-  auto makeBanachSpace(Args&&... args)
-  {
-    return BanachSpace(std::make_shared<Implementation>(std::forward<Args>(args)...));
-  }
 }
 #endif // ALGORITHM_BANACH_SPACE_HH

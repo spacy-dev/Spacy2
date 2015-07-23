@@ -4,7 +4,7 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    Verbosity::Verbosity(bool verbose)
+    Verbosity::Verbosity(bool verbose) noexcept
       : verbose_(verbose)
     {}
 
@@ -13,9 +13,19 @@ namespace Algorithm
       verbose_ = verbose;
     }
 
+    void Verbosity::setDetailedVerbosity(bool verbose) noexcept
+    {
+      verbose_detailed_ = verbose;
+    }
+
     bool Verbosity::verbose() const noexcept
     {
       return verbose_;
+    }
+
+    bool Verbosity::verbose_detailed() const noexcept
+    {
+      return verbose_detailed_;
     }
   }
 }

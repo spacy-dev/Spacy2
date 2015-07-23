@@ -8,14 +8,16 @@ namespace Algorithm
   class LipschitzConstant : public Mixin::Eps
   {
   public:
-    LipschitzConstant(double initialOmega = 1.);
+    LipschitzConstant(double initialOmega = 1e-3);
 
     LipschitzConstant& operator=(double newOmega);
 
     operator double() const;
 
+    double last() const;
+
   private:
-    double omega_ = 1., oldOmega_ = 1., maxFactor_ = 1e6, decreaseFactor_ = 1e-1;
+    double omega_ = 1e-3, oldOmega_ = 1e-3, maxFactor_ = 1e6, decreaseFactor_ = 1e-1;
   };
 }
 

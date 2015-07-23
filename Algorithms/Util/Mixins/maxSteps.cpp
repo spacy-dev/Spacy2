@@ -4,7 +4,7 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    MaxSteps::MaxSteps(unsigned maxSteps)
+    MaxSteps::MaxSteps(unsigned maxSteps) noexcept
       : maxSteps_(maxSteps)
     {}
 

@@ -4,6 +4,7 @@
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractHilbertSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm
@@ -13,16 +14,19 @@ namespace Algorithm
   double ProductSpaceProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
-    if( !isProductSpaceElement(x) || !isProductSpaceElement(y) ) throw InvalidArgumentException("ProductSpaceProduct");
 
-    const auto& x_ = dynamic_cast<const ProductSpaceElement&>(x);
-    const auto& y_ = dynamic_cast<const ProductSpaceElement&>(y);
+//    const auto& x_ = toProductSpaceElement(x);
+//    const auto& y_ = toProductSpaceElement(y);
 
-    auto result = 0.;
+//    auto result = 0.;
 
-    for(auto i=0u; i<x_.size(); ++i)
-      result += *x_.variables()[i] * *y_.variables()[i];
+//    if( x_.isPrimalEnabled() && y_.isPrimalEnabled() )
+//      for( auto i : x_.space().primalSubSpaceIds() )
+//        result += x_.variable(i)( y_.variable(i) );
+//    if( x_.isDualEnabled() && y_.isDualEnabled() )
+//      for( auto i : space().dualSubSpaceIds() )
+//        result += variable(i)( y_.variable(i) );
 
-    return result;
+    return x(y);
   }
 }

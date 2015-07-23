@@ -10,7 +10,7 @@ namespace Algorithm
     : Mixin::UniqueImpl<Interface::AbstractFunctional>(std::move(impl))
   {}
 
-  double Functional::operator()(const FunctionSpaceElement& x)
+  double Functional::operator()(const FunctionSpaceElement& x) const
   {
     return impl()(x.impl());
   }

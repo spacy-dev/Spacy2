@@ -3,50 +3,58 @@
 
 namespace Algorithm
 {
+  /// \cond
   class C1Operator;
   class FunctionSpaceElement;
   class LinearSolver;
-  class NewtonParameter;
   class Norm;
+  /// \endcond
 
-  namespace Newton_DampingStrategy
+  namespace Newton
   {
-    class AffineCovariant
+    /// \cond
+    class NewtonParameter;
+    /// \endcond
+
+    namespace DampingStrategy
     {
-    public:
-      AffineCovariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
+      class AffineCovariant
+      {
+      public:
+        AffineCovariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
 
-      double operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+        double operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
-    private:
-      const NewtonParameter& p_;
-      const C1Operator& F_;
-      const Norm& norm_;
-    };
+      private:
+        const NewtonParameter& p_;
+        const C1Operator& F_;
+        const Norm& norm_;
+      };
 
-    class AffineContravariant
-    {
-    public:
-      AffineContravariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
+      class AffineContravariant
+      {
+      public:
+        AffineContravariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm);
 
-      double operator()(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
+        double operator()(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx);
 
-    private:
-      const NewtonParameter& p_;
-      const C1Operator& F_;
-      const Norm& norm_;
+      private:
+        const NewtonParameter& p_;
+        const C1Operator& F_;
+        const Norm& norm_;
 
-      double muPrime = -1.;
-      double norm_F_x_old = -1;
-    };
+        double muPrime = -1.;
+        double norm_F_x_old = -1;
+      };
 
-    class Undamped
-    {
-    public:
-      Undamped(const NewtonParameter&, const C1Operator& F, const Norm& norm);
+      class None
+      {
+      public:
+        None(const NewtonParameter&, const C1Operator& F, const Norm& norm);
 
-      double operator()(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&);
-    };
+        double operator()(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&);
+      };
+    }
   }
 }
 

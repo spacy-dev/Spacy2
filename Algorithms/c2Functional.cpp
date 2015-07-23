@@ -19,9 +19,16 @@ namespace Algorithm
 
   double C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
   {
-    auto dfdx = impl().getHessian( x.impl() ) ( dx.impl() );
-    return (*dfdx) ( dy.impl() );
+    return impl().d2( x.impl() , dx.impl() , dy.impl() );
+//    auto dfdx = impl().getHessian( x.impl() ) ( dx.impl() );
+//    return (*dfdx) ( dy.impl() );
   }
+
+  LinearOperator C2Functional::hessian(const FunctionSpaceElement& x) const
+  {
+    return LinearOperator( impl().getHessian( x.impl() ) );
+  }
+
 
   Interface::AbstractC2Functional& C2Functional::impl()
   {

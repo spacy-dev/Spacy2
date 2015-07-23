@@ -12,19 +12,23 @@
 #include "functionSpaceElement.hh"
 #include "Util/Exceptions/singularOperatorException.hh"
 #include "Util/Mixins/eps.hh"
+#include "Util/Mixins/iterativeRefinements.hh"
 #include "Util/Mixins/verbosity.hh"
 
 #include "cgTerminationCriteria.hh"
 
 namespace Algorithm
 {
-  enum class CGImplementationType { STANDARD, TRUNCATED, REGULARIZED, HYBRID };
+  enum class CGImplementationType { STANDARD, TRUNCATED, REGULARIZED, TRUNCATED_REGULARIZED };
 
   namespace CG_Detail
   {
-    struct NoRegularization
+    class NoRegularization :
+        public Mixin::Eps,
+        public Mixin::Verbosity
     {
-      NoRegularization(double,bool) noexcept;
+    public:
+      NoRegularization(double eps ,bool verbose) noexcept;
 
       void initializeRegularization() const noexcept;
       void regularize(double&, double) const noexcept;
@@ -34,24 +38,27 @@ namespace Algorithm
     };
 
 
-    struct Regularization : Mixin::Eps, Mixin::Verbosity
+    class Regularization :
+        public Mixin::Eps,
+        public Mixin::Verbosity
     {
+    public:
       Regularization(double eps, bool verbose) noexcept;
 
-      void initializeRegularization() noexcept;
+      void initializeRegularization() const noexcept;
 
       void regularize(double& qAq, double qPq) const noexcept;
 
-      void updateRegularization(double qAq, double qPq);
+      void updateRegularization(double qAq, double qPq) const;
 
       template <class X>
       void adjustRegularizedResidual(double alpha, const X& Pq, X& r) const
       {
-        r.axpy(-alpha*theta,Pq);
+        r -= (alpha*theta)*Pq;
       }
 
     private:
-      double theta = 0;
+      mutable double theta = 0;
       unsigned maxIncrease = 1000, minIncrease = 2;
     };
 
@@ -74,7 +81,7 @@ namespace Algorithm
    *
    */
   template<CGImplementationType Impl = CGImplementationType::STANDARD>
-  class CGBase : public CG_Detail::ChooseRegularization<Impl>, public Mixin::Verbosity
+  class CGImpl : public CG_Detail::ChooseRegularization<Impl> , public Mixin::IterativeRefinements
   {
     enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
   public:
@@ -86,9 +93,8 @@ namespace Algorithm
      * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
      * \param eps_ estimate for the maximal attainable accuracy (default=false).
      */
-    CGBase(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
+    CGImpl(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
-        Mixin::Verbosity(verbose_),
         A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >())
     {
       initPre();
@@ -100,9 +106,18 @@ namespace Algorithm
      * @param b right hand side
      * @param tolerance tolerance of the termination criterion
      */
-    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance)
+    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance) const
     {
       terminate->setRelativeAccuracy(tolerance);
+      return solve(x,b);
+    }
+
+    /**
+     * @param b right hand side
+     */
+    FunctionSpaceElement solve(const FunctionSpaceElement& b) const
+    {
+      auto x = FunctionSpaceElement( A_.impl().getDomain().element() );
       return solve(x,b);
     }
 
@@ -110,7 +125,7 @@ namespace Algorithm
      * @param x initial guess
      * @param b right hand side
      */
-    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b)
+    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b) const
     {
       this->initializeRegularization();
       if( Impl == CGImplementationType::STANDARD || Impl == CGImplementationType::TRUNCATED )
@@ -133,7 +148,7 @@ namespace Algorithm
     }
 
     /// Access to the termination criterion, i.e. for adjusting parameters.
-    CGTerminationCriterion& getTerminationCriterion() const noexcept
+    CGTerminationCriterion& getTerminationCriterion() noexcept
     {
       assert(terminate!=nullptr);
       return *terminate;
@@ -152,8 +167,11 @@ namespace Algorithm
     }
 
   private:
+    using CG_Detail::ChooseRegularization<Impl>::eps;
+    using CG_Detail::ChooseRegularization<Impl>::verbose;
+
     /// CG Implementation.
-    FunctionSpaceElement cgLoop (FunctionSpaceElement x, FunctionSpaceElement r)
+    FunctionSpaceElement cgLoop (FunctionSpaceElement x, FunctionSpaceElement r) const
     {
       terminate->clear();
       result = Result::Failed;
@@ -161,7 +179,7 @@ namespace Algorithm
       // initialization phase for conjugate gradients
       auto Ax = A_(x);
       r -= Ax;
-      auto Qr = P_(r);
+      auto Qr = Q(r);
 
       auto q = Qr;
       auto Pq = r; // required only for regularized or hybrid conjugate gradient methods
@@ -171,9 +189,10 @@ namespace Algorithm
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
+        if( verbose() ) std::cout << "Iteration: " << step << std::endl;
         auto Aq = A_(q);
-        auto qAq = Aq(q);//q*Aq;
-        auto qPq = Pq(q);//q*Pq;
+        auto qAq = Aq(q);
+        auto qPq = Pq(q);
 
         auto alpha = sigma/qAq;
 
@@ -197,7 +216,7 @@ namespace Algorithm
         r -= alpha*Aq;
         this->adjustRegularizedResidual(alpha,Pq,r);
 
-        Qr = P_(r);
+        Qr = Q(r);
 
         // determine new search direction
         auto sigmaNew = std::abs( r(Qr) ); // sigma = <Qr,r>
@@ -211,17 +230,25 @@ namespace Algorithm
       return x;
     }
 
+    FunctionSpaceElement Q(const FunctionSpaceElement& r) const
+    {
+      auto Qr = P_(r);
+      for(auto i=0u; i<iterativeRefinements(); ++i)
+        Qr += P_(r-A_(Qr));
+      return Qr;
+    }
+
     /// Set string pre.
     void initPre()
     {
       if(Impl == CGImplementationType::STANDARD) pre = std::string("CG: ");
       if(Impl == CGImplementationType::TRUNCATED) pre = std::string("TCG: ");
       if(Impl == CGImplementationType::REGULARIZED) pre = std::string("RCG: ");
-      if(Impl == CGImplementationType::HYBRID) pre = std::string("HCG: ");
+      if(Impl == CGImplementationType::TRUNCATED_REGULARIZED) pre = std::string("TRCG: ");
     }
 
     /// Check step length.
-    bool vanishingStep()
+    bool vanishingStep() const
     {
       if( terminate->vanishingStep() )
       {
@@ -236,7 +263,7 @@ namespace Algorithm
      * \return true if iteration should terminate.
      */
     template <class Scalar>
-    bool terminateOnNonconvexity(Scalar qAq, Scalar qPq, FunctionSpaceElement& x, const FunctionSpaceElement& q, unsigned step)
+    bool terminateOnNonconvexity(Scalar qAq, Scalar qPq, FunctionSpaceElement& x, const FunctionSpaceElement& q, unsigned step) const
     {
       if( qAq > 0 ) return false;
 
@@ -251,7 +278,7 @@ namespace Algorithm
         throw SingularOperatorException("CG::terminateOnNonconvexity");
       }
 
-      if( Impl == CGImplementationType::TRUNCATED || ( Impl == CGImplementationType::HYBRID && terminate->minimalDecreaseAchieved() ) )
+      if( Impl == CGImplementationType::TRUNCATED || ( Impl == CGImplementationType::TRUNCATED_REGULARIZED && terminate->minimalDecreaseAchieved() ) )
       {
         // At least do something to retain a little chance to get out of the nonconvexity. If a nonconvexity is encountered in the first step something probably went wrong
         // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
@@ -261,7 +288,7 @@ namespace Algorithm
         return true;
       }
 
-      if( Impl == CGImplementationType::HYBRID || Impl == CGImplementationType::REGULARIZED )
+      if( Impl == CGImplementationType::TRUNCATED_REGULARIZED || Impl == CGImplementationType::REGULARIZED )
       {
         this->updateRegularization(qAq,qPq);
         if( verbose() ) std::cout << pre << "Regularizing at nonconvexity in iteration " << step << "." << std::endl;
@@ -270,11 +297,11 @@ namespace Algorithm
       }
     }
 
-    const Operator& A_;
-    const Operator& P_;
+    Operator A_;
+    Operator P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
-    Result result = Result::Failed; ///< information about reason for termination
-    double energyNorm2 = 0.; ///< energy norm squared
+    mutable Result result = Result::Failed; ///< information about reason for termination
+    mutable double energyNorm2 = 0.; ///< energy norm squared
     std::string pre = std::string("Algorithm CG: "); ///< output
   };
 }

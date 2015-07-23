@@ -31,7 +31,7 @@ namespace Algorithm
       return elementImpl();
     }
 
-    unsigned AbstractBanachSpace::index() const
+    unsigned AbstractBanachSpace::index() const noexcept
     {
       return index_;
     }

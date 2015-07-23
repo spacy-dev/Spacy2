@@ -29,7 +29,7 @@ namespace Algorithm
     private:
       Hessian* cloneImpl() const;
 
-      const AbstractFunctionSpaceElement& x_;
+      std::unique_ptr<AbstractFunctionSpaceElement> x_;
       std::shared_ptr<AbstractLinearSolver> solver_ = nullptr;
     };
   }

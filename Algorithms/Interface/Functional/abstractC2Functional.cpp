@@ -1,9 +1,8 @@
 #include "abstractC2Functional.hh"
 
 #include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractLinearSolver.hh"
 #include "hessian.hh"
-
-#include <utility>
 
 namespace Algorithm
 {
@@ -18,6 +17,11 @@ namespace Algorithm
 
   Interface::Hessian Interface::AbstractC2Functional::makeHessian(const AbstractFunctionSpaceElement& x) const
   {
-    return Interface::Hessian(clone(*this),x);
+    return Interface::Hessian(clone(this),x,solver_);
+  }
+
+  double Interface::AbstractC2Functional::d2(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx, const AbstractFunctionSpaceElement& dy) const
+  {
+    return dy(*d2(x,dx));
   }
 }

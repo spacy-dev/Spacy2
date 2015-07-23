@@ -1,14 +1,17 @@
-#ifndef NEWTONPARAMETER_HH
-#define NEWTONPARAMETER_HH
+#ifndef ALGORITHM_NEWTON_PARAMETER_HH
+#define ALGORITHM_NEWTON_PARAMETER_HH
 
 #include "Algorithm/parameter.hh"
-#include "Algorithm/regularityTest.hh"
+#include "Util/Mixins/regularityTest.hh"
 #include "Util/Mixins/contractionRate.hh"
 
 namespace Algorithm
 {
-  class NewtonParameter : public Parameter, public RegularityTest, public Mixin::ContractionRate
-  {};
+  namespace Newton
+  {
+    class NewtonParameter : public Parameter, public Mixin::RegularityTest, public Mixin::ContractionRate
+    {};
+  }
 }
 
-#endif // NEWTONPARAMETER_HH
+#endif // ALGORITHM_NEWTON_PARAMETER_HH

@@ -29,15 +29,5 @@ namespace Algorithm
      */
     FunctionSpaceElement d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
   };
-
-  /**
-   * @brief Convenient generation of twice differentiable operator from implementation arguments.
-   * @return C2Operator( std::make_shared<Implementation>(std::forward<Args>(args)...) )
-   */
-  template <class Implementation, class... Args>
-  C2Operator makeC2Operator(Args&&... args)
-  {
-    return C2Operator( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
 }
 #endif // ALGORITHM_C2_OPERATOR_HH

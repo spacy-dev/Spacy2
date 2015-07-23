@@ -9,7 +9,10 @@ namespace Algorithm
   namespace CG_Detail
   {
     // class NoRegularization
-    NoRegularization::NoRegularization(double,bool) noexcept {}
+    NoRegularization::NoRegularization(double eps, bool verbose) noexcept
+      : Mixin::Eps(eps),
+        Mixin::Verbosity(verbose)
+    {}
 
     void NoRegularization::initializeRegularization() const noexcept {}
     void NoRegularization::regularize(double&, double) const noexcept {}
@@ -21,7 +24,7 @@ namespace Algorithm
       : Mixin::Eps(eps), Mixin::Verbosity(verbose)
     {}
 
-    void Regularization::initializeRegularization() noexcept
+    void Regularization::initializeRegularization() const noexcept
     {
       theta = 0;
     }
@@ -31,7 +34,7 @@ namespace Algorithm
       qAq += theta*qPq;
     }
 
-    void Regularization::updateRegularization(double qAq, double qPq)
+    void Regularization::updateRegularization(double qAq, double qPq) const
     {
       double oldTheta = theta > 0 ? theta : eps();
       theta += (1-qAq)/std::abs(qPq);

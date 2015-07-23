@@ -11,6 +11,7 @@ namespace Algorithm
   {
     class AbstractBanachSpace;
     class AbstractFunctionSpaceElement;
+    class AbstractLinearSolver;
 
     class AbstractOperator : public Mixin::Cloneable<AbstractOperator>
     {

@@ -15,7 +15,9 @@ namespace Algorithm
     class Vector : public Interface::AbstractFunctionSpaceElement, public Mixin::Impl<dolfin::Function>
     {
     public:
-      Vector(const Interface::AbstractBanachSpace& space, const dolfin::Function& v);
+      explicit Vector(const Interface::AbstractBanachSpace &space);
+
+      Vector(const dolfin::Function& f, const Interface::AbstractBanachSpace& space);
 
       void copyTo(Interface::AbstractFunctionSpaceElement& y) const final override;
 
@@ -54,6 +56,11 @@ namespace Algorithm
     Vector& toVector(Interface::AbstractFunctionSpaceElement& x);
 
     const Vector& toVector(const Interface::AbstractFunctionSpaceElement& x);
+
+
+    void copy(const Interface::AbstractFunctionSpaceElement& x, dolfin::GenericVector& y, bool verbose = false);
+
+    void copy(const dolfin::GenericVector& y, Interface::AbstractFunctionSpaceElement& x, bool verbose = false);
   }
 }
 

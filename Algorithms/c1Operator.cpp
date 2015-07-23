@@ -1,7 +1,6 @@
 #include "c1Operator.hh"
 
 #include "functionSpaceElement.hh"
-#include "Interface/Operator/abstractC1Operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 
 namespace Algorithm
@@ -18,5 +17,15 @@ namespace Algorithm
   LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const
   {
     return LinearOperator( dynamic_cast<const Interface::AbstractC1Operator&>( impl() ).getLinearization(x.impl()) );
+  }
+
+  Interface::AbstractC1Operator& C1Operator::impl()
+  {
+    return dynamic_cast<Interface::AbstractC1Operator&>(Operator::impl());
+  }
+
+  const Interface::AbstractC1Operator& C1Operator::impl() const
+  {
+    return dynamic_cast<const Interface::AbstractC1Operator&>(Operator::impl());
   }
 }

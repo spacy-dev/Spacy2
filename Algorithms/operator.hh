@@ -17,11 +17,5 @@ namespace Algorithm
 
     FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
   };
-
-  template <class Implementation, class... Args>
-  Operator makeOperator(Args&&... args)
-  {
-    return Operator( std::make_unique<Implementation>(std::forward<Args>(args)...) );
-  }
 }
 #endif // ALGORITHM_OPERATOR_HH

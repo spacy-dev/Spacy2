@@ -2,15 +2,12 @@
 #define ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
 
 #include <cassert>
-#include <limits>
-
-#include "Util/Mixins/eps.hh"
 
 namespace Algorithm
 {
   class ScalarProduct;
   class FunctionSpaceElement;
-  class LagrangeFunctional;
+  class C2Functional;
 
   namespace CompositeStep
   {
@@ -25,7 +22,9 @@ namespace Algorithm
       double constant_, linear_, quadratic_;
     };
 
-    QuadraticModel makeQuadraticModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const LagrangeFunctional& f, const FunctionSpaceElement& x);
+    QuadraticModel makeQuadraticModel(double nu,
+                                      const FunctionSpaceElement& dn, const FunctionSpaceElement& dt,
+                                      const C2Functional& f, const FunctionSpaceElement& x);
 
     QuadraticModel makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp);
 
@@ -42,7 +41,7 @@ namespace Algorithm
       double omega_;
     };
 
-    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const LagrangeFunctional& f, const FunctionSpaceElement& x, double omega);
+    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const C2Functional& f, const FunctionSpaceElement& x, double omega);
 
     template <class Model>
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)

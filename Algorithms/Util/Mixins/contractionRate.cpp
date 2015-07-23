@@ -4,7 +4,7 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    ContractionRate::ContractionRate(double desiredContraction, double maximalContraction)
+    ContractionRate::ContractionRate(double desiredContraction, double maximalContraction) noexcept
       : desiredContraction_(desiredContraction), maximalContraction_(maximalContraction)
     {}
 

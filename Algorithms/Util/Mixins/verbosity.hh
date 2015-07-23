@@ -14,7 +14,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets verbosity.
        */
-      explicit Verbosity(bool verbose = false);
+      explicit Verbosity(bool verbose = false) noexcept;
 
       /**
        * @brief Enable/disable verbosity.
@@ -22,12 +22,23 @@ namespace Algorithm
       void setVerbosity(bool) noexcept;
 
       /**
+       * @brief Enable/disable detailed verbosity.
+       */
+      void setDetailedVerbosity(bool) noexcept;
+
+      /**
        * @brief Check if verbosity is turned on.
        */
       bool verbose() const noexcept;
 
+      /**
+       * @brief Check if verbosity is turned on.
+       */
+      bool verbose_detailed() const noexcept;
+
+
     private:
-      bool verbose_ = false;
+      bool verbose_ = false, verbose_detailed_ = false;
     };
   }
 }

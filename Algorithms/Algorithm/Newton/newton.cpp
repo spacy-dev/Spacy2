@@ -7,74 +7,79 @@
 #include "Util/Exceptions/regularityTestFailedException.hh"
 
 #include "dampingStrategies.hh"
-#include "Algorithm/terminationCriteria.hh"
+#include "terminationCriteria.hh"
 
 #include <chrono>
 #include <iostream>
 
 namespace Algorithm
 {
-  Newton::Newton(const C1Operator& F)
-    : F_(F),
-      dampingFactor_(Newton_DampingStrategy::AffineCovariant(*this,F_,norm_)),
-      terminationCriterion_( AffineCovariantRelativeTerminationCriterion(F_,norm_,relativeAccuracy(),verbose()) )
-  {}
-
-  FunctionSpaceElement Newton::solve() const
+  namespace Newton
   {
-    return solve( FunctionSpaceElement( F_.impl().getDomain().element() ) );
-  }
+    NewtonMethod::NewtonMethod(const C1Operator& F)
+      : F_(F),
+        dampingFactor_(DampingStrategy::AffineCovariant(*this,F_,norm_)),
+        terminationCriterion_( TerminationCriterion::AffineCovariant(F_,norm_,relativeAccuracy(),true) )
+    {}
 
-  FunctionSpaceElement Newton::solve(const FunctionSpaceElement& x0) const
-  {
-    using namespace std::chrono;
-    if( verbose() ) std::cout << "Starting newton iteration." << std::endl;
-    auto startTime = high_resolution_clock::now();
-    norm_ = Norm( x0.impl().getSpace().getSharedNorm() );
-
-    auto x = x0;
-    for(unsigned i = 1; i <= maxSteps(); ++i)
+    FunctionSpaceElement NewtonMethod::solve() const
     {
-      if( verbose() ) std::cout << "Iteration " << i << ": ";
-
-      auto DF = F_.getLinearization(x);
-
-      auto dx = (DF^-1)(-F_(x));
-      auto nu = dampingFactor_(DF^-1,x,dx);
-      x += nu*dx;
-
-      if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
-
-      if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm_(x) << ", |dx| = " << norm_(dx) << std::endl;
-
-      if( terminationCriterion_(nu,x,dx))
-      {
-        if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
-        return x;
-      }
+      return solve( FunctionSpaceElement( F_.impl().getDomain().element() ) );
     }
 
-    return x;
+    FunctionSpaceElement NewtonMethod::solve(const FunctionSpaceElement& x0) const
+    {
+      using namespace std::chrono;
+      if( verbose() ) std::cout << "Starting newton iteration." << std::endl;
+      auto startTime = high_resolution_clock::now();
+      norm_ = Norm( x0.impl().space().getSharedNorm() );
+
+      auto x = x0;
+      for(unsigned i = 1; i <= maxSteps(); ++i)
+      {
+        if( verbose() ) std::cout << "Iteration " << i << ": ";
+
+        auto DF = F_.getLinearization(x);
+
+        auto dx = (DF^-1)(-F_(x));
+        auto nu = dampingFactor_(DF^-1,x,dx);
+        x += nu*dx;
+
+        if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
+
+        if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm_(x) << ", |dx| = " << norm_(dx) << std::endl;
+
+        if( terminationCriterion_(nu,x,dx))
+        {
+          if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
+          return x;
+        }
+      }
+
+      return x;
+    }
   }
 
-
-  Newton localNewton(const C1Operator& F)
+  Newton::NewtonMethod localNewton(const C1Operator& F)
   {
-    auto newton = Newton( F );
-    newton.setDampingStrategy<Newton_DampingStrategy::Undamped>();
+    using namespace Newton;
+    auto newton = NewtonMethod( F );
+    newton.setDampingStrategy<DampingStrategy::None>();
     return newton;
   }
 
-  Newton covariantNewton(const C1Operator& F)
+  Newton::NewtonMethod covariantNewton(const C1Operator& F)
   {
-    return Newton( F );
+    using namespace Newton;
+    return NewtonMethod( F );
   }
 
-  Newton contravariantNewton(const C1Operator& F)
+  Newton::NewtonMethod contravariantNewton(const C1Operator& F)
   {
-    auto newton = Newton( F );
-    newton.setDampingStrategy<Newton_DampingStrategy::AffineContravariant>();
-    newton.setTerminationCriterion<AffineContravariantRelativeTerminationCriterion>();
+    using namespace Newton;
+    auto newton = NewtonMethod( F );
+    newton.setDampingStrategy<DampingStrategy::AffineContravariant>();
+    newton.setTerminationCriterion<TerminationCriterion::AffineContravariant>();
     return newton;
   }
 }

@@ -23,7 +23,8 @@ namespace Algorithm
                                                                const AbstractFunctionSpaceElement& dy) const = 0;
 
     protected:
-      std::shared_ptr<AbstractLinearSolver> solver_;
+      using AbstractC1Operator::solver_;
+//      std::shared_ptr<AbstractLinearSolver> solver_;
     };
   }
 }
