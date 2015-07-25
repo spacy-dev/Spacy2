@@ -1,46 +1,76 @@
 #ifndef ALGORITHMS_ADAPTER_FENICS_HILBERTSPACE_HH
 #define ALGORITHMS_ADAPTER_FENICS_HILBERTSPACE_HH
 
+#include <map>
 #include <memory>
 
-#include "Interface/abstractFunctionSpaceElement.hh"
-#include "Interface/abstractHilbertSpace.hh"
-#include "Interface/abstractScalarProduct.hh"
+#include <dolfin.h>
 
-#include "scalarProducts.hh"
-#include "vector.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+
 
 #include "../../hilbertSpace.hh"
+#include "Util/create.hh"
+
+#include "Util/Mixins/impl.hh"
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
 
 namespace Algorithm
 {
+  namespace Interface
+  {
+    class AbstractFunctionSpaceElement;
+  }
+
   namespace Fenics
   {
-    template <class FenicsSpace>
-    class HilbertSpace : public Interface::AbstractHilbertSpace
+    class HilbertSpace : public Interface::AbstractHilbertSpace , public Mixin::Impl<dolfin::FunctionSpace>
     {
     public:
-      HilbertSpace(const FenicsSpace& space, const dolfin::Function& dummy)
-        : Interface::AbstractHilbertSpace(std::make_shared<l2ScalarProduct>()),
-          space_(space), dummy_(dummy)
-      {
-        *dummy_.vector() *= 0.;
-      }
+      explicit HilbertSpace(const dolfin::FunctionSpace& space);
+
+      HilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t,size_t>& dofmap);
+
+      size_t dofmap(size_t i) const;
+
+      size_t inverseDofmap(size_t i) const;
 
     private:
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const
-      {
-        return std::make_unique< Vector >(*this,dummy_);
-      }
-
-      const FenicsSpace& space_;
-      dolfin::Function dummy_;
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const;
+      std::unordered_map<size_t,size_t> dofmap_;
+      std::vector<size_t> inverseDofmap_;
     };
 
     template <class FenicsSpace>
-    auto makeHilbertSpace(const FenicsSpace& space, const dolfin::Function& dummy)
+    auto makeHilbertSpace(const FenicsSpace& space)
     {
-      return Algorithm::makeHilbertSpace< HilbertSpace<FenicsSpace> >(space,dummy);
+      return create_sharedImpl< ::Algorithm::HilbertSpace, HilbertSpace >(space);
+    }
+
+    bool isHilbertSpace(const Interface::AbstractBanachSpace& space);
+
+    const HilbertSpace& toHilbertSpace(const Interface::AbstractBanachSpace& space);
+
+
+    inline auto makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
+    {
+      unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
+      unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
+      std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > spaces( 1 + std::max( maxPrimalId , maxDualId ) );
+      for(size_t i : primalIds)
+      {
+        std::unordered_map<std::size_t,std::size_t> dofmap;
+        auto subSpace = space[i]->collapse(dofmap);
+        spaces[i] =  std::make_shared<HilbertSpace>(*subSpace,dofmap);
+      }
+      for(size_t i : dualIds)
+      {
+        std::unordered_map<std::size_t,std::size_t> dofmap;
+        auto subSpace = space[i]->collapse(dofmap);
+        spaces[i] =  std::make_shared<HilbertSpace>(*subSpace,dofmap);
+      }
+
+      return create_sharedImpl< ::Algorithm::HilbertSpace, ProductSpace>( spaces , primalIds , dualIds );
     }
   }
 }

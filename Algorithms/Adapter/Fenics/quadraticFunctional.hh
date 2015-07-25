@@ -6,7 +6,6 @@
 
 #include <dolfin.h>
 
-#include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/Functional/hessian.hh"
 
 #include "luSolver.hh"
@@ -20,79 +19,113 @@ namespace Algorithm
 {
   namespace Fenics
   {
-    template <class BilinearForm>
+    template <class Functional, class FirstDerivative, class SecondDerivative>
     class QuadraticFunctional : public Interface::AbstractC2Functional
     {
     public:
-      QuadraticFunctional(const BilinearForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
+      QuadraticFunctional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
+                          const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
         : Interface::AbstractC2Functional( space ),
-          J_( J.function_space(0) , J.function_space(1) ),
-          bcs_( bcs )
+          f_( J.function_space(0)->mesh() ),
+          J_( J.function_space(0) ),
+          H_( H.function_space(0) , H.function_space(1) ),
+          bcs_( bcs ),
+          dummy_(J_.function_space(0))
       {
+        copyCoefficients(f,f_);
         copyCoefficients(J,J_);
+        copyCoefficients(H,H_);
       }
-
-      QuadraticFunctional(const BilinearForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
-        : QuadraticFunctional(J,bcs,space.sharedImpl())
-      {}
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        const auto& x_ = toVector(x);
-        assembleJ(x_);
+        if( oldX_f_ != nullptr && oldX_f_->equals(x) ) return value;
 
-        auto y = clone(x_);
-        A_->mult(*x_.impl().vector(), *y->impl().vector());
+        oldX_f_ = clone(x);
 
-        return 0.5 * x_.impl().vector()->inner( *y->impl().vector() );
+        readDummy(x);
+        f_.x = dummy_;
+        value = dolfin::assemble(f_);
+
+        return value;
       }
 
       double d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        const auto& x_ = toVector(x);
-        const auto& dx_ = toVector(dx);
-        assembleJ(x_);
+        const auto& x_ = toProductSpaceElement(x);
+        assemble_J(x_);
 
-        auto y = clone(x_);
-        A_->mult(*x_.impl().vector(), *y->impl().vector());
+        readDummy(dx);
 
-        return dx_.impl().vector()->inner( *y->impl().vector() );
+        return b_->inner( *dummy_.vector() );
       }
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        const auto& dx_ = toVector(dx);
-        assembleJ(toVector(x));
+        const auto& x_ = toProductSpaceElement(x);
+        assemble_H(x_);
 
-        auto y = clone(dx_);
-        A_->mult(*dx_.impl().vector(), *y->impl().vector());
+        readDummy(dx);
+        auto Ax = dummy_;
+        A_->mult(*dummy_.vector(), *Ax.vector());
 
-        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
+        auto result = clone(x_);
+
+        for(auto i=0u; i<result->variables().size(); ++i)
+          toVector(result->variable(i)).impl() = Ax[i];
+
+        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( result.release() );
+      }
+
+      std::shared_ptr<Interface::AbstractLinearSolver> createLinearSolver(const std::string& name, const Interface::AbstractFunctionSpaceElement& x) const override
+      {
+        assemble_H(toProductSpaceElement(x));
+        return makeLinearSolver(name,*A_);
       }
 
     private:
-      void assembleJ(const Vector& x) const
+      void readDummy(const Interface::AbstractFunctionSpaceElement& x) const
       {
-        if( A_ != nullptr ) return;
-        if( oldX_J != nullptr && oldX_J->equals(x) ) return;
-        oldX_J = clone(x);
+        const auto& x_ = toProductSpaceElement(x);
+        for( auto i=0u; i<x_.variables().size(); ++i)
+          dummy_[i] = toVector( x_.variable(i) ).impl();
 
-        A_ = x.impl().vector()->factory().create_matrix();
+        if( !x_.isPrimalEnabled() )
+          for( auto i : x_.space().primalSubSpaceIds() )
+            *dummy_[i].vector() *= 0.;
+        if( !x_.isDualEnabled() )
+          for( auto i : x_.space().dualSubSpaceIds() )
+            *dummy_[i].vector() *= 0.;
+      }
 
-        // Assemble right-hand side
-        dolfin::Assembler assembler;
-        assembler.assemble(*A_, J_);
+      void assemble_J(const ProductSpaceElement& x) const
+      {
+        if( oldX_J_ != nullptr && oldX_J_->equals(x) ) return;
+        oldX_J_ = clone(x);
 
-        // Apply boundary conditions
-        for(const auto& bc : bcs_)
-          bc->apply( *A_ );
+        readDummy(x);
+        J_.x = dummy_;
+        b_ = dummy_.vector()->factory().create_vector();
 
-        solver_ = std::make_shared<LUSolver>( *A_ );
+        dolfin::assemble(*b_,J_);
+        for( auto& bc : bcs_) bc->apply(*b_);
+      }
+
+      void assemble_H(const ProductSpaceElement& x) const
+      {
+        if( oldX_H_ != nullptr && oldX_H_->equals(x) ) return;
+        oldX_H_ = clone(x);
+
+        readDummy(x);
+        A_ = dummy_.vector()->factory().create_matrix();
+        dolfin::assemble(*A_,H_);
+
+        for( auto& bc : bcs_) bc->apply(*A_);
       }
 
       QuadraticFunctional* cloneImpl() const
       {
-        return new QuadraticFunctional(J_,bcs_,getSharedDomain());
+        return new QuadraticFunctional(f_,J_,H_,bcs_,getSharedDomain());
       }
 
       Interface::Hessian makeHessian(const Interface::AbstractFunctionSpaceElement& x) const
@@ -101,11 +134,15 @@ namespace Algorithm
         return Interface::Hessian(clone(*this),x,solver_);
       }
 
-      mutable BilinearForm J_;
-      std::vector<const dolfin::DirichletBC*> bcs_;
-      mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
-      mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-      mutable std::unique_ptr<Vector> oldX_F, oldX_J = nullptr;
+      mutable Functional f_;
+      mutable FirstDerivative J_;
+      mutable SecondDerivative H_;
+      const std::vector<const dolfin::DirichletBC*>& bcs_;
+      mutable std::shared_ptr<dolfin::GenericMatrix> A_;
+      mutable std::shared_ptr<dolfin::GenericVector> b_;
+      mutable std::unique_ptr<Interface::AbstractFunctionSpaceElement> oldX_f_, oldX_J_, oldX_H_;
+      mutable double value = 0;
+      mutable dolfin::Function dummy_;
     };
 
 

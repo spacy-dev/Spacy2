@@ -29,6 +29,8 @@ namespace Algorithm
 
       Vector& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
+      Vector& axpy(double a, const AbstractFunctionSpaceElement& y) final override;
+
       Vector& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
 
       Vector& operator*=(double a) final override;

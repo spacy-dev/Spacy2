@@ -52,6 +52,12 @@ namespace Algorithm
       return *this;
     }
 
+    Vector& Vector::axpy(double a, const AbstractFunctionSpaceElement& y)
+    {
+      impl().vector()->axpy(a,*toVector(y).impl().vector());
+      return *this;
+    }
+
     Vector& Vector::operator-=(const AbstractFunctionSpaceElement& y)
     {
 //      impl() = impl() - toVector(y).impl();
@@ -105,7 +111,8 @@ namespace Algorithm
 
     Vector* Vector::cloneImpl() const
     {
-      return new Vector(impl(),space());
+      return new Vector(*this);
+//      return new Vector(impl(),space());
     }
 
 

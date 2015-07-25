@@ -3,6 +3,10 @@
 #include "vector.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
+#include <string>
+#include <fstream>
+#include <iostream>
+
 namespace Algorithm
 {
   namespace
@@ -27,14 +31,16 @@ namespace Algorithm
 
   namespace Fenics
   {
-  LUSolver::LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& productSpace,
+  LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
                              std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range)
     : Interface::AbstractLinearSolver(domain,range),
-      A_(A.copy()), productSpace_(productSpace)
+      productSpace_(productSpace)
   {
+//    std::cout << A->str(true).c_str() << std::endl;
     auto parameters = default_parameters();
-    solver.parameters.update(parameters("lu_solver"));
-    solver.parameters["symmetric"] = (bool) parameters["symmetric"];
+    solver_.parameters.update(parameters("lu_solver"));
+    solver_.parameters["symmetric"] = (bool) parameters["symmetric"];
+    solver_.set_operator(A);
   }
 
   std::unique_ptr<Interface::AbstractFunctionSpaceElement> LUSolver::operator()(const Interface::AbstractFunctionSpaceElement& x) const
@@ -46,7 +52,7 @@ namespace Algorithm
          x_ = std::make_shared<dolfin::Vector>(tmp.vector()->mpi_comm(), tmp.vector()->size());
     copy(x,*y_);
     copy(x,*x_);
-    solver.solve( *A_ , *y_, * x_ );
+    solver_.solve( *y_, * x_ );
     auto y = clone(x);
 
     copy(*y_, *y);
@@ -55,7 +61,8 @@ namespace Algorithm
 
   LUSolver* LUSolver::cloneImpl() const
   {
-    return new LUSolver(*A_,productSpace_,getSharedDomain(),getSharedRange());
+    std::cout << "cloning LUSolver" << std::endl;
+    return new LUSolver(*this);
   }
 
 //  std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const dolfin::GenericMatrix& A)

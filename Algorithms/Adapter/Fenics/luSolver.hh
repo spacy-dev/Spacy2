@@ -11,21 +11,23 @@
 
 namespace Algorithm
 {
+  static int lusolverid = 0;
+
   namespace Fenics
   {
     class LUSolver : public Interface::AbstractLinearSolver
     {
     public:
-      LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& productSpace,
+      LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
                std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range);
+
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
 
     private:
       LUSolver* cloneImpl() const;
 
-      std::shared_ptr<dolfin::GenericMatrix> A_;
-      mutable dolfin::LUSolver solver;
+      mutable dolfin::LUSolver solver_;
       const dolfin::FunctionSpace& productSpace_;
     };
 
