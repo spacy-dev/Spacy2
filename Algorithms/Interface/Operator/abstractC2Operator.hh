@@ -9,22 +9,27 @@ namespace Algorithm
 {
   namespace Interface
   {
+    /// \cond
     class AbstractLinearizedOperator;
+    /// \endcond
 
+    /**
+     * @brief Abstract interface for twice differentiable operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
+     */
     class AbstractC2Operator : public AbstractC1Operator
     {
     public:
+      /**
+       * @brief Constructor.
+       * @param domain domain space \f$X\f$.
+       * @param range range space \f$Y\f$.
+       */
       AbstractC2Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
-      AbstractC2Operator(std::shared_ptr<AbstractLinearSolver> solver, std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
-
+      /// Apply second derivative of operator, i.e. compute \f$y=A''(x)(dx,dy)\f$.
       virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,
                                                                const AbstractFunctionSpaceElement& dx,
                                                                const AbstractFunctionSpaceElement& dy) const = 0;
-
-    protected:
-      using AbstractC1Operator::solver_;
-//      std::shared_ptr<AbstractLinearSolver> solver_;
     };
   }
 }

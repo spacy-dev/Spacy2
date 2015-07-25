@@ -1,6 +1,7 @@
 #include "hessian.hh"
 
 #include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractLinearSolver.hh"
 
 #include <utility>
 
@@ -8,12 +9,22 @@ namespace Algorithm
 {
   namespace Interface
   {
-    Hessian::Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedDomain()), Mixin::UniqueImpl<AbstractC2Functional>(std::move(A)), x_(clone(x)), solver_(solver)
-    {}
+//    Hessian::Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
+//      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedDomain()), Mixin::UniqueImpl<AbstractC2Functional>(std::move(A)), x_(clone(x)), solver_(solver)
+//    {}
+
+    Hessian::Hessian(Hessian&& other)
+      : AbstractLinearOperator(other.sharedDomain(),other.sharedRange()),
+        Mixin::UniqueImpl<AbstractC2Functional>(std::move(other)),
+        x_(std::move(other.x_))
+    {
+      std::cout << "moving hessian" << std::endl;
+    }
 
     Hessian::Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x)
-      : Hessian( std::move(A) , x , nullptr )
+      : AbstractLinearOperator(A->sharedDomain(),A->sharedDomain()),
+        Mixin::UniqueImpl<AbstractC2Functional>(std::move(A)),
+        x_(clone(x))
     {}
 
     std::unique_ptr<AbstractFunctionSpaceElement> Hessian::operator ()(const AbstractFunctionSpaceElement& dx) const
@@ -21,19 +32,17 @@ namespace Algorithm
       return impl().d2(*x_,dx);
     }
 
-    std::shared_ptr<AbstractLinearSolver> Hessian::getSolver() const
+    std::unique_ptr<AbstractLinearSolver> Hessian::solver() const
     {
-      return solver_;
+//      if( solver_ == nullptr ) throw std::runtime_error("No solver defined in Hessian.");
+      return impl().makeSolver();
     }
 
-    void Hessian::setSolver(std::shared_ptr<AbstractLinearSolver> solver)
-    {
-      solver_ = solver;
-    }
 
     Hessian* Hessian::cloneImpl() const
     {
-      return new Hessian(clone(impl()),*x_,solver_);
+      std::cout << "cloning hessian" << std::endl;
+      return new Hessian(clone(impl()),*x_);
     }
   }
 }

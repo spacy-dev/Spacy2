@@ -15,25 +15,27 @@ namespace Algorithm
     /// \endcond
 
     /**
-     * @brief Interface class for functionals.
+     * @brief Abstract interface for functionals \f$f:\ X\rightarrow \mathbb{R}\f$.
      */
     class AbstractFunctional : public Mixin::Cloneable<AbstractFunctional>
     {
     public:
-      /// Construct functional defined on the banach space domain.
+      /**
+       * @brief Constructor.
+       * @param domain Domain space \f$X\f$.
+       */
       AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);
 
       virtual ~AbstractFunctional();
 
-      /// Evaluate functional at x.
+      /// Apply functional, i.e. compute \f$f(x)\f$.
       double operator()(const AbstractFunctionSpaceElement& x) const;
 
-      /// Access to the banach space on which this functional is defined.
-      const AbstractBanachSpace& getDomain() const;
+      /// Access domain space \f$X\f$.
+      const AbstractBanachSpace& domain() const;
 
-      /// Shared a
-      /// ccess to the banach space on which this functional is defined.
-      std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+      /// Access shared domain space \f$X\f$.
+      std::shared_ptr<AbstractBanachSpace> sharedDomain() const;
 
     protected:
       virtual double d0(const AbstractFunctionSpaceElement&) const = 0;

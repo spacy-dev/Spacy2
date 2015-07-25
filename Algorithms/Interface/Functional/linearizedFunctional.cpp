@@ -6,7 +6,7 @@
 namespace Algorithm
 {
   Interface::LinearizedFunctional::LinearizedFunctional(const Interface::AbstractC2Functional &A, const Interface::AbstractFunctionSpaceElement& x)
-    : Interface::AbstractFunctional(A.getSharedDomain()), A_(A), x_(x)
+    : Interface::AbstractFunctional(A.sharedDomain()), A_(A), x_(x)
   {}
 
   double Interface::LinearizedFunctional::d0(const Interface::AbstractFunctionSpaceElement& dx) const

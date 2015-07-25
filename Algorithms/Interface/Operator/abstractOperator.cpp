@@ -1,6 +1,7 @@
 #include "abstractOperator.hh"
 
 #include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractLinearSolver.hh"
 
 namespace Algorithm
 {
@@ -12,32 +13,32 @@ namespace Algorithm
 
     AbstractOperator::~AbstractOperator(){}
 
-    AbstractBanachSpace& AbstractOperator::getDomain()
+    AbstractBanachSpace& AbstractOperator::domain()
     {
       return *domain_;
     }
 
-    const AbstractBanachSpace& AbstractOperator::getDomain() const
+    const AbstractBanachSpace& AbstractOperator::domain() const
     {
       return *domain_;
     }
 
-    AbstractBanachSpace& AbstractOperator::getRange()
+    AbstractBanachSpace& AbstractOperator::range()
     {
       return *range_;
     }
 
-    const AbstractBanachSpace& AbstractOperator::getRange() const
+    const AbstractBanachSpace& AbstractOperator::range() const
     {
       return *range_;
     }
 
-    std::shared_ptr<AbstractBanachSpace> AbstractOperator::getSharedDomain() const
+    std::shared_ptr<AbstractBanachSpace> AbstractOperator::sharedDomain() const
     {
       return domain_;
     }
 
-    std::shared_ptr<AbstractBanachSpace> AbstractOperator::getSharedRange() const
+    std::shared_ptr<AbstractBanachSpace> AbstractOperator::sharedRange() const
     {
       return range_;
     }

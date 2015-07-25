@@ -9,32 +9,48 @@ namespace Algorithm
 {
   namespace Interface
   {
+    /// \cond
     class AbstractBanachSpace;
     class AbstractFunctionSpaceElement;
     class AbstractLinearSolver;
+    /// \endcond
 
+    /**
+     * @brief Abstract interface for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
+     */
     class AbstractOperator : public Mixin::Cloneable<AbstractOperator>
     {
     public:
       using Base = AbstractOperator;
 
+      /**
+       * @brief Constructor.
+       * @param domain domain space \f$X\f$.
+       * @param range range space \f$Y\f$.
+       */
       AbstractOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
       virtual ~AbstractOperator();
 
+      /// Apply operator, i.e. compute \f$y=Ax\f$.
       virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
-      AbstractBanachSpace& getDomain();
+      AbstractBanachSpace& domain();
 
-      const AbstractBanachSpace& getDomain() const;
+      /// Access domain space \f$X\f$.
+      const AbstractBanachSpace& domain() const;
 
-      AbstractBanachSpace& getRange();
+      /// Access shared domain space \f$X\f$.
+      std::shared_ptr<AbstractBanachSpace> sharedDomain() const;
 
-      const AbstractBanachSpace& getRange() const;
+      /// Access range space \f$Y\f$.
+      AbstractBanachSpace& range();
 
-      std::shared_ptr<AbstractBanachSpace> getSharedDomain() const;
+      /// Access range space \f$Y\f$.
+      const AbstractBanachSpace& range() const;
 
-      std::shared_ptr<AbstractBanachSpace> getSharedRange() const;
+      /// Access shared range space \f$Y\f$.
+      std::shared_ptr<AbstractBanachSpace> sharedRange() const;
 
     private:
       std::shared_ptr<AbstractBanachSpace> domain_, range_;

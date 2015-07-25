@@ -3,25 +3,34 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "hessian.hh"
+#include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 namespace Algorithm
 {
-  Interface::AbstractC2Functional::AbstractC2Functional(std::shared_ptr<AbstractBanachSpace> domain)
-    : AbstractC1Functional(domain)
-  {}
-
-  Interface::Hessian Interface::AbstractC2Functional::getHessian(const AbstractFunctionSpaceElement& x) const
+  namespace Interface
   {
-    return makeHessian(x);
-  }
+    AbstractC2Functional::AbstractC2Functional(std::shared_ptr<AbstractBanachSpace> domain)
+      : AbstractC1Functional(domain)
+    {}
 
-  Interface::Hessian Interface::AbstractC2Functional::makeHessian(const AbstractFunctionSpaceElement& x) const
-  {
-    return Interface::Hessian(clone(this),x,solver_);
-  }
+    std::unique_ptr<Hessian> AbstractC2Functional::hessian(const AbstractFunctionSpaceElement& x) const
+    {
+      return makeHessian(x);
+    }
 
-  double Interface::AbstractC2Functional::d2(const AbstractFunctionSpaceElement &x, const AbstractFunctionSpaceElement &dx, const AbstractFunctionSpaceElement& dy) const
-  {
-    return dy(*d2(x,dx));
+    std::unique_ptr<Hessian> AbstractC2Functional::makeHessian(const AbstractFunctionSpaceElement& x) const
+    {
+      return std::make_unique<Hessian>(clone(this),x);
+    }
+
+    std::unique_ptr<AbstractLinearSolver> AbstractC2Functional::makeSolver() const
+    {
+      throw CallOfUndefinedFunctionException("AbstractC2Functional::makeSolver");
+    }
+
+    void AbstractC2Functional::setOrigin(const AbstractFunctionSpaceElement& x) const
+    {
+      throw CallOfUndefinedFunctionException("AbstractC2Functional::setOrigin");
+    }
   }
 }

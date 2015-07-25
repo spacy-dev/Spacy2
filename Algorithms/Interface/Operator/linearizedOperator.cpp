@@ -3,6 +3,7 @@
 #include "abstractC1Operator.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractLinearSolver.hh"
 
 #include <stdexcept>
 #include <utility>
@@ -11,12 +12,13 @@ namespace Algorithm
 {
   namespace Interface
   {
-    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(clone(x)), solver_(solver)
-    {}
+//    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
+//      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedRange()), A_(std::move(A)), x_(clone(x)), solver_(solver)
+//    {}
 
     LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x)
-      : LinearizedOperator(std::move(A), x, nullptr)
+      : AbstractLinearOperator(A->sharedDomain(),A->sharedRange()),
+        A_(std::move(A)), x_(clone(x))
     {}
 
 
@@ -25,20 +27,14 @@ namespace Algorithm
       return A_->d1(*x_,dx);
     }
 
-    std::shared_ptr<AbstractLinearSolver> LinearizedOperator::getSolver() const
+    std::unique_ptr<AbstractLinearSolver> LinearizedOperator::solver() const
     {
-      if( solver_ == nullptr ) throw std::runtime_error("No solver defined in LinearizedOperator.");
-      return solver_;
-    }
-
-    void LinearizedOperator::setSolver(std::shared_ptr<AbstractLinearSolver> solver)
-    {
-      solver_ = solver;
+      return A_->makeSolver();
     }
 
     LinearizedOperator* LinearizedOperator::cloneImpl() const
     {
-      return new LinearizedOperator(clone(A_),*x_,solver_);
+      return new LinearizedOperator(clone(A_),*x_/*,solver_*/);
     }
   }
 }
