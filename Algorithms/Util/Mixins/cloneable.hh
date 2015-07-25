@@ -45,6 +45,11 @@ namespace Algorithm
     }
   }
 
+  /**
+   * \brief Clone object.
+   *
+   * T must be \"cloneable\", i.e. must be derived from Cloneable<T::Base>;
+   */
   template <class T>
   auto clone(T&& t)
   {

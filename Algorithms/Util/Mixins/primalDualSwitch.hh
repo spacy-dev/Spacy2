@@ -37,6 +37,15 @@ namespace Algorithm
   const Mixin::PrimalDualSwitch& toPrimalDualSwitch(const Interface::AbstractFunctionSpaceElement& x);
 
 
+  Interface::AbstractFunctionSpaceElement& primal(Interface::AbstractFunctionSpaceElement& x);
+
+  const Interface::AbstractFunctionSpaceElement& primal(const Interface::AbstractFunctionSpaceElement& x);
+
+  Interface::AbstractFunctionSpaceElement& dual(Interface::AbstractFunctionSpaceElement& x);
+
+  const Interface::AbstractFunctionSpaceElement& dual(const Interface::AbstractFunctionSpaceElement& x);
+
+
   FunctionSpaceElement& primal(FunctionSpaceElement& x);
 
   const FunctionSpaceElement& primal(const FunctionSpaceElement& x);

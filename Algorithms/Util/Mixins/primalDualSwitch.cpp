@@ -60,28 +60,56 @@ namespace Algorithm
   }
 
 
+  Interface::AbstractFunctionSpaceElement& primal(Interface::AbstractFunctionSpaceElement &x)
+  {
+    toPrimalDualSwitch(x).disableDual();
+    return x;
+  }
+
+  const Interface::AbstractFunctionSpaceElement& primal(const Interface::AbstractFunctionSpaceElement &x)
+  {
+    toPrimalDualSwitch(x).disableDual();
+    return x;
+  }
+
+  Interface::AbstractFunctionSpaceElement& dual(Interface::AbstractFunctionSpaceElement &x)
+  {
+    toPrimalDualSwitch(x).disablePrimal();
+    return x;
+  }
+
+  const Interface::AbstractFunctionSpaceElement& dual(const Interface::AbstractFunctionSpaceElement &x)
+  {
+    toPrimalDualSwitch(x).disablePrimal();
+    return x;
+  }
+
 
   FunctionSpaceElement& primal(FunctionSpaceElement &x)
   {
-    toPrimalDualSwitch(x.impl()).disableDual();
+    primal(x.impl());
+    //    toPrimalDualSwitch(x.impl()).disableDual();
     return x;
   }
 
   const FunctionSpaceElement& primal(const FunctionSpaceElement &x)
   {
-    toPrimalDualSwitch(x.impl()).disableDual();
+    primal(x.impl());
+//    toPrimalDualSwitch(x.impl()).disableDual();
     return x;
   }
 
   FunctionSpaceElement& dual(FunctionSpaceElement &x)
   {
-    toPrimalDualSwitch(x.impl()).disablePrimal();
+    dual(x.impl());
+//    toPrimalDualSwitch(x.impl()).disablePrimal();
     return x;
   }
 
   const FunctionSpaceElement& dual(const FunctionSpaceElement &x)
   {
-    toPrimalDualSwitch(x.impl()).disablePrimal();
+    dual(x.impl());
+//    toPrimalDualSwitch(x.impl()).disablePrimal();
     return x;
   }
 }

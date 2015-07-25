@@ -1,12 +1,23 @@
-#ifndef TIMER_HH
-#define TIMER_HH
+#ifndef ALGORITHM_UTIL_MIXIN_TIMER_HH
+#define ALGORITHM_UTIL_MIXIN_TIMER_HH
 
+#include <chrono>
 
-class Timer
+namespace Algorithm
 {
-public:
-  Timer();
-  ~Timer();
-};
+  namespace Mixin
+  {
+    class Timer
+    {
+    public:
+      void startTimer() const;
 
-#endif // TIMER_HH
+      double elapsedTime() const;
+
+    private:
+      mutable std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
+    };
+  }
+}
+
+#endif // ALGORITHM_UTIL_MIXIN_TIMER_HH
