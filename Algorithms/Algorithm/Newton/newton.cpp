@@ -3,8 +3,6 @@
 #include "linearOperator.hh"
 #include "functionSpaceElement.hh"
 
-#include "Util/Exceptions/regularityTestFailedException.hh"
-
 #include "dampingStrategies.hh"
 #include "terminationCriteria.hh"
 

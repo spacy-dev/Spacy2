@@ -5,6 +5,8 @@
 #include "linearSolver.hh"
 #include "newton.hh"
 
+#include "Util/Exceptions/regularityTestFailedException.hh"
+
 namespace Algorithm
 {
   namespace Newton
