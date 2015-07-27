@@ -77,7 +77,7 @@ namespace Algorithm
     template <class JacobianForm>
     auto makeOperator(const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
     {
-      return create_uniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<JacobianForm> >( J , bcs , space );
+      return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<JacobianForm> >( J , bcs , space );
     }
   }
 }

@@ -106,7 +106,7 @@ namespace Algorithm
     template <class JacobianForm>
     auto makePC2Functional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
     {
-      return create_uniqueImpl< ::Algorithm::C2Functional , ::Algorithm::Fenics::PC2Functional<JacobianForm> >( J , bcs , space );
+      return createFromUniqueImpl< ::Algorithm::C2Functional , ::Algorithm::Fenics::PC2Functional<JacobianForm> >( J , bcs , space );
     }
   }
 }

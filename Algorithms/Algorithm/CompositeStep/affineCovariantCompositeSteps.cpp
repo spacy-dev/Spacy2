@@ -7,11 +7,7 @@
 #include "Util/Exceptions/regularityTestFailedException.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
-#include "Adapter/Fenics/lagrangeFunctional.hh"
-
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
-
-#include "hilbertSpaceNorm.hh"
 
 #include <cmath>
 #include <iostream>
@@ -25,11 +21,17 @@ namespace Algorithm
       L_(std::make_unique<C2Functional>(L))
   {}
 
-  int AffineCovariantCompositeSteps::solve(FunctionSpaceElement& x)
+  FunctionSpaceElement AffineCovariantCompositeSteps::solve()
+  {
+    return solve( FunctionSpaceElement( N_->impl().domain().element() ) );
+  }
+
+  FunctionSpaceElement AffineCovariantCompositeSteps::solve(const FunctionSpaceElement& x0)
   {
     auto lastStepWasUndamped = false;
-    auto x0 = primal(x);
-    castToHilbertSpace(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(x0) ) );
+    auto x = x0;
+    auto x1 = primal(x);
+    castToHilbertSpace(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(x1) ) );
 //    norm = HilbertSpaceNorm( primalInducedScalarProduct( N_->hessian(x0) ));
 
     for(unsigned step = 1; step < maxSteps(); ++step)
@@ -63,17 +65,17 @@ namespace Algorithm
       x += primal(dx);
       if( contraction() < 0.25 ) x += primal(ds);
 
-      x0 = primal(x);
-      norm_x = norm(x0);
+      x1 = primal(x);
+      norm_x = norm(x1);
 
       if( undamped(nu) && undamped(tau) ) lastStepWasUndamped = true;
-      if( convergenceTest(nu,tau,norm_x,norm_dx) ) return 1;
+      if( convergenceTest(nu,tau,norm_x,norm_dx) ) return x;
 
       if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
       if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
     } // end iteration
 
-    return -2;
+    return x;
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeTangentialStep(double nu, const FunctionSpaceElement &x, const FunctionSpaceElement& dn, bool lastStepWasUndamped) const

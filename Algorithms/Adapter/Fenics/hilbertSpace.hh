@@ -44,7 +44,7 @@ namespace Algorithm
     template <class FenicsSpace>
     auto makeHilbertSpace(const FenicsSpace& space)
     {
-      return create_sharedImpl< ::Algorithm::HilbertSpace, HilbertSpace >(space);
+      return createFromSharedImpl< ::Algorithm::HilbertSpace, HilbertSpace >(space);
     }
 
     bool isHilbertSpace(const Interface::AbstractBanachSpace& space);
@@ -70,7 +70,7 @@ namespace Algorithm
         spaces[i] =  std::make_shared<HilbertSpace>(*subSpace,dofmap);
       }
 
-      return create_sharedImpl< ::Algorithm::HilbertSpace, ProductSpace>( spaces , primalIds , dualIds );
+      return createFromSharedImpl< ::Algorithm::HilbertSpace, ProductSpace>( spaces , primalIds , dualIds );
     }
   }
 }

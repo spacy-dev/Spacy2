@@ -165,6 +165,10 @@ namespace Algorithm
         Mixin::UniqueImpl<Interface::AbstractC2Functional>(clone(L))
     {}
 
+    LagrangeFunctional::LagrangeFunctional(std::unique_ptr<AbstractC2Functional>&& L)
+      : Interface::AbstractC2Functional(L->sharedDomain()),
+        Mixin::UniqueImpl<Interface::AbstractC2Functional>(std::move(L))
+    {}
 
     double LagrangeFunctional::d0(const Interface::AbstractFunctionSpaceElement& x) const
     {

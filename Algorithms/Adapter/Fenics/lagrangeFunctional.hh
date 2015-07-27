@@ -51,6 +51,8 @@ namespace Algorithm
     public:
       explicit LagrangeFunctional(const Interface::AbstractC2Functional& L);
 
+      explicit LagrangeFunctional(std::unique_ptr<Interface::AbstractC2Functional>&& L);
+
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override;
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x) const final override;
@@ -65,6 +67,12 @@ namespace Algorithm
       std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const;
     };
 
+
+    template <class Functional, class... Args>
+    ::Algorithm::C2Functional makeLagrangeFunctional( Args&&... args )
+    {
+      return createFromUniqueImpl< ::Algorithm::C2Functional,Fenics::LagrangeFunctional>( std::make_unique<Functional>(std::forward<Args>(args)...) );
+    }
 
 //    ::Algorithm::LagrangeFunctional makeLagrangeFunctional(std::unique_ptr<Interface::AbstractC2Functional>&& f,
 //                                                           std::unique_ptr<Interface::AbstractC2Operator>&& state,

@@ -165,7 +165,7 @@ namespace Algorithm
     template <class ResidualForm, class JacobianForm>
     auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
     {
-      return create_uniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
+      return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
     }
   }
 }

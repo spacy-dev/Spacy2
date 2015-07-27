@@ -37,7 +37,9 @@ namespace Algorithm
   public:
     AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L);
 
-    int solve(FunctionSpaceElement& x0);
+    FunctionSpaceElement solve();
+
+    FunctionSpaceElement solve(const FunctionSpaceElement& x0);
 
   private:
     FunctionSpaceElement computeNormalStep(const FunctionSpaceElement& x) const;

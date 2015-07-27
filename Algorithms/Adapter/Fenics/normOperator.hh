@@ -109,7 +109,7 @@ namespace Algorithm
     template <class JacobianForm>
     auto makeNormOperator(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
     {
-      return create_uniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::NormOperator<JacobianForm> >( J , bcs , domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::NormOperator<JacobianForm> >( J , bcs , domain , range );
     }
   }
 }
