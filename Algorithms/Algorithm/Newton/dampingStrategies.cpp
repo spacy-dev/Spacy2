@@ -34,6 +34,8 @@ namespace Algorithm
           p_.setContraction( norm_(ds)/dxNorm );
 
           nu = std::min(1., p_.desiredContraction()*nu/p_.contraction());
+
+          if( !p_.regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",nu);
         }
 
         return nu;
@@ -53,7 +55,7 @@ namespace Algorithm
 
         while( true )
         {
-          if( !p_.regularityTestPassed(nu) ) break;
+          if( !p_.regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",nu);
 
           auto trial = x + nu*dx;
 

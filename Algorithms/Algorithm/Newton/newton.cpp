@@ -44,8 +44,6 @@ namespace Algorithm
         auto nu = dampingFactor_(DF_Inv,x,dx);
         x += nu*dx;
 
-        if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);
-
         if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm_(x) << ", |dx| = " << norm_(dx) << std::endl;
 
         if( terminationCriterion_(nu,x,dx))
