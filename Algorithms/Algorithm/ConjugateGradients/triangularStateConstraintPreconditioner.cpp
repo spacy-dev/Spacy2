@@ -1,7 +1,6 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "Adapter/Fenics/hilbertSpace.hh"
 #include <utility>
 #include <iostream>
 namespace Algorithm
