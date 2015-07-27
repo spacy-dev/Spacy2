@@ -5,13 +5,26 @@ namespace Algorithm
 {
   namespace Mixin
   {
+    /**
+     * @brief Mixin class for iterative refinements.
+     */
     class IterativeRefinements
     {
     public:
+      /**
+       * @brief Constructor.
+       * @param Sets number of iterative refinements.
+       */
       explicit IterativeRefinements(unsigned iterativeRefinements = 0);
 
+      /**
+       * @brief Set number of iterative refinements.
+       */
       void setIterativeRefinements(unsigned iterativeRefinements);
 
+      /**
+       * @brief Get number of iterative refinements.
+       */
       unsigned iterativeRefinements() const;
 
     private:

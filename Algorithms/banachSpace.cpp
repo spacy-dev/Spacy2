@@ -16,7 +16,7 @@ namespace Algorithm
     impl().setNorm(norm.sharedImpl());
   }
 
-  Norm BanachSpace::getNorm() const
+  Norm BanachSpace::norm() const
   {
     return Norm( impl().getSharedNorm() );
   }

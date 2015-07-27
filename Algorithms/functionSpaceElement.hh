@@ -14,12 +14,7 @@ namespace Algorithm
 {
   class FunctionSpace;
   class FunctionSpaceElement;
-
-  struct Scale
-  {
-    double a;
-    const FunctionSpaceElement& x;
-  };
+  template <class> struct Scale;
 
   /**
    * @brief Representation of a function space element.
@@ -51,6 +46,22 @@ namespace Algorithm
      * @brief Copy assignment.
      */
     FunctionSpaceElement& operator=(const FunctionSpaceElement&);
+
+    /**
+     * @brief Copy assignment.
+     */
+    template <class T>
+    FunctionSpaceElement& operator=(const Scale<T>& s)
+    {
+      FunctionSpaceElement y(s.x);
+      y *= s.a;
+
+      if( !implIsNullPtr() )
+        y.impl().copyTo(impl());
+      else
+        setImpl( clone( y.impl() ) );
+      return *this;
+    }
 
     /**
      * @brief Assign from implementation.
@@ -87,12 +98,26 @@ namespace Algorithm
     /**
      * @brief Axpy for \f$ x += a*y \f$.
      */
-    FunctionSpaceElement& operator+=(Scale&& y);
-
+    template <class T>
+    FunctionSpaceElement& operator+=(Scale<T>&& s)
+    {
+      impl().axpy(s.a,s.x.impl());
+      return *this;
+    }
     /**
      * @brief In-place subtraction.
      */
     FunctionSpaceElement& operator-=(const FunctionSpaceElement& y);
+
+    /**
+     * @brief Axpy for \f$ x -= a*y \f$.
+     */
+    template <class T>
+    FunctionSpaceElement& operator-=(Scale<T>&& s)
+    {
+      impl().axpy(-s.a,s.x.impl());
+      return *this;
+    }
 
     /**
      * @brief Get \f$-x\f$.
@@ -128,6 +153,11 @@ namespace Algorithm
      * @brief Checks if a function space is admissible in the case that the search space is a subset of a function space which is not a subspace.
      */
     bool isAdmissible() const;
+
+    /**
+     * @brief Compute norm, where the norm associated with the underlying function space is used.
+     */
+    double norm() const;
   };
 
 
@@ -136,9 +166,9 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  FunctionSpaceElement operator*(const Arithmetic& a, FunctionSpaceElement x)
+  auto operator*(const Arithmetic& a, FunctionSpaceElement x)
   {
-    return x *= a;
+    return Scale<Arithmetic>{a,x};
   }
 
 
@@ -183,9 +213,28 @@ namespace Algorithm
 
 
   /**
+   * @brief Compute norm, where the norm associated with the underlying function space is used.
+   */
+  double norm(const FunctionSpaceElement& x);
+
+
+  /**
    * @brief Print function space element to os.
    */
   std::ostream& operator<<(std::ostream& os, const FunctionSpaceElement& x);
+
+  template <class T>
+  struct Scale
+  {
+    operator FunctionSpaceElement() const
+    {
+      auto y = x;
+      return y *= a;
+    }
+
+    T a;
+    const FunctionSpaceElement& x;
+  };
 }
 
 #endif // ALGORITHM_FUNCTIONSPACEELEMENT_HH

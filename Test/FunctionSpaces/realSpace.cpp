@@ -37,6 +37,6 @@ TEST(RealSpaceTest,NormTest)
   y.coefficient(0) = -2;
   EXPECT_DOUBLE_EQ( x.coefficient(0), 1. );
   EXPECT_DOUBLE_EQ( y.coefficient(0), -2. );
-  EXPECT_DOUBLE_EQ( Spaces::R.getNorm()(x) , 1. );
-  EXPECT_DOUBLE_EQ( Spaces::R.getNorm()(y) , 2. );
+  EXPECT_DOUBLE_EQ( Spaces::R.norm()(x) , 1. );
+  EXPECT_DOUBLE_EQ( Spaces::R.norm()(y) , 2. );
 }

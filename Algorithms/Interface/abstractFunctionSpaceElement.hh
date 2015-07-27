@@ -14,7 +14,9 @@ namespace Algorithm
   {
     class AbstractBanachSpace;
 
-    class AbstractFunctionSpaceElement : public Mixin::Cloneable<AbstractFunctionSpaceElement>, public Mixin::Eps
+    class AbstractFunctionSpaceElement :
+        public Mixin::Cloneable<AbstractFunctionSpaceElement>,
+        public Mixin::Eps
     {
     public:
       explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);

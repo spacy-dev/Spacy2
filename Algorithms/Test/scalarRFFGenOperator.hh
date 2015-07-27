@@ -29,12 +29,12 @@ namespace Algorithm
 
 //    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const override
 //    {
-//      return makeElement<Real>( f_(x.coefficient(0)) , this->getRange().impl() );
+//      return makeElement<Real>( f_(x.coefficient(0)) , this->range().impl() );
 //    }
 
 //    FunctionSpaceElement d1(const FunctionSpaceElement &dx) const override
 //    {
-//      return makeElement<Real>( f_.template d1<0>(dx.coefficient(0.)) , this->getRange().impl() );
+//      return makeElement<Real>( f_.template d1<0>(dx.coefficient(0.)) , this->range().impl() );
 //    }
 
 //  private:
@@ -75,24 +75,32 @@ namespace Algorithm
 
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const override
     {
-      return std::make_unique<Real>( exp(x.coefficient(0))-2 , getRange() );
+      return std::make_unique<Real>( exp(x.coefficient(0))-2 , range() );
     }
 
 
   private:
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement &dx) const override
     {
-      return std::make_unique<Real>( exp(x.coefficient(0))*dx.coefficient(0) , getRange() );
+      return std::make_unique<Real>( exp(x.coefficient(0))*dx.coefficient(0) , range() );
     }
 
     TestOperator* cloneImpl() const
     {
-      return new TestOperator(getSharedDomain());
+      return new TestOperator(sharedDomain());
     }
 
-    Interface::LinearizedOperator makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const override
+    std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const override
     {
-      return Interface::LinearizedOperator(clone(*this),x,std::make_shared<RealSolver>( exp(x.coefficient(0)) , getSharedRange() , getSharedDomain() ));
+      value = exp(x.coefficient(0));
+      return Interface::AbstractC1Operator::makeLinearization(x);
+    }
+
+    mutable double value;
+
+    std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
+    {
+      return std::make_unique<RealSolver>( value , sharedRange() , sharedDomain() );
     }
 
 //    void updateSolver()
@@ -124,26 +132,26 @@ namespace Algorithm
 
 //    std::unique_ptr<AbstractOperator> clone() const
 //    {
-//      return std::make_unique<TestOperator2>(getDomain(),getRange());
+//      return std::make_unique<TestOperator2>(getDomain(),range());
 //    }
 
 //    std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement &x) const override
 //    {
-//      auto result = getRange().element();
+//      auto result = range().element();
 //      result->coefficient(0) = exp(x.coefficient(0))-2*x.coefficient(1);
 //      return std::move(result);
 //    }
 
 //    std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement &dx) const override
 //    {
-//      auto result = getRange().element();
+//      auto result = range().element();
 //      result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0) - 2*dx.coefficient(1);
 //      return std::move(result);
 //    }
 
 //    std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
 //    {
-//      auto result = getRange().element();
+//      auto result = range().element();
 //      result->coefficient(0) = exp(x_->coefficient(0))*dx.coefficient(0)*dy.coefficient(0);
 //      return std::move(result);
 //    }

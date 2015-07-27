@@ -2,46 +2,39 @@
 #define ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
 
 #include <cassert>
+#include "Algorithm/Functions_1D/quadratic.hh"
 
 namespace Algorithm
 {
+  /// \cond
   class ScalarProduct;
   class FunctionSpaceElement;
   class C2Functional;
+  /// \endcond
 
   namespace CompositeStep
   {
-    class QuadraticModel
-    {
-    public:
-      QuadraticModel(double constant, double linear, double quadratic);
-
-      double operator()(double t) const;
-
-    private:
-      double constant_, linear_, quadratic_;
-    };
-
-    QuadraticModel makeQuadraticModel(double nu,
+    Functions_1D::Quadratic makeQuadraticModel(double nu,
                                       const FunctionSpaceElement& dn, const FunctionSpaceElement& dt,
                                       const C2Functional& f, const FunctionSpaceElement& x);
 
-    QuadraticModel makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp);
+    Functions_1D::Quadratic makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt);
 
     class CubicModel
     {
     public:
-      CubicModel(const QuadraticModel& quadraticModel, const QuadraticModel& squaredNorm, double omega);
+      CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, double omega);
 
       double operator()(double t) const;
 
     private:
-      QuadraticModel quadraticModel_;
-      QuadraticModel squaredNorm_;
+      Functions_1D::Quadratic quadraticModel_;
+      Functions_1D::Quadratic squaredNorm_;
       double omega_;
     };
 
-    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt, const ScalarProduct& sp, const C2Functional& f, const FunctionSpaceElement& x, double omega);
+    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt,
+                              const C2Functional& f, const FunctionSpaceElement& x, double omega);
 
     template <class Model>
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)

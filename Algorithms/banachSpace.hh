@@ -23,6 +23,8 @@ namespace Algorithm
      */
     explicit BanachSpace(std::shared_ptr<Interface::AbstractBanachSpace> implementation);
 
+    virtual ~BanachSpace() = default;
+
     BanachSpace(const BanachSpace&) = delete;
     BanachSpace& operator=(const BanachSpace&) = delete;
 
@@ -37,7 +39,7 @@ namespace Algorithm
     /**
      * @brief Access norm.
      */
-    Norm getNorm() const;
+    Norm norm() const;
 
     /**
      * @brief Create new function space element.

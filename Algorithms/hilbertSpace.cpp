@@ -1,6 +1,7 @@
 #include "hilbertSpace.hh"
 
 #include "Interface/abstractBanachSpace.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {
@@ -17,4 +18,18 @@ namespace Algorithm
   {
     return ScalarProduct( dynamic_cast<const Interface::AbstractHilbertSpace&>( impl() ).getScalarProduct() );
   }
+
+  HilbertSpace& castToHilbertSpace(BanachSpace& space)
+  {
+    if( dynamic_cast<HilbertSpace*>(&space) == nullptr ) throw InvalidArgumentException("castToHilbertSpace(BanachSpace&)");
+    return dynamic_cast<HilbertSpace&>(space);
+  }
+
+  const HilbertSpace& castToHilbertSpace(const BanachSpace& space)
+  {
+    if( dynamic_cast<const HilbertSpace*>(&space) == nullptr ) throw InvalidArgumentException("castToHilbertSpace(BanachSpace&)");
+    return dynamic_cast<const HilbertSpace&>(space);
+  }
+
+
 }

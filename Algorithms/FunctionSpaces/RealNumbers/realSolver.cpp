@@ -23,6 +23,6 @@ namespace Algorithm
   RealSolver* RealSolver::cloneImpl() const
   {
     std::cout << "cloning real solver" << std::endl;
-    return new RealSolver(value_,getSharedDomain(),getSharedRange());
+    return new RealSolver(value_,sharedDomain(),sharedRange());
   }
 }

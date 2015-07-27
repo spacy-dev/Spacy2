@@ -9,7 +9,8 @@ namespace Algorithm
   /**
    * \brief Interface for termination criteria for conjugate gradient methods.
    */
-  class CGTerminationCriterion : public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps
+  class CGTerminationCriterion :
+      public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps
   {
   public:
     explicit CGTerminationCriterion(unsigned maxIter = 1000) noexcept ;

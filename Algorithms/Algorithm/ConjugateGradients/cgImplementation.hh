@@ -84,6 +84,7 @@ namespace Algorithm
   class CGImpl : public CG_Detail::ChooseRegularization<Impl> , public Mixin::IterativeRefinements
   {
     enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
+    enum class Nonconvexity { None , Encountered };
   public:
     /**
      * \brief Set up conjugate gradient solver.
@@ -93,13 +94,32 @@ namespace Algorithm
      * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
      * \param eps_ estimate for the maximal attainable accuracy (default=false).
      */
-    CGImpl(const Operator& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
+    template <class Op1, class Op2,
+              class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
+              class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
+    CGImpl(Op1&& A, Op2&& P, bool verbose_ = true, double eps_ = 1e-12)
       : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
-        A_(A), P_(P), terminate(std::make_unique< RelativeEnergyError >())
+        A_(std::forward<Op1>(A)), P_(std::forward<Op2>(P)), terminate(std::make_unique< RelativeEnergyError >())
     {
       initPre();
       terminate->setEps(eps_);
     }
+
+//    /**
+//     * \brief Set up conjugate gradient solver.
+//     *
+//     * \param A_ linear operator
+//     * \param P_ preconditioner
+//     * \param verbose_ print information on the cg iteration with verbose_=true (default=false).
+//     * \param eps_ estimate for the maximal attainable accuracy (default=false).
+//     */
+//    CGImpl(Operator&& A, const Operator& P, bool verbose_ = true, double eps_ = 1e-12)
+//      : CG_Detail::ChooseRegularization<Impl>(eps_,verbose_),
+//        A_(std::move(A)), P_(P), terminate(std::make_unique< RelativeEnergyError >())
+//    {
+//      initPre();
+//      terminate->setEps(eps_);
+//    }
 
     /**
      * @param x initial guess
@@ -117,7 +137,7 @@ namespace Algorithm
      */
     FunctionSpaceElement solve(const FunctionSpaceElement& b) const
     {
-      auto x = FunctionSpaceElement( A_.impl().getDomain().element() );
+      auto x = FunctionSpaceElement( A_.impl().domain().element() );
       return solve(x,b);
     }
 
@@ -128,6 +148,7 @@ namespace Algorithm
     FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b) const
     {
       this->initializeRegularization();
+      nonconvexity = Nonconvexity::None;
       if( Impl == CGImplementationType::STANDARD || Impl == CGImplementationType::TRUNCATED )
         return cgLoop(x,b);
       else
@@ -148,7 +169,7 @@ namespace Algorithm
     }
 
     /// Access to the termination criterion, i.e. for adjusting parameters.
-    CGTerminationCriterion& getTerminationCriterion() noexcept
+    CGTerminationCriterion& terminationCriterion() noexcept
     {
       assert(terminate!=nullptr);
       return *terminate;
@@ -157,7 +178,8 @@ namespace Algorithm
     /// Tells us whether non-convex directions occurred.
     bool encounteredNonConvexity() const noexcept
     {
-      return result==Result::EncounteredNonConvexity || result==Result::TruncatedAtNonConvexity;
+      return nonconvexity == Nonconvexity::Encountered;
+//      return result==Result::EncounteredNonConvexity || result==Result::TruncatedAtNonConvexity;
     }
 
     /// Energy norm of the computed solution.
@@ -193,13 +215,20 @@ namespace Algorithm
         auto Aq = A_(q);
         auto qAq = Aq(q);
         auto qPq = Pq(q);
+        this->regularize(qAq,qPq);
 
         auto alpha = sigma/qAq;
 
         terminate->provideAlgorithmicQuantities(alpha,qAq,qPq,sigma);
 
         //  don't trust small numbers
-        if( vanishingStep() ) break;
+        if( vanishingStep(step) )
+        {
+          result = Result::Converged;
+          break;
+        }
+
+
         if( terminateOnNonconvexity(qAq,qPq,x,q,step) ) break;
 
         x += alpha * q;
@@ -248,11 +277,11 @@ namespace Algorithm
     }
 
     /// Check step length.
-    bool vanishingStep() const
+    bool vanishingStep(unsigned step) const
     {
       if( terminate->vanishingStep() )
       {
-        if( verbose() ) std::cout << pre << "Terminating due to numerically almost vanishing step." << std::endl;
+        if( verbose() ) std::cout << pre << "Terminating due to numerically almost vanishing step in iteration " << step << "." << std::endl;
         result = Result::Converged;
         return true;
       }
@@ -266,6 +295,7 @@ namespace Algorithm
     bool terminateOnNonconvexity(Scalar qAq, Scalar qPq, FunctionSpaceElement& x, const FunctionSpaceElement& q, unsigned step) const
     {
       if( qAq > 0 ) return false;
+      if( verbose() ) std::cout << pre << "Negative curvature: " << qAq << std::endl;
 
       if( Impl == CGImplementationType::STANDARD )
       {
@@ -284,6 +314,7 @@ namespace Algorithm
         // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
         if( step == 1 ) x += q;
         if( verbose() ) std::cout << pre << "Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
+        nonconvexity = Nonconvexity::Encountered;
         result = Result::TruncatedAtNonConvexity;
         return true;
       }
@@ -292,6 +323,7 @@ namespace Algorithm
       {
         this->updateRegularization(qAq,qPq);
         if( verbose() ) std::cout << pre << "Regularizing at nonconvexity in iteration " << step << "." << std::endl;
+        nonconvexity = Nonconvexity::Encountered;
         result = Result::EncounteredNonConvexity;
         return true;
       }
@@ -301,6 +333,7 @@ namespace Algorithm
     Operator P_;
     std::unique_ptr< CGTerminationCriterion > terminate = nullptr;
     mutable Result result = Result::Failed; ///< information about reason for termination
+    mutable Nonconvexity nonconvexity = Nonconvexity::None;
     mutable double energyNorm2 = 0.; ///< energy norm squared
     std::string pre = std::string("Algorithm CG: "); ///< output
   };

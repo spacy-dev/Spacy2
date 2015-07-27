@@ -7,12 +7,17 @@ namespace Algorithm
 {
   namespace Mixin
   {
+    /**
+     * @brief Mixin class providing a simple timer.
+     */
     class Timer
     {
     public:
       void startTimer() const;
 
       double elapsedTime() const;
+
+      void printElapsedTime() const;
 
     private:
       mutable std::chrono::time_point<std::chrono::high_resolution_clock> startTime;

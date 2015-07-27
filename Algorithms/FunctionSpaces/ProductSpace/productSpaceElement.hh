@@ -32,6 +32,8 @@ namespace Algorithm
      */
     explicit ProductSpaceElement(const ProductSpace& space);
 
+    ProductSpaceElement(const ProductSpaceElement& other);
+
     void copyTo(Interface::AbstractFunctionSpaceElement &) const final override;
 
     /// Print to os.
@@ -42,6 +44,9 @@ namespace Algorithm
 
     /// In-place summation.
     ProductSpaceElement& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
+
+    /// Axpy-operation \f$x = x + ay\f$.
+    AbstractFunctionSpaceElement& axpy(double a, const AbstractFunctionSpaceElement& y) final override;
 
     /// In-place subtraction.
     ProductSpaceElement& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;

@@ -4,50 +4,64 @@
 #include "../../Algorithms/norm.hh"
 #include "../../Algorithms/scalarProduct.hh"
 #include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
-#include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpace.hh"
-#include "../../Algorithms/FunctionSpaces/PrimalDualProductSpace/primalDualProductSpaceElement.hh"
+#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpace.hh"
+#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
-TEST(PrimalDualProductSpaceTest,PurePrimalElementTest)
+TEST(ProductSpaceTest,PurePrimalElementTest)
 {
   using namespace Algorithm;
-  HilbertSpace R2( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(PrimalDualProductSpaceTest,PureDualElementTest)
+TEST(ProductSpaceTest,PureDualElementTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() }, {} , {0,1} );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(PrimalDualProductSpaceTest,MixedElementTest)
+TEST(ProductSpaceTest,MixedElementTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
 
   auto x = R2.element();
-  EXPECT_EQ( dynamic_cast<const PrimalDualProductSpaceElement*>(&x.impl()) == nullptr , false );
+  EXPECT_EQ( dynamic_cast<const ProductSpaceElement*>(&x.impl()) == nullptr , false );
   EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 0. );
 }
 
-TEST(PrimalDualProductSpaceTest,PurePrimalElementSumTest)
+TEST(ProductSpaceTest,PurePrimalElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 2;
+
+  auto ax = primal(x);
+  EXPECT_DOUBLE_EQ( ax.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( ax.coefficient(1) , 0. );
+  auto ay = primal(y);
+  EXPECT_DOUBLE_EQ( ay.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( ay.coefficient(1) , 2. );
+
+  auto bx = dual(x);
+  EXPECT_DOUBLE_EQ( bx.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( bx.coefficient(1) , 0. );
+  auto by = dual(y);
+  EXPECT_DOUBLE_EQ( by.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( by.coefficient(1) , 0. );
 
   auto z = x + y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
@@ -105,14 +119,28 @@ TEST(PrimalDualProductSpaceTest,PurePrimalElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(PrimalDualProductSpaceTest,PureDualElementSumTest)
+TEST(ProductSpaceTest,PureDualElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() }, {} , {0,1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 2;
+
+  auto ax = primal(x);
+  EXPECT_DOUBLE_EQ( ax.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( ax.coefficient(1) , 0. );
+  auto ay = primal(y);
+  EXPECT_DOUBLE_EQ( ay.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( ay.coefficient(1) , 0. );
+
+  auto bx = dual(x);
+  EXPECT_DOUBLE_EQ( bx.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( bx.coefficient(1) , 0. );
+  auto by = dual(y);
+  EXPECT_DOUBLE_EQ( by.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( by.coefficient(1) , 2. );
 
   auto z = x + y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
@@ -167,14 +195,28 @@ TEST(PrimalDualProductSpaceTest,PureDualElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(PrimalDualProductSpaceTest,MixedElementSumTest)
+TEST(ProductSpaceTest,MixedElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 2;
+
+  auto ax = primal(x);
+  EXPECT_DOUBLE_EQ( ax.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( ax.coefficient(1) , 0. );
+  auto ay = primal(y);
+  EXPECT_DOUBLE_EQ( ay.coefficient(0) , 1. );
+  EXPECT_DOUBLE_EQ( ay.coefficient(1) , 0. );
+
+  auto bx = dual(x);
+  EXPECT_DOUBLE_EQ( bx.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( bx.coefficient(1) , 0. );
+  auto by = dual(y);
+  EXPECT_DOUBLE_EQ( by.coefficient(0) , 0. );
+  EXPECT_DOUBLE_EQ( by.coefficient(1) , 2. );
 
   auto z = x + y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
@@ -229,10 +271,10 @@ TEST(PrimalDualProductSpaceTest,MixedElementSumTest)
   EXPECT_DOUBLE_EQ( x.coefficient(1) , 8. );
 }
 
-TEST(PrimalDualProductSpaceTest,PurePrimalElementProductTest)
+TEST(ProductSpaceTest,PurePrimalElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -247,10 +289,10 @@ TEST(PrimalDualProductSpaceTest,PurePrimalElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 0.);
 }
 
-TEST(PrimalDualProductSpaceTest,PureDualElementProductTest)
+TEST(ProductSpaceTest,PureDualElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<> , PackSpaces<RealSpace,RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {} , {0,1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -265,10 +307,10 @@ TEST(PrimalDualProductSpaceTest,PureDualElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 4.);
 }
 
-TEST(PrimalDualProductSpaceTest,MixedElementProductTest)
+TEST(ProductSpaceTest,MixedElementProductTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
@@ -283,16 +325,16 @@ TEST(PrimalDualProductSpaceTest,MixedElementProductTest)
   EXPECT_DOUBLE_EQ( dual(x)*dual(y) , 3.);
 }
 
-TEST(PrimalDualProductSpaceTest,MixedElementArithmeticProductTest)
+TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 3;
 
-  auto z = 2*y;
+  FunctionSpaceElement z = 2*y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
 
@@ -321,10 +363,10 @@ TEST(PrimalDualProductSpaceTest,MixedElementArithmeticProductTest)
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 9. );
 }
 
-TEST(PrimalDualProductSpaceTest,ScalarProductTest)
+TEST(ProductSpaceTest,ScalarProductTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;
@@ -333,15 +375,15 @@ TEST(PrimalDualProductSpaceTest,ScalarProductTest)
   EXPECT_DOUBLE_EQ( x*y, R2.getScalarProduct()(x,y) );
 }
 
-TEST(PrimalDualProductSpaceTest,NormTest)
+TEST(ProductSpaceTest,NormTest)
 {
   using namespace Algorithm;
-  auto R2 = HilbertSpace( makePrimalDualProductSpace< PackSpaces<RealSpace> , PackSpaces<RealSpace> >() );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0} , {1} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 3;
   y.coefficient(1) = 4;
-  EXPECT_DOUBLE_EQ( R2.getNorm()(x) , 3. );
-  EXPECT_DOUBLE_EQ( R2.getNorm()(y) , 5. );
+  EXPECT_DOUBLE_EQ( R2.norm()(x) , 3. );
+  EXPECT_DOUBLE_EQ( R2.norm()(y) , 5. );
 }
 

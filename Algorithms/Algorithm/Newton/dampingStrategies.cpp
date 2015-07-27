@@ -11,7 +11,7 @@ namespace Algorithm
   {
     namespace DampingStrategy
     {
-      AffineCovariant::AffineCovariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm)
+      AffineCovariant::AffineCovariant(NewtonParameter& p, const C1Operator& F, const Norm& norm)
         : p_(p), F_(F), norm_(norm)
       {}
 
@@ -23,17 +23,17 @@ namespace Algorithm
 
         auto dxNorm = norm_(dx);
         if( dxNorm < p_.sqrtEps() ) return 1.;
-        auto theta = norm_(ds)/dxNorm;
-        auto nu = std::min(1., p_.desiredContraction()/theta);
-        while( !p_.admissibleContraction( theta ) )
+        p_.setContraction( norm_(ds)/dxNorm );
+        auto nu = std::min(1., p_.desiredContraction()/p_.contraction());
+        while( !p_.admissibleContraction() )
         {
           if( !p_.regularityTestPassed(nu) ) break;
 
           trial = x + nu*dx;
           ds = DFInv_( -F_(trial) + (1-nu) * F_(x) );
-          theta = norm_(ds)/(nu*dxNorm);
+          p_.setContraction( norm_(ds)/dxNorm );
 
-          nu = std::min(1., p_.desiredContraction()*nu/theta);
+          nu = std::min(1., p_.desiredContraction()*nu/p_.contraction());
         }
 
         return nu;

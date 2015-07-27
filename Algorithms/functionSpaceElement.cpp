@@ -3,6 +3,7 @@
 #include "Interface/abstractBanachSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "banachSpace.hh"
 
@@ -23,7 +24,6 @@ namespace Algorithm
   FunctionSpaceElement::FunctionSpaceElement(const AbstractFunctionSpaceElement& implementation)
     : FunctionSpaceElement(clone(implementation))
   {}
-
 
 //  FunctionSpaceElement::FunctionSpaceElement(const FunctionSpaceElement& y)
 //    : FunctionSpaceElement( clone(y.impl()) )
@@ -69,12 +69,6 @@ namespace Algorithm
     return *this;
   }
 
-  FunctionSpaceElement& FunctionSpaceElement::operator+=(Scale&& s)
-  {
-    impl().axpy(s.a,s.x.impl());
-    return *this;
-  }
-
   FunctionSpaceElement& FunctionSpaceElement::operator-=(const FunctionSpaceElement& y)
   {
     impl() -= y.impl();
@@ -111,6 +105,12 @@ namespace Algorithm
     return impl().isAdmissible();
   }
 
+  double FunctionSpaceElement::norm() const
+  {
+    return impl().space().getNorm()( impl() );
+  }
+
+
 
   // free functions
   FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y)
@@ -140,6 +140,11 @@ namespace Algorithm
   auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl())
   {
     return x.impl() * y.impl();
+  }
+
+  double norm(const FunctionSpaceElement& x)
+  {
+    return x.norm();
   }
 
   std::ostream& operator<<(std::ostream& os, const FunctionSpaceElement& x)

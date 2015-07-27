@@ -2,7 +2,6 @@
 
 #include "linearOperator.hh"
 #include "functionSpaceElement.hh"
-#include "c1Operator.hh"
 
 #include "Util/Exceptions/regularityTestFailedException.hh"
 
@@ -24,7 +23,7 @@ namespace Algorithm
 
     FunctionSpaceElement NewtonMethod::solve() const
     {
-      return solve( FunctionSpaceElement( F_.impl().getDomain().element() ) );
+      return solve( FunctionSpaceElement( F_.impl().domain().element() ) );
     }
 
     FunctionSpaceElement NewtonMethod::solve(const FunctionSpaceElement& x0) const
@@ -39,10 +38,10 @@ namespace Algorithm
       {
         if( verbose() ) std::cout << "Iteration " << i << ": ";
 
-        auto DF = F_.getLinearization(x);
+        auto DF_Inv = F_.getLinearization(x)^-1;
 
-        auto dx = (DF^-1)(-F_(x));
-        auto nu = dampingFactor_(DF^-1,x,dx);
+        auto dx = DF_Inv(-F_(x));
+        auto nu = dampingFactor_(DF_Inv,x,dx);
         x += nu*dx;
 
         if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton",nu);

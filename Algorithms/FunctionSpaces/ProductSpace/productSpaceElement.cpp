@@ -107,6 +107,23 @@ namespace Algorithm
     return *this;
   }
 
+  AbstractFunctionSpaceElement& ProductSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
+  {
+    const auto& y_ = toProductSpaceElement(y);
+
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i).axpy( a , y_.variable(i) );
+
+    if( isDualEnabled() && y_.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i).axpy( a , y_.variable(i) );
+
+    reset(y_);
+    return *this;
+  }
+
+
   ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractFunctionSpaceElement& y)
   {
     const auto& y_ = toProductSpaceElement(y);
@@ -234,18 +251,24 @@ namespace Algorithm
     return variables_;
   }
 
+
+  ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)
+    : AbstractFunctionSpaceElement(other), variables_(cloneVariables(other.variables()))
+  {
+    if( !other.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i) *= 0;
+    if( !other.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i) *= 0;
+
+    reset(other);
+  }
+
   ProductSpaceElement* ProductSpaceElement::cloneImpl() const
   {
-    auto vars = cloneVariables(variables());
-    if( !isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        *vars[i] *= 0;
-    if( !isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        *vars[i] *= 0;
-
-    reset();
-    return new ProductSpaceElement(vars,space());
+    auto tmp = new ProductSpaceElement(*this);
+    return tmp;
   }
 
 

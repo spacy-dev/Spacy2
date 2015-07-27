@@ -6,6 +6,10 @@ namespace Algorithm
     : Norm(std::static_pointer_cast<Interface::AbstractNorm>(implementation))
   {}
 
+  HilbertSpaceNorm::HilbertSpaceNorm(const ScalarProduct& sp)
+    : HilbertSpaceNorm( std::make_shared<Interface::HilbertSpaceNorm>(sp.sharedImpl()) )
+  {}
+
   double HilbertSpaceNorm::scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const
   {
     return dynamic_cast<const Interface::HilbertSpaceNorm&>(impl()).scalarProduct( x.impl() , y.impl() );

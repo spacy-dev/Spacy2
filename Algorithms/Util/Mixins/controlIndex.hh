@@ -7,7 +7,7 @@ namespace Algorithm
   namespace Mixin
   {
     /**
-     * @brief Parameter class for index of control variable.
+     * @brief Mixin class for index of control variable.
      */
     class ControlIndex
     {

@@ -7,7 +7,7 @@ namespace Algorithm
   namespace Mixin
   {
     /**
-     * @brief Parameter class for index of state variable.
+     * @brief Mixin class for index of state variable.
      */
     class StateIndex
     {

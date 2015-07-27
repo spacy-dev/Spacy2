@@ -1,18 +1,21 @@
 #include "linearSolver.hh"
 
-#include "Interface/abstractLinearSolver.hh"
 #include "c1Operator.hh"
 #include "functionSpaceElement.hh"
 #include "linearOperator.hh"
 
+#include <utility>
+
 namespace Algorithm
 {
-  LinearSolver::LinearSolver(const LinearOperator& A)
-    : Mixin::SharedImpl<Interface::AbstractLinearSolver>( A.getSolver().sharedImpl() )
-  {}
+//  LinearSolver::LinearSolver(const LinearOperator& A)
+//    : Operator( clone(A.solver() ) )
+////    : Mixin::SharedImpl<Interface::AbstractLinearSolver>( A.solver() )
+//  {}
 
-  LinearSolver::LinearSolver(std::shared_ptr<Interface::AbstractLinearSolver> impl)
-    : Mixin::SharedImpl<Interface::AbstractLinearSolver>(impl)
+  LinearSolver::LinearSolver(std::unique_ptr<Interface::AbstractLinearSolver>&& impl)
+    : Operator( std::unique_ptr<Interface::AbstractOperator>( impl.release() ) )
+//      : Mixin::SharedImpl<Interface::AbstractLinearSolver>(impl)
   {}
 
   FunctionSpaceElement LinearSolver::operator ()(const FunctionSpaceElement& x) const
@@ -22,7 +25,7 @@ namespace Algorithm
 
   bool LinearSolver::encounteredNonconvexity() const
   {
-    return impl().encounteredNonconvexity();
+    return dynamic_cast<const Interface::AbstractLinearSolver&>(impl()).encounteredNonconvexity();
   }
 }
 

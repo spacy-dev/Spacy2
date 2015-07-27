@@ -17,6 +17,11 @@ namespace Algorithm
       explicit ContractionRate(double desiredContraction = 0.25, double relaxedDesiredContraction = 0.5, double maximalContraction = 0.75) noexcept;
 
       /**
+       * @brief Set contraction rate.
+       */
+      void setContraction(double contraction) noexcept;
+
+      /**
        * @brief Set desired contraction rate.
        */
       void setDesiredContraction(double desiredContraction) noexcept;
@@ -30,6 +35,11 @@ namespace Algorithm
        * @brief Set maximal contraction rate.
        */
       void setMaximalContraction(double maximalContraction) noexcept;
+
+      /**
+       * @brief Get contraction rate.
+       */
+      double contraction() const noexcept;
 
       /**
        * @brief Get desired contraction rate.
@@ -48,11 +58,12 @@ namespace Algorithm
 
       /**
        * @brief Check if contraction is admissible.
-       * @return contraction < maximalContraction()
+       * @return contraction() < maximalContraction()
        */
-      bool admissibleContraction(double contraction) const noexcept;
+      bool admissibleContraction() const noexcept;
 
     private:
+      double contraction_ = 1;
       double desiredContraction_ = 0.25;
       double relaxedDesiredContraction_ = 0.5;
       double maximalContraction_ = 0.75;

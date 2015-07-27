@@ -15,6 +15,11 @@ namespace Algorithm
       assert( relaxedDesiredContraction_ < maximalContraction_ );
     }
 
+    void ContractionRate::setContraction(double contraction) noexcept
+    {
+      contraction_ = contraction;
+    }
+
     void ContractionRate::setDesiredContraction(double desiredContraction) noexcept
     {
       desiredContraction_ = desiredContraction;
@@ -28,6 +33,11 @@ namespace Algorithm
     void ContractionRate::setMaximalContraction(double maximalContraction) noexcept
     {
       maximalContraction_ = maximalContraction;
+    }
+
+    double ContractionRate::contraction() const noexcept
+    {
+      return contraction_;
     }
 
     double ContractionRate::desiredContraction() const noexcept
@@ -45,9 +55,9 @@ namespace Algorithm
       return maximalContraction_;
     }
 
-    bool ContractionRate::admissibleContraction(double contraction) const noexcept
+    bool ContractionRate::admissibleContraction() const noexcept
     {
-      return contraction < maximalContraction();
+      return contraction() < maximalContraction();
     }
   }
 }

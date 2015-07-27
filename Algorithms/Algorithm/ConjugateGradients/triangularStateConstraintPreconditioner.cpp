@@ -38,7 +38,7 @@ namespace Algorithm
 
   TriangularStateConstraintPreconditioner* TriangularStateConstraintPreconditioner::cloneImpl() const
   {
-    return new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(B_) , getSharedDomain() , getSharedRange() );
+    return new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(B_) , sharedDomain() , sharedRange() );
   }
 }
 

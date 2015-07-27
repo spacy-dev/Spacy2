@@ -11,12 +11,12 @@ namespace Algorithm
 
   FunctionSpaceElement C1Operator::d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
   {
-    return FunctionSpaceElement( dynamic_cast<const Interface::AbstractC1Operator&>( impl() ).getLinearization(x.impl())( dx.impl() ) );
+    return impl().d1( x.impl() , dx.impl() );
   }
 
   LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const
   {
-    return LinearOperator( dynamic_cast<const Interface::AbstractC1Operator&>( impl() ).getLinearization(x.impl()) );
+    return LinearOperator( dynamic_cast<const Interface::AbstractC1Operator&>( impl() ).linearization(x.impl()) );
   }
 
   Interface::AbstractC1Operator& C1Operator::impl()

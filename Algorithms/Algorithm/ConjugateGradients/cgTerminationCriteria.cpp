@@ -72,7 +72,7 @@ namespace Algorithm
 
   bool StrakosTichyEnergyErrorTerminationCriterion::vanishingStep() const noexcept
   {
-    return stepLength2 < eps() * eps() * energyNorm2 || stepLength2 == 0;
+    return stepLength2 < std::min( eps() * eps() * energyNorm2 , absoluteAccuracy()*absoluteAccuracy() );
   }
 
   void StrakosTichyEnergyErrorTerminationCriterion::clear() noexcept

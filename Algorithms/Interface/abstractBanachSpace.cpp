@@ -1,12 +1,15 @@
 #include "abstractBanachSpace.hh"
 #include "abstractHilbertSpace.hh"
 
+#include <cassert>
+#include <stdexcept>
+
 namespace Algorithm
 {
   namespace Interface
   {
-    AbstractBanachSpace::AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm)
-      : norm_(norm)
+    AbstractBanachSpace::AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm, AbstractBanachSpace* dualSpace)
+      : norm_(norm), dualSpace_(dualSpace)
     {
       std::cout << "Creating space number " << index_ << "." << std::endl;
     }
@@ -18,6 +21,7 @@ namespace Algorithm
 
     const AbstractNorm& AbstractBanachSpace::getNorm() const
     {
+      assert(norm_ != nullptr);
       return *norm_;
     }
 
@@ -34,6 +38,17 @@ namespace Algorithm
     unsigned AbstractBanachSpace::index() const noexcept
     {
       return index_;
+    }
+
+    const AbstractBanachSpace& AbstractBanachSpace::dualSpace() const
+    {
+      if( dualSpace_ == nullptr ) throw std::runtime_error("Dual space not defined.");
+      return *dualSpace_;
+    }
+
+    AbstractBanachSpace* AbstractBanachSpace::dualSpacePtr() const
+    {
+      return dualSpace_;
     }
 
     void AbstractBanachSpace::addPrimalSpace(const AbstractBanachSpace& primalSpace)

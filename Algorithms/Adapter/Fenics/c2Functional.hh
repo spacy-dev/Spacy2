@@ -105,6 +105,8 @@ namespace Algorithm
         copy(x,*y_);
         *dummy_.vector() = *y_;
         assign_x0_if_present(f_,dummy_);
+        assign_x0_if_present(J_,dummy_);
+        assign_x0_if_present(H_,dummy_);
       }
 
     private:

@@ -3,6 +3,7 @@
 
 #include "Interface/hilbertSpaceNorm.hh"
 #include "norm.hh"
+#include "scalarProduct.hh"
 
 namespace Algorithm
 {
@@ -12,6 +13,8 @@ namespace Algorithm
   {
   public:
     HilbertSpaceNorm(std::shared_ptr<Interface::HilbertSpaceNorm> implementation);
+
+    HilbertSpaceNorm(const ScalarProduct& sp);
 
     double scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const;
 

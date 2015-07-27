@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "norm.hh"
+#include "c1Operator.hh"
 
 #include "newtonParameter.hh"
 
@@ -11,7 +12,6 @@ namespace Algorithm
 {
   /// \cond
   class FunctionSpaceElement;
-  class C1Operator;
   class LinearSolver;
   /// \endcond
 
@@ -69,7 +69,7 @@ namespace Algorithm
       }
 
     private:
-      const C1Operator& F_;
+      C1Operator F_;
       std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
       std::function<bool(double,const FunctionSpaceElement&, const FunctionSpaceElement&)> terminationCriterion_;
       mutable Norm norm_;

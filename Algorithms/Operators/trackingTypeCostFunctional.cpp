@@ -56,7 +56,7 @@ namespace Algorithm
 
   std::unique_ptr<AbstractFunctionSpaceElement> TrackingTypeCostFunctional::d1(const AbstractFunctionSpaceElement& x) const
   {
-    auto tmp = getDomain().element();
+    auto tmp = domain().element();
 
     const auto& x_ =  dynamic_cast<const ProductSpaceElement&>(x);
     auto& tmp_ = dynamic_cast<ProductSpaceElement&>(*tmp);
@@ -97,7 +97,7 @@ namespace Algorithm
 
   TrackingTypeCostFunctional* TrackingTypeCostFunctional::cloneImpl() const
   {
-    return new TrackingTypeCostFunctional(alpha_,*referenceState_,getSharedDomain(),clone(My_),clone(Mu_));
+    return new TrackingTypeCostFunctional(alpha_,*referenceState_,sharedDomain(),clone(My_),clone(Mu_));
   }
 
 }

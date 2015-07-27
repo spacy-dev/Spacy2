@@ -13,7 +13,7 @@ namespace Algorithm
   class LinearOperator : public Operator
   {
   public:
-    LinearOperator(const Interface::AbstractLinearOperator& impl);
+    LinearOperator(std::unique_ptr<Interface::AbstractLinearOperator>&& impl);
 
 //    LinearOperator(const LinearOperator&);
 
@@ -21,7 +21,7 @@ namespace Algorithm
 
 //    FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
 
-    LinearSolver getSolver() const;
+    LinearSolver solver() const;
   };
 
   LinearSolver operator^(const LinearOperator& A, int k);

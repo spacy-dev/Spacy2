@@ -5,18 +5,18 @@
 
 namespace Algorithm
 {
-  LinearOperator::LinearOperator(const Interface::AbstractLinearOperator& impl)
-    : Operator(std::unique_ptr<Interface::AbstractOperator>( clone(impl).release() ))
+  LinearOperator::LinearOperator(std::unique_ptr<Interface::AbstractLinearOperator>&& impl)
+    : Operator(std::unique_ptr<Interface::AbstractOperator>( impl.release() ))
   {}
 
-  LinearSolver LinearOperator::getSolver() const
+  LinearSolver LinearOperator::solver() const
   {
-    return LinearSolver( dynamic_cast<const Interface::AbstractLinearOperator&>(impl()).getSolver() );
+    return LinearSolver( dynamic_cast<const Interface::AbstractLinearOperator&>(impl()).solver() );
   }
 
   LinearSolver operator^(const LinearOperator& A, int k)
   {
-    if( k == -1 ) return A.getSolver();
-    throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent -1.");
+    if( k == -1 ) return A.solver();
+    throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
   }
 }

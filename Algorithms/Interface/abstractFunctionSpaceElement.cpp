@@ -28,8 +28,6 @@ namespace Algorithm
       auto y_ = clone(y);
       *y_ -= *this;
       const auto& norm_ = space().getNorm();
-      std::cout << "equals norm: " << norm_(*y_) << ", y: " << norm_(y) << std::endl;
-      std::cout << (norm_(*y_) < eps()) << std::endl;
       return norm_(*y_) < eps();
     }
 

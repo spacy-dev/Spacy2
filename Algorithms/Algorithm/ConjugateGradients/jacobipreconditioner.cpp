@@ -7,11 +7,11 @@ namespace Algorithm
   using Interface::AbstractOperator;
 
   JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
-    : AbstractOperator(A.impl().getSharedDomain(),A.impl().getSharedRange()),
-      diag_(A.impl().getDomain().element()->size(),1.)
+    : AbstractOperator(A.impl().sharedDomain(),A.impl().sharedRange()),
+      diag_(A.impl().domain().element()->size(),1.)
 
   {
-    auto x = A.impl().getDomain().element();
+    auto x = A.impl().domain().element();
     auto B = A;
     for(unsigned int i=0; i<x->size(); ++i)
     {
@@ -22,11 +22,11 @@ namespace Algorithm
   }
 
   JacobiPreconditioner::JacobiPreconditioner(const LinearOperator& A)
-    : AbstractOperator(A.impl().getSharedDomain(),A.impl().getSharedRange()),
-      diag_(A.impl().getDomain().element()->size(),1.)
+    : AbstractOperator(A.impl().sharedDomain(),A.impl().sharedRange()),
+      diag_(A.impl().domain().element()->size(),1.)
 
   {
-    auto x = A.impl().getDomain().element();
+    auto x = A.impl().domain().element();
     auto B = A;
     for(unsigned int i=0; i<x->size(); ++i)
     {
@@ -38,7 +38,7 @@ namespace Algorithm
 
 
   JacobiPreconditioner::JacobiPreconditioner(const JacobiPreconditioner& other)
-    : AbstractOperator(other.getSharedDomain(), other.getSharedRange()),
+    : AbstractOperator(other.sharedDomain(), other.sharedRange()),
       diag_(other.diag_), x_( clone(*other.x_))
   {}
 

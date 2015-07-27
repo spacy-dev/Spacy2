@@ -10,12 +10,12 @@ namespace Algorithm
 
   LipschitzConstant& LipschitzConstant::operator=(double newOmega)
   {
-    oldOmega_ = omega_;
-    if( newOmega < 0 ) omega_ = decreaseFactor_*oldOmega_;
+    previousOmega_ = omega_;
+    if( newOmega < 0 ) omega_ = minFactor_*previousOmega_;
     else omega_ = newOmega;
 
     omega_ = std::max(omega_,eps());
-    omega_ = std::min(omega_,oldOmega_*maxFactor_);
+    omega_ = std::min(omega_,previousOmega_*maxFactor_);
     return *this;
   }
 
@@ -26,6 +26,16 @@ namespace Algorithm
 
   double LipschitzConstant::last() const
   {
-    return oldOmega_;
+    return previousOmega_;
+  }
+
+  void LipschitzConstant::setMaxFactor(double factor)
+  {
+    maxFactor_ = factor;
+  }
+
+  void LipschitzConstant::setMinFactor(double factor)
+  {
+    minFactor_ = factor;
   }
 }

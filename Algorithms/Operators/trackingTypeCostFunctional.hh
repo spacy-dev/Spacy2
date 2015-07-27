@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "Interface/Operator/abstractOperator.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/abstractScalarProduct.hh"
 #include "Util/Mixins/controlIndex.hh"
