@@ -11,6 +11,7 @@ namespace Algorithm
     void Verbosity::setVerbosity(bool verbose) noexcept
     {
       verbose_ = verbose;
+      forward(verbose_);
     }
 
     void Verbosity::setDetailedVerbosity(bool verbose) noexcept

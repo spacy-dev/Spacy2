@@ -30,4 +30,10 @@ namespace Algorithm
   {
     return impl().index();
   }
+
+  void connectPrimalDual(BanachSpace& primalSpace, BanachSpace& dualSpace)
+  {
+    Interface::makePrimalDual( primalSpace.impl() , dualSpace.impl() );
+  }
+
 }

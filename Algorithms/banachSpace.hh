@@ -51,5 +51,8 @@ namespace Algorithm
      */
     unsigned index() const;
   };
+
+  void connectPrimalDual(BanachSpace& primalSpace, BanachSpace& dualSpace);
+
 }
 #endif // ALGORITHM_BANACH_SPACE_HH

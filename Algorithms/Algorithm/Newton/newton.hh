@@ -1,12 +1,13 @@
 #ifndef ALGORITHM_ALGORITHM_NEWTON_HH
 #define ALGORITHM_ALGORITHM_NEWTON_HH
 
-#include <functional>
+#include <memory>
 
-#include "norm.hh"
 #include "c1Operator.hh"
 
-#include "newtonParameter.hh"
+#include "dampingStrategies.hh"
+#include "terminationCriteria.hh"
+#include "Util/mixins.hh"
 
 namespace Algorithm
 {
@@ -25,7 +26,9 @@ namespace Algorithm
      * \see Newton::DampingStrategy::Undamped, Newton::DampingStrategy::AffineCovariant, Newton::DampingStrategy::AffineContravariant
      * \see Newton::TerminationCriterion::AffineCovariant, Newton::TerminatinoCriterion::AffineContravariant
      */
-    class NewtonMethod : public NewtonParameter
+    class NewtonMethod :
+        public Mixin::Eps, public Mixin::RelativeAccuracy, public Mixin::Verbosity,
+        public Mixin::MaxSteps , public Mixin::RegularityTest , public Mixin::Timer
     {
     public:
       /**
@@ -49,12 +52,13 @@ namespace Algorithm
       /**
        * \brief Change the damping strategy.
        *
-       * \see Newton::DampingStrategy::Undamped, Newton::DampingStrategy::AffineCovariant, Newton::DampingStrategy::AffineContravariant
+       * \see Newton::DampingStrategy::None, Newton::DampingStrategy::AffineCovariant, Newton::DampingStrategy::AffineContravariant
        */
-      template <class DampingStrategy>
+      template <class DampingStrategy_>
       void setDampingStrategy()
       {
-        dampingFactor_ = DampingStrategy(*this,F_,norm_);
+        dampingFactor_ = std::make_unique<DampingStrategy_>(F_);
+        connectEps( *dampingFactor_ );
       }
 
       /**
@@ -62,17 +66,18 @@ namespace Algorithm
        *
        * \see Newton::TerminationCriterion::AffineCovariant, Newton::TerminatinoCriterion::AffineContravariant
        */
-      template <class TerminationCriterion>
+      template <class TerminationCriterion_>
       void setTerminationCriterion()
       {
-        terminationCriterion_ = TerminationCriterion(F_,norm_,relativeAccuracy(),verbose());
+        terminationCriterion_ = std::make_unique<TerminationCriterion_>(F_,relativeAccuracy(),verbose());
+        connectVerbosity( *terminationCriterion_ );
+        connectRelativeAccuracy( *terminationCriterion_ );
       }
 
     private:
       C1Operator F_;
-      std::function<double(const LinearSolver&,const FunctionSpaceElement&,const FunctionSpaceElement&)> dampingFactor_;
-      std::function<bool(double,const FunctionSpaceElement&, const FunctionSpaceElement&)> terminationCriterion_;
-      mutable Norm norm_;
+      std::unique_ptr<DampingStrategy::Base> dampingFactor_;
+      std::unique_ptr<TerminationCriterion::Base> terminationCriterion_;
     };
   }
 

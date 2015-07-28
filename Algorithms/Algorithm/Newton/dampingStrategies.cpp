@@ -1,9 +1,7 @@
 #include "dampingStrategies.hh"
 
-#include "functionSpaceElement.hh"
 #include "c1Operator.hh"
 #include "linearSolver.hh"
-#include "newton.hh"
 
 #include "Util/Exceptions/regularityTestFailedException.hh"
 
@@ -13,69 +11,46 @@ namespace Algorithm
   {
     namespace DampingStrategy
     {
-      AffineCovariant::AffineCovariant(NewtonParameter& p, const C1Operator& F, const Norm& norm)
-        : p_(p), F_(F), norm_(norm)
+      AffineCovariant::AffineCovariant(const C1Operator& F)
+        : F_(F), oldDs(F.domain().element())
       {}
 
-      double AffineCovariant::operator()(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
+      DampingFactor AffineCovariant::compute(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
       {
-        auto trial = x + dx;
-        auto ds = DFInv_(-F_(trial));
-
-
-        auto dxNorm = norm_(dx);
-        if( dxNorm < p_.sqrtEps() ) return 1.;
-        p_.setContraction( norm_(ds)/dxNorm );
-        auto nu = std::min(1., p_.desiredContraction()/p_.contraction());
-        while( !p_.admissibleContraction() )
+        DampingFactor nu = 1;
+        auto mu = 1., normDx = norm(dx);
+        if( oldNu > 0 )
         {
-          if( !p_.regularityTestPassed(nu) ) break;
-
-          trial = x + nu*dx;
-          ds = DFInv_( -F_(trial) + (1-nu) * F_(x) );
-          p_.setContraction( norm_(ds)/dxNorm );
-
-          nu = std::min(1., p_.desiredContraction()*nu/p_.contraction());
-
-          if( !p_.regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",nu);
+          mu = normOldDx * normOldDs * oldNu / ( normDx * norm(oldDs - dx) );
+          nu = std::min(1.,mu);
         }
 
-        return nu;
-      }
-
-
-      AffineContravariant::AffineContravariant(const NewtonParameter& p, const C1Operator& F, const Norm& norm)
-        : p_(p), F_(F), norm_(norm)
-      {}
-
-      double AffineContravariant::operator()(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
-      {
-        auto nu = 1.;
-        auto norm_F_x = norm_(F_(x));
-        if( muPrime > 0 )
-          nu = std::min( 1. , muPrime*norm_F_x_old/norm_F_x );
-
-        while( true )
+        while(true)
         {
-          if( !p_.regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",nu);
+          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",nu);
 
-          auto trial = x + nu*dx;
+          auto trial = x + static_cast<double>(nu)*dx;
+          auto ds = DFInv_(-F_(trial)) - (1-nu)*dx;
+          auto normDs = norm(ds);
 
-          auto norm_F_trial = norm_(F_(trial));
+          auto muPrime = 0.5 * nu * nu / normDs;
 
-          auto theta = norm_F_trial/norm_F_x;
-          muPrime = 0.5*norm_F_x*nu*nu / norm_( F_(trial) - (1-nu)*F_(x) );
-
-          if( theta >= 1 )
+          if( normDs/normDx >= 1)
           {
-            nu = std::min( muPrime , 0.5*nu );
-            norm_F_x_old = norm_F_x;
+            nu = std::min(0.5*nu,muPrime);
             continue;
           }
 
-          auto oldNu = nu;
-          nu = std::min( 1. , muPrime );
-          if( nu >= 4*oldNu ) continue;
+          auto nuPrime = std::min(1.,muPrime);
+
+          if( nu == 1 && nuPrime == 1 && normDs < eps() ) break;
+
+          if( nuPrime >= 4*nu)
+          {
+            nu = nuPrime;
+            continue;
+          }
+
           break;
         }
 
@@ -83,10 +58,51 @@ namespace Algorithm
       }
 
 
-      None::None(const NewtonParameter&, const C1Operator& F, const Norm& norm)
+      AffineContravariant::AffineContravariant(const C1Operator& F)
+        : F_(F)
       {}
 
-      double None::operator()(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&)
+      DampingFactor AffineContravariant::compute(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx)
+      {
+        DampingFactor nu = 1.;
+        auto norm_F_x = norm(F_(x));
+        if( norm_F_x < sqrtEps() ) return nu;
+        if( muPrime > 0 )
+          nu = std::min( 1. , muPrime*norm_F_x_old/norm_F_x );
+
+        while( true )
+        {
+          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",nu);
+
+          auto trial = x + static_cast<double>(nu)*dx;
+
+          auto norm_F_trial = norm(F_(trial));
+
+          auto theta = norm_F_trial/norm_F_x;
+          muPrime = 0.5*norm_F_x*nu*nu / norm( F_(trial) - (1-nu)*F_(x) );
+
+          if( theta >= 1 )
+          {
+            nu = std::min( muPrime , 0.5*nu );
+            continue;
+          }
+
+          auto oldNu = nu;
+          nu = std::min( 1. , muPrime );
+          if( nu >= 4*oldNu ) continue;
+
+          norm_F_x_old = norm_F_x;
+          break;
+        }
+
+        return nu;
+      }
+
+
+      None::None(const C1Operator& F)
+      {}
+
+      DampingFactor None::compute(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&)
       {
         return 1;
       }

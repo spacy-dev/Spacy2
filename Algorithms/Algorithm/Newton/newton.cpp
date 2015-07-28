@@ -3,10 +3,6 @@
 #include "linearOperator.hh"
 #include "functionSpaceElement.hh"
 
-#include "dampingStrategies.hh"
-#include "terminationCriteria.hh"
-
-#include <chrono>
 #include <iostream>
 
 namespace Algorithm
@@ -15,9 +11,10 @@ namespace Algorithm
   {
     NewtonMethod::NewtonMethod(const C1Operator& F)
       : F_(F),
-        dampingFactor_(DampingStrategy::AffineCovariant(*this,F_,norm_)),
-        terminationCriterion_( TerminationCriterion::AffineCovariant(F_,norm_,relativeAccuracy(),true) )
-    {}
+        dampingFactor_(std::make_unique<DampingStrategy::AffineCovariant>(F_)),
+        terminationCriterion_( std::make_unique<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
+    {
+    }
 
     FunctionSpaceElement NewtonMethod::solve() const
     {
@@ -28,8 +25,7 @@ namespace Algorithm
     {
       using namespace std::chrono;
       if( verbose() ) std::cout << "Starting newton iteration." << std::endl;
-      auto startTime = high_resolution_clock::now();
-      norm_ = Norm( x0.impl().space().getSharedNorm() );
+      startTimer();
 
       auto x = x0;
       for(unsigned i = 1; i <= maxSteps(); ++i)
@@ -39,14 +35,14 @@ namespace Algorithm
         auto DF_Inv = F_.getLinearization(x)^-1;
 
         auto dx = DF_Inv(-F_(x));
-        auto nu = dampingFactor_(DF_Inv,x,dx);
-        x += nu*dx;
+        auto nu = dampingFactor_->compute(DF_Inv,x,dx);
+        x += static_cast<double>(nu)*dx;
 
-        if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm_(x) << ", |dx| = " << norm_(dx) << std::endl;
+        if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
 
-        if( terminationCriterion_(nu,x,dx))
+        if( terminationCriterion_->passed(nu,x,dx) )
         {
-          if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
+          if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << elapsedTime() << "s." << std::endl;
           return x;
         }
       }

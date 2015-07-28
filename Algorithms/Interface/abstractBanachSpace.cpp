@@ -78,5 +78,12 @@ namespace Algorithm
 
       return false;
     }
+
+    void makePrimalDual(AbstractBanachSpace& primalSpace, AbstractBanachSpace& dualSpace)
+    {
+      dualSpace.addPrimalSpace(primalSpace);
+      primalSpace.addDualSpace(dualSpace);
+    }
+
   }
 }

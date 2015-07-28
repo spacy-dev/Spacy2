@@ -5,7 +5,6 @@
 
 #include <string>
 #include <fstream>
-#include <iostream>
 
 namespace Algorithm
 {
@@ -53,15 +52,14 @@ namespace Algorithm
     copy(x,*y_);
     copy(x,*x_);
     solver_.solve( *y_, * x_ );
-    auto y = clone(x);
+    auto y = range().element();
 
     copy(*y_, *y);
-    return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
+    return std::move(y);
   }
 
   LUSolver* LUSolver::cloneImpl() const
   {
-    std::cout << "cloning LUSolver" << std::endl;
     return new LUSolver(*this);
   }
 

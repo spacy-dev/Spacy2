@@ -9,6 +9,7 @@ Algorithm::Mixin::Eps::Eps(double eps) noexcept
 void Algorithm::Mixin::Eps::setEps(double eps) noexcept
 {
   eps_ = eps;
+  forward(eps_);
 }
 
 double Algorithm::Mixin::Eps::eps() const noexcept

@@ -56,6 +56,8 @@ namespace Algorithm
       AbstractBanachSpace* dualSpace_ = nullptr;
       const unsigned index_ = spaceIndex++;
     };
+
+    void makePrimalDual(AbstractBanachSpace& primalSpace, AbstractBanachSpace& dualSpace);
   }
 }
 

@@ -1,42 +1,56 @@
 #ifndef AFFINECOVARIANTTERMINATIONCRITERION_HH
 #define AFFINECOVARIANTTERMINATIONCRITERION_HH
 
-#include "Algorithm/parameter.hh"
 #include "Util/mixins.hh"
 
 namespace Algorithm
 {
+  /// \cond
   class FunctionSpaceElement;
   class Norm;
   class Operator;
+  /// \endcond
 
   namespace Newton
   {
     namespace TerminationCriterion
     {
-      class AffineCovariant
+      class Base
           : public Mixin::RelativeAccuracy, public Mixin::Verbosity, public Mixin::Eps
       {
       public:
-        AffineCovariant(const Operator&, const Norm& norm, double relativeAccuracy, bool verbose = false);
+        Base(double relativeAccuracy, bool verbose);
 
-        bool operator()(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
+        virtual ~Base() = default;
 
-      private:
-        const Norm& norm_;
+        virtual bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const = 0;
       };
 
-      class AffineContravariant
-          : public Mixin::RelativeAccuracy, public Mixin::Verbosity, public Mixin::Eps
+      /**
+       * @ingroup NewtonGroup
+       * @brief Affine covariant relative error criterion.
+       */
+      class AffineCovariant : public Base
       {
       public:
-        AffineContravariant(const Operator& F, const Norm& norm, double relativeAccuracy, bool verbose = false);
+        AffineCovariant(const Operator&, double relativeAccuracy, bool verbose = false);
 
-        bool operator()(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const;
+        bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const final override;
+      };
+
+      /**
+       * @ingroup NewtonGroup
+       * @brief Affine contravariant relative error criterion.
+       */
+      class AffineContravariant : public Base
+      {
+      public:
+        AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose = false);
+
+        bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const final override;
 
       private:
         const Operator& F_;
-        const Norm& norm_;
         mutable double initialResidual = -1;
       };
     }

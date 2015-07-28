@@ -68,7 +68,7 @@ namespace Algorithm
       {
         assembleF(x);
 
-        auto y = clone(x);
+        auto y = range().element();
         copy(*b_,*y);
         return std::move(y);
       }
@@ -82,10 +82,10 @@ namespace Algorithm
         auto Ax = y_->copy();
         A_->mult(*y_, *Ax);
 
-        auto result = clone(x);
+        auto result = range().element();
         copy(*Ax,*result);
 
-        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( result.release() );
+        return std::move(result);
       }
 
     private:

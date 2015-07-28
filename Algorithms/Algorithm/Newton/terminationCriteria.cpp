@@ -1,7 +1,6 @@
 #include "terminationCriteria.hh"
 
 #include "functionSpaceElement.hh"
-#include "norm.hh"
 #include "operator.hh"
 
 #include <cmath>
@@ -12,19 +11,25 @@ namespace Algorithm
   {
     namespace TerminationCriterion
     {
-      AffineCovariant::AffineCovariant(const Operator&, const Norm& norm, double relativeAccuracy, bool verbose)
-        : Mixin::RelativeAccuracy(relativeAccuracy), Mixin::Verbosity(verbose), norm_(norm)
+      Base::Base(double relativeAccuracy, bool verbose)
+        : Mixin::RelativeAccuracy(relativeAccuracy),
+          Mixin::Verbosity(verbose)
       {}
 
-      bool AffineCovariant::operator()(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
+      AffineCovariant::AffineCovariant(const Operator&, double relativeAccuracy, bool verbose)
+        : Base(relativeAccuracy,verbose)
+      {}
+
+      bool AffineCovariant::passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
       {
         if(std::fabs(nu-1) > eps()) return false;
 
-        if( norm_(x) == 0 && norm_(dx) == 0 ) return true;
+        auto norm_x = norm(x), norm_dx = norm(dx);
+        if( norm_x == 0 && norm_dx == 0 ) return true;
 
-        if( norm_(dx) < relativeAccuracy() * norm_(x) )
+        if( norm_dx < relativeAccuracy() * norm_x )
         {
-          if( verbose() ) std::cout << "Terminating (rel. acc.: " << norm_(dx)/norm_(x) << ")\n";
+          if( verbose() ) std::cout << "Terminating (rel. acc.: " << norm_dx/norm_x << ")\n";
           return true;
         }
 
@@ -32,21 +37,28 @@ namespace Algorithm
       }
 
 
-      AffineContravariant::AffineContravariant(const Operator& F, const Norm& norm, double relativeAccuracy, bool verbose)
-        : Mixin::RelativeAccuracy(relativeAccuracy), Mixin::Verbosity(verbose), F_(F), norm_(norm)
+      AffineContravariant::AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose)
+        : Base(relativeAccuracy,verbose), F_(F)
       {}
 
-      bool AffineContravariant::operator()(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const
+      bool AffineContravariant::passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const
       {
-        if(std::fabs(nu-1) > eps()) return false;
-
         if( initialResidual < 0 )
         {
-          initialResidual = norm_( F_(x) );
+          initialResidual = norm( F_(x) );
+          if( verbose() ) std::cout << "Initial residual: " << initialResidual << std::endl;
           return false;
         }
 
-        if( norm_( F_(x) ) < relativeAccuracy() * initialResidual ) return true;
+        if(std::fabs(nu-1) > eps()) return false;
+
+        if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << std::endl;
+
+        if( norm( F_(x) ) < relativeAccuracy() * initialResidual )
+        {
+          if( verbose() ) std::cout << "Terminating (rel. acc.: " << norm(F_(x))/initialResidual << ")\n";
+          return true;
+        }
 
         return false;
       }

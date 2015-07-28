@@ -9,7 +9,7 @@ namespace Algorithm
 {
   namespace Newton
   {
-    class NewtonParameter : public Parameter, public Mixin::RegularityTest, public Mixin::ContractionRate
+    class NewtonParameter : public Parameter, public Mixin::RegularityTest
     {};
   }
 }

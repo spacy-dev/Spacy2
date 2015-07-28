@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_EPS_HH
 #define ALGORITHM_UTIL_MIXIN_EPS_HH
 
+#include "forwardConnection.hh"
 
 namespace Algorithm
 {
@@ -9,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Parameter class for maximal attainable accuracy.
      */
-    class Eps
+    class Eps : public ForwardConnection<double>
     {
     public:
       /**
@@ -36,6 +37,13 @@ namespace Algorithm
        * @brief Get third root of maximal attainable accuracy.
        */
       double cbrtEps() const noexcept;
+
+
+      template <class F>
+      void connectEps(F& f)
+      {
+        connect( std::bind(&F::setEps, std::ref(f), std::placeholders::_1) );
+      }
 
     private:
       double eps_ = 1e-15;
