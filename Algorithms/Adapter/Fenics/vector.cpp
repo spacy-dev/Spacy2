@@ -148,18 +148,36 @@ namespace Algorithm
         const auto& x_ = toProductSpaceElement(x);
 
         if( verbose ) std::cout << "variables: " << x_.variables().size() << std::endl;
-        for( auto i=0u; i<x_.variables().size(); ++i )
-        {
-          const auto& xv_ = toVector( x_.variable(i) );
-          for(auto j=0u; j<xv_.size(); ++j)
+//        for( auto i=0u; i<x_.variables().size(); ++i )
+          for( auto i : x_.space().primalSubSpaceIds() )
           {
-            const auto& space = toHilbertSpace( xv_.space() );
+            const auto& xv_ = toVector( x_.variable(i) );
+            for(auto j=0u; j<xv_.size(); ++j)
+            {
+              const auto& space = toHilbertSpace( xv_.space() );
 
-            if( verbose) std::cout << j << " -> " << space.inverseDofmap(j) << ": " << toVector( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
-            y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
+              if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << toVector( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
+              if(x_.isPrimalEnabled())
+                y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
+              else y.setitem(space.inverseDofmap(j),0.);
+            }
           }
-        }
+          for( auto i : x_.space().dualSubSpaceIds() )
+          {
+            const auto& xv_ = toVector( x_.variable(i) );
+            for(auto j=0u; j<xv_.size(); ++j)
+            {
+              const auto& space = toHilbertSpace( xv_.space() );
+
+              if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << toVector( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
+              if(x_.isDualEnabled())
+                y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
+              else y.setitem(space.inverseDofmap(j),0.);
+            }
+          }
+
         y.apply("insert");
+        //x_.reset();
 
         return;
       }
@@ -181,17 +199,39 @@ namespace Algorithm
       {
 
         auto& x_ = toProductSpaceElement(x);
-        for( auto i=0u; i<x_.variables().size(); ++i )
-        {
-          auto& xv_ = toVector( x_.variable(i) );
-          for(auto j=0u; j<xv_.size(); ++j)
+
+        //for( auto i=0u; i<x_.variables().size(); ++i )
+          for( auto i : x_.space().primalSubSpaceIds() )
           {
-            const auto& space = toHilbertSpace( xv_.space() );
-            if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
-            xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
+            auto& xv_ = toVector( x_.variable(i) );
+            for(auto j=0u; j<xv_.size(); ++j)
+            {
+              const auto& space = toHilbertSpace( xv_.space() );
+              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
+              if( x_.isPrimalEnabled())
+                xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
+              else xv_.impl().vector()->setitem( j , 0. );
+            }
+            toVector( x_.variable(i) ).impl().vector()->apply("insert");
           }
-          toVector( x_.variable(i) ).impl().vector()->apply("insert");
-        }
+
+          for( auto i : x_.space().dualSubSpaceIds() )
+          {
+            auto& xv_ = toVector( x_.variable(i) );
+            for(auto j=0u; j<xv_.size(); ++j)
+            {
+              const auto& space = toHilbertSpace( xv_.space() );
+              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
+              if( x_.isDualEnabled())
+                xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
+              else
+                xv_.impl().vector()->setitem( j , 0. );
+            }
+            toVector( x_.variable(i) ).impl().vector()->apply("insert");
+          }
+
+
+        //x_.reset();
         return;
       }
 

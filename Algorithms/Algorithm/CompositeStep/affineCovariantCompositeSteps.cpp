@@ -8,6 +8,7 @@
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
+#include "Algorithm/dampingFactor.hh"
 
 #include "c2Functional.hh"
 #include "functionSpaceElement.hh"
@@ -34,8 +35,7 @@ namespace Algorithm
   {
     auto lastStepWasUndamped = false;
     auto x = x0;
-    auto x1 = primal(x);
-    castToHilbertSpace(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(x1) ) );
+    castToHilbertSpace(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 //    norm = HilbertSpaceNorm( primalInducedScalarProduct( N_->hessian(x0) ));
 
     for(unsigned step = 1; step < maxSteps(); ++step)
@@ -51,11 +51,10 @@ namespace Algorithm
       auto norm_Dn = norm(Dn);
       if( verbose() ) std::cout << spacing << "Computing normal damping factor" << std::endl;
       double nu = computeNormalStepDampingFactor(norm_Dn);
-      if( verbose_detailed() ) std::cout << spacing2 << "|dn| = " << norm_Dn << "nu = " << nu << std::endl;
+      if( verbose_detailed() ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << std::endl;
 
       if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
-      auto dp = computeLagrangeMultiplier(x);
-      x += dual(dp);
+      dual(x) += computeLagrangeMultiplier(x);
 
       if( verbose() ) std::cout << spacing << "Computing tangential step." << std::endl;
       auto Dt = computeTangentialStep(nu,x,Dn,lastStepWasUndamped);
@@ -69,14 +68,14 @@ namespace Algorithm
       x += primal(dx);
       if( contraction() < 0.25 ) x += primal(ds);
 
-      x1 = primal(x);
-      norm_x = norm(x1);
+      norm_x = norm(primal(x));
 
-      if( undamped(nu) && undamped(tau) ) lastStepWasUndamped = true;
+      if( nu == 1 && tau == 1 ) lastStepWasUndamped = true;
       if( convergenceTest(nu,tau,norm_x,norm_dx) ) return x;
 
       if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
       if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
+      if( verbose_detailed() ) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
     } // end iteration
 
     return x;
@@ -87,7 +86,7 @@ namespace Algorithm
     if( L_==nullptr ) return FunctionSpaceElement(0*x);
 
     auto trcgRelativeAccuracy = minimalAccuracy();
-    if( tangentialSolver != nullptr && undamped(nu) && lastStepWasUndamped )
+    if( tangentialSolver != nullptr && nu == 1 && lastStepWasUndamped )
     {
       trcgRelativeAccuracy = std::max( relativeAccuracy() , std::min( minimalAccuracy() , omegaL * norm_dx_old ) );
       if( norm_dx_old > 0 && lastStepWasUndamped )
@@ -102,28 +101,19 @@ namespace Algorithm
                                               *normalSolver,
                                               trcgRelativeAccuracy,
                                               eps(),
-                                              verbose() );
+                                              verbose_detailed() );
     trcg->impl().setIterativeRefinements(9);
     trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
     tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
 
-    FunctionSpaceElement rhs = primal(L_->d1(x));
-    rhs += nu*primal( L_->d2(x,dn) );
-    rhs *= -1;
-    dual(rhs) *= 0;
-    startTimer();
-    auto result = primal( (*tangentialSolver)(rhs) );
-    std::cout << spacing2 << "elapsed time: " << elapsedTime() << "s" << std::endl;
-    return result;
+    return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal( -nu*L_->d2(x,dn)) ) );
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeNormalStep(const FunctionSpaceElement &x) const
   {
     if( N_==nullptr ) return FunctionSpaceElement(0*x);
 
-    auto x0 = x;
-    dual(x0) *= 0;
-    normalSolver = std::make_unique<LinearSolver>( N_->hessian(x0).solver() );
+    normalSolver = std::make_unique<LinearSolver>( N_->hessian(primal(x)).solver() );
     return computeMinimumNormCorrection(x);
   }
 
@@ -135,18 +125,12 @@ namespace Algorithm
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeMinimumNormCorrection(const FunctionSpaceElement& x) const
   {
-    FunctionSpaceElement rhs = L_->d1(x);
-    primal(rhs) *= 0;
-    dual(rhs) *= -1;
-    return primal( (*normalSolver)(rhs) );
+    return primal( (*normalSolver)( dual(-L_->d1(x)) ) );
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeLagrangeMultiplier(const FunctionSpaceElement& x) const
   {
-    FunctionSpaceElement rhs = L_->d1(x);
-    dual(rhs) *= 0;
-    primal(rhs) *= -1;
-    return dual( (*normalSolver)(rhs) );
+    return dual( (*normalSolver)( primal(-L_->d1(x)) ) );
   }
 
   std::tuple<double,FunctionSpaceElement,FunctionSpaceElement,double,double>
@@ -154,6 +138,7 @@ namespace Algorithm
                                                       const FunctionSpaceElement& x, const FunctionSpaceElement& Dn, const FunctionSpaceElement& Dt)
   {
     auto norm_Dt = norm(Dt);
+    if( verbose_detailed() ) std::cout << spacing2 << "|Dt| = " << norm_Dt << std::endl;
     auto cubic = CompositeStep::makeCubicModel( nu, Dn, Dt , *L_ , x , omegaL );
     auto tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubic);
 
@@ -179,7 +164,7 @@ namespace Algorithm
       auto q_tau = quadraticModel(tau);
 
       dx = primal(nu*Dn) + primal(tau*Dt);
-      norm_dx = norm(dx);
+      norm_dx = norm(primal(dx));
       if( verbose_detailed() ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
       auto trial = x + dx;
 
@@ -201,7 +186,7 @@ namespace Algorithm
 
       if( acceptanceTest != AcceptanceTest::LeftAdmissibleDomain ) acceptanceTest = acceptedSteps(norm_x,norm_dx,eta);
 
-      if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin) * omegaL.last() ) )
+      if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin)) * omegaL.last() )
       {
         if( verbose_detailed() ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
         acceptanceTest = AcceptanceTest::Passed;
@@ -211,6 +196,7 @@ namespace Algorithm
           if( verbose_detailed() ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
           trial -= tau*Dt;
           dx -= tau*Dt;
+          norm_dx = norm(dx);
         }
       }
 
@@ -240,7 +226,7 @@ namespace Algorithm
   bool AffineCovariantCompositeSteps::convergenceTest(double nu, double tau, double norm_x, double norm_dx)
   {
     if( tangentialSolver->encounteredNonconvexity() ) return false;
-    if( !undamped(nu) || !undamped(tau) ) return false;
+    if( nu < 1 || tau < 1 ) return false;
 
     if( norm_dx < relativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
     {
@@ -254,13 +240,14 @@ namespace Algorithm
 
   void AffineCovariantCompositeSteps::updateOmegaC(double norm_x, double norm_dx, double norm_ds)
   {
+    if( norm_dx < sqrtEps() * norm_x ) return;
     setContraction( norm_ds/norm_dx );
-    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
+//    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
 
     if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*contraction()/norm_dx )
       omegaC = 2*contraction()/norm_dx;
 
-    if( verbose_detailed() ) std::cout << spacing2 << "theta = " << contraction() << "omegaC: " << omegaC << std::endl;
+    if( verbose_detailed() ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
   }
 
   double AffineCovariantCompositeSteps::updateOmegaL(const FunctionSpaceElement& soc, double q_tau,
@@ -291,9 +278,9 @@ namespace Algorithm
 
   double AffineCovariantCompositeSteps::computeNormalStepDampingFactor(double norm_Dn) const
   {
-    double nu = 1;
+    DampingFactor nu = 1;
     if( norm_Dn > eps() && std::abs(norm_Dn*omegaC) > eps() ) nu = std::min(1.,desiredContraction()/(omegaC*norm_Dn));
-    return undamped(nu) ? 1. : nu;
+    return nu;
   }
 
   double AffineCovariantCompositeSteps::computeTangentialStepDampingFactor(double norm_dn, double norm_Dt, const CompositeStep::CubicModel& cubic) const
@@ -303,9 +290,10 @@ namespace Algorithm
     auto maxTau = 1.;
     if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
       maxTau = std::min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
-    auto tau = CompositeStep::findMinimizer( cubic, 0, maxTau , dampingTolerance*maxTau );
 
-    return undamped(tau) ? 1. : tau;
+    DampingFactor tau = CompositeStep::findMinimizer( cubic, 0, maxTau , dampingTolerance*maxTau );
+
+    return tau;
   }
 
   AffineCovariantCompositeSteps::AcceptanceTest AffineCovariantCompositeSteps::acceptedSteps(double norm_x, double norm_Dx, double eta)
@@ -327,11 +315,6 @@ namespace Algorithm
     }
 
     return AcceptanceTest::Passed;
-  }
-
-  bool AffineCovariantCompositeSteps::undamped(double val) const
-  {
-    return std::abs(val-1.) < dampingTolerance;
   }
 
   void AffineCovariantCompositeSteps::regularityTest(double nu, double tau) const

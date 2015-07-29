@@ -27,19 +27,21 @@ namespace Algorithm
 
     double PrimalInducedScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
     {
-      auto x_ = clone(primal(x));
-      auto y_ = clone(primal(y));
-
-      auto result = (*impl()(*y_))(*x_);
-
       const auto& xx = toProductSpaceElement(x);
       const auto& yy = toProductSpaceElement(y);
 
-      for( auto i : xx.space().dualSubSpaceIds() )
-        result += xx.variable(i) * yy.variable(i);
+      auto result = 0.;
 
-      return result;
-      //      return (*impl()(y))(x);
+      if( xx.isDualEnabled() && yy.isDualEnabled() )
+        for( auto i : xx.space().dualSubSpaceIds() )
+          result += xx.variable(i) * yy.variable(i);
+
+      if( !xx.isPrimalEnabled() || !yy.isPrimalEnabled() ) return result;
+
+      auto x_ = clone(primal(x));
+      auto y_ = clone(primal(y));
+
+      return result += (*impl()(*y_))(*x_);
     }
   }
 

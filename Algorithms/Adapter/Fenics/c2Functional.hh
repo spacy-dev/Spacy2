@@ -5,15 +5,15 @@
 #include <memory>
 #include <vector>
 
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/Functional/hessian.hh"
-#include "Util/makeLinearSolver.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/Mixins/disableAssembly.hh"
+
+#include "../../c2Functional.hh"
 
 #include "util.hh"
 #include "vector.hh"
-
 #include "assignXIfPresent.hh"
 
 namespace Algorithm
@@ -65,9 +65,11 @@ namespace Algorithm
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
+        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
+        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
         if( oldX_f_ != nullptr && oldX_f_->equals(x) ) return value_;
-
-        oldX_f_ = clone(x);
+        if( !dualEnabled ) primal(x);
+        if( !primalEnabled ) dual(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -77,12 +79,13 @@ namespace Algorithm
         f_.x = dummy_;
         value_ = dolfin::assemble(f_);
 
+        oldX_f_ = clone(x);
         return value_;
       }
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x) const final override
       {
-        assemble_J(x);
+        assembleJacobian(x);
 
         auto y = clone(x);
         copy(*b_,*y);
@@ -91,7 +94,7 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        assemble_H(x);
+        assembleHessian(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(dx,*y_);
@@ -117,27 +120,27 @@ namespace Algorithm
     private:
       std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const override
       {
-        assemble_H(x);
+        assembleHessian(x);
 
         assert( A_ != nullptr );
-        return std::make_unique<Interface::Hessian>( std::make_unique<C2Functional>(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_), x);
+        return std::make_unique<Interface::Hessian>( std::make_unique<C2Functional>(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_), *oldX_H_);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
         assert( A_ != nullptr );
-        using namespace std::chrono;
-        auto startTime = high_resolution_clock::now();
-        auto solver = std::make_unique<LUSolver>(A_,*J_.function_space(0),sharedDomain(),sharedDomain());
-        std::cout << "lusolver time: " << duration_cast<milliseconds>(high_resolution_clock::now() - startTime).count() << "ms" << std::endl;
-        return std::move(solver);
+        return std::make_unique<LUSolver>(A_,*J_.function_space(0),sharedDomain(),sharedDomain());
       }
 
-      void assemble_J(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleJacobian(const Interface::AbstractFunctionSpaceElement& x) const
       {
         if( assemblyIsDisabled() ) return;
+
+        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
+        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
         if( oldX_J_ != nullptr && oldX_J_->equals(x) ) return;
-        oldX_J_ = clone(x);
+        if( !dualEnabled ) primal(x);
+        if( !primalEnabled ) dual(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -147,13 +150,19 @@ namespace Algorithm
 
         dolfin::assemble(*b_,J_);
         for( auto& bc : bcs_) bc->apply(*b_,*dummy_.vector());
+
+        oldX_J_ = clone(x);
       }
 
-      void assemble_H(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleHessian(const Interface::AbstractFunctionSpaceElement& x) const
       {
         if( assemblyIsDisabled() ) return;
+
+        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
+        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
         if( oldX_H_ != nullptr && oldX_H_->equals(x) ) return;
-        oldX_H_ = clone(x);
+        if( !dualEnabled ) primal(x);
+        if( !primalEnabled ) dual(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -163,6 +172,8 @@ namespace Algorithm
         dolfin::assemble(*A_,H_);
 
         for( auto& bc : bcs_) bc->apply(*A_);
+
+        oldX_H_ = clone(x);
       }
 
       C2Functional* cloneImpl() const
@@ -181,6 +192,13 @@ namespace Algorithm
       mutable std::unique_ptr<Interface::AbstractFunctionSpaceElement> oldX_f_, oldX_J_, oldX_H_;
       mutable dolfin::Function dummy_;
     };
+
+
+    template <class Functional, class Derivative, class Hessian, class... Args>
+    ::Algorithm::C2Functional makeC2Functional( const Functional& f , const Derivative& J , const Hessian& H , Args&&... args )
+    {
+      return createFromUniqueImpl< ::Algorithm::C2Functional , Fenics::C2Functional<Functional,Derivative,Hessian> >( f , J , H , std::forward<Args>(args)...);
+    }
   }
 }
 

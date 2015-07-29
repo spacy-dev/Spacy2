@@ -64,7 +64,6 @@ namespace Algorithm
 
     void regularityTest(double nu, double tau) const;
     AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
-    bool undamped(double val) const;
 
     std::unique_ptr<C2Functional> N_, L_;
 

@@ -8,18 +8,17 @@
 
 #include "Interface/Operator/abstractC1Operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
-
-#include "luSolver.hh"
-#include "util.hh"
-#include "vector.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "hilbertSpace.hh"
 #include "banachSpace.hh"
 #include "../../c1Operator.hh"
 #include "Util/create.hh"
-#include "Util/makeLinearSolver.hh"
 #include "Util/Mixins/disableAssembly.hh"
 
+#include "luSolver.hh"
+#include "util.hh"
+#include "vector.hh"
 #include "assignXIfPresent.hh"
 
 namespace Algorithm
@@ -66,7 +65,7 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        assembleF(x);
+        assembleOperator(x);
 
         auto y = range().element();
         copy(*b_,*y);
@@ -75,7 +74,7 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        assembleJ(x);
+        assembleGradient(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(dx,*y_);
@@ -91,11 +90,15 @@ namespace Algorithm
     private:
       friend class LinearizedOperator;
 
-      void assembleF(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleOperator(const Interface::AbstractFunctionSpaceElement& x) const
       {
         if( assemblyIsDisabled() ) return;
+
+        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
+        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
         if( oldX_F != nullptr && oldX_F->equals(x) ) return;
-        oldX_F = clone(x);
+        if( !dualEnabled ) primal(x);
+        if( !primalEnabled ) dual(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -110,13 +113,19 @@ namespace Algorithm
         // Apply boundary conditions
         for(const auto& bc : bcs_)
           bc->apply( *b_ , *dummy_.vector() );
+
+        oldX_F = clone(x);
       }
 
-      void assembleJ(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleGradient(const Interface::AbstractFunctionSpaceElement& x) const
       {
         if( assemblyIsDisabled() ) return;
+
+        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
+        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
         if( oldX_J != nullptr && oldX_J->equals(x) ) return;
-        oldX_J = clone(x);
+        if( !dualEnabled ) primal(x);
+        if( !primalEnabled ) dual(x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -131,6 +140,8 @@ namespace Algorithm
         // Apply boundary conditions
         for(const auto& bc : bcs_)
           bc->apply( *A_ );
+
+        oldX_J = clone(x);
       }
 
       C1Operator* cloneImpl() const
@@ -141,8 +152,8 @@ namespace Algorithm
 
       std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
       {
-        assembleF(x);
-        assembleJ(x);
+        assembleOperator(x);
+        assembleGradient(x);
         return std::make_unique<Interface::LinearizedOperator>(std::make_unique<C1Operator>(F_,J_,bcs_,A_,sharedDomain(),sharedRange()),x);
       }
 

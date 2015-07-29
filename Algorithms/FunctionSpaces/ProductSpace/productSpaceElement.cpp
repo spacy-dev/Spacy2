@@ -46,6 +46,19 @@ namespace Algorithm
     for (auto i=0u; i<spaces.size(); ++i) variables_.push_back(spaces[i]->element());
   }
 
+  ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)
+    : AbstractFunctionSpaceElement(other), variables_(cloneVariables(other.variables()))
+  {
+    if( !other.isPrimalEnabled() )
+      for( unsigned i : space().primalSubSpaceIds() )
+        variable(i) *= 0;
+    if( !other.isDualEnabled() )
+      for( unsigned i : space().dualSubSpaceIds() )
+        variable(i) *= 0;
+
+    reset(other);
+  }
+
   void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
   {
     auto& y_ = toProductSpaceElement(y);
@@ -251,19 +264,6 @@ namespace Algorithm
     return variables_;
   }
 
-
-  ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)
-    : AbstractFunctionSpaceElement(other), variables_(cloneVariables(other.variables()))
-  {
-    if( !other.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        variable(i) *= 0;
-    if( !other.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i) *= 0;
-
-    reset(other);
-  }
 
   ProductSpaceElement* ProductSpaceElement::cloneImpl() const
   {
