@@ -25,7 +25,7 @@ TEST(RealSpaceTest,ScalarProductTest)
   EXPECT_DOUBLE_EQ( x.coefficient(0), 1. );
   EXPECT_DOUBLE_EQ( y.coefficient(0), -2. );
   EXPECT_DOUBLE_EQ( x*y, -2. );
-  EXPECT_DOUBLE_EQ( x*y, Spaces::R.getScalarProduct()(x,y) );
+  EXPECT_DOUBLE_EQ( x*y, Spaces::R.scalarProduct()(x,y) );
 }
 
 TEST(RealSpaceTest,NormTest)

@@ -372,7 +372,7 @@ TEST(ProductSpaceTest,ScalarProductTest)
   x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 2;
   EXPECT_DOUBLE_EQ( x*y, 1. );
-  EXPECT_DOUBLE_EQ( x*y, R2.getScalarProduct()(x,y) );
+  EXPECT_DOUBLE_EQ( x*y, R2.scalarProduct()(x,y) );
 }
 
 TEST(ProductSpaceTest,NormTest)
