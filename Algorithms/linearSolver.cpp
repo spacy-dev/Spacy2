@@ -25,7 +25,7 @@ namespace Algorithm
 
   bool LinearSolver::encounteredNonconvexity() const
   {
-    return dynamic_cast<const Interface::AbstractLinearSolver&>(impl()).encounteredNonconvexity();
+    return dynamic_cast<const Interface::AbstractLinearSolver&>(impl()).systemIsPositiveDefinite();
   }
 }
 

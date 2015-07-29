@@ -27,7 +27,7 @@ namespace Algorithm
     {
       auto y_ = clone(y);
       *y_ -= *this;
-      const auto& norm_ = space().getNorm();
+      const auto& norm_ = space().norm();
       return norm_(*y_) < eps();
     }
 

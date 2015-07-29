@@ -24,7 +24,7 @@ namespace Algorithm
       setNorm(std::make_shared<HilbertSpaceNorm>(sp));
     }
 
-    std::shared_ptr<AbstractScalarProduct> AbstractHilbertSpace::getScalarProduct() const
+    std::shared_ptr<AbstractScalarProduct> AbstractHilbertSpace::scalarProduct() const
     {
       return sp_;
     }
@@ -38,7 +38,7 @@ namespace Algorithm
     {
       if( isHilbertSpace(x.space()) && isHilbertSpace(y.space()) && x.spaceIndex() == y.spaceIndex() )
       {
-        auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.space()).getScalarProduct();
+        auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.space()).scalarProduct();
         return sp->operator ()(x,y);
       }
 

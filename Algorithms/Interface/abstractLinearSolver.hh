@@ -9,19 +9,31 @@ namespace Algorithm
 {
   namespace Interface
   {
+    /// \cond
     class AbstractBanachSpace;
     class AbstractFunctionSpaceElement;
+    /// \endcond
 
+    /**
+     * @brief Abstract interface for linear solvers as linear operator \f$X\rightarrow Y\f$.
+     */
     class AbstractLinearSolver : public AbstractOperator
     {
     public:
+      /**
+       * @brief Constructor.
+       * @param domain domain space \f$X\f$.
+       * @param range range space \f$Y\f$.
+       */
       AbstractLinearSolver(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
 
       virtual ~AbstractLinearSolver();
 
+      /// Apply linear solver.
       virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
 
-      virtual bool encounteredNonconvexity() const;
+      /// Checks if the linear system is indefinite.
+      virtual bool systemIsPositiveDefinite() const;
     };
   }
 }

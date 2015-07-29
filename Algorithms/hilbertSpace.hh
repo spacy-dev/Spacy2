@@ -33,7 +33,7 @@ namespace Algorithm
     /**
      * @brief Access scalar product.
      */
-    ScalarProduct getScalarProduct() const;
+    ScalarProduct scalarProduct() const;
   };
 
   HilbertSpace& castToHilbertSpace(BanachSpace& space);

@@ -18,7 +18,7 @@ namespace Algorithm
 
   Norm BanachSpace::norm() const
   {
-    return Norm( impl().getSharedNorm() );
+    return Norm( impl().sharedNorm() );
   }
 
   FunctionSpaceElement BanachSpace::element() const

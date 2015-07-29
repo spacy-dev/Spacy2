@@ -14,9 +14,9 @@ namespace Algorithm
     dynamic_cast<Interface::AbstractHilbertSpace&>( impl() ).setScalarProduct( sp.sharedImpl() );
   }
 
-  ScalarProduct HilbertSpace::getScalarProduct() const
+  ScalarProduct HilbertSpace::scalarProduct() const
   {
-    return ScalarProduct( dynamic_cast<const Interface::AbstractHilbertSpace&>( impl() ).getScalarProduct() );
+    return ScalarProduct( dynamic_cast<const Interface::AbstractHilbertSpace&>( impl() ).scalarProduct() );
   }
 
   HilbertSpace& castToHilbertSpace(BanachSpace& space)

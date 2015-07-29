@@ -26,9 +26,9 @@ namespace Algorithm
 
       void setNorm(std::shared_ptr<AbstractNorm> norm);
 
-      const AbstractNorm& getNorm() const;
+      const AbstractNorm& norm() const;
 
-      std::shared_ptr<AbstractNorm> getSharedNorm() const;
+      std::shared_ptr<AbstractNorm> sharedNorm() const;
 
       std::unique_ptr<AbstractFunctionSpaceElement> element() const;
 

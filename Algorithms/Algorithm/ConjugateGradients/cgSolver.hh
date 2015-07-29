@@ -58,10 +58,9 @@ namespace Algorithm
       return cg;
     }
 
-    bool encounteredNonconvexity() const override
+    bool systemIsPositiveDefinite() const override
     {
-      std::cout << "nonconvexity: " << cg.encounteredNonConvexity() << std::endl;
-      return cg.encounteredNonConvexity();
+      return !cg.encounteredNonConvexity();
     }
 
   private:

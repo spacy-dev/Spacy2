@@ -107,7 +107,7 @@ namespace Algorithm
 
   double FunctionSpaceElement::norm() const
   {
-    return impl().space().getNorm()( impl() );
+    return impl().space().norm()( impl() );
   }
 
 

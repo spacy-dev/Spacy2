@@ -19,13 +19,13 @@ namespace Algorithm
       norm_ = norm;
     }
 
-    const AbstractNorm& AbstractBanachSpace::getNorm() const
+    const AbstractNorm& AbstractBanachSpace::norm() const
     {
       assert(norm_ != nullptr);
       return *norm_;
     }
 
-    std::shared_ptr<AbstractNorm> AbstractBanachSpace::getSharedNorm() const
+    std::shared_ptr<AbstractNorm> AbstractBanachSpace::sharedNorm() const
     {
       return norm_;
     }

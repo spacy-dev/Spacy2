@@ -8,27 +8,39 @@ namespace Algorithm
 {
   namespace Interface
   {
+    /// \cond
     class AbstractNorm;
     class AbstractFunctionSpaceElement;
+    /// \endcond
 
+    /**
+     * @brief Abstract interface for hilbert spaces.
+     */
     class AbstractHilbertSpace : public AbstractBanachSpace
     {
     public:
+      /**
+       * @brief Constructor. Sets scalar product.
+       */
       AbstractHilbertSpace(std::shared_ptr<AbstractScalarProduct> sp);
 
       virtual ~AbstractHilbertSpace() = default;
 
+      /// Set scalar product.
       void setScalarProduct(std::shared_ptr<AbstractScalarProduct> sp);
 
-      std::shared_ptr<AbstractScalarProduct> getScalarProduct() const;
+      /// Get scalar product.
+      std::shared_ptr<AbstractScalarProduct> scalarProduct() const;
 
     private:
       std::shared_ptr<AbstractScalarProduct> sp_;
     };
 
+    /// Checks is space is derived from Interface::AbstractHilbertSpace.
     bool isHilbertSpace(const AbstractBanachSpace& space);
 
-    double operator* (const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&);
+    /// Compute scalar product \f$(x,y)\f$.
+    double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y);
   }
 }
 

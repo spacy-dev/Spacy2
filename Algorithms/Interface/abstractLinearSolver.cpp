@@ -11,7 +11,7 @@ namespace Algorithm
     AbstractLinearSolver::~AbstractLinearSolver()
     {}
 
-    bool AbstractLinearSolver::encounteredNonconvexity() const
+    bool AbstractLinearSolver::systemIsPositiveDefinite() const
     {
       return false;
     }
