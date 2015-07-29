@@ -9,7 +9,6 @@ Download via
 ### Installation
 Go to download folder, i.e.
   - cd FSA
-  - 
   
 and type
 
