@@ -9,6 +9,10 @@
 
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
 
+#include "c2Functional.hh"
+#include "functionSpaceElement.hh"
+#include "linearSolver.hh"
+
 #include <cmath>
 #include <iostream>
 
@@ -23,7 +27,7 @@ namespace Algorithm
 
   FunctionSpaceElement AffineCovariantCompositeSteps::solve()
   {
-    return solve( FunctionSpaceElement( N_->impl().domain().element() ) );
+    return solve( N_->domain().element() );
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::solve(const FunctionSpaceElement& x0)

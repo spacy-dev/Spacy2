@@ -5,9 +5,6 @@
 #include <string>
 #include <tuple>
 
-#include "functionSpaceElement.hh"
-#include "../../lagrangeFunctional.hh"
-
 #include "../parameter.hh"
 #include "quadraticModel.hh"
 #include "Algorithm/lipschitzConstant.hh"
@@ -17,7 +14,12 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class C2Functional;
   class CubicModel;
+  class FunctionSpaceElement;
+  class LinearSolver;
+  /// \endcond
 
   struct CompositeStepParameter : Parameter , Mixin::ContractionRate
   {
