@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for verbosity.
      */
-    class Verbosity : public ForwardConnection<bool>
+    class Verbosity
     {
     public:
       /**
@@ -38,14 +38,24 @@ namespace Algorithm
        */
       bool verbose_detailed() const noexcept;
 
+      /**
+       * @brief Connect verbosity to f.
+       *
+       * When setVerbosity(bool verbose) is called, then also
+       * f.setVerbosity(verbose) is invoked.
+       * When setDetailedVerbosity(bool verbose) is called, then also
+       * f.setDetailedVerbosity(verbose) is invoked.
+       */
       template <class F>
       void connectVerbosity(F& f)
       {
-        connect( std::bind(&F::setVerbosity, std::ref(f), std::placeholders::_1) );
+        connectVerbosity_.connect( std::bind(&F::setVerbosity, std::ref(f), std::placeholders::_1) );
+        connectDetailedVerbosity_.connect( std::bind(&F::setDetailedVerbosity, std::ref(f), std::placeholders::_1) );
       }
 
     private:
       bool verbose_ = false, verbose_detailed_ = false;
+      ForwardConnection<bool> connectVerbosity_, connectDetailedVerbosity_;
     };
   }
 }

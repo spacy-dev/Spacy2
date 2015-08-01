@@ -59,6 +59,7 @@ namespace Algorithm
       {
         dampingFactor_ = std::make_unique<DampingStrategy_>(F_);
         connectEps( *dampingFactor_ );
+        connectRegularityTest( *dampingFactor_ );
       }
 
       /**

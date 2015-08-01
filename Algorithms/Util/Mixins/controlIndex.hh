@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 
+#include "forwardConnection.hh"
 
 namespace Algorithm
 {
@@ -27,8 +28,21 @@ namespace Algorithm
        */
       double controlIndex() const noexcept;
 
+      /**
+       * @brief Connect control index to f.
+       *
+       * When setControlIndex(unsigned index) is called, then also
+       * f.setControlIndex(unsigned index) is invoked.
+       */
+      template <class F>
+      void connectControlIndex(F& f)
+      {
+        connection_.connect( std::bind(&F::setControlIndex, std::ref(f), std::placeholders::_1) );
+      }
+
     private:
       unsigned index_ = 1;
+      ForwardConnection<unsigned> connection_;
     };
   }
 }

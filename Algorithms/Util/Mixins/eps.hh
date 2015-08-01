@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Parameter class for maximal attainable accuracy.
      */
-    class Eps : public ForwardConnection<double>
+    class Eps
     {
     public:
       /**
@@ -42,11 +42,12 @@ namespace Algorithm
       template <class F>
       void connectEps(F& f)
       {
-        connect( std::bind(&F::setEps, std::ref(f), std::placeholders::_1) );
+        connection_.connect( std::bind(&F::setEps, std::ref(f), std::placeholders::_1) );
       }
 
     private:
       double eps_ = 1e-15;
+      ForwardConnection<double> connection_;
     };
   }
 }

@@ -9,6 +9,7 @@ Algorithm::Mixin::AdjointIndex::AdjointIndex(unsigned index) noexcept
 void Algorithm::Mixin::AdjointIndex::setAdjointIndex(unsigned index) noexcept
 {
   index_ = index;
+  connection_.forward(index_);
 }
 
 double Algorithm::Mixin::AdjointIndex::adjointIndex() const noexcept

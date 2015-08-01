@@ -11,12 +11,13 @@ namespace Algorithm
     void Verbosity::setVerbosity(bool verbose) noexcept
     {
       verbose_ = verbose;
-      forward(verbose_);
+      connectVerbosity_.forward(verbose_);
     }
 
     void Verbosity::setDetailedVerbosity(bool verbose) noexcept
     {
       verbose_detailed_ = verbose;
+      connectDetailedVerbosity_.forward(verbose_detailed_);
     }
 
     bool Verbosity::verbose() const noexcept

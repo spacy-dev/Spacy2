@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 
+#include "forwardConnection.hh"
 
 namespace Algorithm
 {
@@ -27,8 +28,21 @@ namespace Algorithm
        */
       double adjointIndex() const noexcept;
 
+      /**
+       * @brief Connect adjoint index to f.
+       *
+       * When setAdjointIndex(unsigned index) is called, then also
+       * f.setAdjointIndex(unsigned index) is invoked.
+       */
+      template <class F>
+      void connectAdjointIndex(F& f)
+      {
+        connection_.connect( std::bind(&F::setAdjointIndex, std::ref(f), std::placeholders::_1) );
+      }
+
     private:
       unsigned index_ = 2;
+      ForwardConnection<unsigned> connection_;
     };
   }
 }

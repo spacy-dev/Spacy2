@@ -102,11 +102,11 @@ namespace Algorithm
                                               trcgRelativeAccuracy,
                                               eps(),
                                               verbose_detailed() );
-    trcg->impl().setIterativeRefinements(9);
+    trcg->impl().setIterativeRefinements(10);
     trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
     tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
 
-    return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal( -nu*L_->d2(x,dn)) ) );
+    return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeNormalStep(const FunctionSpaceElement &x) const

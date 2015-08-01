@@ -15,7 +15,7 @@ namespace Algorithm
     template <class... Args>
     class ForwardConnection
     {
-    protected:
+    public:
       /**
        * @brief Forward args to all connected functions.
        */

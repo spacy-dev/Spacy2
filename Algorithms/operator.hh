@@ -38,6 +38,9 @@ namespace Algorithm
      */
     const BanachSpace& range() const;
 
+    /**
+     * @brief Access shared pointer to underlying domain.
+     */
     std::shared_ptr<BanachSpace> sharedDomain() const;
 
   private:

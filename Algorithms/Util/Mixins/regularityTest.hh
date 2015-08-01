@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 #define ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 
+#include "forwardConnection.hh"
+
 namespace Algorithm
 {
   namespace Mixin
@@ -33,8 +35,21 @@ namespace Algorithm
        */
       bool regularityTestFailed(double nu) const noexcept;
 
+      /**
+       * @brief Connect regularity test to f.
+       *
+       * When setLowerBound(double lowerBound) is called, then also
+       * f.setLowerBound(lowerBound) is invoked.
+       */
+      template <class F>
+      void connectRegularityTest(F& f)
+      {
+        connection_.connect( std::bind(&F::setLowerBound, std::ref(f), std::placeholders::_1) );
+      }
+
     private:
         double lowerBound_ = 1e-12;
+        ForwardConnection<double> connection_;
     };
   }
 }

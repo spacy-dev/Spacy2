@@ -15,6 +15,7 @@ namespace Algorithm
         terminationCriterion_( std::make_unique<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
     {
       connectEps( *dampingFactor_ );
+      connectRegularityTest( *dampingFactor_ );
       connectEps( *terminationCriterion_ );
       connectVerbosity( *terminationCriterion_ );
       connectRelativeAccuracy( *terminationCriterion_ );

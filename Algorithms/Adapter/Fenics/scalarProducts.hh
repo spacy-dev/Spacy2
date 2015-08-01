@@ -1,7 +1,13 @@
 #ifndef ALGORITHM_ADAPTER_FENICS_SCALARPRODUCTS
 #define ALGORITHM_ADAPTER_FENICS_SCALARPRODUCTS
 
+#include <vector>
+#include <dolfin.h>
+
 #include "Interface/abstractScalarProduct.hh"
+#include "Util/create.hh"
+
+#include "scalarProduct.hh"
 
 namespace dolfin
 {
@@ -18,15 +24,23 @@ namespace Algorithm
       double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
     };
 
-    class EnergyScalarProduct : public Interface::AbstractScalarProduct
+    class ScalarProduct : public Interface::AbstractScalarProduct
     {
     public:
-      explicit EnergyScalarProduct(const dolfin::GenericMatrix& A);
+      explicit ScalarProduct(std::shared_ptr<dolfin::GenericMatrix> A);
       double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
 
     private:
-      const dolfin::GenericMatrix& A_;
+      std::shared_ptr<dolfin::GenericMatrix> A_;
     };
+
+    template <class FenicsForm>
+    auto inducedScalarProduct(const FenicsForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<dolfin::GenericMatrix> A)
+    {
+      dolfin::assemble(*A,J);
+      for( auto& bc : bcs) bc->apply(*A);
+      return createFromSharedImpl< ::Algorithm::ScalarProduct , Fenics::ScalarProduct >( A );
+    }
   }
 }
 

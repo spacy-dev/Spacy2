@@ -1,8 +1,9 @@
 #include "scalarProducts.hh"
 
 #include "vector.hh"
+#include "Util/castTo.hh"
 
-#include <dolfin.h>
+#include <memory>
 
 namespace Algorithm
 {
@@ -12,23 +13,22 @@ namespace Algorithm
   {
     double l2ScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
     {
-      return toVector(x).impl().vector()->inner( *toVector(y).impl().vector() );
+      return castTo<Vector>(x).impl().vector()->inner( *castTo<Vector>(y).impl().vector() );
     }
 
-    EnergyScalarProduct::EnergyScalarProduct(const dolfin::GenericMatrix& A)
+    ScalarProduct::ScalarProduct(std::shared_ptr<dolfin::GenericMatrix> A)
       : A_(A)
     {}
 
-    double EnergyScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+    double ScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
     {
-      const auto& x_ = toVector(x);
-      const auto& y_ = toVector(y);
+      auto x_ = std::make_shared<dolfin::Vector>(A_->mpi_comm(), A_->size(0));
+      copy(x,*x_);
+      auto Ax = x_->copy();
+      A_->mult(*x_, *Ax);
 
-      auto z = clone(y_);
-
-      A_.mult( *y_.impl().vector() , *z->impl().vector() );
-
-      return x_.impl().vector()->inner( *z->impl().vector() );
+      return Ax->inner( *x_ );
     }
+
   }
 }

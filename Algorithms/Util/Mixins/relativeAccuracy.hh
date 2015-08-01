@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for relative accuracy.
      */
-    class RelativeAccuracy : public ForwardConnection<double>
+    class RelativeAccuracy
     {
     public:
       /**
@@ -37,11 +37,12 @@ namespace Algorithm
       template <class F>
       void connectRelativeAccuracy(F& f)
       {
-        connect( std::bind(&F::setRelativeAccuracy, std::ref(f), std::placeholders::_1) );
+        connection_.connect( std::bind(&F::setRelativeAccuracy, std::ref(f), std::placeholders::_1) );
       }
 
     private:
       double relativeAccuracy_ = 1e-15;
+      ForwardConnection<double> connection_;
     };
   }
 }

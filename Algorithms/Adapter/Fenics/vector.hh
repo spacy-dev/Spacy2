@@ -53,12 +53,6 @@ namespace Algorithm
       Vector* cloneImpl() const final override;
     };
 
-    bool isVector(const Interface::AbstractFunctionSpaceElement& y);
-
-    Vector& toVector(Interface::AbstractFunctionSpaceElement& x);
-
-    const Vector& toVector(const Interface::AbstractFunctionSpaceElement& x);
-
 
     void copy(const Interface::AbstractFunctionSpaceElement& x, dolfin::GenericVector& y, bool verbose = false);
 

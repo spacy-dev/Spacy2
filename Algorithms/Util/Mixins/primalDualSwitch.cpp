@@ -10,12 +10,14 @@ namespace Algorithm
   {
     void PrimalDualSwitch::reset() const
     {
+      if( disableReset_ ) return;
       disablePrimal_ = disableDual_ = false;
     }
 
 
     void PrimalDualSwitch::reset(const PrimalDualSwitch& y) const
     {
+      if( disableReset_ ) return;
       reset();
       y.reset();
     }
@@ -38,6 +40,16 @@ namespace Algorithm
     bool PrimalDualSwitch::isDualEnabled() const
     {
       return !disableDual_;
+    }
+
+    void PrimalDualSwitch::disableReset() const
+    {
+      disableReset_ = true;
+    }
+
+    void PrimalDualSwitch::enableReset() const
+    {
+      disableReset_ = false;
     }
   }
 

@@ -9,6 +9,7 @@ namespace Algorithm
   void Mixin::RegularityTest::setLowerBound(double lowerBound) noexcept
   {
     lowerBound_ = lowerBound;
+    connection_.forward(lowerBound);
   }
 
   bool Mixin::RegularityTest::regularityTestPassed(double nu) const noexcept
