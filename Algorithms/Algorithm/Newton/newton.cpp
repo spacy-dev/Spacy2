@@ -14,6 +14,10 @@ namespace Algorithm
         dampingFactor_(std::make_unique<DampingStrategy::AffineCovariant>(F_)),
         terminationCriterion_( std::make_unique<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
     {
+      connectEps( *dampingFactor_ );
+      connectEps( *terminationCriterion_ );
+      connectVerbosity( *terminationCriterion_ );
+      connectRelativeAccuracy( *terminationCriterion_ );
     }
 
     FunctionSpaceElement NewtonMethod::solve() const

@@ -65,8 +65,8 @@ namespace Algorithm
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
-        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
+        bool dualEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isDualEnabled() : true;
+        bool primalEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isPrimalEnabled() : true;
         if( oldX_f_ != nullptr && oldX_f_->equals(x) ) return value_;
         if( !dualEnabled ) primal(x);
         if( !primalEnabled ) dual(x);
@@ -136,8 +136,8 @@ namespace Algorithm
       {
         if( assemblyIsDisabled() ) return;
 
-        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
-        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
+        bool dualEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isDualEnabled() : true;
+        bool primalEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isPrimalEnabled() : true;
         if( oldX_J_ != nullptr && oldX_J_->equals(x) ) return;
         if( !dualEnabled ) primal(x);
         if( !primalEnabled ) dual(x);
@@ -158,8 +158,8 @@ namespace Algorithm
       {
         if( assemblyIsDisabled() ) return;
 
-        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
-        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
+        bool dualEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isDualEnabled() : true;
+        bool primalEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isPrimalEnabled() : true;
         if( oldX_H_ != nullptr && oldX_H_->equals(x) ) return;
         if( !dualEnabled ) primal(x);
         if( !primalEnabled ) dual(x);

@@ -16,11 +16,10 @@ namespace Algorithm
     /**
      * @brief Abstract interface for banach spaces.
      */
-    class AbstractBanachSpace
+    class AbstractBanachSpace : public std::enable_shared_from_this<AbstractBanachSpace>
     {
     public:
-      AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm,
-                          AbstractBanachSpace* dualSpace = nullptr);
+      AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm);
 
       virtual ~AbstractBanachSpace() = default;
 
@@ -42,9 +41,11 @@ namespace Algorithm
 
       bool isDualWRT(const AbstractBanachSpace& primalSpace) const;
 
-      const AbstractBanachSpace& dualSpace() const;
+//      const AbstractBanachSpace& dualSpace() const;
 
-      AbstractBanachSpace* dualSpacePtr() const;
+      std::shared_ptr<AbstractBanachSpace> dualSpacePtr() const;
+
+      void setDualSpace(std::shared_ptr<AbstractBanachSpace> dualSpace);
 
     protected:
       std::shared_ptr<AbstractNorm> norm_ = nullptr;
@@ -53,7 +54,7 @@ namespace Algorithm
     private:
       std::vector<unsigned> primalSpaces_, dualSpaces_; ///< primal and dual spaces with respect to this space
 
-      AbstractBanachSpace* dualSpace_ = nullptr;
+      std::weak_ptr<AbstractBanachSpace> dualSpace_;
       const unsigned index_ = spaceIndex++;
     };
 

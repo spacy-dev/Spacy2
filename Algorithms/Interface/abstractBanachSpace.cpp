@@ -8,8 +8,8 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractBanachSpace::AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm, AbstractBanachSpace* dualSpace)
-      : norm_(norm), dualSpace_(dualSpace)
+    AbstractBanachSpace::AbstractBanachSpace(std::shared_ptr<AbstractNorm> norm)
+      : norm_(norm)
     {
       std::cout << "Creating space number " << index_ << "." << std::endl;
     }
@@ -40,16 +40,23 @@ namespace Algorithm
       return index_;
     }
 
-    const AbstractBanachSpace& AbstractBanachSpace::dualSpace() const
+//    const AbstractBanachSpace& AbstractBanachSpace::dualSpace() const
+//    {
+//      if( dualSpace_.expired() ) throw std::runtime_error("Dual space not defined.");
+//      return *dualSpace_;
+//    }
+
+    std::shared_ptr<AbstractBanachSpace> AbstractBanachSpace::dualSpacePtr() const
     {
-      if( dualSpace_ == nullptr ) throw std::runtime_error("Dual space not defined.");
-      return *dualSpace_;
+      if( dualSpace_.expired() ) throw std::runtime_error("Dual space not defined.");
+      return dualSpace_.lock();
     }
 
-    AbstractBanachSpace* AbstractBanachSpace::dualSpacePtr() const
+    void AbstractBanachSpace::setDualSpace(std::shared_ptr<AbstractBanachSpace> dualSpace)
     {
-      return dualSpace_;
+      dualSpace_ = dualSpace;
     }
+
 
     void AbstractBanachSpace::addPrimalSpace(const AbstractBanachSpace& primalSpace)
     {

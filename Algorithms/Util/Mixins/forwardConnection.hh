@@ -21,7 +21,7 @@ namespace Algorithm
        */
       void forward(const Args&... args)
       {
-        for( auto& f : connected ) f(args...);
+        for( auto& f : connected ) if(f) f(args...);
       }
 
       /**
@@ -32,6 +32,10 @@ namespace Algorithm
       template <class F>
       void connect(F&& f)
       {
+        for( auto i = begin(connected); i!=end(connected); ++i)
+          if( !*i )
+            connected.erase(i);
+
         connected.push_back(std::forward<F>(f));
       }
 

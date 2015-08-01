@@ -7,7 +7,9 @@ namespace Algorithm
 {
   HilbertSpace::HilbertSpace(std::shared_ptr<Interface::AbstractHilbertSpace> implementation)
     : BanachSpace( std::static_pointer_cast<Interface::AbstractBanachSpace>( implementation ) )
-  {}
+  {
+    impl().setDualSpace( sharedImpl() );
+  }
 
   void HilbertSpace::setScalarProduct(const ScalarProduct& sp)
   {

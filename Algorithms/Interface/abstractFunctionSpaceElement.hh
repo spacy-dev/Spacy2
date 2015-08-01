@@ -56,12 +56,27 @@ namespace Algorithm
      */
       virtual const double& coefficient(unsigned) const = 0;
 
+      /**
+       * @brief Access unique space index.
+       */
       unsigned spaceIndex() const;
 
+      /**
+       * @brief Access corresponding function space.
+       */
       const AbstractBanachSpace& space() const;
 
+      /**
+       * @brief Checks whether two function space elements coincide up to the maximal attainable accuracy.
+       */
       bool equals(const AbstractFunctionSpaceElement& y) const;
 
+      /**
+       * @brief Checks whether a function space element is admissible.
+       *
+       * The default implementation always returns true. You can overwrite this function if your search space is a
+       * subset of a function space.
+       */
       virtual bool isAdmissible() const;
 
     protected:

@@ -94,8 +94,8 @@ namespace Algorithm
       {
         if( assemblyIsDisabled() ) return;
 
-        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
-        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
+        bool dualEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isDualEnabled() : true;
+        bool primalEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isPrimalEnabled() : true;
         if( oldX_F != nullptr && oldX_F->equals(x) ) return;
         if( !dualEnabled ) primal(x);
         if( !primalEnabled ) dual(x);
@@ -121,8 +121,8 @@ namespace Algorithm
       {
         if( assemblyIsDisabled() ) return;
 
-        bool dualEnabled = toProductSpaceElement(x).isDualEnabled();
-        bool primalEnabled = toProductSpaceElement(x).isPrimalEnabled();
+        bool dualEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isDualEnabled() : true;
+        bool primalEnabled = (isProductSpaceElement(x)) ? toProductSpaceElement(x).isPrimalEnabled() : true;
         if( oldX_J != nullptr && oldX_J->equals(x) ) return;
         if( !dualEnabled ) primal(x);
         if( !primalEnabled ) dual(x);
@@ -173,10 +173,24 @@ namespace Algorithm
     };
 
 
+    /**
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
+     * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range )
+     */
     template <class ResidualForm, class JacobianForm>
     auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
     {
       return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
+    }
+
+    /**
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
+     * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space )
+     */
+    template <class ResidualForm, class JacobianForm>
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
+    {
+      return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space );
     }
   }
 }

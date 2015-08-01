@@ -11,7 +11,7 @@ namespace Algorithm
   namespace Interface
   {
     AbstractHilbertSpace::AbstractHilbertSpace(std::shared_ptr<AbstractScalarProduct> sp)
-      : AbstractBanachSpace(std::make_shared<HilbertSpaceNorm>(sp),this),
+      : AbstractBanachSpace(std::make_shared<HilbertSpaceNorm>(sp)),
         sp_(sp)
     {
       addDualSpace(*this);

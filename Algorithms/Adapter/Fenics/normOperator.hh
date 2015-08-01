@@ -14,6 +14,7 @@
 
 #include "banachSpace.hh"
 #include "../../operator.hh"
+#include "Interface/inducedScalarProduct.hh"
 #include "Util/create.hh"
 
 #include "assignXIfPresent.hh"
@@ -110,6 +111,12 @@ namespace Algorithm
     auto makeNormOperator(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::NormOperator<JacobianForm> >( J , bcs , domain , range );
+    }
+
+    template <class JacobianForm>
+    auto inducedScalarProduct(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
+    {
+      return ::Algorithm::inducedScalarProduct( makeNormOperator( J , bcs , domain , range ) );
     }
   }
 }
