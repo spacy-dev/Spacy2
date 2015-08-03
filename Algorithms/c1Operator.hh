@@ -32,7 +32,7 @@ namespace Algorithm
     /**
      * @brief Get linearization \f$A(x)'\f$ at \f$x\f$.
      */
-    LinearOperator getLinearization(const FunctionSpaceElement& x) const;
+    LinearOperator linearization(const FunctionSpaceElement& x) const;
 
     /**
      * \brief Access implementation.

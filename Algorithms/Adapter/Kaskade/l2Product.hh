@@ -1,31 +1,27 @@
-#ifndef ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
-#define ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
+#ifndef ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
+#define ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
 
-#include "../../Interface/abstractFunctionSpaceElement.hh"
-#include "../../Interface/abstractDualPairing.hh"
-#include "../../Util/incompatiblespaceexception.hh"
-#include "../../Util/invalidargumentexception.hh"
+#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractScalarProduct.hh"
+#include "Util/Exceptions/incompatibleSpaceException.hh"
 
-#include "vectorSpaceElement.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
   namespace Kaskade
   {
-    template <class Vector>
-    class l2Product : public AbstractDualPairing
+    template <class Description>
+    class l2Product : public Interface::AbstractScalarProduct
     {
-      double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override
+      double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override
       {
         if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("l2Product",x.spaceIndex(),y.spaceIndex());
-        if( dynamic_cast<const ::Algorithm::Kaskade::VectorSpaceElement<Vector>*>(&x) == nullptr ||
-            dynamic_cast<const ::Algorithm::Kaskade::VectorSpaceElement<Vector>*>(&y) == nullptr )
-          throw InvalidArgumentException("l2Product");
 
-        return dynamic_cast<const ::Algorithm::Kaskade::VectorSpaceElement<Vector>&>(x).impl() * dynamic_cast<const ::Algorithm::Kaskade::VectorSpaceElement<Vector>&>(y).impl();
+        return castTo< Vector<Description> >(x).impl() * castTo< Vector<Description> >(y).impl();
       }
     };
   }
 }
 
-#endif // ALGORITHM_FUNCTION_SPACES_VECTOR_SPACE_L2PRODUCT_HH
+#endif // ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH

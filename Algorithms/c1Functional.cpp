@@ -3,6 +3,7 @@
 #include "functionSpaceElement.hh"
 #include "Interface/Functional/abstractFunctional.hh"
 #include "Interface/Functional/abstractC1Functional.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -22,11 +23,11 @@ namespace Algorithm
 
   Interface::AbstractC1Functional& C1Functional::impl()
   {
-    return dynamic_cast<Interface::AbstractC1Functional&>( Functional::impl() );
+    return castTo<Interface::AbstractC1Functional>( Functional::impl() );
   }
 
   const Interface::AbstractC1Functional& C1Functional::impl() const
   {
-    return dynamic_cast<const Interface::AbstractC1Functional&>( Functional::impl() );
+    return castTo<Interface::AbstractC1Functional>( Functional::impl() );
   }
 }

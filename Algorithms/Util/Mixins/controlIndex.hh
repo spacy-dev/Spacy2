@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for index of control variable.
      */
-    class ControlIndex
+    class ControlIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -29,20 +29,22 @@ namespace Algorithm
       double controlIndex() const noexcept;
 
       /**
-       * @brief Connect control index to f.
+       * @brief Attach control index.
        *
        * When setControlIndex(unsigned index) is called, then also
-       * f.setControlIndex(unsigned index) is invoked.
+       * other.setControlIndex(unsigned index) is invoked.
        */
-      template <class F>
-      void connectControlIndex(F& f)
-      {
-        connection_.connect( std::bind(&F::setControlIndex, std::ref(f), std::placeholders::_1) );
-      }
+      void attachControlIndex(ControlIndex* other);
+
+      /**
+       * @brief Detach verbosity before it gets deleted.
+       */
+      void detachControlIndex(ControlIndex* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       unsigned index_ = 1;
-      ForwardConnection<unsigned> connection_;
     };
   }
 }

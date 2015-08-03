@@ -1,5 +1,6 @@
 #include "linearOperator.hh"
 
+#include "Interface/abstractLinearSolver.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 

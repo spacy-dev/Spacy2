@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_STATE_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_STATE_INDEX_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for index of state variable.
      */
-    class StateIndex
+    class StateIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -29,20 +29,22 @@ namespace Algorithm
       double stateIndex() const noexcept;
 
       /**
-       * @brief Connect state index to f.
+       * @brief Attach state index.
        *
        * When setStateIndex(unsigned index) is called, then also
-       * f.setStateIndex(unsigned index) is invoked.
+       * other.setStateIndex(unsigned index) is invoked.
        */
-      template <class F>
-      void connectStateIndex(F& f)
-      {
-        connection_.connect( std::bind(&F::setStateIndex, std::ref(f), std::placeholders::_1) );
-      }
+      void attachStateIndex(StateIndex* other);
+
+      /**
+       * @brief Detach verbosity before it gets deleted.
+       */
+      void detachStateIndex(StateIndex* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       unsigned index_ = 0;
-      ForwardConnection<unsigned> connection_;
     };
   }
 }

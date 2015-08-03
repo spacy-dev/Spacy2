@@ -67,6 +67,28 @@ namespace Algorithm
     template <class Type>
     using CRefImpl = Impl<const Type&>;
 
+    template <class Type>
+    class MutableImpl
+    {
+    public:
+      MutableImpl() = default;
+
+      explicit MutableImpl(const Type& impl)
+        : impl_(impl)
+      {}
+
+      /**
+     * @brief Access implementation.
+     */
+      Type& impl() const
+      {
+        return impl_;
+      }
+
+    private:
+      mutable Type impl_;
+    };
+
     template < class Type , class = void >
     class UniqueImpl
     {

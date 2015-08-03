@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 #define ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for maximal number of steps/iterations.
      */
-    class RegularityTest
+    class RegularityTest : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -22,6 +22,11 @@ namespace Algorithm
        * @brief Set lower bound of regularity test for termination criteria.
        */
       void setLowerBound(double lowerBound) noexcept;
+
+      /**
+       * @brief Get lower bound.
+       */
+      double lowerBound() const noexcept;
 
       /**
        * @brief Apply regularity test.
@@ -36,20 +41,22 @@ namespace Algorithm
       bool regularityTestFailed(double nu) const noexcept;
 
       /**
-       * @brief Connect regularity test to f.
+       * @brief Attach RegularityTest.
        *
        * When setLowerBound(double lowerBound) is called, then also
-       * f.setLowerBound(lowerBound) is invoked.
+       * other.setLowerBound(lowerBound) is invoked.
        */
-      template <class F>
-      void connectRegularityTest(F& f)
-      {
-        connection_.connect( std::bind(&F::setLowerBound, std::ref(f), std::placeholders::_1) );
-      }
+      void attachRegularityTest(RegularityTest* other);
+
+      /**
+       * @brief Detach Eps before it gets deleted.
+       */
+      void detachRegularityTest(RegularityTest* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) override;
+
         double lowerBound_ = 1e-12;
-        ForwardConnection<double> connection_;
     };
   }
 }

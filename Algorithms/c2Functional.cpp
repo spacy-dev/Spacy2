@@ -5,6 +5,7 @@
 #include "Interface/Functional/abstractC1Functional.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
 #include "Interface/Functional/hessian.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -20,9 +21,6 @@ namespace Algorithm
   double C2Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
   {
     return dy( d2(x,dx) );
-//    return impl().d2( x.impl() , dx.impl() , dy.impl() );
-//    auto dfdx = impl().getHessian( x.impl() ) ( dx.impl() );
-//    return (*dfdx) ( dy.impl() );
   }
 
   LinearOperator C2Functional::hessian(const FunctionSpaceElement& x) const
@@ -33,11 +31,11 @@ namespace Algorithm
 
   Interface::AbstractC2Functional& C2Functional::impl()
   {
-    return dynamic_cast<Interface::AbstractC2Functional&>( C1Functional::impl() );
+    return castTo<Interface::AbstractC2Functional>( C1Functional::impl() );
   }
 
   const Interface::AbstractC2Functional& C2Functional::impl() const
   {
-    return dynamic_cast<const Interface::AbstractC2Functional&>( C1Functional::impl() );
+    return castTo<Interface::AbstractC2Functional>( C1Functional::impl() );
   }
 }

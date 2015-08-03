@@ -93,13 +93,6 @@ namespace Algorithm
 
   };
 
-  bool isProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x);
-
-  ProductSpaceElement& toProductSpaceElement(Interface::AbstractFunctionSpaceElement& x);
-
-  const ProductSpaceElement& toProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x);
-
-
   FunctionSpaceElement primalElement(const FunctionSpaceElement& x);
 }
 

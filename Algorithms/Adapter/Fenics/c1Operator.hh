@@ -65,7 +65,8 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator(x);
+//        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         auto y = range().element();
         copy(*b_,*y);
@@ -74,7 +75,8 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
+//        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(dx,*y_);
@@ -142,8 +144,10 @@ namespace Algorithm
 
       std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator(x);
+        assembleGradient(x);
+//        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+//        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
         return std::make_unique<Interface::LinearizedOperator>(std::make_unique<C1Operator>(F_,J_,bcs_,A_,sharedDomain(),sharedRange()),x);
       }
 

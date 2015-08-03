@@ -12,85 +12,115 @@ namespace Algorithm
   {
     template <class,class> class HilbertSpace;
 
-    template <class VectorImpl>
-    class Vector : public Interface::AbstractFunctionSpaceElement , public Mixin::Impl<VectorImpl>
+    template <class Description>
+    class Vector : public Interface::AbstractFunctionSpaceElement
     {
+      using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
+      using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,0>::type> >;
+      using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
+
     public:
-      template <class Space, class Variable>
-      Vector(const HilbertSpace<Space,Variable>& space)
-        : Interface::AbstractFunctionSpaceElement(space),
-          Mixin::Impl<VectorImpl>( VectorImpl( space.impl() ) )
+      Vector(const Interface::AbstractBanachSpace& space_)
+        : Interface::AbstractFunctionSpaceElement(space_),
+          spaces_(&castTo< HilbertSpace<Space,Variable> >(space()).impl()),
+          v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
+      {}
+
+      Vector(const Interface::AbstractBanachSpace& space_, const VectorImpl& v)
+        : Interface::AbstractFunctionSpaceElement(space_),
+          spaces_(&castTo< HilbertSpace<Space,Variable> >(space()).impl()),
+          v_(v)
       {}
 
       void copyTo(Interface::AbstractFunctionSpaceElement& y) const override
       {
-
-        castTo< Vector<VectorImpl> >(y).impl() = impl();
+        castTo< Vector<Description> >(y).v_ = v_;
       }
 
       void print(std::ostream& os) const final override
       {
-        //os << impl(); // todo generalize output
+        //os << v_; // todo generalize output
       }
 
       Vector& operator=(const VectorImpl& v)
       {
-        impl() = v;
+        v_ = v;
         return *this;
       }
 
       Vector& operator=(const Interface::AbstractFunctionSpaceElement& y) final override
       {
-        impl() = castTo< Vector<VectorImpl> >(y).impl();
+        v_ = castTo< Vector<Description> >(y).v_;
         return *this;
       }
 
       Vector& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override
       {
-        impl() += castTo< Vector<VectorImpl> >(y).impl();
+        v_ += castTo< Vector<Description> >(y).v_;
         return *this;
       }
 
       Vector& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override
       {
-        impl() -= castTo< Vector<VectorImpl> >(y).impl();
+        v_ -= castTo< Vector<Description> >(y).v_;
         return *this;
       }
 
-      Vector& Interface::operator*=(double a) final override
+      Vector& operator*=(double a) final override
       {
-        impl() *= a;
+        v_ *= a;
         return *this;
       }
 
-      std::unique_ptr<AbstractFunctionSpaceElement> Interface::operator- () const final override
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override
       {
-        auto v = std::make_unique<Vector<VectorImpl>(getSpace(),impl());
+        auto v = std::make_unique<Vector<Description> >(space(),v_);
         *v *= -1;
         return std::move(v);
       }
 
       double& coefficient(unsigned i) final override
       {
-        return boost::fusion::at_c<0>(impl().data)[i][0];
+        return boost::fusion::at_c<0>(v_.data)[i][0];
       }
 
       const double& coefficient(unsigned i) const final override
       {
-        return boost::fusion::at_c<0>(impl().data)[i][0];
+        return boost::fusion::at_c<0>(v_.data)[i][0];
       }
 
       unsigned size() const
       {
-        return impl().dim();
+        return v_.dim();
+      }
+
+      VectorImpl& impl()
+      {
+        return v_;
+      }
+
+      const VectorImpl& impl() const
+      {
+        return v_;
       }
 
     private:
+      double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override
+      {
+        return castTo< Vector<Description> >(y).v_ * v_;
+      }
+
+
       Vector* cloneImpl() const final override
       {
         return new Vector(*this);
       }
+
+      typename Description::Spaces spaces_;
+      VectorImpl v_;
     };
+
+    void copy(const AbstractFunctionSpaceElement& x, )
   }
 }
 

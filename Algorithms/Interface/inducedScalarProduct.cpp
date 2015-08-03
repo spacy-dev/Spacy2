@@ -5,6 +5,7 @@
 
 #include "operator.hh"
 #include "scalarProduct.hh"
+#include "Util/castTo.hh"
 #include "Util/create.hh"
 
 namespace Algorithm
@@ -27,8 +28,8 @@ namespace Algorithm
 
     double PrimalInducedScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
     {
-      const auto& xx = toProductSpaceElement(x);
-      const auto& yy = toProductSpaceElement(y);
+      const auto& xx = castTo<ProductSpaceElement>(x);
+      const auto& yy = castTo<ProductSpaceElement>(y);
 
       auto result = 0.;
 

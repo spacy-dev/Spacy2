@@ -125,9 +125,9 @@ namespace Algorithm
 
   FunctionSpaceElement operator+(double a, FunctionSpaceElement x)
   {
-    if( !isRealElement(x.impl()) ) throw InvalidArgumentException("operator+(double,const FunctionSpaceElement&)");
+    if( !is<Real>(x.impl()) ) throw InvalidArgumentException("operator+(double,const FunctionSpaceElement&)");
 
-    dynamic_cast<Real&>(x.impl()).coefficient(0) += a;
+    castTo<Real>(x.impl()).coefficient(0) += a;
 
     return x;
   }

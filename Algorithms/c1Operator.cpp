@@ -2,6 +2,7 @@
 
 #include "functionSpaceElement.hh"
 #include "Interface/Operator/linearizedOperator.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -14,18 +15,18 @@ namespace Algorithm
     return impl().d1( x.impl() , dx.impl() );
   }
 
-  LinearOperator C1Operator::getLinearization(const FunctionSpaceElement& x) const
+  LinearOperator C1Operator::linearization(const FunctionSpaceElement& x) const
   {
-    return LinearOperator( dynamic_cast<const Interface::AbstractC1Operator&>( impl() ).linearization(x.impl()) );
+    return LinearOperator( castTo<Interface::AbstractC1Operator>( impl() ).linearization(x.impl()) );
   }
 
   Interface::AbstractC1Operator& C1Operator::impl()
   {
-    return dynamic_cast<Interface::AbstractC1Operator&>(Operator::impl());
+    return castTo<Interface::AbstractC1Operator>(Operator::impl());
   }
 
   const Interface::AbstractC1Operator& C1Operator::impl() const
   {
-    return dynamic_cast<const Interface::AbstractC1Operator&>(Operator::impl());
+    return castTo<Interface::AbstractC1Operator>(Operator::impl());
   }
 }

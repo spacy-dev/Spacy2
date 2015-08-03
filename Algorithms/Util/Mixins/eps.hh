@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_EPS_HH
 #define ALGORITHM_UTIL_MIXIN_EPS_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Parameter class for maximal attainable accuracy.
      */
-    class Eps
+    class Eps : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -38,16 +38,23 @@ namespace Algorithm
        */
       double cbrtEps() const noexcept;
 
+      /**
+       * @brief Attach Eps.
+       *
+       * When setEps(double eps) is called, then also
+       * other.setEps(eps) is invoked.
+       */
+      void attachEps(Eps* other);
 
-      template <class F>
-      void connectEps(F& f)
-      {
-        connection_.connect( std::bind(&F::setEps, std::ref(f), std::placeholders::_1) );
-      }
+      /**
+       * @brief Detach Eps before it gets deleted.
+       */
+      void detachEps(Eps* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) override;
+
       double eps_ = 1e-15;
-      ForwardConnection<double> connection_;
     };
   }
 }

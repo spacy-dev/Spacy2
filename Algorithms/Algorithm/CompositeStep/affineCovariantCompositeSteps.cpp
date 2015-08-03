@@ -35,7 +35,7 @@ namespace Algorithm
   {
     auto lastStepWasUndamped = false;
     auto x = x0;
-    castToHilbertSpace(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
+    castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 //    norm = HilbertSpaceNorm( primalInducedScalarProduct( N_->hessian(x0) ));
 
     for(unsigned step = 1; step < maxSteps(); ++step)

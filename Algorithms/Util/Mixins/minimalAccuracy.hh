@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_UTIL_MIXIN_MINIMAL_ACCURACY_HH
 #define ALGORITHM_UTIL_MIXIN_MINIMAL_ACCURACY_HH
 
+#include "Util/DesignPatterns/observer.hh"
+
 namespace Algorithm
 {
   namespace Mixin
@@ -8,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for minimal accuracy.
      */
-    class MinimalAccuracy
+    class MinimalAccuracy : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -26,7 +28,22 @@ namespace Algorithm
        */
       double minimalAccuracy() const noexcept;
 
+      /**
+       * @brief Attach MinimalAccuracy.
+       *
+       * When setMinimalAccuracy(double minimalAccuracy) is called, then also
+       * other.setMinimalAccuracy(minimalAccuracy) is invoked.
+       */
+      void attachMinimalAccuracy(MinimalAccuracy* other);
+
+      /**
+       * @brief Detach RelativeAccuracy before it gets deleted.
+       */
+      void detachMinimalAccuracy(MinimalAccuracy* other);
+
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       double minimalAccuracy_ = 0.25;
     };
   }

@@ -75,8 +75,6 @@ namespace Algorithm
     friend class RealProduct;
     double x_;
   };
-
-  bool isRealElement(const Interface::AbstractFunctionSpaceElement& x);
 }
 
 #endif // ALGORITHM_REAL_NUMBERS_REAL_HH

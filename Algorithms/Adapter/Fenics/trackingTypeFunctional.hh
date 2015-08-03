@@ -9,6 +9,7 @@
 #include "Util/makeLinearSolver.hh"
 #include "Util/Mixins/controlIndex.hh"
 #include "Util/Mixins/stateIndex.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -28,9 +29,9 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        const auto& x_  = toProductSpaceElement(x);
+        const auto& x_  = castTo<ProductSpaceElement>(x);
         auto result_ = clone(x_);
-        auto& result = toProductSpaceElement(*result_);
+        auto& result = castTo<ProductSpaceElement>(*result_);
 
         result.variable(stateIndex()) = *YNormFunctional_->d1( x_.variable(stateIndex()));
         result.variable(controlIndex()) = *UNormFunctional_->d1( x_.variable(controlIndex()));
@@ -39,11 +40,11 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
       {
-        const auto& x_  = toProductSpaceElement(x);
-        const auto& dx_ = toProductSpaceElement(dx);
+        const auto& x_  = castTo<ProductSpaceElement>(x);
+        const auto& dx_ = castTo<ProductSpaceElement>(dx);
 
         auto result_ = clone(x_);
-        auto& result = toProductSpaceElement(*result_);
+        auto& result = castTo<ProductSpaceElement>(*result_);
 
         result.variable(stateIndex()) = *YNormFunctional_->d2( x_.variable(stateIndex()) , dx_.variable(stateIndex())   );
         result.variable(controlIndex()) = *UNormFunctional_->d2( x_.variable(controlIndex()) , dx_.variable(controlIndex()) );
@@ -60,12 +61,12 @@ namespace Algorithm
 
       std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const override
       {
-        return UNormFunctional_->hessian(toProductSpaceElement(x).variable(controlIndex()));
+        return UNormFunctional_->hessian(castTo<ProductSpaceElement>(x).variable(controlIndex()));
       }
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        const auto& x_ = toProductSpaceElement(x);
+        const auto& x_ = castTo<ProductSpaceElement>(x);
         return (*YNormFunctional_)( x_.variable(stateIndex()) )
              + (*UNormFunctional_)( x_.variable(controlIndex()) );
       }

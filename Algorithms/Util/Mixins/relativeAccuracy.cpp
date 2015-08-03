@@ -11,12 +11,28 @@ namespace Algorithm
     void RelativeAccuracy::setRelativeAccuracy(double relativeAccuracy) noexcept
     {
       relativeAccuracy_ = relativeAccuracy;
-      connection_.forward(relativeAccuracy_);
+      notify();
     }
 
     double RelativeAccuracy::relativeAccuracy() const noexcept
     {
       return relativeAccuracy_;
+    }
+
+    void RelativeAccuracy::update(DesignPattern::Observer::Subject *changedSubject)
+    {
+      if( changedSubject == this ) return;
+      setRelativeAccuracy( dynamic_cast<RelativeAccuracy*>(changedSubject)->relativeAccuracy() );
+    }
+
+    void RelativeAccuracy::attachRelativeAccuracy(RelativeAccuracy* other)
+    {
+      attach(other);
+    }
+
+    void RelativeAccuracy::detachRelativeAccuracy(RelativeAccuracy* other)
+    {
+      detach(other);
     }
   }
 }

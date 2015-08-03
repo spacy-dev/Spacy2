@@ -57,9 +57,11 @@ namespace Algorithm
       template <class DampingStrategy_>
       void setDampingStrategy()
       {
-        dampingFactor_ = std::make_unique<DampingStrategy_>(F_);
-        connectEps( *dampingFactor_ );
-        connectRegularityTest( *dampingFactor_ );
+        detachEps( dampingFactor_.get() );
+        detachRegularityTest( dampingFactor_.get() );
+        dampingFactor_ = std::make_shared<DampingStrategy_>(F_);
+        attachEps( dampingFactor_.get() );
+        attachRegularityTest( dampingFactor_.get() );
       }
 
       /**
@@ -70,15 +72,19 @@ namespace Algorithm
       template <class TerminationCriterion_>
       void setTerminationCriterion()
       {
-        terminationCriterion_ = std::make_unique<TerminationCriterion_>(F_,relativeAccuracy(),verbose());
-        connectVerbosity( *terminationCriterion_ );
-        connectRelativeAccuracy( *terminationCriterion_ );
+        detachEps( terminationCriterion_.get() );
+        detachVerbosity( terminationCriterion_.get() );
+        detachRelativeAccuracy( terminationCriterion_.get() );
+        terminationCriterion_ = std::make_shared<TerminationCriterion_>(F_,relativeAccuracy(),verbose());
+        attachEps( terminationCriterion_.get() );
+        attachVerbosity( terminationCriterion_.get() );
+        attachRelativeAccuracy( terminationCriterion_.get() );
       }
 
     private:
       C1Operator F_;
-      std::unique_ptr<DampingStrategy::Base> dampingFactor_;
-      std::unique_ptr<TerminationCriterion::Base> terminationCriterion_;
+      std::shared_ptr<DampingStrategy::Base> dampingFactor_;
+      std::shared_ptr<TerminationCriterion::Base> terminationCriterion_;
     };
   }
 

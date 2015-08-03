@@ -4,23 +4,20 @@
 #include <memory>
 
 #include "operator.hh"
-#include "Interface/abstractLinearSolver.hh"
-#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
   /// \cond
+  namespace Interface { class AbstractLinearSolver; }
   class LinearOperator;
   class C1Operator;
   class FunctionSpaceElement;
   /// \endcond
 
   class LinearSolver : public Operator
-//      public Mixin::SharedImpl<Interface::AbstractLinearSolver>
   {
   public:
     LinearSolver() = default;
-    //zLinearSolver(const LinearOperator& A);
 
     LinearSolver(std::unique_ptr<Interface::AbstractLinearSolver>&& impl);
 

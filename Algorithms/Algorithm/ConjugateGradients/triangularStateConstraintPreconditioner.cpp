@@ -19,9 +19,9 @@ namespace Algorithm
 
   std::unique_ptr<Interface::AbstractFunctionSpaceElement> TriangularStateConstraintPreconditioner::operator()(const Interface::AbstractFunctionSpaceElement& x) const
   {
-    auto x_ = clone( toProductSpaceElement(x) );
+    auto x_ = clone( castTo<ProductSpaceElement>(x) );
     auto y = clone(x);
-    auto& y_ = toProductSpaceElement(*y);
+    auto& y_ = castTo<ProductSpaceElement>(*y);
 
     y_.variable(adjointIndex()) = *(*adjointSolver_)( x_->variable(stateIndex()) );
     x_->variable(controlIndex()) -= *(*BT_)( y_.variable(adjointIndex()) );

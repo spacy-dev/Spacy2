@@ -11,14 +11,14 @@ namespace Algorithm
   {
     NewtonMethod::NewtonMethod(const C1Operator& F)
       : F_(F),
-        dampingFactor_(std::make_unique<DampingStrategy::AffineCovariant>(F_)),
-        terminationCriterion_( std::make_unique<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
+        dampingFactor_(std::make_shared<DampingStrategy::AffineCovariant>(F_)),
+        terminationCriterion_( std::make_shared<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
     {
-      connectEps( *dampingFactor_ );
-      connectRegularityTest( *dampingFactor_ );
-      connectEps( *terminationCriterion_ );
-      connectVerbosity( *terminationCriterion_ );
-      connectRelativeAccuracy( *terminationCriterion_ );
+      attachEps( dampingFactor_.get() );
+      attachRegularityTest( dampingFactor_.get() );
+      attachEps( terminationCriterion_.get() );
+      attachVerbosity( terminationCriterion_.get() );
+      attachRelativeAccuracy( terminationCriterion_.get() );
     }
 
     FunctionSpaceElement NewtonMethod::solve() const
@@ -35,9 +35,9 @@ namespace Algorithm
       auto x = x0;
       for(unsigned i = 1; i <= maxSteps(); ++i)
       {
-        if( verbose() ) std::cout << "Iteration " << i << ": ";
+        if( verbose() ) std::cout << "\nIteration " << i << ": ";
 
-        auto DF_Inv = F_.getLinearization(x)^-1;
+        auto DF_Inv = F_.linearization(x)^-1;
 
         auto dx = DF_Inv(-F_(x));
         auto nu = dampingFactor_->compute(DF_Inv,x,dx);

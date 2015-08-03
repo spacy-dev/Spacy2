@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_VERBOSITY_HH
 #define ALGORITHM_UTIL_MIXIN_VERBOSITY_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for verbosity.
      */
-    class Verbosity
+    class Verbosity : public DesignPattern::Observer::Observer, public DesignPattern::Observer::Subject
     {
     public:
       /**
@@ -39,23 +39,24 @@ namespace Algorithm
       bool verbose_detailed() const noexcept;
 
       /**
-       * @brief Connect verbosity to f.
+       * @brief Attach verbosity.
        *
        * When setVerbosity(bool verbose) is called, then also
-       * f.setVerbosity(verbose) is invoked.
+       * other.setVerbosity(verbose) is invoked.
        * When setDetailedVerbosity(bool verbose) is called, then also
-       * f.setDetailedVerbosity(verbose) is invoked.
+       * other.setDetailedVerbosity(verbose) is invoked.
        */
-      template <class F>
-      void connectVerbosity(F& f)
-      {
-        connectVerbosity_.connect( std::bind(&F::setVerbosity, std::ref(f), std::placeholders::_1) );
-        connectDetailedVerbosity_.connect( std::bind(&F::setDetailedVerbosity, std::ref(f), std::placeholders::_1) );
-      }
+      void attachVerbosity(Verbosity* other);
+
+      /**
+       * @brief Detach verbosity before it gets deleted.
+       */
+      void detachVerbosity(Verbosity* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       bool verbose_ = false, verbose_detailed_ = false;
-      ForwardConnection<bool> connectVerbosity_, connectDetailedVerbosity_;
     };
   }
 }

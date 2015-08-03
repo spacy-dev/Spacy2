@@ -12,8 +12,6 @@
 
 namespace Algorithm
 {
-  class FunctionSpace;
-  class FunctionSpaceElement;
   template <class> struct Scale;
 
   /**

@@ -2,27 +2,50 @@
 
 #include <cmath>
 
-Algorithm::Mixin::Eps::Eps(double eps) noexcept
-  : eps_(eps)
-{}
-
-void Algorithm::Mixin::Eps::setEps(double eps) noexcept
+namespace Algorithm
 {
-  eps_ = eps;
-  connection_.forward(eps_);
-}
+  namespace Mixin
+  {
 
-double Algorithm::Mixin::Eps::eps() const noexcept
-{
-  return eps_;
-}
+    Eps::Eps(double eps) noexcept
+      : eps_(eps)
+    {}
 
-double Algorithm::Mixin::Eps::sqrtEps() const noexcept
-{
-  return sqrt(eps_);
-}
+    void Eps::setEps(double eps) noexcept
+    {
+      eps_ = eps;
+      notify();
+    }
 
-double Algorithm::Mixin::Eps::cbrtEps() const noexcept
-{
-  return cbrt(eps_);
+    double Eps::eps() const noexcept
+    {
+      return eps_;
+    }
+
+    double Eps::sqrtEps() const noexcept
+    {
+      return sqrt(eps_);
+    }
+
+    double Eps::cbrtEps() const noexcept
+    {
+      return cbrt(eps_);
+    }
+
+    void Eps::update(DesignPattern::Observer::Subject *changedSubject)
+    {
+      if( changedSubject == this ) return;
+      setEps( dynamic_cast<Eps*>(changedSubject)->eps() );
+    }
+
+    void Eps::attachEps(Eps* other)
+    {
+      attach(other);
+    }
+
+    void Eps::detachEps(Eps* other)
+    {
+      detach(other);
+    }
+  }
 }

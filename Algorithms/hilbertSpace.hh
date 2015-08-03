@@ -35,9 +35,5 @@ namespace Algorithm
      */
     ScalarProduct scalarProduct() const;
   };
-
-  HilbertSpace& castToHilbertSpace(BanachSpace& space);
-
-  const HilbertSpace& castToHilbertSpace(const BanachSpace& space);
 }
 #endif // ALGORITHM_HILBERT_SPACE_HH

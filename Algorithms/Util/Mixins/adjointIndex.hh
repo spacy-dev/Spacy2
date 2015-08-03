@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for index of adjoint variable.
      */
-    class AdjointIndex
+    class AdjointIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -29,20 +29,22 @@ namespace Algorithm
       double adjointIndex() const noexcept;
 
       /**
-       * @brief Connect adjoint index to f.
+       * @brief Attach adjoint index.
        *
        * When setAdjointIndex(unsigned index) is called, then also
-       * f.setAdjointIndex(unsigned index) is invoked.
+       * other.setAdjointIndex(unsigned index) is invoked.
        */
-      template <class F>
-      void connectAdjointIndex(F& f)
-      {
-        connection_.connect( std::bind(&F::setAdjointIndex, std::ref(f), std::placeholders::_1) );
-      }
+      void attachAdjointIndex(AdjointIndex* other);
+
+      /**
+       * @brief Detach verbosity before it gets deleted.
+       */
+      void detachAdjointIndex(AdjointIndex* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       unsigned index_ = 2;
-      ForwardConnection<unsigned> connection_;
     };
   }
 }

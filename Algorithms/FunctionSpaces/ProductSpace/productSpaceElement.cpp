@@ -1,6 +1,7 @@
 #include "productSpaceElement.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/castTo.hh"
 
 #include <cassert>
 #include <numeric>
@@ -42,7 +43,7 @@ namespace Algorithm
   ProductSpaceElement::ProductSpaceElement(const ProductSpace& space)
     : AbstractFunctionSpaceElement(space)
   {
-    const auto& spaces = dynamic_cast<const ProductSpace&>(space).subSpaces();
+    const auto& spaces = castTo<ProductSpace>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i) variables_.push_back(spaces[i]->element());
   }
 
@@ -61,7 +62,7 @@ namespace Algorithm
 
   void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
   {
-    auto& y_ = toProductSpaceElement(y);
+    auto& y_ = castTo<ProductSpaceElement>(y);
 
     if( ( !isPrimalEnabled() && !y_.isDualEnabled() ) ||
         ( !isDualEnabled() && !y_.isPrimalEnabled() ) )
@@ -90,7 +91,7 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator=(const AbstractFunctionSpaceElement& y)
   {
-    const auto& y_ = toProductSpaceElement(y);
+    const auto& y_ = castTo<ProductSpaceElement>(y);
 
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
@@ -106,7 +107,7 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
   {
-    const auto& y_ = toProductSpaceElement(y);
+    const auto& y_ = castTo<ProductSpaceElement>(y);
 
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
@@ -122,7 +123,7 @@ namespace Algorithm
 
   AbstractFunctionSpaceElement& ProductSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
   {
-    const auto& y_ = toProductSpaceElement(y);
+    const auto& y_ = castTo<ProductSpaceElement>(y);
 
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
@@ -139,7 +140,7 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractFunctionSpaceElement& y)
   {
-    const auto& y_ = toProductSpaceElement(y);
+    const auto& y_ = castTo<ProductSpaceElement>(y);
 
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
@@ -191,7 +192,7 @@ namespace Algorithm
   double ProductSpaceElement::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
   {
     auto result = 0.;
-    const auto& y_  = dynamic_cast<const ProductSpaceElement&>(y);
+    const auto& y_  = castTo<ProductSpaceElement>(y);
     assert( variables().size() == y_.variables().size() );
 
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
@@ -284,33 +285,13 @@ namespace Algorithm
 
   const ProductSpace& ProductSpaceElement::space() const
   {
-    return dynamic_cast<const ProductSpace&>(AbstractFunctionSpaceElement::space());
+    return castTo<ProductSpace>(AbstractFunctionSpaceElement::space());
   }
 
-
-
-  bool isProductSpaceElement(const AbstractFunctionSpaceElement& x)
-  {
-    return dynamic_cast<const ProductSpaceElement*>(&x) != nullptr;
-  }
-
-
-
-  ProductSpaceElement& toProductSpaceElement(Interface::AbstractFunctionSpaceElement& x)
-  {
-    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("toProductSpaceElement");
-    return dynamic_cast<ProductSpaceElement&>(x);
-  }
-
-  const ProductSpaceElement& toProductSpaceElement(const Interface::AbstractFunctionSpaceElement& x)
-  {
-    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("toProductSpaceElement");
-    return dynamic_cast<const ProductSpaceElement&>(x);
-  }
 
   FunctionSpaceElement primalElement(const FunctionSpaceElement& x)
   {
-    return FunctionSpaceElement( toProductSpaceElement(x.impl()).primalElement() );
+    return FunctionSpaceElement( castTo<ProductSpaceElement>(x.impl()).primalElement() );
   }
 
 }

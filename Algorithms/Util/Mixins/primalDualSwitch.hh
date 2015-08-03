@@ -68,7 +68,7 @@ namespace Algorithm
   void primalDualIgnoreReset(F&& f, Arg&& x)
   {
     if( is<Mixin::PrimalDualSwitch>(x) ) castTo<Mixin::PrimalDualSwitch>(x).disableReset();
-    f(std::forward<Arg>(x));
+    f(x);
     if( is<Mixin::PrimalDualSwitch>(x) )
     {
       castTo<Mixin::PrimalDualSwitch>(x).enableReset();

@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_UTIL_MIXIN_RELATIVE_ACCURACY_HH
 #define ALGORITHM_UTIL_MIXIN_RELATIVE_ACCURACY_HH
 
-#include "forwardConnection.hh"
+#include "Util/DesignPatterns/observer.hh"
 
 namespace Algorithm
 {
@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @brief Mixin class for relative accuracy.
      */
-    class RelativeAccuracy
+    class RelativeAccuracy : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
     {
     public:
       /**
@@ -29,20 +29,22 @@ namespace Algorithm
       double relativeAccuracy() const noexcept;
 
       /**
-       * @brief Connect relative accuracy to f.
+       * @brief Attach RelativeAccuracy.
        *
        * When setRelativeAccuracy(double relativeAccuracy) is called, then also
-       * f.setRelativeAccuracy(relativeAccuracy) is invoked.
+       * other.setRelativeAccuracy(relativeAccuracy) is invoked.
        */
-      template <class F>
-      void connectRelativeAccuracy(F& f)
-      {
-        connection_.connect( std::bind(&F::setRelativeAccuracy, std::ref(f), std::placeholders::_1) );
-      }
+      void attachRelativeAccuracy(RelativeAccuracy* other);
+
+      /**
+       * @brief Detach RelativeAccuracy before it gets deleted.
+       */
+      void detachRelativeAccuracy(RelativeAccuracy* other);
 
     private:
+      void update(DesignPattern::Observer::Subject* changedSubject) final override;
+
       double relativeAccuracy_ = 1e-15;
-      ForwardConnection<double> connection_;
     };
   }
 }

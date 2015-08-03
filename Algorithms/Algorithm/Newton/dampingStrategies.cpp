@@ -5,6 +5,8 @@
 
 #include "Util/Exceptions/regularityTestFailedException.hh"
 
+#include <iostream>
+
 namespace Algorithm
 {
   namespace Newton
@@ -19,6 +21,9 @@ namespace Algorithm
       {
         DampingFactor nu = 1;
         auto mu = 1., normDx = norm(dx);
+
+        if( normDx < sqrtEps() * norm(x) ) return nu;
+
         if( oldNu > 0 )
         {
           mu = normOldDx * normOldDs * oldNu / ( normDx * norm(oldDs - dx) );
@@ -35,6 +40,7 @@ namespace Algorithm
 
           auto muPrime = 0.5 * nu * nu / normDs;
 
+
           if( normDs/normDx >= 1)
           {
             nu = std::min(0.5*nu,muPrime);
@@ -47,7 +53,8 @@ namespace Algorithm
 
           if( nuPrime >= 4*nu)
           {
-            nu = nuPrime;
+            nu = static_cast<double>(nu)*4;
+//            nu = nuPrime;
             continue;
           }
 

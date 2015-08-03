@@ -20,6 +20,7 @@
 #include "Util/Mixins/adjointIndex.hh"
 #include "Util/Mixins/controlIndex.hh"
 #include "Util/Mixins/stateIndex.hh"
+#include "Util/castTo.hh"
 #include "Util/create.hh"
 
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -57,10 +58,10 @@ namespace Algorithm
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x,
                                                                   const Interface::AbstractFunctionSpaceElement& dx) const final override
       {
-        const auto& x_ = toProductSpaceElement(x);
-        const auto& dx_ = toProductSpaceElement(dx);
+        const auto& x_ = castTo<ProductSpaceElement>(x);
+        const auto& dx_ = castTo<ProductSpaceElement>(dx);
 
-        const auto& dy = toVector(dx_.variable(stateIndex()));
+        const auto& dy = castTo<Vector>(dx_.variable(stateIndex()));
 
         assemble(x_);
         auto y = clone(x_);
@@ -78,9 +79,9 @@ namespace Algorithm
         if( oldX_ != nullptr && oldX_->equals(x) ) return;
         oldX_ = clone(x);
 
-        pd2c_.u = toVector(x.variable(stateIndex())).impl();
-        pd2c_.p = toVector(x.variable(adjointIndex())).impl();
-        A_ = toVector(x.variable(stateIndex())).impl().vector()->factory().create_matrix();
+        pd2c_.u = castTo<Vector>(x.variable(stateIndex())).impl();
+        pd2c_.p = castTo<Vector>(x.variable(adjointIndex())).impl();
+        A_ = castTo<Vector>(x.variable(stateIndex())).impl().vector()->factory().create_matrix();
 
         // Assemble right-hand side
         dolfin::Assembler assembler;

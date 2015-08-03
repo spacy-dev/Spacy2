@@ -2,6 +2,7 @@
 
 #include "Interface/abstractBanachSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/castTo.hh"
 
 #include <iostream>
 #include <stdexcept>
@@ -21,29 +22,29 @@ namespace Algorithm
 
   void Real::copyTo(AbstractFunctionSpaceElement& y) const
   {
-    if( !isRealElement(y) ) throw InvalidArgumentException("Real::copyTo");
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::copyTo");
 
-    dynamic_cast<Real&>(y).x_ = x_;
+    castTo<Real>(y).x_ = x_;
   }
 
   Real& Real::operator=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isRealElement(y) ) throw InvalidArgumentException("Real::operator=");
-    x_ = dynamic_cast<const Real&>(y).x_;
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=");
+    x_ = castTo<Real>(y).x_;
     return *this;
   }
 
   Real& Real::operator+=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isRealElement(y) ) throw InvalidArgumentException("Real::operator+=");
-    x_ += dynamic_cast<const Real&>(y).x_;
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator+=");
+    x_ += castTo<Real>(y).x_;
     return *this;
   }
 
   Real& Real::operator-=(const AbstractFunctionSpaceElement& y)
   {
-    if( !isRealElement(y) ) throw InvalidArgumentException("Real::operator-=");
-    x_ -= dynamic_cast<const Real&>(y).x_;
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator-=");
+    x_ -= castTo<Real>(y).x_;
     return *this;
   }
 
@@ -60,7 +61,7 @@ namespace Algorithm
 
   double Real::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
   {
-    return x_ * dynamic_cast<const Real&>(y).x_;
+    return x_ * castTo<Real>(y).x_;
   }
 
 
@@ -91,11 +92,5 @@ namespace Algorithm
   Real* Real::cloneImpl() const
   {
     return new Real(*this);
-  }
-
-
-  bool isRealElement(const AbstractFunctionSpaceElement& x)
-  {
-    return dynamic_cast<const Real*>(&x) != nullptr;
   }
 }

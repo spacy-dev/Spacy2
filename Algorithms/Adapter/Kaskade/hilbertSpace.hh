@@ -5,9 +5,12 @@
 
 #include "Interface/abstractHilbertSpace.hh"
 #include "Util/Mixins/impl.hh"
+#include "Util/create.hh"
 
 #include "l2Product.hh"
-#include "vectorSpaceElement.hh"
+#include "vector.hh"
+
+#include "../../hilbertSpace.hh"
 
 namespace Algorithm
 {
@@ -24,16 +27,22 @@ namespace Algorithm
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
     public:
       HilbertSpace(const Space& space)
-        : Interface::AbstractHilbertSpace( std::make_shared< ::Algorithm::Kaskade::l2Product<VectorImpl> >() ),
+        : Interface::AbstractHilbertSpace( std::make_shared< l2Product<Description> >() ),
           Mixin::Impl<Space>(space)
       {}
 
     private:
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override
       {
-        return std::make_unique< Vector<VectorImpl> >(*this);
+        return std::make_unique< Vector<Description> >(*this);
       }
     };
+
+    template <class Variable, class Space>
+    auto makeHilbertSpace(const Space& space)
+    {
+      return createFromSharedImpl< ::Algorithm::HilbertSpace , HilbertSpace<Space,Variable> >( space );
+    }
   }
 }
 
