@@ -21,7 +21,7 @@ namespace Algorithm
   class LinearSolver;
   /// \endcond
 
-  struct CompositeStepParameter : Parameter , Mixin::ContractionRate
+  struct CompositeStepParameter
   {
     double etaMin = 0.5;
     double rejectionTolerance = 0.1;
@@ -31,11 +31,15 @@ namespace Algorithm
   };
 
   class AffineCovariantCompositeSteps :
-      public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::MinimalAccuracy ,
-      public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex , public Mixin::Timer
+      public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer ,
+      public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
+      public Mixin::ContractionRate ,  public Mixin::Eps ,
+      public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
+      public Mixin::Verbosity , public Mixin::MaxSteps
   {
     enum class StepMonitor { Rejected , Accepted };
     enum class AcceptanceTest;
+
   public:
     AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L);
 

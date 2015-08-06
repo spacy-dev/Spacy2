@@ -1,166 +1,188 @@
 #ifndef ALGORITHM_OPERATORS_KASKADEFUNCTIONAL_HH
 #define ALGORITHM_OPERATORS_KASKADEFUNCTIONAL_HH
 
-#include "c1Operator.hh"
+#include "c2Functional.hh"
 #include "Interface/Functional/abstractC2Functional.hh"
-#include "FunctionSpaces/KaskadeVectorSpace/vectorSpaceElement.hh"
-#include "FunctionSpaces/VectorSpace/cgSolver.hh"
-#include "Util/callofundefinedfunctionexception.hh"
+#include "Interface/Functional/hessian.hh"
+#include "Util/Mixins/disableAssembly.hh"
+#include "Util/create.hh"
 
-#include "kaskadeOperator.hh"
+#include "directSolver.hh"
+#include "hilbertSpace.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
-//  template <class Functional>
-//  class KaskadeFunctional : public AbstractC2Functional
-//  {
-//    using Domain = typename Functional::AnsatzVars::template CoefficientVectorRepresentation<>::type;
-//    using Range = typename Functional::TestVars::template CoefficientVectorRepresentation<>::type;
-//    using Assembler = Kaskade::VariationalFunctionalAssembler<Kaskade::LinearizationAt<Functional> >;
-//  public:
-//    KaskadeFunctional(const AbstractBanachSpace& domain)
-//      : AbstractC2Functional(domain)
-//    {}
-
-//    KaskadeFunctional(const KaskadeFunctional& g)
-//      : assembler(g.assembler), f(g.f),
-//        gradient(g.gradient->clone()),
-//        A(g.A)
-//    {}
-
-//    std::unique_ptr<AbstractC0Functional> clone() const final override
-//    {
-//      return std::make_unique<KaskadeFunctional>(*this);
-//    }
-
-//    void setArgument(const AbstractFunctionSpaceElement &x) final override
-//    {
-//      const auto& x_ = dynamic_cast< const VectorSpaceElement<Domain>& >(x);
-//      assembler.assemble(Kaskade::linearization(f,x_));
-//      gradient = std::make_unique<VectorSpaceElement<Domain> >( assembler.rhs() , getDomain() );
-//      A = Kaskade::AssembledGalerkinOperator<Assembler>(assembler);
-//    }
-
-////    double operator()(const AbstractFunctionSpaceElement& x) const final override;
-
-//    double d0() const final override
-//    {
-//      return assembler.functional();
-//    }
-
-//    double d1(const AbstractFunctionSpaceElement& dx) const final override
-//    {
-//      return *gradient * dx;
-//    }
-
-//    double d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const final override
-//    {
-//     const auto& dx_ = dynamic_cast< const VectorSpaceElement<Domain>& >(dx);
-//     const auto& dy_ = dynamic_cast< const VectorSpaceElement<Domain>& >(dy);
-
-//     auto b = dx_.impl();
-//     A.apply(dx_.impl(),b);
-//     return b*dy_.impl();
-//    }
-
-//  private:
-//    Assembler assembler;
-//    Functional f;
-//    std::unique_ptr<AbstractFunctionSpaceElement> gradient;
-//    Kaskade::AssembledGalerkinOperator<Assembler> A;
-//  };
-
-  template <class Functional>
-  class KaskadeFunctional : public AbstractC2Functional
+  namespace Kaskade
   {
-    using VariableSet = typename Functional::AnsatzVars::Representation;
-    using Vector = typename Functional::AnsatzVars::template CoefficientVectorRepresentation<>::type;
-    using Assembler = ::Kaskade::VariationalFunctionalAssembler<::Kaskade::LinearizationAt<Functional> >;
-  public:
-    KaskadeFunctional(const VariableSet& x, const Functional& f, Assembler& assembler, const FunctionSpace& domain)
-      : AbstractC2Functional(domain.impl()),
-        x_(x), assembler_(assembler),
-        f_(f),
-        dA_(std::make_unique< ::Algorithm::Kaskade::VectorSpaceElement<Vector> >(getDomain().getDualSpace(),Vector(assembler_.rhs())))
+    template <class FunctionalImpl>
+    class Functional : public Interface::AbstractC2Functional , public Mixin::DisableAssembly
     {
-      setDerivative( std::make_shared< KaskadeC1Operator<Functional> >(x,f,assembler,getDomain(),getDomain().getDualSpace()) );
-      linearization_ = std::make_unique<LinearOperator>( getDerivative()->getLinearization() );
-      getDerivative()->getLinearization().setSolver( std::make_shared<CGSolver>( *linearization_ ) );
+      using VariableSetDescription = typename FunctionalImpl::AnsatzVars;
+      using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Spaces = typename VariableSetDescription::Spaces;
+      using Variables = typename VariableSetDescription::Variables;
+      using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<FunctionalImpl> >;
+      using Domain = typename Assembler::AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Range = typename Assembler::TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Matrix = ::Kaskade::MatrixAsTriplet<double>;
+      using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
+
+    public:
+      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractBanachSpace> domain_)
+        : AbstractC2Functional(domain_),
+          f_(f),
+          spaces_( extractSpaces<VariableSetDescription>(domain()) ),
+          assembler_(spaces_)
+      {}
+
+      Functional(const FunctionalImpl& f, const BanachSpace& domain)
+        : Functional(f,domain.sharedImpl())
+      {}
+
+      Functional(const Functional& g)
+        : AbstractC2Functional(g.sharedDomain()),
+          DisableAssembly(g.assemblyIsDisabled()),
+          f_(g.f_), spaces_(g.spaces_),
+          assembler_(spaces_)
+      {
+        if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
+      }
+
+
+      Functional(const Functional& g, bool disableAssembly)
+        : AbstractC2Functional(g.sharedDomain()),
+          DisableAssembly(disableAssembly),
+          f_(g.f_), spaces_(g.spaces_),
+          assembler_(spaces_),
+          A_( std::make_unique<KaskadeOperator>(*g.A_) )
+      {}
+
+      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
+      {
+        primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
+
+        return assembler_.functional();
+      }
+
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x) const final override
+      {
+        primalDualIgnoreReset(std::bind(&Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+
+        VectorImpl v( assembler_.rhs() );
+
+        auto y = domain().dualSpacePtr()->element();
+        copyFromCoefficientVector<VariableSetDescription>(v,*y);
+        return std::move(y);
+      }
+
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      {
+        primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+
+        VectorImpl dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        copyToCoefficientVector<VariableSetDescription>(dx,dx_);
+        VectorImpl y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+
+//        std::cout << "functional dn(dn) = " << dx(dx) << std::endl;
+
+        A_->apply( dx_ , y_ );
+
+        auto y = domain().dualSpacePtr()->element();
+        copyFromCoefficientVector<VariableSetDescription>(y_,*y);
+//        std::cout << "result = " << (*y)(*y) << std::endl;
+
+        return std::move(y);
+      }
+
+    private:
+      void assembleFunctional(const Interface::AbstractFunctionSpaceElement& x) const
+      {
+        if( assemblyIsDisabled() ) return;
+        if( old_X_f_ != nullptr && old_X_f_->equals(x) ) return;
+
+        VariableSetDescription variableSet(spaces_);
+        typename VariableSetDescription::VariableSet u(variableSet);
+
+        copy(x,u);
+
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nAssemblyThreads );
+
+        old_X_f_ = clone(x);
+      }
+
+      void assembleGradient(const Interface::AbstractFunctionSpaceElement& x) const
+      {
+        if( assemblyIsDisabled() ) return;
+        if( old_X_df_ != nullptr && old_X_df_->equals(x) ) return;
+
+        VariableSetDescription variableSet(spaces_);
+        typename VariableSetDescription::VariableSet u(variableSet);
+
+        copy(x,u);
+
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
+
+        old_X_df_ = clone(x);
+      }
+
+      void assembleHessian(const Interface::AbstractFunctionSpaceElement& x) const
+      {
+        if( assemblyIsDisabled() ) return;
+        if( old_X_ddf_ != nullptr && old_X_ddf_->equals(x) ) return;
+
+        VariableSetDescription variableSet(spaces_);
+        typename VariableSetDescription::VariableSet u(variableSet);
+
+        copy(x,u);
+
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
+        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_) );
+
+        old_X_ddf_ = clone(x);
+      }
+
+      Functional* cloneImpl() const final override
+      {
+        return new Functional(*this);
+      }
+
+      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const final override
+      {
+        primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        return std::make_unique<Interface::Hessian>(std::make_unique< Functional<FunctionalImpl> >(*this,true),x);
+      }
+
+
+      std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const final override
+      {
+        assert (A_ != nullptr);
+        return std::make_unique< DirectSolver<VariableSetDescription,Domain,Domain> >( *A_ , spaces_, sharedDomain() , sharedDomain() );
+      }
+
+      FunctionalImpl f_;
+      Spaces spaces_;
+      mutable Assembler assembler_;
+      mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
+      mutable std::unique_ptr< Interface::AbstractFunctionSpaceElement > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
+      unsigned nAssemblyThreads = 1;
+      bool onlyLowerTriangle_ = false;
+    };
+
+
+
+    template <class FunctionalImpl>
+    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractBanachSpace> domain)
+    {
+      return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
     }
 
-    KaskadeFunctional(const KaskadeFunctional& g)
-      : AbstractC2Functional(g.getDomain()),
-        x_(g.x_), assembler_(g.assembler_),
-        f_(g.f_),
-        dA_(std::make_unique< ::Algorithm::Kaskade::VectorSpaceElement<Vector> >(getDomain().getDualSpace(),Vector(assembler_.rhs())))
+    template <class FunctionalImpl>
+    auto makeFunctional(const FunctionalImpl& f, const BanachSpace& domain)
     {
-      setDerivative( std::make_shared< KaskadeC1Operator<Functional> >( x_,f_,assembler_,g.getDomain(),g.getDomain().getDualSpace()) );
-      linearization_ = std::make_unique<LinearOperator>( getDerivative()->getLinearization() );
-      getDerivative()->getLinearization().setSolver( std::make_shared<CGSolver>( *linearization_ ) );
+      return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
     }
-
-    void setArgument(const AbstractFunctionSpaceElement& x)
-    {
-      x_ = dynamic_cast< const ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(x).impl();
-      assembler_.assemble(::Kaskade::linearization(f_,x_));
-      dynamic_cast< ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(*dA_) = Vector( assembler_.rhs() );
-      AbstractC2Functional::setArgument(x);
-    }
-
-    double operator()(const AbstractFunctionSpaceElement& x) const final override
-    {
-      throw CallOfUndefinedFunctionException("KaskadeFunctional::operator()");
-//      auto y = x.clone();
-
-//      A_->apply( dynamic_cast< const ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(x).impl() ,
-//                 dynamic_cast< ::Algorithm::Kaskade::VectorSpaceElement<Vector>& >(*y).impl() );
-
-//      return y;
-      return 0.;
-    }
-
-    double d0() const final override
-    {
-      return assembler_.functional();
-    }
-
-    double d1(const AbstractFunctionSpaceElement &dx) const final override
-    {
-      return (*dA_) * dx;
-    }
-
-    std::unique_ptr<AbstractFunctionSpaceElement> d1() const
-    {
-      return clone(dA_);
-    }
-
-    double d2(const AbstractFunctionSpaceElement &dx, const AbstractFunctionSpaceElement &dy) const final override
-    {
-      return (*applyOperator(dx)) * dy;
-    }
-
-    std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement &dx) const
-    {
-      return applyOperator(dx);
-    }
-
-  private:
-    KaskadeFunctional* cloneImpl() const final override
-    {
-      return new KaskadeFunctional(*this);
-    }
-
-    std::unique_ptr<AbstractFunctionSpaceElement> applyOperator(const AbstractFunctionSpaceElement& dx) const
-    {
-      return getDerivative()->getLinearization()(dx);
-    }
-
-    VariableSet x_;
-    Assembler& assembler_;
-    Functional f_;
-    std::unique_ptr<AbstractFunctionSpaceElement> dA_;
-    std::unique_ptr<LinearOperator> linearization_;
-  };
+  }
 }
 
 #endif // ALGORITHM_OPERATORS_KASKADEFUNCTIONAL_HH

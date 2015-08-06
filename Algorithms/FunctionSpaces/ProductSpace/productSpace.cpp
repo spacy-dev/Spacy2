@@ -108,6 +108,18 @@ namespace Algorithm
     return dualSubSpaceIds_;
   }
 
+  bool ProductSpace::isPrimalSubSpaceId(unsigned i) const
+  {
+    for( auto j : primalSubSpaceIds_ ) if( i==j ) return true;
+    return false;
+  }
+
+  bool ProductSpace::isDualSubSpaceId(unsigned i) const
+  {
+    for( auto j : dualSubSpaceIds_ ) if( i==j ) return true;
+    return false;
+  }
+
 
   HilbertSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces)
   {

@@ -96,7 +96,11 @@ namespace Algorithm
 
           auto oldNu = nu;
           nu = std::min( 1. , muPrime );
-          if( nu >= 4*oldNu ) continue;
+          if( nu >= 4*oldNu )
+          {
+            nu = 4*oldNu;
+            continue;
+          }
 
           norm_F_x_old = norm_F_x;
           break;

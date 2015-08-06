@@ -30,7 +30,7 @@ namespace Algorithm
 
     void AbstractC2Functional::setOrigin(const AbstractFunctionSpaceElement& x) const
     {
-      throw CallOfUndefinedFunctionException("AbstractC2Functional::setOrigin");
+      //throw CallOfUndefinedFunctionException("AbstractC2Functional::setOrigin");
     }
   }
 }

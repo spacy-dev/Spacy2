@@ -26,7 +26,7 @@ namespace Algorithm
     operator double() const;
 
     /// Access previous value of Lipschitz constant.
-    double last() const;
+    double previous() const;
 
     /// Set allowed maximal relative increase.
     void setMaxFactor(double factor);

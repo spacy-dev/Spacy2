@@ -24,7 +24,7 @@ namespace Algorithm
     return omega_;
   }
 
-  double LipschitzConstant::last() const
+  double LipschitzConstant::previous() const
   {
     return previousOmega_;
   }

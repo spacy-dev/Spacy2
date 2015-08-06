@@ -191,6 +191,7 @@ namespace Algorithm
   private:
     using CG_Detail::ChooseRegularization<Impl>::eps;
     using CG_Detail::ChooseRegularization<Impl>::verbose;
+    using CG_Detail::ChooseRegularization<Impl>::verbose_detailed;
 
     /// CG Implementation.
     FunctionSpaceElement cgLoop (FunctionSpaceElement x, FunctionSpaceElement r) const
@@ -218,6 +219,7 @@ namespace Algorithm
         this->regularize(qAq,qPq);
 
         auto alpha = sigma/qAq;
+        if( verbose_detailed() ) std::cout << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
         terminate->provideAlgorithmicQuantities(alpha,qAq,qPq,sigma);
 
@@ -233,6 +235,7 @@ namespace Algorithm
 
         x += alpha * q;
         energyNorm2 += alpha*qAq;
+        if( verbose_detailed() ) std::cout << "  |x|^2_A = " << energyNorm2 << std::endl;
 
         // convergence test
         if (*terminate)

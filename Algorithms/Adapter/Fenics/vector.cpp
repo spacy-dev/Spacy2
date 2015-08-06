@@ -135,7 +135,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = toHilbertSpace( xv_.space() );
+              const auto& space = castTo<HilbertSpace>( xv_.space() );
 
               if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isPrimalEnabled())
@@ -148,7 +148,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = toHilbertSpace( xv_.space() );
+              const auto& space = castTo<HilbertSpace>( xv_.space() );
 
               if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isDualEnabled())
@@ -158,8 +158,6 @@ namespace Algorithm
           }
 
         y.apply("insert");
-        //x_.reset();
-
         return;
       }
 
@@ -210,8 +208,6 @@ namespace Algorithm
             castTo<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
           }
 
-
-        //x_.reset();
         return;
       }
 

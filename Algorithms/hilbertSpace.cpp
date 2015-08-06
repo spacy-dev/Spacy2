@@ -17,6 +17,11 @@ namespace Algorithm
     castTo<Interface::AbstractHilbertSpace>( impl() ).setScalarProduct( sp.sharedImpl() );
   }
 
+  void HilbertSpace::setScalarProduct(ScalarProduct&& sp)
+  {
+    castTo<Interface::AbstractHilbertSpace>( impl() ).setScalarProduct( std::move( sp.sharedImpl() ) );
+  }
+
   ScalarProduct HilbertSpace::scalarProduct() const
   {
     return ScalarProduct( dynamic_cast<const Interface::AbstractHilbertSpace&>( impl() ).scalarProduct() );

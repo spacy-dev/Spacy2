@@ -44,6 +44,10 @@ namespace Algorithm
 
     const std::vector<unsigned>& dualSubSpaceIds() const;
 
+    bool isPrimalSubSpaceId(unsigned i) const;
+
+    bool isDualSubSpaceId(unsigned i) const;
+
   private:
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> elementImpl() const override;
 

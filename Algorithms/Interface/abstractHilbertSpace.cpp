@@ -5,6 +5,7 @@
 #include "hilbertSpaceNorm.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -29,16 +30,11 @@ namespace Algorithm
       return sp_;
     }
 
-    bool isHilbertSpace(const AbstractBanachSpace& space)
-    {
-      return dynamic_cast<const AbstractHilbertSpace*>(&space) != nullptr;
-    }
-
     double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y)
     {
-      if( isHilbertSpace(x.space()) && isHilbertSpace(y.space()) && x.spaceIndex() == y.spaceIndex() )
+      if( is<AbstractHilbertSpace>(x.space()) && is<AbstractHilbertSpace>(y.space()) && x.spaceIndex() == y.spaceIndex() )
       {
-        auto sp = dynamic_cast<const AbstractHilbertSpace&>(x.space()).scalarProduct();
+        auto sp = castTo<AbstractHilbertSpace>(x.space()).scalarProduct();
         return sp->operator ()(x,y);
       }
 

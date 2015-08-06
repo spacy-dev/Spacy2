@@ -5,6 +5,8 @@
 #include <cmath>
 #include <limits>
 
+#include <iostream>
+
 namespace Algorithm
 {
   CGTerminationCriterion::CGTerminationCriterion(unsigned maxIter) noexcept
@@ -59,6 +61,7 @@ namespace Algorithm
   StrakosTichyEnergyErrorTerminationCriterion::operator bool() const
   {
     auto tol = std::max( relativeAccuracy() , eps() );
+//    std::cout << "tol = " << tol << ", relativeError = " << sqrt(squaredRelativeError()) << std::endl;
     return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
   }
 

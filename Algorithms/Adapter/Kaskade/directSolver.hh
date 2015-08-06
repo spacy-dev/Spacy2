@@ -5,6 +5,9 @@
 #include "Interface/abstractLinearSolver.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "Util/Mixins/impl.hh"
+#include "Util/castTo.hh"
+
+#include "vector.hh"
 
 namespace Algorithm
 {
@@ -15,22 +18,29 @@ namespace Algorithm
         public Interface::AbstractLinearSolver ,
         public Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
     {
+      using Spaces = typename Description::Spaces;
+      using CoefficientVector = typename Description::template CoefficientVectorRepresentation<>::type;
     public:
       template <class KaskadeOperator>
-      DirectSolver(const KaskadeOperator& A,
+      DirectSolver(const KaskadeOperator& A, const Spaces& spaces,
                std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range)
         : Interface::AbstractLinearSolver(domain,range),
-          Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >( ::Kaskade::directInverseOperator(A) )
+          Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >( ::Kaskade::directInverseOperator(A, DirectType::UMFPACK3264) ),
+          spaces_(spaces)
       {}
 
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
+        CoefficientVector y_(Description::template CoefficientVectorRepresentation<>::init(spaces_));
+        CoefficientVector x_(Description::template CoefficientVectorRepresentation<>::init(spaces_));
+        copyToCoefficientVector<Description>(x,x_);
+//        auto& y_ = castTo< Vector<Description> >(*y);
+
+        this->impl().apply( /*castTo< Vector<Description> >(x).impl()*/x_ , y_ );
+
         auto y = range().element();
-
-        auto& y_ = castTo< Vector<Description> >(*y);
-
-        this->impl().apply( castTo< Vector<Description> >(x).impl() , y_.impl() );
+        copyFromCoefficientVector<Description>(y_,*y);
 
         return std::move(y);
       }
@@ -40,6 +50,8 @@ namespace Algorithm
       {
         return new DirectSolver(*this);
       }
+
+      Spaces spaces_;
     };
   }
 }

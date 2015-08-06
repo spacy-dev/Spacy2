@@ -28,12 +28,12 @@ namespace Algorithm
       void reset(const PrimalDualSwitch& y) const;
 
       /**
-       * @brief Disables operations on primal variables.
+       * @brief Disables the next operation on primal variables.
        */
       void disablePrimal() const;
 
       /**
-       * @brief Enables operations on primal variables.
+       * @brief Disables the next operation on dual variables.
        */
       void disableDual() const;
 
@@ -64,6 +64,12 @@ namespace Algorithm
     };
   }
 
+  /**
+   * @brief Apply f(x) without resetting primal/dual flags in intermediate computations.
+   *
+   * After application of f(x), x.reset() is called. Use this if you need to maintain the restriction to
+   * primal or dual variables for several operations.
+   */
   template <class F, class Arg>
   void primalDualIgnoreReset(F&& f, Arg&& x)
   {
@@ -75,14 +81,6 @@ namespace Algorithm
       castTo<Mixin::PrimalDualSwitch>(x).reset();
     }
   }
-
-
-  bool isPrimalDualSwitch(const Interface::AbstractFunctionSpaceElement& x);
-
-  Mixin::PrimalDualSwitch& toPrimalDualSwitch(Interface::AbstractFunctionSpaceElement& x);
-
-  const Mixin::PrimalDualSwitch& toPrimalDualSwitch(const Interface::AbstractFunctionSpaceElement& x);
-
 
   Interface::AbstractFunctionSpaceElement& primal(Interface::AbstractFunctionSpaceElement& x);
 

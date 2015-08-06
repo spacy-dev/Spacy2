@@ -2,6 +2,7 @@
 #define ALGORITHM_ADAPTER_KASKADE_HH
 
 #include "Kaskade/directSolver.hh"
+#include "Kaskade/functional.hh"
 #include "Kaskade/hilbertSpace.hh"
 #include "Kaskade/l2Product.hh"
 #include "Kaskade/operator.hh"

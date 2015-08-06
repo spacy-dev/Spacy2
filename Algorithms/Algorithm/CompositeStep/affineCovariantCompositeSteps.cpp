@@ -10,6 +10,7 @@
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
 #include "Algorithm/dampingFactor.hh"
 
+#include "Interface/Functional/abstractC2Functional.hh"
 #include "c2Functional.hh"
 #include "functionSpaceElement.hh"
 #include "linearSolver.hh"
@@ -35,15 +36,16 @@ namespace Algorithm
   {
     auto lastStepWasUndamped = false;
     auto x = x0;
-    castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
+//    castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 //    norm = HilbertSpaceNorm( primalInducedScalarProduct( N_->hessian(x0) ));
 
     for(unsigned step = 1; step < maxSteps(); ++step)
     {
       normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-      //dynamic_cast<Fenics::LagrangeFunctional&>(N_->impl()).setOrigin(x.impl());
+      N_->impl().setOrigin(x.impl());
       //norm = N_->domain().norm();
+      castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -102,7 +104,7 @@ namespace Algorithm
                                               trcgRelativeAccuracy,
                                               eps(),
                                               verbose_detailed() );
-    trcg->impl().setIterativeRefinements(10);
+    trcg->impl().setIterativeRefinements(0);
     trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
     tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
 
@@ -125,11 +127,12 @@ namespace Algorithm
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeMinimumNormCorrection(const FunctionSpaceElement& x) const
   {
-    return primal( (*normalSolver)( dual(-L_->d1(x)) ) );
+    return primal( (*normalSolver)( dual(-N_->d1(x)) ) );
   }
 
   FunctionSpaceElement AffineCovariantCompositeSteps::computeLagrangeMultiplier(const FunctionSpaceElement& x) const
   {
+    if( N_ == nullptr || L_ == nullptr ) return FunctionSpaceElement(0*x);
     return dual( (*normalSolver)( primal(-L_->d1(x)) ) );
   }
 
@@ -186,7 +189,7 @@ namespace Algorithm
 
       if( acceptanceTest != AcceptanceTest::LeftAdmissibleDomain ) acceptanceTest = acceptedSteps(norm_x,norm_dx,eta);
 
-      if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin)) * omegaL.last() )
+      if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin)) * omegaL.previous() )
       {
         if( verbose_detailed() ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
         acceptanceTest = AcceptanceTest::Passed;
@@ -225,7 +228,7 @@ namespace Algorithm
 
   bool AffineCovariantCompositeSteps::convergenceTest(double nu, double tau, double norm_x, double norm_dx)
   {
-    if( tangentialSolver->encounteredNonconvexity() ) return false;
+    if( tangentialSolver != nullptr && tangentialSolver->encounteredNonconvexity() ) return false;
     if( nu < 1 || tau < 1 ) return false;
 
     if( norm_dx < relativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
@@ -240,6 +243,7 @@ namespace Algorithm
 
   void AffineCovariantCompositeSteps::updateOmegaC(double norm_x, double norm_dx, double norm_ds)
   {
+    if( N_ == nullptr ) return;
     if( norm_dx < sqrtEps() * norm_x ) return;
     setContraction( norm_ds/norm_dx );
 //    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
@@ -278,6 +282,7 @@ namespace Algorithm
 
   double AffineCovariantCompositeSteps::computeNormalStepDampingFactor(double norm_Dn) const
   {
+    if( N_ == nullptr ) return 1;
     DampingFactor nu = 1;
     if( norm_Dn > eps() && std::abs(norm_Dn*omegaC) > eps() ) nu = std::min(1.,desiredContraction()/(omegaC*norm_Dn));
     return nu;
@@ -285,6 +290,7 @@ namespace Algorithm
 
   double AffineCovariantCompositeSteps::computeTangentialStepDampingFactor(double norm_dn, double norm_Dt, const CompositeStep::CubicModel& cubic) const
   {
+    if( L_ == nullptr ) return 1;
     if( norm_Dt < sqrtEps() ) return 1;
 
     auto maxTau = 1.;
@@ -300,14 +306,14 @@ namespace Algorithm
   {
     if( norm_Dx < eps() * norm_x ) return AcceptanceTest::Passed;
 
-    if( eta < etaMin )
+    if( L_ != nullptr && eta < etaMin )
     {
       if( verbose_detailed() ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
       tangentialStepMonitor = StepMonitor::Rejected;
       return AcceptanceTest::TangentialStepFailed;
     }
 
-    if( !admissibleContraction() )
+    if( N_ != nullptr && !admissibleContraction() )
     {
       if( verbose_detailed() ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
       normalStepMonitor = StepMonitor::Rejected;

@@ -2,9 +2,11 @@
 
 #include "banachSpace.hh"
 #include "hilbertSpace.hh"
-#include "Interface/abstractHilbertSpace.hh"
-
 #include "functionSpaceElement.hh"
+
+#include "Interface/abstractHilbertSpace.hh"
+#include "Util/castTo.hh"
+
 
 #include <utility>
 
@@ -13,12 +15,12 @@ namespace Algorithm
   Operator::Operator(std::unique_ptr<Interface::AbstractOperator>&& implementation)
     : Mixin::UniqueImpl<Interface::AbstractOperator>(std::move(implementation))
   {
-    if(Interface::isHilbertSpace(impl().domain()))
+    if(is<Interface::AbstractHilbertSpace>(impl().domain()))
       domain_ = std::make_shared<HilbertSpace>(std::static_pointer_cast<Interface::AbstractHilbertSpace>(impl().sharedDomain()));
     else
       domain_ = std::make_shared<BanachSpace>(impl().sharedDomain());
 
-    if(Interface::isHilbertSpace(impl().range()))
+    if(is<Interface::AbstractHilbertSpace>(impl().range()))
       range_ = std::make_shared<HilbertSpace>(std::static_pointer_cast<Interface::AbstractHilbertSpace>(impl().sharedRange()));
     else
       range_ = std::make_shared<BanachSpace>(impl().sharedRange());

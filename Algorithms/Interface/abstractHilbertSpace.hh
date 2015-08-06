@@ -36,9 +36,6 @@ namespace Algorithm
       std::shared_ptr<AbstractScalarProduct> sp_;
     };
 
-    /// Checks is space is derived from Interface::AbstractHilbertSpace.
-    bool isHilbertSpace(const AbstractBanachSpace& space);
-
     /// Compute scalar product \f$(x,y)\f$.
     double operator* (const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y);
   }

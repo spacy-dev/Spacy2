@@ -47,11 +47,6 @@ namespace Algorithm
       return createFromSharedImpl< ::Algorithm::HilbertSpace, HilbertSpace >(space);
     }
 
-    bool isHilbertSpace(const Interface::AbstractBanachSpace& space);
-
-    const HilbertSpace& toHilbertSpace(const Interface::AbstractBanachSpace& space);
-
-
     ::Algorithm::HilbertSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds);
 
 //    inline auto makeProductSpace(const dolfin::FunctionSpace& space,

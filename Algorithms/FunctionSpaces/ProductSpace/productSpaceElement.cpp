@@ -44,7 +44,8 @@ namespace Algorithm
     : AbstractFunctionSpaceElement(space)
   {
     const auto& spaces = castTo<ProductSpace>(space).subSpaces();
-    for (auto i=0u; i<spaces.size(); ++i) variables_.push_back(spaces[i]->element());
+    for (auto i=0u; i<spaces.size(); ++i)
+      variables_.push_back(spaces[i]->element());
   }
 
   ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)

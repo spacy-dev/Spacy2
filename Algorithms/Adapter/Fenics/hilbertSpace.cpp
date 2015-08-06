@@ -46,17 +46,6 @@ namespace Algorithm
       return std::make_unique< Vector >(*this);
     }
 
-    bool isHilbertSpace(const Interface::AbstractBanachSpace& space)
-    {
-      return dynamic_cast<const Interface::AbstractBanachSpace*>(&space) != nullptr;
-    }
-
-    const HilbertSpace& toHilbertSpace(const Interface::AbstractBanachSpace& space)
-    {
-      if( !Fenics::isHilbertSpace(space) ) throw InvalidArgumentException("toHilbertSpace");
-      return dynamic_cast<const HilbertSpace&>(space);
-    }
-
     ::Algorithm::HilbertSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));

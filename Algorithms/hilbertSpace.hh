@@ -31,6 +31,11 @@ namespace Algorithm
     void setScalarProduct(const ScalarProduct& sp);
 
     /**
+     * @brief Change scalar product.
+     */
+    void setScalarProduct(ScalarProduct&& sp);
+
+    /**
      * @brief Access scalar product.
      */
     ScalarProduct scalarProduct() const;
