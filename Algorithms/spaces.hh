@@ -3,15 +3,14 @@
 
 #include <memory>
 
-#include "banachSpace.hh"
-#include "hilbertSpace.hh"
+#include "functionSpace.hh"
 #include "FunctionSpaces/RealNumbers/realSpace.hh"
 
 namespace Algorithm
 {
   namespace Spaces
   {
-    HilbertSpace R(std::make_shared<RealSpace>());
+    FunctionSpace R(std::make_shared<RealSpace>());
   }
 }
 #endif // ALGORITHM_SPACES_HH

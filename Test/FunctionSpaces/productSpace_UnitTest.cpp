@@ -1,11 +1,10 @@
 #include <gtest/gtest.h>
 
-#include "../../Algorithms/hilbertSpace.hh"
-#include "../../Algorithms/norm.hh"
-#include "../../Algorithms/scalarProduct.hh"
-#include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
-#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpace.hh"
-#include "../../Algorithms/FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "norm.hh"
+#include "scalarProduct.hh"
+#include "FunctionSpaces/RealNumbers/realSpace.hh"
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 TEST(ProductSpaceTest,PurePrimalElementTest)
 {
