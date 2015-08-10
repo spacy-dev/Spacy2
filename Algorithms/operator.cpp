@@ -15,17 +15,7 @@ namespace Algorithm
     : Mixin::UniqueImpl<Interface::AbstractOperator>(std::move(implementation)),
       domain_( impl().sharedDomain() ),
       range_( impl().sharedRange() )
-  {
-//    if(is<Interface::AbstractHilbertSpace>(impl().domain()))
-//      domain_ = std::make_shared<HilbertSpace>(std::static_pointer_cast<Interface::AbstractHilbertSpace>(impl().sharedDomain()));
-//    else
-//      domain_ = std::make_shared<FunctionSpace>(impl().sharedDomain());
-
-//    if(is<Interface::AbstractHilbertSpace>(impl().range()))
-//      range_ = std::make_shared<HilbertSpace>(std::static_pointer_cast<Interface::AbstractHilbertSpace>(impl().sharedRange()));
-//    else
-//      range_ = std::make_shared<FunctionSpace>(impl().sharedRange());
-  }
+  {}
 
   FunctionSpaceElement Operator::operator()(const FunctionSpaceElement& x) const
   {
@@ -39,7 +29,7 @@ namespace Algorithm
 
   FunctionSpaceElement Operator::d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const
   {
-    return dynamic_cast<const Interface::AbstractOperator&>( impl() ).d2(x.impl(),dx.impl(),dy.impl());
+    return impl().d2(x.impl(),dx.impl(),dy.impl());
   }
 
   LinearOperator Operator::linearization(const FunctionSpaceElement& x) const

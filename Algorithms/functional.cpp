@@ -10,12 +10,7 @@ namespace Algorithm
   Functional::Functional(std::unique_ptr<Interface::AbstractFunctional>&& implementation)
     : Mixin::UniqueImpl<Interface::AbstractFunctional>(std::move(implementation)),
       domain_( impl().sharedDomain() )
-  {
-//    if(is<Interface::AbstractHilbertSpace>(impl().domain()))
-//      domain_ = std::make_shared<HilbertSpace>(std::static_pointer_cast<Interface::AbstractHilbertSpace>(impl().sharedDomain()));
-//    else
-//      domain_ = std::make_shared<FunctionSpace>(impl().sharedDomain());
-  }
+  {}
 
   double Functional::operator()(const FunctionSpaceElement& x) const
   {
@@ -29,12 +24,12 @@ namespace Algorithm
 
   FunctionSpaceElement Functional::d1(const FunctionSpaceElement &x) const
   {
-    return FunctionSpaceElement( impl().d1(x.impl()) );
+    return impl().d1(x.impl());
   }
 
   FunctionSpaceElement Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
   {
-    return FunctionSpaceElement( (*impl().hessian( x.impl() ) )( dx.impl() ) );
+    return impl().d2(x.impl(),dx.impl());
   }
 
   double Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
