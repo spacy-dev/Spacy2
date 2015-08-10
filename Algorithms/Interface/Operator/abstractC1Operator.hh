@@ -26,7 +26,7 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractC1Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+      AbstractC1Operator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range);
 
       /// Get linearization \f$A'(x): X \rightarrow Y\f$.
       std::unique_ptr<LinearizedOperator> linearization(const AbstractFunctionSpaceElement& x) const;

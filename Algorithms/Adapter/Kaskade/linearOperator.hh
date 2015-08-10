@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_OPERATORS_KASKADE_OPERATOR_HH
-#define ALGORITHM_OPERATORS_KASKADE_OPERATOR_HH
+#ifndef ALGORITHM_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
+#define ALGORITHM_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
 
 #include <memory>
 #include <utility>
@@ -9,7 +9,6 @@
 #include "Interface/Operator/linearizedOperator.hh"
 #include "Interface/Operator/abstractC1Operator.hh"
 #include "Util/Mixins/disableAssembly.hh"
-#include "Util/castTo.hh"
 #include "Util/create.hh"
 
 #include "directSolver.hh"
@@ -20,7 +19,7 @@ namespace Algorithm
   namespace Kaskade
   {
     template <class OperatorImpl>
-    class Operator :
+    class LinearOperator :
         public Interface::AbstractC1Operator , public Mixin::DisableAssembly
     {
       using VariableSetDescription = typename OperatorImpl::AnsatzVars;
@@ -34,7 +33,7 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Operator(const OperatorImpl& f,
+      LinearOperator(const OperatorImpl& f,
                         std::shared_ptr<Interface::AbstractFunctionSpace> domain_, std::shared_ptr<Interface::AbstractFunctionSpace> range_)
         : AbstractC1Operator(domain_,range_),
           f_(f),
@@ -42,11 +41,11 @@ namespace Algorithm
           assembler_(spaces_)
       {}
 
-      Operator(const OperatorImpl& f, const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
-        : Operator(f,domain.sharedImpl(),range.sharedImpl())
+      LinearOperator(const OperatorImpl& f, const FunctionSpace& domain, const FunctionSpace& range)
+        : LinearOperator(f,domain.sharedImpl(),range.sharedImpl())
       {}
 
-      Operator(const Operator& g)
+      LinearOperator(const LinearOperator& g)
         : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
@@ -56,7 +55,7 @@ namespace Algorithm
       }
 
 
-      Operator(const Operator& g, bool disableAssembly)
+      LinearOperator(const LinearOperator& g, bool disableAssembly)
         : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
@@ -66,18 +65,12 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
-
-        VectorImpl v( assembler_.rhs() );
-
-        auto y = range().element();
-        copyFromCoefficientVector<VariableSetDescription>(v,*y);
-        return std::move(y);
+        return d1(x,x);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement&, const Interface::AbstractFunctionSpaceElement& dx) const final override
       {
-        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator();
 
         VectorImpl dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
         copyToCoefficientVector<VariableSetDescription>(dx,dx_);
@@ -92,47 +85,27 @@ namespace Algorithm
       }
 
     private:
-      void assembleOperator(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleOperator() const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_A_ != nullptr && old_X_A_->equals(x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
-
-        copy(x,u);
-
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
-
-        old_X_A_ = clone(x);
-      }
-
-      void assembleGradient(const Interface::AbstractFunctionSpaceElement& x) const
-      {
-        if( assemblyIsDisabled() ) return;
-        if( old_X_dA_ != nullptr && old_X_dA_->equals(x) ) return;
-
-        VariableSetDescription variableSet(spaces_);
-        typename VariableSetDescription::VariableSet u(variableSet);
-
-        copy(x,u);
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
-        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_) );
 
-        old_X_dA_ = clone(x);
+        disableAssembly();
       }
 
-      Operator* cloneImpl() const final override
+      LinearOperator* cloneImpl() const final override
       {
-        return new Operator(*this);
+        return new LinearOperator(*this);
       }
 
       std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
       {
-//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
-        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return std::make_unique<Interface::LinearizedOperator>(std::make_unique< Operator<OperatorImpl> >(*this,true),x);
+        assembleOperator();
+        return std::make_unique<Interface::LinearizedOperator>(std::make_unique< LinearOperator<OperatorImpl> >(*this,true),x);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
@@ -145,27 +118,26 @@ namespace Algorithm
       Spaces spaces_;
       mutable Assembler assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      mutable std::unique_ptr< Interface::AbstractFunctionSpaceElement > old_X_A_ = nullptr, old_X_dA_ = nullptr;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
     };
 
     template <class OperatorImpl>
-    auto makeOperator(const OperatorImpl& f,
+    auto makeLinearOperator(const OperatorImpl& f,
                       std::shared_ptr<Interface::AbstractFunctionSpace> domain,
                       std::shared_ptr<Interface::AbstractFunctionSpace> range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::C1Operator , LinearOperator<OperatorImpl> >( f, domain , range );
     }
 
     template <class OperatorImpl>
-    auto makeOperator(const OperatorImpl& f,
-                      const ::Algorithm::FunctionSpace& domain,
-                      const ::Algorithm::FunctionSpace& range)
+    auto makeLinearOperator(const OperatorImpl& f,
+                      const FunctionSpace& domain,
+                      const FunctionSpace& range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::C1Operator , LinearOperator<OperatorImpl> >( f, domain , range );
     }
   }
 }
 
-#endif // ALGORITHM_OPERATORS_KASKADE_OPERATOR_HH
+#endif // ALGORITHM_OPERATORS_KASKADE_LINEAR_OPERATOR_HH

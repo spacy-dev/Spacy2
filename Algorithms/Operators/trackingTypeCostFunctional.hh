@@ -14,21 +14,22 @@ namespace Algorithm
   namespace Interface
   {
     class AbstractFunctionSpaceElement;
-    class AbstractHilbertSpace;
+    class AbstractFunctionSpace;
   }
+
   class ProductSpaceElement;
-  class HilbertSpace;
+  class FunctionSpace;
 
   class TrackingTypeCostFunctional :
       public Interface::AbstractC2Functional , public Mixin::ControlIndex , public Mixin::StateIndex
   {
   public:
-    TrackingTypeCostFunctional(double alpha, const Interface::AbstractFunctionSpaceElement &referenceState, const HilbertSpace& domain,
+    TrackingTypeCostFunctional(double alpha, const Interface::AbstractFunctionSpaceElement &referenceState, const FunctionSpace& domain,
                                std::unique_ptr<Interface::AbstractOperator>&& My,
                                std::unique_ptr<Interface::AbstractOperator>&& Mu);
 
     TrackingTypeCostFunctional(double alpha, const Interface::AbstractFunctionSpaceElement &referenceState,
-                               std::shared_ptr<Interface::AbstractBanachSpace> domain,
+                               std::shared_ptr<Interface::AbstractFunctionSpace> domain,
                                std::unique_ptr<Interface::AbstractOperator>&& My,
                                std::unique_ptr<Interface::AbstractOperator>&& Mu);
 

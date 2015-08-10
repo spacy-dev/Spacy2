@@ -31,7 +31,7 @@ namespace Algorithm
   namespace Fenics
   {
   LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-                             std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range)
+                             std::shared_ptr<Interface::AbstractFunctionSpace> domain , std::shared_ptr<Interface::AbstractFunctionSpace> range)
     : Interface::AbstractLinearSolver(domain,range),
       productSpace_(productSpace)
   {

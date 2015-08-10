@@ -11,7 +11,7 @@ namespace Algorithm
 {  
   namespace Kaskade
   {
-    template <class> class HilbertSpace;
+    template <class> class FunctionSpace;
 
     template <class Description>
     class Vector : public Interface::AbstractFunctionSpaceElement
@@ -21,15 +21,15 @@ namespace Algorithm
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
 
     public:
-      Vector(const Interface::AbstractBanachSpace& space_)
+      Vector(const Interface::AbstractFunctionSpace& space_)
         : Interface::AbstractFunctionSpaceElement(space_),
-          spaces_(&castTo< HilbertSpace<Description> >(space()).impl()),
+          spaces_(&castTo< FunctionSpace<Description> >(space()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
 
-      Vector(const Interface::AbstractBanachSpace& space_, const VectorImpl& v)
+      Vector(const Interface::AbstractFunctionSpace& space_, const VectorImpl& v)
         : Interface::AbstractFunctionSpaceElement(space_),
-          spaces_(&castTo< HilbertSpace<Description> >(space()).impl()),
+          spaces_(&castTo< FunctionSpace<Description> >(space()).impl()),
           v_(v)
       {}
 

@@ -1,6 +1,6 @@
 #include "abstractC2Functional.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "hessian.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
@@ -9,7 +9,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractC2Functional::AbstractC2Functional(std::shared_ptr<AbstractBanachSpace> domain)
+    AbstractC2Functional::AbstractC2Functional(std::shared_ptr<AbstractFunctionSpace> domain)
       : AbstractC1Functional(domain)
     {}
 

@@ -10,8 +10,7 @@
 #include "Interface/Operator/linearizedOperator.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
-#include "hilbertSpace.hh"
-#include "banachSpace.hh"
+#include "functionSpace.hh"
 #include "../../c1Operator.hh"
 #include "Util/create.hh"
 #include "Util/Mixins/disableAssembly.hh"
@@ -30,8 +29,8 @@ namespace Algorithm
     {
     public:
       C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 std::shared_ptr<Interface::AbstractBanachSpace> domain,
-                 std::shared_ptr<Interface::AbstractBanachSpace> range)
+                 std::shared_ptr<Interface::AbstractFunctionSpace> domain,
+                 std::shared_ptr<Interface::AbstractFunctionSpace> range)
         : Interface::AbstractC1Operator( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
@@ -44,8 +43,8 @@ namespace Algorithm
 
       C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
                  std::shared_ptr<dolfin::GenericMatrix> A,
-                 std::shared_ptr<Interface::AbstractBanachSpace> domain,
-                 std::shared_ptr<Interface::AbstractBanachSpace> range)
+                 std::shared_ptr<Interface::AbstractFunctionSpace> domain,
+                 std::shared_ptr<Interface::AbstractFunctionSpace> range)
         : Interface::AbstractC1Operator( domain , range ),
           Mixin::DisableAssembly(true),
           F_( F.function_space(0) ),
@@ -59,7 +58,7 @@ namespace Algorithm
       }
 
       C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 const BanachSpace& domain, const BanachSpace& range)
+                 const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
         : C1Operator(F,J,bcs,domain.sharedImpl(),range.sharedImpl())
       {}
 
@@ -172,7 +171,8 @@ namespace Algorithm
      * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& domain, const BanachSpace& range)
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
+                        const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
     {
       return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
     }
@@ -182,7 +182,7 @@ namespace Algorithm
      * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
     {
       return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space );
     }

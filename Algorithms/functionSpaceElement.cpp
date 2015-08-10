@@ -1,11 +1,11 @@
 #include "functionSpaceElement.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include "banachSpace.hh"
+#include "functionSpace.hh"
 
 #include <utility>
 

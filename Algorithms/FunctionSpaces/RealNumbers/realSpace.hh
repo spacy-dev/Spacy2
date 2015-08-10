@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 
 namespace Algorithm
 {
   namespace Interface { class AbstractFunctionSpaceElement; }
 
   /// Space of real numbers.
-  class RealSpace : public Interface::AbstractHilbertSpace
+  class RealSpace : public Interface::AbstractFunctionSpace
   {
   public:
     RealSpace();

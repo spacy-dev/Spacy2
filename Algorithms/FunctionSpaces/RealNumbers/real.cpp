@@ -1,6 +1,6 @@
 #include "real.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/castTo.hh"
 
@@ -9,14 +9,14 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpace;
   using Interface::AbstractFunctionSpaceElement;
 
-  Real::Real(double x, const AbstractBanachSpace &space)
+  Real::Real(double x, const AbstractFunctionSpace &space)
     : AbstractFunctionSpaceElement(space), x_(x)
   {}
 
-  Real::Real(const AbstractBanachSpace &space)
+  Real::Real(const AbstractFunctionSpace &space)
     : Real(0.,space)
   {}
 

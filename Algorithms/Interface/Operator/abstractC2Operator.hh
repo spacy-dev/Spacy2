@@ -24,7 +24,7 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractC2Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+      AbstractC2Operator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range);
 
       /// Apply second derivative of operator, i.e. compute \f$y=A''(x)(dx,dy)\f$.
       virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,

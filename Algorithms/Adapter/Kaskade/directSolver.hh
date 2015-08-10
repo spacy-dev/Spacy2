@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 #define ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "Util/Mixins/impl.hh"
@@ -23,7 +23,7 @@ namespace Algorithm
     public:
       template <class KaskadeOperator>
       DirectSolver(const KaskadeOperator& A, const Spaces& spaces,
-               std::shared_ptr<Interface::AbstractBanachSpace> domain , std::shared_ptr<Interface::AbstractBanachSpace> range)
+               std::shared_ptr<Interface::AbstractFunctionSpace> domain , std::shared_ptr<Interface::AbstractFunctionSpace> range)
         : Interface::AbstractLinearSolver(domain,range),
           Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >( ::Kaskade::directInverseOperator(A, DirectType::UMFPACK3264) ),
           spaces_(spaces)

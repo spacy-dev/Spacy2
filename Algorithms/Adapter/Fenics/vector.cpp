@@ -1,6 +1,6 @@
 #include "vector.hh"
 
-#include "hilbertSpace.hh"
+#include "functionSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -12,16 +12,17 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpace;
   using Interface::AbstractFunctionSpaceElement;
 
   namespace Fenics
   {
-    Vector::Vector(const AbstractBanachSpace& space)
-      : AbstractFunctionSpaceElement(space), Impl<dolfin::Function>( dolfin::Function( dynamic_cast<const HilbertSpace&>(space).impl() ) )
+    Vector::Vector(const AbstractFunctionSpace& space)
+      : AbstractFunctionSpaceElement(space),
+        Impl<dolfin::Function>( dolfin::Function( castTo<Fenics::FunctionSpace>(space).impl() ) )
     {}
 
-    Vector::Vector(const dolfin::Function& f, const AbstractBanachSpace& space)
+    Vector::Vector(const dolfin::Function& f, const AbstractFunctionSpace& space)
       : AbstractFunctionSpaceElement(space), Impl<dolfin::Function>( f )
     {}
 
@@ -135,7 +136,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<HilbertSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
 
               if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isPrimalEnabled())
@@ -148,7 +149,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<HilbertSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
 
               if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isDualEnabled())
@@ -184,7 +185,7 @@ namespace Algorithm
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::HilbertSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
               if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
@@ -198,7 +199,7 @@ namespace Algorithm
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::HilbertSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
               if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );

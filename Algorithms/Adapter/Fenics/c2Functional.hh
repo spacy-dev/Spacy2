@@ -27,7 +27,7 @@ namespace Algorithm
     {
     public:
       C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
+                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
         : Interface::AbstractC2Functional( space ),
           f_( J.function_space(0)->mesh() ),
           J_( J.function_space(0) ),
@@ -41,12 +41,12 @@ namespace Algorithm
       }
 
       C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
+                   const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
         : C2Functional(f,J,H,bcs,space.sharedImpl())
       {}
 
       C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space,
+                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space,
                    const dolfin::GenericMatrix& A,
                    const Interface::AbstractFunctionSpaceElement& oldX_H)
         : Interface::AbstractC2Functional( space ),

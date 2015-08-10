@@ -8,7 +8,6 @@
 #include "../parameter.hh"
 #include "quadraticModel.hh"
 #include "Algorithm/lipschitzConstant.hh"
-#include "Algorithm/ConjugateGradients/cg.hh"
 #include "Util/mixins.hh"
 #include "hilbertSpaceNorm.hh"
 

@@ -9,7 +9,7 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpace;
   using Interface::AbstractFunctionSpaceElement;
 
   namespace
@@ -24,20 +24,20 @@ namespace Algorithm
     }
 
 
-    std::vector<std::shared_ptr<AbstractBanachSpace> > extractSubSpaces(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces,
+    std::vector<std::shared_ptr<AbstractFunctionSpace> > extractSubSpaces(const std::vector<std::shared_ptr<AbstractFunctionSpace> >& spaces,
                                                                         const std::vector<unsigned>& subSpaceIds)
     {
-      std::vector< std::shared_ptr<AbstractBanachSpace> > subSpaces;
+      std::vector< std::shared_ptr<AbstractFunctionSpace> > subSpaces;
       for( unsigned i : subSpaceIds ) subSpaces.push_back( spaces[i] );
       return subSpaces;
     }
   }
 
 
-  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces,
+  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractFunctionSpace> >& spaces,
                              const std::vector<unsigned>& primalSubSpaceIds,
                              const std::vector<unsigned>& dualSubSpaceIds)
-    : AbstractHilbertSpace(std::make_shared<ProductSpaceProduct>()),
+    : AbstractFunctionSpace(std::make_shared<ProductSpaceProduct>()),
       spaces_(spaces),
       primalSubSpaceIds_(primalSubSpaceIds),
       dualSubSpaceIds_(dualSubSpaceIds),
@@ -47,8 +47,8 @@ namespace Algorithm
     std::cout << "creating product space, p: " << primalSubSpaceIds.size() << ", d: " << dualSubSpaceIds.size() << std::endl;
   }
 
-  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractBanachSpace> >& spaces)
-    : AbstractHilbertSpace(std::make_shared<ProductSpaceProduct>()),
+  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractFunctionSpace> >& spaces)
+    : AbstractFunctionSpace(std::make_shared<ProductSpaceProduct>()),
       spaces_(spaces),
       primalSubSpaceIds_(extractSpaceIds(spaces))
   {
@@ -56,17 +56,17 @@ namespace Algorithm
   }
 
 
-  const std::vector<std::shared_ptr<AbstractBanachSpace> >& ProductSpace::subSpaces() const
+  const std::vector<std::shared_ptr<AbstractFunctionSpace> >& ProductSpace::subSpaces() const
   {
     return spaces_;
   }
 
-  const Interface::AbstractBanachSpace& ProductSpace::subSpace(unsigned i) const
+  const Interface::AbstractFunctionSpace& ProductSpace::subSpace(unsigned i) const
   {
     return *spaces_[i];
   }
 
-  std::shared_ptr<Interface::AbstractBanachSpace> ProductSpace::sharedSubSpace(unsigned i) const
+  std::shared_ptr<Interface::AbstractFunctionSpace> ProductSpace::sharedSubSpace(unsigned i) const
   {
     return spaces_[i];
   }
@@ -121,16 +121,16 @@ namespace Algorithm
   }
 
 
-  HilbertSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces)
+  FunctionSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractFunctionSpace> >& spaces)
   {
     return makeProductSpace( spaces , extractSpaceIds(spaces) );
   }
 
-  HilbertSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& spaces,
+  FunctionSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractFunctionSpace> >& spaces,
                                 const std::vector<unsigned>& primalSubSpaceIds,
                                 const std::vector<unsigned>& dualSubSpaceIds)
   {
-    return createFromSharedImpl< ::Algorithm::HilbertSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
+    return createFromSharedImpl< ::Algorithm::FunctionSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
   }
 
 }

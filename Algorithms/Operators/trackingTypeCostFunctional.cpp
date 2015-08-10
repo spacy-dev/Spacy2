@@ -1,8 +1,8 @@
 #include "trackingTypeCostFunctional.hh"
 
-#include "hilbertSpace.hh"
+#include "functionSpace.hh"
 
-#include "Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -13,11 +13,11 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpace;
   using Interface::AbstractFunctionSpaceElement;
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         std::shared_ptr<AbstractBanachSpace> domain,
+                                                         std::shared_ptr<AbstractFunctionSpace> domain,
                                                          std::unique_ptr<Interface::AbstractOperator>&& My,
                                                          std::unique_ptr<Interface::AbstractOperator>&& Mu)
     : AbstractC2Functional(domain),
@@ -28,7 +28,7 @@ namespace Algorithm
   {}
 
   TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const HilbertSpace &domain, std::unique_ptr<Interface::AbstractOperator>&& My, std::unique_ptr<Interface::AbstractOperator>&& Mu)
+                                                         const FunctionSpace &domain, std::unique_ptr<Interface::AbstractOperator>&& My, std::unique_ptr<Interface::AbstractOperator>&& Mu)
     : TrackingTypeCostFunctional(alpha, referenceState, domain.sharedImpl(), std::move(My), std::move(Mu))
   {}
 

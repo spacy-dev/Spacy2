@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "banachSpace.hh"
+#include "functionSpace.hh"
 #include "Interface/Operator/abstractOperator.hh"
 #include "Util/Mixins/impl.hh"
 
@@ -21,30 +21,31 @@ namespace Algorithm
     /**
      * @brief Access underlying domain.
      */
-    BanachSpace& domain();
+    FunctionSpace& domain();
 
     /**
      * @brief Access range space.
      */
-    BanachSpace& range();
+    FunctionSpace& range();
 
     /**
      * @brief Access underlying domain.
      */
-    const BanachSpace& domain() const;
+    const FunctionSpace& domain() const;
 
     /**
      * @brief Access range space
      */
-    const BanachSpace& range() const;
+    const FunctionSpace& range() const;
 
     /**
      * @brief Access shared pointer to underlying domain.
      */
-    std::shared_ptr<BanachSpace> sharedDomain() const;
+//    std::shared_ptr<FunctionSpace> sharedDomain() const;
 
   private:
-    std::shared_ptr<BanachSpace> domain_ = nullptr, range_ = nullptr;
+    FunctionSpace domain_, range_;
+//    std::shared_ptr<FunctionSpace> domain_ = nullptr, range_ = nullptr;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

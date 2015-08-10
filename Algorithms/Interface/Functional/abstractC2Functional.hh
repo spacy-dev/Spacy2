@@ -22,7 +22,7 @@ namespace Algorithm
        * @brief Constructor.
        * @param domain Domain space \f$X\f$.
        */
-      AbstractC2Functional(std::shared_ptr<AbstractBanachSpace> domain);
+      AbstractC2Functional(std::shared_ptr<AbstractFunctionSpace> domain);
 
       /// Get second derivative \f$f''(x)': X \rightarrow X^*\f$.
       std::unique_ptr<Hessian> hessian(const AbstractFunctionSpaceElement& x) const;

@@ -17,7 +17,7 @@ namespace Algorithm
        * @brief Constructor.
        * @param domain Domain space \f$X\f$.
        */
-      AbstractC1Functional(std::shared_ptr<AbstractBanachSpace> domain);
+      AbstractC1Functional(std::shared_ptr<AbstractFunctionSpace> domain);
 
       /// Apply derivative of functional, i.e. compute \f$f'(x) \in X^* \f$.
       virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x) const = 0;

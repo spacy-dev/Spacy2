@@ -8,7 +8,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
+    AbstractC1Operator::AbstractC1Operator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range)
       : AbstractOperator(domain,range)
     {}
 

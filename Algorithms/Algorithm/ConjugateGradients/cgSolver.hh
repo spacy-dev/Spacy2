@@ -2,8 +2,9 @@
 #define ALGORITHM_CONJUGATE_GRADIENTS_CG_SOLVER_HH
 
 #include <memory>
+#include <utility>
 
-#include "cg.hh"
+#include "conjugateGradients.hh"
 #include "operator.hh"
 
 #include "Interface/abstractFunctionSpaceElement.hh"
@@ -11,32 +12,27 @@
 #include "Util/mixins.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
-#include <utility>
-
 namespace Algorithm
 {
   class Operator;
 
-  template <CGImplementationType impl_t = CGImplementationType::STANDARD>
-  class CGSolverImpl
+  class CGSolver
       : public Interface::AbstractLinearSolver, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::Verbosity
   {
   public:
     template <class Op1, class Op2,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
-    CGSolverImpl(Op1&& A, Op2&& P,
-             double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
+    CGSolver(Op1&& A, Op2&& P, const std::string& type )
       : AbstractLinearSolver(A.impl().sharedRange(),A.impl().sharedDomain()),
-        Mixin::RelativeAccuracy(relativeAccuracy),
-        Mixin::Eps(eps),
-        Mixin::Verbosity(verbose),
-        cg(std::forward<Op1>(A),std::forward<Op2>(P),verbose,eps)
+        cg(std::forward<Op1>(A),std::forward<Op2>(P),type)
     {
-      cg.terminationCriterion().setRelativeAccuracy(relativeAccuracy);
+      attachEps(&cg);
+      attachRelativeAccuracy(&cg.terminationCriterion());
+      attachVerbosity(&cg);
     }
 
-//    CGSolverImpl(Operator&& A, const Operator& P,
+//    CGSolver(Operator&& A, const Operator& P,
 //             double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
 //      : AbstractLinearSolver(A.impl().getSharedRange(),A.impl().getSharedDomain()),
 //        Mixin::RelativeAccuracy(relativeAccuracy),
@@ -53,7 +49,7 @@ namespace Algorithm
       return clone(z.impl());
     }
 
-    CGImpl<impl_t>& impl()
+    CGMethod& impl()
     {
       return cg;
     }
@@ -64,20 +60,63 @@ namespace Algorithm
     }
 
   private:
-    CGSolverImpl* cloneImpl() const
+    CGSolver* cloneImpl() const
     {
-      throw CallOfUndefinedFunctionException("CGSolverImpl::cloneImpl()");
+      throw CallOfUndefinedFunctionException("CGSolver::cloneImpl()");
       //std::cout << "cloning cg solver" << std::endl;
-      //return new CGSolverImpl(*this);
+      //return new CGSolver(*this);
     }
 
-    mutable CGImpl<impl_t> cg;
+    mutable CGMethod cg;
   };
 
-  using CGSolver   = CGSolverImpl<>;
-  using TCGSolver  = CGSolverImpl<CGImplementationType::TRUNCATED>;
-  using RCGSolver  = CGSolverImpl<CGImplementationType::REGULARIZED>;
-  using TRCGSolver = CGSolverImpl<CGImplementationType::TRUNCATED_REGULARIZED>;
+  template <class Op1, class Op2,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
+  auto makeCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
+  {
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "standard" );
+    solver->setRelativeAccuracy(relativeAccuracy);
+    solver->setEps(eps);
+    solver->setVerbosity(verbose);
+    return std::move(solver);
+  }
+
+  template <class Op1, class Op2,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
+  auto makeRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
+  {
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "regularized");
+    solver->setRelativeAccuracy(relativeAccuracy);
+    solver->setEps(eps);
+    solver->setVerbosity(verbose);
+    return std::move(solver);
+  }
+
+  template <class Op1, class Op2,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
+  auto makeTCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
+  {
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "truncated");
+    solver->setRelativeAccuracy(relativeAccuracy);
+    solver->setEps(eps);
+    solver->setVerbosity(verbose);
+    return std::move(solver);
+  }
+
+  template <class Op1, class Op2,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
+            class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
+  auto makeTRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
+  {
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "truncated regularized");
+    solver->setRelativeAccuracy(relativeAccuracy);
+    solver->setEps(eps);
+    solver->setVerbosity(verbose);
+    return std::move(solver);
+  }
 }
 
 #endif // ALGORITHM_CONJUGATE_GRADIENTS_CG_SOLVER_HH

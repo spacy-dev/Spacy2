@@ -8,16 +8,16 @@
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractBanachSpace; }
+  namespace Interface { class AbstractFunctionSpace; }
 
   namespace Fenics
   {
     class Vector : public Interface::AbstractFunctionSpaceElement, public Mixin::Impl<dolfin::Function>
     {
     public:
-      explicit Vector(const Interface::AbstractBanachSpace &space);
+      explicit Vector(const Interface::AbstractFunctionSpace &space);
 
-      Vector(const dolfin::Function& f, const Interface::AbstractBanachSpace& space);
+      Vector(const dolfin::Function& f, const Interface::AbstractFunctionSpace& space);
 
       void copyTo(Interface::AbstractFunctionSpaceElement& y) const final override;
 

@@ -3,7 +3,7 @@
 
 #include "Fenics/c1Operator.hh"
 #include "Fenics/c2Functional.hh"
-#include "Fenics/hilbertSpace.hh"
+#include "Fenics/functionSpace.hh"
 #include "Fenics/pc2Functional.hh"
 #include "Fenics/scalarProducts.hh"
 #include "Fenics/trackingTypeFunctional.hh"

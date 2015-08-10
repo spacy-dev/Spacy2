@@ -1,4 +1,4 @@
-#include "cgTerminationCriteria.hh"
+#include "terminationCriteria.hh"
 
 #include <algorithm>
 #include <cassert>

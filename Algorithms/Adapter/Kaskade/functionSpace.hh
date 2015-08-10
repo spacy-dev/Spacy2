@@ -1,16 +1,16 @@
-#ifndef ALGORITHM_ADAPTER_KASKADE_HILBERT_SPACE_HH
-#define ALGORITHM_ADAPTER_KASKADE_HILBERT_SPACE_HH
+#ifndef ALGORITHM_ADAPTER_KASKADE_FUNCTION_SPACE_HH
+#define ALGORITHM_ADAPTER_KASKADE_FUNCTION_SPACE_HH
 
 #include <memory>
 
-#include "Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/create.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
 
-#include "../../hilbertSpace.hh"
+#include "../../functionSpace.hh"
 
 namespace Algorithm
 {
@@ -21,15 +21,15 @@ namespace Algorithm
   namespace Kaskade
   {
     template <class Description>
-    class HilbertSpace :
-        public Interface::AbstractHilbertSpace ,
+    class FunctionSpace :
+        public Interface::AbstractFunctionSpace ,
         public Mixin::Impl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
     {
       using Space = std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > >;
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
     public:
-      HilbertSpace(const Space& space)
-        : Interface::AbstractHilbertSpace( std::make_shared< l2Product<Description> >() ),
+      FunctionSpace(const Space& space)
+        : Interface::AbstractFunctionSpace( std::make_shared< l2Product<Description> >() ),
           Mixin::Impl<Space>(space)
       {}
 
@@ -41,9 +41,9 @@ namespace Algorithm
     };
 
     template <class Description, class Space>
-    auto makeHilbertSpace(const Space& space)
+    auto makeFunctionSpace(const Space& space)
     {
-      return createFromSharedImpl< ::Algorithm::HilbertSpace , HilbertSpace<Description> >( space );
+      return createFromSharedImpl< ::Algorithm::FunctionSpace , FunctionSpace<Description> >( space );
     }
 
 
@@ -55,9 +55,9 @@ namespace Algorithm
         using Spaces = typename Description::Spaces;
         using Variable = std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Variables,i>::type>;
 
-        static void apply(const Spaces& spaces, std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >& newSpaces)
+        static void apply(const Spaces& spaces, std::vector<std::shared_ptr<Interface::AbstractFunctionSpace> >& newSpaces)
         {
-          newSpaces[i] = std::make_shared< HilbertSpace<ExtractDescription_t<Description,i> > >( *boost::fusion::at_c<Variable::spaceIndex>(spaces) );
+          newSpaces[i] = std::make_shared< FunctionSpace<ExtractDescription_t<Description,i> > >( *boost::fusion::at_c<Variable::spaceIndex>(spaces) );
           MakeSpaces<Description,i+1,n>::apply(spaces,newSpaces);
         }
       };
@@ -66,7 +66,7 @@ namespace Algorithm
       struct MakeSpaces<Description,n,n>
       {
         using Spaces = typename Description::Spaces;
-        static void apply(const Spaces&, std::vector<std::shared_ptr<Interface::AbstractBanachSpace> >&)
+        static void apply(const Spaces&, std::vector<std::shared_ptr<Interface::AbstractFunctionSpace> >&)
         {}
       };
 
@@ -77,7 +77,7 @@ namespace Algorithm
         using Variables = typename Description::Variables;
         static auto apply(const ProductSpace& spaces)
         {
-          return &castTo< HilbertSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j)).impl();
+          return &castTo< FunctionSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j)).impl();
         }
       };
 
@@ -103,8 +103,8 @@ namespace Algorithm
       {
         return ExtractSpace<Description,i,0,boost::fusion::result_of::size<typename Description::Spaces>::value>::apply(spaces);
 //        constexpr int j = std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Variables,i>::type>::spaceIndex;
-//        std::cout << "extracting spaces: " << castTo< HilbertSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl().degreesOfFreedom() << std::endl;
-//        return &castTo< HilbertSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl();
+//        std::cout << "extracting spaces: " << castTo< FunctionSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl().degreesOfFreedom() << std::endl;
+//        return &castTo< FunctionSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl();
       }
 
       template <class Description, unsigned... is>
@@ -118,9 +118,9 @@ namespace Algorithm
       {
         using Spaces = typename Description::Spaces;
 
-        static Spaces apply(const Interface::AbstractBanachSpace& spaces)
+        static Spaces apply(const Interface::AbstractFunctionSpace& spaces)
         {
-          return Spaces( &castTo< HilbertSpace<Description> >(spaces).impl() );
+          return Spaces( &castTo< FunctionSpace<Description> >(spaces).impl() );
         }
       };
 
@@ -129,7 +129,7 @@ namespace Algorithm
       {
         using Spaces = typename Description::Spaces;
 
-        static Spaces apply(const Interface::AbstractBanachSpace&)
+        static Spaces apply(const Interface::AbstractFunctionSpace&)
         {}
       };
     }
@@ -139,19 +139,19 @@ namespace Algorithm
     auto makeProductSpace(const Spaces& spaces, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       constexpr int n = boost::fusion::result_of::size<typename Description::Variables>::value;
-      std::vector<std::shared_ptr<Interface::AbstractBanachSpace> > newSpaces( n );
+      std::vector<std::shared_ptr<Interface::AbstractFunctionSpace> > newSpaces( n );
 
       Detail::MakeSpaces<Description,0,n>::apply(spaces,newSpaces);
 
-      return createFromSharedImpl< ::Algorithm::HilbertSpace, ProductSpace>( newSpaces , primalIds , dualIds );
+      return createFromSharedImpl< ::Algorithm::FunctionSpace, ProductSpace>( newSpaces , primalIds , dualIds );
     }
 
     template <class Description>
-    auto extractSpaces(const Interface::AbstractBanachSpace& spaces)
+    auto extractSpaces(const Interface::AbstractFunctionSpace& spaces)
     {
       using Spaces = typename Description::Spaces;
 
-      if( is< HilbertSpace< Description > >(spaces) )
+      if( is< FunctionSpace< Description > >(spaces) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
       if( is< ProductSpace >(spaces) )
@@ -166,4 +166,4 @@ namespace Algorithm
   }
 }
 
-#endif // ALGORITHM_ADAPTER_KASKADE_HILBERT_SPACE_HH
+#endif // ALGORITHM_ADAPTER_KASKADE_FUNCTION_SPACE_HH

@@ -8,7 +8,7 @@
 #include "Util/create.hh"
 
 #include "directSolver.hh"
-#include "hilbertSpace.hh"
+#include "functionSpace.hh"
 #include "vector.hh"
 
 namespace Algorithm
@@ -29,14 +29,14 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractBanachSpace> domain_)
+      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain_)
         : AbstractC2Functional(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
           assembler_(spaces_)
       {}
 
-      Functional(const FunctionalImpl& f, const BanachSpace& domain)
+      Functional(const FunctionalImpl& f, const ::Algorithm::FunctionSpace& domain)
         : Functional(f,domain.sharedImpl())
       {}
 
@@ -172,13 +172,13 @@ namespace Algorithm
 
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractBanachSpace> domain)
+    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain)
     {
       return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
     }
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, const BanachSpace& domain)
+    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::FunctionSpace& domain)
     {
       return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
     }

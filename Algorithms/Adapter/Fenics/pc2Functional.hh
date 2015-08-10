@@ -13,7 +13,7 @@
 #include "util.hh"
 #include "vector.hh"
 
-#include "banachSpace.hh"
+#include "functionSpace.hh"
 #include "../../c2Functional.hh"
 
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
@@ -33,7 +33,7 @@ namespace Algorithm
     class PC2Functional : public Interface::AbstractC2Functional, public Mixin::StateIndex, public Mixin::ControlIndex , public Mixin::AdjointIndex
     {
     public:
-      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractBanachSpace> space)
+      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
         : Interface::AbstractC2Functional( space ),
           pd2c_( pd2c.function_space(0) , pd2c.function_space(1) ),
           bcs_( bcs )
@@ -41,7 +41,7 @@ namespace Algorithm
         copyCoefficients(pd2c,pd2c_);
       }
 
-      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
+      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
         : PC2Functional(pd2c,bcs,space.sharedImpl())
       {}
 
@@ -105,7 +105,7 @@ namespace Algorithm
 
 
     template <class JacobianForm>
-    auto makePC2Functional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const BanachSpace& space)
+    auto makePC2Functional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const FunctionSpace& space)
     {
       return createFromUniqueImpl< ::Algorithm::C2Functional , ::Algorithm::Fenics::PC2Functional<JacobianForm> >( J , bcs , space );
     }

@@ -11,7 +11,7 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractBanachSpace;
+  using Interface::AbstractFunctionSpace;
   using Interface::AbstractFunctionSpaceElement;
 
   std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables)

@@ -1,12 +1,12 @@
 #include "realSolver.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "real.hh"
 #include <iostream>
 namespace Algorithm
 {
-  RealSolver::RealSolver(double value, std::shared_ptr<Interface::AbstractBanachSpace> domain, std::shared_ptr<Interface::AbstractBanachSpace> range)
+  RealSolver::RealSolver(double value, std::shared_ptr<Interface::AbstractFunctionSpace> domain, std::shared_ptr<Interface::AbstractFunctionSpace> range)
     : AbstractLinearSolver(domain,range),
       value_(value)
   {}

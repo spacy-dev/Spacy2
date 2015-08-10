@@ -10,8 +10,8 @@ namespace Algorithm
                                                                                    std::shared_ptr<Interface::AbstractLinearSolver> adjointSolver,
                                                                                    std::unique_ptr<AbstractOperator>&& B,
                                                                                    std::unique_ptr<AbstractOperator>&& BT,
-                                                                                   std::shared_ptr<Interface::AbstractBanachSpace> domain,
-                                                                                   std::shared_ptr<Interface::AbstractBanachSpace> range)
+                                                                                   std::shared_ptr<Interface::AbstractFunctionSpace> domain,
+                                                                                   std::shared_ptr<Interface::AbstractFunctionSpace> range)
     : AbstractOperator(domain,range),
       stateSolver_(stateSolver), controlSolver_(controlSolver), adjointSolver_(adjointSolver),
       B_(std::move(B)), BT_(std::move(BT))

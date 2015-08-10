@@ -12,14 +12,14 @@ namespace Algorithm
 {
   namespace Interface
   {
-    class AbstractBanachSpace;
+    class AbstractFunctionSpace;
 
     class AbstractFunctionSpaceElement :
         public Mixin::Cloneable<AbstractFunctionSpaceElement>,
         public Mixin::Eps
     {
     public:
-      explicit AbstractFunctionSpaceElement(const AbstractBanachSpace& space);
+      explicit AbstractFunctionSpaceElement(const AbstractFunctionSpace& space);
 
       virtual ~AbstractFunctionSpaceElement() = default;
 
@@ -64,7 +64,7 @@ namespace Algorithm
       /**
        * @brief Access corresponding function space.
        */
-      const AbstractBanachSpace& space() const;
+      const AbstractFunctionSpace& space() const;
 
       /**
        * @brief Checks whether two function space elements coincide up to the maximal attainable accuracy.
@@ -83,7 +83,7 @@ namespace Algorithm
       virtual double applyAsDualTo(const AbstractFunctionSpaceElement& y) const = 0;
 
     private:
-      const AbstractBanachSpace& space_;
+      const AbstractFunctionSpace& space_;
     };
 
     std::ostream& operator<<(std::ostream& os, const AbstractFunctionSpaceElement& element);

@@ -7,7 +7,7 @@
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractBanachSpace; }
+  namespace Interface { class AbstractFunctionSpace; }
 
   /// Real number.
   class Real : public Interface::AbstractFunctionSpaceElement
@@ -18,13 +18,13 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const Interface::AbstractBanachSpace& space);
+    Real(double x, const Interface::AbstractFunctionSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const Interface::AbstractBanachSpace& space);
+    explicit Real(const Interface::AbstractFunctionSpace& space);
 
     /**
      * @brief copy data to y.

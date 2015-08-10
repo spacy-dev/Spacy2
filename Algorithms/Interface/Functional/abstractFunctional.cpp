@@ -1,13 +1,13 @@
 #include "abstractFunctional.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {
   namespace Interface
   {
-    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain)
+    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractFunctionSpace> domain)
       : domain_(domain)
     {}
 
@@ -20,12 +20,12 @@ namespace Algorithm
       return d0(x);
     }
 
-    const AbstractBanachSpace& AbstractFunctional::domain() const
+    const AbstractFunctionSpace& AbstractFunctional::domain() const
     {
       return *domain_;
     }
 
-    std::shared_ptr<AbstractBanachSpace> AbstractFunctional::sharedDomain() const
+    std::shared_ptr<AbstractFunctionSpace> AbstractFunctional::sharedDomain() const
     {
       return domain_;
     }

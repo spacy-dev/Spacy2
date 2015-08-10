@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "banachSpace.hh"
+#include "functionSpace.hh"
 
 #include "Interface/Functional/abstractFunctional.hh"
 #include "Util/Mixins/impl.hh"
@@ -31,17 +31,15 @@ namespace Algorithm
     /**
      * @brief Access underlying domain.
      */
-    BanachSpace& domain();
+    FunctionSpace& domain();
 
     /**
      * @brief Access underlying domain.
      */
-    const BanachSpace& domain() const;
-
-    std::shared_ptr<BanachSpace> sharedDomain() const;
+    const FunctionSpace& domain() const;
 
   private:
-    std::shared_ptr<BanachSpace> domain_ = nullptr;
+    FunctionSpace domain_;
   };
 }
 #endif // ALGORITHM_FUNCTIONAL_HH

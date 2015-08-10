@@ -10,7 +10,7 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractBanachSpace;
+    class AbstractFunctionSpace;
     class AbstractFunctionSpaceElement;
     /// \endcond
 
@@ -24,7 +24,7 @@ namespace Algorithm
        * @brief Constructor.
        * @param domain Domain space \f$X\f$.
        */
-      AbstractFunctional(std::shared_ptr<AbstractBanachSpace> domain);
+      AbstractFunctional(std::shared_ptr<AbstractFunctionSpace> domain);
 
       virtual ~AbstractFunctional();
 
@@ -32,16 +32,16 @@ namespace Algorithm
       double operator()(const AbstractFunctionSpaceElement& x) const;
 
       /// Access domain space \f$X\f$.
-      const AbstractBanachSpace& domain() const;
+      const AbstractFunctionSpace& domain() const;
 
       /// Access shared domain space \f$X\f$.
-      std::shared_ptr<AbstractBanachSpace> sharedDomain() const;
+      std::shared_ptr<AbstractFunctionSpace> sharedDomain() const;
 
     protected:
       virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
 
     private:
-      std::shared_ptr<AbstractBanachSpace> domain_;
+      std::shared_ptr<AbstractFunctionSpace> domain_;
     };
   }
 }

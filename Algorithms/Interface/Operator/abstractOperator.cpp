@@ -1,44 +1,44 @@
 #include "abstractOperator.hh"
 
-#include "Interface/abstractBanachSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 
 namespace Algorithm
 {
   namespace Interface
   {
-    AbstractOperator::AbstractOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range)
+    AbstractOperator::AbstractOperator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range)
       : domain_(domain), range_(range)
     {}
 
     AbstractOperator::~AbstractOperator(){}
 
-    AbstractBanachSpace& AbstractOperator::domain()
+    AbstractFunctionSpace& AbstractOperator::domain()
     {
       return *domain_;
     }
 
-    const AbstractBanachSpace& AbstractOperator::domain() const
+    const AbstractFunctionSpace& AbstractOperator::domain() const
     {
       return *domain_;
     }
 
-    AbstractBanachSpace& AbstractOperator::range()
+    AbstractFunctionSpace& AbstractOperator::range()
     {
       return *range_;
     }
 
-    const AbstractBanachSpace& AbstractOperator::range() const
+    const AbstractFunctionSpace& AbstractOperator::range() const
     {
       return *range_;
     }
 
-    std::shared_ptr<AbstractBanachSpace> AbstractOperator::sharedDomain() const
+    std::shared_ptr<AbstractFunctionSpace> AbstractOperator::sharedDomain() const
     {
       return domain_;
     }
 
-    std::shared_ptr<AbstractBanachSpace> AbstractOperator::sharedRange() const
+    std::shared_ptr<AbstractFunctionSpace> AbstractOperator::sharedRange() const
     {
       return range_;
     }

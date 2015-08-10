@@ -10,7 +10,7 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractBanachSpace;
+    class AbstractFunctionSpace;
     class AbstractLinearSolver;
     /// \endcond
 
@@ -25,10 +25,10 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractLinearOperator(std::shared_ptr<AbstractBanachSpace> domain, std::shared_ptr<AbstractBanachSpace> range);
+      AbstractLinearOperator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range);
 
       /// Get linear solver.
-      virtual std::unique_ptr<AbstractLinearSolver> solver() const = 0;
+      virtual std::unique_ptr<AbstractLinearSolver> solver() const;
     };
   }
 }

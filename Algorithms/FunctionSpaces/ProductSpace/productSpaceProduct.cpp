@@ -3,8 +3,7 @@
 #include "productSpaceElement.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include "Interface/abstractBanachSpace.hh"
-#include "Interface/abstractHilbertSpace.hh"
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 
 namespace Algorithm

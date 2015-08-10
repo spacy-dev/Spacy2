@@ -21,8 +21,8 @@ namespace Algorithm
                                             std::shared_ptr<Interface::AbstractLinearSolver> adjointSolver,
                                             std::unique_ptr<Interface::AbstractOperator>&& B,
                                             std::unique_ptr<Interface::AbstractOperator>&& BT,
-                                            std::shared_ptr<Interface::AbstractBanachSpace> domain,
-                                            std::shared_ptr<Interface::AbstractBanachSpace> range);
+                                            std::shared_ptr<Interface::AbstractFunctionSpace> domain,
+                                            std::shared_ptr<Interface::AbstractFunctionSpace> range);
 
     std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
 

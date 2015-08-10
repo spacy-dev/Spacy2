@@ -36,16 +36,13 @@ namespace Algorithm
   {
     auto lastStepWasUndamped = false;
     auto x = x0;
-//    castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
-//    norm = HilbertSpaceNorm( primalInducedScalarProduct( N_->hessian(x0) ));
 
     for(unsigned step = 1; step < maxSteps(); ++step)
     {
       normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-      N_->impl().setOrigin(x.impl());
-      //norm = N_->domain().norm();
-      castTo<HilbertSpace>(N_->domain()).setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
+      //N_->impl().setOrigin(x.impl());
+      N_->domain().setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -99,11 +96,11 @@ namespace Algorithm
         std::cout << spacing2 << "absolute step length accuracy = " << relativeAccuracy()*norm(x) << std::endl;
       }
     }
-    auto trcg = std::make_unique<TRCGSolver>( L_->hessian(x) ,
-                                              *normalSolver,
-                                              trcgRelativeAccuracy,
-                                              eps(),
-                                              verbose_detailed() );
+    auto trcg = makeTRCGSolver( L_->hessian(x) ,
+                                *normalSolver,
+                                trcgRelativeAccuracy,
+                                eps(),
+                                verbose_detailed() );
     trcg->impl().setIterativeRefinements(0);
     trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
     tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
@@ -246,7 +243,7 @@ namespace Algorithm
     if( N_ == nullptr ) return;
     if( norm_dx < sqrtEps() * norm_x ) return;
     setContraction( norm_ds/norm_dx );
-//    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
+    //    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
 
     if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*contraction()/norm_dx )
       omegaC = 2*contraction()/norm_dx;

@@ -21,7 +21,7 @@ namespace Algorithm
     public:
       TrackingTypeCostFunctional(std::unique_ptr<Interface::AbstractC2Functional>&& YNormFunctional,
                                  std::unique_ptr<Interface::AbstractC2Functional>&& UNormFunctional,
-                                 std::shared_ptr<Interface::AbstractBanachSpace> domain)
+                                 std::shared_ptr<Interface::AbstractFunctionSpace> domain)
         : Interface::AbstractC2Functional(domain),
           YNormFunctional_(std::move(YNormFunctional)),
           UNormFunctional_(std::move(UNormFunctional))

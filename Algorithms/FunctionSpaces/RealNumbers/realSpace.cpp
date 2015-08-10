@@ -5,7 +5,7 @@
 
 namespace Algorithm
 {
-  RealSpace::RealSpace() : Interface::AbstractHilbertSpace(std::make_shared<RealProduct>())
+  RealSpace::RealSpace() : Interface::AbstractFunctionSpace(std::make_shared<RealProduct>())
   {}
 
   std::unique_ptr<Interface::AbstractFunctionSpaceElement> RealSpace::elementImpl() const

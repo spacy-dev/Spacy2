@@ -1,15 +1,15 @@
 #include "abstractFunctionSpaceElement.hh"
 
-#include "abstractBanachSpace.hh"
+#include "abstractFunctionSpace.hh"
 #include "abstractNorm.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include <iostream>
+
 namespace Algorithm
 {
   namespace Interface
   {
-    AbstractFunctionSpaceElement::AbstractFunctionSpaceElement(const AbstractBanachSpace& space)
+    AbstractFunctionSpaceElement::AbstractFunctionSpaceElement(const AbstractFunctionSpace& space)
       : space_(space)
     {}
 
@@ -18,7 +18,7 @@ namespace Algorithm
       return space_.index();
     }
 
-    const AbstractBanachSpace& AbstractFunctionSpaceElement::space() const
+    const AbstractFunctionSpace& AbstractFunctionSpaceElement::space() const
     {
       return space_;
     }

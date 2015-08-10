@@ -6,8 +6,8 @@
 #include <type_traits>
 #include <utility>
 
+#include "Interface/abstractFunctionSpace.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
-#include "Interface/abstractHilbertSpace.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
