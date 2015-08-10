@@ -10,7 +10,6 @@ namespace Algorithm
   /// \cond
   namespace Interface { class AbstractLinearSolver; }
   class LinearOperator;
-  class C1Operator;
   class FunctionSpaceElement;
   /// \endcond
 

@@ -1,6 +1,6 @@
 #include "dampingStrategies.hh"
 
-#include "c1Operator.hh"
+#include "operator.hh"
 #include "linearSolver.hh"
 
 #include "Util/Exceptions/regularityTestFailedException.hh"
@@ -13,7 +13,7 @@ namespace Algorithm
   {
     namespace DampingStrategy
     {
-      AffineCovariant::AffineCovariant(const C1Operator& F)
+      AffineCovariant::AffineCovariant(const Operator& F)
         : F_(F), oldDs(F.domain().element())
       {}
 
@@ -65,7 +65,7 @@ namespace Algorithm
       }
 
 
-      AffineContravariant::AffineContravariant(const C1Operator& F)
+      AffineContravariant::AffineContravariant(const Operator& F)
         : F_(F)
       {}
 
@@ -110,7 +110,7 @@ namespace Algorithm
       }
 
 
-      None::None(const C1Operator& F)
+      None::None(const Operator& F)
       {}
 
       DampingFactor None::compute(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&)

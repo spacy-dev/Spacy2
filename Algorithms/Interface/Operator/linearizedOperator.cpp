@@ -1,6 +1,6 @@
 #include "linearizedOperator.hh"
 
-#include "abstractC1Operator.hh"
+#include "abstractOperator.hh"
 #include "Interface/abstractFunctionSpaceElement.hh"
 #include "Interface/abstractLinearSolver.hh"
 
@@ -10,7 +10,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x)
+    LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractOperator>&& A, const AbstractFunctionSpaceElement& x)
       : AbstractLinearOperator(A->sharedDomain(),A->sharedRange()),
         A_(std::move(A)), x_(clone(x))
     {}

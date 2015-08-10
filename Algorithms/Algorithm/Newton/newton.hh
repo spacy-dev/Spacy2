@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "c1Operator.hh"
+#include "operator.hh"
 
 #include "dampingStrategies.hh"
 #include "terminationCriteria.hh"
@@ -34,7 +34,7 @@ namespace Algorithm
       /**
        * @brief Set up Newton's method to solve \f$F(x)=0\f$.
        */
-      explicit NewtonMethod(const C1Operator& F);
+      explicit NewtonMethod(const Operator& F);
 
       /**
        * \brief Apply Newton's method to solve \f$F(x)=0\f$ starting at the initial guess \f$x0=0\f$.
@@ -82,7 +82,7 @@ namespace Algorithm
       }
 
     private:
-      C1Operator F_;
+      Operator F_;
       std::shared_ptr<DampingStrategy::Base> dampingFactor_;
       std::shared_ptr<TerminationCriterion::Base> terminationCriterion_;
     };
@@ -94,7 +94,7 @@ namespace Algorithm
    * damping strategy: Newton::DampingStrategy::Undamped
    * termination criterion: Newton::TerminationCriterion::AffineCovariant
    */
-  Newton::NewtonMethod localNewton(const C1Operator& F);
+  Newton::NewtonMethod localNewton(const Operator& F);
 
   /**
    * @brief Get affine covariant Newton method.
@@ -102,7 +102,7 @@ namespace Algorithm
    * damping strategy: Newton::DampingStrategy::AffineCovariant
    * termination criterion: Newton::TerminationCriterion::AffineCovariant
    */
-  Newton::NewtonMethod covariantNewton(const C1Operator& F);
+  Newton::NewtonMethod covariantNewton(const Operator& F);
 
   /**
    * @brief Get affine contravariant Newton method.
@@ -110,6 +110,6 @@ namespace Algorithm
    * damping strategy: Newton::DampingStrategy::AffineContravariant
    * termination criterion: Newton::TerminationCriterion::AffineContravariant
    */
-  Newton::NewtonMethod contravariantNewton(const C1Operator& F);
+  Newton::NewtonMethod contravariantNewton(const Operator& F);
 }
 #endif // ALGORITHM_ALGORITHM_NEWTON_HH

@@ -10,6 +10,10 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class LinearSolver;
+  /// \endcond
+
   class LinearOperator : public Operator
   {
   public:

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "abstractC1Operator.hh"
+#include "abstractOperator.hh"
 #include "abstractLinearOperator.hh"
 
 namespace Algorithm
@@ -23,7 +23,7 @@ namespace Algorithm
        * @param A (possibly nonlinear) differentiable operator.
        * @param x point of linearization.
        */
-      LinearizedOperator(std::unique_ptr<AbstractC1Operator>&& A, const AbstractFunctionSpaceElement& x);
+      LinearizedOperator(std::unique_ptr<AbstractOperator>&& A, const AbstractFunctionSpaceElement& x);
 
       /// Apply operator, i.e. compute \f$y=A'(x)dx\f$.
       std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
@@ -34,7 +34,7 @@ namespace Algorithm
     private:
       LinearizedOperator* cloneImpl() const;
 
-      std::unique_ptr<AbstractC1Operator> A_;
+      std::unique_ptr<AbstractOperator> A_;
       std::unique_ptr<AbstractFunctionSpaceElement> x_;
     };
   }

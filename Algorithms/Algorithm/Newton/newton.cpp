@@ -9,7 +9,7 @@ namespace Algorithm
 {
   namespace Newton
   {
-    NewtonMethod::NewtonMethod(const C1Operator& F)
+    NewtonMethod::NewtonMethod(const Operator& F)
       : F_(F),
         dampingFactor_(std::make_shared<DampingStrategy::AffineCovariant>(F_)),
         terminationCriterion_( std::make_shared<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
@@ -56,7 +56,7 @@ namespace Algorithm
     }
   }
 
-  Newton::NewtonMethod localNewton(const C1Operator& F)
+  Newton::NewtonMethod localNewton(const Operator& F)
   {
     using namespace Newton;
     auto newton = NewtonMethod( F );
@@ -64,13 +64,13 @@ namespace Algorithm
     return newton;
   }
 
-  Newton::NewtonMethod covariantNewton(const C1Operator& F)
+  Newton::NewtonMethod covariantNewton(const Operator& F)
   {
     using namespace Newton;
     return NewtonMethod( F );
   }
 
-  Newton::NewtonMethod contravariantNewton(const C1Operator& F)
+  Newton::NewtonMethod contravariantNewton(const Operator& F)
   {
     using namespace Newton;
     auto newton = NewtonMethod( F );

@@ -75,7 +75,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "standard" );
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "cg" );
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -87,7 +87,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "regularized");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "rcg");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -99,7 +99,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeTCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "truncated");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "tcg");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -111,7 +111,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeTRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "truncated regularized");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "trcg");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);

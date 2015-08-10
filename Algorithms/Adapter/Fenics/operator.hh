@@ -1,17 +1,17 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_C1OPERATOR_HH
-#define ALGORITHM_ADAPTER_FENICS_C1OPERATOR_HH
+#ifndef ALGORITHM_ADAPTER_FENICS_OPERATOR_HH
+#define ALGORITHM_ADAPTER_FENICS_OPERATOR_HH
 
 #include <memory>
 #include <vector>
 
 #include <dolfin.h>
 
-#include "Interface/Operator/abstractC1Operator.hh"
+#include "Interface/Operator/abstractOperator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "functionSpace.hh"
-#include "../../c1Operator.hh"
+#include "../../operator.hh"
 #include "Util/create.hh"
 #include "Util/Mixins/disableAssembly.hh"
 
@@ -25,13 +25,13 @@ namespace Algorithm
   namespace Fenics
   {
     template <class ResidualForm, class JacobianForm>
-    class C1Operator : public Interface::AbstractC1Operator , public Mixin::DisableAssembly
+    class Operator : public Interface::AbstractOperator , public Mixin::DisableAssembly
     {
     public:
-      C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
+      Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
                  std::shared_ptr<Interface::AbstractFunctionSpace> domain,
                  std::shared_ptr<Interface::AbstractFunctionSpace> range)
-        : Interface::AbstractC1Operator( domain , range ),
+        : Interface::AbstractOperator( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
           bcs_( bcs ),
@@ -41,11 +41,11 @@ namespace Algorithm
         copyCoefficients(J,J_);
       }
 
-      C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
+      Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
                  std::shared_ptr<dolfin::GenericMatrix> A,
                  std::shared_ptr<Interface::AbstractFunctionSpace> domain,
                  std::shared_ptr<Interface::AbstractFunctionSpace> range)
-        : Interface::AbstractC1Operator( domain , range ),
+        : Interface::AbstractOperator( domain , range ),
           Mixin::DisableAssembly(true),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
@@ -57,15 +57,15 @@ namespace Algorithm
         copyCoefficients(J,J_);
       }
 
-      C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
+      Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
                  const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
-        : C1Operator(F,J,bcs,domain.sharedImpl(),range.sharedImpl())
+        : Operator(F,J,bcs,domain.sharedImpl(),range.sharedImpl())
       {}
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
         assembleOperator(x);
-//        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         auto y = range().element();
         copy(*b_,*y);
@@ -75,7 +75,7 @@ namespace Algorithm
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
         assembleGradient(x);
-//        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+//        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(dx,*y_);
@@ -135,19 +135,19 @@ namespace Algorithm
         oldX_J = clone(x);
       }
 
-      C1Operator* cloneImpl() const
+      Operator* cloneImpl() const
       {
-        if( assemblyIsDisabled() ) return new C1Operator(F_,J_,bcs_,A_,sharedDomain(),sharedRange());
-        return new C1Operator(F_,J_,bcs_,sharedDomain(),sharedRange());
+        if( assemblyIsDisabled() ) return new Operator(F_,J_,bcs_,A_,sharedDomain(),sharedRange());
+        return new Operator(F_,J_,bcs_,sharedDomain(),sharedRange());
       }
 
       std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
       {
         assembleOperator(x);
         assembleGradient(x);
-//        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
-//        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return std::make_unique<Interface::LinearizedOperator>(std::make_unique<C1Operator>(F_,J_,bcs_,A_,sharedDomain(),sharedRange()),x);
+//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+//        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        return std::make_unique<Interface::LinearizedOperator>(std::make_unique<Operator>(F_,J_,bcs_,A_,sharedDomain(),sharedRange()),x);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
@@ -168,25 +168,25 @@ namespace Algorithm
 
     /**
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
-     * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range )
+     * @return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
+    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
                         const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
     }
 
     /**
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
-     * @return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space )
+     * @return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
+    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , ::Algorithm::Fenics::C1Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space );
+      return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space );
     }
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_C1OPERATOR_HH
+#endif // ALGORITHM_ADAPTER_FENICS_OPERATOR_HH

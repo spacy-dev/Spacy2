@@ -5,9 +5,9 @@
 #include <utility>
 
 #include "functionSpace.hh"
-#include "../../c1Operator.hh"
+#include "../../operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
-#include "Interface/Operator/abstractC1Operator.hh"
+#include "Interface/Operator/abstractOperator.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/castTo.hh"
 #include "Util/create.hh"
@@ -21,7 +21,7 @@ namespace Algorithm
   {
     template <class OperatorImpl>
     class Operator :
-        public Interface::AbstractC1Operator , public Mixin::DisableAssembly
+        public Interface::AbstractOperator , public Mixin::DisableAssembly
     {
       using VariableSetDescription = typename OperatorImpl::AnsatzVars;
       using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
@@ -36,7 +36,7 @@ namespace Algorithm
     public:
       Operator(const OperatorImpl& f,
                         std::shared_ptr<Interface::AbstractFunctionSpace> domain_, std::shared_ptr<Interface::AbstractFunctionSpace> range_)
-        : AbstractC1Operator(domain_,range_),
+        : AbstractOperator(domain_,range_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
           assembler_(spaces_)
@@ -47,7 +47,7 @@ namespace Algorithm
       {}
 
       Operator(const Operator& g)
-        : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
+        : AbstractOperator(g.sharedDomain(),g.sharedRange()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_)
@@ -57,7 +57,7 @@ namespace Algorithm
 
 
       Operator(const Operator& g, bool disableAssembly)
-        : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
+        : AbstractOperator(g.sharedDomain(),g.sharedRange()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -155,7 +155,7 @@ namespace Algorithm
                       std::shared_ptr<Interface::AbstractFunctionSpace> domain,
                       std::shared_ptr<Interface::AbstractFunctionSpace> range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
     }
 
     template <class OperatorImpl>
@@ -163,7 +163,7 @@ namespace Algorithm
                       const ::Algorithm::FunctionSpace& domain,
                       const ::Algorithm::FunctionSpace& range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
     }
   }
 }
