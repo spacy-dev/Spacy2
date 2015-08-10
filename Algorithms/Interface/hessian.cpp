@@ -1,7 +1,7 @@
 #include "hessian.hh"
 
-#include "Interface/abstractFunctionSpaceElement.hh"
-#include "Interface/abstractLinearSolver.hh"
+#include "abstractFunctionSpaceElement.hh"
+#include "abstractLinearSolver.hh"
 
 #include <utility>
 
@@ -9,21 +9,21 @@ namespace Algorithm
 {
   namespace Interface
   {
-//    Hessian::Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
-//      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedDomain()), Mixin::UniqueImpl<AbstractC2Functional>(std::move(A)), x_(clone(x)), solver_(solver)
+//    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
+//      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedDomain()), Mixin::UniqueImpl<AbstractFunctional>(std::move(A)), x_(clone(x)), solver_(solver)
 //    {}
 
     Hessian::Hessian(Hessian&& other)
       : AbstractLinearOperator(other.sharedDomain(),other.sharedRange()),
-        Mixin::UniqueImpl<AbstractC2Functional>(std::move(other)),
+        Mixin::UniqueImpl<AbstractFunctional>(std::move(other)),
         x_(std::move(other.x_))
     {
       std::cout << "moving hessian" << std::endl;
     }
 
-    Hessian::Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x)
+    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x)
       : AbstractLinearOperator(A->sharedDomain(),A->sharedDomain()),
-        Mixin::UniqueImpl<AbstractC2Functional>(std::move(A)),
+        Mixin::UniqueImpl<AbstractFunctional>(std::move(A)),
         x_(clone(x))
     {}
 

@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "Interface/Functional/abstractC2Functional.hh"
+#include "Interface/abstractFunctional.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/makeLinearSolver.hh"
 #include "Util/Mixins/controlIndex.hh"
@@ -16,13 +16,13 @@ namespace Algorithm
   namespace Fenics
   {
     class TrackingTypeCostFunctional :
-        public Interface::AbstractC2Functional , public Mixin::ControlIndex , public Mixin::StateIndex
+        public Interface::AbstractFunctional , public Mixin::ControlIndex , public Mixin::StateIndex
     {
     public:
-      TrackingTypeCostFunctional(std::unique_ptr<Interface::AbstractC2Functional>&& YNormFunctional,
-                                 std::unique_ptr<Interface::AbstractC2Functional>&& UNormFunctional,
+      TrackingTypeCostFunctional(std::unique_ptr<Interface::AbstractFunctional>&& YNormFunctional,
+                                 std::unique_ptr<Interface::AbstractFunctional>&& UNormFunctional,
                                  std::shared_ptr<Interface::AbstractFunctionSpace> domain)
-        : Interface::AbstractC2Functional(domain),
+        : Interface::AbstractFunctional(domain),
           YNormFunctional_(std::move(YNormFunctional)),
           UNormFunctional_(std::move(UNormFunctional))
       {}
@@ -72,7 +72,7 @@ namespace Algorithm
       }
 
 
-      std::unique_ptr<Interface::AbstractC2Functional> YNormFunctional_, UNormFunctional_;
+      std::unique_ptr<Interface::AbstractFunctional> YNormFunctional_, UNormFunctional_;
     };
   }
 }

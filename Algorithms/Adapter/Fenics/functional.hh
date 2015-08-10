@@ -1,18 +1,18 @@
-#ifndef ALGORITHMS_ADAPTER_FENICS_C2FUNCTIONAL_HH
-#define ALGORITHMS_ADAPTER_FENICS_C2FUNCTIONAL_HH
+#ifndef ALGORITHMS_ADAPTER_FENICS_FUNCTIONAL_HH
+#define ALGORITHMS_ADAPTER_FENICS_FUNCTIONAL_HH
 
 #include <chrono>
 #include <memory>
 #include <vector>
 
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "Interface/Functional/abstractC2Functional.hh"
-#include "Interface/Functional/hessian.hh"
+#include "Interface/abstractFunctional.hh"
+#include "Interface/hessian.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/Mixins/primalDualSwitch.hh"
 #include "Util/castTo.hh"
 
-#include "../../c2Functional.hh"
+#include "../../functional.hh"
 
 #include "util.hh"
 #include "vector.hh"
@@ -22,13 +22,13 @@ namespace Algorithm
 {
   namespace Fenics
   {
-    template <class Functional, class FirstDerivative, class SecondDerivative>
-    class C2Functional : public Interface::AbstractC2Functional , public Mixin::DisableAssembly
+    template <class F, class DF, class DDF>
+    class Functional : public Interface::AbstractFunctional , public Mixin::DisableAssembly
     {
     public:
-      C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
+      Functional(const F& f, const DF& J, const DDF& H,
                    const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
-        : Interface::AbstractC2Functional( space ),
+        : Interface::AbstractFunctional( space ),
           f_( J.function_space(0)->mesh() ),
           J_( J.function_space(0) ),
           H_( H.function_space(0) , H.function_space(1) ),
@@ -40,16 +40,16 @@ namespace Algorithm
         copyCoefficients(H,H_);
       }
 
-      C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
+      Functional(const F& f, const DF& J, const DDF& H,
                    const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
-        : C2Functional(f,J,H,bcs,space.sharedImpl())
+        : Functional(f,J,H,bcs,space.sharedImpl())
       {}
 
-      C2Functional(const Functional& f, const FirstDerivative& J, const SecondDerivative& H,
+      Functional(const F& f, const DF& J, const DDF& H,
                    const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space,
                    const dolfin::GenericMatrix& A,
                    const Interface::AbstractFunctionSpaceElement& oldX_H)
-        : Interface::AbstractC2Functional( space ),
+        : Interface::AbstractFunctional( space ),
           Mixin::DisableAssembly(true),
           f_( J.function_space(0)->mesh() ),
           J_( J.function_space(0) ),
@@ -67,14 +67,14 @@ namespace Algorithm
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
+        primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
         return value_;
       }
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x) const final override
       {        
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
+        primalDualIgnoreReset(std::bind(&Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
         auto y = clone(x);
         copy(*b_,*y);
@@ -83,7 +83,7 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(dx,*x_);
@@ -109,10 +109,10 @@ namespace Algorithm
     private:
       std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const override
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
         assert( A_ != nullptr );
-        return std::make_unique<Interface::Hessian>( std::make_unique<C2Functional>(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_), *oldX_H_);
+        return std::make_unique<Interface::Hessian>( std::make_unique<Functional>(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_), *oldX_H_);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
@@ -173,15 +173,15 @@ namespace Algorithm
         oldX_H_ = clone(x);
       }
 
-      C2Functional* cloneImpl() const
+      Functional* cloneImpl() const
       {
-        if( assemblyIsDisabled() ) return new C2Functional(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_);
-        return new C2Functional(f_,J_,H_,bcs_,sharedDomain());
+        if( assemblyIsDisabled() ) return new Functional(f_,J_,H_,bcs_,sharedDomain(),*A_,*oldX_H_);
+        return new Functional(f_,J_,H_,bcs_,sharedDomain());
       }
 
-      mutable Functional f_;
-      mutable FirstDerivative J_;
-      mutable SecondDerivative H_;
+      mutable F f_;
+      mutable DF J_;
+      mutable DDF H_;
       const std::vector<const dolfin::DirichletBC*>& bcs_;
       mutable std::shared_ptr<dolfin::GenericMatrix> A_;
       mutable std::shared_ptr<dolfin::GenericVector> b_;
@@ -191,13 +191,13 @@ namespace Algorithm
     };
 
 
-    template <class Functional, class Derivative, class Hessian, class... Args>
-    ::Algorithm::C2Functional makeC2Functional( const Functional& f , const Derivative& J , const Hessian& H , Args&&... args )
+    template <class F, class DF, class DDF, class... Args>
+    ::Algorithm::Functional makeFunctional( const F& f , const DF& J , const DDF& H , Args&&... args )
     {
-      return createFromUniqueImpl< ::Algorithm::C2Functional , Fenics::C2Functional<Functional,Derivative,Hessian> >( f , J , H , std::forward<Args>(args)...);
+      return createFromUniqueImpl< ::Algorithm::Functional , Fenics::Functional<F,DF,DDF> >( f , J , H , std::forward<Args>(args)...);
     }
   }
 }
 
-#endif // ALGORITHMS_ADAPTER_FENICS_C2FUNCTIONAL_HH
+#endif // ALGORITHMS_ADAPTER_FENICS_FUNCTIONAL_HH
 

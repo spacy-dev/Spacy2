@@ -12,6 +12,8 @@ namespace Algorithm
     /// \cond
     class AbstractFunctionSpace;
     class AbstractFunctionSpaceElement;
+    class AbstractLinearSolver;
+    class Hessian;
     /// \endcond
 
     /**
@@ -31,6 +33,15 @@ namespace Algorithm
       /// Apply functional, i.e. compute \f$f(x)\f$.
       double operator()(const AbstractFunctionSpaceElement& x) const;
 
+      /// Apply derivative of functional, i.e. compute \f$f'(x) \in X^* \f$.
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x) const;
+
+      /// Apply second derivative of functional, i.e. compute \f$f''(x)dx \in X^* \f$.
+      virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const;
+
+      /// Get second derivative \f$f''(x)': X \rightarrow X^*\f$.
+      std::unique_ptr<Hessian> hessian(const AbstractFunctionSpaceElement& x) const;
+
       /// Access domain space \f$X\f$.
       const AbstractFunctionSpace& domain() const;
 
@@ -39,6 +50,11 @@ namespace Algorithm
 
     protected:
       virtual double d0(const AbstractFunctionSpaceElement&) const = 0;
+
+      friend class Hessian;
+
+      virtual std::unique_ptr<Hessian> makeHessian(const AbstractFunctionSpaceElement& x) const;
+      virtual std::unique_ptr<AbstractLinearSolver> makeSolver() const;
 
     private:
       std::shared_ptr<AbstractFunctionSpace> domain_;

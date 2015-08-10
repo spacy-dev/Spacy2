@@ -20,7 +20,7 @@ namespace Algorithm
                                                          std::shared_ptr<AbstractFunctionSpace> domain,
                                                          std::unique_ptr<Interface::AbstractOperator>&& My,
                                                          std::unique_ptr<Interface::AbstractOperator>&& Mu)
-    : AbstractC2Functional(domain),
+    : AbstractFunctional(domain),
       alpha_(alpha),
       referenceState_( clone(referenceState) ),
       My_(std::move(My)),
@@ -38,7 +38,7 @@ namespace Algorithm
 //  {
 //    if( isProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
 //    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::setArgument");
-//    AbstractC2Functional::setArgument(x);
+//    AbstractFunctional::setArgument(x);
 ////    x_ = clone( dynamic_cast<const ProductSpaceElement&>(x) );
 //  }
 

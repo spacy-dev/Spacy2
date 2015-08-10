@@ -10,8 +10,7 @@
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
 #include "Algorithm/dampingFactor.hh"
 
-#include "Interface/Functional/abstractC2Functional.hh"
-#include "c2Functional.hh"
+#include "functional.hh"
 #include "functionSpaceElement.hh"
 #include "linearSolver.hh"
 
@@ -22,9 +21,9 @@ namespace Algorithm
 {
   enum class AffineCovariantCompositeSteps::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L)
-    : N_(std::make_unique<C2Functional>(N)),
-      L_(std::make_unique<C2Functional>(L))
+  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const Functional& N, const Functional& L)
+    : N_(std::make_unique<Functional>(N)),
+      L_(std::make_unique<Functional>(L))
   {}
 
   FunctionSpaceElement AffineCovariantCompositeSteps::solve()

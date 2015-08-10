@@ -14,7 +14,7 @@
 namespace Algorithm
 {
   /// \cond
-  class C2Functional;
+  class Functional;
   class CubicModel;
   class FunctionSpaceElement;
   class LinearSolver;
@@ -40,7 +40,7 @@ namespace Algorithm
     enum class AcceptanceTest;
 
   public:
-    AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L);
+    AffineCovariantCompositeSteps(const Functional& N, const Functional& L);
 
     FunctionSpaceElement solve();
 
@@ -68,7 +68,7 @@ namespace Algorithm
     void regularityTest(double nu, double tau) const;
     AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
 
-    std::unique_ptr<C2Functional> N_, L_;
+    std::unique_ptr<Functional> N_, L_;
 
     LipschitzConstant omegaL, omegaC;
 

@@ -2,7 +2,7 @@
 #define ALGORITHM_ADAPTER_FENICS_HH
 
 #include "Fenics/c1Operator.hh"
-#include "Fenics/c2Functional.hh"
+#include "Fenics/functional.hh"
 #include "Fenics/functionSpace.hh"
 #include "Fenics/pc2Functional.hh"
 #include "Fenics/scalarProducts.hh"

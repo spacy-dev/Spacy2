@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_OPERATORS_KASKADEFUNCTIONAL_HH
 #define ALGORITHM_OPERATORS_KASKADEFUNCTIONAL_HH
 
-#include "c2Functional.hh"
-#include "Interface/Functional/abstractC2Functional.hh"
-#include "Interface/Functional/hessian.hh"
+#include "../../functional.hh"
+#include "Interface/abstractFunctional.hh"
+#include "Interface/hessian.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/create.hh"
 
@@ -16,7 +16,7 @@ namespace Algorithm
   namespace Kaskade
   {
     template <class FunctionalImpl>
-    class Functional : public Interface::AbstractC2Functional , public Mixin::DisableAssembly
+    class Functional : public Interface::AbstractFunctional , public Mixin::DisableAssembly
     {
       using VariableSetDescription = typename FunctionalImpl::AnsatzVars;
       using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
@@ -30,7 +30,7 @@ namespace Algorithm
 
     public:
       Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain_)
-        : AbstractC2Functional(domain_),
+        : AbstractFunctional(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
           assembler_(spaces_)
@@ -41,7 +41,7 @@ namespace Algorithm
       {}
 
       Functional(const Functional& g)
-        : AbstractC2Functional(g.sharedDomain()),
+        : AbstractFunctional(g.sharedDomain()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_)
@@ -51,7 +51,7 @@ namespace Algorithm
 
 
       Functional(const Functional& g, bool disableAssembly)
-        : AbstractC2Functional(g.sharedDomain()),
+        : AbstractFunctional(g.sharedDomain()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -174,13 +174,13 @@ namespace Algorithm
     template <class FunctionalImpl>
     auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain)
     {
-      return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
+      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
     }
 
     template <class FunctionalImpl>
     auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::FunctionSpace& domain)
     {
-      return createFromUniqueImpl< ::Algorithm::C2Functional , Functional<FunctionalImpl> >( f, domain );
+      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
     }
   }
 }

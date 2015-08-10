@@ -1,12 +1,12 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_PC2FUNCTIONAL_HH
-#define ALGORITHM_ADAPTER_FENICS_PC2FUNCTIONAL_HH
+#ifndef ALGORITHM_ADAPTER_FENICS_PFunctional_HH
+#define ALGORITHM_ADAPTER_FENICS_PFunctional_HH
 
 #include <memory>
 #include <vector>
 
 #include <dolfin.h>
 
-#include "Interface/Functional/abstractC2Functional.hh"
+#include "Interface/abstractFunctional.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 
 #include "luSolver.hh"
@@ -14,7 +14,7 @@
 #include "vector.hh"
 
 #include "functionSpace.hh"
-#include "../../c2Functional.hh"
+#include "functional.hh"
 
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 #include "Util/Mixins/adjointIndex.hh"
@@ -30,19 +30,19 @@ namespace Algorithm
   namespace Fenics
   {
     template <class JacobianForm>
-    class PC2Functional : public Interface::AbstractC2Functional, public Mixin::StateIndex, public Mixin::ControlIndex , public Mixin::AdjointIndex
+    class PFunctional : public Interface::AbstractFunctional, public Mixin::StateIndex, public Mixin::ControlIndex , public Mixin::AdjointIndex
     {
     public:
-      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
-        : Interface::AbstractC2Functional( space ),
+      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
+        : Interface::AbstractFunctional( space ),
           pd2c_( pd2c.function_space(0) , pd2c.function_space(1) ),
           bcs_( bcs )
       {
         copyCoefficients(pd2c,pd2c_);
       }
 
-      PC2Functional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
-        : PC2Functional(pd2c,bcs,space.sharedImpl())
+      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
+        : PFunctional(pd2c,bcs,space.sharedImpl())
       {}
 
       double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
@@ -92,9 +92,9 @@ namespace Algorithm
           bc->apply( *A_ );
       }
 
-      PC2Functional* cloneImpl() const
+      PFunctional* cloneImpl() const
       {
-        return new PC2Functional(pd2c_,bcs_,sharedDomain());
+        return new PFunctional(pd2c_,bcs_,sharedDomain());
       }
 
       mutable JacobianForm pd2c_;
@@ -105,11 +105,11 @@ namespace Algorithm
 
 
     template <class JacobianForm>
-    auto makePC2Functional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const FunctionSpace& space)
+    auto makePFunctional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const FunctionSpace& space)
     {
-      return createFromUniqueImpl< ::Algorithm::C2Functional , ::Algorithm::Fenics::PC2Functional<JacobianForm> >( J , bcs , space );
+      return createFromUniqueImpl< ::Algorithm::Functional , ::Algorithm::Fenics::PFunctional<JacobianForm> >( J , bcs , space );
     }
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_PC2FUNCTIONAL_HH
+#endif // ALGORITHM_ADAPTER_FENICS_PFunctional_HH

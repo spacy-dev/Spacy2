@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "Interface/Functional/abstractC2Functional.hh"
+#include "abstractFunctional.hh"
 #include "Interface/Operator/abstractLinearOperator.hh"
 #include "Util/Mixins/impl.hh"
 
@@ -13,13 +13,13 @@ namespace Algorithm
   {
     class AbstractFunctionSpaceElement;
 
-    class Hessian : public AbstractLinearOperator, public Mixin::UniqueImpl<AbstractC2Functional>
+    class Hessian : public AbstractLinearOperator, public Mixin::UniqueImpl<AbstractFunctional>
     {
     public:
       Hessian(Hessian&&);
-      Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x);
+      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x);
 
-//      Hessian(std::unique_ptr<AbstractC2Functional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
+//      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
 
       std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
 

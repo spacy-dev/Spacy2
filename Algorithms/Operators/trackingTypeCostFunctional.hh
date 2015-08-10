@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Interface/Operator/abstractOperator.hh"
-#include "Interface/Functional/abstractC2Functional.hh"
+#include "Interface/abstractFunctional.hh"
 #include "Interface/abstractScalarProduct.hh"
 #include "Util/Mixins/controlIndex.hh"
 #include "Util/Mixins/stateIndex.hh"
@@ -21,7 +21,7 @@ namespace Algorithm
   class FunctionSpace;
 
   class TrackingTypeCostFunctional :
-      public Interface::AbstractC2Functional , public Mixin::ControlIndex , public Mixin::StateIndex
+      public Interface::AbstractFunctional , public Mixin::ControlIndex , public Mixin::StateIndex
   {
   public:
     TrackingTypeCostFunctional(double alpha, const Interface::AbstractFunctionSpaceElement &referenceState, const FunctionSpace& domain,
