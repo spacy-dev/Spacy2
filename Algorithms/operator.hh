@@ -55,14 +55,8 @@ namespace Algorithm
      */
     const FunctionSpace& range() const;
 
-    /**
-     * @brief Access shared pointer to underlying domain.
-     */
-//    std::shared_ptr<FunctionSpace> sharedDomain() const;
-
   private:
     FunctionSpace domain_, range_;
-//    std::shared_ptr<FunctionSpace> domain_ = nullptr, range_ = nullptr;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

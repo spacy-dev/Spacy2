@@ -61,6 +61,12 @@ namespace Algorithm
         return *this;
       }
 
+      Vector& axpy(double a, const AbstractFunctionSpaceElement& y) final override
+      {
+        v_.axpy(a,castTo< Vector<Description> >(y).v_);
+        return *this;
+      }
+
       Vector& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override
       {
         v_ -= castTo< Vector<Description> >(y).v_;

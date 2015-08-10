@@ -47,11 +47,6 @@ namespace Algorithm
     return domain_;
   }
 
-//  std::shared_ptr<FunctionSpace> Operator::sharedDomain() const
-//  {
-//    return domain_;
-//  }
-
   FunctionSpace& Operator::range()
   {
     return range_;

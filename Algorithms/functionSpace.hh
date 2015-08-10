@@ -25,12 +25,6 @@ namespace Algorithm
      */
     explicit FunctionSpace(std::shared_ptr<Interface::AbstractFunctionSpace> implementation);
 
-//    FunctionSpace(const FunctionSpace&) = delete;
-//    FunctionSpace& operator=(const FunctionSpace&) = delete;
-
-//    FunctionSpace(FunctionSpace&&) = default;
-//    FunctionSpace& operator=(FunctionSpace&&) = default;
-
     /**
      * @brief Change norm of space.
      */
@@ -67,6 +61,9 @@ namespace Algorithm
     ScalarProduct scalarProduct() const;
   };
 
+  /**
+   * @brief Relate function spaces.
+   */
   void connectPrimalDual(FunctionSpace& primalSpace, FunctionSpace& dualSpace);
 
 }
