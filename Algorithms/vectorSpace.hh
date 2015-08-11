@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_FUNCTION_SPACE_HH
-#define ALGORITHM_FUNCTION_SPACE_HH
+#ifndef ALGORITHM_VECTOR_SPACE_HH
+#define ALGORITHM_VECTOR_SPACE_HH
 
 #include <memory>
 #include <utility>
@@ -7,23 +7,23 @@
 #include "norm.hh"
 #include "scalarProduct.hh"
 
-#include "Interface/abstractFunctionSpace.hh"
+#include "Interface/abstractVectorSpace.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
-  class FunctionSpaceElement;
+  class Vector;
 
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    */
-  class FunctionSpace : public Mixin::SharedImpl<Interface::AbstractFunctionSpace>
+  class VectorSpace : public Mixin::SharedImpl<Interface::AbstractVectorSpace>
   {
   public:
     /**
-     * @brief Construct function space from implementation derived from AbstractFunctionSpace.
+     * @brief Construct function space from implementation derived from AbstractVectorSpace.
      */
-    explicit FunctionSpace(std::shared_ptr<Interface::AbstractFunctionSpace> implementation);
+    explicit VectorSpace(std::shared_ptr<Interface::AbstractVectorSpace> implementation);
 
     /**
      * @brief Change norm of space.
@@ -38,7 +38,7 @@ namespace Algorithm
     /**
      * @brief Create new function space element.
      */
-    FunctionSpaceElement element() const;
+    Vector element() const;
 
     /**
      * @brief Access unique index of the function space.
@@ -64,7 +64,7 @@ namespace Algorithm
   /**
    * @brief Relate function spaces.
    */
-  void connectPrimalDual(FunctionSpace& primalSpace, FunctionSpace& dualSpace);
+  void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace);
 
 }
-#endif // ALGORITHM_FUNCTION_SPACE_HH
+#endif // ALGORITHM_VECTOR_SPACE_HH

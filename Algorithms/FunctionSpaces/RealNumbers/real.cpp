@@ -1,6 +1,6 @@
 #include "real.hh"
 
-#include "Interface/abstractFunctionSpace.hh"
+#include "Interface/abstractVectorSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/castTo.hh"
 
@@ -9,39 +9,39 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpace;
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVectorSpace;
+  using Interface::AbstractVector;
 
-  Real::Real(double x, const AbstractFunctionSpace &space)
-    : AbstractFunctionSpaceElement(space), x_(x)
+  Real::Real(double x, const AbstractVectorSpace &space)
+    : AbstractVector(space), x_(x)
   {}
 
-  Real::Real(const AbstractFunctionSpace &space)
+  Real::Real(const Interface::AbstractVectorSpace& space)
     : Real(0.,space)
   {}
 
-  void Real::copyTo(AbstractFunctionSpaceElement& y) const
+  void Real::copyTo(AbstractVector& y) const
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::copyTo");
 
     castTo<Real>(y).x_ = x_;
   }
 
-  Real& Real::operator=(const AbstractFunctionSpaceElement& y)
+  Real& Real::operator=(const AbstractVector& y)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=");
     x_ = castTo<Real>(y).x_;
     return *this;
   }
 
-  Real& Real::operator+=(const AbstractFunctionSpaceElement& y)
+  Real& Real::operator+=(const AbstractVector& y)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator+=");
     x_ += castTo<Real>(y).x_;
     return *this;
   }
 
-  Real& Real::operator-=(const AbstractFunctionSpaceElement& y)
+  Real& Real::operator-=(const AbstractVector& y)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator-=");
     x_ -= castTo<Real>(y).x_;
@@ -54,12 +54,12 @@ namespace Algorithm
     return *this;
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> Real::operator- () const
+  std::unique_ptr<AbstractVector> Real::operator- () const
   {
     return std::make_unique<Real>(-x_, this->space() );
   }
 
-  double Real::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+  double Real::applyAsDualTo(const AbstractVector& y) const
   {
     return x_ * castTo<Real>(y).x_;
   }

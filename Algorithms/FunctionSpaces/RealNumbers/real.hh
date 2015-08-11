@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVector.hh"
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractFunctionSpace; }
+  namespace Interface { class AbstractVectorSpace; }
 
   /// Real number.
-  class Real : public Interface::AbstractFunctionSpaceElement
+  class Real : public Interface::AbstractVector
   {
   public:
     /**
@@ -18,36 +18,36 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const Interface::AbstractFunctionSpace& space);
+    Real(double x, const Interface::AbstractVectorSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const Interface::AbstractFunctionSpace& space);
+    explicit Real(const Interface::AbstractVectorSpace& space);
 
     /**
      * @brief copy data to y.
      */
-    void copyTo(Interface::AbstractFunctionSpaceElement& y) const final override;
+    void copyTo(Interface::AbstractVector& y) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
 
     /// Assignment.
-    Real& operator=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    Real& operator=(const Interface::AbstractVector& y) final override;
 
     /// In-place summation.
-    Real& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    Real& operator+=(const Interface::AbstractVector& y) final override;
 
     /// In-place subtraction.
-    Real& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    Real& operator-=(const Interface::AbstractVector& y) final override;
 
     /// In-place multiplication.
     Real& operator*=(double) final override;
 
     /// Get -x.
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override;
+    std::unique_ptr<Interface::AbstractVector> operator- () const final override;
 
     /// Access value.
     double& coefficient(unsigned) final override;
@@ -70,7 +70,7 @@ namespace Algorithm
     Real* cloneImpl() const final override;
 
     /// Apply as dual element.
-    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override;
+    double applyAsDualTo(const Interface::AbstractVector& y) const final override;
 
     friend class RealProduct;
     double x_;

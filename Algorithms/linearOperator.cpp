@@ -3,6 +3,7 @@
 #include "Interface/abstractLinearSolver.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
@@ -12,7 +13,12 @@ namespace Algorithm
 
   LinearSolver LinearOperator::solver() const
   {
-    return LinearSolver( dynamic_cast<const Interface::AbstractLinearOperator&>(impl()).solver() );
+    return LinearSolver( castTo<Interface::AbstractLinearOperator>(impl()).solver() );
+  }
+
+  LinearSolver LinearOperator::adjointSolver() const
+  {
+    return LinearSolver( castTo<Interface::AbstractLinearOperator>(impl()).adjointSolver() );
   }
 
   LinearSolver operator^(const LinearOperator& A, int k)

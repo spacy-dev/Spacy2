@@ -3,7 +3,7 @@
 
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/functional.hh"
-#include "Kaskade/functionSpace.hh"
+#include "Kaskade/vectorSpace.hh"
 #include "Kaskade/l2Product.hh"
 #include "Kaskade/operator.hh"
 #include "Kaskade/vector.hh"

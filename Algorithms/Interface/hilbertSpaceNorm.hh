@@ -11,7 +11,7 @@ namespace Algorithm
   namespace Interface
   {
     class AbstractScalarProduct;
-    class AbstractFunctionSpaceElement;
+    class AbstractVector;
 
     /**
    * @brief Norm induced by a scalar product.
@@ -31,13 +31,13 @@ namespace Algorithm
       HilbertSpaceNorm& operator=(HilbertSpaceNorm&&) = default;
 
       /// Compute \f$(x,y)\f$.
-      double scalarProduct(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const;
+      double scalarProduct(const AbstractVector& x, const AbstractVector& y) const;
 
       /// Compute \f$\|x\|\f$.
-      double operator()(const AbstractFunctionSpaceElement& x) const final override;
+      double operator()(const AbstractVector& x) const final override;
 
       /// Compute \f$\|x\|^2=(x,x)\f$.
-      double squared(const AbstractFunctionSpaceElement& x) const final override;
+      double squared(const AbstractVector& x) const final override;
     };
   }
 }

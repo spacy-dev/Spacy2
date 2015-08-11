@@ -1,7 +1,7 @@
 #include "linearSolver.hh"
 
 #include "Interface/abstractLinearSolver.hh"
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
@@ -9,9 +9,9 @@ namespace Algorithm
     : Operator( std::unique_ptr<Interface::AbstractOperator>( impl.release() ) )
   {}
 
-  FunctionSpaceElement LinearSolver::operator ()(const FunctionSpaceElement& x) const
+  Vector LinearSolver::operator ()(const Vector& x) const
   {
-    return FunctionSpaceElement( impl()(x.impl()) );
+    return Vector( impl()(x.impl()) );
   }
 
   bool LinearSolver::encounteredNonconvexity() const

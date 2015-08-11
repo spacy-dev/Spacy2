@@ -1,8 +1,9 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 #define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVector.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/castTo.hh"
@@ -11,29 +12,29 @@ namespace Algorithm
 {  
   namespace Kaskade
   {
-    template <class> class FunctionSpace;
+    template <class> class VectorSpace;
 
     template <class Description>
-    class Vector : public Interface::AbstractFunctionSpaceElement
+    class Vector : public Interface::AbstractVector
     {
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
 
     public:
-      Vector(const Interface::AbstractFunctionSpace& space_)
-        : Interface::AbstractFunctionSpaceElement(space_),
-          spaces_(&castTo< FunctionSpace<Description> >(space()).impl()),
+      Vector(const Interface::AbstractVectorSpace& space_)
+        : Interface::AbstractVector(space_),
+          spaces_(&castTo< VectorSpace<Description> >(space()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
 
-      Vector(const Interface::AbstractFunctionSpace& space_, const VectorImpl& v)
-        : Interface::AbstractFunctionSpaceElement(space_),
-          spaces_(&castTo< FunctionSpace<Description> >(space()).impl()),
+      Vector(const Interface::AbstractVectorSpace& space_, const VectorImpl& v)
+        : Interface::AbstractVector(space_),
+          spaces_(&castTo< VectorSpace<Description> >(space()).impl()),
           v_(v)
       {}
 
-      void copyTo(Interface::AbstractFunctionSpaceElement& y) const override
+      void copyTo(Interface::AbstractVector& y) const override
       {
         castTo< Vector<Description> >(y).v_ = v_;
       }
@@ -49,25 +50,25 @@ namespace Algorithm
         return *this;
       }
 
-      Vector& operator=(const Interface::AbstractFunctionSpaceElement& y) final override
+      Vector& operator=(const Interface::AbstractVector& y) final override
       {
         v_ = castTo< Vector<Description> >(y).v_;
         return *this;
       }
 
-      Vector& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override
+      Vector& operator+=(const Interface::AbstractVector& y) final override
       {
         v_ += castTo< Vector<Description> >(y).v_;
         return *this;
       }
 
-      Vector& axpy(double a, const AbstractFunctionSpaceElement& y) final override
+      Vector& axpy(double a, const AbstractVector& y) final override
       {
         v_.axpy(a,castTo< Vector<Description> >(y).v_);
         return *this;
       }
 
-      Vector& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override
+      Vector& operator-=(const Interface::AbstractVector& y) final override
       {
         v_ -= castTo< Vector<Description> >(y).v_;
         return *this;
@@ -79,7 +80,7 @@ namespace Algorithm
         return *this;
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override
+      std::unique_ptr<Interface::AbstractVector> operator- () const final override
       {
         auto v = std::make_unique<Vector<Description> >(space(),v_);
         *v *= -1;
@@ -112,7 +113,7 @@ namespace Algorithm
       }
 
     private:
-      double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override
+      double applyAsDualTo(const Interface::AbstractVector& y) const final override
       {
         return castTo< Vector<Description> >(y).v_ * v_;
       }
@@ -179,7 +180,7 @@ namespace Algorithm
       struct Copy<0,n>
       {
         template <class Description>
-        static void apply(const Interface::AbstractFunctionSpaceElement& x, ::Kaskade::VariableSet<Description>& y)
+        static void apply(const Interface::AbstractVector& x, ::Kaskade::VariableSet<Description>& y)
         {
           if( is< Vector< Description > >(x) )
           {
@@ -201,7 +202,7 @@ namespace Algorithm
         }
 
         template <class Description, class CoeffVector>
-        static void toCoefficientVector(const Interface::AbstractFunctionSpaceElement& x, CoeffVector& y)
+        static void toCoefficientVector(const Interface::AbstractVector& x, CoeffVector& y)
         {
           if( is< Vector< Description > >(x) )
           {
@@ -223,7 +224,7 @@ namespace Algorithm
         }
 
         template <class Description, class CoeffVector>
-        static void fromCoefficientVector(const CoeffVector& x, Interface::AbstractFunctionSpaceElement& y)
+        static void fromCoefficientVector(const CoeffVector& x, Interface::AbstractVector& y)
         {
           if( is< Vector< Description > >(y) )
           {
@@ -250,27 +251,27 @@ namespace Algorithm
       struct Copy<n,n>
       {
         template <class Description>
-        static void apply(const Interface::AbstractFunctionSpaceElement&, ::Kaskade::VariableSet<Description>&)
+        static void apply(const Interface::AbstractVector&, ::Kaskade::VariableSet<Description>&)
         {}
 
         template <class Description, class CoeffVector>
-        static void toCoefficientVector(const Interface::AbstractFunctionSpaceElement&, CoeffVector&)
+        static void toCoefficientVector(const Interface::AbstractVector&, CoeffVector&)
         {}
 
         template <class Description, class CoeffVector>
-        static void fromCoefficientVector(const CoeffVector&, Interface::AbstractFunctionSpaceElement&)
+        static void fromCoefficientVector(const CoeffVector&, Interface::AbstractVector&)
         {}
       };
     }
 
     template <class Description>
-    void copy(const Interface::AbstractFunctionSpaceElement& x, ::Kaskade::VariableSet<Description>& y)
+    void copy(const Interface::AbstractVector& x, ::Kaskade::VariableSet<Description>& y)
     {
       Detail::Copy<0,Description::noOfVariables>::apply(x,y);
     }
 
     template <class Description>
-    void copyToCoefficientVector(const Interface::AbstractFunctionSpaceElement& x, typename Description::template CoefficientVectorRepresentation<>::type& y)
+    void copyToCoefficientVector(const Interface::AbstractVector& x, typename Description::template CoefficientVectorRepresentation<>::type& y)
     {
       Detail::Copy<0,Description::noOfVariables>::template toCoefficientVector<Description>(x,y);
     }
@@ -278,7 +279,7 @@ namespace Algorithm
 
     template <class Description>
     void copyFromCoefficientVector(const typename Description::template CoefficientVectorRepresentation<>::type& x,
-                                 Interface::AbstractFunctionSpaceElement& y)
+                                 Interface::AbstractVector& y)
     {
       Detail::Copy<0,Description::noOfVariables>::template fromCoefficientVector<Description>(x,y);
     }

@@ -27,7 +27,7 @@ namespace Algorithm
       explicit InducedScalarProduct(const AbstractOperator& M);
 
       /// Compute scalar product \f$(x,y)_M\f$.
-      double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const AbstractVector& x, const AbstractVector& y) const final override;
     };
 
 
@@ -36,7 +36,7 @@ namespace Algorithm
     public:
       explicit PrimalInducedScalarProduct(const AbstractOperator& M);
 
-      double operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const AbstractVector& x, const AbstractVector& y) const final override;
     };
   }
 

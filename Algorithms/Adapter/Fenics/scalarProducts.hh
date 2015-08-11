@@ -21,14 +21,14 @@ namespace Algorithm
     class l2ScalarProduct : public Interface::AbstractScalarProduct
     {
     public:
-      double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const Interface::AbstractVector& x, const Interface::AbstractVector& y) const final override;
     };
 
     class ScalarProduct : public Interface::AbstractScalarProduct
     {
     public:
       explicit ScalarProduct(std::shared_ptr<dolfin::GenericMatrix> A);
-      double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
+      double operator()(const Interface::AbstractVector& x, const Interface::AbstractVector& y) const final override;
 
     private:
       std::shared_ptr<dolfin::GenericMatrix> A_;

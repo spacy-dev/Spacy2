@@ -10,9 +10,9 @@ namespace Algorithm
   class RealSolver : public Interface::AbstractLinearSolver
   {
   public:
-    RealSolver(double value, std::shared_ptr<Interface::AbstractFunctionSpace> domain, std::shared_ptr<Interface::AbstractFunctionSpace> range);
+    RealSolver(double value, std::shared_ptr<Interface::AbstractVectorSpace> domain, std::shared_ptr<Interface::AbstractVectorSpace> range);
 
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& y) const final override;
+    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const final override;
 
   private:
     RealSolver* cloneImpl() const;

@@ -1,6 +1,6 @@
 #include "terminationCriteria.hh"
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "operator.hh"
 
 #include <cmath>
@@ -20,7 +20,7 @@ namespace Algorithm
         : Base(relativeAccuracy,verbose)
       {}
 
-      bool AffineCovariant::passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const
+      bool AffineCovariant::passed(double nu, const Vector& x, const Vector& dx) const
       {
         if(std::fabs(nu-1) > eps()) return false;
 
@@ -41,7 +41,7 @@ namespace Algorithm
         : Base(relativeAccuracy,verbose), F_(F)
       {}
 
-      bool AffineContravariant::passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const
+      bool AffineContravariant::passed(double nu, const Vector& x, const Vector&) const
       {
         if( initialResidual < 0 )
         {

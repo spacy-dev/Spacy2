@@ -12,42 +12,42 @@ namespace Algorithm
       domain_( impl().sharedDomain() )
   {}
 
-  double Functional::operator()(const FunctionSpaceElement& x) const
+  double Functional::operator()(const Vector& x) const
   {
     return impl()(x.impl());
   }
 
-  double Functional::d1(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
+  double Functional::d1(const Vector& x, const Vector &dx) const
   {
     return ( *impl().d1(x.impl()) )(dx.impl());
   }
 
-  FunctionSpaceElement Functional::d1(const FunctionSpaceElement &x) const
+  Vector Functional::d1(const Vector &x) const
   {
     return impl().d1(x.impl());
   }
 
-  FunctionSpaceElement Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx) const
+  Vector Functional::d2(const Vector& x, const Vector &dx) const
   {
     return impl().d2(x.impl(),dx.impl());
   }
 
-  double Functional::d2(const FunctionSpaceElement& x, const FunctionSpaceElement &dx, const FunctionSpaceElement& dy) const
+  double Functional::d2(const Vector& x, const Vector &dx, const Vector& dy) const
   {
     return dy( d2(x,dx) );
   }
 
-  LinearOperator Functional::hessian(const FunctionSpaceElement& x) const
+  LinearOperator Functional::hessian(const Vector& x) const
   {
     return LinearOperator( impl().hessian( x.impl() ) );
   }
 
-  FunctionSpace& Functional::domain()
+  VectorSpace& Functional::domain()
   {
     return domain_;
   }
 
-  const FunctionSpace& Functional::domain() const
+  const VectorSpace& Functional::domain() const
   {
     return domain_;
   }

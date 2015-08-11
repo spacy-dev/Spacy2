@@ -3,7 +3,7 @@
 
 #include "Fenics/operator.hh"
 #include "Fenics/functional.hh"
-#include "Fenics/functionSpace.hh"
+#include "Fenics/vectorSpace.hh"
 #include "Fenics/pc2Functional.hh"
 #include "Fenics/scalarProducts.hh"
 #include "Fenics/trackingTypeFunctional.hh"

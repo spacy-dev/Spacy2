@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 #define ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVector.hh"
 #include "Interface/abstractScalarProduct.hh"
 
 namespace Algorithm
@@ -10,7 +10,7 @@ namespace Algorithm
   class RealProduct : public Interface::AbstractScalarProduct
   {
     /// Compute x*y.
-    double operator()(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& y) const final override;
+    double operator()(const Interface::AbstractVector& x, const Interface::AbstractVector& y) const final override;
   };
 }
 

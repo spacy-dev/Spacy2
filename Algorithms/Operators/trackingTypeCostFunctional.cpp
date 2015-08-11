@@ -1,8 +1,8 @@
 #include "trackingTypeCostFunctional.hh"
 
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 
-#include "Interface/abstractFunctionSpace.hh"
+#include "Interface/abstractVectorSpace.hh"
 
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -13,11 +13,11 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpace;
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVectorSpace;
+  using Interface::AbstractVector;
 
-  TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         std::shared_ptr<AbstractFunctionSpace> domain,
+  TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractVector &referenceState,
+                                                         std::shared_ptr<AbstractVectorSpace> domain,
                                                          std::unique_ptr<Interface::AbstractOperator>&& My,
                                                          std::unique_ptr<Interface::AbstractOperator>&& Mu)
     : AbstractFunctional(domain),
@@ -27,14 +27,14 @@ namespace Algorithm
       Mu_(std::move(Mu))
   {}
 
-  TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractFunctionSpaceElement &referenceState,
-                                                         const FunctionSpace &domain, std::unique_ptr<Interface::AbstractOperator>&& My, std::unique_ptr<Interface::AbstractOperator>&& Mu)
+  TrackingTypeCostFunctional::TrackingTypeCostFunctional(double alpha, const AbstractVector &referenceState,
+                                                         const VectorSpace& domain, std::unique_ptr<Interface::AbstractOperator>&& My, std::unique_ptr<Interface::AbstractOperator>&& Mu)
     : TrackingTypeCostFunctional(alpha, referenceState, domain.sharedImpl(), std::move(My), std::move(Mu))
   {}
 
 
 
-//  void TrackingTypeCostFunctional::setArgument(const AbstractFunctionSpaceElement &x)
+//  void TrackingTypeCostFunctional::setArgument(const AbstractVector &x)
 //  {
 //    if( isProductSpaceElement(x) ) std::cout << "Primaldualelement" << std::endl;
 //    if( !isProductSpaceElement(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::setArgument");
@@ -42,7 +42,7 @@ namespace Algorithm
 ////    x_ = clone( dynamic_cast<const ProductSpaceElement&>(x) );
 //  }
 
-  double TrackingTypeCostFunctional::d0(const AbstractFunctionSpaceElement& x) const
+  double TrackingTypeCostFunctional::d0(const AbstractVector& x) const
   {
     if( !is<ProductSpaceElement>(x) ) throw InvalidArgumentException("TrackingTypeCostFunctional::operator()");
 
@@ -55,7 +55,7 @@ namespace Algorithm
         + 0.5 * alpha_ * ( *(*Mu_)( x_.variable(controlIndex()) ) ) ( x_.variable(controlIndex()) );
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> TrackingTypeCostFunctional::d1(const AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<AbstractVector> TrackingTypeCostFunctional::d1(const AbstractVector& x) const
   {
     auto tmp = domain().element();
 
@@ -74,7 +74,7 @@ namespace Algorithm
 //    return (*(*My_)(y_.variable(stateId_))) ( dx_.variable(stateId_) ) + (*(*Mu_)(y_.variable(controlId_))) ( dx_.variable(controlId_));
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> TrackingTypeCostFunctional::d2(const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement& dx) const
+  std::unique_ptr<AbstractVector> TrackingTypeCostFunctional::d2(const AbstractVector&, const AbstractVector& dx) const
   {
     if( !is<ProductSpaceElement>(dx) ) throw InvalidArgumentException("TrackingTypeCostFunctional::d2");
 
@@ -85,7 +85,7 @@ namespace Algorithm
   }
 
 
-//  double TrackingTypeCostFunctional::d2(const AbstractFunctionSpaceElement& dx, const AbstractFunctionSpaceElement& dy) const
+//  double TrackingTypeCostFunctional::d2(const AbstractVector& dx, const AbstractVector& dy) const
 //  {
 //    if( !isProductSpaceElement(dx) || !isProductSpaceElement(dy) ) throw InvalidArgumentException("TrackingTypeCostFunctional::d2");
 

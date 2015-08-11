@@ -7,7 +7,7 @@
 
 namespace Algorithm
 {
-  class FunctionSpaceElement;
+  class Vector;
 
   class HilbertSpaceNorm : public Norm
   {
@@ -16,9 +16,9 @@ namespace Algorithm
 
     HilbertSpaceNorm(const ScalarProduct& sp);
 
-    double scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const;
+    double scalarProduct(const Vector& x, const Vector& y) const;
 
-    double squared(const FunctionSpaceElement& x) const;
+    double squared(const Vector& x) const;
 
     /**
      * \brief Access implementation.

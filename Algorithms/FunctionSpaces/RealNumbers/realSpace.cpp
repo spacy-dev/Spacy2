@@ -5,10 +5,10 @@
 
 namespace Algorithm
 {
-  RealSpace::RealSpace() : Interface::AbstractFunctionSpace(std::make_shared<RealProduct>())
+  RealSpace::RealSpace() : Interface::AbstractVectorSpace(std::make_shared<RealProduct>())
   {}
 
-  std::unique_ptr<Interface::AbstractFunctionSpaceElement> RealSpace::elementImpl() const
+  std::unique_ptr<Interface::AbstractVector> RealSpace::elementImpl() const
   {
     return std::make_unique<Real>(*this);
   }

@@ -5,7 +5,7 @@
 #include <utility>
 
 #include "Interface/abstractScalarProduct.hh"
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
@@ -27,7 +27,7 @@ namespace Algorithm
     /**
      * @brief Compute scalar product \f$(x,y)\f$.
      */
-    auto operator()(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const -> decltype(std::declval<Interface::AbstractScalarProduct>()(x.impl(),y.impl()));
+    auto operator()(const Vector& x, const Vector& y) const -> decltype(std::declval<Interface::AbstractScalarProduct>()(x.impl(),y.impl()));
   };
 }
 

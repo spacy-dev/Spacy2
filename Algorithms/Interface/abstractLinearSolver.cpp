@@ -4,7 +4,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractLinearSolver::AbstractLinearSolver(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range)
+    AbstractLinearSolver::AbstractLinearSolver(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range)
       : AbstractOperator(domain,range)
     {}
 

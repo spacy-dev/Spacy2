@@ -7,11 +7,11 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVector;
 
   namespace Fenics
   {
-    double l2ScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+    double l2ScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
     {
       return castTo<Vector>(x).impl().vector()->inner( *castTo<Vector>(y).impl().vector() );
     }
@@ -20,7 +20,7 @@ namespace Algorithm
       : A_(A)
     {}
 
-    double ScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+    double ScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
     {
       auto x_ = std::make_shared<dolfin::Vector>(A_->mpi_comm(), A_->size(0));
       copy(x,*x_);

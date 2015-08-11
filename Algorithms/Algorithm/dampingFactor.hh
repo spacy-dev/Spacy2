@@ -1,12 +1,12 @@
 #ifndef ALGORITHM_DAMPING_FACTOR_HH
 #define ALGORITHM_DAMPING_FACTOR_HH
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "Util/Mixins/eps.hh"
 
 namespace Algorithm
 {
-  class FunctionSpaceElement;
+  class Vector;
 
   /**
    * @brief A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.

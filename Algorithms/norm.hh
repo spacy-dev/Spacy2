@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "Interface/abstractNorm.hh"
 #include "Util/Mixins/impl.hh"
 
@@ -28,7 +28,7 @@ namespace Algorithm
     /**
      * @brief Compute \f$\|x\|\f$.
      */
-    auto operator()(const FunctionSpaceElement& x) const -> decltype(std::declval<Interface::AbstractNorm>()(x.impl()));
+    auto operator()(const Vector& x) const -> decltype(std::declval<Interface::AbstractNorm>()(x.impl()));
   };
 }
 

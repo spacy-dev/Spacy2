@@ -8,17 +8,17 @@ namespace Algorithm
 {
   /// \cond
   class ScalarProduct;
-  class FunctionSpaceElement;
+  class Vector;
   class Functional;
   /// \endcond
 
   namespace CompositeStep
   {
     Functions_1D::Quadratic makeQuadraticModel(double nu,
-                                      const FunctionSpaceElement& dn, const FunctionSpaceElement& dt,
-                                      const Functional& f, const FunctionSpaceElement& x);
+                                      const Vector& dn, const Vector& dt,
+                                      const Functional& f, const Vector& x);
 
-    Functions_1D::Quadratic makeQuadraticNormModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt);
+    Functions_1D::Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt);
 
     class CubicModel
     {
@@ -33,8 +33,8 @@ namespace Algorithm
       double omega_;
     };
 
-    CubicModel makeCubicModel(double nu, const FunctionSpaceElement& dn, const FunctionSpaceElement& dt,
-                              const Functional& f, const FunctionSpaceElement& x, double omega);
+    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
+                              const Functional& f, const Vector& x, double omega);
 
     template <class Model>
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)

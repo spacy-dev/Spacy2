@@ -1,5 +1,6 @@
 #include "luSolver.hh"
 
+#include "Interface/abstractVectorSpace.hh"
 #include "vector.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
@@ -31,7 +32,7 @@ namespace Algorithm
   namespace Fenics
   {
   LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-                             std::shared_ptr<Interface::AbstractFunctionSpace> domain , std::shared_ptr<Interface::AbstractFunctionSpace> range)
+                             std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range)
     : Interface::AbstractLinearSolver(domain,range),
       productSpace_(productSpace)
   {
@@ -42,7 +43,7 @@ namespace Algorithm
     solver_.set_operator(A);
   }
 
-  std::unique_ptr<Interface::AbstractFunctionSpaceElement> LUSolver::operator()(const Interface::AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<Interface::AbstractVector> LUSolver::operator()(const Interface::AbstractVector& x) const
   {
 
     // Solve linear system
@@ -84,7 +85,7 @@ namespace Algorithm
 //    solver.parameters["symmetric"] = (bool) parameters["symmetric"];
 //  }
 
-//  std::unique_ptr<Interface::AbstractFunctionSpaceElement> TransposedLUSolver::operator()(const Interface::AbstractFunctionSpaceElement& x) const
+//  std::unique_ptr<Interface::AbstractVector> TransposedLUSolver::operator()(const Interface::AbstractVector& x) const
 //  {
 //    const auto& x_ = toVector(x);
 //    auto y = clone(x_);
@@ -92,7 +93,7 @@ namespace Algorithm
 //    // Solve linear system
 //    solver.solve_transpose( *A_ , *y->impl().vector(), *x_.impl().vector() );
 
-//    return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
+//    return std::unique_ptr<Interface::AbstractVector>( y.release() );
 //  }
 
 

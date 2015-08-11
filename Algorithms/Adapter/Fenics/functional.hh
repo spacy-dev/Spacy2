@@ -27,7 +27,7 @@ namespace Algorithm
     {
     public:
       Functional(const F& f, const DF& J, const DDF& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
+                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractVectorSpace> space)
         : Interface::AbstractFunctional( space ),
           f_( J.function_space(0)->mesh() ),
           J_( J.function_space(0) ),
@@ -41,14 +41,14 @@ namespace Algorithm
       }
 
       Functional(const F& f, const DF& J, const DDF& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
+                   const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::VectorSpace& space)
         : Functional(f,J,H,bcs,space.sharedImpl())
       {}
 
       Functional(const F& f, const DF& J, const DDF& H,
-                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space,
+                   const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractVectorSpace> space,
                    const dolfin::GenericMatrix& A,
-                   const Interface::AbstractFunctionSpaceElement& oldX_H)
+                   const Interface::AbstractVector& oldX_H)
         : Interface::AbstractFunctional( space ),
           Mixin::DisableAssembly(true),
           f_( J.function_space(0)->mesh() ),
@@ -65,14 +65,14 @@ namespace Algorithm
       }
 
 
-      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
+      double d0(const Interface::AbstractVector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
         return value_;
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement &x) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector &x) const final override
       {        
         primalDualIgnoreReset(std::bind(&Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
@@ -81,7 +81,7 @@ namespace Algorithm
         return std::move(y);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector &x, const Interface::AbstractVector &dx) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -93,10 +93,10 @@ namespace Algorithm
         auto result = clone(x);
         copy(*Ax,*result);
 
-        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( result.release() );
+        return std::unique_ptr<Interface::AbstractVector>( result.release() );
       }
 
-      void setOrigin(const Interface::AbstractFunctionSpaceElement& x) const
+      void setOrigin(const Interface::AbstractVector& x) const
       {
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*x_);
@@ -107,7 +107,7 @@ namespace Algorithm
       }
 
     private:
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const override
+      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -121,7 +121,7 @@ namespace Algorithm
         return std::make_unique<LUSolver>(A_,*J_.function_space(0),sharedDomain(),sharedDomain());
       }
 
-      void assembleFunctional(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleFunctional(const Interface::AbstractVector& x) const
       {
         if( oldX_f_ != nullptr && oldX_f_->equals(x) ) return;
 
@@ -136,7 +136,7 @@ namespace Algorithm
         oldX_f_ = clone(x);
       }
 
-      void assembleJacobian(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleJacobian(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
 
@@ -154,7 +154,7 @@ namespace Algorithm
         oldX_J_ = clone(x);
       }
 
-      void assembleHessian(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleHessian(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
 
@@ -186,7 +186,7 @@ namespace Algorithm
       mutable std::shared_ptr<dolfin::GenericMatrix> A_;
       mutable std::shared_ptr<dolfin::GenericVector> b_;
       mutable double value_ = 0;
-      mutable std::unique_ptr<Interface::AbstractFunctionSpaceElement> oldX_f_, oldX_J_, oldX_H_;
+      mutable std::unique_ptr<Interface::AbstractVector> oldX_f_, oldX_J_, oldX_H_;
       mutable dolfin::Function dummy_;
     };
 

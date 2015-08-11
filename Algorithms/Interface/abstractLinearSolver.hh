@@ -10,8 +10,8 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractFunctionSpace;
-    class AbstractFunctionSpaceElement;
+    class AbstractVectorSpace;
+    class AbstractVector;
     /// \endcond
 
     /**
@@ -25,12 +25,12 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractLinearSolver(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range);
+      AbstractLinearSolver(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range);
 
       virtual ~AbstractLinearSolver();
 
       /// Apply linear solver.
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
+      virtual std::unique_ptr<AbstractVector> operator()(const AbstractVector&) const = 0;
 
       /// Checks if the linear system is indefinite.
       virtual bool systemIsPositiveDefinite() const;

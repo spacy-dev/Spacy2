@@ -13,7 +13,7 @@
 
 namespace Algorithm
 {
-  class FunctionSpaceElement;
+  class Vector;
 
   /**
    * \ingroup linalgsolution
@@ -71,18 +71,18 @@ namespace Algorithm
      * @param b right hand side
      * @param tolerance tolerance of the termination criterion
      */
-    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance) const;
+    Vector solve(const Vector& x, const Vector& b, double tolerance) const;
 
     /**
      * @param b right hand side
      */
-    FunctionSpaceElement solve(const FunctionSpaceElement& b) const;
+    Vector solve(const Vector& b) const;
 
     /**
      * @param x initial guess
      * @param b right hand side
      */
-    FunctionSpaceElement solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b) const;
+    Vector solve(const Vector& x, const Vector& b) const;
 
 
     /// Set a new termination criterion which must inherit from CGTerminationCriterion.
@@ -105,12 +105,12 @@ namespace Algorithm
 
   private:
     /// CG Implementation.
-    FunctionSpaceElement cgLoop (FunctionSpaceElement x, FunctionSpaceElement r) const;
+    Vector cgLoop (Vector x, Vector r) const;
 
     /**
      * @brief Apply preconditioner.
      */
-    FunctionSpaceElement Q(const FunctionSpaceElement& r) const;
+    Vector Q(const Vector& r) const;
 
     /// Check step length.
     bool vanishingStep(unsigned step) const;
@@ -118,7 +118,7 @@ namespace Algorithm
     /**
      * \return true if iteration should terminate. Throws if a direction of negative curvature is encountered in the standard cg implementation.
      */
-    bool terminateOnNonconvexity(double qAq, double qPq, FunctionSpaceElement& x, const FunctionSpaceElement& q, unsigned step) const;
+    bool terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const;
 
     /**
      * @brief Set \f$theta=0\f$.
@@ -138,7 +138,7 @@ namespace Algorithm
     /**
      * @brief Replace \f$r\f$ with \f$ r - \alpha\theta\Pq \f$ in regularized conjugate gradient methods.
      */
-    void adjustRegularizedResidual(double alpha, const FunctionSpaceElement& Pq, FunctionSpaceElement& r) const;
+    void adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const;
 
 
     Operator A_;

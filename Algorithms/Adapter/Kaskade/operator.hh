@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 #include "../../operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
 #include "Interface/Operator/abstractOperator.hh"
@@ -35,14 +35,14 @@ namespace Algorithm
 
     public:
       Operator(const OperatorImpl& f,
-                        std::shared_ptr<Interface::AbstractFunctionSpace> domain_, std::shared_ptr<Interface::AbstractFunctionSpace> range_)
+                        std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::shared_ptr<Interface::AbstractVectorSpace> range_)
         : AbstractOperator(domain_,range_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
           assembler_(spaces_)
       {}
 
-      Operator(const OperatorImpl& f, const ::Algorithm::FunctionSpace& domain, const ::Algorithm::FunctionSpace& range)
+      Operator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
         : Operator(f,domain.sharedImpl(),range.sharedImpl())
       {}
 
@@ -64,7 +64,7 @@ namespace Algorithm
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
@@ -75,7 +75,7 @@ namespace Algorithm
         return std::move(y);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
@@ -91,8 +91,8 @@ namespace Algorithm
         return std::move(y);
       }
 
-    private:
-      void assembleOperator(const Interface::AbstractFunctionSpaceElement& x) const
+    protected:
+      void assembleOperator(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
         if( old_X_A_ != nullptr && old_X_A_->equals(x) ) return;
@@ -107,7 +107,7 @@ namespace Algorithm
         old_X_A_ = clone(x);
       }
 
-      void assembleGradient(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleGradient(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
         if( old_X_dA_ != nullptr && old_X_dA_->equals(x) ) return;
@@ -128,7 +128,7 @@ namespace Algorithm
         return new Operator(*this);
       }
 
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
+      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
       {
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
@@ -145,23 +145,23 @@ namespace Algorithm
       Spaces spaces_;
       mutable Assembler assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      mutable std::unique_ptr< Interface::AbstractFunctionSpaceElement > old_X_A_ = nullptr, old_X_dA_ = nullptr;
+      mutable std::unique_ptr< Interface::AbstractVector > old_X_A_ = nullptr, old_X_dA_ = nullptr;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
     };
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
-                      std::shared_ptr<Interface::AbstractFunctionSpace> domain,
-                      std::shared_ptr<Interface::AbstractFunctionSpace> range)
+                      std::shared_ptr<Interface::AbstractVectorSpace> domain,
+                      std::shared_ptr<Interface::AbstractVectorSpace> range)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
     }
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
-                      const ::Algorithm::FunctionSpace& domain,
-                      const ::Algorithm::FunctionSpace& range)
+                      const ::Algorithm::VectorSpace& domain,
+                      const ::Algorithm::VectorSpace& range)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
     }

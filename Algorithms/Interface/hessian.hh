@@ -11,24 +11,24 @@ namespace Algorithm
 {
   namespace Interface
   {
-    class AbstractFunctionSpaceElement;
+    class AbstractVector;
 
     class Hessian : public AbstractLinearOperator, public Mixin::UniqueImpl<AbstractFunctional>
     {
     public:
       Hessian(Hessian&&);
-      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x);
+      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x);
 
-//      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver);
+//      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x, std::shared_ptr<AbstractLinearSolver> solver);
 
-      std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
+      std::unique_ptr<AbstractVector> operator ()(const AbstractVector& dx) const final override;
 
       std::unique_ptr<AbstractLinearSolver> solver() const final override;
 
     private:
       Hessian* cloneImpl() const;
 
-      std::unique_ptr<AbstractFunctionSpaceElement> x_;
+      std::unique_ptr<AbstractVector> x_;
     };
   }
 }

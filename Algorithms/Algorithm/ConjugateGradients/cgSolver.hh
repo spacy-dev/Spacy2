@@ -7,7 +7,7 @@
 #include "conjugateGradients.hh"
 #include "operator.hh"
 
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVector.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Util/mixins.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
@@ -43,9 +43,9 @@ namespace Algorithm
 //      cg.getTerminationCriterion().setRelativeAccuracy(relativeAccuracy);
 //    }
 
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& y) const final override
+    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const final override
     {
-      auto z = cg.solve( FunctionSpaceElement( clone(y) ) );
+      auto z = cg.solve( Vector( clone(y) ) );
       return clone(z.impl());
     }
 

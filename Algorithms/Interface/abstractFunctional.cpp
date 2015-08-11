@@ -1,6 +1,6 @@
 #include "abstractFunctional.hh"
 
-#include "abstractFunctionSpace.hh"
+#include "abstractVectorSpace.hh"
 #include "abstractLinearSolver.hh"
 #include "hessian.hh"
 
@@ -11,35 +11,35 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractFunctionSpace> domain)
+    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractVectorSpace> domain)
       : domain_(domain)
     {}
 
     AbstractFunctional::~AbstractFunctional(){}
 
-    double AbstractFunctional::operator ()(const AbstractFunctionSpaceElement& x) const
+    double AbstractFunctional::operator ()(const AbstractVector& x) const
     {
       if( domain().index() != x.space().index() ) throw InvalidArgumentException("AbstractFunctional::operator() (incompatible space ids)");
 
       return d0(x);
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> AbstractFunctional::d1(const AbstractFunctionSpaceElement& x) const
+    std::unique_ptr<AbstractVector> AbstractFunctional::d1(const AbstractVector& x) const
     {
       throw CallOfUndefinedFunctionException("AbstractFunctional::d1");
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> AbstractFunctional::d2(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& dx) const
+    std::unique_ptr<AbstractVector> AbstractFunctional::d2(const AbstractVector& x, const AbstractVector& dx) const
     {
       throw CallOfUndefinedFunctionException("AbstractFunctional::d2");
     }
 
-    std::unique_ptr<Hessian> AbstractFunctional::hessian(const AbstractFunctionSpaceElement& x) const
+    std::unique_ptr<Hessian> AbstractFunctional::hessian(const AbstractVector& x) const
     {
       return makeHessian(x);
     }
 
-    std::unique_ptr<Hessian> AbstractFunctional::makeHessian(const AbstractFunctionSpaceElement& x) const
+    std::unique_ptr<Hessian> AbstractFunctional::makeHessian(const AbstractVector& x) const
     {
       return std::make_unique<Hessian>(clone(this),x);
     }
@@ -49,12 +49,12 @@ namespace Algorithm
       throw CallOfUndefinedFunctionException("AbstractC2Functional::makeSolver");
     }
 
-    const AbstractFunctionSpace& AbstractFunctional::domain() const
+    const AbstractVectorSpace& AbstractFunctional::domain() const
     {
       return *domain_;
     }
 
-    std::shared_ptr<AbstractFunctionSpace> AbstractFunctional::sharedDomain() const
+    std::shared_ptr<AbstractVectorSpace> AbstractFunctional::sharedDomain() const
     {
       return domain_;
     }

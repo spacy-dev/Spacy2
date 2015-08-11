@@ -12,7 +12,7 @@
 namespace Algorithm
 {
   /// \cond
-  class FunctionSpaceElement;
+  class Vector;
   class LinearSolver;
   /// \endcond
 
@@ -40,14 +40,14 @@ namespace Algorithm
        * \brief Apply Newton's method to solve \f$F(x)=0\f$ starting at the initial guess \f$x0=0\f$.
        * \return \f$x\f$ such that \f$ F(x) = 0 \f$ (up to the desired accuracy).
        */
-      FunctionSpaceElement solve() const;
+      Vector solve() const;
 
       /**
        * \brief Apply Newton's method to solve \f$F(x)=0\f$ starting at the initial guess \f$x0\f$.
        * \param \f$x0\f$ initial guess
        * \return \f$x\f$ such that \f$ F(x) = 0 \f$ (up to the desired accuracy).
        */
-      FunctionSpaceElement solve(const FunctionSpaceElement& x0) const;
+      Vector solve(const Vector& x0) const;
 
       /**
        * \brief Change the damping strategy.

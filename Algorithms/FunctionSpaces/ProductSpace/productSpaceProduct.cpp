@@ -3,14 +3,14 @@
 #include "productSpaceElement.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include "Interface/abstractFunctionSpace.hh"
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVectorSpace.hh"
+#include "Interface/abstractVector.hh"
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVector;
 
-  double ProductSpaceProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+  double ProductSpaceProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
 

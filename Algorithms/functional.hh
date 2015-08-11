@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "functionSpace.hh"
-#include "functionSpaceElement.hh"
+#include "vectorSpace.hh"
+#include "vector.hh"
 #include "linearOperator.hh"
 
 #include "Interface/abstractFunctional.hh"
@@ -26,46 +26,46 @@ namespace Algorithm
     /**
      * @brief Evaluate functional \f$F\f$ at \f$x\f$.
      */
-    double operator()(const FunctionSpaceElement& x) const;
+    double operator()(const Vector& x) const;
 
     /**
      * @brief Compute first directional derivative \f$F(x)'dx\f$ at \f$x\f$ in direction \f$dx\f$.
      */
-    double d1(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
+    double d1(const Vector& x, const Vector& dx) const;
 
     /**
      * @brief Compute first directional derivative \f$F(x)': X \rightarrow X^*\f$ at \f$x\f$.
      */
-    FunctionSpaceElement d1(const FunctionSpaceElement &x) const;
+    Vector d1(const Vector &x) const;
 
     /**
      * @brief Compute element of dual space \f$F(x)''dx\f$.
      */
-    FunctionSpaceElement d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const;
+    Vector d2(const Vector& x, const Vector& dx) const;
 
     /**
      * @brief Compute second directional derivative \f$F(x)''(dx,dy)\f$ at \f$x\f$ in directions \f$dx\f$ and \f$dy\f$.
      */
-    double d2(const FunctionSpaceElement& x, const FunctionSpaceElement& dx, const FunctionSpaceElement& dy) const;
+    double d2(const Vector& x, const Vector& dx, const Vector& dy) const;
 
 
     /**
      * @brief Get hessian as linear operator \f$H: X \rightarrow X^* \f$.
      */
-    LinearOperator hessian(const FunctionSpaceElement& x) const;
+    LinearOperator hessian(const Vector& x) const;
 
     /**
      * @brief Access underlying domain.
      */
-    FunctionSpace& domain();
+    VectorSpace& domain();
 
     /**
      * @brief Access underlying domain.
      */
-    const FunctionSpace& domain() const;
+    const VectorSpace& domain() const;
 
   private:
-    FunctionSpace domain_;
+    VectorSpace domain_;
   };
 }
 #endif // ALGORITHM_FUNCTIONAL_HH

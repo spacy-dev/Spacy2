@@ -5,13 +5,12 @@
 #include <vector>
 
 #include "Interface/Operator/abstractOperator.hh"
-#include "functionSpace.hh"
 #include "operator.hh"
 #include "linearOperator.hh"
 
 namespace Algorithm
 {
-  class FunctionSpaceElement;
+  class Vector;
 
   class JacobiPreconditioner : public Interface::AbstractOperator
   {
@@ -22,13 +21,13 @@ namespace Algorithm
 
     JacobiPreconditioner(const JacobiPreconditioner& other);
 
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const override;
+    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const override;
 
   private:
     JacobiPreconditioner* cloneImpl() const;
 
     std::vector<double> diag_;
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> x_ = nullptr;
+    std::unique_ptr<Interface::AbstractVector> x_ = nullptr;
   };
 
   Operator jacobiPreconditioner(const Operator& A);

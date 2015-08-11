@@ -5,16 +5,16 @@ namespace Algorithm
 {
   namespace Interface
   {
-    class AbstractFunctionSpaceElement;
+    class AbstractVector;
 
     class AbstractNorm
     {
     public:
       virtual ~AbstractNorm(){}
 
-      virtual double operator()(const AbstractFunctionSpaceElement&) const = 0;
+      virtual double operator()(const AbstractVector&) const = 0;
 
-      virtual double squared(const AbstractFunctionSpaceElement&) const = 0;
+      virtual double squared(const AbstractVector&) const = 0;
     };
   }
 }

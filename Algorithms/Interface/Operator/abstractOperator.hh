@@ -10,8 +10,8 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractFunctionSpace;
-    class AbstractFunctionSpaceElement;
+    class AbstractVectorSpace;
+    class AbstractVector;
     class AbstractLinearSolver;
     class LinearizedOperator;
     /// \endcond
@@ -29,51 +29,54 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractOperator(std::shared_ptr<AbstractFunctionSpace> domain, std::shared_ptr<AbstractFunctionSpace> range);
+      AbstractOperator(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range);
 
       virtual ~AbstractOperator();
 
       /// Apply operator, i.e. compute \f$y=Ax\f$.
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> operator()(const AbstractFunctionSpaceElement&) const = 0;
-
-      /// Get linearization \f$A'(x): X \rightarrow Y\f$.
-      std::unique_ptr<LinearizedOperator> linearization(const AbstractFunctionSpaceElement& x) const;
+      virtual std::unique_ptr<AbstractVector> operator()(const AbstractVector&) const = 0;
 
       /// Apply first derivative of operator, i.e. compute \f$y=A'(x)dx\f$.
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> d1(const AbstractFunctionSpaceElement& x,
-                                                               const AbstractFunctionSpaceElement& dx) const;
+      virtual std::unique_ptr<AbstractVector> d1(const AbstractVector& x,
+                                                               const AbstractVector& dx) const;
 
       /// Apply second derivative of operator, i.e. compute \f$y=A''(x)(dx,dy)\f$.
-      virtual std::unique_ptr<AbstractFunctionSpaceElement> d2(const AbstractFunctionSpaceElement& x,
-                                                               const AbstractFunctionSpaceElement& dx,
-                                                               const AbstractFunctionSpaceElement& dy) const;
+      virtual std::unique_ptr<AbstractVector> d2(const AbstractVector& x,
+                                                               const AbstractVector& dx,
+                                                               const AbstractVector& dy) const;
 
-      AbstractFunctionSpace& domain();
+      /// Get linearization \f$A'(x): X \rightarrow Y\f$.
+      std::unique_ptr<LinearizedOperator> linearization(const AbstractVector& x) const;
 
       /// Access domain space \f$X\f$.
-      const AbstractFunctionSpace& domain() const;
+      AbstractVectorSpace& domain();
+
+      /// Access domain space \f$X\f$.
+      const AbstractVectorSpace& domain() const;
 
       /// Access shared domain space \f$X\f$.
-      std::shared_ptr<AbstractFunctionSpace> sharedDomain() const;
+      std::shared_ptr<AbstractVectorSpace> sharedDomain() const;
 
       /// Access range space \f$Y\f$.
-      AbstractFunctionSpace& range();
+      AbstractVectorSpace& range();
 
       /// Access range space \f$Y\f$.
-      const AbstractFunctionSpace& range() const;
+      const AbstractVectorSpace& range() const;
 
       /// Access shared range space \f$Y\f$.
-      std::shared_ptr<AbstractFunctionSpace> sharedRange() const;
+      std::shared_ptr<AbstractVectorSpace> sharedRange() const;
 
     protected:
       friend class LinearizedOperator;
 
-      virtual std::unique_ptr<LinearizedOperator> makeLinearization(const AbstractFunctionSpaceElement& x) const;
+      virtual std::unique_ptr<LinearizedOperator> makeLinearization(const AbstractVector& x) const;
 
       virtual std::unique_ptr<AbstractLinearSolver> makeSolver() const;
 
+      virtual std::unique_ptr<AbstractLinearSolver> makeAdjointSolver() const;
+
     private:
-      std::shared_ptr<AbstractFunctionSpace> domain_, range_;
+      std::shared_ptr<AbstractVectorSpace> domain_, range_;
     };
   }
 }

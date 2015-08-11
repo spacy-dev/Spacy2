@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "linearSolver.hh"
 #include "operator.hh"
 #include "Interface/Operator/abstractLinearOperator.hh"
@@ -23,9 +23,11 @@ namespace Algorithm
 
 //    LinearOperator& operator=(const LinearOperator&);
 
-//    FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
+//    Vector operator()(const Vector&) const;
 
     LinearSolver solver() const;
+
+    LinearSolver adjointSolver() const;
   };
 
   LinearSolver operator^(const LinearOperator& A, int k);
@@ -35,9 +37,9 @@ namespace Algorithm
 //  public:
 //    LinearizedOperator(std::shared_ptr<AbstractLinearizedOperator> impl);
 
-//    FunctionSpaceElement operator()(const FunctionSpaceElement&) const;
+//    Vector operator()(const Vector&) const;
 
-//    void setArgument(const FunctionSpaceElement& x);
+//    void setArgument(const Vector& x);
 
 //    LinearSolver getSolver() const;
 

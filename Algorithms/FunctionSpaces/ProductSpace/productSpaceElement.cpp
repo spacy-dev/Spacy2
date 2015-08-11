@@ -1,5 +1,6 @@
 #include "productSpaceElement.hh"
 
+#include "productSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/castTo.hh"
 
@@ -11,37 +12,37 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpace;
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVectorSpace;
+  using Interface::AbstractVector;
 
-  std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables)
+  std::vector<std::unique_ptr<AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<AbstractVector> >& variables)
   {
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > clonedVariables;
+    std::vector<std::unique_ptr<AbstractVector> > clonedVariables;
 
-    for(const auto& var : variables) clonedVariables.emplace_back<std::unique_ptr<AbstractFunctionSpaceElement> >( clone(*var) );
+    for(const auto& var : variables) clonedVariables.emplace_back<std::unique_ptr<AbstractVector> >( clone(*var) );
 
     return clonedVariables;
   }
 
   namespace
   {
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& variables,
+    std::vector<std::unique_ptr<AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<AbstractVector> >& variables,
                                                                                const std::vector<unsigned>& ids)
     {
-      std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > clonedVariables;
+      std::vector<std::unique_ptr<AbstractVector> > clonedVariables;
 
-      for( unsigned i : ids ) clonedVariables.emplace_back< std::unique_ptr<AbstractFunctionSpaceElement> >( clone(variables[i]) );
+      for( unsigned i : ids ) clonedVariables.emplace_back< std::unique_ptr<AbstractVector> >( clone(variables[i]) );
 
       return clonedVariables;
     }
   }
 
-  ProductSpaceElement::ProductSpaceElement(const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > &variables, const ProductSpace& space)
-    : AbstractFunctionSpaceElement(space), variables_(cloneVariables(variables))
+  ProductSpaceElement::ProductSpaceElement(const std::vector<std::unique_ptr<AbstractVector> > &variables, const ProductSpace& space)
+    : AbstractVector(space), variables_(cloneVariables(variables))
   {}
 
   ProductSpaceElement::ProductSpaceElement(const ProductSpace& space)
-    : AbstractFunctionSpaceElement(space)
+    : AbstractVector(space)
   {
     const auto& spaces = castTo<ProductSpace>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i)
@@ -49,7 +50,7 @@ namespace Algorithm
   }
 
   ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)
-    : AbstractFunctionSpaceElement(other), variables_(cloneVariables(other.variables()))
+    : AbstractVector(other), variables_(cloneVariables(other.variables()))
   {
     if( !other.isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
@@ -61,7 +62,7 @@ namespace Algorithm
     reset(other);
   }
 
-  void ProductSpaceElement::copyTo(AbstractFunctionSpaceElement& y) const
+  void ProductSpaceElement::copyTo(AbstractVector& y) const
   {
     auto& y_ = castTo<ProductSpaceElement>(y);
 
@@ -90,7 +91,7 @@ namespace Algorithm
 
   }
 
-  ProductSpaceElement& ProductSpaceElement::operator=(const AbstractFunctionSpaceElement& y)
+  ProductSpaceElement& ProductSpaceElement::operator=(const AbstractVector& y)
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
@@ -106,7 +107,7 @@ namespace Algorithm
     return *this;
   }
 
-  ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractFunctionSpaceElement& y)
+  ProductSpaceElement& ProductSpaceElement::operator+=(const AbstractVector& y)
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
@@ -122,7 +123,7 @@ namespace Algorithm
     return *this;
   }
 
-  AbstractFunctionSpaceElement& ProductSpaceElement::axpy(double a, const AbstractFunctionSpaceElement& y)
+  AbstractVector& ProductSpaceElement::axpy(double a, const AbstractVector& y)
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
@@ -139,7 +140,7 @@ namespace Algorithm
   }
 
 
-  ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractFunctionSpaceElement& y)
+  ProductSpaceElement& ProductSpaceElement::operator-=(const AbstractVector& y)
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
@@ -169,9 +170,9 @@ namespace Algorithm
     return *this;
   }
 
-  std::unique_ptr<AbstractFunctionSpaceElement> ProductSpaceElement::operator- () const
+  std::unique_ptr<AbstractVector> ProductSpaceElement::operator- () const
   {
-    std::vector<std::unique_ptr<AbstractFunctionSpaceElement> > vars = cloneVariables(variables());
+    std::vector<std::unique_ptr<AbstractVector> > vars = cloneVariables(variables());
     if( isPrimalEnabled() )
       for( unsigned i : space().primalSubSpaceIds() )
         vars[i] = -variable(i);
@@ -190,7 +191,7 @@ namespace Algorithm
     return std::make_unique<ProductSpaceElement>(vars,space());
   }
 
-  double ProductSpaceElement::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+  double ProductSpaceElement::applyAsDualTo(const AbstractVector& y) const
   {
     auto result = 0.;
     const auto& y_  = castTo<ProductSpaceElement>(y);
@@ -246,22 +247,22 @@ namespace Algorithm
     for( auto& v : variables_ ) v->print(os);
   }
 
-  AbstractFunctionSpaceElement& ProductSpaceElement::variable(unsigned i)
+  AbstractVector& ProductSpaceElement::variable(unsigned i)
   {
     return *variables_[i];
   }
 
-  const AbstractFunctionSpaceElement& ProductSpaceElement::variable(unsigned i) const
+  const AbstractVector& ProductSpaceElement::variable(unsigned i) const
   {
     return *variables_[i];
   }
 
-  std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& ProductSpaceElement::variables()
+  std::vector<std::unique_ptr<AbstractVector> >& ProductSpaceElement::variables()
   {
     return variables_;
   }
 
-  const std::vector<std::unique_ptr<AbstractFunctionSpaceElement> >& ProductSpaceElement::variables() const
+  const std::vector<std::unique_ptr<AbstractVector> >& ProductSpaceElement::variables() const
   {
     return variables_;
   }
@@ -286,13 +287,13 @@ namespace Algorithm
 
   const ProductSpace& ProductSpaceElement::space() const
   {
-    return castTo<ProductSpace>(AbstractFunctionSpaceElement::space());
+    return castTo<ProductSpace>(AbstractVector::space());
   }
 
 
-  FunctionSpaceElement primalElement(const FunctionSpaceElement& x)
+  Vector primalElement(const Vector& x)
   {
-    return FunctionSpaceElement( castTo<ProductSpaceElement>(x.impl()).primalElement() );
+    return Vector( castTo<ProductSpaceElement>(x.impl()).primalElement() );
   }
 
 }

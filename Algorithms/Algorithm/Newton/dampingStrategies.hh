@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 #define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "Algorithm/dampingFactor.hh"
 #include "Util/Mixins/eps.hh"
 #include "Util/Mixins/regularityTest.hh"
@@ -23,7 +23,7 @@ namespace Algorithm
       public:
         virtual ~Base() = default;
 
-        virtual DampingFactor compute(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&) = 0;
+        virtual DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) = 0;
       };
 
       /**
@@ -35,14 +35,14 @@ namespace Algorithm
       public:
         AffineCovariant(const Operator& F);
 
-        DampingFactor compute(const LinearSolver& DFInv_, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) final override;
+        DampingFactor compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) final override;
 
       private:
         const Operator& F_;
 
         DampingFactor oldNu = -1;
         double normOldDx = -1, normOldDs = -1;
-        FunctionSpaceElement oldDs;
+        Vector oldDs;
       };
 
       /**
@@ -54,7 +54,7 @@ namespace Algorithm
       public:
         AffineContravariant(const Operator& F);
 
-        DampingFactor compute(const LinearSolver&, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) final override;
+        DampingFactor compute(const LinearSolver&, const Vector& x, const Vector& dx) final override;
 
       private:
         const Operator& F_;
@@ -72,7 +72,7 @@ namespace Algorithm
       public:
         None(const Operator& F);
 
-        DampingFactor compute(const LinearSolver&, const FunctionSpaceElement&, const FunctionSpaceElement&);
+        DampingFactor compute(const LinearSolver&, const Vector&, const Vector&);
       };
     }
   }

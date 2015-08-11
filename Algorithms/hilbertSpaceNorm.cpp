@@ -10,12 +10,12 @@ namespace Algorithm
     : HilbertSpaceNorm( std::make_shared<Interface::HilbertSpaceNorm>(sp.sharedImpl()) )
   {}
 
-  double HilbertSpaceNorm::scalarProduct(const FunctionSpaceElement& x, const FunctionSpaceElement& y) const
+  double HilbertSpaceNorm::scalarProduct(const Vector& x, const Vector& y) const
   {
     return dynamic_cast<const Interface::HilbertSpaceNorm&>(impl()).scalarProduct( x.impl() , y.impl() );
   }
 
-  double HilbertSpaceNorm::squared(const FunctionSpaceElement& x) const
+  double HilbertSpaceNorm::squared(const Vector& x) const
   {
     return scalarProduct(x,x);
   }

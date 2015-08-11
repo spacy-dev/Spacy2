@@ -6,8 +6,8 @@
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractFunctionSpaceElement; }
-  class FunctionSpaceElement;
+  namespace Interface { class AbstractVector; }
+  class Vector;
 
   namespace Mixin
   {
@@ -82,22 +82,22 @@ namespace Algorithm
     }
   }
 
-  Interface::AbstractFunctionSpaceElement& primal(Interface::AbstractFunctionSpaceElement& x);
+  Interface::AbstractVector& primal(Interface::AbstractVector& x);
 
-  const Interface::AbstractFunctionSpaceElement& primal(const Interface::AbstractFunctionSpaceElement& x);
+  const Interface::AbstractVector& primal(const Interface::AbstractVector& x);
 
-  Interface::AbstractFunctionSpaceElement& dual(Interface::AbstractFunctionSpaceElement& x);
+  Interface::AbstractVector& dual(Interface::AbstractVector& x);
 
-  const Interface::AbstractFunctionSpaceElement& dual(const Interface::AbstractFunctionSpaceElement& x);
+  const Interface::AbstractVector& dual(const Interface::AbstractVector& x);
 
 
-  FunctionSpaceElement& primal(FunctionSpaceElement& x);
+  Vector& primal(Vector& x);
 
-  const FunctionSpaceElement& primal(const FunctionSpaceElement& x);
+  const Vector& primal(const Vector& x);
 
-  FunctionSpaceElement& dual(FunctionSpaceElement& x);
+  Vector& dual(Vector& x);
 
-  const FunctionSpaceElement& dual(const FunctionSpaceElement& x);
+  const Vector& dual(const Vector& x);
 }
 
 #endif // ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH

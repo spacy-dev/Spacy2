@@ -16,7 +16,7 @@ namespace Algorithm
   /// \cond
   class Functional;
   class CubicModel;
-  class FunctionSpaceElement;
+  class Vector;
   class LinearSolver;
   /// \endcond
 
@@ -42,24 +42,24 @@ namespace Algorithm
   public:
     AffineCovariantCompositeSteps(const Functional& N, const Functional& L);
 
-    FunctionSpaceElement solve();
+    Vector solve();
 
-    FunctionSpaceElement solve(const FunctionSpaceElement& x0);
+    Vector solve(const Vector& x0);
 
   private:
-    FunctionSpaceElement computeNormalStep(const FunctionSpaceElement& x) const;
-    FunctionSpaceElement computeSimplifiedNormalStep(const FunctionSpaceElement& trial) const;
-    FunctionSpaceElement computeMinimumNormCorrection(const FunctionSpaceElement& x) const;
-    FunctionSpaceElement computeTangentialStep(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dn, bool lastStepWasUndamped) const;
-    FunctionSpaceElement computeLagrangeMultiplier(const FunctionSpaceElement& x) const;
+    Vector computeNormalStep(const Vector& x) const;
+    Vector computeSimplifiedNormalStep(const Vector& trial) const;
+    Vector computeMinimumNormCorrection(const Vector& x) const;
+    Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
+    Vector computeLagrangeMultiplier(const Vector& x) const;
 
     bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
 
-    std::tuple<double, FunctionSpaceElement, FunctionSpaceElement, double, double> computeCompositeStep(double& nu, double norm_Dn,
-                const FunctionSpaceElement& x, const FunctionSpaceElement& Dn, const FunctionSpaceElement& Dt);
+    std::tuple<double, Vector, Vector, double, double> computeCompositeStep(double& nu, double norm_Dn,
+                const Vector& x, const Vector& Dn, const Vector& Dt);
 
     void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
-    double updateOmegaL(const FunctionSpaceElement& soc, double q_tau,
+    double updateOmegaL(const Vector& soc, double q_tau,
                         double tau, double norm_x, double norm_dx, const CompositeStep::CubicModel& cubic);
 
     double computeNormalStepDampingFactor(double normDn) const;

@@ -1,6 +1,6 @@
 #include "conjugateGradients.hh"
 
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 #include "Util/Exceptions/singularOperatorException.hh"
 
 #include <cassert>
@@ -11,19 +11,19 @@
 
 namespace Algorithm
 {
-  FunctionSpaceElement CGMethod::solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b, double tolerance) const
+  Vector CGMethod::solve(const Vector& x, const Vector& b, double tolerance) const
   {
     terminate->setRelativeAccuracy(tolerance);
     return solve(x,b);
   }
 
-  FunctionSpaceElement CGMethod::solve(const FunctionSpaceElement& b) const
+  Vector CGMethod::solve(const Vector& b) const
   {
-    auto x = FunctionSpaceElement( A_.impl().domain().element() );
+    auto x = Vector( A_.impl().domain().element() );
     return solve(x,b);
   }
 
-  FunctionSpaceElement CGMethod::solve(const FunctionSpaceElement& x, const FunctionSpaceElement& b) const
+  Vector CGMethod::solve(const Vector& x, const Vector& b) const
   {
     initializeRegularization();
     nonconvexity = Nonconvexity::None;
@@ -31,7 +31,7 @@ namespace Algorithm
       return cgLoop(x,b);
     else
     {
-      FunctionSpaceElement y = x;
+      Vector y = x;
       while( result != Result::Converged && result != Result::TruncatedAtNonConvexity )
         y = cgLoop(x,b);
       return y;
@@ -54,7 +54,7 @@ namespace Algorithm
     return sqrt(energyNorm2);
   }
 
-  FunctionSpaceElement CGMethod::cgLoop (FunctionSpaceElement x, FunctionSpaceElement r) const
+  Vector CGMethod::cgLoop (Vector x, Vector r) const
   {
     terminate->clear();
     result = Result::Failed;
@@ -123,7 +123,7 @@ namespace Algorithm
   }
 
 
-  FunctionSpaceElement CGMethod::Q(const FunctionSpaceElement& r) const
+  Vector CGMethod::Q(const Vector& r) const
   {
     auto Qr = P_(r);
     for(auto i=0u; i<iterativeRefinements(); ++i)
@@ -142,7 +142,7 @@ namespace Algorithm
     return false;
   }
 
-  bool CGMethod::terminateOnNonconvexity(double qAq, double qPq, FunctionSpaceElement& x, const FunctionSpaceElement& q, unsigned step) const
+  bool CGMethod::terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const
   {
     if( qAq > 0 ) return false;
     if( verbose() ) std::cout << type_ << ": Negative curvature: " << qAq << std::endl;
@@ -204,7 +204,7 @@ namespace Algorithm
     if( verbose() ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
   }
 
-  void CGMethod::adjustRegularizedResidual(double alpha, const FunctionSpaceElement& Pq, FunctionSpaceElement& r) const
+  void CGMethod::adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const
   {
     if( type_ == "cg" || type_ == "tcg" ) return;
     r -= (alpha*theta)*Pq;

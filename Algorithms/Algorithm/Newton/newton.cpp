@@ -1,7 +1,7 @@
 #include "newton.hh"
 
 #include "linearOperator.hh"
-#include "functionSpaceElement.hh"
+#include "vector.hh"
 
 #include <iostream>
 
@@ -21,12 +21,12 @@ namespace Algorithm
       attachRelativeAccuracy( terminationCriterion_.get() );
     }
 
-    FunctionSpaceElement NewtonMethod::solve() const
+    Vector NewtonMethod::solve() const
     {
-      return solve( FunctionSpaceElement( F_.impl().domain().element() ) );
+      return solve( Vector( F_.impl().domain().element() ) );
     }
 
-    FunctionSpaceElement NewtonMethod::solve(const FunctionSpaceElement& x0) const
+    Vector NewtonMethod::solve(const Vector& x0) const
     {
       using namespace std::chrono;
       if( verbose() ) std::cout << "Starting newton iteration." << std::endl;

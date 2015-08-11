@@ -1,6 +1,6 @@
 #include "vector.hh"
 
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -12,21 +12,20 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpace;
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVector;
 
   namespace Fenics
   {
-    Vector::Vector(const AbstractFunctionSpace& space)
-      : AbstractFunctionSpaceElement(space),
-        Impl<dolfin::Function>( dolfin::Function( castTo<Fenics::FunctionSpace>(space).impl() ) )
+    Vector::Vector(const Interface::AbstractVectorSpace& space)
+      : AbstractVector(space),
+        Impl<dolfin::Function>( dolfin::Function( castTo<Fenics::VectorSpace>(space).impl() ) )
     {}
 
-    Vector::Vector(const dolfin::Function& f, const AbstractFunctionSpace& space)
-      : AbstractFunctionSpaceElement(space), Impl<dolfin::Function>( f )
+    Vector::Vector(const dolfin::Function& f, const Interface::AbstractVectorSpace& space)
+      : AbstractVector(space), Impl<dolfin::Function>( f )
     {}
 
-    void Vector::copyTo(AbstractFunctionSpaceElement& y) const
+    void Vector::copyTo(AbstractVector& y) const
     {
       castTo<Vector>(y).impl() = impl();
     }
@@ -42,25 +41,25 @@ namespace Algorithm
       return *this;
     }
 
-    Vector& Vector::operator=(const AbstractFunctionSpaceElement& y)
+    Vector& Vector::operator=(const AbstractVector& y)
     {
       *impl().vector() = *castTo<Vector>(y).impl().vector();
       return *this;
     }
 
-    Vector& Vector::operator+=(const AbstractFunctionSpaceElement& y)
+    Vector& Vector::operator+=(const AbstractVector& y)
     {
       *impl().vector() += *castTo<Vector>(y).impl().vector();
       return *this;
     }
 
-    Vector& Vector::axpy(double a, const AbstractFunctionSpaceElement& y)
+    Vector& Vector::axpy(double a, const AbstractVector& y)
     {
       impl().vector()->axpy(a,*castTo<Vector>(y).impl().vector());
       return *this;
     }
 
-    Vector& Vector::operator-=(const AbstractFunctionSpaceElement& y)
+    Vector& Vector::operator-=(const AbstractVector& y)
     {
       *impl().vector() -= *castTo<Vector>(y).impl().vector();
       return *this;
@@ -72,7 +71,7 @@ namespace Algorithm
       return *this;
     }
 
-    std::unique_ptr<AbstractFunctionSpaceElement> Vector::operator- () const
+    std::unique_ptr<AbstractVector> Vector::operator- () const
     {
       auto v = clone( *this );
       *v *= -1;
@@ -104,7 +103,7 @@ namespace Algorithm
       return impl()[i];
     }
 
-    double Vector::applyAsDualTo(const AbstractFunctionSpaceElement& y) const
+    double Vector::applyAsDualTo(const AbstractVector& y) const
     {
       auto const& y_ = castTo<Vector>(y);
       return impl().vector()->inner( *y_.impl().vector() );
@@ -116,7 +115,7 @@ namespace Algorithm
     }
 
 
-    void copy(const Interface::AbstractFunctionSpaceElement& x, dolfin::GenericVector& y, bool verbose)
+    void copy(const Interface::AbstractVector& x, dolfin::GenericVector& y, bool verbose)
     {
       if( verbose ) std::cout << "copy rhs" << std::endl;
       if( is<Vector>(x) )
@@ -136,7 +135,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
 
               if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isPrimalEnabled())
@@ -149,7 +148,7 @@ namespace Algorithm
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
 
               if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isDualEnabled())
@@ -162,11 +161,11 @@ namespace Algorithm
         return;
       }
 
-      throw InvalidArgumentException("copy(const Interface::AbstractFunctionSpaceElement& x, dolfin::GenericVector& y)");
+      throw InvalidArgumentException("copy(const Interface::AbstractVector& x, dolfin::GenericVector& y)");
     }
 
 
-    void copy(const dolfin::GenericVector& y, Interface::AbstractFunctionSpaceElement& x, bool verbose)
+    void copy(const dolfin::GenericVector& y, Interface::AbstractVector& x, bool verbose)
     {
       if(verbose) std::cout << "from vector" << std::endl;
       if( is<Vector>(x) )
@@ -185,7 +184,7 @@ namespace Algorithm
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
               if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
@@ -199,7 +198,7 @@ namespace Algorithm
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::FunctionSpace>( xv_.space() );
+              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
               if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
@@ -212,7 +211,7 @@ namespace Algorithm
         return;
       }
 
-      throw InvalidArgumentException("copy(const dolfin::GenericVector& y, Interface::AbstractFunctionSpaceElement& x)");
+      throw InvalidArgumentException("copy(const dolfin::GenericVector& y, Interface::AbstractVector& x)");
     }
 
   }

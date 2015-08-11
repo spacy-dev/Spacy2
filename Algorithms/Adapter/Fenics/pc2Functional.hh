@@ -13,7 +13,7 @@
 #include "util.hh"
 #include "vector.hh"
 
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 #include "functional.hh"
 
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
@@ -33,7 +33,7 @@ namespace Algorithm
     class PFunctional : public Interface::AbstractFunctional, public Mixin::StateIndex, public Mixin::ControlIndex , public Mixin::AdjointIndex
     {
     public:
-      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractFunctionSpace> space)
+      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, std::shared_ptr<Interface::AbstractVectorSpace> space)
         : Interface::AbstractFunctional( space ),
           pd2c_( pd2c.function_space(0) , pd2c.function_space(1) ),
           bcs_( bcs )
@@ -41,22 +41,22 @@ namespace Algorithm
         copyCoefficients(pd2c,pd2c_);
       }
 
-      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::FunctionSpace& space)
+      PFunctional(const JacobianForm& pd2c, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::VectorSpace& space)
         : PFunctional(pd2c,bcs,space.sharedImpl())
       {}
 
-      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
+      double d0(const Interface::AbstractVector& x) const final override
       {
         throw CallOfUndefinedFunctionException("Fenics::C2Operator::operator()");
       }
 
-      double d1(const Interface::AbstractFunctionSpaceElement &x, const Interface::AbstractFunctionSpaceElement &dx) const final override
+      double d1(const Interface::AbstractVector &x, const Interface::AbstractVector &dx) const final override
       {
         throw CallOfUndefinedFunctionException("Fenics::C2Operator::d1()");
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x,
-                                                                  const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x,
+                                                                  const Interface::AbstractVector& dx) const final override
       {
         const auto& x_ = castTo<ProductSpaceElement>(x);
         const auto& dx_ = castTo<ProductSpaceElement>(dx);
@@ -69,7 +69,7 @@ namespace Algorithm
         toVector( y->dualVariable( 0 ) ) *= 0;
         A_->mult(*dy.impl().vector(), *toVector(y->variable(stateIndex())).impl().vector());
 
-        return std::unique_ptr<Interface::AbstractFunctionSpaceElement>( y.release() );
+        return std::unique_ptr<Interface::AbstractVector>( y.release() );
       }
 
 
@@ -105,7 +105,7 @@ namespace Algorithm
 
 
     template <class JacobianForm>
-    auto makePFunctional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const FunctionSpace& space)
+    auto makePFunctional(JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
     {
       return createFromUniqueImpl< ::Algorithm::Functional , ::Algorithm::Fenics::PFunctional<JacobianForm> >( J , bcs , space );
     }

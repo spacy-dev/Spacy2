@@ -3,7 +3,7 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractFunctionSpaceElement;
+  using Interface::AbstractVector;
   using Interface::AbstractOperator;
 
   JacobiPreconditioner::JacobiPreconditioner(const Operator& A)
@@ -43,7 +43,7 @@ namespace Algorithm
   {}
 
 
-  std::unique_ptr<AbstractFunctionSpaceElement> JacobiPreconditioner::operator()(const AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<AbstractVector> JacobiPreconditioner::operator()(const AbstractVector& x) const
   {
     auto y = clone(x);
     for(unsigned i = 0; i < x.size(); ++i)

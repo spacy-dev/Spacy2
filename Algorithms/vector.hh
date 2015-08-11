@@ -1,13 +1,9 @@
-#ifndef ALGORITHM_FUNCTIONSPACEELEMENT_HH
-#define ALGORITHM_FUNCTIONSPACEELEMENT_HH
+#ifndef ALGORITHM_VECTOR_HH
+#define ALGORITHM_VECTOR_HH
 
-#include <iostream>
 #include <memory>
-#include <type_traits>
-#include <utility>
 
-#include "Interface/abstractFunctionSpace.hh"
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "Interface/abstractVector.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
@@ -17,41 +13,41 @@ namespace Algorithm
   /**
    * @brief Representation of a function space element.
    *
-   * This class is the base class for all variables. Their specific form is specified in an Implementation derived from AbstractFunctionSpaceElement.
+   * This class is the base class for all variables. Their specific form is specified in an Implementation derived from AbstractVector.
    */
-  class FunctionSpaceElement : public Mixin::UniqueImpl<Interface::AbstractFunctionSpaceElement>
+  class Vector : public Mixin::UniqueImpl<Interface::AbstractVector>
   {
   public:
     /// Default constructor.
-    FunctionSpaceElement();
+    Vector();
 
     /**
-     * @brief Construct FunctionSpaceElement from implementation.
+     * @brief Construct Vector from implementation.
      */
-    FunctionSpaceElement(std::unique_ptr<Interface::AbstractFunctionSpaceElement>&& implementation);
+    Vector(std::unique_ptr<Interface::AbstractVector>&& implementation);
 
     /**
-     * @brief Construct FunctionSpaceElement from implementation.
+     * @brief Construct Vector from implementation.
      */
-    FunctionSpaceElement(const Interface::AbstractFunctionSpaceElement& implementation);
+    Vector(const Interface::AbstractVector& implementation);
 
     /**
      * @brief Copy constructor.
      */
-    FunctionSpaceElement(const FunctionSpaceElement&) = default;
+    Vector(const Vector&) = default;
 
     /**
      * @brief Copy assignment.
      */
-    FunctionSpaceElement& operator=(const FunctionSpaceElement&);
+    Vector& operator=(const Vector&);
 
     /**
      * @brief Copy assignment.
      */
     template <class T>
-    FunctionSpaceElement& operator=(const Scale<T>& s)
+    Vector& operator=(const Scale<T>& s)
     {
-      FunctionSpaceElement y(s.x);
+      Vector y(s.x);
       y *= s.a;
 
       if( !implIsNullPtr() )
@@ -64,7 +60,7 @@ namespace Algorithm
     /**
      * @brief Assign from implementation.
      */
-    FunctionSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& implementation);
+    Vector& operator=(const Interface::AbstractVector& implementation);
 
     /**
      * @brief print information on this function space element
@@ -82,7 +78,7 @@ namespace Algorithm
      */
     template <class Arithmetic,
               class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-    FunctionSpaceElement& operator*=(const Arithmetic& a)
+    Vector& operator*=(const Arithmetic& a)
     {
       impl() *= a;
       return *this;
@@ -91,13 +87,13 @@ namespace Algorithm
     /**
      * @brief In-place summation.
      */
-    FunctionSpaceElement& operator+=(const FunctionSpaceElement& y);
+    Vector& operator+=(const Vector& y);
 
     /**
      * @brief Axpy for \f$ x += a*y \f$.
      */
     template <class T>
-    FunctionSpaceElement& operator+=(Scale<T>&& s)
+    Vector& operator+=(Scale<T>&& s)
     {
       impl().axpy(s.a,s.x.impl());
       return *this;
@@ -105,13 +101,13 @@ namespace Algorithm
     /**
      * @brief In-place subtraction.
      */
-    FunctionSpaceElement& operator-=(const FunctionSpaceElement& y);
+    Vector& operator-=(const Vector& y);
 
     /**
      * @brief Axpy for \f$ x -= a*y \f$.
      */
     template <class T>
-    FunctionSpaceElement& operator-=(Scale<T>&& s)
+    Vector& operator-=(Scale<T>&& s)
     {
       impl().axpy(-s.a,s.x.impl());
       return *this;
@@ -120,17 +116,17 @@ namespace Algorithm
     /**
      * @brief Get \f$-x\f$.
      */
-    FunctionSpaceElement operator-() const;
+    Vector operator-() const;
 
     /**
      * \brief Apply as dual element.
      */
-    double operator()(const FunctionSpaceElement& y) const;
+    double operator()(const Vector& y) const;
 
     /**
      * @brief Equality check.
      */
-    bool operator==(const FunctionSpaceElement& y) const;
+    bool operator==(const Vector& y) const;
 
     /**
      * \brief Access to entry of coefficient vector.
@@ -164,7 +160,7 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(const Arithmetic& a, FunctionSpaceElement x)
+  auto operator*(const Arithmetic& a, Vector x)
   {
     return Scale<Arithmetic>{a,x};
   }
@@ -175,7 +171,7 @@ namespace Algorithm
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  auto operator*(const FunctionSpaceElement& x, const Arithmetic& a)
+  auto operator*(const Vector& x, const Arithmetic& a)
   {
     return a*x;
   }
@@ -183,56 +179,56 @@ namespace Algorithm
   /**
    * @brief Compute \f$z=x+y\f$.
    */
-  FunctionSpaceElement operator+(FunctionSpaceElement x, const FunctionSpaceElement& y);
+  Vector operator+(Vector x, const Vector& y);
 
   /**
    * @brief Compute \f$z=x-y\f$.
    */
-  FunctionSpaceElement operator-(FunctionSpaceElement x, const FunctionSpaceElement& y);
+  Vector operator-(Vector x, const Vector& y);
 
   /**
    * @brief Compute \f$z=a+x\f$.
    * @param a
    * @param x function space element with implementation of type Real.
    */
-  FunctionSpaceElement operator+(double a, FunctionSpaceElement x);
+  Vector operator+(double a, Vector x);
 
   /**
    * @brief Compute \f$z=a+x\f$.
    * @param a
    * @param x function space element with implementation of type Real.
    */
-  FunctionSpaceElement operator+(const FunctionSpaceElement& x, double a);
+  Vector operator+(const Vector& x, double a);
 
   /**
    * @brief Compute \f$z=x*y=(x,y)\f$.
    */
-  auto operator*(const FunctionSpaceElement& x, const FunctionSpaceElement& y) -> decltype(x.impl()*y.impl());
+  auto operator*(const Vector& x, const Vector& y) -> decltype(x.impl()*y.impl());
 
 
   /**
    * @brief Compute norm, where the norm associated with the underlying function space is used.
    */
-  double norm(const FunctionSpaceElement& x);
+  double norm(const Vector& x);
 
 
   /**
    * @brief Print function space element to os.
    */
-  std::ostream& operator<<(std::ostream& os, const FunctionSpaceElement& x);
+  std::ostream& operator<<(std::ostream& os, const Vector& x);
 
   template <class T>
   struct Scale
   {
-    operator FunctionSpaceElement() const
+    operator Vector() const
     {
       auto y = x;
       return y *= a;
     }
 
     T a;
-    const FunctionSpaceElement& x;
+    const Vector& x;
   };
 }
 
-#endif // ALGORITHM_FUNCTIONSPACEELEMENT_HH
+#endif // ALGORITHM_VECTOR_HH

@@ -21,13 +21,13 @@ namespace Algorithm
     public:
       TrackingTypeCostFunctional(std::unique_ptr<Interface::AbstractFunctional>&& YNormFunctional,
                                  std::unique_ptr<Interface::AbstractFunctional>&& UNormFunctional,
-                                 std::shared_ptr<Interface::AbstractFunctionSpace> domain)
+                                 std::shared_ptr<Interface::AbstractVectorSpace> domain)
         : Interface::AbstractFunctional(domain),
           YNormFunctional_(std::move(YNormFunctional)),
           UNormFunctional_(std::move(UNormFunctional))
       {}
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x) const final override
       {
         const auto& x_  = castTo<ProductSpaceElement>(x);
         auto result_ = clone(x_);
@@ -38,7 +38,7 @@ namespace Algorithm
         return std::move(result_);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
       {
         const auto& x_  = castTo<ProductSpaceElement>(x);
         const auto& dx_ = castTo<ProductSpaceElement>(dx);
@@ -59,12 +59,12 @@ namespace Algorithm
         return r;
       }
 
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const override
+      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const override
       {
         return UNormFunctional_->hessian(castTo<ProductSpaceElement>(x).variable(controlIndex()));
       }
 
-      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
+      double d0(const Interface::AbstractVector& x) const final override
       {
         const auto& x_ = castTo<ProductSpaceElement>(x);
         return (*YNormFunctional_)( x_.variable(stateIndex()) )

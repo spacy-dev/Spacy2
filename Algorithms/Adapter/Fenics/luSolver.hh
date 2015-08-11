@@ -19,10 +19,10 @@ namespace Algorithm
     {
     public:
       LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-               std::shared_ptr<Interface::AbstractFunctionSpace> domain , std::shared_ptr<Interface::AbstractFunctionSpace> range);
+               std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range);
 
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
+      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
 
     private:
       LUSolver* cloneImpl() const;
@@ -42,7 +42,7 @@ namespace Algorithm
 //    public:
 //      explicit TransposedLUSolver(const dolfin::GenericMatrix& A);
 
-//      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override;
+//      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
 
 //    private:
 //      std::unique_ptr<dolfin::GenericMatrix> A_;

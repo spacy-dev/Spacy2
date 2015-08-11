@@ -1,6 +1,7 @@
 #include "inducedScalarProduct.hh"
 
-#include "abstractFunctionSpaceElement.hh"
+#include "abstractVector.hh"
+#include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "operator.hh"
@@ -16,7 +17,7 @@ namespace Algorithm
       : Mixin::UniqueImpl<AbstractOperator>(clone(M))
     {}
 
-    double InducedScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+    double InducedScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
     {
       return (*impl()(y))(x);
     }
@@ -26,7 +27,7 @@ namespace Algorithm
       : Mixin::UniqueImpl<AbstractOperator>(clone(M))
     {}
 
-    double PrimalInducedScalarProduct::operator()(const AbstractFunctionSpaceElement& x, const AbstractFunctionSpaceElement& y) const
+    double PrimalInducedScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
     {
       const auto& xx = castTo<ProductSpaceElement>(x);
       const auto& yy = castTo<ProductSpaceElement>(y);

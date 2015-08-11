@@ -63,12 +63,12 @@ namespace Algorithm
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator()(const Interface::AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
       {
         return d1(x,x);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement&, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector&, const Interface::AbstractVector& dx) const final override
       {
         assembleOperator();
 
@@ -102,7 +102,7 @@ namespace Algorithm
         return new LinearOperator(*this);
       }
 
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractFunctionSpaceElement& x) const
+      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
       {
         assembleOperator();
         return std::make_unique<Interface::LinearizedOperator>(std::make_unique< LinearOperator<OperatorImpl> >(*this,true),x);

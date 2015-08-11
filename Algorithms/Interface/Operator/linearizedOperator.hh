@@ -11,7 +11,7 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractFunctionSpaceElement;
+    class AbstractVector;
     /// \endcond
 
     /// Linearized operator \f$A'(x)\f$ of a differentiable operator \f$A\f$.
@@ -23,19 +23,22 @@ namespace Algorithm
        * @param A (possibly nonlinear) differentiable operator.
        * @param x point of linearization.
        */
-      LinearizedOperator(std::unique_ptr<AbstractOperator>&& A, const AbstractFunctionSpaceElement& x);
+      LinearizedOperator(std::unique_ptr<AbstractOperator>&& A, const AbstractVector& x);
 
       /// Apply operator, i.e. compute \f$y=A'(x)dx\f$.
-      std::unique_ptr<AbstractFunctionSpaceElement> operator ()(const AbstractFunctionSpaceElement& dx) const final override;
+      std::unique_ptr<AbstractVector> operator ()(const AbstractVector& dx) const final override;
 
       /// Get linear solver (representing \f$(A'(x))^{-1}\f$).
       std::unique_ptr<AbstractLinearSolver> solver() const final override;
+
+      /// Get linear solver (representing \f$(A'(x))^{-*}\f$).
+      std::unique_ptr<AbstractLinearSolver> adjointSolver() const final override;
 
     private:
       LinearizedOperator* cloneImpl() const;
 
       std::unique_ptr<AbstractOperator> A_;
-      std::unique_ptr<AbstractFunctionSpaceElement> x_;
+      std::unique_ptr<AbstractVector> x_;
     };
   }
 }

@@ -5,14 +5,14 @@ namespace Algorithm
 {
   namespace Interface
   {
-    class AbstractFunctionSpaceElement;
+    class AbstractVector;
 
     class AbstractScalarProduct
     {
     public:
       virtual ~AbstractScalarProduct(){}
 
-      virtual double operator()(const AbstractFunctionSpaceElement&, const AbstractFunctionSpaceElement&) const = 0;
+      virtual double operator()(const AbstractVector&, const AbstractVector&) const = 0;
     };
   }
 }

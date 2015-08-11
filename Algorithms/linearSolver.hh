@@ -10,7 +10,7 @@ namespace Algorithm
   /// \cond
   namespace Interface { class AbstractLinearSolver; }
   class LinearOperator;
-  class FunctionSpaceElement;
+  class Vector;
   /// \endcond
 
   class LinearSolver : public Operator
@@ -20,7 +20,7 @@ namespace Algorithm
 
     LinearSolver(std::unique_ptr<Interface::AbstractLinearSolver>&& impl);
 
-    FunctionSpaceElement operator()(const FunctionSpaceElement& x) const;
+    Vector operator()(const Vector& x) const;
 
     bool encounteredNonconvexity() const;
   };

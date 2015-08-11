@@ -4,19 +4,18 @@
 #include <memory>
 #include <vector>
 
-#include "productSpace.hh"
-
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "vector.hh"
+#include "Interface/abstractVector.hh"
 #include "Util/Mixins/primalDualSwitch.hh"
 
 namespace Algorithm
 {
   class ProductSpace;
 
-  std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> > cloneVariables(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables);
+  std::vector<std::unique_ptr<Interface::AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables);
 
   /// Real number.
-  class ProductSpaceElement : public Interface::AbstractFunctionSpaceElement , public Mixin::PrimalDualSwitch
+  class ProductSpaceElement : public Interface::AbstractVector , public Mixin::PrimalDualSwitch
   {
   public:
     /**
@@ -24,7 +23,7 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    ProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables, const ProductSpace& space);
+    ProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables, const ProductSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
@@ -34,28 +33,28 @@ namespace Algorithm
 
     ProductSpaceElement(const ProductSpaceElement& other);
 
-    void copyTo(Interface::AbstractFunctionSpaceElement &) const final override;
+    void copyTo(Interface::AbstractVector &) const final override;
 
     /// Print to os.
     void print(std::ostream& os) const final override;
 
     /// Assignment.
-    ProductSpaceElement& operator=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator=(const Interface::AbstractVector& y) final override;
 
     /// In-place summation.
-    ProductSpaceElement& operator+=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator+=(const Interface::AbstractVector& y) final override;
 
     /// Axpy-operation \f$x = x + ay\f$.
-    AbstractFunctionSpaceElement& axpy(double a, const AbstractFunctionSpaceElement& y) final override;
+    AbstractVector& axpy(double a, const AbstractVector& y) final override;
 
     /// In-place subtraction.
-    ProductSpaceElement& operator-=(const Interface::AbstractFunctionSpaceElement& y) final override;
+    ProductSpaceElement& operator-=(const Interface::AbstractVector& y) final override;
 
     /// In-place multiplication.
     ProductSpaceElement& operator*=(double) final override;
 
     /// Get -x.
-    std::unique_ptr<Interface::AbstractFunctionSpaceElement> operator- () const final override;
+    std::unique_ptr<Interface::AbstractVector> operator- () const final override;
 
     /// Access value.
     double& coefficient(unsigned) final override;
@@ -66,13 +65,13 @@ namespace Algorithm
     /// Number of entries in coefficient vector.
     unsigned size() const final override;
 
-    Interface::AbstractFunctionSpaceElement& variable(unsigned i);
+    Interface::AbstractVector& variable(unsigned i);
 
-    const Interface::AbstractFunctionSpaceElement& variable(unsigned i) const;
+    const Interface::AbstractVector& variable(unsigned i) const;
 
-    std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables();
+    std::vector<std::unique_ptr<Interface::AbstractVector> >& variables();
 
-    const std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> >& variables() const;
+    const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables() const;
 
     ProductSpaceElement primalElement() const;
 
@@ -87,13 +86,13 @@ namespace Algorithm
     ProductSpaceElement* cloneImpl() const final override;
 
     /// Apply as dual element.
-    double applyAsDualTo(const Interface::AbstractFunctionSpaceElement& y) const final override;
+    double applyAsDualTo(const Interface::AbstractVector& y) const final override;
 
-    std::vector<std::unique_ptr<Interface::AbstractFunctionSpaceElement> > variables_;
+    std::vector<std::unique_ptr<Interface::AbstractVector> > variables_;
 
   };
 
-  FunctionSpaceElement primalElement(const FunctionSpaceElement& x);
+  Vector primalElement(const Vector& x);
 }
 
 #endif // ALGORITHM_PRODUCT_SPACE_ELEMENT_HH

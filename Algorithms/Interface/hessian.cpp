@@ -1,6 +1,6 @@
 #include "hessian.hh"
 
-#include "abstractFunctionSpaceElement.hh"
+#include "abstractVector.hh"
 #include "abstractLinearSolver.hh"
 
 #include <utility>
@@ -9,7 +9,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-//    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x, std::shared_ptr<AbstractLinearSolver> solver)
+//    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x, std::shared_ptr<AbstractLinearSolver> solver)
 //      : AbstractLinearOperator(A->getSharedDomain(),A->getSharedDomain()), Mixin::UniqueImpl<AbstractFunctional>(std::move(A)), x_(clone(x)), solver_(solver)
 //    {}
 
@@ -21,13 +21,13 @@ namespace Algorithm
       std::cout << "moving hessian" << std::endl;
     }
 
-    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractFunctionSpaceElement& x)
+    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x)
       : AbstractLinearOperator(A->sharedDomain(),A->sharedDomain()),
         Mixin::UniqueImpl<AbstractFunctional>(std::move(A)),
         x_(clone(x))
     {}
 
-    std::unique_ptr<AbstractFunctionSpaceElement> Hessian::operator ()(const AbstractFunctionSpaceElement& dx) const
+    std::unique_ptr<AbstractVector> Hessian::operator ()(const AbstractVector& dx) const
     {
       return impl().d2(*x_,dx);
     }

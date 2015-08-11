@@ -8,7 +8,7 @@
 #include "Util/create.hh"
 
 #include "directSolver.hh"
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 #include "vector.hh"
 
 namespace Algorithm
@@ -29,14 +29,14 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain_)
+      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_)
         : AbstractFunctional(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
           assembler_(spaces_)
       {}
 
-      Functional(const FunctionalImpl& f, const ::Algorithm::FunctionSpace& domain)
+      Functional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain)
         : Functional(f,domain.sharedImpl())
       {}
 
@@ -58,14 +58,14 @@ namespace Algorithm
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      double d0(const Interface::AbstractFunctionSpaceElement& x) const final override
+      double d0(const Interface::AbstractVector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
         return assembler_.functional();
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d1(const Interface::AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
@@ -76,7 +76,7 @@ namespace Algorithm
         return std::move(y);
       }
 
-      std::unique_ptr<Interface::AbstractFunctionSpaceElement> d2(const Interface::AbstractFunctionSpaceElement& x, const Interface::AbstractFunctionSpaceElement& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -95,8 +95,8 @@ namespace Algorithm
         return std::move(y);
       }
 
-    private:
-      void assembleFunctional(const Interface::AbstractFunctionSpaceElement& x) const
+    protected:
+      void assembleFunctional(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
         if( old_X_f_ != nullptr && old_X_f_->equals(x) ) return;
@@ -111,7 +111,7 @@ namespace Algorithm
         old_X_f_ = clone(x);
       }
 
-      void assembleGradient(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleGradient(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
         if( old_X_df_ != nullptr && old_X_df_->equals(x) ) return;
@@ -126,7 +126,7 @@ namespace Algorithm
         old_X_df_ = clone(x);
       }
 
-      void assembleHessian(const Interface::AbstractFunctionSpaceElement& x) const
+      void assembleHessian(const Interface::AbstractVector& x) const
       {
         if( assemblyIsDisabled() ) return;
         if( old_X_ddf_ != nullptr && old_X_ddf_->equals(x) ) return;
@@ -147,7 +147,7 @@ namespace Algorithm
         return new Functional(*this);
       }
 
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractFunctionSpaceElement& x) const final override
+      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
         return std::make_unique<Interface::Hessian>(std::make_unique< Functional<FunctionalImpl> >(*this,true),x);
@@ -164,7 +164,7 @@ namespace Algorithm
       Spaces spaces_;
       mutable Assembler assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      mutable std::unique_ptr< Interface::AbstractFunctionSpaceElement > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
+      mutable std::unique_ptr< Interface::AbstractVector > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
     };
@@ -172,13 +172,13 @@ namespace Algorithm
 
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractFunctionSpace> domain)
+    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain)
     {
       return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
     }
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::FunctionSpace& domain)
+    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain)
     {
       return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
     }

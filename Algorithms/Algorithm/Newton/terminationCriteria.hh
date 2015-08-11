@@ -6,7 +6,7 @@
 namespace Algorithm
 {
   /// \cond
-  class FunctionSpaceElement;
+  class Vector;
   class Norm;
   class Operator;
   /// \endcond
@@ -23,7 +23,7 @@ namespace Algorithm
 
         virtual ~Base() = default;
 
-        virtual bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const = 0;
+        virtual bool passed(double nu, const Vector& x, const Vector& dx) const = 0;
       };
 
       /**
@@ -35,7 +35,7 @@ namespace Algorithm
       public:
         AffineCovariant(const Operator&, double relativeAccuracy, bool verbose = false);
 
-        bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement& dx) const final override;
+        bool passed(double nu, const Vector& x, const Vector& dx) const final override;
       };
 
       /**
@@ -47,7 +47,7 @@ namespace Algorithm
       public:
         AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose = false);
 
-        bool passed(double nu, const FunctionSpaceElement& x, const FunctionSpaceElement&) const final override;
+        bool passed(double nu, const Vector& x, const Vector&) const final override;
 
       private:
         const Operator& F_;

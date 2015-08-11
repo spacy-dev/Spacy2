@@ -1,19 +1,19 @@
 #include "realSolver.hh"
 
-#include "Interface/abstractFunctionSpace.hh"
+#include "Interface/abstractVectorSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "real.hh"
 #include <iostream>
 namespace Algorithm
 {
-  RealSolver::RealSolver(double value, std::shared_ptr<Interface::AbstractFunctionSpace> domain, std::shared_ptr<Interface::AbstractFunctionSpace> range)
+  RealSolver::RealSolver(double value, std::shared_ptr<Interface::AbstractVectorSpace> domain, std::shared_ptr<Interface::AbstractVectorSpace> range)
     : AbstractLinearSolver(domain,range),
       value_(value)
   {}
 
-  std::unique_ptr<Interface::AbstractFunctionSpaceElement> RealSolver::operator ()(const Interface::AbstractFunctionSpaceElement& y) const
+  std::unique_ptr<Interface::AbstractVector> RealSolver::operator ()(const Interface::AbstractVector& y) const
   {
-    if(  dynamic_cast<const Real*>(&y) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const FunctionSpaceElement&)");
+    if(  dynamic_cast<const Real*>(&y) == nullptr ) throw InvalidArgumentException("RealSolver::operator()(const Vector&)");
 
     auto x = Algorithm::clone(y);
     *x *= 1./value_;

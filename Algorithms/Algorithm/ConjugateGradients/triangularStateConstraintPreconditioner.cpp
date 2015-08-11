@@ -10,14 +10,14 @@ namespace Algorithm
                                                                                    std::shared_ptr<Interface::AbstractLinearSolver> adjointSolver,
                                                                                    std::unique_ptr<AbstractOperator>&& B,
                                                                                    std::unique_ptr<AbstractOperator>&& BT,
-                                                                                   std::shared_ptr<Interface::AbstractFunctionSpace> domain,
-                                                                                   std::shared_ptr<Interface::AbstractFunctionSpace> range)
+                                                                                   std::shared_ptr<Interface::AbstractVectorSpace> domain,
+                                                                                   std::shared_ptr<Interface::AbstractVectorSpace> range)
     : AbstractOperator(domain,range),
       stateSolver_(stateSolver), controlSolver_(controlSolver), adjointSolver_(adjointSolver),
       B_(std::move(B)), BT_(std::move(BT))
   {}
 
-  std::unique_ptr<Interface::AbstractFunctionSpaceElement> TriangularStateConstraintPreconditioner::operator()(const Interface::AbstractFunctionSpaceElement& x) const
+  std::unique_ptr<Interface::AbstractVector> TriangularStateConstraintPreconditioner::operator()(const Interface::AbstractVector& x) const
   {
     auto x_ = clone( castTo<ProductSpaceElement>(x) );
     auto y = clone(x);

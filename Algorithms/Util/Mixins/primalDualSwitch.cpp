@@ -1,7 +1,6 @@
 #include "primalDualSwitch.hh"
 
-#include "functionSpaceElement.hh"
-#include "Interface/abstractFunctionSpaceElement.hh"
+#include "vector.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
@@ -54,50 +53,50 @@ namespace Algorithm
   }
 
 
-  Interface::AbstractFunctionSpaceElement& primal(Interface::AbstractFunctionSpaceElement &x)
+  Interface::AbstractVector& primal(Interface::AbstractVector &x)
   {
     castTo<Mixin::PrimalDualSwitch>(x).disableDual();
     return x;
   }
 
-  const Interface::AbstractFunctionSpaceElement& primal(const Interface::AbstractFunctionSpaceElement &x)
+  const Interface::AbstractVector& primal(const Interface::AbstractVector &x)
   {
     castTo<Mixin::PrimalDualSwitch>(x).disableDual();
     return x;
   }
 
-  Interface::AbstractFunctionSpaceElement& dual(Interface::AbstractFunctionSpaceElement &x)
+  Interface::AbstractVector& dual(Interface::AbstractVector &x)
   {
     castTo<Mixin::PrimalDualSwitch>(x).disablePrimal();
     return x;
   }
 
-  const Interface::AbstractFunctionSpaceElement& dual(const Interface::AbstractFunctionSpaceElement &x)
+  const Interface::AbstractVector& dual(const Interface::AbstractVector &x)
   {
     castTo<Mixin::PrimalDualSwitch>(x).disablePrimal();
     return x;
   }
 
 
-  FunctionSpaceElement& primal(FunctionSpaceElement &x)
+  Vector& primal(Vector &x)
   {
     primal(x.impl());
     return x;
   }
 
-  const FunctionSpaceElement& primal(const FunctionSpaceElement &x)
+  const Vector& primal(const Vector &x)
   {
     primal(x.impl());
     return x;
   }
 
-  FunctionSpaceElement& dual(FunctionSpaceElement &x)
+  Vector& dual(Vector &x)
   {
     dual(x.impl());
     return x;
   }
 
-  const FunctionSpaceElement& dual(const FunctionSpaceElement &x)
+  const Vector& dual(const Vector &x)
   {
     dual(x.impl());
     return x;
