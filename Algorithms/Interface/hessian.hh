@@ -19,8 +19,6 @@ namespace Algorithm
       Hessian(Hessian&&);
       Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x);
 
-//      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x, std::shared_ptr<AbstractLinearSolver> solver);
-
       std::unique_ptr<AbstractVector> operator ()(const AbstractVector& dx) const final override;
 
       std::unique_ptr<AbstractLinearSolver> solver() const final override;

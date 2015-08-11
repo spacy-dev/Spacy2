@@ -34,6 +34,7 @@ namespace Algorithm
   LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
                              std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range)
     : Interface::AbstractLinearSolver(domain,range),
+      solver_("umfpack"),
       productSpace_(productSpace)
   {
 //    std::cout << A->str(true).c_str() << std::endl;

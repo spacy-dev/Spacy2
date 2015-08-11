@@ -29,22 +29,28 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_)
+      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_,
+                 int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
+                 int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
         : AbstractFunctional(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
-          assembler_(spaces_)
+          assembler_(spaces_),
+          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      Functional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain)
-        : Functional(f,domain.sharedImpl())
+      Functional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain,
+                 int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
+                 int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
+        : Functional(f,domain.sharedImpl(),rbegin,rend,cbegin,cend)
       {}
 
       Functional(const Functional& g)
         : AbstractFunctional(g.sharedDomain()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_)
+          assembler_(spaces_),
+          rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_)
       {
         if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
       }
@@ -137,7 +143,7 @@ namespace Algorithm
         copy(x,u);
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
-        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_) );
+        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_ddf_ = clone(x);
       }
@@ -160,6 +166,7 @@ namespace Algorithm
         return std::make_unique< DirectSolver<VariableSetDescription,Domain,Domain> >( *A_ , spaces_, sharedDomain() , sharedDomain() );
       }
 
+
       FunctionalImpl f_;
       Spaces spaces_;
       mutable Assembler assembler_;
@@ -167,20 +174,26 @@ namespace Algorithm
       mutable std::unique_ptr< Interface::AbstractVector > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
+      int rbegin_=0, rend_=FunctionalImpl::AnsatzVars::noOfVariables;
+      int cbegin_=0, cend_=FunctionalImpl::TestVars::noOfVariables;
     };
 
 
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain)
+    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain,
+                        int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
+                        int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
+      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain , rbegin , rend , cbegin , cend );
     }
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain)
+    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain,
+                        int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
+                        int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain );
+      return createFromUniqueImpl< ::Algorithm::Functional , Functional<FunctionalImpl> >( f, domain , rbegin, rend , cbegin , cend );
     }
   }
 }

@@ -9,6 +9,8 @@
 
 #include "vector.hh"
 
+#include "linalg/direct.hh"
+
 namespace Algorithm
 {
   namespace Kaskade

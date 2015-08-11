@@ -35,22 +35,28 @@ namespace Algorithm
 
     public:
       Operator(const OperatorImpl& f,
-                        std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::shared_ptr<Interface::AbstractVectorSpace> range_)
+               std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::shared_ptr<Interface::AbstractVectorSpace> range_,
+               int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
+               int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
         : AbstractOperator(domain_,range_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
-          assembler_(spaces_)
+          assembler_(spaces_),
+          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      Operator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
-        : Operator(f,domain.sharedImpl(),range.sharedImpl())
+      Operator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range,
+               int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
+               int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
+        : Operator(f,domain.sharedImpl(),range.sharedImpl(),rbegin,rend,cbegin,cend)
       {}
 
       Operator(const Operator& g)
         : AbstractOperator(g.sharedDomain(),g.sharedRange()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_)
+          assembler_(spaces_),
+          rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_)
       {
         if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
       }
@@ -118,7 +124,7 @@ namespace Algorithm
         copy(x,u);
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
-        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_) );
+        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_dA_ = clone(x);
       }
@@ -148,22 +154,28 @@ namespace Algorithm
       mutable std::unique_ptr< Interface::AbstractVector > old_X_A_ = nullptr, old_X_dA_ = nullptr;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
+      int rbegin_=0, rend_=OperatorImpl::AnsatzVars::noOfVariables;
+      int cbegin_=0, cend_=OperatorImpl::TestVars::noOfVariables;
     };
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
                       std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                      std::shared_ptr<Interface::AbstractVectorSpace> range)
+                      std::shared_ptr<Interface::AbstractVectorSpace> range,
+                      int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
+                      int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range , rbegin , rend , cbegin , cend);
     }
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
                       const ::Algorithm::VectorSpace& domain,
-                      const ::Algorithm::VectorSpace& range)
+                      const ::Algorithm::VectorSpace& range,
+                      int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
+                      int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range , rbegin , rend , cbegin , cend);
     }
   }
 }

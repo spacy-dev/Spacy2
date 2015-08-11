@@ -40,8 +40,7 @@ namespace Algorithm
     {
       normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-      //N_->impl().setOrigin(x.impl());
-      //N_->domain().setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
+      N_->domain().setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
 
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -53,7 +52,6 @@ namespace Algorithm
 
       if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
       dual(x) += computeLagrangeMultiplier(x);
-      std::cout << "|p| = " << norm(dual(x)) << std::endl;
 
       if( verbose() ) std::cout << spacing << "Computing tangential step." << std::endl;
       auto Dt = computeTangentialStep(nu,x,Dn,lastStepWasUndamped);
@@ -105,10 +103,6 @@ namespace Algorithm
     trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
     tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
 
-    std::cout << "compute dt: rhs0 = " << norm(primal(L_->d1(x))) << std::endl;
-    std::cout << "compute dt: rhs1 = " << norm(primal(nu*L_->d2(x,dn))) << std::endl;
-    std::cout << "compute dt: rhs2 = " << norm(primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn))) << std::endl;
-
     return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
   }
 
@@ -134,7 +128,6 @@ namespace Algorithm
   Vector AffineCovariantCompositeSteps::computeLagrangeMultiplier(const Vector& x) const
   {
     if( N_ == nullptr || L_ == nullptr ) return Vector(0*x);
-    std::cout << "compute p: rhs = " << norm(primal(L_->d1(x))) << std::endl;
     return dual( (*normalSolver)( primal(-L_->d1(x)) ) );
   }
 
