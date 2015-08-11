@@ -333,7 +333,7 @@ TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
   x.coefficient(1) = x.coefficient(0) = y.coefficient(0) = 1;
   y.coefficient(1) = 3;
 
-  FunctionSpaceElement z = 2*y;
+  Vector z = 2*y;
   EXPECT_DOUBLE_EQ( z.coefficient(0) , 2. );
   EXPECT_DOUBLE_EQ( z.coefficient(1) , 6. );
 
