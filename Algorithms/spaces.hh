@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "functionSpace.hh"
+#include "vectorSpace.hh"
 #include "FunctionSpaces/RealNumbers/realSpace.hh"
 
 namespace Algorithm
 {
   namespace Spaces
   {
-    FunctionSpace R(std::make_shared<RealSpace>());
+    VectorSpace R(std::make_shared<RealSpace>());
   }
 }
 #endif // ALGORITHM_SPACES_HH
