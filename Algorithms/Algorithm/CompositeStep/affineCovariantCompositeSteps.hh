@@ -34,7 +34,8 @@ namespace Algorithm
       public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
       public Mixin::ContractionRate ,  public Mixin::Eps ,
       public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
-      public Mixin::Verbosity , public Mixin::MaxSteps
+      public Mixin::Verbosity , public Mixin::MaxSteps ,
+      public Mixin::IterativeRefinements
   {
     enum class StepMonitor { Rejected , Accepted };
     enum class AcceptanceTest;
@@ -52,6 +53,7 @@ namespace Algorithm
     Vector computeMinimumNormCorrection(const Vector& x) const;
     Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
     Vector computeLagrangeMultiplier(const Vector& x) const;
+    std::unique_ptr<LinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
 
     bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
 

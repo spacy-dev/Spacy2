@@ -26,6 +26,8 @@ namespace Algorithm
 
     std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
 
+    std::unique_ptr<Interface::AbstractVector> kernelOffset(const Interface::AbstractVector& rhs) const;
+
   private:
     TriangularStateConstraintPreconditioner* cloneImpl() const;
 

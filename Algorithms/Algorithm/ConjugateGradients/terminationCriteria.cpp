@@ -9,10 +9,6 @@
 
 namespace Algorithm
 {
-  CGTerminationCriterion::CGTerminationCriterion(unsigned maxIter) noexcept
-    : Mixin::MaxSteps(maxIter)
-  {}
-
   CGTerminationCriterion::~CGTerminationCriterion() {}
 
   double CGTerminationCriterion::getMinimalTolerance() const
@@ -43,7 +39,6 @@ namespace Algorithm
 
 
   StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, int maxit, double eps)
-    : CGTerminationCriterion(maxit)
   {
     setRelativeAccuracy(tol);
     setEps(eps);
@@ -61,7 +56,6 @@ namespace Algorithm
   StrakosTichyEnergyErrorTerminationCriterion::operator bool() const
   {
     auto tol = std::max( relativeAccuracy() , eps() );
-//    std::cout << "tol = " << tol << ", relativeError = " << sqrt(squaredRelativeError()) << std::endl;
     return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
   }
 
@@ -75,7 +69,9 @@ namespace Algorithm
 
   bool StrakosTichyEnergyErrorTerminationCriterion::vanishingStep() const noexcept
   {
-    return stepLength2 < std::min( eps() * eps() * energyNorm2 , absoluteAccuracy()*absoluteAccuracy() );
+    auto tol = absoluteAccuracy()*absoluteAccuracy();
+    if( energyNorm2 > tol) tol = std::min(tol,eps()*eps()*energyNorm2);
+    return stepLength2 < tol;
   }
 
   void StrakosTichyEnergyErrorTerminationCriterion::clear() noexcept

@@ -8,6 +8,7 @@
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
+#include "Algorithm/ConjugateGradients/triangularStateConstraintPreconditioner.hh"
 #include "Algorithm/dampingFactor.hh"
 
 #include "functional.hh"
@@ -45,6 +46,7 @@ namespace Algorithm
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
       auto Dn = computeNormalStep(x);
+      std::cout << "computing normal step norm " << std::endl;
       auto norm_Dn = norm(Dn);
       if( verbose() ) std::cout << spacing << "Computing normal damping factor" << std::endl;
       double nu = computeNormalStepDampingFactor(norm_Dn);
@@ -82,6 +84,13 @@ namespace Algorithm
   {
     if( L_==nullptr ) return Vector(0*x);
 
+    tangentialSolver = makeTangentialSolver(nu,x,lastStepWasUndamped);
+
+    return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
+  }
+
+  std::unique_ptr<LinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
+  {
     auto trcgRelativeAccuracy = minimalAccuracy();
     if( tangentialSolver != nullptr && nu == 1 && lastStepWasUndamped )
     {
@@ -94,16 +103,30 @@ namespace Algorithm
         std::cout << spacing2 << "absolute step length accuracy = " << relativeAccuracy()*norm(x) << std::endl;
       }
     }
-    auto trcg = makeTRCGSolver( L_->hessian(x) ,
-                                *normalSolver,
-                                trcgRelativeAccuracy,
-                                eps(),
-                                verbose_detailed() );
-    trcg->impl().setIterativeRefinements(0);
-    trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
-    tangentialSolver = std::make_unique<LinearSolver>( std::move(trcg) );
 
-    return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
+    std::unique_ptr<CGSolver> trcg = nullptr;
+
+    if( is<CGSolver>(normalSolver->impl()) )
+    {
+      const auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
+      if( is<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl()))
+        trcg = makeTRCGSolver( L_->hessian(x) ,
+                               cgSolver.preconditioner(),
+                               trcgRelativeAccuracy,
+                               eps(),
+                               verbose() );
+    }
+
+    if( trcg != nullptr)
+      trcg = makeTRCGSolver( L_->hessian(x) ,
+                             *normalSolver,
+                             trcgRelativeAccuracy,
+                             eps(),
+                             verbose_detailed() );
+    trcg->impl().setIterativeRefinements(iterativeRefinements());
+    trcg->impl().setDetailedVerbosity(verbose_detailed());
+    trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
+    return std::make_unique<LinearSolver>( std::move(trcg) );
   }
 
   Vector AffineCovariantCompositeSteps::computeNormalStep(const Vector &x) const
@@ -122,7 +145,25 @@ namespace Algorithm
 
   Vector AffineCovariantCompositeSteps::computeMinimumNormCorrection(const Vector& x) const
   {
-    return primal( (*normalSolver)( dual(-N_->d1(x)) ) );
+    auto rhs = dual(-N_->d1(x));
+    Vector dn0 = 0*x;
+    if( is<CGSolver>(normalSolver->impl()) )
+    {
+      auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
+      cgSolver.setEps(eps());
+      cgSolver.setRelativeAccuracy(relativeAccuracy());
+      cgSolver.setVerbosity(verbose_detailed());
+      cgSolver.setDetailedVerbosity(verbose_detailed());
+      cgSolver.setIterativeRefinements(iterativeRefinements());
+      if( is<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl()))
+      {
+        const auto& P = castTo<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl());
+        dn0 = Vector( P.kernelOffset(rhs.impl()) );
+
+        rhs -= N_->d2(primal(x),dn0);
+      }
+    }
+    return dn0 + primal( (*normalSolver)( rhs ) );
   }
 
   Vector AffineCovariantCompositeSteps::computeLagrangeMultiplier(const Vector& x) const

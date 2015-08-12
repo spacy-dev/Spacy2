@@ -16,8 +16,11 @@ namespace Algorithm
 {
   class Operator;
 
-  class CGSolver
-      : public Interface::AbstractLinearSolver, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::Verbosity
+  class CGSolver :
+      public Interface::AbstractLinearSolver,
+      public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy,
+      public Mixin::Eps, public Mixin::Verbosity,
+      public Mixin::IterativeRefinements
   {
   public:
     template <class Op1, class Op2,
@@ -28,44 +31,24 @@ namespace Algorithm
         cg(std::forward<Op1>(A),std::forward<Op2>(P),type)
     {
       attachEps(&cg);
+      attachAbsoluteAccuracy(&cg.terminationCriterion());
       attachRelativeAccuracy(&cg.terminationCriterion());
       attachVerbosity(&cg);
+      attachIterativeRefinements(&cg);
     }
 
-//    CGSolver(Operator&& A, const Operator& P,
-//             double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
-//      : AbstractLinearSolver(A.impl().getSharedRange(),A.impl().getSharedDomain()),
-//        Mixin::RelativeAccuracy(relativeAccuracy),
-//        Mixin::Eps(eps),
-//        Mixin::Verbosity(verbose),
-//        cg(std::move(A),P,verbose,eps)
-//    {
-//      cg.getTerminationCriterion().setRelativeAccuracy(relativeAccuracy);
-//    }
+    CGSolver(const CGSolver& other);
 
-    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const final override
-    {
-      auto z = cg.solve( Vector( clone(y) ) );
-      return clone(z.impl());
-    }
+    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const override;
 
-    CGMethod& impl()
-    {
-      return cg;
-    }
+    CGMethod& impl();
 
-    bool systemIsPositiveDefinite() const override
-    {
-      return !cg.encounteredNonConvexity();
-    }
+    bool systemIsPositiveDefinite() const override;
+
+    const Operator& preconditioner() const;
 
   private:
-    CGSolver* cloneImpl() const
-    {
-      throw CallOfUndefinedFunctionException("CGSolver::cloneImpl()");
-      //std::cout << "cloning cg solver" << std::endl;
-      //return new CGSolver(*this);
-    }
+    CGSolver* cloneImpl() const;
 
     mutable CGMethod cg;
   };

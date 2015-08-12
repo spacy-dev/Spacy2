@@ -4,6 +4,7 @@
 #include "abstractLinearSolver.hh"
 
 #include <utility>
+#include <iostream>
 
 namespace Algorithm
 {

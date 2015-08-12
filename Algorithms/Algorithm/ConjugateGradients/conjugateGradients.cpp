@@ -27,6 +27,7 @@ namespace Algorithm
   {
     initializeRegularization();
     nonconvexity = Nonconvexity::None;
+    result = Result::Failed;
     if( type_ == "cg" || type_ == "tcg" )
       return cgLoop(x,b);
     else
@@ -52,6 +53,11 @@ namespace Algorithm
   auto CGMethod::getEnergyNormOfSolution() const noexcept
   {
     return sqrt(energyNorm2);
+  }
+
+  const Operator& CGMethod::preconditioner() const
+  {
+    return P_;
   }
 
   Vector CGMethod::cgLoop (Vector x, Vector r) const

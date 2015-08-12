@@ -64,6 +64,7 @@ namespace Algorithm
         terminate(std::make_shared< RelativeEnergyError >()), type_(type)
     {
       attachEps(terminate.get());
+      assert( type=="cg" || type=="rcg" || type=="tcg" || type=="trcg" );
     }
 
     /**
@@ -102,6 +103,8 @@ namespace Algorithm
     auto getEnergyNormOfSolution() const noexcept;
 
     void setType(const std::string& otherType);
+
+    const Operator& preconditioner() const;
 
   private:
     /// CG Implementation.

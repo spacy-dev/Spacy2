@@ -15,13 +15,14 @@ namespace Algorithm
 {
   namespace Kaskade
   {
-    template <class Description, class Domain, class Range>
+    template <class AnsatzVariableDescription, class TestVariableDescription>
     class DirectSolver :
         public Interface::AbstractLinearSolver ,
-        public Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
+        public Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type,typename TestVariableDescription::template CoefficientVectorRepresentation<>::type> > >
     {
-      using Spaces = typename Description::Spaces;
-      using CoefficientVector = typename Description::template CoefficientVectorRepresentation<>::type;
+      using Spaces = typename AnsatzVariableDescription::Spaces;
+      using Domain = typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type;
+      using Range = typename TestVariableDescription::template CoefficientVectorRepresentation<>::type;
     public:
       template <class KaskadeOperator>
       DirectSolver(const KaskadeOperator& A, const Spaces& spaces,
@@ -34,15 +35,14 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
       {
-        CoefficientVector y_(Description::template CoefficientVectorRepresentation<>::init(spaces_));
-        CoefficientVector x_(Description::template CoefficientVectorRepresentation<>::init(spaces_));
-        copyToCoefficientVector<Description>(x,x_);
-//        auto& y_ = castTo< Vector<Description> >(*y);
+        Range y_(TestVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
+        Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
+        copyToCoefficientVector<AnsatzVariableDescription>(x,x_);
 
         this->impl().apply( /*castTo< Vector<Description> >(x).impl()*/x_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<Description>(y_,*y);
+        copyFromCoefficientVector<TestVariableDescription>(y_,*y);
 
         return std::move(y);
       }

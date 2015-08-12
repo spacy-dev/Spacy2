@@ -1,5 +1,7 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
+#include "Interface/abstractNorm.hh"
+#include "Interface/abstractVectorSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include <utility>
 #include <iostream>
@@ -35,9 +37,22 @@ namespace Algorithm
     return y;
   }
 
+  std::unique_ptr<Interface::AbstractVector> TriangularStateConstraintPreconditioner::kernelOffset(const Interface::AbstractVector& rhs) const
+  {
+    auto y = range().element();
+
+    castTo<ProductSpaceElement>(*y).variable(stateIndex()) = *(*stateSolver_)( castTo<ProductSpaceElement>(rhs).variable(adjointIndex()) );
+    return std::move(y);
+  }
+
+
   TriangularStateConstraintPreconditioner* TriangularStateConstraintPreconditioner::cloneImpl() const
   {
-    return new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(B_) , sharedDomain() , sharedRange() );
+    auto result = new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(BT_) , sharedDomain() , sharedRange() );
+    result->setStateIndex(stateIndex());
+    result->setControlIndex(controlIndex());
+    result->setAdjointIndex(adjointIndex());
+    return result;
   }
 }
 

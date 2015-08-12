@@ -35,7 +35,7 @@ namespace Algorithm
         : AbstractFunctional(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain()) ),
-          assembler_(spaces_),
+          assembler_(std::make_shared<Assembler>(spaces_)),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
@@ -49,7 +49,7 @@ namespace Algorithm
         : AbstractFunctional(g.sharedDomain()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_),
+          assembler_(g.assembler_),
           rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_)
       {
         if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
@@ -60,29 +60,29 @@ namespace Algorithm
         : AbstractFunctional(g.sharedDomain()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_),
+          assembler_(g.assembler_),
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      double d0(const Interface::AbstractVector& x) const final override
+      double d0(const Interface::AbstractVector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
-        return assembler_.functional();
+        return assembler_->functional();
       }
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x) const final override
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        VectorImpl v( assembler_.rhs() );
+        VectorImpl v( assembler_->rhs() );
 
         auto y = domain().dualSpacePtr()->element();
         copyFromCoefficientVector<VariableSetDescription>(v,*y);
         return std::move(y);
       }
 
-      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
+      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -112,7 +112,7 @@ namespace Algorithm
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nAssemblyThreads );
+        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nAssemblyThreads );
 
         old_X_f_ = clone(x);
       }
@@ -127,7 +127,7 @@ namespace Algorithm
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
+        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
 
         old_X_df_ = clone(x);
       }
@@ -142,34 +142,34 @@ namespace Algorithm
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
-        A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
+        A_ = std::make_unique< KaskadeOperator >( assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_ddf_ = clone(x);
       }
 
-      Functional* cloneImpl() const final override
+      Functional* cloneImpl() const override
       {
         return new Functional(*this);
       }
 
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const final override
+      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
         return std::make_unique<Interface::Hessian>(std::make_unique< Functional<FunctionalImpl> >(*this,true),x);
       }
 
 
-      std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const final override
+      std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const override
       {
         assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<VariableSetDescription,Domain,Domain> >( *A_ , spaces_, sharedDomain() , sharedDomain() );
+        return std::make_unique< DirectSolver<VariableSetDescription,VariableSetDescription> >( *A_ , spaces_, sharedDomain() , sharedDomain() );
       }
 
 
       FunctionalImpl f_;
       Spaces spaces_;
-      mutable Assembler assembler_;
+      mutable std::shared_ptr<Assembler> assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
       mutable std::unique_ptr< Interface::AbstractVector > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
       unsigned nAssemblyThreads = 1;

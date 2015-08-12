@@ -13,8 +13,6 @@ namespace Algorithm
       public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps
   {
   public:
-    explicit CGTerminationCriterion(unsigned maxIter = 1000) noexcept ;
-
     virtual ~CGTerminationCriterion();
 
     /**

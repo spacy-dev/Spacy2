@@ -23,10 +23,11 @@ namespace Algorithm
     class Operator :
         public Interface::AbstractOperator , public Mixin::DisableAssembly
     {
-      using VariableSetDescription = typename OperatorImpl::AnsatzVars;
-      using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Spaces = typename VariableSetDescription::Spaces;
-      using Variables = typename VariableSetDescription::Variables;
+      using AnsatzVariableSetDescription = typename OperatorImpl::AnsatzVars;
+      using TestVariableSetDescription = typename OperatorImpl::TestVars;
+      using VectorImpl = typename AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Spaces = typename AnsatzVariableSetDescription::Spaces;
+      using Variables = typename AnsatzVariableSetDescription::Variables;
       using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<OperatorImpl> >;
       using Domain = typename Assembler::AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
       using Range = typename Assembler::TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
@@ -40,7 +41,7 @@ namespace Algorithm
                int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
         : AbstractOperator(domain_,range_),
           f_(f),
-          spaces_( extractSpaces<VariableSetDescription>(domain()) ),
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) ),
           assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
@@ -77,7 +78,7 @@ namespace Algorithm
         VectorImpl v( assembler_.rhs() );
 
         auto y = range().element();
-        copyFromCoefficientVector<VariableSetDescription>(v,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(v,*y);
         return std::move(y);
       }
 
@@ -85,14 +86,14 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        VectorImpl dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
-        copyToCoefficientVector<VariableSetDescription>(dx,dx_);
-        VectorImpl y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        VectorImpl dx_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        copyToCoefficientVector<AnsatzVariableSetDescription>(dx,dx_);
+        VectorImpl y_( TestVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
         A_->apply( dx_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<VariableSetDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
 
         return std::move(y);
       }
@@ -103,8 +104,8 @@ namespace Algorithm
         if( assemblyIsDisabled() ) return;
         if( old_X_A_ != nullptr && old_X_A_->equals(x) ) return;
 
-        VariableSetDescription variableSet(spaces_);
-        typename VariableSetDescription::VariableSet u(variableSet);
+        AnsatzVariableSetDescription variableSet(spaces_);
+        typename AnsatzVariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
@@ -118,8 +119,8 @@ namespace Algorithm
         if( assemblyIsDisabled() ) return;
         if( old_X_dA_ != nullptr && old_X_dA_->equals(x) ) return;
 
-        VariableSetDescription variableSet(spaces_);
-        typename VariableSetDescription::VariableSet u(variableSet);
+        AnsatzVariableSetDescription variableSet(spaces_);
+        typename AnsatzVariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
@@ -144,7 +145,7 @@ namespace Algorithm
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
         assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<VariableSetDescription,Range,Domain> >( *A_ , spaces_, sharedRange() , sharedDomain() );
+        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( *A_ , spaces_, sharedRange() , sharedDomain() );
       }
 
       OperatorImpl f_;

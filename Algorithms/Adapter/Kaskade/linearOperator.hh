@@ -4,10 +4,10 @@
 #include <memory>
 #include <utility>
 
-#include "functionSpace.hh"
-#include "../../c1Operator.hh"
+#include "../../operator.hh"
+#include "vectorSpace.hh"
 #include "Interface/Operator/linearizedOperator.hh"
-#include "Interface/Operator/abstractC1Operator.hh"
+#include "Interface/Operator/abstractOperator.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/create.hh"
 
@@ -18,124 +18,88 @@ namespace Algorithm
 {
   namespace Kaskade
   {
-    template <class OperatorImpl>
-    class LinearOperator :
-        public Interface::AbstractC1Operator , public Mixin::DisableAssembly
+    template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
+    class LinearOperator : public Interface::AbstractOperator
     {
-      using VariableSetDescription = typename OperatorImpl::AnsatzVars;
-      using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Spaces = typename VariableSetDescription::Spaces;
-      using Variables = typename VariableSetDescription::Variables;
-      using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<OperatorImpl> >;
-      using Domain = typename Assembler::AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Range = typename Assembler::TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Spaces = typename AnsatzVariableSetDescription::Spaces;
+      using Variables = typename AnsatzVariableSetDescription::Variables;
+      using Domain = typename AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Range = typename TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
-      using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      LinearOperator(const OperatorImpl& f,
-                        std::shared_ptr<Interface::AbstractFunctionSpace> domain_, std::shared_ptr<Interface::AbstractFunctionSpace> range_)
-        : AbstractC1Operator(domain_,range_),
-          f_(f),
-          spaces_( extractSpaces<VariableSetDescription>(domain()) ),
-          assembler_(spaces_)
+      LinearOperator(const OperatorImpl& A,
+               std::shared_ptr<Interface::AbstractVectorSpace> domain_,
+               std::shared_ptr<Interface::AbstractVectorSpace> range_)
+        : AbstractOperator(domain_,range_),
+          A_(A),
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) )
       {}
 
-      LinearOperator(const OperatorImpl& f, const FunctionSpace& domain, const FunctionSpace& range)
+      LinearOperator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
         : LinearOperator(f,domain.sharedImpl(),range.sharedImpl())
-      {}
-
-      LinearOperator(const LinearOperator& g)
-        : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
-          DisableAssembly(g.assemblyIsDisabled()),
-          f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_)
-      {
-        if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
-      }
-
-
-      LinearOperator(const LinearOperator& g, bool disableAssembly)
-        : AbstractC1Operator(g.sharedDomain(),g.sharedRange()),
-          DisableAssembly(disableAssembly),
-          f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_),
-          A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
       std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
       {
-        return d1(x,x);
-      }
+        Domain x_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        copyToCoefficientVector<AnsatzVariableSetDescription>(x,x_);
+        Range y_( TestVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector&, const Interface::AbstractVector& dx) const final override
-      {
-        assembleOperator();
-
-        VectorImpl dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
-        copyToCoefficientVector<VariableSetDescription>(dx,dx_);
-        VectorImpl y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
-
-        A_->apply( dx_ , y_ );
+        A_.apply(x_,y_);
 
         auto y = range().element();
-        copyFromCoefficientVector<VariableSetDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
 
         return std::move(y);
       }
 
-    private:
-      void assembleOperator() const
+      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector&, const Interface::AbstractVector& dx) const final override
       {
-        if( assemblyIsDisabled() ) return;
+        Domain dx_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        copyToCoefficientVector<AnsatzVariableSetDescription>(dx,dx_);
+        Range y_( TestVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
-        VariableSetDescription variableSet(spaces_);
-        typename VariableSetDescription::VariableSet u(variableSet);
+        A_.apply( dx_ , y_ );
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
+        auto y = range().element();
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
 
-        disableAssembly();
+        return std::move(y);
       }
 
+    protected:
       LinearOperator* cloneImpl() const final override
       {
         return new LinearOperator(*this);
       }
 
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
-      {
-        assembleOperator();
-        return std::make_unique<Interface::LinearizedOperator>(std::make_unique< LinearOperator<OperatorImpl> >(*this,true),x);
-      }
-
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
-        assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<VariableSetDescription,Range,Domain> >( *A_ , spaces_, sharedRange() , sharedDomain() );
+        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( A_ , spaces_, sharedRange() , sharedDomain() );
       }
 
-      OperatorImpl f_;
+      OperatorImpl A_;
       Spaces spaces_;
-      mutable Assembler assembler_;
-      mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      unsigned nAssemblyThreads = 1;
-      bool onlyLowerTriangle_ = false;
     };
 
-    template <class OperatorImpl>
+
+
+
+    template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
     auto makeLinearOperator(const OperatorImpl& f,
-                      std::shared_ptr<Interface::AbstractFunctionSpace> domain,
-                      std::shared_ptr<Interface::AbstractFunctionSpace> range)
+                      std::shared_ptr<Interface::AbstractVectorSpace> domain,
+                      std::shared_ptr<Interface::AbstractVectorSpace> range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , LinearOperator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription> >( f, domain , range );
     }
 
-    template <class OperatorImpl>
+    template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
     auto makeLinearOperator(const OperatorImpl& f,
-                      const FunctionSpace& domain,
-                      const FunctionSpace& range)
+                      const ::Algorithm::VectorSpace& domain,
+                      const ::Algorithm::VectorSpace& range)
     {
-      return createFromUniqueImpl< ::Algorithm::C1Operator , LinearOperator<OperatorImpl> >( f, domain , range );
+      return createFromUniqueImpl< ::Algorithm::Operator , LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription> >( f, domain , range );
     }
   }
 }

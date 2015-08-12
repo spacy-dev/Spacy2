@@ -16,7 +16,7 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets absolute accuracy.
        */
-      explicit AbsoluteAccuracy(double absoluteAccuracy = 1e-12) noexcept;
+      explicit AbsoluteAccuracy(double absoluteAccuracy = 1e-15) noexcept;
 
       /**
        * @brief Set absolute accuracy.
@@ -44,7 +44,7 @@ namespace Algorithm
     private:
       void update(DesignPattern::Observer::Subject* changedSubject) final override;
 
-      double absoluteAccuracy_ = 1e-12;
+      double absoluteAccuracy_ = 1e-15;
     };
   }
 }
