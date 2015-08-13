@@ -28,7 +28,7 @@ namespace Algorithm
     initializeRegularization();
     nonconvexity = Nonconvexity::None;
     result = Result::Failed;
-    if( type_ == "cg" || type_ == "tcg" )
+    if( type_ == "CG" || type_ == "TCG" )
       return cgLoop(x,b);
     else
     {
@@ -55,9 +55,14 @@ namespace Algorithm
     return sqrt(energyNorm2);
   }
 
-  const Operator& CGMethod::preconditioner() const
+  const Operator& CGMethod::P() const
   {
     return P_;
+  }
+
+  const Operator& CGMethod::A() const
+  {
+    return A_;
   }
 
   Vector CGMethod::cgLoop (Vector x, Vector r) const
@@ -78,7 +83,7 @@ namespace Algorithm
     // the conjugate gradient iteration
     for (unsigned step = 1; true; step++ )
     {
-      if( verbose() ) std::cout << "Iteration: " << step << std::endl;
+      if( verbose_detailed() ) std::cout << "Iteration: " << step << std::endl;
       auto Aq = A_(q);
       auto qAq = Aq(q);
       auto qPq = Pq(q);
@@ -106,7 +111,7 @@ namespace Algorithm
       // convergence test
       if (*terminate)
       {
-        if( verbose() ) std::cout << type_ << ": Terminating in iteration " << step << ".\n";
+        if( verbose() ) std::cout << "    " << type_ << ": Terminating in iteration " << step << ".\n";
         result = terminate->reachedMaximalNumberOfIterations() ? Result::Failed : Result::Converged;
         break;
       }
@@ -153,7 +158,7 @@ namespace Algorithm
     if( qAq > 0 ) return false;
     if( verbose() ) std::cout << type_ << ": Negative curvature: " << qAq << std::endl;
 
-    if( type_ == "cg" )
+    if( type_ == "CG" )
     {
       if( verbose() )
       {
@@ -164,7 +169,7 @@ namespace Algorithm
       throw SingularOperatorException("CG::terminateOnNonconvexity");
     }
 
-    if( type_ == "tcg" || ( type_ == "trcg" && terminate->minimalDecreaseAchieved() ) )
+    if( type_ == "TCG" || ( type_ == "TRCG" && terminate->minimalDecreaseAchieved() ) )
     {
       // At least do something to retain a little chance to get out of the nonconvexity. If a nonconvexity is encountered in the first step something probably went wrong
       // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
@@ -175,7 +180,7 @@ namespace Algorithm
       return true;
     }
 
-    if( type_ == "trcg" || type_ == "rcg" )
+    if( type_ == "TRCG" || type_ == "RCG" )
     {
       updateRegularization(qAq,qPq);
       if( verbose() ) std::cout << type_ << ": Regularizing at nonconvexity in iteration " << step << "." << std::endl;
@@ -190,19 +195,19 @@ namespace Algorithm
 
   void CGMethod::initializeRegularization() const noexcept
   {
-    if( type_ == "cg" || type_ == "tcg" ) return;
+    if( type_ == "CG" || type_ == "TCG" ) return;
     theta = 0;
   }
 
   void CGMethod::regularize(double& qAq, double qPq) const noexcept
   {
-    if( type_ == "cg" || type_ == "tcg" ) return;
+    if( type_ == "CG" || type_ == "TCG" ) return;
     qAq += theta*qPq;
   }
 
   void CGMethod::updateRegularization(double qAq, double qPq) const
   {
-    if( type_ == "cg" || type_ == "tcg" ) return;
+    if( type_ == "CG" || type_ == "TCG" ) return;
     double oldTheta = theta > 0 ? theta : eps();
     theta += (1-qAq)/std::abs(qPq);
     if( verbose() ) std::cout << "Computed regularization parameter: " << theta << std::endl;
@@ -212,7 +217,7 @@ namespace Algorithm
 
   void CGMethod::adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const
   {
-    if( type_ == "cg" || type_ == "tcg" ) return;
+    if( type_ == "CG" || type_ == "TCG" ) return;
     r -= (alpha*theta)*Pq;
   }
 }

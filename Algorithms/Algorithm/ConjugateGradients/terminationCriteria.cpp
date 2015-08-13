@@ -38,24 +38,10 @@ namespace Algorithm
   }
 
 
-  StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, int maxit, double eps)
-  {
-    setRelativeAccuracy(tol);
-    setEps(eps);
-    setMaxSteps(maxit);
-  }
-
-
-  StrakosTichyEnergyErrorTerminationCriterion::StrakosTichyEnergyErrorTerminationCriterion(double tol, double minTol, int maxit, double eps)
-    : StrakosTichyEnergyErrorTerminationCriterion(tol,maxit,eps)
-  {
-    minTol2 = minTol*minTol;
-  }
-
-
   StrakosTichyEnergyErrorTerminationCriterion::operator bool() const
   {
     auto tol = std::max( relativeAccuracy() , eps() );
+    if( verbose_detailed() ) std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
     return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
   }
 

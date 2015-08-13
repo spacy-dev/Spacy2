@@ -38,7 +38,11 @@ namespace Algorithm
         for( auto i : xx.space().dualSubSpaceIds() )
           result += xx.variable(i) * yy.variable(i);
 
-      if( !xx.isPrimalEnabled() || !yy.isPrimalEnabled() ) return result;
+      if( !xx.isPrimalEnabled() || !yy.isPrimalEnabled() )
+      {
+        xx.reset(yy);
+        return result;
+      }
 
       auto x_ = clone(primal(x));
       auto y_ = clone(primal(y));

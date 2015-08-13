@@ -33,9 +33,14 @@ namespace Algorithm
     return !cg.encounteredNonConvexity();
   }
 
-  const Operator& CGSolver::preconditioner() const
+  const Operator& CGSolver::P() const
   {
-    return cg.preconditioner();
+    return cg.P();
+  }
+
+  const Operator& CGSolver::A() const
+  {
+    return cg.A();
   }
 
   CGSolver* CGSolver::cloneImpl() const

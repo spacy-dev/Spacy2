@@ -109,23 +109,24 @@ namespace Algorithm
     if( is<CGSolver>(normalSolver->impl()) )
     {
       const auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
-      if( is<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl()))
+      if( is<TriangularStateConstraintPreconditioner>(cgSolver.P().impl()))
         trcg = makeTRCGSolver( L_->hessian(x) ,
-                               cgSolver.preconditioner(),
+                               cgSolver.P(),
                                trcgRelativeAccuracy,
                                eps(),
                                verbose() );
     }
 
-    if( trcg != nullptr)
+    if( trcg == nullptr )
       trcg = makeTRCGSolver( L_->hessian(x) ,
                              *normalSolver,
                              trcgRelativeAccuracy,
                              eps(),
-                             verbose_detailed() );
-    trcg->impl().setIterativeRefinements(iterativeRefinements());
-    trcg->impl().setDetailedVerbosity(verbose_detailed());
-    trcg->impl().terminationCriterion().setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
+                             verbose() );
+    trcg->setIterativeRefinements(iterativeRefinements());
+    trcg->setDetailedVerbosity(verbose_detailed());
+    trcg->setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
+    trcg->setMaxSteps(maxSteps());
     return std::make_unique<LinearSolver>( std::move(trcg) );
   }
 
@@ -151,16 +152,16 @@ namespace Algorithm
     {
       auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
       cgSolver.setEps(eps());
-      cgSolver.setRelativeAccuracy(relativeAccuracy());
-      cgSolver.setVerbosity(verbose_detailed());
+      cgSolver.setRelativeAccuracy(eps());
+      cgSolver.setVerbosity(verbose());
       cgSolver.setDetailedVerbosity(verbose_detailed());
       cgSolver.setIterativeRefinements(iterativeRefinements());
-      if( is<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl()))
+      cgSolver.setMaxSteps(maxSteps());
+      if( is<TriangularStateConstraintPreconditioner>(cgSolver.P().impl()))
       {
-        const auto& P = castTo<TriangularStateConstraintPreconditioner>(cgSolver.preconditioner().impl());
-        dn0 = Vector( P.kernelOffset(rhs.impl()) );
-
-        rhs -= N_->d2(primal(x),dn0);
+        const auto& P = castTo<TriangularStateConstraintPreconditioner>(cgSolver.P().impl());
+        dn0 = Vector(P.kernelOffset(rhs.impl()));
+        rhs -= cgSolver.A()( dn0 );
       }
     }
     return dn0 + primal( (*normalSolver)( rhs ) );

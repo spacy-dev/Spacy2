@@ -25,26 +25,29 @@ namespace Algorithm
    *
    * Different implementations are available:
    *
-   * - "cg": Standard preconditioned conjugate gradient method.
+   * - "CG": Standard preconditioned conjugate gradient method.
    *
-   * - "tcg": Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is
+   * - "TCG": Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is
    * encountered.
    *
-   * - "rcg": Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by \f$A\f$ and the preconditioner by \f$P\f$.
+   * - "RCG": Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by \f$A\f$ and the preconditioner by \f$P\f$.
    * Then if a direction of negative curvature is encountered \f$A\f$ is implicitly replaced by the regularization $\f$A+\thetaP\f$. Then the CG method is
    * restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the
    * regularization are neglishible.
    *
-   * - "trcg": Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction
+   * - "TRCG": Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction
    * of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting
    * the used operator by \f$A\f$ and the preconditioner by \f$P\f, \f$A\f$ is implicitly replaced by the regularization $\f$A+\thetaP\f$. Then the CG method is
    * restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the
    * regularization are neglishible.
    */
   class CGMethod :
+      public Mixin::AbsoluteAccuracy ,
+      public Mixin::RelativeAccuracy ,
       public Mixin::Eps ,
       public Mixin::IterativeRefinements ,
-      public Mixin::Verbosity
+      public Mixin::Verbosity,
+      public Mixin::MaxSteps
   {
     enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
     enum class Nonconvexity { None , Encountered };
@@ -54,17 +57,21 @@ namespace Algorithm
      *
      * \param A linear operator
      * \param P preconditioner
-     * \param type conjugate gradient type ("cg", "rcg", "tcg" or "trcg")
+     * \param type conjugate gradient type ("CG", "RCG", "TCG" or "TRCG")
      */
     template <class Op1, class Op2,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
-    CGMethod(Op1&& A, Op2&& P, const std::string& type = "cg" ) :
+    CGMethod(Op1&& A, Op2&& P, const std::string& type = "CG" ) :
         A_(std::forward<Op1>(A)), P_(std::forward<Op2>(P)),
         terminate(std::make_shared< RelativeEnergyError >()), type_(type)
     {
       attachEps(terminate.get());
-      assert( type=="cg" || type=="rcg" || type=="tcg" || type=="trcg" );
+      attachAbsoluteAccuracy(terminate.get());
+      attachRelativeAccuracy(terminate.get());
+      attachVerbosity(terminate.get());
+      attachMaxSteps(terminate.get());
+      assert( type=="CG" || type=="RCG" || type=="TCG" || type=="TRCG" );
     }
 
     /**
@@ -90,7 +97,19 @@ namespace Algorithm
     template <class Criterion>
     void setTerminationCriterion(const Criterion& newTerminate)
     {
+      detachEps(terminate.get());
+      detachAbsoluteAccuracy(terminate.get());
+      detachRelativeAccuracy(terminate.get());
+      detachVerbosity(terminate.get());
+      detachMaxSteps(terminate.get());
+
       terminate.reset(std::make_unique<Criterion>(newTerminate));
+
+      attachEps(terminate.get());
+      attachAbsoluteAccuracy(terminate.get());
+      attachRelativeAccuracy(terminate.get());
+      attachVerbosity(terminate.get());
+      attachMaxSteps(terminate.get());
     }
 
     /// Access to the termination criterion.
@@ -104,7 +123,9 @@ namespace Algorithm
 
     void setType(const std::string& otherType);
 
-    const Operator& preconditioner() const;
+    const Operator& P() const;
+
+    const Operator& A() const;
 
   private:
     /// CG Implementation.
@@ -151,7 +172,7 @@ namespace Algorithm
     mutable Nonconvexity nonconvexity = Nonconvexity::None;
     mutable double energyNorm2 = 0.; ///< energy norm squared
 
-    std::string type_ = "cg";
+    std::string type_ = "CG";
 
     // parameters for regularized conjugate gradient methods
     mutable double theta = 0;

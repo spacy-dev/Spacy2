@@ -20,21 +20,22 @@ namespace Algorithm
       public Interface::AbstractLinearSolver,
       public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy,
       public Mixin::Eps, public Mixin::Verbosity,
-      public Mixin::IterativeRefinements
+      public Mixin::IterativeRefinements , public Mixin::MaxSteps
   {
   public:
     template <class Op1, class Op2,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
-    CGSolver(Op1&& A, Op2&& P, const std::string& type )
-      : AbstractLinearSolver(A.impl().sharedRange(),A.impl().sharedDomain()),
-        cg(std::forward<Op1>(A),std::forward<Op2>(P),type)
+    CGSolver(Op1&& A_, Op2&& P_, const std::string& type )
+      : AbstractLinearSolver(A_.impl().sharedRange(),A_.impl().sharedDomain()),
+        cg(std::forward<Op1>(A_),std::forward<Op2>(P_),type)
     {
       attachEps(&cg);
       attachAbsoluteAccuracy(&cg.terminationCriterion());
       attachRelativeAccuracy(&cg.terminationCriterion());
       attachVerbosity(&cg);
       attachIterativeRefinements(&cg);
+      attachMaxSteps(&cg);
     }
 
     CGSolver(const CGSolver& other);
@@ -45,7 +46,9 @@ namespace Algorithm
 
     bool systemIsPositiveDefinite() const override;
 
-    const Operator& preconditioner() const;
+    const Operator& P() const;
+
+    const Operator& A() const;
 
   private:
     CGSolver* cloneImpl() const;
@@ -58,7 +61,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "cg" );
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "CG" );
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -70,7 +73,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "rcg");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "RCG");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -82,7 +85,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeTCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "tcg");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "TCG");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);
@@ -94,7 +97,7 @@ namespace Algorithm
             class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
   auto makeTRCGSolver(Op1&& A, Op2&& P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false)
   {
-    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "trcg");
+    auto solver = std::make_unique<CGSolver>(std::forward<Op1>(A), std::forward<Op2>(P), "TRCG");
     solver->setRelativeAccuracy(relativeAccuracy);
     solver->setEps(eps);
     solver->setVerbosity(verbose);

@@ -39,14 +39,14 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      LagrangeCGFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::string solver="cg",
+      LagrangeCGFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::string solver="CG",
                            int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                            int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
         : Functional<FunctionalImpl>(f,domain_,rbegin,rend,cbegin,cend),
           solver_(solver)
       {}
 
-      LagrangeCGFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain, std::string solver="cg",
+      LagrangeCGFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain, std::string solver="CG",
                            int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                            int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
         : LagrangeCGFunctional(f,domain.sharedImpl(),solver,rbegin,rend,cbegin,cend)
@@ -134,7 +134,7 @@ namespace Algorithm
 
         auto A = ::Algorithm::Operator( std::make_unique< Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription> >( *this->A_ , this->sharedDomain() , this->sharedDomain() ) );
 
-        auto solver = std::make_unique<CGSolver>(A, P, "trcg");
+        auto solver = std::make_unique<CGSolver>(A, P, solver_);
         solver->setAbsoluteAccuracy(absoluteAccuracy());
         solver->setRelativeAccuracy(relativeAccuracy());
         solver->setEps(eps());
@@ -145,13 +145,13 @@ namespace Algorithm
         return std::move(solver);
       }
 
-      std::string solver_ = "cg";
+      std::string solver_ = "CG";
     };
 
 
 
     template <int stateId, int controlId, int adjointId, class FunctionalImpl>
-    auto makeLagrangeCGFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain, std::string solver="cg",
+    auto makeLagrangeCGFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain, std::string solver="CG",
                                   int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                                   int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {
@@ -159,7 +159,7 @@ namespace Algorithm
     }
 
     template <int stateId, int controlId, int adjointId, class FunctionalImpl>
-    auto makeLagrangeCGFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain, std::string solver="cg",
+    auto makeLagrangeCGFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain, std::string solver="CG",
                                   int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                                   int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {

@@ -10,7 +10,7 @@ namespace Algorithm
    * \brief Interface for termination criteria for conjugate gradient methods.
    */
   class CGTerminationCriterion :
-      public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps
+      public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps, public Mixin::Verbosity
   {
   public:
     virtual ~CGTerminationCriterion();
@@ -92,36 +92,6 @@ namespace Algorithm
     using CGTerminationCriterion::maximalNumberOfIterations_;
     using CGTerminationCriterion::reachedMaximalNumberOfIterations_;
   public:
-    StrakosTichyEnergyErrorTerminationCriterion() = default;
-
-    /**
-     * \brief constructor
-     *
-     * The pcg iteration is terminated as soon as either the estimated relative error satisfies \f$ [\epsilon] \le \mathrm{tol} \f$ or
-     * the number of iterations exceeds the limit maxit. Note that the estimate of the relative error requires a look ahead
-     * parameter L. Thus, if \f$\mathrm{maxit}\ge\mathrm{L}\f$, then the error is first estimated in the (L+1)-th iteration.
-     *
-     * \param tol the relative error tolerance for termination
-     * \param maxit the maximum number of iterations
-     * \param eps estimate of the maximal attainable accuracy
-     */
-    StrakosTichyEnergyErrorTerminationCriterion(double tol, int maxit, double eps = 1e-12);
-
-    /**
-     * \brief constructor
-     *
-     * The pcg iteration is terminated as soon as either the estimated error satisfies \f$ [\epsilon] \le \mathrm{tol} \f$ or
-     * the number of iterations exceeds the limit maxit. Note that the estimate of the relative error requires a look ahead
-     * parameter L. Thus, if \f$\mathrm{maxit}\ge\mathrm{L}\f$, then the error is first estimated in the (L+1)-th iteration.
-     *
-     * \param tol the relative error tolerance for termination
-     * \param minTol relative error tolerance to admit truncation in the hybrid cg implementation
-     * \param maxit the maximum number of iterations
-     * \param eps estimate of the maximal attainable accuracy
-     */
-    StrakosTichyEnergyErrorTerminationCriterion(double tol, double minTol, int maxit, double eps = 1e-12);
-
-
     /**
      * \brief termination decision
      * \return true if the iteration has reached the required accuracy
