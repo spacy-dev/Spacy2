@@ -1,0 +1,22 @@
+include /home/ignaz/lib/Kaskade7.3/Makefile.Local
+include /home/ignaz/lib/Kaskade7.3/Makefile.Rules
+
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) -I/home/ignaz/C++/FSA/Algorithms
+FLAGS = $(WFLAGS) $(OPTFLAGS)
+
+laplace: laplace.o Makefile $(KASKADE7)/libs/libkaskade.a 
+	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/umfpack_solve.o $(KASKADELIB) \
+ $(DUNELIB) \
+ $(UGLIB) \
+ $(BOOSTLIB) \
+ $(UMFPACKLIB) \
+ $(BLASLIB) $(FTNLIB) $(NUMALIB) -L/home/ignaz/C++/FSA/build -lalgorithms -o $@
+
+clean:
+	rm -f gccerr.txt laplace laplace.o temperature.vtu *.bak
+
+depend:
+	cp Makefile.gen Makefile; /home/ignaz/lib/Kaskade7.3/gccmakedep -f Makefile $(INCLUDE) $(MAKEDEPENDFLAGS)  laplace.cpp; /home/ignaz/lib/Kaskade7.3/remove_install_deps Makefile
+
+# DO NOT DELETE
+
