@@ -129,8 +129,9 @@ namespace Algorithm
         assembler.assemble(*A_, J_);
 
         // Apply boundary conditions
+        auto tmp = dummy_.vector()->copy();
         for(const auto& bc : bcs_)
-          bc->apply( *A_ );
+          bc->apply( *A_ , *tmp , *dummy_.vector() );
 
         oldX_J = clone(x);
       }

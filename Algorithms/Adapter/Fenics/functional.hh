@@ -167,8 +167,10 @@ namespace Algorithm
         A_ = dummy_.vector()->factory().create_matrix();
         dolfin::assemble(*A_,H_);
 
-        auto tmp = dummy_.vector()->copy();
-        for( auto& bc : bcs_) bc->apply(*A_,*tmp,*dummy_.vector());
+//        std::cout << "A: " << std::endl;
+//        std::cout << A_->str(true) << std::endl;
+
+        for( auto& bc : bcs_) bc->apply(*A_);
 
         oldX_H_ = clone(x);
       }

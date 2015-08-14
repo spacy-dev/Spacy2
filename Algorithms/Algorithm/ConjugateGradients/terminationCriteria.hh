@@ -138,7 +138,7 @@ namespace Algorithm
      *
      * \param lookAhead the requested lookahead (nonnegative)
      *
-     * The default value is 50.
+     * The default value is 5.
      */
     void setLookAhead(unsigned lookAhead) noexcept final override;
 
@@ -155,7 +155,7 @@ namespace Algorithm
     double squaredRelativeError() const noexcept;
 
     double minTol2 = 0.0625;
-    unsigned lookAhead_ = 10;
+    unsigned lookAhead_ = 5;
     std::vector<double> scaledGamma2 = std::vector<double>{};
     double energyNorm2 = 0;
     double stepLength2 = 0.;

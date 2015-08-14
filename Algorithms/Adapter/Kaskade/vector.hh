@@ -271,6 +271,12 @@ namespace Algorithm
     }
 
     template <class Description>
+    void copy(const ::Algorithm::Vector& x, ::Kaskade::VariableSet<Description>& y)
+    {
+      copy(x.impl(),y);
+    }
+
+    template <class Description>
     void copyToCoefficientVector(const Interface::AbstractVector& x, typename Description::template CoefficientVectorRepresentation<>::type& y)
     {
       Detail::Copy<0,Description::noOfVariables>::template toCoefficientVector<Description>(x,y);

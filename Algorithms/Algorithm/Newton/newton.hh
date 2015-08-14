@@ -89,7 +89,7 @@ namespace Algorithm
   }
 
   /**
-   * @brief Get local Newton Method.
+   * @brief Local Newton Method.
    *
    * damping strategy: Newton::DampingStrategy::Undamped
    * termination criterion: Newton::TerminationCriterion::AffineCovariant
@@ -97,7 +97,7 @@ namespace Algorithm
   Newton::NewtonMethod localNewton(const Operator& F);
 
   /**
-   * @brief Get affine covariant Newton method.
+   * @brief Affine covariant Newton method.
    *
    * damping strategy: Newton::DampingStrategy::AffineCovariant
    * termination criterion: Newton::TerminationCriterion::AffineCovariant
@@ -105,7 +105,7 @@ namespace Algorithm
   Newton::NewtonMethod covariantNewton(const Operator& F);
 
   /**
-   * @brief Get affine contravariant Newton method.
+   * @brief Affine contravariant Newton method.
    *
    * damping strategy: Newton::DampingStrategy::AffineContravariant
    * termination criterion: Newton::TerminationCriterion::AffineContravariant

@@ -1,6 +1,11 @@
 #ifndef ALGORITHM_OPERATORS_KASKADE_FUNCTIONAL_HH
 #define ALGORITHM_OPERATORS_KASKADE_FUNCTIONAL_HH
 
+#include <memory>
+
+#include "fem/assemble.hh"
+#include "fem/istlinterface.hh"
+
 #include "../../functional.hh"
 #include "Interface/abstractFunctional.hh"
 #include "Interface/hessian.hh"
@@ -144,6 +149,9 @@ namespace Algorithm
 
         assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+
+//        std::cout << "A: " << std::endl;
+//        std::cout << assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) << std::endl;
 
         old_X_ddf_ = clone(x);
       }

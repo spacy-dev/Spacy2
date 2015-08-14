@@ -1,10 +1,12 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_FENICS_VECTOR_SPACE_ELEMENT_HH
 #define ALGORITHM_FUNCTION_SPACES_FENICS_VECTOR_SPACE_ELEMENT_HH
 
+#include <dolfin.h>
+
+#include "../../vector.hh"
 #include "Interface/abstractVector.hh"
 #include "Util/Mixins/impl.hh"
 
-#include <dolfin.h>
 
 namespace Algorithm
 {
@@ -55,6 +57,8 @@ namespace Algorithm
 
 
     void copy(const Interface::AbstractVector& x, dolfin::GenericVector& y, bool verbose = false);
+
+    void copy(const ::Algorithm::Vector& x, dolfin::Function& y, bool verbose = false);
 
     void copy(const dolfin::GenericVector& y, Interface::AbstractVector& x, bool verbose = false);
   }

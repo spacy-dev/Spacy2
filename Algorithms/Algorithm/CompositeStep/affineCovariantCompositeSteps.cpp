@@ -46,9 +46,12 @@ namespace Algorithm
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
       auto Dn = computeNormalStep(x);
-      std::cout << "computing normal step norm " << std::endl;
       auto norm_Dn = norm(Dn);
-      if( verbose() ) std::cout << spacing << "Computing normal damping factor" << std::endl;
+      if( verbose() )
+      {
+        std::cout << spacing << "Normal step length: " << norm_Dn << std::endl;
+        std::cout << spacing << "Computing normal damping factor" << std::endl;
+      }
       double nu = computeNormalStepDampingFactor(norm_Dn);
       if( verbose_detailed() ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << std::endl;
 
@@ -61,7 +64,11 @@ namespace Algorithm
       double tau = 0., norm_x = 0., norm_dx = 0.;
       auto ds = Dt; auto dx = Dt;
 
-      if( verbose() ) std::cout << spacing << "Computing damping factors." << std::endl;
+      if( verbose() )
+      {
+        std::cout << spacing << "Tangential step length: " << norm(Dt) << std::endl;
+        std::cout << spacing << "Computing damping factors." << std::endl;
+      }
       std::tie(tau,dx,ds,norm_x,norm_dx) = computeCompositeStep( nu , norm_Dn , x , Dn , Dt );
 
       x += primal(dx);
@@ -125,7 +132,10 @@ namespace Algorithm
                              verbose() );
     trcg->setIterativeRefinements(iterativeRefinements());
     trcg->setDetailedVerbosity(verbose_detailed());
-    trcg->setAbsoluteAccuracy( relativeAccuracy()*norm(x) );
+    if( norm(primal(x)) > 0)
+      trcg->setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
+    else
+      trcg->setAbsoluteAccuracy( eps() );
     trcg->setMaxSteps(maxSteps());
     return std::make_unique<LinearSolver>( std::move(trcg) );
   }
@@ -146,7 +156,7 @@ namespace Algorithm
 
   Vector AffineCovariantCompositeSteps::computeMinimumNormCorrection(const Vector& x) const
   {
-    auto rhs = dual(-N_->d1(x));
+    auto rhs = dual(-L_->d1(x));
     Vector dn0 = 0*x;
     if( is<CGSolver>(normalSolver->impl()) )
     {

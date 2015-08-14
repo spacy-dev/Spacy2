@@ -164,6 +164,11 @@ namespace Algorithm
       throw InvalidArgumentException("copy(const Interface::AbstractVector& x, dolfin::GenericVector& y)");
     }
 
+    void copy(const ::Algorithm::Vector& x, dolfin::Function& y, bool verbose)
+    {
+      copy(x.impl(),*y.vector(),verbose);
+    }
+
 
     void copy(const dolfin::GenericVector& y, Interface::AbstractVector& x, bool verbose)
     {

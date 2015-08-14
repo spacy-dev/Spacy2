@@ -90,7 +90,7 @@ namespace Algorithm
       regularize(qAq,qPq);
 
       auto alpha = sigma/qAq;
-      if( verbose_detailed() ) std::cout << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
+      if( verbose_detailed() ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
       terminate->provideAlgorithmicQuantities(alpha,qAq,qPq,sigma);
 
@@ -106,7 +106,7 @@ namespace Algorithm
 
       x += alpha * q;
       energyNorm2 += alpha*qAq;
-      if( verbose_detailed() ) std::cout << "  |x|^2_A = " << energyNorm2 << std::endl;
+      if( verbose_detailed() ) std::cout << "    " << type_ << "  |x|^2_A = " << energyNorm2 << std::endl;
 
       // convergence test
       if (*terminate)
@@ -146,7 +146,7 @@ namespace Algorithm
   {
     if( terminate->vanishingStep() )
     {
-      if( verbose() ) std::cout << type_ << ": Terminating due to numerically almost vanishing step in iteration " << step << "." << std::endl;
+      if( verbose() ) std::cout << "    " << type_ << ": Terminating due to numerically almost vanishing step in iteration " << step << "." << std::endl;
       result = Result::Converged;
       return true;
     }
@@ -156,14 +156,14 @@ namespace Algorithm
   bool CGMethod::terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const
   {
     if( qAq > 0 ) return false;
-    if( verbose() ) std::cout << type_ << ": Negative curvature: " << qAq << std::endl;
+    if( verbose() ) std::cout << "    " << type_ << ": Negative curvature: " << qAq << std::endl;
 
     if( type_ == "CG" )
     {
       if( verbose() )
       {
-        std::cout << type_ << ": Direction of negative curvature encountered in standard CG Implementation!" << std::endl;
-        std::cout << type_ << ": Either something is wrong with your operator or you should use TCG, RCG or HCG. Terminating CG!" << std::endl;
+        std::cout << "    " << type_ << ": Direction of negative curvature encountered in standard CG Implementation!" << std::endl;
+        std::cout << "    " << type_ << ": Either something is wrong with your operator or you should use TCG, RCG or HCG. Terminating CG!" << std::endl;
       }
 
       throw SingularOperatorException("CG::terminateOnNonconvexity");
@@ -174,7 +174,7 @@ namespace Algorithm
       // At least do something to retain a little chance to get out of the nonconvexity. If a nonconvexity is encountered in the first step something probably went wrong
       // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
       if( step == 1 ) x += q;
-      if( verbose() ) std::cout << type_ << ": Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
+      if( verbose() ) std::cout << "    " << type_ << ": Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
       nonconvexity = Nonconvexity::Encountered;
       result = Result::TruncatedAtNonConvexity;
       return true;
@@ -183,7 +183,7 @@ namespace Algorithm
     if( type_ == "TRCG" || type_ == "RCG" )
     {
       updateRegularization(qAq,qPq);
-      if( verbose() ) std::cout << type_ << ": Regularizing at nonconvexity in iteration " << step << "." << std::endl;
+      if( verbose() ) std::cout << "    " << type_ << ": Regularizing at nonconvexity in iteration " << step << "." << std::endl;
       nonconvexity = Nonconvexity::Encountered;
       result = Result::EncounteredNonConvexity;
       return true;

@@ -4,6 +4,9 @@
 #include <memory>
 #include <utility>
 
+#include "fem/assemble.hh"
+#include "fem/istlinterface.hh"
+
 #include "vectorSpace.hh"
 #include "../../operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
@@ -126,7 +129,6 @@ namespace Algorithm
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
-
         old_X_dA_ = clone(x);
       }
 

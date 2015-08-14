@@ -25,7 +25,7 @@ namespace Algorithm
     double etaMin = 0.5;
     double rejectionTolerance = 0.1;
 
-    double dampingTolerance = 1e-5;
+    double dampingTolerance = 1e-3;
 
   };
 
