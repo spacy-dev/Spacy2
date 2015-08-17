@@ -14,9 +14,7 @@ namespace Algorithm
   {
     AbstractVectorSpace::AbstractVectorSpace(std::shared_ptr<AbstractNorm> norm)
       : norm_(norm)
-    {
-      std::cout << "Creating space number " << index_ << "." << std::endl;
-    }
+    {}
 
     AbstractVectorSpace::AbstractVectorSpace(std::shared_ptr<AbstractScalarProduct> sp)
       : AbstractVectorSpace(std::make_shared<HilbertSpaceNorm>(sp))

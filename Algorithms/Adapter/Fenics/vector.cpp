@@ -128,7 +128,7 @@ namespace Algorithm
       {
         const auto& x_ = castTo<ProductSpaceElement>(x);
 
-        if( verbose ) std::cout << "variables: " << x_.variables().size() << std::endl;
+//        if( verbose ) std::cout << "variables: " << x_.variables().size() << std::endl;
 //        for( auto i=0u; i<x_.variables().size(); ++i )
           for( auto i : x_.space().primalSubSpaceIds() )
           {
@@ -190,7 +190,7 @@ namespace Algorithm
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
-              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
+//              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
               else xv_.impl().vector()->setitem( j , 0. );
@@ -204,7 +204,7 @@ namespace Algorithm
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
-              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
+//              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
               else

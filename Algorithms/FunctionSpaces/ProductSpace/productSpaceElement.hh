@@ -14,17 +14,12 @@ namespace Algorithm
 
   std::vector<std::unique_ptr<Interface::AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables);
 
-  /// Real number.
+  /**
+   * @brief Product space element.
+   */
   class ProductSpaceElement : public Interface::AbstractVector , public Mixin::PrimalDualSwitch
   {
   public:
-    /**
-     * @brief Construct real number with value x.
-     * @param x initial value
-     * @param space associated function space (RealSpace)
-     */
-    ProductSpaceElement(const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables, const ProductSpace& space);
-
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
@@ -69,30 +64,30 @@ namespace Algorithm
 
     const Interface::AbstractVector& variable(unsigned i) const;
 
-    std::vector<std::unique_ptr<Interface::AbstractVector> >& variables();
+    ProductSpaceElement& primalComponent();
 
-    const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables() const;
+    const ProductSpaceElement& primalComponent() const;
 
-    ProductSpaceElement primalElement() const;
+    void setPrimalComponent(std::unique_ptr<Interface::AbstractVector>&& y);
 
-    ProductSpaceElement dualElement() const;
+    ProductSpaceElement& dualComponent();
+
+    const ProductSpaceElement& dualComponent() const;
+
+    void setDualComponent(std::unique_ptr<Interface::AbstractVector>&& y);
 
     const ProductSpace& space() const;
 
-  private:    
-    /**
-     * @brief Get a copy of this real number.
-     */
+    bool isPrimalDualProductSpaceElement() const;
+
+  private:
     ProductSpaceElement* cloneImpl() const final override;
 
     /// Apply as dual element.
     double applyAsDualTo(const Interface::AbstractVector& y) const final override;
 
-    std::vector<std::unique_ptr<Interface::AbstractVector> > variables_;
-
+    std::vector<std::unique_ptr<Interface::AbstractVector> > variables_ ;
   };
-
-  Vector primalElement(const Vector& x);
 }
 
 #endif // ALGORITHM_PRODUCT_SPACE_ELEMENT_HH

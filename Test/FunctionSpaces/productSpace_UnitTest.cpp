@@ -42,7 +42,7 @@ TEST(ProductSpaceTest,MixedElementTest)
 TEST(ProductSpaceTest,PurePrimalElementSumTest)
 {
   using namespace Algorithm;
-  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } );
+  auto R2 = makeProductSpace( { std::make_shared<RealSpace>() , std::make_shared<RealSpace>() } , {0,1} , {} );
   auto x = R2.element();
   auto y = R2.element();
   x.coefficient(0) = y.coefficient(0) = 1;

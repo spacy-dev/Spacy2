@@ -4,6 +4,7 @@
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/castTo.hh"
 
+#include <algorithm>
 #include <cassert>
 #include <numeric>
 #include <stdexcept>
@@ -37,34 +38,43 @@ namespace Algorithm
     }
   }
 
-  ProductSpaceElement::ProductSpaceElement(const std::vector<std::unique_ptr<AbstractVector> > &variables, const ProductSpace& space)
-    : AbstractVector(space), variables_(cloneVariables(variables))
-  {}
 
   ProductSpaceElement::ProductSpaceElement(const ProductSpace& space)
     : AbstractVector(space)
   {
-    const auto& spaces = castTo<ProductSpace>(space).subSpaces();
-    for (auto i=0u; i<spaces.size(); ++i)
-      variables_.push_back(spaces[i]->element());
+    if( isPrimalDualProductSpaceElement() )
+    {
+      variables_.push_back(space.primalSubSpace().element());
+      variables_.push_back(space.dualSubSpace().element());
+    }
+    else
+    {
+      const auto& spaces = space.subSpaces();
+      for (auto i=0u; i<spaces.size(); ++i)
+        variables_.push_back(spaces[i]->element());
+    }
   }
 
   ProductSpaceElement::ProductSpaceElement(const ProductSpaceElement& other)
-    : AbstractVector(other), variables_(cloneVariables(other.variables()))
+    : AbstractVector(other), variables_(cloneVariables(other.variables_))
   {
-    if( !other.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        variable(i) *= 0;
-    if( !other.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i) *= 0;
-
-    reset(other);
+    if( isPrimalDualProductSpaceElement() )
+    {
+      if( !other.isPrimalEnabled() ) primalComponent() *= 0;
+      if( !other.isDualEnabled() ) dualComponent() *= 0;
+      reset(other);
+    }
   }
 
   void ProductSpaceElement::copyTo(AbstractVector& y) const
   {
     auto& y_ = castTo<ProductSpaceElement>(y);
+
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      y_.variables_ = cloneVariables(variables_);
+      return;
+    }
 
     if( ( !isPrimalEnabled() && !y_.isDualEnabled() ) ||
         ( !isDualEnabled() && !y_.isPrimalEnabled() ) )
@@ -73,35 +83,31 @@ namespace Algorithm
       return;
     }
 
-    if( !isPrimalEnabled() || !y_.isPrimalEnabled() )
-    {
-      for( unsigned i : space().dualSubSpaceIds() ) y_.variables()[i] = clone(variable(i));
-      reset(y_);
-      return;
-    }
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      y_.setPrimalComponent( clone(primalComponent()) );
 
-    if( !isDualEnabled() || !y_.isDualEnabled() )
-    {
-      for( unsigned i : space().primalSubSpaceIds() ) y_.variables()[i] = clone(variable(i));
-      reset(y_);
-      return;
-    }
+    if( isDualEnabled() && y_.isDualEnabled() )
+      y_.setDualComponent( clone(dualComponent()) );
 
-    y_.variables_ = cloneVariables(variables_);
-
+    reset(y_);
+    return;
   }
 
   ProductSpaceElement& ProductSpaceElement::operator=(const AbstractVector& y)
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      variables_ = cloneVariables(y_.variables_);
+      return *this;
+    }
+
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        variables()[i] = clone( y_.variable(i) );
+      setPrimalComponent( clone(y_.primalComponent()) );
 
     if( isDualEnabled() && y_.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variables()[i] = clone( y_.variable(i) );
+      setDualComponent( clone(y_.dualComponent()) );
 
     reset(y_);
     return *this;
@@ -111,13 +117,18 @@ namespace Algorithm
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
-    if( isPrimalEnabled() && y_.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      for(auto i=0u; i<variables_.size(); ++i)
         variable(i) += y_.variable(i);
+      return *this;
+    }
+
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      primalComponent() += y_.primalComponent();
 
     if( isDualEnabled() && y_.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i) += y_.variable(i);
+      dualComponent() += y_.dualComponent();
 
     reset(y_);
     return *this;
@@ -127,13 +138,18 @@ namespace Algorithm
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      for(auto i=0u; i<variables_.size(); ++i)
+        variable(i).axpy(a,y_.variable(i));
+      return *this;
+    }
+
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        variable(i).axpy( a , y_.variable(i) );
+      primalComponent().axpy(a,y_.primalComponent());
 
     if( isDualEnabled() && y_.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i).axpy( a , y_.variable(i) );
+      dualComponent().axpy(a,y_.dualComponent());
 
     reset(y_);
     return *this;
@@ -144,13 +160,18 @@ namespace Algorithm
   {
     const auto& y_ = castTo<ProductSpaceElement>(y);
 
-    if( isPrimalEnabled() && y_.isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      for(auto i=0u; i<variables_.size(); ++i)
         variable(i) -= y_.variable(i);
+      return *this;
+    }
+
+    if( isPrimalEnabled() && y_.isPrimalEnabled() )
+      primalComponent() -= y_.primalComponent();
 
     if( isDualEnabled() && y_.isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i) -= y_.variable(i);
+      dualComponent() -= y_.dualComponent();
 
     reset(y_);
     return *this;
@@ -158,13 +179,18 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator*=(double a)
   {
-    if( isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      for(auto i=0u; i<variables_.size(); ++i)
         variable(i) *= a;
+      return *this;
+    }
+
+    if( isPrimalEnabled() )
+      primalComponent() *= a;
 
     if( isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        variable(i) *= a;
+      dualComponent() *= a;
 
     reset();
     return *this;
@@ -172,37 +198,31 @@ namespace Algorithm
 
   std::unique_ptr<AbstractVector> ProductSpaceElement::operator- () const
   {
-    std::vector<std::unique_ptr<AbstractVector> > vars = cloneVariables(variables());
-    if( isPrimalEnabled() )
-      for( unsigned i : space().primalSubSpaceIds() )
-        vars[i] = -variable(i);
-    else
-      for( unsigned i : space().primalSubSpaceIds() )
-        vars[i] = clone(variable(i));
-
-    if( isDualEnabled() )
-      for( unsigned i : space().dualSubSpaceIds() )
-        vars[i] = -variable(i);
-    else
-      for( unsigned i : space().dualSubSpaceIds() )
-        vars[i] = clone(variable(i));
-
-    reset();
-    return std::make_unique<ProductSpaceElement>(vars,space());
+    bool primalEnabled = isPrimalEnabled(), dualEnabled = isDualEnabled();
+    auto result = clone(this);
+    if(primalEnabled) result->primalComponent() *= -1;
+    if(dualEnabled) result->dualComponent() *= -1;
+    return std::unique_ptr<AbstractVector>(result.release());
   }
 
   double ProductSpaceElement::applyAsDualTo(const AbstractVector& y) const
   {
-    auto result = 0.;
     const auto& y_  = castTo<ProductSpaceElement>(y);
-    assert( variables().size() == y_.variables().size() );
+    assert( variables_.size() == y_.variables_.size() );
 
+    if( !isPrimalDualProductSpaceElement() )
+    {
+      auto result = 0.;
+      for(auto i=0u; i<variables_.size(); ++i)
+        result += variable(i)( y_.variable(i) );
+      return result;
+    }
+
+    auto result = 0.;
     if( isPrimalEnabled() && y_.isPrimalEnabled() )
-      for( auto i : space().primalSubSpaceIds() )
-        result += variable(i)( y_.variable(i) );
+      result += primalComponent()( y_.primalComponent() );
     if( isDualEnabled() && y_.isDualEnabled() )
-      for( auto i : space().dualSubSpaceIds() )
-        result += variable(i)( y_.variable(i) );
+      result += dualComponent()( y_.dualComponent() );
 
     reset(y_);
     return result;
@@ -249,40 +269,71 @@ namespace Algorithm
 
   AbstractVector& ProductSpaceElement::variable(unsigned i)
   {
+    if( isPrimalDualProductSpaceElement() )
+    {
+      if( space().isPrimalSubSpaceId(i) )
+        return primalComponent().variable(space().primalIdMap(i));
+
+      if( space().isDualSubSpaceId(i) )
+        return dualComponent().variable(space().dualIdMap(i));
+      assert(false);
+    }
+
     return *variables_[i];
   }
 
   const AbstractVector& ProductSpaceElement::variable(unsigned i) const
   {
+    if( isPrimalDualProductSpaceElement() )
+    {
+      if( space().isPrimalSubSpaceId(i) )
+        return primalComponent().variable(space().primalIdMap(i));
+
+      if( space().isDualSubSpaceId(i) )
+        return dualComponent().variable(space().dualIdMap(i));
+      assert(false);
+    }
+
     return *variables_[i];
   }
 
-  std::vector<std::unique_ptr<AbstractVector> >& ProductSpaceElement::variables()
-  {
-    return variables_;
-  }
-
-  const std::vector<std::unique_ptr<AbstractVector> >& ProductSpaceElement::variables() const
-  {
-    return variables_;
-  }
-
-
   ProductSpaceElement* ProductSpaceElement::cloneImpl() const
   {
-    auto tmp = new ProductSpaceElement(*this);
-    return tmp;
+    return new ProductSpaceElement(*this);
   }
 
-
-  ProductSpaceElement ProductSpaceElement::primalElement() const
+  const ProductSpaceElement& ProductSpaceElement::primalComponent() const
   {
-    return ProductSpaceElement( cloneVariables(variables(),space().primalSubSpaceIds()) , space().primalSubSpace() );
+    if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::primal can only be used with primal-dual product spaces.");
+    return castTo<ProductSpaceElement>(*variables_[0]);
   }
 
-  ProductSpaceElement ProductSpaceElement::dualElement() const
+  ProductSpaceElement& ProductSpaceElement::primalComponent()
   {
-    return ProductSpaceElement( cloneVariables(variables(),space().dualSubSpaceIds()) , space().dualSubSpace() );
+    if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::primal can only be used with primal-dual product spaces.");
+    return castTo<ProductSpaceElement>(*variables_[0]);
+  }
+
+  void ProductSpaceElement::setPrimalComponent(std::unique_ptr<Interface::AbstractVector>&& y)
+  {
+    variables_[0] = std::move(y);
+  }
+
+  const ProductSpaceElement& ProductSpaceElement::dualComponent() const
+  {
+    if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::dual can only be used with primal-dual product spaces.");
+    return castTo<ProductSpaceElement>(*variables_[1]);
+  }
+
+  ProductSpaceElement& ProductSpaceElement::dualComponent()
+  {
+    if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::dual can only be used with primal-dual product spaces.");
+    return castTo<ProductSpaceElement>(*variables_[1]);
+  }
+
+  void ProductSpaceElement::setDualComponent(std::unique_ptr<Interface::AbstractVector>&& y)
+  {
+    variables_[1] = std::move(y);
   }
 
   const ProductSpace& ProductSpaceElement::space() const
@@ -290,10 +341,8 @@ namespace Algorithm
     return castTo<ProductSpace>(AbstractVector::space());
   }
 
-
-  Vector primalElement(const Vector& x)
+  bool ProductSpaceElement::isPrimalDualProductSpaceElement() const
   {
-    return Vector( castTo<ProductSpaceElement>(x.impl()).primalElement() );
+    return space().isPrimalDualProductSpace();
   }
-
 }
