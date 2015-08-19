@@ -4,6 +4,3 @@
 [submodule "build/RFFGen"]
 	path = build/RFFGen
 	url = https://github.com/lubkoll/RFFGen.git
-[submodule "External/RFFGen"]
-	path = External/RFFGen
-	url = https://github.com/lubkoll/RFFGen.git
