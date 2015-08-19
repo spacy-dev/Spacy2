@@ -1,5 +1,6 @@
 #include "newton.hh"
 
+#include "operator.hh"
 #include "linearOperator.hh"
 #include "vector.hh"
 
@@ -9,45 +10,31 @@ namespace Algorithm
 {
   namespace Newton
   {
-    NewtonMethod::NewtonMethod(const Operator& F)
-      : F_(F),
-        dampingFactor_(std::make_shared<DampingStrategy::AffineCovariant>(F_)),
-        terminationCriterion_( std::make_shared<TerminationCriterion::AffineCovariant>(F_,relativeAccuracy()) )
-    {
-      attachEps( dampingFactor_.get() );
-      attachRegularityTest( dampingFactor_.get() );
-      attachEps( terminationCriterion_.get() );
-      attachVerbosity( terminationCriterion_.get() );
-      attachRelativeAccuracy( terminationCriterion_.get() );
-    }
-
-    Vector NewtonMethod::solve() const
-    {
-      return solve( Vector( F_.impl().domain().element() ) );
-    }
-
-    Vector NewtonMethod::solve(const Vector& x0) const
+    Vector newton(const Operator& F, const Vector& x0,
+                  const DampingStrategy::Base& dampingFactor,
+                  const TerminationCriterion::Base& terminationCriterion,
+                  const Newton::Parameter p)
     {
       using namespace std::chrono;
-      if( verbose() ) std::cout << "Starting newton iteration." << std::endl;
-      startTimer();
+      if( p.verbose() ) std::cout << "Starting newton iteration." << std::endl;
+      p.startTimer();
 
       auto x = x0;
-      for(unsigned i = 1; i <= maxSteps(); ++i)
+      for(unsigned i = 1; i <= p.maxSteps(); ++i)
       {
-        if( verbose() ) std::cout << "\nIteration " << i << ": ";
+        if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
 
-        auto DF_Inv = F_.linearization(x)^-1;
+        auto DF_Inv = F.linearization(x)^-1;
 
-        auto dx = DF_Inv(-F_(x));
-        auto nu = dampingFactor_->compute(DF_Inv,x,dx);
+        auto dx = DF_Inv(-F(x));
+        auto nu = dampingFactor(DF_Inv,x,dx);
         x += static_cast<double>(nu)*dx;
 
-        if( verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
+        if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
 
-        if( terminationCriterion_->passed(nu,x,dx) )
+        if( terminationCriterion(nu,x,dx) )
         {
-          if( verbose() ) std::cout << "Newton iteration converged. Computation time: " << elapsedTime() << "s." << std::endl;
+          if( p.verbose() ) std::cout << "Newton iteration converged. Computation time: " << p.elapsedTime() << "s." << std::endl;
           return x;
         }
       }
@@ -56,26 +43,36 @@ namespace Algorithm
     }
   }
 
-  Newton::NewtonMethod localNewton(const Operator& F)
+
+  Vector localNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
   {
-    using namespace Newton;
-    auto newton = NewtonMethod( F );
-    newton.setDampingStrategy<DampingStrategy::None>();
-    return newton;
+    return Newton::newton<Newton::DampingStrategy::None,Newton::TerminationCriterion::AffineCovariant>(F,x0,p);
   }
 
-  Newton::NewtonMethod covariantNewton(const Operator& F)
+  Vector localNewton(const Operator& F, const Newton::Parameter p)
   {
-    using namespace Newton;
-    return NewtonMethod( F );
+    return localNewton(F,F.domain().element(),p);
   }
 
-  Newton::NewtonMethod contravariantNewton(const Operator& F)
+
+  Vector covariantNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
   {
-    using namespace Newton;
-    auto newton = NewtonMethod( F );
-    newton.setDampingStrategy<DampingStrategy::AffineContravariant>();
-    newton.setTerminationCriterion<TerminationCriterion::AffineContravariant>();
-    return newton;
+    return Newton::newton<Newton::DampingStrategy::AffineCovariant,Newton::TerminationCriterion::AffineCovariant>(F,x0,p);
+  }
+
+  Vector covariantNewton(const Operator& F, const Algorithm::Newton::Parameter p)
+  {
+    return covariantNewton(F,F.domain().element(),p);
+  }
+
+
+  Vector contravariantNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
+  {
+    return Newton::newton<Newton::DampingStrategy::AffineContravariant,Newton::TerminationCriterion::AffineContravariant>(F,x0,p);
+  }
+
+  Vector contravariantNewton(const Operator& F, const Algorithm::Newton::Parameter p)
+  {
+    return contravariantNewton(F,F.domain().element(),p);
   }
 }

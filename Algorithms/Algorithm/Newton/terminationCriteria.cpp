@@ -16,6 +16,12 @@ namespace Algorithm
           Mixin::Verbosity(verbose)
       {}
 
+      bool Base::operator()(double nu, const Vector& x, const Vector& dx) const
+      {
+        return passed(nu,x,dx);
+      }
+
+
       AffineCovariant::AffineCovariant(const Operator&, double relativeAccuracy, bool verbose)
         : Base(relativeAccuracy,verbose)
       {}

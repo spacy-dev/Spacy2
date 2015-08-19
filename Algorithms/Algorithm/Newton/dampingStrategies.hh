@@ -23,7 +23,10 @@ namespace Algorithm
       public:
         virtual ~Base() = default;
 
-        virtual DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) = 0;
+        DampingFactor operator()(const LinearSolver& F, const Vector& x, const Vector& dx) const;
+
+      protected:
+        virtual DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) const = 0;
       };
 
       /**
@@ -35,14 +38,14 @@ namespace Algorithm
       public:
         AffineCovariant(const Operator& F);
 
-        DampingFactor compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) final override;
-
       private:
+        DampingFactor compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const final override;
+
         const Operator& F_;
 
-        DampingFactor oldNu = -1;
-        double normOldDx = -1, normOldDs = -1;
-        Vector oldDs;
+        mutable DampingFactor oldNu = -1;
+        mutable double normOldDx = -1, normOldDs = -1;
+        mutable Vector oldDs;
       };
 
       /**
@@ -54,13 +57,13 @@ namespace Algorithm
       public:
         AffineContravariant(const Operator& F);
 
-        DampingFactor compute(const LinearSolver&, const Vector& x, const Vector& dx) final override;
-
       private:
+        DampingFactor compute(const LinearSolver&, const Vector& x, const Vector& dx) const final override;
+
         const Operator& F_;
 
-        double muPrime = -1.;
-        double norm_F_x_old = -1;
+        mutable double muPrime = -1.;
+        mutable double norm_F_x_old = -1;
       };
 
       /**
@@ -72,7 +75,7 @@ namespace Algorithm
       public:
         None(const Operator& F);
 
-        DampingFactor compute(const LinearSolver&, const Vector&, const Vector&);
+        DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) const final override;
       };
     }
   }

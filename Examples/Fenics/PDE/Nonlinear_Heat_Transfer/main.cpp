@@ -65,15 +65,14 @@ int main()
   auto A = Fenics::makeOperator( L , a , bcs , domain , range );
   domain.setScalarProduct( inducedScalarProduct( A.linearization(domain.element()) ) );
 
-  auto newton = covariantNewton( A );
-//  auto newton = contravariantNewton( A );
-//  auto newton = localNewton( A );
-  newton.setVerbosity( true );
-  newton.setDetailedVerbosity( true );
-  newton.setRelativeAccuracy(1e-12);
-    
-  auto result = newton.solve();
-  Fenics::copy(result,u);
+  auto p = Algorithm::Newton::Parameter{};
+  p.setVerbosity(true);
+  p.setRelativeAccuracy(1e-12);
+
+  auto sol = Algorithm::covariantNewton(A,p);
+//  auto sol = Algorithm::contravariantNewton(A,p);
+//  auto sol = Algorithm::localNewton(A,p);
+  Fenics::copy(sol,u);
 
   // Save solution in VTK format
   File file("poisson.pvd");

@@ -53,13 +53,13 @@ int main()
   auto f = Algorithm::Kaskade::makeOperator( F , domain.sharedImpl() , range.sharedImpl() );
   domain.setScalarProduct( inducedScalarProduct(f.linearization(domain.element())) );
   
-  auto newton = Algorithm::covariantNewton( f );
-//  auto newton = contravariantNewton( f );
-//  auto newton = localNewton(f );
-  newton.setVerbosity(true);
-  newton.setRelativeAccuracy(1e-12);
-  
-  auto sol = newton.solve();
+  auto p = Algorithm::Newton::Parameter{};
+  p.setVerbosity(true);
+  p.setRelativeAccuracy(1e-12);
+
+  auto sol = Algorithm::covariantNewton(f,p);
+//  auto sol = Algorithm::contravariantNewton(f,p);
+//  auto sol = Algorithm::localNewton(f,p);
 
   //construct Galerkin representation
   VariableSetDesc::VariableSet u(variableSetDesc);

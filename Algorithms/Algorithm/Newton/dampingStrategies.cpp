@@ -13,11 +13,17 @@ namespace Algorithm
   {
     namespace DampingStrategy
     {
+      DampingFactor Base::operator()(const LinearSolver& F, const Vector& x, const Vector& dx) const
+      {
+        return compute(F,x,dx);
+      }
+
+
       AffineCovariant::AffineCovariant(const Operator& F)
         : F_(F), oldDs(F.domain().element())
       {}
 
-      DampingFactor AffineCovariant::compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx)
+      DampingFactor AffineCovariant::compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1;
         auto mu = 1., normDx = norm(dx);
@@ -69,7 +75,7 @@ namespace Algorithm
         : F_(F)
       {}
 
-      DampingFactor AffineContravariant::compute(const LinearSolver&, const Vector& x, const Vector& dx)
+      DampingFactor AffineContravariant::compute(const LinearSolver&, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1.;
         auto norm_F_x = norm(F_(x));
@@ -113,7 +119,7 @@ namespace Algorithm
       None::None(const Operator& F)
       {}
 
-      DampingFactor None::compute(const LinearSolver&, const Vector&, const Vector&)
+      DampingFactor None::compute(const LinearSolver&, const Vector&, const Vector&) const
       {
         return 1;
       }

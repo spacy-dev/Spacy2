@@ -23,6 +23,9 @@ namespace Algorithm
 
         virtual ~Base() = default;
 
+        bool operator()(double nu, const Vector& x, const Vector& dx) const;
+
+      private:
         virtual bool passed(double nu, const Vector& x, const Vector& dx) const = 0;
       };
 
@@ -35,6 +38,7 @@ namespace Algorithm
       public:
         AffineCovariant(const Operator&, double relativeAccuracy, bool verbose = false);
 
+      private:
         bool passed(double nu, const Vector& x, const Vector& dx) const final override;
       };
 
@@ -47,9 +51,9 @@ namespace Algorithm
       public:
         AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose = false);
 
+      private:
         bool passed(double nu, const Vector& x, const Vector&) const final override;
 
-      private:
         const Operator& F_;
         mutable double initialResidual = -1;
       };
