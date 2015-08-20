@@ -1,7 +1,8 @@
 #ifndef ALGORITHM_HILBERTSPACENORM_HH
 #define ALGORITHM_HILBERTSPACENORM_HH
 
-#include "Interface/hilbertSpaceNorm.hh"
+#include <memory>
+
 #include "norm.hh"
 #include "scalarProduct.hh"
 
@@ -9,31 +10,21 @@ namespace Algorithm
 {
   class Vector;
 
-  class HilbertSpaceNorm : public Norm
+  class HilbertSpaceNorm
   {
   public:
-    HilbertSpaceNorm(std::shared_ptr<Interface::HilbertSpaceNorm> implementation);
+    explicit HilbertSpaceNorm(std::shared_ptr<Interface::AbstractScalarProduct> implementation);
 
-    HilbertSpaceNorm(const ScalarProduct& sp);
+//    HilbertSpaceNorm(const ScalarProduct& sp);
 
     double scalarProduct(const Vector& x, const Vector& y) const;
 
     double squared(const Vector& x) const;
 
-    /**
-     * \brief Access implementation.
-     */
-    Interface::HilbertSpaceNorm& impl();
+    double operator()(const Vector& x) const;
 
-    /**
-     * \brief Access implementation.
-     */
-    const Interface::HilbertSpaceNorm& impl() const;
-
-    /**
-     * \brief Access implementation.
-     */
-    std::shared_ptr<Interface::HilbertSpaceNorm> sharedImpl() const;
+  private:
+    std::shared_ptr<Interface::AbstractScalarProduct> sp_;
   };
 }
 

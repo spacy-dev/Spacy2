@@ -2,7 +2,6 @@
 
 #include "abstractScalarProduct.hh"
 #include "abstractVectorSpace.hh"
-#include "abstractNorm.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 

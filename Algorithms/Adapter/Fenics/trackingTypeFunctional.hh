@@ -6,7 +6,6 @@
 
 #include "Interface/abstractFunctional.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-#include "Util/makeLinearSolver.hh"
 #include "Util/Mixins/controlIndex.hh"
 #include "Util/Mixins/stateIndex.hh"
 #include "Util/castTo.hh"

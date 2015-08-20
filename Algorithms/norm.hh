@@ -1,35 +1,22 @@
 #ifndef ALGORITHM_NORM_HH
 #define ALGORITHM_NORM_HH
 
-#include <memory>
-#include <utility>
+#include <boost/mpl/vector.hpp>
+#include <boost/type_erasure/any.hpp>
+#include <boost/type_erasure/callable.hpp>
 
 #include "vector.hh"
-#include "Interface/abstractNorm.hh"
-#include "Util/Mixins/impl.hh"
+#include "Util/conceptBase.hh"
 
 namespace Algorithm
 {
+  using NormConcept = boost::type_erasure::callable<double(const Vector&), const boost::type_erasure::_self>;
+
   /**
    * @brief Norm class. Plug your implementations in here.
    */
-  class Norm : public Mixin::SharedImpl<Interface::AbstractNorm>
-  {
-  public:
-    Norm() = default;
-    explicit Norm(std::shared_ptr<Interface::AbstractNorm> implementation);
-
-    Norm(const Norm&) = delete;
-    Norm& operator=(const Norm&) = delete;
-
-    Norm(Norm&&) = default;
-    Norm& operator=(Norm&&) = default;
-
-    /**
-     * @brief Compute \f$\|x\|\f$.
-     */
-    auto operator()(const Vector& x) const -> decltype(std::declval<Interface::AbstractNorm>()(x.impl()));
-  };
+  using Norm = boost::type_erasure::any< boost::mpl::vector< ConceptBase , NormConcept > >;
 }
+
 
 #endif // ALGORITHM_NORM_HH

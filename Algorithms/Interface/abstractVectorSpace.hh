@@ -2,6 +2,8 @@
 #define ALGORITHM_INTERFACE_ABSTRACT_VECTOR_SPACE_HH
 
 #include <memory>
+
+#include "norm.hh"
 #include "abstractVector.hh"
 
 namespace Algorithm
@@ -22,7 +24,7 @@ namespace Algorithm
       /**
        * @brief Constructor for Banach spaces. Sets norm.
        */
-      AbstractVectorSpace(std::shared_ptr<AbstractNorm> norm);
+//      AbstractVectorSpace(Norm norm);
 
       /**
        * @brief Constructor for Hilbert spaces. Sets scalar product.
@@ -32,11 +34,11 @@ namespace Algorithm
 
       virtual ~AbstractVectorSpace() = default;
 
-      void setNorm(std::shared_ptr<AbstractNorm> norm);
+      void setNorm(Norm norm);
 
-      const AbstractNorm& norm() const;
+      Norm norm() const;
 
-      std::shared_ptr<AbstractNorm> sharedNorm() const;
+//      std::shared_ptr<AbstractNorm> sharedNorm() const;
 
       std::unique_ptr<AbstractVector> element() const;
 
@@ -65,7 +67,7 @@ namespace Algorithm
       bool isHilbertSpace() const;
 
     protected:
-      std::shared_ptr<AbstractNorm> norm_ = nullptr;
+      Norm norm_;
       virtual std::unique_ptr<AbstractVector> elementImpl() const = 0;
 
     private:

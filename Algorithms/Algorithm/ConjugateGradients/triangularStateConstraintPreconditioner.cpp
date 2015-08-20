@@ -1,6 +1,5 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "Interface/abstractNorm.hh"
 #include "Interface/abstractVectorSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include <utility>

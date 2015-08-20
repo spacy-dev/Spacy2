@@ -7,7 +7,6 @@ namespace Algorithm
 {
   /// \cond
   class Vector;
-  class Norm;
   class Operator;
   /// \endcond
 

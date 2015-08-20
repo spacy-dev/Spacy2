@@ -11,7 +11,6 @@ namespace Algorithm
   /// \cond
   class Operator;
   class LinearSolver;
-  class Norm;
   /// \endcond
 
   namespace Newton

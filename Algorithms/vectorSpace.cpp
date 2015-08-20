@@ -16,12 +16,12 @@ namespace Algorithm
 
   void VectorSpace::setNorm(const Norm& norm)
   {
-    impl().setNorm(norm.sharedImpl());
+    impl().setNorm(norm);
   }
 
   Norm VectorSpace::norm() const
   {
-    return Norm( impl().sharedNorm() );
+    return impl().norm();
   }
 
   Vector VectorSpace::element() const

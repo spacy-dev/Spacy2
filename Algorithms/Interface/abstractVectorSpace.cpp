@@ -1,7 +1,7 @@
 #include "abstractVectorSpace.hh"
 
 #include "abstractScalarProduct.hh"
-#include "hilbertSpaceNorm.hh"
+#include "../hilbertSpaceNorm.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 
@@ -12,33 +12,34 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractVectorSpace::AbstractVectorSpace(std::shared_ptr<AbstractNorm> norm)
-      : norm_(norm)
-    {}
+//    AbstractVectorSpace::AbstractVectorSpace(Norm norm)
+//      : norm_(norm)
+//    {}
 
     AbstractVectorSpace::AbstractVectorSpace(std::shared_ptr<AbstractScalarProduct> sp)
-      : AbstractVectorSpace(std::make_shared<HilbertSpaceNorm>(sp))
+//      : AbstractVectorSpace( ::Algorithm::HilbertSpaceNorm(sp) )
+      : norm_( ::Algorithm::HilbertSpaceNorm(sp) ) ,
+        sp_(sp)
     {
-      sp_ = sp;
+      //sp_ = sp;
       addDualSpace(*this);
       addPrimalSpace(*this);
     }
 
-    void AbstractVectorSpace::setNorm(std::shared_ptr<AbstractNorm> norm)
+    void AbstractVectorSpace::setNorm(Norm norm)
     {
       norm_ = norm;
     }
 
-    const AbstractNorm& AbstractVectorSpace::norm() const
-    {
-      assert(norm_ != nullptr);
-      return *norm_;
-    }
-
-    std::shared_ptr<AbstractNorm> AbstractVectorSpace::sharedNorm() const
+    Norm AbstractVectorSpace::norm() const
     {
       return norm_;
     }
+
+//    std::shared_ptr<AbstractNorm> AbstractVectorSpace::sharedNorm() const
+//    {
+//      return norm_;
+//    }
 
     std::unique_ptr<AbstractVector> AbstractVectorSpace::element() const
     {
@@ -99,7 +100,7 @@ namespace Algorithm
     void AbstractVectorSpace::setScalarProduct(std::shared_ptr<AbstractScalarProduct> sp)
     {
       sp_ = sp;
-      setNorm(std::make_shared<HilbertSpaceNorm>(sp));
+      setNorm( ::Algorithm::HilbertSpaceNorm(sp) );
     }
 
     std::shared_ptr<AbstractScalarProduct> AbstractVectorSpace::scalarProduct() const
