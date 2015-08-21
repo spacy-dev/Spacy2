@@ -11,7 +11,7 @@ namespace Algorithm
   namespace Interface
   {
     LinearizedOperator::LinearizedOperator(std::unique_ptr<AbstractOperator>&& A, const AbstractVector& x)
-      : AbstractLinearOperator(A->sharedDomain(),A->sharedRange()),
+      : AbstractLinearOperator(A->domain_ptr(),A->range_ptr()),
         A_(std::move(A)), x_(clone(x))
     {}
 

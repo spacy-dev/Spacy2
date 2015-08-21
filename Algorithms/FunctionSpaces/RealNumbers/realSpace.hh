@@ -3,21 +3,22 @@
 
 #include <memory>
 
-#include "Interface/abstractVectorSpace.hh"
-
 namespace Algorithm
 {
+  /// \cond
+  class Vector;
+  class VectorSpace;
   namespace Interface { class AbstractVector; }
+  /// \endcond
 
   /// Space of real numbers.
-  class RealSpace : public Interface::AbstractVectorSpace
+  class RealSpace
   {
   public:
-    RealSpace();
-
-  private:
-    std::unique_ptr<Interface::AbstractVector> elementImpl() const override;
+    Vector element(const VectorSpace* space) const;
   };
+
+  VectorSpace makeRealSpace();
 }
 
 #endif // ALGORITHM_FUNCTIONSPACES_REALNUMBERS_REALSPACE_HH

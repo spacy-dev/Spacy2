@@ -1,6 +1,5 @@
 #include "vector.hh"
 
-#include "Interface/abstractVectorSpace.hh"
 #include "Interface/abstractVector.hh"
 #include "FunctionSpaces/RealNumbers/real.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -107,7 +106,7 @@ namespace Algorithm
 
   double Vector::norm() const
   {
-    return impl().space().norm()( impl() );
+    return impl().space().norm()( *this );
   }
 
 

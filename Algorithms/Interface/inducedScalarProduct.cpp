@@ -35,7 +35,7 @@ namespace Algorithm
       auto result = 0.;
 
       if( xx.isDualEnabled() && yy.isDualEnabled() )
-        for( auto i : xx.space().dualSubSpaceIds() )
+        for( auto i : xx.productSpace().dualSubSpaceIds() )
           result += xx.variable(i) * yy.variable(i);
 
       if( !xx.isPrimalEnabled() || !yy.isPrimalEnabled() )

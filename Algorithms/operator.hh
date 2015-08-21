@@ -38,12 +38,12 @@ namespace Algorithm
     /**
      * @brief Access underlying domain.
      */
-    VectorSpace& domain();
+    VectorSpace* domain_ptr() const;
 
     /**
      * @brief Access range space.
      */
-    VectorSpace& range();
+    VectorSpace* range_ptr() const;
 
     /**
      * @brief Access underlying domain.
@@ -54,9 +54,6 @@ namespace Algorithm
      * @brief Access range space
      */
     const VectorSpace& range() const;
-
-  private:
-    VectorSpace domain_, range_;
   };
 }
 #endif // ALGORITHM_OPERATOR_HH

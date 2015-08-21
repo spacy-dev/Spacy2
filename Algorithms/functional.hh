@@ -55,6 +55,11 @@ namespace Algorithm
     LinearOperator hessian(const Vector& x) const;
 
     /**
+     * @brief Access pointer to underlying domain.
+     */
+    VectorSpace* domain_ptr() const;
+
+    /**
      * @brief Access underlying domain.
      */
     VectorSpace& domain();
@@ -63,9 +68,6 @@ namespace Algorithm
      * @brief Access underlying domain.
      */
     const VectorSpace& domain() const;
-
-  private:
-    VectorSpace domain_;
   };
 }
 #endif // ALGORITHM_FUNCTIONAL_HH

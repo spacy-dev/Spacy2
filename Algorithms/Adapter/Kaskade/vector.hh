@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 #define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
+#include <boost/type_erasure/any_cast.hpp>
+
 #include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Interface/abstractVector.hh"
@@ -10,6 +12,10 @@
 
 namespace Algorithm
 {  
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   namespace Kaskade
   {
     template <class> class VectorSpace;
@@ -22,15 +28,15 @@ namespace Algorithm
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
 
     public:
-      Vector(const Interface::AbstractVectorSpace& space_)
+      Vector(const ::Algorithm::VectorSpace& space_)
         : Interface::AbstractVector(space_),
-          spaces_(&castTo< VectorSpace<Description> >(space()).impl()),
+          spaces_(&boost::type_erasure::any_cast< const VectorSpace<Description>& >(space().impl()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
 
-      Vector(const Interface::AbstractVectorSpace& space_, const VectorImpl& v)
+      Vector(const ::Algorithm::VectorSpace& space_, const VectorImpl& v)
         : Interface::AbstractVector(space_),
-          spaces_(&castTo< VectorSpace<Description> >(space()).impl()),
+          spaces_(&boost::type_erasure::any_cast< const VectorSpace<Description>& >(space().impl()).impl()),
           v_(v)
       {}
 
@@ -151,8 +157,8 @@ namespace Algorithm
         template <class Description>
         static void apply(const ProductSpaceElement& x, ::Kaskade::VariableSet<Description>& y)
         {
-          if( ( x.space().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
-              ( x.space().isDualSubSpaceId(i) && x.isDualEnabled() ) )
+          if( ( x.productSpace().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
+              ( x.productSpace().isDualSubSpaceId(i) && x.isDualEnabled() ) )
             boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,i> > >(x.variable(i)).impl().data);
           Copy<i+1,n>::apply(x,y);
         }
@@ -160,8 +166,8 @@ namespace Algorithm
         template <class Description, class CoeffVector>
         static void toCoefficientVector(const ProductSpaceElement& x, CoeffVector& y)
         {
-          if( ( x.space().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
-              ( x.space().isDualSubSpaceId(i) && x.isDualEnabled() ) )
+          if( ( x.productSpace().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
+              ( x.productSpace().isDualSubSpaceId(i) && x.isDualEnabled() ) )
             boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,i> > >(x.variable(i)).impl().data);
           Copy<i+1,n>::template toCoefficientVector<Description>(x,y);
         }
@@ -169,8 +175,8 @@ namespace Algorithm
         template <class Description, class CoeffVector>
         static void fromCoefficientVector(const CoeffVector& x, ProductSpaceElement& y)
         {
-          if( ( y.space().isPrimalSubSpaceId(i) && y.isPrimalEnabled() ) ||
-              ( y.space().isDualSubSpaceId(i) && y.isDualEnabled() ) )
+          if( ( y.productSpace().isPrimalSubSpaceId(i) && y.isPrimalEnabled() ) ||
+              ( y.productSpace().isDualSubSpaceId(i) && y.isDualEnabled() ) )
             boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,i> > >(y.variable(i)).impl().data) = boost::fusion::at_c<i>(x.data);
           Copy<i+1,n>::template fromCoefficientVector<Description>(x,y);
         }
@@ -191,8 +197,8 @@ namespace Algorithm
           if( is<ProductSpaceElement>(x))
           {
             const auto& x_ = castTo<ProductSpaceElement>(x);
-            if( ( x_.space().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
-                ( x_.space().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
+            if( ( x_.productSpace().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
+                ( x_.productSpace().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
             boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
             Copy<1,n>::apply(x_,y);
             return;
@@ -213,8 +219,8 @@ namespace Algorithm
           if( is<ProductSpaceElement>(x))
           {
             const auto& x_ = castTo<ProductSpaceElement>(x);
-            if( ( x_.space().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
-                ( x_.space().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
+            if( ( x_.productSpace().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
+                ( x_.productSpace().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
               boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
             Copy<1,n>::template toCoefficientVector<Description>(x_,y);
             return;
@@ -235,8 +241,8 @@ namespace Algorithm
           if( is<ProductSpaceElement>(y))
           {
             auto& y_ = castTo<ProductSpaceElement>(y);
-            if( ( y_.space().isPrimalSubSpaceId(0) && y_.isPrimalEnabled() ) ||
-                ( y_.space().isDualSubSpaceId(0) && y_.isDualEnabled() ) )
+            if( ( y_.productSpace().isPrimalSubSpaceId(0) && y_.isPrimalEnabled() ) ||
+                ( y_.productSpace().isDualSubSpaceId(0) && y_.isDualEnabled() ) )
               boost::fusion::at_c<0>(castTo< Vector< ExtractDescription_t<Description,0> > >(y_.variable(0)).impl().data) = boost::fusion::at_c<0>(x.data);
             Copy<1,n>::template fromCoefficientVector<Description>(x,y_);
             return;

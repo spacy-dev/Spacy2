@@ -29,15 +29,15 @@ namespace Algorithm
 
     public:
       LinearOperator(const OperatorImpl& A,
-               std::shared_ptr<Interface::AbstractVectorSpace> domain_,
-               std::shared_ptr<Interface::AbstractVectorSpace> range_)
+               ::Algorithm::VectorSpace* domain_,
+               ::Algorithm::VectorSpace* range_)
         : AbstractOperator(domain_,range_),
           A_(A),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) )
       {}
 
       LinearOperator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
-        : LinearOperator(f,domain.sharedImpl(),range.sharedImpl())
+        : LinearOperator(f,&domain,&range)
       {}
 
       std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
@@ -49,9 +49,9 @@ namespace Algorithm
         A_.apply(x_,y_);
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,y.impl());
 
-        return std::move(y);
+        return clone(y.impl());
       }
 
       std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector&, const Interface::AbstractVector& dx) const final override
@@ -63,9 +63,9 @@ namespace Algorithm
         A_.apply( dx_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,y.impl());
 
-        return std::move(y);
+        return clone(y.impl());
       }
 
     protected:
@@ -76,7 +76,7 @@ namespace Algorithm
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
-        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( A_ , spaces_, sharedRange() , sharedDomain() );
+        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( A_ , spaces_, range_ptr() , domain_ptr() );
       }
 
       OperatorImpl A_;
@@ -88,8 +88,8 @@ namespace Algorithm
 
     template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
     auto makeLinearOperator(const OperatorImpl& f,
-                      std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                      std::shared_ptr<Interface::AbstractVectorSpace> range)
+                            ::Algorithm::VectorSpace* domain,
+                            ::Algorithm::VectorSpace* range)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription> >( f, domain , range );
     }

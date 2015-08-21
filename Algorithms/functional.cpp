@@ -8,8 +8,7 @@
 namespace Algorithm
 {
   Functional::Functional(std::unique_ptr<Interface::AbstractFunctional>&& implementation)
-    : Mixin::UniqueImpl<Interface::AbstractFunctional>(std::move(implementation)),
-      domain_( impl().sharedDomain() )
+    : Mixin::UniqueImpl<Interface::AbstractFunctional>(std::move(implementation))
   {}
 
   double Functional::operator()(const Vector& x) const
@@ -42,13 +41,18 @@ namespace Algorithm
     return LinearOperator( impl().hessian( x.impl() ) );
   }
 
+  VectorSpace* Functional::domain_ptr() const
+  {
+    return impl().domain_ptr();
+  }
+
   VectorSpace& Functional::domain()
   {
-    return domain_;
+    return *impl().domain_ptr();
   }
 
   const VectorSpace& Functional::domain() const
   {
-    return domain_;
+    return impl().domain();
   }
 }

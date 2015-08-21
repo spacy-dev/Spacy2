@@ -1,6 +1,6 @@
 #include "abstractOperator.hh"
 
-#include "Interface/abstractVectorSpace.hh"
+#include "vectorSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "linearizedOperator.hh"
 
@@ -10,7 +10,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractOperator::AbstractOperator(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range)
+    AbstractOperator::AbstractOperator(VectorSpace* domain, VectorSpace* range)
       : domain_(domain), range_(range)
     {}
 
@@ -49,32 +49,32 @@ namespace Algorithm
       throw CallOfUndefinedFunctionException("AbstractOperator::makeAdjointSolver");
     }
 
-    AbstractVectorSpace& AbstractOperator::domain()
+    VectorSpace& AbstractOperator::domain()
     {
       return *domain_;
     }
 
-    const AbstractVectorSpace& AbstractOperator::domain() const
+    const VectorSpace& AbstractOperator::domain() const
     {
       return *domain_;
     }
 
-    AbstractVectorSpace& AbstractOperator::range()
+    VectorSpace& AbstractOperator::range()
     {
       return *range_;
     }
 
-    const AbstractVectorSpace& AbstractOperator::range() const
+    const VectorSpace& AbstractOperator::range() const
     {
       return *range_;
     }
 
-    std::shared_ptr<AbstractVectorSpace> AbstractOperator::sharedDomain() const
+    VectorSpace* AbstractOperator::domain_ptr() const
     {
       return domain_;
     }
 
-    std::shared_ptr<AbstractVectorSpace> AbstractOperator::sharedRange() const
+    VectorSpace*  AbstractOperator::range_ptr() const
     {
       return range_;
     }

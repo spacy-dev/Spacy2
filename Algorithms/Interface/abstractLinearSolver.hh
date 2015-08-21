@@ -25,7 +25,7 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractLinearSolver(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range);
+      AbstractLinearSolver(VectorSpace* domain, VectorSpace* range);
 
       virtual ~AbstractLinearSolver();
 

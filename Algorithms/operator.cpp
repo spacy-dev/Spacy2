@@ -12,9 +12,7 @@
 namespace Algorithm
 {
   Operator::Operator(std::unique_ptr<Interface::AbstractOperator>&& implementation)
-    : Mixin::UniqueImpl<Interface::AbstractOperator>(std::move(implementation)),
-      domain_( impl().sharedDomain() ),
-      range_( impl().sharedRange() )
+    : Mixin::UniqueImpl<Interface::AbstractOperator>(std::move(implementation))
   {}
 
   Vector Operator::operator()(const Vector& x) const
@@ -37,23 +35,23 @@ namespace Algorithm
     return LinearOperator( impl().linearization(x.impl()) );
   }
 
-  VectorSpace& Operator::domain()
+  VectorSpace* Operator::domain_ptr() const
   {
-    return domain_;
+    return impl().domain_ptr();
   }
 
   const VectorSpace& Operator::domain() const
   {
-    return domain_;
+    return impl().domain();
   }
 
-  VectorSpace& Operator::range()
+  VectorSpace* Operator::range_ptr() const
   {
-    return range_;
+    return impl().range_ptr();
   }
 
   const VectorSpace& Operator::range() const
   {
-    return range_;
+    return impl().range();
   }
 }

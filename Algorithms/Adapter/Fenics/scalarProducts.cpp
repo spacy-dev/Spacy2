@@ -4,6 +4,7 @@
 #include "Util/castTo.hh"
 
 #include <memory>
+#include <iostream>
 
 namespace Algorithm
 {

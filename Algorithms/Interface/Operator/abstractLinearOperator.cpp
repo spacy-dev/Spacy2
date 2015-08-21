@@ -3,9 +3,11 @@
 #include "Interface/abstractLinearSolver.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
+#include "vectorSpace.hh"
+
 namespace Algorithm
 {
-  Interface::AbstractLinearOperator::AbstractLinearOperator(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range)
+  Interface::AbstractLinearOperator::AbstractLinearOperator(VectorSpace* domain, VectorSpace* range)
     : AbstractOperator(domain,range)
   {}
 

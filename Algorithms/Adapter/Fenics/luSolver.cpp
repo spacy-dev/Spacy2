@@ -1,6 +1,5 @@
 #include "luSolver.hh"
 
-#include "Interface/abstractVectorSpace.hh"
 #include "vector.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
@@ -32,7 +31,7 @@ namespace Algorithm
   namespace Fenics
   {
   LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-                             std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range)
+                     ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range)
     : Interface::AbstractLinearSolver(domain,range),
       solver_("umfpack"),
       productSpace_(productSpace)
@@ -56,8 +55,8 @@ namespace Algorithm
     solver_.solve( *y_, * x_ );
     auto y = range().element();
 
-    copy(*y_, *y);
-    return std::move(y);
+    copy(*y_, y.impl());
+    return clone(y.impl());
   }
 
   LUSolver* LUSolver::cloneImpl() const

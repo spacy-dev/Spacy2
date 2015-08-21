@@ -4,22 +4,21 @@
 #include <dolfin.h>
 
 #include "../../vector.hh"
+#include "../../vectorSpace.hh"
 #include "Interface/abstractVector.hh"
 #include "Util/Mixins/impl.hh"
 
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractVectorSpace; }
-
   namespace Fenics
   {
     class Vector : public Interface::AbstractVector, public Mixin::Impl<dolfin::Function>
     {
     public:
-      explicit Vector(const Interface::AbstractVectorSpace &space);
+      explicit Vector(const Algorithm::VectorSpace& space);
 
-      Vector(const dolfin::Function& f, const Interface::AbstractVectorSpace& space);
+      Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space);
 
       void copyTo(Interface::AbstractVector& y) const final override;
 

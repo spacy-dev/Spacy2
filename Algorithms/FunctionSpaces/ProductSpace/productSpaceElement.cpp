@@ -11,9 +11,10 @@
 
 #include <iostream>
 
+#include <boost/type_erasure/any_cast.hpp>
+
 namespace Algorithm
 {
-  using Interface::AbstractVectorSpace;
   using Interface::AbstractVector;
 
   std::vector<std::unique_ptr<AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<AbstractVector> >& variables)
@@ -39,19 +40,19 @@ namespace Algorithm
   }
 
 
-  ProductSpaceElement::ProductSpaceElement(const ProductSpace& space)
+  ProductSpaceElement::ProductSpaceElement(const VectorSpace& space)
     : AbstractVector(space)
   {
     if( isPrimalDualProductSpaceElement() )
     {
-      variables_.push_back(space.primalSubSpace().element());
-      variables_.push_back(space.dualSubSpace().element());
+      variables_.push_back(clone( boost::type_erasure::any_cast<const ProductSpace&>(space.impl()).primalSubSpace().element().impl()) );
+      variables_.push_back(clone( boost::type_erasure::any_cast<const ProductSpace&>(space.impl()).dualSubSpace().element().impl()) );
     }
     else
     {
-      const auto& spaces = space.subSpaces();
+      const auto& spaces = boost::type_erasure::any_cast<const ProductSpace&>(space.impl()).subSpaces();
       for (auto i=0u; i<spaces.size(); ++i)
-        variables_.push_back(spaces[i]->element());
+        variables_.push_back( clone( spaces[i]->element().impl() ) );
     }
   }
 
@@ -271,11 +272,11 @@ namespace Algorithm
   {
     if( isPrimalDualProductSpaceElement() )
     {
-      if( space().isPrimalSubSpaceId(i) )
-        return primalComponent().variable(space().primalIdMap(i));
+      if( productSpace().isPrimalSubSpaceId(i) )
+        return primalComponent().variable(productSpace().primalIdMap(i));
 
-      if( space().isDualSubSpaceId(i) )
-        return dualComponent().variable(space().dualIdMap(i));
+      if( productSpace().isDualSubSpaceId(i) )
+        return dualComponent().variable(productSpace().dualIdMap(i));
       assert(false);
     }
 
@@ -286,11 +287,11 @@ namespace Algorithm
   {
     if( isPrimalDualProductSpaceElement() )
     {
-      if( space().isPrimalSubSpaceId(i) )
-        return primalComponent().variable(space().primalIdMap(i));
+      if( productSpace().isPrimalSubSpaceId(i) )
+        return primalComponent().variable(productSpace().primalIdMap(i));
 
-      if( space().isDualSubSpaceId(i) )
-        return dualComponent().variable(space().dualIdMap(i));
+      if( productSpace().isDualSubSpaceId(i) )
+        return dualComponent().variable(productSpace().dualIdMap(i));
       assert(false);
     }
 
@@ -336,13 +337,13 @@ namespace Algorithm
     variables_[1] = std::move(y);
   }
 
-  const ProductSpace& ProductSpaceElement::space() const
+  const ProductSpace& ProductSpaceElement::productSpace() const
   {
-    return castTo<ProductSpace>(AbstractVector::space());
+    return boost::type_erasure::any_cast<const ProductSpace&>(space().impl());
   }
 
   bool ProductSpaceElement::isPrimalDualProductSpaceElement() const
   {
-    return space().isPrimalDualProductSpace();
+    return productSpace().isPrimalDualProductSpace();
   }
 }

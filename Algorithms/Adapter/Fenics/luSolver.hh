@@ -19,7 +19,7 @@ namespace Algorithm
     {
     public:
       LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-               std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range);
+               ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range);
 
 
       std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;

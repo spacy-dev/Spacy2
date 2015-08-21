@@ -10,16 +10,18 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   namespace Interface
   {
-    class AbstractVectorSpace;
-
     class AbstractVector :
         public Mixin::Cloneable<AbstractVector>,
         public Mixin::Eps
     {
     public:
-      explicit AbstractVector(const AbstractVectorSpace& space);
+      explicit AbstractVector(const ::Algorithm::VectorSpace& space);
 
       virtual ~AbstractVector() = default;
 
@@ -62,9 +64,9 @@ namespace Algorithm
       unsigned spaceIndex() const;
 
       /**
-       * @brief Access corresponding function space.
+       * @brief Access underlying function space.
        */
-      const AbstractVectorSpace& space() const;
+      const ::Algorithm::VectorSpace& space() const;
 
       /**
        * @brief Checks whether two function space elements coincide up to the maximal attainable accuracy.
@@ -83,7 +85,7 @@ namespace Algorithm
       virtual double applyAsDualTo(const AbstractVector& y) const = 0;
 
     private:
-      const AbstractVectorSpace& space_;
+      const ::Algorithm::VectorSpace& space_;
     };
 
     std::ostream& operator<<(std::ostream& os, const AbstractVector& element);

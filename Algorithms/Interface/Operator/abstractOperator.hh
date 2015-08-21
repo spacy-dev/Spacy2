@@ -7,10 +7,12 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
   namespace Interface
   {
     /// \cond
-    class AbstractVectorSpace;
     class AbstractVector;
     class AbstractLinearSolver;
     class LinearizedOperator;
@@ -29,7 +31,7 @@ namespace Algorithm
        * @param domain domain space \f$X\f$.
        * @param range range space \f$Y\f$.
        */
-      AbstractOperator(std::shared_ptr<AbstractVectorSpace> domain, std::shared_ptr<AbstractVectorSpace> range);
+      AbstractOperator(VectorSpace* domain, VectorSpace* range);
 
       virtual ~AbstractOperator();
 
@@ -49,22 +51,22 @@ namespace Algorithm
       std::unique_ptr<LinearizedOperator> linearization(const AbstractVector& x) const;
 
       /// Access domain space \f$X\f$.
-      AbstractVectorSpace& domain();
+      VectorSpace& domain();
 
       /// Access domain space \f$X\f$.
-      const AbstractVectorSpace& domain() const;
+      const VectorSpace& domain() const;
 
       /// Access shared domain space \f$X\f$.
-      std::shared_ptr<AbstractVectorSpace> sharedDomain() const;
+      VectorSpace* domain_ptr() const;
 
       /// Access range space \f$Y\f$.
-      AbstractVectorSpace& range();
+      VectorSpace& range();
 
       /// Access range space \f$Y\f$.
-      const AbstractVectorSpace& range() const;
+      const VectorSpace& range() const;
 
       /// Access shared range space \f$Y\f$.
-      std::shared_ptr<AbstractVectorSpace> sharedRange() const;
+      VectorSpace* range_ptr() const;
 
     protected:
       friend class LinearizedOperator;
@@ -76,7 +78,7 @@ namespace Algorithm
       virtual std::unique_ptr<AbstractLinearSolver> makeAdjointSolver() const;
 
     private:
-      std::shared_ptr<AbstractVectorSpace> domain_, range_;
+      VectorSpace *domain_, *range_;
     };
   }
 }

@@ -6,9 +6,12 @@
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "Util/castTo.hh"
+#include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 #include <utility>
 #include <iostream>
+
+#include <boost/type_erasure/any_cast.hpp>
 
 namespace Algorithm
 {
@@ -16,12 +19,12 @@ namespace Algorithm
 
   namespace Fenics
   {
-    Vector::Vector(const Interface::AbstractVectorSpace& space)
+    Vector::Vector(const ::Algorithm::VectorSpace& space)
       : AbstractVector(space),
-        Impl<dolfin::Function>( dolfin::Function( castTo<Fenics::VectorSpace>(space).impl() ) )
+        Impl<dolfin::Function>( dolfin::Function( boost::type_erasure::any_cast<const VectorSpace&>(space.impl()).impl() ) )
     {}
 
-    Vector::Vector(const dolfin::Function& f, const Interface::AbstractVectorSpace& space)
+    Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)
       : AbstractVector(space), Impl<dolfin::Function>( f )
     {}
 
@@ -80,12 +83,14 @@ namespace Algorithm
 
     double& Vector::coefficient(unsigned i)
     {
-      return *(impl().vector()->data() + i);
+      throw CallOfUndefinedFunctionException("Fenics::Vector::coefficient");
+//      return (*impl().vector())[i];
     }
 
     const double& Vector::coefficient(unsigned i) const
     {
-      return *(impl().vector()->data() + i);
+      throw CallOfUndefinedFunctionException("Fenics::Vector::coefficient");
+//      return (*impl().vector())[i];
     }
 
     unsigned Vector::size() const
@@ -130,12 +135,12 @@ namespace Algorithm
 
 //        if( verbose ) std::cout << "variables: " << x_.variables().size() << std::endl;
 //        for( auto i=0u; i<x_.variables().size(); ++i )
-          for( auto i : x_.space().primalSubSpaceIds() )
+          for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
+              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
 
               if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isPrimalEnabled())
@@ -143,12 +148,12 @@ namespace Algorithm
               else y.setitem(space.inverseDofmap(j),0.);
             }
           }
-          for( auto i : x_.space().dualSubSpaceIds() )
+          for( auto i : x_.productSpace().dualSubSpaceIds() )
           {
             const auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
+              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
 
               if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isDualEnabled())
@@ -184,12 +189,12 @@ namespace Algorithm
 
         auto& x_ = castTo<ProductSpaceElement>(x);
 
-          for( auto i : x_.space().primalSubSpaceIds() )
+          for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
+              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
 //              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
@@ -198,12 +203,12 @@ namespace Algorithm
             castTo<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
           }
 
-          for( auto i : x_.space().dualSubSpaceIds() )
+          for( auto i : x_.productSpace().dualSubSpaceIds() )
           {
             auto& xv_ = castTo<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = castTo<Fenics::VectorSpace>( xv_.space() );
+              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
 //              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
@@ -218,6 +223,5 @@ namespace Algorithm
 
       throw InvalidArgumentException("copy(const dolfin::GenericVector& y, Interface::AbstractVector& x)");
     }
-
   }
 }

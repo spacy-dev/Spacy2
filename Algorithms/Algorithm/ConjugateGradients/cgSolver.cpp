@@ -3,7 +3,7 @@
 namespace Algorithm
 {
   CGSolver::CGSolver(const CGSolver& other) :
-    AbstractLinearSolver(other.sharedDomain(),other.sharedRange()),
+    AbstractLinearSolver(other.domain_ptr(),other.range_ptr()),
     Mixin::AbsoluteAccuracy(other.absoluteAccuracy()),
     Mixin::RelativeAccuracy(other.relativeAccuracy()),
     Mixin::Eps(other.eps()),

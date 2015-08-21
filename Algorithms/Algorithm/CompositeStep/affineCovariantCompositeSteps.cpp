@@ -11,7 +11,6 @@
 #include "Algorithm/ConjugateGradients/triangularStateConstraintPreconditioner.hh"
 #include "Algorithm/dampingFactor.hh"
 
-#include "functional.hh"
 #include "vector.hh"
 #include "linearSolver.hh"
 

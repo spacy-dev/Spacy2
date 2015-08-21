@@ -8,16 +8,15 @@
 
 #include "Interface/abstractVector.hh"
 
-
-#include "Interface/abstractVectorSpace.hh"
-#include "../../vectorSpace.hh"
-#include "Util/create.hh"
-
 #include "Util/Mixins/impl.hh"
 #include "FunctionSpaces/ProductSpace/productSpace.hh"
+#include "scalarProducts.hh"
 
 namespace Algorithm
 {
+  class Vector;
+  class VectorSpace;
+
   namespace Interface
   {
     class AbstractVector;
@@ -25,7 +24,7 @@ namespace Algorithm
 
   namespace Fenics
   {
-    class VectorSpace : public Interface::AbstractVectorSpace , public Mixin::Impl<dolfin::FunctionSpace>
+    class VectorSpace : public Mixin::Impl<dolfin::FunctionSpace>
     {
     public:
       explicit VectorSpace(const dolfin::FunctionSpace& space);
@@ -36,8 +35,9 @@ namespace Algorithm
 
       size_t inverseDofmap(size_t i) const;
 
+      ::Algorithm::Vector element(const ::Algorithm::VectorSpace* space) const;
+
     private:
-      std::unique_ptr<Interface::AbstractVector> elementImpl() const;
       std::unordered_map<size_t,size_t> dofmap_;
       std::vector<size_t> inverseDofmap_;
     };
@@ -45,7 +45,11 @@ namespace Algorithm
     template <class FenicsSpace>
     auto makeFunctionSpace(const FenicsSpace& space)
     {
-      return createFromSharedImpl< ::Algorithm::VectorSpace, Fenics::VectorSpace >(space);
+      return ::Algorithm::VectorSpace{ Fenics::VectorSpace{space} , std::make_shared<l2ScalarProduct>() };
+//      ::Algorithm::VectorSpace vs(space);
+//      space.setScalarProduct( l2ScalarProduct() );
+//      return space;
+//      return createFromSharedImpl< ::Algorithm::VectorSpace, Fenics::VectorSpace >(space);
     }
 
     ::Algorithm::VectorSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds);

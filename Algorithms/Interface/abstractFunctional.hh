@@ -7,10 +7,13 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   namespace Interface
   {
     /// \cond
-    class AbstractVectorSpace;
     class AbstractVector;
     class AbstractLinearSolver;
     class Hessian;
@@ -26,7 +29,7 @@ namespace Algorithm
        * @brief Constructor.
        * @param domain Domain space \f$X\f$.
        */
-      AbstractFunctional(std::shared_ptr<AbstractVectorSpace> domain);
+      AbstractFunctional(VectorSpace* domain);
 
       virtual ~AbstractFunctional();
 
@@ -43,10 +46,10 @@ namespace Algorithm
       std::unique_ptr<Hessian> hessian(const AbstractVector& x) const;
 
       /// Access domain space \f$X\f$.
-      const AbstractVectorSpace& domain() const;
+      const VectorSpace& domain() const;
 
-      /// Access shared domain space \f$X\f$.
-      std::shared_ptr<AbstractVectorSpace> sharedDomain() const;
+      /// Access pointer to domain space \f$X\f$.
+      VectorSpace* domain_ptr() const;
 
     protected:
       virtual double d0(const AbstractVector&) const = 0;
@@ -57,7 +60,7 @@ namespace Algorithm
       virtual std::unique_ptr<AbstractLinearSolver> makeSolver() const;
 
     private:
-      std::shared_ptr<AbstractVectorSpace> domain_;
+      VectorSpace* domain_;
     };
   }
 }

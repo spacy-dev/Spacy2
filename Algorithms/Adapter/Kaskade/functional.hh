@@ -7,6 +7,7 @@
 #include "fem/istlinterface.hh"
 
 #include "../../functional.hh"
+#include "../../vectorSpace.hh"
 #include "Interface/abstractFunctional.hh"
 #include "Interface/hessian.hh"
 #include "Util/Mixins/disableAssembly.hh"
@@ -34,7 +35,7 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Functional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain_,
+      Functional(const FunctionalImpl& f, ::Algorithm::VectorSpace* domain_,
                  int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                  int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
         : AbstractFunctional(domain_),
@@ -44,14 +45,14 @@ namespace Algorithm
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      Functional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain,
+      Functional(const FunctionalImpl& f, ::Algorithm::VectorSpace& domain,
                  int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                  int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
-        : Functional(f,domain.sharedImpl(),rbegin,rend,cbegin,cend)
+        : Functional(f,&domain,rbegin,rend,cbegin,cend)
       {}
 
       Functional(const Functional& g)
-        : AbstractFunctional(g.sharedDomain()),
+        : AbstractFunctional(g.domain_ptr()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(g.assembler_),
@@ -62,7 +63,7 @@ namespace Algorithm
 
 
       Functional(const Functional& g, bool disableAssembly)
-        : AbstractFunctional(g.sharedDomain()),
+        : AbstractFunctional(g.domain_ptr()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(g.assembler_),
@@ -82,9 +83,9 @@ namespace Algorithm
 
         VectorImpl v( assembler_->rhs() );
 
-        auto y = domain().dualSpacePtr()->element();
-        copyFromCoefficientVector<VariableSetDescription>(v,*y);
-        return std::move(y);
+        auto y = domain().dualSpace_ptr()->element();
+        copyFromCoefficientVector<VariableSetDescription>(v,y.impl());
+        return clone(y.impl());
       }
 
       std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const override
@@ -99,11 +100,11 @@ namespace Algorithm
 
         A_->apply( dx_ , y_ );
 
-        auto y = domain().dualSpacePtr()->element();
-        copyFromCoefficientVector<VariableSetDescription>(y_,*y);
+        auto y = domain().dualSpace_ptr()->element();
+        copyFromCoefficientVector<VariableSetDescription>(y_,y.impl());
 //        std::cout << "result = " << (*y)(*y) << std::endl;
 
-        return std::move(y);
+        return clone(y.impl());
       }
 
     protected:
@@ -171,7 +172,7 @@ namespace Algorithm
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const override
       {
         assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<VariableSetDescription,VariableSetDescription> >( *A_ , spaces_, sharedDomain() , sharedDomain() );
+        return std::make_unique< DirectSolver<VariableSetDescription,VariableSetDescription> >( *A_ , spaces_, domain().dualSpace_ptr() , domain_ptr() );
       }
 
 
@@ -189,7 +190,7 @@ namespace Algorithm
 
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, std::shared_ptr<Interface::AbstractVectorSpace> domain,
+    auto makeFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace* domain,
                         int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                         int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {
@@ -197,7 +198,7 @@ namespace Algorithm
     }
 
     template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, const ::Algorithm::VectorSpace& domain,
+    auto makeFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace& domain,
                         int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                         int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
     {

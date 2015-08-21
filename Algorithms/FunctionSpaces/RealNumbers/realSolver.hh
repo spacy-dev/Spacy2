@@ -5,12 +5,14 @@
 
 namespace Algorithm
 {
-  class C0Operator;
+  /// \cond
+  class VectorSpace;
+  /// \endcond
 
   class RealSolver : public Interface::AbstractLinearSolver
   {
   public:
-    RealSolver(double value, std::shared_ptr<Interface::AbstractVectorSpace> domain, std::shared_ptr<Interface::AbstractVectorSpace> range);
+    RealSolver(double value, VectorSpace* domain, VectorSpace* range);
 
     std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const final override;
 

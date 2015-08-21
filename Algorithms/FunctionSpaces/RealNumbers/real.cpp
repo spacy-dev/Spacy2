@@ -1,6 +1,6 @@
 #include "real.hh"
 
-#include "Interface/abstractVectorSpace.hh"
+#include "vectorSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/castTo.hh"
 
@@ -9,14 +9,13 @@
 
 namespace Algorithm
 {
-  using Interface::AbstractVectorSpace;
   using Interface::AbstractVector;
 
-  Real::Real(double x, const AbstractVectorSpace &space)
+  Real::Real(double x, const VectorSpace &space)
     : AbstractVector(space), x_(x)
   {}
 
-  Real::Real(const Interface::AbstractVectorSpace& space)
+  Real::Real(const VectorSpace& space)
     : Real(0.,space)
   {}
 

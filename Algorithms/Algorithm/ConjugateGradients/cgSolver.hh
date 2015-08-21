@@ -27,7 +27,7 @@ namespace Algorithm
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
               class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
     CGSolver(Op1&& A_, Op2&& P_, const std::string& type )
-      : AbstractLinearSolver(A_.impl().sharedRange(),A_.impl().sharedDomain()),
+      : AbstractLinearSolver(A_.impl().range_ptr(),A_.impl().domain_ptr()),
         cg(std::forward<Op1>(A_),std::forward<Op2>(P_),type)
     {
       attachEps(&cg);

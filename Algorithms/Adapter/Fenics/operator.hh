@@ -10,8 +10,10 @@
 #include "Interface/Operator/linearizedOperator.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
+#include "../../vectorSpace.hh"
 #include "vectorSpace.hh"
 #include "../../operator.hh"
+#include "../../linearOperator.hh"
 #include "Util/create.hh"
 #include "Util/Mixins/disableAssembly.hh"
 
@@ -29,8 +31,7 @@ namespace Algorithm
     {
     public:
       Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                 std::shared_ptr<Interface::AbstractVectorSpace> range)
+               ::Algorithm::VectorSpace* domain, ::Algorithm::VectorSpace* range)
         : Interface::AbstractOperator( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
@@ -42,9 +43,8 @@ namespace Algorithm
       }
 
       Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 std::shared_ptr<dolfin::GenericMatrix> A,
-                 std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                 std::shared_ptr<Interface::AbstractVectorSpace> range)
+               std::shared_ptr<dolfin::GenericMatrix> A,
+               ::Algorithm::VectorSpace* domain, ::Algorithm::VectorSpace* range)
         : Interface::AbstractOperator( domain , range ),
           Mixin::DisableAssembly(true),
           F_( F.function_space(0) ),
@@ -58,8 +58,8 @@ namespace Algorithm
       }
 
       Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
-        : Operator(F,J,bcs,domain.sharedImpl(),range.sharedImpl())
+               ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range)
+        : Operator(F,J,bcs,&domain,&range)
       {}
 
       std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
@@ -68,8 +68,8 @@ namespace Algorithm
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         auto y = range().element();
-        copy(*b_,*y);
-        return std::move(y);
+        copy(*b_,y.impl());
+        return clone(y.impl());
       }
 
       std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector &x, const Interface::AbstractVector &dx) const final override
@@ -83,9 +83,9 @@ namespace Algorithm
         A_->mult(*y_, *Ax);
 
         auto result = range().element();
-        copy(*Ax,*result);
+        copy(*Ax,result.impl());
 
-        return std::move(result);
+        return clone(result.impl());
       }
 
     private:
@@ -138,8 +138,8 @@ namespace Algorithm
 
       Operator* cloneImpl() const
       {
-        if( assemblyIsDisabled() ) return new Operator(F_,J_,bcs_,A_,sharedDomain(),sharedRange());
-        return new Operator(F_,J_,bcs_,sharedDomain(),sharedRange());
+        if( assemblyIsDisabled() ) return new Operator(F_,J_,bcs_,A_,domain_ptr(),range_ptr());
+        return new Operator(F_,J_,bcs_,domain_ptr(),range_ptr());
       }
 
       std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
@@ -148,13 +148,13 @@ namespace Algorithm
         assembleGradient(x);
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 //        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return std::make_unique<Interface::LinearizedOperator>(std::make_unique<Operator>(F_,J_,bcs_,A_,sharedDomain(),sharedRange()),x);
+        return std::make_unique<Interface::LinearizedOperator>(std::make_unique<Operator>(F_,J_,bcs_,A_,domain_ptr(),range_ptr()),x);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
         assert (A_ != nullptr);
-        return std::make_unique<LUSolver>( A_ , *F_.function_space(0) , sharedRange() , sharedDomain() );
+        return std::make_unique<LUSolver>( A_ , *F_.function_space(0) , range_ptr() , domain_ptr() );
       }
 
       mutable ResidualForm F_;
@@ -173,7 +173,7 @@ namespace Algorithm
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                        const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
+                      ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , domain , range );
     }
@@ -183,7 +183,7 @@ namespace Algorithm
      * @return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const ::Algorithm::VectorSpace& space)
+    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, ::Algorithm::VectorSpace& space)
     {
       return createFromUniqueImpl< ::Algorithm::Operator , ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm> >( F , J , bcs , space , space );
     }

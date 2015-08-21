@@ -5,11 +5,13 @@
 #include "productSpaceElement.hh"
 #include "productSpaceProduct.hh"
 
+#include "../../vector.hh"
+
 #include <algorithm>
+#include <boost/type_erasure/any_cast.hpp>
 
 namespace Algorithm
 {
-  using Interface::AbstractVectorSpace;
   using Interface::AbstractVector;
 
   namespace
@@ -24,10 +26,10 @@ namespace Algorithm
     }
 
 
-    std::vector<std::shared_ptr<AbstractVectorSpace> > extractSubSpaces(const std::vector<std::shared_ptr<AbstractVectorSpace> >& spaces,
+    std::vector<std::shared_ptr<VectorSpace> > extractSubSpaces(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                                                         const std::vector<unsigned>& subSpaceIds)
     {
-      std::vector< std::shared_ptr<AbstractVectorSpace> > subSpaces;
+      std::vector< std::shared_ptr<VectorSpace> > subSpaces;
       for( unsigned i : subSpaceIds )
         subSpaces.push_back( spaces[i] );
       return subSpaces;
@@ -35,11 +37,10 @@ namespace Algorithm
   }
 
 
-  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractVectorSpace> >& spaces,
+  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                              const std::vector<unsigned>& primalSubSpaceIds,
                              const std::vector<unsigned>& dualSubSpaceIds)
-    : AbstractVectorSpace(std::make_shared<ProductSpaceProduct>()),
-      primalSubSpaceIds_(primalSubSpaceIds),
+    : primalSubSpaceIds_(primalSubSpaceIds),
       dualSubSpaceIds_(dualSubSpaceIds),
       isPrimalDualProductSpace_(true)
   {
@@ -48,14 +49,13 @@ namespace Algorithm
     for( auto i = 0u; i< dualSubSpaceIds_.size(); ++i )
       dualMap_[dualSubSpaceIds[i]] = i;
 
-    spaces_ = std::vector<std::shared_ptr<AbstractVectorSpace> >(2,nullptr);
-    spaces_[0] = std::make_shared<ProductSpace>(extractSubSpaces(spaces,primalSubSpaceIds_));
-    spaces_[1] = std::make_shared<ProductSpace>(extractSubSpaces(spaces,dualSubSpaceIds_));
+    spaces_ = std::vector<std::shared_ptr<VectorSpace> >(2,nullptr);
+    spaces_[0] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,primalSubSpaceIds_) ) , std::make_shared<ProductSpaceProduct>() );
+    spaces_[1] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,dualSubSpaceIds_) ) , std::make_shared<ProductSpaceProduct>() );
   }
 
-  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<AbstractVectorSpace> >& spaces)
-    : AbstractVectorSpace(std::make_shared<ProductSpaceProduct>()),
-      spaces_(spaces),
+  ProductSpace::ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
+    : spaces_(spaces),
       primalSubSpaceIds_(extractSpaceIds(spaces))
   {
     for(auto i=0u; i<primalSubSpaceIds_.size(); ++i)
@@ -63,71 +63,71 @@ namespace Algorithm
   }
 
 
-  std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > ProductSpace::subSpaces() const
+  std::vector<std::shared_ptr<VectorSpace> > ProductSpace::subSpaces() const
   {
     return spaces_;
   }
 
-  const Interface::AbstractVectorSpace& ProductSpace::subSpace(unsigned i) const
+  const VectorSpace& ProductSpace::subSpace(unsigned i) const
   {
     if( isPrimalDualProductSpace() )
     {
-      if( isPrimalSubSpaceId(i) ) return castTo<ProductSpace>(*spaces_[0]).subSpace(primalMap_.find(i)->second);
-      if( isDualSubSpaceId(i) ) return castTo<ProductSpace>(*spaces_[0]).subSpace(dualMap_.find(i)->second);
+      if( isPrimalSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[0]->impl()).subSpace(primalMap_.find(i)->second);
+      if( isDualSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[1]->impl()).subSpace(dualMap_.find(i)->second);
     }
     return *spaces_[i];
   }
 
-  std::shared_ptr<Interface::AbstractVectorSpace> ProductSpace::sharedSubSpace(unsigned i) const
+  std::shared_ptr<VectorSpace> ProductSpace::sharedSubSpace(unsigned i) const
   {
     if( isPrimalDualProductSpace() )
     {
-      if( isPrimalSubSpaceId(i) ) return castTo<ProductSpace>(*spaces_[0]).sharedSubSpace(primalMap_.find(i)->second);
-      if( isDualSubSpaceId(i) ) return castTo<ProductSpace>(*spaces_[0]).sharedSubSpace(dualMap_.find(i)->second);
+      if( isPrimalSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[0]->impl()).sharedSubSpace(primalMap_.find(i)->second);
+      if( isDualSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[1]->impl()).sharedSubSpace(dualMap_.find(i)->second);
     }
     return spaces_[i];
   }
 
 
-  std::unique_ptr<AbstractVector> ProductSpace::elementImpl() const
+  Vector ProductSpace::element(const VectorSpace* space) const
   {
-    return std::make_unique<ProductSpaceElement>(*this);
+    return Vector( std::make_unique<ProductSpaceElement>(*space) );
   }
 
-  ProductSpace& ProductSpace::primalSubSpace()
+  VectorSpace& ProductSpace::primalSubSpace()
   {
     assert( isPrimalDualProductSpace() );
-    return castTo<ProductSpace>(*spaces_[0]);
+    return *spaces_[0];
   }
 
-  const ProductSpace& ProductSpace::primalSubSpace() const
+  const VectorSpace& ProductSpace::primalSubSpace() const
   {
     assert( isPrimalDualProductSpace() );
-    return castTo<ProductSpace>(*spaces_[0]);
+    return *spaces_[0];
   }
 
-  ProductSpace& ProductSpace::dualSubSpace()
+  VectorSpace& ProductSpace::dualSubSpace()
   {
     assert( isPrimalDualProductSpace() );
-    return castTo<ProductSpace>(*spaces_[1]);
+    return *spaces_[1];
   }
 
-  const ProductSpace& ProductSpace::dualSubSpace() const
+  const VectorSpace& ProductSpace::dualSubSpace() const
   {
     assert( isPrimalDualProductSpace() );
-    return castTo<ProductSpace>(*spaces_[1]);
+    return *spaces_[1];
   }
 
-  std::shared_ptr<ProductSpace> ProductSpace::sharedPrimalSubSpace() const
+  std::shared_ptr<VectorSpace> ProductSpace::sharedPrimalSubSpace() const
   {
     assert( isPrimalDualProductSpace() );
-    return std::static_pointer_cast<ProductSpace>(spaces_[0]);
+    return spaces_[0];
   }
 
-  std::shared_ptr<ProductSpace> ProductSpace::sharedDualSubSpace() const
+  std::shared_ptr<VectorSpace> ProductSpace::sharedDualSubSpace() const
   {
     assert( isPrimalDualProductSpace() );
-    return std::static_pointer_cast<ProductSpace>(spaces_[1]);
+    return spaces_[1];
   }
 
 
@@ -167,16 +167,17 @@ namespace Algorithm
   }
 
 
-  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces)
+  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
   {
     return makeProductSpace( spaces , extractSpaceIds(spaces) );
   }
 
-  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces,
+  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                 const std::vector<unsigned>& primalSubSpaceIds,
                                 const std::vector<unsigned>& dualSubSpaceIds)
   {
-    return createFromSharedImpl< ::Algorithm::VectorSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
+    return VectorSpace( ProductSpace( spaces , primalSubSpaceIds , dualSubSpaceIds ) , std::make_shared<ProductSpaceProduct>() );
+//    return createFromSharedImpl< ::Algorithm::VectorSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
   }
 
 }

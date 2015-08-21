@@ -24,7 +24,7 @@ namespace Algorithm
     }
 
     auto result = 0.;
-    for( auto i : x_.space().primalSubSpaceIds() )
+    for( auto i : x_.productSpace().primalSubSpaceIds() )
       result += x_.variable(i)( y_.variable(i) );
     return result;
   }

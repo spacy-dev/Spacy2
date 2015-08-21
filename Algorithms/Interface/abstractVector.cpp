@@ -1,7 +1,8 @@
 #include "abstractVector.hh"
 
 #include "abstractScalarProduct.hh"
-#include "abstractVectorSpace.hh"
+
+#include "vectorSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 
@@ -9,7 +10,7 @@ namespace Algorithm
 {
   namespace Interface
   {
-    AbstractVector::AbstractVector(const AbstractVectorSpace& space)
+    AbstractVector::AbstractVector(const ::Algorithm::VectorSpace& space)
       : space_(space)
     {}
 
@@ -18,7 +19,7 @@ namespace Algorithm
       return space_.index();
     }
 
-    const AbstractVectorSpace& AbstractVector::space() const
+    const ::Algorithm::VectorSpace& AbstractVector::space() const
     {
       return space_;
     }
@@ -61,7 +62,7 @@ namespace Algorithm
       if( x.space().isHilbertSpace() && x.spaceIndex() == y.spaceIndex() )
       {
         auto sp = x.space().scalarProduct();
-        return sp->operator ()(x,y);
+        return sp(Vector(clone(x)),Vector(clone(y)));
       }
 
       throw InvalidArgumentException("operator*(const AbstractVector&,const AbstractVector&)");

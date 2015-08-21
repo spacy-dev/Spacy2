@@ -7,6 +7,7 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
+#include "../../vectorSpace.hh"
 #include "vectorSpace.hh"
 #include "../../operator.hh"
 #include "Interface/Operator/linearizedOperator.hh"
@@ -39,7 +40,7 @@ namespace Algorithm
 
     public:
       Operator(const OperatorImpl& f,
-               std::shared_ptr<Interface::AbstractVectorSpace> domain_, std::shared_ptr<Interface::AbstractVectorSpace> range_,
+               ::Algorithm::VectorSpace* domain_, ::Algorithm::VectorSpace* range_,
                int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
         : AbstractOperator(domain_,range_),
@@ -49,14 +50,14 @@ namespace Algorithm
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      Operator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range,
+      Operator(const OperatorImpl& f, ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range,
                int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
-        : Operator(f,domain.sharedImpl(),range.sharedImpl(),rbegin,rend,cbegin,cend)
+        : Operator(f,&domain,&range,rbegin,rend,cbegin,cend)
       {}
 
       Operator(const Operator& g)
-        : AbstractOperator(g.sharedDomain(),g.sharedRange()),
+        : AbstractOperator(g.domain_ptr(),g.range_ptr()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -67,7 +68,7 @@ namespace Algorithm
 
 
       Operator(const Operator& g, bool disableAssembly)
-        : AbstractOperator(g.sharedDomain(),g.sharedRange()),
+        : AbstractOperator(g.domain_ptr(),g.range_ptr()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -81,8 +82,8 @@ namespace Algorithm
         VectorImpl v( assembler_.rhs() );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(v,*y);
-        return std::move(y);
+        copyFromCoefficientVector<TestVariableSetDescription>(v,y.impl());
+        return clone(y.impl());
       }
 
       std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
@@ -96,9 +97,9 @@ namespace Algorithm
         A_->apply( dx_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,y.impl());
 
-        return std::move(y);
+        return clone(y.impl());
       }
 
     protected:
@@ -147,7 +148,7 @@ namespace Algorithm
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
       {
         assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( *A_ , spaces_, sharedRange() , sharedDomain() );
+        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( *A_ , spaces_, range_ptr() , domain_ptr() );
       }
 
       OperatorImpl f_;
@@ -163,8 +164,8 @@ namespace Algorithm
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
-                      std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                      std::shared_ptr<Interface::AbstractVectorSpace> range,
+                      ::Algorithm::VectorSpace* domain,
+                      ::Algorithm::VectorSpace* range,
                       int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                       int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {
@@ -173,8 +174,8 @@ namespace Algorithm
 
     template <class OperatorImpl>
     auto makeOperator(const OperatorImpl& f,
-                      const ::Algorithm::VectorSpace& domain,
-                      const ::Algorithm::VectorSpace& range,
+                      ::Algorithm::VectorSpace& domain,
+                      ::Algorithm::VectorSpace& range,
                       int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                       int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {

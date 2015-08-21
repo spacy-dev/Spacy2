@@ -5,11 +5,14 @@
 #include <boost/type_erasure/any.hpp>
 #include <boost/type_erasure/callable.hpp>
 
-#include "vector.hh"
 #include "Util/conceptBase.hh"
 
 namespace Algorithm
 {
+  /// \cond
+  class Vector;
+  /// \endcond
+
   using NormConcept = boost::type_erasure::callable<double(const Vector&), const boost::type_erasure::_self>;
 
   /**

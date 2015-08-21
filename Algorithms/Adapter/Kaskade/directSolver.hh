@@ -1,7 +1,6 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 #define ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 
-#include "Interface/abstractVectorSpace.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Interface/abstractVector.hh"
 #include "Util/Mixins/impl.hh"
@@ -26,7 +25,7 @@ namespace Algorithm
     public:
       template <class KaskadeOperator>
       DirectSolver(const KaskadeOperator& A, const Spaces& spaces,
-               std::shared_ptr<Interface::AbstractVectorSpace> domain , std::shared_ptr<Interface::AbstractVectorSpace> range)
+               ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range)
         : Interface::AbstractLinearSolver(domain,range),
           Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >( ::Kaskade::directInverseOperator(A, DirectType::UMFPACK3264) ),
           spaces_(spaces)
@@ -42,9 +41,9 @@ namespace Algorithm
         this->impl().apply( /*castTo< Vector<Description> >(x).impl()*/x_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableDescription>(y_,*y);
+        copyFromCoefficientVector<TestVariableDescription>(y_,y.impl());
 
-        return std::move(y);
+        return clone(y.impl());
       }
 
     private:

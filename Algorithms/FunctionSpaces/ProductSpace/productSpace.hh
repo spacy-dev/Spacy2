@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "vectorSpace.hh"
-#include "Interface/abstractVectorSpace.hh"
 #include "Util/create.hh"
 
 namespace Algorithm
@@ -20,13 +19,13 @@ namespace Algorithm
   /// \endcond
 
 
-  class ProductSpace : public Interface::AbstractVectorSpace
+  class ProductSpace
   {
   public:
     /**
      * @brief Construct product space \f$ X = \{ Y_0 , Y_1 , \ldots \} \f$.
      */
-    explicit ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces);
+    explicit ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
 
     /**
      * @brief Construct product space \f$ X = \{ \{ Y_0 , Y_1 , \ldots \} , \{ Z_0 , \ldots \} \}\f$.
@@ -38,27 +37,27 @@ namespace Algorithm
      * @param primalSubSpaceIds indices of spaces associated with primal variables
      * @param dualSubSpaceIds indices of spaces associated with dual variables
      */
-    ProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces,
+    ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                  const std::vector<unsigned>& primalSubSpaceIds,
                  const std::vector<unsigned>& dualSubSpaceIds);
 
-    std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > subSpaces() const;
+    std::vector<std::shared_ptr<VectorSpace> > subSpaces() const;
 
-    const Interface::AbstractVectorSpace& subSpace(unsigned i) const;
+    const VectorSpace& subSpace(unsigned i) const;
 
-    std::shared_ptr<Interface::AbstractVectorSpace> sharedSubSpace(unsigned i) const;
+    std::shared_ptr<VectorSpace> sharedSubSpace(unsigned i) const;
 
-    ProductSpace& primalSubSpace();
+    VectorSpace& primalSubSpace();
 
-    const ProductSpace& primalSubSpace() const;
+    const VectorSpace& primalSubSpace() const;
 
-    ProductSpace& dualSubSpace();
+    VectorSpace& dualSubSpace();
 
-    const ProductSpace& dualSubSpace() const;
+    const VectorSpace& dualSubSpace() const;
 
-    std::shared_ptr<ProductSpace> sharedPrimalSubSpace() const;
+    std::shared_ptr<VectorSpace> sharedPrimalSubSpace() const;
 
-    std::shared_ptr<ProductSpace> sharedDualSubSpace() const;
+    std::shared_ptr<VectorSpace> sharedDualSubSpace() const;
 
     const std::vector<unsigned>& primalSubSpaceIds() const;
 
@@ -74,10 +73,11 @@ namespace Algorithm
 
     bool isPrimalDualProductSpace() const;
 
-  private:
-    std::unique_ptr<Interface::AbstractVector> elementImpl() const override;
+    Vector element(const VectorSpace* space) const;
 
-    std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > spaces_;
+  private:
+
+    std::vector<std::shared_ptr<VectorSpace> > spaces_;
     std::vector<unsigned> primalSubSpaceIds_, dualSubSpaceIds_;
     std::map<unsigned,unsigned> primalMap_, dualMap_;
     bool isPrimalDualProductSpace_ = false;
@@ -93,16 +93,16 @@ namespace Algorithm
     template <>
     struct CreateSpaceVectorImpl<>
     {
-      static std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > apply()
+      static std::vector<std::shared_ptr<VectorSpace> > apply()
       {
-        return std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >();
+        return std::vector<std::shared_ptr<VectorSpace> >();
       }
     };
 
     template <class Space, class... Spaces>
     struct CreateSpaceVectorImpl<Space,Spaces...>
     {
-      static std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > apply()
+      static std::vector<std::shared_ptr<VectorSpace> > apply()
       {
         auto spaces = CreateSpaceVectorImpl<Spaces...>::apply();
         spaces.push_back(std::make_shared<Space>());
@@ -117,9 +117,9 @@ namespace Algorithm
   }
 
 
-  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces);
+  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
 
-  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<Interface::AbstractVectorSpace> >& spaces,
+  VectorSpace makeProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                const std::vector<unsigned>& primalSubSpaceIds,
                                const std::vector<unsigned>& dualSubSpaceIds = {});
 }

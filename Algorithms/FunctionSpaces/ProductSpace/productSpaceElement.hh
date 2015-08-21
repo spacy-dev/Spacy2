@@ -24,7 +24,7 @@ namespace Algorithm
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit ProductSpaceElement(const ProductSpace& space);
+    explicit ProductSpaceElement(const VectorSpace& space);
 
     ProductSpaceElement(const ProductSpaceElement& other);
 
@@ -76,7 +76,7 @@ namespace Algorithm
 
     void setDualComponent(std::unique_ptr<Interface::AbstractVector>&& y);
 
-    const ProductSpace& space() const;
+    const ProductSpace& productSpace() const;
 
     bool isPrimalDualProductSpaceElement() const;
 

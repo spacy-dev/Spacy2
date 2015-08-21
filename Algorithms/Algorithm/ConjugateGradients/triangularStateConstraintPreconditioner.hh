@@ -12,6 +12,10 @@
 
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   class TriangularStateConstraintPreconditioner
       : public Interface::AbstractOperator, public Mixin::AdjointIndex, public Mixin::ControlIndex, public Mixin::StateIndex
   {
@@ -21,8 +25,8 @@ namespace Algorithm
                                             std::shared_ptr<Interface::AbstractLinearSolver> adjointSolver,
                                             std::unique_ptr<Interface::AbstractOperator>&& B,
                                             std::unique_ptr<Interface::AbstractOperator>&& BT,
-                                            std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                                            std::shared_ptr<Interface::AbstractVectorSpace> range);
+                                            VectorSpace* domain,
+                                            VectorSpace* range);
 
     std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
 

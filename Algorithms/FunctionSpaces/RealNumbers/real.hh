@@ -7,7 +7,9 @@
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractVectorSpace; }
+  /// \cond
+  class VectorSpace;
+  /// \endcond
 
   /// Real number.
   class Real : public Interface::AbstractVector
@@ -18,13 +20,13 @@ namespace Algorithm
      * @param x initial value
      * @param space associated function space (RealSpace)
      */
-    Real(double x, const Interface::AbstractVectorSpace& space);
+    Real(double x, const VectorSpace& space);
 
     /**
      * @brief Construct real number with initial value 0.
      * @param space associated function space (RealSpace)
      */
-    explicit Real(const Interface::AbstractVectorSpace& space);
+    explicit Real(const VectorSpace& space);
 
     /**
      * @brief copy data to y.

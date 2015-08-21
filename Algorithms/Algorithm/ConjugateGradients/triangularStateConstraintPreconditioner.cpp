@@ -1,7 +1,8 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "Interface/abstractVectorSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "vectorSpace.hh"
+
 #include <utility>
 #include <iostream>
 namespace Algorithm
@@ -11,8 +12,8 @@ namespace Algorithm
                                                                                    std::shared_ptr<Interface::AbstractLinearSolver> adjointSolver,
                                                                                    std::unique_ptr<AbstractOperator>&& B,
                                                                                    std::unique_ptr<AbstractOperator>&& BT,
-                                                                                   std::shared_ptr<Interface::AbstractVectorSpace> domain,
-                                                                                   std::shared_ptr<Interface::AbstractVectorSpace> range)
+                                                                                   VectorSpace* domain,
+                                                                                   VectorSpace* range)
     : AbstractOperator(domain,range),
       stateSolver_(stateSolver), controlSolver_(controlSolver), adjointSolver_(adjointSolver),
       B_(std::move(B)), BT_(std::move(BT))
@@ -40,14 +41,14 @@ namespace Algorithm
   {
     auto y = range().element();
 
-    castTo<ProductSpaceElement>(*y).variable(stateIndex()) = *(*stateSolver_)( castTo<ProductSpaceElement>(rhs).variable(adjointIndex()) );
-    return std::move(y);
+    castTo<ProductSpaceElement>(y.impl()).variable(stateIndex()) = *(*stateSolver_)( castTo<ProductSpaceElement>(rhs).variable(adjointIndex()) );
+    return clone(y.impl());
   }
 
 
   TriangularStateConstraintPreconditioner* TriangularStateConstraintPreconditioner::cloneImpl() const
   {
-    auto result = new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(BT_) , sharedDomain() , sharedRange() );
+    auto result = new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , clone(B_) , clone(BT_) , domain_ptr() , range_ptr() );
     result->setStateIndex(stateIndex());
     result->setControlIndex(controlIndex());
     result->setAdjointIndex(adjointIndex());

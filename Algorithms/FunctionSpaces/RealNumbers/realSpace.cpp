@@ -3,13 +3,18 @@
 #include "real.hh"
 #include "realProduct.hh"
 
+#include "vector.hh"
+#include "vectorSpace.hh"
+
 namespace Algorithm
 {
-  RealSpace::RealSpace() : Interface::AbstractVectorSpace(std::make_shared<RealProduct>())
-  {}
-
-  std::unique_ptr<Interface::AbstractVector> RealSpace::elementImpl() const
+  Vector RealSpace::element(const VectorSpace*space) const
   {
-    return std::make_unique<Real>(*this);
+    return Vector( std::make_unique<Real>(*space) );
+  }
+
+  VectorSpace makeRealSpace()
+  {
+    return VectorSpace( RealSpace() , std::make_shared<RealProduct>() );
   }
 }

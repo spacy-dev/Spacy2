@@ -1,57 +1,109 @@
 #include "vectorSpace.hh"
 
-#include "Interface/abstractVectorSpace.hh"
-#include "vector.hh"
+#include "hilbertSpaceNorm.hh"
 
 #include <utility>
 
 namespace Algorithm
 {
-  VectorSpace::VectorSpace(std::shared_ptr<Interface::AbstractVectorSpace> implementation)
-    : Mixin::SharedImpl<Interface::AbstractVectorSpace>(implementation)
+//  VectorSpace::VectorSpace(VectorSpaceImpl impl, Norm norm)
+//    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)),
+//      norm_(norm)
+//  {
+////    if( impl().isHilbertSpace() )
+////      impl().setDualSpace(sharedImpl());
+//  }
+
+  VectorSpace::VectorSpace(const VectorSpaceImpl& impl, std::shared_ptr<Interface::AbstractScalarProduct> sp)
+    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)) ,
+      norm_(HilbertSpaceNorm(sp)),
+      sp_(std::make_shared<ScalarProduct>(sp))
   {
-    if( impl().isHilbertSpace() )
-      impl().setDualSpace(sharedImpl());
+    setDualSpace(this);
+    addDualSpace(*this);
+    addPrimalSpace(*this);
+    std::cout << "create space: " << index_ << std::endl;
   }
 
-  void VectorSpace::setNorm(const Norm& norm)
+  void VectorSpace::setNorm(Algorithm::Norm norm)
   {
-    impl().setNorm(norm);
+    norm_ = std::move(norm);
   }
 
-  Norm VectorSpace::norm() const
+  const Norm& VectorSpace::norm() const
   {
-    return impl().norm();
+    return norm_;
   }
 
   Vector VectorSpace::element() const
   {
-    return Vector(impl().element());
+    return impl().element(this);
   }
 
   unsigned VectorSpace::index() const
   {
-    return impl().index();
+    return index_;
   }
 
-  void VectorSpace::setScalarProduct(const ScalarProduct& sp)
+  void VectorSpace::setScalarProduct(Algorithm::ScalarProduct sp)
   {
-    impl().setScalarProduct( sp.sharedImpl() );
+    sp_ = std::make_shared<ScalarProduct>(sp);
+    setNorm( HilbertSpaceNorm(sp_->sharedImpl()) );
   }
 
-  void VectorSpace::setScalarProduct(ScalarProduct&& sp)
+  const ScalarProduct& VectorSpace::scalarProduct() const
   {
-    impl().setScalarProduct( std::move( sp.sharedImpl() ) );
+    return *sp_;
   }
 
-  ScalarProduct VectorSpace::scalarProduct() const
+
+  void VectorSpace::addPrimalSpace(const VectorSpace& Y)
   {
-    return ScalarProduct( impl().scalarProduct() );
+    primalSpaces_.push_back(Y.index());
   }
 
+  void VectorSpace::addDualSpace(const VectorSpace& Y)
+  {
+    dualSpaces_.push_back(Y.index());
+  }
+
+  bool VectorSpace::isPrimalWRT(const VectorSpace& Y) const
+  {
+    for( auto index : dualSpaces_ )
+      if( index == Y.index() )
+        return true;
+
+    return false;
+  }
+
+  bool VectorSpace::isDualWRT(const VectorSpace& Y) const
+  {
+    for( auto index : primalSpaces_ )
+      if( index == Y.index() )
+        return true;
+
+    return false;
+  }
+
+  VectorSpace* VectorSpace::dualSpace_ptr() const
+  {
+    assert( dualSpace_ != nullptr );
+    return dualSpace_;
+  }
+
+  void VectorSpace::setDualSpace(VectorSpace* Y)
+  {
+    dualSpace_ = Y;
+  }
+
+  bool VectorSpace::isHilbertSpace() const
+  {
+    return this == dualSpace_ptr();
+  }
 
   void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace)
   {
-    Interface::makePrimalDual( primalSpace.impl() , dualSpace.impl() );
+    primalSpace.addDualSpace( dualSpace );
+    dualSpace.addPrimalSpace( primalSpace );
   }
 }

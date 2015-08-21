@@ -1,17 +1,19 @@
 #include "abstractFunctional.hh"
 
-#include "abstractVectorSpace.hh"
 #include "abstractLinearSolver.hh"
 #include "hessian.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
+#include "Interface/abstractVector.hh"
+#include "vectorSpace.hh"
+
 namespace Algorithm
 {
   namespace Interface
   {
-    AbstractFunctional::AbstractFunctional(std::shared_ptr<AbstractVectorSpace> domain)
+    AbstractFunctional::AbstractFunctional(VectorSpace* domain)
       : domain_(domain)
     {}
 
@@ -49,12 +51,12 @@ namespace Algorithm
       throw CallOfUndefinedFunctionException("AbstractC2Functional::makeSolver");
     }
 
-    const AbstractVectorSpace& AbstractFunctional::domain() const
+    const VectorSpace& AbstractFunctional::domain() const
     {
       return *domain_;
     }
 
-    std::shared_ptr<AbstractVectorSpace> AbstractFunctional::sharedDomain() const
+    VectorSpace* AbstractFunctional::domain_ptr() const
     {
       return domain_;
     }
