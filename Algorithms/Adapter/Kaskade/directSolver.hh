@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 #define ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 
+#include "vector.hh"
 #include "Interface/abstractLinearSolver.hh"
-#include "Interface/abstractVector.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/castTo.hh"
 
@@ -32,7 +32,7 @@ namespace Algorithm
       {}
 
 
-      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override
       {
         Range y_(TestVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
@@ -41,9 +41,9 @@ namespace Algorithm
         this->impl().apply( /*castTo< Vector<Description> >(x).impl()*/x_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableDescription>(y_,y.impl());
+        copyFromCoefficientVector<TestVariableDescription>(y_,y);
 
-        return clone(y.impl());
+        return y;
       }
 
     private:

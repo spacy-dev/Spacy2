@@ -5,19 +5,19 @@
 #include <vector>
 
 #include "vector.hh"
-#include "Interface/abstractVector.hh"
+#include "Interface/vectorBase.hh"
 #include "Util/Mixins/primalDualSwitch.hh"
 
 namespace Algorithm
 {
+  /// \cond
   class ProductSpace;
-
-  std::vector<std::unique_ptr<Interface::AbstractVector> > cloneVariables(const std::vector<std::unique_ptr<Interface::AbstractVector> >& variables);
+  /// \endcond
 
   /**
    * @brief Product space element.
    */
-  class ProductSpaceElement : public Interface::AbstractVector , public Mixin::PrimalDualSwitch
+  class ProductSpaceElement : public VectorBase<ProductSpaceElement>, public Mixin::PrimalDualSwitch
   {
   public:
     /**
@@ -28,65 +28,67 @@ namespace Algorithm
 
     ProductSpaceElement(const ProductSpaceElement& other);
 
-    void copyTo(Interface::AbstractVector &) const final override;
+//    void copyTo(Vector &) const;
 
     /// Print to os.
-    void print(std::ostream& os) const final override;
+//    void print(std::ostream& os) const;
 
     /// Assignment.
-    ProductSpaceElement& operator=(const Interface::AbstractVector& y) final override;
+    ProductSpaceElement& operator=(const ProductSpaceElement& y);
 
     /// In-place summation.
-    ProductSpaceElement& operator+=(const Interface::AbstractVector& y) final override;
+    ProductSpaceElement& operator+=(const ProductSpaceElement& y);
 
     /// Axpy-operation \f$x = x + ay\f$.
-    AbstractVector& axpy(double a, const AbstractVector& y) final override;
+//    AbstractVector& axpy(double a, const AbstractVector& y);
 
     /// In-place subtraction.
-    ProductSpaceElement& operator-=(const Interface::AbstractVector& y) final override;
+    ProductSpaceElement& operator-=(const ProductSpaceElement& y);
 
     /// In-place multiplication.
-    ProductSpaceElement& operator*=(double) final override;
+    ProductSpaceElement& operator*=(double);
 
     /// Get -x.
-    std::unique_ptr<Interface::AbstractVector> operator- () const final override;
+    ProductSpaceElement operator- () const;
+
+    bool operator==(const ProductSpaceElement& y) const;
 
     /// Access value.
-    double& coefficient(unsigned) final override;
+    double& coefficient(unsigned);
 
     /// Access value.
-    const double& coefficient(unsigned) const final override;
+    const double& coefficient(unsigned) const;
 
     /// Number of entries in coefficient vector.
-    unsigned size() const final override;
+    unsigned size() const;
 
-    Interface::AbstractVector& variable(unsigned i);
+    Vector& variable(unsigned i);
 
-    const Interface::AbstractVector& variable(unsigned i) const;
+    const Vector& variable(unsigned i) const;
 
     ProductSpaceElement& primalComponent();
 
     const ProductSpaceElement& primalComponent() const;
 
-    void setPrimalComponent(std::unique_ptr<Interface::AbstractVector>&& y);
+    void setPrimalComponent(const Vector& y);
 
     ProductSpaceElement& dualComponent();
 
     const ProductSpaceElement& dualComponent() const;
 
-    void setDualComponent(std::unique_ptr<Interface::AbstractVector>&& y);
+    void setDualComponent(const Vector& y);
 
     const ProductSpace& productSpace() const;
 
     bool isPrimalDualProductSpaceElement() const;
 
-  private:
-    ProductSpaceElement* cloneImpl() const final override;
-
     /// Apply as dual element.
-    double applyAsDualTo(const Interface::AbstractVector& y) const final override;
+    double operator()(const ProductSpaceElement& y) const;
 
-    std::vector<std::unique_ptr<Interface::AbstractVector> > variables_ ;
+  private:
+//    ProductSpaceElement* cloneImpl() const;
+
+    std::vector<Vector> variables_ ;
   };
 }
 

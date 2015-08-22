@@ -1,6 +1,5 @@
 #include "inducedScalarProduct.hh"
 
-#include "abstractVector.hh"
 #include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
@@ -11,26 +10,26 @@
 
 namespace Algorithm
 {
-  namespace Interface
-  {
-    InducedScalarProduct::InducedScalarProduct(const AbstractOperator& M)
-      : Mixin::UniqueImpl<AbstractOperator>(clone(M))
+//  namespace Interface
+//  {
+    InducedScalarProduct::InducedScalarProduct(const Interface::AbstractOperator& M)
+      : Mixin::UniqueImpl<Interface::AbstractOperator>(clone(M))
     {}
 
-    double InducedScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
+    double InducedScalarProduct::operator()(const Vector& x, const Vector& y) const
     {
-      return (*impl()(y))(x);
+      return impl()(y)(x);
     }
 
 
-    PrimalInducedScalarProduct::PrimalInducedScalarProduct(const AbstractOperator& M)
-      : Mixin::UniqueImpl<AbstractOperator>(clone(M))
+    PrimalInducedScalarProduct::PrimalInducedScalarProduct(const Interface::AbstractOperator& M)
+      : Mixin::UniqueImpl<Interface::AbstractOperator>(clone(M))
     {}
 
-    double PrimalInducedScalarProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
+    double PrimalInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
     {
-      const auto& xx = castTo<ProductSpaceElement>(x);
-      const auto& yy = castTo<ProductSpaceElement>(y);
+      const auto& xx = castAny<ProductSpaceElement>(x);
+      const auto& yy = castAny<ProductSpaceElement>(y);
 
       auto result = 0.;
 
@@ -44,20 +43,22 @@ namespace Algorithm
         return result;
       }
 
-      auto x_ = clone(primal(x));
-      auto y_ = clone(primal(y));
+      auto x_ = primal(x);
+      auto y_ = primal(y);
 
-      return result += (*impl()(*y_))(*x_);
+      return result += impl()(y_)(x_);
     }
+//  }
+
+  InducedScalarProduct inducedScalarProduct(const Operator& A)
+  {
+    return InducedScalarProduct(A.impl());
+//    return createFromSharedImpl<ScalarProduct,Interface::InducedScalarProduct>( A.impl() );
   }
 
-  ScalarProduct inducedScalarProduct(const Operator& A)
+  PrimalInducedScalarProduct primalInducedScalarProduct(const Operator& A)
   {
-    return createFromSharedImpl<ScalarProduct,Interface::InducedScalarProduct>( A.impl() );
-  }
-
-  ScalarProduct primalInducedScalarProduct(const Operator& A)
-  {
-    return createFromSharedImpl<ScalarProduct,Interface::PrimalInducedScalarProduct>( A.impl() );
+    return PrimalInducedScalarProduct(A.impl());
+//    return createFromSharedImpl<ScalarProduct,Interface::PrimalInducedScalarProduct>( A.impl() );
   }
 }

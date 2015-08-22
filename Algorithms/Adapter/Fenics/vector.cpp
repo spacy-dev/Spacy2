@@ -20,23 +20,23 @@ namespace Algorithm
   namespace Fenics
   {
     Vector::Vector(const ::Algorithm::VectorSpace& space)
-      : AbstractVector(space),
+      : VectorBase<Vector>(space),
         Impl<dolfin::Function>( dolfin::Function( boost::type_erasure::any_cast<const VectorSpace&>(space.impl()).impl() ) )
     {}
 
     Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)
-      : AbstractVector(space), Impl<dolfin::Function>( f )
+      : VectorBase<Vector>(space), Impl<dolfin::Function>( f )
     {}
 
-    void Vector::copyTo(AbstractVector& y) const
-    {
-      castTo<Vector>(y).impl() = impl();
-    }
+//    void Vector::copyTo(AbstractVector& y) const
+//    {
+//      castTo<Vector>(y).impl() = impl();
+//    }
 
-    void Vector::print(std::ostream& os) const
-    {
-      //      os << impl(); // todo generalize output
-    }
+//    void Vector::print(std::ostream& os) const
+//    {
+//      //      os << impl(); // todo generalize output
+//    }
 
     Vector& Vector::operator=(const dolfin::Function& v)
     {
@@ -44,27 +44,27 @@ namespace Algorithm
       return *this;
     }
 
-    Vector& Vector::operator=(const AbstractVector& y)
+    Vector& Vector::operator=(const Vector& y)
     {
-      *impl().vector() = *castTo<Vector>(y).impl().vector();
+      *impl().vector() = *y.impl().vector();
       return *this;
     }
 
-    Vector& Vector::operator+=(const AbstractVector& y)
+    Vector& Vector::operator+=(const Vector& y)
     {
-      *impl().vector() += *castTo<Vector>(y).impl().vector();
+      *impl().vector() += *y.impl().vector();
       return *this;
     }
 
-    Vector& Vector::axpy(double a, const AbstractVector& y)
-    {
-      impl().vector()->axpy(a,*castTo<Vector>(y).impl().vector());
-      return *this;
-    }
+//    Vector& Vector::axpy(double a, const Vector& y)
+//    {
+//      impl().vector()->axpy(a,*castTo<Vector>(y).impl().vector());
+//      return *this;
+//    }
 
-    Vector& Vector::operator-=(const AbstractVector& y)
+    Vector& Vector::operator-=(const Vector& y)
     {
-      *impl().vector() -= *castTo<Vector>(y).impl().vector();
+      *impl().vector() -= *y.impl().vector();
       return *this;
     }
 
@@ -74,11 +74,18 @@ namespace Algorithm
       return *this;
     }
 
-    std::unique_ptr<AbstractVector> Vector::operator- () const
+    Vector Vector::operator- () const
     {
-      auto v = clone( *this );
-      *v *= -1;
-      return std::move(v);
+      auto v = *this;
+      v *= -1;
+      return v;
+    }
+
+    bool Vector::operator==(const Vector& y) const
+    {
+      auto dx = impl().vector()->copy();
+     *dx -= *y.impl().vector();
+      return dx->inner( *dx ) < eps();
     }
 
     double& Vector::coefficient(unsigned i)
@@ -108,41 +115,40 @@ namespace Algorithm
       return impl()[i];
     }
 
-    double Vector::applyAsDualTo(const AbstractVector& y) const
+    double Vector::operator()(const Vector& y) const
     {
-      auto const& y_ = castTo<Vector>(y);
-      return impl().vector()->inner( *y_.impl().vector() );
+      return impl().vector()->inner( *y.impl().vector() );
     }
 
-    Vector* Vector::cloneImpl() const
-    {
-      return new Vector(*this);
-    }
+//    Vector* Vector::cloneImpl() const
+//    {
+//      return new Vector(*this);
+//    }
 
 
-    void copy(const Interface::AbstractVector& x, dolfin::GenericVector& y, bool verbose)
+    void copy(const ::Algorithm::Vector& x, dolfin::GenericVector& y, bool verbose)
     {
       if( verbose ) std::cout << "copy rhs" << std::endl;
-      if( is<Vector>(x) )
+      if( isAny<Vector>(x) )
       {
-        y = *castTo<Vector>(x).impl().vector();
+        y = *castAny<Vector>(x).impl().vector();
         return;
       }
 
-      if( is<ProductSpaceElement>(x) )
+      if( isAny<ProductSpaceElement>(x) )
       {
-        const auto& x_ = castTo<ProductSpaceElement>(x);
+        const auto& x_ = castAny<ProductSpaceElement>(x);
 
 //        if( verbose ) std::cout << "variables: " << x_.variables().size() << std::endl;
 //        for( auto i=0u; i<x_.variables().size(); ++i )
           for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
-            const auto& xv_ = castTo<Vector>( x_.variable(i) );
+            const auto& xv_ = castAny<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
+              const auto& space = castAny<Fenics::VectorSpace>( xv_.space().impl() );
 
-              if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
+              if( verbose) std::cout << "primal variable: " << x_.isPrimalEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castAny<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isPrimalEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
               else y.setitem(space.inverseDofmap(j),0.);
@@ -150,12 +156,12 @@ namespace Algorithm
           }
           for( auto i : x_.productSpace().dualSubSpaceIds() )
           {
-            const auto& xv_ = castTo<Vector>( x_.variable(i) );
+            const auto& xv_ = castAny<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
+              const auto& space = castAny<Fenics::VectorSpace>( xv_.space().impl() );
 
-              if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castTo<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
+              if( verbose) std::cout << "dual variable: " << x_.isDualEnabled() << ": " << j << " -> " << space.inverseDofmap(j) << ": " << castAny<Vector>( x_.variable(i) ).impl().vector()->getitem(j) << std::endl;
               if(x_.isDualEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
               else y.setitem(space.inverseDofmap(j),0.);
@@ -171,51 +177,51 @@ namespace Algorithm
 
     void copy(const ::Algorithm::Vector& x, dolfin::Function& y, bool verbose)
     {
-      copy(x.impl(),*y.vector(),verbose);
+      copy(x,*y.vector(),verbose);
     }
 
 
-    void copy(const dolfin::GenericVector& y, Interface::AbstractVector& x, bool verbose)
+    void copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x, bool verbose)
     {
       if(verbose) std::cout << "from vector" << std::endl;
-      if( is<Vector>(x) )
+      if( isAny<Vector>(x) )
       {
-        *castTo<Vector>(x).impl().vector() = y;
+        *castAny<Vector>(x).impl().vector() = y;
         return;
       }
 
-      if( is<ProductSpaceElement>(x) )
+      if( isAny<ProductSpaceElement>(x) )
       {
 
-        auto& x_ = castTo<ProductSpaceElement>(x);
+        auto& x_ = castAny<ProductSpaceElement>(x);
 
           for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
-            auto& xv_ = castTo<Vector>( x_.variable(i) );
+            auto& xv_ = castAny<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
+              const auto& space = castAny<Fenics::VectorSpace>( xv_.space().impl() );
 //              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
               else xv_.impl().vector()->setitem( j , 0. );
             }
-            castTo<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
+            castAny<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
           }
 
           for( auto i : x_.productSpace().dualSubSpaceIds() )
           {
-            auto& xv_ = castTo<Vector>( x_.variable(i) );
+            auto& xv_ = castAny<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = boost::type_erasure::any_cast<const Fenics::VectorSpace&>( xv_.space().impl() );
+              const auto& space = castAny<Fenics::VectorSpace>( xv_.space().impl() );
 //              if( verbose) std::cout << space.inverseDofmap(j) << " -> " << j << ": " << y.getitem(i + j*x_.variables().size()) << std::endl;
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j)  /*i + j*x_.variables().size()*/ ) );
               else
                 xv_.impl().vector()->setitem( j , 0. );
             }
-            castTo<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
+            castAny<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
           }
 
         return;

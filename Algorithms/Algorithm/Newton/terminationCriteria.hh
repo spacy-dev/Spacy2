@@ -1,12 +1,12 @@
 #ifndef AFFINECOVARIANTTERMINATIONCRITERION_HH
 #define AFFINECOVARIANTTERMINATIONCRITERION_HH
 
+#include "vector.hh"
 #include "Util/mixins.hh"
 
 namespace Algorithm
 {
   /// \cond
-  class Vector;
   class Operator;
   /// \endcond
 

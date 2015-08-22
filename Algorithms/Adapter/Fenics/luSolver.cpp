@@ -43,7 +43,7 @@ namespace Algorithm
     solver_.set_operator(A);
   }
 
-  std::unique_ptr<Interface::AbstractVector> LUSolver::operator()(const Interface::AbstractVector& x) const
+  ::Algorithm::Vector LUSolver::operator()(const ::Algorithm::Vector& x) const
   {
 
     // Solve linear system
@@ -55,8 +55,8 @@ namespace Algorithm
     solver_.solve( *y_, * x_ );
     auto y = range().element();
 
-    copy(*y_, y.impl());
-    return clone(y.impl());
+    copy(*y_, y);
+    return y;
   }
 
   LUSolver* LUSolver::cloneImpl() const

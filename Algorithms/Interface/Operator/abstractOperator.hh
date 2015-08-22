@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "vector.hh"
 #include "Util/Mixins/cloneable.hh"
 
 namespace Algorithm
@@ -13,7 +14,6 @@ namespace Algorithm
   namespace Interface
   {
     /// \cond
-    class AbstractVector;
     class AbstractLinearSolver;
     class LinearizedOperator;
     /// \endcond
@@ -36,19 +36,16 @@ namespace Algorithm
       virtual ~AbstractOperator();
 
       /// Apply operator, i.e. compute \f$y=Ax\f$.
-      virtual std::unique_ptr<AbstractVector> operator()(const AbstractVector&) const = 0;
+      virtual Vector operator()(const Vector&) const = 0;
 
       /// Apply first derivative of operator, i.e. compute \f$y=A'(x)dx\f$.
-      virtual std::unique_ptr<AbstractVector> d1(const AbstractVector& x,
-                                                               const AbstractVector& dx) const;
+      virtual Vector d1(const Vector& x, const Vector& dx) const;
 
       /// Apply second derivative of operator, i.e. compute \f$y=A''(x)(dx,dy)\f$.
-      virtual std::unique_ptr<AbstractVector> d2(const AbstractVector& x,
-                                                               const AbstractVector& dx,
-                                                               const AbstractVector& dy) const;
+      virtual Vector d2(const Vector& x, const Vector& dx, const Vector& dy) const;
 
       /// Get linearization \f$A'(x): X \rightarrow Y\f$.
-      std::unique_ptr<LinearizedOperator> linearization(const AbstractVector& x) const;
+      std::unique_ptr<LinearizedOperator> linearization(const Vector& x) const;
 
       /// Access domain space \f$X\f$.
       VectorSpace& domain();
@@ -71,7 +68,7 @@ namespace Algorithm
     protected:
       friend class LinearizedOperator;
 
-      virtual std::unique_ptr<LinearizedOperator> makeLinearization(const AbstractVector& x) const;
+      virtual std::unique_ptr<LinearizedOperator> makeLinearization(const Vector& x) const;
 
       virtual std::unique_ptr<AbstractLinearSolver> makeSolver() const;
 

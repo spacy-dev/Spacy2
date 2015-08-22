@@ -16,25 +16,22 @@ namespace Algorithm
 
     AbstractOperator::~AbstractOperator(){}
 
-    std::unique_ptr<AbstractVector> AbstractOperator::d1(const AbstractVector& x,
-                                                                       const AbstractVector& dx) const
+    Vector AbstractOperator::d1(const Vector& x, const Vector& dx) const
     {
       throw CallOfUndefinedFunctionException("AbstractOperator::d1");
     }
 
-    std::unique_ptr<AbstractVector> AbstractOperator::d2(const AbstractVector& x,
-                                                                       const AbstractVector& dx,
-                                                                       const AbstractVector& dy) const
+    Vector AbstractOperator::d2(const Vector& x, const Vector& dx, const Vector& dy) const
     {
       throw CallOfUndefinedFunctionException("AbstractOperator::d2");
     }
 
-    std::unique_ptr<LinearizedOperator> AbstractOperator::linearization(const AbstractVector& x) const
+    std::unique_ptr<LinearizedOperator> AbstractOperator::linearization(const Vector& x) const
     {
       return makeLinearization(x);
     }
 
-    std::unique_ptr<LinearizedOperator> AbstractOperator::makeLinearization(const AbstractVector& x) const
+    std::unique_ptr<LinearizedOperator> AbstractOperator::makeLinearization(const Vector& x) const
     {
       return std::make_unique<LinearizedOperator>(clone(this),x);
     }

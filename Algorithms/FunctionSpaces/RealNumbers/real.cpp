@@ -6,44 +6,48 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <cmath>
 
 namespace Algorithm
 {
-  using Interface::AbstractVector;
-
   Real::Real(double x, const VectorSpace &space)
-    : AbstractVector(space), x_(x)
+    : VectorBase<Real>(space), x_(x)
   {}
 
   Real::Real(const VectorSpace& space)
     : Real(0.,space)
   {}
 
-  void Real::copyTo(AbstractVector& y) const
-  {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::copyTo");
+//  void Real::copyTo(AbstractVector& y) const
+//  {
+//    if( !is<Real>(y) ) throw InvalidArgumentException("Real::copyTo");
 
-    castTo<Real>(y).x_ = x_;
-  }
+//    castTo<Real>(y).x_ = x_;
+//  }
 
-  Real& Real::operator=(const AbstractVector& y)
+//  Real& Real::operator=(const Real& y)
+//  {
+////    if( !isAny<Real>(y) ) throw InvalidArgumentException("Real::operator=");
+//    x_ = y.x_;
+//    return *this;
+//  }
+
+//  Real::Real(const Real &y)
+//  {
+//    *this = y;
+//  }
+
+  Real& Real::operator+=(const Real& y)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=");
-    x_ = castTo<Real>(y).x_;
+//    if( !isAny<Real>(y) ) throw InvalidArgumentException("Real::operator+=");
+    x_ += y.x_;
     return *this;
   }
 
-  Real& Real::operator+=(const AbstractVector& y)
+  Real& Real::operator-=(const Real& y)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator+=");
-    x_ += castTo<Real>(y).x_;
-    return *this;
-  }
-
-  Real& Real::operator-=(const AbstractVector& y)
-  {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator-=");
-    x_ -= castTo<Real>(y).x_;
+//    if( !isAny<Real>(y) ) throw InvalidArgumentException("Real::operator-=");
+    x_ -= y.x_;
     return *this;
   }
 
@@ -53,14 +57,14 @@ namespace Algorithm
     return *this;
   }
 
-  std::unique_ptr<AbstractVector> Real::operator- () const
+  Real Real::operator- () const
   {
-    return std::make_unique<Real>(-x_, this->space() );
+    return Real(-x_, this->space() );
   }
 
-  double Real::applyAsDualTo(const AbstractVector& y) const
+  double Real::operator()(const Real& y) const
   {
-    return x_ * castTo<Real>(y).x_;
+    return x_ * y.x_;
   }
 
 
@@ -82,14 +86,19 @@ namespace Algorithm
     return x_;
   }
 
-  void Real::print(std::ostream& os) const
+  bool Real::operator==(const Real& y) const
   {
-    os << "Space index: " << space().index() << "\n";
-    os << x_ << std::endl;
+    return std::fabs(x_-y.x_) < eps();
   }
 
-  Real* Real::cloneImpl() const
-  {
-    return new Real(*this);
-  }
+//  void Real::print(std::ostream& os) const
+//  {
+//    os << "Space index: " << space().index() << "\n";
+//    os << x_ << std::endl;
+//  }
+
+//  Real* Real::cloneImpl() const
+//  {
+//    return new Real(*this);
+//  }
 }

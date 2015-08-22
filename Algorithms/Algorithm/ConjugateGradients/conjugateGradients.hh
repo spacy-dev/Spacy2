@@ -5,6 +5,7 @@
 #include <string>
 
 #include "operator.hh"
+#include "vector.hh"
 #include "Util/Mixins/eps.hh"
 #include "Util/Mixins/iterativeRefinements.hh"
 #include "Util/Mixins/verbosity.hh"
@@ -13,8 +14,6 @@
 
 namespace Algorithm
 {
-  class Vector;
-
   /**
    * \ingroup linalgsolution
    * \brief regularized preconditioned conjugate gradient method

@@ -14,7 +14,7 @@ namespace Algorithm
   public:
     RealSolver(double value, VectorSpace* domain, VectorSpace* range);
 
-    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const final override;
+    Vector operator()(const Vector& y) const final override;
 
   private:
     RealSolver* cloneImpl() const;

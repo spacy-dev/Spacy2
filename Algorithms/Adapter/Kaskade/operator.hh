@@ -75,18 +75,18 @@ namespace Algorithm
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         VectorImpl v( assembler_.rhs() );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(v,y.impl());
-        return clone(y.impl());
+        copyFromCoefficientVector<TestVariableSetDescription>(v,y);
+        return y;
       }
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const final override
+      ::Algorithm::Vector d1(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const final override
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
@@ -97,16 +97,16 @@ namespace Algorithm
         A_->apply( dx_ , y_ );
 
         auto y = range().element();
-        copyFromCoefficientVector<TestVariableSetDescription>(y_,y.impl());
+        copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
-        return clone(y.impl());
+        return y;
       }
 
     protected:
-      void assembleOperator(const Interface::AbstractVector& x) const
+      void assembleOperator(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_A_ != nullptr && old_X_A_->equals(x) ) return;
+        if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && (old_X_A_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
         typename AnsatzVariableSetDescription::VariableSet u(variableSet);
@@ -115,13 +115,13 @@ namespace Algorithm
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
 
-        old_X_A_ = clone(x);
+        old_X_A_ = x;
       }
 
-      void assembleGradient(const Interface::AbstractVector& x) const
+      void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_dA_ != nullptr && old_X_dA_->equals(x) ) return;
+        if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && (old_X_dA_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
         typename AnsatzVariableSetDescription::VariableSet u(variableSet);
@@ -130,7 +130,7 @@ namespace Algorithm
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
-        old_X_dA_ = clone(x);
+        old_X_dA_ = x;
       }
 
       Operator* cloneImpl() const final override
@@ -138,7 +138,7 @@ namespace Algorithm
         return new Operator(*this);
       }
 
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
+      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const ::Algorithm::Vector& x) const
       {
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
@@ -155,7 +155,7 @@ namespace Algorithm
       Spaces spaces_;
       mutable Assembler assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      mutable std::unique_ptr< Interface::AbstractVector > old_X_A_ = nullptr, old_X_dA_ = nullptr;
+      mutable ::Algorithm::Vector old_X_A_, old_X_dA_;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorImpl::AnsatzVars::noOfVariables;

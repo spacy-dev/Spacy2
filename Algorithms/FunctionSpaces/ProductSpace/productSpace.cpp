@@ -50,8 +50,8 @@ namespace Algorithm
       dualMap_[dualSubSpaceIds[i]] = i;
 
     spaces_ = std::vector<std::shared_ptr<VectorSpace> >(2,nullptr);
-    spaces_[0] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,primalSubSpaceIds_) ) , std::make_shared<ProductSpaceProduct>() );
-    spaces_[1] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,dualSubSpaceIds_) ) , std::make_shared<ProductSpaceProduct>() );
+    spaces_[0] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,primalSubSpaceIds_) ) , ProductSpaceProduct() );
+    spaces_[1] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,dualSubSpaceIds_) ) , ProductSpaceProduct() );
   }
 
   ProductSpace::ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
@@ -91,7 +91,7 @@ namespace Algorithm
 
   Vector ProductSpace::element(const VectorSpace* space) const
   {
-    return Vector( std::make_unique<ProductSpaceElement>(*space) );
+    return ProductSpaceElement{*space};
   }
 
   VectorSpace& ProductSpace::primalSubSpace()
@@ -176,7 +176,7 @@ namespace Algorithm
                                 const std::vector<unsigned>& primalSubSpaceIds,
                                 const std::vector<unsigned>& dualSubSpaceIds)
   {
-    return VectorSpace( ProductSpace( spaces , primalSubSpaceIds , dualSubSpaceIds ) , std::make_shared<ProductSpaceProduct>() );
+    return VectorSpace( ProductSpace( spaces , primalSubSpaceIds , dualSubSpaceIds ) , ProductSpaceProduct() );
 //    return createFromSharedImpl< ::Algorithm::VectorSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
   }
 

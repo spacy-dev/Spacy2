@@ -169,7 +169,7 @@ namespace Algorithm
       if( is<TriangularStateConstraintPreconditioner>(cgSolver.P().impl()))
       {
         const auto& P = castTo<TriangularStateConstraintPreconditioner>(cgSolver.P().impl());
-        dn0 = Vector(P.kernelOffset(rhs.impl()));
+        dn0 = P.kernelOffset(rhs);
         rhs -= cgSolver.A()( dn0 );
       }
     }

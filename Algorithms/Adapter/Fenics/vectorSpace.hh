@@ -6,21 +6,13 @@
 
 #include <dolfin.h>
 
-#include "Interface/abstractVector.hh"
-
 #include "Util/Mixins/impl.hh"
 #include "FunctionSpaces/ProductSpace/productSpace.hh"
 #include "scalarProducts.hh"
 
 namespace Algorithm
 {
-  class Vector;
   class VectorSpace;
-
-  namespace Interface
-  {
-    class AbstractVector;
-  }
 
   namespace Fenics
   {
@@ -45,7 +37,7 @@ namespace Algorithm
     template <class FenicsSpace>
     auto makeFunctionSpace(const FenicsSpace& space)
     {
-      return ::Algorithm::VectorSpace{ Fenics::VectorSpace{space} , std::make_shared<l2ScalarProduct>() };
+      return ::Algorithm::VectorSpace{ Fenics::VectorSpace{space} , l2Product() };
 //      ::Algorithm::VectorSpace vs(space);
 //      space.setScalarProduct( l2ScalarProduct() );
 //      return space;

@@ -3,16 +3,16 @@
 #include "productSpace.hh"
 #include "productSpaceElement.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "Interface/abstractVector.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
-  double ProductSpaceProduct::operator()(const Interface::AbstractVector& x, const Interface::AbstractVector& y) const
+  double ProductSpaceProduct::operator()(const Vector& x, const Vector& y) const
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
 
-    const auto& x_ = castTo<ProductSpaceElement>(x);
-    const auto& y_ = castTo<ProductSpaceElement>(y);
+    const auto& x_ = castAny<ProductSpaceElement>(x);
+    const auto& y_ = castAny<ProductSpaceElement>(y);
 
     if( x_.isPrimalDualProductSpaceElement() )
     {

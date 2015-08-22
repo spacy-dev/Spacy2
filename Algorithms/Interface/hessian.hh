@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "vector.hh"
 #include "abstractFunctional.hh"
 #include "Interface/Operator/abstractLinearOperator.hh"
 #include "Util/Mixins/impl.hh"
@@ -11,22 +12,20 @@ namespace Algorithm
 {
   namespace Interface
   {
-    class AbstractVector;
-
     class Hessian : public AbstractLinearOperator, public Mixin::UniqueImpl<AbstractFunctional>
     {
     public:
       Hessian(Hessian&&);
-      Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x);
+      Hessian(std::unique_ptr<AbstractFunctional>&& A, const Vector& x);
 
-      std::unique_ptr<AbstractVector> operator ()(const AbstractVector& dx) const final override;
+      Vector operator ()(const Vector& dx) const final override;
 
       std::unique_ptr<AbstractLinearSolver> solver() const final override;
 
     private:
       Hessian* cloneImpl() const;
 
-      std::unique_ptr<AbstractVector> x_;
+      Vector x_;
     };
   }
 }

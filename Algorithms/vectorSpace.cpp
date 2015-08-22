@@ -14,7 +14,7 @@ namespace Algorithm
 ////      impl().setDualSpace(sharedImpl());
 //  }
 
-  VectorSpace::VectorSpace(const VectorSpaceImpl& impl, std::shared_ptr<Interface::AbstractScalarProduct> sp)
+  VectorSpace::VectorSpace(const VectorSpaceImpl& impl, const Algorithm::ScalarProduct& sp)
     : Mixin::Impl<VectorSpaceImpl>(std::move(impl)) ,
       norm_(HilbertSpaceNorm(sp)),
       sp_(std::make_shared<ScalarProduct>(sp))
@@ -48,7 +48,7 @@ namespace Algorithm
   void VectorSpace::setScalarProduct(Algorithm::ScalarProduct sp)
   {
     sp_ = std::make_shared<ScalarProduct>(sp);
-    setNorm( HilbertSpaceNorm(sp_->sharedImpl()) );
+    setNorm( HilbertSpaceNorm(*sp_) );
   }
 
   const ScalarProduct& VectorSpace::scalarProduct() const

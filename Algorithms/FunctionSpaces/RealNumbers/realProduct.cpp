@@ -3,16 +3,16 @@
 #include "real.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/castTo.hh"
 
 namespace Algorithm
 {
-  using Interface::AbstractVector;
 
-  double RealProduct::operator()(const AbstractVector& x, const AbstractVector& y) const
+  double RealProduct::operator()(const Vector& x, const Vector& y) const
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("RealProduct",x.spaceIndex(),y.spaceIndex());
-    if( dynamic_cast<const Real*>(&x) == nullptr || dynamic_cast<const Real*>(&y) == nullptr ) throw InvalidArgumentException("RealProduct");
+    if( !isAny<Real>(x) || !isAny<Real>(y) ) throw InvalidArgumentException("RealProduct");
 
-    return x.coefficient(0) * y.coefficient(0);
+    return castAny<Real>(x).coefficient(0) * castAny<Real>(y).coefficient(0);
   }
 }

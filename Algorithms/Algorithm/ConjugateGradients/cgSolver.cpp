@@ -18,9 +18,9 @@ namespace Algorithm
     setDetailedVerbosity(other.verbose_detailed());
   }
 
-  std::unique_ptr<Interface::AbstractVector> CGSolver::operator()(const Interface::AbstractVector& y) const
+  Vector CGSolver::operator()(const Vector& y) const
   {
-    return clone( cg.solve( Vector( clone(y) ) ).impl() );
+    return cg.solve(y);
   }
 
   CGMethod& CGSolver::impl()

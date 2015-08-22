@@ -1,6 +1,6 @@
 #include "hessian.hh"
 
-#include "abstractVector.hh"
+#include "vector.hh"
 #include "abstractLinearSolver.hh"
 
 #include <utility>
@@ -16,15 +16,15 @@ namespace Algorithm
         x_(std::move(other.x_))
     {}
 
-    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const AbstractVector& x)
+    Hessian::Hessian(std::unique_ptr<AbstractFunctional>&& A, const Vector& x)
       : AbstractLinearOperator(A->domain_ptr(),A->domain_ptr()),
         Mixin::UniqueImpl<AbstractFunctional>(std::move(A)),
-        x_(clone(x))
+        x_(x)
     {}
 
-    std::unique_ptr<AbstractVector> Hessian::operator ()(const AbstractVector& dx) const
+    Vector Hessian::operator ()(const Vector& dx) const
     {
-      return impl().d2(*x_,dx);
+      return impl().d2(x_,dx);
     }
 
     std::unique_ptr<AbstractLinearSolver> Hessian::solver() const
@@ -35,7 +35,7 @@ namespace Algorithm
 
     Hessian* Hessian::cloneImpl() const
     {
-      return new Hessian(clone(impl()),*x_);
+      return new Hessian(clone(impl()),x_);
     }
   }
 }

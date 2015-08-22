@@ -1,7 +1,6 @@
 #include "primalDualSwitch.hh"
 
-#include "vector.hh"
-#include "Util/Exceptions/invalidArgumentException.hh"
+#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 namespace Algorithm
 {
@@ -53,52 +52,27 @@ namespace Algorithm
   }
 
 
-  Interface::AbstractVector& primal(Interface::AbstractVector &x)
-  {
-    castTo<Mixin::PrimalDualSwitch>(x).disableDual();
-    return x;
-  }
-
-  const Interface::AbstractVector& primal(const Interface::AbstractVector &x)
-  {
-    castTo<Mixin::PrimalDualSwitch>(x).disableDual();
-    return x;
-  }
-
-  Interface::AbstractVector& dual(Interface::AbstractVector &x)
-  {
-    castTo<Mixin::PrimalDualSwitch>(x).disablePrimal();
-    return x;
-  }
-
-  const Interface::AbstractVector& dual(const Interface::AbstractVector &x)
-  {
-    castTo<Mixin::PrimalDualSwitch>(x).disablePrimal();
-    return x;
-  }
-
-
   Vector& primal(Vector &x)
   {
-    primal(x.impl());
+    castAny<ProductSpaceElement>(x).disableDual();
     return x;
   }
 
   const Vector& primal(const Vector &x)
   {
-    primal(x.impl());
+    castAny<ProductSpaceElement>(x).disableDual();
     return x;
   }
 
   Vector& dual(Vector &x)
   {
-    dual(x.impl());
+    castAny<ProductSpaceElement>(x).disablePrimal();
     return x;
   }
 
   const Vector& dual(const Vector &x)
   {
-    dual(x.impl());
+    castAny<ProductSpaceElement>(x).disablePrimal();
     return x;
   }
 }

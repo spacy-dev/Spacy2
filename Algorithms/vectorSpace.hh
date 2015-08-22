@@ -13,13 +13,14 @@
 #include "Util/conceptBase.hh"
 #include "Util/Mixins/impl.hh"
 
+#include "vector.hh"
+
 BOOST_TYPE_ERASURE_MEMBER( (has_element) , element , 1 )
 
 namespace Algorithm
 {
   namespace Detail { static unsigned spaceIndex = 0; }
   /// \cond
-  class Vector;
   class VectorSpace;
   /// \endcond
 
@@ -40,7 +41,7 @@ namespace Algorithm
      */
 //    VectorSpace(VectorSpaceImpl impl, Norm norm);
 
-    VectorSpace(const VectorSpaceImpl& impl, std::shared_ptr<Interface::AbstractScalarProduct> sp);
+    VectorSpace(const VectorSpaceImpl& impl, const ScalarProduct& sp);
 
     /**
      * @brief Change norm of space.

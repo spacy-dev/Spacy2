@@ -4,8 +4,8 @@
 
 namespace Algorithm
 {
-  HilbertSpaceNorm::HilbertSpaceNorm(std::shared_ptr<Interface::AbstractScalarProduct> implementation)
-    : sp_(implementation)
+  HilbertSpaceNorm::HilbertSpaceNorm(const ScalarProduct& sp)
+    : sp_(sp)
   {}
 
 //  HilbertSpaceNorm::HilbertSpaceNorm(const ScalarProduct& sp)
@@ -14,7 +14,7 @@ namespace Algorithm
 
   double HilbertSpaceNorm::scalarProduct(const Vector& x, const Vector& y) const
   {
-    return (*sp_)( x.impl() , y.impl() );
+    return sp_(x,y);
   }
 
   double HilbertSpaceNorm::squared(const Vector& x) const

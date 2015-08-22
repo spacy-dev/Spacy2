@@ -6,8 +6,6 @@
 
 namespace Algorithm
 {
-  class Vector;
-
   /**
    * @brief A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.
    */

@@ -42,7 +42,7 @@ namespace Algorithm
 
     ::Algorithm::Vector VectorSpace::element(const ::Algorithm::VectorSpace* space) const
     {
-      return ::Algorithm::Vector( std::make_unique< Vector >(*space) );
+      return Vector(*space);
     }
 
     ::Algorithm::VectorSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
@@ -54,17 +54,17 @@ namespace Algorithm
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), std::make_shared<Fenics::l2ScalarProduct>());
+        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), Fenics::l2Product());
       }
       for(size_t i : dualIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), std::make_shared<Fenics::l2ScalarProduct>());
+        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), Fenics::l2Product());
       }
 
       VectorSpaceImpl tmp = ProductSpace( spaces , primalIds , dualIds );
-      return ::Algorithm::VectorSpace( tmp , std::make_shared<ProductSpaceProduct>() );
+      return ::Algorithm::VectorSpace( tmp , ProductSpaceProduct() );
     }
 //    BanachSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
 //    {

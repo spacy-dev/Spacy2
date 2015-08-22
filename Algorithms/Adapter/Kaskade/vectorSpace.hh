@@ -5,6 +5,7 @@
 
 #include "Util/Mixins/impl.hh"
 #include "Util/create.hh"
+#include "Util/castTo.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
@@ -15,7 +16,6 @@
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
 
-#include <boost/type_erasure/any_cast.hpp>
 
 namespace Algorithm
 {
@@ -23,24 +23,24 @@ namespace Algorithm
   {
     template <class Description>
     class VectorSpace :
-        public Mixin::CRefImpl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
+        public Mixin::Impl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
     {
       using Space = std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > >;
     public:
       VectorSpace(const Space& space)
-        : Mixin::CRefImpl<Space>(space)
+        : Mixin::Impl<Space>(space)
       {}
 
       ::Algorithm::Vector element(const ::Algorithm::VectorSpace* space) const
       {
-        return ::Algorithm::Vector( std::make_unique< Vector<Description> >(*space) );
+        return Vector<Description>{*space};
       }
     };
 
     template <class Description, class Space>
     auto makeVectorSpace(const Space& space)
     {
-      return ::Algorithm::VectorSpace( Kaskade::VectorSpace<Description>(space) , std::make_shared< l2Product<Description> >() );
+      return ::Algorithm::VectorSpace( Kaskade::VectorSpace<Description>(space) , l2Product<Description>() );
 //      return createFromSharedImpl< ::Algorithm::VectorSpace , VectorSpace<Description> >( space );
     }
 
@@ -55,7 +55,7 @@ namespace Algorithm
 
         static void apply(const Spaces& spaces, std::vector<std::shared_ptr< ::Algorithm::VectorSpace > >& newSpaces)
         {
-          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( VectorSpace< ExtractDescription_t<Description,i> >( *boost::fusion::at_c<Variable::spaceIndex>(spaces) ) , std::make_shared< l2Product< ExtractDescription_t<Description,i> > >() );
+          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( VectorSpace< ExtractDescription_t<Description,i> >( *boost::fusion::at_c<Variable::spaceIndex>(spaces) ) , l2Product< ExtractDescription_t<Description,i> >() );
           MakeSpaces<Description,i+1,n>::apply(spaces,newSpaces);
         }
       };
@@ -75,7 +75,7 @@ namespace Algorithm
         using Variables = typename Description::Variables;
         static auto apply(const ProductSpace& spaces)
         {
-          return &boost::type_erasure::any_cast< const VectorSpace< ExtractDescription_t<Description,j> >& >( spaces.subSpace(j).impl()).impl();
+          return &castAny< VectorSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
         }
       };
 
@@ -118,7 +118,7 @@ namespace Algorithm
 
         static Spaces apply(const  ::Algorithm::VectorSpace & spaces)
         {
-          return Spaces( &boost::type_erasure::any_cast< const VectorSpace<Description>& >(spaces.impl()).impl() );
+          return Spaces( &castAny< VectorSpace<Description> >(spaces.impl()).impl() );
 //          return Spaces( &castTo< VectorSpace<Description> >(spaces).impl() );
         }
       };
@@ -142,7 +142,7 @@ namespace Algorithm
 
       Detail::MakeSpaces<Description,0,n>::apply(spaces,newSpaces);
 
-      return ::Algorithm::VectorSpace( ProductSpace( newSpaces , primalIds , dualIds ) , std::make_shared<ProductSpaceProduct>() );
+      return ::Algorithm::VectorSpace( ProductSpace( newSpaces , primalIds , dualIds ) , ProductSpaceProduct() );
     }
 
     template <class Description>
@@ -151,10 +151,10 @@ namespace Algorithm
       using Spaces = typename Description::Spaces;
 
 //      if( is< VectorSpace< Description > >(spaces) )
-      if( boost::type_erasure::any_cast<const VectorSpace<Description>*>(&spaces.impl()) != nullptr )
+      if( isAny< VectorSpace<Description> >(spaces.impl()) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
-      if( boost::type_erasure::any_cast<const ProductSpace*>(&spaces.impl()) != nullptr )
+      if( isAny<ProductSpace>(spaces.impl()) )
 //      if( is< ProductSpace >(spaces) )
       {
         const auto& spaces_ = boost::type_erasure::any_cast<const ProductSpace&>(spaces.impl());

@@ -1,14 +1,13 @@
 #ifndef ALGORITHM_FUNCTIONSPACES_REALNUMBERS_REALSPACE_HH
 #define ALGORITHM_FUNCTIONSPACES_REALNUMBERS_REALSPACE_HH
 
-#include <memory>
+#include "vector.hh"
+#include "real.hh"
 
 namespace Algorithm
 {
   /// \cond
-  class Vector;
   class VectorSpace;
-  namespace Interface { class AbstractVector; }
   /// \endcond
 
   /// Space of real numbers.

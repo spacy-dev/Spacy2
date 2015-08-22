@@ -2,13 +2,14 @@
 #define ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
 
 #include <cassert>
+
+#include "scalarProduct.hh"
+#include "vector.hh"
 #include "Algorithm/Functions_1D/quadratic.hh"
 
 namespace Algorithm
 {
   /// \cond
-  class ScalarProduct;
-  class Vector;
   class Functional;
   /// \endcond
 

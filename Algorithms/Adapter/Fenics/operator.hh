@@ -62,17 +62,17 @@ namespace Algorithm
         : Operator(F,J,bcs,&domain,&range)
       {}
 
-      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override
       {
         assembleOperator(x);
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         auto y = range().element();
-        copy(*b_,y.impl());
-        return clone(y.impl());
+        copy(*b_,y);
+        return y;
       }
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector &x, const Interface::AbstractVector &dx) const final override
+      ::Algorithm::Vector d1(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx) const final override
       {
         assembleGradient(x);
 //        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
@@ -83,18 +83,18 @@ namespace Algorithm
         A_->mult(*y_, *Ax);
 
         auto result = range().element();
-        copy(*Ax,result.impl());
+        copy(*Ax,result);
 
-        return clone(result.impl());
+        return result;
       }
 
     private:
       friend class LinearizedOperator;
 
-      void assembleOperator(const Interface::AbstractVector& x) const
+      void assembleOperator(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( oldX_F != nullptr && oldX_F->equals(x) ) return;
+        if( b_ != nullptr && (oldX_F == x) ) return;
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -110,13 +110,13 @@ namespace Algorithm
         for(const auto& bc : bcs_)
           bc->apply( *b_ , *dummy_.vector() );
 
-        oldX_F = clone(x);
+        oldX_F = x;
       }
 
-      void assembleGradient(const Interface::AbstractVector& x) const
+      void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( oldX_J != nullptr && oldX_J->equals(x) ) return;
+        if( A_ != nullptr && ( oldX_J == x ) ) return;
 
         auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*y_);
@@ -133,7 +133,7 @@ namespace Algorithm
         for(const auto& bc : bcs_)
           bc->apply( *A_ , *tmp , *dummy_.vector() );
 
-        oldX_J = clone(x);
+        oldX_J = x;
       }
 
       Operator* cloneImpl() const
@@ -142,7 +142,7 @@ namespace Algorithm
         return new Operator(F_,J_,bcs_,domain_ptr(),range_ptr());
       }
 
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const Interface::AbstractVector& x) const
+      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const ::Algorithm::Vector& x) const
       {
         assembleOperator(x);
         assembleGradient(x);
@@ -162,7 +162,7 @@ namespace Algorithm
       std::vector<const dolfin::DirichletBC*> bcs_;
       mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-      mutable std::unique_ptr<Interface::AbstractVector> oldX_F, oldX_J = nullptr;
+      mutable ::Algorithm::Vector oldX_F, oldX_J;
       mutable dolfin::Function dummy_;
     };
 

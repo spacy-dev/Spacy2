@@ -19,30 +19,30 @@ namespace Algorithm
       B_(std::move(B)), BT_(std::move(BT))
   {}
 
-  std::unique_ptr<Interface::AbstractVector> TriangularStateConstraintPreconditioner::operator()(const Interface::AbstractVector& x) const
+  Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x) const
   {
-    auto x_ = clone( castTo<ProductSpaceElement>(x) );
-    auto y = clone(x);
-    auto& y_ = castTo<ProductSpaceElement>(*y);
+    auto x_ = castAny<ProductSpaceElement>(x);
+    auto y = range().element();
+    auto& y_ = castAny<ProductSpaceElement>(y);
 
-    y_.variable(adjointIndex()) = *(*adjointSolver_)( x_->variable(stateIndex()) );
-    x_->variable(controlIndex()) -= *(*BT_)( y_.variable(adjointIndex()) );
+    y_.variable(adjointIndex()) = (*adjointSolver_)( x_.variable(stateIndex()) );
+    x_.variable(controlIndex()) -= (*BT_)( y_.variable(adjointIndex()) );
 
-    y_.variable(controlIndex()) = *(*controlSolver_)( x_->variable(controlIndex()) );
+    y_.variable(controlIndex()) = (*controlSolver_)( x_.variable(controlIndex()) );
 
-    x_->variable(adjointIndex()) -= *(*B_)( y_.variable(controlIndex()) );
+    x_.variable(adjointIndex()) -= (*B_)( y_.variable(controlIndex()) );
 
-    y_.variable(stateIndex()) = *(*stateSolver_)( x_->variable(adjointIndex()) );
+    y_.variable(stateIndex()) = (*stateSolver_)( x_.variable(adjointIndex()) );
 
     return y;
   }
 
-  std::unique_ptr<Interface::AbstractVector> TriangularStateConstraintPreconditioner::kernelOffset(const Interface::AbstractVector& rhs) const
+  Vector TriangularStateConstraintPreconditioner::kernelOffset(const Vector& rhs) const
   {
     auto y = range().element();
 
-    castTo<ProductSpaceElement>(y.impl()).variable(stateIndex()) = *(*stateSolver_)( castTo<ProductSpaceElement>(rhs).variable(adjointIndex()) );
-    return clone(y.impl());
+    castAny<ProductSpaceElement>(y).variable(stateIndex()) = (*stateSolver_)( castAny<ProductSpaceElement>(rhs).variable(adjointIndex()) );
+    return y;
   }
 
 

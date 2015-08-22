@@ -4,13 +4,13 @@
 #include <memory>
 
 #include "operator.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
   /// \cond
   namespace Interface { class AbstractLinearSolver; }
   class LinearOperator;
-  class Vector;
   /// \endcond
 
   class LinearSolver : public Operator

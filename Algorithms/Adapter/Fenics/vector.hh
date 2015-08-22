@@ -5,42 +5,45 @@
 
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
-#include "Interface/abstractVector.hh"
+#include "Interface/vectorBase.hh"
 #include "Util/Mixins/impl.hh"
+#include "Util/Mixins/eps.hh"
 
 
 namespace Algorithm
 {
   namespace Fenics
   {
-    class Vector : public Interface::AbstractVector, public Mixin::Impl<dolfin::Function>
+    class Vector : public VectorBase<Vector>, public Mixin::Impl<dolfin::Function> , public Mixin::Eps
     {
     public:
       explicit Vector(const Algorithm::VectorSpace& space);
 
       Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space);
 
-      void copyTo(Interface::AbstractVector& y) const final override;
+//      void copyTo(Interface::AbstractVector& y) const;
 
-      void print(std::ostream& os) const final override;
+//      void print(std::ostream& os) const;
 
       Vector& operator=(const dolfin::Function& v);
 
-      Vector& operator=(const Interface::AbstractVector& y) final override;
+      Vector& operator=(const Vector& y);
 
-      Vector& operator+=(const Interface::AbstractVector& y) final override;
+      Vector& operator+=(const Vector& y);
 
-      Vector& axpy(double a, const AbstractVector& y) final override;
+//      Vector& axpy(double a, const AbstractVector& y);
 
-      Vector& operator-=(const Interface::AbstractVector& y) final override;
+      Vector& operator-=(const Vector& y);
 
-      Vector& operator*=(double a) final override;
+      Vector& operator*=(double a);
 
-      std::unique_ptr<Interface::AbstractVector> operator- () const final override;
+      Vector operator- () const;
 
-      double& coefficient(unsigned i) final override;
+      bool operator==(const Vector& y) const;
 
-      const double& coefficient(unsigned i) const final override;
+      double& coefficient(unsigned i);
+
+      const double& coefficient(unsigned i) const;
 
       unsigned size() const;
 
@@ -48,18 +51,18 @@ namespace Algorithm
 
       const dolfin::Function& operator[](unsigned i) const;
 
-    private:
-      double applyAsDualTo(const Interface::AbstractVector& y) const final override;
+      double operator()(const Vector& y) const;
+//    private:
 
-      Vector* cloneImpl() const final override;
+//      Vector* cloneImpl() const;
     };
 
 
-    void copy(const Interface::AbstractVector& x, dolfin::GenericVector& y, bool verbose = false);
+    void copy(const ::Algorithm::Vector& x, dolfin::GenericVector& y, bool verbose = false);
 
     void copy(const ::Algorithm::Vector& x, dolfin::Function& y, bool verbose = false);
 
-    void copy(const dolfin::GenericVector& y, Interface::AbstractVector& x, bool verbose = false);
+    void copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x, bool verbose = false);
   }
 }
 

@@ -2,8 +2,8 @@
 #define ALGORITHM_REAL_NUMBERS_REAL_HH
 
 #include <memory>
-
-#include "Interface/abstractVector.hh"
+#include "Interface/vectorBase.hh"
+#include "Util/Mixins/eps.hh"
 
 namespace Algorithm
 {
@@ -12,7 +12,7 @@ namespace Algorithm
   /// \endcond
 
   /// Real number.
-  class Real : public Interface::AbstractVector
+  class Real : public VectorBase<Real> , public Mixin::Eps
   {
   public:
     /**
@@ -31,48 +31,53 @@ namespace Algorithm
     /**
      * @brief copy data to y.
      */
-    void copyTo(Interface::AbstractVector& y) const final override;
+//    void copyTo(Interface::AbstractVector& y) const ;
 
     /// Print to os.
-    void print(std::ostream& os) const final override;
+//    void print(std::ostream& os) const ;
 
     /// Assignment.
-    Real& operator=(const Interface::AbstractVector& y) final override;
+//    Real& operator=(const Real& y);
+
+//    Real(const Real& y);
 
     /// In-place summation.
-    Real& operator+=(const Interface::AbstractVector& y) final override;
+    Real& operator+=(const Real& y);
 
     /// In-place subtraction.
-    Real& operator-=(const Interface::AbstractVector& y) final override;
+    Real& operator-=(const Real& y);
 
     /// In-place multiplication.
-    Real& operator*=(double) final override;
+    Real& operator*=(double a);
 
     /// Get -x.
-    std::unique_ptr<Interface::AbstractVector> operator- () const final override;
+    Real operator- () const;
 
     /// Access value.
-    double& coefficient(unsigned) final override;
+    double& coefficient(unsigned);
 
     /// Access value.
-    const double& coefficient(unsigned) const final override;
+    const double& coefficient(unsigned) const;
 
     /// Number of entries in coefficient vector (=1).
-    unsigned size() const final override;
+    unsigned size() const ;
 
     operator double() const
     {
       return x_;
     }
 
+    bool operator==(const Real& y) const;
+
+    double operator()(const Real& y) const;
+
   private:
     /**
      * @brief Get a copy of this real number.
      */
-    Real* cloneImpl() const final override;
+//    Real* cloneImpl() const ;
 
     /// Apply as dual element.
-    double applyAsDualTo(const Interface::AbstractVector& y) const final override;
 
     friend class RealProduct;
     double x_;

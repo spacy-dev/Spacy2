@@ -7,7 +7,6 @@
 #include "conjugateGradients.hh"
 #include "operator.hh"
 
-#include "Interface/abstractVector.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Util/mixins.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
@@ -40,7 +39,7 @@ namespace Algorithm
 
     CGSolver(const CGSolver& other);
 
-    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& y) const override;
+    Vector operator()(const Vector& y) const override;
 
     CGMethod& impl();
 

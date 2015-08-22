@@ -6,6 +6,7 @@
 #include <tuple>
 
 #include "functional.hh"
+#include "vector.hh"
 #include "../parameter.hh"
 #include "quadraticModel.hh"
 #include "Algorithm/lipschitzConstant.hh"
@@ -16,7 +17,6 @@ namespace Algorithm
 {
   /// \cond
   class CubicModel;
-  class Vector;
   class LinearSolver;
   /// \endcond
 

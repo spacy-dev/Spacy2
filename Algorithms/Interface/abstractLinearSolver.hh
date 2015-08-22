@@ -3,17 +3,13 @@
 
 #include <memory>
 
+#include "vector.hh"
 #include "Interface/Operator/abstractOperator.hh"
 
 namespace Algorithm
 {
   namespace Interface
   {
-    /// \cond
-    class AbstractVectorSpace;
-    class AbstractVector;
-    /// \endcond
-
     /**
      * @brief Abstract interface for linear solvers as linear operator \f$X\rightarrow Y\f$.
      */
@@ -30,7 +26,7 @@ namespace Algorithm
       virtual ~AbstractLinearSolver();
 
       /// Apply linear solver.
-      virtual std::unique_ptr<AbstractVector> operator()(const AbstractVector&) const = 0;
+      virtual Vector operator()(const Vector&) const = 0;
 
       /// Checks if the linear system is indefinite.
       virtual bool systemIsPositiveDefinite() const;

@@ -6,6 +6,7 @@
 
 #include <dolfin.h>
 
+#include "../../vector.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
@@ -22,7 +23,7 @@ namespace Algorithm
                ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range);
 
 
-      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override;
 
     private:
       LUSolver* cloneImpl() const;

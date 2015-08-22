@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_ALGORITHM_NEWTON_HH
 #define ALGORITHM_ALGORITHM_NEWTON_HH
 
+#include "vector.hh"
 #include "dampingStrategies.hh"
 #include "terminationCriteria.hh"
 #include "parameter.hh"
@@ -8,7 +9,6 @@
 namespace Algorithm
 {
   /// \cond
-  class Vector;
   class LinearSolver;
   /// \endcond
 

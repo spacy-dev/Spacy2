@@ -11,7 +11,7 @@ namespace Algorithm
 
   Vector LinearSolver::operator ()(const Vector& x) const
   {
-    return Vector( impl()(x.impl()) );
+    return impl()(x);
   }
 
   bool LinearSolver::encounteredNonconvexity() const

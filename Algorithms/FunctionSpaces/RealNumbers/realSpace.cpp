@@ -1,6 +1,5 @@
 #include "realSpace.hh"
 
-#include "real.hh"
 #include "realProduct.hh"
 
 #include "vector.hh"
@@ -8,13 +7,14 @@
 
 namespace Algorithm
 {
-  Vector RealSpace::element(const VectorSpace*space) const
+  Vector RealSpace::element(const VectorSpace* space) const
   {
-    return Vector( std::make_unique<Real>(*space) );
+    Vector v = Real{*space};
+    return v;
   }
 
   VectorSpace makeRealSpace()
   {
-    return VectorSpace( RealSpace() , std::make_shared<RealProduct>() );
+    return VectorSpace{ RealSpace{} , RealProduct{} };
   }
 }

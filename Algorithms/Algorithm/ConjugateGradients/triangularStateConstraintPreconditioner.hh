@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "vector.hh"
 #include "Interface/abstractLinearSolver.hh"
 #include "Interface/Operator/abstractOperator.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
@@ -28,9 +29,9 @@ namespace Algorithm
                                             VectorSpace* domain,
                                             VectorSpace* range);
 
-    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
+    Vector operator()(const Vector& x) const final override;
 
-    std::unique_ptr<Interface::AbstractVector> kernelOffset(const Interface::AbstractVector& rhs) const;
+    Vector kernelOffset(const Vector& rhs) const;
 
   private:
     TriangularStateConstraintPreconditioner* cloneImpl() const;

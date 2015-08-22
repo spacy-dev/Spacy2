@@ -17,22 +17,22 @@ namespace Algorithm
 
   Vector Operator::operator()(const Vector& x) const
   {
-    return impl()(x.impl());
+    return impl()(x);
   }
 
   Vector Operator::d1(const Vector& x, const Vector& dx) const
   {
-    return impl().d1( x.impl() , dx.impl() );
+    return impl().d1( x , dx );
   }
 
   Vector Operator::d2(const Vector& x, const Vector& dx, const Vector& dy) const
   {
-    return impl().d2(x.impl(),dx.impl(),dy.impl());
+    return impl().d2(x,dx,dy);
   }
 
   LinearOperator Operator::linearization(const Vector& x) const
   {
-    return LinearOperator( impl().linearization(x.impl()) );
+    return LinearOperator( impl().linearization(x) );
   }
 
   VectorSpace* Operator::domain_ptr() const

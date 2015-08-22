@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "vector.hh"
 #include "vectorSpace.hh"
 
 #include "Interface/Operator/abstractOperator.hh"
@@ -10,7 +11,6 @@
 
 namespace Algorithm
 {
-  class Vector;
   class LinearOperator;
 
   class Operator : public Mixin::UniqueImpl<Interface::AbstractOperator>

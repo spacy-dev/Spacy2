@@ -1,37 +1,35 @@
-#ifndef ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
-#define ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
+//#ifndef ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
+//#define ALGORITHM_CONJUGATE_GRADIENTS_JACOBIPRECONDITIONER_HH
 
-#include <memory>
-#include <vector>
+//#include <memory>
+//#include <vector>
 
-#include "Interface/Operator/abstractOperator.hh"
-#include "operator.hh"
-#include "linearOperator.hh"
+//#include "vector.hh"
+//#include "Interface/Operator/abstractOperator.hh"
+//#include "operator.hh"
+//#include "linearOperator.hh"
 
-namespace Algorithm
-{
-  class Vector;
+//namespace Algorithm
+//{
 
-  class JacobiPreconditioner : public Interface::AbstractOperator
-  {
-  public:
-    JacobiPreconditioner(const Operator& A);
+//  class JacobiPreconditioner : public Interface::AbstractOperator
+//  {
+//  public:
+//    JacobiPreconditioner(const Operator& A);
 
-    JacobiPreconditioner(const LinearOperator& A);
+//    JacobiPreconditioner(const LinearOperator& A);
 
-    JacobiPreconditioner(const JacobiPreconditioner& other);
+//    Vector operator()(const Vector& x) const override;
 
-    std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const override;
+//  private:
+//    JacobiPreconditioner* cloneImpl() const;
 
-  private:
-    JacobiPreconditioner* cloneImpl() const;
+//    std::vector<double> diag_;
+//    Vector x_;
+//  };
 
-    std::vector<double> diag_;
-    std::unique_ptr<Interface::AbstractVector> x_ = nullptr;
-  };
+//  Operator jacobiPreconditioner(const Operator& A);
 
-  Operator jacobiPreconditioner(const Operator& A);
-
-  Operator jacobiPreconditioner(const LinearOperator& A);
-}
-#endif // JACOBIPRECONDITIONER_HH
+//  Operator jacobiPreconditioner(const LinearOperator& A);
+//}
+//#endif // JACOBIPRECONDITIONER_HH

@@ -1,28 +1,21 @@
 #ifndef ALGORITHM_SCALARPRODUCT_HH
 #define ALGORITHM_SCALARPRODUCT_HH
 
-#include <memory>
-#include <utility>
+#include <boost/mpl/vector.hpp>
+#include <boost/type_erasure/any.hpp>
+#include <boost/type_erasure/callable.hpp>
 
-#include "Interface/abstractScalarProduct.hh"
+#include "Util/conceptBase.hh"
+
 #include "vector.hh"
-#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
+  using ScalarProductConcept = boost::type_erasure::callable<double(const Vector&,const Vector&), const boost::type_erasure::_self>;
+
   /**
-   * @brief Scalar product class. Plug your implementations in here.
+   * @brief Norm class. Plug your implementations in here.
    */
-  class ScalarProduct : public Mixin::SharedImpl<Interface::AbstractScalarProduct>
-  {
-  public:
-    explicit ScalarProduct(std::shared_ptr<Interface::AbstractScalarProduct> implementation);
-
-    /**
-     * @brief Compute scalar product \f$(x,y)\f$.
-     */
-    double operator()(const Vector& x, const Vector& y) const;
-  };
+  using ScalarProduct = boost::type_erasure::any< boost::mpl::vector< ConceptBase , ScalarProductConcept > >;
 }
-
 #endif // ALGORITHMS_SCALARPRODUCT_HH

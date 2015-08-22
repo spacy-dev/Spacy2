@@ -7,6 +7,7 @@
 #include "fem/istlinterface.hh"
 
 #include "../../functional.hh"
+#include "../../vector.hh"
 #include "../../vectorSpace.hh"
 #include "Interface/abstractFunctional.hh"
 #include "Interface/hessian.hh"
@@ -70,25 +71,25 @@ namespace Algorithm
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      double d0(const Interface::AbstractVector& x) const override
+      double d0(const ::Algorithm::Vector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
         return assembler_->functional();
       }
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector& x) const override
+      ::Algorithm::Vector d1(const ::Algorithm::Vector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
         VectorImpl v( assembler_->rhs() );
 
         auto y = domain().dualSpace_ptr()->element();
-        copyFromCoefficientVector<VariableSetDescription>(v,y.impl());
-        return clone(y.impl());
+        copyFromCoefficientVector<VariableSetDescription>(v,y);
+        return y;
       }
 
-      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector& x, const Interface::AbstractVector& dx) const override
+      ::Algorithm::Vector d2(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -101,17 +102,17 @@ namespace Algorithm
         A_->apply( dx_ , y_ );
 
         auto y = domain().dualSpace_ptr()->element();
-        copyFromCoefficientVector<VariableSetDescription>(y_,y.impl());
+        copyFromCoefficientVector<VariableSetDescription>(y_,y);
 //        std::cout << "result = " << (*y)(*y) << std::endl;
 
-        return clone(y.impl());
+        return y;
       }
 
     protected:
-      void assembleFunctional(const Interface::AbstractVector& x) const
+      void assembleFunctional(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_f_ != nullptr && old_X_f_->equals(x) ) return;
+        if( ( (assembler_->valid() & Assembler::VALUE) != 0 ) && (old_X_f_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
@@ -120,13 +121,13 @@ namespace Algorithm
 
         assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nAssemblyThreads );
 
-        old_X_f_ = clone(x);
+        old_X_f_ = x;
       }
 
-      void assembleGradient(const Interface::AbstractVector& x) const
+      void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_df_ != nullptr && old_X_df_->equals(x) ) return;
+        if( ( (assembler_->valid() & Assembler::RHS) != 0 ) && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
@@ -135,13 +136,13 @@ namespace Algorithm
 
         assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
 
-        old_X_df_ = clone(x);
+        old_X_df_ = x;
       }
 
-      void assembleHessian(const Interface::AbstractVector& x) const
+      void assembleHessian(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( old_X_ddf_ != nullptr && old_X_ddf_->equals(x) ) return;
+        if( ( (assembler_->valid() & Assembler::MATRIX) != 0 ) && (old_X_ddf_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
@@ -154,7 +155,7 @@ namespace Algorithm
 //        std::cout << "A: " << std::endl;
 //        std::cout << assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) << std::endl;
 
-        old_X_ddf_ = clone(x);
+        old_X_ddf_ = x;
       }
 
       Functional* cloneImpl() const override
@@ -162,7 +163,7 @@ namespace Algorithm
         return new Functional(*this);
       }
 
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const override
+      std::unique_ptr<Interface::Hessian> makeHessian(const ::Algorithm::Vector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
         return std::make_unique<Interface::Hessian>(std::make_unique< Functional<FunctionalImpl> >(*this,true),x);
@@ -180,7 +181,7 @@ namespace Algorithm
       Spaces spaces_;
       mutable std::shared_ptr<Assembler> assembler_;
       mutable std::unique_ptr< KaskadeOperator > A_ = nullptr;
-      mutable std::unique_ptr< Interface::AbstractVector > old_X_f_ = nullptr, old_X_df_ = nullptr, old_X_ddf_ = nullptr;
+      mutable ::Algorithm::Vector old_X_f_, old_X_df_, old_X_ddf_;
       unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalImpl::AnsatzVars::noOfVariables;

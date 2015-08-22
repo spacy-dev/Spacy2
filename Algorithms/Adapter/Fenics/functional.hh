@@ -12,6 +12,7 @@
 #include "Util/Mixins/primalDualSwitch.hh"
 #include "Util/castTo.hh"
 
+#include "../../vector.hh"
 #include "../../vectorSpace.hh"
 #include "../../functional.hh"
 
@@ -49,7 +50,7 @@ namespace Algorithm
       Functional(const F& f, const DF& J, const DDF& H,
                    const std::vector<const dolfin::DirichletBC*>& bcs, ::Algorithm::VectorSpace* space,
                    const dolfin::GenericMatrix& A,
-                   const Interface::AbstractVector& oldX_H)
+                   const ::Algorithm::Vector& oldX_H)
         : Interface::AbstractFunctional( space ),
           Mixin::DisableAssembly(true),
           f_( J.function_space(0)->mesh() ),
@@ -57,7 +58,7 @@ namespace Algorithm
           H_( H.function_space(0) , H.function_space(1) ),
           bcs_( bcs ),
           A_(A.copy()),
-          oldX_H_(clone(oldX_H)),
+          oldX_H_(oldX_H),
           dummy_(J_.function_space(0))
       {
         copyCoefficients(f,f_);
@@ -66,23 +67,23 @@ namespace Algorithm
       }
 
 
-      double d0(const Interface::AbstractVector& x) const final override
+      double d0(const ::Algorithm::Vector& x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
         return value_;
       }
 
-      std::unique_ptr<Interface::AbstractVector> d1(const Interface::AbstractVector &x) const final override
+      ::Algorithm::Vector d1(const ::Algorithm::Vector &x) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
-        auto y = clone(x);
-        copy(*b_,*y);
-        return std::move(y);
+        auto y = domain().dualSpace_ptr()->element();
+        copy(*b_,y);
+        return y;
       }
 
-      std::unique_ptr<Interface::AbstractVector> d2(const Interface::AbstractVector &x, const Interface::AbstractVector &dx) const final override
+      ::Algorithm::Vector d2(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx) const final override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -91,13 +92,13 @@ namespace Algorithm
         auto Ax = x_->copy();
         A_->mult(*x_, *Ax);
 
-        auto result = clone(x);
-        copy(*Ax,*result);
+        auto result = domain().dualSpace_ptr()->element();
+        copy(*Ax,result);
 
-        return std::unique_ptr<Interface::AbstractVector>( result.release() );
-      }
+        return result;
+    }
 
-      void setOrigin(const Interface::AbstractVector& x) const
+      void setOrigin(const ::Algorithm::Vector& x) const
       {
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*x_);
@@ -108,12 +109,12 @@ namespace Algorithm
       }
 
     private:
-      std::unique_ptr<Interface::Hessian> makeHessian(const Interface::AbstractVector& x) const override
+      std::unique_ptr<Interface::Hessian> makeHessian(const ::Algorithm::Vector& x) const override
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
         assert( A_ != nullptr );
-        return std::make_unique<Interface::Hessian>( std::make_unique<Functional>(f_,J_,H_,bcs_,domain_ptr(),*A_,*oldX_H_), *oldX_H_);
+        return std::make_unique<Interface::Hessian>( std::make_unique<Functional>(f_,J_,H_,bcs_,domain_ptr(),*A_,oldX_H_), oldX_H_);
       }
 
       std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
@@ -122,10 +123,10 @@ namespace Algorithm
         return std::make_unique<LUSolver>(A_,*J_.function_space(0),domain_ptr(),domain_ptr());
       }
 
-      void assembleFunctional(const Interface::AbstractVector& x) const
+      void assembleFunctional(const ::Algorithm::Vector& x) const
       {
-        if( oldX_f_ != nullptr && oldX_f_->equals(x) ) return;
-
+        if( valueAssembled_ && (oldX_f_ == x) ) return;
+        valueAssembled_ = true;
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*x_);
 
@@ -134,14 +135,14 @@ namespace Algorithm
         f_.x = dummy_;
         value_ = dolfin::assemble(f_);
 
-        oldX_f_ = clone(x);
+        oldX_f_ = x;
       }
 
-      void assembleJacobian(const Interface::AbstractVector& x) const
+      void assembleJacobian(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
 
-        if( oldX_J_ != nullptr && oldX_J_->equals(x) ) return;
+        if( b_ != nullptr && (oldX_J_==x) ) return;
 
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*x_);
@@ -152,14 +153,14 @@ namespace Algorithm
         dolfin::assemble(*b_,J_);
         for( auto& bc : bcs_) bc->apply(*b_,*dummy_.vector());
 
-        oldX_J_ = clone(x);
+        oldX_J_ = x;
       }
 
-      void assembleHessian(const Interface::AbstractVector& x) const
+      void assembleHessian(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
 
-        if( oldX_H_ != nullptr && oldX_H_->equals(x) ) return;
+        if( A_ != nullptr && (oldX_H_==x) ) return;
 
         auto x_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
         copy(x,*x_);
@@ -173,12 +174,12 @@ namespace Algorithm
 
         for( auto& bc : bcs_) bc->apply(*A_);
 
-        oldX_H_ = clone(x);
+        oldX_H_ = x;
       }
 
       Functional* cloneImpl() const
       {
-        if( assemblyIsDisabled() ) return new Functional(f_,J_,H_,bcs_,domain_ptr(),*A_,*oldX_H_);
+        if( assemblyIsDisabled() ) return new Functional(f_,J_,H_,bcs_,domain_ptr(),*A_,oldX_H_);
         return new Functional(f_,J_,H_,bcs_,domain_ptr());
       }
 
@@ -189,7 +190,8 @@ namespace Algorithm
       mutable std::shared_ptr<dolfin::GenericMatrix> A_;
       mutable std::shared_ptr<dolfin::GenericVector> b_;
       mutable double value_ = 0;
-      mutable std::unique_ptr<Interface::AbstractVector> oldX_f_, oldX_J_, oldX_H_;
+      mutable bool valueAssembled_ = false;
+      mutable ::Algorithm::Vector oldX_f_, oldX_J_, oldX_H_;
       mutable dolfin::Function dummy_;
     };
 

@@ -1,14 +1,11 @@
 #ifndef ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH
 #define ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH
 
+#include "vector.hh"
 #include "Util/castTo.hh"
-#include "primalDualSwitch.hh"
 
 namespace Algorithm
 {
-  namespace Interface { class AbstractVector; }
-  class Vector;
-
   namespace Mixin
   {
     /**
@@ -70,25 +67,17 @@ namespace Algorithm
    * After application of f(x), x.reset() is called. Use this if you need to maintain the restriction to
    * primal or dual variables for several operations.
    */
-  template <class F, class Arg>
-  void primalDualIgnoreReset(F&& f, Arg&& x)
+  template <class F>
+  void primalDualIgnoreReset(F&& f, const Vector& x)
   {
-    if( is<Mixin::PrimalDualSwitch>(x) ) castTo<Mixin::PrimalDualSwitch>(x).disableReset();
+    if( isAny<Mixin::PrimalDualSwitch>(x) ) castAny<Mixin::PrimalDualSwitch>(x).disableReset();
     f(x);
-    if( is<Mixin::PrimalDualSwitch>(x) )
+    if( isAny<Mixin::PrimalDualSwitch>(x) )
     {
-      castTo<Mixin::PrimalDualSwitch>(x).enableReset();
-      castTo<Mixin::PrimalDualSwitch>(x).reset();
+      castAny<Mixin::PrimalDualSwitch>(x).enableReset();
+      castAny<Mixin::PrimalDualSwitch>(x).reset();
     }
   }
-
-  Interface::AbstractVector& primal(Interface::AbstractVector& x);
-
-  const Interface::AbstractVector& primal(const Interface::AbstractVector& x);
-
-  Interface::AbstractVector& dual(Interface::AbstractVector& x);
-
-  const Interface::AbstractVector& dual(const Interface::AbstractVector& x);
 
 
   Vector& primal(Vector& x);

@@ -13,32 +13,32 @@ namespace Algorithm
 
   double Functional::operator()(const Vector& x) const
   {
-    return impl()(x.impl());
+    return impl()(x);
   }
 
   double Functional::d1(const Vector& x, const Vector &dx) const
   {
-    return ( *impl().d1(x.impl()) )(dx.impl());
+    return impl().d1(x)(dx);
   }
 
   Vector Functional::d1(const Vector &x) const
   {
-    return impl().d1(x.impl());
+    return impl().d1(x);
   }
 
   Vector Functional::d2(const Vector& x, const Vector &dx) const
   {
-    return impl().d2(x.impl(),dx.impl());
+    return impl().d2(x,dx);
   }
 
   double Functional::d2(const Vector& x, const Vector &dx, const Vector& dy) const
   {
-    return dy( d2(x,dx) );
+    return d2(x,dx)(dy);
   }
 
   LinearOperator Functional::hessian(const Vector& x) const
   {
-    return LinearOperator( impl().hessian( x.impl() ) );
+    return LinearOperator( impl().hessian( x ) );
   }
 
   VectorSpace* Functional::domain_ptr() const
