@@ -2,10 +2,13 @@
 #define ALGORITHM_FUNCTIONAL_BASE_HH
 
 #include "vector.hh"
-#include "vectorSpace.hh"
 
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   /**
    * @brief Base class for functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
    */

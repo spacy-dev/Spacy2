@@ -66,7 +66,7 @@ namespace Algorithm
 
       void setDualComponent(const ::Algorithm::Vector& y);
 
-      const SpaceCreator& productSpace() const;
+      const SpaceCreator& creator() const;
 
       bool isPrimalDualProductSpaceElement() const;
 

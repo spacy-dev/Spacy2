@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_VECTOR_BASE_HH
 #define ALGORITHM_VECTOR_BASE_HH
 
-#include "vectorSpace.hh"
 #include "Util/Mixins/impl.hh"
+#include "vectorSpace.hh"
 
 namespace Algorithm
 {

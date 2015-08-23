@@ -32,7 +32,7 @@ namespace Algorithm
       {
         const auto& x_ = cast_ref<ProductSpace::Vector>(x);
 
-          for( auto i : x_.productSpace().primalSubSpaceIds() )
+          for( auto i : x_.creator().primalSubSpaceIds() )
           {
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
@@ -44,7 +44,7 @@ namespace Algorithm
               else y.setitem(space.inverseDofmap(j),0.);
             }
           }
-          for( auto i : x_.productSpace().dualSubSpaceIds() )
+          for( auto i : x_.creator().dualSubSpaceIds() )
           {
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
@@ -83,7 +83,7 @@ namespace Algorithm
 
         auto& x_ = cast_ref<ProductSpace::Vector>(x);
 
-          for( auto i : x_.productSpace().primalSubSpaceIds() )
+          for( auto i : x_.creator().primalSubSpaceIds() )
           {
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
@@ -96,7 +96,7 @@ namespace Algorithm
             cast_ref<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
           }
 
-          for( auto i : x_.productSpace().dualSubSpaceIds() )
+          for( auto i : x_.creator().dualSubSpaceIds() )
           {
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)

@@ -78,7 +78,6 @@ namespace Algorithm
       ::Algorithm::Vector operator()(const VectorSpace* space) const;
 
     private:
-
       std::vector<std::shared_ptr<VectorSpace> > spaces_;
       std::vector<unsigned> primalSubSpaceIds_, dualSubSpaceIds_;
       std::map<unsigned,unsigned> primalMap_, dualMap_;

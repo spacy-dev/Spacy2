@@ -6,12 +6,10 @@
 #include "linearSolverConcept.hh"
 #include "vectorConcept.hh"
 
+#include "vectorSpace.hh"
+
 namespace Algorithm
 {
-  /// \cond
-  class VectorSpace;
-  /// \endcond
-
   /**
    * @brief Concept defining the simplest possible operator, only providing Vector operator()(const Vector&).
    * @see ::Algorithm::Operator

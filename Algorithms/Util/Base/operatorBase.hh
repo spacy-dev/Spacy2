@@ -6,10 +6,6 @@
 
 namespace Algorithm
 {
-//  /// \cond
-//  class VectorSpace;
-//  /// \endcond
-
   /**
    * @brief Abstract interface for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
    */

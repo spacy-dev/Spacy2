@@ -192,11 +192,11 @@ namespace Algorithm
     {
       if( isPrimalDualProductSpaceElement() )
       {
-        if( productSpace().isPrimalSubSpaceId(i) )
-          return primalComponent().variable(productSpace().primalIdMap(i));
+        if( creator().isPrimalSubSpaceId(i) )
+          return primalComponent().variable(creator().primalIdMap(i));
 
-        if( productSpace().isDualSubSpaceId(i) )
-          return dualComponent().variable(productSpace().dualIdMap(i));
+        if( creator().isDualSubSpaceId(i) )
+          return dualComponent().variable(creator().dualIdMap(i));
         assert(false);
       }
 
@@ -207,21 +207,16 @@ namespace Algorithm
     {
       if( isPrimalDualProductSpaceElement() )
       {
-        if( productSpace().isPrimalSubSpaceId(i) )
-          return primalComponent().variable(productSpace().primalIdMap(i));
+        if( creator().isPrimalSubSpaceId(i) )
+          return primalComponent().variable(creator().primalIdMap(i));
 
-        if( productSpace().isDualSubSpaceId(i) )
-          return dualComponent().variable(productSpace().dualIdMap(i));
+        if( creator().isDualSubSpaceId(i) )
+          return dualComponent().variable(creator().dualIdMap(i));
         assert(false);
       }
 
       return variables_[i];
     }
-
-  //  ProductSpaceElement* ProductSpaceElement::cloneImpl() const
-  //  {
-  //    return new ProductSpaceElement(*this);
-  //  }
 
     const Vector& Vector::primalComponent() const
     {
@@ -257,14 +252,14 @@ namespace Algorithm
       variables_[1] = y;
     }
 
-    const SpaceCreator& Vector::productSpace() const
+    const SpaceCreator& Vector::creator() const
     {
       return cast_ref<ProductSpace::SpaceCreator>(space().impl());
     }
 
     bool Vector::isPrimalDualProductSpaceElement() const
     {
-      return productSpace().isPrimalDualProductSpace();
+      return creator().isPrimalDualProductSpace();
     }
   }
 }
