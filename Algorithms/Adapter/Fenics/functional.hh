@@ -7,7 +7,6 @@
 #include "hessian.hh"
 #include "operator.hh"
 #include "vector.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/Mixins/primalDualSwitch.hh"
 #include "Util/cast.hh"
@@ -60,7 +59,8 @@ namespace Algorithm
           value_( other.value_ ) ,
           valueAssembled_( other.valueAssembled_ ) ,
           oldX_f_(other.oldX_f_) , oldX_J_(other.oldX_J_) , oldX_H_(other.oldX_H_) ,
-          dummy_(J_.function_space(0))
+          dummy_(J_.function_space(0)),
+          solver_(other.solver_)
       {
         copyCoefficients(other.f_,f_);
         copyCoefficients(other.J_,J_);
@@ -89,13 +89,7 @@ namespace Algorithm
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
         assert( A_ != nullptr );
-        return Hessian( Functional(*this,true), oldX_H_);
-      }
-
-      LinearSolver solver() const
-      {
-        assert( A_ != nullptr );
-        return LUSolver(A_,*J_.function_space(0),this->domain_ptr(),this->domain_ptr());
+        return Hessian( Functional(*this,true), oldX_H_, solver_);
       }
 
       ::Algorithm::Vector d1_(const ::Algorithm::Vector &x) const
@@ -168,6 +162,7 @@ namespace Algorithm
         for( auto& bc : bcs_) bc->apply(*A_);
 
         oldX_H_ = x;
+        solver_ = std::make_shared<LinearSolver>( LUSolver(A_,*J_.function_space(0),this->domain_ptr(),this->domain_ptr() ) );
       }
 
       mutable F f_;
@@ -180,6 +175,7 @@ namespace Algorithm
       mutable bool valueAssembled_ = false;
       mutable ::Algorithm::Vector oldX_f_, oldX_J_, oldX_H_;
       mutable dolfin::Function dummy_;
+      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
 

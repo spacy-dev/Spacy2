@@ -10,6 +10,13 @@ namespace Algorithm
       x_(x)
   {}
 
+  Hessian::Hessian(C2Functional F, const Vector &x, std::shared_ptr<LinearSolver> solver)
+    : Hessian(F,x)
+  {
+    solver_ = solver;
+  }
+
+
   Vector Hessian::operator ()(const Vector& dx) const
   {
     return F_.d2(x_,dx);
@@ -17,6 +24,6 @@ namespace Algorithm
 
   LinearSolver Hessian::solver() const
   {
-    return F_.solver();
+    return *solver_;
   }
 }

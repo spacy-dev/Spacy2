@@ -1,6 +1,7 @@
 #ifndef ALGORITHM_LINEARIZED_OPERATOR_HH
 #define ALGORITHM_LINEARIZED_OPERATOR_HH
 
+#include "linearSolver.hh"
 #include "operator.hh"
 #include "vector.hh"
 #include "Util/Base/operatorBase.hh"

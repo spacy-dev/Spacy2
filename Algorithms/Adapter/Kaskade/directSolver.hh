@@ -1,22 +1,19 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 #define ALGORITHM_ADAPTER_KASKADE_DIRECT_SOLVER_HH
 
+#include "linalg/direct.hh"
+
 #include "vector.hh"
-#include "Util/Mixins/impl.hh"
 #include "Util/cast.hh"
 #include "Util/Base/operatorBase.hh"
-
-#include "vector.hh"
-
-#include "linalg/direct.hh"
 
 namespace Algorithm
 {
   namespace Kaskade
   {
     template <class AnsatzVariableDescription, class TestVariableDescription>
-    class DirectSolver : public OperatorBase ,
-        public Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type,typename TestVariableDescription::template CoefficientVectorRepresentation<>::type> > >
+    class DirectSolver :
+        public OperatorBase
     {
       using Spaces = typename AnsatzVariableDescription::Spaces;
       using Domain = typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type;
@@ -26,7 +23,7 @@ namespace Algorithm
       DirectSolver(const KaskadeOperator& A, const Spaces& spaces,
                ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range)
         : OperatorBase(domain,range),
-          Mixin::MutableImpl< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >( ::Kaskade::directInverseOperator(A, DirectType::UMFPACK3264) ),
+          solver_( ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> >( ::Kaskade::directInverseOperator(A, DirectType::UMFPACK3264) ) ) ,
           spaces_(spaces)
       {}
 
@@ -37,7 +34,7 @@ namespace Algorithm
         Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         copyToCoefficientVector<AnsatzVariableDescription>(x,x_);
 
-        this->impl().apply( x_ , y_ );
+        solver_.apply( x_ , y_ );
 
         auto y = range().element();
         copyFromCoefficientVector<TestVariableDescription>(y_,y);
@@ -46,6 +43,7 @@ namespace Algorithm
       }
 
     private:
+      ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > solver_;
       Spaces spaces_;
     };
   }

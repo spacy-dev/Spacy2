@@ -2,6 +2,7 @@
 #define ALGORITHM_VECTOR_BASE_HH
 
 #include "vectorSpace.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {

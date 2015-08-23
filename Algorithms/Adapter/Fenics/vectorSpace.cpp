@@ -3,7 +3,7 @@
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
 #include "vector.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceProduct.hh"
+#include "FunctionSpaces/ProductSpace/vectorSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 
@@ -16,10 +16,11 @@ namespace Algorithm
     {}
 
     VectorSpace::VectorSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t, size_t>& dofmap)
-      : Mixin::Impl<dolfin::FunctionSpace>(space),
-        dofmap_(dofmap),
-        inverseDofmap_(dofmap_.size())
+      : VectorSpace(space)
     {
+      dofmap_ = dofmap;
+      inverseDofmap_ = std::vector<size_t>(dofmap_.size());
+
       auto mend = end(dofmap_);
       for( auto m = begin(dofmap_) ; m!=mend ; ++m )
         inverseDofmap_[m->first] = m->second;
@@ -40,12 +41,12 @@ namespace Algorithm
     }
 
 
-    ::Algorithm::Vector VectorSpace::element(const ::Algorithm::VectorSpace* space) const
+    ::Algorithm::Vector VectorSpace::operator()(const ::Algorithm::VectorSpace* space) const
     {
-      return Vector(*space);
+      return Vector{*space};
     }
 
-    ::Algorithm::VectorSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
+    ::Algorithm::VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
       unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
@@ -63,7 +64,7 @@ namespace Algorithm
         spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >( makeHilbertSpace( *subSpace,dofmap ) );
       }
 
-      return makeProductSpace( spaces , primalIds , dualIds );
+      return ProductSpace::makeHilbertSpace( spaces , primalIds , dualIds );
     }
   }
 }

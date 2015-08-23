@@ -3,43 +3,42 @@
 
 #include <vector>
 
-#include "norm.hh"
-#include "scalarProduct.hh"
-
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
-#include <boost/type_erasure/member.hpp>
 
-#include "Util/conceptBase.hh"
-#include "Util/Mixins/impl.hh"
-
+#include "norm.hh"
+#include "scalarProduct.hh"
 #include "vector.hh"
 
-BOOST_TYPE_ERASURE_MEMBER( (has_element) , element , 1 )
+#include "Util/Concepts/conceptBase.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
-  namespace Detail { static unsigned spaceIndex = 0; }
   /// \cond
+  namespace Detail { static unsigned spaceIndex = 0; }
   class VectorSpace;
   /// \endcond
 
-  /**
-   * @brief Vector space implementation class. Plug your implementations in here.
-   */
-  using VectorSpaceImpl = boost::type_erasure::any< boost::mpl::vector< ConceptBase , has_element<Vector(const VectorSpace*), const boost::type_erasure::_self> > >;
+  using VectorCreatorConcept =
+  boost::mpl::vector<
+    ConceptBase ,
+    boost::type_erasure::callable<Vector(const VectorSpace*), const boost::type_erasure::_self>
+  >;
+
+  using VectorCreator = boost::type_erasure::any< VectorCreatorConcept >;
 
 
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    */
-  class VectorSpace : public Mixin::Impl<VectorSpaceImpl>
+  class VectorSpace : public Mixin::Impl<VectorCreator>
   {
   public:
     /**
      * @brief Construct function space from implementation derived from AbstractVectorSpace.
      */
-    VectorSpace(VectorSpaceImpl impl, Norm norm);
+    VectorSpace(VectorCreator impl, Norm norm);
 
     /**
      * @brief Move vector space.
@@ -126,12 +125,12 @@ namespace Algorithm
   /**
    * @brief Construct Banach space.
    */
-  VectorSpace makeBanachSpace(VectorSpaceImpl impl, Norm norm);
+  VectorSpace makeBanachSpace(VectorCreator impl, Norm norm);
 
   /**
    * @brief Construct Hilbert space.
    */
-  VectorSpace makeHilbertSpace(VectorSpaceImpl impl, ScalarProduct scalarProduct);
+  VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct);
 
   /**
    * @brief Relate function spaces.

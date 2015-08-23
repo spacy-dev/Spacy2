@@ -1,6 +1,6 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/ProductSpace/vector.hh"
 #include "vectorSpace.hh"
 
 #include <utility>
@@ -21,9 +21,9 @@ namespace Algorithm
 
   Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x) const
   {
-    auto x_ = cast_ref<ProductSpaceElement>(x);
+    auto x_ = cast_ref<ProductSpace::Vector>(x);
     auto y = range().element();
-    auto& y_ = cast_ref<ProductSpaceElement>(y);
+    auto& y_ = cast_ref<ProductSpace::Vector>(y);
 
     y_.variable(adjointIndex()) = adjointSolver_( x_.variable(stateIndex()) );
     x_.variable(controlIndex()) -= BT_( y_.variable(adjointIndex()) );
@@ -40,18 +40,8 @@ namespace Algorithm
   Vector TriangularStateConstraintPreconditioner::kernelOffset(const Vector& rhs) const
   {
     auto y = range().element();
-    cast_ref<ProductSpaceElement>(y).variable(stateIndex()) = stateSolver_( cast_ref<ProductSpaceElement>(rhs).variable(adjointIndex()) );
+    cast_ref<ProductSpace::Vector>(y).variable(stateIndex()) = stateSolver_( cast_ref<ProductSpace::Vector>(rhs).variable(adjointIndex()) );
     return y;
-  }
-
-
-  TriangularStateConstraintPreconditioner* TriangularStateConstraintPreconditioner::cloneImpl() const
-  {
-    auto result = new TriangularStateConstraintPreconditioner( stateSolver_ , controlSolver_ , adjointSolver_ , B_ , BT_ , domain_ptr() , range_ptr() );
-    result->setStateIndex(stateIndex());
-    result->setControlIndex(controlIndex());
-    result->setAdjointIndex(adjointIndex());
-    return result;
   }
 }
 

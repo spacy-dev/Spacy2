@@ -1,6 +1,7 @@
 #include "quadraticModel.hh"
 
 #include "vector.hh"
+#include "vectorSpace.hh"
 #include "functional.hh"
 #include "Util/invoke.hh"
 

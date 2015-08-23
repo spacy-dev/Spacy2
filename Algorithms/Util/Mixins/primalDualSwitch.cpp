@@ -1,6 +1,6 @@
 #include "primalDualSwitch.hh"
 
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/ProductSpace/vector.hh"
 
 namespace Algorithm
 {
@@ -54,25 +54,25 @@ namespace Algorithm
 
   Vector& primal(Vector &x)
   {
-    cast_ref<ProductSpaceElement>(x).disableDual();
+    cast_ref<ProductSpace::Vector>(x).disableDual();
     return x;
   }
 
   const Vector& primal(const Vector &x)
   {
-    cast_ref<ProductSpaceElement>(x).disableDual();
+    cast_ref<ProductSpace::Vector>(x).disableDual();
     return x;
   }
 
   Vector& dual(Vector &x)
   {
-    cast_ref<ProductSpaceElement>(x).disablePrimal();
+    cast_ref<ProductSpace::Vector>(x).disablePrimal();
     return x;
   }
 
   const Vector& dual(const Vector &x)
   {
-    cast_ref<ProductSpaceElement>(x).disablePrimal();
+    cast_ref<ProductSpace::Vector>(x).disablePrimal();
     return x;
   }
 }

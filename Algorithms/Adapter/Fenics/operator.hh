@@ -6,10 +6,10 @@
 #include <dolfin.h>
 
 #include "linearSolver.hh"
+#include "linearizedOperator.hh"
 #include "../../vectorSpace.hh"
 #include "Util/Mixins/disableAssembly.hh"
 #include "Util/Base/operatorBase.hh"
-#include "linearizedOperator.hh"
 
 #include "luSolver.hh"
 #include "util.hh"

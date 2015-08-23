@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_CONJUGATE_GRADIENTS_TRIANGULARSTATECONSTRAINTPRECONDITIONER_HH
 #define ALGORITHM_CONJUGATE_GRADIENTS_TRIANGULARSTATECONSTRAINTPRECONDITIONER_HH
 
+#include "linearSolver.hh"
 #include "operator.hh"
 #include "vector.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 #include "Util/Mixins/adjointIndex.hh"
 #include "Util/Mixins/controlIndex.hh"
 #include "Util/Mixins/stateIndex.hh"
@@ -32,8 +32,6 @@ namespace Algorithm
     Vector kernelOffset(const Vector& rhs) const;
 
   private:
-    TriangularStateConstraintPreconditioner* cloneImpl() const;
-
     LinearSolver stateSolver_, controlSolver_, adjointSolver_;
     CallableOperator B_, BT_;
   };

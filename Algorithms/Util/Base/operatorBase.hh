@@ -2,12 +2,13 @@
 #define ALGORITHM_OPERATOR_BASE_HH
 
 #include "vector.hh"
+#include "vectorSpace.hh"
 
 namespace Algorithm
 {
-  /// \cond
-  class VectorSpace;
-  /// \endcond
+//  /// \cond
+//  class VectorSpace;
+//  /// \endcond
 
   /**
    * @brief Abstract interface for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.

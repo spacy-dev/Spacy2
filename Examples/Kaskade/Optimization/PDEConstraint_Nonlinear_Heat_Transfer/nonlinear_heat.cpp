@@ -96,19 +96,17 @@ int main(int argc, char *argv[])
   VarSet x_ref(desc);
   interpolateGloballyFromFunctor<PlainAverage>(boost::fusion::at_c<stateId>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
   {
-    auto x = cell.geometry().global(xLocal);
-    Dune::FieldVector<double,1> result(0);
-    result[0] = 1;//8*(1. - x[0])*x[0]*(1. - x[1])*x[1];
-    return result;
+  //  auto x = cell.geometry().global(xLocal);
+    return Dune::FieldVector<double,1>(1);
   });
 
 
-  auto domain = Algorithm::Kaskade::makeProductSpace<Descriptions>(spaces, {0u,1u}, {2u});
+  auto domain = Algorithm::Kaskade::makeHilbertSpace<Descriptions>(spaces, {0u,1u}, {2u});
   // Normal step functional with cg solver
-  //auto fn = Algorithm::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<double,Descriptions>(alpha,x_ref,c,d) , domain );
+  auto fn = Algorithm::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // Normal step functional with direct solver
-  auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  //auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // Lagrange functional
   auto ft = Algorithm::Kaskade::makeFunctional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );

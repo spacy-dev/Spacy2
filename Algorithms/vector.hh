@@ -1,47 +1,18 @@
 #ifndef ALGORITHM_VECTOR_HH
 #define ALGORITHM_VECTOR_HH
 
-#include <boost/mpl/vector.hpp>
+#include <type_traits>
 #include <boost/type_erasure/any.hpp>
-#include <boost/type_erasure/callable.hpp>
-#include <boost/type_erasure/member.hpp>
-#include <boost/type_erasure/operators.hpp>
 
-#include "Util/conceptBase.hh"
-
-BOOST_TYPE_ERASURE_MEMBER( (has_space) , space , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_spaceIndex) , spaceIndex , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_size) , size , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_isAdmissible) , isAdmissible , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_norm) , norm , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_scalarProduct) , scalarProduct , 1 )
+#include "Util/Concepts/vectorConcept.hh"
 
 namespace Algorithm
 {
-  namespace te = boost::type_erasure;
-
-  using VectorConcept =
-  boost::mpl::vector<
-    ConceptBase ,
-    te::assignable<> ,
-    te::multiply_assignable< te::_self , double > ,
-    te::add_assignable<> ,
-    te::subtract_assignable<> ,
-    te::negatable<> ,
-    te::equality_comparable<> ,
-    te::callable<double(const te::_self&), const te::_self> ,
-    has_spaceIndex<unsigned(), const te::_self> ,
-    has_isAdmissible<bool(), const te::_self> ,
-    has_norm<double(), const te::_self> ,
-    has_scalarProduct<double(const te::_self&), const te::_self>
-  >;
-
-  using Vector = te::any<VectorConcept >;
+  /**
+   * @brief Vector class.  Can store objects that satisfy the requirements of VectorConcept.
+   * @see VectorConcept
+   */
+  using Vector = boost::type_erasure::any<VectorConcept >;
 
 ////  template <class> struct Scale;
 

@@ -4,7 +4,6 @@
 
 #include "inducedScalarProduct.hh"
 #include "Util/Exceptions/regularityTestFailedException.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 #include "Algorithm/ConjugateGradients/cgSolver.hh"
 #include "Algorithm/ConjugateGradients/triangularStateConstraintPreconditioner.hh"
@@ -109,32 +108,42 @@ namespace Algorithm
       }
     }
 
+    auto setParams = [this,&x](auto& solver)
+    {
+      solver.setIterativeRefinements(iterativeRefinements());
+      solver.setDetailedVerbosity(verbose_detailed());
+      if( norm(primal(x)) > 0)
+        solver.setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
+      else
+        solver.setAbsoluteAccuracy( eps() );
+      solver.setMaxSteps(maxSteps());
+    };
+
 //    std::unique_ptr<CGSolver> trcg = nullptr;
 
-//    if( isAny<CGSolver>(*normalSolver) )
-//    {
-//      const auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
-//      if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
-//        trcg = std::make_unique<CGSolver>( makeTRCGSolver( L_->hessian(x) ,
-//                                                           cgSolver.P(),
-//                                                           trcgRelativeAccuracy,
-//                                                           eps(),
-//                                                           verbose() ) );
-//    }
+    if( isAny<CGSolver>(*normalSolver) )
+    {
+      const auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
+      if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+      {
+        auto trcg =  makeTRCGSolver( L_->hessian(x) , cgSolver.P() ,
+                                     trcgRelativeAccuracy , eps() , verbose() );
+        setParams(trcg);
+        return std::make_unique<GeneralLinearSolver>(trcg);
+      }
+    }
 
 //    if( trcg == nullptr )
-     auto trcg = CGSolver( makeTRCGSolver( L_->hessian(x) ,
-                                                         *normalSolver,
-                                                         trcgRelativeAccuracy,
-                                                         eps(),
-                                                         verbose() ) );
-    trcg.setIterativeRefinements(iterativeRefinements());
-    trcg.setDetailedVerbosity(verbose_detailed());
-    if( norm(primal(x)) > 0)
-      trcg.setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
-    else
-      trcg.setAbsoluteAccuracy( eps() );
-    trcg.setMaxSteps(maxSteps());
+     auto trcg = makeTRCGSolver( L_->hessian(x) , *normalSolver ,
+                                 trcgRelativeAccuracy , eps(), verbose() );
+//    trcg.setIterativeRefinements(iterativeRefinements());
+//    trcg.setDetailedVerbosity(verbose_detailed());
+//    if( norm(primal(x)) > 0)
+//      trcg.setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
+//    else
+//      trcg.setAbsoluteAccuracy( eps() );
+//    trcg.setMaxSteps(maxSteps());
+     setParams(trcg);
     return std::make_unique<GeneralLinearSolver>(trcg);
     //return std::move(trcg);
 //    return std::unique_ptr<GeneralLinearSolver>( trcg.release() );

@@ -68,7 +68,7 @@ int main()
   using namespace Algorithm;
 
   std::vector<unsigned> primalSpaceIds = {0u,1u}, dualSpaceIds = {2u};
-  auto productSpace = Fenics::makeProductSpace( V , primalSpaceIds , dualSpaceIds );
+  auto productSpace = Fenics::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
   
   // functionals
   auto lagrangeFunctional = Fenics::makeFunctional( f , J , H , bcs , productSpace );

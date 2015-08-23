@@ -1,7 +1,6 @@
 #include "luSolver.hh"
 
 #include "util.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
 namespace Algorithm
 {

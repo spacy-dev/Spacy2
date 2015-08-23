@@ -1,0 +1,7 @@
+#ifndef ALGORITHM_FUNCTION_SPACES_PRODUCT_SPACE_HH
+#define ALGORITHM_FUNCTION_SPACES_PRODUCT_SPACE_HH
+
+#include "ProductSpace/vector.hh"
+#include "ProductSpace/vectorSpace.hh"
+
+#endif // ALGORITHM_FUNCTION_SPACES_PRODUCT_SPACE_HH

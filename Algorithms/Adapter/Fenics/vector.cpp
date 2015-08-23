@@ -1,24 +1,19 @@
 #include "vector.hh"
 
-#include "vectorSpace.hh"
-
-#include "Util/Exceptions/invalidArgumentException.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "../../vectorSpace.hh"
 
 #include "Util/cast.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
+#include "Util/Exceptions/invalidArgumentException.hh"
 
 #include <utility>
 
 namespace Algorithm
 {
-  using Interface::AbstractVector;
-
   namespace Fenics
   {
     Vector::Vector(const ::Algorithm::VectorSpace& space)
-      : VectorBase<Vector>(space),
-        Impl<dolfin::Function>( dolfin::Function( cast_ref<VectorSpace>(space.impl()).impl() ) )
+      : Vector( dolfin::Function( cast_ref<VectorSpace>(space.impl()).impl() ) , space )
     {}
 
     Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)

@@ -3,9 +3,10 @@
 #include "Util/cast.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
+#include "../../vectorSpace.hh"
 #include "vector.hh"
 #include "vectorSpace.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/ProductSpace/vector.hh"
 
 #include <dolfin.h>
 
@@ -27,16 +28,16 @@ namespace Algorithm
         return;
       }
 
-      if( isAny<ProductSpaceElement>(x) )
+      if( isAny<ProductSpace::Vector>(x) )
       {
-        const auto& x_ = cast_ref<ProductSpaceElement>(x);
+        const auto& x_ = cast_ref<ProductSpace::Vector>(x);
 
           for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<Fenics::VectorSpace>( xv_.space().impl() );
+              const auto& space = cast_ref<VectorSpace>(xv_.space().impl());
 
               if(x_.isPrimalEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
@@ -48,7 +49,7 @@ namespace Algorithm
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<Fenics::VectorSpace>( xv_.space().impl() );
+              const auto& space = cast_ref<VectorSpace>(xv_.space().impl());
 
               if(x_.isDualEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
@@ -77,17 +78,17 @@ namespace Algorithm
         return;
       }
 
-      if( isAny<ProductSpaceElement>(x) )
+      if( isAny<ProductSpace::Vector>(x) )
       {
 
-        auto& x_ = cast_ref<ProductSpaceElement>(x);
+        auto& x_ = cast_ref<ProductSpace::Vector>(x);
 
           for( auto i : x_.productSpace().primalSubSpaceIds() )
           {
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<Fenics::VectorSpace>( xv_.space().impl() );
+              const auto& space = cast_ref<VectorSpace>(xv_.space().impl());
               if( x_.isPrimalEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j) ) );
               else xv_.impl().vector()->setitem( j , 0. );
@@ -100,7 +101,7 @@ namespace Algorithm
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<Fenics::VectorSpace>( xv_.space().impl() );
+              const auto& space = cast_ref<VectorSpace>(xv_.space().impl());
               if( x_.isDualEnabled())
                 xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j) ) );
               else
@@ -112,7 +113,7 @@ namespace Algorithm
         return;
       }
 
-      throw InvalidArgumentException("copy(const dolfin::GenericVector& y, Interface::AbstractVector& x)");
+      throw InvalidArgumentException("copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x)");
     }
   }
 }

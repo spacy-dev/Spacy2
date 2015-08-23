@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_HESSIAN_HH
 #define ALGORITHM_HESSIAN_HH
 
+#include <memory>
+
 #include "functional.hh"
 #include "linearSolver.hh"
 #include "vector.hh"
@@ -13,6 +15,8 @@ namespace Algorithm
   public:
     Hessian(C2Functional F, const Vector& x);
 
+    Hessian(C2Functional F, const Vector &x, std::shared_ptr<LinearSolver> solver);
+
     Vector operator ()(const Vector& dx) const;
 
     LinearSolver solver() const;
@@ -20,6 +24,7 @@ namespace Algorithm
   private:
     C2Functional F_;
     Vector x_;
+    std::shared_ptr<LinearSolver> solver_;
   };
 }
 

@@ -111,7 +111,7 @@ namespace Algorithm
         return y;
       }
 
-      LinearOperator linearization(const ::Algorithm::Vector& x) const
+      ::Algorithm::LinearOperator linearization(const ::Algorithm::Vector& x) const
       {
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);

@@ -6,13 +6,14 @@
 
 #include <dolfin.h>
 
+#include "../../vectorSpace.hh"
 #include "Util/Mixins/impl.hh"
-#include "FunctionSpaces/ProductSpace/productSpace.hh"
+#include "FunctionSpaces/ProductSpace/vectorSpace.hh"
 #include "scalarProducts.hh"
 
 namespace Algorithm
 {
-  class VectorSpace;
+//  class VectorSpace;
 
   namespace Fenics
   {
@@ -27,7 +28,7 @@ namespace Algorithm
 
       size_t inverseDofmap(size_t i) const;
 
-      ::Algorithm::Vector element(const ::Algorithm::VectorSpace* space) const;
+      ::Algorithm::Vector operator()(const ::Algorithm::VectorSpace* space) const;
 
     private:
       std::unordered_map<size_t,size_t> dofmap_;
@@ -46,7 +47,7 @@ namespace Algorithm
       return ::Algorithm::makeHilbertSpace( Fenics::VectorSpace{space,dofmap} , l2Product{} );
     }
 
-    ::Algorithm::VectorSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds);
+    ::Algorithm::VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {});
   }
 }
 

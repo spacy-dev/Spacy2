@@ -2,8 +2,7 @@
 #define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
 #include "Util/Base/vectorBase.hh"
-#include "FunctionSpaces/ProductSpace/productSpace.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
+#include "FunctionSpaces/productSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/Mixins/eps.hh"
@@ -127,7 +126,7 @@ namespace Algorithm
       struct Copy
       {
         template <class Description>
-        static void apply(const ProductSpaceElement& x, ::Kaskade::VariableSet<Description>& y)
+        static void apply(const ProductSpace::Vector& x, ::Kaskade::VariableSet<Description>& y)
         {
           if( ( x.productSpace().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
               ( x.productSpace().isDualSubSpaceId(i) && x.isDualEnabled() ) )
@@ -136,7 +135,7 @@ namespace Algorithm
         }
 
         template <class Description, class CoeffVector>
-        static void toCoefficientVector(const ProductSpaceElement& x, CoeffVector& y)
+        static void toCoefficientVector(const ProductSpace::Vector& x, CoeffVector& y)
         {
           if( ( x.productSpace().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
               ( x.productSpace().isDualSubSpaceId(i) && x.isDualEnabled() ) )
@@ -145,7 +144,7 @@ namespace Algorithm
         }
 
         template <class Description, class CoeffVector>
-        static void fromCoefficientVector(const CoeffVector& x, ProductSpaceElement& y)
+        static void fromCoefficientVector(const CoeffVector& x, ProductSpace::Vector& y)
         {
           if( ( y.productSpace().isPrimalSubSpaceId(i) && y.isPrimalEnabled() ) ||
               ( y.productSpace().isDualSubSpaceId(i) && y.isDualEnabled() ) )
@@ -166,9 +165,9 @@ namespace Algorithm
             return;
           }
 
-          if( isAny<ProductSpaceElement>(x))
+          if( isAny<ProductSpace::Vector>(x))
           {
-            const auto& x_ = cast_ref<ProductSpaceElement>(x);
+            const auto& x_ = cast_ref<ProductSpace::Vector>(x);
             if( ( x_.productSpace().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
                 ( x_.productSpace().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
             boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
@@ -188,9 +187,9 @@ namespace Algorithm
             return;
           }
 
-          if( isAny<ProductSpaceElement>(x))
+          if( isAny<ProductSpace::Vector>(x))
           {
-            const auto& x_ = cast_ref<ProductSpaceElement>(x);
+            const auto& x_ = cast_ref<ProductSpace::Vector>(x);
             if( ( x_.productSpace().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
                 ( x_.productSpace().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
               boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
@@ -210,9 +209,9 @@ namespace Algorithm
             return;
           }
 
-          if( isAny<ProductSpaceElement>(y))
+          if( isAny<ProductSpace::Vector>(y))
           {
-            auto& y_ = cast_ref<ProductSpaceElement>(y);
+            auto& y_ = cast_ref<ProductSpace::Vector>(y);
             if( ( y_.productSpace().isPrimalSubSpaceId(0) && y_.isPrimalEnabled() ) ||
                 ( y_.productSpace().isDualSubSpaceId(0) && y_.isDualEnabled() ) )
               boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(y_.variable(0)).impl().data) = boost::fusion::at_c<0>(x.data);
@@ -229,15 +228,15 @@ namespace Algorithm
       struct Copy<n,n>
       {
         template <class Description>
-        static void apply(const ProductSpaceElement&, ::Kaskade::VariableSet<Description>&)
+        static void apply(const ProductSpace::Vector&, ::Kaskade::VariableSet<Description>&)
         {}
 
         template <class Description, class CoeffVector>
-        static void toCoefficientVector(const ProductSpaceElement&, CoeffVector&)
+        static void toCoefficientVector(const ProductSpace::Vector&, CoeffVector&)
         {}
 
         template <class Description, class CoeffVector>
-        static void fromCoefficientVector(const CoeffVector&, ProductSpaceElement&)
+        static void fromCoefficientVector(const CoeffVector&, ProductSpace::Vector&)
         {}
       };
     }

@@ -4,7 +4,7 @@
 #include <dolfin.h>
 
 #include "../../vector.hh"
-#include "../../vectorSpace.hh"
+#include "vectorSpace.hh"
 #include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/Mixins/eps.hh"
@@ -17,7 +17,7 @@ namespace Algorithm
     class Vector : public VectorBase<Vector>, public Mixin::Impl<dolfin::Function> , public Mixin::Eps
     {
     public:
-      explicit Vector(const Algorithm::VectorSpace& space);
+      explicit Vector(const ::Algorithm::VectorSpace& space);
 
       Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space);
 

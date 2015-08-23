@@ -1,8 +1,6 @@
 #include "inducedScalarProduct.hh"
 
-#include "FunctionSpaces/ProductSpace/productSpace.hh"
-#include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-
+#include "FunctionSpaces/productSpace.hh"
 #include "Util/cast.hh"
 
 #include <utility>
@@ -25,8 +23,8 @@ namespace Algorithm
 
   double PrimalInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
   {
-    const auto& xx = cast_ref<ProductSpaceElement>(x);
-    const auto& yy = cast_ref<ProductSpaceElement>(y);
+    const auto& xx = cast_ref<ProductSpace::Vector>(x);
+    const auto& yy = cast_ref<ProductSpace::Vector>(y);
 
     auto result = 0.;
 

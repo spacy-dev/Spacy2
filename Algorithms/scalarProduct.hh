@@ -1,21 +1,15 @@
 #ifndef ALGORITHM_SCALARPRODUCT_HH
 #define ALGORITHM_SCALARPRODUCT_HH
 
-#include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
-#include <boost/type_erasure/callable.hpp>
-
-#include "Util/conceptBase.hh"
-
-#include "vector.hh"
+#include "Util/Concepts/scalarProductConcept.hh"
 
 namespace Algorithm
 {
-  using ScalarProductConcept = boost::type_erasure::callable<double(const Vector&,const Vector&), const boost::type_erasure::_self>;
-
   /**
-   * @brief Norm class. Plug your implementations in here.
+   * @brief Scalar product class.  Can store objects that satisfy the requirements of ScalarProductConcept.
+   * @see ScalarProductConcept
    */
-  using ScalarProduct = boost::type_erasure::any< boost::mpl::vector< ConceptBase , ScalarProductConcept > >;
+  using ScalarProduct = boost::type_erasure::any< ScalarProductConcept >;
 }
 #endif // ALGORITHMS_SCALARPRODUCT_HH

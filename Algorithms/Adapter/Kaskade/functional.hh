@@ -6,6 +6,7 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
+#include "../../operator.hh"
 #include "../../functional.hh"
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"

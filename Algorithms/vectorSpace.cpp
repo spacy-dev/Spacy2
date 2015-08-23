@@ -24,13 +24,15 @@ namespace Algorithm
       ScalarProduct sp_;
     };
   }
-  VectorSpace::VectorSpace(VectorSpaceImpl impl, Norm norm)
-    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)),
+
+
+  VectorSpace::VectorSpace(VectorCreator impl, Norm norm)
+    : Mixin::Impl<VectorCreator>(std::move(impl)),
       norm_(norm)
   {}
 
   VectorSpace::VectorSpace(VectorSpace&& other)
-    : Mixin::Impl<VectorSpaceImpl>(other.impl()) ,
+    : Mixin::Impl<VectorCreator>(other.impl()) ,
       norm_(std::move(other.norm_)) ,
       sp_(std::move(other.sp_)) ,
       index_(std::move(other.index_)) ,
@@ -55,7 +57,7 @@ namespace Algorithm
 
   Vector VectorSpace::element() const
   {
-    return impl().element(this);
+    return impl()(this);
   }
 
   unsigned VectorSpace::index() const
@@ -120,12 +122,12 @@ namespace Algorithm
     return sp_ != nullptr;
   }
 
-  VectorSpace makeBanachSpace(VectorSpaceImpl impl, Norm norm)
+  VectorSpace makeBanachSpace(VectorCreator impl, Norm norm)
   {
     return VectorSpace{std::move(impl),std::move(norm)};
   }
 
-  VectorSpace makeHilbertSpace(VectorSpaceImpl impl, ScalarProduct scalarProduct)
+  VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct)
   {
     auto V = VectorSpace{std::move(impl),HilbertSpaceNorm(scalarProduct)};
     V.setScalarProduct(std::move(scalarProduct));
