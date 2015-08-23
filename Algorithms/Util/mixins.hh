@@ -3,7 +3,6 @@
 
 #include "Mixins/absoluteAccuracy.hh"
 #include "Mixins/adjointIndex.hh"
-#include "Mixins/cloneable.hh"
 #include "Mixins/contractionRate.hh"
 #include "Mixins/controlIndex.hh"
 #include "Mixins/disableAssembly.hh"

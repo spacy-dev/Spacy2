@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 #define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 
+#include "linearSolver.hh"
+#include "operator.hh"
 #include "vector.hh"
 #include "Algorithm/dampingFactor.hh"
 #include "Util/Mixins/eps.hh"
@@ -8,11 +10,6 @@
 
 namespace Algorithm
 {
-  /// \cond
-  class Operator;
-  class LinearSolver;
-  /// \endcond
-
   namespace Newton
   {
     namespace DampingStrategy

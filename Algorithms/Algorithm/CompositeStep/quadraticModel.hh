@@ -3,21 +3,18 @@
 
 #include <cassert>
 
+#include "functional.hh"
 #include "scalarProduct.hh"
 #include "vector.hh"
 #include "Algorithm/Functions_1D/quadratic.hh"
 
 namespace Algorithm
 {
-  /// \cond
-  class Functional;
-  /// \endcond
-
   namespace CompositeStep
   {
     Functions_1D::Quadratic makeQuadraticModel(double nu,
                                       const Vector& dn, const Vector& dt,
-                                      const Functional& f, const Vector& x);
+                                      const C2Functional& f, const Vector& x);
 
     Functions_1D::Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt);
 
@@ -35,7 +32,7 @@ namespace Algorithm
     };
 
     CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
-                              const Functional& f, const Vector& x, double omega);
+                              const C2Functional& f, const Vector& x, double omega);
 
     template <class Model>
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)

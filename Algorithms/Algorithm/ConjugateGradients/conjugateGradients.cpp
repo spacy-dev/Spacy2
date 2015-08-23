@@ -11,6 +11,18 @@
 
 namespace Algorithm
 {
+  CGMethod::CGMethod(Operator A, CallableOperator P, const std::string& type)
+    : A_(std::move(A)), P_(std::move(P)),
+      terminate(std::make_shared< RelativeEnergyError >()), type_(type)
+  {
+    attachEps(terminate.get());
+    attachAbsoluteAccuracy(terminate.get());
+    attachRelativeAccuracy(terminate.get());
+    attachVerbosity(terminate.get());
+    attachMaxSteps(terminate.get());
+    assert( type=="CG" || type=="RCG" || type=="TCG" || type=="TRCG" );
+  }
+
   Vector CGMethod::solve(const Vector& x, const Vector& b, double tolerance) const
   {
     terminate->setRelativeAccuracy(tolerance);
@@ -19,7 +31,7 @@ namespace Algorithm
 
   Vector CGMethod::solve(const Vector& b) const
   {
-    auto x = Vector( A_.impl().domain().element() );
+    auto x = A_.domain().element();
     return solve(x,b);
   }
 
@@ -55,7 +67,7 @@ namespace Algorithm
     return sqrt(energyNorm2);
   }
 
-  const Operator& CGMethod::P() const
+  const CallableOperator& CGMethod::P() const
   {
     return P_;
   }

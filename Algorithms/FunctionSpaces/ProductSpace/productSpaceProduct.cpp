@@ -3,7 +3,7 @@
 #include "productSpace.hh"
 #include "productSpaceElement.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 namespace Algorithm
 {
@@ -11,8 +11,8 @@ namespace Algorithm
   {
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpaceProduct",x.spaceIndex(),y.spaceIndex());
 
-    const auto& x_ = castAny<ProductSpaceElement>(x);
-    const auto& y_ = castAny<ProductSpaceElement>(y);
+    const auto& x_ = cast_ref<ProductSpaceElement>(x);
+    const auto& y_ = cast_ref<ProductSpaceElement>(y);
 
     if( x_.isPrimalDualProductSpaceElement() )
     {

@@ -58,20 +58,7 @@ namespace Algorithm
      * \param P preconditioner
      * \param type conjugate gradient type ("CG", "RCG", "TCG" or "TRCG")
      */
-    template <class Op1, class Op2,
-              class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op1> >::value>,
-              class = std::enable_if_t<std::is_base_of<Operator,std::decay_t<Op2> >::value> >
-    CGMethod(Op1&& A, Op2&& P, const std::string& type = "CG" ) :
-        A_(std::forward<Op1>(A)), P_(std::forward<Op2>(P)),
-        terminate(std::make_shared< RelativeEnergyError >()), type_(type)
-    {
-      attachEps(terminate.get());
-      attachAbsoluteAccuracy(terminate.get());
-      attachRelativeAccuracy(terminate.get());
-      attachVerbosity(terminate.get());
-      attachMaxSteps(terminate.get());
-      assert( type=="CG" || type=="RCG" || type=="TCG" || type=="TRCG" );
-    }
+    CGMethod(Operator A, CallableOperator P, const std::string& type = "CG" );
 
     /**
      * @param x initial guess
@@ -122,7 +109,7 @@ namespace Algorithm
 
     void setType(const std::string& otherType);
 
-    const Operator& P() const;
+    const CallableOperator& P() const;
 
     const Operator& A() const;
 
@@ -165,7 +152,7 @@ namespace Algorithm
 
 
     Operator A_;
-    Operator P_;
+    CallableOperator P_;
     std::shared_ptr< CGTerminationCriterion > terminate = nullptr;
     mutable Result result = Result::Failed; ///< information about reason for termination
     mutable Nonconvexity nonconvexity = Nonconvexity::None;

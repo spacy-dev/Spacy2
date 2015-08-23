@@ -1,7 +1,7 @@
 #include "scalarProducts.hh"
 
 #include "vector.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 namespace Algorithm
 {
@@ -9,7 +9,7 @@ namespace Algorithm
   {
     double l2Product::operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
     {
-      return castAny<Vector>(x).impl().vector()->inner( *castAny<Vector>(y).impl().vector() );
+      return cast_ref<Vector>(x).impl().vector()->inner( *cast_ref<Vector>(y).impl().vector() );
     }
 
   }

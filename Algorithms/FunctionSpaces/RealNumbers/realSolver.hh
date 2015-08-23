@@ -1,24 +1,18 @@
 #ifndef ALGORITHM_REALNUMBERS_REALSOLVER_HH
 #define ALGORITHM_REALNUMBERS_REALSOLVER_HH
 
-#include "Interface/abstractLinearSolver.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
-  /// \cond
-  class VectorSpace;
-  /// \endcond
-
-  class RealSolver : public Interface::AbstractLinearSolver
+  class RealSolver
   {
   public:
-    RealSolver(double value, VectorSpace* domain, VectorSpace* range);
+    RealSolver(double value);
 
-    Vector operator()(const Vector& y) const final override;
+    Vector operator()(const Vector& y) const;
 
   private:
-    RealSolver* cloneImpl() const;
-
     double value_;
   };
 }

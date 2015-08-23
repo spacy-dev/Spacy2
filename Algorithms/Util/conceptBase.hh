@@ -10,7 +10,7 @@ namespace Algorithm
   boost::mpl::vector<
     // copy
     boost::type_erasure::copy_constructible<> ,
-    // run-time type information for any_cast
+    // run-time type information for cast_ref
     boost::type_erasure::typeid_<> ,
     boost::type_erasure::relaxed
   >;

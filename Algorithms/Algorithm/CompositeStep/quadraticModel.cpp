@@ -13,7 +13,7 @@ namespace Algorithm
   {
     namespace
     {
-      auto quadraticCoefficients(double nu, const Vector& dn, const Vector& dt, const Functional &L, const Vector& x)
+      auto quadraticCoefficients(double nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
       {
         auto constant = L(x) + nu*L.d1(x,dn) + 0.5*nu*nu*L.d2(x,dn,dn);
         auto linear = L.d1(x,dt) + nu*L.d2(x,dn,dt);
@@ -23,7 +23,7 @@ namespace Algorithm
     }
 
 
-    Functions_1D::Quadratic makeQuadraticModel(double nu, const Vector& dn, const Vector& dt, const Functional &L, const Vector& x)
+    Functions_1D::Quadratic makeQuadraticModel(double nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
     {
       return create<Functions_1D::Quadratic>(quadraticCoefficients(nu,dn,dt,L,x));
     }
@@ -35,7 +35,7 @@ namespace Algorithm
     }
 
     CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
-                              const Functional& f, const Vector& x, double omega)
+                              const C2Functional& f, const Vector& x, double omega)
     {
       return CubicModel( makeQuadraticModel(nu,dn,dt,f,x), makeQuadraticNormModel(nu,dn,dt), omega );
     }

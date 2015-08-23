@@ -2,7 +2,6 @@
 #define ALGORITHM_FUNCTIONSPACES_REALNUMBERS_REALSPACE_HH
 
 #include "vector.hh"
-#include "real.hh"
 
 namespace Algorithm
 {

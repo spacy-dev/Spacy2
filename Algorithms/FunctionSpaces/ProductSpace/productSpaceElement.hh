@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "vector.hh"
-#include "Interface/vectorBase.hh"
+#include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/primalDualSwitch.hh"
 
 namespace Algorithm
@@ -28,11 +28,6 @@ namespace Algorithm
 
     ProductSpaceElement(const ProductSpaceElement& other);
 
-//    void copyTo(Vector &) const;
-
-    /// Print to os.
-//    void print(std::ostream& os) const;
-
     /// Assignment.
     ProductSpaceElement& operator=(const ProductSpaceElement& y);
 
@@ -52,15 +47,6 @@ namespace Algorithm
     ProductSpaceElement operator- () const;
 
     bool operator==(const ProductSpaceElement& y) const;
-
-    /// Access value.
-    double& coefficient(unsigned);
-
-    /// Access value.
-    const double& coefficient(unsigned) const;
-
-    /// Number of entries in coefficient vector.
-    unsigned size() const;
 
     Vector& variable(unsigned i);
 
@@ -86,8 +72,6 @@ namespace Algorithm
     double operator()(const ProductSpaceElement& y) const;
 
   private:
-//    ProductSpaceElement* cloneImpl() const;
-
     std::vector<Vector> variables_ ;
   };
 }

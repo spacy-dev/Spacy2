@@ -1,6 +1,7 @@
 #include "productSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
+#include "Util/cast.hh"
 
 #include "productSpaceElement.hh"
 #include "productSpaceProduct.hh"
@@ -8,7 +9,6 @@
 #include "../../vector.hh"
 
 #include <algorithm>
-#include <boost/type_erasure/any_cast.hpp>
 
 namespace Algorithm
 {
@@ -50,8 +50,8 @@ namespace Algorithm
       dualMap_[dualSubSpaceIds[i]] = i;
 
     spaces_ = std::vector<std::shared_ptr<VectorSpace> >(2,nullptr);
-    spaces_[0] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,primalSubSpaceIds_) ) , ProductSpaceProduct() );
-    spaces_[1] = std::make_shared<VectorSpace>( ProductSpace( extractSubSpaces(spaces,dualSubSpaceIds_) ) , ProductSpaceProduct() );
+    spaces_[0] = std::make_shared<VectorSpace>( makeHilbertSpace( ProductSpace{ extractSubSpaces(spaces,primalSubSpaceIds_) } , ProductSpaceProduct{} ) );
+    spaces_[1] = std::make_shared<VectorSpace>( makeHilbertSpace( ProductSpace{ extractSubSpaces(spaces,dualSubSpaceIds_) } , ProductSpaceProduct{} ) );
   }
 
   ProductSpace::ProductSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
@@ -72,8 +72,8 @@ namespace Algorithm
   {
     if( isPrimalDualProductSpace() )
     {
-      if( isPrimalSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[0]->impl()).subSpace(primalMap_.find(i)->second);
-      if( isDualSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[1]->impl()).subSpace(dualMap_.find(i)->second);
+      if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace>(spaces_[0]->impl()).subSpace(primalMap_.find(i)->second);
+      if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace>(spaces_[1]->impl()).subSpace(dualMap_.find(i)->second);
     }
     return *spaces_[i];
   }
@@ -82,8 +82,8 @@ namespace Algorithm
   {
     if( isPrimalDualProductSpace() )
     {
-      if( isPrimalSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[0]->impl()).sharedSubSpace(primalMap_.find(i)->second);
-      if( isDualSubSpaceId(i) ) return boost::type_erasure::any_cast<const ProductSpace&>(spaces_[1]->impl()).sharedSubSpace(dualMap_.find(i)->second);
+      if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace>(spaces_[0]->impl()).sharedSubSpace(primalMap_.find(i)->second);
+      if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace>(spaces_[1]->impl()).sharedSubSpace(dualMap_.find(i)->second);
     }
     return spaces_[i];
   }
@@ -176,8 +176,7 @@ namespace Algorithm
                                 const std::vector<unsigned>& primalSubSpaceIds,
                                 const std::vector<unsigned>& dualSubSpaceIds)
   {
-    return VectorSpace( ProductSpace( spaces , primalSubSpaceIds , dualSubSpaceIds ) , ProductSpaceProduct() );
-//    return createFromSharedImpl< ::Algorithm::VectorSpace , ::Algorithm::ProductSpace >( spaces , primalSubSpaceIds , dualSubSpaceIds );
+    return makeHilbertSpace( ProductSpace{ spaces , primalSubSpaceIds , dualSubSpaceIds } , ProductSpaceProduct{} );
   }
 
 }

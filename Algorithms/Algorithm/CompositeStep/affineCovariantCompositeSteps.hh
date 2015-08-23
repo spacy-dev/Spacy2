@@ -5,28 +5,24 @@
 #include <string>
 #include <tuple>
 
+#include "linearSolver.hh"
 #include "functional.hh"
 #include "vector.hh"
 #include "../parameter.hh"
-#include "quadraticModel.hh"
 #include "Algorithm/lipschitzConstant.hh"
 #include "Util/mixins.hh"
-#include "hilbertSpaceNorm.hh"
 
 namespace Algorithm
 {
   /// \cond
-  class CubicModel;
-  class LinearSolver;
+  namespace CompositeStep{ class CubicModel; }
   /// \endcond
 
   struct CompositeStepParameter
   {
     double etaMin = 0.5;
     double rejectionTolerance = 0.1;
-
     double dampingTolerance = 1e-3;
-
   };
 
   class AffineCovariantCompositeSteps :
@@ -41,7 +37,7 @@ namespace Algorithm
     enum class AcceptanceTest;
 
   public:
-    AffineCovariantCompositeSteps(const Functional& N, const Functional& L);
+    AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L);
 
     Vector solve();
 
@@ -53,7 +49,7 @@ namespace Algorithm
     Vector computeMinimumNormCorrection(const Vector& x) const;
     Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
     Vector computeLagrangeMultiplier(const Vector& x) const;
-    std::unique_ptr<LinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
+    std::unique_ptr<GeneralLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
 
     bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
 
@@ -70,11 +66,12 @@ namespace Algorithm
     void regularityTest(double nu, double tau) const;
     AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
 
-    std::unique_ptr<Functional> N_, L_;
+    std::unique_ptr<C2Functional> N_, L_;
 
     LipschitzConstant omegaL, omegaC;
 
-    mutable std::unique_ptr<LinearSolver> normalSolver = nullptr, tangentialSolver = nullptr;
+    mutable std::unique_ptr<LinearSolver> normalSolver = nullptr;
+    mutable std::unique_ptr<GeneralLinearSolver> tangentialSolver = nullptr;
 
     std::string spacing = "  ", spacing2 = "    ";
 

@@ -35,13 +35,15 @@ namespace Algorithm
     };
 
     template <class FenicsSpace>
-    auto makeFunctionSpace(const FenicsSpace& space)
+    auto makeHilbertSpace(const FenicsSpace& space)
     {
-      return ::Algorithm::VectorSpace{ Fenics::VectorSpace{space} , l2Product() };
-//      ::Algorithm::VectorSpace vs(space);
-//      space.setScalarProduct( l2ScalarProduct() );
-//      return space;
-//      return createFromSharedImpl< ::Algorithm::VectorSpace, Fenics::VectorSpace >(space);
+      return ::Algorithm::makeHilbertSpace( Fenics::VectorSpace{space} , l2Product{} );
+    }
+
+    template <class FenicsSpace>
+    auto makeHilbertSpace(const FenicsSpace& space, const std::unordered_map<size_t,size_t>& dofmap)
+    {
+      return ::Algorithm::makeHilbertSpace( Fenics::VectorSpace{space,dofmap} , l2Product{} );
     }
 
     ::Algorithm::VectorSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds);

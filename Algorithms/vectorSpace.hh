@@ -39,9 +39,12 @@ namespace Algorithm
     /**
      * @brief Construct function space from implementation derived from AbstractVectorSpace.
      */
-//    VectorSpace(VectorSpaceImpl impl, Norm norm);
+    VectorSpace(VectorSpaceImpl impl, Norm norm);
 
-    VectorSpace(const VectorSpaceImpl& impl, const ScalarProduct& sp);
+    /**
+     * @brief Move vector space.
+     */
+    VectorSpace(VectorSpace&& other);
 
     /**
      * @brief Change norm of space.
@@ -114,11 +117,21 @@ namespace Algorithm
 
   private:
     Norm norm_;
-    std::shared_ptr<ScalarProduct> sp_;
+    std::shared_ptr<ScalarProduct> sp_ = nullptr;
     unsigned index_ = Detail::spaceIndex++;
     std::vector<unsigned> primalSpaces_, dualSpaces_; ///< primal and dual spaces with respect to this space
     VectorSpace* dualSpace_;
   };
+
+  /**
+   * @brief Construct Banach space.
+   */
+  VectorSpace makeBanachSpace(VectorSpaceImpl impl, Norm norm);
+
+  /**
+   * @brief Construct Hilbert space.
+   */
+  VectorSpace makeHilbertSpace(VectorSpaceImpl impl, ScalarProduct scalarProduct);
 
   /**
    * @brief Relate function spaces.

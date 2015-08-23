@@ -7,17 +7,17 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
+#include "linearSolver.hh"
+#include "../../operator.hh"
 #include "../../vectorSpace.hh"
 #include "vectorSpace.hh"
-#include "../../operator.hh"
-#include "Interface/Operator/linearizedOperator.hh"
-#include "Interface/Operator/abstractOperator.hh"
 #include "Util/Mixins/disableAssembly.hh"
-#include "Util/castTo.hh"
-#include "Util/create.hh"
+#include "Util/cast.hh"
+#include "Util/Base/operatorBase.hh"
+#include "linearizedOperator.hh"
 
 #include "directSolver.hh"
-#include "vector.hh" // copy
+#include "vector.hh"
 
 namespace Algorithm
 {
@@ -25,7 +25,7 @@ namespace Algorithm
   {
     template <class OperatorImpl>
     class Operator :
-        public Interface::AbstractOperator , public Mixin::DisableAssembly
+        public OperatorBase , public Mixin::DisableAssembly
     {
       using AnsatzVariableSetDescription = typename OperatorImpl::AnsatzVars;
       using TestVariableSetDescription = typename OperatorImpl::TestVars;
@@ -43,7 +43,7 @@ namespace Algorithm
                ::Algorithm::VectorSpace* domain_, ::Algorithm::VectorSpace* range_,
                int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
-        : AbstractOperator(domain_,range_),
+        : OperatorBase(domain_,range_),
           f_(f),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) ),
           assembler_(spaces_),
@@ -57,7 +57,7 @@ namespace Algorithm
       {}
 
       Operator(const Operator& g)
-        : AbstractOperator(g.domain_ptr(),g.range_ptr()),
+        : OperatorBase(g.domain_ptr(),g.range_ptr()),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -66,16 +66,25 @@ namespace Algorithm
         if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
       }
 
+      Operator(Operator&& g)
+        : OperatorBase(g.domain_ptr(),g.range_ptr()),
+          DisableAssembly(g.assemblyIsDisabled()),
+          f_(std::move(g.f_)), spaces_(std::move(g.spaces_)),
+          assembler_(spaces_),
+          rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_)
+      {
+        if( g.A_ != nullptr ) A_ = std::move(g.A_);
+      }
 
       Operator(const Operator& g, bool disableAssembly)
-        : AbstractOperator(g.domain_ptr(),g.range_ptr()),
+        : OperatorBase(g.domain_ptr(),g.range_ptr()),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
           A_( std::make_unique<KaskadeOperator>(*g.A_) )
       {}
 
-      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
@@ -86,7 +95,7 @@ namespace Algorithm
         return y;
       }
 
-      ::Algorithm::Vector d1(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const final override
+      ::Algorithm::Vector d1(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
@@ -100,6 +109,19 @@ namespace Algorithm
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
+      }
+
+      LinearOperator linearization(const ::Algorithm::Vector& x) const
+      {
+//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        return LinearizedOperator(Operator<OperatorImpl>(*this,true),x);
+      }
+
+      LinearSolver solver() const
+      {
+        assert (A_ != nullptr);
+        return DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription>( *A_ , spaces_, range_ptr() , domain_ptr() );
       }
 
     protected:
@@ -133,24 +155,6 @@ namespace Algorithm
         old_X_dA_ = x;
       }
 
-      Operator* cloneImpl() const final override
-      {
-        return new Operator(*this);
-      }
-
-      std::unique_ptr<Interface::LinearizedOperator> makeLinearization(const ::Algorithm::Vector& x) const
-      {
-//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
-        primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return std::make_unique<Interface::LinearizedOperator>(std::make_unique< Operator<OperatorImpl> >(*this,true),x);
-      }
-
-      std::unique_ptr<Interface::AbstractLinearSolver> makeSolver() const
-      {
-        assert (A_ != nullptr);
-        return std::make_unique< DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription> >( *A_ , spaces_, range_ptr() , domain_ptr() );
-      }
-
       OperatorImpl f_;
       Spaces spaces_;
       mutable Assembler assembler_;
@@ -169,7 +173,7 @@ namespace Algorithm
                       int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                       int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range , rbegin , rend , cbegin , cend);
+      return Operator<OperatorImpl>( f, domain , range , rbegin , rend , cbegin , cend);
     }
 
     template <class OperatorImpl>
@@ -179,7 +183,7 @@ namespace Algorithm
                       int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                       int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
     {
-      return createFromUniqueImpl< ::Algorithm::Operator , Operator<OperatorImpl> >( f, domain , range , rbegin , rend , cbegin , cend);
+      return Operator<OperatorImpl>( f, domain , range , rbegin , rend , cbegin , cend);
     }
   }
 }

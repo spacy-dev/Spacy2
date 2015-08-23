@@ -1,15 +1,12 @@
 #ifndef AFFINECOVARIANTTERMINATIONCRITERION_HH
 #define AFFINECOVARIANTTERMINATIONCRITERION_HH
 
+#include "operator.hh"
 #include "vector.hh"
 #include "Util/mixins.hh"
 
 namespace Algorithm
 {
-  /// \cond
-  class Operator;
-  /// \endcond
-
   namespace Newton
   {
     namespace TerminationCriterion

@@ -1,73 +1,74 @@
 #ifndef ALGORITHM_FUNCTIONAL_HH
 #define ALGORITHM_FUNCTIONAL_HH
 
-#include <memory>
+#include <boost/mpl/vector.hpp>
+#include <boost/type_erasure/any.hpp>
+#include <boost/type_erasure/callable.hpp>
+#include <boost/type_erasure/member.hpp>
 
-#include "vectorSpace.hh"
+#include "Util/conceptBase.hh"
+
 #include "vector.hh"
-#include "linearOperator.hh"
+#include "vectorSpace.hh"
+#include "operator.hh"
 
-#include "Interface/abstractFunctional.hh"
-#include "Util/Mixins/impl.hh"
+BOOST_TYPE_ERASURE_MEMBER( (has_d1_dual) , d1 , 1 )
+
+BOOST_TYPE_ERASURE_MEMBER( (has_d2) , d2 , 3 )
+
+BOOST_TYPE_ERASURE_MEMBER( (has_d2_dual) , d2 , 2 )
+
+BOOST_TYPE_ERASURE_MEMBER( (has_hessian) , hessian , 1 )
 
 namespace Algorithm
 {
   /**
-   * @brief A functional \f$F\f$.
+   * @brief Concept for functionals.
    */
-  class Functional : public Mixin::UniqueImpl<Interface::AbstractFunctional>
-  {
-  public:
-    /**
-     * @brief Construct functional from implementation.
-     */
-    Functional(std::unique_ptr<Interface::AbstractFunctional>&& implementation);
+  using FunctionalConcept =
+  boost::mpl::vector<
+    boost::type_erasure::callable<double(const Vector&), const boost::type_erasure::_self> ,
+    has_domain<VectorSpace&()> ,
+    has_domain<const VectorSpace&(), const boost::type_erasure::_self> ,
+    has_domain_ptr<VectorSpace*(), const boost::type_erasure::_self>
+  >;
 
-    /**
-     * @brief Evaluate functional \f$F\f$ at \f$x\f$.
-     */
-    double operator()(const Vector& x) const;
+  /**
+   * @brief Concept for differentiable functionals.
+   */
+  using C1FunctionalConcept =
+  boost::mpl::vector<
+    FunctionalConcept ,
+    has_d1<double(const Vector&, const Vector&), const boost::type_erasure::_self> ,
+    has_d1_dual<Vector(const Vector&), const boost::type_erasure::_self>
+  >;
 
-    /**
-     * @brief Compute first directional derivative \f$F(x)'dx\f$ at \f$x\f$ in direction \f$dx\f$.
-     */
-    double d1(const Vector& x, const Vector& dx) const;
+  /**
+   * @brief Concept for twice differentiable functionals.
+   */
+  using C2FunctionalConcept =
+  boost::mpl::vector<
+    C1FunctionalConcept ,
+    has_d2<double(const Vector&,const Vector&,const Vector&), const boost::type_erasure::_self> ,
+    has_d2_dual<Vector(const Vector&,const Vector&), const boost::type_erasure::_self> ,
+    has_hessian<LinearOperator(const Vector&), const boost::type_erasure::_self> ,
+    has_solver<LinearSolver(), const boost::type_erasure::_self>
+  >;
 
-    /**
-     * @brief Compute first directional derivative \f$F(x)': X \rightarrow X^*\f$ at \f$x\f$.
-     */
-    Vector d1(const Vector &x) const;
+  /**
+   * @brief Functional. Plug your implementations in here.
+   */
+  using Functional = boost::type_erasure::any< boost::mpl::vector< ConceptBase , FunctionalConcept > >;
 
-    /**
-     * @brief Compute element of dual space \f$F(x)''dx\f$.
-     */
-    Vector d2(const Vector& x, const Vector& dx) const;
+  /**
+   * @brief Differentiable functional. Plug your implementations in here.
+   */
+  using C1Functional = boost::type_erasure::any< boost::mpl::vector< ConceptBase , C1FunctionalConcept > >;
 
-    /**
-     * @brief Compute second directional derivative \f$F(x)''(dx,dy)\f$ at \f$x\f$ in directions \f$dx\f$ and \f$dy\f$.
-     */
-    double d2(const Vector& x, const Vector& dx, const Vector& dy) const;
-
-
-    /**
-     * @brief Get hessian as linear operator \f$H: X \rightarrow X^* \f$.
-     */
-    LinearOperator hessian(const Vector& x) const;
-
-    /**
-     * @brief Access pointer to underlying domain.
-     */
-    VectorSpace* domain_ptr() const;
-
-    /**
-     * @brief Access underlying domain.
-     */
-    VectorSpace& domain();
-
-    /**
-     * @brief Access underlying domain.
-     */
-    const VectorSpace& domain() const;
-  };
+  /**
+   * @brief Twice differentiable functional. Plug your implementations in here.
+   */
+  using C2Functional = boost::type_erasure::any< boost::mpl::vector< ConceptBase , C2FunctionalConcept > >;
 }
+
 #endif // ALGORITHM_FUNCTIONAL_HH

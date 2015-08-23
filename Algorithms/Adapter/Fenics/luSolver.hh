@@ -7,7 +7,7 @@
 #include <dolfin.h>
 
 #include "../../vector.hh"
-#include "Interface/abstractLinearSolver.hh"
+#include "Util/Base/operatorBase.hh"
 #include "Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 namespace Algorithm
@@ -16,18 +16,16 @@ namespace Algorithm
 
   namespace Fenics
   {
-    class LUSolver : public Interface::AbstractLinearSolver
+    class LUSolver : public OperatorBase
     {
     public:
       LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
                ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range);
 
 
-      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const final override;
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
 
     private:
-      LUSolver* cloneImpl() const;
-
       mutable dolfin::LUSolver solver_;
       const dolfin::FunctionSpace& productSpace_;
     };

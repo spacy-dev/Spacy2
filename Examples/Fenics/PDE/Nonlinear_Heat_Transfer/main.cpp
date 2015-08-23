@@ -3,7 +3,7 @@
 
 #include "Adapter/fenics.hh"
 #include "Algorithm/Newton/newton.hh"
-#include "Interface/inducedScalarProduct.hh"
+#include "inducedScalarProduct.hh"
 
 using namespace dolfin;
 
@@ -58,12 +58,13 @@ int main()
   // Compute solution
   using namespace Algorithm;
 
-  auto domain = Fenics::makeFunctionSpace(V);
-  auto range = Fenics::makeFunctionSpace(V);
+  auto domain = Fenics::makeHilbertSpace(V);
+  auto range = Fenics::makeHilbertSpace(V);
   connectPrimalDual(domain,range);
   
   auto A = Fenics::makeOperator( L , a , bcs , domain , range );
-  domain.setScalarProduct( inducedScalarProduct( A.linearization(domain.element()) ) );
+  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.element()) ) );
+//  range.setScalarProduct( inducedScalarProduct( A.linearization(domain.element()) ) );
 
   auto p = Algorithm::Newton::Parameter{};
   p.setVerbosity(true);

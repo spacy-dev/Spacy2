@@ -1,9 +1,23 @@
 #include "cgSolver.hh"
 
+#include <utility>
+
 namespace Algorithm
 {
+  CGSolver::CGSolver(Operator A_, CallableOperator P_, const std::string& type )
+    : OperatorBase(A_.range_ptr(),A_.domain_ptr()),
+      cg(std::move(A_),std::move(P_),type)
+  {
+    attachEps(&cg);
+    attachAbsoluteAccuracy(&cg.terminationCriterion());
+    attachRelativeAccuracy(&cg.terminationCriterion());
+    attachVerbosity(&cg);
+    attachIterativeRefinements(&cg);
+    attachMaxSteps(&cg);
+  }
+
   CGSolver::CGSolver(const CGSolver& other) :
-    AbstractLinearSolver(other.domain_ptr(),other.range_ptr()),
+    OperatorBase(other.domain_ptr(),other.range_ptr()),
     Mixin::AbsoluteAccuracy(other.absoluteAccuracy()),
     Mixin::RelativeAccuracy(other.relativeAccuracy()),
     Mixin::Eps(other.eps()),
@@ -28,12 +42,12 @@ namespace Algorithm
     return cg;
   }
 
-  bool CGSolver::systemIsPositiveDefinite() const
+  bool CGSolver::isPositiveDefinite() const
   {
     return !cg.encounteredNonConvexity();
   }
 
-  const Operator& CGSolver::P() const
+  const CallableOperator& CGSolver::P() const
   {
     return cg.P();
   }
@@ -43,8 +57,13 @@ namespace Algorithm
     return cg.A();
   }
 
-  CGSolver* CGSolver::cloneImpl() const
+  CGSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy, double eps, bool verbose)
   {
-    return new CGSolver(*this);
+    auto solver = CGSolver(std::move(A), std::move(P), "TRCG");
+    solver.setRelativeAccuracy(relativeAccuracy);
+    solver.setEps(eps);
+    solver.setVerbosity(verbose);
+    return solver;
   }
+
 }

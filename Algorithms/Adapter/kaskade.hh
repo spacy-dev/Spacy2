@@ -1,7 +1,6 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_HH
 #define ALGORITHM_ADAPTER_KASKADE_HH
 
-#include "linearOperator.hh"
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/functional.hh"
 #include "Kaskade/l2Product.hh"

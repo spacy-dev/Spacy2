@@ -54,25 +54,25 @@ namespace Algorithm
 
   Vector& primal(Vector &x)
   {
-    castAny<ProductSpaceElement>(x).disableDual();
+    cast_ref<ProductSpaceElement>(x).disableDual();
     return x;
   }
 
   const Vector& primal(const Vector &x)
   {
-    castAny<ProductSpaceElement>(x).disableDual();
+    cast_ref<ProductSpaceElement>(x).disableDual();
     return x;
   }
 
   Vector& dual(Vector &x)
   {
-    castAny<ProductSpaceElement>(x).disablePrimal();
+    cast_ref<ProductSpaceElement>(x).disablePrimal();
     return x;
   }
 
   const Vector& dual(const Vector &x)
   {
-    castAny<ProductSpaceElement>(x).disablePrimal();
+    cast_ref<ProductSpaceElement>(x).disablePrimal();
     return x;
   }
 }

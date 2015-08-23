@@ -54,36 +54,16 @@ namespace Algorithm
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), Fenics::l2Product());
+        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >( makeHilbertSpace( *subSpace,dofmap) );
       }
       for(size_t i : dualIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >(Fenics::VectorSpace(*subSpace,dofmap), Fenics::l2Product());
+        spaces[i] =  std::make_shared< ::Algorithm::VectorSpace >( makeHilbertSpace( *subSpace,dofmap ) );
       }
 
-      VectorSpaceImpl tmp = ProductSpace( spaces , primalIds , dualIds );
-      return ::Algorithm::VectorSpace( tmp , ProductSpaceProduct() );
+      return makeProductSpace( spaces , primalIds , dualIds );
     }
-//    BanachSpace makeProductSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
-//    {
-//      unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
-//      unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
-//      std::vector<std::shared_ptr<Interface::AbstractVectorSpace> > spaces( 1 + std::max( maxPrimalId , maxDualId ) );
-//      std::vector< std::unordered_map<std::size_t,std::size_t> > dofmaps(spaces.size());
-//      for(size_t i : primalIds)
-//      {
-//        auto subSpace = space[i]->collapse(dofmaps[i]);
-//        spaces[i] =  std::make_shared<FunctionSpace>(*subSpace,dofmaps[i]);
-//      }
-//      for(size_t i : dualIds)
-//      {
-//        auto subSpace = space[i]->collapse(dofmaps[i]);
-//        spaces[i] =  std::make_shared<FunctionSpace>(*subSpace,dofmaps[i]);
-//      }
-
-//      return create_sharedImpl< ::Algorithm::BanachSpace, ProductSpace>( spaces , primalIds , dualIds );
-//    }
   }
 }

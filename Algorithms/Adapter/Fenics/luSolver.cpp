@@ -1,10 +1,7 @@
 #include "luSolver.hh"
 
-#include "vector.hh"
+#include "util.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
-
-#include <string>
-#include <fstream>
 
 namespace Algorithm
 {
@@ -32,7 +29,7 @@ namespace Algorithm
   {
   LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
                      ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range)
-    : Interface::AbstractLinearSolver(domain,range),
+    : OperatorBase(domain,range),
       solver_("umfpack"),
       productSpace_(productSpace)
   {
@@ -45,7 +42,6 @@ namespace Algorithm
 
   ::Algorithm::Vector LUSolver::operator()(const ::Algorithm::Vector& x) const
   {
-
     // Solve linear system
     dolfin::Function tmp(productSpace_);
     auto y_ = std::make_shared<dolfin::Vector>(tmp.vector()->mpi_comm(), tmp.vector()->size()),
@@ -58,22 +54,6 @@ namespace Algorithm
     copy(*y_, y);
     return y;
   }
-
-  LUSolver* LUSolver::cloneImpl() const
-  {
-    return new LUSolver(*this);
-  }
-
-//  std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const dolfin::GenericMatrix& A)
-//  {
-//    return std::make_shared<LUSolver>(A);
-//  }
-
-//  template <class... Args>
-//  std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const Args&...)
-//  {
-//    throw CallOfUndefinedFunctionException("createLUSolver");
-//  }
 
 
 

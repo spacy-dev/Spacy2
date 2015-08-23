@@ -1,29 +1,35 @@
 #ifndef ALGORITHM_LINEAR_SOLVER_HH
 #define ALGORITHM_LINEAR_SOLVER_HH
 
-#include <memory>
+#include <boost/mpl/vector.hpp>
+#include <boost/type_erasure/any.hpp>
+#include <boost/type_erasure/callable.hpp>
+#include <boost/type_erasure/member.hpp>
 
-#include "operator.hh"
+#include "Util/conceptBase.hh"
+
 #include "vector.hh"
+
+BOOST_TYPE_ERASURE_MEMBER( (has_isPositiveDefinite) , isPositiveDefinite , 0 )
 
 namespace Algorithm
 {
-  /// \cond
-  namespace Interface { class AbstractLinearSolver; }
-  class LinearOperator;
-  /// \endcond
+  using OperatorApplyConcept = boost::type_erasure::callable<Vector(const Vector&), const boost::type_erasure::_self>;
 
-  class LinearSolver : public Operator
-  {
-  public:
-    LinearSolver() = default;
+  /**
+   * @brief Norm class. Plug your implementations in here.
+   */
+  using CallableOperator = boost::type_erasure::any< boost::mpl::vector< ConceptBase , OperatorApplyConcept > >;
+  using LinearSolver = CallableOperator;
 
-    LinearSolver(std::unique_ptr<Interface::AbstractLinearSolver>&& impl);
-
-    Vector operator()(const Vector& x) const;
-
-    bool encounteredNonconvexity() const;
-  };
+  using GeneralLinearSolver =
+  boost::type_erasure::any<
+    boost::mpl::vector<
+      ConceptBase ,
+      OperatorApplyConcept ,
+      has_isPositiveDefinite<bool(), const boost::type_erasure::_self>
+    >
+  >;
 }
 
 #endif // ALGORITHM_LINEAR_SOLVER_HH

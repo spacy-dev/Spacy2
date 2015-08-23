@@ -2,8 +2,7 @@
 
 #include "quadraticModel.hh"
 
-#include "Interface/abstractLinearSolver.hh"
-#include "Interface/inducedScalarProduct.hh"
+#include "inducedScalarProduct.hh"
 #include "Util/Exceptions/regularityTestFailedException.hh"
 #include "FunctionSpaces/ProductSpace/productSpaceElement.hh"
 
@@ -21,9 +20,9 @@ namespace Algorithm
 {
   enum class AffineCovariantCompositeSteps::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const Functional& N, const Functional& L)
-    : N_(std::make_unique<Functional>(N)),
-      L_(std::make_unique<Functional>(L))
+  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L)
+    : N_(std::make_unique<C2Functional>(N)),
+      L_(std::make_unique<C2Functional>(L))
   {}
 
   Vector AffineCovariantCompositeSteps::solve()
@@ -40,7 +39,7 @@ namespace Algorithm
     {
       normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-      N_->domain().setScalarProduct( primalInducedScalarProduct( N_->hessian(primal(x)) ) );
+      N_->domain().setScalarProduct( PrimalInducedScalarProduct( N_->hessian(primal(x)) ) );
 
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -95,7 +94,7 @@ namespace Algorithm
     return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
   }
 
-  std::unique_ptr<LinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
+  std::unique_ptr<GeneralLinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
   {
     auto trcgRelativeAccuracy = minimalAccuracy();
     if( tangentialSolver != nullptr && nu == 1 && lastStepWasUndamped )
@@ -110,33 +109,35 @@ namespace Algorithm
       }
     }
 
-    std::unique_ptr<CGSolver> trcg = nullptr;
+//    std::unique_ptr<CGSolver> trcg = nullptr;
 
-    if( is<CGSolver>(normalSolver->impl()) )
-    {
-      const auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
-      if( is<TriangularStateConstraintPreconditioner>(cgSolver.P().impl()))
-        trcg = makeTRCGSolver( L_->hessian(x) ,
-                               cgSolver.P(),
-                               trcgRelativeAccuracy,
-                               eps(),
-                               verbose() );
-    }
+//    if( isAny<CGSolver>(*normalSolver) )
+//    {
+//      const auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
+//      if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+//        trcg = std::make_unique<CGSolver>( makeTRCGSolver( L_->hessian(x) ,
+//                                                           cgSolver.P(),
+//                                                           trcgRelativeAccuracy,
+//                                                           eps(),
+//                                                           verbose() ) );
+//    }
 
-    if( trcg == nullptr )
-      trcg = makeTRCGSolver( L_->hessian(x) ,
-                             *normalSolver,
-                             trcgRelativeAccuracy,
-                             eps(),
-                             verbose() );
-    trcg->setIterativeRefinements(iterativeRefinements());
-    trcg->setDetailedVerbosity(verbose_detailed());
+//    if( trcg == nullptr )
+     auto trcg = CGSolver( makeTRCGSolver( L_->hessian(x) ,
+                                                         *normalSolver,
+                                                         trcgRelativeAccuracy,
+                                                         eps(),
+                                                         verbose() ) );
+    trcg.setIterativeRefinements(iterativeRefinements());
+    trcg.setDetailedVerbosity(verbose_detailed());
     if( norm(primal(x)) > 0)
-      trcg->setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
+      trcg.setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
     else
-      trcg->setAbsoluteAccuracy( eps() );
-    trcg->setMaxSteps(maxSteps());
-    return std::make_unique<LinearSolver>( std::move(trcg) );
+      trcg.setAbsoluteAccuracy( eps() );
+    trcg.setMaxSteps(maxSteps());
+    return std::make_unique<GeneralLinearSolver>(trcg);
+    //return std::move(trcg);
+//    return std::unique_ptr<GeneralLinearSolver>( trcg.release() );
   }
 
   Vector AffineCovariantCompositeSteps::computeNormalStep(const Vector &x) const
@@ -157,18 +158,18 @@ namespace Algorithm
   {
     auto rhs = dual(-L_->d1(x));
     Vector dn0 = 0*x;
-    if( is<CGSolver>(normalSolver->impl()) )
+    if( isAny<CGSolver>(*normalSolver) )
     {
-      auto& cgSolver = castTo<CGSolver>(normalSolver->impl());
+      auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
       cgSolver.setEps(eps());
       cgSolver.setRelativeAccuracy(eps());
       cgSolver.setVerbosity(verbose());
       cgSolver.setDetailedVerbosity(verbose_detailed());
       cgSolver.setIterativeRefinements(iterativeRefinements());
       cgSolver.setMaxSteps(maxSteps());
-      if( is<TriangularStateConstraintPreconditioner>(cgSolver.P().impl()))
+      if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
       {
-        const auto& P = castTo<TriangularStateConstraintPreconditioner>(cgSolver.P().impl());
+        const auto& P = cast_ref<TriangularStateConstraintPreconditioner>(cgSolver.P());
         dn0 = P.kernelOffset(rhs);
         rhs -= cgSolver.A()( dn0 );
       }
@@ -274,7 +275,7 @@ namespace Algorithm
 
   bool AffineCovariantCompositeSteps::convergenceTest(double nu, double tau, double norm_x, double norm_dx)
   {
-    if( tangentialSolver != nullptr && tangentialSolver->encounteredNonconvexity() ) return false;
+    if( tangentialSolver != nullptr && !tangentialSolver->isPositiveDefinite() ) return false;
     if( nu < 1 || tau < 1 ) return false;
 
     if( norm_dx < relativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )

@@ -5,7 +5,7 @@
 
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
-#include "Interface/vectorBase.hh"
+#include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/Mixins/eps.hh"
 
@@ -20,10 +20,6 @@ namespace Algorithm
       explicit Vector(const Algorithm::VectorSpace& space);
 
       Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space);
-
-//      void copyTo(Interface::AbstractVector& y) const;
-
-//      void print(std::ostream& os) const;
 
       Vector& operator=(const dolfin::Function& v);
 
@@ -41,10 +37,6 @@ namespace Algorithm
 
       bool operator==(const Vector& y) const;
 
-      double& coefficient(unsigned i);
-
-      const double& coefficient(unsigned i) const;
-
       unsigned size() const;
 
       dolfin::Function& operator[](unsigned i);
@@ -52,17 +44,7 @@ namespace Algorithm
       const dolfin::Function& operator[](unsigned i) const;
 
       double operator()(const Vector& y) const;
-//    private:
-
-//      Vector* cloneImpl() const;
     };
-
-
-    void copy(const ::Algorithm::Vector& x, dolfin::GenericVector& y, bool verbose = false);
-
-    void copy(const ::Algorithm::Vector& x, dolfin::Function& y, bool verbose = false);
-
-    void copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x, bool verbose = false);
   }
 }
 

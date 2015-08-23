@@ -2,7 +2,7 @@
 #define ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH
 
 #include "vector.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 namespace Algorithm
 {
@@ -70,12 +70,12 @@ namespace Algorithm
   template <class F>
   void primalDualIgnoreReset(F&& f, const Vector& x)
   {
-    if( isAny<Mixin::PrimalDualSwitch>(x) ) castAny<Mixin::PrimalDualSwitch>(x).disableReset();
+    if( isAny<Mixin::PrimalDualSwitch>(x) ) cast_ref<Mixin::PrimalDualSwitch>(x).disableReset();
     f(x);
     if( isAny<Mixin::PrimalDualSwitch>(x) )
     {
-      castAny<Mixin::PrimalDualSwitch>(x).enableReset();
-      castAny<Mixin::PrimalDualSwitch>(x).reset();
+      cast_ref<Mixin::PrimalDualSwitch>(x).enableReset();
+      cast_ref<Mixin::PrimalDualSwitch>(x).reset();
     }
   }
 

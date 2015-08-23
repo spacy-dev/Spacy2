@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
   std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
 
   VarSet x(desc);
-  Algorithm::Kaskade::copy(result.impl(),x);
+  Algorithm::Kaskade::copy(result,x);
 
 
   IoOptions options;

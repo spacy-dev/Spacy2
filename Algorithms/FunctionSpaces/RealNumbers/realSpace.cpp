@@ -1,8 +1,7 @@
 #include "realSpace.hh"
 
+#include "real.hh"
 #include "realProduct.hh"
-
-#include "vector.hh"
 #include "vectorSpace.hh"
 
 namespace Algorithm
@@ -15,6 +14,6 @@ namespace Algorithm
 
   VectorSpace makeRealSpace()
   {
-    return VectorSpace{ RealSpace{} , RealProduct{} };
+    return makeHilbertSpace( RealSpace{} , RealProduct{} );
   }
 }

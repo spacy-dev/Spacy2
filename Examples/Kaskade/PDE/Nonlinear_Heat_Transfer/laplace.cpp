@@ -12,7 +12,7 @@
 
 #include "Adapter/kaskade.hh"
 #include "Algorithm/Newton/newton.hh"
-#include "Interface/inducedScalarProduct.hh"
+#include "inducedScalarProduct.hh"
 
 #include "laplace.hh"
 
@@ -46,12 +46,12 @@ int main()
   Functional F;
   
   // compute solution
-  auto domain = Algorithm::Kaskade::makeVectorSpace<VariableSetDesc>( temperatureSpace );
-  auto range = Algorithm::Kaskade::makeVectorSpace<VariableSetDesc>( temperatureSpace );
+  auto domain = Algorithm::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
+  auto range = Algorithm::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
   Algorithm::connectPrimalDual(domain,range);
 
-  auto f = Algorithm::Kaskade::makeOperator( F , domain.sharedImpl() , range.sharedImpl() );
-  domain.setScalarProduct( inducedScalarProduct(f.linearization(domain.element())) );
+  auto f = Algorithm::Kaskade::makeOperator( F , domain , range );
+  domain.setScalarProduct( Algorithm::InducedScalarProduct(f.linearization(domain.element())) );
   
   auto p = Algorithm::Newton::Parameter{};
   p.setVerbosity(true);

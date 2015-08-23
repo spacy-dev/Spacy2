@@ -1,16 +1,12 @@
 #include "newton.hh"
 
-#include "operator.hh"
-#include "linearOperator.hh"
-#include "vector.hh"
-
 #include <iostream>
 
 namespace Algorithm
 {
   namespace Newton
   {
-    Vector newton(const Operator& F, const Vector& x0,
+    Vector newton(const C1Operator& F, const Vector& x0,
                   const DampingStrategy::Base& dampingFactor,
                   const TerminationCriterion::Base& terminationCriterion,
                   const Newton::Parameter p)
@@ -44,34 +40,34 @@ namespace Algorithm
   }
 
 
-  Vector localNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
+  Vector localNewton(const C1Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
   {
     return Newton::newton<Newton::DampingStrategy::None,Newton::TerminationCriterion::AffineCovariant>(F,x0,p);
   }
 
-  Vector localNewton(const Operator& F, const Newton::Parameter p)
+  Vector localNewton(const C1Operator& F, const Newton::Parameter p)
   {
     return localNewton(F,F.domain().element(),p);
   }
 
 
-  Vector covariantNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
+  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
   {
     return Newton::newton<Newton::DampingStrategy::AffineCovariant,Newton::TerminationCriterion::AffineCovariant>(F,x0,p);
   }
 
-  Vector covariantNewton(const Operator& F, const Algorithm::Newton::Parameter p)
+  Vector covariantNewton(const C1Operator& F, const Algorithm::Newton::Parameter p)
   {
     return covariantNewton(F,F.domain().element(),p);
   }
 
 
-  Vector contravariantNewton(const Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
+  Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Algorithm::Newton::Parameter p)
   {
     return Newton::newton<Newton::DampingStrategy::AffineContravariant,Newton::TerminationCriterion::AffineContravariant>(F,x0,p);
   }
 
-  Vector contravariantNewton(const Operator& F, const Algorithm::Newton::Parameter p)
+  Vector contravariantNewton(const C1Operator& F, const Algorithm::Newton::Parameter p)
   {
     return contravariantNewton(F,F.domain().element(),p);
   }

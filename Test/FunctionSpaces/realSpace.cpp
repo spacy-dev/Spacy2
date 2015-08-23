@@ -1,42 +1,44 @@
 #include <gtest/gtest.h>
 
-#include "../../Algorithms/norm.hh"
-#include "../../Algorithms/scalarProduct.hh"
-#include "../../Algorithms/FunctionSpaces/RealNumbers/real.hh"
-#include "../../Algorithms/FunctionSpaces/RealNumbers/realSpace.hh"
-#include "../../Algorithms/FunctionSpaces/RealNumbers/realProduct.hh"
-#include "../../Algorithms/spaces.hh"
+#include "norm.hh"
+#include "scalarProduct.hh"
+#include "FunctionSpaces/RealNumbers/real.hh"
+#include "FunctionSpaces/RealNumbers/realSpace.hh"
+#include "FunctionSpaces/RealNumbers/realProduct.hh"
+#include "Util/cast.hh"
 
 TEST(RealSpaceTest,ElementTest)
 {
   using namespace Algorithm;
-  auto x = Spaces::R.element();
-  EXPECT_EQ( dynamic_cast<const Real*>(&x.impl()) == nullptr , false );
-  EXPECT_DOUBLE_EQ( x.coefficient(0) , 0. );
+  auto R = makeRealSpace();
+  auto x = R.element();
+  EXPECT_DOUBLE_EQ( static_cast<double>(cast_ref<Real>(x)) , 0. );
 }
 
 TEST(RealSpaceTest,ScalarProductTest)
 {
   using namespace Algorithm;
-  auto x = Spaces::R.element();
-  auto y = Spaces::R.element();
-  x.coefficient(0) = 1;
-  y.coefficient(0) = -2;
-  EXPECT_DOUBLE_EQ( x.coefficient(0), 1. );
-  EXPECT_DOUBLE_EQ( y.coefficient(0), -2. );
+  auto R = makeRealSpace();
+  auto x = R.element();
+  auto y = R.element();
+  cast_ref<Real&>(x) = 1;
+  cast_ref<Real&>(y) = -2;
+  EXPECT_DOUBLE_EQ( cast_ref<Real>(x), 1. );
+  EXPECT_DOUBLE_EQ( cast_ref<Real>(y), -2. );
   EXPECT_DOUBLE_EQ( x*y, -2. );
-  EXPECT_DOUBLE_EQ( x*y, Spaces::R.scalarProduct()(x,y) );
+  EXPECT_DOUBLE_EQ( x*y, R.scalarProduct()(x,y) );
 }
 
 TEST(RealSpaceTest,NormTest)
 {
   using namespace Algorithm;
-  auto x = Spaces::R.element();
-  auto y = Spaces::R.element();
-  x.coefficient(0) = 1;
-  y.coefficient(0) = -2;
-  EXPECT_DOUBLE_EQ( x.coefficient(0), 1. );
-  EXPECT_DOUBLE_EQ( y.coefficient(0), -2. );
-  EXPECT_DOUBLE_EQ( Spaces::R.norm()(x) , 1. );
-  EXPECT_DOUBLE_EQ( Spaces::R.norm()(y) , 2. );
+  auto R = makeRealSpace();
+  auto x = R.element();
+  auto y = R.element();
+  cast_ref<Real&>(x) = 1;
+  cast_ref<Real&>(y) = -2;
+  EXPECT_DOUBLE_EQ( cast_ref<Real>(x), 1. );
+  EXPECT_DOUBLE_EQ( cast_ref<Real>(y), -2. );
+  EXPECT_DOUBLE_EQ( R.norm()(x) , 1. );
+  EXPECT_DOUBLE_EQ( R.norm()(y) , 2. );
 }

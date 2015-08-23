@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "vectorSpace.hh"
-#include "Util/create.hh"
 
 namespace Algorithm
 {

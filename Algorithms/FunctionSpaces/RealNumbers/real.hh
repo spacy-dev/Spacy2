@@ -1,18 +1,17 @@
 #ifndef ALGORITHM_REAL_NUMBERS_REAL_HH
 #define ALGORITHM_REAL_NUMBERS_REAL_HH
 
-#include <memory>
-#include "Interface/vectorBase.hh"
+#include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/eps.hh"
+#include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
-  /// \cond
-  class VectorSpace;
-  /// \endcond
-
   /// Real number.
-  class Real : public VectorBase<Real> , public Mixin::Eps
+  class Real :
+      public VectorBase<Real,double> ,
+      public SupportedOperatorBase<Real> ,
+      public Mixin::Eps
   {
   public:
     /**
@@ -28,59 +27,17 @@ namespace Algorithm
      */
     explicit Real(const VectorSpace& space);
 
-    /**
-     * @brief copy data to y.
-     */
-//    void copyTo(Interface::AbstractVector& y) const ;
-
-    /// Print to os.
-//    void print(std::ostream& os) const ;
-
     /// Assignment.
-//    Real& operator=(const Real& y);
-
-//    Real(const Real& y);
-
-    /// In-place summation.
-    Real& operator+=(const Real& y);
-
-    /// In-place subtraction.
-    Real& operator-=(const Real& y);
-
-    /// In-place multiplication.
-    Real& operator*=(double a);
-
-    /// Get -x.
-    Real operator- () const;
-
-    /// Access value.
-    double& coefficient(unsigned);
-
-    /// Access value.
-    const double& coefficient(unsigned) const;
+    Real& operator=(double y);
 
     /// Number of entries in coefficient vector (=1).
     unsigned size() const ;
 
-    operator double() const
-    {
-      return x_;
-    }
+    operator double() const;
 
     bool operator==(const Real& y) const;
 
     double operator()(const Real& y) const;
-
-  private:
-    /**
-     * @brief Get a copy of this real number.
-     */
-//    Real* cloneImpl() const ;
-
-    /// Apply as dual element.
-
-    friend class RealProduct;
-    double x_;
   };
 }
 

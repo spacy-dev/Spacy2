@@ -1,11 +1,11 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_VECTOR_SPACE_HH
 #define ALGORITHM_ADAPTER_KASKADE_VECTOR_SPACE_HH
 
+#include <type_traits>
 #include <memory>
 
 #include "Util/Mixins/impl.hh"
-#include "Util/create.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
@@ -38,10 +38,9 @@ namespace Algorithm
     };
 
     template <class Description, class Space>
-    auto makeVectorSpace(const Space& space)
+    auto makeHilbertSpace(const Space& space)
     {
-      return ::Algorithm::VectorSpace( Kaskade::VectorSpace<Description>(space) , l2Product<Description>() );
-//      return createFromSharedImpl< ::Algorithm::VectorSpace , VectorSpace<Description> >( space );
+      return ::Algorithm::makeHilbertSpace( Kaskade::VectorSpace<Description>{space} , l2Product<Description>{} );
     }
 
 
@@ -55,7 +54,7 @@ namespace Algorithm
 
         static void apply(const Spaces& spaces, std::vector<std::shared_ptr< ::Algorithm::VectorSpace > >& newSpaces)
         {
-          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( VectorSpace< ExtractDescription_t<Description,i> >( *boost::fusion::at_c<Variable::spaceIndex>(spaces) ) , l2Product< ExtractDescription_t<Description,i> >() );
+          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( ::Algorithm::makeHilbertSpace( VectorSpace< ExtractDescription_t<Description,i> >{ *boost::fusion::at_c<Variable::spaceIndex>(spaces) } , l2Product< ExtractDescription_t<Description,i> >{} ) );
           MakeSpaces<Description,i+1,n>::apply(spaces,newSpaces);
         }
       };
@@ -75,7 +74,7 @@ namespace Algorithm
         using Variables = typename Description::Variables;
         static auto apply(const ProductSpace& spaces)
         {
-          return &castAny< VectorSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
+          return &cast_ref< VectorSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
         }
       };
 
@@ -100,9 +99,6 @@ namespace Algorithm
       auto extractSpace(const ProductSpace& spaces)
       {
         return ExtractSpace<Description,i,0,boost::fusion::result_of::size<typename Description::Spaces>::value>::apply(spaces);
-//        constexpr int j = std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Variables,i>::type>::spaceIndex;
-//        std::cout << "extracting spaces: " << castTo< VectorSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl().degreesOfFreedom() << std::endl;
-//        return &castTo< VectorSpace< ExtractDescription_t<Description,i> > >( spaces.subSpace(i)).impl();
       }
 
       template <class Description, unsigned... is>
@@ -118,8 +114,7 @@ namespace Algorithm
 
         static Spaces apply(const  ::Algorithm::VectorSpace & spaces)
         {
-          return Spaces( &castAny< VectorSpace<Description> >(spaces.impl()).impl() );
-//          return Spaces( &castTo< VectorSpace<Description> >(spaces).impl() );
+          return Spaces{ &cast_ref< VectorSpace<Description> >(spaces.impl()).impl() };
         }
       };
 
@@ -142,7 +137,7 @@ namespace Algorithm
 
       Detail::MakeSpaces<Description,0,n>::apply(spaces,newSpaces);
 
-      return ::Algorithm::VectorSpace( ProductSpace( newSpaces , primalIds , dualIds ) , ProductSpaceProduct() );
+      return ::Algorithm::makeProductSpace( newSpaces , primalIds , dualIds );
     }
 
     template <class Description>
@@ -150,14 +145,12 @@ namespace Algorithm
     {
       using Spaces = typename Description::Spaces;
 
-//      if( is< VectorSpace< Description > >(spaces) )
       if( isAny< VectorSpace<Description> >(spaces.impl()) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
       if( isAny<ProductSpace>(spaces.impl()) )
-//      if( is< ProductSpace >(spaces) )
       {
-        const auto& spaces_ = boost::type_erasure::any_cast<const ProductSpace&>(spaces.impl());
+        const auto& spaces_ = cast_ref<ProductSpace>(spaces.impl());
         using seq = std::make_integer_sequence<unsigned,boost::fusion::result_of::size<Spaces>::value>;
         return Detail::extractSpaces<Description>(spaces_,seq{});
       }

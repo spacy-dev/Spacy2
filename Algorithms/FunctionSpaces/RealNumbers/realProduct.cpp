@@ -3,7 +3,7 @@
 #include "real.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 namespace Algorithm
 {
@@ -13,6 +13,6 @@ namespace Algorithm
     if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("RealProduct",x.spaceIndex(),y.spaceIndex());
     if( !isAny<Real>(x) || !isAny<Real>(y) ) throw InvalidArgumentException("RealProduct");
 
-    return castAny<Real>(x).coefficient(0) * castAny<Real>(y).coefficient(0);
+    return cast_ref<Real>(x).impl() * cast_ref<Real>(y).impl();
   }
 }

@@ -2,16 +2,10 @@
 
 #include "productSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 #include <algorithm>
 #include <cassert>
-#include <numeric>
-#include <stdexcept>
-
-#include <iostream>
-
-#include <boost/type_erasure/any_cast.hpp>
 
 namespace Algorithm
 {
@@ -33,12 +27,12 @@ namespace Algorithm
   {
     if( isPrimalDualProductSpaceElement() )
     {
-      variables_.push_back( castAny<ProductSpace>(space.impl()).primalSubSpace().element() );
-      variables_.push_back( castAny<ProductSpace>(space.impl()).dualSubSpace().element() );
+      variables_.push_back( cast_ref<ProductSpace>(space.impl()).primalSubSpace().element() );
+      variables_.push_back( cast_ref<ProductSpace>(space.impl()).dualSubSpace().element() );
     }
     else
     {
-      const auto& spaces = castAny<ProductSpace>(space.impl()).subSpaces();
+      const auto& spaces = cast_ref<ProductSpace>(space.impl()).subSpaces();
       for (auto i=0u; i<spaces.size(); ++i)
         variables_.push_back( spaces[i]->element() );
     }
@@ -55,37 +49,8 @@ namespace Algorithm
     }
   }
 
-//  void ProductSpaceElement::copyTo(AbstractVector& y) const
-//  {
-//    auto& y_ = castTo<ProductSpaceElement>(y);
-
-//    if( !isPrimalDualProductSpaceElement() )
-//    {
-//      y_.variables_ = cloneVariables(variables_);
-//      return;
-//    }
-
-//    if( ( !isPrimalEnabled() && !y_.isDualEnabled() ) ||
-//        ( !isDualEnabled() && !y_.isPrimalEnabled() ) )
-//    {
-//      reset(y_);
-//      return;
-//    }
-
-//    if( isPrimalEnabled() && y_.isPrimalEnabled() )
-//      y_.setPrimalComponent( clone(primalComponent()) );
-
-//    if( isDualEnabled() && y_.isDualEnabled() )
-//      y_.setDualComponent( clone(dualComponent()) );
-
-//    reset(y_);
-//    return;
-//  }
-
   ProductSpaceElement& ProductSpaceElement::operator=(const ProductSpaceElement& y_)
   {
-//    const auto& y_ = castAny<ProductSpaceElement>(y);
-
     if( !isPrimalDualProductSpaceElement() )
     {
       variables_ = y_.variables_;
@@ -104,8 +69,6 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator+=(const ProductSpaceElement& y_)
   {
-//    const auto& y_ = castAny<ProductSpaceElement>(y);
-
     if( !isPrimalDualProductSpaceElement() )
     {
       for(auto i=0u; i<variables_.size(); ++i)
@@ -147,8 +110,6 @@ namespace Algorithm
 
   ProductSpaceElement& ProductSpaceElement::operator-=(const ProductSpaceElement& y_)
   {
-//    const auto& y_ = castAny<ProductSpaceElement>(y);
-
     if( !isPrimalDualProductSpaceElement() )
     {
       for(auto i=0u; i<variables_.size(); ++i)
@@ -205,7 +166,6 @@ namespace Algorithm
 
   double ProductSpaceElement::operator()(const ProductSpaceElement& y_) const
   {
-//    const auto& y_  = castAny<ProductSpaceElement>(y);
     assert( variables_.size() == y_.variables_.size() );
 
     if( !isPrimalDualProductSpaceElement() )
@@ -225,45 +185,6 @@ namespace Algorithm
     reset(y_);
     return result;
   }
-
-  unsigned ProductSpaceElement::size() const
-  {
-    return std::accumulate( begin(variables_) , end(variables_), 0.0,
-                            [](auto init, const auto& variable) { return init += variable.size(); } );
-  }
-
-  double& ProductSpaceElement::coefficient(unsigned i)
-  {
-//    if( i > size() ) throw std::out_of_range("In ProductSpaceElement::coefficient(" + std::to_string(i) + ").");
-
-//    unsigned elementId = 0;
-//    while ( i >= variables_[elementId]->size() )
-//    {
-//      i -= variables_[elementId]->size();
-//      ++elementId;
-//    }
-//    return variables_[elementId]->coefficient(i);
-  }
-
-  const double& ProductSpaceElement::coefficient(unsigned i) const
-  {
-//    if( i > size() ) throw std::out_of_range("In ProductSpaceElement::coefficient(" + std::to_string(i) + ").");
-
-//    unsigned elementId = 0;
-//    while ( i >= variables_[elementId]->size() )
-//    {
-//      i -= variables_[elementId]->size();
-//      ++elementId;
-//    }
-//    return variables_[elementId]->coefficient(i);
-  }
-
-//  void ProductSpaceElement::print(std::ostream& os) const
-//  {
-//    os << "Space index: " << space().index() << "\n";
-//    os << "Variables:\n";
-//    for( auto& v : variables_ ) v->print(os);
-//  }
 
   Vector& ProductSpaceElement::variable(unsigned i)
   {
@@ -303,13 +224,13 @@ namespace Algorithm
   const ProductSpaceElement& ProductSpaceElement::primalComponent() const
   {
     if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::primal can only be used with primal-dual product spaces.");
-    return castAny<ProductSpaceElement>(variables_[0]);
+    return cast_ref<ProductSpaceElement>(variables_[0]);
   }
 
   ProductSpaceElement& ProductSpaceElement::primalComponent()
   {
     if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::primal can only be used with primal-dual product spaces.");
-    return castAny<ProductSpaceElement>(variables_[0]);
+    return cast_ref<ProductSpaceElement>(variables_[0]);
   }
 
   void ProductSpaceElement::setPrimalComponent(const Vector& y)
@@ -320,13 +241,13 @@ namespace Algorithm
   const ProductSpaceElement& ProductSpaceElement::dualComponent() const
   {
     if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::dual can only be used with primal-dual product spaces.");
-    return castAny<ProductSpaceElement>(variables_[1]);
+    return cast_ref<ProductSpaceElement>(variables_[1]);
   }
 
   ProductSpaceElement& ProductSpaceElement::dualComponent()
   {
     if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpaceElement::dual can only be used with primal-dual product spaces.");
-    return castAny<ProductSpaceElement>(variables_[1]);
+    return cast_ref<ProductSpaceElement>(variables_[1]);
   }
 
   void ProductSpaceElement::setDualComponent(const Vector& y)
@@ -334,31 +255,9 @@ namespace Algorithm
     variables_[1] = y;
   }
 
-//  double ProductSpaceElement::operator()(const ProductSpaceElement& y) const
-//  {
-//    const auto& y_  = castAny<ProductSpaceElement>(y);
-//    assert( variables_.size() == y_.variables_.size() );
-
-//    if( !isPrimalDualProductSpaceElement() )
-//    {
-//      auto result = 0.;
-//      for(auto i=0u; i<variables_.size(); ++i)
-//        result += variable(i)( y_.variable(i) );
-//      return result;
-//    }
-
-//    auto result = 0.;
-//    if( isPrimalEnabled() && y_.isPrimalEnabled() )
-//      result += primalComponent()( y_.primalComponent() );
-//    if( isDualEnabled() && y_.isDualEnabled() )
-//      result += dualComponent()( y_.dualComponent() );
-
-//    reset(y_);
-//    return result;
-//  }
   const ProductSpace& ProductSpaceElement::productSpace() const
   {
-    return castAny<ProductSpace>(space().impl());
+    return cast_ref<ProductSpace>(space().impl());
   }
 
   bool ProductSpaceElement::isPrimalDualProductSpaceElement() const

@@ -1,28 +1,46 @@
 #include "vectorSpace.hh"
 
-#include "hilbertSpaceNorm.hh"
-
+#include <cmath>
+#include <stdexcept>
 #include <utility>
 
 namespace Algorithm
 {
-//  VectorSpace::VectorSpace(VectorSpaceImpl impl, Norm norm)
-//    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)),
-//      norm_(norm)
-//  {
-////    if( impl().isHilbertSpace() )
-////      impl().setDualSpace(sharedImpl());
-//  }
-
-  VectorSpace::VectorSpace(const VectorSpaceImpl& impl, const Algorithm::ScalarProduct& sp)
-    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)) ,
-      norm_(HilbertSpaceNorm(sp)),
-      sp_(std::make_shared<ScalarProduct>(sp))
+  namespace
   {
-    setDualSpace(this);
-    addDualSpace(*this);
-    addPrimalSpace(*this);
-    std::cout << "create space: " << index_ << std::endl;
+    class HilbertSpaceNorm
+    {
+    public:
+      explicit HilbertSpaceNorm(ScalarProduct sp)
+        : sp_(sp)
+      {}
+
+      double operator()(const Vector& x) const
+      {
+        return sqrt(sp_(x,x));
+      }
+
+    private:
+      ScalarProduct sp_;
+    };
+  }
+  VectorSpace::VectorSpace(VectorSpaceImpl impl, Norm norm)
+    : Mixin::Impl<VectorSpaceImpl>(std::move(impl)),
+      norm_(norm)
+  {}
+
+  VectorSpace::VectorSpace(VectorSpace&& other)
+    : Mixin::Impl<VectorSpaceImpl>(other.impl()) ,
+      norm_(std::move(other.norm_)) ,
+      sp_(std::move(other.sp_)) ,
+      index_(std::move(other.index_)) ,
+      primalSpaces_(std::move(other.primalSpaces_)) ,
+      dualSpaces_(std::move(other.dualSpaces_))
+  {
+    if( &other == other.dualSpace_)
+      setDualSpace(this);
+    else
+      setDualSpace(other.dualSpace_);
   }
 
   void VectorSpace::setNorm(Algorithm::Norm norm)
@@ -45,14 +63,15 @@ namespace Algorithm
     return index_;
   }
 
-  void VectorSpace::setScalarProduct(Algorithm::ScalarProduct sp)
+  void VectorSpace::setScalarProduct(ScalarProduct sp)
   {
-    sp_ = std::make_shared<ScalarProduct>(sp);
+    sp_ = std::make_shared<ScalarProduct>(std::move(sp));
     setNorm( HilbertSpaceNorm(*sp_) );
   }
 
   const ScalarProduct& VectorSpace::scalarProduct() const
   {
+    if( sp_ == nullptr ) throw std::runtime_error("No scalar product defined!");
     return *sp_;
   }
 
@@ -98,7 +117,22 @@ namespace Algorithm
 
   bool VectorSpace::isHilbertSpace() const
   {
-    return this == dualSpace_ptr();
+    return sp_ != nullptr;
+  }
+
+  VectorSpace makeBanachSpace(VectorSpaceImpl impl, Norm norm)
+  {
+    return VectorSpace{std::move(impl),std::move(norm)};
+  }
+
+  VectorSpace makeHilbertSpace(VectorSpaceImpl impl, ScalarProduct scalarProduct)
+  {
+    auto V = VectorSpace{std::move(impl),HilbertSpaceNorm(scalarProduct)};
+    V.setScalarProduct(std::move(scalarProduct));
+    V.setDualSpace(&V);
+    V.addDualSpace(V);
+    V.addPrimalSpace(V);
+    return std::move(V);
   }
 
   void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace)

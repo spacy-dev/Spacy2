@@ -3,7 +3,7 @@
 
 #include "../../vector.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "Util/castTo.hh"
+#include "Util/cast.hh"
 
 namespace Algorithm
 {
@@ -17,7 +17,7 @@ namespace Algorithm
       {
         if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("l2Product",x.spaceIndex(),y.spaceIndex());
 
-        return castAny< Vector<Description> >(x).impl() * castAny< Vector<Description> >(y).impl();
+        return cast_ref< Vector<Description> >(x).impl() * cast_ref< Vector<Description> >(y).impl();
       }
     };
   }
