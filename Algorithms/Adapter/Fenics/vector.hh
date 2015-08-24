@@ -7,14 +7,15 @@
 #include "vectorSpace.hh"
 #include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/impl.hh"
-#include "Util/Mixins/eps.hh"
 
 
 namespace Algorithm
 {
   namespace Fenics
   {
-    class Vector : public VectorBase<Vector>, public Mixin::Impl<dolfin::Function> , public Mixin::Eps
+    class Vector :
+        public VectorBase<Vector> ,
+        public SupportedOperatorBase<Vector>
     {
     public:
       explicit Vector(const ::Algorithm::VectorSpace& space);
@@ -25,25 +26,18 @@ namespace Algorithm
 
       Vector& operator=(const Vector& y);
 
-      Vector& operator+=(const Vector& y);
-
 //      Vector& axpy(double a, const AbstractVector& y);
-
-      Vector& operator-=(const Vector& y);
-
-      Vector& operator*=(double a);
-
-      Vector operator- () const;
-
-      bool operator==(const Vector& y) const;
 
       unsigned size() const;
 
-      dolfin::Function& operator[](unsigned i);
+      dolfin::GenericVector& impl();
 
-      const dolfin::Function& operator[](unsigned i) const;
+      const dolfin::GenericVector& impl() const;
 
       double operator()(const Vector& y) const;
+
+    private:
+      dolfin::Function v_;
     };
   }
 }

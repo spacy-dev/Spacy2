@@ -34,10 +34,5 @@ namespace Algorithm
     {
       return 1;
     }
-
-    bool Vector::operator==(const Vector& y) const
-    {
-      return std::fabs(impl()-y.impl()) < eps();
-    }
   }
 }

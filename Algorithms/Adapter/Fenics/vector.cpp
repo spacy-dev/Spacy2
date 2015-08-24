@@ -17,24 +17,20 @@ namespace Algorithm
     {}
 
     Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)
-      : VectorBase<Vector>(space), Impl<dolfin::Function>( f )
+      : VectorBase<Vector>(space), //Impl<dolfin::Function>( f )
+        v_(f)
     {}
 
     Vector& Vector::operator=(const dolfin::Function& v)
     {
-      impl() = v;
+      v_ = v;
       return *this;
     }
 
     Vector& Vector::operator=(const Vector& y)
     {
-      *impl().vector() = *y.impl().vector();
-      return *this;
-    }
-
-    Vector& Vector::operator+=(const Vector& y)
-    {
-      *impl().vector() += *y.impl().vector();
+      impl() = y.impl();
+//      *impl().vector() = *y.impl().vector();
       return *this;
     }
 
@@ -44,50 +40,34 @@ namespace Algorithm
 //      return *this;
 //    }
 
-    Vector& Vector::operator-=(const Vector& y)
-    {
-      *impl().vector() -= *y.impl().vector();
-      return *this;
-    }
-
-    Vector& Vector::operator*=(double a)
-    {
-      *impl().vector() *= a;
-      return *this;
-    }
-
-    Vector Vector::operator- () const
-    {
-      auto v = *this;
-      v *= -1;
-      return v;
-    }
-
-    bool Vector::operator==(const Vector& y) const
-    {
-      auto dx = impl().vector()->copy();
-     *dx -= *y.impl().vector();
-      return dx->inner( *dx ) < eps();
-    }
-
     unsigned Vector::size() const
     {
-      return impl().vector()->size(); // todo generalize
+      return impl().size(); // todo generalize
     }
 
-    dolfin::Function& Vector::operator[](unsigned i)
+    dolfin::GenericVector& Vector::impl()
     {
-      return impl()[i];
+      return *v_.vector();
     }
 
-    const dolfin::Function& Vector::operator[](unsigned i) const
+    const dolfin::GenericVector& Vector::impl() const
     {
-      return impl()[i];
+      return *v_.vector();
     }
+
+//    dolfin::Function& Vector::operator[](unsigned i)
+//    {
+//      return impl()[i];
+//    }
+
+//    const dolfin::Function& Vector::operator[](unsigned i) const
+//    {
+//      return impl()[i];
+//    }
 
     double Vector::operator()(const Vector& y) const
     {
-      return impl().vector()->inner( *y.impl().vector() );
+      return impl().inner( y.impl() );
     }
   }
 }

@@ -24,7 +24,7 @@ namespace Algorithm
     {
       if( isAny<Vector>(x) )
       {
-        y = *cast_ref<Vector>(x).impl().vector();
+        y = cast_ref<Vector>(x).impl();
         return;
       }
 
@@ -40,7 +40,7 @@ namespace Algorithm
               const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
 
               if(x_.isPrimalEnabled())
-                y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
+                y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
               else y.setitem(space.inverseDofmap(j),0.);
             }
           }
@@ -52,7 +52,7 @@ namespace Algorithm
               const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
 
               if(x_.isDualEnabled())
-                y.setitem(space.inverseDofmap(j),xv_.impl().vector()->getitem(j));
+                y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
               else y.setitem(space.inverseDofmap(j),0.);
             }
           }
@@ -74,7 +74,7 @@ namespace Algorithm
     {
       if( isAny<Vector>(x) )
       {
-        *cast_ref<Vector>(x).impl().vector() = y;
+        cast_ref<Vector>(x).impl() = y;
         return;
       }
 
@@ -90,10 +90,10 @@ namespace Algorithm
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
               if( x_.isPrimalEnabled())
-                xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j) ) );
-              else xv_.impl().vector()->setitem( j , 0. );
+                xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
+              else xv_.impl().setitem( j , 0. );
             }
-            cast_ref<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
+            cast_ref<Vector>( x_.variable(i) ).impl().apply("insert");
           }
 
           for( auto i : x_.creator().dualSubSpaceIds() )
@@ -103,11 +103,11 @@ namespace Algorithm
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
               if( x_.isDualEnabled())
-                xv_.impl().vector()->setitem( j , y.getitem( space.inverseDofmap(j) ) );
+                xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
               else
-                xv_.impl().vector()->setitem( j , 0. );
+                xv_.impl().setitem( j , 0. );
             }
-            cast_ref<Vector>( x_.variable(i) ).impl().vector()->apply("insert");
+            cast_ref<Vector>( x_.variable(i) ).impl().apply("insert");
           }
 
         return;

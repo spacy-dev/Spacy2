@@ -5,7 +5,6 @@
 #include "Util/Base/vectorBase.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/Mixins/impl.hh"
-#include "Util/Mixins/eps.hh"
 #include "Util/cast.hh"
 
 namespace Algorithm
@@ -21,7 +20,9 @@ namespace Algorithm
     /// \endcond
 
     template <class Description>
-    class Vector : public VectorBase< Vector<Description> > , public Mixin::Eps
+    class Vector :
+        public VectorBase< Vector<Description> > ,
+        public SupportedOperatorBase< Vector<Description> >
     {
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
@@ -46,40 +47,6 @@ namespace Algorithm
         return *this;
       }
 
-      Vector(const Vector&) = default;
-      Vector& operator=(const Vector&) = default;
-
-      Vector& operator+=(const Vector& y)
-      {
-        v_ += y.v_;
-        return *this;
-      }
-
-//      Vector& axpy(double a, const AbstractVector& y)
-//      {
-//        v_.axpy(a,castTo< Vector<Description> >(y).v_);
-//        return *this;
-//      }
-
-      Vector& operator-=(const Vector& y)
-      {
-        v_ -= y.v_;
-        return *this;
-      }
-
-      Vector& operator*=(double a)
-      {
-        v_ *= a;
-        return *this;
-      }
-
-      Vector operator- () const
-      {
-        auto v = *this;
-        v *= -1;
-        return v;
-      }
-
       VectorImpl& impl()
       {
         return v_;
@@ -92,15 +59,14 @@ namespace Algorithm
 
       double operator()(const Vector& y) const
       {
-        return y.v_ * v_;
+        return impl() * y.impl();
       }
 
-      bool operator==(const Vector& y) const
-      {
-        auto dx = y;
-        dx -= *this;
-        return (dx*dx) < eps();
-      }
+      //      Vector& axpy(double a, const AbstractVector& y)
+      //      {
+      //        v_.axpy(a,castTo< Vector<Description> >(y).v_);
+      //        return *this;
+      //      }
 
     private:
       typename Description::Spaces spaces_;

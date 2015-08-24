@@ -34,8 +34,8 @@ namespace Algorithm
        * \f$ \{Z_i\}_i \f$ are spaces associated with dual variables.
        *
        * @param spaces shared spaces to build the product space from
-       * @param primalSubSpaceIds indices of spaces associated with primal variables
-       * @param dualSubSpaceIds indices of spaces associated with dual variables
+       * @param primalSubSpaceIds indices of spaces \f$Y_i\f$ associated with primal variables
+       * @param dualSubSpaceIds indices of spaces \f$Z_i\f$ associated with dual variables
        */
       VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                    const std::vector<unsigned>& primalSubSpaceIds,

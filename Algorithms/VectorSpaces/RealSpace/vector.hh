@@ -9,14 +9,10 @@ namespace Algorithm
 {
   namespace Real
   {
-    /**
-     * @ingroup RealGroup
-     * @brief Real number.
-     */
+    /// Real number.
     class Vector :
         public VectorBase<Vector,double> ,
-        public SupportedOperatorBase<Vector> ,
-        public Mixin::Eps
+        public SupportedOperatorBase<Vector>
     {
     public:
       /**
@@ -40,9 +36,6 @@ namespace Algorithm
 
       /// Implicit conversion to double.
       operator double() const;
-
-      /// Comparison operator.
-      bool operator==(const Vector& y) const;
 
       /// Apply as dual element.
       double operator()(const Vector& y) const;

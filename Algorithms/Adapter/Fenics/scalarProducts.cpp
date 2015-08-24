@@ -9,7 +9,7 @@ namespace Algorithm
   {
     double l2Product::operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
     {
-      return cast_ref<Vector>(x).impl().vector()->inner( *cast_ref<Vector>(y).impl().vector() );
+      return cast_ref<Vector>(x).impl().inner( cast_ref<Vector>(y).impl() );
     }
 
   }

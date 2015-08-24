@@ -8,7 +8,7 @@ namespace Algorithm
   /// \endcond
 
   /**
-   * @brief Abstract interface for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
+   * @brief Base class for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
    */
   class OperatorBase
   {

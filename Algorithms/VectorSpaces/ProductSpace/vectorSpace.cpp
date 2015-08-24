@@ -42,7 +42,7 @@ namespace Algorithm
                                const std::vector<unsigned>& dualSubSpaceIds)
       : primalSubSpaceIds_(primalSubSpaceIds),
         dualSubSpaceIds_(dualSubSpaceIds),
-        isPrimalDual_(!dualSubSpaceIds_.empty())
+        isPrimalDual_(true)
     {
       for( auto i = 0u; i< primalSubSpaceIds_.size(); ++i )
         primalMap_[primalSubSpaceIds[i]] = i;
