@@ -34,7 +34,7 @@ namespace Algorithm
 
   Vector CGSolver::operator()(const Vector& y) const
   {
-    return cg.solve(y);
+    return cg.solve(range().element(),y);
   }
 
   CGMethod& CGSolver::impl()
@@ -52,7 +52,7 @@ namespace Algorithm
     return cg.P();
   }
 
-  const Operator& CGSolver::A() const
+  const CallableOperator& CGSolver::A() const
   {
     return cg.A();
   }

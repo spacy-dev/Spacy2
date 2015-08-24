@@ -6,10 +6,12 @@
 #include "linearSolverConcept.hh"
 #include "vectorConcept.hh"
 
-#include "vectorSpace.hh"
-
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   /**
    * @brief Concept defining the simplest possible operator, only providing Vector operator()(const Vector&).
    * @see ::Algorithm::Operator
@@ -43,7 +45,7 @@ namespace Algorithm
   using LinearOperatorConcept =
   boost::mpl::vector<
     OperatorConcept ,
-    has_solver<boost::type_erasure::any<LinearSolverConcept>(),
+    has_solver<const boost::type_erasure::any<LinearSolverConcept>&(),
                const boost::type_erasure::_self>
   >;
 
@@ -57,9 +59,7 @@ namespace Algorithm
     has_d1<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
            const boost::type_erasure::_self> ,
     has_linearization<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                      const boost::type_erasure::_self> ,
-    has_solver<boost::type_erasure::any<LinearSolverConcept>(),
-               const boost::type_erasure::_self>
+                      const boost::type_erasure::_self>
   >;
 }
 

@@ -2,7 +2,7 @@
 #define ALGORITHM_ADAPTER_FENICS_LUSOLVER_HH
 
 #include <memory>
-#include <vector>
+#include <string>
 
 #include <dolfin.h>
 
@@ -12,46 +12,37 @@
 
 namespace Algorithm
 {
-  static int lusolverid = 0;
-
   namespace Fenics
   {
     class LUSolver : public OperatorBase
     {
     public:
-      LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
-               ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range);
+      LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
+               ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range,
+               bool symmetric = false, const std::string& solverName = "mumps");
 
 
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
 
     private:
       mutable dolfin::LUSolver solver_;
-      const dolfin::FunctionSpace& productSpace_;
+      const dolfin::FunctionSpace& space_;
     };
 
-//    std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const dolfin::GenericMatrix& A);
 
-//    template <class... Args>
-//    std::shared_ptr<Interface::AbstractLinearSolver> createLUSolver(const Args&...);
+    class TransposedLUSolver : public OperatorBase
+    {
+    public:
+      TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
+               ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range,
+               bool symmetric = false, const std::string& solverName = "mumps");
 
+      ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
 
-//    class TransposedLUSolver : public Interface::AbstractLinearSolver
-//    {
-//    public:
-//      explicit TransposedLUSolver(const dolfin::GenericMatrix& A);
-
-//      std::unique_ptr<Interface::AbstractVector> operator()(const Interface::AbstractVector& x) const final override;
-
-//    private:
-//      std::unique_ptr<dolfin::GenericMatrix> A_;
-//      mutable dolfin::LUSolver solver;
-//    };
-
-//    std::shared_ptr<Interface::AbstractLinearSolver> createTransposedLUSolver(const dolfin::GenericMatrix& A);
-
-//    template <class... Args>
-//    std::shared_ptr<Interface::AbstractLinearSolver> createTransposedLUSolver(const Args&...);
+    private:
+      mutable dolfin::LUSolver solver_;
+      const dolfin::FunctionSpace& space_;
+    };
   }
 }
 

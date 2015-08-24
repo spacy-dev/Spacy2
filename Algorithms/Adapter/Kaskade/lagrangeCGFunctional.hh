@@ -91,23 +91,23 @@ namespace Algorithm
         using Domain0 = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
         using KaskadeOperator2 = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain0,Domain0>;
         auto stateSolver = DirectSolver<VPSetDescription,VYSetDescription>( KaskadeOperator2(matA), this->spaces_,
-                                                                            cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(adjointId),
-                                                                            cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(stateId) );
+                                                                            cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId),
+                                                                            cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(stateId) );
         auto controlSolver = DirectSolver<VUSetDescription,VUSetDescription>( KaskadeOperator2(matM), this->spaces_,
-                                                                              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(controlId),
-                                                                              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(controlId) );
+                                                                              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId),
+                                                                              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId) );
         auto adjointSolver = DirectSolver<VYSetDescription,VPSetDescription>( KaskadeOperator2(matAt), this->spaces_,
-                                                                              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(stateId),
-                                                                              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(adjointId) );
+                                                                              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(stateId),
+                                                                              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId) );
 
         auto B = Kaskade::LinearOperator<KaskadeOperator2,VUSetDescription,VPSetDescription>
             ( KaskadeOperator2(matB) ,
-              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(controlId) ,
-              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(adjointId) );
+              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId) ,
+              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId) );
         auto Bt = Kaskade::LinearOperator<KaskadeOperator2,VPSetDescription,VUSetDescription>
             ( KaskadeOperator2(matBt) ,
-              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(adjointId) ,
-              cast_ref<ProductSpace::SpaceCreator>(this->domain().impl()).subSpace_ptr(controlId) );
+              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId) ,
+              cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId) );
 
         auto P = TriangularStateConstraintPreconditioner
             ( std::move(stateSolver) ,

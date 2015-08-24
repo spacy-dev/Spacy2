@@ -37,12 +37,12 @@ namespace Algorithm
     }
 
 
-    SpaceCreator::SpaceCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
+    VectorCreator::VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                const std::vector<unsigned>& primalSubSpaceIds,
                                const std::vector<unsigned>& dualSubSpaceIds)
       : primalSubSpaceIds_(primalSubSpaceIds),
         dualSubSpaceIds_(dualSubSpaceIds),
-        isPrimalDualProductSpace_(true)
+        isPrimalDual_(true)
     {
       for( auto i = 0u; i< primalSubSpaceIds_.size(); ++i )
         primalMap_[primalSubSpaceIds[i]] = i;
@@ -54,7 +54,7 @@ namespace Algorithm
       spaces_[1] = std::make_shared<VectorSpace>( makeHilbertSpace( extractSubSpaces(spaces,dualSubSpaceIds_) ) );
     }
 
-    SpaceCreator::SpaceCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
+    VectorCreator::VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
       : spaces_(spaces),
         primalSubSpaceIds_(extractSpaceIds(spaces))
     {
@@ -63,135 +63,135 @@ namespace Algorithm
     }
 
 
-    const std::vector<std::shared_ptr<VectorSpace> >& SpaceCreator::subSpaces() const
+    const std::vector<std::shared_ptr<VectorSpace> >& VectorCreator::subSpaces() const
     {
       return spaces_;
     }
 
-    const VectorSpace& SpaceCreator::subSpace(unsigned i) const
+    const VectorSpace& VectorCreator::subSpace(unsigned i) const
     {
-      if( isPrimalDualProductSpace() )
+      if( isPrimalDual() )
       {
-        if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace::SpaceCreator>(spaces_[0]->impl()).subSpace(primalMap_.find(i)->second);
-        if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace::SpaceCreator>(spaces_[1]->impl()).subSpace(dualMap_.find(i)->second);
+        if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace::VectorCreator>(spaces_[0]->impl()).subSpace(primalMap_.find(i)->second);
+        if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace::VectorCreator>(spaces_[1]->impl()).subSpace(dualMap_.find(i)->second);
       }
       return *spaces_[i];
     }
 
-    VectorSpace* SpaceCreator::subSpace_ptr(unsigned i) const
+    VectorSpace* VectorCreator::subSpace_ptr(unsigned i) const
     {
       return sharedSubSpace(i).get();
     }
 
-    std::shared_ptr<VectorSpace> SpaceCreator::sharedSubSpace(unsigned i) const
+    std::shared_ptr<VectorSpace> VectorCreator::sharedSubSpace(unsigned i) const
     {
-      if( isPrimalDualProductSpace() )
+      if( isPrimalDual() )
       {
-        if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace::SpaceCreator>(spaces_[0]->impl()).sharedSubSpace(primalMap_.find(i)->second);
-        if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace::SpaceCreator>(spaces_[1]->impl()).sharedSubSpace(dualMap_.find(i)->second);
+        if( isPrimalSubSpaceId(i) ) return cast_ref<ProductSpace::VectorCreator>(spaces_[0]->impl()).sharedSubSpace(primalMap_.find(i)->second);
+        if( isDualSubSpaceId(i) ) return cast_ref<ProductSpace::VectorCreator>(spaces_[1]->impl()).sharedSubSpace(dualMap_.find(i)->second);
       }
       return spaces_[i];
     }
 
 
-    ::Algorithm::Vector SpaceCreator::operator()(const VectorSpace* space) const
+    ::Algorithm::Vector VectorCreator::operator()(const VectorSpace* space) const
     {
       return Vector{*space};
     }
 
-    VectorSpace& SpaceCreator::primalSubSpace()
+    VectorSpace& VectorCreator::primalSubSpace()
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return *spaces_[0];
     }
 
-    const VectorSpace& SpaceCreator::primalSubSpace() const
+    const VectorSpace& VectorCreator::primalSubSpace() const
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return *spaces_[0];
     }
 
-    VectorSpace* SpaceCreator::primalSubSpace_ptr() const
+    VectorSpace* VectorCreator::primalSubSpace_ptr() const
     {
       return sharedPrimalSubSpace().get();
     }
 
-    VectorSpace& SpaceCreator::dualSubSpace()
+    VectorSpace& VectorCreator::dualSubSpace()
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return *spaces_[1];
     }
 
-    const VectorSpace& SpaceCreator::dualSubSpace() const
+    const VectorSpace& VectorCreator::dualSubSpace() const
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return *spaces_[1];
     }
 
-    VectorSpace* SpaceCreator::dualSubSpace_ptr() const
+    VectorSpace* VectorCreator::dualSubSpace_ptr() const
     {
       return sharedDualSubSpace().get();
     }
 
-    std::shared_ptr<VectorSpace> SpaceCreator::sharedPrimalSubSpace() const
+    std::shared_ptr<VectorSpace> VectorCreator::sharedPrimalSubSpace() const
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return spaces_[0];
     }
 
-    std::shared_ptr<VectorSpace> SpaceCreator::sharedDualSubSpace() const
+    std::shared_ptr<VectorSpace> VectorCreator::sharedDualSubSpace() const
     {
-      assert( isPrimalDualProductSpace() );
+      assert( isPrimalDual() );
       return spaces_[1];
     }
 
 
-    const std::vector<unsigned>& SpaceCreator::primalSubSpaceIds() const
+    const std::vector<unsigned>& VectorCreator::primalSubSpaceIds() const
     {
       return primalSubSpaceIds_;
     }
 
-    const std::vector<unsigned>& SpaceCreator::dualSubSpaceIds() const
+    const std::vector<unsigned>& VectorCreator::dualSubSpaceIds() const
     {
       return dualSubSpaceIds_;
     }
 
-    bool SpaceCreator::isPrimalSubSpaceId(unsigned i) const
+    bool VectorCreator::isPrimalSubSpaceId(unsigned i) const
     {
       return primalMap_.find(i) != end(primalMap_);
     }
 
-    bool SpaceCreator::isDualSubSpaceId(unsigned i) const
+    bool VectorCreator::isDualSubSpaceId(unsigned i) const
     {
       return dualMap_.find(i) != end(dualMap_);
     }
 
-    unsigned SpaceCreator::primalIdMap(unsigned i) const
+    unsigned VectorCreator::primalIdMap(unsigned i) const
     {
       return primalMap_.find(i)->second;
     }
 
-    unsigned SpaceCreator::dualIdMap(unsigned i) const
+    unsigned VectorCreator::dualIdMap(unsigned i) const
     {
       return dualMap_.find(i)->second;
     }
 
-    bool SpaceCreator::isPrimalDualProductSpace() const
+    bool VectorCreator::isPrimalDual() const
     {
-      return isPrimalDualProductSpace_;
+      return isPrimalDual_;
     }
 
 
     VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces)
     {
-      return ::Algorithm::makeHilbertSpace( SpaceCreator{ spaces } , ScalarProduct{} );
+      return ::Algorithm::makeHilbertSpace( VectorCreator{ spaces } , ScalarProduct{} );
     }
 
     VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                   const std::vector<unsigned>& primalSubSpaceIds,
                                   const std::vector<unsigned>& dualSubSpaceIds)
     {
-      return ::Algorithm::makeHilbertSpace( SpaceCreator{ spaces , primalSubSpaceIds , dualSubSpaceIds } , ScalarProduct{} );
+      return ::Algorithm::makeHilbertSpace( VectorCreator{ spaces , primalSubSpaceIds , dualSubSpaceIds } , ScalarProduct{} );
     }
   }
 }

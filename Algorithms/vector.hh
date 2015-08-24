@@ -14,6 +14,14 @@ namespace Algorithm
    */
   using Vector = boost::type_erasure::any<VectorConcept >;
 
+//  struct Vector : AnyVector
+//  {
+//    template <class... Args>
+//    Vector(Args&&... args)
+//      : AnyVector(std::forward<Args>(args)...)
+//    {}
+//  };
+
 ////  template <class> struct Scale;
 
   /**

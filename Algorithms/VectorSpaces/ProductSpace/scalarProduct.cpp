@@ -16,7 +16,7 @@ namespace Algorithm
       const auto& x_ = cast_ref<Vector>(x);
       const auto& y_ = cast_ref<Vector>(y);
 
-      if( x_.isPrimalDualProductSpaceElement() )
+      if( x_.isPrimalDual() )
       {
         auto result = 0;
         if( x_.isPrimalEnabled() && y_.isPrimalEnabled() ) result += x_.primalComponent() * y_.primalComponent();

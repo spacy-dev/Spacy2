@@ -56,7 +56,7 @@ namespace Algorithm
     private:
       void update(DesignPattern::Observer::Subject* changedSubject) override;
 
-        double lowerBound_ = 1e-12;
+      double lowerBound_ = 1e-12;
     };
   }
 }

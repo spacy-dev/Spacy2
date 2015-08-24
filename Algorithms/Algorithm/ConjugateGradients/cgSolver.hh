@@ -29,7 +29,7 @@ namespace Algorithm
 
     const CallableOperator& P() const;
 
-    const Operator& A() const;
+    const CallableOperator& A() const;
 
   private:
     mutable CGMethod cg;

@@ -1,6 +1,8 @@
 #ifndef ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH
 #define ALGORITHM_UTIL_MIXIN_PRIMAL_DUAL_SWITCH_HH
 
+#include <atomic>
+
 #include "vector.hh"
 #include "Util/cast.hh"
 
@@ -14,6 +16,9 @@ namespace Algorithm
     class PrimalDualSwitch
     {
     public:
+      /// Default constructor.
+      PrimalDualSwitch();
+
       /**
        * @brief Enable operations on primal and dual operations.
        */
@@ -55,9 +60,9 @@ namespace Algorithm
       void enableReset() const;
 
     private:
-      mutable bool disablePrimal_ = false;
-      mutable bool disableDual_ = false;
-      mutable bool disableReset_ = false;
+      mutable std::atomic_bool disablePrimal_;
+      mutable std::atomic_bool disableDual_;
+      mutable std::atomic_bool disableReset_;
     };
   }
 

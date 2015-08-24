@@ -115,16 +115,10 @@ namespace Algorithm
       {
 //        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return LinearizedOperator(Operator<OperatorImpl>(*this,true),x);
+        return LinearizedOperator(Operator<OperatorImpl>(*this,true),x,solver_);
       }
 
-      LinearSolver solver() const
-      {
-        assert (A_ != nullptr);
-        return DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription>( *A_ , spaces_, range_ptr() , domain_ptr() );
-      }
-
-    protected:
+    private:
       void assembleOperator(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
@@ -152,6 +146,7 @@ namespace Algorithm
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        solver_ = std::make_shared<LinearSolver>( DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription>( *A_ , spaces_, range_ptr() , domain_ptr() ) );
         old_X_dA_ = x;
       }
 
@@ -164,6 +159,7 @@ namespace Algorithm
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorImpl::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=OperatorImpl::TestVars::noOfVariables;
+      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
     template <class OperatorImpl>

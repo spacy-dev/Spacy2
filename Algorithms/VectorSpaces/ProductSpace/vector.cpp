@@ -1,8 +1,9 @@
 #include "vector.hh"
 
-#include "vectorSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/cast.hh"
+
+#include "vectorSpace.hh"
 
 #include <algorithm>
 #include <cassert>
@@ -27,14 +28,14 @@ namespace Algorithm
     Vector::Vector(const VectorSpace& space)
       : VectorBase<Vector>(space)
     {
-      if( isPrimalDualProductSpaceElement() )
+      if( isPrimalDual() )
       {
-        variables_.push_back( cast_ref<SpaceCreator>(space.impl()).primalSubSpace().element() );
-        variables_.push_back( cast_ref<SpaceCreator>(space.impl()).dualSubSpace().element() );
+        variables_.push_back( cast_ref<VectorCreator>(space.impl()).primalSubSpace().element() );
+        variables_.push_back( cast_ref<VectorCreator>(space.impl()).dualSubSpace().element() );
       }
       else
       {
-        const auto& spaces = cast_ref<SpaceCreator>(space.impl()).subSpaces();
+        const auto& spaces = cast_ref<VectorCreator>(space.impl()).subSpaces();
         for (auto i=0u; i<spaces.size(); ++i)
           variables_.push_back( spaces[i]->element() );
       }
@@ -43,7 +44,7 @@ namespace Algorithm
     Vector::Vector(const Vector& other)
       : VectorBase<Vector>(other.space()), variables_(other.variables_)
     {
-      if( isPrimalDualProductSpaceElement() )
+      if( isPrimalDual() )
       {
         if( !other.isPrimalEnabled() ) primalComponent() *= 0;
         if( !other.isDualEnabled() ) dualComponent() *= 0;
@@ -53,7 +54,7 @@ namespace Algorithm
 
     Vector& Vector::operator=(const Vector& y_)
     {
-      if( !isPrimalDualProductSpaceElement() )
+      if( !isPrimalDual() )
       {
         variables_ = y_.variables_;
         return *this;
@@ -71,7 +72,7 @@ namespace Algorithm
 
     Vector& Vector::operator+=(const Vector& y_)
     {
-      if( !isPrimalDualProductSpaceElement() )
+      if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
           variable(i) += y_.variable(i);
@@ -92,7 +93,7 @@ namespace Algorithm
   //  {
   //    const auto& y_ = castTo<ProductSpaceElement>(y);
 
-  //    if( !isPrimalDualProductSpaceElement() )
+  //    if( !isPrimalDual() )
   //    {
   //      for(auto i=0u; i<variables_.size(); ++i)
   //        variable(i).axpy(a,y_.variable(i));
@@ -112,7 +113,7 @@ namespace Algorithm
 
     Vector& Vector::operator-=(const Vector& y_)
     {
-      if( !isPrimalDualProductSpaceElement() )
+      if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
           variable(i) -= y_.variable(i);
@@ -131,7 +132,7 @@ namespace Algorithm
 
     Vector& Vector::operator*=(double a)
     {
-      if( !isPrimalDualProductSpaceElement() )
+      if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
           variable(i) *= a;
@@ -170,7 +171,7 @@ namespace Algorithm
     {
       assert( variables_.size() == y_.variables_.size() );
 
-      if( !isPrimalDualProductSpaceElement() )
+      if( !isPrimalDual() )
       {
         auto result = 0.;
         for(auto i=0u; i<variables_.size(); ++i)
@@ -190,7 +191,7 @@ namespace Algorithm
 
     ::Algorithm::Vector& Vector::variable(unsigned i)
     {
-      if( isPrimalDualProductSpaceElement() )
+      if( isPrimalDual() )
       {
         if( creator().isPrimalSubSpaceId(i) )
           return primalComponent().variable(creator().primalIdMap(i));
@@ -205,7 +206,7 @@ namespace Algorithm
 
     const ::Algorithm::Vector& Vector::variable(unsigned i) const
     {
-      if( isPrimalDualProductSpaceElement() )
+      if( isPrimalDual() )
       {
         if( creator().isPrimalSubSpaceId(i) )
           return primalComponent().variable(creator().primalIdMap(i));
@@ -220,13 +221,13 @@ namespace Algorithm
 
     const Vector& Vector::primalComponent() const
     {
-      if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpace::Vector::primalComponent() can only be used with primal-dual product spaces.");
+      if( !isPrimalDual() ) throw std::runtime_error("ProductSpace::Vector::primalComponent() can only be used with primal-dual product spaces.");
       return cast_ref<Vector>(variables_[0]);
     }
 
     Vector& Vector::primalComponent()
     {
-      if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpace::Vector::primalComponent() can only be used with primal-dual product spaces.");
+      if( !isPrimalDual() ) throw std::runtime_error("ProductSpace::Vector::primalComponent() can only be used with primal-dual product spaces.");
       return cast_ref<Vector>(variables_[0]);
     }
 
@@ -237,13 +238,13 @@ namespace Algorithm
 
     const Vector& Vector::dualComponent() const
     {
-      if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpace::Vector::dualComponent() can only be used with primal-dual product spaces.");
+      if( !isPrimalDual() ) throw std::runtime_error("ProductSpace::Vector::dualComponent() can only be used with primal-dual product spaces.");
       return cast_ref<Vector>(variables_[1]);
     }
 
     Vector& Vector::dualComponent()
     {
-      if( !isPrimalDualProductSpaceElement() ) throw std::runtime_error("ProductSpace::Vector::dualComponent() can only be used with primal-dual product spaces.");
+      if( !isPrimalDual() ) throw std::runtime_error("ProductSpace::Vector::dualComponent() can only be used with primal-dual product spaces.");
       return cast_ref<Vector>(variables_[1]);
     }
 
@@ -252,14 +253,14 @@ namespace Algorithm
       variables_[1] = y;
     }
 
-    const SpaceCreator& Vector::creator() const
+    const VectorCreator& Vector::creator() const
     {
-      return cast_ref<ProductSpace::SpaceCreator>(space().impl());
+      return cast_ref<ProductSpace::VectorCreator>(space().impl());
     }
 
-    bool Vector::isPrimalDualProductSpaceElement() const
+    bool Vector::isPrimalDual() const
     {
-      return creator().isPrimalDualProductSpace();
+      return creator().isPrimalDual();
     }
   }
 }

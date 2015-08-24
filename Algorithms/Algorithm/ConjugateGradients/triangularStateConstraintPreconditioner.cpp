@@ -1,10 +1,10 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "FunctionSpaces/ProductSpace/vector.hh"
+#include "VectorSpaces/ProductSpace/vector.hh"
 #include "vectorSpace.hh"
 
 #include <utility>
-#include <iostream>
+
 namespace Algorithm
 {
   TriangularStateConstraintPreconditioner::TriangularStateConstraintPreconditioner(LinearSolver stateSolver,

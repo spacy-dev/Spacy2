@@ -14,16 +14,24 @@ namespace Algorithm
   public:
     /**
      * @brief Constructor.
-     * @param A (possibly nonlinear) differentiable operator.
+     * @param A differentiable operator.
      * @param x point of linearization.
      */
     LinearizedOperator(C1Operator A, const Vector& x);
+
+    /**
+     * @brief Constructor.
+     * @param A differentiable operator.
+     * @param x point of linearization.
+     * @param solver linear solver to (approximately) compute \f$A(x)^{-1}y\f$
+     */
+    LinearizedOperator(C1Operator A, const Vector& x, std::shared_ptr<LinearSolver> solver);
 
     /// Apply operator, i.e. compute \f$y=A'(x)dx\f$.
     Vector operator ()(const Vector& dx) const;
 
     /// Get linear solver (representing \f$(A'(x))^{-1}\f$).
-    LinearSolver solver() const;
+    const LinearSolver& solver() const;
 
     /// Get linear solver (representing \f$(A'(x))^{-*}\f$).
     //std::unique_ptr<AbstractLinearSolver> adjointSolver() const final override;
@@ -31,6 +39,7 @@ namespace Algorithm
   private:
     C1Operator A_;
     Vector x_;
+    std::shared_ptr<LinearSolver> solver_;
   };
 }
 

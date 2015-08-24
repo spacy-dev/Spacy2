@@ -19,12 +19,25 @@ namespace Algorithm
 {
   namespace Fenics
   {
+    /**
+     * @brief Operator interface for FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
+     *
+     * @see C1Operator, C1OperatorConcept
+     */
     template <class ResidualForm, class JacobianForm>
     class Operator : public OperatorBase , public Mixin::DisableAssembly
     {
     public:
+      /**
+       * @brief Construct operator for FEnics.
+       * @param F Residual form for the evaluation of \f$A\f$
+       * @param J Jacobian form for the evaluation of \f$A'\f$
+       * @param bcs Dirichlet boundary conditions
+       * @param domain domain space \f$X\f$
+       * @param range range space \f$Y\f$
+       */
       Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-               ::Algorithm::VectorSpace* domain, ::Algorithm::VectorSpace* range)
+               VectorSpace& domain, VectorSpace& range)
         : OperatorBase( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
@@ -35,27 +48,31 @@ namespace Algorithm
         copyCoefficients(J,J_);
       }
 
-      Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-               std::shared_ptr<dolfin::GenericMatrix> A,
-               ::Algorithm::VectorSpace* domain, ::Algorithm::VectorSpace* range)
+      /**
+       * @brief Construct operator without boundary conditions for FEnics.
+       * @param F Residual form for the evaluation of \f$A\f$
+       * @param J Jacobian form for the evaluation of \f$A'\f$
+       * @param domain domain space \f$X\f$
+       * @param range range space \f$Y\f$
+       */
+      Operator(const ResidualForm& F, const JacobianForm& J, VectorSpace& domain, VectorSpace& range)
         : OperatorBase( domain , range ),
-          Mixin::DisableAssembly(true),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
-          bcs_( bcs ),
-          A_(A->copy()),
+          bcs_(),
           dummy_( J.function_space(0) )
       {
         copyCoefficients(F,F_);
         copyCoefficients(J,J_);
       }
 
+      /// Move constructor.
       Operator(Operator&& other)
         : OperatorBase( other.domain_ptr() , other.range_ptr() ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
-          bcs_( other.bcs_ ) ,
+          bcs_( std::move(other.bcs_) ) ,
           A_( std::move(other.A_) ) ,
           b_( std::move(other.b_) ) ,
           dummy_( other.J_.function_space(0) )
@@ -64,6 +81,7 @@ namespace Algorithm
         copyCoefficients(other.J_,J_);
       }
 
+      /// Copy constructor.
       Operator(const Operator& other)
         : OperatorBase( other.domain_ptr() , other.range_ptr() ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
@@ -78,49 +96,82 @@ namespace Algorithm
         copyCoefficients(other.J_,J_);
       }
 
-      Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-               ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range)
-        : Operator(F,J,bcs,&domain,&range)
-      {}
+      /// Copy assignment.
+      Operator& operator=(const Operator& other)
+      {
+        OperatorBase::operator=( other );
+        disableAssembly(other.assemblyIsDisabled());
+        F_ = other.F_;
+        J_ = other.J_;
+        bcs_ = other.bcs_;
+        A_ = (other.A_ != nullptr) ? other.A_->copy() : nullptr;
+        b_ = (other.b_ != nullptr) ? other.b_->copy() : nullptr;
+        dummy_ = other.dummy_;
 
+        copyCoefficients(other.F_,F_);
+        copyCoefficients(other.J_,J_);
+      }
+
+      /// Move assignment.
+      Operator& operator=(Operator&& other)
+      {
+        OperatorBase::operator=( other );
+        disableAssembly(other.assemblyIsDisabled());
+        F_ = other.F_;
+        J_ = other.J_;
+        bcs_ = std::move(other.bcs_);
+        A_ = std::move(other.A_);
+        b_ = std::move(other.b_);
+        dummy_ = std::move(other.dummy_);
+
+        copyCoefficients(other.F_,F_);
+        copyCoefficients(other.J_,J_);
+      }
+
+      /**
+       * @brief Compute \f$A(x)\f$.
+       */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
         auto y = range().element();
         copy(*b_,y);
-        return y;
+        return std::move(y);
       }
 
+      /**
+       * @brief Compute \f$A'(x)dx\f$.
+       */
       ::Algorithm::Vector d1(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        auto y_ = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
-        copy(dx,*y_);
-        auto Ax = y_->copy();
-        A_->mult(*y_, *Ax);
+        copy(dx,*dummy_.vector());
+        auto y_ = dummy_.vector()->copy();
+        A_->mult(*dummy_.vector(), *y_);
 
-        auto result = range().element();
-        copy(*Ax,result);
+        auto y = range().element();
+        copy(*y_,y);
 
-        return result;
+        return std::move(y);
       }
 
+      /**
+       * @brief Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
+       * @see LinearizedOperator, LinearOperator, LinearOperatorConcept
+       */
       LinearOperator linearization(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
         assert(A_ != nullptr);
-        return LinearizedOperator(Operator(F_,J_,bcs_,A_,domain_ptr(),range_ptr()),x);
-      }
-
-      LinearSolver solver() const
-      {
-        assert (A_ != nullptr);
-        return LUSolver( A_ , *F_.function_space(0) , range_ptr() , domain_ptr() );
+        Operator newOp = Operator(*this);
+        newOp.disableAssembly();
+        return LinearizedOperator(std::move(newOp),x,solver_);
       }
 
     private:
+      /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
@@ -140,6 +191,7 @@ namespace Algorithm
         oldX_F = x;
       }
 
+      /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
@@ -153,10 +205,10 @@ namespace Algorithm
         dolfin::Assembler assembler;
         assembler.assemble(*A_, J_);
 
-        auto tmp = dummy_.vector()->copy();
         for(const auto& bc : bcs_)
-          bc->apply( *A_ , *tmp , *dummy_.vector() );
+          bc->apply( *A_ , *dummy_.vector() , *dummy_.vector() );
 
+        solver_ = std::make_shared<LinearSolver>( LUSolver( A_ , *F_.function_space(0) , range_ptr() , domain_ptr() ) );
         oldX_J = x;
       }
 
@@ -168,6 +220,7 @@ namespace Algorithm
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
       mutable ::Algorithm::Vector oldX_F, oldX_J;
       mutable dolfin::Function dummy_;
+      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
 
@@ -177,9 +230,19 @@ namespace Algorithm
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                      ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range)
+                      VectorSpace& domain, VectorSpace& range)
     {
-      return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , domain , range );
+      return Operator<ResidualForm,JacobianForm>{ F , J , bcs , domain , range };
+    }
+
+    /**
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
+     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , domain , range )
+     */
+    template <class ResidualForm, class JacobianForm>
+    auto makeOperator(ResidualForm& F, JacobianForm& J, VectorSpace& domain, VectorSpace& range)
+    {
+      return Operator<ResidualForm,JacobianForm>{ F , J , domain , range };
     }
 
     /**
@@ -187,9 +250,19 @@ namespace Algorithm
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, ::Algorithm::VectorSpace& space)
+    auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, VectorSpace& space)
     {
-      return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space );
+      return Operator<ResidualForm,JacobianForm>{ F , J , bcs , space , space };
+    }
+
+    /**
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
+     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , space , space )
+     */
+    template <class ResidualForm, class JacobianForm>
+    auto makeOperator(ResidualForm& F, JacobianForm& J, VectorSpace& space)
+    {
+      return Operator<ResidualForm,JacobianForm>{ F , J , space , space };
     }
   }
 }

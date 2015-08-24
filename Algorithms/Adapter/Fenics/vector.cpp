@@ -13,7 +13,7 @@ namespace Algorithm
   namespace Fenics
   {
     Vector::Vector(const ::Algorithm::VectorSpace& space)
-      : Vector( dolfin::Function( cast_ref<VectorSpace>(space.impl()).impl() ) , space )
+      : Vector( dolfin::Function( cast_ref<VectorCreator>(space.impl()).impl() ) , space )
     {}
 
     Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)

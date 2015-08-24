@@ -4,6 +4,8 @@
 #include <boost/type_erasure/any.hpp>
 #include "Util/Concepts/functionalConcept.hh"
 
+#include "vectorSpace.hh"
+
 namespace Algorithm
 {
   /**

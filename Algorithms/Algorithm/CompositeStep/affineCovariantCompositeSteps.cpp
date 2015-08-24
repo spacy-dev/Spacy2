@@ -353,7 +353,7 @@ namespace Algorithm
     if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
       maxTau = std::min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-    DampingFactor tau = CompositeStep::findMinimizer( cubic, 0, maxTau , dampingTolerance*maxTau );
+    DampingFactor tau = CompositeStep::findMinimizer( cubic, 0, maxTau , dampingTolerance );
 
     return tau;
   }

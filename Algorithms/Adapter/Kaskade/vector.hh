@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 #define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
+#include "VectorSpaces/productSpace.hh"
 #include "Util/Base/vectorBase.hh"
-#include "FunctionSpaces/productSpace.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 #include "Util/Mixins/impl.hh"
 #include "Util/Mixins/eps.hh"
@@ -16,7 +16,9 @@ namespace Algorithm
 
   namespace Kaskade
   {
-    template <class> class VectorSpace;
+    /// \cond
+    template <class> class VectorCreator;
+    /// \endcond
 
     template <class Description>
     class Vector : public VectorBase< Vector<Description> > , public Mixin::Eps
@@ -28,13 +30,13 @@ namespace Algorithm
     public:
       Vector(const ::Algorithm::VectorSpace& space_)
         : VectorBase< Vector<Description> >(space_),
-          spaces_(&cast_ref< VectorSpace<Description> >(space_.impl()).impl()),
+          spaces_(&cast_ref< VectorCreator<Description> >(space_.impl()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
 
       Vector(const ::Algorithm::VectorSpace& space_, const VectorImpl& v)
         : VectorBase< Vector<Description> >(space_),
-          spaces_(&cast_ref< VectorSpace<Description> >(space_.impl()).impl()),
+          spaces_(&cast_ref< VectorCreator<Description> >(space_.impl()).impl()),
           v_(v)
       {}
 

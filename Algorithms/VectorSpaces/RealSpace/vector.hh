@@ -1,7 +1,6 @@
 #ifndef ALGORITHM_REAL_SPACE_VECTOR_HH
 #define ALGORITHM_REAL_SPACE_VECTOR_HH
 
-#include "../../vectorSpace.hh"
 #include "Util/Base/vectorBase.hh"
 #include "Util/Mixins/eps.hh"
 #include "Util/Mixins/impl.hh"

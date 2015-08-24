@@ -20,11 +20,11 @@ namespace Algorithm
       {
         if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
 
-        auto DF_Inv = F.linearization(x)^-1;
+        const auto& DF_Inv = F.linearization(x)^-1;
 
         auto dx = DF_Inv(-F(x));
-        auto nu = dampingFactor(DF_Inv,x,dx);
-        x += static_cast<double>(nu)*dx;
+        double nu = dampingFactor(DF_Inv,x,dx);
+        x += nu*dx;
 
         if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
 

@@ -58,7 +58,7 @@ namespace Algorithm
      * \param P preconditioner
      * \param type conjugate gradient type ("CG", "RCG", "TCG" or "TRCG")
      */
-    CGMethod(Operator A, CallableOperator P, const std::string& type = "CG" );
+    CGMethod(CallableOperator A, CallableOperator P, const std::string& type = "CG" );
 
     /**
      * @param x initial guess
@@ -66,11 +66,6 @@ namespace Algorithm
      * @param tolerance tolerance of the termination criterion
      */
     Vector solve(const Vector& x, const Vector& b, double tolerance) const;
-
-    /**
-     * @param b right hand side
-     */
-    Vector solve(const Vector& b) const;
 
     /**
      * @param x initial guess
@@ -111,7 +106,7 @@ namespace Algorithm
 
     const CallableOperator& P() const;
 
-    const Operator& A() const;
+    const CallableOperator& A() const;
 
   private:
     /// CG Implementation.
@@ -151,8 +146,7 @@ namespace Algorithm
     void adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const;
 
 
-    Operator A_;
-    CallableOperator P_;
+    CallableOperator A_, P_;
     std::shared_ptr< CGTerminationCriterion > terminate = nullptr;
     mutable Result result = Result::Failed; ///< information about reason for termination
     mutable Nonconvexity nonconvexity = Nonconvexity::None;

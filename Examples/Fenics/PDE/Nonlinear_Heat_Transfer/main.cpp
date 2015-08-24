@@ -45,6 +45,8 @@ int main()
   NonlinearPoisson::BilinearForm a(V, V);
   NonlinearPoisson::LinearForm L(V);
 
+  list_lu_solver_methods();
+  
   Constant c(1e-2), d(1e2);
   Source f;
   Function u(V);

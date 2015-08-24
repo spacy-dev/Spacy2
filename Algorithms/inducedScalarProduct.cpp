@@ -1,6 +1,6 @@
 #include "inducedScalarProduct.hh"
 
-#include "FunctionSpaces/productSpace.hh"
+#include "VectorSpaces/productSpace.hh"
 #include "Util/cast.hh"
 
 #include <utility>

@@ -1,11 +1,15 @@
 #include "primalDualSwitch.hh"
 
-#include "FunctionSpaces/ProductSpace/vector.hh"
+#include "VectorSpaces/ProductSpace/vector.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
+    PrimalDualSwitch::PrimalDualSwitch()
+      : disablePrimal_(false), disableDual_(false), disableReset_(false)
+    {}
+
     void PrimalDualSwitch::reset() const
     {
       if( disableReset_ ) return;

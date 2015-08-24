@@ -3,7 +3,7 @@
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
 #include "vector.hh"
-#include "FunctionSpaces/ProductSpace/vectorSpace.hh"
+#include "VectorSpaces/ProductSpace/vectorSpace.hh"
 
 #include "Util/Exceptions/invalidArgumentException.hh"
 
@@ -11,12 +11,12 @@ namespace Algorithm
 {
   namespace Fenics
   {
-    VectorSpace::VectorSpace(const dolfin::FunctionSpace& space)
+    VectorCreator::VectorCreator(const dolfin::FunctionSpace& space)
       : Mixin::Impl<dolfin::FunctionSpace>(space)
     {}
 
-    VectorSpace::VectorSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t, size_t>& dofmap)
-      : VectorSpace(space)
+    VectorCreator::VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<size_t, size_t>& dofmap)
+      : VectorCreator(space)
     {
       dofmap_ = dofmap;
       inverseDofmap_ = std::vector<size_t>(dofmap_.size());
@@ -26,7 +26,7 @@ namespace Algorithm
         inverseDofmap_[m->first] = m->second;
     }
 
-    size_t VectorSpace::dofmap(size_t i) const
+    size_t VectorCreator::dofmap(size_t i) const
     {
 
       auto j = dofmap_.find(i);
@@ -34,19 +34,29 @@ namespace Algorithm
       return j->second;
     }
 
-    size_t VectorSpace::inverseDofmap(size_t i) const
+    size_t VectorCreator::inverseDofmap(size_t i) const
     {
       if(inverseDofmap_.empty()) throw std::runtime_error("inverseDofmap");
       return inverseDofmap_[i];
     }
 
 
-    ::Algorithm::Vector VectorSpace::operator()(const ::Algorithm::VectorSpace* space) const
+    ::Algorithm::Vector VectorCreator::operator()(const ::Algorithm::VectorSpace* space) const
     {
       return Vector{*space};
     }
 
-    ::Algorithm::VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
+    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space)
+    {
+      return ::Algorithm::makeHilbertSpace( VectorCreator{space} , l2Product{} );
+    }
+
+    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t,size_t>& dofmap)
+    {
+      return ::Algorithm::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} );
+    }
+
+    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
       unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));

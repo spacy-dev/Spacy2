@@ -38,6 +38,7 @@ namespace Algorithm
     double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)
     {
       assert(a<b);
+      eps *= b-a;
       double t = a;
       double tmin = t;
       double fmin = f(t);

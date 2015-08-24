@@ -159,10 +159,10 @@ namespace Algorithm
         A_ = dummy_.vector()->factory().create_matrix();
         dolfin::assemble(*A_,H_);
 
-        for( auto& bc : bcs_) bc->apply(*A_);
+        for( auto& bc : bcs_) bc->apply(*A_,*dummy_.vector(),*dummy_.vector());
 
         oldX_H_ = x;
-        solver_ = std::make_shared<LinearSolver>( LUSolver(A_,*J_.function_space(0),this->domain_ptr(),this->domain_ptr() ) );
+        solver_ = std::make_shared<LinearSolver>( LUSolver(A_,*J_.function_space(0),this->domain_ptr(),this->domain_ptr(),true) );
       }
 
       mutable F f_;

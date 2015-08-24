@@ -11,7 +11,7 @@
 
 namespace Algorithm
 {
-  CGMethod::CGMethod(Operator A, CallableOperator P, const std::string& type)
+  CGMethod::CGMethod(CallableOperator A, CallableOperator P, const std::string& type)
     : A_(std::move(A)), P_(std::move(P)),
       terminate(std::make_shared< RelativeEnergyError >()), type_(type)
   {
@@ -26,12 +26,6 @@ namespace Algorithm
   Vector CGMethod::solve(const Vector& x, const Vector& b, double tolerance) const
   {
     terminate->setRelativeAccuracy(tolerance);
-    return solve(x,b);
-  }
-
-  Vector CGMethod::solve(const Vector& b) const
-  {
-    auto x = A_.domain().element();
     return solve(x,b);
   }
 
@@ -72,7 +66,7 @@ namespace Algorithm
     return P_;
   }
 
-  const Operator& CGMethod::A() const
+  const CallableOperator& CGMethod::A() const
   {
     return A_;
   }

@@ -15,13 +15,13 @@ namespace Algorithm
 
   namespace ProductSpace
   {
-    class SpaceCreator
+    class VectorCreator
     {
     public:
       /**
        * @brief Construct product space \f$ X = \{ Y_0 , Y_1 , \ldots \} \f$.
        */
-      explicit SpaceCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
+      explicit VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
 
       /**
        * @brief Construct product space \f$ X = \{ \{ Y_0 , Y_1 , \ldots \} , \{ Z_0 , \ldots \} \}\f$.
@@ -33,7 +33,7 @@ namespace Algorithm
        * @param primalSubSpaceIds indices of spaces associated with primal variables
        * @param dualSubSpaceIds indices of spaces associated with dual variables
        */
-      SpaceCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
+      VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                    const std::vector<unsigned>& primalSubSpaceIds,
                    const std::vector<unsigned>& dualSubSpaceIds);
 
@@ -103,7 +103,7 @@ namespace Algorithm
        * @brief Checks whether this product space has primal-dual structure or is a simple product space.
        * @return true if this product space has primal-dual structure, else false
        */
-      bool isPrimalDualProductSpace() const;
+      bool isPrimalDual() const;
 
       /// Generate (default) product space element.
       ::Algorithm::Vector operator()(const VectorSpace* space) const;
@@ -112,44 +112,8 @@ namespace Algorithm
       std::vector<std::shared_ptr<VectorSpace> > spaces_;
       std::vector<unsigned> primalSubSpaceIds_, dualSubSpaceIds_;
       std::map<unsigned,unsigned> primalMap_, dualMap_;
-      bool isPrimalDualProductSpace_ = false;
+      bool isPrimalDual_ = false;
     };
-
-
-    /// \cond
-    template <class... Spaces_> struct PackSpaces {};
-
-    namespace ProductSpaceDetail
-    {
-      template <class...> struct CreateSpaceVectorImpl;
-
-      template <>
-      struct CreateSpaceVectorImpl<>
-      {
-        static std::vector<std::shared_ptr<VectorSpace> > apply()
-        {
-          return std::vector<std::shared_ptr<VectorSpace> >();
-        }
-      };
-
-      template <class Space, class... Spaces>
-      struct CreateSpaceVectorImpl<Space,Spaces...>
-      {
-        static std::vector<std::shared_ptr<VectorSpace> > apply()
-        {
-          auto spaces = CreateSpaceVectorImpl<Spaces...>::apply();
-          spaces.push_back(std::make_shared<Space>());
-          return spaces;
-        }
-      };
-
-      template <class> struct CreateSpaceVector;
-
-      template <class... Spaces_>
-      struct CreateSpaceVector< PackSpaces<Spaces_...> > : CreateSpaceVectorImpl<Spaces_...> {};
-    }
-    /// \endcond
-
 
     /**
      * @brief Create product space from spaces.

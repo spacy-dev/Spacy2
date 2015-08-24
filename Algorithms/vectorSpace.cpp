@@ -129,7 +129,7 @@ namespace Algorithm
 
   VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct)
   {
-    auto V = VectorSpace{std::move(impl),HilbertSpaceNorm(scalarProduct)};
+    auto V = VectorSpace{std::move(impl),HilbertSpaceNorm{scalarProduct}};
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);

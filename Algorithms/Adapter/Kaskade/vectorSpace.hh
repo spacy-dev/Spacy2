@@ -10,7 +10,7 @@
 #include "l2Product.hh"
 #include "vector.hh"
 
-#include "FunctionSpaces/productSpace.hh"
+#include "VectorSpaces/productSpace.hh"
 
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
@@ -21,12 +21,12 @@ namespace Algorithm
   namespace Kaskade
   {
     template <class Description>
-    class VectorSpace :
+    class VectorCreator :
         public Mixin::Impl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
     {
       using Space = std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > >;
     public:
-      VectorSpace(const Space& space)
+      VectorCreator(const Space& space)
         : Mixin::Impl<Space>{space}
       {}
 
@@ -39,7 +39,7 @@ namespace Algorithm
     template <class Description, class Space>
     auto makeHilbertSpace(const Space& space)
     {
-      return ::Algorithm::makeHilbertSpace( Kaskade::VectorSpace<Description>{space} , l2Product<Description>{} );
+      return ::Algorithm::makeHilbertSpace( Kaskade::VectorCreator<Description>{space} , l2Product<Description>{} );
     }
 
 
@@ -53,7 +53,7 @@ namespace Algorithm
 
         static void apply(const Spaces& spaces, std::vector<std::shared_ptr< ::Algorithm::VectorSpace > >& newSpaces)
         {
-          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( ::Algorithm::makeHilbertSpace( VectorSpace< ExtractDescription_t<Description,i> >{ *boost::fusion::at_c<Variable::spaceIndex>(spaces) } , l2Product< ExtractDescription_t<Description,i> >{} ) );
+          newSpaces[i] = std::make_shared< ::Algorithm::VectorSpace >( ::Algorithm::makeHilbertSpace( VectorCreator< ExtractDescription_t<Description,i> >{ *boost::fusion::at_c<Variable::spaceIndex>(spaces) } , l2Product< ExtractDescription_t<Description,i> >{} ) );
           MakeSpaces<Description,i+1,n>::apply(spaces,newSpaces);
         }
       };
@@ -71,16 +71,16 @@ namespace Algorithm
       struct ExtractSpace
       {
         using Variables = typename Description::Variables;
-        static auto apply(const ProductSpace::SpaceCreator& spaces)
+        static auto apply(const ProductSpace::VectorCreator& spaces)
         {
-          return &cast_ref< VectorSpace< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
+          return &cast_ref< VectorCreator< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
         }
       };
 
       template <class Description, unsigned i, unsigned j, unsigned n>
       struct ExtractSpace<Description,i,j,n,false>
       {
-        static auto apply(const ProductSpace::SpaceCreator& spaces)
+        static auto apply(const ProductSpace::VectorCreator& spaces)
         {
           return ExtractSpace<Description,i,j+1,n>::apply(spaces);
         }
@@ -89,19 +89,19 @@ namespace Algorithm
       template <class Description, unsigned i,  unsigned n, bool doApply>
       struct ExtractSpace<Description,i,n,n,doApply>
       {
-        static auto apply(const ProductSpace::SpaceCreator&)
+        static auto apply(const ProductSpace::VectorCreator&)
         {}
       };
 
 
       template <class Description, unsigned i>
-      auto extractSpace(const ProductSpace::SpaceCreator& spaces)
+      auto extractSpace(const ProductSpace::VectorCreator& spaces)
       {
         return ExtractSpace<Description,i,0,boost::fusion::result_of::size<typename Description::Spaces>::value>::apply(spaces);
       }
 
       template <class Description, unsigned... is>
-      auto extractSpaces(const ProductSpace::SpaceCreator &spaces, std::integer_sequence<unsigned,is...>)
+      auto extractSpaces(const ProductSpace::VectorCreator &spaces, std::integer_sequence<unsigned,is...>)
       {
         return typename Description::Spaces( extractSpace<Description,is>(spaces)... );
       }
@@ -113,7 +113,7 @@ namespace Algorithm
 
         static Spaces apply(const  ::Algorithm::VectorSpace & spaces)
         {
-          return Spaces{ &cast_ref< VectorSpace<Description> >(spaces.impl()).impl() };
+          return Spaces{ &cast_ref< VectorCreator<Description> >(spaces.impl()).impl() };
         }
       };
 
@@ -149,12 +149,12 @@ namespace Algorithm
     {
       using Spaces = typename Description::Spaces;
 
-      if( isAny< VectorSpace<Description> >(spaces.impl()) )
+      if( isAny< VectorCreator<Description> >(spaces.impl()) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
-      if( isAny<ProductSpace::SpaceCreator>(spaces.impl()) )
+      if( isAny<ProductSpace::VectorCreator>(spaces.impl()) )
       {
-        const auto& spaces_ = cast_ref<ProductSpace::SpaceCreator>(spaces.impl());
+        const auto& spaces_ = cast_ref<ProductSpace::VectorCreator>(spaces.impl());
         using seq = std::make_integer_sequence<unsigned,boost::fusion::result_of::size<Spaces>::value>;
         return Detail::extractSpaces<Description>(spaces_,seq{});
       }

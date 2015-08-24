@@ -81,14 +81,7 @@ namespace Algorithm
       LinearOperator hessian(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
-        return Hessian(  Functional<FunctionalImpl>(*this,true) , x );
-      }
-
-
-      LinearSolver solver() const
-      {
-        assert (A_ != nullptr);
-        return DirectSolver<VariableSetDescription,VariableSetDescription>( *A_ , spaces_, this->domain().dualSpace_ptr() , this->domain_ptr() );
+        return Hessian(  Functional<FunctionalImpl>(*this,true) , x , solver_ );
       }
 
       ::Algorithm::Vector d1_(const ::Algorithm::Vector& x) const
@@ -162,6 +155,7 @@ namespace Algorithm
         assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
+        solver_ = std::make_shared<LinearSolver>( DirectSolver<VariableSetDescription,VariableSetDescription>( *A_ , spaces_, this->domain().dualSpace_ptr() , this->domain_ptr() ) );
         old_X_ddf_ = x;
       }
 
@@ -175,6 +169,7 @@ namespace Algorithm
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalImpl::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=FunctionalImpl::TestVars::noOfVariables;
+      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
 

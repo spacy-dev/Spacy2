@@ -4,6 +4,7 @@
 #include "../../vector.hh"
 #include "Util/Exceptions/incompatibleSpaceException.hh"
 #include "Util/cast.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {

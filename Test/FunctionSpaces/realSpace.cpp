@@ -2,7 +2,7 @@
 
 #include "norm.hh"
 #include "scalarProduct.hh"
-#include "FunctionSpaces/realSpace.hh"
+#include "VectorSpaces/realSpace.hh"
 #include "Util/cast.hh"
 
 TEST(RealSpaceTest,ElementTest)

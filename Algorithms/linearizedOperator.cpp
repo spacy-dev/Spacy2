@@ -9,14 +9,21 @@ namespace Algorithm
       A_(std::move(A)), x_(x)
   {}
 
+ LinearizedOperator::LinearizedOperator(C1Operator A, const Vector& x, std::shared_ptr<LinearSolver> solver)
+   : LinearizedOperator(A,x)
+ {
+    solver_ = solver;
+ }
+
   Vector LinearizedOperator::operator ()(const Vector& dx) const
   {
     return A_.d1(x_,dx);
   }
 
-  LinearSolver LinearizedOperator::solver() const
+  const LinearSolver& LinearizedOperator::solver() const
   {
-    return A_.solver();
+    return *solver_;
+//    return A_.solver();
   }
 
 //    std::unique_ptr<AbstractLinearSolver> LinearizedOperator::adjointSolver() const

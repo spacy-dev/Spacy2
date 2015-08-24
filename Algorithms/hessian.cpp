@@ -22,7 +22,7 @@ namespace Algorithm
     return F_.d2(x_,dx);
   }
 
-  LinearSolver Hessian::solver() const
+  const LinearSolver& Hessian::solver() const
   {
     return *solver_;
   }

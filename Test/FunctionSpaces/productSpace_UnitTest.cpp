@@ -2,8 +2,8 @@
 
 #include "norm.hh"
 #include "scalarProduct.hh"
-#include "FunctionSpaces/realSpace.hh"
-#include "FunctionSpaces/productSpace.hh"
+#include "VectorSpaces/realSpace.hh"
+#include "VectorSpaces/productSpace.hh"
 #include "Util/cast.hh"
 
 TEST(ProductSpaceTest,PurePrimalElementTest)

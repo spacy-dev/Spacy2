@@ -20,17 +20,26 @@ namespace Algorithm
   class VectorSpace;
   /// \endcond
 
+  /**
+   * @brief Vector creator concept.
+   * @see VectorCreator, VectorSpace
+   */
   using VectorCreatorConcept =
   boost::mpl::vector<
     ConceptBase ,
     boost::type_erasure::callable<Vector(const VectorSpace*), const boost::type_erasure::_self>
   >;
 
+  /**
+   * @brief Vector creator for feeding into VectorSpace.
+   * @see VectorCreatorConcept, VectorSpace
+   */
   using VectorCreator = boost::type_erasure::any< VectorCreatorConcept >;
 
 
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
+   * @see VectorCreator, VectorCreatorConcept
    */
   class VectorSpace : public Mixin::Impl<VectorCreator>
   {

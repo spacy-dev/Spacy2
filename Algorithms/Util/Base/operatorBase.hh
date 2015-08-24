@@ -1,11 +1,12 @@
 #ifndef ALGORITHM_OPERATOR_BASE_HH
 #define ALGORITHM_OPERATOR_BASE_HH
 
-#include "vector.hh"
-#include "vectorSpace.hh"
-
 namespace Algorithm
 {
+  /// \cond
+  class VectorSpace;
+  /// \endcond
+
   /**
    * @brief Abstract interface for operators \f$A:\ X\rightarrow Y\f$, between function spaces \f$X\f$ and \f$Y\f$.
    */
@@ -14,11 +15,16 @@ namespace Algorithm
   public:
     /**
      * @brief Constructor.
-     * @param domain domain space \f$X\f$.
-     * @param range range space \f$Y\f$.
+     * @param domain pointer to domain space \f$X\f$.
+     * @param range pointe to range space \f$Y\f$.
      */
     OperatorBase(VectorSpace* domain, VectorSpace* range);
 
+    /**
+     * @brief Constructor.
+     * @param domain domain space \f$X\f$.
+     * @param range range space \f$Y\f$.
+     */
     OperatorBase(VectorSpace& domain, VectorSpace& range);
 
     /// Access domain space \f$X\f$.

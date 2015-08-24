@@ -13,19 +13,19 @@ namespace Algorithm
   namespace ProductSpace
   {
     /// \cond
-    class SpaceCreator;
+    class VectorCreator;
     /// \endcond
 
     /**
-   * @brief Product space element.
-   */
+     * @brief Product space element.
+     */
     class Vector : public VectorBase<Vector>, public Mixin::PrimalDualSwitch
     {
     public:
       /**
-     * @brief Construct real number with initial value 0.
-     * @param space associated function space (RealSpace)
-     */
+       * @brief Construct real number with initial value 0.
+       * @param space associated function space (RealSpace)
+       */
       explicit Vector(const VectorSpace& space);
 
       Vector(const Vector& other);
@@ -66,9 +66,9 @@ namespace Algorithm
 
       void setDualComponent(const ::Algorithm::Vector& y);
 
-      const SpaceCreator& creator() const;
+      const VectorCreator& creator() const;
 
-      bool isPrimalDualProductSpaceElement() const;
+      bool isPrimalDual() const;
 
       /// Apply as dual element.
       double operator()(const Vector& y) const;

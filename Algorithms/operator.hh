@@ -40,7 +40,7 @@ namespace Algorithm
   /**
    * @brief Access solver via A^-1. Throws for k!=-1.
    */
-  inline auto operator^(const LinearOperator& A, int k)
+  inline const auto& operator^(const LinearOperator& A, int k)
   {
     if( k == -1 ) return A.solver();
     throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
