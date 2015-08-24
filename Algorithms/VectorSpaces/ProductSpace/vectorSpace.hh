@@ -15,6 +15,10 @@ namespace Algorithm
 
   namespace ProductSpace
   {
+    /**
+     * @ingroup ProductSpaceGroup
+     * @brief Creator for ProductSpace::Vector.
+     */
     class VectorCreator
     {
     public:
@@ -116,8 +120,8 @@ namespace Algorithm
     };
 
     /**
+     * @ingroup ProductSpaceGroup
      * @brief Create product space from spaces.
-     *
      * @param spaces vector of spaces
      *
      * Creates a simple product space with only primal variables.
@@ -125,6 +129,7 @@ namespace Algorithm
     VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
 
     /**
+     * @ingroup ProductSpaceGroup
      * @brief Create product space from spaces.
      *
      * @param spaces vector of spaces

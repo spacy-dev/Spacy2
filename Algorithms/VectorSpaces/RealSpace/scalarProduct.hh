@@ -8,7 +8,10 @@ namespace Algorithm
 {
   namespace Real
   {
-    /// Scalar product for RealSpace.
+    /**
+     * @ingroup RealGroup
+     * @brief Scalar product for space of real numbers.
+     */
     class ScalarProduct
     {
     public:

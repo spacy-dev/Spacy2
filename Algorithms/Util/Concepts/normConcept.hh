@@ -10,11 +10,19 @@
 
 namespace Algorithm
 {
-  using NormConcept =
-  boost::mpl::vector<
-    ConceptBase ,
-    boost::type_erasure::callable<double(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
-  >;
+  namespace Concepts
+  {
+    /**
+     * @ingroup ConceptGroup
+     * @brief Concept for norm implementations.
+     * @see ::Algorithm::Norm
+     */
+    using NormConcept =
+    boost::mpl::vector<
+      ConceptBase ,
+      boost::type_erasure::callable<double(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
+    >;
+  }
 }
 
 #endif // ALGORITHM_NORM_CONCEPT

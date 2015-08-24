@@ -10,21 +10,21 @@ namespace Algorithm
 {
   /**
    * @brief Functional. Can store objects that satisfy the requirements of FunctionalConcept.
-   * @see FunctionalConcept
+   * @see Concepts::FunctionalConcept
    */
-  using Functional = boost::type_erasure::any<FunctionalConcept>;
+  using Functional = boost::type_erasure::any<Concepts::FunctionalConcept>;
 
   /**
    * @brief Differentiable functional. Can store objects that satisfy the requirements of C1FunctionalConcept.
-   * @see C1FunctionalConcept
+   * @see Concepts::C1FunctionalConcept
    */
-  using C1Functional = boost::type_erasure::any<C1FunctionalConcept>;
+  using C1Functional = boost::type_erasure::any<Concepts::C1FunctionalConcept>;
 
   /**
    * @brief Twice differentiable functional. Can store objects that satisfy the requirements of C2FunctionalConcept.
-   * @see C2FunctionalConcept
+   * @see Concepts::C2FunctionalConcept
    */
-  using C2Functional = boost::type_erasure::any<C2FunctionalConcept>;
+  using C2Functional = boost::type_erasure::any<Concepts::C2FunctionalConcept>;
 }
 
 #endif // ALGORITHM_FUNCTIONAL_HH

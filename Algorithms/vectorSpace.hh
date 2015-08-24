@@ -2,39 +2,26 @@
 #define ALGORITHM_VECTOR_SPACE_HH
 
 #include <vector>
-
-#include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
 
 #include "norm.hh"
 #include "scalarProduct.hh"
 #include "vector.hh"
 
-#include "Util/Concepts/conceptBase.hh"
+#include "Util/Concepts/vectorCreatorConcept.hh"
 #include "Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
   /// \cond
   namespace Detail { static unsigned spaceIndex = 0; }
-  class VectorSpace;
   /// \endcond
 
   /**
-   * @brief Vector creator concept.
-   * @see VectorCreator, VectorSpace
-   */
-  using VectorCreatorConcept =
-  boost::mpl::vector<
-    ConceptBase ,
-    boost::type_erasure::callable<Vector(const VectorSpace*), const boost::type_erasure::_self>
-  >;
-
-  /**
    * @brief Vector creator for feeding into VectorSpace.
-   * @see VectorCreatorConcept, VectorSpace
+   * @see Concepts::VectorCreatorConcept, VectorSpace
    */
-  using VectorCreator = boost::type_erasure::any< VectorCreatorConcept >;
+  using VectorCreator = boost::type_erasure::any< Concepts::VectorCreatorConcept >;
 
 
   /**

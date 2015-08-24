@@ -7,15 +7,24 @@ namespace Algorithm
 {
   namespace Real
   {
+    /**
+     * @ingroup RealGroup
+     * @brief A solver for scalar problems.
+     */
     class Solver
     {
     public:
-      Solver(double value);
+      /**
+       * @brief Constructor.
+       * @param z to be inverted
+       */
+      Solver(double z);
 
+      /// Compute \f$z^{-1}y\f$.
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& y) const;
 
     private:
-      double value_;
+      double z_;
     };
   }
 }

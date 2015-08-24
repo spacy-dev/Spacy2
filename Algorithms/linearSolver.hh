@@ -9,16 +9,16 @@ namespace Algorithm
   /**
    * @brief Linear solver class. Same as CallableOperator.
    *
-   * @see LinearSolverConcept
+   * @see Concepts::LinearSolverConcept
    */
-  using LinearSolver = boost::type_erasure::any< LinearSolverConcept >;
+  using LinearSolver = boost::type_erasure::any< Concepts::LinearSolverConcept >;
 
   /**
    * @brief General linear solver class. Additionally monitors if the underlying operator is positive definite.
    *
-   * @see GeneralLinearSolverConcept
+   * @see Concepts::GeneralLinearSolverConcept
    */
-  using GeneralLinearSolver = boost::type_erasure::any< GeneralLinearSolverConcept >;
+  using GeneralLinearSolver = boost::type_erasure::any< Concepts::GeneralLinearSolverConcept >;
 }
 
 #endif // ALGORITHM_LINEAR_SOLVER_HH

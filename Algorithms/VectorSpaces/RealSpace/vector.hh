@@ -9,7 +9,10 @@ namespace Algorithm
 {
   namespace Real
   {
-    /// Real number.
+    /**
+     * @ingroup RealGroup
+     * @brief Real number.
+     */
     class Vector :
         public VectorBase<Vector,double> ,
         public SupportedOperatorBase<Vector> ,
@@ -35,10 +38,13 @@ namespace Algorithm
       /// Number of entries in coefficient vector (=1).
       unsigned size() const ;
 
+      /// Implicit conversion to double.
       operator double() const;
 
+      /// Comparison operator.
       bool operator==(const Vector& y) const;
 
+      /// Apply as dual element.
       double operator()(const Vector& y) const;
     };
   }

@@ -7,11 +7,14 @@ namespace Algorithm
 {
   namespace ProductSpace
   {
-    /// Canonical scalar product on product spaces.
+    /**
+     * @ingroup ProductSpaceGroup
+     * @brief Canonical scalar product on product spaces.
+     */
     class ScalarProduct
     {
     public:
-      /// Compute x*y.
+      /// Compute \f$(x,y)=\sum_i (x_i,y_i)\f$.
       double operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const;
     };
   }

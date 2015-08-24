@@ -10,17 +10,9 @@ namespace Algorithm
 {
   /**
    * @brief Vector class.  Can store objects that satisfy the requirements of VectorConcept.
-   * @see VectorConcept
+   * @see Concepts::VectorConcept
    */
-  using Vector = boost::type_erasure::any<VectorConcept >;
-
-//  struct Vector : AnyVector
-//  {
-//    template <class... Args>
-//    Vector(Args&&... args)
-//      : AnyVector(std::forward<Args>(args)...)
-//    {}
-//  };
+  using Vector = boost::type_erasure::any<Concepts::VectorConcept >;
 
 ////  template <class> struct Scale;
 
@@ -56,10 +48,9 @@ namespace Algorithm
   Vector operator-(Vector x, const Vector& y);
 
   /**
-   * @brief Compute \f$z=x*y=(x,y)\f$.
+   * @brief Compute scalar product \f$z=x*y=(x,y)\f$.
    */
   double operator*(const Vector& x, const Vector& y);
-
 
   /**
    * @brief Compute norm, where the norm associated with the underlying function space is used.

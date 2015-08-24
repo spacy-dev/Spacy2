@@ -15,27 +15,27 @@ namespace Algorithm
    *
    * Use this if only application of an operator is required.
    *
-   * @see CallableOperatorConcept
+   * @see Concepts::CallableOperatorConcept
    */
-  using CallableOperator = boost::type_erasure::any< CallableOperatorConcept >;
+  using CallableOperator = boost::type_erasure::any< Concepts::CallableOperatorConcept >;
 
   /**
    * @brief Linear operator class. Can store objects that satisfy the requirements of LinearOperatorConcept.
-   * @see LinearOperatorConcept
+   * @see Concepts::LinearOperatorConcept
    */
-  using LinearOperator = boost::type_erasure::any< LinearOperatorConcept >;
+  using LinearOperator = boost::type_erasure::any< Concepts::LinearOperatorConcept >;
 
   /**
    * @brief Operator class. Can store objects that satisfy the requirements of OperatorConcept.
-   * @see OperatorConcept
+   * @see Concepts::OperatorConcept
    */
-  using Operator = boost::type_erasure::any< OperatorConcept >;
+  using Operator = boost::type_erasure::any< Concepts::OperatorConcept >;
 
   /**
    * @brief Differentiable perator class. Can store objects that satisfy the requirements of C1OperatorConcept.
-   * @see C1OperatorConcept
+   * @see Concepts::C1OperatorConcept
    */
-  using C1Operator = boost::type_erasure::any< C1OperatorConcept >;
+  using C1Operator = boost::type_erasure::any< Concepts::C1OperatorConcept >;
 
   /**
    * @brief Access solver via A^-1. Throws for k!=-1.

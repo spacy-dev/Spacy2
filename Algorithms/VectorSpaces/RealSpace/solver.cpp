@@ -8,8 +8,8 @@ namespace Algorithm
 {
   namespace Real
   {
-    Solver::Solver(double value)
-       : value_(value)
+    Solver::Solver(double z)
+       : z_(z)
     {}
 
     ::Algorithm::Vector Solver::operator ()(const ::Algorithm::Vector& y) const
@@ -17,7 +17,7 @@ namespace Algorithm
       if( !isAny<Real::Vector>(y) ) throw InvalidArgumentException("RealSolver::operator()(const Vector&)");
 
       auto x = y;
-      x *= 1./value_;
+      x *= 1./z_;
       return x;
     }
   }

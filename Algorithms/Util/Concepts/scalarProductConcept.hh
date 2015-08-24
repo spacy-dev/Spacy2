@@ -10,17 +10,21 @@
 
 namespace Algorithm
 {
-  /**
-   * @brief Concept for scalar products.
-   * @see ScalarProduct
-   */
-  using ScalarProductConcept =
-  boost::mpl::vector<
-    ConceptBase ,
-    boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&,
-                                         const boost::type_erasure::any<VectorConcept>&),
-                                  const boost::type_erasure::_self>
-  >;
+  namespace Concepts
+  {
+    /**
+     * @ingroup ConceptGroup
+     * @brief Concept for scalar products.
+     * @see ScalarProduct
+     */
+    using ScalarProductConcept =
+    boost::mpl::vector<
+      ConceptBase ,
+      boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&,
+                                           const boost::type_erasure::any<VectorConcept>&),
+                                    const boost::type_erasure::_self>
+    >;
+  }
 }
 
 #endif // ALGORITHM_SCALAR_PRODUCT_CONCEPT_HH

@@ -8,9 +8,9 @@ namespace Algorithm
 {
   /**
    * @brief Norm class.  Can store objects that satisfy the requirements of NormConcept.
-   * @see NormConcept
+   * @see Concepts::NormConcept
    */
-  using Norm = boost::type_erasure::any< NormConcept >;
+  using Norm = boost::type_erasure::any< Concepts::NormConcept >;
 }
 
 

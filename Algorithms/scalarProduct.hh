@@ -8,8 +8,8 @@ namespace Algorithm
 {
   /**
    * @brief Scalar product class.  Can store objects that satisfy the requirements of ScalarProductConcept.
-   * @see ScalarProductConcept
+   * @see Concepts::ScalarProductConcept
    */
-  using ScalarProduct = boost::type_erasure::any< ScalarProductConcept >;
+  using ScalarProduct = boost::type_erasure::any< Concepts::ScalarProductConcept >;
 }
 #endif // ALGORITHMS_SCALARPRODUCT_HH

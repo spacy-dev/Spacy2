@@ -7,6 +7,11 @@ namespace Algorithm
 {
   namespace Real
   {
+    /**
+     * @ingroup RealGroup
+     * @brief Construct space of real numbers.
+     * @return ::Algorithm::makeHilbertSpace( [](const VectorSpace* space){ return Vector{*space}; } , ScalarProduct{} );
+     */
     VectorSpace makeHilbertSpace();
   }
 }
