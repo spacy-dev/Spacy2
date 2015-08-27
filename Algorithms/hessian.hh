@@ -19,7 +19,7 @@ namespace Algorithm
      * @param A twice differentiable functional
      * @param x point of linearization
      */
-    Hessian(C2Functional F, const Vector& x);
+    Hessian(C2Functional F, Vector x);
 
     /**
      * @brief Constructor.
@@ -27,7 +27,7 @@ namespace Algorithm
      * @param x point of linearization
      * @param solver linear solver to (approximately) compute \f$A(x)^{-1}y\f$
      */
-    Hessian(C2Functional F, const Vector &x, std::shared_ptr<LinearSolver> solver);
+    Hessian(C2Functional F, Vector x, LinearSolver solver);
 
     /// Apply operator, i.e. compute \f$y=f''(x)dx\f$.
     Vector operator ()(const Vector& dx) const;
@@ -38,7 +38,7 @@ namespace Algorithm
   private:
     C2Functional F_;
     Vector x_;
-    std::shared_ptr<LinearSolver> solver_;
+    LinearSolver solver_;
   };
 }
 

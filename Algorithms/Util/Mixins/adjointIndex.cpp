@@ -17,18 +17,17 @@ double Algorithm::Mixin::AdjointIndex::adjointIndex() const noexcept
   return index_;
 }
 
-void Algorithm::Mixin::AdjointIndex::update(DesignPattern::Observer::Subject *changedSubject)
+void Algorithm::Mixin::AdjointIndex::update(AdjointIndex* changedSubject)
 {
-  if( changedSubject == this ) return;
-  setAdjointIndex( dynamic_cast<AdjointIndex*>(changedSubject)->adjointIndex() );
+  setAdjointIndex( changedSubject->adjointIndex() );
 }
 
-void Algorithm::Mixin::AdjointIndex::attachAdjointIndex(AdjointIndex* other)
+void Algorithm::Mixin::AdjointIndex::attachAdjointIndex(AdjointIndex& other)
 {
   attach(other);
 }
 
-void Algorithm::Mixin::AdjointIndex::detachAdjointIndex(AdjointIndex* other)
+void Algorithm::Mixin::AdjointIndex::detachAdjointIndex(AdjointIndex& other)
 {
   detach(other);
 }

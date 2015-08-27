@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_ADJOINT_INDEX_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for index of adjoint variable.
      */
-    class AdjointIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class AdjointIndex : public MixinConnection<AdjointIndex>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setAdjointIndex(unsigned index) is called, then also
        * other.setAdjointIndex(unsigned index) is invoked.
        */
-      void attachAdjointIndex(AdjointIndex* other);
+      void attachAdjointIndex(AdjointIndex& other);
 
       /**
        * @brief Detach verbosity before it gets deleted.
        */
-      void detachAdjointIndex(AdjointIndex* other);
+      void detachAdjointIndex(AdjointIndex& other);
+
+      void update(AdjointIndex* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       unsigned index_ = 2;
     };
   }

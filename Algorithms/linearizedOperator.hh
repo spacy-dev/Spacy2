@@ -17,7 +17,7 @@ namespace Algorithm
      * @param A differentiable operator.
      * @param x point of linearization.
      */
-    LinearizedOperator(C1Operator A, const Vector& x);
+    LinearizedOperator(C1Operator A, Vector x);
 
     /**
      * @brief Constructor.
@@ -25,7 +25,7 @@ namespace Algorithm
      * @param x point of linearization.
      * @param solver linear solver to (approximately) compute \f$A(x)^{-1}y\f$
      */
-    LinearizedOperator(C1Operator A, const Vector& x, std::shared_ptr<LinearSolver> solver);
+    LinearizedOperator(C1Operator A,  Vector x, LinearSolver solver);
 
     /// Apply operator, i.e. compute \f$y=A'(x)dx\f$.
     Vector operator ()(const Vector& dx) const;
@@ -39,7 +39,7 @@ namespace Algorithm
   private:
     C1Operator A_;
     Vector x_;
-    std::shared_ptr<LinearSolver> solver_;
+    LinearSolver solver_;
   };
 }
 

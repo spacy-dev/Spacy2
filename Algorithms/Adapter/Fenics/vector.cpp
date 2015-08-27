@@ -13,24 +13,13 @@ namespace Algorithm
   namespace Fenics
   {
     Vector::Vector(const ::Algorithm::VectorSpace& space)
-      : Vector( dolfin::Function( cast_ref<VectorCreator>(space.impl()).impl() ) , space )
-    {}
-
-    Vector::Vector(const dolfin::Function& f, const ::Algorithm::VectorSpace& space)
       : VectorBase<Vector>(space), //Impl<dolfin::Function>( f )
-        v_(f)
+        v_(cast_ref<VectorCreator>(space.impl()).impl())
     {}
 
     Vector& Vector::operator=(const dolfin::Function& v)
     {
       v_ = v;
-      return *this;
-    }
-
-    Vector& Vector::operator=(const Vector& y)
-    {
-      impl() = y.impl();
-//      *impl().vector() = *y.impl().vector();
       return *this;
     }
 
@@ -54,16 +43,6 @@ namespace Algorithm
     {
       return *v_.vector();
     }
-
-//    dolfin::Function& Vector::operator[](unsigned i)
-//    {
-//      return impl()[i];
-//    }
-
-//    const dolfin::Function& Vector::operator[](unsigned i) const
-//    {
-//      return impl()[i];
-//    }
 
     double Vector::operator()(const Vector& y) const
     {

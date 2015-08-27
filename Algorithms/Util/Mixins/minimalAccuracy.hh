@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_MINIMAL_ACCURACY_HH
 #define ALGORITHM_UTIL_MIXIN_MINIMAL_ACCURACY_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for minimal accuracy.
      */
-    class MinimalAccuracy : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class MinimalAccuracy : public MixinConnection<MinimalAccuracy>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setMinimalAccuracy(double minimalAccuracy) is called, then also
        * other.setMinimalAccuracy(minimalAccuracy) is invoked.
        */
-      void attachMinimalAccuracy(MinimalAccuracy* other);
+      void attachMinimalAccuracy(MinimalAccuracy& other);
 
       /**
        * @brief Detach RelativeAccuracy before it gets deleted.
        */
-      void detachMinimalAccuracy(MinimalAccuracy* other);
+      void detachMinimalAccuracy(MinimalAccuracy& other);
+
+      void update(MinimalAccuracy* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       double minimalAccuracy_ = 0.25;
     };
   }

@@ -115,5 +115,11 @@ namespace Algorithm
 
       throw InvalidArgumentException("copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x)");
     }
+
+    void copy(const dolfin::Function& y, ::Algorithm::Vector& x)
+    {
+      copy(*y.vector(),x);
+    }
+
   }
 }

@@ -10,7 +10,8 @@
 namespace Algorithm
 {
   namespace Newton
-  {    
+  {
+
     Vector newton(const C1Operator& F, const Vector& x0,
                   const DampingStrategy::Base& dampingFactor,
                   const TerminationCriterion::Base& terminationCriterion,
@@ -27,16 +28,36 @@ namespace Algorithm
   }
 
   /**
+   * @ingroup NewtonGroup
    * @brief Local Newton Method.
+   *
+   * @param F operator
+   * @param x0 initial iterate
+   * @param p parameter object holding algorithmic parameters
    *
    * damping strategy: Newton::DampingStrategy::Undamped
    * termination criterion: Newton::TerminationCriterion::AffineCovariant
+   *
+   * @see Newton::Parameter
    */
   Vector localNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
 
+  /**
+   * @ingroup NewtonGroup
+   * @brief Local Newton Method with default initial iterate (x0=0).
+   *
+   * @param F operator
+   * @param p parameter object holding algorithmic parameters
+   *
+   * damping strategy: Newton::DampingStrategy::Undamped
+   * termination criterion: Newton::TerminationCriterion::AffineCovariant
+   *
+   * @see Newton::Parameter
+   */
   Vector localNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
   /**
+   * @ingroup NewtonGroup
    * @brief Affine covariant Newton method.
    *
    * damping strategy: Newton::DampingStrategy::AffineCovariant
@@ -47,6 +68,7 @@ namespace Algorithm
   Vector covariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
   /**
+   * @ingroup NewtonGroup
    * @brief Affine contravariant Newton method.
    *
    * damping strategy: Newton::DampingStrategy::AffineContravariant
@@ -55,6 +77,7 @@ namespace Algorithm
   Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
 
   /**
+   * @ingroup NewtonGroup
    * @brief Affine contravariant Newton method.
    *
    * damping strategy: Newton::DampingStrategy::AffineContravariant

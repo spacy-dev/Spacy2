@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_STATE_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_STATE_INDEX_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for index of state variable.
      */
-    class StateIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class StateIndex : public MixinConnection<StateIndex>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setStateIndex(unsigned index) is called, then also
        * other.setStateIndex(unsigned index) is invoked.
        */
-      void attachStateIndex(StateIndex* other);
+      void attachStateIndex(StateIndex& other);
 
       /**
        * @brief Detach verbosity before it gets deleted.
        */
-      void detachStateIndex(StateIndex* other);
+      void detachStateIndex(StateIndex& other);
+
+      void update(StateIndex* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       unsigned index_ = 0;
     };
   }

@@ -20,18 +20,17 @@ namespace Algorithm
     }
 
 
-    void MaxSteps::update(DesignPattern::Observer::Subject *changedSubject)
+    void MaxSteps::update(MaxSteps* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setMaxSteps( dynamic_cast<MaxSteps*>(changedSubject)->maxSteps() );
+      setMaxSteps( changedSubject->maxSteps() );
     }
 
-    void MaxSteps::attachMaxSteps(MaxSteps* other)
+    void MaxSteps::attachMaxSteps(MaxSteps& other)
     {
       attach(other);
     }
 
-    void MaxSteps::detachMaxSteps(MaxSteps* other)
+    void MaxSteps::detachMaxSteps(MaxSteps& other)
     {
       detach(other);
     }

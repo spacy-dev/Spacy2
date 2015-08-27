@@ -9,7 +9,10 @@ namespace Algorithm
 {
   namespace Real
   {
-    /// Real number.
+    /**
+     * @ingroup RealGroup
+     * @brief Real number.
+     */
     class Vector :
         public VectorBase<Vector,double> ,
         public SupportedOperatorBase<Vector>

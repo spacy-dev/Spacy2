@@ -103,16 +103,16 @@ int main(int argc, char *argv[])
 
   auto domain = Algorithm::Kaskade::makeHilbertSpace<Descriptions>(spaces, {0u,1u}, {2u});
   // Normal step functional with cg solver
-  auto fn = Algorithm::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  //auto fn = Algorithm::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // Normal step functional with direct solver
-  //auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // Lagrange functional
   auto ft = Algorithm::Kaskade::makeFunctional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // algorithm and parameters
-  auto cs = Algorithm::AffineCovariantCompositeSteps( fn , ft );
+  auto cs = Algorithm::AffineCovariantCompositeSteps( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
   cs.setVerbosity(verbose>0);

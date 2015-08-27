@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_VERBOSITY_HH
 #define ALGORITHM_UTIL_MIXIN_VERBOSITY_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for verbosity.
      */
-    class Verbosity : public DesignPattern::Observer::Observer, public DesignPattern::Observer::Subject
+    class Verbosity : public MixinConnection<Verbosity>
     {
     public:
       /**
@@ -46,16 +47,17 @@ namespace Algorithm
        * When setDetailedVerbosity(bool verbose) is called, then also
        * other.setDetailedVerbosity(verbose) is invoked.
        */
-      void attachVerbosity(Verbosity* other);
+      void attachVerbosity(Verbosity& other);
 
       /**
        * @brief Detach verbosity before it gets deleted.
        */
-      void detachVerbosity(Verbosity* other);
+      void detachVerbosity(Verbosity& other);
+
+
+      void update(Verbosity* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       bool verbose_ = false, verbose_detailed_ = false;
     };
   }

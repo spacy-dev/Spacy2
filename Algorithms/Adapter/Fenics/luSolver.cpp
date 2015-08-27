@@ -25,8 +25,8 @@ namespace Algorithm
 
   namespace Fenics
   {
-    LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
-                       ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range,
+    LUSolver::LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& space,
+                       const VectorSpace& domain , const VectorSpace& range,
                        bool symmetric, const std::string& solverName)
       : OperatorBase(domain,range),
         solver_(solverName),
@@ -35,7 +35,7 @@ namespace Algorithm
       auto parameters = default_parameters();
       solver_.parameters.update(parameters("lu_solver"));
       solver_.parameters["symmetric"] = symmetric;
-      solver_.set_operator(A);
+      solver_.set_operator(A.copy());
     }
 
     ::Algorithm::Vector LUSolver::operator()(const ::Algorithm::Vector& x) const
@@ -53,8 +53,8 @@ namespace Algorithm
 
 
     TransposedLUSolver::TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
-                       ::Algorithm::VectorSpace* domain , ::Algorithm::VectorSpace* range,
-                       bool symmetric, const std::string& solverName)
+                                           const VectorSpace& domain , const VectorSpace& range,
+                                           bool symmetric, const std::string& solverName)
       : OperatorBase(domain,range),
         solver_(solverName),
         space_(space)

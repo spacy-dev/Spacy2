@@ -6,6 +6,7 @@ namespace Algorithm
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for contraction rates.
      */
     class ContractionRate

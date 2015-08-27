@@ -20,11 +20,7 @@ BOOST_TYPE_ERASURE_MEMBER( (has_scalarProduct) , scalarProduct , 1 )
 // operator concepts
 BOOST_TYPE_ERASURE_MEMBER( (has_domain) , domain , 0 )
 
-BOOST_TYPE_ERASURE_MEMBER( (has_domain_ptr) , domain_ptr , 0 )
-
 BOOST_TYPE_ERASURE_MEMBER( (has_range) , range , 0 )
-
-BOOST_TYPE_ERASURE_MEMBER( (has_range_ptr) , range_ptr , 0 )
 
 BOOST_TYPE_ERASURE_MEMBER( (has_d1) , d1 , 2 )
 

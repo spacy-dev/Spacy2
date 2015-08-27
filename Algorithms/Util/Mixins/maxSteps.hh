@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_MAXSTEPS_HH
 #define ALGORITHM_UTIL_MIXIN_MAXSTEPS_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for maximal number of steps/iterations.
      */
-    class MaxSteps : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class MaxSteps : public MixinConnection<MaxSteps>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setMaxSteps(unsigned steps) is called, then also
        * other.setMaxSteps(unsigned steps) is invoked.
        */
-      void attachMaxSteps(MaxSteps* other);
+      void attachMaxSteps(MaxSteps& other);
 
       /**
        * @brief Detach Eps before it gets deleted.
        */
-      void detachMaxSteps(MaxSteps* other);
+      void detachMaxSteps(MaxSteps& other);
+
+      void update(MaxSteps* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) override;
-
       unsigned maxSteps_ = 100;
     };
   }

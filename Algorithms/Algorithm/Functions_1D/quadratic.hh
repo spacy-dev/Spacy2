@@ -6,6 +6,7 @@ namespace Algorithm
   namespace Functions_1D
   {
     /**
+     * @ingroup AlgorithmGroup
      * @brief A one-dimensional quadratic function \f$q(t) = a + bt + ct^2\f$.
      */
     class Quadratic

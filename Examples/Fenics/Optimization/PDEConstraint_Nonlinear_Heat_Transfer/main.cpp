@@ -75,7 +75,7 @@ int main()
   auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , bcs , productSpace );
 
   // composite step solve
-  AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional );
+  AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
   alg_cs.setRelativeAccuracy(1e-9);
   alg_cs.setEps(1e-12);
   alg_cs.setMaxSteps(500);

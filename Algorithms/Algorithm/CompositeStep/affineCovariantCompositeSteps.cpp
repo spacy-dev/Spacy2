@@ -19,9 +19,10 @@ namespace Algorithm
 {
   enum class AffineCovariantCompositeSteps::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L)
+  AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain)
     : N_(std::make_unique<C2Functional>(N)),
-      L_(std::make_unique<C2Functional>(L))
+      L_(std::make_unique<C2Functional>(L)),
+      domain_(domain)
   {}
 
   Vector AffineCovariantCompositeSteps::solve()
@@ -38,7 +39,7 @@ namespace Algorithm
     {
       normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-      N_->domain().setScalarProduct( PrimalInducedScalarProduct( N_->hessian(primal(x)) ) );
+      domain_.setScalarProduct( PrimalInducedScalarProduct( N_->hessian(primal(x)) ) );
 
       if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
       if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;

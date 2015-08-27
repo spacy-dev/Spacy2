@@ -24,9 +24,10 @@ namespace Algorithm
                                             LinearSolver adjointSolver,
                                             CallableOperator B,
                                             CallableOperator BT,
-                                            VectorSpace* domain,
-                                            VectorSpace* range);
+                                            const VectorSpace& domain,
+                                            const VectorSpace& range);
 
+    /// Apply preconditioner.
     Vector operator()(const Vector& x) const;
 
     Vector kernelOffset(const Vector& rhs) const;

@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 #define ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for maximal number of steps/iterations.
      */
-    class RegularityTest : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class RegularityTest : public MixinConnection<RegularityTest>
     {
     public:
       /**
@@ -46,16 +47,16 @@ namespace Algorithm
        * When setLowerBound(double lowerBound) is called, then also
        * other.setLowerBound(lowerBound) is invoked.
        */
-      void attachRegularityTest(RegularityTest* other);
+      void attachRegularityTest(RegularityTest& other);
 
       /**
        * @brief Detach Eps before it gets deleted.
        */
-      void detachRegularityTest(RegularityTest* other);
+      void detachRegularityTest(RegularityTest& other);
+
+      void update(MixinConnection<RegularityTest>* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) override;
-
       double lowerBound_ = 1e-12;
     };
   }

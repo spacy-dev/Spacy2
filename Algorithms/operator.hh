@@ -32,7 +32,7 @@ namespace Algorithm
   using Operator = boost::type_erasure::any< Concepts::OperatorConcept >;
 
   /**
-   * @brief Differentiable perator class. Can store objects that satisfy the requirements of C1OperatorConcept.
+   * @brief Differentiable operator class. Can store objects that satisfy the requirements of C1OperatorConcept.
    * @see Concepts::C1OperatorConcept
    */
   using C1Operator = boost::type_erasure::any< Concepts::C1OperatorConcept >;

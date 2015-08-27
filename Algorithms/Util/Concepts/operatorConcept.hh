@@ -34,12 +34,8 @@ namespace Algorithm
     using OperatorConcept =
     boost::mpl::vector<
       CallableOperatorConcept ,
-      has_domain<VectorSpace&()> ,
       has_domain<const VectorSpace&(), const boost::type_erasure::_self> ,
-      has_domain_ptr<VectorSpace*(), const boost::type_erasure::_self> ,
-      has_range<VectorSpace&()> ,
-      has_range<const VectorSpace&(), const boost::type_erasure::_self> ,
-      has_range_ptr<VectorSpace*(), const boost::type_erasure::_self>
+      has_range<const VectorSpace&(), const boost::type_erasure::_self>
     >;
 
     /**

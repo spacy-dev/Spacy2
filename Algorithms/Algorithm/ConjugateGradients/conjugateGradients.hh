@@ -15,8 +15,8 @@
 namespace Algorithm
 {
   /**
-   * \ingroup linalgsolution
-   * \brief regularized preconditioned conjugate gradient method
+   * \ingroup CGGroup
+   * \brief Conjugate gradient method
    *
    * This implements a preconditioned CG iteration for an operator \f$ A: X\to x^* \f$, preconditioned by a
    * preconditioner \f$ B^{-1}: X^* \to X \f$. The default termination criterion is based on an estimate of the relative energy error.
@@ -78,19 +78,19 @@ namespace Algorithm
     template <class Criterion>
     void setTerminationCriterion(const Criterion& newTerminate)
     {
-      detachEps(terminate.get());
-      detachAbsoluteAccuracy(terminate.get());
-      detachRelativeAccuracy(terminate.get());
-      detachVerbosity(terminate.get());
-      detachMaxSteps(terminate.get());
+//      detachEps(*terminate);
+      detachAbsoluteAccuracy(*terminate);
+      detachRelativeAccuracy(*terminate);
+      detachVerbosity(*terminate);
+      detachMaxSteps(*terminate);
 
       terminate.reset(std::make_unique<Criterion>(newTerminate));
 
-      attachEps(terminate.get());
-      attachAbsoluteAccuracy(terminate.get());
-      attachRelativeAccuracy(terminate.get());
-      attachVerbosity(terminate.get());
-      attachMaxSteps(terminate.get());
+//      attachEps(*terminate);
+      attachAbsoluteAccuracy(*terminate);
+      attachRelativeAccuracy(*terminate);
+      attachVerbosity(*terminate);
+      attachMaxSteps(*terminate);
     }
 
     /// Access to the termination criterion.

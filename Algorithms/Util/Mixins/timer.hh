@@ -8,15 +8,22 @@ namespace Algorithm
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class providing a simple timer.
+     * @tparam Unit time unit (std::chrono::seconds, std::chrono::milliseconds, ...)
+     * @see std::chrono
      */
+    template <class Unit = std::chrono::milliseconds>
     class Timer
     {
     public:
+      /// Start new measurement.
       void startTimer() const;
 
-      double elapsedTime() const;
+      /// Get elapsed time
+      typename std::chrono::high_resolution_clock::rep elapsedTime() const;
 
+      /// Print elapsed time.
       void printElapsedTime() const;
 
     private:

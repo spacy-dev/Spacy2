@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_RELATIVE_ACCURACY_HH
 #define ALGORITHM_UTIL_MIXIN_RELATIVE_ACCURACY_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for relative accuracy.
      */
-    class RelativeAccuracy : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class RelativeAccuracy : public MixinConnection<RelativeAccuracy>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setRelativeAccuracy(double relativeAccuracy) is called, then also
        * other.setRelativeAccuracy(relativeAccuracy) is invoked.
        */
-      void attachRelativeAccuracy(RelativeAccuracy* other);
+      void attachRelativeAccuracy(RelativeAccuracy& other);
 
       /**
        * @brief Detach RelativeAccuracy before it gets deleted.
        */
-      void detachRelativeAccuracy(RelativeAccuracy* other);
+      void detachRelativeAccuracy(RelativeAccuracy& other);
+
+      void update(RelativeAccuracy* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       double relativeAccuracy_ = 1e-15;
     };
   }

@@ -27,18 +27,17 @@ namespace Algorithm
     return !regularityTestPassed(nu);
   }
 
-  void Mixin::RegularityTest::update(DesignPattern::Observer::Subject *changedSubject)
+  void Mixin::RegularityTest::update(MixinConnection<RegularityTest>* changedSubject)
   {
-    if( changedSubject == this ) return;
-    setLowerBound( dynamic_cast<RegularityTest*>(changedSubject)->lowerBound() );
+    setLowerBound( static_cast<RegularityTest*>(changedSubject)->lowerBound() );
   }
 
-  void Mixin::RegularityTest::attachRegularityTest(RegularityTest* other)
+  void Mixin::RegularityTest::attachRegularityTest(RegularityTest& other)
   {
     attach(other);
   }
 
-  void Mixin::RegularityTest::detachRegularityTest(RegularityTest* other)
+  void Mixin::RegularityTest::detachRegularityTest(RegularityTest& other)
   {
     detach(other);
   }

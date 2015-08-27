@@ -26,9 +26,7 @@ namespace Algorithm
       ConceptBase ,
       boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&),
                                     const boost::type_erasure::_self> ,
-      has_domain<VectorSpace&()> ,
-      has_domain<const VectorSpace&(), const boost::type_erasure::_self> ,
-      has_domain_ptr<VectorSpace*(), const boost::type_erasure::_self>
+      has_domain<const VectorSpace&(), const boost::type_erasure::_self>
     >;
 
     /**

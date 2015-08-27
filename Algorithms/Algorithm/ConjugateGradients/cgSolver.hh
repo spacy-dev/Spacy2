@@ -10,6 +10,11 @@
 
 namespace Algorithm
 {
+  /**
+   * @ingroup CGGroup
+   * @brief Conjugate gradient solver satisfying the GeneralLinearOperatorConcept
+   * @see GeneralLinearOperatorConcept, CGMethod
+   */
   class CGSolver :
       public OperatorBase ,
       public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy,
@@ -17,18 +22,33 @@ namespace Algorithm
       public Mixin::IterativeRefinements , public Mixin::MaxSteps
   {
   public:
+    /**
+     * @brief Set up conjugate gradient solver
+     * @param A_ operator
+     * @param P_ preconditioner
+     * @param type solver type, i.e. "CG", "TCG", "RCG" or "TRCG"
+     */
     CGSolver(Operator A_, CallableOperator P_, const std::string& type );
 
+    /// Copy constructor.
     CGSolver(const CGSolver& other);
 
+    /// Apply conjugate gradient solver with right hand side \f$y\f$.
     Vector operator()(const Vector& y) const;
 
+    /// Access conjugate gradient implementation.
     CGMethod& impl();
 
+    /**
+     * @brief Checks positive definiteness of \f$A\f$.
+     * @return true if \f$A\f$ is positive definite, else false
+     */
     bool isPositiveDefinite() const;
 
+    /// Access preconditioner.
     const CallableOperator& P() const;
 
+    /// Access operator.
     const CallableOperator& A() const;
 
   private:
@@ -71,7 +91,16 @@ namespace Algorithm
     return solver;
   }
 
-
+  /**
+   * @ingroup CGGroup
+   * @brief makeTRCGSolver
+   * @param A operator
+   * @param P preconditioner
+   * @param relativeAccuracy relative accuracy
+   * @param eps maximal attainable accuracy
+   * @param verbose verbosity
+   * @return CGSolver(A,P,"TRCG")
+   */
   CGSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
 }
 

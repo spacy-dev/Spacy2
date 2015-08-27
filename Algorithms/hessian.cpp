@@ -1,20 +1,24 @@
 #include "hessian.hh"
 
+#include "boost/type_erasure/is_empty.hpp"
+
+#include <stdexcept>
 #include <utility>
 
 namespace Algorithm
 {
-  Hessian::Hessian(C2Functional F, const Vector& x)
-    : OperatorBase(F.domain_ptr(),F.domain_ptr()),
+  Hessian::Hessian(C2Functional F, Vector x)
+    : OperatorBase(F.domain(),F.domain().dualSpace()),
       F_(std::move(F)),
       x_(x)
   {}
 
-  Hessian::Hessian(C2Functional F, const Vector &x, std::shared_ptr<LinearSolver> solver)
-    : Hessian(F,x)
-  {
-    solver_ = solver;
-  }
+  Hessian::Hessian(C2Functional F, Vector x, LinearSolver solver)
+    : OperatorBase(F.domain(),F.domain().dualSpace()),
+      F_(std::move(F)),
+      x_(std::move(x)),
+      solver_(std::move(solver))
+  {}
 
 
   Vector Hessian::operator ()(const Vector& dx) const
@@ -24,6 +28,7 @@ namespace Algorithm
 
   const LinearSolver& Hessian::solver() const
   {
-    return *solver_;
+    if( is_empty(solver_) ) throw std::runtime_error("Trying to access solver that has not been set in Hessian.");
+    return solver_;
   }
 }

@@ -7,7 +7,8 @@
 namespace Algorithm
 {
   /**
-   * \brief Interface for termination criteria for conjugate gradient methods.
+   * @ingroup CGGroup
+   * @brief Interface for termination criteria for conjugate gradient methods.
    */
   class CGTerminationCriterion :
       public Mixin::AbsoluteAccuracy, public Mixin::RelativeAccuracy, public Mixin::Eps, public Mixin::MaxSteps, public Mixin::Verbosity

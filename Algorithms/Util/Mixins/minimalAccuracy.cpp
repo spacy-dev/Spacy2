@@ -19,18 +19,17 @@ namespace Algorithm
       return minimalAccuracy_;
     }
 
-    void MinimalAccuracy::update(DesignPattern::Observer::Subject *changedSubject)
+    void MinimalAccuracy::update(MinimalAccuracy* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setMinimalAccuracy( dynamic_cast<MinimalAccuracy*>(changedSubject)->minimalAccuracy() );
+      setMinimalAccuracy( changedSubject->minimalAccuracy() );
     }
 
-    void MinimalAccuracy::attachMinimalAccuracy(MinimalAccuracy* other)
+    void MinimalAccuracy::attachMinimalAccuracy(MinimalAccuracy& other)
     {
       attach(other);
     }
 
-    void MinimalAccuracy::detachMinimalAccuracy(MinimalAccuracy* other)
+    void MinimalAccuracy::detachMinimalAccuracy(MinimalAccuracy& other)
     {
       detach(other);
     }

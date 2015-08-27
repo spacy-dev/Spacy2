@@ -28,16 +28,10 @@ namespace Algorithm
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
 
     public:
-      LinearOperator(const OperatorImpl& A,
-               ::Algorithm::VectorSpace* domain_,
-               ::Algorithm::VectorSpace* range_)
+      LinearOperator(const OperatorImpl& A, const VectorSpace& domain_, const VectorSpace& range_)
         : OperatorBase(domain_,range_),
           A_(A),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) )
-      {}
-
-      LinearOperator(const OperatorImpl& f, const ::Algorithm::VectorSpace& domain, const ::Algorithm::VectorSpace& range)
-        : LinearOperator(f,&domain,&range)
       {}
 
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
@@ -71,7 +65,7 @@ namespace Algorithm
 
       LinearSolver solver() const
       {
-        return DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range_ptr() , domain_ptr() );
+        return DirectSolver<OperatorImpl,AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range() , domain() );
       }
 
     private:

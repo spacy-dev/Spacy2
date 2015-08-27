@@ -32,18 +32,17 @@ namespace Algorithm
       return cbrt(eps_);
     }
 
-    void Eps::update(DesignPattern::Observer::Subject *changedSubject)
+    void Eps::update(Eps* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setEps( dynamic_cast<Eps*>(changedSubject)->eps() );
+      setEps( changedSubject->eps() );
     }
 
-    void Eps::attachEps(Eps* other)
+    void Eps::attachEps(Eps& other)
     {
       attach(other);
     }
 
-    void Eps::detachEps(Eps* other)
+    void Eps::detachEps(Eps& other)
     {
       detach(other);
     }

@@ -1,0 +1,82 @@
+#error Documentation only.
+
+
+/**
+ * @defgroup VectorSpaceGroup Vector Spaces
+ *
+ * @brief Collection of available vector spaces.
+ *
+ * Contains models for one-dimensional and product spaces as well as vector spaces for FEnics and Kaskade 7.
+ */
+
+    /**
+     * @defgroup RealGroup Real Space
+     * @ingroup VectorSpaceGroup
+     * @brief A one-dimensional vector space.
+     */
+
+    /**
+     * @defgroup ProductSpaceGroup Product Space
+     * @ingroup VectorSpaceGroup
+     * @brief A product space that supports distinction between primal and dual variables.
+     */
+
+    /**
+     * @defgroup FenicsGroup Vector Space for FEniCS
+     * @ingroup VectorSpaceGroup
+     * @brief Vector spaces, functionals and operators for FEniCS.
+     */
+
+     
+    /**
+     * @defgroup KaskadeGroup Vector Space for Kaskade 7
+     * @ingroup VectorSpaceGroup
+     * @brief Vector spaces, functionals and operators for Kaskade 7.
+     */
+     
+/**
+ * @defgroup MixinGroup Mixins
+ * @brief Components that are frequently used and can be added to your classes via (multiple) inheritance.
+ */
+
+
+
+/**
+ * @defgroup AlgorithmGroup Algorithms
+ * @brief Contains different algorithms that can be formulated in vector spaces.
+ * @see NewtonGroup, CGGroup, CSGroup
+ *
+ * Contains different variants of conjugate gradient methods for convex and nonconvex problems, different newton methods and an affine covariant composite step method.
+ */
+ 
+  /**
+   * @defgroup NewtonGroup Newton Methods.
+   * @ingroup AlgorithmGroup
+   * @brief Newton methods, largely following P. Deuflhard: Newton Methods for Nonlinear Problems.
+   */
+ 
+ /**
+  * @defgroup CGGroup Conjugate Gradient Methods
+  * @ingroup AlgorithmGroup
+  * @brief Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Truncated Regularized CG).
+  */ 
+
+   /**
+  * @defgroup CSGroup Composite Step Methods
+  * @ingroup AlgorithmGroup
+  * @brief Currently only contains the affine covariant composite step method of L. Lubkoll, A. Schiela, M. Weiser: An affine covariant composite step method for optimization with PDEs as equality constraints.
+  */ 
+  
+/**
+ * @defgroup ConceptGroup Concepts
+ * @brief Concepts for vectors, functional, operators, ...
+ * 
+ * The concepts are employed with Boost.TypeErasure, i.e. VectorConcept yields the type boost::type_erasure::any<VectorConcept>.
+ */
+
+
+  /**
+   * \namespace VHat
+   * \brief Main namespace of the %VHat library.
+   */
+ 

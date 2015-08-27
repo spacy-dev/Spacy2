@@ -15,38 +15,19 @@ namespace Algorithm
   public:
     /**
      * @brief Constructor.
-     * @param domain pointer to domain space \f$X\f$.
-     * @param range pointe to range space \f$Y\f$.
-     */
-    OperatorBase(VectorSpace* domain, VectorSpace* range);
-
-    /**
-     * @brief Constructor.
      * @param domain domain space \f$X\f$.
      * @param range range space \f$Y\f$.
      */
-    OperatorBase(VectorSpace& domain, VectorSpace& range);
-
-    /// Access domain space \f$X\f$.
-    VectorSpace& domain();
+    OperatorBase(const VectorSpace& domain, const VectorSpace& range);
 
     /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
 
-    /// Access pointer to domain space \f$X\f$.
-    VectorSpace* domain_ptr() const;
-
-    /// Access range space \f$Y\f$.
-    VectorSpace& range();
-
     /// Access range space \f$Y\f$.
     const VectorSpace& range() const;
 
-    /// Access pointer to range space \f$Y\f$.
-    VectorSpace* range_ptr() const;
-
   private:
-    VectorSpace *domain_, *range_;
+    const VectorSpace &domain_, &range_;
   };
 }
 

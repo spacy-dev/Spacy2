@@ -30,19 +30,18 @@ namespace Algorithm
       return verbose_detailed_;
     }
 
-    void Verbosity::update(DesignPattern::Observer::Subject *changedSubject)
+    void Verbosity::update(Verbosity* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setVerbosity( dynamic_cast<Verbosity*>(changedSubject)->verbose() );
-      setDetailedVerbosity( dynamic_cast<Verbosity*>(changedSubject)->verbose_detailed() );
+      setVerbosity( changedSubject->verbose() );
+      setDetailedVerbosity( changedSubject->verbose_detailed() );
     }
 
-    void Verbosity::attachVerbosity(Verbosity* other)
+    void Verbosity::attachVerbosity(Verbosity& other)
     {
       attach(other);
     }
 
-    void Verbosity::detachVerbosity(Verbosity* other)
+    void Verbosity::detachVerbosity(Verbosity& other)
     {
       detach(other);
     }

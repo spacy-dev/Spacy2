@@ -20,16 +20,8 @@ namespace Algorithm
      * @brief Constructor.
      * @param domain domain space \f$X\f$.
      */
-    explicit FunctionalBase(VectorSpace* domain)
+    explicit FunctionalBase(const VectorSpace& domain)
       : domain_(domain)
-    {}
-
-    /**
-     * @brief Constructor.
-     * @param domain domain space \f$X\f$.
-     */
-    explicit FunctionalBase(VectorSpace& domain)
-      : FunctionalBase(&domain)
     {}
 
     /**
@@ -65,25 +57,13 @@ namespace Algorithm
     }
 
     /// Access domain space \f$X\f$.
-    VectorSpace& domain()
-    {
-      return *domain_;
-    }
-
-    /// Access domain space \f$X\f$.
     const VectorSpace& domain() const
-    {
-      return *domain_;
-    }
-
-    /// Access pointer to domain space \f$X\f$.
-    VectorSpace* domain_ptr() const
     {
       return domain_;
     }
 
   private:
-    VectorSpace *domain_;
+    const VectorSpace& domain_;
   };
 }
 

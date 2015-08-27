@@ -12,8 +12,8 @@ namespace Algorithm
                                                                                    LinearSolver adjointSolver,
                                                                                    CallableOperator B,
                                                                                    CallableOperator BT,
-                                                                                   VectorSpace* domain,
-                                                                                   VectorSpace* range)
+                                                                                   const VectorSpace& domain,
+                                                                                   const VectorSpace& range)
     : OperatorBase(domain,range),
       stateSolver_(std::move(stateSolver)), controlSolver_(std::move(controlSolver)), adjointSolver_(std::move(adjointSolver)),
       B_(std::move(B)), BT_(std::move(BT))

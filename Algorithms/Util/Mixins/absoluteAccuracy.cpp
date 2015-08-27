@@ -19,18 +19,17 @@ namespace Algorithm
       return absoluteAccuracy_;
     }
 
-    void AbsoluteAccuracy::update(DesignPattern::Observer::Subject *changedSubject)
+    void AbsoluteAccuracy::update(AbsoluteAccuracy* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setAbsoluteAccuracy( dynamic_cast<AbsoluteAccuracy*>(changedSubject)->absoluteAccuracy() );
+      setAbsoluteAccuracy( changedSubject->absoluteAccuracy() );
     }
 
-    void AbsoluteAccuracy::attachAbsoluteAccuracy(AbsoluteAccuracy* other)
+    void AbsoluteAccuracy::attachAbsoluteAccuracy(AbsoluteAccuracy& other)
     {
       attach(other);
     }
 
-    void AbsoluteAccuracy::detachAbsoluteAccuracy(AbsoluteAccuracy* other)
+    void AbsoluteAccuracy::detachAbsoluteAccuracy(AbsoluteAccuracy& other)
     {
       detach(other);
     }

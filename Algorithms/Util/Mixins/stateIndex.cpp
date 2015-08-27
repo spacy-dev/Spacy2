@@ -17,18 +17,17 @@ double Algorithm::Mixin::StateIndex::stateIndex() const noexcept
   return index_;
 }
 
-void Algorithm::Mixin::StateIndex::update(DesignPattern::Observer::Subject *changedSubject)
+void Algorithm::Mixin::StateIndex::update(StateIndex* changedSubject)
 {
-  if( changedSubject == this ) return;
-  setStateIndex( dynamic_cast<StateIndex*>(changedSubject)->stateIndex() );
+  setStateIndex( changedSubject->stateIndex() );
 }
 
-void Algorithm::Mixin::StateIndex::attachStateIndex(StateIndex* other)
+void Algorithm::Mixin::StateIndex::attachStateIndex(StateIndex& other)
 {
   attach(other);
 }
 
-void Algorithm::Mixin::StateIndex::detachStateIndex(StateIndex* other)
+void Algorithm::Mixin::StateIndex::detachStateIndex(StateIndex& other)
 {
   detach(other);
 }

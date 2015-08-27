@@ -20,7 +20,7 @@ namespace Algorithm
       {
         if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
 
-        const auto& DF_Inv = F.linearization(x)^-1;
+        auto DF_Inv = F.linearization(x)^-1;
 
         auto dx = DF_Inv(-F(x));
         double nu = dampingFactor(DF_Inv,x,dx);

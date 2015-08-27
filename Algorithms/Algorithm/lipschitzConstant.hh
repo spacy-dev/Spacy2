@@ -6,6 +6,7 @@
 namespace Algorithm
 {
   /**
+   * @ingroup AlgorithmGroup
    * @brief A simple model for Lipschitz constants.
    */
   class LipschitzConstant : public Mixin::Eps

@@ -19,18 +19,17 @@ namespace Algorithm
       return relativeAccuracy_;
     }
 
-    void RelativeAccuracy::update(DesignPattern::Observer::Subject *changedSubject)
+    void RelativeAccuracy::update(RelativeAccuracy* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setRelativeAccuracy( dynamic_cast<RelativeAccuracy*>(changedSubject)->relativeAccuracy() );
+      setRelativeAccuracy( changedSubject->relativeAccuracy() );
     }
 
-    void RelativeAccuracy::attachRelativeAccuracy(RelativeAccuracy* other)
+    void RelativeAccuracy::attachRelativeAccuracy(RelativeAccuracy& other)
     {
       attach(other);
     }
 
-    void RelativeAccuracy::detachRelativeAccuracy(RelativeAccuracy* other)
+    void RelativeAccuracy::detachRelativeAccuracy(RelativeAccuracy& other)
     {
       detach(other);
     }

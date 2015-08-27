@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 #define ALGORITHM_UTIL_MIXIN_CONTROL_INDEX_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for index of control variable.
      */
-    class ControlIndex : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class ControlIndex : public MixinConnection<ControlIndex>
     {
     public:
       /**
@@ -34,16 +35,16 @@ namespace Algorithm
        * When setControlIndex(unsigned index) is called, then also
        * other.setControlIndex(unsigned index) is invoked.
        */
-      void attachControlIndex(ControlIndex* other);
+      void attachControlIndex(ControlIndex& other);
 
       /**
        * @brief Detach verbosity before it gets deleted.
        */
-      void detachControlIndex(ControlIndex* other);
+      void detachControlIndex(ControlIndex& other);
+
+      void update(ControlIndex* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) final override;
-
       unsigned index_ = 1;
     };
   }

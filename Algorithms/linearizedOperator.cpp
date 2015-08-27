@@ -1,19 +1,22 @@
 #include "linearizedOperator.hh"
 
+#include "boost/type_erasure/is_empty.hpp"
+
 #include <utility>
 
 namespace Algorithm
 {
-  LinearizedOperator::LinearizedOperator(C1Operator A, const Vector& x)
-    : OperatorBase(A.domain_ptr(),A.range_ptr()),
-      A_(std::move(A)), x_(x)
+  LinearizedOperator::LinearizedOperator(C1Operator A, Vector x)
+    : OperatorBase(A.domain(),A.range()),
+      A_(std::move(A)), x_(std::move(x))
   {}
 
- LinearizedOperator::LinearizedOperator(C1Operator A, const Vector& x, std::shared_ptr<LinearSolver> solver)
-   : LinearizedOperator(A,x)
- {
-    solver_ = solver;
- }
+ LinearizedOperator::LinearizedOperator(C1Operator A, Vector x, LinearSolver solver)
+   : OperatorBase(A.domain(),A.range()),
+     A_(std::move(A)),
+     x_(std::move(x)),
+     solver_(std::move(solver))
+ {}
 
   Vector LinearizedOperator::operator ()(const Vector& dx) const
   {
@@ -22,8 +25,8 @@ namespace Algorithm
 
   const LinearSolver& LinearizedOperator::solver() const
   {
-    return *solver_;
-//    return A_.solver();
+    if( is_empty(solver_) ) throw std::runtime_error("Trying to access solver that has not been set in LinearizedOperator.");
+    return solver_;
   }
 
 //    std::unique_ptr<AbstractLinearSolver> LinearizedOperator::adjointSolver() const

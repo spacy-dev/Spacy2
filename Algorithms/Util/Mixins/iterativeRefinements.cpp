@@ -19,18 +19,17 @@ namespace Algorithm
       return iterativeRefinements_;
     }
 
-    void IterativeRefinements::update(DesignPattern::Observer::Subject *changedSubject)
+    void IterativeRefinements::update(IterativeRefinements* changedSubject)
     {
-      if( changedSubject == this ) return;
-      setIterativeRefinements( dynamic_cast<IterativeRefinements*>(changedSubject)->iterativeRefinements() );
+      setIterativeRefinements( changedSubject->iterativeRefinements() );
     }
 
-    void IterativeRefinements::attachIterativeRefinements(IterativeRefinements* other)
+    void IterativeRefinements::attachIterativeRefinements(IterativeRefinements& other)
     {
       attach(other);
     }
 
-    void IterativeRefinements::detachIterativeRefinements(IterativeRefinements* other)
+    void IterativeRefinements::detachIterativeRefinements(IterativeRefinements& other)
     {
       detach(other);
     }

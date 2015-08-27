@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_MIXIN_ITERATIVE_REFINEMENTS_HH
 #define ALGORITHM_MIXIN_ITERATIVE_REFINEMENTS_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for iterative refinements.
      */
-    class IterativeRefinements : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class IterativeRefinements : public MixinConnection<IterativeRefinements>
     {
     public:
       /**
@@ -35,16 +36,16 @@ namespace Algorithm
        * When setIterativeRefinements(unsigned iterativeRefinements) is called, then also
        * other.setIterativeRefinements(iterativeRefinements) is invoked.
        */
-      void attachIterativeRefinements(IterativeRefinements* other);
+      void attachIterativeRefinements(IterativeRefinements& other);
 
       /**
        * @brief Detach Eps before it gets deleted.
        */
-      void detachIterativeRefinements(IterativeRefinements* other);
+      void detachIterativeRefinements(IterativeRefinements& other);
+
+      void update(IterativeRefinements* changedSubject) ;
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) override;
-
       unsigned iterativeRefinements_ = 0;
     };
 

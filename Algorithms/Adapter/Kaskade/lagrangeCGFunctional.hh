@@ -40,17 +40,11 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      LagrangeCGFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace* domain_, std::string solver="CG",
+      LagrangeCGFunctional(const FunctionalImpl& f, const VectorSpace& domain, std::string solver="CG",
                            int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
                            int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
-        : Functional<FunctionalImpl>(f,domain_,rbegin,rend,cbegin,cend),
+        : Functional<FunctionalImpl>(f,domain,rbegin,rend,cbegin,cend),
           solver_(solver)
-      {}
-
-      LagrangeCGFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace& domain, std::string solver="CG",
-                           int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
-                           int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
-        : LagrangeCGFunctional(f,&domain,solver,rbegin,rend,cbegin,cend)
       {}
 
       LagrangeCGFunctional(const LagrangeCGFunctional& g)
@@ -76,7 +70,7 @@ namespace Algorithm
         return Hessian(std::move(copy),x,solver());
       }
 
-      std::shared_ptr<LinearSolver> solver() const
+      auto solver() const
       {
         auto matA = this->assembler_->template get<Matrix>(this->onlyLowerTriangle_,adjointId,adjointId+1,stateId,stateId+1);
         auto matB = this->assembler_->template get<Matrix>(this->onlyLowerTriangle_,adjointId,adjointId+1,controlId,controlId+1);
@@ -90,13 +84,13 @@ namespace Algorithm
         using VPSetDescription = Detail::ExtractDescription_t<VariableSetDescription,adjointId>;
         using Domain0 = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
         using KaskadeOperator2 = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain0,Domain0>;
-        auto stateSolver = DirectSolver<VPSetDescription,VYSetDescription>( KaskadeOperator2(matA), this->spaces_,
+        auto stateSolver = DirectSolver<KaskadeOperator2,VPSetDescription,VYSetDescription>( KaskadeOperator2(matA), this->spaces_,
                                                                             cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId),
                                                                             cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(stateId) );
-        auto controlSolver = DirectSolver<VUSetDescription,VUSetDescription>( KaskadeOperator2(matM), this->spaces_,
+        auto controlSolver = DirectSolver<KaskadeOperator2,VUSetDescription,VUSetDescription>( KaskadeOperator2(matM), this->spaces_,
                                                                               cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId),
                                                                               cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(controlId) );
-        auto adjointSolver = DirectSolver<VYSetDescription,VPSetDescription>( KaskadeOperator2(matAt), this->spaces_,
+        auto adjointSolver = DirectSolver<KaskadeOperator2,VYSetDescription,VPSetDescription>( KaskadeOperator2(matAt), this->spaces_,
                                                                               cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(stateId),
                                                                               cast_ref<ProductSpace::VectorCreator>(this->domain().impl()).subSpace_ptr(adjointId) );
 
@@ -121,7 +115,7 @@ namespace Algorithm
         P.setControlIndex(controlId);
         P.setAdjointIndex(adjointId);
 
-        auto A = Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription>( *this->A_ , this->domain_ptr() , this->domain_ptr() );
+        auto A = Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription>( *this->A_ , this->domain() , this->domain().dualSpace() );
 
         auto solver = CGSolver(A, P, solver_);
         solver.setAbsoluteAccuracy(absoluteAccuracy());
@@ -131,7 +125,7 @@ namespace Algorithm
         solver.setDetailedVerbosity(verbose_detailed());
         solver.setIterativeRefinements(iterativeRefinements());
 
-        return std::make_shared<LinearSolver>(std::move(solver));
+        return std::move(solver);
       }
 
 

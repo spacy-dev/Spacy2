@@ -46,7 +46,7 @@ int main()
   auto range = Fenics::makeHilbertSpace(V);
   connectPrimalDual(domain,range);
   
-  auto A = Fenics::makeOperator( L , a , {} , domain , range );
+  auto A = Fenics::makeOperator( L , a , domain , range );
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.element()) ) );
 
   auto p = Algorithm::Newton::Parameter{};

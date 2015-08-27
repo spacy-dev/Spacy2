@@ -77,6 +77,11 @@ namespace Algorithm
     VectorSpace* dualSpace_ptr() const;
 
     /**
+     * @brief Access dual space \f$Y=X^*\f$.
+     */
+    const VectorSpace& dualSpace() const;
+
+    /**
      * @brief Set dual space \f$Y=X^*\f$.
      */
     void setDualSpace(VectorSpace* Y);

@@ -6,6 +6,7 @@ namespace Algorithm
   namespace Functions_1D
   {
     /**
+     * @ingroup AlgorithmGroup
      * @brief A one-dimensional cubic function \f$q(t) = a + bt + ct^2 + dt^3\f$.
      */
     class Cubic

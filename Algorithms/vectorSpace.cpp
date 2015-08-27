@@ -112,6 +112,12 @@ namespace Algorithm
     return dualSpace_;
   }
 
+  const VectorSpace& VectorSpace::dualSpace() const
+  {
+    assert( dualSpace_ != nullptr );
+    return *dualSpace_;
+  }
+
   void VectorSpace::setDualSpace(VectorSpace* Y)
   {
     dualSpace_ = Y;

@@ -5,30 +5,30 @@
 namespace Algorithm
 {
   CGSolver::CGSolver(Operator A_, CallableOperator P_, const std::string& type )
-    : OperatorBase(A_.range_ptr(),A_.domain_ptr()),
+    : OperatorBase(A_.range(),A_.domain()),
       cg(std::move(A_),std::move(P_),type)
   {
-    attachEps(&cg);
-    attachAbsoluteAccuracy(&cg.terminationCriterion());
-    attachRelativeAccuracy(&cg.terminationCriterion());
-    attachVerbosity(&cg);
-    attachIterativeRefinements(&cg);
-    attachMaxSteps(&cg);
+    attachEps(cg);
+    attachAbsoluteAccuracy(cg.terminationCriterion());
+    attachRelativeAccuracy(cg.terminationCriterion());
+    attachVerbosity(cg);
+    attachIterativeRefinements(cg);
+    attachMaxSteps(cg);
   }
 
   CGSolver::CGSolver(const CGSolver& other) :
-    OperatorBase(other.domain_ptr(),other.range_ptr()),
+    OperatorBase(other.domain(),other.range()),
     Mixin::AbsoluteAccuracy(other.absoluteAccuracy()),
     Mixin::RelativeAccuracy(other.relativeAccuracy()),
     Mixin::Eps(other.eps()),
     Mixin::Verbosity(other.verbose()),
     cg(other.cg)
   {
-    attachEps(&cg);
-    attachAbsoluteAccuracy(&cg.terminationCriterion());
-    attachRelativeAccuracy(&cg.terminationCriterion());
-    attachVerbosity(&cg);
-    attachIterativeRefinements(&cg);
+    attachEps(cg);
+    attachAbsoluteAccuracy(cg.terminationCriterion());
+    attachRelativeAccuracy(cg.terminationCriterion());
+    attachVerbosity(cg);
+    attachIterativeRefinements(cg);
     setDetailedVerbosity(other.verbose_detailed());
   }
 

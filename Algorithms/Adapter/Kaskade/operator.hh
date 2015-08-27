@@ -39,25 +39,30 @@ namespace Algorithm
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
 
     public:
-      Operator(const OperatorImpl& f,
-               ::Algorithm::VectorSpace* domain_, ::Algorithm::VectorSpace* range_,
+//      Operator(const OperatorImpl& f,
+//               ::Algorithm::VectorSpace* domain_, ::Algorithm::VectorSpace* range_,
+//               int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
+//               int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
+//        : OperatorBase(domain_,range_),
+//          f_(f),
+//          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) ),
+//          assembler_(spaces_),
+//          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
+//      {}
+
+      Operator(const OperatorImpl& f, const VectorSpace& domain, const VectorSpace& range,
                int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
                int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
-        : OperatorBase(domain_,range_),
+        : OperatorBase(domain,range),
           f_(f),
-          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) ),
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain) ),
           assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      Operator(const OperatorImpl& f, ::Algorithm::VectorSpace& domain, ::Algorithm::VectorSpace& range,
-               int rbegin = 0, int rend = OperatorImpl::AnsatzVars::noOfVariables,
-               int cbegin = 0, int cend = OperatorImpl::TestVars::noOfVariables)
-        : Operator(f,&domain,&range,rbegin,rend,cbegin,cend)
-      {}
-
+      /// Copy constructor.
       Operator(const Operator& g)
-        : OperatorBase(g.domain_ptr(),g.range_ptr()),
+        : OperatorBase(g),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -66,8 +71,9 @@ namespace Algorithm
         if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
       }
 
+      /// Move constructor.
       Operator(Operator&& g)
-        : OperatorBase(g.domain_ptr(),g.range_ptr()),
+        : OperatorBase(g),
           DisableAssembly(g.assemblyIsDisabled()),
           f_(std::move(g.f_)), spaces_(std::move(g.spaces_)),
           assembler_(spaces_),
@@ -77,7 +83,7 @@ namespace Algorithm
       }
 
       Operator(const Operator& g, bool disableAssembly)
-        : OperatorBase(g.domain_ptr(),g.range_ptr()),
+        : OperatorBase(g),
           DisableAssembly(disableAssembly),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -113,12 +119,14 @@ namespace Algorithm
 
       ::Algorithm::LinearOperator linearization(const ::Algorithm::Vector& x) const
       {
-//        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return LinearizedOperator(Operator<OperatorImpl>(*this,true),x,solver_);
+
+        return LinearizedOperator(Operator<OperatorImpl>(*this,true),x,
+                                  DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>( *A_ , spaces_, range() , domain() ) );
       }
 
     private:
+      /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
@@ -134,6 +142,7 @@ namespace Algorithm
         old_X_A_ = x;
       }
 
+      /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
@@ -146,7 +155,6 @@ namespace Algorithm
 
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
         A_ = std::make_unique< KaskadeOperator >( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
-        solver_ = std::make_shared<LinearSolver>( DirectSolver<AnsatzVariableSetDescription,TestVariableSetDescription>( *A_ , spaces_, range_ptr() , domain_ptr() ) );
         old_X_dA_ = x;
       }
 
@@ -159,7 +167,6 @@ namespace Algorithm
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorImpl::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=OperatorImpl::TestVars::noOfVariables;
-      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
     template <class OperatorImpl>

@@ -1,16 +1,17 @@
 #ifndef ALGORITHM_UTIL_MIXIN_EPS_HH
 #define ALGORITHM_UTIL_MIXIN_EPS_HH
 
-#include "Util/DesignPatterns/observer.hh"
+#include "mixinConnection.hh"
 
 namespace Algorithm
 {
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Parameter class for maximal attainable accuracy.
      */
-    class Eps : public DesignPattern::Observer::Subject , public DesignPattern::Observer::Observer
+    class Eps : public MixinConnection<Eps>
     {
     public:
       /**
@@ -44,16 +45,16 @@ namespace Algorithm
        * When setEps(double eps) is called, then also
        * other.setEps(eps) is invoked.
        */
-      void attachEps(Eps* other);
+      void attachEps(Eps& other);
 
       /**
        * @brief Detach Eps before it gets deleted.
        */
-      void detachEps(Eps* other);
+      void detachEps(Eps& other);
+
+      void update(Eps* changedSubject);
 
     private:
-      void update(DesignPattern::Observer::Subject* changedSubject) override;
-
       double eps_ = 1e-15;
     };
   }

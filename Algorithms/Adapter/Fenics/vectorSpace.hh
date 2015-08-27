@@ -15,6 +15,7 @@ namespace Algorithm
   namespace Fenics
   {
     /**
+     * @ingroup FenicsGroup
      * @brief Creator for vector space elements for FEniCS.
      * @see ::Algorithm::VectorCreator, _::Algorithm::VectorCreatorConcept
      */
@@ -57,6 +58,7 @@ namespace Algorithm
     };
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a single vector space from dolfin::FunctionSpace.
      * @param space single dolfin::FunctionSpace (no product space)
      * @return ::Algorithm::makeHilbertSpace( VectorCreator{space} , l2Product{} )
@@ -64,6 +66,7 @@ namespace Algorithm
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space);
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a single vector space from dolfin::FunctionSpace.
      * @param space single dolfin::FunctionSpace (no product space)
      * @param dofmap map relating global ids of a product space to local ids in this single space
@@ -72,6 +75,7 @@ namespace Algorithm
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t,size_t>& dofmap);
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a product space from dolfin::FunctionSpace.
      * @param space single dolfin::FunctionSpace (product space)
      * @param primalIds indices of spaces associated with primal variables

@@ -9,7 +9,7 @@ namespace Algorithm
   {
     struct Parameter :
         public Mixin::Eps, public Mixin::RelativeAccuracy, public Mixin::Verbosity,
-        public Mixin::MaxSteps , public Mixin::RegularityTest , public Mixin::Timer
+        public Mixin::MaxSteps , public Mixin::RegularityTest , public Mixin::Timer<std::chrono::seconds>
     {};
   }
 }

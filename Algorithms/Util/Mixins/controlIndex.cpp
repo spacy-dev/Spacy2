@@ -17,18 +17,17 @@ double Algorithm::Mixin::ControlIndex::controlIndex() const noexcept
   return index_;
 }
 
-void Algorithm::Mixin::ControlIndex::update(DesignPattern::Observer::Subject *changedSubject)
+void Algorithm::Mixin::ControlIndex::update(ControlIndex* changedSubject)
 {
-  if( changedSubject == this ) return;
-  setControlIndex( dynamic_cast<ControlIndex*>(changedSubject)->controlIndex() );
+  setControlIndex( changedSubject->controlIndex() );
 }
 
-void Algorithm::Mixin::ControlIndex::attachControlIndex(ControlIndex* other)
+void Algorithm::Mixin::ControlIndex::attachControlIndex(ControlIndex& other)
 {
   attach(other);
 }
 
-void Algorithm::Mixin::ControlIndex::detachControlIndex(ControlIndex* other)
+void Algorithm::Mixin::ControlIndex::detachControlIndex(ControlIndex& other)
 {
   detach(other);
 }

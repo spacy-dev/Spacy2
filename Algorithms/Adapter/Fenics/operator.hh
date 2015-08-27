@@ -20,6 +20,7 @@ namespace Algorithm
   namespace Fenics
   {
     /**
+     * @ingroup FenicsGroup
      * @brief Operator interface for FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
      *
      * @see C1Operator, C1OperatorConcept
@@ -41,8 +42,7 @@ namespace Algorithm
         : OperatorBase( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
-          bcs_( bcs ),
-          dummy_( J.function_space(0) )
+          bcs_( bcs )
       {
         copyCoefficients(F,F_);
         copyCoefficients(J,J_);
@@ -59,8 +59,7 @@ namespace Algorithm
         : OperatorBase( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
-          bcs_(),
-          dummy_( J.function_space(0) )
+          bcs_()
       {
         copyCoefficients(F,F_);
         copyCoefficients(J,J_);
@@ -68,14 +67,13 @@ namespace Algorithm
 
       /// Move constructor.
       Operator(Operator&& other)
-        : OperatorBase( other.domain_ptr() , other.range_ptr() ) ,
+        : OperatorBase( other ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( std::move(other.bcs_) ) ,
           A_( std::move(other.A_) ) ,
-          b_( std::move(other.b_) ) ,
-          dummy_( other.J_.function_space(0) )
+          b_( std::move(other.b_) )
       {
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -83,14 +81,13 @@ namespace Algorithm
 
       /// Copy constructor.
       Operator(const Operator& other)
-        : OperatorBase( other.domain_ptr() , other.range_ptr() ) ,
+        : OperatorBase( other ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( other.bcs_ ) ,
           A_( (other.A_ != nullptr) ? other.A_->copy() : nullptr ) ,
-          b_( (other.b_ != nullptr) ? other.b_->copy() : nullptr ) ,
-          dummy_( other.J_.function_space(0) )
+          b_( (other.b_ != nullptr) ? other.b_->copy() : nullptr )
       {
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -106,7 +103,6 @@ namespace Algorithm
         bcs_ = other.bcs_;
         A_ = (other.A_ != nullptr) ? other.A_->copy() : nullptr;
         b_ = (other.b_ != nullptr) ? other.b_->copy() : nullptr;
-        dummy_ = other.dummy_;
 
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -122,7 +118,6 @@ namespace Algorithm
         bcs_ = std::move(other.bcs_);
         A_ = std::move(other.A_);
         b_ = std::move(other.b_);
-        dummy_ = std::move(other.dummy_);
 
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -147,9 +142,10 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        copy(dx,*dummy_.vector());
-        auto y_ = dummy_.vector()->copy();
-        A_->mult(*dummy_.vector(), *y_);
+        auto dx_ = dolfin::Function( J_.function_space(0) );
+        copy(dx,dx_);
+        auto y_ = dx_.vector()->copy();
+        A_->mult(*dx_.vector(), *y_);
 
         auto y = range().element();
         copy(*y_,y);
@@ -167,7 +163,7 @@ namespace Algorithm
         assert(A_ != nullptr);
         Operator newOp = Operator(*this);
         newOp.disableAssembly();
-        return LinearizedOperator(std::move(newOp),x,solver_);
+        return LinearizedOperator( std::move(newOp) , x , LUSolver( *A_ , *F_.function_space(0) , range() , domain() ) );
       }
 
     private:
@@ -177,16 +173,16 @@ namespace Algorithm
         if( assemblyIsDisabled() ) return;
         if( b_ != nullptr && (oldX_F == x) ) return;
 
-        dummy_.vector() = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
-        copy(x,*dummy_.vector());
-        Assign_X_If_Present<decltype(F_)>::apply(F_,dummy_);
-        b_ = dummy_.vector()->factory().create_vector();
+        auto x_ = dolfin::Function( J_.function_space(0) );
+        copy(x,x_);
+        Assign_X_If_Present<decltype(F_)>::apply(F_,x_);
+        b_ = x_.vector()->factory().create_vector();
 
         dolfin::Assembler assembler;
         assembler.assemble(*b_, F_);
 
         for(const auto& bc : bcs_)
-          bc->apply( *b_ , *dummy_.vector() );
+          bc->apply( *b_ , *x_.vector() );
 
         oldX_F = x;
       }
@@ -197,21 +193,19 @@ namespace Algorithm
         if( assemblyIsDisabled() ) return;
         if( A_ != nullptr && ( oldX_J == x ) ) return;
 
-        dummy_.vector() = std::make_shared<dolfin::Vector>(dummy_.vector()->mpi_comm(), dummy_.vector()->size());
-        copy(x,*dummy_.vector());
-        Assign_X_If_Present<decltype(J_)>::apply(J_,dummy_);
-        A_ = dummy_.vector()->factory().create_matrix();
+        auto x_ = dolfin::Function( J_.function_space(0) );
+        copy(x,x_);
+        Assign_X_If_Present<decltype(J_)>::apply(J_,x_);
+        A_ = x_.vector()->factory().create_matrix();
 
         dolfin::Assembler assembler;
         assembler.assemble(*A_, J_);
 
         for(const auto& bc : bcs_)
-          bc->apply( *A_ , *dummy_.vector() , *dummy_.vector() );
+          bc->apply( *A_ , *x_.vector() , *x_.vector() );
 
-        solver_ = std::make_shared<LinearSolver>( LUSolver( A_ , *F_.function_space(0) , range_ptr() , domain_ptr() ) );
         oldX_J = x;
       }
-
 
       mutable ResidualForm F_;
       mutable JacobianForm J_;
@@ -219,12 +213,11 @@ namespace Algorithm
       mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
       mutable ::Algorithm::Vector oldX_F, oldX_J;
-      mutable dolfin::Function dummy_;
-      mutable std::shared_ptr<LinearSolver> solver_ = nullptr;
     };
 
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , domain , range )
      */
@@ -236,6 +229,7 @@ namespace Algorithm
     }
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , domain , range )
      */
@@ -246,6 +240,7 @@ namespace Algorithm
     }
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )
      */
@@ -256,6 +251,7 @@ namespace Algorithm
     }
 
     /**
+     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , space , space )
      */

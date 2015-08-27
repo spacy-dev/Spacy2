@@ -6,6 +6,7 @@ namespace Algorithm
   namespace Mixin
   {
     /**
+     * @ingroup MixinGroup
      * @brief Mixin class for enabling/disabling assembly.
      */
     class DisableAssembly

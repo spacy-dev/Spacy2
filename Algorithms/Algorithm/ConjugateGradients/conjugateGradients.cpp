@@ -15,11 +15,11 @@ namespace Algorithm
     : A_(std::move(A)), P_(std::move(P)),
       terminate(std::make_shared< RelativeEnergyError >()), type_(type)
   {
-    attachEps(terminate.get());
-    attachAbsoluteAccuracy(terminate.get());
-    attachRelativeAccuracy(terminate.get());
-    attachVerbosity(terminate.get());
-    attachMaxSteps(terminate.get());
+//    attachEps(*terminate);
+    attachAbsoluteAccuracy(*terminate);
+    attachRelativeAccuracy(*terminate);
+    attachVerbosity(*terminate);
+    attachMaxSteps(*terminate);
     assert( type=="CG" || type=="RCG" || type=="TCG" || type=="TRCG" );
   }
 

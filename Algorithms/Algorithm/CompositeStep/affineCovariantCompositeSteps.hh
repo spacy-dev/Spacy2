@@ -8,6 +8,7 @@
 #include "linearSolver.hh"
 #include "functional.hh"
 #include "vector.hh"
+#include "vectorSpace.hh"
 #include "../parameter.hh"
 #include "Algorithm/lipschitzConstant.hh"
 #include "Util/mixins.hh"
@@ -26,7 +27,7 @@ namespace Algorithm
   };
 
   class AffineCovariantCompositeSteps :
-      public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer ,
+      public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer<std::chrono::milliseconds> ,
       public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
       public Mixin::ContractionRate ,  public Mixin::Eps ,
       public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
@@ -37,7 +38,7 @@ namespace Algorithm
     enum class AcceptanceTest;
 
   public:
-    AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L);
+    AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
 
     Vector solve();
 
@@ -67,6 +68,7 @@ namespace Algorithm
     AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
 
     std::unique_ptr<C2Functional> N_, L_;
+    VectorSpace& domain_;
 
     LipschitzConstant omegaL, omegaC;
 
