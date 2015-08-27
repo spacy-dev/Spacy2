@@ -6,7 +6,7 @@ Algorithm::Mixin::AdjointIndex::AdjointIndex(unsigned index) noexcept
   : index_(index)
 {}
 
-void Algorithm::Mixin::AdjointIndex::setAdjointIndex(unsigned index) noexcept
+void Algorithm::Mixin::AdjointIndex::setAdjointIndex(unsigned index)
 {
   index_ = index;
   notify();

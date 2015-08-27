@@ -43,6 +43,9 @@ namespace Algorithm
        */
       void detachIterativeRefinements(IterativeRefinements& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(IterativeRefinements* changedSubject) ;
 
     private:

@@ -11,34 +11,38 @@
 namespace Algorithm
 {
   /**
-   * @brief Simplest possible operator class. Can store objects that satisfy the requirements of CallableOperatorConcept.
+   * \ingroup VHatGroup
+   * \anchor CallableOperatorAnchor
+   * \brief Simplest possible operator class. Can store objects that satisfy the requirements of \ref CallableOperatorConceptAnchor "CallableOperatorConcept".
    *
    * Use this if only application of an operator is required.
-   *
-   * @see Concepts::CallableOperatorConcept
    */
   using CallableOperator = boost::type_erasure::any< Concepts::CallableOperatorConcept >;
 
   /**
-   * @brief Linear operator class. Can store objects that satisfy the requirements of LinearOperatorConcept.
-   * @see Concepts::LinearOperatorConcept
+   * \ingroup VHatGroup
+   * \anchor LinearOperatorAnchor
+   * \brief Linear operator class. Can store objects that satisfy the requirements of \ref LinearOperatorConceptAnchor "LinearOperatorConcept".
    */
   using LinearOperator = boost::type_erasure::any< Concepts::LinearOperatorConcept >;
 
   /**
-   * @brief Operator class. Can store objects that satisfy the requirements of OperatorConcept.
-   * @see Concepts::OperatorConcept
+   * \ingroup VHatGroup
+   * \anchor OperatorAnchor
+   * \brief Operator class. Can store objects that satisfy the requirements of \ref OperatorConceptAnchor "OperatorConcept".
    */
   using Operator = boost::type_erasure::any< Concepts::OperatorConcept >;
 
   /**
-   * @brief Differentiable operator class. Can store objects that satisfy the requirements of C1OperatorConcept.
-   * @see Concepts::C1OperatorConcept
+   * \ingroup VHatGroup
+   * \anchor C1OperatorAnchor
+   * \brief Differentiable operator class. Can store objects that satisfy the requirements of \ref C1OperatorConceptAnchor "C1OperatorConcept".
    */
   using C1Operator = boost::type_erasure::any< Concepts::C1OperatorConcept >;
 
   /**
-   * @brief Access solver via A^-1. Throws for k!=-1.
+   * \ingroup VHatGroup
+   * \brief Access solver via A^-1. Throws for k!=-1.
    */
   inline const auto& operator^(const LinearOperator& A, int k)
   {

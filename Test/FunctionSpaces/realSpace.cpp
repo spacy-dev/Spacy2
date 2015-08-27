@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "norm.hh"
-#include "scalarProduct.hh"
+#include "vector.hh"
 #include "VectorSpaces/realSpace.hh"
 #include "Util/cast.hh"
 

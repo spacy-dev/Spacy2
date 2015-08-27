@@ -19,19 +19,57 @@ namespace Algorithm
     /**
      * @ingroup ConceptGroup
      * @brief Concept for functionals.
+     *
+     * The minimal signature of a functional is:
+     * @code
+     * // A functional f: X->R.
+     * class MyFunctional
+     * {
+     * public:
+     *   // Compute f(x).
+     *   double operator()(const ::Algorithm::Vector&) const;
+     *
+     *   // Access underlying domain.
+     *   const VectorSpace& domain() const;
+     * };
+     * @endcode
+     *
      * @see ::Algorithm::Functional
      */
     using FunctionalConcept =
     boost::mpl::vector<
-      ConceptBase ,
+      ConceptBase,
       boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&),
-                                    const boost::type_erasure::_self> ,
+                                    const boost::type_erasure::_self>,
       has_domain<const VectorSpace&(), const boost::type_erasure::_self>
     >;
 
     /**
      * @ingroup ConceptGroup
      * @brief Concept for differentiable functionals.
+     *
+     * The minimal signature of a differentiable functional is
+     * @code
+     * // A functional f: X->R.
+     * class MyFunctional
+     * {
+     * public:
+     *   // Copy constructor, possibly default-generated.
+     *   MyFunctional(const MyFunctional&);
+     *
+     *   // Move constructor, possibly default-generated.
+     *   MyFunctional(MyFunctional&&);
+     *
+     *   // Compute f(x).
+     *   double operator()(const ::Algorithm::Vector&) const;
+     *
+     *
+     *
+     *   // Access underlying domain.
+     *   const VectorSpace& domain() const;
+     * };
+     * @endcode
+     *
      * @see ::Algorithm::C1Functional
      */
     using C1FunctionalConcept =

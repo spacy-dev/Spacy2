@@ -7,8 +7,9 @@
 namespace Algorithm
 {
   /**
-   * @brief Norm class.  Can store objects that satisfy the requirements of NormConcept.
-   * @see Concepts::NormConcept
+   * \ingroup VHatGroup
+   * \anchor NormAnchor
+   * \brief Norm class.  Can store objects that satisfy the requirements of \ref NormConceptAnchor "NormConcept".
    */
   using Norm = boost::type_erasure::any< Concepts::NormConcept >;
 }

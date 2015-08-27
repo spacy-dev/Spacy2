@@ -13,9 +13,28 @@ namespace Algorithm
   namespace Concepts
   {
     /**
-     * @ingroup ConceptGroup
-     * @brief Concept for norm implementations.
-     * @see ::Algorithm::Norm
+     * \ingroup ConceptGroup
+     * \anchor NormConceptAnchor
+     * \brief Concept for norm implementations.
+     *
+     * The minimal signature of a norm is:
+     * \code
+     * // My norm.
+     * class MyNorm
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyNorm(const MyNorm&);
+     *
+     *   // Move constructor.
+     *   MyNorm(MyNorm&&);
+     *
+     *   // Compute ||x||.
+     *   double operator()(const ::Algorithm::Vector& x) const;
+     * };
+     * \endcode
+     *
+     * See \ref NormAnchor "::Algorithm::Norm".
      */
     using NormConcept =
     boost::mpl::vector<

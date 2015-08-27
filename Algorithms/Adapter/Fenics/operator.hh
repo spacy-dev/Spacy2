@@ -230,7 +230,7 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ from FEniCS(dolfin).
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , domain , range )
      */
     template <class ResidualForm, class JacobianForm>
@@ -241,7 +241,7 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from FEniCS(dolfin).
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )
      */
     template <class ResidualForm, class JacobianForm>
@@ -252,7 +252,7 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ as used in Fenics.
+     * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from FEniCS(dolfin).
      * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , space , space )
      */
     template <class ResidualForm, class JacobianForm>

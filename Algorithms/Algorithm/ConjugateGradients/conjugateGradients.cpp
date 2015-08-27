@@ -15,7 +15,7 @@ namespace Algorithm
     : A_(std::move(A)), P_(std::move(P)),
       terminate(std::make_shared< RelativeEnergyError >()), type_(type)
   {
-//    attachEps(*terminate);
+    attachEps(*terminate);
     attachAbsoluteAccuracy(*terminate);
     attachRelativeAccuracy(*terminate);
     attachVerbosity(*terminate);

@@ -105,14 +105,18 @@ int main(int argc, char *argv[])
   // Normal step functional with cg solver
   //auto fn = Algorithm::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
+
   // Normal step functional with direct solver
   auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
-
+  auto solverCreator = Algorithm::Kaskade::Lagrange::CGSolver<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
+  solverCreator.setVerbosity(true);
+  fn.setSolverCreator( solverCreator );
+  
   // Lagrange functional
   auto ft = Algorithm::Kaskade::makeFunctional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // algorithm and parameters
-  auto cs = Algorithm::AffineCovariantCompositeSteps( fn , ft , domain );
+  auto cs = Algorithm::CompositeStep::AffineCovariantCompositeSteps( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
   cs.setVerbosity(verbose>0);

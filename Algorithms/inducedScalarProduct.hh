@@ -7,6 +7,7 @@
 namespace Algorithm
 {
   /**
+   * @ingroup VHatGroup
    * @brief Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
    */
   class InducedScalarProduct

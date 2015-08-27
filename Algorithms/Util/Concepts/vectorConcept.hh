@@ -9,11 +9,51 @@
 
 namespace Algorithm
 {
+  class VectorSpace;
   namespace Concepts
   {
     /**
      * @ingroup ConceptGroup
      * @brief Concept for vector implementations.
+     *
+     * The minimal signature of a vector is:
+     * @code
+     * // My vector.
+     * class MyVector
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyVector(const MyVector&);
+     *
+     *   // Move constructor.
+     *   MyVector(MyVector&&);
+     *
+     *   // Copy assignable x=y.
+     *   MyVector& operator=(const MyVector& y);
+     *
+     *   // In-place summation x+=y.
+     *   MyVector& operator+=(const MyVector& y);
+     *
+     *   // In-place subtraction x-=y.
+     *   MyVector& operator-=(const MyVector& y);
+     *
+     *   // In-place multiplication x*=a.
+     *   MyVector& operator*=(double a);
+     *
+     *   // Negation -y.
+     *   MyVector operator-(const MyVector& y);
+     *
+     *   // Equality comparison x==y.
+     *   bool operator==(const MyVector& y);
+     *
+     *   // Apply as dual element x(y).
+     *   double operator()(const MyVector& y);
+     *
+     *   // Access pointer to underlying function space.
+     *   const VectorSpace* space() const;
+     * };
+     * @endcode
+     *
      * @see ::Algorithm::Vector
      */
     using VectorConcept =
@@ -27,14 +67,8 @@ namespace Algorithm
       boost::type_erasure::equality_comparable<> ,
       boost::type_erasure::callable<double(const boost::type_erasure::_self&),
                                     const boost::type_erasure::_self> ,
-      has_spaceIndex<unsigned(),
-                     const boost::type_erasure::_self> ,
-      has_isAdmissible<bool(),
-                       const boost::type_erasure::_self> ,
-      has_norm<double(),
-               const boost::type_erasure::_self> ,
-      has_scalarProduct<double(const boost::type_erasure::_self&),
-                        const boost::type_erasure::_self>
+      has_space<const VectorSpace*(),
+                const boost::type_erasure::_self>
     >;
   }
 }

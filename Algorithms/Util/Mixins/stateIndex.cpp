@@ -6,7 +6,7 @@ Algorithm::Mixin::StateIndex::StateIndex(unsigned index) noexcept
   : index_(index)
 {}
 
-void Algorithm::Mixin::StateIndex::setStateIndex(unsigned index) noexcept
+void Algorithm::Mixin::StateIndex::setStateIndex(unsigned index)
 {
   index_ = index;
   notify();

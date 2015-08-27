@@ -42,7 +42,18 @@ namespace Algorithm
     }
 
     Vector::Vector(const Vector& other)
-      : VectorBase<Vector>(other.space()), variables_(other.variables_)
+      : VectorBase<Vector>(*other.space()), variables_(other.variables_)
+    {
+      if( isPrimalDual() )
+      {
+        if( !other.isPrimalEnabled() ) primalComponent() *= 0;
+        if( !other.isDualEnabled() ) dualComponent() *= 0;
+        reset(other);
+      }
+    }
+
+    Vector::Vector(Vector&& other)
+      : VectorBase<Vector>(*other.space()), variables_(std::move(other.variables_))
     {
       if( isPrimalDual() )
       {
@@ -67,6 +78,24 @@ namespace Algorithm
         setDualComponent( y_.dualComponent() );
 
       reset(y_);
+      return *this;
+    }
+
+    Vector& Vector::operator=(Vector&& y_)
+    {
+      if( !isPrimalDual() )
+      {
+        variables_ = std::move(y_.variables_);
+        return *this;
+      }
+
+      if( isPrimalEnabled() && y_.isPrimalEnabled() )
+        setPrimalComponent( std::move(y_.primalComponent()) );
+
+      if( isDualEnabled() && y_.isDualEnabled() )
+        setDualComponent( std::move(y_.dualComponent()) );
+
+      reset();
       return *this;
     }
 
@@ -255,7 +284,7 @@ namespace Algorithm
 
     const VectorCreator& Vector::creator() const
     {
-      return cast_ref<ProductSpace::VectorCreator>(space().impl());
+      return cast_ref<ProductSpace::VectorCreator>(space()->impl());
     }
 
     bool Vector::isPrimalDual() const

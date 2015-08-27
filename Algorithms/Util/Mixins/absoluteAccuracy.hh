@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set absolute accuracy.
        */
-      void setAbsoluteAccuracy(double) noexcept;
+      void setAbsoluteAccuracy(double);
 
       /**
        * @brief Get absolute accuracy.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachAbsoluteAccuracy(AbsoluteAccuracy& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(AbsoluteAccuracy* changedSubject);
 
     private:

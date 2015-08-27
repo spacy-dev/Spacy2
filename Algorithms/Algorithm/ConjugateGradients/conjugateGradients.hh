@@ -78,7 +78,7 @@ namespace Algorithm
     template <class Criterion>
     void setTerminationCriterion(const Criterion& newTerminate)
     {
-//      detachEps(*terminate);
+      detachEps(*terminate);
       detachAbsoluteAccuracy(*terminate);
       detachRelativeAccuracy(*terminate);
       detachVerbosity(*terminate);
@@ -86,7 +86,7 @@ namespace Algorithm
 
       terminate.reset(std::make_unique<Criterion>(newTerminate));
 
-//      attachEps(*terminate);
+      attachEps(*terminate);
       attachAbsoluteAccuracy(*terminate);
       attachRelativeAccuracy(*terminate);
       attachVerbosity(*terminate);

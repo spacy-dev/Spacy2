@@ -1,13 +1,14 @@
 #ifndef ALGORITHM_VECTOR_SPACE_HH
 #define ALGORITHM_VECTOR_SPACE_HH
 
+#include <functional>
 #include <vector>
 #include <boost/type_erasure/any.hpp>
 
 #include "norm.hh"
 #include "scalarProduct.hh"
-#include "vector.hh"
 
+#include "Util/Concepts/vectorConcept.hh"
 #include "Util/Concepts/vectorCreatorConcept.hh"
 #include "Util/Mixins/impl.hh"
 
@@ -18,6 +19,7 @@ namespace Algorithm
   /// \endcond
 
   /**
+   * @ingroup VHatGroup
    * @brief Vector creator for feeding into VectorSpace.
    * @see Concepts::VectorCreatorConcept, VectorSpace
    */
@@ -25,6 +27,7 @@ namespace Algorithm
 
 
   /**
+   * @ingroup VHatGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    * @see VectorCreator, VectorCreatorConcept
    */
@@ -32,7 +35,7 @@ namespace Algorithm
   {
   public:
     /**
-     * @brief Construct function space from implementation derived from AbstractVectorSpace.
+     * @brief Construct function space form VectorCreator and Norm.
      */
     VectorSpace(VectorCreator impl, Norm norm);
 
@@ -54,7 +57,7 @@ namespace Algorithm
     /**
      * @brief Create new function space element.
      */
-    Vector element() const;
+    boost::type_erasure::any<Concepts::VectorConcept> element() const;
 
     /**
      * @brief Access unique index of the function space.
@@ -72,11 +75,6 @@ namespace Algorithm
     const ScalarProduct& scalarProduct() const;
 
     /**
-     * @brief Access pointer to dual space \f$Y=X^*\f$.
-     */
-    VectorSpace* dualSpace_ptr() const;
-
-    /**
      * @brief Access dual space \f$Y=X^*\f$.
      */
     const VectorSpace& dualSpace() const;
@@ -84,7 +82,7 @@ namespace Algorithm
     /**
      * @brief Set dual space \f$Y=X^*\f$.
      */
-    void setDualSpace(VectorSpace* Y);
+    void setDualSpace(const VectorSpace* Y);
 
     /**
      * @brief Add space \f$Y\f$ for which this space \f$X\f$ acts as dual space.
@@ -115,28 +113,45 @@ namespace Algorithm
      */
     bool isHilbertSpace() const;
 
+    /**
+     * @brief Restrict vector space.
+     * @param f function object that checks if a vector is admissible.
+     *
+     * With this function constraints such as \f$\det(\nabla\varphi)>0\f$ in nonlinear elasticity can be implemented.
+     */
+    void setRestriction(std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> f);
+
+    /**
+     * @brief Checks if vector is admissible. Default implementation always returns true;
+     * @return true if x is admissible, else false
+     */
+    bool isAdmissible(const boost::type_erasure::any<Concepts::VectorConcept>& x) const;
+
   private:
     Norm norm_;
     std::shared_ptr<ScalarProduct> sp_ = nullptr;
     unsigned index_ = Detail::spaceIndex++;
     std::vector<unsigned> primalSpaces_, dualSpaces_; ///< primal and dual spaces with respect to this space
-    VectorSpace* dualSpace_;
+    const VectorSpace* dualSpace_;
+    std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> restriction_ = [](const boost::type_erasure::any<Concepts::VectorConcept>&){ return true; };
   };
 
   /**
+   * @ingroup VHatGroup
    * @brief Construct Banach space.
    */
   VectorSpace makeBanachSpace(VectorCreator impl, Norm norm);
 
   /**
+   * @ingroup VHatGroup
    * @brief Construct Hilbert space.
    */
   VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct);
 
   /**
+   * @ingroup VHatGroup
    * @brief Relate function spaces.
    */
   void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace);
-
 }
 #endif // ALGORITHM_VECTOR_SPACE_HH

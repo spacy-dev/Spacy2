@@ -8,7 +8,7 @@ namespace Algorithm
       : minimalAccuracy_(minimalAccuracy)
     {}
 
-    void MinimalAccuracy::setMinimalAccuracy(double minimalAccuracy) noexcept
+    void MinimalAccuracy::setMinimalAccuracy(double minimalAccuracy)
     {
       minimalAccuracy_ = minimalAccuracy;
       notify();

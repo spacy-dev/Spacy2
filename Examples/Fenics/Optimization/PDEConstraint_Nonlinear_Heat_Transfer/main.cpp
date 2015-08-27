@@ -42,7 +42,7 @@ int main()
   LagrangeFunctional::LinearForm J(V);
   LagrangeFunctional::BilinearForm H(V,V);
   NormalStep::BilinearForm Norm(V,V);
-   std::vector<const DirichletBC*> bcs = {};
+  std::vector<const DirichletBC*> bcs = {};
   
   Function dummy(V);
   Source y_ref;
@@ -75,7 +75,7 @@ int main()
   auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , bcs , productSpace );
 
   // composite step solve
-  AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
+  CompositeStep::AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
   alg_cs.setRelativeAccuracy(1e-9);
   alg_cs.setEps(1e-12);
   alg_cs.setMaxSteps(500);

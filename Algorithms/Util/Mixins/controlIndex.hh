@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set index of control variable.
        */
-      void setControlIndex(unsigned index) noexcept;
+      void setControlIndex(unsigned index);
 
       /**
        * @brief Get index of control variable.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachControlIndex(ControlIndex& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(ControlIndex* changedSubject);
 
     private:

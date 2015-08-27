@@ -11,7 +11,8 @@ namespace Algorithm
   {
     double ScalarProduct::operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
     {
-      if( x.spaceIndex() != y.spaceIndex() ) throw IncompatibleSpaceException("ProductSpace::ScalarProduct",x.spaceIndex(),y.spaceIndex());
+      if( x.space()->index() != y.space()->index() )
+        throw IncompatibleSpaceException("ProductSpace::ScalarProduct",x.space()->index(),y.space()->index());
 
       const auto& x_ = cast_ref<Vector>(x);
       const auto& y_ = cast_ref<Vector>(y);

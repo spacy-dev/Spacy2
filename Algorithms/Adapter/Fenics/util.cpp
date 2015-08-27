@@ -37,7 +37,7 @@ namespace Algorithm
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
+              const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
 
               if(x_.isPrimalEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
@@ -49,7 +49,7 @@ namespace Algorithm
             const auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
+              const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
 
               if(x_.isDualEnabled())
                 y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
@@ -88,7 +88,7 @@ namespace Algorithm
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
+              const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
               if( x_.isPrimalEnabled())
                 xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
               else xv_.impl().setitem( j , 0. );
@@ -101,7 +101,7 @@ namespace Algorithm
             auto& xv_ = cast_ref<Vector>( x_.variable(i) );
             for(auto j=0u; j<xv_.size(); ++j)
             {
-              const auto& space = cast_ref<VectorCreator>(xv_.space().impl());
+              const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
               if( x_.isDualEnabled())
                 xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
               else

@@ -49,7 +49,7 @@ namespace Algorithm
     }
 
     /**
-     * @brief Compute second directional derivative \f$f''(x):\ X\times\X \rightarrow \mathbb{R} \f$.
+     * @brief Compute second directional derivative \f$f''(x):\ X\times X \rightarrow \mathbb{R} \f$.
      */
     double d2(const Vector &x, const Vector &dx, const Vector& dy) const
     {

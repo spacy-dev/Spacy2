@@ -19,69 +19,72 @@ namespace Algorithm
   namespace CompositeStep{ class CubicModel; }
   /// \endcond
 
-  struct CompositeStepParameter
+  namespace CompositeStep
   {
-    double etaMin = 0.5;
-    double rejectionTolerance = 0.1;
-    double dampingTolerance = 1e-3;
-  };
+    struct CompositeStepParameter
+    {
+      double etaMin = 0.5;
+      double rejectionTolerance = 0.1;
+      double dampingTolerance = 1e-3;
+    };
 
-  class AffineCovariantCompositeSteps :
-      public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer<std::chrono::milliseconds> ,
-      public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
-      public Mixin::ContractionRate ,  public Mixin::Eps ,
-      public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
-      public Mixin::Verbosity , public Mixin::MaxSteps ,
-      public Mixin::IterativeRefinements
-  {
-    enum class StepMonitor { Rejected , Accepted };
-    enum class AcceptanceTest;
+    class AffineCovariantCompositeSteps :
+        public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer<std::chrono::milliseconds> ,
+        public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
+        public Mixin::ContractionRate ,  public Mixin::Eps ,
+        public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
+        public Mixin::Verbosity , public Mixin::MaxSteps ,
+        public Mixin::IterativeRefinements
+    {
+      enum class StepMonitor { Rejected , Accepted };
+      enum class AcceptanceTest;
 
-  public:
-    AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
+    public:
+      AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
 
-    Vector solve();
+      Vector solve();
 
-    Vector solve(const Vector& x0);
+      Vector solve(const Vector& x0);
 
-  private:
-    Vector computeNormalStep(const Vector& x) const;
-    Vector computeSimplifiedNormalStep(const Vector& trial) const;
-    Vector computeMinimumNormCorrection(const Vector& x) const;
-    Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
-    Vector computeLagrangeMultiplier(const Vector& x) const;
-    std::unique_ptr<GeneralLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
+    private:
+      Vector computeNormalStep(const Vector& x) const;
+      Vector computeSimplifiedNormalStep(const Vector& trial) const;
+      Vector computeMinimumNormCorrection(const Vector& x) const;
+      Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
+      Vector computeLagrangeMultiplier(const Vector& x) const;
+      std::unique_ptr<GeneralLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
 
-    bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
+      bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
 
-    std::tuple<double, Vector, Vector, double, double> computeCompositeStep(double& nu, double norm_Dn,
-                const Vector& x, const Vector& Dn, const Vector& Dt);
+      std::tuple<double, Vector, Vector, double, double> computeCompositeStep(double& nu, double norm_Dn,
+                  const Vector& x, const Vector& Dn, const Vector& Dt);
 
-    void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
-    double updateOmegaL(const Vector& soc, double q_tau,
-                        double tau, double norm_x, double norm_dx, const CompositeStep::CubicModel& cubic);
+      void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
+      double updateOmegaL(const Vector& soc, double q_tau,
+                          double tau, double norm_x, double norm_dx, const CompositeStep::CubicModel& cubic);
 
-    double computeNormalStepDampingFactor(double normDn) const;
-    double computeTangentialStepDampingFactor(double normdn, double normDt, const CompositeStep::CubicModel& cubic) const;
+      double computeNormalStepDampingFactor(double normDn) const;
+      double computeTangentialStepDampingFactor(double normdn, double normDt, const CompositeStep::CubicModel& cubic) const;
 
-    void regularityTest(double nu, double tau) const;
-    AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
+      void regularityTest(double nu, double tau) const;
+      AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
 
-    std::unique_ptr<C2Functional> N_, L_;
-    VectorSpace& domain_;
+      std::unique_ptr<C2Functional> N_, L_;
+      VectorSpace& domain_;
 
-    LipschitzConstant omegaL, omegaC;
+      LipschitzConstant omegaL, omegaC;
 
-    mutable std::unique_ptr<LinearSolver> normalSolver = nullptr;
-    mutable std::unique_ptr<GeneralLinearSolver> tangentialSolver = nullptr;
+      mutable std::unique_ptr<LinearSolver> normalSolver = nullptr;
+      mutable std::unique_ptr<GeneralLinearSolver> tangentialSolver = nullptr;
 
-    std::string spacing = "  ", spacing2 = "    ";
+      std::string spacing = "  ", spacing2 = "    ";
 
-    StepMonitor normalStepMonitor = StepMonitor::Accepted;
-    StepMonitor tangentialStepMonitor = StepMonitor::Accepted;
+      StepMonitor normalStepMonitor = StepMonitor::Accepted;
+      StepMonitor tangentialStepMonitor = StepMonitor::Accepted;
 
-    double norm_dx_old = -1;
-  };
+      double norm_dx_old = -1;
+    };
+  }
 }
 
 #endif // ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH

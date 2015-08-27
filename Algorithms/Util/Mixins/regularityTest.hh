@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set lower bound of regularity test for termination criteria.
        */
-      void setLowerBound(double lowerBound) noexcept;
+      void setLowerBound(double lowerBound);
 
       /**
        * @brief Get lower bound.

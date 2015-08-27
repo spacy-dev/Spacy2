@@ -68,6 +68,26 @@ namespace Algorithm
       MatrixProperties property_ = MatrixProperties::GENERAL;
       mutable std::shared_ptr< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > > solver_ = nullptr;
     };
+
+    /**
+     * @brief Convenient generation of direct solver for %Kaskade 7.
+     * @param A %Kaskade operator (i.e., AssembledGalerkinOperator or MatrixRepresentedOperator)
+     * @param spaces boost fusion forward sequence of space pointers required to initialize temporary storage
+     * @param domain domain space of the solver
+     * @param range range space of the solver
+     * @param directSolver solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU)
+     * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
+     * @return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>( A , spaces , domain , range , directSolver , property )
+     */
+    template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator, class Spaces>
+    auto makeDirectSolver(KaskadeOperator A, const Spaces& spaces,
+                 const VectorSpace& domain , const VectorSpace& range,
+                 DirectType directSolver = DirectType::MUMPS, MatrixProperties property = MatrixProperties::GENERAL )
+    {
+      return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
+          ( std::move(A) , spaces , domain , range , directSolver , property );
+    }
+
   }
 }
 

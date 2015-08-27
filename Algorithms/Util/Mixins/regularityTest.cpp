@@ -6,7 +6,7 @@ namespace Algorithm
     : lowerBound_(lowerBound)
   {}
 
-  void Mixin::RegularityTest::setLowerBound(double lowerBound) noexcept
+  void Mixin::RegularityTest::setLowerBound(double lowerBound)
   {
     lowerBound_ = lowerBound;
     notify();

@@ -22,12 +22,12 @@ namespace Algorithm
       /**
        * @brief Enable/disable verbosity.
        */
-      void setVerbosity(bool) noexcept;
+      void setVerbosity(bool);
 
       /**
        * @brief Enable/disable detailed verbosity.
        */
-      void setDetailedVerbosity(bool) noexcept;
+      void setDetailedVerbosity(bool);
 
       /**
        * @brief Check if verbosity is turned on.
@@ -54,7 +54,9 @@ namespace Algorithm
        */
       void detachVerbosity(Verbosity& other);
 
-
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(Verbosity* changedSubject);
 
     private:

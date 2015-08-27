@@ -15,11 +15,12 @@ namespace Algorithm
 
   double operator*(const Vector& x, const Vector& y)
   {
-    return x.scalarProduct(y);
+//    return x.scalarProduct(y);
+    return x.space()->scalarProduct()(x,y);
   }
 
   double norm(const Vector& x)
   {
-    return x.norm();
+    return x.space()->norm()(x);
   }
 }

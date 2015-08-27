@@ -8,7 +8,10 @@
 
 namespace Algorithm
 {
-  /// Linearized operator \f$A'(x)\f$ of a differentiable operator \f$A\f$.
+  /**
+   * @ingroup VHatGroup
+   * @brief Linearized operator \f$A'(x)\f$ of a differentiable operator \f$A\f$.
+   */
   class LinearizedOperator : public OperatorBase
   {
   public:

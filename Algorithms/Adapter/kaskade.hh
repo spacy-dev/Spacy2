@@ -4,7 +4,7 @@
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/functional.hh"
 #include "Kaskade/l2Product.hh"
-#include "Kaskade/lagrangeCGFunctional.hh"
+#include "Kaskade/lagrangeCGSolver.hh"
 #include "Kaskade/linearOperator.hh"
 #include "Kaskade/operator.hh"
 #include "Kaskade/vector.hh"

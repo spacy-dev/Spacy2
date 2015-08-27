@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set maximal number of steps/iterations for iterative solvers.
        */
-      void setMaxSteps(unsigned) noexcept;
+      void setMaxSteps(unsigned);
 
       /**
        * @brief Get maximal number of steps/iterations for iterative solvers.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachMaxSteps(MaxSteps& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(MaxSteps* changedSubject);
 
     private:

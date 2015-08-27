@@ -57,27 +57,27 @@ namespace Algorithm
     /// Copy assignment.
     VectorBase& operator=(const VectorBase& other)
     {
-      if( &space_ != &other.space() ) throw IncompatibleSpaceException("VectorBase::operator=", space_.index() , other.space().index());
+      if( space() != other.space() ) throw IncompatibleSpaceException("VectorBase::operator=", space()->index() , other.space()->index());
       return *this;
     }
 
     /// Move assignment.
     VectorBase& operator=(VectorBase&& other) noexcept
     {
-      assert( &space_ == &other.space() );
+      assert( space() != other.space() );
       return *this;
     }
 
     /// Access underlying vector space.
-    const VectorSpace& space() const
+    const VectorSpace* space() const
     {
-      return space_;
+      return &space_;
     }
 
     /// Access index of underlying space.
     unsigned spaceIndex() const
     {
-      return space().index();
+      return space()->index();
     }
 
     /**
@@ -87,21 +87,21 @@ namespace Algorithm
      * Overwrite this method in case your admissible set is a subset of a vector space and your algorithm may compute iterates that
      * leave the admissible domain.
      */
-    bool isAdmissible() const
-    {
-      return true;
-    }
+//    bool isAdmissible() const
+//    {
+//      return true;
+//    }
 
     /// Compute norm of vector. The norm defined in the underlying vector space is employed.
     double norm() const
     {
-      return space().norm()(static_cast<const VType&>(*this));
+      return space()->norm()(static_cast<const VType&>(*this));
     }
 
     /// Compute scalar product \f$(x,y)\f$. The scalar product defined in the underlying vector space is employed.
     double scalarProduct(const VType& y) const
     {
-      return space().scalarProduct()( static_cast<const VType&>(*this) , y );
+      return space()->scalarProduct()( static_cast<const VType&>(*this) , y );
     }
 
   private:

@@ -15,7 +15,7 @@ namespace Algorithm
         : sp_(sp)
       {}
 
-      double operator()(const Vector& x) const
+      double operator()(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
       {
         return sqrt(sp_(x,x));
       }
@@ -55,7 +55,7 @@ namespace Algorithm
     return norm_;
   }
 
-  Vector VectorSpace::element() const
+  boost::type_erasure::any<Concepts::VectorConcept> VectorSpace::element() const
   {
     return impl()(this);
   }
@@ -106,19 +106,13 @@ namespace Algorithm
     return false;
   }
 
-  VectorSpace* VectorSpace::dualSpace_ptr() const
-  {
-    assert( dualSpace_ != nullptr );
-    return dualSpace_;
-  }
-
   const VectorSpace& VectorSpace::dualSpace() const
   {
     assert( dualSpace_ != nullptr );
     return *dualSpace_;
   }
 
-  void VectorSpace::setDualSpace(VectorSpace* Y)
+  void VectorSpace::setDualSpace(const VectorSpace* Y)
   {
     dualSpace_ = Y;
   }
@@ -127,6 +121,17 @@ namespace Algorithm
   {
     return sp_ != nullptr;
   }
+
+  bool VectorSpace::isAdmissible(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
+  {
+    return restriction_(x);
+  }
+
+  void VectorSpace::setRestriction(std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> f)
+  {
+    restriction_ = std::move(f);
+  }
+
 
   VectorSpace makeBanachSpace(VectorCreator impl, Norm norm)
   {

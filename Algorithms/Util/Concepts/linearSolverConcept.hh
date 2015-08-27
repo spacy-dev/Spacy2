@@ -13,8 +13,26 @@ namespace Algorithm
   {
     /**
      * @ingroup ConceptGroup
-     * @brief Concept for linear solver implementations.
-     * @see ::Algorithm::LinearSolver
+     * @brief Concept for linear solver implementations. Same as CallableOperatorConcept.
+     *
+     * The minimal signature of a linear solver is:
+     * @code
+     * // My linear solver representing A^-1.
+     * class MyLinearSolver
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyLinearSolver(const MyLinearSolver&);
+     *
+     *   // Move constructor.
+     *   MyLinearSolver(MyLinearSolver&&);
+     *
+     *   // Compute A^-1(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     * };
+     * @endcode
+     *
+     * @see ::Algorithm::LinearSolver, CallableOperatorConcept
      */
     using LinearSolverConcept =
     boost::mpl::vector<
@@ -26,6 +44,27 @@ namespace Algorithm
     /**
      * @ingroup ConceptGroup
      * @brief Concept for linear solver implementations that monitor positive definiteness.
+     *
+     * The minimal signature of a general linear solver is:
+     * @code
+     * // My general linear solver S representing A^-1.
+     * class MyGeneralLinearSolver
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyGeneralLinearSolver(const MyGeneralLinearSolver&);
+     *
+     *   // Move constructor.
+     *   MyGeneralLinearSolver(MyGeneralLinearSolver&&);
+     *
+     *   // Compute A^-1(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     *
+     *   // Check if A is positive definite
+     *   bool isPositiveDefinite() const;
+     * };
+     * @endcode
+     *
      * @see ::Algorithm::GeneralLinearSolver
      */
     using GeneralLinearSolverConcept =

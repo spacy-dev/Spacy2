@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set minimal accuracy.
        */
-      void setMinimalAccuracy(double) noexcept;
+      void setMinimalAccuracy(double);
 
       /**
        * @brief Get minimal accuracy.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachMinimalAccuracy(MinimalAccuracy& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(MinimalAccuracy* changedSubject);
 
     private:

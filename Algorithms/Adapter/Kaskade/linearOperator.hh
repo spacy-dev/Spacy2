@@ -1,23 +1,26 @@
 #ifndef ALGORITHM_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
 #define ALGORITHM_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
 
-#include <memory>
 #include <utility>
 
-#include "../../operator.hh"
 #include "../../vector.hh"
-#include "vectorSpace.hh"
-#include "linearizedOperator.hh"
-#include "Util/Mixins/disableAssembly.hh"
 #include "Util/Base/operatorBase.hh"
 
 #include "directSolver.hh"
-#include "vector.hh" // copy
+#include "util.hh" // copy
 
 namespace Algorithm
 {
   namespace Kaskade
   {
+    /**
+     * @ingroup KaskadeGroup
+     * @brief Linear operator interface for operators in %Kaskade 7.
+     * @tparam OperatorImpl %Kaskade 7 operator, i.e. ::Kaskade::AssembledGalerkinOperator or ::Kaskade::MatrixRepresentedOperator.
+     * @tparam AnsatzVariableSetDescription ::Kaskade::VariableSetDescription for ansatz variables
+     * @tparam TestVariableSetDescription ::Kaskade::VariableSetDescription for test variables
+     * @see LinearOperator, LinearOperatorConcept
+     */
     template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
     class LinearOperator : public OperatorBase
     {
@@ -28,12 +31,21 @@ namespace Algorithm
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
 
     public:
+      /**
+       * @brief Construct linear operator for %Kaskade 7.
+       * @param A operator from %Kaskade 7
+       * @param domain domain space
+       * @param range range space
+       */
       LinearOperator(const OperatorImpl& A, const VectorSpace& domain_, const VectorSpace& range_)
         : OperatorBase(domain_,range_),
           A_(A),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) )
       {}
 
+      /**
+       * @brief Compute \f$A(x)\f$.
+       */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
       {
         Domain x_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
@@ -47,7 +59,9 @@ namespace Algorithm
 
         return y;
       }
-
+      /**
+       * @brief Compute \f$A'(x)dx = A(dx)\f$.
+       */
       ::Algorithm::Vector d1(const ::Algorithm::Vector&, const ::Algorithm::Vector& dx) const
       {
         Domain dx_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
@@ -62,8 +76,8 @@ namespace Algorithm
         return y;
       }
 
-
-      LinearSolver solver() const
+      /// Access solver.
+      const LinearSolver& solver() const
       {
         return DirectSolver<OperatorImpl,AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range() , domain() );
       }
@@ -73,23 +87,21 @@ namespace Algorithm
       Spaces spaces_;
     };
 
-
-
-
-    template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
-    auto makeLinearOperator(const OperatorImpl& f,
-                            ::Algorithm::VectorSpace* domain,
-                            ::Algorithm::VectorSpace* range)
+    /**
+     * @ingroup KaskadeGroup
+     * @brief Convenient generation of a linear operator for %Kaskade 7.
+     * @param A operator from %Kaskade 7
+     * @param domain domain space
+     * @param range range space
+     * @tparam OperatorImpl %Kaskade 7 operator, i.e. ::Kaskade::AssembledGalerkinOperator or ::Kaskade::MatrixRepresentedOperator.
+     * @tparam AnsatzVariableSetDescription ::Kaskade::VariableSetDescription for ansatz variables
+     * @tparam TestVariableSetDescription ::Kaskade::VariableSetDescription for test variables
+     * @return LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription>( A , domain , range )
+     */
+    template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class OperatorImpl>
+    auto makeLinearOperator(const OperatorImpl& A, const VectorSpace& domain, const VectorSpace& range)
     {
-      return LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription>( f, domain , range );
-    }
-
-    template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
-    auto makeLinearOperator(const OperatorImpl& f,
-                      const ::Algorithm::VectorSpace& domain,
-                      const ::Algorithm::VectorSpace& range)
-    {
-      return LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription>( f, domain , range );
+      return LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription>( A , domain , range );
     }
   }
 }

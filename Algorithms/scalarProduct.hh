@@ -7,8 +7,9 @@
 namespace Algorithm
 {
   /**
-   * @brief Scalar product class.  Can store objects that satisfy the requirements of ScalarProductConcept.
-   * @see Concepts::ScalarProductConcept
+   * \ingroup VHatGroup
+   * \anchor ScalarProductAnchor
+   * \brief Scalar product class.  Can store objects that satisfy the requirements of \ref ScalarProductConceptAnchor "ScalarProductConcept".
    */
   using ScalarProduct = boost::type_erasure::any< Concepts::ScalarProductConcept >;
 }

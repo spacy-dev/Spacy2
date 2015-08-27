@@ -8,7 +8,7 @@ namespace Algorithm
       : relativeAccuracy_(relativeAccuracy)
     {}
 
-    void RelativeAccuracy::setRelativeAccuracy(double relativeAccuracy) noexcept
+    void RelativeAccuracy::setRelativeAccuracy(double relativeAccuracy)
     {
       relativeAccuracy_ = relativeAccuracy;
       notify();

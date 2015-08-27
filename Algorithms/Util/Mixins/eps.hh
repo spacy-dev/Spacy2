@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Parameter class for maximal attainable accuracy.
+     * @brief Mixin class for maximal attainable accuracy.
      */
     class Eps : public MixinConnection<Eps>
     {
@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set maximal attainable accuracy.
        */
-      void setEps(double) noexcept;
+      void setEps(double);
 
       /**
        * @brief Get maximal attainable accuracy.
@@ -52,6 +52,9 @@ namespace Algorithm
        */
       void detachEps(Eps& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(Eps* changedSubject);
 
     private:

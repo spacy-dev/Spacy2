@@ -15,9 +15,28 @@ namespace Algorithm
   namespace Concepts
   {
     /**
-     * @ingroup ConceptGroup
-     * @brief Concept defining the simplest possible operator, only providing Vector operator()(const Vector&).
-     * @see ::Algorithm::Operator
+     * \ingroup ConceptGroup
+     * \anchor CallableOperatorConceptAnchor
+     * \brief Concept defining the simplest possible operator, only providing Vector operator()(const Vector&).
+     *
+     * The minimal signature of a callable operator is:
+     * \code
+     * // My callable operator A: X->Y.
+     * class MyOperator
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyOperator(const MyOperator&);
+     *
+     *   // Move constructor.
+     *   MyOperator(MyOperator&&);
+     *
+     *   // Compute A(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     * };
+     * \endcode
+     *
+     * See \ref CallableOperatorAnchor "::Algorithm::CallableOperator".
      */
     using CallableOperatorConcept =
     boost::mpl::vector<
@@ -27,9 +46,34 @@ namespace Algorithm
     >;
 
     /**
-     * @ingroup ConceptGroup
-     * @brief Concept defining general operators.
-     * @see ::Algorithm::Operator
+     * \ingroup ConceptGroup
+     * \anchor OperatorConceptAnchor
+     * \brief Concept defining general operators.
+     *
+     * The minimal signature of an operator is:
+     * \code
+     * // My operator A: X->Y.
+     * class MyOperator
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyOperator(const MyOperator&);
+     *
+     *   // Move constructor.
+     *   MyOperator(MyOperator&&);
+     *
+     *   // Compute A(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     *
+     *   // Access domain space.
+     *   const VectorSpace& domain() const;
+     *
+     *   // Access range space.
+     *   const VectorSpace& range() const;
+     * };
+     * \endcode
+     *
+     * See \ref OperatorAnchor "::Algorithm::Operator".
      */
     using OperatorConcept =
     boost::mpl::vector<
@@ -39,9 +83,37 @@ namespace Algorithm
     >;
 
     /**
-     * @ingroup ConceptGroup
-     * @brief Concept defining linear operators.
-     * @see ::Algorithm::LinearOperator
+     * \ingroup ConceptGroup
+     * \anchor LinearOperatorConceptAnchor
+     * \brief Concept defining linear operators.
+     *
+     * The minimal signature of a linear operator is:
+     * \code
+     * // My linear operator A: X->Y.
+     * class MyOperator
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyOperator(const MyOperator&);
+     *
+     *   // Move constructor.
+     *   MyOperator(MyOperator&&);
+     *
+     *   // Compute A(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     *
+     *   // Access solver for the computation of A^-1.
+     *   ::Algorithm::LinearSolver solver() const;
+     *
+     *   // Access domain space.
+     *   const VectorSpace& domain() const;
+     *
+     *   // Access range space.
+     *   const VectorSpace& range() const;
+     * };
+     * \endcode
+     *
+     * See \ref LinearOperatorAnchor "::Algorithm::LinearOperator".
      */
     using LinearOperatorConcept =
     boost::mpl::vector<
@@ -51,9 +123,40 @@ namespace Algorithm
     >;
 
     /**
-     * @ingroup ConceptGroup
-     * @brief Concept defining differentiable operators.
-     * @see ::Algorithm::C1Operator
+     * \ingroup ConceptGroup
+     * \anchor C1OperatorConceptAnchor
+     * \brief Concept defining differentiable operators.
+     *
+     * The minimal signature for a differentiable operator is:
+     * \code
+     * // My differentiable operator A: X->Y.
+     * class MyOperator
+     * {
+     * public:
+     *   // Copy constructor.
+     *   MyOperator(const MyOperator&);
+     *
+     *   // Move constructor.
+     *   MyOperator(MyOperator&&);
+     *
+     *   // Compute A(x).
+     *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
+     *
+     *   // Compute A'(x)dx.
+     *   ::Algorithm::Vector d1(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const;
+     *
+     *   // Get linearization representing A'(x).
+     *  ::Algorithm::LinearOperator linearization(const ::Algorithm::Vector& x) const;
+     *
+     *   // Access domain space.
+     *   const VectorSpace& domain() const;
+     *
+     *   // Access range space.
+     *   const VectorSpace& range() const;
+     * };
+     * \endcode
+     *
+     * See \ref C1OperatorAnchor "::Algorithm::C1Operator".
      */
     using C1OperatorConcept =
     boost::mpl::vector<

@@ -24,7 +24,7 @@ namespace Algorithm
   {
     /**
      * @ingroup FenicsGroup
-     * @brief Functional interface for FEniCS. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
+     * @brief %Functional interface for FEniCS. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
      * @tparam F dolfin::Form describing the functional value
      * @tparam DF dolfin::Form describing the derivative
      * @tparam DDF dolfin::Form describing the second derivative
@@ -140,6 +140,7 @@ namespace Algorithm
       }
 
       /**
+       * @cond
        * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow X^* \f$.
        *
        * Actual implementation of d1 is provided in base class FunctionalBase.
@@ -149,7 +150,7 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
-        auto y = this->domain().dualSpace_ptr()->element();
+        auto y = this->domain().dualSpace().element();
         copy(*b_,y);
         return y;
       }
@@ -169,11 +170,12 @@ namespace Algorithm
         auto Ax = x_.vector()->copy();
         A_->mult(*x_.vector(), *Ax);
 
-        auto result = this->domain().dualSpace_ptr()->element();
+        auto result = this->domain().dualSpace().element();
         copy(*Ax,result);
 
         return result;
       }
+      /// @endcond
 
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.

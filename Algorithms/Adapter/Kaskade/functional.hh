@@ -7,11 +7,11 @@
 #include "fem/istlinterface.hh"
 
 #include "../../operator.hh"
-#include "../../functional.hh"
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
 #include "hessian.hh"
 #include "Util/Mixins/disableAssembly.hh"
+#include "Util/Mixins/numberOfThreads.hh"
 #include "Util/Base/functionalBase.hh"
 
 #include "directSolver.hh"
@@ -22,88 +22,195 @@ namespace Algorithm
 {
   namespace Kaskade
   {
-    template <class FunctionalImpl>
+    /**
+     * @ingroup KaskadeGroup
+     * @brief %Functional interface for %Kaskade 7. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
+     * @tparam FunctionalDefinition functional definition from %Kaskade 7
+     * @see Concepts::C2Functional, Concepts::C2FunctionalConcept
+     */
+    template <class FunctionalDefinition>
     class Functional :
-        public FunctionalBase< Functional<FunctionalImpl> > ,
-        public Mixin::DisableAssembly
+        public FunctionalBase< Functional<FunctionalDefinition> > ,
+        public Mixin::DisableAssembly ,
+        public Mixin::NumberOfThreads
     {
-      using VariableSetDescription = typename FunctionalImpl::AnsatzVars;
-      using VectorImpl = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Spaces = typename VariableSetDescription::Spaces;
-      using Variables = typename VariableSetDescription::Variables;
-      using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<FunctionalImpl> >;
-      using Domain = typename Assembler::AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Range = typename Assembler::TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
-      using Matrix = ::Kaskade::MatrixAsTriplet<double>;
-      using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
-
     public:
-      Functional(const FunctionalImpl& f, const VectorSpace& domain_,
-                 int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
-                 int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
-        : FunctionalBase< Functional<FunctionalImpl> >(domain_),
+      /// ::Kaskade::VariableSetDescription
+      using VariableSetDescription = typename FunctionalDefinition::AnsatzVars;
+      /// Coefficient vector type.
+      using CoefficientVector = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
+      /// boost::fusion::vector<const Space0*,const Space1*,...>
+      using Spaces = typename VariableSetDescription::Spaces;
+      /// ::Kaskade::VariationalFunctionalAssembler
+      using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<FunctionalDefinition> >;
+      /// Matrix type
+      using Matrix = ::Kaskade::MatrixAsTriplet<double>;
+      /// operator for the description of the second derivative
+      using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVector,CoefficientVector>;
+
+      /**
+       * @brief Construct a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
+       * @param f operator definition from %Kaskade 7
+       * @param domain domain space
+       * @param rbegin first row to be considered in the definition of f
+       * @param rend one after the last row to be considered in the definition of f
+       * @param cbegin first column to be considered in the definition of f
+       * @param cend one after the last column to be considered in the definition of f
+       *
+       * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
+       * a system of equation.
+       */
+      Functional(const FunctionalDefinition& f, const VectorSpace& domain_,
+                 int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
+                 int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
+        : FunctionalBase< Functional<FunctionalDefinition> >(domain_),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(this->domain()) ),
-          assembler_(std::make_shared<Assembler>(spaces_)),
+          assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
+      /// Copy constructor.
       Functional(const Functional& g)
-        : FunctionalBase< Functional<FunctionalImpl> >(g.domain()),
-          DisableAssembly(g.assemblyIsDisabled()),
+        : FunctionalBase< Functional<FunctionalDefinition> >(g.domain()),
+          DisableAssembly(g),
+          NumberOfThreads(g),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(g.assembler_),
+          assembler_(spaces_),
           A_(g.A_),
-          rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_)
+          old_X_f_(g.old_X_f_),
+          old_X_df_(g.old_X_df_),
+          old_X_ddf_(g.old_X_ddf_),
+          onlyLowerTriangle_(g.onlyLowerTriangle_),
+          rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_),
+          solverCreator_(g.solverCreator_)
+      {}
+
+      /// Copy assignment.
+      Functional& operator=(const Functional& g)
       {
-        //if( g.A_ != nullptr ) A_ = std::make_unique<KaskadeOperator>(*g.A_);
+        disableAssembly(g.assemblyIsDisable());
+        setNumberOfThreads(g.nThreads());
+        f_ = g.f_;
+        spaces_ = g.spaces_;
+        assembler_ = Assembler(spaces_);
+        A_ = g.A_;
+        old_X_f_ = g.old_X_f_;
+        old_X_df_ = g.old_X_df_;
+        old_X_ddf_ = g.old_X_ddf_;
+        onlyLowerTriangle_ = g.onlyLowerTriangle_;
+        rbegin_ = g.rbegin_;
+        rend_ = g.rend_;
+        cbegin_ = g.cbegin_;
+        cend_ = g.cend_;
+        solverCreator_ = g.solverCreator_;
       }
 
+      /// Move constructor.
+      Functional(Functional&&) = default;
+
+      /// Move assignment.
+      Functional& operator=(Functional&&) = default;
+
+      /// Compute functional value \f$f(x)\f$.
       double operator()(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
 
-        return assembler_->functional();
+        return assembler().functional();
       }
 
+      /**
+       * @cond
+       * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow X^* \f$.
+       *
+       * Actual implementation of d1 is provided in base class FunctionalBase.
+       * @see ::Algorithm::FunctionalBase
+       */
       ::Algorithm::Vector d1_(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        VectorImpl v( assembler_->rhs() );
+        CoefficientVector v( assembler_.rhs() );
 
-        auto y = this->domain().dualSpace_ptr()->element();
+        auto y = this->domain().dualSpace().element();
         copyFromCoefficientVector<VariableSetDescription>(v,y);
         return y;
       }
 
+      /**
+       * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
+       *
+       * Actual implementation of d2 is provided in base class FunctionalBase.
+       * @see ::Algorithm::FunctionalBase
+       */
       ::Algorithm::Vector d2_(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
-        VectorImpl dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        CoefficientVector dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
         copyToCoefficientVector<VariableSetDescription>(dx,dx_);
-        VectorImpl y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
+        CoefficientVector y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
         A_.apply( dx_ , y_ );
 
-        auto y = this->domain().dualSpace_ptr()->element();
+        auto y = this->domain().dualSpace().element();
         copyFromCoefficientVector<VariableSetDescription>(y_,y);
 
         return y;
       }
+      /// @endcond
 
-      LinearOperator hessian(const ::Algorithm::Vector& x) const
+      /**
+       * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
+       * @see Hessian, LinearOperator, LinearOperatorConcept
+       */
+      ::Algorithm::LinearOperator hessian(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
         auto newOperator = *this;
         newOperator.disableAssembly();
-        return Hessian( std::move(newOperator) , x ,
-                        DirectSolver<KaskadeOperator,VariableSetDescription,VariableSetDescription>( A_ , spaces_,
-                                                                                                     this->domain().dualSpace() ,
-                                                                                                     this->domain() ,
-                                                                                                     DirectType::MUMPS ,
-                                                                                                     MatrixProperties::GENERAL ) );
+        return Hessian( std::move(newOperator) , x , solverCreator_(*this) );
+      }
+
+      /// Access assembler.
+      Assembler& assembler()
+      {
+        return assembler_;
+      }
+
+      /// Access assembler.
+      const Assembler& assembler() const noexcept
+      {
+        return assembler_;
+      }
+
+      /// Access operator representing \f$f''\f$.
+      const KaskadeOperator& A() const noexcept
+      {
+        return A_;
+      }
+
+      /// Access boost::fusion::vector of spaces.
+      const Spaces& spaces() const noexcept
+      {
+        return spaces_;
+      }
+
+      /// Access onlyLowerTriangle flag.
+      bool onlyLowerTriangle() const noexcept
+      {
+        return onlyLowerTriangle_;
+      }
+
+      /**
+       * @brief Change solver creator.
+       * @param f anything that can be fed into objects of type std::function<LinearSolver(const Functional<FunctionalDefinition>&)>.
+       */
+      template <class Function>
+      void setSolverCreator(Function&& f)
+      {
+        solverCreator_ = std::forward<Function>(f);
       }
 
     protected:
@@ -111,14 +218,14 @@ namespace Algorithm
       void assembleFunctional(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( ( (assembler_->valid() & Assembler::VALUE) != 0 ) && (old_X_f_==x) ) return;
+        if( ( (assembler_.valid() & Assembler::VALUE) != 0 ) && (old_X_f_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nAssemblyThreads );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nThreads() );
 
         old_X_f_ = x;
       }
@@ -127,63 +234,74 @@ namespace Algorithm
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( ( (assembler_->valid() & Assembler::RHS) != 0 ) && (old_X_df_==x) ) return;
+        if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nAssemblyThreads );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
 
         old_X_df_ = x;
       }
 
-      /// Assemble discrete representation of \f$f''(x)\f$ and construct solver.
+      /// Assemble discrete representation of \f$f''(x)\f$.
       void assembleHessian(const ::Algorithm::Vector& x) const
       {
         if( assemblyIsDisabled() ) return;
-        if( ( (assembler_->valid() & Assembler::MATRIX) != 0 ) && (old_X_ddf_==x) ) return;
+        if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && (old_X_ddf_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_->assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nAssemblyThreads );
-        A_ = KaskadeOperator( assembler_->template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
+        A_ = KaskadeOperator( assembler().template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_ddf_ = x;
       }
 
-      FunctionalImpl f_;
+      FunctionalDefinition f_;
       Spaces spaces_;
-      mutable std::shared_ptr<Assembler> assembler_;
+      mutable Assembler assembler_;
       mutable KaskadeOperator A_;
       mutable ::Algorithm::Vector old_X_f_, old_X_df_, old_X_ddf_;
-      unsigned nAssemblyThreads = 1;
       bool onlyLowerTriangle_ = false;
-      int rbegin_=0, rend_=FunctionalImpl::AnsatzVars::noOfVariables;
-      int cbegin_=0, cend_=FunctionalImpl::TestVars::noOfVariables;
-//      std::function<LinearSolver(Functional&)> solverCreator_;
+      int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
+      int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;
+      std::function<LinearSolver(const Functional&)> solverCreator_ = [](const Functional& f)
+        {
+            return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() , f.spaces(),
+                                                                                     f.domain().dualSpace() ,
+                                                                                     f.domain() ,
+                                                                                     DirectType::MUMPS ,
+                                                                                     MatrixProperties::GENERAL );
+
+        };
     };
 
-
-
-    template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace* domain,
-                        int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
-                        int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
+    /**
+     * @ingroup KaskadeGroup
+     * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
+     * @param f operator definition from %Kaskade 7
+     * @param domain domain space
+     * @param rbegin first row to be considered in the definition of f
+     * @param rend one after the last row to be considered in the definition of f
+     * @param cbegin first column to be considered in the definition of f
+     * @param cend one after the last column to be considered in the definition of f
+     * @return ::Algorithm::Kaskade::Functional<FunctionalDefinition>( f, domain, rbegin, rend, cbegin, cend )
+     *
+     * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
+     * a system of equation.
+     */
+    template <class FunctionalDefinition>
+    auto makeFunctional(const FunctionalDefinition& f, const VectorSpace& domain,
+                        int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
+                        int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
     {
-      return Functional<FunctionalImpl>( f, domain , rbegin , rend , cbegin , cend );
-    }
-
-    template <class FunctionalImpl>
-    auto makeFunctional(const FunctionalImpl& f, ::Algorithm::VectorSpace& domain,
-                        int rbegin = 0, int rend = FunctionalImpl::AnsatzVars::noOfVariables,
-                        int cbegin = 0, int cend = FunctionalImpl::TestVars::noOfVariables)
-    {
-      return Functional<FunctionalImpl>( f, domain , rbegin, rend , cbegin , cend );
+      return Functional<FunctionalDefinition>( f, domain , rbegin, rend , cbegin , cend );
     }
   }
 }

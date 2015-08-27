@@ -5,6 +5,7 @@
 #include <boost/type_erasure/any.hpp>
 
 #include "Util/Concepts/vectorConcept.hh"
+#include "vectorSpace.hh"
 
 namespace Algorithm
 {
@@ -24,17 +25,6 @@ namespace Algorithm
   Vector operator*(Arithmetic a, Vector x)
   {
     return x*=a;//Scale<Arithmetic>{a,x};
-  }
-
-
-  /**
-   * @brief Compute \f$z=a*x\f$.
-   */
-  template <class Arithmetic,
-            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  Vector operator*(const Vector& x, Arithmetic a)
-  {
-    return a*x;
   }
 
   /**

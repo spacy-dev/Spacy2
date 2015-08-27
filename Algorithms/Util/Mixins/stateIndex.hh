@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set index of state variable.
        */
-      void setStateIndex(unsigned index) noexcept;
+      void setStateIndex(unsigned index);
 
       /**
        * @brief Get index of state variable.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachStateIndex(StateIndex& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(StateIndex* changedSubject);
 
     private:

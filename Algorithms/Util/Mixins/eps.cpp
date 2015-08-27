@@ -11,7 +11,7 @@ namespace Algorithm
       : eps_(eps)
     {}
 
-    void Eps::setEps(double eps) noexcept
+    void Eps::setEps(double eps)
     {
       eps_ = eps;
       notify();

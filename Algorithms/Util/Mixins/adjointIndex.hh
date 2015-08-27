@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set index of adjoint variable.
        */
-      void setAdjointIndex(unsigned index) noexcept;
+      void setAdjointIndex(unsigned index);
 
       /**
        * @brief Get index of adjoint variable.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachAdjointIndex(AdjointIndex& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(AdjointIndex* changedSubject);
 
     private:

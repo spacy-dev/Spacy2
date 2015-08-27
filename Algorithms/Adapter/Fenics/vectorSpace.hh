@@ -8,7 +8,6 @@
 
 #include "Util/Mixins/impl.hh"
 #include "VectorSpaces/ProductSpace/vectorSpace.hh"
-#include "scalarProducts.hh"
 
 namespace Algorithm
 {
@@ -17,7 +16,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Creator for vector space elements for FEniCS.
-     * @see ::Algorithm::VectorCreator, _::Algorithm::VectorCreatorConcept
+     * @see ::Algorithm::VectorCreator, ::Algorithm::VectorCreatorConcept
      */
     class VectorCreator : public Mixin::Impl<dolfin::FunctionSpace>
     {

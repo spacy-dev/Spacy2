@@ -8,13 +8,13 @@ namespace Algorithm
       : verbose_(verbose)
     {}
 
-    void Verbosity::setVerbosity(bool verbose) noexcept
+    void Verbosity::setVerbosity(bool verbose)
     {
       verbose_ = verbose;
       notify();
     }
 
-    void Verbosity::setDetailedVerbosity(bool verbose) noexcept
+    void Verbosity::setDetailedVerbosity(bool verbose)
     {
       verbose_detailed_ = verbose;
       notify();

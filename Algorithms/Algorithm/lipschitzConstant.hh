@@ -32,7 +32,7 @@ namespace Algorithm
     /// Set allowed maximal relative increase.
     void setMaxFactor(double factor);
 
-    /// Set allowed maximal relative decrease.
+    /// Set relative decrease for negative estimates.
     void setMinFactor(double factor);
 
   private:

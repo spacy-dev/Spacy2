@@ -8,7 +8,7 @@ namespace Algorithm
       : absoluteAccuracy_(absoluteAccuracy)
     {}
 
-    void AbsoluteAccuracy::setAbsoluteAccuracy(double absoluteAccuracy) noexcept
+    void AbsoluteAccuracy::setAbsoluteAccuracy(double absoluteAccuracy)
     {
       absoluteAccuracy_ = absoluteAccuracy;
       notify();

@@ -5,7 +5,7 @@
 #include "Fenics/functional.hh"
 #include "Fenics/vectorSpace.hh"
 #include "Fenics/pc2Functional.hh"
-#include "Fenics/scalarProducts.hh"
+#include "Fenics/l2Product.hh"
 #include "Fenics/trackingTypeFunctional.hh"
 #include "Fenics/util.hh"
 #include "Fenics/vector.hh"

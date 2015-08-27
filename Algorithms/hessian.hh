@@ -10,7 +10,10 @@
 
 namespace Algorithm
 {
-  /// Linear operator \f$f''(x)\f$ of a twice differentiable functional \f$f\f$.
+  /**
+   * @ingroup VHatGroup
+   * @brief Linear operator \f$f''(x)\f$ of a twice differentiable functional \f$f\f$.
+   */
   class Hessian : public OperatorBase
   {
   public:

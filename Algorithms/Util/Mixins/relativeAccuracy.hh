@@ -22,7 +22,7 @@ namespace Algorithm
       /**
        * @brief Set relative accuracy.
        */
-      void setRelativeAccuracy(double) noexcept;
+      void setRelativeAccuracy(double);
 
       /**
        * @brief Get relative accuracy.
@@ -42,6 +42,9 @@ namespace Algorithm
        */
       void detachRelativeAccuracy(RelativeAccuracy& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(RelativeAccuracy* changedSubject);
 
     private:

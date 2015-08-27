@@ -2,6 +2,7 @@
 
 #include "../../vector.hh"
 #include "../../vectorSpace.hh"
+#include "l2Product.hh"
 #include "vector.hh"
 #include "VectorSpaces/ProductSpace/vectorSpace.hh"
 

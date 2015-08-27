@@ -6,7 +6,7 @@ Algorithm::Mixin::ControlIndex::ControlIndex(unsigned index) noexcept
   : index_(index)
 {}
 
-void Algorithm::Mixin::ControlIndex::setControlIndex(unsigned index) noexcept
+void Algorithm::Mixin::ControlIndex::setControlIndex(unsigned index)
 {
   index_ = index;
   notify();

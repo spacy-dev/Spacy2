@@ -8,7 +8,7 @@ namespace Algorithm
       : maxSteps_(maxSteps)
     {}
 
-    void MaxSteps::setMaxSteps(unsigned maxSteps) noexcept
+    void MaxSteps::setMaxSteps(unsigned maxSteps)
     {
       maxSteps_ = maxSteps;
       notify();

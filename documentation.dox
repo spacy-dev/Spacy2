@@ -2,6 +2,10 @@
 
 
 /**
+ * @defgroup VHatGroup VHat
+ */
+
+/**
  * @defgroup VectorSpaceGroup Vector Spaces
  *
  * @brief Collection of available vector spaces.

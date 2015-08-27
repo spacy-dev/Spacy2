@@ -32,8 +32,14 @@ namespace Algorithm
       /// Copy constructor.
       Vector(const Vector& other);
 
-      /// Assignment.
+      /// Move constructor.
+      Vector(Vector&& other);
+
+      /// Copy assignment.
       Vector& operator=(const Vector& y);
+
+      /// Move assignment.
+      Vector& operator=(Vector&& y);
 
       /// In-place summation.
       Vector& operator+=(const Vector& y);
