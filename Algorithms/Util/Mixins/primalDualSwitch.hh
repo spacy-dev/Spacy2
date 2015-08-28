@@ -76,9 +76,9 @@ namespace Algorithm
   template <class F>
   void primalDualIgnoreReset(F&& f, const Vector& x)
   {
-    if( isAny<Mixin::PrimalDualSwitch>(x) ) cast_ref<Mixin::PrimalDualSwitch>(x).disableReset();
+    if( is<Mixin::PrimalDualSwitch>(x) ) cast_ref<Mixin::PrimalDualSwitch>(x).disableReset();
     f(x);
-    if( isAny<Mixin::PrimalDualSwitch>(x) )
+    if( is<Mixin::PrimalDualSwitch>(x) )
     {
       cast_ref<Mixin::PrimalDualSwitch>(x).enableReset();
       cast_ref<Mixin::PrimalDualSwitch>(x).reset();

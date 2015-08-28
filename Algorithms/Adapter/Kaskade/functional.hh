@@ -165,7 +165,7 @@ namespace Algorithm
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
        * @see Hessian, LinearOperator, LinearOperatorConcept
        */
-      ::Algorithm::LinearOperator hessian(const ::Algorithm::Vector& x) const
+      auto hessian(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
         auto newOperator = *this;

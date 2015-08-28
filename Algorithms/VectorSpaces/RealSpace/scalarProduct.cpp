@@ -13,7 +13,7 @@ namespace Algorithm
     {
       if( x.space()->index() != y.space()->index() )
         throw IncompatibleSpaceException("Real::ScalarProduct",x.space()->index(),y.space()->index());
-      if( !isAny<Vector>(x) || !isAny<Vector>(y) ) throw InvalidArgumentException("Real::ScalarProduct");
+      if( !is<Vector>(x) || !is<Vector>(y) ) throw InvalidArgumentException("Real::ScalarProduct");
 
       return cast_ref<Vector>(x).impl() * cast_ref<Vector>(y).impl();
     }

@@ -5,7 +5,6 @@
 
 #include <dolfin.h>
 
-#include "linearSolver.hh"
 #include "linearizedOperator.hh"
 #include "../../vectorSpace.hh"
 #include "Util/Mixins/disableAssembly.hh"
@@ -157,7 +156,7 @@ namespace Algorithm
        * @brief Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
        * @see LinearizedOperator, LinearOperator, LinearOperatorConcept
        */
-      LinearOperator linearization(const ::Algorithm::Vector& x) const
+      auto linearization(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
         assert(A_ != nullptr);

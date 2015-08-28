@@ -124,10 +124,10 @@ namespace Algorithm
 
   //    std::unique_ptr<CGSolver> trcg = nullptr;
 
-      if( isAny<CGSolver>(*normalSolver) )
+      if( is<CGSolver>(*normalSolver) )
       {
         const auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
-        if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+        if( is<TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
           auto trcg =  makeTRCGSolver( L_->hessian(x) , cgSolver.P() ,
                                        trcgRelativeAccuracy , eps() , verbose() );
@@ -170,7 +170,7 @@ namespace Algorithm
     {
       auto rhs = dual(-L_->d1(x));
       Vector dn0 = 0*x;
-      if( isAny<CGSolver>(*normalSolver) )
+      if( is<CGSolver>(*normalSolver) )
       {
         auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
         cgSolver.setEps(eps());
@@ -179,7 +179,7 @@ namespace Algorithm
         cgSolver.setDetailedVerbosity(verbose_detailed());
         cgSolver.setIterativeRefinements(iterativeRefinements());
         cgSolver.setMaxSteps(maxSteps());
-        if( isAny<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+        if( is<TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
           const auto& P = cast_ref<TriangularStateConstraintPreconditioner>(cgSolver.P());
           dn0 = P.kernelOffset(rhs);

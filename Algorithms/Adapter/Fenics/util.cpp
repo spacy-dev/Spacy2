@@ -22,13 +22,13 @@ namespace Algorithm
 
     void copy(const ::Algorithm::Vector& x, dolfin::GenericVector& y)
     {
-      if( isAny<Vector>(x) )
+      if( is<Vector>(x) )
       {
         y = cast_ref<Vector>(x).impl();
         return;
       }
 
-      if( isAny<ProductSpace::Vector>(x) )
+      if( is<ProductSpace::Vector>(x) )
       {
         const auto& x_ = cast_ref<ProductSpace::Vector>(x);
 
@@ -72,13 +72,13 @@ namespace Algorithm
 
     void copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x)
     {
-      if( isAny<Vector>(x) )
+      if( is<Vector>(x) )
       {
         cast_ref<Vector>(x).impl() = y;
         return;
       }
 
-      if( isAny<ProductSpace::Vector>(x) )
+      if( is<ProductSpace::Vector>(x) )
       {
 
         auto& x_ = cast_ref<ProductSpace::Vector>(x);

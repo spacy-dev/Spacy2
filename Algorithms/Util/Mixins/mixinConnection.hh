@@ -13,7 +13,7 @@ namespace Algorithm
     template <class Impl>
     class MixinConnection
     {
-    public:
+    protected:
       /// Attach observer.
       void attach(Impl& observer)
       {

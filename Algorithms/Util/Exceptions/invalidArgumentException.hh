@@ -6,11 +6,18 @@
 
 namespace Algorithm
 {
-  /// Exception to be thrown on invalid arguments.
+  /**
+   * @ingroup ExceptionGroup
+   * @brief Exception to be thrown on invalid arguments.
+   */
   class InvalidArgumentException : public std::runtime_error
   {
   public:
-    InvalidArgumentException(const std::string&);
+    /**
+     * @brief Constructor.
+     * @param function name of function that throws
+     */
+    InvalidArgumentException(const std::string& function);
   };
 }
 

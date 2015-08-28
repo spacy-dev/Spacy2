@@ -153,13 +153,13 @@ namespace Algorithm
         template <class Description>
         static void apply(const ::Algorithm::Vector& x, ::Kaskade::VariableSet<Description>& y)
         {
-          if( isAny< Vector< Description > >(x) )
+          if( is< Vector< Description > >(x) )
           {
             boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).impl().data);
             return;
           }
 
-          if( isAny<ProductSpace::Vector>(x))
+          if( is<ProductSpace::Vector>(x))
           {
             const auto& x_ = cast_ref<ProductSpace::Vector>(x);
             if( ( x_.creator().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
@@ -175,13 +175,13 @@ namespace Algorithm
         template <class Description, class CoeffVector>
         static void toCoefficientVector(const ::Algorithm::Vector& x, CoeffVector& y)
         {
-          if( isAny< Vector< Description > >(x) )
+          if( is< Vector< Description > >(x) )
           {
             boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).impl().data);
             return;
           }
 
-          if( isAny<ProductSpace::Vector>(x))
+          if( is<ProductSpace::Vector>(x))
           {
             const auto& x_ = cast_ref<ProductSpace::Vector>(x);
             if( ( x_.creator().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
@@ -197,13 +197,13 @@ namespace Algorithm
         template <class Description, class CoeffVector>
         static void fromCoefficientVector(const CoeffVector& x, ::Algorithm::Vector& y)
         {
-          if( isAny< Vector< Description > >(y) )
+          if( is< Vector< Description > >(y) )
           {
             boost::fusion::at_c<0>(cast_ref< Vector< Description > >(y).impl().data) = boost::fusion::at_c<0>(x.data);
             return;
           }
 
-          if( isAny<ProductSpace::Vector>(y))
+          if( is<ProductSpace::Vector>(y))
           {
             auto& y_ = cast_ref<ProductSpace::Vector>(y);
             if( ( y_.creator().isPrimalSubSpaceId(0) && y_.isPrimalEnabled() ) ||
@@ -246,10 +246,10 @@ namespace Algorithm
     {
       using Spaces = typename Description::Spaces;
 
-      if( isAny< VectorCreator<Description> >(spaces.impl()) )
+      if( is< VectorCreator<Description> >(spaces.impl()) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
-      if( isAny<ProductSpace::VectorCreator>(spaces.impl()) )
+      if( is<ProductSpace::VectorCreator>(spaces.impl()) )
       {
         const auto& spaces_ = cast_ref<ProductSpace::VectorCreator>(spaces.impl());
         using seq = std::make_integer_sequence<unsigned,boost::fusion::result_of::size<Spaces>::value>;

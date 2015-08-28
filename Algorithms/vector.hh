@@ -10,14 +10,16 @@
 namespace Algorithm
 {
   /**
-   * @brief Vector class.  Can store objects that satisfy the requirements of VectorConcept.
-   * @see Concepts::VectorConcept
+   * @ingroup VHatGroup
+   * @anchor VectorAnchor
+   * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
    */
   using Vector = boost::type_erasure::any<Concepts::VectorConcept >;
 
 ////  template <class> struct Scale;
 
   /**
+   * @ingroup VHatGroup
    * @brief Compute \f$z=a*x\f$.
    */
   template <class Arithmetic,
@@ -28,21 +30,25 @@ namespace Algorithm
   }
 
   /**
+   * @ingroup VHatGroup
    * @brief Compute \f$z=x+y\f$.
    */
   Vector operator+(Vector x, const Vector& y);
 
   /**
+   * @ingroup VHatGroup
    * @brief Compute \f$z=x-y\f$.
    */
   Vector operator-(Vector x, const Vector& y);
 
   /**
+   * @ingroup VHatGroup
    * @brief Compute scalar product \f$z=x*y=(x,y)\f$.
    */
   double operator*(const Vector& x, const Vector& y);
 
   /**
+   * @ingroup VHatGroup
    * @brief Compute norm, where the norm associated with the underlying function space is used.
    */
   double norm(const Vector& x);

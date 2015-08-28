@@ -14,6 +14,7 @@ namespace Algorithm
   {
     /**
      * @ingroup ConceptGroup
+     * @anchor VectorConceptAnchor
      * @brief Concept for vector implementations.
      *
      * The minimal signature of a vector is:
@@ -54,7 +55,7 @@ namespace Algorithm
      * };
      * @endcode
      *
-     * @see ::Algorithm::Vector
+     * See @ref VectorAnchor "::Algorithm::Vector".
      */
     using VectorConcept =
     boost::mpl::vector<

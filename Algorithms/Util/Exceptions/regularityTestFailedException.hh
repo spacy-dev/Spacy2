@@ -6,11 +6,19 @@
 
 namespace Algorithm
 {
-  /// Exception to be thrown if a virtual function is not implemented.
+  /**
+   * @ingroup ExceptionGroup
+   * @brief Exception to be thrown if regularity test fails
+   */
   class RegularityTestFailedException : public std::runtime_error
   {
   public:
-    RegularityTestFailedException(const std::string&, double nu);
+    /**
+     * @brief Constructor.
+     * @param function name of function that throws
+     * @param nu damping factor
+     */
+    RegularityTestFailedException(const std::string& function, double nu);
   };
 }
 

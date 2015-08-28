@@ -14,7 +14,7 @@ namespace Algorithm
 
     ::Algorithm::Vector Solver::operator ()(const ::Algorithm::Vector& y) const
     {
-      if( !isAny<Real::Vector>(y) ) throw InvalidArgumentException("RealSolver::operator()(const Vector&)");
+      if( !is<Real::Vector>(y) ) throw InvalidArgumentException("RealSolver::operator()(const Vector&)");
 
       auto x = y;
       x *= 1./z_;
