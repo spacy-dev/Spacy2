@@ -16,7 +16,7 @@ namespace Algorithm
     public:
       /**
        * @brief Constructor.
-       * @param Sets number of iterative refinements.
+       * @param iterativeRefinements number of iterative refinements.
        */
       explicit IterativeRefinements(unsigned iterativeRefinements = 0);
 

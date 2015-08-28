@@ -18,6 +18,7 @@ namespace Algorithm
   {
     /**
      * @ingroup ConceptGroup
+     * @anchor FunctionalConceptAnchor
      * @brief Concept for functionals.
      *
      * The minimal signature of a functional is:
@@ -34,7 +35,7 @@ namespace Algorithm
      * };
      * @endcode
      *
-     * @see ::Algorithm::Functional
+     * See @ref FunctionalAnchor "::Algorithm::Functional".
      */
     using FunctionalConcept =
     boost::mpl::vector<
@@ -46,6 +47,7 @@ namespace Algorithm
 
     /**
      * @ingroup ConceptGroup
+     * @anchor C1FunctionalConceptAnchor
      * @brief Concept for differentiable functionals.
      *
      * The minimal signature of a differentiable functional is
@@ -70,7 +72,7 @@ namespace Algorithm
      * };
      * @endcode
      *
-     * @see ::Algorithm::C1Functional
+     * See @ref C1FunctionalAnchor "::Algorithm::C1Functional".
      */
     using C1FunctionalConcept =
     boost::mpl::vector<
@@ -83,8 +85,9 @@ namespace Algorithm
 
     /**
      * @ingroup ConceptGroup
+     * @anchor C2FunctionalConceptAnchor
      * @brief Concept for twice differentiable functionals.
-     * @see ::Algorithm::C2Functional
+     * See @ref C2FunctionalAnchor "::Algorithm::C2Functional".
      */
     using C2FunctionalConcept =
     boost::mpl::vector<

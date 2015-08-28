@@ -213,7 +213,7 @@ namespace Algorithm
         solverCreator_ = std::forward<Function>(f);
       }
 
-    protected:
+    private:
       /// Assemble \f$f(x)\f$.
       void assembleFunctional(const ::Algorithm::Vector& x) const
       {

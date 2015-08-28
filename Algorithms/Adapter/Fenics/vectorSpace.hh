@@ -16,7 +16,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Creator for vector space elements for FEniCS.
-     * @see ::Algorithm::VectorCreator, ::Algorithm::VectorCreatorConcept
+     * See @ref VectorCreatorAnchor "::Algorithm::VectorCreator", VectorCreatorConceptAnchor "::Algorithm::VectorCreatorConcept".
      */
     class VectorCreator : public Mixin::Impl<dolfin::FunctionSpace>
     {

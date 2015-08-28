@@ -61,7 +61,7 @@ namespace Algorithm
        * @param solverName name of the solver, i.e. "default", "mumps", "petsc" or "umfpack".
        */
     public:
-      TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& productSpace,
+      TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
                const VectorSpace& domain , const VectorSpace& range,
                bool symmetric = false, const std::string& solverName = "mumps");
 

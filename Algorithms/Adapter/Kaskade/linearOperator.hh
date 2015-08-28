@@ -37,10 +37,10 @@ namespace Algorithm
        * @param domain domain space
        * @param range range space
        */
-      LinearOperator(const OperatorImpl& A, const VectorSpace& domain_, const VectorSpace& range_)
-        : OperatorBase(domain_,range_),
+      LinearOperator(const OperatorImpl& A, const VectorSpace& domain, const VectorSpace& range)
+        : OperatorBase(domain,range),
           A_(A),
-          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain()) )
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(domain) )
       {}
 
       /**

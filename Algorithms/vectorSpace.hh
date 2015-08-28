@@ -20,8 +20,9 @@ namespace Algorithm
 
   /**
    * @ingroup VHatGroup
+   * @anchor VectorCreatorAnchor
    * @brief Vector creator for feeding into VectorSpace.
-   * @see Concepts::VectorCreatorConcept, VectorSpace
+   * See \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
    */
   using VectorCreator = boost::type_erasure::any< Concepts::VectorCreatorConcept >;
 
@@ -29,7 +30,7 @@ namespace Algorithm
   /**
    * @ingroup VHatGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
-   * @see VectorCreator, VectorCreatorConcept
+   * @see VectorCreator, \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
    */
   class VectorSpace : public Mixin::Impl<VectorCreator>
   {

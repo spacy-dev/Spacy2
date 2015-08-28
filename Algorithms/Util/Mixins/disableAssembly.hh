@@ -14,7 +14,7 @@ namespace Algorithm
     public:
       /**
        * @brief Constructor.
-       * @param Sets flag to enabled.
+       * @param disable true: disable assemble, false: enable assembly
        */
       DisableAssembly(bool disable = false) noexcept;
 
