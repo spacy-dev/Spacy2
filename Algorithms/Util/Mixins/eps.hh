@@ -58,7 +58,7 @@ namespace Algorithm
       void update(Eps* changedSubject);
 
     private:
-      double eps_ = 1e-15;
+      double eps_;
     };
   }
 }

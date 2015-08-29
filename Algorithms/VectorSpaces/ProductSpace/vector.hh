@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "../../vector.hh"
-#include "Util/Base/vectorBase.hh"
-#include "Util/Mixins/primalDualSwitch.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/vectorBase.hh"
+#include "Algorithms/Util/Mixins/primalDualSwitch.hh"
 
 namespace Algorithm
 {
@@ -105,7 +105,7 @@ namespace Algorithm
       double operator()(const Vector& y) const;
 
     private:
-      std::vector< ::Algorithm::Vector > variables_ ;
+      std::vector< ::Algorithm::Vector > variables_ = {};
     };
   }
 }

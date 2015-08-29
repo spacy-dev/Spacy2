@@ -3,10 +3,10 @@
 
 #include <memory>
 
-#include "functional.hh"
-#include "linearSolver.hh"
-#include "vector.hh"
-#include "Util/Base/operatorBase.hh"
+#include "Algorithms/functional.hh"
+#include "Algorithms/linearSolver.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
 
 namespace Algorithm
 {
@@ -19,14 +19,14 @@ namespace Algorithm
   public:
     /**
      * @brief Constructor.
-     * @param A twice differentiable functional
+     * @param F twice differentiable functional
      * @param x point of linearization
      */
     Hessian(C2Functional F, Vector x);
 
     /**
      * @brief Constructor.
-     * @param A twice differentiable functional
+     * @param F twice differentiable functional
      * @param x point of linearization
      * @param solver linear solver to (approximately) compute \f$A(x)^{-1}y\f$
      */
@@ -41,7 +41,7 @@ namespace Algorithm
   private:
     C2Functional F_;
     Vector x_;
-    LinearSolver solver_;
+    LinearSolver solver_ = {};
   };
 }
 

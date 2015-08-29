@@ -1,8 +1,7 @@
 #ifndef ALGORITHM_DAMPING_FACTOR_HH
 #define ALGORITHM_DAMPING_FACTOR_HH
 
-#include "vector.hh"
-#include "Util/Mixins/eps.hh"
+#include "Algorithms/Util/Mixins/eps.hh"
 
 namespace Algorithm
 {

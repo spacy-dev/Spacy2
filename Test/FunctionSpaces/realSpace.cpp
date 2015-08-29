@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include "vector.hh"
-#include "VectorSpaces/realSpace.hh"
-#include "Util/cast.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/VectorSpaces/realSpace.hh"
+#include "Algorithms/Util/cast.hh"
 
 TEST(RealSpaceTest,ElementTest)
 {
   using namespace Algorithm;
   auto R = Real::makeHilbertSpace();
-  auto x = R.element();
+  auto x = R.vector();
   EXPECT_DOUBLE_EQ( static_cast<double>(cast_ref<Real::Vector>(x)) , 0. );
 }
 
@@ -16,8 +16,8 @@ TEST(RealSpaceTest,ScalarProductTest)
 {
   using namespace Algorithm;
   auto R = Real::makeHilbertSpace();
-  auto x = R.element();
-  auto y = R.element();
+  auto x = R.vector();
+  auto y = R.vector();
   cast_ref<Real::Vector>(x) = 1;
   cast_ref<Real::Vector>(y) = -2;
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x), 1. );
@@ -30,8 +30,8 @@ TEST(RealSpaceTest,NormTest)
 {
   using namespace Algorithm;
   auto R = Real::makeHilbertSpace();
-  auto x = R.element();
-  auto y = R.element();
+  auto x = R.vector();
+  auto y = R.vector();
   cast_ref<Real::Vector>(x) = 1;
   cast_ref<Real::Vector>(y) = -2;
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x), 1. );

@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 #define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
-#include "Util/Base/vectorBase.hh"
-#include "Util/cast.hh"
+#include "Algorithms/Util/Base/vectorBase.hh"
+#include "Algorithms/Util/cast.hh"
 
 #include "util.hh"
 

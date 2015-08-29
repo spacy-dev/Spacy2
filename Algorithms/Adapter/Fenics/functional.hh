@@ -3,17 +3,16 @@
 
 #include <memory>
 
-#include "../../vector.hh"
-#include "../../vectorSpace.hh"
+#include "Algorithms/hessian.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/vectorSpace.hh"
 
-#include "Util/Mixins/disableAssembly.hh"
-#include "Util/Mixins/primalDualSwitch.hh"
-#include "Util/cast.hh"
-#include "Util/Base/functionalBase.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/Util/Base/functionalBase.hh"
+#include "Algorithms/Util/Mixins/disableAssembly.hh"
+#include "Algorithms/Util/Mixins/primalDualSwitch.hh"
 
 #include "assignXIfPresent.hh"
-#include "hessian.hh"
-#include "operator.hh"
 #include "util.hh"
 #include "vector.hh"
 
@@ -27,6 +26,7 @@ namespace Algorithm
      * @tparam F dolfin::Form describing the functional value
      * @tparam DF dolfin::Form describing the derivative
      * @tparam DDF dolfin::Form describing the second derivative
+     * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
      * @see C2Functional, C2FunctionalConcept
      */
     template <class F, class DF, class DDF>
@@ -39,12 +39,12 @@ namespace Algorithm
        * @brief Construct functional for FEnics.
        * @param f form for the evaluation of \f$f\f$.
        * @param J form for the evaluation of \f$f'\f$
-       * @param J form for the evaluation of \f$f''\f$
+       * @param H form for the evaluation of \f$f''\f$
        * @param bcs Dirichlet boundary conditions
        * @param space domain space \f$X\f$
        */
       Functional(const F& f, const DF& J, const DDF& H,
-                 const std::vector<const dolfin::DirichletBC*>& bcs, ::Algorithm::VectorSpace& space)
+                 const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
         : FunctionalBase< Functional<F,DF,DDF> >( space ),
           f_( f.mesh_shared_ptr() ),
           J_( J.function_space(0) ),
@@ -149,7 +149,7 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
-        auto y = this->domain().dualSpace().element();
+        auto y = this->domain().dualSpace().vector();
         copy(*b_,y);
         return y;
       }
@@ -169,7 +169,7 @@ namespace Algorithm
         auto Ax = x_.vector()->copy();
         A_->mult(*x_.vector(), *Ax);
 
-        auto result = this->domain().dualSpace().element();
+        auto result = this->domain().dualSpace().vector();
         copy(*Ax,result);
 
         return result;
@@ -199,7 +199,7 @@ namespace Algorithm
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
 
-        Assign_X_If_Present<decltype(f_)>::apply(f_,x_);
+        assign_x_if_present(f_,x_);
         value_ = dolfin::assemble(f_);
 
         oldX_f_ = x;
@@ -213,7 +213,7 @@ namespace Algorithm
 
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
-        Assign_X_If_Present<decltype(J_)>::apply(J_,x_);
+        assign_x_if_present(J_,x_);
         b_ = x_.vector()->factory().create_vector();
 
         dolfin::assemble(*b_,J_);
@@ -231,7 +231,7 @@ namespace Algorithm
 
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,*x_.vector());
-        Assign_X_If_Present<decltype(H_)>::apply(H_,x_);
+        assign_x_if_present(H_,x_);
         A_ = x_.vector()->factory().create_matrix();
         dolfin::assemble(*A_,H_);
 
@@ -243,12 +243,12 @@ namespace Algorithm
       mutable F f_;
       mutable DF J_;
       mutable DDF H_;
-      const std::vector<const dolfin::DirichletBC*>& bcs_;
-      mutable std::shared_ptr<dolfin::GenericMatrix> A_;
-      mutable std::shared_ptr<dolfin::GenericVector> b_;
+      std::vector<const dolfin::DirichletBC*> bcs_ = {};
+      mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
+      mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
       mutable double value_ = 0;
       mutable bool valueAssembled_ = false;
-      mutable ::Algorithm::Vector oldX_f_, oldX_J_, oldX_H_;
+      mutable ::Algorithm::Vector oldX_f_ = {}, oldX_J_ = {}, oldX_H_ = {};
     };
 
     /**
@@ -258,7 +258,7 @@ namespace Algorithm
      */
     template <class F, class DF, class DDF>
     auto makeFunctional( const F& f , const DF& J , const DDF& H ,
-                         const std::vector<const dolfin::DirichletBC*>& bcs, VectorSpace& space)
+                         const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
     {
       return Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space );
     }
@@ -270,7 +270,7 @@ namespace Algorithm
      * @return ::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )
      */
     template <class F, class DF, class DDF>
-    auto makeFunctional( const F& f , const DF& J , const DDF& H , VectorSpace& space)
+    auto makeFunctional( const F& f , const DF& J , const DDF& H , const VectorSpace& space)
     {
       return Fenics::Functional<F,DF,DDF>( f , J , H , {} , space );
     }

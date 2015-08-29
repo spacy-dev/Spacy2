@@ -48,7 +48,7 @@ namespace Algorithm
       void update(RelativeAccuracy* changedSubject);
 
     private:
-      double relativeAccuracy_ = 1e-15;
+      double relativeAccuracy_;
     };
   }
 }

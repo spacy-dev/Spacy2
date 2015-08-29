@@ -1,9 +1,6 @@
 #include "dampingStrategies.hh"
 
-#include "operator.hh"
-#include "linearSolver.hh"
-
-#include "Util/Exceptions/regularityTestFailedException.hh"
+#include "Algorithms/Util/Exceptions/regularityTestFailedException.hh"
 
 #include <iostream>
 
@@ -11,19 +8,13 @@ namespace Algorithm
 {
   namespace Newton
   {
-    namespace DampingStrategy
+    namespace Damping
     {
-      DampingFactor Base::operator()(const LinearSolver& F, const Vector& x, const Vector& dx) const
-      {
-        return compute(F,x,dx);
-      }
-
-
       AffineCovariant::AffineCovariant(const Operator& F)
-        : F_(F), oldDs(F.domain().element())
+        : F_(F), oldDs(F.domain().vector())
       {}
 
-      DampingFactor AffineCovariant::compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const
+      DampingFactor AffineCovariant::operator()(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1;
         auto mu = 1., normDx = norm(dx);
@@ -75,7 +66,7 @@ namespace Algorithm
         : F_(F)
       {}
 
-      DampingFactor AffineContravariant::compute(const LinearSolver&, const Vector& x, const Vector& dx) const
+      DampingFactor AffineContravariant::operator()(const LinearSolver&, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1.;
         auto norm_F_x = norm(F_(x));
@@ -116,10 +107,10 @@ namespace Algorithm
       }
 
 
-      None::None(const Operator& F)
+      None::None(const Operator&)
       {}
 
-      DampingFactor None::compute(const LinearSolver&, const Vector&, const Vector&) const
+      DampingFactor None::operator()(const LinearSolver&, const Vector&, const Vector&) const
       {
         return 1;
       }

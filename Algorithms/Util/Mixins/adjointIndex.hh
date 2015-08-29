@@ -48,7 +48,7 @@ namespace Algorithm
       void update(AdjointIndex* changedSubject);
 
     private:
-      unsigned index_ = 2;
+      unsigned index_;
     };
   }
 }

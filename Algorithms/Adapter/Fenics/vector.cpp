@@ -1,10 +1,10 @@
 #include "vector.hh"
 
-#include "../../vectorSpace.hh"
+#include "vectorSpace.hh"
 
-#include "Util/cast.hh"
-#include "Util/Exceptions/callOfUndefinedFunctionException.hh"
-#include "Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/Util/Exceptions/callOfUndefinedFunctionException.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
 
 #include <utility>
 

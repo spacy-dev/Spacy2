@@ -1,13 +1,18 @@
 #ifndef ALGORITHM_VECTOR_BASE_HH
 #define ALGORITHM_VECTOR_BASE_HH
 
-#include "Util/Mixins/eps.hh"
-#include "Util/Mixins/impl.hh"
-#include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "vectorSpace.hh"
+#include "Algorithms/Util/Mixins/eps.hh"
+#include "Algorithms/Util/Mixins/impl.hh"
+#include "Algorithms/Util/Exceptions/incompatibleSpaceException.hh"
+#include "Algorithms/vectorSpace.hh"
 
 namespace Algorithm
 {
+  /// @cond
+  template <class V>
+  void checkSameSpaces(const V& x, const V& y);
+  /// @endcond
+
   /**
    * @brief Base class for vector implementations.
    *
@@ -57,14 +62,14 @@ namespace Algorithm
     /// Copy assignment.
     VectorBase& operator=(const VectorBase& other)
     {
-      if( space() != other.space() ) throw IncompatibleSpaceException("VectorBase::operator=", space()->index() , other.space()->index());
+      checkSameSpaces(*this,other);
       return *this;
     }
 
     /// Move assignment.
     VectorBase& operator=(VectorBase&& other) noexcept
     {
-      assert( space() != other.space() );
+      checkSameSpaces(*this,other);
       return *this;
     }
 
@@ -79,18 +84,6 @@ namespace Algorithm
     {
       return space()->index();
     }
-
-    /**
-     * @brief Checks if vector is admissible.
-     * @return true
-     *
-     * Overwrite this method in case your admissible set is a subset of a vector space and your algorithm may compute iterates that
-     * leave the admissible domain.
-     */
-//    bool isAdmissible() const
-//    {
-//      return true;
-//    }
 
     /// Compute norm of vector. The norm defined in the underlying vector space is employed.
     double norm() const
@@ -121,6 +114,7 @@ namespace Algorithm
     /// Compute \f$ x+=y\f$.
     VType& operator+=(const VType& y)
     {
+      checkSameSpaces(static_cast<const VType&>(*this),y);
       static_cast<VType*>(this)->impl() += y.impl();
       return static_cast<VType&>(*this);
     }
@@ -128,6 +122,7 @@ namespace Algorithm
     /// Compute \f$ x-=y\f$.
     VType& operator-=(const VType& y)
     {
+      checkSameSpaces(static_cast<const VType&>(*this),y);
       static_cast<VType*>(this)->impl() -= y.impl();
       return static_cast<VType&>(*this);
     }
@@ -150,6 +145,7 @@ namespace Algorithm
     /// Comparison operators.
     bool operator==(const VType& y) const
     {
+      checkSameSpaces(static_cast<const VType&>(*this),y);
       auto dx = y;
       dx -= static_cast<const VType&>(*this);
       return dx(dx) < eps()*eps();

@@ -48,7 +48,7 @@ namespace Algorithm
       void update(MinimalAccuracy* changedSubject);
 
     private:
-      double minimalAccuracy_ = 0.25;
+      double minimalAccuracy_;
     };
   }
 }

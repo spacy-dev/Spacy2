@@ -1,8 +1,8 @@
 #include "l2Product.hh"
 
 #include "vector.hh"
-#include "Util/cast.hh"
-#include "Util/Exceptions/incompatibleSpaceException.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/Util/Exceptions/incompatibleSpaceException.hh"
 
 namespace Algorithm
 {

@@ -6,11 +6,11 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
-#include "Util/Base/operatorBase.hh"
-#include "Util/Mixins/disableAssembly.hh"
-#include "Util/Mixins/numberOfThreads.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
+#include "Algorithms/Util/Mixins/disableAssembly.hh"
+#include "Algorithms/Util/Mixins/numberOfThreads.hh"
 
-#include "linearizedOperator.hh"
+#include "Algorithms/linearizedOperator.hh"
 #include "directSolver.hh"
 
 namespace Algorithm
@@ -112,7 +112,7 @@ namespace Algorithm
 
         VectorImpl v( assembler_.rhs() );
 
-        auto y = range().element();
+        auto y = range().vector();
         copyFromCoefficientVector<TestVariableSetDescription>(v,y);
         return y;
       }
@@ -130,7 +130,7 @@ namespace Algorithm
 
         A_.apply( dx_ , y_ );
 
-        auto y = range().element();
+        auto y = range().vector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
@@ -187,8 +187,8 @@ namespace Algorithm
       OperatorDefinition f_;
       Spaces spaces_;
       mutable Assembler assembler_;
-      mutable KaskadeOperator A_;
-      mutable ::Algorithm::Vector old_X_A_, old_X_dA_;
+      mutable KaskadeOperator A_ = {};
+      mutable ::Algorithm::Vector old_X_A_ = {}, old_X_dA_ = {};
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=OperatorDefinition::TestVars::noOfVariables;

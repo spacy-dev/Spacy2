@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include "../../vector.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {
@@ -113,9 +113,9 @@ namespace Algorithm
       ::Algorithm::Vector operator()(const VectorSpace* space) const;
 
     private:
-      std::vector<std::shared_ptr<VectorSpace> > spaces_;
-      std::vector<unsigned> primalSubSpaceIds_, dualSubSpaceIds_;
-      std::map<unsigned,unsigned> primalMap_, dualMap_;
+      std::vector<std::shared_ptr<VectorSpace> > spaces_ = {};
+      std::vector<unsigned> primalSubSpaceIds_ = {}, dualSubSpaceIds_ = {};
+      std::map<unsigned,unsigned> primalMap_ = std::map<unsigned,unsigned>{}, dualMap_ = std::map<unsigned,unsigned>{};
       bool isPrimalDual_ = false;
     };
 

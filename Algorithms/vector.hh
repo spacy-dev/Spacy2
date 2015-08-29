@@ -4,8 +4,9 @@
 #include <type_traits>
 #include <boost/type_erasure/any.hpp>
 
-#include "Util/Concepts/vectorConcept.hh"
-#include "vectorSpace.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/Util/Concepts/vectorConcept.hh"
+#include "Algorithms/Util/Exceptions/incompatibleSpaceException.hh"
 
 namespace Algorithm
 {
@@ -14,13 +15,14 @@ namespace Algorithm
    * @anchor VectorAnchor
    * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
    */
-  using Vector = boost::type_erasure::any<Concepts::VectorConcept >;
+  using Vector = boost::type_erasure::any< Concepts::VectorConcept >;
 
 ////  template <class> struct Scale;
 
   /**
    * @ingroup VHatGroup
-   * @brief Compute \f$z=a*x\f$.
+   * @brief Multiplication with arithmetic types (double,float,int,...).
+   * @return \f$z=a*x\f$.
    */
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
@@ -31,28 +33,39 @@ namespace Algorithm
 
   /**
    * @ingroup VHatGroup
-   * @brief Compute \f$z=x+y\f$.
+   * @brief Sum of vectors.
+   * @return Compute \f$z=x+y\f$.
    */
   Vector operator+(Vector x, const Vector& y);
 
   /**
    * @ingroup VHatGroup
-   * @brief Compute \f$z=x-y\f$.
+   * @brief Subtract vectors.
+   * @return \f$z=x-y\f$.
    */
   Vector operator-(Vector x, const Vector& y);
 
   /**
    * @ingroup VHatGroup
-   * @brief Compute scalar product \f$z=x*y=(x,y)\f$.
+   * @brief Compute scalar product.
+   * @return \f$z=x*y=(x,y)\f$.
    */
   double operator*(const Vector& x, const Vector& y);
 
   /**
    * @ingroup VHatGroup
    * @brief Compute norm, where the norm associated with the underlying function space is used.
+   * @return \f$ z = \|x\| \f$.
    */
   double norm(const Vector& x);
 
+
+  template <class V>
+  void checkSameSpaces(const V& x, const V& y)
+  {
+    if( x.space()->index() != y.space()->index() )
+      throw IncompatibleSpaceException("checkSameSpaces",x.space()->index(),y.space()->index());
+  }
 //  template <class T>
 //  struct Scale
 //  {

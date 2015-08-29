@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_LIPSCHITZ_CONSTANT_HH
 #define ALGORITHM_LIPSCHITZ_CONSTANT_HH
 
-#include "Util/Mixins/eps.hh"
+#include "Algorithms/Util/Mixins/eps.hh"
 
 namespace Algorithm
 {

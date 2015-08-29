@@ -1,5 +1,7 @@
 #include "vectorSpace.hh"
 
+#include <boost/type_erasure/is_empty.hpp>
+
 #include <cmath>
 #include <stdexcept>
 #include <utility>
@@ -27,22 +29,37 @@ namespace Algorithm
 
 
   VectorSpace::VectorSpace(VectorCreator impl, Norm norm)
-    : Mixin::Impl<VectorCreator>(std::move(impl)),
-      norm_(norm)
+    : Mixin::Impl<VectorCreator>{std::move(impl)},
+      norm_{norm}
   {}
 
   VectorSpace::VectorSpace(VectorSpace&& other)
-    : Mixin::Impl<VectorCreator>(other.impl()) ,
-      norm_(std::move(other.norm_)) ,
-      sp_(std::move(other.sp_)) ,
-      index_(std::move(other.index_)) ,
-      primalSpaces_(std::move(other.primalSpaces_)) ,
-      dualSpaces_(std::move(other.dualSpaces_))
+    : Mixin::Impl<VectorCreator>{other.impl()} ,
+      norm_{std::move(other.norm_)} ,
+      sp_{std::move(other.sp_)} ,
+      index_{std::move(other.index_)} ,
+      primalSpaces_{std::move(other.primalSpaces_)} ,
+      dualSpaces_{std::move(other.dualSpaces_)}
   {
     if( &other == other.dualSpace_)
       setDualSpace(this);
     else
       setDualSpace(other.dualSpace_);
+  }
+
+  VectorSpace& VectorSpace::operator=(VectorSpace&& other)
+  {
+    Mixin::Impl<VectorCreator>::operator=(std::move(other));
+    norm_ = std::move(other.norm_);
+    sp_ = std::move(other.sp_);
+    index_ = other.index_;
+    primalSpaces_ = std::move(other.primalSpaces_);
+    dualSpaces_ = std::move(other.dualSpaces_);
+    if( &other == other.dualSpace_)
+      setDualSpace(this);
+    else
+      setDualSpace(other.dualSpace_);
+    return *this;
   }
 
   void VectorSpace::setNorm(Algorithm::Norm norm)
@@ -55,7 +72,7 @@ namespace Algorithm
     return norm_;
   }
 
-  boost::type_erasure::any<Concepts::VectorConcept> VectorSpace::element() const
+  boost::type_erasure::any<Concepts::VectorConcept> VectorSpace::vector() const
   {
     return impl()(this);
   }
@@ -67,14 +84,14 @@ namespace Algorithm
 
   void VectorSpace::setScalarProduct(ScalarProduct sp)
   {
-    sp_ = std::make_shared<ScalarProduct>(std::move(sp));
-    setNorm( HilbertSpaceNorm(*sp_) );
+    sp_ = std::move(sp);
+    setNorm( HilbertSpaceNorm{sp_} );
   }
 
   const ScalarProduct& VectorSpace::scalarProduct() const
   {
-    if( sp_ == nullptr ) throw std::runtime_error("No scalar product defined!");
-    return *sp_;
+    if( is_empty(sp_) ) throw std::runtime_error("No scalar product defined!");
+    return sp_;
   }
 
 
@@ -119,7 +136,7 @@ namespace Algorithm
 
   bool VectorSpace::isHilbertSpace() const
   {
-    return sp_ != nullptr;
+    return !is_empty(sp_);
   }
 
   bool VectorSpace::isAdmissible(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
@@ -133,14 +150,14 @@ namespace Algorithm
   }
 
 
-  VectorSpace makeBanachSpace(VectorCreator impl, Norm norm)
+  VectorSpace makeBanachSpace(VectorCreator creator, Norm norm)
   {
-    return VectorSpace{std::move(impl),std::move(norm)};
+    return VectorSpace{std::move(creator),std::move(norm)};
   }
 
-  VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct)
+  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct)
   {
-    auto V = VectorSpace{std::move(impl),HilbertSpaceNorm{scalarProduct}};
+    auto V = VectorSpace{std::move(creator),HilbertSpaceNorm{scalarProduct}};
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);
@@ -148,9 +165,9 @@ namespace Algorithm
     return std::move(V);
   }
 
-  void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace)
+  void connectPrimalDual(VectorSpace& X, VectorSpace& Y)
   {
-    primalSpace.addDualSpace( dualSpace );
-    dualSpace.addPrimalSpace( primalSpace );
+    X.addDualSpace( Y );
+    Y.addPrimalSpace( X );
   }
 }

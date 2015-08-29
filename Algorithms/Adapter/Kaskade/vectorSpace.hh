@@ -4,25 +4,22 @@
 #include <type_traits>
 #include <memory>
 
-#include "Util/Mixins/impl.hh"
-#include "Util/cast.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/VectorSpaces/productSpace.hh"
+#include "Algorithms/Util/Mixins/impl.hh"
+#include "Algorithms/Util/cast.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
-
-#include "VectorSpaces/productSpace.hh"
-
-#include "../../vector.hh"
-#include "../../vectorSpace.hh"
 #include "util.hh"
-
 
 namespace Algorithm
 {
   namespace Kaskade
   {
     /**
-     * @ingroup KaskadeGropu
+     * @ingroup KaskadeGroup
      * @brief Creator for vector space elements for %Kaskade 7
      * @see ::Algorithm::VectorCreator, ::Algorithm::VectorCreatorConcept
      */
@@ -50,6 +47,7 @@ namespace Algorithm
     /**
      * @ingroup KaskadeGroup
      * @brief Create single space with hilbert space structure for %Kaskade 7.
+     * @param space single %Kaskade 7 function space (no product space)
      */
     template <class Description, class Space>
     auto makeHilbertSpace(const Space& space)
@@ -60,6 +58,9 @@ namespace Algorithm
     /**
      * @ingroup KaskadeGroup
      * @brief Create product space with hilbert space structure for %Kaskade 7.
+     * @param spaces boost fusion forward sequence of const pointers to %Kaskade 7 function spaces
+     * @param primalIds ids of primal variables
+     * @param dualIds ids of dual variables
      */
     template <class Description, class Spaces>
     auto makeHilbertSpace(const Spaces& spaces, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {})
@@ -71,7 +72,6 @@ namespace Algorithm
 
       return ::Algorithm::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
     }
-
   }
 }
 

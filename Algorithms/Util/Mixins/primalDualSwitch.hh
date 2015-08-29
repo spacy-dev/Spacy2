@@ -3,8 +3,8 @@
 
 #include <atomic>
 
-#include "vector.hh"
-#include "Util/cast.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/cast.hh"
 
 namespace Algorithm
 {
@@ -51,12 +51,12 @@ namespace Algorithm
       bool isDualEnabled() const;
 
       /**
-       * @brief Disable reset.
+       * @brief Disable reset for PrimalDualSwitch.
        */
       void disableReset() const;
 
       /**
-       * @brief Enable reset.
+       * @brief Enable reset for PrimalDualSwitch.
        */
       void enableReset() const;
 

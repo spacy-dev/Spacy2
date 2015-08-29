@@ -27,7 +27,7 @@ namespace Algorithm
       void printElapsedTime() const;
 
     private:
-      mutable std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
+      mutable std::chrono::time_point<std::chrono::high_resolution_clock> startTime = {};
     };
   }
 }

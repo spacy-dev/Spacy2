@@ -3,9 +3,10 @@
 
 #include "linalg/direct.hh"
 
-#include "vector.hh"
-#include "Util/cast.hh"
-#include "Util/Base/operatorBase.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
+#include "util.hh"
 
 namespace Algorithm
 {
@@ -55,7 +56,7 @@ namespace Algorithm
 
         solver_->apply( x_ , y_ );
 
-        auto y = range().element();
+        auto y = range().vector();
         copyFromCoefficientVector<TestVariableDescription>(y_,y);
 
         return y;

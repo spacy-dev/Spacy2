@@ -1,12 +1,12 @@
 #include "vectorSpace.hh"
 
-#include "Util/Exceptions/invalidArgumentException.hh"
-#include "Util/cast.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/cast.hh"
 
-#include "vector.hh"
-#include "scalarProduct.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vector.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/scalarProduct.hh"
 
-#include "../../vectorSpace.hh"
+#include "Algorithms/vectorSpace.hh"
 
 #include <algorithm>
 

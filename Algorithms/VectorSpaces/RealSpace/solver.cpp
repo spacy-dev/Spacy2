@@ -1,8 +1,8 @@
 #include "solver.hh"
 
-#include "Util/Exceptions/invalidArgumentException.hh"
-#include "Util/cast.hh"
-#include "vector.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/VectorSpaces/RealSpace/vector.hh"
 
 namespace Algorithm
 {

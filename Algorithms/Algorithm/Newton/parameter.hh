@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_NEWTON_PARAMETER_HH
 #define ALGORITHM_NEWTON_PARAMETER_HH
 
-#include "Util/mixins.hh"
+#include "Algorithms/Util/mixins.hh"
 
 namespace Algorithm
 {

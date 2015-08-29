@@ -3,8 +3,8 @@
 
 #include <utility>
 
-#include "../../vector.hh"
-#include "Util/Base/operatorBase.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
 
 #include "directSolver.hh"
 #include "util.hh" // copy

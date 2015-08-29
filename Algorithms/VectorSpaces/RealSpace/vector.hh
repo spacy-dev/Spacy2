@@ -1,9 +1,7 @@
 #ifndef ALGORITHM_REAL_SPACE_VECTOR_HH
 #define ALGORITHM_REAL_SPACE_VECTOR_HH
 
-#include "Util/Base/vectorBase.hh"
-#include "Util/Mixins/eps.hh"
-#include "Util/Mixins/impl.hh"
+#include "Algorithms/Util/Base/vectorBase.hh"
 
 namespace Algorithm
 {

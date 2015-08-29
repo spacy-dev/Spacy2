@@ -6,8 +6,8 @@
 
 #include <dolfin.h>
 
-#include "Util/Mixins/impl.hh"
-#include "VectorSpaces/ProductSpace/vectorSpace.hh"
+#include "Algorithms/Util/Mixins/impl.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vectorSpace.hh"
 
 namespace Algorithm
 {
@@ -32,28 +32,31 @@ namespace Algorithm
        * @param space single dolfin::FunctionSpace (no product space)
        * @param dofmap map relating global ids of a product space to local ids in this single space
        */
-      VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<size_t,size_t>& dofmap);
+      VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
 
       /**
        * @brief Map global id of a product space to local id in this single space.
        * @param i global id
        * @return local id
        */
-      size_t dofmap(size_t i) const;
+      std::size_t dofmap(std::size_t i) const;
 
       /**
        * @brief Map local id this single space to the global id of a product space.
        * @param i local id
        * @return global id
        */
-      size_t inverseDofmap(size_t i) const;
+      std::size_t inverseDofmap(std::size_t i) const;
 
       /// Generate vector for FEniCS.
       ::Algorithm::Vector operator()(const VectorSpace* space) const;
 
     private:
-      std::unordered_map<size_t,size_t> dofmap_;
-      std::vector<size_t> inverseDofmap_;
+      using map = std::unordered_map<std::size_t,std::size_t>;
+      map dofmap_ = map{};
+      // the following line does not compile, why?
+      //std::unordered_map<std::size_t,std::size_t> dofmap_ = std::unordered_map<std::size_t,std::size_t>{};
+      std::vector<std::size_t> inverseDofmap_ = {};
     };
 
     /**
@@ -71,7 +74,7 @@ namespace Algorithm
      * @param dofmap map relating global ids of a product space to local ids in this single space
      * @return ::Algorithm::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} )
      */
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<size_t,size_t>& dofmap);
+    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
 
     /**
      * @ingroup FenicsGroup

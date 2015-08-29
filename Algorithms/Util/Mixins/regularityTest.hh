@@ -54,10 +54,13 @@ namespace Algorithm
        */
       void detachRegularityTest(RegularityTest& other);
 
+      /**
+       * @brief update function for observer pattern.
+       */
       void update(MixinConnection<RegularityTest>* changedSubject);
 
     private:
-      double lowerBound_ = 1e-12;
+      double lowerBound_;
     };
   }
 }

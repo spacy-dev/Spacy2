@@ -4,15 +4,15 @@
 #define HAVE_UG
 #include <dune/grid/uggrid.hh>
 
+#include <Algorithms/Adapter/kaskade.hh>
+#include <Algorithms/Algorithm/Newton/newton.hh>
+#include <Algorithms/inducedScalarProduct.hh>
+
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
 #include "fem/variables.hh"
 #include "io/vtk.hh"
 #include "utilities/gridGeneration.hh" //  createUnitSquare
-
-#include "Adapter/kaskade.hh"
-#include "Algorithm/Newton/newton.hh"
-#include "inducedScalarProduct.hh"
 
 #include "laplace.hh"
 
@@ -51,19 +51,19 @@ int main()
   Algorithm::connectPrimalDual(domain,range);
 
   auto f = Algorithm::Kaskade::makeOperator( F , domain , range );
-  domain.setScalarProduct( Algorithm::InducedScalarProduct(f.linearization(domain.element())) );
+  domain.setScalarProduct( Algorithm::InducedScalarProduct(f.linearization(domain.vector())) );
   
   auto p = Algorithm::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
-  auto sol = Algorithm::covariantNewton(f,p);
+  auto x = Algorithm::covariantNewton(f,p);
 //  auto sol = Algorithm::contravariantNewton(f,p);
 //  auto sol = Algorithm::localNewton(f,p);
 
   //construct Galerkin representation
   VariableSetDesc::VariableSet u(variableSetDesc);
-  Algorithm::Kaskade::copy(sol,u);
+  Algorithm::Kaskade::copy(x,u);
   
   writeVTKFile(gridManager.grid().leafGridView(), u ,"temperature",IoOptions(),order);
 

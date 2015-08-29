@@ -1,8 +1,9 @@
 #include "luSolver.hh"
 
+#include "Algorithms/vectorSpace.hh"
+
 #include "util.hh"
 #include "vectorSpace.hh"
-#include "../../vectorSpace.hh"
 
 namespace Algorithm
 {
@@ -45,7 +46,7 @@ namespace Algorithm
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve( *y_, *x_.vector() );
-      auto y = range().element();
+      auto y = range().vector();
 
       copy(*y_, y);
       return y;
@@ -72,7 +73,7 @@ namespace Algorithm
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve_transpose( *y_, *x_.vector() );
-      auto y = range().element();
+      auto y = range().vector();
 
       copy(*y_, y);
       return y;

@@ -1,12 +1,12 @@
 #include "util.hh"
 
-#include "Util/cast.hh"
-#include "Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/cast.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
 
-#include "../../vectorSpace.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vector.hh"
 #include "vector.hh"
 #include "vectorSpace.hh"
-#include "VectorSpaces/ProductSpace/vector.hh"
 
 #include <dolfin.h>
 

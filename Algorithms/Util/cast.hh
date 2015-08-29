@@ -3,10 +3,15 @@
 
 #include <boost/type_erasure/any_cast.hpp>
 
-#include "Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
 
 namespace Algorithm
 {
+  /**
+   * @ingroup VHatGroup
+   * @brief Check if x can be cast to a reference of type ToType.
+   * @return boost::type_erasure::any_cast< const std::decay_t<ToType>* >(&x) != nullptr
+   */
   template < class ToType , class FromType >
   bool is(const FromType& x)
   {
@@ -15,7 +20,8 @@ namespace Algorithm
 
   /**
    * @ingroup VHatGroup
-   * @brief cast x of type 'FromType&' to 'ToType&' with boost::type_erasure::any_cast.
+   * @brief cast x of type 'FromType&' to 'ToType&' with boost::type_erasure::any_cast
+   * @return boost::type_erasure::any_cast<ToType&>(x)
    */
   template <class ToType, class FromType>
   ToType& cast_ref(FromType& x)
@@ -26,7 +32,8 @@ namespace Algorithm
 
   /**
    * @ingroup VHatGroup
-   * @brief cast x of type 'const FromType&' to 'const ToType&' with boost::type_erasure::any_cast.
+   * @brief cast x of type 'const FromType&' to 'const ToType&' with boost::type_erasure::any_cast
+   * @return boost::type_erasure::any_cast<const ToType&>(x)
    */
   template <class ToType, class FromType>
   const ToType& cast_ref(const FromType& x)

@@ -6,13 +6,13 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
-#include "../../operator.hh"
-#include "../../vector.hh"
-#include "../../vectorSpace.hh"
-#include "hessian.hh"
-#include "Util/Mixins/disableAssembly.hh"
-#include "Util/Mixins/numberOfThreads.hh"
-#include "Util/Base/functionalBase.hh"
+#include "Algorithms/operator.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/hessian.hh"
+#include "Algorithms/Util/Mixins/disableAssembly.hh"
+#include "Algorithms/Util/Mixins/numberOfThreads.hh"
+#include "Algorithms/Util/Base/functionalBase.hh"
 
 #include "directSolver.hh"
 #include "vectorSpace.hh"
@@ -60,12 +60,12 @@ namespace Algorithm
        * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
        * a system of equation.
        */
-      Functional(const FunctionalDefinition& f, const VectorSpace& domain_,
+      Functional(const FunctionalDefinition& f, const VectorSpace& domain,
                  int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
                  int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
-        : FunctionalBase< Functional<FunctionalDefinition> >(domain_),
+        : FunctionalBase< Functional<FunctionalDefinition> >(domain),
           f_(f),
-          spaces_( extractSpaces<VariableSetDescription>(this->domain()) ),
+          spaces_( extractSpaces<VariableSetDescription>(domain) ),
           assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
@@ -133,7 +133,7 @@ namespace Algorithm
 
         CoefficientVector v( assembler_.rhs() );
 
-        auto y = this->domain().dualSpace().element();
+        auto y = this->domain().dualSpace().vector();
         copyFromCoefficientVector<VariableSetDescription>(v,y);
         return y;
       }
@@ -154,7 +154,7 @@ namespace Algorithm
 
         A_.apply( dx_ , y_ );
 
-        auto y = this->domain().dualSpace().element();
+        auto y = this->domain().dualSpace().vector();
         copyFromCoefficientVector<VariableSetDescription>(y_,y);
 
         return y;
@@ -266,8 +266,8 @@ namespace Algorithm
       FunctionalDefinition f_;
       Spaces spaces_;
       mutable Assembler assembler_;
-      mutable KaskadeOperator A_;
-      mutable ::Algorithm::Vector old_X_f_, old_X_df_, old_X_ddf_;
+      mutable KaskadeOperator A_ = {};
+      mutable ::Algorithm::Vector old_X_f_ = {}, old_X_df_ = {}, old_X_ddf_ = {};
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;

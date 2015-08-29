@@ -1,9 +1,9 @@
 #include "vector.hh"
 
-#include "Util/Exceptions/invalidArgumentException.hh"
-#include "Util/cast.hh"
+#include "Algorithms/Util/Exceptions/invalidArgumentException.hh"
+#include "Algorithms/Util/cast.hh"
 
-#include "vectorSpace.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vectorSpace.hh"
 
 #include <algorithm>
 #include <cassert>
@@ -12,32 +12,19 @@ namespace Algorithm
 {
   namespace ProductSpace
   {
-    namespace
-    {
-      std::vector< ::Algorithm::Vector > cloneVariables(const std::vector< ::Algorithm::Vector >& variables, const std::vector<unsigned>& ids)
-      {
-        std::vector< ::Algorithm::Vector > clonedVariables;
-
-        for( unsigned i : ids ) clonedVariables.push_back( variables[i] );
-
-        return clonedVariables;
-      }
-    }
-
-
     Vector::Vector(const VectorSpace& space)
       : VectorBase<Vector>(space)
     {
       if( isPrimalDual() )
       {
-        variables_.push_back( cast_ref<VectorCreator>(space.impl()).primalSubSpace().element() );
-        variables_.push_back( cast_ref<VectorCreator>(space.impl()).dualSubSpace().element() );
+        variables_.push_back( cast_ref<VectorCreator>(space.impl()).primalSubSpace().vector() );
+        variables_.push_back( cast_ref<VectorCreator>(space.impl()).dualSubSpace().vector() );
       }
       else
       {
         const auto& spaces = cast_ref<VectorCreator>(space.impl()).subSpaces();
         for (auto i=0u; i<spaces.size(); ++i)
-          variables_.push_back( spaces[i]->element() );
+          variables_.push_back( spaces[i]->vector() );
       }
     }
 
@@ -189,9 +176,22 @@ namespace Algorithm
 
     bool Vector::operator==(const Vector& y) const
     {
-      for( auto i=0u; i<variables_.size(); ++i )
-        if( !(variables_[i] == y.variables_[i]) ) return false;
+      if(isPrimalEnabled())
+        for( auto i : creator().primalSubSpaceIds())
+          if( !(variable(i) == y.variable(i)) )
+          {
+            reset(y);
+            return false;
+          }
+      if(isDualEnabled())
+        for( auto i : creator().dualSubSpaceIds())
+          if( !(variable(i) == y.variable(i)) )
+          {
+            reset(y);
+            return false;
+          }
 
+      reset(y);
       return true;
     }
 

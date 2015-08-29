@@ -1,8 +1,8 @@
 #ifndef ALGORITHM_INDUCED_SCALAR_PRODUCT_HH
 #define ALGORITHM_INDUCED_SCALAR_PRODUCT_HH
 
-#include "operator.hh"
-#include "vector.hh"
+#include "Algorithms/operator.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {

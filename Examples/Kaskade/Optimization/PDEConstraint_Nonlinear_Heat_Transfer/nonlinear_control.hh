@@ -21,6 +21,7 @@
 #include "fem/diffops/trackingTypeCostFunctional.hh"
 #include "fem/diffops/antonsNonlinearTestProblems.hh"
 
+/// \cond
 using namespace Kaskade;
 
 
@@ -215,5 +216,5 @@ using NormalStepFunctional = StepFunctional<stateId,controlId,adjointId,RType,An
 
 template <int stateId, int controlId, int adjointId, class RType, class AnsatzVars, class TestVars=AnsatzVars, class OriginVars=AnsatzVars>
 using TangentialStepFunctional = StepFunctional<stateId,controlId,adjointId,RType,AnsatzVars,TestVars,OriginVars,RoleOfFunctional::TANGENTIAL>;
-
+/// \endcond
 #endif

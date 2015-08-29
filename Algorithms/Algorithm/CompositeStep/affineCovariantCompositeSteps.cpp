@@ -1,16 +1,12 @@
 #include "affineCovariantCompositeSteps.hh"
 
-#include "quadraticModel.hh"
+#include "Algorithms/Algorithm/dampingFactor.hh"
+#include "Algorithms/Algorithm/CG/linearSolver.hh"
+#include "Algorithms/Algorithm/CG/triangularStateConstraintPreconditioner.hh"
+#include "Algorithms/Algorithm/CompositeStep/quadraticModel.hh"
 
-#include "inducedScalarProduct.hh"
-#include "Util/Exceptions/regularityTestFailedException.hh"
-
-#include "Algorithm/ConjugateGradients/cgSolver.hh"
-#include "Algorithm/ConjugateGradients/triangularStateConstraintPreconditioner.hh"
-#include "Algorithm/dampingFactor.hh"
-
-#include "vector.hh"
-#include "linearSolver.hh"
+#include "Algorithms/inducedScalarProduct.hh"
+#include "Algorithms/Util/Exceptions/regularityTestFailedException.hh"
 
 #include <cmath>
 #include <iostream>
@@ -29,7 +25,7 @@ namespace Algorithm
 
     Vector AffineCovariantCompositeSteps::solve()
     {
-      return solve( N_->domain().element() );
+      return solve( domain_.vector() );
     }
 
     Vector AffineCovariantCompositeSteps::solve(const Vector& x0)
@@ -53,7 +49,7 @@ namespace Algorithm
           std::cout << spacing << "Computing normal damping factor" << std::endl;
         }
         double nu = computeNormalStepDampingFactor(norm_Dn);
-        if( verbose_detailed() ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << std::endl;
 
         if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
         dual(x) += computeLagrangeMultiplier(x);
@@ -81,7 +77,7 @@ namespace Algorithm
 
         if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
         if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
-        if( verbose_detailed() ) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
+        if( verbosityLevel() > 1) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
       } // end iteration
 
       return x;
@@ -96,7 +92,7 @@ namespace Algorithm
       return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
     }
 
-    std::unique_ptr<GeneralLinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
+    std::unique_ptr<IndefiniteLinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
     {
       auto trcgRelativeAccuracy = minimalAccuracy();
       if( tangentialSolver != nullptr && nu == 1 && lastStepWasUndamped )
@@ -104,7 +100,7 @@ namespace Algorithm
         trcgRelativeAccuracy = std::max( relativeAccuracy() , std::min( minimalAccuracy() , omegaL * norm_dx_old ) );
         if( norm_dx_old > 0 && lastStepWasUndamped )
           trcgRelativeAccuracy = std::min( std::max( relativeAccuracy()/norm_dx_old , trcgRelativeAccuracy ) , minimalAccuracy() );
-        if( verbose_detailed() )
+        if( verbosityLevel() > 1 )
         {
           std::cout << spacing2 << "relative accuracy = " << trcgRelativeAccuracy << std::endl;
           std::cout << spacing2 << "absolute step length accuracy = " << relativeAccuracy()*norm(x) << std::endl;
@@ -114,7 +110,7 @@ namespace Algorithm
       auto setParams = [this,&x](auto& solver)
       {
         solver.setIterativeRefinements(iterativeRefinements());
-        solver.setDetailedVerbosity(verbose_detailed());
+        solver.setVerbosityLevel( verbosityLevel() );
         if( norm(primal(x)) > 0)
           solver.setAbsoluteAccuracy( relativeAccuracy()*norm(primal(x)) );
         else
@@ -124,15 +120,15 @@ namespace Algorithm
 
   //    std::unique_ptr<CGSolver> trcg = nullptr;
 
-      if( is<CGSolver>(*normalSolver) )
+      if( is<CG::LinearSolver>(*normalSolver) )
       {
-        const auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
-        if( is<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+        const auto& cgSolver = cast_ref<CG::LinearSolver>(*normalSolver);
+        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
           auto trcg =  makeTRCGSolver( L_->hessian(x) , cgSolver.P() ,
                                        trcgRelativeAccuracy , eps() , verbose() );
           setParams(trcg);
-          return std::make_unique<GeneralLinearSolver>(trcg);
+          return std::make_unique<IndefiniteLinearSolver>(trcg);
         }
       }
 
@@ -147,9 +143,9 @@ namespace Algorithm
   //      trcg.setAbsoluteAccuracy( eps() );
   //    trcg.setMaxSteps(maxSteps());
        setParams(trcg);
-      return std::make_unique<GeneralLinearSolver>(trcg);
+      return std::make_unique<IndefiniteLinearSolver>(trcg);
       //return std::move(trcg);
-  //    return std::unique_ptr<GeneralLinearSolver>( trcg.release() );
+  //    return std::unique_ptr<IndefiniteLinearSolver>( trcg.release() );
     }
 
     Vector AffineCovariantCompositeSteps::computeNormalStep(const Vector &x) const
@@ -170,18 +166,18 @@ namespace Algorithm
     {
       auto rhs = dual(-L_->d1(x));
       Vector dn0 = 0*x;
-      if( is<CGSolver>(*normalSolver) )
+      if( is<CG::LinearSolver>(*normalSolver) )
       {
-        auto& cgSolver = cast_ref<CGSolver>(*normalSolver);
+        auto& cgSolver = cast_ref<CG::LinearSolver>(*normalSolver);
         cgSolver.setEps(eps());
         cgSolver.setRelativeAccuracy(eps());
         cgSolver.setVerbosity(verbose());
-        cgSolver.setDetailedVerbosity(verbose_detailed());
+        cgSolver.setVerbosityLevel(verbosityLevel());
         cgSolver.setIterativeRefinements(iterativeRefinements());
         cgSolver.setMaxSteps(maxSteps());
-        if( is<TriangularStateConstraintPreconditioner>(cgSolver.P()))
+        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
-          const auto& P = cast_ref<TriangularStateConstraintPreconditioner>(cgSolver.P());
+          const auto& P = cast_ref<CG::TriangularStateConstraintPreconditioner>(cgSolver.P());
           dn0 = P.kernelOffset(rhs);
           rhs -= cgSolver.A()( dn0 );
         }
@@ -200,7 +196,7 @@ namespace Algorithm
                                                         const Vector& x, const Vector& Dn, const Vector& Dt)
     {
       auto norm_Dt = norm(Dt);
-      if( verbose_detailed() ) std::cout << spacing2 << "|Dt| = " << norm_Dt << std::endl;
+      if( verbosityLevel() > 1 ) std::cout << spacing2 << "|Dt| = " << norm_Dt << std::endl;
       auto cubic = CompositeStep::makeCubicModel( nu, Dn, Dt , *L_ , x , omegaL );
       auto tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubic);
 
@@ -215,22 +211,22 @@ namespace Algorithm
       {
         if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) nu *= 0.5;
         else nu = computeNormalStepDampingFactor(norm_Dn);
-        if( verbose_detailed() ) std::cout << spacing2 << "nu = " << nu << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "nu = " << nu << std::endl;
 
         auto quadraticModel = CompositeStep::makeQuadraticModel(nu,Dn,Dt,*L_,x);
         auto cubicModel = CompositeStep::makeCubicModel(nu, Dn, Dt, *L_, x, omegaL);
 
         if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) tau *= 0.5;
         else tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubicModel);
-        if( verbose_detailed() ) std::cout << spacing2 << "tau = " << tau << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "tau = " << tau << std::endl;
         auto q_tau = quadraticModel(tau);
 
         dx = primal(nu*Dn) + primal(tau*Dt);
         norm_dx = norm(primal(dx));
-        if( verbose_detailed() ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
         auto trial = x + dx;
 
-        if( !domain_.isAdmissible(trial) ) acceptanceTest == AcceptanceTest::LeftAdmissibleDomain;
+        if( !domain_.isAdmissible(trial) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
         else
         {
           if( verbose() ) std::cout << spacing << "Computing simplified normal correction." << std::endl;
@@ -240,7 +236,7 @@ namespace Algorithm
           updateOmegaC(norm_x, norm_dx, norm(ds));
           eta = updateOmegaL(trial + ds,q_tau,tau,norm_x,norm_dx,cubicModel);
 
-          if( verbose_detailed() ) std::cout << spacing2 << "|ds| = " << norm(ds) << std::endl;
+          if( verbosityLevel() > 1 ) std::cout << spacing2 << "|ds| = " << norm(ds) << std::endl;
         }
 
         regularityTest(nu,tau);
@@ -250,12 +246,12 @@ namespace Algorithm
 
         if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin)) * omegaL.previous() )
         {
-          if( verbose_detailed() ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
+          if( verbosityLevel() > 1 ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
           acceptanceTest = AcceptanceTest::Passed;
 
           if( eta < rejectionTolerance)
           {
-            if( verbose_detailed() ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
+            if( verbosityLevel() > 1 ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
             trial -= tau*Dt;
             dx -= tau*Dt;
             norm_dx = norm(dx);
@@ -267,7 +263,7 @@ namespace Algorithm
           norm_dx_old = norm_dx;
         }
 
-        if( verbose_detailed() )
+        if( verbosityLevel() > 1 )
         {
           if( acceptanceTest == AcceptanceTest::Failed ) std::cout << spacing2 << "Acceptance test failed." << std::endl;
           if( acceptanceTest == AcceptanceTest::NormalStepFailed ) std::cout << spacing2 << "Acceptance test normal step failed." << std::endl;
@@ -310,7 +306,7 @@ namespace Algorithm
       if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*contraction()/norm_dx )
         omegaC = 2*contraction()/norm_dx;
 
-      if( verbose_detailed() ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
+      if( verbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
     }
 
     double AffineCovariantCompositeSteps::updateOmegaL(const Vector& soc, double q_tau,
@@ -327,7 +323,7 @@ namespace Algorithm
           omegaL < ((*L_)(primal(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx) )
         omegaL = ((*L_)(primal(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
 
-      if( verbose_detailed())
+      if( verbosityLevel() > 1 )
       {
         std::cout << spacing2 << "predicted decrease: " << (cubic(tau)-cubic(0)) << std::endl;
         std::cout << spacing2 << "actual decrease: " << ( (*L_)(primal(soc)) - cubic(0) ) << std::endl;
@@ -367,14 +363,14 @@ namespace Algorithm
 
       if( L_ != nullptr && eta < etaMin )
       {
-        if( verbose_detailed() ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
         tangentialStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::TangentialStepFailed;
       }
 
       if( N_ != nullptr && !admissibleContraction() )
       {
-        if( verbose_detailed() ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
+        if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
         normalStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::NormalStepFailed;
       }
@@ -384,8 +380,8 @@ namespace Algorithm
 
     void AffineCovariantCompositeSteps::regularityTest(double nu, double tau) const
     {
-      if( !regularityTestPassed(nu) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::solve (nu)",nu);
-      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::solve (tau)",tau);
+      if( !regularityTestPassed(nu) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::regularityTest (nu,...)",nu);
+      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::regularityTest (...,tau)",tau);
     }
   }
 }

@@ -3,14 +3,17 @@
 
 #include <dolfin.h>
 
-#include "../../vector.hh"
-#include "vectorSpace.hh"
-#include "Util/Base/vectorBase.hh"
-#include "Util/Mixins/impl.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/vectorBase.hh"
+#include "Algorithms/Util/Mixins/impl.hh"
 
 
 namespace Algorithm
 {
+  /// @cond
+  class VectorSpace;
+  /// @endcond
+
   namespace Fenics
   {
     /**

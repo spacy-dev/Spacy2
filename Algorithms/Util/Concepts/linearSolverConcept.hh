@@ -13,7 +13,8 @@ namespace Algorithm
   {
     /**
      * @ingroup ConceptGroup
-     * @brief Concept for linear solver implementations. Same as CallableOperatorConcept.
+     * @anchor LinearSolverConceptAnchor
+     * @brief Concept for linear solver implementations. Same as @ref CallableOperatorConceptAnchor "CallableOperatorConcept".
      *
      * The minimal signature of a linear solver is:
      * @code
@@ -32,7 +33,7 @@ namespace Algorithm
      * };
      * @endcode
      *
-     * @see ::Algorithm::LinearSolver, CallableOperatorConcept
+     * See @ref LinearSolverAnchor "::Algorithm::LinearSolver", @ref CallableOperatorConceptAnchor "CallableOperatorConcept"
      */
     using LinearSolverConcept =
     boost::mpl::vector<
@@ -43,19 +44,20 @@ namespace Algorithm
 
     /**
      * @ingroup ConceptGroup
+     * @anchor IndefiniteLinearSolverConceptAnchor
      * @brief Concept for linear solver implementations that monitor positive definiteness.
      *
      * The minimal signature of a general linear solver is:
      * @code
      * // My general linear solver S representing A^-1.
-     * class MyGeneralLinearSolver
+     * class MyIndefiniteLinearSolver
      * {
      * public:
      *   // Copy constructor.
-     *   MyGeneralLinearSolver(const MyGeneralLinearSolver&);
+     *   MyIndefiniteLinearSolver(const MyIndefiniteLinearSolver&);
      *
      *   // Move constructor.
-     *   MyGeneralLinearSolver(MyGeneralLinearSolver&&);
+     *   MyIndefiniteLinearSolver(MyIndefiniteLinearSolver&&);
      *
      *   // Compute A^-1(x).
      *   ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
@@ -65,9 +67,9 @@ namespace Algorithm
      * };
      * @endcode
      *
-     * @see ::Algorithm::GeneralLinearSolver
+     * See @ref IndefiniteLinearSolverAnchor "::Algorithm::IndefiniteLinearSolver".
      */
-    using GeneralLinearSolverConcept =
+    using IndefiniteLinearSolverConcept =
     boost::mpl::vector<
       LinearSolverConcept ,
       has_isPositiveDefinite<bool(), const boost::type_erasure::_self>

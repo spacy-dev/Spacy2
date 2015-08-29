@@ -1,11 +1,12 @@
 #include <chrono>
 
 #include <dolfin.h>
+
+#include <Algorithms/Adapter/fenics.hh>
+#include <Algorithms/Algorithm/CompositeStep/affineCovariantCompositeSteps.hh>
+
 #include "NormalStep.h"
 #include "LagrangeFunctional.h"
-
-#include "Adapter/fenics.hh"
-#include "Algorithm/CompositeStep/affineCovariantCompositeSteps.hh"
 
 using namespace dolfin;
 using namespace std::chrono;
@@ -42,7 +43,6 @@ int main()
   LagrangeFunctional::LinearForm J(V);
   LagrangeFunctional::BilinearForm H(V,V);
   NormalStep::BilinearForm Norm(V,V);
-  std::vector<const DirichletBC*> bcs = {};
   
   Function dummy(V);
   Source y_ref;
@@ -71,15 +71,15 @@ int main()
   auto productSpace = Fenics::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
   
   // functionals
-  auto lagrangeFunctional = Fenics::makeFunctional( f , J , H , bcs , productSpace );
-  auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , bcs , productSpace );
+  auto lagrangeFunctional = Fenics::makeFunctional( f , J , H , productSpace );
+  auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , productSpace );
 
   // composite step solve
   CompositeStep::AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
   alg_cs.setRelativeAccuracy(1e-9);
   alg_cs.setEps(1e-12);
   alg_cs.setMaxSteps(500);
-  alg_cs.setVerbosity(true);
+  alg_cs.setVerbosityLevel(1);
   alg_cs.setIterativeRefinements(0);
 
   // solve problem

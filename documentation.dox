@@ -1,6 +1,5 @@
 #error Documentation only.
 
-
 /**
  * @defgroup VHatGroup VHat
  */
@@ -13,37 +12,41 @@
  * Contains models for one-dimensional and product spaces as well as vector spaces for FEnics and Kaskade 7.
  */
 
-    /**
-     * @defgroup RealGroup Real Space
-     * @ingroup VectorSpaceGroup
-     * @brief A one-dimensional vector space.
-     */
+  /**
+    * @defgroup RealGroup Real Space
+    * @ingroup VectorSpaceGroup
+    * @brief A one-dimensional vector space.
+    */
 
-    /**
-     * @defgroup ProductSpaceGroup Product Space
-     * @ingroup VectorSpaceGroup
-     * @brief A product space that supports distinction between primal and dual variables.
-     */
+  /**
+    * @defgroup ProductSpaceGroup Product Space
+    * @ingroup VectorSpaceGroup
+    * @brief A product space that supports distinction between primal and dual variables.
+    */
 
-    /**
-     * @defgroup FenicsGroup Vector Space for FEniCS
-     * @ingroup VectorSpaceGroup
-     * @brief Vector spaces, functionals and operators for FEniCS.
-     */
+  /**
+    * @defgroup FenicsGroup Vector Space for FEniCS
+    * @ingroup VectorSpaceGroup
+    * @brief Vector spaces, functionals and operators for FEniCS.
+    */
 
-     
-    /**
-     * @defgroup KaskadeGroup Vector Space for Kaskade 7
-     * @ingroup VectorSpaceGroup
-     * @brief Vector spaces, functionals and operators for Kaskade 7.
-     */
+    
+  /**
+    * @defgroup KaskadeGroup Vector Space for Kaskade 7
+    * @ingroup VectorSpaceGroup
+    * @brief Vector spaces, functionals and operators for Kaskade 7.
+    */
      
 /**
  * @defgroup MixinGroup Mixins
  * @brief Components that are frequently used and can be added to your classes via (multiple) inheritance.
  */
 
-
+/**
+ * @defgroup ExceptionGroup Exceptions
+ * @brief Some simple exceptions.
+ * @todo improve
+ */
 
 /**
  * @defgroup AlgorithmGroup Algorithms
@@ -54,22 +57,22 @@
  */
  
   /**
-   * @defgroup NewtonGroup Newton Methods.
+   * @defgroup NewtonGroup Newton Methods
    * @ingroup AlgorithmGroup
    * @brief Newton methods, largely following P. Deuflhard: Newton Methods for Nonlinear Problems.
    */
  
- /**
-  * @defgroup CGGroup Conjugate Gradient Methods
-  * @ingroup AlgorithmGroup
-  * @brief Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Truncated Regularized CG).
-  */ 
+  /**
+   * @defgroup CGGroup Conjugate Gradient Methods
+   * @ingroup AlgorithmGroup
+   * @brief Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Truncated Regularized CG).
+   */ 
 
-   /**
-  * @defgroup CSGroup Composite Step Methods
-  * @ingroup AlgorithmGroup
-  * @brief Currently only contains the affine covariant composite step method of L. Lubkoll, A. Schiela, M. Weiser: An affine covariant composite step method for optimization with PDEs as equality constraints.
-  */ 
+  /**
+   * @defgroup CSGroup Composite Step Methods
+   * @ingroup AlgorithmGroup
+   * @brief Currently only contains the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
+   */ 
   
 /**
  * @defgroup ConceptGroup Concepts
@@ -77,7 +80,18 @@
  * 
  * The concepts are employed with Boost.TypeErasure, i.e. VectorConcept yields the type boost::type_erasure::any<VectorConcept>.
  */
-
+ 
+  /**
+   * @defgroup NewtonConceptGroup Concepts for Newton's method
+   * @ingroup ConceptGroup
+   * @brief Concepts for damping strategy and termination criteria for Newton's method.
+   */
+   
+  /**
+   * @defgroup CGConceptGroup Concepts for conjugate gradient methods
+   * @ingroup ConceptGroup
+   * @brief Concept for termination criteria for conjugate gradient methods.
+   */
 
   /**
    * \namespace VHat

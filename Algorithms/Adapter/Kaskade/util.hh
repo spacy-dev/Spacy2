@@ -3,11 +3,14 @@
 
 #include <memory>
 #include <type_traits>
-#include <vector.hh>
+#include <vector>
 
-#include "../../vectorSpace.hh"
-#include "VectorSpaces/productSpace.hh"
+#include "fem/variables.hh"
+
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/VectorSpaces/productSpace.hh"
 #include "l2Product.hh"
+#include "vector.hh"
 
 namespace Algorithm
 {
@@ -261,7 +264,7 @@ namespace Algorithm
 
     /**
      * @ingroup KaskadeGroup
-     * @brief Copy from ::Algorithm::Vector to ::Kaskade::VariableSet<Description>.
+     * @brief Copy from \ref VectorAnchor "::Algorithm::Vector" to ::Kaskade::VariableSet<Description>.
      *
      * Takes into account product space structures.
      */
@@ -273,7 +276,7 @@ namespace Algorithm
 
     /**
      * @ingroup KaskadeGroup
-     * @brief Copy from ::Algorithm::Vector to coefficient vector of Kaskade 7.
+     * @brief Copy from \ref VectorAnchor "::Algorithm::Vector" to coefficient vector of Kaskade 7.
      *
      * Takes into account product space structures.
      */
@@ -285,7 +288,7 @@ namespace Algorithm
 
     /**
      * @ingroup KaskadeGroup
-     * @brief Copy coefficient vector of Kaskade 7 to ::Algorithm::Vector.
+     * @brief Copy coefficient vector of Kaskade 7 to \ref VectorAnchor "::Algorithm::Vector".
      *
      * Takes into account product space structures.
      */

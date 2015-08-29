@@ -3,10 +3,10 @@
 
 #include <string>
 
-#include "linearSolver.hh"
-#include "Algorithm/ConjugateGradients/cgSolver.hh"
-#include "Algorithm/ConjugateGradients/triangularStateConstraintPreconditioner.hh"
-#include "Util/mixins.hh"
+#include "Algorithms/linearSolver.hh"
+#include "Algorithms/Algorithm/CG/linearSolver.hh"
+#include "Algorithms/Algorithm/CG/triangularStateConstraintPreconditioner.hh"
+#include "Algorithms/Util/mixins.hh"
 
 #include "linearOperator.hh"
 #include "util.hh"
@@ -19,8 +19,25 @@ namespace Algorithm
 
     namespace Lagrange
     {
+      /**
+       * @ingroup KaskadeGroup
+       * @brief Creator for conjugate gradient solver for optimal control problems with a CG::TriangularStateConstraintPreconditioner.
+       *
+       * Solve a system of the form
+       * \f[ A = \left( \begin{array}{ccc} L_{yy} & L_{yu}  & A^T \\ L_{uy} & L_{uu} & B^T \\ A & B &  \end{array} \right)\f],
+       * with preconditioner
+       * \f[ P = \left( \begin{array}{ccc}  &  & A^{-T} \\  & L_{uu}^{-1} & -B^T \\ A^{-1} & -B &  \end{array} \right)\f],
+       * where \f$A\f$ is the state operator, \f$B\f$ the control operator and \f$L_{uu}\f$ is the second derivative of the Lagrange functional
+       * with respect to the control variable \f$u\f$. The state variable is denoted by \f$y\f$ and the adjoint variable by\f$p\f$.
+       *
+       * @tparam FunctionalDefinition definition of the Lagrange functional from Kaskade
+       * @tparam stateId index of the state variable
+       * @tparam controlId index of the control variable
+       * @tparam adjointId index of the adjoint variable
+       * @see CG::Solver
+       */
       template <class FunctionalDefinition, int stateId=0, int controlId=1, int adjointId=2>
-      class CGSolver :
+      class CGCreator :
           public Mixin::AbsoluteAccuracy ,
           public Mixin::RelativeAccuracy ,
           public Mixin::Eps ,
@@ -28,67 +45,78 @@ namespace Algorithm
           public Mixin::MaxSteps ,
           public Mixin::Verbosity
       {
+        using KaskadeOperator = typename Functional<FunctionalDefinition>::KaskadeOperator;
+        using Matrix = typename  Functional<FunctionalDefinition>::Matrix;
+        using VariableSetDescription = typename Functional<FunctionalDefinition>::VariableSetDescription;
+        template <class X, class Y>
+        using M = ::Kaskade::MatrixRepresentedOperator<Matrix,X,Y>;
       public:
-        explicit CGSolver(std::string solver = "CG")
+        /**
+         * @brief Constructor.
+         * @param solver solver type ("CG", "RCG", "TCG", "RTCG").
+         * @see CG::Solver
+         */
+        explicit CGCreator(std::string solver = "CG")
          : solver_(solver)
         {}
 
-        LinearSolver operator()(const Functional<FunctionalDefinition>& f)
+        /// Create conjugate gradient solver with triangular state constraint preconditioner for \f$L''\f$.
+        LinearSolver operator()(const Functional<FunctionalDefinition>& L) const
         {
-          using KaskadeOperator = typename Functional<FunctionalDefinition>::KaskadeOperator;
-          using Matrix = typename  Functional<FunctionalDefinition>::Matrix;
-          using VariableSetDescription = typename Functional<FunctionalDefinition>::VariableSetDescription;
-          auto matA = f.assembler().template get<Matrix>(f.onlyLowerTriangle(),adjointId,adjointId+1,stateId,stateId+1);
-          auto matB = f.assembler().template get<Matrix>(f.onlyLowerTriangle(),adjointId,adjointId+1,controlId,controlId+1);
-          auto matM = f.assembler().template get<Matrix>(f.onlyLowerTriangle(),controlId,controlId+1,controlId,controlId+1);
+          auto matA = L.assembler().template get<Matrix>(L.onlyLowerTriangle(),adjointId,adjointId+1,stateId,stateId+1);
+          auto matB = L.assembler().template get<Matrix>(L.onlyLowerTriangle(),adjointId,adjointId+1,controlId,controlId+1);
+          auto matM = L.assembler().template get<Matrix>(L.onlyLowerTriangle(),controlId,controlId+1,controlId,controlId+1);
           auto matAt = matA; matAt.transpose();
           auto matBt = matB; matBt.transpose();
-
 
           using VYSetDescription = Detail::ExtractDescription_t<VariableSetDescription,stateId>;
           using VUSetDescription = Detail::ExtractDescription_t<VariableSetDescription,controlId>;
           using VPSetDescription = Detail::ExtractDescription_t<VariableSetDescription,adjointId>;
-          using Domain0 = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
-          using KaskadeOperator2 = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain0,Domain0>;
-          auto stateSolver = DirectSolver<KaskadeOperator2,VPSetDescription,VYSetDescription>( KaskadeOperator2(matA), f.spaces(),
-                                                                              cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(adjointId),
-                                                                              cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(stateId).dualSpace() );
-          auto controlSolver = DirectSolver<KaskadeOperator2,VUSetDescription,VUSetDescription>( KaskadeOperator2(matM), f.spaces(),
-                                                                                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(controlId),
-                                                                                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(controlId).dualSpace() );
-          auto adjointSolver = DirectSolver<KaskadeOperator2,VYSetDescription,VPSetDescription>( KaskadeOperator2(matAt), f.spaces(),
-                                                                                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(stateId),
-                                                                                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(adjointId).dualSpace() );
+          using DomainY = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
+          using DomainU = typename VUSetDescription::template CoefficientVectorRepresentation<>::type;
+          using DomainP = typename VPSetDescription::template CoefficientVectorRepresentation<>::type;
 
-          auto B = Kaskade::LinearOperator<KaskadeOperator2,VUSetDescription,VPSetDescription>
-              ( KaskadeOperator2(matB) ,
-                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(controlId) ,
-                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(adjointId).dualSpace() );
-          auto Bt = Kaskade::LinearOperator<KaskadeOperator2,VPSetDescription,VUSetDescription>
-              ( KaskadeOperator2(matBt) ,
-                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(adjointId) ,
-                cast_ref<ProductSpace::VectorCreator>(f.domain().impl()).subSpace(controlId).dualSpace() );
+          auto stateSolver   = DirectSolver<M<DomainY,DomainP>,VPSetDescription,VYSetDescription>
+              ( M<DomainY,DomainP>(matA), L.spaces(),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(adjointId),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(stateId).dualSpace() );
+          auto controlSolver = DirectSolver<M<DomainU,DomainU>,VUSetDescription,VUSetDescription>
+              ( M<DomainU,DomainU>(matM), L.spaces(),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(controlId),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(controlId).dualSpace() );
+          auto adjointSolver = DirectSolver<M<DomainP,DomainY>,VYSetDescription,VPSetDescription>
+              ( M<DomainP,DomainY>(matAt), L.spaces(),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(stateId),
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(adjointId).dualSpace() );
 
-          auto P = TriangularStateConstraintPreconditioner
+          auto B = Kaskade::LinearOperator<M<DomainU,DomainP>,VUSetDescription,VPSetDescription>
+              ( M<DomainU,DomainP>(matB) ,
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(controlId) ,
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(adjointId).dualSpace() );
+          auto Bt = Kaskade::LinearOperator<M<DomainP,DomainU>,VPSetDescription,VUSetDescription>
+              ( M<DomainP,DomainU>(matBt) ,
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(adjointId) ,
+                cast_ref<ProductSpace::VectorCreator>(L.domain().impl()).subSpace(controlId).dualSpace() );
+
+          auto P = CG::TriangularStateConstraintPreconditioner
               ( std::move(stateSolver) ,
                 std::move(controlSolver) ,
                 std::move(adjointSolver) ,
                 std::move(B),
                 std::move(Bt),
-                f.domain().dualSpace() , f.domain() );
+                L.domain().dualSpace() , L.domain() );
 
           P.setStateIndex(stateId);
           P.setControlIndex(controlId);
           P.setAdjointIndex(adjointId);
 
-          auto A = Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription>( f.A() , f.domain() , f.domain().dualSpace() );
+          auto A = Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription>( L.A() , L.domain() , L.domain().dualSpace() );
 
-          auto solver = ::Algorithm::CGSolver(A, P, solver_);
+          auto solver = ::Algorithm::CG::Solver(A, P, solver_);
           solver.setAbsoluteAccuracy(absoluteAccuracy());
           solver.setRelativeAccuracy(relativeAccuracy());
           solver.setEps(eps());
-          solver.setVerbosity(verbose());
-          solver.setDetailedVerbosity(verbose_detailed());
+          solver.setVerbosityLevel(verbosityLevel());
           solver.setIterativeRefinements(iterativeRefinements());
           solver.setMaxSteps(maxSteps());
 

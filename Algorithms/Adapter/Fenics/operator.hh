@@ -5,10 +5,10 @@
 
 #include <dolfin.h>
 
-#include "linearizedOperator.hh"
-#include "../../vectorSpace.hh"
-#include "Util/Mixins/disableAssembly.hh"
-#include "Util/Base/operatorBase.hh"
+#include "Algorithms/linearizedOperator.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/Util/Mixins/disableAssembly.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
 
 #include "luSolver.hh"
 #include "util.hh"
@@ -21,7 +21,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Operator interface for FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
-     *
+     * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
      * @see C1Operator, C1OperatorConcept
      */
     template <class ResidualForm, class JacobianForm>
@@ -129,7 +129,7 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
-        auto y = range().element();
+        auto y = range().vector();
         copy(*b_,y);
         return std::move(y);
       }
@@ -146,7 +146,7 @@ namespace Algorithm
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
 
-        auto y = range().element();
+        auto y = range().vector();
         copy(*y_,y);
 
         return std::move(y);
@@ -174,7 +174,7 @@ namespace Algorithm
 
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
-        Assign_X_If_Present<decltype(F_)>::apply(F_,x_);
+        assign_x_if_present(F_,x_);
         b_ = x_.vector()->factory().create_vector();
 
         dolfin::Assembler assembler;
@@ -194,7 +194,7 @@ namespace Algorithm
 
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
-        Assign_X_If_Present<decltype(J_)>::apply(J_,x_);
+        assign_x_if_present(J_,x_);
         A_ = x_.vector()->factory().create_matrix();
 
         dolfin::Assembler assembler;
@@ -208,10 +208,10 @@ namespace Algorithm
 
       mutable ResidualForm F_;
       mutable JacobianForm J_;
-      std::vector<const dolfin::DirichletBC*> bcs_;
+      std::vector<const dolfin::DirichletBC*> bcs_ = {};
       mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-      mutable ::Algorithm::Vector oldX_F, oldX_J;
+      mutable ::Algorithm::Vector oldX_F = {}, oldX_J = {};
     };
 
 

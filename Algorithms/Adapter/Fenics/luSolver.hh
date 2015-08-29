@@ -6,9 +6,9 @@
 
 #include <dolfin.h>
 
-#include "../../vector.hh"
-#include "Util/Base/operatorBase.hh"
-#include "Util/Exceptions/callOfUndefinedFunctionException.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
+#include "Algorithms/Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 namespace Algorithm
 {

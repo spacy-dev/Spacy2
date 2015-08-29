@@ -48,7 +48,7 @@ namespace Algorithm
       void update(StateIndex* changedSubject);
 
     private:
-      unsigned index_ = 0;
+      unsigned index_;
     };
   }
 }

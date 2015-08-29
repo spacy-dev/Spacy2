@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_ADAPTER_FENICS_L2_PRODUCT_HH
 #define ALGORITHM_ADAPTER_FENICS_L2_PRODUCT_HH
 
-#include "../../vector.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {

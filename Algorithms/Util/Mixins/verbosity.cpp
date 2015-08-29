@@ -4,36 +4,46 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    Verbosity::Verbosity(bool verbose) noexcept
-      : verbose_(verbose)
+    Verbosity::Verbosity(unsigned verbosityLevel) noexcept
+      : verbosityLevel_(verbosityLevel)
     {}
 
     void Verbosity::setVerbosity(bool verbose)
     {
-      verbose_ = verbose;
+      verbosityLevel_ = 1;
       notify();
     }
 
-    void Verbosity::setDetailedVerbosity(bool verbose)
-    {
-      verbose_detailed_ = verbose;
-      notify();
-    }
+//    void Verbosity::setDetailedVerbosity(bool verbose)
+//    {
+//      verbosityLevel_ = 2;
+//      notify();
+//    }
 
     bool Verbosity::verbose() const noexcept
     {
-      return verbose_;
+      return verbosityLevel_ > 0;
     }
 
-    bool Verbosity::verbose_detailed() const noexcept
+//    bool Verbosity::verbose_detailed() const noexcept
+//    {
+//      return verbosityLevel_ > 1;
+//    }
+
+    void Verbosity::setVerbosityLevel(unsigned level) noexcept
     {
-      return verbose_detailed_;
+      verbosityLevel_ = level;
+      notify();
+    }
+
+    unsigned Verbosity::verbosityLevel() const noexcept
+    {
+      return verbosityLevel_;
     }
 
     void Verbosity::update(Verbosity* changedSubject)
     {
-      setVerbosity( changedSubject->verbose() );
-      setDetailedVerbosity( changedSubject->verbose_detailed() );
+      setVerbosityLevel( changedSubject->verbosityLevel() );
     }
 
     void Verbosity::attachVerbosity(Verbosity& other)

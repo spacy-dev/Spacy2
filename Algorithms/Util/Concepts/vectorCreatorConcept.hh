@@ -18,7 +18,7 @@ namespace Algorithm
      * @ingroup ConceptGroup
      * @anchor VectorCreatorConceptAnchor
      * @brief Vector creator concept.
-     * @see \ref VectorSpaceAnchor "VectorSpace", \ref VectorCreatorAnchor "VectorCreator".
+     * @see VectorSpace, \ref VectorCreatorAnchor "VectorCreator".
      */
     using VectorCreatorConcept =
     boost::mpl::vector<

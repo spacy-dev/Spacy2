@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_REAL_SPACE_SOLVER_HH
 #define ALGORITHM_REAL_SPACE_SOLVER_HH
 
-#include "../../vector.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {

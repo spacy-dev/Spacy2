@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_ADAPTER_FENICS_UTIL_HH
 #define ALGORITHM_ADAPTER_FENICS_UTIL_HH
 
-#include "../../vector.hh"
+#include "Algorithms/vector.hh"
 
 /// \cond
 namespace dolfin
@@ -29,7 +29,7 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from ::Algorithm::Vector to dolfin::GenericVector.
+     * @brief Copy from \ref VectorAnchor "::Algorithm::Vector" to dolfin::GenericVector.
      *
      * Does consider product space structures.
      * @see ProductSpace
@@ -38,7 +38,7 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from ::Algorithm::Vector to dolfin::Function.
+     * @brief Copy from \ref VectorAnchor "::Algorithm::Vector" to dolfin::Function.
      *
      * Does consider product space structures.
      * @see ProductSpace
@@ -47,18 +47,18 @@ namespace Algorithm
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from dolfin::GenericVector to ::Algorithm::Vector.
+     * @brief Copy from dolfin::GenericVector to \ref VectorAnchor "::Algorithm::Vector".
      *
      * Does consider product space structures.
-     * @see ProductSpace
+     * @see ProductSpaceGroup
      */
     void copy(const dolfin::GenericVector& y, ::Algorithm::Vector& x);
 
     /**
-     * @brief Copy from dolfin::Function to ::Algorithm::Vector.
+     * @brief Copy from dolfin::Function to \ref VectorAnchor "::Algorithm::Vector".
      *
      * Does consider product space structures.
-     * @see ProductSpace
+     * @see ProductSpaceGroup
      */
     void copy(const dolfin::Function& y, ::Algorithm::Vector& x);
   }

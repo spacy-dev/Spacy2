@@ -1,10 +1,10 @@
 #ifndef ALGORITHM_LINEARIZED_OPERATOR_HH
 #define ALGORITHM_LINEARIZED_OPERATOR_HH
 
-#include "linearSolver.hh"
-#include "operator.hh"
-#include "vector.hh"
-#include "Util/Base/operatorBase.hh"
+#include "Algorithms/linearSolver.hh"
+#include "Algorithms/operator.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Base/operatorBase.hh"
 
 namespace Algorithm
 {
@@ -42,7 +42,7 @@ namespace Algorithm
   private:
     C1Operator A_;
     Vector x_;
-    LinearSolver solver_;
+    LinearSolver solver_ = {};
   };
 }
 

@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_FUNCTIONAL_BASE_HH
 #define ALGORITHM_FUNCTIONAL_BASE_HH
 
-#include "vector.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {

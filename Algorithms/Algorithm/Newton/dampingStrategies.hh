@@ -1,42 +1,43 @@
 #ifndef ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 #define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
 
-#include "linearSolver.hh"
-#include "operator.hh"
-#include "vector.hh"
-#include "Algorithm/dampingFactor.hh"
-#include "Util/Mixins/eps.hh"
-#include "Util/Mixins/regularityTest.hh"
+#include <boost/type_erasure/any.hpp>
+
+#include "Algorithms/linearSolver.hh"
+#include "Algorithms/operator.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Algorithm/dampingFactor.hh"
+#include "Algorithms/Util/Mixins/eps.hh"
+#include "Algorithms/Util/Mixins/regularityTest.hh"
+#include "Algorithms/Util/Concepts/Newton/dampingStrategyConcept.hh"
 
 namespace Algorithm
 {
   namespace Newton
   {
-    namespace DampingStrategy
+    /**
+     * \brief Damping strategies for newton methods.
+     * \anchor Newton_DampingStrategyAnchor
+     * See \ref Newton_DampingStrategyConceptAnchor "DampingStrategyConcept".
+     */
+    using DampingStrategy = boost::type_erasure::any< ::Algorithm::Concepts::Newton::DampingStrategyConcept >;
+
+    namespace Damping
     {
-      class Base : public Mixin::Eps, public Mixin::RegularityTest
-      {
-      public:
-        virtual ~Base() = default;
-
-        DampingFactor operator()(const LinearSolver& F, const Vector& x, const Vector& dx) const;
-
-      protected:
-        virtual DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) const = 0;
-      };
-
       /**
        * @ingroup NewtonGroup
-       * @brief Affine covariant damping strategy as described in Deuflhard: Newton Methods for Nonlinear Problems, Sec. 3.3.
+       * @brief Affine covariant damping strategy as described in @cite Deuflhard2004 [Sec. 3.3].
        */
-      class AffineCovariant : public Base
+      class AffineCovariant : public Mixin::Eps, public Mixin::RegularityTest
       {
       public:
+        /// Constructor.
         AffineCovariant(const Operator& F);
 
-      private:
-        DampingFactor compute(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const final override;
+        /// Compute damping factor.
+        DampingFactor operator()(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const;
 
+      private:
         const Operator& F_;
 
         mutable DampingFactor oldNu = -1;
@@ -46,32 +47,38 @@ namespace Algorithm
 
       /**
        * @ingroup NewtonGroup
-       * @brief Affine contravariant damping strategy as described in Deuflhard: Newton Methods for Nonlinear Problems, Sec. 3.2.
+       * @brief Affine contravariant damping strategy as described in @cite Deuflhard2004 [Sec. 3.2].
        */
-      class AffineContravariant : public Base
+      class AffineContravariant : public Mixin::Eps, public Mixin::RegularityTest
       {
       public:
+        /// Constructor.
         AffineContravariant(const Operator& F);
 
+        /// Compute damping factor.
+        DampingFactor operator()(const LinearSolver&, const Vector& x, const Vector& dx) const;
+
       private:
-        DampingFactor compute(const LinearSolver&, const Vector& x, const Vector& dx) const final override;
-
         const Operator& F_;
-
         mutable double muPrime = -1.;
         mutable double norm_F_x_old = -1;
       };
 
       /**
        * @ingroup NewtonGroup
-       * @brief No damping.
+       * @brief No damping, yields local newton method.
        */
-      class None : public Base
+      class None
       {
       public:
-        None(const Operator& F);
+        /// Constructor.
+        None(const Operator&);
 
-        DampingFactor compute(const LinearSolver&, const Vector&, const Vector&) const final override;
+        /**
+         * @brief Compute damping factor.
+         * @return 1
+         */
+        DampingFactor operator()(const LinearSolver&, const Vector&, const Vector&) const;
       };
     }
   }

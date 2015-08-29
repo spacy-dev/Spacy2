@@ -1,9 +1,7 @@
 #include "quadraticModel.hh"
 
-#include "vector.hh"
-#include "vectorSpace.hh"
-#include "functional.hh"
-#include "Util/invoke.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/Util/invoke.hh"
 
 #include <cmath>
 #include <tuple>
@@ -36,9 +34,9 @@ namespace Algorithm
     }
 
     CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& f, const Vector& x, double omega)
+                              const C2Functional& L, const Vector& x, double omega)
     {
-      return CubicModel( makeQuadraticModel(nu,dn,dt,f,x), makeQuadraticNormModel(nu,dn,dt), omega );
+      return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega );
     }
 
     CubicModel::CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, double omega)

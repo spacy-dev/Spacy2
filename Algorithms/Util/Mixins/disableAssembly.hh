@@ -30,7 +30,7 @@ namespace Algorithm
       bool assemblyIsDisabled() const noexcept;
 
     private:
-      bool disableAssembly_ = false;
+      bool disableAssembly_;
     };
   }
 }

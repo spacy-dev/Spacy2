@@ -1,9 +1,9 @@
 #include "scalarProduct.hh"
 
-#include "vectorSpace.hh"
-#include "vector.hh"
-#include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "Util/cast.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vectorSpace.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vector.hh"
+#include "Algorithms/Util/Exceptions/incompatibleSpaceException.hh"
+#include "Algorithms/Util/cast.hh"
 
 namespace Algorithm
 {

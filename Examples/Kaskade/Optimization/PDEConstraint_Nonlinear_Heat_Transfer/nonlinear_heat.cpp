@@ -15,8 +15,11 @@
 #include <chrono>
 #include <iostream>
 
-#include "dune/grid/config.h"
-#include "dune/grid/uggrid.hh"
+#include <dune/grid/config.h>
+#include <dune/grid/uggrid.hh>
+
+#include <Algorithms/Adapter/kaskade.hh>
+#include <Algorithms/Algorithm/CompositeStep/affineCovariantCompositeSteps.hh>
 
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
@@ -25,8 +28,6 @@
 #include "utilities/kaskopt.hh"
 #include "utilities/gridGeneration.hh"
 
-#include "Adapter/kaskade.hh"
-#include "Algorithm/CompositeStep/affineCovariantCompositeSteps.hh"
 
 #define NCOMPONENTS 1
 #include "nonlinear_control.hh"
@@ -108,9 +109,9 @@ int main(int argc, char *argv[])
 
   // Normal step functional with direct solver
   auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
-  auto solverCreator = Algorithm::Kaskade::Lagrange::CGSolver<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
-  solverCreator.setVerbosity(true);
-  fn.setSolverCreator( solverCreator );
+//  auto solverCreator = Algorithm::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
+//  solverCreator.setVerbosity(true);
+//  fn.setSolverCreator( solverCreator );
   
   // Lagrange functional
   auto ft = Algorithm::Kaskade::makeFunctional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
@@ -119,8 +120,7 @@ int main(int argc, char *argv[])
   auto cs = Algorithm::CompositeStep::AffineCovariantCompositeSteps( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
-  cs.setVerbosity(verbose>0);
-  cs.setDetailedVerbosity(verbose>1);
+  cs.setVerbosityLevel(verbose);
   cs.setMaxSteps(maxSteps);
   cs.setIterativeRefinements(iterativeRefinements);
 

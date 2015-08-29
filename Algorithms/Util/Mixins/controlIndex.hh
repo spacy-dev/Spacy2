@@ -48,7 +48,7 @@ namespace Algorithm
       void update(ControlIndex* changedSubject);
 
     private:
-      unsigned index_ = 1;
+      unsigned index_;
     };
   }
 }

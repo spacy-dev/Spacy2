@@ -49,7 +49,7 @@ namespace Algorithm
       void update(IterativeRefinements* changedSubject) ;
 
     private:
-      unsigned iterativeRefinements_ = 0;
+      unsigned iterativeRefinements_;
     };
 
   }

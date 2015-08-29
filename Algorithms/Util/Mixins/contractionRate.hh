@@ -65,9 +65,9 @@ namespace Algorithm
 
     private:
       double contraction_ = 1;
-      double desiredContraction_ = 0.25;
-      double relaxedDesiredContraction_ = 0.5;
-      double maximalContraction_ = 0.75;
+      double desiredContraction_;
+      double relaxedDesiredContraction_;
+      double maximalContraction_;
     };
   }
 }

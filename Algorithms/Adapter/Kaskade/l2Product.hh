@@ -1,9 +1,9 @@
 #ifndef ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
 #define ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
 
-#include "../../vector.hh"
-#include "Util/Exceptions/incompatibleSpaceException.hh"
-#include "Util/cast.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/Util/Exceptions/incompatibleSpaceException.hh"
+#include "Algorithms/Util/cast.hh"
 
 namespace Algorithm
 {

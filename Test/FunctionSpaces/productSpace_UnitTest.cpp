@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 
-#include "norm.hh"
-#include "scalarProduct.hh"
-#include "VectorSpaces/realSpace.hh"
-#include "VectorSpaces/productSpace.hh"
-#include "Util/cast.hh"
+#include "Algorithms/norm.hh"
+#include "Algorithms/scalarProduct.hh"
+#include "Algorithms/VectorSpaces/realSpace.hh"
+#include "Algorithms/VectorSpaces/productSpace.hh"
+#include "Algorithms/Util/cast.hh"
 
 TEST(ProductSpaceTest,PurePrimalElementTest)
 {
@@ -12,7 +12,7 @@ TEST(ProductSpaceTest,PurePrimalElementTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } );
 
-  auto x = R2.element();
+  auto x = R2.vector();
   const auto& x_ = cast_ref<ProductSpace::Vector>(x);
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(0)) , 0. );
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(1)) , 0. );
@@ -24,7 +24,7 @@ TEST(ProductSpaceTest,PureDualElementTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
-  auto x = R2.element();
+  auto x = R2.vector();
   const auto& x_ = cast_ref<ProductSpace::Vector>(x);
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(0)) , 0. );
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(1)) , 0. );
@@ -36,7 +36,7 @@ TEST(ProductSpaceTest,MixedElementTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
+  auto x = R2.vector();
   const auto& x_ = cast_ref<ProductSpace::Vector>(x);
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(0)) , 0. );
   EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x_.variable(1)) , 0. );
@@ -48,8 +48,8 @@ TEST(ProductSpaceTest,PurePrimalElementSumTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -133,8 +133,8 @@ TEST(ProductSpaceTest,PureDualElementSumTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -214,8 +214,8 @@ TEST(ProductSpaceTest,MixedElementSumTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -293,8 +293,8 @@ TEST(ProductSpaceTest,PurePrimalElementProductTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(x_.variable(1)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -315,8 +315,8 @@ TEST(ProductSpaceTest,PureDualElementProductTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(x_.variable(1)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -337,8 +337,8 @@ TEST(ProductSpaceTest,MixedElementProductTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(x_.variable(1)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -359,8 +359,8 @@ TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(x_.variable(1)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -400,8 +400,8 @@ TEST(ProductSpaceTest,ScalarProductTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(y_.variable(0)) = 1;
@@ -416,8 +416,8 @@ TEST(ProductSpaceTest,NormTest)
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
-  auto x = R2.element();
-  auto y = R2.element();
+  auto x = R2.vector();
+  auto y = R2.vector();
   auto& x_ = cast_ref<ProductSpace::Vector>(x);
   auto& y_ = cast_ref<ProductSpace::Vector>(y);
   cast_ref<Real::Vector>(x_.variable(0)) = cast_ref<Real::Vector>(y_.variable(0)) = 3;

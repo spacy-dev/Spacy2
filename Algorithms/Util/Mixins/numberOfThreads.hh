@@ -17,7 +17,7 @@ namespace Algorithm
       /**
        * @brief Set number of allowed threads.
        */
-      void setNumberOfThreads(unsigned nThreads);
+      void setNumberOfThreads(unsigned nThreads = 1);
 
       /**
        * @brief Access number of allowed threads.
@@ -30,7 +30,7 @@ namespace Algorithm
       void update(NumberOfThreads* changed);
 
     private:
-      unsigned nThreads_ = 1;
+      unsigned nThreads_;
     };
   }
 }

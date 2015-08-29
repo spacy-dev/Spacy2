@@ -1,6 +1,6 @@
 #include "primalDualSwitch.hh"
 
-#include "VectorSpaces/ProductSpace/vector.hh"
+#include "Algorithms/VectorSpaces/ProductSpace/vector.hh"
 
 namespace Algorithm
 {

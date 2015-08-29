@@ -1,6 +1,6 @@
 #include "operatorBase.hh"
 
-#include "vectorSpace.hh"
+#include "Algorithms/vectorSpace.hh"
 
 namespace Algorithm
 {

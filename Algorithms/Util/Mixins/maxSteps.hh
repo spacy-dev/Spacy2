@@ -48,7 +48,7 @@ namespace Algorithm
       void update(MaxSteps* changedSubject);
 
     private:
-      unsigned maxSteps_ = 100;
+      unsigned maxSteps_;
     };
   }
 }

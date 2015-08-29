@@ -9,6 +9,7 @@
 
 using namespace Kaskade;
 
+/// \cond
 template <class RType, class VarSet>
 class HeatFunctional : public FunctionalBase<WeakFormulation>
 {
@@ -139,5 +140,6 @@ public:
     }
   }
 };
+/// \endcond
 
 #endif

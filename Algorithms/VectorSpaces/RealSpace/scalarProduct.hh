@@ -1,8 +1,7 @@
 #ifndef ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 #define ALGORITHM_REAL_NUMBERS_REALPRODUCT_HH
 
-#include "../../vector.hh"
-#include "vector.hh"
+#include "Algorithms/vector.hh"
 
 namespace Algorithm
 {

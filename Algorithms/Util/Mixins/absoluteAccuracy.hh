@@ -48,7 +48,7 @@ namespace Algorithm
       void update(AbsoluteAccuracy* changedSubject);
 
     private:
-      double absoluteAccuracy_ = 1e-15;
+      double absoluteAccuracy_;
     };
   }
 }

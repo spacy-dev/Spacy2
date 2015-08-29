@@ -1,5 +1,7 @@
 #include "vector.hh"
 
+#include "Algorithms/Util/cast.hh"
+
 namespace Algorithm
 {
   // free functions
@@ -15,7 +17,6 @@ namespace Algorithm
 
   double operator*(const Vector& x, const Vector& y)
   {
-//    return x.scalarProduct(y);
     return x.space()->scalarProduct()(x,y);
   }
 

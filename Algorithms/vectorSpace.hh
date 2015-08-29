@@ -5,12 +5,12 @@
 #include <vector>
 #include <boost/type_erasure/any.hpp>
 
-#include "norm.hh"
-#include "scalarProduct.hh"
+#include "Algorithms/norm.hh"
+#include "Algorithms/scalarProduct.hh"
 
-#include "Util/Concepts/vectorConcept.hh"
-#include "Util/Concepts/vectorCreatorConcept.hh"
-#include "Util/Mixins/impl.hh"
+#include "Algorithms/Util/Concepts/vectorConcept.hh"
+#include "Algorithms/Util/Concepts/vectorCreatorConcept.hh"
+#include "Algorithms/Util/Mixins/impl.hh"
 
 namespace Algorithm
 {
@@ -30,7 +30,7 @@ namespace Algorithm
   /**
    * @ingroup VHatGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
-   * @see VectorCreator, \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
+   * @see \ref VectorCreatorAnchor "VectorCreator".
    */
   class VectorSpace : public Mixin::Impl<VectorCreator>
   {
@@ -41,9 +41,17 @@ namespace Algorithm
     VectorSpace(VectorCreator impl, Norm norm);
 
     /**
-     * @brief Move vector space.
+     * @brief Move constructor.
      */
     VectorSpace(VectorSpace&& other);
+
+    /**
+     * @brief Move assignment.
+     */
+    VectorSpace& operator=(VectorSpace&& other);
+
+    VectorSpace(const VectorSpace&) = delete;
+    VectorSpace& operator=(const VectorSpace&) = delete;
 
     /**
      * @brief Change norm of space.
@@ -56,9 +64,9 @@ namespace Algorithm
     const Norm& norm() const;
 
     /**
-     * @brief Create new function space element.
+     * @brief Create new vector \f$v=0\f$.
      */
-    boost::type_erasure::any<Concepts::VectorConcept> element() const;
+    boost::type_erasure::any<Concepts::VectorConcept> vector() const;
 
     /**
      * @brief Access unique index of the function space.
@@ -130,29 +138,41 @@ namespace Algorithm
 
   private:
     Norm norm_;
-    std::shared_ptr<ScalarProduct> sp_ = nullptr;
+    ScalarProduct sp_ = {};
     unsigned index_ = Detail::spaceIndex++;
-    std::vector<unsigned> primalSpaces_, dualSpaces_; ///< primal and dual spaces with respect to this space
-    const VectorSpace* dualSpace_;
+    std::vector<unsigned> primalSpaces_ = {}, dualSpaces_ = {}; ///< primal and dual spaces with respect to this space
+    const VectorSpace* dualSpace_ = nullptr;
     std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> restriction_ = [](const boost::type_erasure::any<Concepts::VectorConcept>&){ return true; };
   };
 
   /**
    * @ingroup VHatGroup
    * @brief Construct Banach space.
+   * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
+   * @param norm norm satisfying \ref NormConceptAnchor "NormConcept"
+   * @return VectorSpace(impl,norm)
    */
-  VectorSpace makeBanachSpace(VectorCreator impl, Norm norm);
+  VectorSpace makeBanachSpace(VectorCreator creator, Norm norm);
 
   /**
    * @ingroup VHatGroup
    * @brief Construct Hilbert space.
+   * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
+   * @param scalarProduct scalar product satisfying \ref ScalarProductConceptAnchor "ScalarProductConcept"
+   * @return hilbert space
    */
-  VectorSpace makeHilbertSpace(VectorCreator impl, ScalarProduct scalarProduct);
+  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct);
 
   /**
    * @ingroup VHatGroup
    * @brief Relate function spaces.
+   * @param X primal space
+   * @param Y dual space
+   *
+   * Makes \f$X\f$ the primal space of \f$Y\f$ and
+   * makes \f$Y\f$ the dual space of \f$X\f$.
+   * This admits the evaluation of \f$y(x)\f$ for \f$x\in X\f$ and \f$y\in Y\f$.
    */
-  void connectPrimalDual(VectorSpace& primalSpace, VectorSpace& dualSpace);
+  void connectPrimalDual(VectorSpace& X, VectorSpace& Y);
 }
 #endif // ALGORITHM_VECTOR_SPACE_HH

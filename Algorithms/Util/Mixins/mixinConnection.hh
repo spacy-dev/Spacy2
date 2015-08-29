@@ -35,7 +35,6 @@ namespace Algorithm
       /// Notify observers about changes.
       void notify()
       {
-        auto count = 0;
         for( Impl* observer : observers_ )
           observer->update(static_cast<Impl*>(this));
       }

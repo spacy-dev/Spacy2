@@ -7,18 +7,18 @@
 namespace Algorithm
 {
   /**
-   * @brief Linear solver class. Same as CallableOperator.
-   *
-   * @see Concepts::LinearSolverConcept
+   * \brief Linear solver class. Same as CallableOperator.
+   * \anchor LinearSolverAnchor
+   * See \ref LinearSolverConceptAnchor "LinearSolverConcept".
    */
   using LinearSolver = boost::type_erasure::any< Concepts::LinearSolverConcept >;
 
   /**
-   * @brief General linear solver class. Additionally monitors if the underlying operator is positive definite.
-   *
-   * @see Concepts::GeneralLinearSolverConcept
+   * \brief General linear solver class. Additionally monitors if the underlying operator is positive definite.
+   * \anchor IndefiniteLinearSolverAnchor
+   * See \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept".
    */
-  using GeneralLinearSolver = boost::type_erasure::any< Concepts::GeneralLinearSolverConcept >;
+  using IndefiniteLinearSolver = boost::type_erasure::any< Concepts::IndefiniteLinearSolverConcept >;
 }
 
 #endif // ALGORITHM_LINEAR_SOLVER_HH

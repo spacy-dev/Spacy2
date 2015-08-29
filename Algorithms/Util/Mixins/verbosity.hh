@@ -17,27 +17,38 @@ namespace Algorithm
       /**
        * @brief Constructor. Sets verbosity.
        */
-      explicit Verbosity(bool verbose = false) noexcept;
+      explicit Verbosity(unsigned verbosityLevel = 0) noexcept;
 
       /**
        * @brief Enable/disable verbosity.
        */
       void setVerbosity(bool);
 
-      /**
-       * @brief Enable/disable detailed verbosity.
-       */
-      void setDetailedVerbosity(bool);
+//      /**
+//       * @brief Enable/disable detailed verbosity.
+//       */
+//      void setDetailedVerbosity(bool);
 
       /**
        * @brief Check if verbosity is turned on.
        */
       bool verbose() const noexcept;
 
+//      /**
+//       * @brief Check if verbosity is turned on.
+//       */
+//      bool verbose_detailed() const noexcept;
+
       /**
-       * @brief Check if verbosity is turned on.
+       * @brief Set verbosity level.
+       * @param level verbosity level
        */
-      bool verbose_detailed() const noexcept;
+      void setVerbosityLevel(unsigned level) noexcept;
+
+      /**
+       * @brief Access verbosity level.
+       */
+      unsigned verbosityLevel() const noexcept;
 
       /**
        * @brief Attach verbosity.
@@ -60,7 +71,7 @@ namespace Algorithm
       void update(Verbosity* changedSubject);
 
     private:
-      bool verbose_ = false, verbose_detailed_ = false;
+      unsigned verbosityLevel_;
     };
   }
 }

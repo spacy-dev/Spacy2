@@ -1,32 +1,30 @@
 #include "terminationCriteria.hh"
 
-#include "vector.hh"
-#include "operator.hh"
-
 #include <cmath>
 
 namespace Algorithm
 {
   namespace Newton
   {
-    namespace TerminationCriterion
+    namespace Termination
     {
-      Base::Base(double relativeAccuracy, bool verbose)
+//      Base::Base(double relativeAccuracy, bool verbose)
+//        : Mixin::RelativeAccuracy(relativeAccuracy),
+//          Mixin::Verbosity(verbose)
+//      {}
+
+//      bool Base::operator()(double nu, const Vector& x, const Vector& dx) const
+//      {
+//        return passed(nu,x,dx);
+//      }
+
+
+      AffineCovariant::AffineCovariant(const Operator&, double relativeAccuracy, bool verbose)
         : Mixin::RelativeAccuracy(relativeAccuracy),
           Mixin::Verbosity(verbose)
       {}
 
-      bool Base::operator()(double nu, const Vector& x, const Vector& dx) const
-      {
-        return passed(nu,x,dx);
-      }
-
-
-      AffineCovariant::AffineCovariant(const Operator&, double relativeAccuracy, bool verbose)
-        : Base(relativeAccuracy,verbose)
-      {}
-
-      bool AffineCovariant::passed(double nu, const Vector& x, const Vector& dx) const
+      bool AffineCovariant::operator()(double nu, const Vector& x, const Vector& dx) const
       {
         if(std::fabs(nu-1) > eps()) return false;
 
@@ -44,10 +42,11 @@ namespace Algorithm
 
 
       AffineContravariant::AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose)
-        : Base(relativeAccuracy,verbose), F_(F)
+        : Mixin::RelativeAccuracy(relativeAccuracy),
+          Mixin::Verbosity(verbose), F_(F)
       {}
 
-      bool AffineContravariant::passed(double nu, const Vector& x, const Vector&) const
+      bool AffineContravariant::operator()(double nu, const Vector& x, const Vector&) const
       {
         if( initialResidual < 0 )
         {

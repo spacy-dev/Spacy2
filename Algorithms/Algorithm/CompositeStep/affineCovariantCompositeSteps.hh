@@ -5,13 +5,12 @@
 #include <string>
 #include <tuple>
 
-#include "linearSolver.hh"
-#include "functional.hh"
-#include "vector.hh"
-#include "vectorSpace.hh"
-#include "../parameter.hh"
-#include "Algorithm/lipschitzConstant.hh"
-#include "Util/mixins.hh"
+#include "Algorithms/linearSolver.hh"
+#include "Algorithms/functional.hh"
+#include "Algorithms/vector.hh"
+#include "Algorithms/vectorSpace.hh"
+#include "Algorithms/Algorithm/lipschitzConstant.hh"
+#include "Algorithms/Util/mixins.hh"
 
 namespace Algorithm
 {
@@ -52,7 +51,7 @@ namespace Algorithm
       Vector computeMinimumNormCorrection(const Vector& x) const;
       Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
       Vector computeLagrangeMultiplier(const Vector& x) const;
-      std::unique_ptr<GeneralLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
+      std::unique_ptr<IndefiniteLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
 
       bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
 
@@ -69,13 +68,13 @@ namespace Algorithm
       void regularityTest(double nu, double tau) const;
       AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
 
-      std::unique_ptr<C2Functional> N_, L_;
+      std::unique_ptr<C2Functional> N_ = nullptr, L_ = nullptr;
       VectorSpace& domain_;
 
-      LipschitzConstant omegaL, omegaC;
+      LipschitzConstant omegaL = {1e-6}, omegaC = {1e-6};
 
       mutable std::unique_ptr<LinearSolver> normalSolver = nullptr;
-      mutable std::unique_ptr<GeneralLinearSolver> tangentialSolver = nullptr;
+      mutable std::unique_ptr<IndefiniteLinearSolver> tangentialSolver = nullptr;
 
       std::string spacing = "  ", spacing2 = "    ";
 
