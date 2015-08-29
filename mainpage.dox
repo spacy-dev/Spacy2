@@ -1,0 +1,25 @@
+#error Documentation only.
+
+/*! \mainpage %VHat documentation
+ * 
+ * %Vhat is a library that aims at
+ * - providing an abstraction layer for the implementation of algorithms in a vector space setting (function space oriented algorithms)
+ * - providing a simple interface for sharing and comparing algorithms
+ * - having fun while developing algorithms
+ * - leaving you all freedom you want to implement your fancy algorithm (as long as you don't violate the mathematical structure of vector spaces)
+ * 
+ * The basis of VHat is the abstraction layer for vector space settings. 
+ * - First there is a vector space class (::Algorithm::VectorSpace), which models a \ref ::Algorithm::makeBanachSpace() "Banach space" <span lang="latex"> 
+ *   (X,||.||)</span> or a \ref ::Algorithm::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a \ref NormAnchor "norm" and possibly a \ref ScalarProductAnchor "scalar product". Moreover, vector spaces can be 
+ *   related to each other as primal or dual spaces. Eventually they can generate vectors.
+ * - Vectors (see \ref VectorAnchor "Vector", \ref VectorConceptAnchor "VectorConcept") can be any class satisfying the \ref VectorConceptAnchor "VectorConcept", i.e. vectors must be vectors in an almost pure mathematical sense.
+ * - Operator (see \ref OperatorAnchor "Operator", \ref OperatorConceptAnchor "OperatorConcept") are mappings between different vector spaces.
+ * - Functionals (see \ref FunctionalAnchor "Functional", \ref FunctionalConceptAnchor "FunctionalConcept") are mappings from a vector spaces into the space of real numbers \f$ \mathbb{R} \f$.
+ *
+ *
+ *
+ * Currently VHat supports 
+ * - <a href="www.fenicsproject.org">the FEniCS Project,</a>
+ * . <a href "http://www.zib.de/projects/kaskade7-finite-element-toolbox">the Kaskade 7 Finite Element Toolbox.</a>
+ */
+ 

@@ -26,6 +26,8 @@ namespace Algorithm
 
     /**
      * @brief Compute first directional derivative \f$f'(x) \in X^* \f$.
+     * @param x current iterate
+     * @return \f$f'(x)\f$
      */
     Vector d1(const Vector& x) const
     {
@@ -34,6 +36,9 @@ namespace Algorithm
 
     /**
      * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow \mathbb{R} \f$.
+     * @param x current iterate
+     * @param dx perturbation
+     * @return \f$f'(x)dx\f$
      */
     double d1(const Vector &x, const Vector& dx) const
     {
@@ -42,6 +47,9 @@ namespace Algorithm
 
     /**
      * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
+     * @param x current iterate
+     * @param dx perturbation
+     * @return \f$f''(x)dx\f$
      */
     Vector d2(const Vector& x, const Vector& dx) const
     {
@@ -50,13 +58,20 @@ namespace Algorithm
 
     /**
      * @brief Compute second directional derivative \f$f''(x):\ X\times X \rightarrow \mathbb{R} \f$.
+     * @param x current iterate
+     * @param dx perturbation
+     * @param dy perturbation
+     * @return \f$f''(x)(dx,dy)\f$
      */
     double d2(const Vector &x, const Vector &dx, const Vector& dy) const
     {
       return d2(x,dx)(dy);
     }
 
-    /// Access domain space \f$X\f$.
+    /**
+     * @brief Access domain space \f$X\f$.
+     * @return domain space \f$X\f$.
+     */
     const VectorSpace& domain() const
     {
       return domain_;

@@ -60,7 +60,11 @@ namespace Algorithm
          : solver_(solver)
         {}
 
-        /// Create conjugate gradient solver with triangular state constraint preconditioner for \f$L''\f$.
+        /**
+         * @brief Create conjugate gradient solver with triangular state constraint preconditioner for \f$L''\f$.
+         * @param L Lagrange functional
+         * @return solver representing \f$L''(x)^{-1}\f$, where \f$x\f$ is the current iterate
+         */
         LinearSolver operator()(const Functional<FunctionalDefinition>& L) const
         {
           auto matA = L.assembler().template get<Matrix>(L.onlyLowerTriangle(),adjointId,adjointId+1,stateId,stateId+1);
@@ -112,7 +116,7 @@ namespace Algorithm
 
           auto A = Kaskade::LinearOperator<KaskadeOperator,VariableSetDescription,VariableSetDescription>( L.A() , L.domain() , L.domain().dualSpace() );
 
-          auto solver = ::Algorithm::CG::Solver(A, P, solver_);
+          auto solver = ::Algorithm::CG::LinearSolver(A, P, solver_);
           solver.setAbsoluteAccuracy(absoluteAccuracy());
           solver.setRelativeAccuracy(relativeAccuracy());
           solver.setEps(eps());

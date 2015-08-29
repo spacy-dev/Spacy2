@@ -20,7 +20,11 @@ namespace Algorithm
        */
       Quadratic(double a, double b, double c) noexcept;
 
-      /// Compute \f$q(t) = a + bt + ct^2 \f$.
+      /**
+       * @brief Compute \f$q(t) = a + bt + ct^2 \f$.
+       * @param t argument
+       * @return \f$q(t) = a + bt + ct^2 \f$
+       */
       double operator()(double t) const noexcept;
 
     private:

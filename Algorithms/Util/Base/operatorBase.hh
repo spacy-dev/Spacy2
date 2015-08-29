@@ -20,10 +20,16 @@ namespace Algorithm
      */
     OperatorBase(const VectorSpace& domain, const VectorSpace& range);
 
-    /// Access domain space \f$X\f$.
+    /**
+     * @brief Access domain space \f$X\f$.
+     * @return domain space \f$X\f$.
+     */
     const VectorSpace& domain() const;
 
-    /// Access range space \f$Y\f$.
+    /**
+     * @brief Access range space \f$Y\f$.
+     * @return range space \f$Y\f$.
+     */
     const VectorSpace& range() const;
 
   private:

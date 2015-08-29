@@ -9,23 +9,26 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for index of adjoint variable.
+     * @brief Mixin class for index of the adjoint variable.
      */
     class AdjointIndex : public MixinConnection<AdjointIndex>
     {
     public:
       /**
-       * @brief Constructor. Sets index of adjoint variable.
+       * @brief Constructor.
+       * @param index index of the adjoint variable.
        */
       explicit AdjointIndex(unsigned index = 2) noexcept;
 
       /**
-       * @brief Set index of adjoint variable.
+       * @brief Set index of the adjoint variable.
+       * @param index new index of the adjoint variable
        */
       void setAdjointIndex(unsigned index);
 
       /**
-       * @brief Get index of adjoint variable.
+       * @brief Access index of the adjoint variable.
+       * @return index of the adjoint variable
        */
       double adjointIndex() const noexcept;
 

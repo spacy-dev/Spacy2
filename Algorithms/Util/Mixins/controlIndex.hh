@@ -9,23 +9,26 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for index of control variable.
+     * @brief Mixin class for index of the control variable.
      */
     class ControlIndex : public MixinConnection<ControlIndex>
     {
     public:
       /**
-       * @brief Constructor. Sets index of control variable.
+       * @brief Constructor.
+       * @param index index of the control variable
        */
       explicit ControlIndex(unsigned index = 1) noexcept;
 
       /**
-       * @brief Set index of control variable.
+       * @brief Set index of the control variable.
+       * @param index of the control variable
        */
       void setControlIndex(unsigned index);
 
       /**
        * @brief Get index of control variable.
+       * @return control index
        */
       double controlIndex() const noexcept;
 

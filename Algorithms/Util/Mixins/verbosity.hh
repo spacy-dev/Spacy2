@@ -15,29 +15,22 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets verbosity.
+       * @brief Constructor.
+       * @param verbosityLevel verbosity level (0=silent,...)
        */
       explicit Verbosity(unsigned verbosityLevel = 0) noexcept;
 
       /**
        * @brief Enable/disable verbosity.
+       * @param verbose true: if verbosityLevel = 0, set verbosityLevel = 1; false: if set verbosityLevel = 0
        */
-      void setVerbosity(bool);
-
-//      /**
-//       * @brief Enable/disable detailed verbosity.
-//       */
-//      void setDetailedVerbosity(bool);
+      void setVerbosity(bool verbose);
 
       /**
        * @brief Check if verbosity is turned on.
+       * @return true if verbosityLevel > 0
        */
       bool verbose() const noexcept;
-
-//      /**
-//       * @brief Check if verbosity is turned on.
-//       */
-//      bool verbose_detailed() const noexcept;
 
       /**
        * @brief Set verbosity level.
@@ -47,6 +40,7 @@ namespace Algorithm
 
       /**
        * @brief Access verbosity level.
+       * @return verbosity level
        */
       unsigned verbosityLevel() const noexcept;
 

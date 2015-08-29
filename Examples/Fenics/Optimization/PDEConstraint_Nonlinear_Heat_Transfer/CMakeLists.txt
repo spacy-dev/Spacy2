@@ -40,8 +40,8 @@ set(CMAKE_CXX_FLAGS "${DOLFIN_CXX_FLAGS} ${CMAKE_CXX_FLAGS} -std=c++1y")
 include_directories(${DOLFIN_INCLUDE_DIRS})
 include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
 
-include_directories(/home/ignaz/C++/FSA/Algorithms)
-link_directories(/home/ignaz/C++/FSA/build/)
+include_directories(/home/ignaz/C++/FSA_AKT/FSA)
+link_directories(/home/ignaz/C++/FSA_AKT/FSA/build/)
 
 # Executable
 add_executable(${PROJECT_NAME} main.cpp)

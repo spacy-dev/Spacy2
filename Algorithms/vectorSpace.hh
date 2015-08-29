@@ -30,27 +30,34 @@ namespace Algorithm
   /**
    * @ingroup VHatGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
-   * @see \ref VectorCreatorAnchor "VectorCreator".
+   * @see @ref VectorCreatorAnchor "VectorCreator".
    */
   class VectorSpace : public Mixin::Impl<VectorCreator>
   {
   public:
     /**
-     * @brief Construct function space form VectorCreator and Norm.
+     * @brief Construct function space from @ref VectorCreatorAnchor "VectorCreator" and @ref NormAnchor "Norm".
+     * @param impl object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
+     * @param norm object satisfying the @ref NormConceptAnchor "NormConcept"
      */
     VectorSpace(VectorCreator impl, Norm norm);
 
     /**
      * @brief Move constructor.
+     * @param V vector space to move from
      */
-    VectorSpace(VectorSpace&& other);
+    VectorSpace(VectorSpace&& V);
 
     /**
      * @brief Move assignment.
+     * @param V vector space to move from
      */
-    VectorSpace& operator=(VectorSpace&& other);
+    VectorSpace& operator=(VectorSpace&& V);
 
+    /// Vector spaces can not copied.
     VectorSpace(const VectorSpace&) = delete;
+
+    /// Vector spaces can not copy-assigned.
     VectorSpace& operator=(const VectorSpace&) = delete;
 
     /**

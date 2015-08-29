@@ -13,47 +13,60 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets desired and maximal contraction rate.
+       * @brief Constructor.
+       * @param desiredContraction desired contraction rate
+       * @param relaxedDesiredContraction relaxed contraction rate
+       * @param maximalContraction maximal allowed contraction rate
        */
-      explicit ContractionRate(double desiredContraction = 0.25, double relaxedDesiredContraction = 0.5, double maximalContraction = 0.75) noexcept;
+      explicit ContractionRate(double desiredContraction = 0.25,
+                               double relaxedDesiredContraction = 0.5,
+                               double maximalContraction = 0.75) noexcept;
 
       /**
        * @brief Set contraction rate.
+       * @param contraction monitored contraction rate
        */
       void setContraction(double contraction) noexcept;
 
       /**
        * @brief Set desired contraction rate.
+       * @param desiredContraction desired contraction rate
        */
       void setDesiredContraction(double desiredContraction) noexcept;
 
       /**
        * @brief Set relaxed desired contraction rate.
+       * @param relaxedDesiredContraction relaxed contraction rate
        */
       void setRelaxedDesiredContraction(double relaxedDesiredContraction) noexcept;
 
       /**
        * @brief Set maximal contraction rate.
+       * @param maximalContraction maximal allowed contraction rate
        */
       void setMaximalContraction(double maximalContraction) noexcept;
 
       /**
-       * @brief Get contraction rate.
+       * @brief Access contraction rate.
+       * @return monitored contraction rate
        */
       double contraction() const noexcept;
 
       /**
-       * @brief Get desired contraction rate.
+       * @brief Access desired contraction rate.
+       * @return desired contraction rate
        */
       double desiredContraction() const noexcept;
 
       /**
        * @brief Get relaxed desired contraction rate.
+       * @return relaxed contraction rate
        */
       double relaxedDesiredContraction() const noexcept;
 
       /**
        * @brief Get desired contraction rate.
+       * @return maximal allowed contraction rate
        */
       double maximalContraction() const noexcept;
 

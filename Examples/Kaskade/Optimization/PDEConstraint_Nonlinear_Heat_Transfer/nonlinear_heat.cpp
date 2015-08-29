@@ -19,7 +19,7 @@
 #include <dune/grid/uggrid.hh>
 
 #include <Algorithms/Adapter/kaskade.hh>
-#include <Algorithms/Algorithm/CompositeStep/affineCovariantCompositeSteps.hh>
+#include <Algorithms/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
@@ -109,15 +109,15 @@ int main(int argc, char *argv[])
 
   // Normal step functional with direct solver
   auto fn = Algorithm::Kaskade::makeFunctional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
-//  auto solverCreator = Algorithm::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
-//  solverCreator.setVerbosity(true);
-//  fn.setSolverCreator( solverCreator );
+  auto solverCreator = Algorithm::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
+  solverCreator.setVerbosity(true);
+  fn.setSolverCreator( solverCreator );
   
   // Lagrange functional
   auto ft = Algorithm::Kaskade::makeFunctional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // algorithm and parameters
-  auto cs = Algorithm::CompositeStep::AffineCovariantCompositeSteps( fn , ft , domain );
+  auto cs = Algorithm::CompositeStep::AffineCovariantSolver( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
   cs.setVerbosityLevel(verbose);

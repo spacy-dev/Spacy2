@@ -20,29 +20,48 @@ namespace Algorithm
 
   namespace CompositeStep
   {
-    struct CompositeStepParameter
-    {
-      double etaMin = 0.5;
-      double rejectionTolerance = 0.1;
-      double dampingTolerance = 1e-3;
-    };
-
-    class AffineCovariantCompositeSteps :
-        public CompositeStepParameter , public Mixin::RegularityTest , public Mixin::Timer<std::chrono::milliseconds> ,
-        public Mixin::AdjointIndex , public Mixin::ControlIndex , public Mixin::StateIndex ,
-        public Mixin::ContractionRate ,  public Mixin::Eps ,
-        public Mixin::RelativeAccuracy , public Mixin::MinimalAccuracy ,
-        public Mixin::Verbosity , public Mixin::MaxSteps ,
+    /**
+     * @brief The affine covariant step method described in @cite Lubkoll2015, @cite Lubkoll2015a for the solution of equality constraint optimization problems.
+     *
+     * An affine covariant composite step method for the solution of problems of the form
+     * \f[\min f(x)\quad \text{s.t.}\quad c(x)=0\f], based on the corresponding Lagrange functional
+     * \f[L(x,p) = f(x)+pc(x)\f].
+     */
+    class AffineCovariantSolver :
+        public Mixin::RegularityTest ,
+        public Mixin::Timer<std::chrono::milliseconds> ,
+        public Mixin::AdjointIndex ,
+        public Mixin::ControlIndex ,
+        public Mixin::StateIndex ,
+        public Mixin::ContractionRate ,
+        public Mixin::DecreaseCondition ,
+        public Mixin::Eps ,
+        public Mixin::MaxSteps ,
+        public Mixin::DampingAccuracy ,
+        public Mixin::MinimalAccuracy ,
+        public Mixin::RelativeAccuracy ,
+        public Mixin::Verbosity ,
         public Mixin::IterativeRefinements
     {
       enum class StepMonitor { Rejected , Accepted };
       enum class AcceptanceTest;
 
     public:
-      AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
+      /**
+       * @brief Constructor.
+       * @param N Lagrange functional for the problem \f[\min \|\delta x_k\| \quad \text{s.t.} c'(x_k)\delta x_k + c(x_k)=0\f]
+       * @param L Lagrange functional
+       * @param domain domain space \f$X=\{Y,U,P\}\f$
+       */
+      AffineCovariantSolver(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
 
+      /// Compute solution.
       Vector solve();
 
+      /**
+       * @brief Compute solution.
+       * @param x0 initial iterate
+       */
       Vector solve(const Vector& x0);
 
     private:

@@ -20,25 +20,31 @@ namespace Algorithm
    * Stores an object of type Value. This object holds the employed vector implementation.
    * @see Real::Vector
    */
-  template <class VType, class Value = void>
+  template <class Derived, class Value = void>
   class VectorBase :
-      public VectorBase<VType> , public Mixin::Impl<Value>
+      public VectorBase<Derived> , public Mixin::Impl<Value>
   {
   public:
-    VectorBase( const VectorSpace& space , const Value& value )
-      : VectorBase<VType>(space) , Mixin::Impl<Value>(value)
+    /**
+     * @brief Constructor.
+     * @param space underlying vector space
+     * @param value to be stored in Mixin::Impl<Value>
+     */
+    VectorBase( const VectorSpace& space , Value value )
+      : VectorBase<Derived>(space) , Mixin::Impl<Value>(std::move(value))
     {}
   };
 
 
   /**
    * @brief Base class for vector implementations.
-   * @see Kaskade::Vector, Fenics::Vector
+   * @tparam Derived derived vector implementation, provided for CRTP
    *
    * Provides access to the underlying vector space and related operations.
+   * @see Kaskade::Vector, Fenics::Vector
    */
-  template <class VType>
-  class VectorBase<VType,void>
+  template <class Derived>
+  class VectorBase<Derived,void>
   {
   public:
     /**
@@ -49,52 +55,49 @@ namespace Algorithm
       : space_(space)
     {}
 
-    /// Copy constructor.
-    VectorBase(const VectorBase &other)
-      : space_(other.space_)
+    /**
+     * @brief Copy constructor.
+     * @param y object to copy from
+     */
+    VectorBase(const VectorBase& y)
+      : space_(y.space_)
     {}
 
-    /// Move constructor.
-    VectorBase(VectorBase&& other) noexcept
-      : space_(other.space_)
+    /**
+     * @brief Move constructor.
+     * @param y object to move from
+     */
+    VectorBase(VectorBase&& y) noexcept
+      : space_(y.space_)
     {}
 
-    /// Copy assignment.
-    VectorBase& operator=(const VectorBase& other)
+    /**
+     * @brief Copy assignment.
+     * @param y object to copy from
+     */
+    VectorBase& operator=(const VectorBase& y)
     {
-      checkSameSpaces(*this,other);
+      checkSameSpaces(*this,y);
       return *this;
     }
 
-    /// Move assignment.
-    VectorBase& operator=(VectorBase&& other) noexcept
+    /**
+     * @brief Move assignment.
+     * @param y object to move from
+     */
+    VectorBase& operator=(VectorBase&& y) noexcept
     {
-      checkSameSpaces(*this,other);
+      checkSameSpaces(*this,y);
       return *this;
     }
 
-    /// Access underlying vector space.
+    /**
+     * @brief Access underlying vector space.
+     * @return underlying vector space
+     */
     const VectorSpace* space() const
     {
       return &space_;
-    }
-
-    /// Access index of underlying space.
-    unsigned spaceIndex() const
-    {
-      return space()->index();
-    }
-
-    /// Compute norm of vector. The norm defined in the underlying vector space is employed.
-    double norm() const
-    {
-      return space()->norm()(static_cast<const VType&>(*this));
-    }
-
-    /// Compute scalar product \f$(x,y)\f$. The scalar product defined in the underlying vector space is employed.
-    double scalarProduct(const VType& y) const
-    {
-      return space()->scalarProduct()( static_cast<const VType&>(*this) , y );
     }
 
   private:
@@ -103,51 +106,71 @@ namespace Algorithm
 
   /**
    * @brief Base class providing some operations for vectors via CRTP.
-   * @see Real::Vector, Fenics::Vector, Kaskade::Vector
+   * @tparam Derived derived vector implementation, provided for CRTP
    *
    * Provides operator+=, operator-=, operator*=, operator-, operator==.
+   *
+   * @see Real::Vector, Fenics::Vector, Kaskade::Vector
    */
-  template <class VType>
+  template <class Derived>
   class SupportedOperatorBase : public Mixin::Eps
   {
   public:
-    /// Compute \f$ x+=y\f$.
-    VType& operator+=(const VType& y)
+    /**
+     * @brief In-place summation \f$ x+=y\f$.
+     * @param y vector to add to this vector
+     * @return \f$ x+=y\f$.
+     */
+    Derived& operator+=(const Derived& y)
     {
-      checkSameSpaces(static_cast<const VType&>(*this),y);
-      static_cast<VType*>(this)->impl() += y.impl();
-      return static_cast<VType&>(*this);
+      checkSameSpaces(static_cast<const Derived&>(*this),y);
+      static_cast<Derived*>(this)->impl() += y.impl();
+      return static_cast<Derived&>(*this);
     }
 
-    /// Compute \f$ x-=y\f$.
-    VType& operator-=(const VType& y)
+    /**
+     * @brief In-place subtraction \f$ x-=y\f$.
+     * @param y vector to subtract from this vector
+     * @return \f$ x-=y\f$.
+     */
+    Derived& operator-=(const Derived& y)
     {
-      checkSameSpaces(static_cast<const VType&>(*this),y);
-      static_cast<VType*>(this)->impl() -= y.impl();
-      return static_cast<VType&>(*this);
+      checkSameSpaces(static_cast<const Derived&>(*this),y);
+      static_cast<Derived*>(this)->impl() -= y.impl();
+      return static_cast<Derived&>(*this);
     }
 
-    /// Compute \f$a*=x\f$.
-    VType& operator*=(double a)
+    /**
+     * @brief In-place multiplication \f$ x*=a\f$.
+     * @param a scaling factor
+     * @return \f$ x*=a\f$.
+     */
+    Derived& operator*=(double a)
     {
-      static_cast<VType*>(this)->impl() *= a;
-      return static_cast<VType&>(*this);
+      static_cast<Derived*>(this)->impl() *= a;
+      return static_cast<Derived&>(*this);
     }
 
-    /// Get \f$-x\f$.
-    VType operator-() const
+    /**
+     * @brief Negation \f$ -x\f$.
+     * @return \f$ -x \f$.
+     */
+    Derived operator-() const
     {
-      VType y = static_cast<const VType&>(*this);
+      Derived y = static_cast<const Derived&>(*this);
       y.impl() *= -1;
       return y;
     }
 
-    /// Comparison operators.
-    bool operator==(const VType& y) const
+    /**
+     * @brief Comparison operator \f$ x==y\f$.
+     * @param y vector to compare with this vector
+     * @return \f$ x==y\f$.
+     */    bool operator==(const Derived& y) const
     {
-      checkSameSpaces(static_cast<const VType&>(*this),y);
+      checkSameSpaces(static_cast<const Derived&>(*this),y);
       auto dx = y;
-      dx -= static_cast<const VType&>(*this);
+      dx -= static_cast<const Derived&>(*this);
       return dx(dx) < eps()*eps();
     }
   };

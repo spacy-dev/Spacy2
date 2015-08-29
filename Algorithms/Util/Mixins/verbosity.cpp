@@ -14,21 +14,10 @@ namespace Algorithm
       notify();
     }
 
-//    void Verbosity::setDetailedVerbosity(bool verbose)
-//    {
-//      verbosityLevel_ = 2;
-//      notify();
-//    }
-
     bool Verbosity::verbose() const noexcept
     {
       return verbosityLevel_ > 0;
     }
-
-//    bool Verbosity::verbose_detailed() const noexcept
-//    {
-//      return verbosityLevel_ > 1;
-//    }
 
     void Verbosity::setVerbosityLevel(unsigned level) noexcept
     {

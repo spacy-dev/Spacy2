@@ -35,13 +35,13 @@ namespace Algorithm
         public Mixin::NumberOfThreads
     {
     public:
-      /// ::Kaskade::VariableSetDescription
+      /// %Kaskade::VariableSetDescription
       using VariableSetDescription = typename FunctionalDefinition::AnsatzVars;
       /// Coefficient vector type.
       using CoefficientVector = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
       /// boost::fusion::vector<const Space0*,const Space1*,...>
       using Spaces = typename VariableSetDescription::Spaces;
-      /// ::Kaskade::VariationalFunctionalAssembler
+      /// %Kaskade::VariationalFunctionalAssembler
       using Assembler = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<FunctionalDefinition> >;
       /// Matrix type
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
@@ -207,10 +207,9 @@ namespace Algorithm
        * @brief Change solver creator.
        * @param f anything that can be fed into objects of type std::function<LinearSolver(const Functional<FunctionalDefinition>&)>.
        */
-      template <class Function>
-      void setSolverCreator(Function&& f)
+      void setSolverCreator(std::function<LinearSolver(const Functional&)> f)
       {
-        solverCreator_ = std::forward<Function>(f);
+        solverCreator_ = std::move(f);
       }
 
     private:
@@ -291,7 +290,7 @@ namespace Algorithm
      * @param rend one after the last row to be considered in the definition of f
      * @param cbegin first column to be considered in the definition of f
      * @param cend one after the last column to be considered in the definition of f
-     * @return ::Algorithm::Kaskade::Functional<FunctionalDefinition>( f, domain, rbegin, rend, cbegin, cend )
+     * @return @ref Functional "::Algorithm::Kaskade::Functional<FunctionalDefinition>( f, domain, rbegin, rend, cbegin, cend )"
      *
      * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
      * a system of equation.

@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 set (Algorithms_VERSION_MAJOR 1)
 set (Algorithms_VERSION_MINOR 0)
 
+#set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
 set(CMAKE_BUILD_TYPE Debug)
 
 option(BuildTest "BuildTest" ON)
@@ -17,8 +18,8 @@ set(CMAKE_MODULE_PATH
 include(ConfigSafeGuards)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused -Wpedantic")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
+    set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -Weffc++")
 endif()
 
 include_directories(
@@ -50,7 +51,7 @@ find_package(DOLFIN)
 
 
 #link_directories(/home/ignaz/lib/armadillo-4.650.4/)
-include_directories(${PROJECT_SOURCE_DIR}/Algorithms)
+include_directories(${PROJECT_SOURCE_DIR})
 #include_directories(/home/ignaz/C++/RFFGen/RFFGen)
 include_directories(${DOLFIN_INCLUDE_DIRS})
 include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
@@ -60,21 +61,19 @@ aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Adapter/Fenics SRC_LIST)
 
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm/Functions_1D SRC_LIST)
-aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm/ConjugateGradients SRC_LIST)
+aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm/CG SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm/CompositeStep SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Algorithm/Newton SRC_LIST)
 
-aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/FunctionSpaces/RealSpace SRC_LIST)
-aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/FunctionSpaces/VectorSpace SRC_LIST)
-#aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/FunctionSpaces/KaskadeVectorSpace SRC_LIST)
-aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/FunctionSpaces/ProductSpace SRC_LIST)
+aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/VectorSpaces/RealSpace SRC_LIST)
+#aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/VectorSpaces/VectorSpace SRC_LIST)
+aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/VectorSpaces/ProductSpace SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Operators OPERATOR_SRC_LIST)
 #aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Test SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Util SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Util/Base SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Util/Mixins SRC_LIST)
 aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Util/Exceptions SRC_LIST)
-aux_source_directory(${PROJECT_SOURCE_DIR}/Algorithms/Util/DesignPatterns SRC_LIST)
 add_library(algorithms ${SRC_LIST} ${OPERATOR_SRC_LIST})
 #add_library(operators ${OPERATOR_SRC_LIST})
 #target_link_libraries(operators algorithms)

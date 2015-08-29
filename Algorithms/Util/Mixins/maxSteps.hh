@@ -15,17 +15,20 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Set maximal number of steps/iterations.
+       * @brief Constructor.
+       * @param maxSteps maximal number of steps/iterations
        */
       explicit MaxSteps(unsigned maxSteps = 100) noexcept;
 
       /**
        * @brief Set maximal number of steps/iterations for iterative solvers.
+       * @param maxSteps maximal number of steps/iterations
        */
-      void setMaxSteps(unsigned);
+      void setMaxSteps(unsigned maxSteps);
 
       /**
        * @brief Get maximal number of steps/iterations for iterative solvers.
+       * @return maximal number of steps/iterations
        */
       unsigned maxSteps() const noexcept;
 

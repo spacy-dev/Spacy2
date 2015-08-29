@@ -10,10 +10,6 @@ namespace Algorithm
     set(nu);
   }
 
-  DampingFactor::DampingFactor(double nu)
-    : DampingFactor(nu,1e-3)
-  {}
-
   DampingFactor& DampingFactor::operator=(double nu)
   {
     set(nu);

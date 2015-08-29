@@ -16,10 +16,10 @@ namespace Algorithm
     /**
      * @ingroup KaskadeGroup
      * @brief Linear operator interface for operators in %Kaskade 7.
-     * @tparam OperatorImpl %Kaskade 7 operator, i.e. ::Kaskade::AssembledGalerkinOperator or ::Kaskade::MatrixRepresentedOperator.
-     * @tparam AnsatzVariableSetDescription ::Kaskade::VariableSetDescription for ansatz variables
-     * @tparam TestVariableSetDescription ::Kaskade::VariableSetDescription for test variables
-     * @see LinearOperator, LinearOperatorConcept
+     * @tparam OperatorImpl %Kaskade 7 operator, i.e. %Kaskade::AssembledGalerkinOperator or %Kaskade::MatrixRepresentedOperator.
+     * @tparam AnsatzVariableSetDescription %Kaskade::VariableSetDescription for ansatz variables
+     * @tparam TestVariableSetDescription %Kaskade::VariableSetDescription for test variables
+     * @see LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
      */
     template <class OperatorImpl, class AnsatzVariableSetDescription, class TestVariableSetDescription>
     class LinearOperator : public OperatorBase
@@ -45,6 +45,7 @@ namespace Algorithm
 
       /**
        * @brief Compute \f$A(x)\f$.
+       * @param x operator argument
        */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
       {
@@ -54,13 +55,14 @@ namespace Algorithm
 
         A_.apply(x_,y_);
 
-        auto y = range().element();
+        auto y = range().vector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
       }
       /**
        * @brief Compute \f$A'(x)dx = A(dx)\f$.
+       * @param dx operator argument
        */
       ::Algorithm::Vector d1(const ::Algorithm::Vector&, const ::Algorithm::Vector& dx) const
       {
@@ -70,13 +72,16 @@ namespace Algorithm
 
         A_.apply( dx_ , y_ );
 
-        auto y = range().element();
+        auto y = range().vector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
       }
 
-      /// Access solver.
+      /**
+       * @brief Access solver.
+       * @return linear solver representing \f$A^{-1}\f$
+       */
       const LinearSolver& solver() const
       {
         return DirectSolver<OperatorImpl,AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range() , domain() );
@@ -93,9 +98,9 @@ namespace Algorithm
      * @param A operator from %Kaskade 7
      * @param domain domain space
      * @param range range space
-     * @tparam OperatorImpl %Kaskade 7 operator, i.e. ::Kaskade::AssembledGalerkinOperator or ::Kaskade::MatrixRepresentedOperator.
-     * @tparam AnsatzVariableSetDescription ::Kaskade::VariableSetDescription for ansatz variables
-     * @tparam TestVariableSetDescription ::Kaskade::VariableSetDescription for test variables
+     * @tparam OperatorImpl %Kaskade 7 operator, i.e. %Kaskade::AssembledGalerkinOperator or %Kaskade::MatrixRepresentedOperator.
+     * @tparam AnsatzVariableSetDescription %Kaskade::VariableSetDescription for ansatz variables
+     * @tparam TestVariableSetDescription %Kaskade::VariableSetDescription for test variables
      * @return LinearOperator<OperatorImpl, AnsatzVariableSetDescription, TestVariableSetDescription>( A , domain , range )
      */
     template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class OperatorImpl>

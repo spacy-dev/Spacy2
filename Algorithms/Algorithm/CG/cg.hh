@@ -21,7 +21,8 @@ namespace Algorithm
      * \brief Conjugate gradient method.
      *
      * This implements a preconditioned CG iteration for an operator \f$ A: X\to x^* \f$, preconditioned by a
-     * preconditioner \f$ B^{-1}: X^* \to X \f$. The default termination criterion is based on an estimate of the relative energy error.
+     * preconditioner \f$ B^{-1}: X^* \to X \f$. The default termination criterion is based on an estimate of the relative
+     * energy error (see StrakosTichyEnergyError).
      *
      *
      * Different implementations are available:
@@ -51,7 +52,7 @@ namespace Algorithm
         public Mixin::MaxSteps
     {
       enum class Result { Converged, Failed, EncounteredNonConvexity, TruncatedAtNonConvexity };
-      enum class Nonconvexity { None , Encountered };
+      enum class DefiniteNess { PositiveDefinite , Indefinite };
     public:
       /**
        * \brief Set up conjugate gradient solver.
@@ -69,29 +70,35 @@ namespace Algorithm
       Vector solve(const Vector& x, const Vector& b) const;
 
 
-      /// Set a new termination criterion which must inherit from CGTerminationCriterion.
+      /**
+       * @brief Set a new termination criterion which must satisfy the @ref CG_TerminationCriterionConceptAnchor "TerminationCriterionConcept".
+       * @param newTerminate new termination criterion
+       */
       template <class Criterion>
-      void setTerminationCriterion(const Criterion& newTerminate)
+      void setTerminationCriterion(Criterion newTerminate)
       {
   //      detachEps(terminate);
   //      detachAbsoluteAccuracy(terminate);
   //      detachRelativeAccuracy(terminate);
 
-        terminate = newTerminate;
+        terminate = std::move(newTerminate);
 
   //      attachEps(terminate);
   //      attachAbsoluteAccuracy(terminate);
   //      attachRelativeAccuracy(terminate);
       }
 
-      /// Access to the termination criterion.
-      CG::TerminationCriterion& terminationCriterion() noexcept;
+//      /// Access to the termination criterion.
+//      CG::TerminationCriterion& terminationCriterion() noexcept;
 
-      /// Tells us whether non-convex directions occurred.
-      bool encounteredNonConvexity() const noexcept;
+      /**
+       * @brief After solving an equation reports if the underlying operator is indefinite.
+       * @return true: if \f$A\f$ is indefinite, else false
+       */
+      bool indefiniteOperator() const noexcept;
 
-      /// Energy norm of the computed solution.
-      auto getEnergyNormOfSolution() const noexcept;
+//      /// Energy norm of the computed solution.
+//      auto getEnergyNormOfSolution() const noexcept;
 
       /**
        * @brief Change conjugate gradient implementation.
@@ -99,10 +106,16 @@ namespace Algorithm
        */
       void setType(const std::string& otherType);
 
-      /// Access preconditioner.
+      /**
+       * @brief Access preconditioner.
+       * @return preconditioner \f$P\f$
+       */
       const CallableOperator& P() const;
 
-      /// Access operator.
+      /**
+       * @brief Access operator.
+       * @return operator \f$A\f$
+       */
       const CallableOperator& A() const;
 
     private:
@@ -114,16 +127,20 @@ namespace Algorithm
        */
       Vector Q(const Vector& r) const;
 
-      /// Check step length.
+      /// Check if step length is below maximal attainable accuracy.
       bool vanishingStep(unsigned step) const;
 
       /**
-       * \return true if iteration should terminate. Throws if a direction of negative curvature is encountered in the standard cg implementation.
+       * @brief Behaviour if a direction of negative curvature is encountered.
+       *
+       * Throws if a direction of negative curvature is encountered in the standard cg implementation.
+       *
+       * @return true if iteration should terminate.
        */
       bool terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const;
 
       /**
-       * @brief Set \f$theta=0\f$.
+       * @brief Set \f$\theta=0\f$.
        */
       void initializeRegularization() const noexcept;
 
@@ -146,7 +163,7 @@ namespace Algorithm
       CallableOperator A_, P_;
       mutable CG::TerminationCriterion terminate;
       mutable Result result = Result::Failed; ///< information about reason for termination
-      mutable Nonconvexity nonconvexity = Nonconvexity::None;
+      mutable DefiniteNess definiteness_ = DefiniteNess::PositiveDefinite;
       mutable double energyNorm2 = 0.; ///< energy norm squared
 
       std::string type_ = "CG";

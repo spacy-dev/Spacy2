@@ -26,6 +26,7 @@ namespace Algorithm
 
       /**
        * @brief Check if assembly is disabled.
+       * @return true if assembly is disabled, else false
        */
       bool assemblyIsDisabled() const noexcept;
 

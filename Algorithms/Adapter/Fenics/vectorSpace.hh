@@ -48,7 +48,11 @@ namespace Algorithm
        */
       std::size_t inverseDofmap(std::size_t i) const;
 
-      /// Generate vector for FEniCS.
+      /**
+       * @brief Generate vector for FEniCS.
+       * @param space pointer to vector space implementation
+       * @return vector associated with space
+       */
       ::Algorithm::Vector operator()(const VectorSpace* space) const;
 
     private:
@@ -63,7 +67,7 @@ namespace Algorithm
      * @ingroup FenicsGroup
      * @brief Convenient generation of a single vector space from dolfin::FunctionSpace.
      * @param space single dolfin::FunctionSpace (no product space)
-     * @return ::Algorithm::makeHilbertSpace( VectorCreator{space} , l2Product{} )
+     * @return @ref ::Algorithm::makeHilbertSpace() "::Algorithm::makeHilbertSpace( VectorCreator{space} , l2Product{} )"
      */
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space);
 
@@ -72,7 +76,7 @@ namespace Algorithm
      * @brief Convenient generation of a single vector space from dolfin::FunctionSpace.
      * @param space single dolfin::FunctionSpace (no product space)
      * @param dofmap map relating global ids of a product space to local ids in this single space
-     * @return ::Algorithm::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} )
+     * @return @ref ::Algorithm::makeHilbertSpace() "::Algorithm::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} )"
      */
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
 

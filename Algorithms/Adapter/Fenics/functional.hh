@@ -254,7 +254,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ as used in FEniCS.
-     * @return ::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )
+     * @return @ref Functional "::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )"
      */
     template <class F, class DF, class DDF>
     auto makeFunctional( const F& f , const DF& J , const DDF& H ,
@@ -267,7 +267,7 @@ namespace Algorithm
      * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$
      * with out Dirichlet boundary conditions as used in FEniCS.
-     * @return ::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )
+     * @return @ref Functional "::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )"
      */
     template <class F, class DF, class DDF>
     auto makeFunctional( const F& f , const DF& J , const DDF& H , const VectorSpace& space)

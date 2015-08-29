@@ -15,17 +15,20 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets minimal accuracy.
+       * @brief Constructor.
+       * @param accuracy minimal accuracy
        */
-      explicit MinimalAccuracy(double minimalAccuracy = 0.25) noexcept;
+      explicit MinimalAccuracy(double accuracy = 0.25) noexcept;
 
       /**
        * @brief Set minimal accuracy.
+       * @param accuracy minimal accuracy
        */
-      void setMinimalAccuracy(double);
+      void setMinimalAccuracy(double accuracy);
 
       /**
-       * @brief Get minimal accuracy.
+       * @brief Access minimal accuracy.
+       * @return minimal accuracy
        */
       double minimalAccuracy() const noexcept;
 

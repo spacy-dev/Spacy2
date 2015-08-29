@@ -13,23 +13,25 @@ namespace Algorithm
   {
   public:
     /**
-     * @brief Constructor. Sets damping factor \f$\nu\f$ and accuracy \f$\varepsilon\f$.
+     * @brief Constructor.
+     * @param nu damping factor \f$\nu\f$
+     * @param eps accuracy \f$\varepsilon\f$.
      */
-    DampingFactor(double nu, double eps);
-
-    /**
-     * @brief Constructor. Sets damping factor \f$\nu\f$. The accuracy is set to \f$1e-3\f$.
-     */
-    DampingFactor(double nu = 1);
+    DampingFactor(double nu, double eps = 1e-3);
 
     /**
      * @brief Set damping factor \f$\nu\f$.
      *
      * If \f$ |\nu-1| < \varepsilon \f$ then \f$\nu\f$ is set to 1.
+     *
+     * @param nu damping factor
      */
-    DampingFactor& operator=(double);
+    DampingFactor& operator=(double nu);
 
-    /// Access damping factor
+    /**
+     * @brief Access damping factor
+     * @return \f$\nu\f$
+     */
     operator double() const;
 
   private:

@@ -7,12 +7,15 @@ namespace Algorithm
 {
   /**
    * @ingroup AlgorithmGroup
-   * @brief A simple model for Lipschitz constants.
+   * @brief A simple model for a Lipschitz constant \f$\omega\f$.
    */
   class LipschitzConstant : public Mixin::Eps
   {
   public:
-    /// Construct Lipschitz constant.
+    /**
+     * @brief Construct Lipschitz constant.
+     * @param initialOmega initial estimate for Lipschitz constant
+     */
     LipschitzConstant(double initialOmega = 1e-3);
 
     /**
@@ -20,19 +23,33 @@ namespace Algorithm
      *
      * If \f$\omega_{new}<0\f$ sets the Lipschitz constant to \f$minFactor * previousOmega\f$.
      * Restricts increase such that \f$\omega = min(\omega_{new},maxFactor * previousOmega)\f$.
+     *
+     * @param newOmega new Lipschitz constant
      */
     LipschitzConstant& operator=(double newOmega);
 
-    /// Access value of Lipschitz constant.
+    /**
+     * @brief Access value of Lipschitz constant.
+     * @return \f$\omega\f$
+     */
     operator double() const;
 
-    /// Access previous value of Lipschitz constant.
+    /**
+     * @brief Access previous value of Lipschitz constant.
+     * @return \f$\omega_{k-1}\f$
+     */
     double previous() const;
 
-    /// Set allowed maximal relative increase.
+    /**
+     * @brief Set allowed maximal relative increase.
+     * @param factor new allowed maximal relative increase
+     */
     void setMaxFactor(double factor);
 
-    /// Set relative decrease for negative estimates.
+    /**
+     * @brief Set relative decrease for negative estimates.
+     * @param factor new relative decrease for negative estimates of the Lipschitz constant
+     */
     void setMinFactor(double factor);
 
   private:

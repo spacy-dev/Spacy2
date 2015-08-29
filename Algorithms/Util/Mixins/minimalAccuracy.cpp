@@ -4,13 +4,13 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    MinimalAccuracy::MinimalAccuracy(double minimalAccuracy) noexcept
-      : minimalAccuracy_(minimalAccuracy)
+    MinimalAccuracy::MinimalAccuracy(double accuracy) noexcept
+      : minimalAccuracy_(accuracy)
     {}
 
-    void MinimalAccuracy::setMinimalAccuracy(double minimalAccuracy)
+    void MinimalAccuracy::setMinimalAccuracy(double accuracy)
     {
-      minimalAccuracy_ = minimalAccuracy;
+      minimalAccuracy_ = accuracy;
       notify();
     }
 

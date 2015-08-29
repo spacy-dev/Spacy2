@@ -17,13 +17,20 @@ namespace Algorithm
     class Timer
     {
     public:
-      /// Start new measurement.
+      /**
+       * @brief Start timer.
+       */
       void startTimer() const;
 
-      /// Get elapsed time
+      /**
+       * @brief Get elapsed time.
+       * @return elapsed in time in specified time unit
+       */
       typename std::chrono::high_resolution_clock::rep elapsedTime() const;
 
-      /// Print elapsed time.
+      /**
+       * @brief Print elapsed time to std::cout.
+       */
       void printElapsedTime() const;
 
     private:

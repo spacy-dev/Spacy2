@@ -1,4 +1,4 @@
-#include "affineCovariantCompositeSteps.hh"
+#include "affineCovariantSolver.hh"
 
 #include "Algorithms/Algorithm/dampingFactor.hh"
 #include "Algorithms/Algorithm/CG/linearSolver.hh"
@@ -15,20 +15,20 @@ namespace Algorithm
 {
   namespace CompositeStep
   {
-    enum class AffineCovariantCompositeSteps::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
+    enum class AffineCovariantSolver::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-    AffineCovariantCompositeSteps::AffineCovariantCompositeSteps(const C2Functional& N, const C2Functional& L, VectorSpace& domain)
+    AffineCovariantSolver::AffineCovariantSolver(const C2Functional& N, const C2Functional& L, VectorSpace& domain)
       : N_(std::make_unique<C2Functional>(N)),
         L_(std::make_unique<C2Functional>(L)),
         domain_(domain)
     {}
 
-    Vector AffineCovariantCompositeSteps::solve()
+    Vector AffineCovariantSolver::solve()
     {
       return solve( domain_.vector() );
     }
 
-    Vector AffineCovariantCompositeSteps::solve(const Vector& x0)
+    Vector AffineCovariantSolver::solve(const Vector& x0)
     {
       auto lastStepWasUndamped = false;
       auto x = x0;
@@ -83,7 +83,7 @@ namespace Algorithm
       return x;
     }
 
-    Vector AffineCovariantCompositeSteps::computeTangentialStep(double nu, const Vector &x, const Vector& dn, bool lastStepWasUndamped) const
+    Vector AffineCovariantSolver::computeTangentialStep(double nu, const Vector &x, const Vector& dn, bool lastStepWasUndamped) const
     {
       if( L_==nullptr ) return Vector(0*x);
 
@@ -92,7 +92,7 @@ namespace Algorithm
       return primal( (*tangentialSolver)( primal(-L_->d1(x)) + primal(-nu*L_->d2(x,dn)) ) );
     }
 
-    std::unique_ptr<IndefiniteLinearSolver> AffineCovariantCompositeSteps::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
+    std::unique_ptr<IndefiniteLinearSolver> AffineCovariantSolver::makeTangentialSolver(double nu, const Vector &x, bool lastStepWasUndamped) const
     {
       auto trcgRelativeAccuracy = minimalAccuracy();
       if( tangentialSolver != nullptr && nu == 1 && lastStepWasUndamped )
@@ -148,7 +148,7 @@ namespace Algorithm
   //    return std::unique_ptr<IndefiniteLinearSolver>( trcg.release() );
     }
 
-    Vector AffineCovariantCompositeSteps::computeNormalStep(const Vector &x) const
+    Vector AffineCovariantSolver::computeNormalStep(const Vector &x) const
     {
       if( N_==nullptr ) return Vector(0*x);
 
@@ -156,13 +156,13 @@ namespace Algorithm
       return computeMinimumNormCorrection(x);
     }
 
-    Vector AffineCovariantCompositeSteps::computeSimplifiedNormalStep(const Vector &trial) const
+    Vector AffineCovariantSolver::computeSimplifiedNormalStep(const Vector &trial) const
     {
       if( N_==nullptr ) return Vector(0*trial);
       return computeMinimumNormCorrection(trial);
     }
 
-    Vector AffineCovariantCompositeSteps::computeMinimumNormCorrection(const Vector& x) const
+    Vector AffineCovariantSolver::computeMinimumNormCorrection(const Vector& x) const
     {
       auto rhs = dual(-L_->d1(x));
       Vector dn0 = 0*x;
@@ -185,14 +185,14 @@ namespace Algorithm
       return dn0 + primal( (*normalSolver)( rhs ) );
     }
 
-    Vector AffineCovariantCompositeSteps::computeLagrangeMultiplier(const Vector& x) const
+    Vector AffineCovariantSolver::computeLagrangeMultiplier(const Vector& x) const
     {
       if( N_ == nullptr || L_ == nullptr ) return Vector(0*x);
       return dual( (*normalSolver)( primal(-L_->d1(x)) ) );
     }
 
     std::tuple<double,Vector,Vector,double,double>
-    AffineCovariantCompositeSteps::computeCompositeStep(double& nu, double norm_Dn,
+    AffineCovariantSolver::computeCompositeStep(double& nu, double norm_Dn,
                                                         const Vector& x, const Vector& Dn, const Vector& Dt)
     {
       auto norm_Dt = norm(Dt);
@@ -244,12 +244,12 @@ namespace Algorithm
 
         if( acceptanceTest != AcceptanceTest::LeftAdmissibleDomain ) acceptanceTest = acceptedSteps(norm_x,norm_dx,eta);
 
-        if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - etaMin)) * omegaL.previous() )
+        if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - minimalDecrease())) * omegaL.previous() )
         {
           if( verbosityLevel() > 1 ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
           acceptanceTest = AcceptanceTest::Passed;
 
-          if( eta < rejectionTolerance)
+          if( !acceptableRelaxedDecrease( eta ) )
           {
             if( verbosityLevel() > 1 ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
             trial -= tau*Dt;
@@ -281,7 +281,7 @@ namespace Algorithm
       return std::make_tuple(tau,dx,ds,norm_x,norm_dx);
     }
 
-    bool AffineCovariantCompositeSteps::convergenceTest(double nu, double tau, double norm_x, double norm_dx)
+    bool AffineCovariantSolver::convergenceTest(double nu, double tau, double norm_x, double norm_dx)
     {
       if( tangentialSolver != nullptr && !tangentialSolver->isPositiveDefinite() ) return false;
       if( nu < 1 || tau < 1 ) return false;
@@ -296,7 +296,7 @@ namespace Algorithm
     }
 
 
-    void AffineCovariantCompositeSteps::updateOmegaC(double norm_x, double norm_dx, double norm_ds)
+    void AffineCovariantSolver::updateOmegaC(double norm_x, double norm_dx, double norm_ds)
     {
       if( N_ == nullptr ) return;
       if( norm_dx < sqrtEps() * norm_x ) return;
@@ -309,7 +309,7 @@ namespace Algorithm
       if( verbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
     }
 
-    double AffineCovariantCompositeSteps::updateOmegaL(const Vector& soc, double q_tau,
+    double AffineCovariantSolver::updateOmegaL(const Vector& soc, double q_tau,
                                                        double tau, double norm_x, double norm_dx, const CompositeStep::CubicModel& cubic)
     {
       if( tangentialSolver == nullptr ) return 1;
@@ -335,7 +335,7 @@ namespace Algorithm
     }
 
 
-    double AffineCovariantCompositeSteps::computeNormalStepDampingFactor(double norm_Dn) const
+    double AffineCovariantSolver::computeNormalStepDampingFactor(double norm_Dn) const
     {
       if( N_ == nullptr ) return 1;
       DampingFactor nu = 1;
@@ -343,7 +343,7 @@ namespace Algorithm
       return nu;
     }
 
-    double AffineCovariantCompositeSteps::computeTangentialStepDampingFactor(double norm_dn, double norm_Dt, const CompositeStep::CubicModel& cubic) const
+    double AffineCovariantSolver::computeTangentialStepDampingFactor(double norm_dn, double norm_Dt, const CompositeStep::CubicModel& cubic) const
     {
       if( L_ == nullptr ) return 1;
       if( norm_Dt < sqrtEps() ) return 1;
@@ -352,16 +352,14 @@ namespace Algorithm
       if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
         maxTau = std::min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-      DampingFactor tau = CompositeStep::findMinimizer( cubic, 0, maxTau , dampingTolerance );
-
-      return tau;
+      return CompositeStep::findMinimizer( cubic, 0, maxTau , dampingAccuracy() );
     }
 
-    AffineCovariantCompositeSteps::AcceptanceTest AffineCovariantCompositeSteps::acceptedSteps(double norm_x, double norm_Dx, double eta)
+    AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(double norm_x, double norm_Dx, double eta)
     {
       if( norm_Dx < eps() * norm_x ) return AcceptanceTest::Passed;
 
-      if( L_ != nullptr && eta < etaMin )
+      if( L_ != nullptr && !acceptableDecrease( eta ) )
       {
         if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
         tangentialStepMonitor = StepMonitor::Rejected;
@@ -378,10 +376,10 @@ namespace Algorithm
       return AcceptanceTest::Passed;
     }
 
-    void AffineCovariantCompositeSteps::regularityTest(double nu, double tau) const
+    void AffineCovariantSolver::regularityTest(double nu, double tau) const
     {
-      if( !regularityTestPassed(nu) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::regularityTest (nu,...)",nu);
-      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantCompositeSteps::regularityTest (...,tau)",tau);
+      if( !regularityTestPassed(nu) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (nu,...)",nu);
+      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (...,tau)",tau);
     }
   }
 }

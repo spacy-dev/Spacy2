@@ -35,13 +35,21 @@ namespace Algorithm
        */
       LinearSolver(Operator A_, CallableOperator P_, const std::string& type );
 
-      /// Copy constructor.
+      /**
+       * @brief Copy constructor.
+       * @param other solver to copy from
+       */
       LinearSolver(const LinearSolver& other);
 
-      /// Apply conjugate gradient solver with right hand side \f$y\f$.
+      /**
+       * @brief Apply conjugate gradient solver.
+       * @param y right hand side \f$y\f$.
+       */
       Vector operator()(const Vector& y) const;
 
-      /// Access conjugate gradient implementation.
+      /**
+       * @brief Access conjugate gradient implementation.
+       */
       Solver& impl();
 
       /**
@@ -50,10 +58,16 @@ namespace Algorithm
        */
       bool isPositiveDefinite() const;
 
-      /// Access preconditioner.
+      /**
+       * @brief Access preconditioner.
+       * @return preconditioner \f$P\f$
+       */
       const CallableOperator& P() const;
 
-      /// Access operator.
+      /**
+       * @brief Access operator.
+       * @return operator \f$A\f$
+       */
       const CallableOperator& A() const;
 
     private:

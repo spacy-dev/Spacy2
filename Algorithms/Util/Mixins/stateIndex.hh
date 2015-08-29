@@ -15,17 +15,20 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets index of state variable.
+       * @brief Constructor.
+       * @param index index of state variable
        */
       explicit StateIndex(unsigned index = 0) noexcept;
 
       /**
        * @brief Set index of state variable.
+       * @param index new index of state variable
        */
       void setStateIndex(unsigned index);
 
       /**
-       * @brief Get index of state variable.
+       * @brief Access index of state variable.
+       * @return index of state variable
        */
       double stateIndex() const noexcept;
 

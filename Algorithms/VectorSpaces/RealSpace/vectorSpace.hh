@@ -10,7 +10,7 @@ namespace Algorithm
     /**
      * @ingroup RealGroup
      * @brief Construct space of real numbers.
-     * @return ::Algorithm::makeHilbertSpace( [](const VectorSpace* space){ return Vector{*space}; } , ScalarProduct{} );
+     * @return ::Algorithm::makeHilbertSpace() "::Algorithm::makeHilbertSpace( [](const VectorSpace* space){ return Vector{*space}; } , ScalarProduct{} )"
      */
     VectorSpace makeHilbertSpace();
   }

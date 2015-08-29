@@ -33,32 +33,32 @@ namespace Algorithm
       norm_{norm}
   {}
 
-  VectorSpace::VectorSpace(VectorSpace&& other)
-    : Mixin::Impl<VectorCreator>{other.impl()} ,
-      norm_{std::move(other.norm_)} ,
-      sp_{std::move(other.sp_)} ,
-      index_{std::move(other.index_)} ,
-      primalSpaces_{std::move(other.primalSpaces_)} ,
-      dualSpaces_{std::move(other.dualSpaces_)}
+  VectorSpace::VectorSpace(VectorSpace&& V)
+    : Mixin::Impl<VectorCreator>{V.impl()} ,
+      norm_{std::move(V.norm_)} ,
+      sp_{std::move(V.sp_)} ,
+      index_{std::move(V.index_)} ,
+      primalSpaces_{std::move(V.primalSpaces_)} ,
+      dualSpaces_{std::move(V.dualSpaces_)}
   {
-    if( &other == other.dualSpace_)
+    if( &V == V.dualSpace_)
       setDualSpace(this);
     else
-      setDualSpace(other.dualSpace_);
+      setDualSpace(V.dualSpace_);
   }
 
-  VectorSpace& VectorSpace::operator=(VectorSpace&& other)
+  VectorSpace& VectorSpace::operator=(VectorSpace&& V)
   {
-    Mixin::Impl<VectorCreator>::operator=(std::move(other));
-    norm_ = std::move(other.norm_);
-    sp_ = std::move(other.sp_);
-    index_ = other.index_;
-    primalSpaces_ = std::move(other.primalSpaces_);
-    dualSpaces_ = std::move(other.dualSpaces_);
-    if( &other == other.dualSpace_)
+    Mixin::Impl<VectorCreator>::operator=(std::move(V));
+    norm_ = std::move(V.norm_);
+    sp_ = std::move(V.sp_);
+    index_ = V.index_;
+    primalSpaces_ = std::move(V.primalSpaces_);
+    dualSpaces_ = std::move(V.dualSpaces_);
+    if( &V == V.dualSpace_)
       setDualSpace(this);
     else
-      setDualSpace(other.dualSpace_);
+      setDualSpace(V.dualSpace_);
     return *this;
   }
 

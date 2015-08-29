@@ -4,13 +4,13 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    RelativeAccuracy::RelativeAccuracy(double relativeAccuracy) noexcept
-      : relativeAccuracy_(relativeAccuracy)
+    RelativeAccuracy::RelativeAccuracy(double accuracy) noexcept
+      : relativeAccuracy_(accuracy)
     {}
 
-    void RelativeAccuracy::setRelativeAccuracy(double relativeAccuracy)
+    void RelativeAccuracy::setRelativeAccuracy(double accuracy)
     {
-      relativeAccuracy_ = relativeAccuracy;
+      relativeAccuracy_ = accuracy;
       notify();
     }
 

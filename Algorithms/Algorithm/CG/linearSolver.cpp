@@ -46,7 +46,7 @@ namespace Algorithm
 
     bool LinearSolver::isPositiveDefinite() const
     {
-      return !cg.encounteredNonConvexity();
+      return !cg.indefiniteOperator();
     }
 
     const CallableOperator& LinearSolver::P() const

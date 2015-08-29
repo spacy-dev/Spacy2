@@ -14,7 +14,12 @@ namespace Algorithm
     class l2Product
     {
     public:
-      /// Compute l2 product \f$(x,y) = \sum_i x_i y_i \f$.
+      /**
+       * @brief Compute l2 product.
+       * @param x vector
+       * @param y vector
+       * @return \f$(x,y) = \sum_i x_i y_i \f$.
+       */
       double operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const;
     };
   }

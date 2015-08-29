@@ -15,28 +15,33 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets lower bound for regularity test.
+       * @brief Constructor.
+       * @param lowerBound lower bound for regularity test
        */
       explicit RegularityTest(double lowerBound = 1e-12) noexcept;
 
       /**
        * @brief Set lower bound of regularity test for termination criteria.
+       * @param lowerBound new lower bound
        */
       void setLowerBound(double lowerBound);
 
       /**
-       * @brief Get lower bound.
+       * @brief Access lower bound.
+       * @return lower bound
        */
       double lowerBound() const noexcept;
 
       /**
        * @brief Apply regularity test.
+       * @param nu damping factor
        * @return \f$nu > lowerBound_\f$
        */
       bool regularityTestPassed(double nu) const noexcept;
 
       /**
        * @brief Apply regularity test.
+       * @param nu damping factor
        * @return \f$nu <= lowerBound_\f$
        */
       bool regularityTestFailed(double nu) const noexcept;

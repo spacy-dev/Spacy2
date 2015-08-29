@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_MIXINS_NUMBER_OF_THREADS_
 #define ALGORITHM_MIXINS_NUMBER_OF_THREADS_
 
-#include "mixinConnection.hh"
-
 namespace Algorithm
 {
   namespace Mixin
@@ -11,26 +9,23 @@ namespace Algorithm
      * @ingroup MixinGroup
      * @brief Mixin class for number of threads
      */
-    class NumberOfThreads : public MixinConnection<NumberOfThreads>
+    class NumberOfThreads
     {
     public:
       /**
        * @brief Set number of allowed threads.
+       * @param nThreads number of threads
        */
       void setNumberOfThreads(unsigned nThreads = 1);
 
       /**
        * @brief Access number of allowed threads.
+       * @return number of allowed threads
        */
       unsigned nThreads() const noexcept;
 
-      /**
-       * @brief update function for observer pattern.
-       */
-      void update(NumberOfThreads* changed);
-
     private:
-      unsigned nThreads_;
+      unsigned nThreads_ = 1;
     };
   }
 }

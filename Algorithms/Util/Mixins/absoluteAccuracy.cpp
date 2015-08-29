@@ -4,8 +4,8 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    AbsoluteAccuracy::AbsoluteAccuracy(double absoluteAccuracy) noexcept
-      : absoluteAccuracy_(absoluteAccuracy)
+    AbsoluteAccuracy::AbsoluteAccuracy(double accuracy) noexcept
+      : absoluteAccuracy_(accuracy)
     {}
 
     void AbsoluteAccuracy::setAbsoluteAccuracy(double absoluteAccuracy)

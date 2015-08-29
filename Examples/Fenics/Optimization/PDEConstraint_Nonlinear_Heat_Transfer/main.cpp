@@ -3,7 +3,7 @@
 #include <dolfin.h>
 
 #include <Algorithms/Adapter/fenics.hh>
-#include <Algorithms/Algorithm/CompositeStep/affineCovariantCompositeSteps.hh>
+#include <Algorithms/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
 #include "NormalStep.h"
 #include "LagrangeFunctional.h"
@@ -75,7 +75,7 @@ int main()
   auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , productSpace );
 
   // composite step solve
-  CompositeStep::AffineCovariantCompositeSteps alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
+  CompositeStep::AffineCovariantSolver alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
   alg_cs.setRelativeAccuracy(1e-9);
   alg_cs.setEps(1e-12);
   alg_cs.setMaxSteps(500);

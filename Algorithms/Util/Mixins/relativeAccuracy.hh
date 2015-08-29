@@ -15,17 +15,20 @@ namespace Algorithm
     {
     public:
       /**
-       * @brief Constructor. Sets relative accuracy.
+       * @brief Constructor.
+       * @param accuracy relative accuracy.
        */
-      explicit RelativeAccuracy(double relativeAccuracy = 1e-15) noexcept;
+      explicit RelativeAccuracy(double accuracy = 1e-15) noexcept;
 
       /**
        * @brief Set relative accuracy.
+       * @param accuracy relative accuracy
        */
-      void setRelativeAccuracy(double);
+      void setRelativeAccuracy(double accuracy);
 
       /**
-       * @brief Get relative accuracy.
+       * @brief Access relative accuracy.
+       * @return relative accuracy
        */
       double relativeAccuracy() const noexcept;
 

@@ -26,7 +26,7 @@ namespace Algorithm
     Vector Solver::solve(const Vector& x, const Vector& b) const
     {
       initializeRegularization();
-      nonconvexity = Nonconvexity::None;
+      definiteness_ = DefiniteNess::PositiveDefinite;
       result = Result::Failed;
 
       terminate.setEps(eps());
@@ -44,20 +44,20 @@ namespace Algorithm
       }
     }
 
-    CG::TerminationCriterion& Solver::terminationCriterion() noexcept
+//    CG::TerminationCriterion& Solver::terminationCriterion() noexcept
+//    {
+//      return terminate;
+//    }
+
+    bool Solver::indefiniteOperator() const noexcept
     {
-      return terminate;
+      return definiteness_ == DefiniteNess::Indefinite;
     }
 
-    bool Solver::encounteredNonConvexity() const noexcept
-    {
-      return nonconvexity == Nonconvexity::Encountered;
-    }
-
-    auto Solver::getEnergyNormOfSolution() const noexcept
-    {
-      return sqrt(energyNorm2);
-    }
+//    auto Solver::getEnergyNormOfSolution() const noexcept
+//    {
+//      return sqrt(energyNorm2);
+//    }
 
     const CallableOperator& Solver::P() const
     {
@@ -179,7 +179,7 @@ namespace Algorithm
         // elsewhere. Chances that a way out of the nonconvexity can be found are small in this case.
         if( step == 1 ) x += q;
         if( verbose() ) std::cout << "    " << type_ << ": Truncating at nonconvexity in iteration " << step << ": " << qAq << std::endl;
-        nonconvexity = Nonconvexity::Encountered;
+        definiteness_ = DefiniteNess::Indefinite;
         result = Result::TruncatedAtNonConvexity;
         return true;
       }
@@ -188,7 +188,7 @@ namespace Algorithm
       {
         updateRegularization(qAq,qPq);
         if( verbose() ) std::cout << "    " << type_ << ": Regularizing at nonconvexity in iteration " << step << "." << std::endl;
-        nonconvexity = Nonconvexity::Encountered;
+        definiteness_ = DefiniteNess::Indefinite;
         result = Result::EncounteredNonConvexity;
         return true;
       }

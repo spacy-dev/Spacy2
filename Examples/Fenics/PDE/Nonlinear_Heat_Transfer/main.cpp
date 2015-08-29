@@ -1,9 +1,10 @@
 #include <dolfin.h>
-#include "NonlinearPoisson.h"
 
-#include "Adapter/fenics.hh"
-#include "Algorithm/Newton/newton.hh"
-#include "inducedScalarProduct.hh"
+#include <Algorithms/Adapter/fenics.hh>
+#include <Algorithms/Algorithm/Newton/newton.hh>
+#include <Algorithms/inducedScalarProduct.hh>
+
+#include "NonlinearPoisson.h"
 
 using namespace dolfin;
 
@@ -14,7 +15,7 @@ class Source : public Expression
   {
     double dx = x[0] - 0.5;
     double dy = x[1] - 0.5;
-    values[0] = 1;//10*exp(-(dx*dx + dy*dy) / 0.02);
+    values[0] = 1;
   }
 };
 
@@ -58,22 +59,27 @@ int main()
   // Compute solution
   using namespace Algorithm;
 
+  // create spaces
   auto domain = Fenics::makeHilbertSpace(V);
   auto range = Fenics::makeHilbertSpace(V);
   connectPrimalDual(domain,range);
   
+  // create operator
   auto A = Fenics::makeOperator( L , a , bcs , domain , range );
-  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.element()) ) );
-//  range.setScalarProduct( inducedScalarProduct( A.linearization(domain.element()) ) );
+  // set scalar product for affine covariant newton method
+  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
+  // specify parameters for Newton's method
   auto p = Algorithm::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
-  auto sol = Algorithm::covariantNewton(A,p);
+  // solve A(x) = 0
+  auto x = Algorithm::covariantNewton(A,p);
 //  auto sol = Algorithm::contravariantNewton(A,p);
 //  auto sol = Algorithm::localNewton(A,p);
-  Fenics::copy(sol,u);
+  
+  Fenics::copy(x,u);
 
   // Save solution in VTK format
   File file("poisson.pvd");

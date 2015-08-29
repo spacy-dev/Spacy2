@@ -25,24 +25,41 @@ namespace Algorithm
         public SupportedOperatorBase<Vector>
     {
     public:
-      /// Construct vector from underlying vector space.
+      /**
+       * @brief Construct vector \f$x\f$ from underlying vector space.
+       * @param space underlying vector space
+       */
       explicit Vector(const ::Algorithm::VectorSpace& space);
 
-      /// Assign from dolfin::Function.
+      /**
+       * @brief Assign from dolfin::Function.
+       * @param v dolfin::Function to assign from
+       */
       Vector& operator=(const dolfin::Function& v);
 
 //      Vector& axpy(double a, const AbstractVector& y);
 
-      /// Degrees of freedom.
+      /**
+       * @brief Degrees of freedom.
+       * @return number of degrees of freedom (size of coefficient vector)
+       */
       unsigned size() const;
 
-      /// Access reference to underlying vector.
+      /**
+       * @brief Access reference to underlying vector.
+       */
       dolfin::GenericVector& impl();
 
-      /// Access reference to underlying vector.
+      /**
+       * @brief Access reference to underlying vector.
+       */
       const dolfin::GenericVector& impl() const;
 
-      /// Apply as dual element.
+      /**
+       * @brief Apply as dual element.
+       * @param y primal vector
+       * @return \f$x(y)\f$
+       */
       double operator()(const Vector& y) const;
 
     private:

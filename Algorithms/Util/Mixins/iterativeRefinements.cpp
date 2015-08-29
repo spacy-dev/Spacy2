@@ -4,13 +4,13 @@ namespace Algorithm
 {
   namespace Mixin
   {
-    IterativeRefinements::IterativeRefinements(unsigned iterativeRefinements)
-      : iterativeRefinements_(iterativeRefinements)
+    IterativeRefinements::IterativeRefinements(unsigned refinements)
+      : iterativeRefinements_(refinements)
     {}
 
-    void IterativeRefinements::setIterativeRefinements(unsigned iterativeRefinements)
+    void IterativeRefinements::setIterativeRefinements(unsigned refinements)
     {
-      iterativeRefinements_ = iterativeRefinements;
+      iterativeRefinements_ = refinements;
       notify();
     }
 

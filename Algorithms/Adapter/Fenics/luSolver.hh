@@ -36,7 +36,11 @@ namespace Algorithm
                bool symmetric = false, const std::string& solverName = "mumps");
 
 
-      /// Compute \f$A^{-1}x\f$.
+      /**
+       * @brief Apply LU-solver.
+       * @param x right hand side for \f$A^{-1}\f$
+       * @return \f$A^{-1}x\f$.
+       */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
 
     private:
@@ -65,7 +69,11 @@ namespace Algorithm
                const VectorSpace& domain , const VectorSpace& range,
                bool symmetric = false, const std::string& solverName = "mumps");
 
-      /// Compute \f$A^{-T}x\f$.
+      /**
+       * @brief Apply LU-solver.
+       * @param x right hand side for \f$A^{-T}\f$
+       * @return \f$A^{-T}x\f$.
+       */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const;
 
     private:

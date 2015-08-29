@@ -16,17 +16,19 @@ namespace Algorithm
     public:
       /**
        * @brief Constructor.
-       * @param iterativeRefinements number of iterative refinements.
+       * @param refinements number of iterative refinements.
        */
-      explicit IterativeRefinements(unsigned iterativeRefinements = 0);
+      explicit IterativeRefinements(unsigned refinements = 0);
 
       /**
        * @brief Set number of iterative refinements.
+       * @param refinements number of iterative refinements
        */
-      void setIterativeRefinements(unsigned iterativeRefinements);
+      void setIterativeRefinements(unsigned refinements);
 
       /**
-       * @brief Get number of iterative refinements.
+       * @brief Access number of iterative refinements.
+       * @return number of iterative refinements
        */
       unsigned iterativeRefinements() const;
 

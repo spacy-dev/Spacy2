@@ -65,7 +65,10 @@ namespace Algorithm
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      /// Copy constructor.
+      /**
+       * @brief Copy constructor.
+       * @param B object to copy from
+       */
       Operator(const Operator& B)
         : OperatorBase(B),
           DisableAssembly(B),
@@ -79,7 +82,10 @@ namespace Algorithm
           rbegin_(B.rbegin_), rend_(B.rend_), cbegin_(B.cbegin_), cend_(B.cend_)
       {}
 
-      /// Copy assignment.
+      /**
+       * @brief Copy assignment.
+       * @param B object to copy from
+       */
       Operator& operator=(const Operator& B)
       {
         disableAssembley(B.assemblyIsDisabled());
@@ -97,14 +103,22 @@ namespace Algorithm
         cend_ = B.cend_;
       }
 
-      /// Move constructor.
-      Operator(Operator&&) = default;
-
-      /// Move assignment.
-      Operator& operator=(Operator&&) = default;
+      /**
+       * @brief Move constructor.
+       * @param B object to move from
+       */
+      Operator(Operator&& B) = default;
 
       /**
-       * @brief Compute \f$A(x)\f$.
+       * @brief Move assignment.
+       * @param B object to move from
+       */
+      Operator& operator=(Operator&& B) = default;
+
+      /**
+       * @brief Apply operator.
+       * @param x argument
+       * @return \f$A(x)\f$
        */
       ::Algorithm::Vector operator()(const ::Algorithm::Vector& x) const
       {
@@ -119,6 +133,9 @@ namespace Algorithm
 
       /**
        * @brief Compute \f$A'(x)dx\f$.
+       * @param x current iterate
+       * @param dx correction
+       * @return \f$A'(x)dx\f$
        */
       ::Algorithm::Vector d1(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const
       {
@@ -138,7 +155,8 @@ namespace Algorithm
 
       /**
        * @brief Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
-       * @see LinearizedOperator, LinearOperator, LinearOperatorConcept
+       * @param x point of linearization
+       * @see LinearizedOperator, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
       ::Algorithm::LinearOperator linearization(const ::Algorithm::Vector& x) const
       {
@@ -204,7 +222,7 @@ namespace Algorithm
      * @param rend one after the last row to be considered in the definition of f
      * @param cbegin first column to be considered in the definition of f
      * @param cend one after the last column to be considered in the definition of f
-     * @return ::Algorithm::Kaskade::Operator<OperatorDefinition>( f , domain , range , rbegin , rend , cbegin , cend )
+     * @return @ref Operator "::Algorithm::Kaskade::Operator<OperatorDefinition>( f , domain , range , rbegin , rend , cbegin , cend )"
      *
      * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
      * a system of equation.

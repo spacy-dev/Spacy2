@@ -1,7 +1,7 @@
 include /home/ignaz/lib/Kaskade7.3/Makefile.Local
 include /home/ignaz/lib/Kaskade7.3/Makefile.Rules
 
-INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) -I/home/ignaz/C++/FSA/Algorithms
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) -I/home/ignaz/C++/FSA
 FLAGS = $(WFLAGS) $(OPTFLAGS)
 
 laplace: laplace.o Makefile $(KASKADE7)/libs/libkaskade.a 

@@ -20,12 +20,14 @@ namespace Algorithm
   {
     /**
      * @ingroup FenicsGroup
-     * @brief Operator interface for FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
+     * @brief %Operator interface for FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
      * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
-     * @see C1Operator, C1OperatorConcept
+     * @see @ref C1OperatorAnchor "C1Operator", @ref C1OperatorConceptAnchor "C1OperatorConcept"
      */
     template <class ResidualForm, class JacobianForm>
-    class Operator : public OperatorBase , public Mixin::DisableAssembly
+    class Operator :
+        public OperatorBase ,
+        public Mixin::DisableAssembly
     {
     public:
       /**
@@ -64,7 +66,10 @@ namespace Algorithm
         copyCoefficients(J,J_);
       }
 
-      /// Move constructor.
+      /**
+       * @brief Move constructor.
+       * @param other object to move from
+       */
       Operator(Operator&& other)
         : OperatorBase( other ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
@@ -78,7 +83,10 @@ namespace Algorithm
         copyCoefficients(other.J_,J_);
       }
 
-      /// Copy constructor.
+      /**
+       * @brief Move constructor.
+       * @param other object to copy from
+       */
       Operator(const Operator& other)
         : OperatorBase( other ) ,
           Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
@@ -92,7 +100,10 @@ namespace Algorithm
         copyCoefficients(other.J_,J_);
       }
 
-      /// Copy assignment.
+      /**
+       * @brief Copy assignment.
+       * @param other object to copy from
+       */
       Operator& operator=(const Operator& other)
       {
         OperatorBase::operator=( other );
@@ -107,7 +118,10 @@ namespace Algorithm
         copyCoefficients(other.J_,J_);
       }
 
-      /// Move assignment.
+      /**
+       * @brief Move assignment.
+       * @param other object to move from
+       */
       Operator& operator=(Operator&& other)
       {
         OperatorBase::operator=( other );
@@ -136,6 +150,9 @@ namespace Algorithm
 
       /**
        * @brief Compute \f$A'(x)dx\f$.
+       * @param x iterate
+       * @param dx correction
+       * @return \f$A'(x)dx\f$
        */
       ::Algorithm::Vector d1(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx) const
       {
@@ -154,6 +171,8 @@ namespace Algorithm
 
       /**
        * @brief Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
+       * @param x current iterate
+       * @return LinearizedOperator
        * @see LinearizedOperator, LinearOperator, LinearOperatorConcept
        */
       auto linearization(const ::Algorithm::Vector& x) const
@@ -218,7 +237,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in Fenics.
-     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , domain , range )
+     * @return @ref Operator "::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , domain , range )"
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
@@ -230,7 +249,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ from FEniCS(dolfin).
-     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , domain , range )
+     * @return @ref Operator "::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , domain , range )"
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, VectorSpace& domain, VectorSpace& range)
@@ -241,7 +260,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from FEniCS(dolfin).
-     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )
+     * @return @ref Operator "::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )"
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, VectorSpace& space)
@@ -252,7 +271,7 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from FEniCS(dolfin).
-     * @return ::Algorithm::Fenics::Operator<ResidualForm,JacobianForm>( F , J , space , space )
+     * @return @ref Operator "Fenics::Operator<ResidualForm,JacobianForm>( F , J , space , space )"
      */
     template <class ResidualForm, class JacobianForm>
     auto makeOperator(ResidualForm& F, JacobianForm& J, VectorSpace& space)
