@@ -10,7 +10,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     Vector::Vector(const ::Algorithm::VectorSpace& space)
       : VectorBase<Vector>(space), //Impl<dolfin::Function>( f )

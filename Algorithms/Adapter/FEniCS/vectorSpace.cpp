@@ -10,7 +10,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     VectorCreator::VectorCreator(const dolfin::FunctionSpace& space)
       : Mixin::Impl<dolfin::FunctionSpace>(space)

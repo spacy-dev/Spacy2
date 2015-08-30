@@ -12,7 +12,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     void copyCoefficients(const dolfin::Form& F, dolfin::Form& G)
     {

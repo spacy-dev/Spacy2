@@ -105,7 +105,7 @@ namespace Algorithm
      *
      * This is necessary to allow evaluation of \f$y(x)\f$ for \f$ x\in X \f$ and \f$ y\in Y\f$.
      */
-    void addPrimalSpace(const VectorSpace& Y);
+//    void addPrimalSpace(const VectorSpace& Y);
 
     /**
      * @brief Add space \f$Y\f$ for which this space \f$X\f$ acts as primal space.
@@ -122,7 +122,7 @@ namespace Algorithm
     /**
      * @brief Checks whether \f$Y\f$ has been assigned as primal space with respect to this space \f$X\f$.
      */
-    bool isDualWRT(const VectorSpace& Y) const;
+//    bool isDualWRT(const VectorSpace& Y) const;
 
     /**
      * @brief Checks whether this space is a hilbert space.

@@ -5,7 +5,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     /// @cond
     template <class T>

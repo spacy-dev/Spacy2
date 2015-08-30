@@ -10,60 +10,67 @@ namespace Algorithm
   /// \endcond
 
   /**
-   * @brief Base class for functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
+   * @brief Base class for twice differentiable functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
    */
-  template <class Impl>
-  class FunctionalBase
+  template <class Functional>
+  class C2FunctionalBase
   {
   public:
     /**
      * @brief Constructor.
      * @param domain domain space \f$X\f$.
      */
-    explicit FunctionalBase(const VectorSpace& domain)
+    explicit C2FunctionalBase(const VectorSpace& domain)
       : domain_(domain)
     {}
 
     /**
      * @brief Compute first directional derivative \f$f'(x) \in X^* \f$.
+     *
+     * Calls Functional::d1_(x) via CRTP.
+     *
      * @param x current iterate
      * @return \f$f'(x)\f$
      */
-    Vector d1(const Vector& x) const
+    ::Algorithm::Vector d1(const ::Algorithm::Vector& x) const
     {
-      return static_cast<const Impl*>(this)->d1_(x);
+      return static_cast<const Functional*>(this)->d1_(x);
     }
 
     /**
-     * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow \mathbb{R} \f$.
+     * @brief Compute first directional derivative \f$f'(x)dx \in \mathbb{R} \f$.
+     *
      * @param x current iterate
      * @param dx perturbation
      * @return \f$f'(x)dx\f$
      */
-    double d1(const Vector &x, const Vector& dx) const
+    double d1(const ::Algorithm::Vector &x, const ::Algorithm::Vector& dx) const
     {
       return d1(x)(dx);
     }
 
     /**
-     * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
+     * @brief Compute second directional derivative \f$f''(x)dx\in X^* \f$.
+     *
+     * Calls Functionals::d2_(x) via CRTP.
+     *
      * @param x current iterate
      * @param dx perturbation
      * @return \f$f''(x)dx\f$
      */
-    Vector d2(const Vector& x, const Vector& dx) const
+    ::Algorithm::Vector d2(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const
     {
-      return static_cast<const Impl*>(this)->d2_(x,dx);
+      return static_cast<const Functional*>(this)->d2_(x,dx);
     }
 
     /**
-     * @brief Compute second directional derivative \f$f''(x):\ X\times X \rightarrow \mathbb{R} \f$.
+     * @brief Compute second directional derivative \f$f''(x)(dx,dy) \in \mathbb{R} \f$.
      * @param x current iterate
      * @param dx perturbation
      * @param dy perturbation
      * @return \f$f''(x)(dx,dy)\f$
      */
-    double d2(const Vector &x, const Vector &dx, const Vector& dy) const
+    double d2(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx, const ::Algorithm::Vector& dy) const
     {
       return d2(x,dx)(dy);
     }

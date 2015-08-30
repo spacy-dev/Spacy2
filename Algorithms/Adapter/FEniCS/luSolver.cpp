@@ -24,7 +24,7 @@ namespace Algorithm
     }
   }
 
-  namespace Fenics
+  namespace FEniCS
   {
     LUSolver::LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& space,
                        const VectorSpace& domain , const VectorSpace& range,

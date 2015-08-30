@@ -1,8 +1,7 @@
 #ifndef ALGORITHM_UTIL_INCOMPATIBLESPACEEXCEPTION_HH
 #define ALGORITHM_UTIL_INCOMPATIBLESPACEEXCEPTION_HH
 
-#include <string>
-#include <stdexcept>
+#include "genericException.hh"
 
 namespace Algorithm
 {
@@ -10,16 +9,15 @@ namespace Algorithm
    * @ingroup ExceptionGroup
    * @brief Exception to be thrown when encountering incompatible spaces.
    */
-  class IncompatibleSpaceException : public std::runtime_error
+  class IncompatibleSpaceException : public GenericException
   {
   public:
     /**
      * @brief Constructor.
-     * @param function name of function that throws
      * @param spaceIndex1 index of first space
      * @param spaceIndex2 index of second space
      */
-    IncompatibleSpaceException(const std::string& function, unsigned spaceIndex1, unsigned spaceIndex2);
+    IncompatibleSpaceException(unsigned spaceIndex1, unsigned spaceIndex2);
   };
 }
 

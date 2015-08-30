@@ -1,5 +1,8 @@
 #include "vectorSpace.hh"
 
+#include "VectorSpaces/productSpace.hh"
+#include "Util/cast.hh"
+
 #include <boost/type_erasure/is_empty.hpp>
 
 #include <cmath>
@@ -14,7 +17,7 @@ namespace Algorithm
     {
     public:
       explicit HilbertSpaceNorm(ScalarProduct sp)
-        : sp_(sp)
+        : sp_(std::move(sp))
       {}
 
       double operator()(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
@@ -95,10 +98,10 @@ namespace Algorithm
   }
 
 
-  void VectorSpace::addPrimalSpace(const VectorSpace& Y)
-  {
-    primalSpaces_.push_back(Y.index());
-  }
+//  void VectorSpace::addPrimalSpace(const VectorSpace& Y)
+//  {
+//    primalSpaces_.push_back(Y.index());
+//  }
 
   void VectorSpace::addDualSpace(const VectorSpace& Y)
   {
@@ -114,14 +117,14 @@ namespace Algorithm
     return false;
   }
 
-  bool VectorSpace::isDualWRT(const VectorSpace& Y) const
-  {
-    for( auto index : primalSpaces_ )
-      if( index == Y.index() )
-        return true;
+//  bool VectorSpace::isDualWRT(const VectorSpace& Y) const
+//  {
+//    for( auto index : primalSpaces_ )
+//      if( index == Y.index() )
+//        return true;
 
-    return false;
-  }
+//    return false;
+//  }
 
   const VectorSpace& VectorSpace::dualSpace() const
   {
@@ -161,13 +164,26 @@ namespace Algorithm
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);
-    V.addPrimalSpace(V);
+//    V.addPrimalSpace(V);
+
+    if( is<ProductSpace::VectorCreator>(creator) )
+    {
+      auto& productSpaceCreator = cast_ref<ProductSpace::VectorCreator>(creator);
+      for( auto i = 0u; i < productSpaceCreator.subSpaces().size(); ++i)
+      {
+        VectorSpace* subSpace = productSpaceCreator.subSpace_ptr(i);
+        subSpace->setDualSpace(subSpace);
+        subSpace->addDualSpace(*subSpace);
+//        subSpace->addPrimalSpace(*subSpace);
+      }
+    }
+
     return std::move(V);
   }
 
   void connectPrimalDual(VectorSpace& X, VectorSpace& Y)
   {
     X.addDualSpace( Y );
-    Y.addPrimalSpace( X );
+//    Y.addPrimalSpace( X );
   }
 }

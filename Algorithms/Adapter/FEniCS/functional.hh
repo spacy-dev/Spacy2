@@ -9,7 +9,6 @@
 
 #include "Algorithms/Util/cast.hh"
 #include "Algorithms/Util/Base/functionalBase.hh"
-#include "Algorithms/Util/Mixins/disableAssembly.hh"
 #include "Algorithms/Util/Mixins/primalDualSwitch.hh"
 
 #include "assignXIfPresent.hh"
@@ -18,7 +17,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     /**
      * @ingroup FenicsGroup
@@ -27,12 +26,10 @@ namespace Algorithm
      * @tparam DF dolfin::Form describing the derivative
      * @tparam DDF dolfin::Form describing the second derivative
      * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
-     * @see C2Functional, C2FunctionalConcept
+     * @see @ref C2FunctionalAnchor "C2Functional", @ref C2FunctionalConceptAnchor "C2FunctionalConcept"
      */
     template <class F, class DF, class DDF>
-    class Functional :
-        public FunctionalBase< Functional<F,DF,DDF> > ,
-        public Mixin::DisableAssembly
+    class Functional : public C2FunctionalBase< Functional<F,DF,DDF> >
     {
     public:
       /**
@@ -45,7 +42,7 @@ namespace Algorithm
        */
       Functional(const F& f, const DF& J, const DDF& H,
                  const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
-        : FunctionalBase< Functional<F,DF,DDF> >( space ),
+        : C2FunctionalBase< Functional<F,DF,DDF> >( space ),
           f_( f.mesh_shared_ptr() ),
           J_( J.function_space(0) ),
           H_( H.function_space(0) , H.function_space(1) ),
@@ -56,81 +53,93 @@ namespace Algorithm
         copyCoefficients(H,H_);
       }
 
-      /// Copy constructor.
-      Functional(const Functional& other)
-        : FunctionalBase< Functional<F,DF,DDF> >( other.domain() ) ,
-          Mixin::DisableAssembly( other.assemblyIsDisabled() ) ,
-          f_( other.f_.mesh_shared_ptr() ) ,
-          J_( other.J_.function_space(0) ) ,
-          H_( other.H_.function_space(0) , other.H_.function_space(1) ) ,
-          bcs_( other.bcs_ ),
-          A_( (other.A_!=nullptr) ? other.A_->copy() : nullptr ) ,
-          b_( (other.b_!=nullptr) ? other.b_->copy() : nullptr ) ,
-          value_( other.value_ ) ,
-          valueAssembled_( other.valueAssembled_ ) ,
-          oldX_f_(other.oldX_f_) , oldX_J_(other.oldX_J_) , oldX_H_(other.oldX_H_)
+      /**
+       * @brief Copy constructor.
+       * @param g functional to copy from
+       */
+      Functional(const Functional& g)
+        : C2FunctionalBase< Functional<F,DF,DDF> >( g.domain() ) ,
+          f_( g.f_.mesh_shared_ptr() ) ,
+          J_( g.J_.function_space(0) ) ,
+          H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
+          bcs_( g.bcs_ ),
+          A_( (g.A_!=nullptr) ? g.A_->copy() : nullptr ) ,
+          b_( (g.b_!=nullptr) ? g.b_->copy() : nullptr ) ,
+          value_( g.value_ ) ,
+          valueAssembled_( g.valueAssembled_ ) ,
+          oldX_f_(g.oldX_f_) , oldX_J_(g.oldX_J_) , oldX_H_(g.oldX_H_)
       {
-        copyCoefficients(other.f_,f_);
-        copyCoefficients(other.J_,J_);
-        copyCoefficients(other.H_,H_);
+        copyCoefficients(g.f_,f_);
+        copyCoefficients(g.J_,J_);
+        copyCoefficients(g.H_,H_);
       }
 
-      /// Copy assignment.
-      Functional& operator=(const Functional& other)
+      /**
+       * @brief Copy assignment.
+       * @param g functional to copy from
+       */
+      Functional& operator=(const Functional& g)
       {
-        disableAssembly( other.assemblyIsDisabled() );
-        bcs_ = other.bcs_;
-        A_ = (other.A_!=nullptr) ? other.A_->copy() : nullptr;
-        b_ = (other.b_!=nullptr) ? other.b_->copy() : nullptr;
-        value_ = other.value_;
-        valueAssembled_ = other.valueAssembled_;
-        oldX_f_ = other.oldX_f_;
-        oldX_J_ = other.oldX_J_;
-        oldX_H_ = other.oldX_H_;
+        bcs_ = g.bcs_;
+        A_ = (g.A_!=nullptr) ? g.A_->copy() : nullptr;
+        b_ = (g.b_!=nullptr) ? g.b_->copy() : nullptr;
+        value_ = g.value_;
+        valueAssembled_ = g.valueAssembled_;
+        oldX_f_ = g.oldX_f_;
+        oldX_J_ = g.oldX_J_;
+        oldX_H_ = g.oldX_H_;
 
-        copyCoefficients(other.f_,f_);
-        copyCoefficients(other.J_,J_);
-        copyCoefficients(other.H_,H_);
+        copyCoefficients(g.f_,f_);
+        copyCoefficients(g.J_,J_);
+        copyCoefficients(g.H_,H_);
       }
 
-      /// Move constructor.
-      Functional(Functional&& other)
-        : FunctionalBase< Functional<F,DF,DDF> >( other.domain() ) ,
-          Mixin::DisableAssembly( other.assemblyIsDisabled() ) ,
-          f_( other.f_.mesh_shared_ptr() ) ,
-          J_( other.J_.function_space(0) ) ,
-          H_( other.H_.function_space(0) , other.H_.function_space(1) ) ,
-          bcs_( other.bcs_ ),
-          A_( std::move(other.A_) ) ,
-          b_( std::move(other.b_) ) ,
-          value_( other.value_ ) ,
-          valueAssembled_( other.valueAssembled_ ) ,
-          oldX_f_(std::move(other.oldX_f_)) , oldX_J_(std::move(other.oldX_J_)) , oldX_H_(std::move(other.oldX_H_))
+      /**
+       * @brief Move constructor.
+       * @param g functional to move from
+       */
+      Functional(Functional&& g)
+        : C2FunctionalBase< Functional<F,DF,DDF> >( g.domain() ) ,
+          f_( g.f_.mesh_shared_ptr() ) ,
+          J_( g.J_.function_space(0) ) ,
+          H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
+          bcs_( g.bcs_ ),
+          A_( std::move(g.A_) ) ,
+          b_( std::move(g.b_) ) ,
+          value_( g.value_ ) ,
+          valueAssembled_( g.valueAssembled_ ) ,
+          oldX_f_(std::move(g.oldX_f_)) , oldX_J_(std::move(g.oldX_J_)) , oldX_H_(std::move(g.oldX_H_))
       {
-        copyCoefficients(other.f_,f_);
-        copyCoefficients(other.J_,J_);
-        copyCoefficients(other.H_,H_);
+        copyCoefficients(g.f_,f_);
+        copyCoefficients(g.J_,J_);
+        copyCoefficients(g.H_,H_);
       }
 
-      /// Move assignment.
-      Functional& operator=(Functional&& other)
+      /**
+       * @brief Move assignment.
+       * @param g functional to move from
+       */
+      Functional& operator=(Functional&& g)
       {
-        disableAssembly( other.assemblyIsDisabled() );
-        bcs_ = std::move(other.bcs_);
-        A_ = std::move(other.A_);
-        b_ = std::move(other.b_);
-        value_ = other.value_;
-        valueAssembled_ = other.valueAssembled_;
-        oldX_f_ = std::move(other.oldX_f_);
-        oldX_J_ = std::move(other.oldX_J_);
-        oldX_H_ = std::move(other.oldX_H_);
+        bcs_ = std::move(g.bcs_);
+        A_ = std::move(g.A_);
+        b_ = std::move(g.b_);
+        value_ = g.value_;
+        valueAssembled_ = g.valueAssembled_;
+        oldX_f_ = std::move(g.oldX_f_);
+        oldX_J_ = std::move(g.oldX_J_);
+        oldX_H_ = std::move(g.oldX_H_);
 
-        copyCoefficients(other.f_,f_);
-        copyCoefficients(other.J_,J_);
-        copyCoefficients(other.H_,H_);
+        copyCoefficients(g.f_,f_);
+        copyCoefficients(g.J_,J_);
+        copyCoefficients(g.H_,H_);
       }
 
-      /// Compute functional value \f$f(x)\f$.
+      /**
+       * @brief Apply functional.
+       * @param x argument
+       * @return \f$f(x)\f$
+       */
       double operator()(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
@@ -140,10 +149,10 @@ namespace Algorithm
 
       /**
        * @cond
-       * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow X^* \f$.
+       * @brief Compute first directional derivative \f$f'(x) \in X^* \f$.
        *
-       * Actual implementation of d1 is provided in base class FunctionalBase.
-       * @see ::Algorithm::FunctionalBase
+       * Actual implementation of d1 is provided in base class C2FunctionalBase.
+       * @see C2FunctionalBase
        */
       ::Algorithm::Vector d1_(const ::Algorithm::Vector &x) const
       {
@@ -155,10 +164,10 @@ namespace Algorithm
       }
 
       /**
-       * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
+       * @brief Compute second directional derivative \f$f''(x) \in X^* \f$.
        *
-       * Actual implementation of d2 is provided in base class FunctionalBase.
-       * @see ::Algorithm::FunctionalBase
+       * Actual implementation of d2 is provided in base class C2FunctionalBase.
+       * @see C2FunctionalBase
        */
       ::Algorithm::Vector d2_(const ::Algorithm::Vector &x, const ::Algorithm::Vector &dx) const
       {
@@ -178,16 +187,15 @@ namespace Algorithm
 
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
-       * @see Hessian, LinearOperator, LinearOperatorConcept
+       * @param x point of linearization
+       * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      auto hessian(const ::Algorithm::Vector& x) const
+      Hessian hessian(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
         assert( A_ != nullptr );
-        auto newFunctional = *this;
-        newFunctional.disableAssembly();
-        return Hessian(std::move(newFunctional), x, LUSolver(*A_,*J_.function_space(0),this->domain().dualSpace(),this->domain(),true) );
+        return Hessian(*this, x, LUSolver(*A_,*J_.function_space(0),this->domain().dualSpace(),this->domain(),true) );
       }
 
     private:
@@ -208,7 +216,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$f'(x)\f$.
       void assembleJacobian(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( b_ != nullptr && (oldX_J_==x) ) return;
 
         auto x_ = dolfin::Function( J_.function_space(0) );
@@ -225,8 +232,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$f''(x)\f$.
       void assembleHessian(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
-
         if( A_ != nullptr && (oldX_H_==x) ) return;
 
         auto x_ = dolfin::Function( J_.function_space(0) );
@@ -254,25 +259,34 @@ namespace Algorithm
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ as used in FEniCS.
+     * @param f form for the evaluation of \f$f\f$.
+     * @param J form for the evaluation of \f$f'\f$
+     * @param H form for the evaluation of \f$f''\f$
+     * @param bcs Dirichlet boundary conditions
+     * @param space domain space \f$X\f$
      * @return @ref Functional "::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )"
      */
     template <class F, class DF, class DDF>
     auto makeFunctional( const F& f , const DF& J , const DDF& H ,
                          const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
     {
-      return Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space );
+      return Functional<F,DF,DDF>( f , J , H , bcs , space );
     }
 
     /**
      * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$
      * with out Dirichlet boundary conditions as used in FEniCS.
+     * @param f form for the evaluation of \f$f\f$.
+     * @param J form for the evaluation of \f$f'\f$
+     * @param H form for the evaluation of \f$f''\f$
+     * @param space domain space \f$X\f$
      * @return @ref Functional "::Algorithm::Fenics::Functional<F,DF,DDF>( f , J , H , bcs , space )"
      */
     template <class F, class DF, class DDF>
     auto makeFunctional( const F& f , const DF& J , const DDF& H , const VectorSpace& space)
     {
-      return Fenics::Functional<F,DF,DDF>( f , J , H , {} , space );
+      return Functional<F,DF,DDF>( f , J , H , {} , space );
     }
   }
 }

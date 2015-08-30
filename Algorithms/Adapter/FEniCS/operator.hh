@@ -7,7 +7,6 @@
 
 #include "Algorithms/linearizedOperator.hh"
 #include "Algorithms/vectorSpace.hh"
-#include "Algorithms/Util/Mixins/disableAssembly.hh"
 #include "Algorithms/Util/Base/operatorBase.hh"
 
 #include "luSolver.hh"
@@ -16,7 +15,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     /**
      * @ingroup FenicsGroup
@@ -25,9 +24,7 @@ namespace Algorithm
      * @see @ref C1OperatorAnchor "C1Operator", @ref C1OperatorConceptAnchor "C1OperatorConcept"
      */
     template <class ResidualForm, class JacobianForm>
-    class Operator :
-        public OperatorBase ,
-        public Mixin::DisableAssembly
+    class Operator : public OperatorBase
     {
     public:
       /**
@@ -72,7 +69,6 @@ namespace Algorithm
        */
       Operator(Operator&& other)
         : OperatorBase( other ) ,
-          Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( std::move(other.bcs_) ) ,
@@ -89,7 +85,6 @@ namespace Algorithm
        */
       Operator(const Operator& other)
         : OperatorBase( other ) ,
-          Mixin::DisableAssembly(other.assemblyIsDisabled()) ,
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( other.bcs_ ) ,
@@ -107,7 +102,6 @@ namespace Algorithm
       Operator& operator=(const Operator& other)
       {
         OperatorBase::operator=( other );
-        disableAssembly(other.assemblyIsDisabled());
         F_ = other.F_;
         J_ = other.J_;
         bcs_ = other.bcs_;
@@ -125,7 +119,6 @@ namespace Algorithm
       Operator& operator=(Operator&& other)
       {
         OperatorBase::operator=( other );
-        disableAssembly(other.assemblyIsDisabled());
         F_ = other.F_;
         J_ = other.J_;
         bcs_ = std::move(other.bcs_);
@@ -179,16 +172,13 @@ namespace Algorithm
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
         assert(A_ != nullptr);
-        Operator newOp = Operator(*this);
-        newOp.disableAssembly();
-        return LinearizedOperator( std::move(newOp) , x , LUSolver( *A_ , *F_.function_space(0) , range() , domain() ) );
+        return LinearizedOperator( *this , x , LUSolver( *A_ , *F_.function_space(0) , range() , domain() ) );
       }
 
     private:
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( b_ != nullptr && (oldX_F == x) ) return;
 
         auto x_ = dolfin::Function( J_.function_space(0) );
@@ -208,7 +198,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( A_ != nullptr && ( oldX_J == x ) ) return;
 
         auto x_ = dolfin::Function( J_.function_space(0) );

@@ -1,5 +1,6 @@
 #include "vector.hh"
 
+#include "Algorithms/vector.hh"
 #include <cmath>
 
 namespace Algorithm
@@ -22,6 +23,7 @@ namespace Algorithm
 
     double Vector::operator()(const Vector& y) const
     {
+      checkDualPairing(*this,y);
       return impl() * y.impl();
     }
 

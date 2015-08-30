@@ -44,12 +44,12 @@ int main()
   using namespace Algorithm;
 
   // create spaces
-  auto domain = Fenics::makeHilbertSpace(V);
-  auto range = Fenics::makeHilbertSpace(V);
+  auto domain = FEniCS::makeHilbertSpace(V);
+  auto range = FEniCS::makeHilbertSpace(V);
   connectPrimalDual(domain,range);
   
   // create operator
-  auto A = Fenics::makeOperator( L , a , domain , range );
+  auto A = FEniCS::makeOperator( L , a , domain , range );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
@@ -63,7 +63,7 @@ int main()
 //  auto x = Algorithm::contravariantNewton(A,p);
 //  auto x = Algorithm::localNewton(A,p);
   
-  Fenics::copy(x,u);
+  FEniCS::copy(x,u);
 
   
   // Save solution in VTK format

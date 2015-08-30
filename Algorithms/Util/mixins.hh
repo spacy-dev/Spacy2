@@ -7,7 +7,6 @@
 #include "Mixins/controlIndex.hh"
 #include "Mixins/dampingAccuracy.hh"
 #include "Mixins/decreaseCondition.hh"
-#include "Mixins/disableAssembly.hh"
 #include "Mixins/eps.hh"
 #include "Mixins/impl.hh"
 #include "Mixins/iterativeRefinements.hh"

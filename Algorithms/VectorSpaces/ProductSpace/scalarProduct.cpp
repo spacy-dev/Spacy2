@@ -11,9 +11,7 @@ namespace Algorithm
   {
     double ScalarProduct::operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
     {
-      if( x.space()->index() != y.space()->index() )
-        throw IncompatibleSpaceException("ProductSpace::ScalarProduct",x.space()->index(),y.space()->index());
-
+      checkSpaceCompatibility(x,y);
       const auto& x_ = cast_ref<Vector>(x);
       const auto& y_ = cast_ref<Vector>(y);
 
@@ -28,7 +26,7 @@ namespace Algorithm
 
       auto result = 0.;
       for( auto i : x_.creator().primalSubSpaceIds() )
-        result += x_.variable(i)( y_.variable(i) );
+        result += x_.variable(i) * y_.variable(i);
       return result;
     }
   }

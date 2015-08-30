@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for index of the adjoint variable.
+     * @brief %Mixin class for index of the adjoint variable.
      */
     class AdjointIndex : public MixinConnection<AdjointIndex>
     {

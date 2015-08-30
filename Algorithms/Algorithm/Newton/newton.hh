@@ -13,7 +13,7 @@ namespace Algorithm
   {
     /**
      * @ingroup NewtonGroup
-     * @brief Generic Newton method.
+     * @brief Generic %Newton method.
      *
      * @param F operator
      * @param x0 initial iterate
@@ -43,7 +43,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Local Newton method.
+   * @brief Local %Newton method.
    *
    * @param F operator
    * @param x0 initial iterate
@@ -58,7 +58,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Local Newton method with default initial iterate (x0=0).
+   * @brief Local %Newton method with default initial iterate (x0=0).
    *
    * @param F operator
    * @param p parameter object holding algorithmic parameters
@@ -72,7 +72,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Affine covariant Newton method.
+   * @brief Affine covariant %Newton method.
    *
    * @param F operator
    * @param x0 initial iterate
@@ -87,7 +87,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Affine covariant Newton method.
+   * @brief Affine covariant %Newton method.
    *
    * @param F operator
    * @param p parameter object holding algorithmic parameters
@@ -101,7 +101,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Affine contravariant Newton method.
+   * @brief Affine contravariant %Newton method.
    *
    * @param F operator
    * @param x0 initial iterate
@@ -116,7 +116,7 @@ namespace Algorithm
 
   /**
    * @ingroup NewtonGroup
-   * @brief Affine contravariant Newton method.
+   * @brief Affine contravariant %Newton method.
    *
    * @param F operator
    * @param p parameter object holding algorithmic parameters

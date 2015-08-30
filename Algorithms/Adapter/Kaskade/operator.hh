@@ -7,7 +7,6 @@
 #include "fem/istlinterface.hh"
 
 #include "Algorithms/Util/Base/operatorBase.hh"
-#include "Algorithms/Util/Mixins/disableAssembly.hh"
 #include "Algorithms/Util/Mixins/numberOfThreads.hh"
 
 #include "Algorithms/linearizedOperator.hh"
@@ -28,7 +27,6 @@ namespace Algorithm
     template <class OperatorDefinition>
     class Operator :
         public OperatorBase ,
-        public Mixin::DisableAssembly ,
         public Mixin::NumberOfThreads
     {
       using AnsatzVariableSetDescription = typename OperatorDefinition::AnsatzVars;
@@ -71,7 +69,6 @@ namespace Algorithm
        */
       Operator(const Operator& B)
         : OperatorBase(B),
-          DisableAssembly(B),
           NumberOfThreads(B),
           f_(B.f_), spaces_(B.spaces_),
           assembler_(spaces_),
@@ -88,7 +85,6 @@ namespace Algorithm
        */
       Operator& operator=(const Operator& B)
       {
-        disableAssembley(B.assemblyIsDisabled());
         setNumberOfThreads(B.nThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
@@ -161,19 +157,56 @@ namespace Algorithm
       ::Algorithm::LinearOperator linearization(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        auto newOp = *this;
-        newOp.disableAssembly();
-        return LinearizedOperator(std::move(newOp),x,
-                                  DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
-                                    ( A_ , spaces_, range() , domain() )
-                                  );
+        return LinearizedOperator( *this , x , solverCreator_(*this) );
+      }
+
+      /**
+       * @brief Access assembler.
+       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
+       */
+      const Assembler& assembler() const noexcept
+      {
+        return assembler_;
+      }
+
+      /**
+       * @brief Access operator representing \f$A'(x)\f$.
+       */
+      const KaskadeOperator& A() const noexcept
+      {
+        return A_;
+      }
+
+      /**
+       * @brief Access boost::fusion::vector of pointers to spaces.
+       */
+      const Spaces& spaces() const noexcept
+      {
+        return spaces_;
+      }
+
+      /**
+       * @brief Access onlyLowerTriangle flag.
+       * @return true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false
+       */
+      bool onlyLowerTriangle() const noexcept
+      {
+        return onlyLowerTriangle_;
+      }
+
+      /**
+       * @brief Change solver creator.
+       * @param f function/functor for the creation of a linear solver
+       */
+      void setSolverCreator(std::function<LinearSolver(const Operator&)> f)
+      {
+        solverCreator_ = std::move(f);
       }
 
     private:
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && (old_X_A_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
@@ -189,7 +222,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && (old_X_dA_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
@@ -210,6 +242,15 @@ namespace Algorithm
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=OperatorDefinition::TestVars::noOfVariables;
+      std::function<LinearSolver(const Operator&)> solverCreator_ = [](const Operator& M)
+        {
+            return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() , M.spaces(),
+                                                                                              M.range() ,
+                                                                                              M.domain() ,
+                                                                                              DirectType::MUMPS ,
+                                                                                              MatrixProperties::GENERAL );
+
+        };
     };
 
     /**

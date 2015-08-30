@@ -2,7 +2,9 @@
 
 namespace Algorithm
 {
-  IncompatibleSpaceException::IncompatibleSpaceException(const std::string& function, unsigned spaceIndex1, unsigned spaceIndex2)
-    : std::runtime_error("In " + function + ": incompatible space indices: " + std::to_string(spaceIndex1) + " and " + std::to_string(spaceIndex2) + ".\n")
+  IncompatibleSpaceException::IncompatibleSpaceException(unsigned spaceIndex1, unsigned spaceIndex2)
+    : GenericException("Incompatible spaces.",
+                       " First spaces  index: " + std::to_string(spaceIndex1) + "\n ------------ Second space index: " + std::to_string(spaceIndex2),
+                       "Space indices must coincide.")
   {}
 }

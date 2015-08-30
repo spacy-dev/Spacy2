@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class providing a simple timer.
+     * @brief %Mixin class providing a simple timer.
      * @tparam Unit time unit (std::chrono::seconds, std::chrono::milliseconds, ...)
      * @see std::chrono
      */

@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for relative accuracy.
+     * @brief %Mixin class for relative accuracy.
      */
     class RelativeAccuracy : public MixinConnection<RelativeAccuracy>
     {

@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for index of state variable.
+     * @brief %Mixin class for index of state variable.
      */
     class StateIndex : public MixinConnection<StateIndex>
     {

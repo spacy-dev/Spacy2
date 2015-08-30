@@ -10,7 +10,7 @@ namespace Algorithm
   {
     double ScalarProduct::operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
     {
-      checkSameSpaces(x,y);
+      checkSpaceCompatibility(x,y);
       if( !is<Vector>(x) || !is<Vector>(y) ) throw InvalidArgumentException("Real::ScalarProduct");
 
       return cast_ref<Vector>(x).impl() * cast_ref<Vector>(y).impl();

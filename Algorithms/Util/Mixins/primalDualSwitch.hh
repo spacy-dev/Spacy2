@@ -12,7 +12,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for separating primal and dual variables.
+     * @brief %Mixin class for separating primal and dual variables.
      */
     class PrimalDualSwitch
     {

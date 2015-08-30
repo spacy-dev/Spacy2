@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for iterative refinements.
+     * @brief %Mixin class for iterative refinements.
      */
     class IterativeRefinements : public MixinConnection<IterativeRefinements>
     {

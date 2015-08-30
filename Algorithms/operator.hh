@@ -4,6 +4,7 @@
 #include <boost/type_erasure/any.hpp>
 
 #include "Util/Concepts/operatorConcept.hh"
+#include "Util/Concepts/vectorConcept.hh"
 #include "Util/Exceptions/invalidArgumentException.hh"
 
 #include "vectorSpace.hh"
@@ -48,6 +49,28 @@ namespace Algorithm
   {
     if( k == -1 ) return A.solver();
     throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
+  }
+
+  /**
+   * \ingroup VHatGroup
+   * \brief Access solver via A^-1. Throws for k!=-1.
+   */
+  inline const auto& operator^(LinearOperator&& A, int k)
+  {
+    if( k == -1 ) return std::move(A.solver());
+    throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
+  }
+
+  /**
+   * @ingroup VHatGroup
+   * @brief Linearize \f$A\f$ at \f$x\f$.
+   * @param A differentiable operator
+   * @param x point of linearization
+   * @return LinearizedOperator(A,x,solver)
+   */
+  inline auto linearize(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x)
+  {
+    return A.linearization(x);
   }
 }
 

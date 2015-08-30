@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for verbosity.
+     * @brief %Mixin class for verbosity.
      */
     class Verbosity : public MixinConnection<Verbosity>
     {

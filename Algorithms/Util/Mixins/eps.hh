@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for maximal attainable accuracy \f$\varepsilon\f$.
+     * @brief %Mixin class for maximal attainable accuracy \f$\varepsilon\f$.
      */
     class Eps : public MixinConnection<Eps>
     {

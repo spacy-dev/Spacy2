@@ -7,7 +7,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for number of threads
+     * @brief %Mixin class for number of threads
      */
     class NumberOfThreads
     {

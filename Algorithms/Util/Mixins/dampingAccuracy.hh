@@ -7,7 +7,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for the accuracy of damping factors.
+     * @brief %Mixin class for the accuracy of damping factors.
      */
     class DampingAccuracy
     {

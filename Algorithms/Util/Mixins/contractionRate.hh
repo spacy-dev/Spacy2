@@ -7,7 +7,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for contraction rates.
+     * @brief %Mixin class for contraction rates.
      */
     class ContractionRate
     {

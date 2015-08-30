@@ -7,7 +7,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for accepting local models \f$m\f$ of nonlinear optimization problems \f$\min f(x)\f$.
+     * @brief %Mixin class for accepting local models \f$m\f$ of nonlinear optimization problems \f$\min f(x)\f$.
      *
      *
      */

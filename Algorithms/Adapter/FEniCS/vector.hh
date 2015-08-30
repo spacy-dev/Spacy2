@@ -14,7 +14,7 @@ namespace Algorithm
   class VectorSpace;
   /// @endcond
 
-  namespace Fenics
+  namespace FEniCS
   {
     /**
      * @ingroup FenicsGroup

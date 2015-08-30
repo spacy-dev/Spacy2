@@ -61,10 +61,17 @@ namespace Algorithm
 
 
   template <class V>
-  void checkSameSpaces(const V& x, const V& y)
+  void checkSpaceCompatibility(const V& x, const V& y)
   {
     if( x.space()->index() != y.space()->index() )
-      throw IncompatibleSpaceException("checkSameSpaces",x.space()->index(),y.space()->index());
+      throw IncompatibleSpaceException(x.space()->index(),y.space()->index());
+  }
+
+  template <class V>
+  void checkDualPairing(const V& x, const V& y)
+  {
+    if( !y.space()->isPrimalWRT(*x.space()) )
+      throw IncompatibleSpaceException(x.space()->index(),y.space()->index());
   }
 //  template <class T>
 //  struct Scale

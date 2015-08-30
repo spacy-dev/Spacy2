@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for maximal number of steps/iterations.
+     * @brief %Mixin class for maximal number of steps/iterations.
      */
     class MaxSteps : public MixinConnection<MaxSteps>
     {

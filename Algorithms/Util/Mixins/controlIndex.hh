@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for index of the control variable.
+     * @brief %Mixin class for index of the control variable.
      */
     class ControlIndex : public MixinConnection<ControlIndex>
     {

@@ -68,11 +68,11 @@ int main()
   using namespace Algorithm;
 
   std::vector<unsigned> primalSpaceIds = {0u,1u}, dualSpaceIds = {2u};
-  auto productSpace = Fenics::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
+  auto productSpace = FEniCS::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
   
   // functionals
-  auto lagrangeFunctional = Fenics::makeFunctional( f , J , H , productSpace );
-  auto normalStepFunctional = Fenics::makeFunctional( f , J , Norm , productSpace );
+  auto lagrangeFunctional = FEniCS::makeFunctional( f , J , H , productSpace );
+  auto normalStepFunctional = FEniCS::makeFunctional( f , J , Norm , productSpace );
 
   // composite step solve
   CompositeStep::AffineCovariantSolver alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
@@ -89,7 +89,7 @@ int main()
 
   // copy back and display solution
   Function u(V);
-  Fenics::copy(sol,u);
+  FEniCS::copy(sol,u);
   
   File filecs("cs.pvd");
   filecs << u[0];

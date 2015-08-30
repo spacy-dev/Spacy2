@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for absolute accuracy.
+     * @brief %Mixin class for absolute accuracy.
      */
     class AbsoluteAccuracy :public MixinConnection<AbsoluteAccuracy>
     {

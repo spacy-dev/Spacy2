@@ -12,7 +12,7 @@
 
 namespace Algorithm
 {
-  namespace Fenics
+  namespace FEniCS
   {
     /**
      * @ingroup FenicsGroup

@@ -10,7 +10,7 @@ namespace Algorithm
 {
   /// @cond
   template <class V>
-  void checkSameSpaces(const V& x, const V& y);
+  void checkSpaceCompatibility(const V& x, const V& y);
   /// @endcond
 
   /**
@@ -77,7 +77,7 @@ namespace Algorithm
      */
     VectorBase& operator=(const VectorBase& y)
     {
-      checkSameSpaces(*this,y);
+      checkSpaceCompatibility(*this,y);
       return *this;
     }
 
@@ -87,7 +87,7 @@ namespace Algorithm
      */
     VectorBase& operator=(VectorBase&& y) noexcept
     {
-      checkSameSpaces(*this,y);
+      checkSpaceCompatibility(*this,y);
       return *this;
     }
 
@@ -123,7 +123,7 @@ namespace Algorithm
      */
     Derived& operator+=(const Derived& y)
     {
-      checkSameSpaces(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
       static_cast<Derived*>(this)->impl() += y.impl();
       return static_cast<Derived&>(*this);
     }
@@ -135,7 +135,7 @@ namespace Algorithm
      */
     Derived& operator-=(const Derived& y)
     {
-      checkSameSpaces(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
       static_cast<Derived*>(this)->impl() -= y.impl();
       return static_cast<Derived&>(*this);
     }
@@ -168,7 +168,7 @@ namespace Algorithm
      * @return \f$ x==y\f$.
      */    bool operator==(const Derived& y) const
     {
-      checkSameSpaces(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
       return dx(dx) < eps()*eps();

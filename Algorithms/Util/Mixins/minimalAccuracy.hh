@@ -9,7 +9,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for minimal accuracy.
+     * @brief %Mixin class for minimal accuracy.
      */
     class MinimalAccuracy : public MixinConnection<MinimalAccuracy>
     {

@@ -24,9 +24,7 @@ namespace Algorithm
       /// Compute \f$ (x,y) = \sum_i x_i y_i \f$.
       double operator()(const ::Algorithm::Vector& x, const ::Algorithm::Vector& y) const
       {
-        if( x.space()->index() != y.space()->index() )
-          throw IncompatibleSpaceException("Kaskade::l2Product",x.space()->index(),y.space()->index());
-
+        checkSpaceCompatibility(x,y);
         return cast_ref< Vector<Description> >(x).impl() * cast_ref< Vector<Description> >(y).impl();
       }
     };

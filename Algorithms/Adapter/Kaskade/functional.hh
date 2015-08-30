@@ -10,7 +10,6 @@
 #include "Algorithms/vector.hh"
 #include "Algorithms/vectorSpace.hh"
 #include "Algorithms/hessian.hh"
-#include "Algorithms/Util/Mixins/disableAssembly.hh"
 #include "Algorithms/Util/Mixins/numberOfThreads.hh"
 #include "Algorithms/Util/Base/functionalBase.hh"
 
@@ -26,12 +25,11 @@ namespace Algorithm
      * @ingroup KaskadeGroup
      * @brief %Functional interface for %Kaskade 7. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
      * @tparam FunctionalDefinition functional definition from %Kaskade 7
-     * @see Concepts::C2Functional, Concepts::C2FunctionalConcept
+     * @see @ref C2FunctionalAnchor "C2Functional", @ref C2FunctionalConceptAnchor "C2FunctionalConcept"
      */
     template <class FunctionalDefinition>
     class Functional :
-        public FunctionalBase< Functional<FunctionalDefinition> > ,
-        public Mixin::DisableAssembly ,
+        public C2FunctionalBase< Functional<FunctionalDefinition> > ,
         public Mixin::NumberOfThreads
     {
     public:
@@ -63,17 +61,19 @@ namespace Algorithm
       Functional(const FunctionalDefinition& f, const VectorSpace& domain,
                  int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
                  int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
-        : FunctionalBase< Functional<FunctionalDefinition> >(domain),
+        : C2FunctionalBase< Functional<FunctionalDefinition> >(domain),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
           assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
       {}
 
-      /// Copy constructor.
+      /**
+       * @brief Copy constructor.
+       * @param g functional to copy from
+       */
       Functional(const Functional& g)
-        : FunctionalBase< Functional<FunctionalDefinition> >(g.domain()),
-          DisableAssembly(g),
+        : C2FunctionalBase< Functional<FunctionalDefinition> >(g.domain()),
           NumberOfThreads(g),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -86,10 +86,12 @@ namespace Algorithm
           solverCreator_(g.solverCreator_)
       {}
 
-      /// Copy assignment.
+      /**
+       * @brief Copy assignment.
+       * @param g functional to copy from
+       */
       Functional& operator=(const Functional& g)
       {
-        disableAssembly(g.assemblyIsDisable());
         setNumberOfThreads(g.nThreads());
         f_ = g.f_;
         spaces_ = g.spaces_;
@@ -106,13 +108,23 @@ namespace Algorithm
         solverCreator_ = g.solverCreator_;
       }
 
-      /// Move constructor.
+      /**
+       * @brief Move constructor.
+       * @param g functional to move from
+       */
       Functional(Functional&&) = default;
 
-      /// Move assignment.
+      /**
+       * @brief Move assignment.
+       * @param g functional to move from
+       */
       Functional& operator=(Functional&&) = default;
 
-      /// Compute functional value \f$f(x)\f$.
+      /**
+       * @brief Apply functional.
+       * @param x argument
+       * @return \f$f(x)\f$
+       */
       double operator()(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
@@ -124,8 +136,8 @@ namespace Algorithm
        * @cond
        * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow X^* \f$.
        *
-       * Actual implementation of d1 is provided in base class FunctionalBase.
-       * @see ::Algorithm::FunctionalBase
+       * Actual implementation of d1 is provided in base class C2FunctionalBase.
+       * @see C2FunctionalBase
        */
       ::Algorithm::Vector d1_(const ::Algorithm::Vector& x) const
       {
@@ -141,8 +153,8 @@ namespace Algorithm
       /**
        * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
        *
-       * Actual implementation of d2 is provided in base class FunctionalBase.
-       * @see ::Algorithm::FunctionalBase
+       * Actual implementation of d2 is provided in base class C2FunctionalBase.
+       * @see C2FunctionalBase
        */
       ::Algorithm::Vector d2_(const ::Algorithm::Vector& x, const ::Algorithm::Vector& dx) const
       {
@@ -163,41 +175,54 @@ namespace Algorithm
 
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
-       * @see Hessian, LinearOperator, LinearOperatorConcept
+       * @param x point of linearization
+       * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      auto hessian(const ::Algorithm::Vector& x) const
+      Hessian hessian(const ::Algorithm::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
-        auto newOperator = *this;
-        newOperator.disableAssembly();
-        return Hessian( std::move(newOperator) , x , solverCreator_(*this) );
+
+        return Hessian( *this , x , solverCreator_(*this) );
       }
 
-      /// Access assembler.
+      /**
+       * @brief Access assembler.
+       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
+       */
       Assembler& assembler()
       {
         return assembler_;
       }
 
-      /// Access assembler.
+      /**
+       * @brief Access assembler.
+       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
+       */
       const Assembler& assembler() const noexcept
       {
         return assembler_;
       }
 
-      /// Access operator representing \f$f''\f$.
+      /**
+       * @brief Access operator representing \f$f''\f$.
+       */
       const KaskadeOperator& A() const noexcept
       {
         return A_;
       }
 
-      /// Access boost::fusion::vector of spaces.
+      /**
+       * @brief Access boost::fusion::vector of pointers to spaces.
+       */
       const Spaces& spaces() const noexcept
       {
         return spaces_;
       }
 
-      /// Access onlyLowerTriangle flag.
+      /**
+       * @brief Access onlyLowerTriangle flag.
+       * @return true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false
+       */
       bool onlyLowerTriangle() const noexcept
       {
         return onlyLowerTriangle_;
@@ -205,7 +230,7 @@ namespace Algorithm
 
       /**
        * @brief Change solver creator.
-       * @param f anything that can be fed into objects of type std::function<LinearSolver(const Functional<FunctionalDefinition>&)>.
+       * @param f function/functor for the creation of a linear solver
        */
       void setSolverCreator(std::function<LinearSolver(const Functional&)> f)
       {
@@ -216,7 +241,6 @@ namespace Algorithm
       /// Assemble \f$f(x)\f$.
       void assembleFunctional(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( ( (assembler_.valid() & Assembler::VALUE) != 0 ) && (old_X_f_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
@@ -232,7 +256,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$f'(x)\f$.
       void assembleGradient(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
@@ -248,7 +271,6 @@ namespace Algorithm
       /// Assemble discrete representation of \f$f''(x)\f$.
       void assembleHessian(const ::Algorithm::Vector& x) const
       {
-        if( assemblyIsDisabled() ) return;
         if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && (old_X_ddf_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);

@@ -50,58 +50,61 @@ namespace Algorithm
       }
     }
 
-    Vector& Vector::operator=(const Vector& y_)
+    Vector& Vector::operator=(const Vector& y)
     {
+      checkSpaceCompatibility(*this,y);
       if( !isPrimalDual() )
       {
-        variables_ = y_.variables_;
+        variables_ = y.variables_;
         return *this;
       }
 
-      if( isPrimalEnabled() && y_.isPrimalEnabled() )
-        setPrimalComponent( y_.primalComponent() );
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        setPrimalComponent( y.primalComponent() );
 
-      if( isDualEnabled() && y_.isDualEnabled() )
-        setDualComponent( y_.dualComponent() );
+      if( isDualEnabled() && y.isDualEnabled() )
+        setDualComponent( y.dualComponent() );
 
-      reset(y_);
+      reset(y);
       return *this;
     }
 
-    Vector& Vector::operator=(Vector&& y_)
+    Vector& Vector::operator=(Vector&& y)
     {
+      checkSpaceCompatibility(*this,y);
       if( !isPrimalDual() )
       {
-        variables_ = std::move(y_.variables_);
+        variables_ = std::move(y.variables_);
         return *this;
       }
 
-      if( isPrimalEnabled() && y_.isPrimalEnabled() )
-        setPrimalComponent( std::move(y_.primalComponent()) );
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        setPrimalComponent( std::move(y.primalComponent()) );
 
-      if( isDualEnabled() && y_.isDualEnabled() )
-        setDualComponent( std::move(y_.dualComponent()) );
+      if( isDualEnabled() && y.isDualEnabled() )
+        setDualComponent( std::move(y.dualComponent()) );
 
-      reset();
+      reset(y);
       return *this;
     }
 
-    Vector& Vector::operator+=(const Vector& y_)
+    Vector& Vector::operator+=(const Vector& y)
     {
+      checkSpaceCompatibility(*this,y);
       if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
-          variable(i) += y_.variable(i);
+          variable(i) += y.variable(i);
         return *this;
       }
 
-      if( isPrimalEnabled() && y_.isPrimalEnabled() )
-        primalComponent() += y_.primalComponent();
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        primalComponent() += y.primalComponent();
 
-      if( isDualEnabled() && y_.isDualEnabled() )
-        dualComponent() += y_.dualComponent();
+      if( isDualEnabled() && y.isDualEnabled() )
+        dualComponent() += y.dualComponent();
 
-      reset(y_);
+      reset(y);
       return *this;
     }
 
@@ -127,22 +130,23 @@ namespace Algorithm
   //  }
 
 
-    Vector& Vector::operator-=(const Vector& y_)
+    Vector& Vector::operator-=(const Vector& y)
     {
+      checkSpaceCompatibility(*this,y);
       if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
-          variable(i) -= y_.variable(i);
+          variable(i) -= y.variable(i);
         return *this;
       }
 
-      if( isPrimalEnabled() && y_.isPrimalEnabled() )
-        primalComponent() -= y_.primalComponent();
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        primalComponent() -= y.primalComponent();
 
-      if( isDualEnabled() && y_.isDualEnabled() )
-        dualComponent() -= y_.dualComponent();
+      if( isDualEnabled() && y.isDualEnabled() )
+        dualComponent() -= y.dualComponent();
 
-      reset(y_);
+      reset(y);
       return *this;
     }
 
@@ -176,6 +180,7 @@ namespace Algorithm
 
     bool Vector::operator==(const Vector& y) const
     {
+      checkSpaceCompatibility(*this,y);
       if(isPrimalEnabled())
         for( auto i : creator().primalSubSpaceIds())
           if( !(variable(i) == y.variable(i)) )
@@ -196,25 +201,26 @@ namespace Algorithm
     }
 
 
-    double Vector::operator()(const Vector& y_) const
+    double Vector::operator()(const Vector& y) const
     {
-      assert( variables_.size() == y_.variables_.size() );
+      checkDualPairing(*this,y);
+      assert( variables_.size() == y.variables_.size() );
 
       if( !isPrimalDual() )
       {
         auto result = 0.;
         for(auto i=0u; i<variables_.size(); ++i)
-          result += variable(i)( y_.variable(i) );
+          result += variable(i)( y.variable(i) );
         return result;
       }
 
       auto result = 0.;
-      if( isPrimalEnabled() && y_.isPrimalEnabled() )
-        result += primalComponent()( y_.primalComponent() );
-      if( isDualEnabled() && y_.isDualEnabled() )
-        result += dualComponent()( y_.dualComponent() );
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        result += primalComponent()( y.primalComponent() );
+      if( isDualEnabled() && y.isDualEnabled() )
+        result += dualComponent()( y.dualComponent() );
 
-      reset(y_);
+      reset(y);
       return result;
     }
 
