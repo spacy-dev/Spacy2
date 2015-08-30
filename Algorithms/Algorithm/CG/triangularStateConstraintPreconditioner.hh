@@ -21,7 +21,7 @@ namespace Algorithm
      * @brief A triangular state constraint preconditioner used in @cite Lubkoll2015a.
      *
      * A preconditioner for optimal control problems of the form
-     * \f[ \left( \begin{array}{ccc}  &  & A^{-T} \\  & M^{-1} & -B^T \\ A^{-1} & -B &  \end{array} \right)\f],
+     * \f[ P=\left( \begin{array}{ccc}  &  & A^{-T} \\  & M^{-1} & -B^T \\ A^{-1} & -B &  \end{array} \right)\f],
      * where \f$A\f$ is the state operator, \f$B\f$ the control operator and \f$M\f$ induces a scalar product on the control space.
      */
     class TriangularStateConstraintPreconditioner
@@ -49,7 +49,11 @@ namespace Algorithm
                                               const VectorSpace& domain,
                                               const VectorSpace& range);
 
-      /// Apply preconditioner.
+      /**
+       * @brief Apply preconditioner \f$P\f$.
+       * @param x argument
+       * @return \f$P(x)\f$
+       */
       Vector operator()(const Vector& x) const;
 
       /**

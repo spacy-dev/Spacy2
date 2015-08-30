@@ -21,7 +21,7 @@ namespace Algorithm
     /**
      * @ingroup KaskadeGroup
      * @brief Creator for vector space elements for %Kaskade 7
-     * @see ::Algorithm::VectorCreator, ::Algorithm::VectorCreatorConcept
+     * @see @ref VectorCreatorAnchor "VectorCreator", @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
      */
     template <class Description>
     class VectorCreator :

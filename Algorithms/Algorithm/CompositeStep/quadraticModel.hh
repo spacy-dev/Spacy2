@@ -60,7 +60,7 @@ namespace Algorithm
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
        * @param t argument
-       * @return \frac{\omega}{6}q_2^{3/2} \f$
+       * @return \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$
        */
       double operator()(double t) const;
 

@@ -7,7 +7,7 @@ namespace Algorithm
   {
     /**
      * @ingroup MixinGroup
-     * @brief Mixin class for accepting local models \fm\f$ of nonlinear optimization problems \f$\min f(x)\f$.
+     * @brief Mixin class for accepting local models \f$m\f$ of nonlinear optimization problems \f$\min f(x)\f$.
      *
      *
      */
@@ -43,13 +43,13 @@ namespace Algorithm
 
       /**
        * @brief Decide if measure relative decrease is acceptable.
-       * @param measured relative decrease \f$\delta m/\delta f\f$.
+       * @param decrease measured relative decrease \f$\delta m/\delta f\f$.
        */
       bool acceptableDecrease(double decrease) const noexcept;
 
       /**
        * @brief Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition.
-       * @param measured relative decrease \f$\delta m/\delta f\f$.
+       * @param decrease measured relative decrease \f$\delta m/\delta f\f$.
        */
       bool acceptableRelaxedDecrease(double decrease) const noexcept;
 
