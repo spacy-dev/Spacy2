@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/lubkoll/FSA.svg?branch=master)](https://travis-ci.org/lubkoll/FSA/builds)
 
-# FSA - Function Space Algorithms
+# VSA - Vector Space Algorithms
 
 ### Download
 Download via
-  - git clone https://github.com/lubkoll/FSA.git
+  - git clone https://github.com/lubkoll/VSA.git
 
 ### Installation
 Go to download folder, i.e.
-  - cd FSA
+  - cd VSA
   
 and type
 
