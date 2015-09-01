@@ -1,8 +1,8 @@
 #include <dolfin.h>
 
-#include <Algorithms/Adapter/fenics.hh>
-#include <Algorithms/Algorithm/Newton/newton.hh>
-#include <Algorithms/inducedScalarProduct.hh>
+#include <VSA/Adapter/fenics.hh>
+#include <VSA/Algorithm/Newton/newton.hh>
+#include <VSA/inducedScalarProduct.hh>
 
 #include "NonlinearPoisson.h"
 
@@ -31,20 +31,20 @@ class DirichletBoundary : public SubDomain
 int main()
 {
   // Create mesh and function space
-  int n = 256;
-  UnitSquareMesh mesh(n,n);
-  NonlinearPoisson::FunctionSpace V(mesh);
+  auto n = 256u;
+  UnitSquareMesh mesh{n,n};
+  NonlinearPoisson::FunctionSpace V{mesh};
   std::cout << "degrees of freedom: " << V.dim() << std::endl;
 
   // Define boundary condition
-  Constant u0(0.0);
+  Constant u0{0.};
   DirichletBoundary boundary;
-  DirichletBC bc(V, u0, boundary);
+  DirichletBC bc{V, u0, boundary};
   std::vector<const DirichletBC*> bcs { &bc };
 
    // Define variational forms
-  NonlinearPoisson::BilinearForm a(V, V);
-  NonlinearPoisson::LinearForm L(V);
+  NonlinearPoisson::BilinearForm a{V, V};
+  NonlinearPoisson::LinearForm L{V};
   
   Constant c(1e-2), d(1e2);
   Source f;
@@ -57,27 +57,27 @@ int main()
   
   
   // Compute solution
-  using namespace Algorithm;
+  using namespace VSA;
 
   // create spaces
   auto domain = FEniCS::makeHilbertSpace(V);
   auto range = FEniCS::makeHilbertSpace(V);
-  connectPrimalDual(domain,range);
+  connect(domain,range);
   
   // create operator
-  auto A = FEniCS::makeOperator( L , a , bcs , domain , range );
+  auto A = FEniCS::makeC1Operator( L , a , bcs , domain , range );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
   // specify parameters for Newton's method
-  auto p = Algorithm::Newton::Parameter{};
+  auto p = VSA::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x) = 0
-  auto x = Algorithm::covariantNewton(A,p);
-//  auto sol = Algorithm::contravariantNewton(A,p);
-//  auto sol = Algorithm::localNewton(A,p);
+  auto x = VSA::covariantNewton(A,p);
+//  auto sol = VSA::contravariantNewton(A,p);
+//  auto sol = VSA::localNewton(A,p);
   
   FEniCS::copy(x,u);
 

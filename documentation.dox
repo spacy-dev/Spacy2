@@ -3,7 +3,7 @@
 /** MODULES **/
 
 /**
- * @defgroup VHatGroup VHat
+ * @defgroup VSpaceGroup VSpace
  */
 
 /**
@@ -29,14 +29,14 @@
   /**
     * @defgroup FenicsGroup Vector Space for FEniCS
     * @ingroup VectorSpaceGroup
-    * @brief Vector spaces, functionals and operators for FEniCS.
+    * @brief Vector spaces, functionals and operators for <a href="http://www.fenicsproject.org">FEniCS</a>.
     */
 
     
   /**
     * @defgroup KaskadeGroup Vector Space for Kaskade 7
     * @ingroup VectorSpaceGroup
-    * @brief Vector spaces, functionals and operators for %Kaskade 7.
+    * @brief Vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
     */
      
 /**
@@ -174,13 +174,13 @@
    
   /**
    * @namespace Algorithm::FEniCS
-   * @brief Contains vector spaces, functionals and operators for FEniCS.
+   * @brief Contains vector spaces, functionals and operators for <a href="www.fenicsproject.org">FEniCS</a>.
    * @see FenicsGroup
    */
    
   /**
    * @namespace Algorithm::Kaskade
-   * @brief Contains vector spaces, functionals and operators for %Kaskade 7.
+   * @brief Contains vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
    * @see KaskadeGroup
    */
    

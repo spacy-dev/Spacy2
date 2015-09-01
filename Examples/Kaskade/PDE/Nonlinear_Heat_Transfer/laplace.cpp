@@ -4,9 +4,9 @@
 #define HAVE_UG
 #include <dune/grid/uggrid.hh>
 
-#include <Algorithms/Adapter/kaskade.hh>
-#include <Algorithms/Algorithm/Newton/newton.hh>
-#include <Algorithms/inducedScalarProduct.hh>
+#include <VSA/Adapter/kaskade.hh>
+#include <VSA/Algorithm/Newton/newton.hh>
+#include <VSA/inducedScalarProduct.hh>
 
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
@@ -46,24 +46,24 @@ int main()
   Functional F;
   
   // compute solution
-  auto domain = Algorithm::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
-  auto range = Algorithm::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
-  Algorithm::connectPrimalDual(domain,range);
+  auto domain = VSA::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
+  auto range = VSA::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
+  VSA::connect(domain,range);
 
-  auto f = Algorithm::Kaskade::makeOperator( F , domain , range );
-  domain.setScalarProduct( Algorithm::InducedScalarProduct(f.linearization(domain.vector())) );
+  auto A = VSA::Kaskade::makeC1Operator( F , domain , range );
+  domain.setScalarProduct( VSA::InducedScalarProduct( A.linearization(domain.vector())) );
   
-  auto p = Algorithm::Newton::Parameter{};
+  auto p = VSA::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
-  auto x = Algorithm::covariantNewton(f,p);
-//  auto sol = Algorithm::contravariantNewton(f,p);
-//  auto sol = Algorithm::localNewton(f,p);
+  auto x = VSA::covariantNewton(A,p);
+//  auto sol = VSA::contravariantNewton(f,p);
+//  auto sol = VSA::localNewton(f,p);
 
   //construct Galerkin representation
   VariableSetDesc::VariableSet u(variableSetDesc);
-  Algorithm::Kaskade::copy(x,u);
+  VSA::Kaskade::copy(x,u);
   
   writeVTKFile(gridManager.grid().leafGridView(), u ,"temperature",IoOptions(),order);
 

@@ -2,13 +2,20 @@
 
 /*! \mainpage %VHat documentation
  * 
+ * \section sec_intro Introduction
  * %Vhat is a library that aims at
  * - providing an abstraction layer for the implementation of algorithms in a vector space setting (function space oriented algorithms)
  * - providing a simple interface for sharing and comparing algorithms
  * - having fun while developing algorithms
  * - leaving you all freedom you want to implement your fancy algorithm (as long as you don't violate the mathematical structure of vector spaces)
  * 
- * The basis of VHat is the abstraction layer for vector space settings. 
+ * \section sec_overview Overview
+ * The basis of %VHat is the abstraction layer for vector space settings. The interface of %VHat essentially builds on type erasure techniques
+ * provided by <a href="http://www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a>. Moreover, C++11-features such
+ * as <a href="http://en.cppreference.com/w/cpp/language/value_category">R-values</a> are extensively used, so make sure to use one of the
+ * compiler options -std=c++0x, -std=c++11 or -std=c++1y.
+ *
+ * \subsection sub_concepts Main concepts
  * - First there is a vector space class (::Algorithm::VectorSpace), which models a \ref ::Algorithm::makeBanachSpace() "Banach space" <span lang="latex"> 
  *   (X,||.||)</span> or a \ref ::Algorithm::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a \ref NormAnchor "norm" and possibly a \ref ScalarProductAnchor "scalar product". Moreover, vector spaces can be 
  *   related to each other as primal or dual spaces. Eventually they can generate vectors.
@@ -16,10 +23,77 @@
  * - Operator (see \ref OperatorAnchor "Operator", \ref OperatorConceptAnchor "OperatorConcept") are mappings between different vector spaces.
  * - Functionals (see \ref FunctionalAnchor "Functional", \ref FunctionalConceptAnchor "FunctionalConcept") are mappings from a vector spaces into the space of real numbers \f$ \mathbb{R} \f$.
  *
+ * \section sec_usage_fenics Usage with FEnics
+ * Examples for nonlinear PDEs and optimal control problems with <a href="http://www.fenicsproject.org">FEniCS</a> are given in Examples/FEniCS.
+ *
+ * \subsection sub_usage_fenics_pde Nonlinear PDEs with FEniCS
+ * For an operator equation \f$A(x)=0\f$, discretized with FEniCS ('L' denoting the residual form and 'a' the gradient form),
+ * simplest usage of %VSpace is as follows
+ * @code
+ * ...
+ * MyFEniCSExample::FunctionSpace V{mesh}
+ * MyFEniCSExample::LinearForm L{V};
+ * MyFEniCSExample::BilinearForm a{V,V};
+ * ...
+ *
+ * // Create function space.
+ * auto domain = Algorithm::FEniCS::makeHilbertSpace(V);
+ *
+ * // Create operator mapping into the dual space of domain (which is, due to the Hilbert space structure, associated with domain itself).
+ * // You can also specify the range space if it differs from the dual space of domain
+ * // This is illustrated in the PDE example for Kaskade 7
+ * auto A = Algorithm::FEniCS::makeOperator( L , a , domain );
+ *
+ * // Solve with covariant Newton method with initial guess x0=0.
+ * auto x = Algorithm::covariantNewton(A);
  *
  *
+ * // Copy solution back to dolfin::Function.
+ * dolfin::Function u(V);
+ * Algorithm::FEniCS::copy(x,u);
+ * ...
+ * @endcode
+ * 
+ * 
+ * \section sec_usage_kaskade Usage with Kaskade 7
+ * Examples for nonlinear PDEs and optimal control problems with <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a> are given in Examples/Kaskade.
+ *
+ * \subsection sub_usage_kaskade_pde Nonlinear PDEs with Kaskade 7
+ * For an operator equation \f$A(x)=0\f$, discretized with Kaskade 7,
+ * usage of %VSpace is as follows
+ * @code
+ * ...
+ * auto h1Space = Kaskade::FEFunctionSpace< ContinuousLagrangeMapper<double,LeafView> >{(} gridManager , gridManager.grid().leafView() , order };
+ * ...
+ * auto variableSetDescription = VariableSetDescription{ spaces , {"x"} };
+ * Functional F{ ... };
+ * ...
+ *
+ * // Create domain and range space.
+ * auto domain = Algorithm::Kaskade::makeHilbertSpace( space );
+ * auto range  = Algorithm::Kaskade::makeHilbertSpace( space );
+ *
+ * // Create operator
+ * auto A = Algorithm::Kaskade::makeOperator( F , domain , range );
+ *
+ * // Set induced scalar product on domain space.
+ * auto x0 = domain.vector();
+ * domain.setScalarProduct( InducedScalarProduct( A.linearization(x0) );
+ *
+ * // Solve with covariant Newton method with initial guess x0=0.
+ * auto x = Algorithm::covariantNewton( A , x0 );
+ *
+ *
+ * // copy solution back to dolfin::Function
+ * typename VariableSetDescription::VariableSet u( variableSetDescription );
+ * Algorithm::Kaskade::copy( x , u );
+ * ...
+ * @endcode
+ *
+ *
+ * \section sec_supported_libs Supported libraries
  * Currently VHat supports 
- * - <a href="www.fenicsproject.org">the FEniCS Project,</a>
+ * - <a href="http://www.fenicsproject.org">the FEniCS Project,</a>
  * - <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">the Kaskade 7 Finite Element Toolbox.</a>
  */
  

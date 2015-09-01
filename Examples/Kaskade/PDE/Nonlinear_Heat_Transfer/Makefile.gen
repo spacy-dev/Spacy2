@@ -10,7 +10,7 @@ laplace: laplace.o Makefile $(KASKADE7)/libs/libkaskade.a
  $(UGLIB) \
  $(BOOSTLIB) \
  $(UMFPACKLIB) \
- $(BLASLIB) $(FTNLIB) $(NUMALIB) -L/home/ignaz/C++/FSA/build -lalgorithms -o $@
+ $(BLASLIB) $(FTNLIB) $(NUMALIB) -L/home/ignaz/C++/FSA/build -lvsa -o $@
 
 clean:
 	rm -f gccerr.txt laplace laplace.o temperature.vtu *.bak

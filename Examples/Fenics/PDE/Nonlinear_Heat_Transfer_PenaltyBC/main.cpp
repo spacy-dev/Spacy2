@@ -1,8 +1,8 @@
 #include <dolfin.h>
 
-#include <Algorithms/Adapter/fenics.hh>
-#include <Algorithms/Algorithm/Newton/newton.hh>
-#include <Algorithms/inducedScalarProduct.hh>
+#include <VSA/Adapter/fenics.hh>
+#include <VSA/Algorithm/Newton/newton.hh>
+#include <VSA/inducedScalarProduct.hh>
 
 #include "NonlinearPoisson.h"
 
@@ -41,27 +41,27 @@ int main()
   
   
   // Compute solution
-  using namespace Algorithm;
+  using namespace VSA;
 
   // create spaces
   auto domain = FEniCS::makeHilbertSpace(V);
   auto range = FEniCS::makeHilbertSpace(V);
-  connectPrimalDual(domain,range);
+  connect(domain,range);
   
   // create operator
-  auto A = FEniCS::makeOperator( L , a , domain , range );
+  auto A = FEniCS::makeC1Operator( L , a , domain , range );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
   // specify parameters for Newton's method
-  auto p = Algorithm::Newton::Parameter{};
+  auto p = VSA::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x)=0
-  auto x = Algorithm::covariantNewton(A,p);
-//  auto x = Algorithm::contravariantNewton(A,p);
-//  auto x = Algorithm::localNewton(A,p);
+  auto x = VSA::covariantNewton(A,p);
+//  auto x = VSA::contravariantNewton(A,p);
+//  auto x = VSA::localNewton(A,p);
   
   FEniCS::copy(x,u);
 

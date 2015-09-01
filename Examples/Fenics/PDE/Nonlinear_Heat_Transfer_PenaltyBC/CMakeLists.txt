@@ -47,4 +47,4 @@ link_directories(/home/ignaz/C++/FSA_AKT/FSA/build/)
 add_executable(${PROJECT_NAME} main.cpp)
 
 # Target libraries
-target_link_libraries(${PROJECT_NAME} ${DOLFIN_LIBRARIES} algorithms)
+target_link_libraries(${PROJECT_NAME} ${DOLFIN_LIBRARIES} vsa)

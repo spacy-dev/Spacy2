@@ -2,8 +2,8 @@
 
 #include <dolfin.h>
 
-#include <Algorithms/Adapter/fenics.hh>
-#include <Algorithms/Algorithm/CompositeStep/affineCovariantSolver.hh>
+#include <VSA/Adapter/fenics.hh>
+#include <VSA/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
 #include "NormalStep.h"
 #include "LagrangeFunctional.h"
@@ -39,9 +39,9 @@ int main()
   LagrangeFunctional::FunctionSpace V(mesh);
 
   // Define variational forms
-  LagrangeFunctional::Functional f(V.mesh());
-  LagrangeFunctional::LinearForm J(V);
-  LagrangeFunctional::BilinearForm H(V,V);
+  LagrangeFunctional::Functional L(V.mesh());
+  LagrangeFunctional::LinearForm dL(V);
+  LagrangeFunctional::BilinearForm ddL(V,V);
   NormalStep::BilinearForm Norm(V,V);
   
   Function dummy(V);
@@ -49,30 +49,30 @@ int main()
   Constant alpha(1e-2);
   Constant c(1e-1);
   Constant d(10);
-  f.y0 = y_ref;
-  f.alpha = alpha;
-  f.c = c;
-  f.d = d;
-  J.y0 = y_ref;
-  J.alpha = alpha;
-  J.c = c;
-  J.d = d;
-  H.alpha = alpha;
-  H.c = c;
-  H.d = d;
+  L.y0 = y_ref;
+  L.alpha = alpha;
+  L.c = c;
+  L.d = d;
+  dL.y0 = y_ref;
+  dL.alpha = alpha;
+  dL.c = c;
+  dL.d = d;
+  ddL.alpha = alpha;
+  ddL.c = c;
+  ddL.d = d;
   Norm.alpha = alpha;
   Norm.c = c;
   Norm.d = d;
   
   // Compute solution
-  using namespace Algorithm;
+  using namespace VSA;
 
   std::vector<unsigned> primalSpaceIds = {0u,1u}, dualSpaceIds = {2u};
   auto productSpace = FEniCS::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
   
   // functionals
-  auto lagrangeFunctional = FEniCS::makeFunctional( f , J , H , productSpace );
-  auto normalStepFunctional = FEniCS::makeFunctional( f , J , Norm , productSpace );
+  auto lagrangeFunctional = FEniCS::makeC2Functional( L , dL , ddL , productSpace );
+  auto normalStepFunctional = FEniCS::makeC2Functional( L , dL , Norm , productSpace );
 
   // composite step solve
   CompositeStep::AffineCovariantSolver alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );

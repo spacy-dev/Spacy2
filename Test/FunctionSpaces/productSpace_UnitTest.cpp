@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include "Algorithms/norm.hh"
-#include "Algorithms/scalarProduct.hh"
-#include "Algorithms/VectorSpaces/realSpace.hh"
-#include "Algorithms/VectorSpaces/productSpace.hh"
-#include "Algorithms/Util/cast.hh"
+#include "VSA/norm.hh"
+#include "VSA/scalarProduct.hh"
+#include "VSA/Spaces/realSpace.hh"
+#include "VSA/Spaces/productSpace.hh"
+#include "VSA/Util/cast.hh"
 
 TEST(ProductSpaceTest,PurePrimalElementTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } );
 
@@ -20,7 +20,7 @@ TEST(ProductSpaceTest,PurePrimalElementTest)
 
 TEST(ProductSpaceTest,PureDualElementTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -32,7 +32,7 @@ TEST(ProductSpaceTest,PureDualElementTest)
 
 TEST(ProductSpaceTest,MixedElementTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -44,7 +44,7 @@ TEST(ProductSpaceTest,MixedElementTest)
 
 TEST(ProductSpaceTest,PurePrimalElementSumTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
@@ -129,7 +129,7 @@ TEST(ProductSpaceTest,PurePrimalElementSumTest)
 
 TEST(ProductSpaceTest,PureDualElementSumTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -210,7 +210,7 @@ TEST(ProductSpaceTest,PureDualElementSumTest)
 
 TEST(ProductSpaceTest,MixedElementSumTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -289,7 +289,7 @@ TEST(ProductSpaceTest,MixedElementSumTest)
 
 TEST(ProductSpaceTest,PurePrimalElementProductTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
@@ -311,7 +311,7 @@ TEST(ProductSpaceTest,PurePrimalElementProductTest)
 
 TEST(ProductSpaceTest,PureDualElementProductTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -333,7 +333,7 @@ TEST(ProductSpaceTest,PureDualElementProductTest)
 
 TEST(ProductSpaceTest,MixedElementProductTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -355,7 +355,7 @@ TEST(ProductSpaceTest,MixedElementProductTest)
 
 TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -396,7 +396,7 @@ TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 
 TEST(ProductSpaceTest,ScalarProductTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -412,7 +412,7 @@ TEST(ProductSpaceTest,ScalarProductTest)
 
 TEST(ProductSpaceTest,NormTest)
 {
-  using namespace Algorithm;
+  using namespace VSA;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
