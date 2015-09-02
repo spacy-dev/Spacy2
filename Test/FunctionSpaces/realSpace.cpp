@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include "VSA/vector.hh"
-#include "VSA/Spaces/realSpace.hh"
-#include "VSA/Util/cast.hh"
+#include "Spacy/vector.hh"
+#include "Spacy/Spaces/realSpace.hh"
+#include "Spacy/Util/cast.hh"
 
 TEST(RealSpaceTest,ElementTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = Real::makeHilbertSpace();
   auto x = R.vector();
   EXPECT_DOUBLE_EQ( static_cast<double>(cast_ref<Real::Vector>(x)) , 0. );
@@ -14,7 +14,7 @@ TEST(RealSpaceTest,ElementTest)
 
 TEST(RealSpaceTest,ScalarProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = Real::makeHilbertSpace();
   auto x = R.vector();
   auto y = R.vector();
@@ -28,7 +28,7 @@ TEST(RealSpaceTest,ScalarProductTest)
 
 TEST(RealSpaceTest,NormTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = Real::makeHilbertSpace();
   auto x = R.vector();
   auto y = R.vector();

@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 
-#include "VSA/norm.hh"
-#include "VSA/scalarProduct.hh"
-#include "VSA/Spaces/realSpace.hh"
-#include "VSA/Spaces/productSpace.hh"
-#include "VSA/Util/cast.hh"
+#include "Spacy/norm.hh"
+#include "Spacy/scalarProduct.hh"
+#include "Spacy/Spaces/realSpace.hh"
+#include "Spacy/Spaces/productSpace.hh"
+#include "Spacy/Util/cast.hh"
 
 TEST(ProductSpaceTest,PurePrimalElementTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } );
 
@@ -20,7 +20,7 @@ TEST(ProductSpaceTest,PurePrimalElementTest)
 
 TEST(ProductSpaceTest,PureDualElementTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -32,7 +32,7 @@ TEST(ProductSpaceTest,PureDualElementTest)
 
 TEST(ProductSpaceTest,MixedElementTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -44,7 +44,7 @@ TEST(ProductSpaceTest,MixedElementTest)
 
 TEST(ProductSpaceTest,PurePrimalElementSumTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
@@ -129,7 +129,7 @@ TEST(ProductSpaceTest,PurePrimalElementSumTest)
 
 TEST(ProductSpaceTest,PureDualElementSumTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -210,7 +210,7 @@ TEST(ProductSpaceTest,PureDualElementSumTest)
 
 TEST(ProductSpaceTest,MixedElementSumTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -289,7 +289,7 @@ TEST(ProductSpaceTest,MixedElementSumTest)
 
 TEST(ProductSpaceTest,PurePrimalElementProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
@@ -311,7 +311,7 @@ TEST(ProductSpaceTest,PurePrimalElementProductTest)
 
 TEST(ProductSpaceTest,PureDualElementProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
@@ -333,7 +333,7 @@ TEST(ProductSpaceTest,PureDualElementProductTest)
 
 TEST(ProductSpaceTest,MixedElementProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -355,7 +355,7 @@ TEST(ProductSpaceTest,MixedElementProductTest)
 
 TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -396,7 +396,7 @@ TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 
 TEST(ProductSpaceTest,ScalarProductTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
@@ -412,7 +412,7 @@ TEST(ProductSpaceTest,ScalarProductTest)
 
 TEST(ProductSpaceTest,NormTest)
 {
-  using namespace VSA;
+  using namespace Spacy;
   auto R = std::make_shared<VectorSpace>( Real::makeHilbertSpace() );
   auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 

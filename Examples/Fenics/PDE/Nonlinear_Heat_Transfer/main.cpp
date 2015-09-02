@@ -1,10 +1,10 @@
 #include <dolfin.h>
 
-#include <VSA/Adapter/fenics.hh>
-#include <VSA/Algorithm/Newton/newton.hh>
-#include <VSA/inducedScalarProduct.hh>
+#include <Spacy/Adapter/fenics.hh>
+#include <Spacy/Algorithm/Newton/newton.hh>
+#include <Spacy/inducedScalarProduct.hh>
 
-#include "NonlinearPoisson.h"
+#include "NonlinearHeat.h"
 
 using namespace dolfin;
 
@@ -33,7 +33,7 @@ int main()
   // Create mesh and function space
   auto n = 256u;
   UnitSquareMesh mesh{n,n};
-  NonlinearPoisson::FunctionSpace V{mesh};
+  NonlinearHeat::FunctionSpace V{mesh};
   std::cout << "degrees of freedom: " << V.dim() << std::endl;
 
   // Define boundary condition
@@ -43,8 +43,8 @@ int main()
   std::vector<const DirichletBC*> bcs { &bc };
 
    // Define variational forms
-  NonlinearPoisson::BilinearForm a{V, V};
-  NonlinearPoisson::LinearForm L{V};
+  NonlinearHeat::BilinearForm a{V, V};
+  NonlinearHeat::LinearForm L{V};
   
   Constant c(1e-2), d(1e2);
   Source f;
@@ -57,7 +57,7 @@ int main()
   
   
   // Compute solution
-  using namespace VSA;
+  using namespace Spacy;
 
   // create spaces
   auto domain = FEniCS::makeHilbertSpace(V);
@@ -70,14 +70,14 @@ int main()
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
   // specify parameters for Newton's method
-  auto p = VSA::Newton::Parameter{};
+  auto p = Spacy::Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x) = 0
-  auto x = VSA::covariantNewton(A,p);
-//  auto sol = VSA::contravariantNewton(A,p);
-//  auto sol = VSA::localNewton(A,p);
+  auto x = Spacy::covariantNewton(A,p);
+//  auto sol = Spacy::contravariantNewton(A,p);
+//  auto sol = Spacy::localNewton(A,p);
   
   FEniCS::copy(x,u);
 

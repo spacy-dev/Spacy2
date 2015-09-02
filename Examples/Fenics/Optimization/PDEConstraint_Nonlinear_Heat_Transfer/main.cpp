@@ -2,8 +2,8 @@
 
 #include <dolfin.h>
 
-#include <VSA/Adapter/fenics.hh>
-#include <VSA/Algorithm/CompositeStep/affineCovariantSolver.hh>
+#include <Spacy/Adapter/fenics.hh>
+#include <Spacy/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
 #include "NormalStep.h"
 #include "LagrangeFunctional.h"
@@ -65,7 +65,7 @@ int main()
   Norm.d = d;
   
   // Compute solution
-  using namespace VSA;
+  using namespace Spacy;
 
   std::vector<unsigned> primalSpaceIds = {0u,1u}, dualSpaceIds = {2u};
   auto productSpace = FEniCS::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
