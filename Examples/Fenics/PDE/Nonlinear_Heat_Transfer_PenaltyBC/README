@@ -1,0 +1,12 @@
+Generate problem definition from .ufl file
+ - ffc -l dolfin NonlinearHeat.ufl
+
+Compilation:
+ - mkdir build
+ - cd build
+ - cmake ..
+ - make
+ 
+ Run example:
+  - ./nonlinear_heat
+  

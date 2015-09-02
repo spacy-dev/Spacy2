@@ -24,21 +24,20 @@ if (NOT CMAKE_BUILD_TYPE)
     "Choose the type of build, options are: Debug MinSizeRel Release RelWithDebInfo." FORCE)
 endif()
 
-# Compiler definitions
-add_definitions(${DOLFIN_CXX_DEFINITIONS})
-
 # Include directories
 include_directories(${DOLFIN_INCLUDE_DIRS})
 include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${DOLFIN_LIBRARIES})
+# Compiler definitions
+add_definitions(${DOLFIN_CXX_DEFINITIONS})
 
-find_package(VSpace REQUIRED)
-include_directories(${VSPACE_INCLUDE_DIRS})
-link_directories(${VSPACE_LIBRARY_DIRS})
-set(LIBS ${LIBS} ${VSPACE_LIBRARIES})
-
+# Include path, link path, library and compiler flags for Spacy
+find_package(Spacy REQUIRED)
+include_directories(${SPACY_INCLUDE_DIRS})
+link_directories(${SPACY_LIBRARY_DIR})
+set(LIBS ${LIBS} ${SPACY_LIBRARIES})
 # Compiler flags inherited from Spacy
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${VSPACE_CXX_FLAGS}" )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SPACY_CXX_FLAGS}" )
 
 # Executable
 add_executable(${PROJECT_NAME} main.cpp)

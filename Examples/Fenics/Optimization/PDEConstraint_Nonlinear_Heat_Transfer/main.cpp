@@ -5,7 +5,7 @@
 #include <Spacy/Adapter/fenics.hh>
 #include <Spacy/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
-#include "NormalStep.h"
+#include "NormalStepFunctional.h"
 #include "LagrangeFunctional.h"
 
 using namespace dolfin;
@@ -42,7 +42,7 @@ int main()
   LagrangeFunctional::Functional L(V.mesh());
   LagrangeFunctional::LinearForm dL(V);
   LagrangeFunctional::BilinearForm ddL(V,V);
-  NormalStep::BilinearForm Norm(V,V);
+  NormalStepFunctional::BilinearForm Norm(V,V);
   
   Function dummy(V);
   Source y_ref;

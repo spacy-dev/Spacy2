@@ -1,10 +1,10 @@
 #include <dolfin.h>
 
-#include <VSA/Adapter/fenics.hh>
-#include <VSA/Algorithm/Newton/newton.hh>
-#include <VSA/inducedScalarProduct.hh>
+#include <Spacy/Adapter/fenics.hh>
+#include <Spacy/Algorithm/Newton/newton.hh>
+#include <Spacy/inducedScalarProduct.hh>
 
-#include "NonlinearPoisson.h"
+#include "NonlinearHeat.h"
 
 using namespace dolfin;
 
@@ -24,11 +24,11 @@ int main()
   // Create mesh and function space
   int n = 256;
   UnitSquareMesh mesh(n,n);
-  NonlinearPoisson::FunctionSpace V(mesh);
+  NonlinearHeat::FunctionSpace V(mesh);
 
   // Define variational forms
-  NonlinearPoisson::BilinearForm a(V, V);
-  NonlinearPoisson::LinearForm L(V);
+  NonlinearHeat::BilinearForm a(V, V);
+  NonlinearHeat::LinearForm L(V);
 
   Constant c(1e-2), d(1e2);
   Source f;
@@ -41,7 +41,7 @@ int main()
   
   
   // Compute solution
-  using namespace VSA;
+  using namespace Spacy;
 
   // create spaces
   auto domain = FEniCS::makeHilbertSpace(V);
@@ -54,14 +54,14 @@ int main()
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
 
   // specify parameters for Newton's method
-  auto p = VSA::Newton::Parameter{};
+  auto p = Newton::Parameter{};
   p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x)=0
-  auto x = VSA::covariantNewton(A,p);
-//  auto x = VSA::contravariantNewton(A,p);
-//  auto x = VSA::localNewton(A,p);
+  auto x = covariantNewton(A,p);
+//  auto x = contravariantNewton(A,p);
+//  auto x = localNewton(A,p);
   
   FEniCS::copy(x,u);
 

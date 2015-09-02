@@ -1,18 +1,26 @@
 project(spacy)
 
 cmake_minimum_required(VERSION 2.8)
-# The version number
-set (VSPACe_MAJOR_VERSION 0)
-set (VSPACE_MINOR_VERSION 1)
-set (VSPACE_PATCH_VERSION 0)
-set(VSPACE_VERSION ${FOOBAR_MAJOR_VERSION}.${FOOBAR_MINOR_VERSION}.${FOOBAR_PATCH_VERSION})
 
+# The version number
+set (SPACY_MAJOR_VERSION 0)
+set (SPACY_MINOR_VERSION 1)
+set (SPACY_PATCH_VERSION 0)
+set (SPACY_VERSION ${SPACY_MAJOR_VERSION}.${SPACY_MINOR_VERSION}.${SPACY_PATCH_VERSION})
+
+# Set path to cmake scripts
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
-    ${CMAKE_SOURCE_DIR}/cmake/Modules
+    ${CMAKE_SOURCE_DIR}/cmake
     )
   
-include(CMakeConfigGuards)  
+# Do not allow in-source builds  
+include(ConfigSafeGuards)  
+  
+# Set compiler flags
+if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -Weffc++")
+endif()
   
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
@@ -23,20 +31,16 @@ foreach(p LIB BIN INCLUDE CMAKE)
 endforeach()
  
 # set up include-directories
-include_directories(
-  "${PROJECT_SOURCE_DIR}"
-  "${PROJECT_BINARY_DIR}")
+include_directories("${PROJECT_SOURCE_DIR}")
 
+# set up subdirectory containing code
 add_subdirectory(Spacy)
   
-#set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
-#set(CMAKE_BUILD_TYPE Debug)
+# Does not debug auto, but is less sloppy than gcc
+# set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
 
 # enable/disable unit tests
 option(BuildTest "BuildTest" OFF)
-
-
-#include(ConfigSafeGuards) 
 
 if(BuildTest)
   if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
@@ -59,36 +63,35 @@ if(BuildTest)
   aux_source_directory(Test/FunctionSpaces TEST_SRC_LIST)
   add_executable(unit_tests ${TEST_SRC_LIST})
   add_dependencies(unit_tests gtest)
-  target_link_libraries(unit_tests vspace gtest pthread)
+  target_link_libraries(unit_tests spacy gtest pthread)
 endif()
 
 
 # export add_library
 # ==================
-export(TARGETS vspace FILE ${PROJECT_BINARY_DIR}/VSpaceTargets.cmake)
-export(PACKAGE VSpace)
-file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
-   "${INSTALL_INCLUDE_DIR}")
+export(TARGETS spacy FILE ${PROJECT_BINARY_DIR}/SpacyTargets.cmake)
+export(PACKAGE Spacy)
+file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}" "${PROJECT_SOURCE_DIR}")
 # ... for the build tree
-include(${PROJECT_SOURCE_DIR}/cmake/Modules/VSpaceConfig.cmake.in)
+include(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in)
 set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
-set(CONF_LIBRARY_DIRS "${PROJECT_BINARY_DIR}/Spacy")
-configure_file(${PROJECT_SOURCE_DIR}/cmake/Modules/VSpaceConfig.cmake.in
-  "${PROJECT_BINARY_DIR}/VSpaceConfig.cmake" @ONLY)
+set(CONF_LIBRARY_DIR "${PROJECT_SOURCE_DIR}/build/Spacy")
+configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in
+  "${PROJECT_BINARY_DIR}/SpacyConfig.cmake" @ONLY)
 # ... for the install tree
 set(CONF_INCLUDE_DIRS "\${VSPACE_CMAKE_DIR}/${REL_INCLUDE_DIR}")
-configure_file(${PROJECT_SOURCE_DIR}/cmake/Modules/VSpaceConfig.cmake.in
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/VSpaceConfig.cmake" @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/SpacyConfig.cmake" @ONLY)
 # ... for both
-configure_file(${PROJECT_SOURCE_DIR}/cmake/Modules/VSpaceConfigVersion.cmake.in
-  "${PROJECT_BINARY_DIR}/VSpaceConfigVersion.cmake" @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfigVersion.cmake.in
+  "${PROJECT_BINARY_DIR}/SpacyConfigVersion.cmake" @ONLY)
  
-# Install the VSpaceConfig.cmake and VSpaceConfigVersion.cmake
+# Install the SpacyConfig.cmake and SpacyConfigVersion.cmake
 install(FILES
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/VSpaceConfig.cmake"
-  "${PROJECT_BINARY_DIR}/VSpaceConfigVersion.cmake"
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/SpacyConfig.cmake"
+  "${PROJECT_BINARY_DIR}/SpacyConfigVersion.cmake"
   DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
  
 # Install the export set for use with the install-tree
-install(EXPORT VSpaceTargets DESTINATION
+install(EXPORT SpacyTargets DESTINATION
   "${INSTALL_CMAKE_DIR}" COMPONENT dev)
