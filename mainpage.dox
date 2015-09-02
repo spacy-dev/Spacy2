@@ -28,7 +28,7 @@
  *
  * \subsection sub_usage_fenics_pde Nonlinear PDEs with FEniCS
  * For an operator equation \f$A(x)=0\f$, discretized with FEniCS ('L' denoting the residual form and 'a' the gradient form),
- * simplest usage of %Spacy is as follows
+ * simplest usage is as follows
  * @code
  * ...
  * MyFEniCSExample::FunctionSpace V{mesh}
@@ -59,8 +59,8 @@
  * Examples for nonlinear PDEs and optimal control problems with <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a> are given in Examples/Kaskade.
  *
  * \subsection sub_usage_kaskade_pde Nonlinear PDEs with Kaskade 7
- * For an operator equation \f$A(x)=0\f$, discretized with Kaskade 7,
- * usage of %Spacy is as follows
+ * For an operator equation \f$A(x)=0\f$, discretized with Kaskade 7 and with another scalar product,
+ * usage is as follows
  * @code
  * ...
  * auto h1Space = Kaskade::FEFunctionSpace< ContinuousLagrangeMapper<double,LeafView> >{(} gridManager , gridManager.grid().leafView() , order };
