@@ -17,4 +17,6 @@ and type
   - make
 
 ### Examples
-Currently there are examples for usage with Kaskade 7 and FEniCS. These are located in Spacy/Examples/Kaskade, resp. Spacy/Examples/FEniCS. 
+Currently there are examples for usage with Kaskade 7 and FEniCS. These are located in 
+ - Spacy/Examples/Kaskade, 
+ - Spacy/Examples/FEniCS. 
