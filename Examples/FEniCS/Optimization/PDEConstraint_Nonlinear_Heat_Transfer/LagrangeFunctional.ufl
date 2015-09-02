@@ -1,0 +1,29 @@
+# Compile this form with FFC: ffc -l dolfin LagrangeFunctional.ufl
+
+Y = FiniteElement("Lagrange", triangle, 1)
+U = FiniteElement("Lagrange", triangle, 1)
+P = FiniteElement("Lagrange", triangle, 1)
+
+X = MixedElement( Y , U , P )
+
+x = Coefficient(X)
+(y,u,p) = split(x)
+y0 = Coefficient(Y)
+
+alpha = Constant(triangle)
+c = Constant(triangle)
+d = Constant(triangle)
+
+f = 0.5*((y-y0)**2)*dx + 0.5*alpha*(u**2)*dx + inner((c+d*y**2)*grad(y), grad(p))*dx - u*p*dx + 1e9*y*p*ds
+#f = 0.5*((y-y0)**2) *dx + 0.5*alpha*(u**2)*dx + inner((c+d*y0**2)*grad(y), grad(p))*dx + #inner((2*d*dy*y)*grad(dy), grad(p))*dx + u*p*dx
+
+v  = TestFunction(X)
+
+J = derivative(f,x,v)
+
+dx = TrialFunction(X)
+
+H = derivative(J,x,dx) 
+
+forms = [f,J,H]
+

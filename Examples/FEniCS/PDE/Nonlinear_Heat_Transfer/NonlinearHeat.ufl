@@ -1,0 +1,18 @@
+# The residal form F and the Jacobian (linearised) form J
+# for the nonlinear equation - div (c+d*u^2) grad u = f
+#
+# Compile this form with FFC: ffc -l dolfin NonlinearHeat.ufl
+
+element = FiniteElement("Lagrange", triangle, 1)
+
+f  = Coefficient(element)
+x  = Coefficient(element)
+v  = TestFunction(element)
+
+c = Constant(triangle)
+d = Constant(triangle)
+
+F  = inner((c + d*x**2)*grad(x), grad(v))*dx - f*v*dx
+
+du = TrialFunction(element)
+J = derivative(F,x,du)
