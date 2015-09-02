@@ -36,8 +36,8 @@ find_package(Spacy REQUIRED)
 include_directories(${SPACY_INCLUDE_DIRS})
 link_directories(${SPACY_LIBRARY_DIR})
 set(LIBS ${LIBS} ${SPACY_LIBRARIES})
-# Compiler flags inherited from Spacy
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SPACY_CXX_FLAGS}" )
+# Compiler flags from Spacy, i.e. -std=c++1y
+add_compile_options(${SPACY_CXX_OPTIONS})
 
 # Executable
 add_executable(${PROJECT_NAME} main.cpp)

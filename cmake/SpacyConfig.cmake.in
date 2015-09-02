@@ -14,4 +14,4 @@ set(SPACY_LIBRARIES spacy)
 
 
 # Set compiler flags
-set(SPACY_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
+set(SPACY_CXX_OPTIONS "-std=c++1y")
