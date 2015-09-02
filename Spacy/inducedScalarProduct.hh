@@ -7,7 +7,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
    */
   class InducedScalarProduct
@@ -32,7 +32,7 @@ namespace Spacy
   };
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Induced scalar product for the primal variables (i.e. for constrained optimization problems).
    *
    * Let

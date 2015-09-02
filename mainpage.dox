@@ -1,6 +1,6 @@
 #error Documentation only.
 
-/*! \mainpage %VHat documentation
+/*! \mainpage %Spacy documentation
  * 
  * \section sec_intro Introduction
  * %Vhat is a library that aims at
@@ -10,7 +10,7 @@
  * - leaving you all freedom you want to implement your fancy algorithm (as long as you don't violate the mathematical structure of vector spaces)
  * 
  * \section sec_overview Overview
- * The basis of %VHat is the abstraction layer for vector space settings. The interface of %VHat essentially builds on type erasure techniques
+ * The basis of %Spacy is the abstraction layer for vector space settings. The interface of %Spacy essentially builds on type erasure techniques
  * provided by <a href="http://www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a>. Moreover, C++11-features such
  * as <a href="http://en.cppreference.com/w/cpp/language/value_category">R-values</a> are extensively used, so make sure to use one of the
  * compiler options -std=c++0x, -std=c++11 or -std=c++1y.
@@ -92,7 +92,7 @@
  *
  *
  * \section sec_supported_libs Supported libraries
- * Currently VHat supports 
+ * Currently Spacy supports 
  * - <a href="http://www.fenicsproject.org">the FEniCS Project,</a>
  * - <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">the Kaskade 7 Finite Element Toolbox.</a>
  */

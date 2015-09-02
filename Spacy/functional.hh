@@ -9,21 +9,21 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @anchor FunctionalAnchor
    * @brief Functional. Can store objects that satisfy the requirements of \ref FunctionalConceptAnchor "FunctionalConcept".
    */
   using Functional = boost::type_erasure::any<Concepts::FunctionalConcept>;
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @anchor C1FunctionalAnchor
    * @brief Differentiable functional. Can store objects that satisfy the requirements of \ref C1FunctionalConceptAnchor "C1FunctionalConcept".
    */
   using C1Functional = boost::type_erasure::any<Concepts::C1FunctionalConcept>;
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @anchor C2FunctionalAnchor
    * @brief Twice differentiable functional. Can store objects that satisfy the requirements of \ref C2FunctionalConceptAnchor "C2FunctionalConcept".
    */

@@ -3,7 +3,7 @@
 /** MODULES **/
 
 /**
- * @defgroup VSpaceGroup VSpace
+ * @defgroup SpacyGroup Spacy
  */
 
 /**
@@ -112,8 +112,8 @@
 /** NAMESPACES **/
    
   /**
-   * \namespace VHat
-   * \brief Main namespace of the %VHat library.
+   * \namespace Spacy
+   * \brief Main namespace of the %Spacy library.
    */
  
  

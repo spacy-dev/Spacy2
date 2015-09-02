@@ -9,7 +9,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Linearized operator \f$A'(x)\f$ of a differentiable operator \f$A\f$.
    * @see @ref LinearOperatorAnchor "LinearOperator", @ref Concepts::LinearOperatorConcept "LinearOperatorConcept"
    */

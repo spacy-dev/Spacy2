@@ -8,7 +8,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Check if x can be cast to a reference of type ToType.
    * @return boost::type_erasure::any_cast< const std::decay_t<ToType>* >(&x) != nullptr
    */
@@ -19,7 +19,7 @@ namespace Spacy
   }
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief cast x of type 'FromType&' to 'ToType&' with boost::type_erasure::any_cast
    * @return boost::type_erasure::any_cast<ToType&>(x)
    */
@@ -31,7 +31,7 @@ namespace Spacy
   }
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief cast x of type 'const FromType&' to 'const ToType&' with boost::type_erasure::any_cast
    * @return boost::type_erasure::any_cast<const ToType&>(x)
    */

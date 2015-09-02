@@ -11,7 +11,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @anchor VectorAnchor
    * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
    */
@@ -20,7 +20,7 @@ namespace Spacy
 ////  template <class> struct Scale;
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Multiplication with arithmetic types (double,float,int,...).
    * @return \f$z=a*x\f$.
    */
@@ -32,28 +32,28 @@ namespace Spacy
   }
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Sum of vectors.
    * @return Compute \f$z=x+y\f$.
    */
   Vector operator+(Vector x, const Vector& y);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Subtract vectors.
    * @return \f$z=x-y\f$.
    */
   Vector operator-(Vector x, const Vector& y);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Compute scalar product.
    * @return \f$z=x*y=(x,y)\f$.
    */
   double operator*(const Vector& x, const Vector& y);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Compute norm, where the norm associated with the underlying function space is used.
    * @return \f$ z = \|x\| \f$.
    */

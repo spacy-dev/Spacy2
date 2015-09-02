@@ -8,7 +8,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Compute the derivative of a functional \f$ f: X\to \mathbb{R} \f$ as (nonlinear) operator \f$ f':X\to X^* \f$.
    * @param f twice differentiable functional
    * @return \f$f'\f$
@@ -17,7 +17,7 @@ namespace Spacy
   C1Operator derivative(C2Functional f);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Compute the linearization of a functional \f$ f: X\to \mathbb{R} \f$ at \f$x\in X\f$ as linear functional \f$ f'(x):X\to\mathbb{R} \f$.
    * @param f twice differentiable functional
    * @param x point of linearization

@@ -7,7 +7,7 @@
 namespace Spacy
 {
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \anchor ScalarProductAnchor
    * \brief Scalar product class.  Can store objects that satisfy the requirements of \ref ScalarProductConceptAnchor "ScalarProductConcept".
    */

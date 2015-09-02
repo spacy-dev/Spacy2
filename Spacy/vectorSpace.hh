@@ -19,7 +19,7 @@ namespace Spacy
   /// \endcond
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @anchor VectorCreatorAnchor
    * @brief Vector creator for feeding into VectorSpace.
    * See \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
@@ -28,7 +28,7 @@ namespace Spacy
 
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    * @see @ref VectorCreatorAnchor "VectorCreator".
    */
@@ -153,7 +153,7 @@ namespace Spacy
   };
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Construct Banach space.
    * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
    * @param norm norm satisfying \ref NormConceptAnchor "NormConcept"
@@ -162,7 +162,7 @@ namespace Spacy
   VectorSpace makeBanachSpace(VectorCreator creator, Norm norm);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Construct Hilbert space.
    * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
    * @param scalarProduct scalar product satisfying \ref ScalarProductConceptAnchor "ScalarProductConcept"
@@ -171,7 +171,7 @@ namespace Spacy
   VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct);
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Relate function spaces.
    * @param X primal space
    * @param Y dual space

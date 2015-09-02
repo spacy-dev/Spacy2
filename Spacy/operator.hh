@@ -12,7 +12,7 @@
 namespace Spacy
 {
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \anchor CallableOperatorAnchor
    * \brief Simplest possible operator class. Can store objects that satisfy the requirements of \ref CallableOperatorConceptAnchor "CallableOperatorConcept".
    *
@@ -21,28 +21,28 @@ namespace Spacy
   using CallableOperator = boost::type_erasure::any< Concepts::CallableOperatorConcept >;
 
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \anchor LinearOperatorAnchor
    * \brief Linear operator class. Can store objects that satisfy the requirements of \ref LinearOperatorConceptAnchor "LinearOperatorConcept".
    */
   using LinearOperator = boost::type_erasure::any< Concepts::LinearOperatorConcept >;
 
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \anchor OperatorAnchor
    * \brief Operator class. Can store objects that satisfy the requirements of \ref OperatorConceptAnchor "OperatorConcept".
    */
   using Operator = boost::type_erasure::any< Concepts::OperatorConcept >;
 
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \anchor C1OperatorAnchor
    * \brief Differentiable operator class. Can store objects that satisfy the requirements of \ref C1OperatorConceptAnchor "C1OperatorConcept".
    */
   using C1Operator = boost::type_erasure::any< Concepts::C1OperatorConcept >;
 
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
   inline const auto& operator^(const LinearOperator& A, int k)
@@ -52,7 +52,7 @@ namespace Spacy
   }
 
   /**
-   * \ingroup VSpaceGroup
+   * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
   inline const auto& operator^(LinearOperator&& A, int k)
@@ -62,7 +62,7 @@ namespace Spacy
   }
 
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Linearize \f$A\f$ at \f$x\f$.
    * @param A differentiable operator
    * @param x point of linearization

@@ -11,7 +11,7 @@
 namespace Spacy
 {
   /**
-   * @ingroup VSpaceGroup
+   * @ingroup SpacyGroup
    * @brief Linear operator \f$f''(x)\f$ for a twice differentiable functional \f$f\f$.
    * @see @ref LinearOperatorAnchor "LinearOperator", @ref Concepts::LinearOperatorConcept "LinearOperatorConcept"
    */
