@@ -11,13 +11,13 @@
  * 
  * \section sec_overview Overview
  * The basis of %Spacy is the abstraction layer for vector space settings. The interface of %Spacy essentially builds on type erasure techniques
- * provided by <a href="http://www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a>. Moreover, C++11-features such
- * as <a href="http://en.cppreference.com/w/cpp/language/value_category">R-values</a> are extensively used, so make sure to use one of the
- * compiler options -std=c++0x, -std=c++11 or -std=c++1y.
+ * provided by <a href="http://www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a>. Moreover, C++11/14-features such
+ * as <a href="http://en.cppreference.com/w/cpp/language/value_category">R-values</a> are used, so make sure to use the
+ * compiler option -std=c++1y.
  *
  * \subsection sub_concepts Main concepts
- * - First there is a vector space class (::Algorithm::VectorSpace), which models a \ref ::Algorithm::makeBanachSpace() "Banach space" <span lang="latex"> 
- *   (X,||.||)</span> or a \ref ::Algorithm::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a \ref NormAnchor "norm" and possibly a \ref ScalarProductAnchor "scalar product". Moreover, vector spaces can be 
+ * - First there is a vector space class (::Spacy::VectorSpace), which models a \ref ::Spacy::makeBanachSpace() "Banach space" <span lang="latex"> 
+ *   (X,||.||)</span> or a \ref ::Spacy::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a \ref NormAnchor "norm" and possibly a \ref ScalarProductAnchor "scalar product". Moreover, vector spaces can be 
  *   related to each other as primal or dual spaces. Eventually they can generate vectors.
  * - Vectors (see \ref VectorAnchor "Vector", \ref VectorConceptAnchor "VectorConcept") can be any class satisfying the \ref VectorConceptAnchor "VectorConcept", i.e. vectors must be vectors in an almost pure mathematical sense.
  * - Operator (see \ref OperatorAnchor "Operator", \ref OperatorConceptAnchor "OperatorConcept") are mappings between different vector spaces.
@@ -28,7 +28,7 @@
  *
  * \subsection sub_usage_fenics_pde Nonlinear PDEs with FEniCS
  * For an operator equation \f$A(x)=0\f$, discretized with FEniCS ('L' denoting the residual form and 'a' the gradient form),
- * simplest usage of %VSpace is as follows
+ * simplest usage of %Spacy is as follows
  * @code
  * ...
  * MyFEniCSExample::FunctionSpace V{mesh}
@@ -37,20 +37,20 @@
  * ...
  *
  * // Create function space.
- * auto domain = Algorithm::FEniCS::makeHilbertSpace(V);
+ * auto domain = Spacy::FEniCS::makeHilbertSpace(V);
  *
  * // Create operator mapping into the dual space of domain (which is, due to the Hilbert space structure, associated with domain itself).
  * // You can also specify the range space if it differs from the dual space of domain
  * // This is illustrated in the PDE example for Kaskade 7
- * auto A = Algorithm::FEniCS::makeOperator( L , a , domain );
+ * auto A = Spacy::FEniCS::makeOperator( L , a , domain );
  *
  * // Solve with covariant Newton method with initial guess x0=0.
- * auto x = Algorithm::covariantNewton(A);
+ * auto x = Spacy::covariantNewton(A);
  *
  *
  * // Copy solution back to dolfin::Function.
  * dolfin::Function u(V);
- * Algorithm::FEniCS::copy(x,u);
+ * Spacy::FEniCS::copy(x,u);
  * ...
  * @endcode
  * 
@@ -60,7 +60,7 @@
  *
  * \subsection sub_usage_kaskade_pde Nonlinear PDEs with Kaskade 7
  * For an operator equation \f$A(x)=0\f$, discretized with Kaskade 7,
- * usage of %VSpace is as follows
+ * usage of %Spacy is as follows
  * @code
  * ...
  * auto h1Space = Kaskade::FEFunctionSpace< ContinuousLagrangeMapper<double,LeafView> >{(} gridManager , gridManager.grid().leafView() , order };
@@ -70,23 +70,23 @@
  * ...
  *
  * // Create domain and range space.
- * auto domain = Algorithm::Kaskade::makeHilbertSpace( space );
- * auto range  = Algorithm::Kaskade::makeHilbertSpace( space );
+ * auto domain = Spacy::Kaskade::makeHilbertSpace( space );
+ * auto range  = Spacy::Kaskade::makeHilbertSpace( space );
  *
  * // Create operator
- * auto A = Algorithm::Kaskade::makeOperator( F , domain , range );
+ * auto A = Spacy::Kaskade::makeOperator( F , domain , range );
  *
  * // Set induced scalar product on domain space.
  * auto x0 = domain.vector();
  * domain.setScalarProduct( InducedScalarProduct( A.linearization(x0) );
  *
  * // Solve with covariant Newton method with initial guess x0=0.
- * auto x = Algorithm::covariantNewton( A , x0 );
+ * auto x = Spacy::covariantNewton( A , x0 );
  *
  *
  * // copy solution back to dolfin::Function
  * typename VariableSetDescription::VariableSet u( variableSetDescription );
- * Algorithm::Kaskade::copy( x , u );
+ * Spacy::Kaskade::copy( x , u );
  * ...
  * @endcode
  *
