@@ -75,7 +75,7 @@ file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}" "${PROJECT_SOURCE_DIR}
 # ... for the build tree
 include(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in)
 set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
-set(CONF_LIBRARY_DIR "${PROJECT_SOURCE_DIR}/build/Spacy")
+set(CONF_LIBRARY_DIR "${PROJECT_BINARY_DIR}/Spacy")
 configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in
   "${PROJECT_BINARY_DIR}/SpacyConfig.cmake" @ONLY)
 # ... for the install tree
