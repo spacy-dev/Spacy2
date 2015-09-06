@@ -1,7 +1,7 @@
 #include "cg.hh"
 
-#include "Spacy/vector.hh"
 #include "Spacy/Util/Exceptions/singularOperatorException.hh"
+#include "Spacy/vector.hh"
 
 #include <cassert>
 #include <cmath>
@@ -84,8 +84,8 @@ namespace Spacy
       {
         if( verbosityLevel() > 1 ) std::cout << "Iteration: " << step << std::endl;
         auto Aq = A_(q);
-        auto qAq = Aq(q);
-        auto qPq = Pq(q);
+        Real qAq = Aq(q);
+        Real qPq = Pq(q);
         regularize(qAq,qPq);
 
         auto alpha = sigma/qAq;

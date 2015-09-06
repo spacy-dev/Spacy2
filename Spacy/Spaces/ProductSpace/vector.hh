@@ -4,7 +4,6 @@
 #include <memory>
 #include <vector>
 
-#include "Spacy/vector.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/Mixins/primalDualSwitch.hh"
 
@@ -168,7 +167,7 @@ namespace Spacy
        * @brief Set primal vector \f$x_p\f$.
        * @param y product space vector
        */
-      void setPrimalComponent(const ::Spacy::Vector& y);
+      void setPrimalComponent(Vector y);
 
       /**
        * @brief Access dual variables as product space vector.
@@ -186,7 +185,7 @@ namespace Spacy
        * @brief Set dual variable \f$x_d\f$.
        * @param y product space vector.
        */
-      void setDualComponent(const ::Spacy::Vector& y);
+      void setDualComponent(Vector y);
 
       /**
        * @brief Access VectorCreator object.

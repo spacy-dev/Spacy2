@@ -3,6 +3,7 @@
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 
+#include "Spacy/vector.hh"
 #include "vectorSpace.hh"
 
 #include <cmath>
@@ -46,11 +47,19 @@ namespace Spacy
     return *this;
   }
 
-  Real& Real::operator=(const boost::type_erasure::any< Concepts::VectorConcept >& y)
+  Real& Real::operator=(const Vector& y)
+  {
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
+    impl() = cast_ref<Real>(y).impl();
+    return *this;
+  }
+
+  Real::Real(const Vector& y)
+    : VectorBase(y.space()),
+      Mixin::Impl<double>(0)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
     *this = cast_ref<Real>(y);
-    return *this;
   }
 
   Real Real::operator()(const Real& y) const
@@ -59,6 +68,19 @@ namespace Spacy
     return *this * y;
   }
 
+  Real& Real::operator+=(const Vector& y)
+  {
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
+    impl() += cast_ref<Real>(y).impl();
+    return *this;
+  }
+
+  Real& Real::operator-=(const Vector& y)
+  {
+    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
+    impl() -= cast_ref<Real>(y).impl();
+    return *this;
+  }
 
   Real& Real::operator*=(const Real& y)
   {
@@ -139,6 +161,17 @@ namespace Spacy
     return y;
   }
 
+  Real operator+(Real x, const Vector& y)
+  {
+    return x += cast_ref<Real>(y);
+  }
+
+  Real operator+(const Vector& x, Real y)
+  {
+    return y += cast_ref<Real>(x);
+  }
+
+
   Real operator-(Real x, const Real& y)
   {
     toDouble(x) -= toDouble(y);
@@ -159,12 +192,12 @@ namespace Spacy
   }
 
 
-  boost::type_erasure::any<Concepts::VectorConcept> operator*(Real a, boost::type_erasure::any<Concepts::VectorConcept> x)
+  Vector operator*(Real a, Vector x)
   {
     return x *= toDouble(a);
   }
 
-  boost::type_erasure::any<Concepts::VectorConcept> operator*(boost::type_erasure::any<Concepts::VectorConcept> x, Real a)
+  Vector operator*(Vector x, Real a)
   {
     return x *= toDouble(a);
   }

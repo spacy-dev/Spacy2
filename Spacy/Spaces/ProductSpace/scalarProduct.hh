@@ -1,13 +1,13 @@
 #ifndef SPACY_PRODUCT_SPACE_PRODUCT_HH
 #define SPACY_PRODUCT_SPACE_PRODUCT_HH
 
-#include "Spacy/vector.hh"
-
 namespace Spacy
 {
   /// @cond
   class Real;
+  class Vector;
   /// @endcond
+
   namespace ProductSpace
   {
     /**

@@ -244,9 +244,9 @@ namespace Spacy
       return cast_ref<Vector>(variables_[0]);
     }
 
-    void Vector::setPrimalComponent(const ::Spacy::Vector& y)
+    void Vector::setPrimalComponent(Vector y)
     {
-      variables_[0] = y;
+      variables_[0] = std::move(y);
     }
 
     const Vector& Vector::dualComponent() const
@@ -261,9 +261,9 @@ namespace Spacy
       return cast_ref<Vector>(variables_[1]);
     }
 
-    void Vector::setDualComponent(const ::Spacy::Vector& y)
+    void Vector::setDualComponent(Vector y)
     {
-      variables_[1] = y;
+      variables_[1] = std::move(y);
     }
 
     const VectorCreator& Vector::creator() const
@@ -279,7 +279,7 @@ namespace Spacy
 
     Real Vector::operator()(const Vector& y) const
     {
-      checkDualPairing(*this,y);
+//      checkDualPairing(*this,y);
       assert( variables_.size() == y.variables_.size() );
 
       if( !isPrimalDual() )

@@ -11,6 +11,10 @@
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  /// @endcond
+
   /**
    * @ingroup RealGroup
    * @brief Real number.
@@ -34,7 +38,18 @@ namespace Spacy
      */
     explicit Real(const VectorSpace& space);
 
+    /**
+     * @brief Construction from double.
+     * @param y value to assign
+     */
     Real(double x);
+
+    /**
+     * @brief Construction form vector.
+     * @throws if y does not hold an object of type Real
+     * @param y value to assign
+     */
+    Real(const Vector& y);
 
     /**
      * @brief Assignment from double.
@@ -42,13 +57,28 @@ namespace Spacy
      */
     Real& operator=(double y);
 
+    /**
+     * @brief In-place summation.
+     * @throws if y does not hold an object of type Real
+     * @param y vector to add
+     * @return \f$x+y\f$
+     */
+    Real& operator+=(const Vector& y);
+
+    /**
+     * @brief In-place subtraction.
+     * @throws if y does not hold an object of type Real
+     * @param y vector to subtract
+     * @return \f$x-y\f$
+     */
+    Real& operator-=(const Vector& y);
 
     /**
      * @brief Assignment from Real stored in a ::Spacy::Vector.
      * @param y value to assign
      * @throws InvalidArgumentException if casting y to const Real::Vector& fails
      */
-    Real& operator=(const boost::type_erasure::any< Concepts::VectorConcept >& y);
+    Real& operator=(const Vector& y);
 
     Real& operator*=(const Real& y);
 
@@ -92,10 +122,10 @@ namespace Spacy
   Real operator*(Real x, double y);
 
   /// Compute \f$a*y\f$.
-  boost::type_erasure::any<Concepts::VectorConcept> operator*(Real a, boost::type_erasure::any<Concepts::VectorConcept> x);
+  Vector operator*(Real a, Vector x);
 
   /// Compute \f$a*y\f$.
-  boost::type_erasure::any<Concepts::VectorConcept> operator*(boost::type_erasure::any<Concepts::VectorConcept> x, Real a);
+  Vector operator*(Vector x, Real a);
 
   /// Compute \f$x+y\f$.
   Real operator+(Real x, const Real& y);
@@ -105,6 +135,12 @@ namespace Spacy
 
   /// Compute \f$x+y\f$.
   Real operator+(double x, Real y);
+
+  /// Compute \f$x+y\f$.
+  Real operator+(Real x, const Vector& y);
+
+  /// Compute \f$x+y\f$.
+  Real operator+(const Vector& x, Real y);
 
   /// Compute \f$x-y\f$.
   Real operator-(Real x, const Real& y);

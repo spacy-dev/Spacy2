@@ -1,8 +1,9 @@
 #include "inducedScalarProduct.hh"
 
+#include "Util/cast.hh"
 #include "Spacy/Spaces/productSpace.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
-#include "Util/cast.hh"
+#include "Spacy/vector.hh"
 
 #include <utility>
 

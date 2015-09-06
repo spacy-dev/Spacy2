@@ -137,6 +137,66 @@ namespace Spacy
       std::unique_ptr<Type> impl_ = nullptr;
     };
 
+    /**
+     * @ingroup MixinGroup
+     * @brief Stores an object of type Type as unique pointer and provides access via member function impl().
+     */
+    template < class Type >
+    class CopyingUniqueImpl
+    {
+    public:
+      /// Default constructor.
+      CopyingUniqueImpl() = default;
+
+      /**
+       * @brief Constructor.
+       * @param impl value to be stored.
+       */
+      explicit CopyingUniqueImpl(std::unique_ptr<Type>&& impl)
+        : impl_(std::move(impl))
+      {}
+
+      CopyingUniqueImpl(const CopyingUniqueImpl& other)
+        : impl_(std::make_unique<Type>(other.impl()))
+      {}
+
+      CopyingUniqueImpl& operator=(const CopyingUniqueImpl& other)
+      {
+        impl_ = std::make_unique<Type>(other.impl());
+        return *this;
+      }
+
+      CopyingUniqueImpl(CopyingUniqueImpl&&) = default;
+      CopyingUniqueImpl& operator=(CopyingUniqueImpl&&) = default;
+
+      /**
+       * @brief Access implementation.
+       */
+      Type& impl()
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl().");
+        return *impl_;
+      }
+
+      /**
+       * @brief Access implementation.
+       */
+      const Type& impl() const
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl() const.");
+        return *impl_;
+      }
+
+      /// Check if stored object is null pointer.
+      bool implIsNullPtr() const
+      {
+        return impl_ == nullptr;
+      }
+
+    private:
+      std::unique_ptr<Type> impl_ = nullptr;
+    };
+
    /**
     * @ingroup MixinGroup
     * @brief Stores an object of type Type as shared pointer and provides access via member function impl().

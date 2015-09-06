@@ -2,7 +2,6 @@
 #define AFFINECOVARIANTTERMINATIONCRITERION_HH
 
 #include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/mixins.hh"
 #include "Spacy/Util/Concepts/Newton/terminationCriterionConcept.hh"
@@ -11,6 +10,7 @@ namespace Spacy
 {
   /// @cond
   class DampingFactor;
+  class Vector;
   /// @endcond
 
   namespace Newton

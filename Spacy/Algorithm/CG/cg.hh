@@ -5,7 +5,6 @@
 #include <string>
 
 #include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/iterativeRefinements.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"
@@ -14,11 +13,15 @@
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  /// @endcond
+
   namespace CG
   {
     /**
-     * \ingroup CGGroup
-     * \brief Conjugate gradient method.
+     * @ingroup CGGroup
+     * @brief Conjugate gradient method.
      *
      * This implements a preconditioned CG iteration for an operator \f$ A: X\to x^* \f$, preconditioned by a
      * preconditioner \f$ B^{-1}: X^* \to X \f$. The default termination criterion is based on an estimate of the relative

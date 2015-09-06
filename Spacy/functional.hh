@@ -4,7 +4,8 @@
 #include <boost/type_erasure/any.hpp>
 #include "Util/Concepts/functionalConcept.hh"
 
-#include "vectorSpace.hh"
+#include "Spacy/vectorSpace.hh"
+#include "Spacy/vector.hh"
 
 namespace Spacy
 {
@@ -42,7 +43,8 @@ namespace Spacy
    * @return \f$f'(x)\f$, i.e. f.d1(x).
    * @see @ref C2FunctionalAnchor "C2Functional"
    */
-  boost::type_erasure::any< Concepts::VectorConcept > d1(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
+  Vector d1(const C2Functional& f, const Vector& x);
+//  boost::type_erasure::any< Concepts::VectorConcept > d1(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
 
   /**
    * @ingroup SpacyGroup
@@ -56,7 +58,8 @@ namespace Spacy
    * @return \f$f''(x)\f$, i.e. f.hessian(x).
    * @see @ref C2FunctionalAnchor "C2Functional"
    */
-  boost::type_erasure::any< Concepts::LinearOperatorConcept > d2(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
+  boost::type_erasure::any< Concepts::LinearOperatorConcept > d2(const C2Functional& f, const Vector& x);
+//  boost::type_erasure::any< Concepts::LinearOperatorConcept > d2(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
 }
 
 #endif // SPACY_FUNCTIONAL_HH

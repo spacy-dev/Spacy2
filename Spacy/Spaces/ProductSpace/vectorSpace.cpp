@@ -89,7 +89,7 @@ namespace Spacy
     }
 
 
-    ::Spacy::Vector VectorCreator::operator()(const VectorSpace* space) const
+    Vector VectorCreator::operator()(const VectorSpace* space) const
     {
       return Vector{*space};
     }

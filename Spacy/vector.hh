@@ -5,16 +5,96 @@
 #include <boost/type_erasure/any.hpp>
 
 #include "Spacy/Util/Concepts/vectorConcept.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/cast.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
+
   /**
    * @ingroup SpacyGroup
    * @anchor VectorAnchor
    * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
    */
-  using Vector = boost::type_erasure::any< Concepts::VectorConcept >;
+  using AnyVector = boost::type_erasure::any< Concepts::VectorConcept >;
+
+  class Vector : public Mixin::CopyingUniqueImpl<AnyVector>
+  {
+  public:
+    Vector()
+      : Mixin::CopyingUniqueImpl<AnyVector>( std::make_unique<AnyVector>() )
+    {}
+
+    template <class VImpl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<VImpl>,Vector>::value>
+              >
+    Vector(VImpl&& v)
+      : Mixin::CopyingUniqueImpl<AnyVector>(std::make_unique<AnyVector>(std::forward<VImpl>(v)))
+    {}
+
+//    Vector(AnyVector v);
+
+    operator AnyVector() const;
+
+    /**
+     * @brief In-place summation \f$ x+=y\f$.
+     * @param y vector to add to this vector
+     * @return \f$ x+=y\f$.
+     */
+    Vector& operator+=(const Vector& y);
+
+    /**
+     * @brief In-place subtraction \f$ x-=y\f$.
+     * @param y vector to subtract from this vector
+     * @return \f$ x-=y\f$.
+     */
+    Vector& operator-=(const Vector& y);
+
+    /**
+     * @brief In-place multiplication \f$ x*=a\f$.
+     * @param a scaling factor
+     * @return \f$ x*=a\f$.
+     */
+    Vector& operator*=(double a);
+
+    /**
+     * @brief Negation \f$ -x\f$.
+     * @return \f$ -x \f$.
+     */
+    Vector operator-() const;
+
+    Vector operator()(const Vector& y) const;
+
+    /**
+     * @brief Comparison operator \f$ x==y\f$.
+     * @param y vector to compare with this vector
+     * @return \f$ x==y\f$.
+     */
+    bool operator==(const Vector& y) const;
+
+    const VectorSpace& space() const;
+  };
+
+  template <class ToType>
+  bool is(const Spacy::Vector& v)
+  {
+    return is<ToType>(v.impl());
+  }
+
+  template <class ToType>
+  const ToType& cast_ref(const Spacy::Vector& v)
+  {
+    return cast_ref<ToType>(v.impl());
+  }
+
+  template <class ToType>
+  ToType& cast_ref(Spacy::Vector& v)
+  {
+    return cast_ref<ToType>(v.impl());
+  }
 
 ////  template <class> struct Scale;
 
@@ -25,10 +105,7 @@ namespace Spacy
    */
 //  template <class Arithmetic,
 //            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  inline Vector operator*(double a, Vector x)
-  {
-    return x*=a;//Scale<Arithmetic>{a,x};
-  }
+  Vector operator*(double a, Vector x);
 
   /**
    * @ingroup SpacyGroup

@@ -2,12 +2,12 @@
 #define SPACY_INDUCED_SCALAR_PRODUCT_HH
 
 #include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
 
 namespace Spacy
 {
   /// @cond
   class Real;
+  class Vector;
   /// @endcond
 
   /**

@@ -13,6 +13,10 @@ namespace Spacy
 {
   namespace FEniCS
   {
+    /// @cond
+    class Vector;
+    /// @endcond
+
     /**
      * @ingroup FenicsGroup
      * @brief Creator for vector space elements for %FEniCS.
@@ -53,7 +57,7 @@ namespace Spacy
        * @param space pointer to vector space implementation
        * @return vector associated with space
        */
-      ::Spacy::Vector operator()(const VectorSpace* space) const;
+      Vector operator()(const VectorSpace* space) const;
 
     private:
       using map = std::unordered_map<std::size_t,std::size_t>;

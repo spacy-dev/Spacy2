@@ -1,6 +1,7 @@
 #include "terminationCriteria.hh"
 
 #include "Spacy/Algorithm/dampingFactor.hh"
+#include "Spacy/vector.hh"
 
 #include <cmath>
 

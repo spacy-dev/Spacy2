@@ -11,6 +11,7 @@ namespace Spacy
 {
   /// @cond
   class DampingFactor;
+  class Vector;
   /// @endcond
 
   namespace Concepts
@@ -45,9 +46,13 @@ namespace Spacy
       boost::mpl::vector<
         ::Spacy::Concepts::ConceptBase ,
         boost::type_erasure::callable<bool(DampingFactor,
-                                           const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&,
-                                           const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&),
+                                           const Vector&,
+                                           const Vector&),
                                       const boost::type_erasure::_self>
+//      boost::type_erasure::callable<bool(DampingFactor,
+//                                         const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&,
+//                                         const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&),
+//                                    const boost::type_erasure::_self>
       >;
     }
   }

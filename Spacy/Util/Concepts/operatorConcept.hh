@@ -9,6 +9,7 @@
 namespace Spacy
 {
   /// \cond
+  class Vector;
   class VectorSpace;
   /// \endcond
 
@@ -41,8 +42,10 @@ namespace Spacy
     using CallableOperatorConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                                    const boost::type_erasure::_self>
+    boost::type_erasure::callable<Vector(const Vector&),
+                                  const boost::type_erasure::_self>
+//    boost::type_erasure::callable<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
+//                                  const boost::type_erasure::_self>
     >;
 
     /**
@@ -161,10 +164,14 @@ namespace Spacy
     using C1OperatorConcept =
     boost::mpl::vector<
       OperatorConcept ,
-      has_d1<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
-             const boost::type_erasure::_self> ,
-      has_linearization<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                        const boost::type_erasure::_self>
+    has_d1<Vector(const Vector&,const Vector&),
+           const boost::type_erasure::_self> ,
+    has_linearization<boost::type_erasure::any<LinearOperatorConcept>(const Vector&),
+                      const boost::type_erasure::_self>
+//    has_d1<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
+//           const boost::type_erasure::_self> ,
+//    has_linearization<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
+//                      const boost::type_erasure::_self>
     >;
   }
 }

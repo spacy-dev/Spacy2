@@ -5,6 +5,7 @@
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
 #include "Spacy/Spaces/productSpace.hh"
+#include "Spacy/vector.hh"
 
 #include <boost/type_erasure/is_empty.hpp>
 
@@ -77,7 +78,7 @@ namespace Spacy
     return norm_;
   }
 
-  boost::type_erasure::any<Concepts::VectorConcept> VectorSpace::vector() const
+  Vector VectorSpace::vector() const
   {
     return impl()(this);
   }
@@ -99,12 +100,6 @@ namespace Spacy
     return sp_;
   }
 
-
-//  void VectorSpace::addPrimalSpace(const VectorSpace& Y)
-//  {
-//    primalSpaces_.push_back(Y.index());
-//  }
-
   void VectorSpace::addDualSpace(const VectorSpace& Y)
   {
     dualSpaces_.push_back(Y.index());
@@ -118,15 +113,6 @@ namespace Spacy
 
     return false;
   }
-
-//  bool VectorSpace::isDualWRT(const VectorSpace& Y) const
-//  {
-//    for( auto index : primalSpaces_ )
-//      if( index == Y.index() )
-//        return true;
-
-//    return false;
-//  }
 
   const VectorSpace& VectorSpace::dualSpace() const
   {
@@ -144,12 +130,12 @@ namespace Spacy
     return !is_empty(sp_);
   }
 
-  bool VectorSpace::isAdmissible(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
+  bool VectorSpace::isAdmissible(const Vector& x) const
   {
     return restriction_(x);
   }
 
-  void VectorSpace::setRestriction(std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> f)
+  void VectorSpace::setRestriction(std::function<bool(const Vector&)> f)
   {
     restriction_ = std::move(f);
   }
@@ -166,7 +152,6 @@ namespace Spacy
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);
-//    V.addPrimalSpace(V);
 
     if( is<ProductSpace::VectorCreator>(creator) )
     {
@@ -176,7 +161,6 @@ namespace Spacy
         auto subSpace = productSpaceCreator.sharedSubSpace(i);
         subSpace->setDualSpace(subSpace.get());
         subSpace->addDualSpace(*subSpace);
-//        subSpace->addPrimalSpace(*subSpace);
       }
     }
 
@@ -186,13 +170,17 @@ namespace Spacy
   void connect(VectorSpace& X, VectorSpace& Y)
   {
     X.addDualSpace( Y );
-//    Y.addPrimalSpace( X );
   }
 
 
+  void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W)
+  {
+    if( V.index() != W.index() )
+      throw IncompatibleSpaceException(V.index(),W.index());
+  }
+
   void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W)
   {
-    if( V->index() != W->index() )
-      throw IncompatibleSpaceException(V->index(),W->index());
+    checkSpaceCompatibility(*V,*W);
   }
 }

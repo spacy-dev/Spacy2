@@ -11,6 +11,7 @@
 namespace Spacy
 {
   /// @cond
+  class Vector;
   class Real;
   /// @endcond
   namespace Concepts
@@ -42,9 +43,12 @@ namespace Spacy
     using ScalarProductConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<Real(const boost::type_erasure::any<VectorConcept>&,
-                                         const boost::type_erasure::any<VectorConcept>&),
+      boost::type_erasure::callable<Real(const Vector&,
+                                         const Vector&),
                                     const boost::type_erasure::_self>
+//    boost::type_erasure::callable<Real(const boost::type_erasure::any<VectorConcept>&,
+//                                       const boost::type_erasure::any<VectorConcept>&),
+//                                  const boost::type_erasure::_self>
     >;
   }
 }

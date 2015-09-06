@@ -9,6 +9,10 @@
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  /// @endcond
+
   namespace Concepts
   {
     /**
@@ -38,8 +42,9 @@ namespace Spacy
     using LinearSolverConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                                    const boost::type_erasure::_self>
+      boost::type_erasure::callable<Vector(const Vector&), const boost::type_erasure::_self>
+//    boost::type_erasure::callable<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
+//                                  const boost::type_erasure::_self>
     >;
 
     /**

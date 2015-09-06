@@ -11,7 +11,8 @@
 namespace Spacy
 {
   /// @cond
- class Real;
+  class Vector;
+  class Real;
   /// @endcond
   namespace Concepts
   {
@@ -42,7 +43,8 @@ namespace Spacy
     using NormConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<Real(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
+    boost::type_erasure::callable<Real(const Vector&), const boost::type_erasure::_self>
+//    boost::type_erasure::callable<Real(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
     >;
   }
 }

@@ -2,7 +2,6 @@
 #define SPACY_SPACY_NEWTON_HH
 
 #include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
 #include "Spacy/Algorithm/Newton/dampingStrategies.hh"
 #include "Spacy/Algorithm/Newton/terminationCriteria.hh"
 #include "Spacy/Algorithm/Newton/parameter.hh"

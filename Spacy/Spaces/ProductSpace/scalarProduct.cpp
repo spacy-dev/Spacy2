@@ -7,6 +7,7 @@
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 #include "Spacy/Util/cast.hh"
 #include "Spacy/vectorSpace.hh"
+#include "Spacy/vector.hh"
 
 namespace Spacy
 {

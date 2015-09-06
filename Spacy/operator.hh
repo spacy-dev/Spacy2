@@ -63,7 +63,8 @@ namespace Spacy
    * @return \f$A'(x)\f$, i.e. A.linearization(x).
    * @see @ref C1OperatorAnchor "C1Operator", @ref LinearOperatorAnchor "LinearOperator"
    */
-  LinearOperator d1(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x);
+  LinearOperator d1(const C1Operator& A, const Vector& x);
+//  LinearOperator d1(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x);
 }
 
 #endif // SPACY_OPERATOR_HH

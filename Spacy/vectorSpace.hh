@@ -13,12 +13,13 @@
 #include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/Concepts/vectorCreatorConcept.hh"
 #include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/vector.hh"
 
 namespace Spacy
 {
-  /// \cond
+  /// @cond
   namespace Detail { static unsigned spaceIndex = 0; }
-  /// \endcond
+  /// @endcond
 
   /**
    * @ingroup SpacyGroup
@@ -75,7 +76,7 @@ namespace Spacy
     /**
      * @brief Create new vector \f$v=0\f$.
      */
-    boost::type_erasure::any<Concepts::VectorConcept> vector() const;
+    Vector vector() const;
 
     /**
      * @brief Access unique index of the function space.
@@ -103,13 +104,6 @@ namespace Spacy
     void setDualSpace(const VectorSpace* Y);
 
     /**
-     * @brief Add space \f$Y\f$ for which this space \f$X\f$ acts as dual space.
-     *
-     * This is necessary to allow evaluation of \f$y(x)\f$ for \f$ x\in X \f$ and \f$ y\in Y\f$.
-     */
-//    void addPrimalSpace(const VectorSpace& Y);
-
-    /**
      * @brief Add space \f$Y\f$ for which this space \f$X\f$ acts as primal space.
      *
      * This is necessary to allow evaluation of \f$x(y)\f$ for \f$ x\in X \f$ and \f$ y\in Y\f$.
@@ -122,11 +116,6 @@ namespace Spacy
     bool isPrimalWRT(const VectorSpace& Y) const;
 
     /**
-     * @brief Checks whether \f$Y\f$ has been assigned as primal space with respect to this space \f$X\f$.
-     */
-//    bool isDualWRT(const VectorSpace& Y) const;
-
-    /**
      * @brief Checks whether this space is a hilbert space.
      */
     bool isHilbertSpace() const;
@@ -137,13 +126,13 @@ namespace Spacy
      *
      * With this function constraints such as \f$\det(\nabla\varphi)>0\f$ in nonlinear elasticity can be implemented.
      */
-    void setRestriction(std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> f);
+    void setRestriction(std::function<bool(const Vector&)> f);
 
     /**
      * @brief Checks if vector is admissible. Default implementation always returns true;
      * @return true if x is admissible, else false
      */
-    bool isAdmissible(const boost::type_erasure::any<Concepts::VectorConcept>& x) const;
+    bool isAdmissible(const Vector& x) const;
 
   private:
     Norm norm_;
@@ -151,7 +140,7 @@ namespace Spacy
     unsigned index_ = Detail::spaceIndex++;
     std::vector<unsigned> primalSpaces_ = {}, dualSpaces_ = {}; ///< primal and dual spaces with respect to this space
     const VectorSpace* dualSpace_ = nullptr;
-    std::function<bool(const boost::type_erasure::any<Concepts::VectorConcept>&)> restriction_ = [](const boost::type_erasure::any<Concepts::VectorConcept>&){ return true; };
+    std::function<bool(const Vector&)> restriction_ = [](const Vector&){ return true; };
   };
 
   /**
@@ -183,6 +172,8 @@ namespace Spacy
    * This admits the evaluation of \f$y(x)\f$ for \f$x\in X\f$ and \f$y\in Y\f$.
    */
   void connect(VectorSpace& X, VectorSpace& Y);
+
+  void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
 
   void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W);
 }

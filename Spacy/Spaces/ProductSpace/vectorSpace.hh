@@ -5,16 +5,18 @@
 #include <memory>
 #include <vector>
 
-#include "Spacy/vector.hh"
-
 namespace Spacy
 {
-  /// \cond
+  /// @cond
   class VectorSpace;
-  /// \endcond
+  /// @endcond
 
   namespace ProductSpace
   {
+    /// @cond
+    class Vector;
+    /// @endcond
+
     /**
      * @ingroup ProductSpaceGroup
      * @brief Creator for ProductSpace::Vector.
@@ -155,7 +157,7 @@ namespace Spacy
        * @param space pointer to vector space implementation
        * @return vector associated with space
        */
-      ::Spacy::Vector operator()(const VectorSpace* space) const;
+      Vector operator()(const VectorSpace* space) const;
 
     private:
       std::vector<std::shared_ptr<VectorSpace> > spaces_ = {};

@@ -9,6 +9,7 @@
 #include "vectorSpace.hh"
 
 #include <dolfin.h>
+#include <iostream>
 
 namespace Spacy
 {
@@ -61,7 +62,7 @@ namespace Spacy
         return;
       }
 
-      throw InvalidArgumentException("copy(const Interface::AbstractVector& x, dolfin::GenericVector& y)");
+      throw InvalidArgumentException("copy(const Spacy::Vector& x, dolfin::GenericVector& y)");
     }
 
     void copy(const ::Spacy::Vector& x, dolfin::Function& y)

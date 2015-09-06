@@ -1,6 +1,7 @@
 #include "newton.hh"
 
 #include "Spacy/derivative.hh"
+#include "Spacy/vector.hh"
 
 #include <iostream>
 

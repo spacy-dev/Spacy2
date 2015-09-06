@@ -38,7 +38,7 @@ namespace Spacy
       {}
 
       /// Generate vector for %Kaskade 7.
-      ::Spacy::Vector operator()(const VectorSpace* space) const
+      Vector<Description> operator()(const VectorSpace* space) const
       {
         return Vector<Description>{*space};
       }

@@ -11,6 +11,8 @@
 namespace Spacy
 {
   /// \cond
+  class Real;
+  class Vector;
   class VectorSpace;
   /// \endcond
 
@@ -40,8 +42,10 @@ namespace Spacy
     using FunctionalConcept =
     boost::mpl::vector<
       ConceptBase,
-      boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&),
-                                    const boost::type_erasure::_self>,
+    boost::type_erasure::callable<Real(const Vector&),
+                                  const boost::type_erasure::_self>,
+//    boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&),
+//                                  const boost::type_erasure::_self>,
       has_domain<const VectorSpace&(), const boost::type_erasure::_self>
     >;
 
@@ -78,8 +82,10 @@ namespace Spacy
     using C1FunctionalConcept =
     boost::mpl::vector<
       FunctionalConcept ,
-      has_d1_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                  const boost::type_erasure::_self>
+    has_d1_dual<Vector(const Vector&),
+                const boost::type_erasure::_self>
+//    has_d1_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
+//                const boost::type_erasure::_self>
     >;
 
     /**
@@ -121,10 +127,14 @@ namespace Spacy
     using C2FunctionalConcept =
     boost::mpl::vector<
       C1FunctionalConcept ,
-      has_d2_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
-                  const boost::type_erasure::_self> ,
-      has_hessian<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
-                  const boost::type_erasure::_self>
+    has_d2_dual<Vector(const Vector&,const Vector&),
+                const boost::type_erasure::_self> ,
+    has_hessian<boost::type_erasure::any<LinearOperatorConcept>(const Vector&),
+                const boost::type_erasure::_self>
+//    has_d2_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
+//                const boost::type_erasure::_self> ,
+//    has_hessian<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
+//                const boost::type_erasure::_self>
     >;
   }
 }
