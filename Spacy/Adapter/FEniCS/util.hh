@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_UTIL_HH
-#define ALGORITHM_ADAPTER_FENICS_UTIL_HH
+#ifndef SPACY_ADAPTER_FENICS_UTIL_HH
+#define SPACY_ADAPTER_FENICS_UTIL_HH
 
 #include "Spacy/vector.hh"
 
@@ -64,5 +64,5 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_UTIL_HH
+#endif // SPACY_ADAPTER_FENICS_UTIL_HH
 

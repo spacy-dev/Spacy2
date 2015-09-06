@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_UTIL_Impl_HH
-#define ALGORITHMS_UTIL_Impl_HH
+#ifndef SPACYS_UTIL_Impl_HH
+#define SPACYS_UTIL_Impl_HH
 
 #include <memory>
 #include <utility>
@@ -240,5 +240,5 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHMS_UTIL_Impl_HH
+#endif // SPACYS_UTIL_Impl_HH
 

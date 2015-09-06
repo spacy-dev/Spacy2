@@ -84,7 +84,7 @@ int main()
 
   // solve problem
   auto startTime = high_resolution_clock::now();
-  auto sol = alg_cs.solve();
+  auto sol = alg_cs();
   std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now()-startTime).count() << std::endl;
 
   // copy back and display solution

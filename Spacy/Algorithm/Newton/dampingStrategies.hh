@@ -1,11 +1,12 @@
-#ifndef ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
-#define ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
+#ifndef SPACY_NEWTON_DAMPINGSTRATEGIES_HH
+#define SPACY_NEWTON_DAMPINGSTRATEGIES_HH
 
 #include <boost/type_erasure/any.hpp>
 
 #include "Spacy/linearSolver.hh"
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Algorithm/dampingFactor.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/regularityTest.hh"
@@ -41,7 +42,7 @@ namespace Spacy
         const Operator& F_;
 
         mutable DampingFactor oldNu = -1;
-        mutable double normOldDx = -1, normOldDs = -1;
+        mutable Real normOldDx = Real{-1}, normOldDs = Real{-1};
         mutable Vector oldDs;
       };
 
@@ -60,8 +61,7 @@ namespace Spacy
 
       private:
         const Operator& F_;
-        mutable double muPrime = -1.;
-        mutable double norm_F_x_old = -1;
+        mutable Real muPrime = Real{-1}, norm_F_x_old = Real{-1};
       };
 
       /**
@@ -84,4 +84,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_NEWTON_DAMPINGSTRATEGIES_HH
+#endif // SPACY_NEWTON_DAMPINGSTRATEGIES_HH

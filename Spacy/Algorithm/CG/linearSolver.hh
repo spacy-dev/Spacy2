@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONJUGATE_GRADIENTS_CG_SOLVER_HH
-#define ALGORITHM_CONJUGATE_GRADIENTS_CG_SOLVER_HH
+#ifndef SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH
+#define SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH
 
 #include "Spacy/operator.hh"
 #include "cg.hh"
@@ -124,4 +124,4 @@ namespace Spacy
   CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
 }
 
-#endif // ALGORITHM_CONJUGATE_GRADIENTS_CG_SOLVER_HH
+#endif // SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH

@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ALGORITHM_NEWTON_HH
-#define ALGORITHM_ALGORITHM_NEWTON_HH
+#ifndef SPACY_SPACY_NEWTON_HH
+#define SPACY_SPACY_NEWTON_HH
 
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
@@ -138,4 +138,4 @@ namespace Spacy
   Vector contravariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
 }
-#endif // ALGORITHM_ALGORITHM_NEWTON_HH
+#endif // SPACY_SPACY_NEWTON_HH

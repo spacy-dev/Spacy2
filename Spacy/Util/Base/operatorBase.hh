@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_OPERATOR_BASE_HH
-#define ALGORITHM_OPERATOR_BASE_HH
+#ifndef SPACY_OPERATOR_BASE_HH
+#define SPACY_OPERATOR_BASE_HH
 
 namespace Spacy
 {
@@ -37,4 +37,4 @@ namespace Spacy
   };
 }
 
-#endif // ALGORITHM_OPERATOR_BASE_HH
+#endif // SPACY_OPERATOR_BASE_HH

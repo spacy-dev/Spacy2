@@ -1,5 +1,7 @@
 #include "newton.hh"
 
+#include "Spacy/derivative.hh"
+
 #include <iostream>
 
 namespace Spacy
@@ -20,15 +22,15 @@ namespace Spacy
       {
         if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
 
-        auto DF_Inv = linearize(F,x)^-1;
+        auto dF_inv = d1(F,x)^-1;
 
-        auto dx = DF_Inv(-F(x));
-        double nu = dampingStrategy(DF_Inv,x,dx);
-        x += nu*dx;
+        auto dx = dF_inv(-F(x));
+        auto nu = dampingStrategy(dF_inv,x,dx);
+        x += nu()*dx;
 
-        if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
+        if( p.verbose() ) std::cout << "nu = " << nu() << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
 
-        if( terminationCriterion(nu,x,dx) )
+        if( terminationCriterion(nu(),x,dx) )
         {
           if( p.verbose() ) std::cout << "Newton iteration converged. Computation time: " << p.elapsedTime() << "s." << std::endl;
           return x;

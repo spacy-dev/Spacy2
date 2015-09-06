@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPTS_CONCEPT_BASE_HH
-#define ALGORITHM_CONCEPTS_CONCEPT_BASE_HH
+#ifndef SPACY_CONCEPTS_CONCEPT_BASE_HH
+#define SPACY_CONCEPTS_CONCEPT_BASE_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
@@ -24,5 +24,5 @@ namespace Spacy
     >;
   }
 }
-#endif // ALGORITHM_CONCEPTS_CONCEPT_BASE_HH
+#endif // SPACY_CONCEPTS_CONCEPT_BASE_HH
 

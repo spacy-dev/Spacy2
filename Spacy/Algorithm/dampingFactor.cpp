@@ -4,25 +4,36 @@
 
 namespace Spacy
 {
+  DampingFactor::DampingFactor(Real nu, double eps)
+    : Mixin::Eps(eps)
+  {
+    set(nu);
+  }
+
   DampingFactor::DampingFactor(double nu, double eps)
     : Mixin::Eps(eps)
   {
     set(nu);
   }
 
-  DampingFactor& DampingFactor::operator=(double nu)
+  DampingFactor& DampingFactor::operator=(Real nu)
   {
     set(nu);
     return *this;
   }
 
-  DampingFactor::operator double() const
+  DampingFactor::operator Real() const
   {
     return nu_;
   }
 
-  void DampingFactor::set(double nu)
+  Real DampingFactor::operator()() const
   {
-    nu_ = ( std::abs(1-nu) < eps() ) ? 1. : nu;
+    return nu_;
+  }
+
+  void DampingFactor::set(Real nu)
+  {
+    nu_ = ( abs(1-nu) < eps() ) ? 1. : nu;
   }
 }

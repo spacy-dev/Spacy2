@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <tuple>
+#include <iostream>
 
 namespace Spacy
 {
@@ -12,38 +13,41 @@ namespace Spacy
   {
     namespace
     {
-      auto quadraticCoefficients(double nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
+      auto quadraticCoefficients(Real nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
       {
-        auto constant = L(x) + nu*L.d1(x,dn) + 0.5*nu*nu*L.d2(x,dn,dn);
-        auto linear = L.d1(x,dt) + nu*L.d2(x,dn,dt);
-        auto quadratic = 0.5*L.d2(x,dt,dt);
+        auto constant = L(x) + nu*d1(L,x)(dn) + 0.5*nu*nu*d2(L,x)(dn)(dn);
+        auto linear = d1(L,x)(dt) + nu*d2(L,x)(dn)(dt);
+        auto quadratic = 0.5*d2(L,x)(dt)(dt);
+//        auto constant = L(x) + nu*L.d1(x,dn) + 0.5*nu*nu*L.d2(x,dn,dn);
+//        auto linear = L.d1(x,dt) + nu*L.d2(x,dn,dt);
+//        auto quadratic = 0.5*L.d2(x,dt,dt);
         return std::make_tuple(constant,linear,quadratic);
       }
     }
 
 
-    Functions_1D::Quadratic makeQuadraticModel(double nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
+    Functions_1D::Quadratic makeQuadraticModel(Real nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
     {
       return create<Functions_1D::Quadratic>(quadraticCoefficients(nu,dn,dt,L,x));
     }
 
 
-    Functions_1D::Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt)
+    Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt)
     {
       return Functions_1D::Quadratic( nu*nu*dn*dn , 2*nu*dn*dt , dt*dt);
     }
 
-    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, double omega)
+    CubicModel makeCubicModel(Real nu, const Vector& dn, const Vector& dt,
+                              const C2Functional& L, const Vector& x, Real omega)
     {
       return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega );
     }
 
-    CubicModel::CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, double omega)
+    CubicModel::CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, Real omega)
       : quadraticModel_(quadraticModel), squaredNorm_(squaredNorm), omega_(omega)
     {}
 
-    double CubicModel::operator()(double t) const
+    Real CubicModel::operator()(Real t) const
     {
       return quadraticModel_(t) + omega_/6 * pow( squaredNorm_(t), 1.5 );
     }

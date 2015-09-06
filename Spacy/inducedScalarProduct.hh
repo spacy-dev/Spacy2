@@ -1,11 +1,15 @@
-#ifndef ALGORITHM_INDUCED_SCALAR_PRODUCT_HH
-#define ALGORITHM_INDUCED_SCALAR_PRODUCT_HH
+#ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH
+#define SPACY_INDUCED_SCALAR_PRODUCT_HH
 
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
+
   /**
    * @ingroup SpacyGroup
    * @brief Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
@@ -25,7 +29,7 @@ namespace Spacy
      * @param y vector
      * @return \f$(x,y)_M\f$.
      */
-    double operator()(const Vector& x, const Vector& y) const;
+    Real operator()(const Vector& x, const Vector& y) const;
 
   private:
     CallableOperator M_;
@@ -56,11 +60,11 @@ namespace Spacy
      * @param y vector
      * @return \f$(x,y)_M\f$.
      */
-    double operator()(const Vector& x, const Vector& y) const;
+    Real operator()(const Vector& x, const Vector& y) const;
 
   private:
     CallableOperator M_;
   };
 }
 
-#endif // ALGORITHM_INDUCED_SCALAR_PRODUCT_HH
+#endif // SPACY_INDUCED_SCALAR_PRODUCT_HH

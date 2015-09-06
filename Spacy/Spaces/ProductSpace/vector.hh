@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_PRODUCT_SPACE_VECTOR_HH
-#define ALGORITHM_PRODUCT_SPACE_VECTOR_HH
+#ifndef SPACY_PRODUCT_SPACE_VECTOR_HH
+#define SPACY_PRODUCT_SPACE_VECTOR_HH
 
 #include <memory>
 #include <vector>
@@ -10,11 +10,15 @@
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
+
   namespace ProductSpace
   {
-    /// \cond
+    /// @cond
     class VectorCreator;
-    /// \endcond
+    /// @endcond
 
     /**
      * @ingroup ProductSpaceGroup
@@ -25,7 +29,7 @@ namespace Spacy
      * \f$ x = (x_p,x_d) \in X=\{ X_p, X_d \}\f$, where \f$X_p=\{X_i\}_i,\ i\in I \f$ is associated to the primal variables and \f$X_d=\{X_j\}_j,\ j\in J\f$
      * is associated to the dual variables.
      */
-    class Vector : public VectorBase<Vector>, public Mixin::PrimalDualSwitch
+    class Vector : public VectorBase, public Mixin::PrimalDualSwitch
     {
     public:
       /**
@@ -201,7 +205,7 @@ namespace Spacy
        * @param y primal vector
        * @return \f$x(y)\f$
        */
-      double operator()(const Vector& y) const;
+      Real operator()(const Vector& y) const;
 
     private:
       std::vector< ::Spacy::Vector > variables_ = {};
@@ -209,4 +213,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_PRODUCT_SPACE_VECTOR_HH
+#endif // SPACY_PRODUCT_SPACE_VECTOR_HH

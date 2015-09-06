@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_NORM_HH
-#define ALGORITHM_NORM_HH
+#ifndef SPACY_NORM_HH
+#define SPACY_NORM_HH
 
 #include <boost/type_erasure/any.hpp>
 #include "Util/Concepts/normConcept.hh"
@@ -15,4 +15,4 @@ namespace Spacy
 }
 
 
-#endif // ALGORITHM_NORM_HH
+#endif // SPACY_NORM_HH

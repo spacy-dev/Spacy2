@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_SCALAR_PRODUCT_CONCEPT_HH
-#define ALGORITHM_SCALAR_PRODUCT_CONCEPT_HH
+#ifndef SPACY_SCALAR_PRODUCT_CONCEPT_HH
+#define SPACY_SCALAR_PRODUCT_CONCEPT_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
@@ -10,15 +10,18 @@
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
   namespace Concepts
   {
     /**
-     * \ingroup ConceptGroup
-     * \anchor ScalarProductConceptAnchor
-     * \brief Concept for scalar products.
+     * @ingroup ConceptGroup
+     * @anchor ScalarProductConceptAnchor
+     * @brief Concept for scalar products.
      *
      * The minimal signature of a scalar product is:
-     * \code
+     * @code
      * // My scalar product.
      * class MyScalarProduct
      * {
@@ -30,20 +33,20 @@ namespace Spacy
      *   MyScalarProduct(MyScalarProduct&&);
      *
      *   // Compute (x,y).
-     *   double operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
+     *   Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
      * };
-     * \endcode
+     * @endcode
      *
-     * See \ref ScalarProductAnchor "::Spacy::ScalarProduct".
+     * See @ref ScalarProductAnchor "::Spacy::ScalarProduct".
      */
     using ScalarProductConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<double(const boost::type_erasure::any<VectorConcept>&,
-                                           const boost::type_erasure::any<VectorConcept>&),
+      boost::type_erasure::callable<Real(const boost::type_erasure::any<VectorConcept>&,
+                                         const boost::type_erasure::any<VectorConcept>&),
                                     const boost::type_erasure::_self>
     >;
   }
 }
 
-#endif // ALGORITHM_SCALAR_PRODUCT_CONCEPT_HH
+#endif // SPACY_SCALAR_PRODUCT_CONCEPT_HH

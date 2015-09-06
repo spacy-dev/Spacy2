@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_NEWTON_PARAMETER_HH
-#define ALGORITHM_NEWTON_PARAMETER_HH
+#ifndef SPACY_NEWTON_PARAMETER_HH
+#define SPACY_NEWTON_PARAMETER_HH
 
 #include "Spacy/Util/mixins.hh"
 
@@ -14,4 +14,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_NEWTON_PARAMETER_HH
+#endif // SPACY_NEWTON_PARAMETER_HH

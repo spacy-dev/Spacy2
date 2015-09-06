@@ -3,13 +3,18 @@
 
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/mixins.hh"
 #include "Spacy/Util/Concepts/Newton/terminationCriterionConcept.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class DampingFactor;
+  /// @endcond
+
   namespace Newton
-  {
+  {    
     /**
      * \brief Termination criteria for newton methods.
      * \anchor Newton_TerminationCriterionAnchor
@@ -41,7 +46,7 @@ namespace Spacy
          * @param dx correction
          * @return true if \f$\nu=1\f$ and \f$ \|dx\|<rel_acc\|x\| \f$ or \f$\|x\|=\|dx\|=0\f$, else false
          */
-        bool operator()(double nu, const Vector& x, const Vector& dx) const;
+        bool operator()(DampingFactor nu, const Vector& x, const Vector& dx) const;
       };
 
       /**
@@ -65,11 +70,11 @@ namespace Spacy
          * @param x iterate
          * @return true if \f$\nu=1\f$ and \f$ \|F(x)\|<rel_acc\|F(x_0)\| \f$, else false
          */
-        bool operator()(double nu, const Vector& x, const Vector&) const;
+        bool operator()(DampingFactor nu, const Vector& x, const Vector&) const;
 
       private:
         const Operator& F_;
-        mutable double initialResidual = -1;
+        mutable Real initialResidual = Real{-1};
       };
     }
   }

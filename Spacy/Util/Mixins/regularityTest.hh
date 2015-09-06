@@ -1,7 +1,8 @@
-#ifndef ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
-#define ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
+#ifndef SPACY_UTIL_MIXIN_REGULARITY_TEST_HH
+#define SPACY_UTIL_MIXIN_REGULARITY_TEST_HH
 
 #include "mixinConnection.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -18,33 +19,33 @@ namespace Spacy
        * @brief Constructor.
        * @param lowerBound lower bound for regularity test
        */
-      explicit RegularityTest(double lowerBound = 1e-12) noexcept;
+      explicit RegularityTest(Real lowerBound = 1e-12) noexcept;
 
       /**
        * @brief Set lower bound of regularity test for termination criteria.
        * @param lowerBound new lower bound
        */
-      void setLowerBound(double lowerBound);
+      void setLowerBound(Real lowerBound);
 
       /**
        * @brief Access lower bound.
        * @return lower bound
        */
-      double lowerBound() const noexcept;
+      Real lowerBound() const noexcept;
 
       /**
        * @brief Apply regularity test.
        * @param nu damping factor
        * @return \f$nu > lowerBound_\f$
        */
-      bool regularityTestPassed(double nu) const noexcept;
+      bool regularityTestPassed(Real nu) const noexcept;
 
       /**
        * @brief Apply regularity test.
        * @param nu damping factor
        * @return \f$nu <= lowerBound_\f$
        */
-      bool regularityTestFailed(double nu) const noexcept;
+      bool regularityTestFailed(Real nu) const noexcept;
 
       /**
        * @brief Attach RegularityTest.
@@ -65,8 +66,8 @@ namespace Spacy
       void update(MixinConnection<RegularityTest>* changedSubject);
 
     private:
-      double lowerBound_;
+      Real lowerBound_;
     };
   }
 }
-#endif // ALGORITHM_UTIL_MIXIN_REGULARITY_TEST_HH
+#endif // SPACY_UTIL_MIXIN_REGULARITY_TEST_HH

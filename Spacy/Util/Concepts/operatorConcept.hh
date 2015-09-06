@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPTS_OPERATOR_CONCEPT_HH
-#define ALGORITHM_CONCEPTS_OPERATOR_CONCEPT_HH
+#ifndef SPACY_CONCEPTS_OPERATOR_CONCEPT_HH
+#define SPACY_CONCEPTS_OPERATOR_CONCEPT_HH
 
 #include "conceptBase.hh"
 #include "singleConcepts.hh"
@@ -90,14 +90,14 @@ namespace Spacy
      * The minimal signature of a linear operator is:
      * \code
      * // My linear operator A: X->Y.
-     * class MyOperator
+     * class MyLinearOperator
      * {
      * public:
      *   // Copy constructor.
-     *   MyOperator(const MyOperator&);
+     *   MyLinearOperator(const MyLinearOperator&);
      *
      *   // Move constructor.
-     *   MyOperator(MyOperator&&);
+     *   MyLinearOperator(MyLinearOperator&&);
      *
      *   // Compute A(x).
      *   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
@@ -169,4 +169,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_CONCEPTS_OPERATOR_CONCEPT_HH
+#endif // SPACY_CONCEPTS_OPERATOR_CONCEPT_HH

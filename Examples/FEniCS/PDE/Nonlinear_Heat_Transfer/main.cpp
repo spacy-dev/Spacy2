@@ -71,13 +71,13 @@ int main()
 
   // specify parameters for Newton's method
   auto p = Spacy::Newton::Parameter{};
-  p.setVerbosity(true);
+  p.setVerbosityLevel(2);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x) = 0
   auto x = Spacy::covariantNewton(A,p);
-//  auto sol = Spacy::contravariantNewton(A,p);
-//  auto sol = Spacy::localNewton(A,p);
+//  auto x = Spacy::contravariantNewton(A,p);
+//  auto x = Spacy::localNewton(A,p);
   
   FEniCS::copy(x,u);
 

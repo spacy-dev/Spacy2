@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
-#define ALGORITHM_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
+#ifndef SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
+#define SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
 
 #include <vector>
 
@@ -7,6 +7,7 @@
 
 #include "Spacy/Util/mixins.hh"
 #include "Spacy/Util/Concepts/CG/terminationCriterionConcept.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -52,7 +53,7 @@ namespace Spacy
          * @param qPq squared \f$P\f$-norm, i. e. the norm induced by the preconditioner, of the conjugate search direction \f$q\f$ (here: unused)
          * @param rPINVr squared \f$P^{-1}\f$-norm of the residual
          */
-        void update(double alpha, double qAq, double qPq, double rPINVr);
+        void update(Real alpha, Real qAq, Real qPq, Real rPINVr);
 
         /**
          * \brief check if the energy norm of the current step \f$\|q\|_A=\sqrt(qAq)\f$ is smaller than the maximal attainable accuracy multiplied with the energy norm of the iterate \f$\varepsilon_{max}\|x\|_A\f$.
@@ -84,12 +85,12 @@ namespace Spacy
         /**
          * \brief returns the estimated sqaured absolute energy error
          */
-        double squaredRelativeError() const noexcept;
+        Real squaredRelativeError() const noexcept;
 
         unsigned lookAhead_ = 5;
-        std::vector<double> scaledGamma2 = std::vector<double>{};
-        double energyNorm2 = 0;
-        double stepLength2 = 0.;
+        std::vector<Real> scaledGamma2 = std::vector<Real>{};
+        Real energyNorm2 = 0;
+        Real stepLength2 = 0.;
       };
 
 
@@ -219,4 +220,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
+#endif // SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION

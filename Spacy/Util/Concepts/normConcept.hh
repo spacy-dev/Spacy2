@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_NORM_CONCEPT_HH
-#define ALGORITHM_NORM_CONCEPT_HH
+#ifndef SPACY_NORM_CONCEPT_HH
+#define SPACY_NORM_CONCEPT_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/any.hpp>
@@ -10,15 +10,18 @@
 
 namespace Spacy
 {
+  /// @cond
+ class Real;
+  /// @endcond
   namespace Concepts
   {
     /**
-     * \ingroup ConceptGroup
-     * \anchor NormConceptAnchor
-     * \brief Concept for norm implementations.
+     * @ingroup ConceptGroup
+     * @anchor NormConceptAnchor
+     * @brief Concept for norm implementations.
      *
      * The minimal signature of a norm is:
-     * \code
+     * @code
      * // My norm.
      * class MyNorm
      * {
@@ -30,18 +33,18 @@ namespace Spacy
      *   MyNorm(MyNorm&&);
      *
      *   // Compute ||x||.
-     *   double operator()(const ::Spacy::Vector& x) const;
+     *   Real operator()(const ::Spacy::Vector& x) const;
      * };
-     * \endcode
+     * @endcode
      *
-     * See \ref NormAnchor "::Spacy::Norm".
+     * See @ref NormAnchor "::Spacy::Norm".
      */
     using NormConcept =
     boost::mpl::vector<
       ConceptBase ,
-      boost::type_erasure::callable<double(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
+      boost::type_erasure::callable<Real(const boost::type_erasure::any< VectorConcept >&), const boost::type_erasure::_self>
     >;
   }
 }
 
-#endif // ALGORITHM_NORM_CONCEPT
+#endif // SPACY_NORM_CONCEPT

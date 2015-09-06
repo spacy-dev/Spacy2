@@ -4,6 +4,8 @@
 #include "Spacy/Util/cast.hh"
 
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/vectorSpace.hh"
 
 #include <algorithm>
 #include <cassert>
@@ -13,7 +15,7 @@ namespace Spacy
   namespace ProductSpace
   {
     Vector::Vector(const VectorSpace& space)
-      : VectorBase<Vector>(space)
+      : VectorBase(space)
     {
       if( isPrimalDual() )
       {
@@ -29,7 +31,7 @@ namespace Spacy
     }
 
     Vector::Vector(const Vector& y)
-      : VectorBase<Vector>(*y.space()), variables_(y.variables_)
+      : VectorBase(*y.space()), variables_(y.variables_)
     {
       if( isPrimalDual() )
       {
@@ -40,7 +42,7 @@ namespace Spacy
     }
 
     Vector::Vector(Vector&& y)
-      : VectorBase<Vector>(*y.space()), variables_(std::move(y.variables_))
+      : VectorBase(*y.space()), variables_(std::move(y.variables_))
     {
       if( isPrimalDual() )
       {
@@ -52,7 +54,7 @@ namespace Spacy
 
     Vector& Vector::operator=(const Vector& y)
     {
-      checkSpaceCompatibility(*this,y);
+      checkSpaceCompatibility(this->space(),y.space());
       if( !isPrimalDual() )
       {
         variables_ = y.variables_;
@@ -71,7 +73,7 @@ namespace Spacy
 
     Vector& Vector::operator=(Vector&& y)
     {
-      checkSpaceCompatibility(*this,y);
+      checkSpaceCompatibility(this->space(),y.space());
       if( !isPrimalDual() )
       {
         variables_ = std::move(y.variables_);
@@ -90,7 +92,7 @@ namespace Spacy
 
     Vector& Vector::operator+=(const Vector& y)
     {
-      checkSpaceCompatibility(*this,y);
+      checkSpaceCompatibility(this->space(),y.space());
       if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
@@ -132,7 +134,7 @@ namespace Spacy
 
     Vector& Vector::operator-=(const Vector& y)
     {
-      checkSpaceCompatibility(*this,y);
+      checkSpaceCompatibility(this->space(),y.space());
       if( !isPrimalDual() )
       {
         for(auto i=0u; i<variables_.size(); ++i)
@@ -180,7 +182,7 @@ namespace Spacy
 
     bool Vector::operator==(const Vector& y) const
     {
-      checkSpaceCompatibility(*this,y);
+      checkSpaceCompatibility(this->space(),y.space());
       if(isPrimalEnabled())
         for( auto i : creator().primalSubSpaceIds())
           if( !(variable(i) == y.variable(i)) )
@@ -198,30 +200,6 @@ namespace Spacy
 
       reset(y);
       return true;
-    }
-
-
-    double Vector::operator()(const Vector& y) const
-    {
-      checkDualPairing(*this,y);
-      assert( variables_.size() == y.variables_.size() );
-
-      if( !isPrimalDual() )
-      {
-        auto result = 0.;
-        for(auto i=0u; i<variables_.size(); ++i)
-          result += variable(i)( y.variable(i) );
-        return result;
-      }
-
-      auto result = 0.;
-      if( isPrimalEnabled() && y.isPrimalEnabled() )
-        result += primalComponent()( y.primalComponent() );
-      if( isDualEnabled() && y.isDualEnabled() )
-        result += dualComponent()( y.dualComponent() );
-
-      reset(y);
-      return result;
     }
 
     ::Spacy::Vector& Vector::variable(unsigned k)
@@ -296,6 +274,30 @@ namespace Spacy
     bool Vector::isPrimalDual() const
     {
       return creator().isPrimalDual();
+    }
+
+
+    Real Vector::operator()(const Vector& y) const
+    {
+      checkDualPairing(*this,y);
+      assert( variables_.size() == y.variables_.size() );
+
+      if( !isPrimalDual() )
+      {
+        auto result = Real{0.};
+        for(auto i=0u; i<variables_.size(); ++i)
+          result += variable(i)( y.variable(i) );
+        return result;
+      }
+
+      auto result = Real{0.};
+      if( isPrimalEnabled() && y.isPrimalEnabled() )
+        result += primalComponent()( y.primalComponent() );
+      if( isDualEnabled() && y.isDualEnabled() )
+        result += dualComponent()( y.dualComponent() );
+
+      reset(y);
+      return result;
     }
   }
 }

@@ -1,10 +1,13 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_L2_PRODUCT_HH
-#define ALGORITHM_ADAPTER_FENICS_L2_PRODUCT_HH
+#ifndef SPACY_ADAPTER_FENICS_L2_PRODUCT_HH
+#define SPACY_ADAPTER_FENICS_L2_PRODUCT_HH
 
 #include "Spacy/vector.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
   namespace FEniCS
   {
     /**
@@ -21,10 +24,10 @@ namespace Spacy
        * @param y vector (FEniCS::Vector)
        * @return \f$(x,y) = \sum_i x_i y_i \f$.
        */
-      double operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
+      Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
     };
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_L2_PRODUCT_HH
+#endif // SPACY_ADAPTER_FENICS_L2_PRODUCT_HH
 

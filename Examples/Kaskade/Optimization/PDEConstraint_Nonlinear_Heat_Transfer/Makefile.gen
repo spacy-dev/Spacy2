@@ -1,16 +1,16 @@
 include /home/ignaz/lib/Kaskade7.3/Makefile.Local
 include /home/ignaz/lib/Kaskade7.3/Makefile.Rules
 
-INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) $(FSAINC)
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(MUMPSINC) $(SPACYINC)
 FLAGS = $(WFLAGS) $(OPTFLAGS)
 
 nonlinear_heat: nonlinear_heat.o Makefile $(KASKADE7)/libs/libkaskade.a 
-	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/umfpack_solve.o $(KASKADELIB) \
+	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/mumps_solve.o $(KASKADELIB) \
  $(DUNELIB) \
  $(UGLIB) \
  $(BOOSTLIB) \
- $(UMFPACKLIB) \
- $(BLASLIB) $(FTNLIB) $(NUMALIB) $(FSALIB) -o $@
+ $(MUMPSLIB) \
+ $(BLASLIB) $(FTNLIB) $(NUMALIB) $(SPACYLIB) -o $@
 
 clean:
 	rm -f gccerr.txt nonlinear_heat nonlinear_heat.o solution.vtu *.bak

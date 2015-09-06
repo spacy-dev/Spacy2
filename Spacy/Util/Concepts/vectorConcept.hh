@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_VECTOR_CONCEPT_HH
-#define ALGORITHM_VECTOR_CONCEPT_HH
+#ifndef SPACY_VECTOR_CONCEPT_HH
+#define SPACY_VECTOR_CONCEPT_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/callable.hpp>
@@ -10,6 +10,7 @@
 namespace Spacy
 {
   /// @cond
+  class Real;
   class VectorSpace;
   /// @endcond
 
@@ -51,7 +52,7 @@ namespace Spacy
      *   bool operator==(const MyVector& y);
      *
      *   // Apply as dual element x(y).
-     *   double operator()(const MyVector& y);
+     *   Real operator()(const MyVector& y);
      *
      *   // Access pointer to underlying function space.
      *   const VectorSpace* space() const;
@@ -69,7 +70,7 @@ namespace Spacy
       boost::type_erasure::subtract_assignable<> ,
       boost::type_erasure::negatable<> ,
       boost::type_erasure::equality_comparable<> ,
-      boost::type_erasure::callable<double(const boost::type_erasure::_self&),
+      boost::type_erasure::callable<Real(const boost::type_erasure::_self&),
                                     const boost::type_erasure::_self> ,
       has_space<const VectorSpace*(),
                 const boost::type_erasure::_self>
@@ -77,4 +78,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_VECTOR_CONCEPT_HH
+#endif // SPACY_VECTOR_CONCEPT_HH

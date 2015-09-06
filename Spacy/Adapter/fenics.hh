@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_HH
-#define ALGORITHM_ADAPTER_FENICS_HH
+#ifndef SPACY_ADAPTER_FENICS_HH
+#define SPACY_ADAPTER_FENICS_HH
 
 #include "FEniCS/c1Operator.hh"
 #include "FEniCS/c2Functional.hh"
@@ -8,4 +8,4 @@
 #include "FEniCS/util.hh"
 #include "FEniCS/vector.hh"
 
-#endif // ALGORITHM_ADAPTER_FENICS_HH
+#endif // SPACY_ADAPTER_FENICS_HH

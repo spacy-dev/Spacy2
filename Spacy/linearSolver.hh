@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_LINEAR_SOLVER_HH
-#define ALGORITHM_LINEAR_SOLVER_HH
+#ifndef SPACY_LINEAR_SOLVER_HH
+#define SPACY_LINEAR_SOLVER_HH
 
 #include <boost/type_erasure/any.hpp>
 #include "Util/Concepts/linearSolverConcept.hh"
@@ -21,4 +21,4 @@ namespace Spacy
   using IndefiniteLinearSolver = boost::type_erasure::any< Concepts::IndefiniteLinearSolverConcept >;
 }
 
-#endif // ALGORITHM_LINEAR_SOLVER_HH
+#endif // SPACY_LINEAR_SOLVER_HH

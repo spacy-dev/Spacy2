@@ -1,7 +1,6 @@
-#ifndef ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
-#define ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
+#ifndef SPACY_AFFINECOVARIANTCOMPOSITESTEPS_HH
+#define SPACY_AFFINECOVARIANTCOMPOSITESTEPS_HH
 
-#include <memory>
 #include <string>
 #include <tuple>
 
@@ -11,6 +10,7 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Algorithm/lipschitzConstant.hh"
 #include "Spacy/Util/mixins.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -53,56 +53,56 @@ namespace Spacy
        * @param L Lagrange functional
        * @param domain domain space \f$X=\{Y,U,P\}\f$
        */
-      AffineCovariantSolver(const C2Functional& N, const C2Functional& L, VectorSpace& domain);
+      AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain);
 
       /// Compute solution.
-      Vector solve();
+      Vector operator()();
 
       /**
        * @brief Compute solution.
        * @param x0 initial iterate
        */
-      Vector solve(const Vector& x0);
+      Vector operator()(const Vector& x0);
 
     private:
       Vector computeNormalStep(const Vector& x) const;
       Vector computeSimplifiedNormalStep(const Vector& trial) const;
       Vector computeMinimumNormCorrection(const Vector& x) const;
-      Vector computeTangentialStep(double nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
+      Vector computeTangentialStep(Real nu, const Vector& x, const Vector& dn, bool lastStepWasUndamped) const;
       Vector computeLagrangeMultiplier(const Vector& x) const;
-      std::unique_ptr<IndefiniteLinearSolver> makeTangentialSolver(double nu, const Vector& x, bool lastStepWasUndamped) const;
+      IndefiniteLinearSolver makeTangentialSolver(Real nu, const Vector& x, bool lastStepWasUndamped) const;
 
-      bool convergenceTest(double nu, double tau, double norm_x, double norm_dx);
+      bool convergenceTest(Real nu, Real tau, Real norm_x, Real norm_dx);
 
-      std::tuple<double, Vector, Vector, double, double> computeCompositeStep(double& nu, double norm_Dn,
+      std::tuple<Real, Vector, Vector, Real, Real> computeCompositeStep(Real& nu, Real norm_Dn,
                   const Vector& x, const Vector& Dn, const Vector& Dt);
 
-      void updateOmegaC(double norm_x, double norm_dx, double norm_ds);
-      double updateOmegaL(const Vector& soc, double q_tau,
-                          double tau, double norm_x, double norm_dx, const CompositeStep::CubicModel& cubic);
+      void updateOmegaC(Real norm_x, Real norm_dx, Real norm_ds);
+      Real updateOmegaL(const Vector& soc, Real q_tau,
+                          Real tau, Real norm_x, Real norm_dx, const CompositeStep::CubicModel& cubic);
 
-      double computeNormalStepDampingFactor(double normDn) const;
-      double computeTangentialStepDampingFactor(double normdn, double normDt, const CompositeStep::CubicModel& cubic) const;
+      Real computeNormalStepDampingFactor(Real norm_Dn) const;
+      Real computeTangentialStepDampingFactor(Real norm_dn, Real norm_Dt, const CompositeStep::CubicModel& cubic) const;
 
-      void regularityTest(double nu, double tau) const;
-      AcceptanceTest acceptedSteps(double norm_x, double normDx, double eta);
+      void regularityTest(Real nu, Real tau) const;
+      AcceptanceTest acceptedSteps(Real norm_x, Real normDx, Real eta);
 
-      std::unique_ptr<C2Functional> N_ = nullptr, L_ = nullptr;
+      C2Functional N_, L_;
       VectorSpace& domain_;
 
       LipschitzConstant omegaL = {1e-6}, omegaC = {1e-6};
 
-      mutable std::unique_ptr<LinearSolver> normalSolver = nullptr;
-      mutable std::unique_ptr<IndefiniteLinearSolver> tangentialSolver = nullptr;
+      mutable LinearSolver normalSolver = {};
+      mutable IndefiniteLinearSolver tangentialSolver = {};
 
       std::string spacing = "  ", spacing2 = "    ";
 
       StepMonitor normalStepMonitor = StepMonitor::Accepted;
       StepMonitor tangentialStepMonitor = StepMonitor::Accepted;
 
-      double norm_dx_old = -1;
+      Real norm_dx_old = -1;
     };
   }
 }
 
-#endif // ALGORITHM_AFFINECOVARIANTCOMPOSITESTEPS_HH
+#endif // SPACY_AFFINECOVARIANTCOMPOSITESTEPS_HH

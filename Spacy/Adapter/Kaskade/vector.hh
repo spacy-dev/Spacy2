@@ -1,6 +1,7 @@
-#ifndef ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
-#define ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
+#ifndef SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
+#define SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
+#include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/cast.hh"
 
@@ -25,7 +26,7 @@ namespace Spacy
      */
     template <class Description>
     class Vector :
-        public VectorBase< Vector<Description> > ,
+        public VectorBase ,
         public SupportedOperatorBase< Vector<Description> >
     {
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
@@ -38,7 +39,7 @@ namespace Spacy
        * @param space underlying vector space
        */
       Vector(const VectorSpace& space)
-        : VectorBase< Vector<Description> >(space),
+        : VectorBase(space),
           spaces_(&cast_ref< VectorCreator<Description> >(space.impl()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
@@ -77,7 +78,7 @@ namespace Spacy
        * @param y primal vector
        * @return \f$x(y)\f$
        */
-      double operator()(const Vector& y) const
+      Real operator()(const Vector& y) const
       {
         return impl() * y.impl();
       }
@@ -95,4 +96,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
+#endif // SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH

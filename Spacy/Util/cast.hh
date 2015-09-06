@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_UTIL_CAST_TO_HH
-#define ALGORITHMS_UTIL_CAST_TO_HH
+#ifndef SPACYS_UTIL_CAST_TO_HH
+#define SPACYS_UTIL_CAST_TO_HH
 
 #include <boost/type_erasure/any_cast.hpp>
 
@@ -43,4 +43,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHMS_UTIL_CAST_TO_HH
+#endif // SPACYS_UTIL_CAST_TO_HH

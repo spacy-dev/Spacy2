@@ -54,11 +54,6 @@ namespace Spacy
       return definiteness_ == DefiniteNess::Indefinite;
     }
 
-//    auto Solver::getEnergyNormOfSolution() const noexcept
-//    {
-//      return sqrt(energyNorm2);
-//    }
-
     const CallableOperator& Solver::P() const
     {
       return P_;
@@ -82,7 +77,7 @@ namespace Spacy
       auto q = Qr;
       auto Pq = r; // required only for regularized or hybrid conjugate gradient methods
 
-      auto sigma = std::abs( r(Qr) ); // preconditioned residual norm squared
+      auto sigma = abs( r(Qr) ); // preconditioned residual norm squared
 
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
@@ -96,7 +91,7 @@ namespace Spacy
         auto alpha = sigma/qAq;
         if( verbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
-        terminate.update(alpha,qAq,qPq,sigma);
+        terminate.update(toDouble(alpha),toDouble(qAq),toDouble(qPq),toDouble(sigma));
 
         //  don't trust small numbers
         if( vanishingStep(step) )
@@ -108,9 +103,7 @@ namespace Spacy
 
         if( terminateOnNonconvexity(qAq,qPq,x,q,step) ) break;
 
-        x += alpha * q;
-        energyNorm2 += alpha*qAq;
-        if( verbosityLevel() > 1 ) std::cout << "    " << type_ << "  |x|^2_A = " << energyNorm2 << std::endl;
+        x += (toDouble(alpha) * q);
 
         // convergence test
         if (terminate())
@@ -126,12 +119,12 @@ namespace Spacy
         Qr = Q(r);
 
         // determine new search direction
-        auto sigmaNew = std::abs( r(Qr) ); // sigma = <Qr,r>
+        auto sigmaNew = abs( r(Qr) ); // sigma = <Qr,r>
         auto beta = sigmaNew/sigma;
         sigma = sigmaNew;
 
-        q *= beta; q += Qr;  //  q = Qr + beta*q
-        Pq *= beta; Pq += r; // Pq = r + beta*Pq
+        q *= toDouble(beta); q += Qr;  //  q = Qr + beta*q
+        Pq *= toDouble(beta); Pq += r; // Pq = r + beta*Pq
       }
 
       return x;
@@ -157,7 +150,7 @@ namespace Spacy
       return false;
     }
 
-    bool Solver::terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const
+    bool Solver::terminateOnNonconvexity(Real qAq, Real qPq, Vector& x, const Vector& q, unsigned step) const
     {
       if( qAq > 0 ) return false;
       if( verbose() ) std::cout << "    " << type_ << ": Negative curvature: " << qAq << std::endl;
@@ -203,23 +196,23 @@ namespace Spacy
       theta = 0;
     }
 
-    void Solver::regularize(double& qAq, double qPq) const noexcept
+    void Solver::regularize(Real& qAq, Real qPq) const noexcept
     {
       if( type_ == "CG" || type_ == "TCG" ) return;
       qAq += theta*qPq;
     }
 
-    void Solver::updateRegularization(double qAq, double qPq) const
+    void Solver::updateRegularization(Real qAq, Real qPq) const
     {
       if( type_ == "CG" || type_ == "TCG" ) return;
-      double oldTheta = theta > 0 ? theta : eps();
-      theta += (1-qAq)/std::abs(qPq);
+      Real oldTheta = theta > 0 ? theta : Real(eps());
+      theta += (1-qAq)/abs(qPq);
       if( verbosityLevel() > 1 ) std::cout << "Computed regularization parameter: " << theta << std::endl;
-      theta = std::min(std::max(minIncrease*oldTheta,theta),maxIncrease*oldTheta);
+      theta = min(max(minIncrease*oldTheta,theta),maxIncrease*oldTheta);
       if( verbosityLevel() > 1 ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
     }
 
-    void Solver::adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const
+    void Solver::adjustRegularizedResidual(Real alpha, const Vector& Pq, Vector& r) const
     {
       if( type_ == "CG" || type_ == "TCG" ) return;
       r -= (alpha*theta)*Pq;

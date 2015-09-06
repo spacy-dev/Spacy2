@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
-#define ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
+#ifndef SPACY_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
+#define SPACY_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
 
 #include <memory>
 #include <string>
@@ -97,9 +97,6 @@ namespace Spacy
        */
       bool indefiniteOperator() const noexcept;
 
-//      /// Energy norm of the computed solution.
-//      auto getEnergyNormOfSolution() const noexcept;
-
       /**
        * @brief Change conjugate gradient implementation.
        * @param otherType conjugate gradient type ("CG", "RCG", "TCG" or "TRCG")
@@ -137,7 +134,7 @@ namespace Spacy
        *
        * @return true if iteration should terminate.
        */
-      bool terminateOnNonconvexity(double qAq, double qPq, Vector& x, const Vector& q, unsigned step) const;
+      bool terminateOnNonconvexity(Real qAq, Real qPq, Vector& x, const Vector& q, unsigned step) const;
 
       /**
        * @brief Set \f$\theta=0\f$.
@@ -147,32 +144,31 @@ namespace Spacy
       /**
        * @brief Replace \f$qAq\f$ with \f$ qAq + \theta qPq\f$.
        */
-      void regularize(double& qAq, double qPq) const noexcept;
+      void regularize(Real& qAq, Real qPq) const noexcept;
 
       /**
        * @brief Update regularization parameter \f$\theta\f$ in regularized conjugate gradient methods.
        */
-      void updateRegularization(double qAq, double qPq) const;
+      void updateRegularization(Real qAq, Real qPq) const;
 
       /**
        * @brief Replace \f$r\f$ with \f$ r - \alpha\theta\Pq \f$ in regularized conjugate gradient methods.
        */
-      void adjustRegularizedResidual(double alpha, const Vector& Pq, Vector& r) const;
+      void adjustRegularizedResidual(Real alpha, const Vector& Pq, Vector& r) const;
 
 
       CallableOperator A_, P_;
       mutable CG::TerminationCriterion terminate;
       mutable Result result = Result::Failed; ///< information about reason for termination
       mutable DefiniteNess definiteness_ = DefiniteNess::PositiveDefinite;
-      mutable double energyNorm2 = 0.; ///< energy norm squared
 
       std::string type_ = "CG";
 
       // parameters for regularized conjugate gradient methods
-      mutable double theta = 0;
+      mutable Real theta = Real{0};
       unsigned maxIncrease = 1000, minIncrease = 2;
     };
   }
 }
 
-#endif // ALGORITHM_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH
+#endif // SPACY_CONJUGATE_GRADIENTS_IMPLEMENTATION_HH

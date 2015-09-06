@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_VECTOR_HH
-#define ALGORITHM_ADAPTER_FENICS_VECTOR_HH
+#ifndef SPACY_ADAPTER_FENICS_VECTOR_HH
+#define SPACY_ADAPTER_FENICS_VECTOR_HH
 
 #include <dolfin.h>
 
@@ -11,6 +11,7 @@
 namespace Spacy
 {
   /// @cond
+  class Real;
   class VectorSpace;
   /// @endcond
 
@@ -21,7 +22,7 @@ namespace Spacy
      * @brief %Vector implementation for %FEniCS (single space).
      */
     class Vector :
-        public VectorBase<Vector> ,
+        public VectorBase ,
         public SupportedOperatorBase<Vector>
     {
     public:
@@ -60,7 +61,7 @@ namespace Spacy
        * @param y primal vector
        * @return \f$x(y)\f$
        */
-      double operator()(const Vector& y) const;
+      Real operator()(const Vector& y) const;
 
     private:
       dolfin::Function v_;
@@ -68,4 +69,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_VECTOR_HH
+#endif // SPACY_ADAPTER_FENICS_VECTOR_HH

@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ADAPTER_KASKADE_HH
-#define ALGORITHM_ADAPTER_KASKADE_HH
+#ifndef SPACY_ADAPTER_KASKADE_HH
+#define SPACY_ADAPTER_KASKADE_HH
 
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/c2Functional.hh"
@@ -11,5 +11,5 @@
 #include "Kaskade/vector.hh"
 #include "Kaskade/vectorSpace.hh"
 
-#endif // ALGORITHM_ADAPTER_KASKADE_HH
+#endif // SPACY_ADAPTER_KASKADE_HH
 

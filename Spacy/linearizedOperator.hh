@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_LINEARIZED_OPERATOR_HH
-#define ALGORITHM_LINEARIZED_OPERATOR_HH
+#ifndef SPACY_LINEARIZED_OPERATOR_HH
+#define SPACY_LINEARIZED_OPERATOR_HH
 
 #include "Spacy/linearSolver.hh"
 #include "Spacy/operator.hh"
@@ -54,4 +54,4 @@ namespace Spacy
   };
 }
 
-#endif // ALGORITHM_LINEARIZED_OPERATOR_HH
+#endif // SPACY_LINEARIZED_OPERATOR_HH

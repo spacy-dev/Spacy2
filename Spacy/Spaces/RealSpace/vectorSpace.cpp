@@ -1,10 +1,18 @@
 #include "vectorSpace.hh"
 
-#include "Spacy/Spaces/RealSpace/vector.hh"
-#include "Spacy/Spaces/RealSpace/scalarProduct.hh"
+#include "Spacy/Util/cast.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/vector.hh"
 
-Spacy::VectorSpace Spacy::Real::makeHilbertSpace()
+Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace()
 {
-  return ::Spacy::makeHilbertSpace( [](const VectorSpace* space){ return Vector{*space}; } ,
-                                        ScalarProduct{} );
+  return ::Spacy::makeHilbertSpace( [](const VectorSpace* space)
+                                      {
+                                        return Real{*space};
+                                      } ,
+                                    [](const ::Spacy::Vector& x, const ::Spacy::Vector& y)
+                                      {
+                                        return Real( toDouble( cast_ref<Real>(x) * cast_ref<Real>(y) ) );
+                                      }
+                                   );
 }

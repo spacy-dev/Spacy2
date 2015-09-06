@@ -1,11 +1,11 @@
-#ifndef ALGORITHM_REAL_SPACE_CREATOR_HH
-#define ALGORITHM_REAL_SPACE_CREATOR_HH
+#ifndef SPACY_REAL_SPACE_CREATOR_HH
+#define SPACY_REAL_SPACE_CREATOR_HH
 
 #include "Spacy/vectorSpace.hh"
 
 namespace Spacy
 {
-  namespace Real
+  namespace RealSpace
   {
     /**
      * @ingroup RealGroup
@@ -14,6 +14,11 @@ namespace Spacy
      */
     VectorSpace makeHilbertSpace();
   }
+
+  namespace StaticDetail
+  {
+    static VectorSpace R = RealSpace::makeHilbertSpace();
+  }
 }
 
-#endif // ALGORITHM_REAL_SPACE_CREATOR_HH
+#endif // SPACY_REAL_SPACE_CREATOR_HH

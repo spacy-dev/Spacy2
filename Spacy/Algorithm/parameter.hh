@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ALGORITHM_PARAMETERS_HH
-#define ALGORITHM_ALGORITHM_PARAMETERS_HH
+#ifndef SPACY_SPACY_PARAMETERS_HH
+#define SPACY_SPACY_PARAMETERS_HH
 
 #include "Util/mixins.hh"
 
@@ -11,4 +11,4 @@ namespace Spacy
 class Parameter : public Mixin::Eps, public Mixin::RelativeAccuracy, public Mixin::Verbosity, public Mixin::MaxSteps {};
 }
 
-#endif // ALGORITHM_ALGORITHM_PARAMETERS_HH
+#endif // SPACY_SPACY_PARAMETERS_HH

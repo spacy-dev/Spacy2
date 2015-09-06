@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_VECTOR_SPACE_HH
-#define ALGORITHM_VECTOR_SPACE_HH
+#ifndef SPACY_VECTOR_SPACE_HH
+#define SPACY_VECTOR_SPACE_HH
 
 #include <functional>
 #include <vector>
@@ -7,6 +7,8 @@
 
 #include "Spacy/norm.hh"
 #include "Spacy/scalarProduct.hh"
+
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 #include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/Concepts/vectorCreatorConcept.hh"
@@ -181,5 +183,7 @@ namespace Spacy
    * This admits the evaluation of \f$y(x)\f$ for \f$x\in X\f$ and \f$y\in Y\f$.
    */
   void connect(VectorSpace& X, VectorSpace& Y);
+
+  void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W);
 }
-#endif // ALGORITHM_VECTOR_SPACE_HH
+#endif // SPACY_VECTOR_SPACE_HH

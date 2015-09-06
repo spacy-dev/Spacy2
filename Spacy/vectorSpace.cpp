@@ -1,11 +1,13 @@
 #include "vectorSpace.hh"
 
+#include "Spacy/Util/cast.hh"
+#include "Spacy/Util/cmath.hh"
+#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
+
 #include "Spacy/Spaces/productSpace.hh"
-#include "Util/cast.hh"
 
 #include <boost/type_erasure/is_empty.hpp>
 
-#include <cmath>
 #include <stdexcept>
 #include <utility>
 
@@ -20,7 +22,7 @@ namespace Spacy
         : sp_(std::move(sp))
       {}
 
-      double operator()(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
+      Real operator()(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
       {
         return sqrt(sp_(x,x));
       }
@@ -185,5 +187,12 @@ namespace Spacy
   {
     X.addDualSpace( Y );
 //    Y.addPrimalSpace( X );
+  }
+
+
+  void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W)
+  {
+    if( V->index() != W->index() )
+      throw IncompatibleSpaceException(V->index(),W->index());
   }
 }

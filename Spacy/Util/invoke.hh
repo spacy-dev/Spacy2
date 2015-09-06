@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_UTIL_INVOKE_HH
-#define ALGORITHM_UTIL_INVOKE_HH
+#ifndef SPACY_UTIL_INVOKE_HH
+#define SPACY_UTIL_INVOKE_HH
 
 #include <tuple>
 #include <utility>
@@ -76,4 +76,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_UTIL_INVOKE_HH
+#endif // SPACY_UTIL_INVOKE_HH

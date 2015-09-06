@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_HESSIAN_HH
-#define ALGORITHM_HESSIAN_HH
+#ifndef SPACY_HESSIAN_HH
+#define SPACY_HESSIAN_HH
 
 #include <memory>
 
@@ -53,4 +53,4 @@ namespace Spacy
   };
 }
 
-#endif // ALGORITHM_HESSIAN_HH
+#endif // SPACY_HESSIAN_HH

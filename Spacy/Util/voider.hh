@@ -18,8 +18,8 @@
 /*                                                                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef ALGORITHM_UTIL_VOIDER_HH
-#define ALGORITHM_UTIL_VOIDER_HH
+#ifndef SPACY_UTIL_VOIDER_HH
+#define SPACY_UTIL_VOIDER_HH
 
 namespace Spacy
 {
@@ -40,4 +40,4 @@ namespace Spacy
   using void_t = typename Detail::voider<Types...>::type;
 }
 
-#endif // ALGORITHM_UTIL_VOIDER_HH
+#endif // SPACY_UTIL_VOIDER_HH

@@ -18,8 +18,8 @@
 #include <dune/grid/config.h>
 #include <dune/grid/uggrid.hh>
 
-#include <VSA/Adapter/kaskade.hh>
-#include <VSA/Algorithm/CompositeStep/affineCovariantSolver.hh>
+#include "Spacy/Adapter/kaskade.hh"
+#include "Spacy/Algorithm/CompositeStep/affineCovariantSolver.hh"
 
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
@@ -102,22 +102,22 @@ int main(int argc, char *argv[])
   });
 
 
-  auto domain = VSA::Kaskade::makeHilbertSpace<Descriptions>(spaces, {0u,1u}, {2u});
+  auto domain = Spacy::Kaskade::makeHilbertSpace<Descriptions>(spaces, {0u,1u}, {2u});
   // Normal step functional with cg solver
-  //auto fn = VSA::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  //auto fn = Spacy::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
 
   // Normal step functional with direct solver
-  auto fn = VSA::Kaskade::makeC2Functional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
-//  auto solverCreator = VSA::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
+  auto fn = Spacy::Kaskade::makeC2Functional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+//  auto solverCreator = Spacy::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
 //  solverCreator.setVerbosity(true);
 //  fn.setSolverCreator( solverCreator );
   
   // Lagrange functional
-  auto ft = VSA::Kaskade::makeC2Functional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  auto ft = Spacy::Kaskade::makeC2Functional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
   // algorithm and parameters
-  auto cs = VSA::CompositeStep::AffineCovariantSolver( fn , ft , domain );
+  auto cs = Spacy::CompositeStep::AffineCovariantSolver( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
   cs.setVerbosityLevel(verbose);
@@ -127,11 +127,11 @@ int main(int argc, char *argv[])
   
   using namespace std::chrono;
   auto startTime = high_resolution_clock::now();
-  auto result = cs.solve();
+  auto result = cs();
   std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
 
   VarSet x(desc);
-  VSA::Kaskade::copy(result,x);
+  Spacy::Kaskade::copy(result,x);
 
 
   IoOptions options;

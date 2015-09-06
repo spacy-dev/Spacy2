@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_SCALARPRODUCT_HH
-#define ALGORITHM_SCALARPRODUCT_HH
+#ifndef SPACY_SCALARPRODUCT_HH
+#define SPACY_SCALARPRODUCT_HH
 
 #include <boost/type_erasure/any.hpp>
 #include "Util/Concepts/scalarProductConcept.hh"
@@ -13,4 +13,4 @@ namespace Spacy
    */
   using ScalarProduct = boost::type_erasure::any< Concepts::ScalarProductConcept >;
 }
-#endif // ALGORITHMS_SCALARPRODUCT_HH
+#endif // SPACYS_SCALARPRODUCT_HH

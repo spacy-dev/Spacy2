@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPT_SINGLE_CONCEPTS_HH
-#define ALGORITHM_CONCEPT_SINGLE_CONCEPTS_HH
+#ifndef SPACY_CONCEPT_SINGLE_CONCEPTS_HH
+#define SPACY_CONCEPT_SINGLE_CONCEPTS_HH
 
 #include <boost/type_erasure/member.hpp>
 
@@ -28,6 +28,8 @@ BOOST_TYPE_ERASURE_MEMBER( (has_linearization) , linearization , 1 )
 
 BOOST_TYPE_ERASURE_MEMBER( (has_solver) , solver , 0 )
 
+// additional concepts for time-dependent operators
+BOOST_TYPE_ERASURE_MEMBER( (has_M) , M , 0 )
 
 // additional functional concepts
 BOOST_TYPE_ERASURE_MEMBER( (has_d1_dual) , d1 , 1 )
@@ -42,4 +44,4 @@ BOOST_TYPE_ERASURE_MEMBER( (has_hessian) , hessian , 1 )
 // linear solver concepts
 BOOST_TYPE_ERASURE_MEMBER( (has_isPositiveDefinite) , isPositiveDefinite , 0 )
 
-#endif // ALGORITHM_CONCEPT_SINGLE_CONCEPTS_HH
+#endif // SPACY_CONCEPT_SINGLE_CONCEPTS_HH

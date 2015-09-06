@@ -6,6 +6,9 @@
 #include "Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh"
 #include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 
+#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/vectorSpace.hh"
+
 #include <utility>
 
 namespace Spacy
@@ -13,7 +16,7 @@ namespace Spacy
   namespace FEniCS
   {
     Vector::Vector(const VectorSpace& space)
-      : VectorBase<Vector>(space),
+      : VectorBase(space),
         v_(cast_ref<VectorCreator>(space.impl()).impl())
     {}
 
@@ -44,7 +47,7 @@ namespace Spacy
       return *v_.vector();
     }
 
-    double Vector::operator()(const Vector& y) const
+    Real Vector::operator()(const Vector& y) const
     {
       return impl().inner( y.impl() );
     }

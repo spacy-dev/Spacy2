@@ -1,10 +1,14 @@
-#ifndef ALGORITHM_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH
-#define ALGORITHM_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH
+#ifndef SPACY_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH
+#define SPACY_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH
 
 #include "mixinConnection.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
+
   namespace Mixin
   {
     /**
@@ -25,6 +29,8 @@ namespace Spacy
        * @param accuracy absolute accuracy
        */
       void setAbsoluteAccuracy(double accuracy);
+
+      void setAbsoluteAccuracy(Real accuracy);
 
       /**
        * @brief Access absolute accuracy.
@@ -56,4 +62,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH
+#endif // SPACY_UTIL_MIXIN_ABSOLUTE_ACCURACY_HH

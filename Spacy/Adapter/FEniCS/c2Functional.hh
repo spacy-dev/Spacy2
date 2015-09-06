@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
-#define ALGORITHMS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
+#ifndef SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
+#define SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
 
 #include <memory>
 
@@ -29,7 +29,7 @@ namespace Spacy
      * @see @ref C2FunctionalAnchor "C2Functional", @ref C2FunctionalConceptAnchor "C2FunctionalConcept"
      */
     template <class F, class DF, class DDF>
-    class C2Functional : public C2FunctionalBase< C2Functional<F,DF,DDF> >
+    class C2Functional : public C2FunctionalBase
     {
     public:
       /**
@@ -42,7 +42,7 @@ namespace Spacy
        */
       C2Functional(const F& f, const DF& J, const DDF& H,
                  const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
-        : C2FunctionalBase< C2Functional<F,DF,DDF> >( space ),
+        : C2FunctionalBase( space ),
           f_( f.mesh_shared_ptr() ),
           J_( J.function_space(0) ),
           H_( H.function_space(0) , H.function_space(1) ),
@@ -58,7 +58,7 @@ namespace Spacy
        * @param g functional to copy from
        */
       C2Functional(const C2Functional& g)
-        : C2FunctionalBase< C2Functional<F,DF,DDF> >( g.domain() ) ,
+        : C2FunctionalBase( g.domain() ) ,
           f_( g.f_.mesh_shared_ptr() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
@@ -99,7 +99,7 @@ namespace Spacy
        * @param g functional to move from
        */
       C2Functional(C2Functional&& g)
-        : C2FunctionalBase< C2Functional<F,DF,DDF> >( g.domain() ) ,
+        : C2FunctionalBase( g.domain() ) ,
           f_( g.f_.mesh_shared_ptr() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
@@ -148,13 +148,12 @@ namespace Spacy
       }
 
       /**
-       * @cond
        * @brief Compute first directional derivative \f$f'(x) \in X^* \f$.
        *
-       * Actual implementation of d1 is provided in base class C2FunctionalBase.
-       * @see C2FunctionalBase
+       * @param x current iterate
+       * @return \f$f'(x)\f$
        */
-      ::Spacy::Vector d1_(const ::Spacy::Vector &x) const
+      ::Spacy::Vector d1(const ::Spacy::Vector &x) const
       {
         primalDualIgnoreReset(std::bind(&C2Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
 
@@ -164,12 +163,13 @@ namespace Spacy
       }
 
       /**
-       * @brief Compute second directional derivative \f$f''(x) \in X^* \f$.
+       * @brief Compute second directional derivative \f$f''(x)dx\in X^* \f$.
        *
-       * Actual implementation of d2 is provided in base class C2FunctionalBase.
-       * @see C2FunctionalBase
+       * @param x current iterate
+       * @param dx perturbation
+       * @return \f$f''(x)dx\f$
        */
-      ::Spacy::Vector d2_(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const
+      ::Spacy::Vector d2(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const
       {
         primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -183,7 +183,6 @@ namespace Spacy
 
         return result;
       }
-      /// @endcond
 
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
@@ -291,5 +290,5 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHMS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
+#endif // SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
 

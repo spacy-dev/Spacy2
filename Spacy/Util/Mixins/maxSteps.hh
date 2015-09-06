@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_UTIL_MIXIN_MAXSTEPS_HH
-#define ALGORITHM_UTIL_MIXIN_MAXSTEPS_HH
+#ifndef SPACY_UTIL_MIXIN_MAXSTEPS_HH
+#define SPACY_UTIL_MIXIN_MAXSTEPS_HH
 
 #include "mixinConnection.hh"
 
@@ -56,4 +56,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_UTIL_MIXIN_MAXSTEPS_HH
+#endif // SPACY_UTIL_MIXIN_MAXSTEPS_HH

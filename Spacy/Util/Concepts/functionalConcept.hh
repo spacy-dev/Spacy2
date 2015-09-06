@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPTS_FUNCTIONAL_CONCEPT_HH
-#define ALGORITHM_CONCEPTS_FUNCTIONAL_CONCEPT_HH
+#ifndef SPACY_CONCEPTS_FUNCTIONAL_CONCEPT_HH
+#define SPACY_CONCEPTS_FUNCTIONAL_CONCEPT_HH
 
 #include <boost/type_erasure/callable.hpp>
 #include "conceptBase.hh"
@@ -28,7 +28,7 @@ namespace Spacy
      * {
      * public:
      *   // Compute f(x).
-     *   double operator()(const ::Spacy::Vector&) const;
+     *   double operator()(const ::Spacy::Vector& x) const;
      *
      *   // Access underlying domain.
      *   const VectorSpace& domain() const;
@@ -52,20 +52,21 @@ namespace Spacy
      *
      * The minimal signature of a differentiable functional is
      * @code
-     * // A functional f: X->R.
-     * class MyFunctional
+     * // A differentiable functional f: X->R.
+     * class MyC1Functional
      * {
      * public:
      *   // Copy constructor, possibly default-generated.
-     *   MyFunctional(const MyFunctional&);
+     *   MyC1Functional(const MyC1Functional&);
      *
      *   // Move constructor, possibly default-generated.
-     *   MyFunctional(MyFunctional&&);
+     *   MyC1Functional(MyC1Functional&&);
      *
      *   // Compute f(x).
-     *   double operator()(const ::Spacy::Vector&) const;
+     *   double operator()(const ::Spacy::Vector& x) const;
      *
-     *
+     *   // Compute f'(x) as element of X*.
+     *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
      *
      *   // Access underlying domain.
      *   const VectorSpace& domain() const;
@@ -77,8 +78,6 @@ namespace Spacy
     using C1FunctionalConcept =
     boost::mpl::vector<
       FunctionalConcept ,
-      has_d1<double(const boost::type_erasure::any<VectorConcept>&, const boost::type_erasure::any<VectorConcept>&),
-             const boost::type_erasure::_self> ,
       has_d1_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&),
                   const boost::type_erasure::_self>
     >;
@@ -87,13 +86,41 @@ namespace Spacy
      * @ingroup ConceptGroup
      * @anchor C2FunctionalConceptAnchor
      * @brief Concept for twice differentiable functionals.
+     *
+     * The minimal signature of a twice differentiable functional is
+     * @code
+     * // A twice differentiable functional f: X->R.
+     * class MyC2Functional
+     * {
+     * public:
+     *   // Copy constructor, possibly default-generated.
+     *   MyC2Functional(const MyC2Functional&);
+     *
+     *   // Move constructor, possibly default-generated.
+     *   MyC2Functional(MyC2Functional&&);
+     *
+     *   // Compute f(x).
+     *   double operator()(const ::Spacy::Vector& x) const;
+     *
+     *   // Compute f'(x) as element of X*.
+     *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+     *
+     *   // Compute f''(x)dx as element of X*.
+     *   ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+     *
+     *   // Access f''(x) as mapping f''(x): X->X*.
+     *   LinearOperator hessian(const ::Spacy::Vector& x);
+     *
+     *   // Access underlying domain.
+     *   const VectorSpace& domain() const;
+     * };
+     * @endcode
+     *
      * See @ref C2FunctionalAnchor "::Spacy::C2Functional".
      */
     using C2FunctionalConcept =
     boost::mpl::vector<
       C1FunctionalConcept ,
-      has_d2<double(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
-             const boost::type_erasure::_self> ,
       has_d2_dual<boost::type_erasure::any<VectorConcept>(const boost::type_erasure::any<VectorConcept>&,const boost::type_erasure::any<VectorConcept>&),
                   const boost::type_erasure::_self> ,
       has_hessian<boost::type_erasure::any<LinearOperatorConcept>(const boost::type_erasure::any<VectorConcept>&),
@@ -102,4 +129,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_CONCEPTS_FUNCTIONAL_CONCEPT_HH
+#endif // SPACY_CONCEPTS_FUNCTIONAL_CONCEPT_HH

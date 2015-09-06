@@ -1,12 +1,11 @@
-#ifndef ALGORITHM_VECTOR_HH
-#define ALGORITHM_VECTOR_HH
+#ifndef SPACY_VECTOR_HH
+#define SPACY_VECTOR_HH
 
 #include <type_traits>
 #include <boost/type_erasure/any.hpp>
 
-#include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/Concepts/vectorConcept.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -24,9 +23,9 @@ namespace Spacy
    * @brief Multiplication with arithmetic types (double,float,int,...).
    * @return \f$z=a*x\f$.
    */
-  template <class Arithmetic,
-            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  Vector operator*(Arithmetic a, Vector x)
+//  template <class Arithmetic,
+//            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
+  inline Vector operator*(double a, Vector x)
   {
     return x*=a;//Scale<Arithmetic>{a,x};
   }
@@ -50,29 +49,16 @@ namespace Spacy
    * @brief Compute scalar product.
    * @return \f$z=x*y=(x,y)\f$.
    */
-  double operator*(const Vector& x, const Vector& y);
+  Real operator*(const Vector& x, const Vector& y);
 
   /**
    * @ingroup SpacyGroup
    * @brief Compute norm, where the norm associated with the underlying function space is used.
    * @return \f$ z = \|x\| \f$.
    */
-  double norm(const Vector& x);
+  Real norm(const Vector& x);
 
-
-  template <class V>
-  void checkSpaceCompatibility(const V& x, const V& y)
-  {
-    if( x.space()->index() != y.space()->index() )
-      throw IncompatibleSpaceException(x.space()->index(),y.space()->index());
-  }
-
-  template <class V>
-  void checkDualPairing(const V& x, const V& y)
-  {
-    if( !y.space()->isPrimalWRT(*x.space()) )
-      throw IncompatibleSpaceException(x.space()->index(),y.space()->index());
-  }
+  void checkDualPairing(const Vector& x, const Vector& y);
 //  template <class T>
 //  struct Scale
 //  {
@@ -87,4 +73,4 @@ namespace Spacy
 //  };
 }
 
-#endif // ALGORITHM_VECTOR_HH
+#endif // SPACY_VECTOR_HH

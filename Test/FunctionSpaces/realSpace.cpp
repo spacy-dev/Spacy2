@@ -4,38 +4,51 @@
 #include "Spacy/Spaces/realSpace.hh"
 #include "Spacy/Util/cast.hh"
 
+namespace
+{
+  double to_double(const Spacy::Vector& x)
+  {
+    return Spacy::cast_ref<Spacy::Real>(x).impl();
+  }
+
+  double& to_double(Spacy::Vector& x)
+  {
+    return Spacy::cast_ref<Spacy::Real>(x).impl();
+  }
+}
+
 TEST(RealSpaceTest,ElementTest)
 {
   using namespace Spacy;
-  auto R = Real::makeHilbertSpace();
+  auto R = RealSpace::makeHilbertSpace();
   auto x = R.vector();
-  EXPECT_DOUBLE_EQ( static_cast<double>(cast_ref<Real::Vector>(x)) , 0. );
+  EXPECT_DOUBLE_EQ( to_double(x) , 0. );
 }
 
 TEST(RealSpaceTest,ScalarProductTest)
 {
   using namespace Spacy;
-  auto R = Real::makeHilbertSpace();
+  auto R = RealSpace::makeHilbertSpace();
   auto x = R.vector();
   auto y = R.vector();
-  cast_ref<Real::Vector>(x) = 1;
-  cast_ref<Real::Vector>(y) = -2;
-  EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x), 1. );
-  EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(y), -2. );
-  EXPECT_DOUBLE_EQ( x*y, -2. );
-  EXPECT_DOUBLE_EQ( x*y, R.scalarProduct()(x,y) );
+  to_double(x) = 1;
+  to_double(y) = -2;
+  EXPECT_DOUBLE_EQ( to_double(x), 1. );
+  EXPECT_DOUBLE_EQ( to_double(y), -2. );
+  EXPECT_DOUBLE_EQ( toDouble(x*y), -2. );
+  EXPECT_DOUBLE_EQ( toDouble(x*y), toDouble(R.scalarProduct()(x,y)) );
 }
 
 TEST(RealSpaceTest,NormTest)
 {
   using namespace Spacy;
-  auto R = Real::makeHilbertSpace();
+  auto R = RealSpace::makeHilbertSpace();
   auto x = R.vector();
   auto y = R.vector();
-  cast_ref<Real::Vector>(x) = 1;
-  cast_ref<Real::Vector>(y) = -2;
-  EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(x), 1. );
-  EXPECT_DOUBLE_EQ( cast_ref<Real::Vector>(y), -2. );
-  EXPECT_DOUBLE_EQ( R.norm()(x) , 1. );
-  EXPECT_DOUBLE_EQ( R.norm()(y) , 2. );
+  to_double(x) = 1;
+  to_double(y) = -2;
+  EXPECT_DOUBLE_EQ( to_double(x), 1. );
+  EXPECT_DOUBLE_EQ( to_double(y), -2. );
+  EXPECT_DOUBLE_EQ( toDouble(R.norm()(x)) , 1. );
+  EXPECT_DOUBLE_EQ( toDouble(R.norm()(y)) , 2. );
 }

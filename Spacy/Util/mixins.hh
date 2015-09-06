@@ -1,5 +1,5 @@
-#ifndef ALGORITHMS_UTIL_MIXINS_HH
-#define ALGORITHMS_UTIL_MIXINS_HH
+#ifndef SPACYS_UTIL_MIXINS_HH
+#define SPACYS_UTIL_MIXINS_HH
 
 #include "Mixins/absoluteAccuracy.hh"
 #include "Mixins/adjointIndex.hh"
@@ -19,5 +19,5 @@
 #include "Mixins/timer.hh"
 #include "Mixins/verbosity.hh"
 
-#endif // ALGORITHMS_UTIL_MIXINS_HH
+#endif // SPACYS_UTIL_MIXINS_HH
 

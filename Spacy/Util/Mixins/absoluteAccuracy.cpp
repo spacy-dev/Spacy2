@@ -1,5 +1,7 @@
 #include "absoluteAccuracy.hh"
 
+#include "Spacy/Spaces/RealSpace/real.hh"
+
 namespace Spacy
 {
   namespace Mixin
@@ -12,6 +14,11 @@ namespace Spacy
     {
       absoluteAccuracy_ = absoluteAccuracy;
       notify();
+    }
+
+    void AbsoluteAccuracy::setAbsoluteAccuracy(Real accuracy)
+    {
+      absoluteAccuracy_ = toDouble(accuracy);
     }
 
     double AbsoluteAccuracy::absoluteAccuracy() const noexcept

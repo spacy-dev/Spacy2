@@ -1,5 +1,7 @@
 #include "terminationCriteria.hh"
 
+#include "Spacy/Algorithm/dampingFactor.hh"
+
 #include <cmath>
 
 namespace Spacy
@@ -24,9 +26,9 @@ namespace Spacy
           Mixin::Verbosity(verbose)
       {}
 
-      bool AffineCovariant::operator()(double nu, const Vector& x, const Vector& dx) const
+      bool AffineCovariant::operator()(DampingFactor nu, const Vector& x, const Vector& dx) const
       {
-        if(std::fabs(nu-1) > eps()) return false;
+        if(abs(nu()-1) > eps()) return false;
 
         auto norm_x = norm(x), norm_dx = norm(dx);
         if( norm_x == 0 && norm_dx == 0 ) return true;
@@ -46,7 +48,7 @@ namespace Spacy
           Mixin::Verbosity(verbose), F_(F)
       {}
 
-      bool AffineContravariant::operator()(double nu, const Vector& x, const Vector&) const
+      bool AffineContravariant::operator()(DampingFactor nu, const Vector& x, const Vector&) const
       {
         if( initialResidual < 0 )
         {
@@ -55,7 +57,7 @@ namespace Spacy
           return false;
         }
 
-        if(std::fabs(nu-1) > eps()) return false;
+        if(abs(nu()-1) > eps()) return false;
 
         if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << std::endl;
 

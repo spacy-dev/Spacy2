@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ADAPTER_FENICS_HASX_HH
-#define ALGORITHM_ADAPTER_FENICS_HASX_HH
+#ifndef SPACY_ADAPTER_FENICS_HASX_HH
+#define SPACY_ADAPTER_FENICS_HASX_HH
 
 #include "Spacy/Util/voider.hh"
 
@@ -41,5 +41,5 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_ADAPTER_FENICS_HASX_HH
+#endif // SPACY_ADAPTER_FENICS_HASX_HH
 

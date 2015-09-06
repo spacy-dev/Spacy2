@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_KASKADE_UTIL_HH
-#define ALGORITHM_KASKADE_UTIL_HH
+#ifndef SPACY_KASKADE_UTIL_HH
+#define SPACY_KASKADE_UTIL_HH
 
 #include <memory>
 #include <type_traits>
@@ -301,4 +301,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_KASKADE_UTIL_HH
+#endif // SPACY_KASKADE_UTIL_HH

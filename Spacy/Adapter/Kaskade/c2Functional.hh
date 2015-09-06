@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
-#define ALGORITHM_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
+#ifndef SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
+#define SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
 
 #include <memory>
 
@@ -29,7 +29,7 @@ namespace Spacy
      */
     template <class FunctionalDefinition>
     class C2Functional :
-        public C2FunctionalBase< C2Functional<FunctionalDefinition> > ,
+        public C2FunctionalBase ,
         public Mixin::NumberOfThreads
     {
     public:
@@ -61,7 +61,7 @@ namespace Spacy
       C2Functional(const FunctionalDefinition& f, const VectorSpace& domain,
                    int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
                    int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
-        : C2FunctionalBase< C2Functional<FunctionalDefinition> >(domain),
+        : C2FunctionalBase(domain),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
           assembler_(spaces_),
@@ -73,7 +73,7 @@ namespace Spacy
        * @param g functional to copy from
        */
       C2Functional(const C2Functional& g)
-        : C2FunctionalBase< C2Functional<FunctionalDefinition> >(g.domain()),
+        : C2FunctionalBase(g.domain()),
           NumberOfThreads(g),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),
@@ -133,13 +133,12 @@ namespace Spacy
       }
 
       /**
-       * @cond
-       * @brief Compute first directional derivative \f$f'(x):\ X \rightarrow X^* \f$.
+       * @brief Compute first directional derivative \f$f'(x) \in X^* \f$.
        *
-       * Actual implementation of d1 is provided in base class C2FunctionalBase.
-       * @see C2FunctionalBase
+       * @param x current iterate
+       * @return \f$f'(x)\f$
        */
-      ::Spacy::Vector d1_(const ::Spacy::Vector& x) const
+      ::Spacy::Vector d1(const ::Spacy::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&C2Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
@@ -151,12 +150,13 @@ namespace Spacy
       }
 
       /**
-       * @brief Compute second directional derivative \f$f''(x):\ X \rightarrow X^* \f$.
+       * @brief Compute second directional derivative \f$f''(x)dx\in X^* \f$.
        *
-       * Actual implementation of d2 is provided in base class C2FunctionalBase.
-       * @see C2FunctionalBase
+       * @param x current iterate
+       * @param dx perturbation
+       * @return \f$f''(x)dx\f$
        */
-      ::Spacy::Vector d2_(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
+      ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
       {
         primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
@@ -171,7 +171,6 @@ namespace Spacy
 
         return y;
       }
-      /// @endcond
 
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
@@ -327,4 +326,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
+#endif // SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH

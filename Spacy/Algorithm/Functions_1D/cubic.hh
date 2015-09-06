@@ -1,5 +1,7 @@
-#ifndef ALGORITHM_1D_MODEL_CUBIC_FUNCTION_HH
-#define ALGORITHM_1D_MODEL_CUBIC_FUNCTION_HH
+#ifndef SPACY_1D_MODEL_CUBIC_FUNCTION_HH
+#define SPACY_1D_MODEL_CUBIC_FUNCTION_HH
+
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -19,19 +21,19 @@ namespace Spacy
        * @param c coefficient of quadratic term
        * @param d coefficient of cubic term
        */
-      Cubic(double a, double b, double c, double d) noexcept;
+      Cubic(Real a, Real b, Real c, Real d) noexcept;
 
       /**
        * @brief Compute \f$q(t) = a + bt + ct^2 + dt^3 \f$.
        * @param t argument
        * @return \f$q(t) = a + bt + ct^2 + dt^3 \f$
        */
-      double operator()(double t) const noexcept;
+      Real operator()(Real t) const noexcept;
 
     private:
-      double a_, b_, c_, d_;
+      Real a_, b_, c_, d_;
     };
   }
 }
 
-#endif // ALGORITHM_1D_MODEL_CUBIC_FUNCTION_HH
+#endif // SPACY_1D_MODEL_CUBIC_FUNCTION_HH

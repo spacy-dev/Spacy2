@@ -1,11 +1,10 @@
-#ifndef ALGORITHM_OPERATOR_HH
-#define ALGORITHM_OPERATOR_HH
+#ifndef SPACY_OPERATOR_HH
+#define SPACY_OPERATOR_HH
 
 #include <boost/type_erasure/any.hpp>
 
 #include "Util/Concepts/operatorConcept.hh"
 #include "Util/Concepts/vectorConcept.hh"
-#include "Util/Exceptions/invalidArgumentException.hh"
 
 #include "vectorSpace.hh"
 
@@ -45,33 +44,26 @@ namespace Spacy
    * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
-  inline const auto& operator^(const LinearOperator& A, int k)
-  {
-    if( k == -1 ) return A.solver();
-    throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
-  }
+  const boost::type_erasure::any<Concepts::LinearSolverConcept>& operator^(const LinearOperator& A, int k);
 
   /**
    * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
-  inline const auto& operator^(LinearOperator&& A, int k)
-  {
-    if( k == -1 ) return std::move(A.solver());
-    throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
-  }
+  boost::type_erasure::any<Concepts::LinearSolverConcept> operator^(LinearOperator&& A, int k);
 
   /**
    * @ingroup SpacyGroup
-   * @brief Linearize \f$A\f$ at \f$x\f$.
+   * @brief For an operator \f$ A: X\to Y \f$, compute \f$A'\f$ at \f$x\in X\f$ as linear operator \f$ A'(x): X \to Y \f$.
+   *
+   * Equivalent to calling A.linearization(x).
+   *
    * @param A differentiable operator
    * @param x point of linearization
-   * @return LinearizedOperator(A,x,solver)
+   * @return \f$A'(x)\f$, i.e. A.linearization(x).
+   * @see @ref C1OperatorAnchor "C1Operator", @ref LinearOperatorAnchor "LinearOperator"
    */
-  inline auto linearize(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x)
-  {
-    return A.linearization(x);
-  }
+  LinearOperator d1(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x);
 }
 
-#endif // ALGORITHM_OPERATOR_HH
+#endif // SPACY_OPERATOR_HH

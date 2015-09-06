@@ -1,7 +1,8 @@
-#ifndef ALGORITHM_DERIVATIVE_HH
-#define ALGORITHM_DERIVATIVE_HH
+#ifndef SPACY_DERIVATIVE_HH
+#define SPACY_DERIVATIVE_HH
 
 #include "Spacy/functional.hh"
+#include "Spacy/hessian.hh"
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
 
@@ -15,16 +16,6 @@ namespace Spacy
    * @see @ref C2FunctionalAnchor "C2Functional", @ref C1OperatorAnchor "C1Operator"
    */
   C1Operator derivative(C2Functional f);
-
-  /**
-   * @ingroup SpacyGroup
-   * @brief Compute the linearization of a functional \f$ f: X\to \mathbb{R} \f$ at \f$x\in X\f$ as linear functional \f$ f'(x):X\to\mathbb{R} \f$.
-   * @param f twice differentiable functional
-   * @param x point of linearization
-   * @return \f$f'(x)\f$
-   * @see @ref C2FunctionalAnchor "C2Functional", @ref FunctionalAnchor "Functional"
-   */
-  Functional linearize(C2Functional f, Vector x);
 }
 
-#endif // ALGORITHM_DERIVATIVE_HH
+#endif // SPACY_DERIVATIVE_HH

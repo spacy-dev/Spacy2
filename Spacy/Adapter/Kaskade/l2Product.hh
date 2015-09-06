@@ -1,7 +1,9 @@
-#ifndef ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
-#define ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
+#ifndef SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
+#define SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
 
 #include "Spacy/vector.hh"
+#include "Spacy/vectorSpace.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 #include "Spacy/Util/cast.hh"
 
@@ -9,13 +11,13 @@ namespace Spacy
 {
   namespace Kaskade
   {
-    /// \cond
+    /// @cond
     template <class> class Vector;
-    /// \endcond
+    /// @endcond
 
     /**
      * @ingroup KaskadeGroup
-     * @brief l2 scalar product for Kaskade 7.
+     * @brief Generic l2 scalar product for Kaskade7. Based on the implementation of the dual pairing.
      */
     template <class Description>
     class l2Product
@@ -27,13 +29,13 @@ namespace Spacy
        * @param y vector
        * @return \f$(x,y) = \sum_i x_i y_i \f$.
        */
-      double operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const
+      Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const
       {
-        checkSpaceCompatibility(x,y);
-        return cast_ref< Vector<Description> >(x).impl() * cast_ref< Vector<Description> >(y).impl();
+        checkSpaceCompatibility(x.space(),y.space());
+        return x(y);
       }
     };
   }
 }
 
-#endif // ALGORITHM_ADAPTER_KASKADE_L2PRODUCT_HH
+#endif // SPACY_ADAPTER_KASKADE_L2PRODUCT_HH

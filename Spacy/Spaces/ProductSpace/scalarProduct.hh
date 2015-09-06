@@ -1,10 +1,13 @@
-#ifndef ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
-#define ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
+#ifndef SPACY_PRODUCT_SPACE_PRODUCT_HH
+#define SPACY_PRODUCT_SPACE_PRODUCT_HH
 
 #include "Spacy/vector.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
   namespace ProductSpace
   {
     /**
@@ -20,9 +23,9 @@ namespace Spacy
        * @param y vector (ProductSpace::Vector)
        * @return \f$(x,y) = \sum_i x_i y_i \f$.
        */
-      double operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
+      Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
     };
   }
 }
 
-#endif // ALGORITHM_PRODUCT_SPACE_PRODUCT_HH
+#endif // SPACY_PRODUCT_SPACE_PRODUCT_HH

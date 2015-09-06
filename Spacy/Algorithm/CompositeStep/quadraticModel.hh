@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
-#define ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
+#ifndef SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
+#define SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
 
 #include <cassert>
 
@@ -7,6 +7,7 @@
 #include "Spacy/scalarProduct.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/Algorithm/Functions_1D/quadratic.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -28,7 +29,7 @@ namespace Spacy
      *
      * @return \f$ q(t)=a+bt+ct^2\f$
      */
-    Functions_1D::Quadratic makeQuadraticModel(double nu,
+    Functions_1D::Quadratic makeQuadraticModel(Real nu,
                                       const Vector& dn, const Vector& dt,
                                       const C2Functional& L, const Vector& x);
 
@@ -40,7 +41,7 @@ namespace Spacy
      * @param dt tangential step
      * @return \f$ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 \f$
      */
-    Functions_1D::Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt);
+    Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
 
     /**
      * @ingroup CSGroup
@@ -55,19 +56,19 @@ namespace Spacy
        * @param squaredNorm quadratic model \f$q_2\f$ of a norm (generated with makeQuadraticNormModel(...))
        * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
        */
-      CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, double omega);
+      CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, Real omega);
 
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
        * @param t argument
        * @return \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$
        */
-      double operator()(double t) const;
+      Real operator()(Real t) const;
 
     private:
       Functions_1D::Quadratic quadraticModel_;
       Functions_1D::Quadratic squaredNorm_;
-      double omega_;
+      Real omega_;
     };
 
     /**
@@ -81,8 +82,8 @@ namespace Spacy
      * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
      * @return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega )
      */
-    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, double omega);
+    CubicModel makeCubicModel(Real nu, const Vector& dn, const Vector& dt,
+                              const C2Functional& L, const Vector& x, Real omega);
 
     /**
      * @ingroup CSGroup
@@ -94,15 +95,15 @@ namespace Spacy
      * @return \f$ x \in \mathrm{argmin}_{[a,b]} \f$
      */
     template <class Model>
-    double findMinimizer(const Model& f, double a, double b, double eps = 1e-2)
+    Real findMinimizer(const Model& f, Real a, Real b, Real eps = 1e-2)
     {
       assert(a<b);
       eps *= b-a;
-      double t = a;
-      double tmin = t;
-      double fmin = f(t);
+      Real t = a;
+      Real tmin = t;
+      Real fmin = f(t);
 
-      while( (t+=eps) < b)
+      while( (t+=eps) <= b)
       {
         if( f(t) < fmin )
         {
@@ -116,4 +117,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_ALGORITHM_COMPOSITE_STEP_QUADRATICMODEL_HH
+#endif // SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH

@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_GENERIC_EXCEPTION_HH
-#define ALGORITHM_GENERIC_EXCEPTION_HH
+#ifndef SPACY_GENERIC_EXCEPTION_HH
+#define SPACY_GENERIC_EXCEPTION_HH
 
 #include <string>
 #include <stdexcept>
@@ -25,4 +25,4 @@ namespace Spacy
   };
 }
 
-#endif // ALGORITHM_GENERIC_EXCEPTION_HH
+#endif // SPACY_GENERIC_EXCEPTION_HH

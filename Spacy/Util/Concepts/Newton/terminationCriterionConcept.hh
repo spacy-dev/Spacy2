@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH
-#define ALGORITHM_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH
+#ifndef SPACY_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH
+#define SPACY_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/callable.hpp>
@@ -9,6 +9,10 @@
 
 namespace Spacy
 {
+  /// @cond
+  class DampingFactor;
+  /// @endcond
+
   namespace Concepts
   {
     namespace Newton
@@ -31,7 +35,7 @@ namespace Spacy
        *   MyTerminationCriterion(MyTerminationCriterion&&);
        *
        *   // Check if termination criterion is satisfied.
-       *   bool operator()(double nu, const Vector& x, const Vector& dx) const;
+       *   bool operator()(DampingFactor nu, const Vector& x, const Vector& dx) const;
        * };
        * @endcode
        *
@@ -40,7 +44,8 @@ namespace Spacy
       using TerminationCriterionConcept =
       boost::mpl::vector<
         ::Spacy::Concepts::ConceptBase ,
-        boost::type_erasure::callable<bool(double, const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&,
+        boost::type_erasure::callable<bool(DampingFactor,
+                                           const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&,
                                            const boost::type_erasure::any< ::Spacy::Concepts::VectorConcept >&),
                                       const boost::type_erasure::_self>
       >;
@@ -48,4 +53,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH
+#endif // SPACY_CONCEPTS_NEWTON_TERMINATION_CRITERION_CONCEPT_HH

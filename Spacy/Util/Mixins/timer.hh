@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_UTIL_MIXIN_TIMER_HH
-#define ALGORITHM_UTIL_MIXIN_TIMER_HH
+#ifndef SPACY_UTIL_MIXIN_TIMER_HH
+#define SPACY_UTIL_MIXIN_TIMER_HH
 
 #include <chrono>
 
@@ -39,4 +39,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_UTIL_MIXIN_TIMER_HH
+#endif // SPACY_UTIL_MIXIN_TIMER_HH

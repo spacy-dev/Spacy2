@@ -1,5 +1,7 @@
-#ifndef ALGORITHM_UTIL_MIXIN_CONTRACTION_RATE_HH
-#define ALGORITHM_UTIL_MIXIN_CONTRACTION_RATE_HH
+#ifndef SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH
+#define SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH
+
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -18,57 +20,57 @@ namespace Spacy
        * @param relaxedDesiredContraction relaxed contraction rate
        * @param maximalContraction maximal allowed contraction rate
        */
-      explicit ContractionRate(double desiredContraction = 0.25,
-                               double relaxedDesiredContraction = 0.5,
-                               double maximalContraction = 0.75) noexcept;
+      explicit ContractionRate(Real desiredContraction = 0.25,
+                               Real relaxedDesiredContraction = 0.5,
+                               Real maximalContraction = 0.75) noexcept;
 
       /**
        * @brief Set contraction rate.
        * @param contraction monitored contraction rate
        */
-      void setContraction(double contraction) noexcept;
+      void setContraction(Real contraction) noexcept;
 
       /**
        * @brief Set desired contraction rate.
        * @param desiredContraction desired contraction rate
        */
-      void setDesiredContraction(double desiredContraction) noexcept;
+      void setDesiredContraction(Real desiredContraction) noexcept;
 
       /**
        * @brief Set relaxed desired contraction rate.
        * @param relaxedDesiredContraction relaxed contraction rate
        */
-      void setRelaxedDesiredContraction(double relaxedDesiredContraction) noexcept;
+      void setRelaxedDesiredContraction(Real relaxedDesiredContraction) noexcept;
 
       /**
        * @brief Set maximal contraction rate.
        * @param maximalContraction maximal allowed contraction rate
        */
-      void setMaximalContraction(double maximalContraction) noexcept;
+      void setMaximalContraction(Real maximalContraction) noexcept;
 
       /**
        * @brief Access contraction rate.
        * @return monitored contraction rate
        */
-      double contraction() const noexcept;
+      Real contraction() const noexcept;
 
       /**
        * @brief Access desired contraction rate.
        * @return desired contraction rate
        */
-      double desiredContraction() const noexcept;
+      Real desiredContraction() const noexcept;
 
       /**
        * @brief Get relaxed desired contraction rate.
        * @return relaxed contraction rate
        */
-      double relaxedDesiredContraction() const noexcept;
+      Real relaxedDesiredContraction() const noexcept;
 
       /**
        * @brief Get desired contraction rate.
        * @return maximal allowed contraction rate
        */
-      double maximalContraction() const noexcept;
+      Real maximalContraction() const noexcept;
 
       /**
        * @brief Check if contraction is admissible.
@@ -77,12 +79,12 @@ namespace Spacy
       bool admissibleContraction() const noexcept;
 
     private:
-      double contraction_ = 1;
-      double desiredContraction_;
-      double relaxedDesiredContraction_;
-      double maximalContraction_;
+      Real contraction_ = 1;
+      Real desiredContraction_;
+      Real relaxedDesiredContraction_;
+      Real maximalContraction_;
     };
   }
 }
 
-#endif // ALGORITHM_UTIL_MIXIN_CONTRACTION_RATE_HH
+#endif // SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH

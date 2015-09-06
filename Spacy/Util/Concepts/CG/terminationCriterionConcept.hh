@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH
-#define ALGORITHM_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH
+#ifndef SPACY_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH
+#define SPACY_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH
 
 #include <boost/mpl/vector.hpp>
 #include <boost/type_erasure/callable.hpp>
@@ -26,6 +26,10 @@ BOOST_TYPE_ERASURE_MEMBER( (has_cg_terminate_setMinimalAccuracy) , setMinimalAcc
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  /// @endcond
+
   namespace Concepts
   {
     namespace CG
@@ -54,7 +58,7 @@ namespace Spacy
        *   void clear();
        *
        *   // Provide algorithmic quantities required to evaluate termination criteria.
-       *   void update(double stepLength, double qAq, double qPq, double rPINVr)
+       *   void update(Real stepLength, Real qAq, Real qPq, Real rPINVr)
        *
        *   // Checks if the step length of the computed step is below the maximal attainable accuracy.
        *   bool vanishingStep() const;
@@ -83,7 +87,7 @@ namespace Spacy
         ConceptBase ,
         boost::type_erasure::callable<bool(), const boost::type_erasure::_self> ,
         has_cg_terminate_clear<void()> ,
-        has_cg_terminate_update<void(double,double,double,double)> ,
+        has_cg_terminate_update<void(Real,Real,Real,Real)> ,
         has_cg_terminate_vanishingStep<bool(), const boost::type_erasure::_self> ,
         has_cg_terminate_minimalDecreaseAchieved<bool(), const boost::type_erasure::_self> ,
         has_cg_terminate_setEps<void(double)> ,
@@ -95,4 +99,4 @@ namespace Spacy
   }
 }
 
-#endif // ALGORITHM_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH
+#endif // SPACY_CONCEPTS_CG_TERMINATION_CRITERION_CONCEPT_HH

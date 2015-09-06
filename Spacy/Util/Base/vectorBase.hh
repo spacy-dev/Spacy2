@@ -1,39 +1,14 @@
-#ifndef ALGORITHM_VECTOR_BASE_HH
-#define ALGORITHM_VECTOR_BASE_HH
+#ifndef SPACY_VECTOR_BASE_HH
+#define SPACY_VECTOR_BASE_HH
 
 #include "Spacy/Util/Mixins/eps.hh"
-#include "Spacy/Util/Mixins/impl.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
-#include "Spacy/vectorSpace.hh"
 
 namespace Spacy
 {
   /// @cond
-  template <class V>
-  void checkSpaceCompatibility(const V& x, const V& y);
+  class VectorSpace;
+  void checkSpaceCompatibility(const VectorSpace* x, const VectorSpace* y);
   /// @endcond
-
-  /**
-   * @brief Base class for vector implementations.
-   *
-   * Provides access to the underlying vector space and related operations.
-   * Stores an object of type Value. This object holds the employed vector implementation.
-   * @see Real::Vector
-   */
-  template <class Derived, class Value = void>
-  class VectorBase :
-      public VectorBase<Derived> , public Mixin::Impl<Value>
-  {
-  public:
-    /**
-     * @brief Constructor.
-     * @param space underlying vector space
-     * @param value to be stored in Mixin::Impl<Value>
-     */
-    VectorBase( const VectorSpace& space , Value value )
-      : VectorBase<Derived>(space) , Mixin::Impl<Value>(std::move(value))
-    {}
-  };
 
 
   /**
@@ -43,62 +18,44 @@ namespace Spacy
    * Provides access to the underlying vector space and related operations.
    * @see Kaskade::Vector, Fenics::Vector
    */
-  template <class Derived>
-  class VectorBase<Derived,void>
+  class VectorBase
   {
   public:
     /**
      * @brief Constructor.
      * @param space underlying vector space
      */
-    VectorBase( const VectorSpace& space )
-      : space_(space)
-    {}
+    VectorBase( const VectorSpace& space );
 
     /**
      * @brief Copy constructor.
      * @param y object to copy from
      */
-    VectorBase(const VectorBase& y)
-      : space_(y.space_)
-    {}
+    VectorBase(const VectorBase& y);
 
     /**
      * @brief Move constructor.
      * @param y object to move from
      */
-    VectorBase(VectorBase&& y) noexcept
-      : space_(y.space_)
-    {}
+    VectorBase(VectorBase&& y) noexcept;
 
     /**
      * @brief Copy assignment.
      * @param y object to copy from
      */
-    VectorBase& operator=(const VectorBase& y)
-    {
-      checkSpaceCompatibility(*this,y);
-      return *this;
-    }
+    VectorBase& operator=(const VectorBase& y);
 
     /**
      * @brief Move assignment.
      * @param y object to move from
      */
-    VectorBase& operator=(VectorBase&& y) noexcept
-    {
-      checkSpaceCompatibility(*this,y);
-      return *this;
-    }
+    VectorBase& operator=(VectorBase&& y) noexcept;
 
     /**
      * @brief Access underlying vector space.
      * @return underlying vector space
      */
-    const VectorSpace* space() const
-    {
-      return &space_;
-    }
+    const VectorSpace* space() const;
 
   private:
     const VectorSpace& space_;
@@ -123,7 +80,7 @@ namespace Spacy
      */
     Derived& operator+=(const Derived& y)
     {
-      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
       static_cast<Derived*>(this)->impl() += y.impl();
       return static_cast<Derived&>(*this);
     }
@@ -135,7 +92,7 @@ namespace Spacy
      */
     Derived& operator-=(const Derived& y)
     {
-      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
       static_cast<Derived*>(this)->impl() -= y.impl();
       return static_cast<Derived&>(*this);
     }
@@ -166,14 +123,15 @@ namespace Spacy
      * @brief Comparison operator \f$ x==y\f$.
      * @param y vector to compare with this vector
      * @return \f$ x==y\f$.
-     */    bool operator==(const Derived& y) const
+     */
+    bool operator==(const Derived& y) const
     {
-      checkSpaceCompatibility(static_cast<const Derived&>(*this),y);
+      checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
-      return dx(dx) < eps()*eps();
+      return toDouble( dx(dx) ) < eps()*eps();
     }
   };
 }
 
-#endif // ALGORITHM_VECTOR_BASE_HH
+#endif // SPACY_VECTOR_BASE_HH

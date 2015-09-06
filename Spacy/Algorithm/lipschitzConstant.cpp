@@ -4,37 +4,42 @@
 
 namespace Spacy
 {
-  LipschitzConstant::LipschitzConstant(double initialOmega)
+  LipschitzConstant::LipschitzConstant(Real initialOmega)
     : omega_(initialOmega)
   {}
 
-  LipschitzConstant& LipschitzConstant::operator=(double newOmega)
+  LipschitzConstant& LipschitzConstant::operator=(Real newOmega)
   {
     previousOmega_ = omega_;
     if( newOmega < 0 ) omega_ = minFactor_*previousOmega_;
     else omega_ = newOmega;
 
-    omega_ = std::max(omega_,eps());
-    omega_ = std::min(omega_,previousOmega_*maxFactor_);
+    omega_ = max(omega_,eps());
+    omega_ = min(omega_,previousOmega_*maxFactor_);
     return *this;
   }
 
-  LipschitzConstant::operator double() const
+  LipschitzConstant::operator Real() const
   {
     return omega_;
   }
 
-  double LipschitzConstant::previous() const
+  Real LipschitzConstant::operator()() const
+  {
+    return omega_;
+  }
+
+  Real LipschitzConstant::previous() const
   {
     return previousOmega_;
   }
 
-  void LipschitzConstant::setMaxFactor(double factor)
+  void LipschitzConstant::setMaxFactor(Real factor)
   {
     maxFactor_ = factor;
   }
 
-  void LipschitzConstant::setMinFactor(double factor)
+  void LipschitzConstant::setMinFactor(Real factor)
   {
     minFactor_ = factor;
   }
