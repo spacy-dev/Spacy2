@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lubkoll/FSA.svg?branch=master)](https://travis-ci.org/lubkoll/FSA/builds)
+[![Build Status](https://travis-ci.org/lubkoll/Spacy.svg?branch=master)](https://travis-ci.org/lubkoll/Spacy/builds)
 
 # The Spacy Library - Vector Space Algorithms
 
