@@ -10,6 +10,10 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libboost-dev libboost-test-dev libboost-program-options-dev
   - dpkg -S /usr/include/boost/version.hpp
+  - sudo add-apt-repository ppa:fenics-packages/fenics
+  - sudo apt-get update
+  - sudo apt-get -y install fenics
+  - sudo apt-get -y dist-upgrade
 install:
   - sudo pip install cpp-coveralls
 script:
