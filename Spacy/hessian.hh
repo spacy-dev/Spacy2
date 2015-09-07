@@ -44,7 +44,7 @@ namespace Spacy
      * @brief Access linear solver.
      * @return linear solver representing \f$(f''(x))^{-1}\f$
      */
-    const LinearSolver& solver() const;
+    LinearSolver solver() const;
 
   private:
     C2Functional F_;

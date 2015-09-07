@@ -129,7 +129,7 @@ namespace Spacy
       checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
-      return toDouble( dx(dx) ) < eps()*eps();
+      return dx(dx) < eps()*eps();
     }
   };
 }

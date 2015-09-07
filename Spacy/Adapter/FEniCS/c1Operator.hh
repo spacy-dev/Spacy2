@@ -9,9 +9,14 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 
+#include "linearOperator.hh"
 #include "luSolver.hh"
 #include "util.hh"
 #include "assignXIfPresent.hh"
+#include "vectorSpace.hh"
+
+#include "operatorSpace.hh"
+#include "Spacy/Spaces/RealSpace/vectorSpace.hh"
 
 namespace Spacy
 {
@@ -40,7 +45,11 @@ namespace Spacy
         : OperatorBase( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
-          bcs_( bcs )
+          bcs_( bcs ),
+          operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(domain,range,J.function_space(0)) , [](const Spacy::Vector& v)
+          {
+            return dolfin::Matrix( cast_ref<LinearOperator>(v).impl()).norm("frobenius");
+          } , true ) )
       {
         copyCoefficients(F,F_);
         copyCoefficients(J,J_);
@@ -54,14 +63,20 @@ namespace Spacy
        * @param range range space \f$Y\f$
        */
       C1Operator(const ResidualForm& F, const JacobianForm& J, VectorSpace& domain, VectorSpace& range)
-        : OperatorBase( domain , range ),
-          F_( F.function_space(0) ),
-          J_( J.function_space(0) , J.function_space(1) ),
-          bcs_()
-      {
-        copyCoefficients(F,F_);
-        copyCoefficients(J,J_);
-      }
+        : C1Operator(F,J,{},domain,range)
+      {}
+//        : OperatorBase( domain , range ),
+//          F_( F.function_space(0) ),
+//          J_( J.function_space(0) , J.function_space(1) ),
+//          bcs_() ,
+//          operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(domain,range,*J.function_space(0)) , [](const Spacy::Vector& v)
+//          {
+//            return dolfin::Matrix( cast_ref<LinearOperator>(v).impl()).norm("frobenius");
+//          } , true ) )
+//      {
+//        copyCoefficients(F,F_);
+//        copyCoefficients(J,J_);
+//      }
 
       /**
        * @brief Move constructor.
@@ -73,7 +88,8 @@ namespace Spacy
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( std::move(other.bcs_) ) ,
           A_( std::move(other.A_) ) ,
-          b_( std::move(other.b_) )
+          b_( std::move(other.b_) ) ,
+          operatorSpace_( std::move(other.operatorSpace_) )
       {
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -88,8 +104,9 @@ namespace Spacy
           F_( other.F_.function_space(0) ) ,
           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
           bcs_( other.bcs_ ) ,
-          A_( (other.A_ != nullptr) ? other.A_->copy() : nullptr ) ,
-          b_( (other.b_ != nullptr) ? other.b_->copy() : nullptr )
+          A_( (other.A_ != nullptr) ? /*other.A_->copy()*/std::make_shared<dolfin::Matrix>(*other.A_) : nullptr ) ,
+          b_( (other.b_ != nullptr) ? other.b_->copy() : nullptr ) ,
+          operatorSpace_(other.operatorSpace_)
       {
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -105,8 +122,9 @@ namespace Spacy
         F_ = other.F_;
         J_ = other.J_;
         bcs_ = other.bcs_;
-        A_ = (other.A_ != nullptr) ? other.A_->copy() : nullptr;
+        A_ = (other.A_ != nullptr) ? /*other.A_->copy()*/std::make_shared<dolfin::Matrix>(*other.A_) : nullptr;
         b_ = (other.b_ != nullptr) ? other.b_->copy() : nullptr;
+        operatorSpace_ = other.operatorSpace_;
 
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -124,6 +142,7 @@ namespace Spacy
         bcs_ = std::move(other.bcs_);
         A_ = std::move(other.A_);
         b_ = std::move(other.b_);
+        operatorSpace_ = std::move(other.operatorSpace_);
 
         copyCoefficients(other.F_,F_);
         copyCoefficients(other.J_,J_);
@@ -151,7 +170,7 @@ namespace Spacy
       {
         primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
 
-        auto dx_ = dolfin::Function( J_.function_space(0) );
+        auto dx_ = dolfin::Function( cast_ref<VectorCreator>(domain().impl()).impl() );
         copy(dx,dx_);
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
@@ -172,7 +191,10 @@ namespace Spacy
       {
         primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
         assert(A_ != nullptr);
-        return LinearizedOperator( *this , x , LUSolver( *A_ , *F_.function_space(0) , range() , domain() ) );
+        assert(operatorSpace_ != nullptr);
+
+        return LinearOperator{ A_->copy() , *operatorSpace_ , J_.function_space(0) };
+//        return LinearizedOperator( *this , x , LUSolver( *A_ , range() , domain() ) );
       }
 
     private:
@@ -203,13 +225,14 @@ namespace Spacy
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
         assign_x_if_present(J_,x_);
-        A_ = x_.vector()->factory().create_matrix();
+        auto A = x_.vector()->factory().create_matrix();
 
         dolfin::Assembler assembler;
-        assembler.assemble(*A_, J_);
+        assembler.assemble(*A, J_);
 
         for(const auto& bc : bcs_)
-          bc->apply( *A_ , *x_.vector() , *x_.vector() );
+          bc->apply( *A , *x_.vector() , *x_.vector() );
+        A_ = std::make_shared<dolfin::Matrix>(*A);
 
         oldX_J = x;
       }
@@ -217,9 +240,10 @@ namespace Spacy
       mutable ResidualForm F_;
       mutable JacobianForm J_;
       std::vector<const dolfin::DirichletBC*> bcs_ = {};
-      mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
+      mutable std::shared_ptr<dolfin::Matrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
       mutable ::Spacy::Vector oldX_F = {}, oldX_J = {};
+      std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
 

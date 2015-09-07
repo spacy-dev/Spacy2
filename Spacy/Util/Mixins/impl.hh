@@ -20,7 +20,9 @@ namespace Spacy
     {
     public:
       /// Default constructor.
-      Impl() = default;
+      Impl()
+        : impl_{}
+      {}
 
       /**
        * @brief Constructor.

@@ -38,12 +38,13 @@ namespace Spacy
   class VectorSpace : public Mixin::Impl<VectorCreator>
   {
   public:
+    VectorSpace() = default;
     /**
      * @brief Construct function space from @ref VectorCreatorAnchor "VectorCreator" and @ref NormAnchor "Norm".
      * @param impl object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
      * @param norm object satisfying the @ref NormConceptAnchor "NormConcept"
      */
-    VectorSpace(VectorCreator impl, Norm norm);
+    VectorSpace(VectorCreator impl, Norm norm, bool defaultIndex = false);
 
     /**
      * @brief Move constructor.
@@ -135,7 +136,7 @@ namespace Spacy
     bool isAdmissible(const Vector& x) const;
 
   private:
-    Norm norm_;
+    Norm norm_ = {};
     ScalarProduct sp_ = {};
     unsigned index_ = Detail::spaceIndex++;
     std::vector<unsigned> primalSpaces_ = {}, dualSpaces_ = {}; ///< primal and dual spaces with respect to this space
@@ -159,7 +160,7 @@ namespace Spacy
    * @param scalarProduct scalar product satisfying \ref ScalarProductConceptAnchor "ScalarProductConcept"
    * @return hilbert space
    */
-  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct);
+  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex = false);
 
   /**
    * @ingroup SpacyGroup

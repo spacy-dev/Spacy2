@@ -12,12 +12,13 @@ namespace Spacy
      * @brief Construct space of real numbers.
      * @return ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( [](const Spacy* space){ return Vector{*space}; } , ScalarProduct{} )"
      */
-    VectorSpace makeHilbertSpace();
+    VectorSpace makeHilbertSpace(bool defaultIndex = false);
   }
 
   namespace StaticDetail
   {
-    static VectorSpace R = RealSpace::makeHilbertSpace();
+    static VectorSpace R = RealSpace::makeHilbertSpace(true);
+//    static VectorSpace M{};
   }
 }
 

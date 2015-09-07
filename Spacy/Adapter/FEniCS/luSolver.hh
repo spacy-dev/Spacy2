@@ -31,7 +31,7 @@ namespace Spacy
        * @param symmetric true if A is symmetric, else false
        * @param solverName name of the solver, i.e. "default", "mumps", "petsc" or "umfpack".
        */
-      LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& space,
+      LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, std::shared_ptr<const dolfin::FunctionSpace> space,
                const VectorSpace& domain , const VectorSpace& range,
                bool symmetric = false, const std::string& solverName = "mumps");
 
@@ -45,7 +45,7 @@ namespace Spacy
 
     private:
       mutable dolfin::LUSolver solver_;
-      const dolfin::FunctionSpace& space_;
+      std::shared_ptr<const dolfin::FunctionSpace> space_;
     };
 
     /**

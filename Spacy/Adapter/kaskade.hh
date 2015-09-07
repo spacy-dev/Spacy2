@@ -7,6 +7,7 @@
 #include "Kaskade/lagrangeCGSolver.hh"
 #include "Kaskade/linearOperator.hh"
 #include "Kaskade/operator.hh"
+#include "Kaskade/operatorSpace.hh"
 #include "Kaskade/c1Operator.hh"
 #include "Kaskade/vector.hh"
 #include "Kaskade/vectorSpace.hh"

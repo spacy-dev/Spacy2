@@ -18,6 +18,7 @@ namespace Spacy
     template <class AnsatzVariableSetDescription, class TestVariableSetDescription>
     class LinearOperatorCreator
     {
+      using Spaces = typename AnsatzVariableSetDescription::Spaces;
       using Scalar = typename AnsatzVariableSetDescription::Scalar;
       using Domain = typename AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
       using Range = typename TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
@@ -30,7 +31,7 @@ namespace Spacy
           range_(range)
       {}
 
-      ::Spacy::Vector operator()(const VectorSpace* space)
+      LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription> operator()(const VectorSpace* space) const
       {
         return LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription>{ OperatorImpl{ Matrix{} } , *space };
       }

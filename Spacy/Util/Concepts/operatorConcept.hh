@@ -121,7 +121,8 @@ namespace Spacy
     using LinearOperatorConcept =
     boost::mpl::vector<
       OperatorConcept ,
-      has_solver<const boost::type_erasure::any<LinearSolverConcept>&(),
+      VectorConcept ,
+      has_solver<boost::type_erasure::any<LinearSolverConcept>(),
                  const boost::type_erasure::_self>
     >;
 

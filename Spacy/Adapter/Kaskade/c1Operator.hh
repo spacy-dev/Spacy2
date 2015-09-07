@@ -5,12 +5,17 @@
 
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
+#include "linalg/triplet.hh"
 
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 
 #include "Spacy/linearizedOperator.hh"
+#include "Spacy/vector.hh"
+#include "Spacy/vectorSpace.hh"
 #include "directSolver.hh"
+#include "linearOperator.hh"
+#include "operatorSpace.hh"
 
 namespace Spacy
 {
@@ -40,6 +45,7 @@ namespace Spacy
       using Range = typename Assembler::TestVariableSetDescription::template CoefficientVectorRepresentation<>::type;
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
+      using Linearization = LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription>;
 
     public:
       /**
@@ -62,7 +68,20 @@ namespace Spacy
           f_(f),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain) ),
           assembler_(spaces_),
-          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
+          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
+          operatorSpace_( std::make_shared<VectorSpace>(
+                            LinearOperatorCreator<AnsatzVariableSetDescription,TestVariableSetDescription>(domain,range) ,
+                            [](const ::Spacy::Vector& v)
+          {
+            using std::begin;
+            using std::end;
+            const auto& m = cast_ref<Linearization>(v).impl();
+            auto iend = end(m);
+            auto result = 0.;
+            for(auto iter = begin(m); iter!=iend; ++iter)
+              result += (*iter) * (*iter);
+            return Real{sqrt(result)};
+          } , true ) )
       {}
 
       /**
@@ -78,7 +97,8 @@ namespace Spacy
           old_X_A_(B.old_X_A_),
           old_X_dA_(B.old_X_dA_),
           onlyLowerTriangle_(B.onlyLowerTriangle_),
-          rbegin_(B.rbegin_), rend_(B.rend_), cbegin_(B.cbegin_), cend_(B.cend_)
+          rbegin_(B.rbegin_), rend_(B.rend_), cbegin_(B.cbegin_), cend_(B.cend_),
+          operatorSpace_(B.operatorSpace_)
       {}
 
       /**
@@ -99,6 +119,7 @@ namespace Spacy
         rend_ = B.rend_;
         cbegin_ = B.cbegin_;
         cend_ = B.cend_;
+        operatorSpace_ = B.operatorSpace_;
       }
 
       /**
@@ -156,10 +177,12 @@ namespace Spacy
        * @param x point of linearization
        * @see LinearizedOperator, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const
+      auto linearization(const ::Spacy::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
-        return LinearizedOperator( *this , x , solverCreator_(*this) );
+
+        return Linearization(A_,*operatorSpace_,solverCreator_);
+        //return LinearizedOperator( *this , x , solverCreator_(*this) );
       }
 
       /**
@@ -180,14 +203,6 @@ namespace Spacy
       }
 
       /**
-       * @brief Access boost::fusion::vector of pointers to spaces.
-       */
-      const Spaces& spaces() const noexcept
-      {
-        return spaces_;
-      }
-
-      /**
        * @brief Access onlyLowerTriangle flag.
        * @return true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false
        */
@@ -200,7 +215,7 @@ namespace Spacy
        * @brief Change solver creator.
        * @param f function/functor for the creation of a linear solver
        */
-      void setSolverCreator(std::function<LinearSolver(const C1Operator&)> f)
+      void setSolverCreator(std::function<LinearSolver(const Linearization&)> f)
       {
         solverCreator_ = std::move(f);
       }
@@ -244,15 +259,16 @@ namespace Spacy
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=OperatorDefinition::TestVars::noOfVariables;
-      std::function<LinearSolver(const C1Operator&)> solverCreator_ = [](const C1Operator& M)
+      std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& M)
         {
-            return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() , M.spaces(),
+            return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() ,
                                                                                               M.range() ,
                                                                                               M.domain() ,
                                                                                               DirectType::MUMPS ,
                                                                                               MatrixProperties::GENERAL );
 
         };
+      std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
     /**

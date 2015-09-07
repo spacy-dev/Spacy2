@@ -44,7 +44,7 @@ namespace Spacy
    * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
-  const boost::type_erasure::any<Concepts::LinearSolverConcept>& operator^(const LinearOperator& A, int k);
+  boost::type_erasure::any<Concepts::LinearSolverConcept> operator^(const LinearOperator& A, int k);
 
   /**
    * \ingroup SpacyGroup

@@ -26,7 +26,7 @@ namespace Spacy
     return F_.d2(x_,dx);
   }
 
-  const LinearSolver& Hessian::solver() const
+  LinearSolver Hessian::solver() const
   {
     if( is_empty(solver_) ) throw std::runtime_error("Trying to access solver that has not been set in Hessian.");
     return solver_;

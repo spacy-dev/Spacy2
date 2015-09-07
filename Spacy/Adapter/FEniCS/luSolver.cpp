@@ -26,7 +26,7 @@ namespace Spacy
 
   namespace FEniCS
   {
-    LUSolver::LUSolver(const dolfin::GenericMatrix& A, const dolfin::FunctionSpace& space,
+    LUSolver::LUSolver(std::shared_ptr<dolfin::GenericMatrix> A, std::shared_ptr<const dolfin::FunctionSpace> space,
                        const VectorSpace& domain , const VectorSpace& range,
                        bool symmetric, const std::string& solverName)
       : OperatorBase(domain,range),
@@ -36,13 +36,13 @@ namespace Spacy
       auto parameters = default_parameters();
       solver_.parameters.update(parameters("lu_solver"));
       solver_.parameters["symmetric"] = symmetric;
-      solver_.set_operator(A.copy());
+      solver_.set_operator(A);
     }
 
     ::Spacy::Vector LUSolver::operator()(const ::Spacy::Vector& x) const
     {
       // Solve linear system
-      dolfin::Function x_(space_);
+      auto x_ = dolfin::Function( space_ );
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve( *y_, *x_.vector() );

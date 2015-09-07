@@ -23,7 +23,7 @@ namespace Spacy
     return A_.d1(x_,dx);
   }
 
-  const LinearSolver& LinearizedOperator::solver() const
+  LinearSolver LinearizedOperator::solver() const
   {
     if( is_empty(solver_) ) throw std::runtime_error("Trying to access solver that has not been set in LinearizedOperator.");
     return solver_;

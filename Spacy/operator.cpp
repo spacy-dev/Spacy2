@@ -7,7 +7,7 @@
 
 namespace Spacy
 {
-  const LinearSolver& operator^(const LinearOperator& A, int k)
+  LinearSolver operator^(const LinearOperator& A, int k)
   {
     if( k == -1 ) return A.solver();
     throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");

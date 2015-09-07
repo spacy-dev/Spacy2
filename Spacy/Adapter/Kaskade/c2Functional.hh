@@ -5,6 +5,7 @@
 
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
+#include "linalg/triplet.hh"
 
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
@@ -16,6 +17,8 @@
 #include "directSolver.hh"
 #include "vectorSpace.hh"
 #include "vector.hh"
+#include "operatorSpace.hh"
+#include "linearOperator.hh"
 
 namespace Spacy
 {
@@ -46,6 +49,8 @@ namespace Spacy
       /// operator for the description of the second derivative
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVector,CoefficientVector>;
 
+      using Linearization = LinearOperator<VariableSetDescription,VariableSetDescription>;
+
       /**
        * @brief Construct a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
        * @param f operator definition from %Kaskade 7
@@ -65,8 +70,22 @@ namespace Spacy
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
           assembler_(spaces_),
-          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend)
+          rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
+          operatorSpace_( std::make_shared<VectorSpace>(
+                            LinearOperatorCreator<VariableSetDescription,VariableSetDescription>(domain,domain.dualSpace()) ,
+                            [](const ::Spacy::Vector& v)
+          {
+            using std::begin;
+            using std::end;
+            const auto& m = cast_ref<Linearization>(v).impl();
+            auto iend = end(m);
+            auto result = 0.;
+            for(auto iter = begin(m); iter!=iend; ++iter)
+              result += (*iter) * (*iter);
+            return Real{sqrt(result)};
+          } , true ) )
       {}
+
 
       /**
        * @brief Copy constructor.
@@ -83,7 +102,8 @@ namespace Spacy
           old_X_ddf_(g.old_X_ddf_),
           onlyLowerTriangle_(g.onlyLowerTriangle_),
           rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_),
-          solverCreator_(g.solverCreator_)
+          solverCreator_(g.solverCreator_),
+          operatorSpace_(g.operatorSpace_)
       {}
 
       /**
@@ -106,6 +126,7 @@ namespace Spacy
         cbegin_ = g.cbegin_;
         cend_ = g.cend_;
         solverCreator_ = g.solverCreator_;
+        operatorSpace_ = g.operatorSpace_;
       }
 
       /**
@@ -177,11 +198,12 @@ namespace Spacy
        * @param x point of linearization
        * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      Hessian hessian(const ::Spacy::Vector& x) const
+      auto hessian(const ::Spacy::Vector& x) const
       {
         primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
 
-        return Hessian( *this , x , solverCreator_(*this) );
+        return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
+        //return Hessian( *this , x , solverCreator_(*this) );
       }
 
       /**
@@ -291,15 +313,16 @@ namespace Spacy
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;
-      std::function<LinearSolver(const C2Functional&)> solverCreator_ = [](const C2Functional& f)
+      std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& f)
         {
-            return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() , f.spaces(),
-                                                                                     f.domain().dualSpace() ,
+            return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() ,
+                                                                                     f.range() ,
                                                                                      f.domain() ,
                                                                                      DirectType::MUMPS ,
                                                                                      MatrixProperties::GENERAL );
 
         };
+      std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
     /**

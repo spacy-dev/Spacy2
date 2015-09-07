@@ -7,6 +7,7 @@
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "util.hh"
+#include "vectorSpace.hh"
 
 namespace Spacy
 {
@@ -26,6 +27,7 @@ namespace Spacy
       using Domain = typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type;
       using Range = typename TestVariableDescription::template CoefficientVectorRepresentation<>::type;
     public:
+      DirectSolver() = delete;
       /**
        * @brief Constructor.
        * @param A %Kaskade operator (i.e., %AssembledGalerkinOperator or %MatrixRepresentedOperator)
@@ -35,12 +37,11 @@ namespace Spacy
        * @param directSolver solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU)
        * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
        */
-      DirectSolver(KaskadeOperator A, const Spaces& spaces,
-                   const VectorSpace& domain, const VectorSpace& range,
+      DirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
                    DirectType directSolver = DirectType::MUMPS, MatrixProperties property = MatrixProperties::GENERAL )
         : OperatorBase(domain,range),
           A_(std::move(A)),
-          spaces_(spaces),
+          spaces_( extractSpaces<AnsatzVariableDescription>(domain) ),
           directSolver_(directSolver),
           property_(property)
       {}
@@ -80,13 +81,12 @@ namespace Spacy
      * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
      * @return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>( A , spaces , domain , range , directSolver , property )
      */
-    template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator, class Spaces>
-    auto makeDirectSolver(KaskadeOperator A, const Spaces& spaces,
-                          const VectorSpace& domain, const VectorSpace& range,
+    template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator>
+    auto makeDirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
                           DirectType directSolver = DirectType::MUMPS, MatrixProperties property = MatrixProperties::GENERAL )
     {
       return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
-          ( std::move(A) , spaces , domain , range , directSolver , property );
+          ( std::move(A) , domain , range , directSolver , property );
     }
 
   }

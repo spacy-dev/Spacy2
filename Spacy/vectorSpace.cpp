@@ -23,7 +23,7 @@ namespace Spacy
         : sp_(std::move(sp))
       {}
 
-      Real operator()(const boost::type_erasure::any<Concepts::VectorConcept>& x) const
+      Real operator()(const Vector& x) const
       {
         return sqrt(sp_(x,x));
       }
@@ -34,10 +34,12 @@ namespace Spacy
   }
 
 
-  VectorSpace::VectorSpace(VectorCreator impl, Norm norm)
+  VectorSpace::VectorSpace(VectorCreator impl, Norm norm, bool defaultIndex)
     : Mixin::Impl<VectorCreator>{std::move(impl)},
       norm_{norm}
-  {}
+  {
+    if(defaultIndex) index_ = 0;
+  }
 
   VectorSpace::VectorSpace(VectorSpace&& V)
     : Mixin::Impl<VectorCreator>{V.impl()} ,
@@ -146,9 +148,9 @@ namespace Spacy
     return VectorSpace{std::move(creator),std::move(norm)};
   }
 
-  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct)
+  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex)
   {
-    auto V = VectorSpace{std::move(creator),HilbertSpaceNorm{scalarProduct}};
+    auto V = VectorSpace{std::move(creator),HilbertSpaceNorm{scalarProduct},defaultIndex};
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);

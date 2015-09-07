@@ -42,7 +42,7 @@ namespace Spacy
      * @brief Access linear solver.
      * @return linear solver representing \f$(A'(x))^{-1}\f$
      */
-    const LinearSolver& solver() const;
+    LinearSolver solver() const;
 
     // Get linear solver (representing \f$(A'(x))^{-*}\f$).
     //std::unique_ptr<AbstractLinearSolver> adjointSolver() const final override;
