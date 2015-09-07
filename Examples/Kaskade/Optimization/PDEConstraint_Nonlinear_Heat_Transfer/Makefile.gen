@@ -1,7 +1,7 @@
 include /home/ignaz/lib/Kaskade7.3/Makefile.Local
 include /home/ignaz/lib/Kaskade7.3/Makefile.Rules
 
-INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(MUMPSINC) $(SPACYINC)
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(MUMPSINC) $(UMFPACKINC) $(SPACYINC)
 FLAGS = $(WFLAGS) $(OPTFLAGS)
 
 nonlinear_heat: nonlinear_heat.o Makefile $(KASKADE7)/libs/libkaskade.a 
@@ -10,6 +10,7 @@ nonlinear_heat: nonlinear_heat.o Makefile $(KASKADE7)/libs/libkaskade.a
  $(UGLIB) \
  $(BOOSTLIB) \
  $(MUMPSLIB) \
+ $(UMFPACKLIB) \
  $(BLASLIB) $(FTNLIB) $(NUMALIB) $(SPACYLIB) -o $@
 
 clean:
