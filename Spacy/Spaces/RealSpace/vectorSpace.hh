@@ -17,7 +17,7 @@ namespace Spacy
 
   namespace StaticDetail
   {
-    static VectorSpace R = RealSpace::makeHilbertSpace(true);
+    static VectorSpace R = RealSpace::makeHilbertSpace();
 //    static VectorSpace M{};
   }
 }

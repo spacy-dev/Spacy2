@@ -18,7 +18,9 @@
 namespace Spacy
 {
   /// @cond
-  namespace Detail { static unsigned spaceIndex = 0; }
+  /// Each space gets a unique index, except if defaultIndex is set to true.
+  /// In this case it gets the default index 0.
+  namespace Detail { static unsigned spaceIndex = 1; }
   /// @endcond
 
   /**
@@ -43,6 +45,9 @@ namespace Spacy
      * @brief Construct function space from @ref VectorCreatorAnchor "VectorCreator" and @ref NormAnchor "Norm".
      * @param impl object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
      * @param norm object satisfying the @ref NormConceptAnchor "NormConcept"
+     * @param defaultIndex if false, then this space gets a unique index, else it gets the default index 0
+     *
+     * The default index can be used to use different locally defined function spaces together.
      */
     VectorSpace(VectorCreator impl, Norm norm, bool defaultIndex = false);
 
