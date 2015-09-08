@@ -169,7 +169,12 @@ namespace Spacy
       }
 
       CopyingUniqueImpl(CopyingUniqueImpl&&) = default;
-      CopyingUniqueImpl& operator=(CopyingUniqueImpl&&) = default;
+
+      CopyingUniqueImpl& operator=(CopyingUniqueImpl&& other)
+      {
+        *impl_ = std::move(*other.impl_);
+        return *this;
+      }
 
       /**
        * @brief Access implementation.

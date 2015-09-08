@@ -37,7 +37,7 @@ namespace Spacy
 
 //    Vector(AnyVector v);
 
-    operator AnyVector() const;
+ //   operator AnyVector() const;
 
     /**
      * @brief In-place summation \f$ x+=y\f$.

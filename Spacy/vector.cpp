@@ -6,17 +6,19 @@
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/vectorSpace.hh"
 
-
 namespace Spacy
 {
 //  Vector::Vector(AnyVector v)
 //    : Mixin::Impl<AnyVector>(std::move(v))
 //  {}
 
-  Vector::operator AnyVector() const
-  {
-    return impl();
-  }
+
+
+
+//  Vector::operator AnyVector() const
+//  {
+//    return impl();
+//  }
 
   Vector& Vector::operator+=(const Vector& y)
   {
