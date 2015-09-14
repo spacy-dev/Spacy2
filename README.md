@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/lubkoll/Spacy.svg?branch=master)](https://travis-ci.org/lubkoll/Spacy/builds)
-
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lubkoll/spacy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 # The Spacy Library - Vector Space Algorithms
 
 ### Download
