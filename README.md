@@ -22,5 +22,5 @@ Currently there are examples for usage with Kaskade 7 and FEniCS. These are loca
  - Spacy/Examples/FEniCS. 
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lubkoll/spacy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 
