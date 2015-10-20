@@ -1,0 +1,390 @@
+\hypertarget{namespaceSpacy_1_1FEniCS}{}\section{Spacy\+:\+:F\+Eni\+C\+S Namespace Reference}
+\label{namespaceSpacy_1_1FEniCS}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+
+
+Contains vector spaces, functionals and operators for \href{www.fenicsproject.org}{\tt F\+Eni\+C\+S}.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator}
+\begin{DoxyCompactList}\small\item\em Operator interface for F\+Eni\+C\+S. Models a differentiable operator $A:X\rightarrow Y$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1C2Functional}{C2\+Functional}
+\begin{DoxyCompactList}\small\item\em Functional interface for F\+Eni\+C\+S. Models a twice differentiable functional $f:X\rightarrow \mathbb{R}$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1DynamicC1Operator}{Dynamic\+C1\+Operator}
+\begin{DoxyCompactList}\small\item\em Operator interface for F\+Eni\+C\+S. Models a differentiable operator $A:X\rightarrow Y$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1l2Product}{l2\+Product}
+\begin{DoxyCompactList}\small\item\em l2 product $(x,y) = \sum_i x_i y_i $ for F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1LinearOperator}{Linear\+Operator}
+\begin{DoxyCompactList}\small\item\em Linear operator interface for operators in F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1LinearOperatorCreator}{Linear\+Operator\+Creator}
+\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1LUSolver}{L\+U\+Solver}
+\begin{DoxyCompactList}\small\item\em L\+U solver for F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1TransposedLUSolver}{Transposed\+L\+U\+Solver}
+\begin{DoxyCompactList}\small\item\em Transposed L\+U solver for F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1Vector}{Vector}
+\begin{DoxyCompactList}\small\item\em Vector implementation for F\+Eni\+C\+S (single space). \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator}{Vector\+Creator}
+\begin{DoxyCompactList}\small\item\em Creator for vector space elements for F\+Eni\+C\+S. See \hyperlink{group__SpacyGroup_ga1f5316487c031a478247206764bb2efb_VectorCreatorAnchor}{\+:\+:Spacy\+:\+:Vector\+Creator}, \hyperlink{group__ConceptGroup_ga3064301642b7c66b1b08f88a12a04645_VectorCreatorConceptAnchor}{\+:\+:Spacy\+:\+:Vector\+Creator\+Concept}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceSpacy_1_1FEniCS_ac42a8d576578dbe113e1b93450ed3d2c}{}{\footnotesize template$<$class T , class Arg $>$ }\\void \hyperlink{namespaceSpacy_1_1FEniCS_ac42a8d576578dbe113e1b93450ed3d2c}{assign\+\_\+x\+\_\+if\+\_\+present} (T \&f, const Arg \&x)\label{namespaceSpacy_1_1FEniCS_ac42a8d576578dbe113e1b93450ed3d2c}
+
+\begin{DoxyCompactList}\small\item\em Assign f.\+x=x if f has a public member with name x. Else does nothing. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_1_1FEniCS_af23f1bf9e866dbce5fd71a36abc4fd17}{}{\footnotesize template$<$class T , class Arg $>$ }\\void \hyperlink{namespaceSpacy_1_1FEniCS_af23f1bf9e866dbce5fd71a36abc4fd17}{assign\+\_\+t\+\_\+if\+\_\+present} (T \&f, const Arg \&t)\label{namespaceSpacy_1_1FEniCS_af23f1bf9e866dbce5fd71a36abc4fd17}
+
+\begin{DoxyCompactList}\small\item\em Assign f.\+f=f if f has a public member with name t. Else does nothing. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_1_1FEniCS_a847a1c704ef8c31faedcee55be860a25}{}{\footnotesize template$<$class T , class Arg $>$ }\\void \hyperlink{namespaceSpacy_1_1FEniCS_a847a1c704ef8c31faedcee55be860a25}{assign\+\_\+f\+\_\+if\+\_\+present} (T \&g, const Arg \&f)\label{namespaceSpacy_1_1FEniCS_a847a1c704ef8c31faedcee55be860a25}
+
+\begin{DoxyCompactList}\small\item\em Assign T.\+f if g has a public member with name t. Else does nothing. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form $>$ }\\auto \hyperlink{group__FenicsGroup_ga5b21d39905318b5e3f36b71c1fb525e9_ga5b21d39905318b5e3f36b71c1fb525e9}{make\+C1\+Operator} (Residual\+Form \&F, Jacobian\+Form \&J, const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&bcs, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form $>$ }\\auto \hyperlink{group__FenicsGroup_gaecd46636694770dba7c8f99325341eda_gaecd46636694770dba7c8f99325341eda}{make\+C1\+Operator} (Residual\+Form \&F, Jacobian\+Form \&J, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ from F\+Eni\+C\+S(dolfin). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form $>$ }\\auto \hyperlink{group__FenicsGroup_gafc3de3603a9ac312096d742da2b5752b_gafc3de3603a9ac312096d742da2b5752b}{make\+C1\+Operator} (Residual\+Form \&F, Jacobian\+Form \&J, const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&bcs, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow X$ from F\+Eni\+C\+S(dolfin). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form $>$ }\\auto \hyperlink{group__FenicsGroup_ga508af586ecdbc9f099759ffec06e99df_ga508af586ecdbc9f099759ffec06e99df}{make\+C1\+Operator} (Residual\+Form \&F, Jacobian\+Form \&J, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow X$ from F\+Eni\+C\+S(dolfin). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class D\+F , class D\+D\+F $>$ }\\auto \hyperlink{group__FenicsGroup_ga78db716003d17d5f781dfcb13a183519_ga78db716003d17d5f781dfcb13a183519}{make\+C2\+Functional} (const F \&f, const D\+F \&J, const D\+D\+F \&H, const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&bcs, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ as used in F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class D\+F , class D\+D\+F $>$ }\\auto \hyperlink{group__FenicsGroup_ga4e69e5b7265feac21653bfc2da725a75_ga4e69e5b7265feac21653bfc2da725a75}{make\+C2\+Functional} (const F \&f, const D\+F \&J, const D\+D\+F \&H, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ with out Dirichlet boundary conditions as used in F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form , class Mass\+Form , class Source $>$ }\\auto \hyperlink{group__FenicsGroup_ga70d8ba7fecc2caba97343f5506340602_ga70d8ba7fecc2caba97343f5506340602}{make\+Dynamic\+C1\+Operator} (Residual\+Form \&\&F, Jacobian\+Form \&\&J, Mass\+Form \&\&M, Source \&\&f, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in F\+Eni\+C\+S. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Residual\+Form , class Jacobian\+Form , class Mass\+Form , class Source $>$ }\\auto \hyperlink{group__FenicsGroup_ga467a0e85b66c8f17cdaf2884d5d443cd_ga467a0e85b66c8f17cdaf2884d5d443cd}{make\+Dynamic\+C1\+Operator} (Residual\+Form \&\&F, Jacobian\+Form \&\&J, Mass\+Form \&\&M, Source \&\&f, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ from F\+Eni\+C\+S(dolfin). \end{DoxyCompactList}\item 
+void \hyperlink{group__FenicsGroup_gab3d4c7c1e91a50e4e816598258b6edce_gab3d4c7c1e91a50e4e816598258b6edce}{copy\+Coefficients} (const dolfin\+::\+Form \&F, dolfin\+::\+Form \&G)
+\begin{DoxyCompactList}\small\item\em Copy coefficients of F to G. \end{DoxyCompactList}\item 
+void \hyperlink{group__FenicsGroup_ga7f43f0c660d0646adb031b453c536bb0_ga7f43f0c660d0646adb031b453c536bb0}{copy} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, dolfin\+::\+Generic\+Vector \&y)
+\begin{DoxyCompactList}\small\item\em Copy from \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector} to dolfin\+::\+Generic\+Vector. \end{DoxyCompactList}\item 
+void \hyperlink{group__FenicsGroup_ga28fb1ebae29e07ec0256bb2331599aa7_ga28fb1ebae29e07ec0256bb2331599aa7}{copy} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, dolfin\+::\+Function \&y)
+\begin{DoxyCompactList}\small\item\em Copy from \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector} to dolfin\+::\+Function. \end{DoxyCompactList}\item 
+void \hyperlink{group__FenicsGroup_ga61c5e45dbb789c155fbf86f8ec288f17_ga61c5e45dbb789c155fbf86f8ec288f17}{copy} (const dolfin\+::\+Generic\+Vector \&y,\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x)
+\begin{DoxyCompactList}\small\item\em Copy from dolfin\+::\+Generic\+Vector to \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector}. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e_a7c4519bd0cbdc4e72b71f273bade591e}{copy} (const dolfin\+::\+Function \&y,\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x)
+\begin{DoxyCompactList}\small\item\em Copy from dolfin\+::\+Function to \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector}. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{group__FenicsGroup_ga89defe8c7e08ab224af2a3cd0445e254_ga89defe8c7e08ab224af2a3cd0445e254}{make\+Hilbert\+Space} (const dolfin\+::\+Function\+Space \&space)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a single vector space from dolfin\+::\+Function\+Space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{group__FenicsGroup_ga1aaf48bfbd005bee810090a01404ab4a_ga1aaf48bfbd005bee810090a01404ab4a}{make\+Hilbert\+Space} (const dolfin\+::\+Function\+Space \&space, const std\+::unordered\+\_\+map$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \&dofmap)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a single vector space from dolfin\+::\+Function\+Space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{group__FenicsGroup_gaa16b365c49ec0660e5f707ad7da38a75_gaa16b365c49ec0660e5f707ad7da38a75}{make\+Hilbert\+Space} (const dolfin\+::\+Function\+Space \&space, const std\+::vector$<$ unsigned $>$ \&primal\+Ids, const std\+::vector$<$ unsigned $>$ \&dual\+Ids=\{\})
+\begin{DoxyCompactList}\small\item\em Convenient generation of a product space from dolfin\+::\+Function\+Space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains vector spaces, functionals and operators for \href{www.fenicsproject.org}{\tt F\+Eni\+C\+S}. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__FenicsGroup}{Vector Space for F\+Eni\+C\+S} 
+\end{DoxySeeAlso}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__FenicsGroup_ga7f43f0c660d0646adb031b453c536bb0_ga7f43f0c660d0646adb031b453c536bb0}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!copy@{copy}}
+\index{copy@{copy}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+F\+Eni\+C\+S\+::copy (
+\begin{DoxyParamCaption}
+\item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x, }
+\item[{dolfin\+::\+Generic\+Vector \&}]{y}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga7f43f0c660d0646adb031b453c536bb0_ga7f43f0c660d0646adb031b453c536bb0}
+
+
+Copy from \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector} to dolfin\+::\+Generic\+Vector. 
+
+Does consider product space structures. \begin{DoxySeeAlso}{See also}
+\hyperlink{namespaceSpacy_1_1ProductSpace}{Product\+Space} 
+\end{DoxySeeAlso}
+\hypertarget{group__FenicsGroup_ga28fb1ebae29e07ec0256bb2331599aa7_ga28fb1ebae29e07ec0256bb2331599aa7}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!copy@{copy}}
+\index{copy@{copy}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+F\+Eni\+C\+S\+::copy (
+\begin{DoxyParamCaption}
+\item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x, }
+\item[{dolfin\+::\+Function \&}]{y}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga28fb1ebae29e07ec0256bb2331599aa7_ga28fb1ebae29e07ec0256bb2331599aa7}
+
+
+Copy from \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector} to dolfin\+::\+Function. 
+
+Does consider product space structures. \begin{DoxySeeAlso}{See also}
+\hyperlink{namespaceSpacy_1_1ProductSpace}{Product\+Space} 
+\end{DoxySeeAlso}
+\hypertarget{group__FenicsGroup_ga61c5e45dbb789c155fbf86f8ec288f17_ga61c5e45dbb789c155fbf86f8ec288f17}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!copy@{copy}}
+\index{copy@{copy}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+F\+Eni\+C\+S\+::copy (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Generic\+Vector \&}]{y, }
+\item[{\+::{\bf Spacy\+::\+Vector} \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga61c5e45dbb789c155fbf86f8ec288f17_ga61c5e45dbb789c155fbf86f8ec288f17}
+
+
+Copy from dolfin\+::\+Generic\+Vector to \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector}. 
+
+Does consider product space structures. \begin{DoxySeeAlso}{See also}
+\hyperlink{group__ProductSpaceGroup}{Product Space} 
+\end{DoxySeeAlso}
+\hypertarget{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e_a7c4519bd0cbdc4e72b71f273bade591e}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!copy@{copy}}
+\index{copy@{copy}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+F\+Eni\+C\+S\+::copy (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Function \&}]{y, }
+\item[{\+::{\bf Spacy\+::\+Vector} \&}]{x}
+\end{DoxyParamCaption}
+)}\label{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e_a7c4519bd0cbdc4e72b71f273bade591e}
+
+
+Copy from dolfin\+::\+Function to \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_VectorAnchor}{\+:\+:Spacy\+:\+:Vector}. 
+
+Does consider product space structures. \begin{DoxySeeAlso}{See also}
+\hyperlink{group__ProductSpaceGroup}{Product Space} 
+\end{DoxySeeAlso}
+\hypertarget{group__FenicsGroup_gab3d4c7c1e91a50e4e816598258b6edce_gab3d4c7c1e91a50e4e816598258b6edce}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!copy\+Coefficients@{copy\+Coefficients}}
+\index{copy\+Coefficients@{copy\+Coefficients}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{copy\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+F\+Eni\+C\+S\+::copy\+Coefficients (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Form \&}]{F, }
+\item[{dolfin\+::\+Form \&}]{G}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_gab3d4c7c1e91a50e4e816598258b6edce_gab3d4c7c1e91a50e4e816598258b6edce}
+
+
+Copy coefficients of F to G. 
+
+Whatever the copy-\/constructor for dolfin forms does it does not copy. So if you want to copy these do the following. Create A new form from the function spaces stored in G. Then copy the coefficients with this function. \hypertarget{group__FenicsGroup_ga5b21d39905318b5e3f36b71c1fb525e9_ga5b21d39905318b5e3f36b71c1fb525e9}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C1\+Operator@{make\+C1\+Operator}}
+\index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&}]{F, }
+\item[{Jacobian\+Form \&}]{J, }
+\item[{const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&}]{bcs, }
+\item[{{\bf Vector\+Space} \&}]{domain, }
+\item[{{\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga5b21d39905318b5e3f36b71c1fb525e9_ga5b21d39905318b5e3f36b71c1fb525e9}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in F\+Eni\+C\+S. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , bcs , domain , range )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_gaecd46636694770dba7c8f99325341eda_gaecd46636694770dba7c8f99325341eda}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C1\+Operator@{make\+C1\+Operator}}
+\index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&}]{F, }
+\item[{Jacobian\+Form \&}]{J, }
+\item[{{\bf Vector\+Space} \&}]{domain, }
+\item[{{\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_gaecd46636694770dba7c8f99325341eda_gaecd46636694770dba7c8f99325341eda}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow Y$ from F\+Eni\+C\+S(dolfin). 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , domain , range )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_gafc3de3603a9ac312096d742da2b5752b_gafc3de3603a9ac312096d742da2b5752b}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C1\+Operator@{make\+C1\+Operator}}
+\index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&}]{F, }
+\item[{Jacobian\+Form \&}]{J, }
+\item[{const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&}]{bcs, }
+\item[{{\bf Vector\+Space} \&}]{space}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_gafc3de3603a9ac312096d742da2b5752b_gafc3de3603a9ac312096d742da2b5752b}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow X$ from F\+Eni\+C\+S(dolfin). 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , bcs , space , space )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga508af586ecdbc9f099759ffec06e99df_ga508af586ecdbc9f099759ffec06e99df}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C1\+Operator@{make\+C1\+Operator}}
+\index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&}]{F, }
+\item[{Jacobian\+Form \&}]{J, }
+\item[{{\bf Vector\+Space} \&}]{space}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga508af586ecdbc9f099759ffec06e99df_ga508af586ecdbc9f099759ffec06e99df}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow X$ from F\+Eni\+C\+S(dolfin). 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , space , space )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga78db716003d17d5f781dfcb13a183519_ga78db716003d17d5f781dfcb13a183519}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C2\+Functional@{make\+C2\+Functional}}
+\index{make\+C2\+Functional@{make\+C2\+Functional}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C2\+Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class D\+F , class D\+D\+F $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C2\+Functional (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const D\+F \&}]{J, }
+\item[{const D\+D\+F \&}]{H, }
+\item[{const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&}]{bcs, }
+\item[{const {\bf Vector\+Space} \&}]{space}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga78db716003d17d5f781dfcb13a183519_ga78db716003d17d5f781dfcb13a183519}
+
+
+Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ as used in F\+Eni\+C\+S. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & form for the evaluation of $f$. \\
+\hline
+{\em J} & form for the evaluation of $f'$ \\
+\hline
+{\em H} & form for the evaluation of $f''$ \\
+\hline
+{\em bcs} & Dirichlet boundary conditions \\
+\hline
+{\em space} & domain space $X$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C2Functional}{\+:\+:Spacy\+:\+:Fenics\+:\+:C2\+Functional$<$F,D\+F,D\+D\+F$>$( f , J , H , bcs , space )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga4e69e5b7265feac21653bfc2da725a75_ga4e69e5b7265feac21653bfc2da725a75}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+C2\+Functional@{make\+C2\+Functional}}
+\index{make\+C2\+Functional@{make\+C2\+Functional}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+C2\+Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class D\+F , class D\+D\+F $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+C2\+Functional (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const D\+F \&}]{J, }
+\item[{const D\+D\+F \&}]{H, }
+\item[{const {\bf Vector\+Space} \&}]{space}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga4e69e5b7265feac21653bfc2da725a75_ga4e69e5b7265feac21653bfc2da725a75}
+
+
+Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ with out Dirichlet boundary conditions as used in F\+Eni\+C\+S. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & form for the evaluation of $f$. \\
+\hline
+{\em J} & form for the evaluation of $f'$ \\
+\hline
+{\em H} & form for the evaluation of $f''$ \\
+\hline
+{\em space} & domain space $X$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C2Functional}{\+:\+:Spacy\+:\+:Fenics\+:\+:C2\+Functional$<$F,D\+F,D\+D\+F$>$( f , J , H , bcs , space )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga70d8ba7fecc2caba97343f5506340602_ga70d8ba7fecc2caba97343f5506340602}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
+\index{make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+Dynamic\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form , class Mass\+Form , class Source $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+Dynamic\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&\&}]{F, }
+\item[{Jacobian\+Form \&\&}]{J, }
+\item[{Mass\+Form \&\&}]{M, }
+\item[{Source \&\&}]{f, }
+\item[{const {\bf Vector\+Space} \&}]{domain, }
+\item[{const {\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga70d8ba7fecc2caba97343f5506340602_ga70d8ba7fecc2caba97343f5506340602}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in F\+Eni\+C\+S. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , bcs , domain , range )}
+\end{DoxyReturn}
+Convenient generation of a differentiable operator $A: X\rightarrow Y$ from F\+Eni\+C\+S(dolfin). \begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , domain , range )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga467a0e85b66c8f17cdaf2884d5d443cd_ga467a0e85b66c8f17cdaf2884d5d443cd}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
+\index{make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+Dynamic\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form , class Mass\+Form , class Source $>$ auto Spacy\+::\+F\+Eni\+C\+S\+::make\+Dynamic\+C1\+Operator (
+\begin{DoxyParamCaption}
+\item[{Residual\+Form \&\&}]{F, }
+\item[{Jacobian\+Form \&\&}]{J, }
+\item[{Mass\+Form \&\&}]{M, }
+\item[{Source \&\&}]{f, }
+\item[{const {\bf Vector\+Space} \&}]{domain}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga467a0e85b66c8f17cdaf2884d5d443cd_ga467a0e85b66c8f17cdaf2884d5d443cd}
+
+
+Convenient generation of a differentiable operator $A: X\rightarrow Y$ from F\+Eni\+C\+S(dolfin). 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\+:\+:Spacy\+:\+:Fenics\+:\+:C1\+Operator$<$Residual\+Form,Jacobian\+Form$>$( F , J , domain , range )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga89defe8c7e08ab224af2a3cd0445e254_ga89defe8c7e08ab224af2a3cd0445e254}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space} Spacy\+::\+F\+Eni\+C\+S\+::make\+Hilbert\+Space (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Function\+Space \&}]{space}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga89defe8c7e08ab224af2a3cd0445e254_ga89defe8c7e08ab224af2a3cd0445e254}
+
+
+Convenient generation of a single vector space from dolfin\+::\+Function\+Space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & single dolfin\+::\+Function\+Space (no product space) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{group__SpacyGroup_ga63c49d211bf214be1fb321440ed03aad_ga63c49d211bf214be1fb321440ed03aad}{\+:\+:Spacy\+:\+:make\+Hilbert\+Space( Vector\+Creator\{space\} , l2\+Product\{\} )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_ga1aaf48bfbd005bee810090a01404ab4a_ga1aaf48bfbd005bee810090a01404ab4a}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space} Spacy\+::\+F\+Eni\+C\+S\+::make\+Hilbert\+Space (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Function\+Space \&}]{space, }
+\item[{const std\+::unordered\+\_\+map$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \&}]{dofmap}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_ga1aaf48bfbd005bee810090a01404ab4a_ga1aaf48bfbd005bee810090a01404ab4a}
+
+
+Convenient generation of a single vector space from dolfin\+::\+Function\+Space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & single dolfin\+::\+Function\+Space (no product space) \\
+\hline
+{\em dofmap} & map relating global ids of a product space to local ids in this single space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{group__SpacyGroup_ga63c49d211bf214be1fb321440ed03aad_ga63c49d211bf214be1fb321440ed03aad}{\+:\+:Spacy\+:\+:make\+Hilbert\+Space( Vector\+Creator\{space,dofmap\} , l2\+Product\{\} )} 
+\end{DoxyReturn}
+\hypertarget{group__FenicsGroup_gaa16b365c49ec0660e5f707ad7da38a75_gaa16b365c49ec0660e5f707ad7da38a75}{}\index{Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Spacy\+::\+F\+Eni\+C\+S@{Spacy\+::\+F\+Eni\+C\+S}}
+\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space} Spacy\+::\+F\+Eni\+C\+S\+::make\+Hilbert\+Space (
+\begin{DoxyParamCaption}
+\item[{const dolfin\+::\+Function\+Space \&}]{space, }
+\item[{const std\+::vector$<$ unsigned $>$ \&}]{primal\+Ids, }
+\item[{const std\+::vector$<$ unsigned $>$ \&}]{dual\+Ids = {\ttfamily \{\}}}
+\end{DoxyParamCaption}
+)}\label{group__FenicsGroup_gaa16b365c49ec0660e5f707ad7da38a75_gaa16b365c49ec0660e5f707ad7da38a75}
+
+
+Convenient generation of a product space from dolfin\+::\+Function\+Space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & single dolfin\+::\+Function\+Space (product space) \\
+\hline
+{\em primal\+Ids} & indices of spaces associated with primal variables \\
+\hline
+{\em dual\+Ids} & indices of spaces associated with dual variables \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+primal-\/dual product space 
+\end{DoxyReturn}

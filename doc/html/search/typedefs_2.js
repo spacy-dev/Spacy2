@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['dampingstrategy',['DampingStrategy',['../namespaceSpacy_1_1Newton_ae2ba8821b209bfac2ab9190e6283cf06.html#ae2ba8821b209bfac2ab9190e6283cf06',1,'Spacy::Newton']]],
   ['dampingstrategyconcept',['DampingStrategyConcept',['../group__NewtonConceptGroup_ga8da917ba6de9c283c1509281956bb04a.html#ga8da917ba6de9c283c1509281956bb04a',1,'Spacy::Concepts::Newton']]],
   ['dynamicc1operator',['DynamicC1Operator',['../group__SpacyGroup_gabc9c830d2a7e020bcab097b10ee6f642.html#gabc9c830d2a7e020bcab097b10ee6f642',1,'Spacy']]],
   ['dynamicc1operatorconcept',['DynamicC1OperatorConcept',['../group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11',1,'Spacy::Concepts']]],

@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,46 +121,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">Spacy::Concepts::VectorConcept</a> = typedef boost::mpl::vector&lt; ConceptBase , boost::type_erasure::assignable&lt;&gt; , boost::type_erasure::multiply_assignable&lt; boost::type_erasure::_self , double &gt; , boost::type_erasure::add_assignable&lt;&gt; , boost::type_erasure::subtract_assignable&lt;&gt; , boost::type_erasure::negatable&lt;&gt; , boost::type_erasure::equality_comparable&lt;&gt; , boost::type_erasure::callable&lt;Vector(const boost::type_erasure::_self&amp;), const boost::type_erasure::_self&gt; , has_space&lt;const VectorSpace*(), const boost::type_erasure::_self&gt; , has_toFile&lt;void(const std::string&amp;), const boost::type_erasure::_self&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">Spacy::Concepts::VectorConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">ConceptBase</a> , boost::type_erasure::assignable&lt;&gt; , boost::type_erasure::multiply_assignable&lt; boost::type_erasure::_self , double &gt; , boost::type_erasure::add_assignable&lt;&gt; , boost::type_erasure::subtract_assignable&lt;&gt; , boost::type_erasure::negatable&lt;&gt; , boost::type_erasure::equality_comparable&lt;&gt; , boost::type_erasure::callable&lt;<a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const boost::type_erasure::_self&amp;), const boost::type_erasure::_self&gt; , has_space&lt;const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>*(), const boost::type_erasure::_self&gt; , has_toFile&lt;void(const std::string&amp;), const boost::type_erasure::_self&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept for vector implementations. </p>
-<p><a class="anchor" id="VectorConceptAnchor"></a>The minimal signature of a vector is: </p><div class="fragment"><div class="line"><span class="comment">// My vector.</span></div>
-<div class="line"><span class="keyword">class </span>MyVector</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Copy constructor.</span></div>
-<div class="line">  MyVector(<span class="keyword">const</span> MyVector&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Move constructor.</span></div>
-<div class="line">  MyVector(MyVector&amp;&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Copy assignable x=y.</span></div>
-<div class="line">  MyVector&amp; operator=(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// In-place summation x+=y.</span></div>
-<div class="line">  MyVector&amp; operator+=(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// In-place subtraction x-=y.</span></div>
-<div class="line">  MyVector&amp; operator-=(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// In-place multiplication x*=a.</span></div>
-<div class="line">  MyVector&amp; operator*=(<span class="keywordtype">double</span> a);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Negation -y.</span></div>
-<div class="line">  MyVector <a class="code" href="namespaceSpacy.html#a8bc98f51c7beab86185bf97a29b36395">operator-</a>(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Equality comparison x==y.</span></div>
-<div class="line">  <span class="keywordtype">bool</span> <a class="code" href="namespaceSpacy.html#aef4930427aac4c8089b4c43b1c97cf25">operator==</a>(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Apply as dual element x(y).</span></div>
-<div class="line">  Vector operator()(<span class="keyword">const</span> MyVector&amp; y);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access pointer to underlying function space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace* space() <span class="keyword">const</span>;</div>
-<div class="line">};</div>
+<p><a class="anchor" id="VectorConceptAnchor"></a>The minimal signature of a vector is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// My vector.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyVector</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Copy constructor.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  MyVector(const MyVector&amp;);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Move constructor.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  MyVector(MyVector&amp;&amp;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  // Copy assignable x=y.</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  MyVector&amp; operator=(const MyVector&amp; y);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  // In-place summation x+=y.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  MyVector&amp; operator+=(const MyVector&amp; y);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  // In-place subtraction x-=y.</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  MyVector&amp; operator-=(const MyVector&amp; y);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  // In-place multiplication x*=a.</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  MyVector&amp; operator*=(double a);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  // Negation -y.</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  MyVector operator-(const MyVector&amp; y);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  // Equality comparison x==y.</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  bool operator==(const MyVector&amp; y);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  // Apply as dual element x(y).</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  Vector operator()(const MyVector&amp; y);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  // Access pointer to underlying function space.</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  const VectorSpace* space() const;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 </div><!-- fragment --><p>See <a class="el" href="group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54.html#VectorAnchor">::Spacy::Vector</a>. </p>
 
 </div>
@@ -171,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

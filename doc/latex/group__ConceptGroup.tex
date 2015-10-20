@@ -81,25 +81,25 @@ Concept for differentiable functionals.
 \hypertarget{group__ConceptGroup_ga205b55d8291e0f2e143f116cf78bc54f_C1FunctionalConceptAnchor}{}%
 The minimal signature of a differentiable functional is 
 \begin{DoxyCode}
-\textcolor{comment}{// A differentiable functional f: X->R.}
-\textcolor{keyword}{class }MyC1Functional
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor, possibly default-generated.}
-  MyC1Functional(\textcolor{keyword}{const} MyC1Functional&);
-
-  \textcolor{comment}{// Move constructor, possibly default-generated.}
-  MyC1Functional(MyC1Functional&&);
-
-  \textcolor{comment}{// Compute f(x).}
-  \textcolor{keywordtype}{double} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Compute f'(x) as element of X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2_gab6646eb7068eb9f1369e639cf0b620a2}{d1}(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access underlying domain.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-\};
+1 // A differentiable functional f: X->R.
+2 class MyC1Functional
+3 \{
+4 public:
+5   // Copy constructor, possibly default-generated.
+6   MyC1Functional(const MyC1Functional&);
+7 
+8   // Move constructor, possibly default-generated.
+9   MyC1Functional(MyC1Functional&&);
+10 
+11   // Compute f(x).
+12   double operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Compute f'(x) as element of X*.
+15   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+16 
+17   // Access underlying domain.
+18   const VectorSpace& domain() const;
+19 \};
 \end{DoxyCode}
 
 
@@ -114,31 +114,31 @@ Concept defining differentiable operators.
 \hypertarget{group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b_C1OperatorConceptAnchor}{}%
 The minimal signature for a differentiable operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My differentiable operator A: X->Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Compute A'(x)dx.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2_gab6646eb7068eb9f1369e639cf0b620a2}{d1}(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Get linearization representing A'(x).}
- \hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_ga584f7b9d82a844302ba0d77c3a1b6640}{::Spacy::LinearOperator} linearization(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My differentiable operator A: X->Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Compute A'(x)dx.
+15   ::Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+16 
+17   // Get linearization representing A'(x).
+18  ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const;
+19 
+20   // Access domain space.
+21   const VectorSpace& domain() const;
+22 
+23   // Access range space.
+24   const VectorSpace& range() const;
+25 \};
 \end{DoxyCode}
 
 
@@ -153,31 +153,31 @@ Concept for twice differentiable functionals.
 \hypertarget{group__ConceptGroup_gafb4414561b07b27100cad81ecf152e47_C2FunctionalConceptAnchor}{}%
 The minimal signature of a twice differentiable functional is 
 \begin{DoxyCode}
-\textcolor{comment}{// A twice differentiable functional f: X->R.}
-\textcolor{keyword}{class }MyC2Functional
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor, possibly default-generated.}
-  MyC2Functional(\textcolor{keyword}{const} MyC2Functional&);
-
-  \textcolor{comment}{// Move constructor, possibly default-generated.}
-  MyC2Functional(MyC2Functional&&);
-
-  \textcolor{comment}{// Compute f(x).}
-  \textcolor{keywordtype}{double} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Compute f'(x) as element of X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2_gab6646eb7068eb9f1369e639cf0b620a2}{d1}(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Compute f''(x)dx as element of X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{group__SpacyGroup_ga22f56f6ffd46496e786b435cabca71e0_ga22f56f6ffd46496e786b435cabca71e0}{d2}(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access f''(x) as mapping f''(x): X->X*.}
-  \hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_ga584f7b9d82a844302ba0d77c3a1b6640}{LinearOperator} hessian(const ::Spacy::Vector& x);
-
-  \textcolor{comment}{// Access underlying domain.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-\};
+1 // A twice differentiable functional f: X->R.
+2 class MyC2Functional
+3 \{
+4 public:
+5   // Copy constructor, possibly default-generated.
+6   MyC2Functional(const MyC2Functional&);
+7 
+8   // Move constructor, possibly default-generated.
+9   MyC2Functional(MyC2Functional&&);
+10 
+11   // Compute f(x).
+12   double operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Compute f'(x) as element of X*.
+15   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+16 
+17   // Compute f''(x)dx as element of X*.
+18   ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+19 
+20   // Access f''(x) as mapping f''(x): X->X*.
+21   LinearOperator hessian(const ::Spacy::Vector& x);
+22 
+23   // Access underlying domain.
+24   const VectorSpace& domain() const;
+25 \};
 \end{DoxyCode}
 
 
@@ -192,19 +192,19 @@ Concept defining the simplest possible operator, only providing \hyperlink{class
 \hypertarget{group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30_CallableOperatorConceptAnchor}{}%
 The minimal signature of a callable operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My callable operator A: X->Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-\};
+1 // My callable operator A: X->Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 \};
 \end{DoxyCode}
 
 
@@ -226,34 +226,34 @@ Concept defining time-\/dependent operators that are differentiable with respect
 \hypertarget{group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11_DynamicC1OperatorConceptAnchor}{}%
 The minimal signature for a time-\/dependent differentiable operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My differentiable operator A: [0,T[ \(\backslash\)times X -> Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(t,x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Compute A\_x(t,x)dx.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2_gab6646eb7068eb9f1369e639cf0b620a2}{d1}(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x, const ::Spacy::Vector& dx) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Get linearization representing A\_x(t,x).}
- \hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_ga584f7b9d82a844302ba0d77c3a1b6640}{::Spacy::LinearOperator} linearization(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access mass matrix.}
-  \hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_ga584f7b9d82a844302ba0d77c3a1b6640}{LinearOperator} M() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My differentiable operator A: [0,T[ \(\backslash\)times X -> Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(t,x).
+12   ::Spacy::Vector operator()(double t, const ::Spacy::Vector& x) const;
+13 
+14   // Compute A\_x(t,x)dx.
+15   ::Spacy::Vector d1(double t, const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+16 
+17   // Get linearization representing A\_x(t,x).
+18  ::Spacy::LinearOperator linearization(double t, const ::Spacy::Vector& x) const;
+19 
+20   // Access mass matrix.
+21   LinearOperator M() const;
+22 
+23   // Access domain space.
+24   const VectorSpace& domain() const;
+25 
+26   // Access range space.
+27   const VectorSpace& range() const;
+28 \};
 \end{DoxyCode}
 
 
@@ -268,19 +268,19 @@ Concept defining the simplest possible time-\/dependent operator, only providing
 \hypertarget{group__ConceptGroup_ga30692db093ead5a1a074905363a2f043_DynamicCallableOperatorConceptAnchor}{}%
 The minimal signature of a time-\/dependent callable operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My callable operator A: [0,T[ \(\backslash\)times X -> Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(t,x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-\};
+1 // My callable operator A: [0,T[ \(\backslash\)times X -> Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(t,x).
+12   ::Spacy::Vector operator()(double t, const ::Spacy::Vector& x) const;
+13 \};
 \end{DoxyCode}
 
 
@@ -295,28 +295,28 @@ Concept defining time-\/dependent linear operators.
 \hypertarget{group__ConceptGroup_ga015b0d099011a2ef73a16aa9b36a7346_DynamicLinearOperatorConceptAnchor}{}%
 The minimal signature of a time-\/dependent linear operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My linear operator A: [0,T[ \(\backslash\)times X -> Y.}
-\textcolor{keyword}{class }MyLinearOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyLinearOperator(\textcolor{keyword}{const} MyLinearOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyLinearOperator(MyLinearOperator&&);
-
-  \textcolor{comment}{// Compute A(t,x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access solver for the computation of A(t)^-1.}
-  \hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{::Spacy::LinearSolver} solver() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My linear operator A: [0,T[ \(\backslash\)times X -> Y.
+2 class MyLinearOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyLinearOperator(const MyLinearOperator&);
+7 
+8   // Move constructor.
+9   MyLinearOperator(MyLinearOperator&&);
+10 
+11   // Compute A(t,x).
+12   ::Spacy::Vector operator()(double t, const ::Spacy::Vector& x) const;
+13 
+14   // Access solver for the computation of A(t)^-1.
+15   ::Spacy::LinearSolver solver() const;
+16 
+17   // Access domain space.
+18   const VectorSpace& domain() const;
+19 
+20   // Access range space.
+21   const VectorSpace& range() const;
+22 \};
 \end{DoxyCode}
 
 
@@ -331,28 +331,28 @@ Concept defining general time-\/dependent operators.
 \hypertarget{group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7_DynamicOperatorConceptAnchor}{}%
 The minimal signature of a time-\/dependent operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My operator A: [0,T[ \(\backslash\)times X -> Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(t,x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access mass matrix.}
-  \hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_ga584f7b9d82a844302ba0d77c3a1b6640}{LinearOperator} M() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My operator A: [0,T[ \(\backslash\)times X -> Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(t,x).
+12   ::Spacy::Vector operator()(double t, const ::Spacy::Vector& x) const;
+13 
+14   // Access domain space.
+15   const VectorSpace& domain() const;
+16 
+17   // Access mass matrix.
+18   LinearOperator M() const;
+19 
+20   // Access range space.
+21   const VectorSpace& range() const;
+22 \};
 \end{DoxyCode}
 
 
@@ -367,16 +367,16 @@ Concept for functionals.
 \hypertarget{group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d_FunctionalConceptAnchor}{}%
 The minimal signature of a functional is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// A functional f: X->R.}
-\textcolor{keyword}{class }MyFunctional
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Compute f(x).}
-  \textcolor{keywordtype}{double} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access underlying domain.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-\};
+1 // A functional f: X->R.
+2 class MyFunctional
+3 \{
+4 public:
+5   // Compute f(x).
+6   double operator()(const ::Spacy::Vector& x) const;
+7 
+8   // Access underlying domain.
+9   const VectorSpace& domain() const;
+10 \};
 \end{DoxyCode}
 
 
@@ -391,22 +391,22 @@ Concept for linear solver implementations that monitor positive definiteness.
 \hypertarget{group__ConceptGroup_ga582dd34334cdecc7b27883f4e8239490_IndefiniteLinearSolverConceptAnchor}{}%
 The minimal signature of a general linear solver is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My general linear solver S representing A^-1.}
-\textcolor{keyword}{class }MyIndefiniteLinearSolver
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyIndefiniteLinearSolver(\textcolor{keyword}{const} MyIndefiniteLinearSolver&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyIndefiniteLinearSolver(MyIndefiniteLinearSolver&&);
-
-  \textcolor{comment}{// Compute A^-1(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Check if A is positive definite}
-  \textcolor{keywordtype}{bool} isPositiveDefinite() \textcolor{keyword}{const};
-\};
+1 // My general linear solver S representing A^-1.
+2 class MyIndefiniteLinearSolver
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyIndefiniteLinearSolver(const MyIndefiniteLinearSolver&);
+7 
+8   // Move constructor.
+9   MyIndefiniteLinearSolver(MyIndefiniteLinearSolver&&);
+10 
+11   // Compute A^-1(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Check if A is positive definite
+15   bool isPositiveDefinite() const;
+16 \};
 \end{DoxyCode}
 
 
@@ -421,28 +421,28 @@ Concept defining linear operators.
 \hypertarget{group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055_LinearOperatorConceptAnchor}{}%
 The minimal signature of a linear operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My linear operator A: X->Y.}
-\textcolor{keyword}{class }MyLinearOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyLinearOperator(\textcolor{keyword}{const} MyLinearOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyLinearOperator(MyLinearOperator&&);
-
-  \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access solver for the computation of A^-1.}
-  \hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{::Spacy::LinearSolver} solver() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My linear operator A: X->Y.
+2 class MyLinearOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyLinearOperator(const MyLinearOperator&);
+7 
+8   // Move constructor.
+9   MyLinearOperator(MyLinearOperator&&);
+10 
+11   // Compute A(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Access solver for the computation of A^-1.
+15   ::Spacy::LinearSolver solver() const;
+16 
+17   // Access domain space.
+18   const VectorSpace& domain() const;
+19 
+20   // Access range space.
+21   const VectorSpace& range() const;
+22 \};
 \end{DoxyCode}
 
 
@@ -457,19 +457,19 @@ Concept for linear solver implementations. Same as \hyperlink{group__ConceptGrou
 \hypertarget{group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd_LinearSolverConceptAnchor}{}%
 The minimal signature of a linear solver is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My linear solver representing A^-1.}
-\textcolor{keyword}{class }MyLinearSolver
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyLinearSolver(\textcolor{keyword}{const} MyLinearSolver&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyLinearSolver(MyLinearSolver&&);
-
-  \textcolor{comment}{// Compute A^-1(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-\};
+1 // My linear solver representing A^-1.
+2 class MyLinearSolver
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyLinearSolver(const MyLinearSolver&);
+7 
+8   // Move constructor.
+9   MyLinearSolver(MyLinearSolver&&);
+10 
+11   // Compute A^-1(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 \};
 \end{DoxyCode}
 
 
@@ -484,22 +484,22 @@ Concept for time integrators.
 \hypertarget{group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08_ErrorEstimatorConceptAnchor}{}%
 The minimal signature of an error estimator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My error estimator.}
-\textcolor{keyword}{class }MyErrorEstimator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyErrorEstimator(\textcolor{keyword}{const} MyErrorEstimator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyErrorEstimator(MyErrorEstimator&&);
-
-  \textcolor{comment}{// Compute error estimate.}
-  \textcolor{keywordtype}{double} operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Refine grid.}
-  \textcolor{keywordtype}{void} refine();
-\};
+1 // My error estimator.
+2 class MyErrorEstimator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyErrorEstimator(const MyErrorEstimator&);
+7 
+8   // Move constructor.
+9   MyErrorEstimator(MyErrorEstimator&&);
+10 
+11   // Compute error estimate.
+12   double operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+13 
+14   // Refine grid.
+15   void refine();
+16 \};
 \end{DoxyCode}
 
 
@@ -514,19 +514,19 @@ Concept for norm implementations.
 \hypertarget{group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b_NormConceptAnchor}{}%
 The minimal signature of a norm is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My norm.}
-\textcolor{keyword}{class }MyNorm
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyNorm(\textcolor{keyword}{const} MyNorm&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyNorm(MyNorm&&);
-
-  \textcolor{comment}{// Compute ||x||.}
-  Real operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-\};
+1 // My norm.
+2 class MyNorm
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyNorm(const MyNorm&);
+7 
+8   // Move constructor.
+9   MyNorm(MyNorm&&);
+10 
+11   // Compute ||x||.
+12   Real operator()(const ::Spacy::Vector& x) const;
+13 \};
 \end{DoxyCode}
 
 
@@ -541,25 +541,25 @@ Concept defining general operators.
 \hypertarget{group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e_OperatorConceptAnchor}{}%
 The minimal signature of an operator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My operator A: X->Y.}
-\textcolor{keyword}{class }MyOperator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyOperator(\textcolor{keyword}{const} MyOperator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyOperator(MyOperator&&);
-
-  \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access domain space.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Access range space.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
-\};
+1 // My operator A: X->Y.
+2 class MyOperator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyOperator(const MyOperator&);
+7 
+8   // Move constructor.
+9   MyOperator(MyOperator&&);
+10 
+11   // Compute A(x).
+12   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+13 
+14   // Access domain space.
+15   const VectorSpace& domain() const;
+16 
+17   // Access range space.
+18   const VectorSpace& range() const;
+19 \};
 \end{DoxyCode}
 
 
@@ -574,19 +574,19 @@ Concept for scalar products.
 \hypertarget{group__ConceptGroup_ga1308724cda3078f228fb05c29556805d_ScalarProductConceptAnchor}{}%
 The minimal signature of a scalar product is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My scalar product.}
-\textcolor{keyword}{class }MyScalarProduct
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyScalarProduct(\textcolor{keyword}{const} MyScalarProduct&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyScalarProduct(MyScalarProduct&&);
-
-  \textcolor{comment}{// Compute (x,y).}
-  Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) \textcolor{keyword}{const};
-\};
+1 // My scalar product.
+2 class MyScalarProduct
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyScalarProduct(const MyScalarProduct&);
+7 
+8   // Move constructor.
+9   MyScalarProduct(MyScalarProduct&&);
+10 
+11   // Compute (x,y).
+12   Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
+13 \};
 \end{DoxyCode}
 
 
@@ -601,22 +601,22 @@ Concept for time integrators.
 \hypertarget{group__ConceptGroup_ga45ecfe57ffb996aa97c9ff89a647f095_TimeIntegratorConceptAnchor}{}%
 The minimal signature of a time integrator is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My scalar product.}
-\textcolor{keyword}{class }MyTimeIntegrator
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyTimeIntegrator(\textcolor{keyword}{const} MyTimeIntegrator&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyTimeIntegrator(MyTimeIntegrator&&);
-
-  \textcolor{comment}{// Compute (x,y).}
-  Vector operator()(\textcolor{keywordtype}{double} t, const ::Spacy::Vector& x) \textcolor{keyword}{const};
-
-  \textcolor{comment}{// Set time step.}
-  \textcolor{keywordtype}{void} setTimeStep(\textcolor{keywordtype}{double} dt);
-\};
+1 // My scalar product.
+2 class MyTimeIntegrator
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyTimeIntegrator(const MyTimeIntegrator&);
+7 
+8   // Move constructor.
+9   MyTimeIntegrator(MyTimeIntegrator&&);
+10 
+11   // Compute (x,y).
+12   Vector operator()(double t, const ::Spacy::Vector& x) const;
+13 
+14   // Set time step.
+15   void setTimeStep(double dt);
+16 \};
 \end{DoxyCode}
 
 
@@ -631,40 +631,40 @@ Concept for vector implementations.
 \hypertarget{group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004_VectorConceptAnchor}{}%
 The minimal signature of a vector is\+: 
 \begin{DoxyCode}
-\textcolor{comment}{// My vector.}
-\textcolor{keyword}{class }MyVector
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Copy constructor.}
-  MyVector(\textcolor{keyword}{const} MyVector&);
-
-  \textcolor{comment}{// Move constructor.}
-  MyVector(MyVector&&);
-
-  \textcolor{comment}{// Copy assignable x=y.}
-  MyVector& operator=(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// In-place summation x+=y.}
-  MyVector& operator+=(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// In-place subtraction x-=y.}
-  MyVector& operator-=(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// In-place multiplication x*=a.}
-  MyVector& operator*=(\textcolor{keywordtype}{double} a);
-
-  \textcolor{comment}{// Negation -y.}
-  MyVector \hyperlink{namespaceSpacy_a8bc98f51c7beab86185bf97a29b36395}{operator-}(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// Equality comparison x==y.}
-  \textcolor{keywordtype}{bool} \hyperlink{namespaceSpacy_aef4930427aac4c8089b4c43b1c97cf25}{operator==}(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// Apply as dual element x(y).}
-  Vector operator()(\textcolor{keyword}{const} MyVector& y);
-
-  \textcolor{comment}{// Access pointer to underlying function space.}
-  \textcolor{keyword}{const} VectorSpace* space() \textcolor{keyword}{const};
-\};
+1 // My vector.
+2 class MyVector
+3 \{
+4 public:
+5   // Copy constructor.
+6   MyVector(const MyVector&);
+7 
+8   // Move constructor.
+9   MyVector(MyVector&&);
+10 
+11   // Copy assignable x=y.
+12   MyVector& operator=(const MyVector& y);
+13 
+14   // In-place summation x+=y.
+15   MyVector& operator+=(const MyVector& y);
+16 
+17   // In-place subtraction x-=y.
+18   MyVector& operator-=(const MyVector& y);
+19 
+20   // In-place multiplication x*=a.
+21   MyVector& operator*=(double a);
+22 
+23   // Negation -y.
+24   MyVector operator-(const MyVector& y);
+25 
+26   // Equality comparison x==y.
+27   bool operator==(const MyVector& y);
+28 
+29   // Apply as dual element x(y).
+30   Vector operator()(const MyVector& y);
+31 
+32   // Access pointer to underlying function space.
+33   const VectorSpace* space() const;
+34 \};
 \end{DoxyCode}
 
 

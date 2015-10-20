@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,25 +121,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Spacy::Concepts::LinearSolverConcept</a> = typedef boost::mpl::vector&lt; ConceptBase , boost::type_erasure::callable&lt;Vector(const Vector&amp;), const boost::type_erasure::_self&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Spacy::Concepts::LinearSolverConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">ConceptBase</a> , boost::type_erasure::callable&lt;<a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;), const boost::type_erasure::_self&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept for linear solver implementations. Same as <a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#CallableOperatorConceptAnchor">CallableOperatorConcept</a>. </p>
-<p><a class="anchor" id="LinearSolverConceptAnchor"></a>The minimal signature of a linear solver is: </p><div class="fragment"><div class="line"><span class="comment">// My linear solver representing A^-1.</span></div>
-<div class="line"><span class="keyword">class </span>MyLinearSolver</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Copy constructor.</span></div>
-<div class="line">  MyLinearSolver(<span class="keyword">const</span> MyLinearSolver&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Move constructor.</span></div>
-<div class="line">  MyLinearSolver(MyLinearSolver&amp;&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Compute A^-1(x).</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(const ::Spacy::Vector&amp; x) <span class="keyword">const</span>;</div>
-<div class="line">};</div>
+<p><a class="anchor" id="LinearSolverConceptAnchor"></a>The minimal signature of a linear solver is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// My linear solver representing A^-1.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyLinearSolver</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Copy constructor.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  MyLinearSolver(const MyLinearSolver&amp;);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Move constructor.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  MyLinearSolver(MyLinearSolver&amp;&amp;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  // Compute A^-1(x).</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  ::Spacy::Vector operator()(const ::Spacy::Vector&amp; x) const;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
 </div><!-- fragment --><p>See <a class="el" href="namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#LinearSolverAnchor">::Spacy::LinearSolver</a>, <a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#CallableOperatorConceptAnchor">CallableOperatorConcept</a> </p>
 
 </div>
@@ -150,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

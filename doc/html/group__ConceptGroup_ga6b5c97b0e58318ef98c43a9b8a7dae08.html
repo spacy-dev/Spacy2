@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,28 +121,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08.html#ga6b5c97b0e58318ef98c43a9b8a7dae08">Spacy::Concepts::MyErrorEstimatorConcept</a> = typedef boost::mpl::vector&lt; ConceptBase , boost::type_erasure::callable&lt;double(const Vector&amp;, const Vector&amp;), const boost::type_erasure::_self&gt; , has_refine&lt;void()&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08.html#ga6b5c97b0e58318ef98c43a9b8a7dae08">Spacy::Concepts::MyErrorEstimatorConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">ConceptBase</a> , boost::type_erasure::callable&lt;double(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;), const boost::type_erasure::_self&gt; , has_refine&lt;void()&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept for time integrators. </p>
-<p><a class="anchor" id="ErrorEstimatorConceptAnchor"></a>The minimal signature of an error estimator is: </p><div class="fragment"><div class="line"><span class="comment">// My error estimator.</span></div>
-<div class="line"><span class="keyword">class </span>MyErrorEstimator</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Copy constructor.</span></div>
-<div class="line">  MyErrorEstimator(<span class="keyword">const</span> MyErrorEstimator&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Move constructor.</span></div>
-<div class="line">  MyErrorEstimator(MyErrorEstimator&amp;&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Compute error estimate.</span></div>
-<div class="line">  <span class="keywordtype">double</span> operator()(const ::Spacy::Vector&amp; x, const ::Spacy::Vector&amp; dx) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Refine grid.</span></div>
-<div class="line">  <span class="keywordtype">void</span> refine();</div>
-<div class="line">};</div>
+<p><a class="anchor" id="ErrorEstimatorConceptAnchor"></a>The minimal signature of an error estimator is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// My error estimator.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyErrorEstimator</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Copy constructor.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  MyErrorEstimator(const MyErrorEstimator&amp;);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Move constructor.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  MyErrorEstimator(MyErrorEstimator&amp;&amp;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  // Compute error estimate.</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  double operator()(const ::Spacy::Vector&amp; x, const ::Spacy::Vector&amp; dx) const;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  // Refine grid.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  void refine();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
 </div><!-- fragment --><p>See ::Spacy::MyErrorEstimator. </p>
 
 </div>
@@ -153,7 +153,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

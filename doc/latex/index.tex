@@ -54,8 +54,8 @@ auto variableSetDescription = VariableSetDescription\{ spaces , \{\textcolor{str
 ...
 
 \textcolor{comment}{// Create domain and range space.}
-auto domain = \hyperlink{group__FenicsGroup_ga89defe8c7e08ab224af2a3cd0445e254_ga89defe8c7e08ab224af2a3cd0445e254}{Spacy::Kaskade::makeHilbertSpace}( space );
-\textcolor{keyword}{auto} range  = \hyperlink{group__FenicsGroup_ga89defe8c7e08ab224af2a3cd0445e254_ga89defe8c7e08ab224af2a3cd0445e254}{Spacy::Kaskade::makeHilbertSpace}( space );
+auto domain = \hyperlink{group__KaskadeGroup_ga04d45446864bbf87770d02eade7b64cf_ga04d45446864bbf87770d02eade7b64cf}{Spacy::Kaskade::makeHilbertSpace}( space );
+\textcolor{keyword}{auto} range  = \hyperlink{group__KaskadeGroup_ga04d45446864bbf87770d02eade7b64cf_ga04d45446864bbf87770d02eade7b64cf}{Spacy::Kaskade::makeHilbertSpace}( space );
 
 \textcolor{comment}{// Create operator}
 \textcolor{keyword}{auto} A = \hyperlink{group__KaskadeGroup_ga0e8d7d2c51e429e22561ef813fc97589_ga0e8d7d2c51e429e22561ef813fc97589}{Spacy::Kaskade::makeOperator}( F , domain , range );
@@ -70,7 +70,7 @@ domain.setScalarProduct( InducedScalarProduct( A.linearization(x0) );
 
 \textcolor{comment}{// copy solution back to dolfin::Function}
 \textcolor{keyword}{typename} VariableSetDescription::VariableSet u( variableSetDescription );
-\hyperlink{group__FenicsGroup_ga7f43f0c660d0646adb031b453c536bb0_ga7f43f0c660d0646adb031b453c536bb0}{Spacy::Kaskade::copy}( x , u );
+\hyperlink{group__KaskadeGroup_gafbbd7e385eda54f651c45b1c074d7bf9_gafbbd7e385eda54f651c45b1c074d7bf9}{Spacy::Kaskade::copy}( x , u );
 ...
 \end{DoxyCode}
  

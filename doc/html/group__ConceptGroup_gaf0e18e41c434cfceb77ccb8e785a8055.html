@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,34 +121,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">Spacy::Concepts::LinearOperatorConcept</a> = typedef boost::mpl::vector&lt; OperatorConcept , VectorConcept , has_solver&lt;boost::type_erasure::any&lt;LinearSolverConcept&gt;(), const boost::type_erasure::_self&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">Spacy::Concepts::LinearOperatorConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e.html#ga7d984281b647a6d8e4c0a7ea5faeb90e">OperatorConcept</a> , <a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">VectorConcept</a> , has_solver&lt;boost::type_erasure::any&lt;<a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">LinearSolverConcept</a>&gt;(), const boost::type_erasure::_self&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept defining linear operators. </p>
-<p><a class="anchor" id="LinearOperatorConceptAnchor"></a>The minimal signature of a linear operator is: </p><div class="fragment"><div class="line"><span class="comment">// My linear operator A: X-&gt;Y.</span></div>
-<div class="line"><span class="keyword">class </span>MyLinearOperator</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Copy constructor.</span></div>
-<div class="line">  MyLinearOperator(<span class="keyword">const</span> MyLinearOperator&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Move constructor.</span></div>
-<div class="line">  MyLinearOperator(MyLinearOperator&amp;&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Compute A(x).</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(const ::Spacy::Vector&amp; x) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access solver for the computation of A^-1.</span></div>
-<div class="line">  <a class="code" href="namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#a7d5cd1c6fb9dd85aa345b536caf30bba">::Spacy::LinearSolver</a> solver() <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access domain space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access range space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
-<div class="line">};</div>
+<p><a class="anchor" id="LinearOperatorConceptAnchor"></a>The minimal signature of a linear operator is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// My linear operator A: X-&gt;Y.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyLinearOperator</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Copy constructor.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  MyLinearOperator(const MyLinearOperator&amp;);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Move constructor.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  MyLinearOperator(MyLinearOperator&amp;&amp;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  // Compute A(x).</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  ::Spacy::Vector operator()(const ::Spacy::Vector&amp; x) const;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  // Access solver for the computation of A^-1.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  ::Spacy::LinearSolver solver() const;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  // Access domain space.</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  const VectorSpace&amp; domain() const;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  // Access range space.</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  const VectorSpace&amp; range() const;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
 </div><!-- fragment --><p>See <a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#LinearOperatorAnchor">::Spacy::LinearOperator</a>. </p>
 
 </div>
@@ -159,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

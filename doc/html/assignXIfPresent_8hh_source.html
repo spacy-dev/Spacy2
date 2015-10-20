@@ -171,19 +171,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">template</span> &lt; <span class="keyword">class</span> T , <span class="keyword">class</span> Arg &gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> assign_x_if_present(T&amp; f, <span class="keyword">const</span> Arg&amp; x)</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="namespaceSpacy_1_1FEniCS.html#ac42a8d576578dbe113e1b93450ed3d2c">   81</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#ac42a8d576578dbe113e1b93450ed3d2c">assign_x_if_present</a>(T&amp; f, <span class="keyword">const</span> Arg&amp; x)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      Assign_x_If_Present&lt;T&gt;::apply(f,x);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">template</span> &lt; <span class="keyword">class</span> T , <span class="keyword">class</span> Arg &gt;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> assign_t_if_present(T&amp; f, <span class="keyword">const</span> Arg&amp; t)</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="namespaceSpacy_1_1FEniCS.html#af23f1bf9e866dbce5fd71a36abc4fd17">   90</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#af23f1bf9e866dbce5fd71a36abc4fd17">assign_t_if_present</a>(T&amp; f, <span class="keyword">const</span> Arg&amp; t)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      Assign_t_If_Present&lt;T&gt;::apply(f,t);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span> &lt; <span class="keyword">class</span> T , <span class="keyword">class</span> Arg &gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> assign_f_if_present(T&amp; g, <span class="keyword">const</span> Arg&amp; f)</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="namespaceSpacy_1_1FEniCS.html#a847a1c704ef8c31faedcee55be860a25">   99</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a847a1c704ef8c31faedcee55be860a25">assign_f_if_present</a>(T&amp; g, <span class="keyword">const</span> Arg&amp; f)</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      Assign_f_If_Present&lt;T&gt;::apply(g,f);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
@@ -193,11 +193,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif // SPACY_ADAPTER_FENICS_HASX_HH</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
 <div class="ttc" id="namespaceSpacy_html_a63ae343327f8e3bde02913c0be7d8655"><div class="ttname"><a href="namespaceSpacy.html#a63ae343327f8e3bde02913c0be7d8655">Spacy::void_t</a></div><div class="ttdeci">typename Detail::voider&lt; Types...&gt;::type void_t</div><div class="ttdoc">Most fascinating type ever. Is always void. </div><div class="ttdef"><b>Definition:</b> voider.hh:40</div></div>
+<div class="ttc" id="namespaceSpacy_1_1FEniCS_html_ac42a8d576578dbe113e1b93450ed3d2c"><div class="ttname"><a href="namespaceSpacy_1_1FEniCS.html#ac42a8d576578dbe113e1b93450ed3d2c">Spacy::FEniCS::assign_x_if_present</a></div><div class="ttdeci">void assign_x_if_present(T &amp;f, const Arg &amp;x)</div><div class="ttdoc">Assign f.x=x if f has a public member with name x. Else does nothing. </div><div class="ttdef"><b>Definition:</b> assignXIfPresent.hh:81</div></div>
+<div class="ttc" id="namespaceSpacy_1_1FEniCS_html_a847a1c704ef8c31faedcee55be860a25"><div class="ttname"><a href="namespaceSpacy_1_1FEniCS.html#a847a1c704ef8c31faedcee55be860a25">Spacy::FEniCS::assign_f_if_present</a></div><div class="ttdeci">void assign_f_if_present(T &amp;g, const Arg &amp;f)</div><div class="ttdoc">Assign T.f if g has a public member with name t. Else does nothing. </div><div class="ttdef"><b>Definition:</b> assignXIfPresent.hh:99</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<div class="ttc" id="namespaceSpacy_1_1FEniCS_html_af23f1bf9e866dbce5fd71a36abc4fd17"><div class="ttname"><a href="namespaceSpacy_1_1FEniCS.html#af23f1bf9e866dbce5fd71a36abc4fd17">Spacy::FEniCS::assign_t_if_present</a></div><div class="ttdeci">void assign_t_if_present(T &amp;f, const Arg &amp;t)</div><div class="ttdoc">Assign f.f=f if f has a public member with name t. Else does nothing. </div><div class="ttdef"><b>Definition:</b> assignXIfPresent.hh:90</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:05 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

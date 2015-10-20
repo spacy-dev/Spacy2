@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><b>CG</b></li><li class="navelem"><a class="el" href="classSpacy_1_1CG_1_1Solver.html">Solver</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1CG.html">CG</a></li><li class="navelem"><a class="el" href="classSpacy_1_1CG_1_1Solver.html">Solver</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -341,13 +341,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Conjugate gradient method. </p>
-<p>This implements a preconditioned CG iteration for an operator \( A: X\to x^* \), preconditioned by a preconditioner \( B^{-1}: X^* \to X \). The default termination criterion is based on an estimate of the relative energy error (see StrakosTichyEnergyError).</p>
+<p>This implements a preconditioned <a class="el" href="namespaceSpacy_1_1CG.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr...">CG</a> iteration for an operator \( A: X\to x^* \), preconditioned by a preconditioner \( B^{-1}: X^* \to X \). The default termination criterion is based on an estimate of the relative energy error (see StrakosTichyEnergyError).</p>
 <p>Different implementations are available:</p>
 <ul>
 <li>"CG": Standard preconditioned conjugate gradient method (see <a class="el" href="citelist.html#CITEREF_Hestenes1952">[3]</a>).</li>
 <li>"TCG": Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is encountered.</li>
-<li>"RCG": Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by \(A\) and the preconditioner by \(P\). Then if a direction of negative curvature is encountered \(A\) is implicitly replaced by the regularization $ \(A+\thetaP\). Then the CG method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.</li>
-<li>"TRCG": Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by \(A\) and the preconditioner by \(P\), \(A\) is implicitly replaced by the regularization $ \(A+\thetaP\). Then the CG method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see <a class="el" href="citelist.html#CITEREF_Lubkoll2015a">[4]</a>). </li>
+<li>"RCG": Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by \(A\) and the preconditioner by \(P\). Then if a direction of negative curvature is encountered \(A\) is implicitly replaced by the regularization $ \(A+\thetaP\). Then the <a class="el" href="namespaceSpacy_1_1CG.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr...">CG</a> method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.</li>
+<li>"TRCG": Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by \(A\) and the preconditioner by \(P\), \(A\) is implicitly replaced by the regularization $ \(A+\thetaP\). Then the <a class="el" href="namespaceSpacy_1_1CG.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr...">CG</a> method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see <a class="el" href="citelist.html#CITEREF_Lubkoll2015a">[4]</a>). </li>
 </ul>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>Spacy/Algorithm/CG/<a class="el" href="cg_8hh_source.html">cg.hh</a></li>
@@ -355,7 +355,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:26 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

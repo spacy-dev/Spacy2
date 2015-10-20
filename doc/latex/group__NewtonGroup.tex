@@ -235,8 +235,8 @@ Local Newton method with default initial iterate (x0=0).
 \begin{DoxyParamCaption}
 \item[{const {\bf C1\+Operator} \&}]{F, }
 \item[{const {\bf Vector} \&}]{x0, }
-\item[{const Damping\+Strategy \&}]{damping\+Strategy, }
-\item[{const Termination\+Criterion \&}]{termination\+Criterion, }
+\item[{const {\bf Damping\+Strategy} \&}]{damping\+Strategy, }
+\item[{const {\bf Termination\+Criterion} \&}]{termination\+Criterion, }
 \item[{const {\bf Parameter} \&}]{p}
 \end{DoxyParamCaption}
 )}\label{group__NewtonGroup_gac1e03448966c56b3a119f9bea07e6dd6_gac1e03448966c56b3a119f9bea07e6dd6}
@@ -284,7 +284,7 @@ Generic Newton method.
 \end{DoxyParams}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Damping} & damping strategy, must provide a constructor Damping(const C1\+Operator\& F) \\
+{\em \hyperlink{namespaceSpacy_1_1Newton_1_1Damping}{Damping}} & damping strategy, must provide a constructor Damping(const C1\+Operator\& F) \\
 \hline
 {\em Terminate} & termination criterion, must provide a constructor Terminate(const C1\+Operator\& F, double relative\+Accuracy, bool verbose)\\
 \hline

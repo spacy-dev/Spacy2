@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,22 +121,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d">Spacy::Concepts::FunctionalConcept</a> = typedef boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt;Real(const Vector&amp;), const boost::type_erasure::_self&gt;, has_domain&lt;const VectorSpace&amp;(), const boost::type_erasure::_self&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d">Spacy::Concepts::FunctionalConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">ConceptBase</a>, boost::type_erasure::callable&lt;<a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;), const boost::type_erasure::_self&gt;, has_domain&lt;const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp;(), const boost::type_erasure::_self&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept for functionals. </p>
-<p><a class="anchor" id="FunctionalConceptAnchor"></a>The minimal signature of a functional is: </p><div class="fragment"><div class="line"><span class="comment">// A functional f: X-&gt;R.</span></div>
-<div class="line"><span class="keyword">class </span>MyFunctional</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Compute f(x).</span></div>
-<div class="line">  <span class="keywordtype">double</span> operator()(const ::Spacy::Vector&amp; x) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access underlying domain.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
-<div class="line">};</div>
+<p><a class="anchor" id="FunctionalConceptAnchor"></a>The minimal signature of a functional is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// A functional f: X-&gt;R.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyFunctional</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Compute f(x).</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  double operator()(const ::Spacy::Vector&amp; x) const;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Access underlying domain.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  const VectorSpace&amp; domain() const;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;};</div>
 </div><!-- fragment --><p>See <a class="el" href="group__SpacyGroup_ga673218f603c93790864aef12c89d3a35.html#FunctionalAnchor">::Spacy::Functional</a>. </p>
 
 </div>
@@ -147,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

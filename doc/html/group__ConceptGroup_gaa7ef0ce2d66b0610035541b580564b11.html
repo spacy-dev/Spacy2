@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="group__ConceptGroup.html">Concepts</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a></li><li class="navelem"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="contents">
@@ -121,40 +121,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11">Spacy::Concepts::DynamicC1OperatorConcept</a> = typedef boost::mpl::vector&lt; DynamicOperatorConcept , has_d1&lt;Vector(double t, const Vector&amp;,const Vector&amp;), const boost::type_erasure::_self&gt; , has_linearization&lt;boost::type_erasure::any&lt;LinearOperatorConcept&gt;(double t, const Vector&amp;), const boost::type_erasure::_self&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11">Spacy::Concepts::DynamicC1OperatorConcept</a> = typedef boost::mpl::vector&lt; <a class="el" href="group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7.html#ga2c979d268f0ca7a436776a9631d10af7">DynamicOperatorConcept</a> , has_d1&lt;<a class="el" href="classSpacy_1_1Vector.html">Vector</a>(double t, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;,const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;), const boost::type_erasure::_self&gt; , has_linearization&lt;boost::type_erasure::any&lt;<a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">LinearOperatorConcept</a>&gt;(double t, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;), const boost::type_erasure::_self&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Concept defining time-dependent operators that are differentiable with respect to the spatial variable. </p>
-<p><a class="anchor" id="DynamicC1OperatorConceptAnchor"></a>The minimal signature for a time-dependent differentiable operator is: </p><div class="fragment"><div class="line"><span class="comment">// My differentiable operator A: [0,T[ \times X -&gt; Y.</span></div>
-<div class="line"><span class="keyword">class </span>MyOperator</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Copy constructor.</span></div>
-<div class="line">  MyOperator(<span class="keyword">const</span> MyOperator&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Move constructor.</span></div>
-<div class="line">  MyOperator(MyOperator&amp;&amp;);</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Compute A(t,x).</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<span class="keywordtype">double</span> t, const ::Spacy::Vector&amp; x) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Compute A_x(t,x)dx.</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2.html#gab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<span class="keywordtype">double</span> t, const ::Spacy::Vector&amp; x, const ::Spacy::Vector&amp; dx) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Get linearization representing A_x(t,x).</span></div>
-<div class="line"> <a class="code" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">::Spacy::LinearOperator</a> linearization(<span class="keywordtype">double</span> t, const ::Spacy::Vector&amp; x) <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access mass matrix.</span></div>
-<div class="line">  <a class="code" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> M() <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access domain space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
-<div class="line"></div>
-<div class="line">  <span class="comment">// Access range space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
-<div class="line">};</div>
+<p><a class="anchor" id="DynamicC1OperatorConceptAnchor"></a>The minimal signature for a time-dependent differentiable operator is: </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// My differentiable operator A: [0,T[ \times X -&gt; Y.</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;class MyOperator</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;public:</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;  // Copy constructor.</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  MyOperator(const MyOperator&amp;);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  // Move constructor.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  MyOperator(MyOperator&amp;&amp;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  // Compute A(t,x).</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  ::Spacy::Vector operator()(double t, const ::Spacy::Vector&amp; x) const;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  // Compute A_x(t,x)dx.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  ::Spacy::Vector d1(double t, const ::Spacy::Vector&amp; x, const ::Spacy::Vector&amp; dx) const;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  // Get linearization representing A_x(t,x).</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; ::Spacy::LinearOperator linearization(double t, const ::Spacy::Vector&amp; x) const;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  // Access mass matrix.</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  LinearOperator M() const;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  // Access domain space.</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  const VectorSpace&amp; domain() const;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  // Access range space.</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  const VectorSpace&amp; range() const;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 </div><!-- fragment --><p>See <a class="el" href="group__SpacyGroup_gabc9c830d2a7e020bcab097b10ee6f642.html#DynamicC1OperatorAnchor">::Spacy::DynamicC1Operator</a>. </p>
 
 </div>
@@ -165,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

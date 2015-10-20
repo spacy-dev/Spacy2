@@ -154,10 +154,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> AnsatzVariableSetDescription, <span class="keyword">class</span> TestVariableSetDescription, <span class="keyword">class</span> KaskadeOperator&gt;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">auto</span> makeDirectSolver(KaskadeOperator A, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; domain, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; range,</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56.html#a9ee22f7d702c4cfc68786dd821dddd56">   85</a></span>&#160;    <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56.html#a9ee22f7d702c4cfc68786dd821dddd56">makeDirectSolver</a>(KaskadeOperator A, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; domain, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; range,</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                          DirectType directSolver = DirectType::MUMPS, MatrixProperties property = MatrixProperties::GENERAL )</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">return</span> DirectSolver&lt;KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1Kaskade_1_1DirectSolver.html">DirectSolver&lt;KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription&gt;</a></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;          ( std::move(A) , domain , range , directSolver , property );</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
@@ -178,10 +178,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classSpacy_1_1VectorSpace_html_a4fe6635949ce6f2971966eaaf122233c"><div class="ttname"><a href="classSpacy_1_1VectorSpace.html#a4fe6635949ce6f2971966eaaf122233c">Spacy::VectorSpace::vector</a></div><div class="ttdeci">Vector vector() const </div><div class="ttdoc">Create new vector . </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
 <div class="ttc" id="classSpacy_1_1Kaskade_1_1DirectSolver_html"><div class="ttname"><a href="classSpacy_1_1Kaskade_1_1DirectSolver.html">Spacy::Kaskade::DirectSolver</a></div><div class="ttdoc">Direct solver interface for Kaskade 7. </div><div class="ttdef"><b>Definition:</b> directSolver.hh:23</div></div>
+<div class="ttc" id="namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56_html_a9ee22f7d702c4cfc68786dd821dddd56"><div class="ttname"><a href="namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56.html#a9ee22f7d702c4cfc68786dd821dddd56">Spacy::Kaskade::makeDirectSolver</a></div><div class="ttdeci">auto makeDirectSolver(KaskadeOperator A, const VectorSpace &amp;domain, const VectorSpace &amp;range, DirectType directSolver=DirectType::MUMPS, MatrixProperties property=MatrixProperties::GENERAL)</div><div class="ttdoc">Convenient generation of direct solver for Kaskade 7. </div><div class="ttdef"><b>Definition:</b> directSolver.hh:85</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:00:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

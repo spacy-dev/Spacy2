@@ -1,5 +1,17 @@
 var searchData=
 [
+  ['cg',['CG',['../namespaceSpacy_1_1CG.html',1,'Spacy']]],
+  ['cg',['CG',['../namespaceSpacy_1_1Concepts_1_1CG.html',1,'Spacy::Concepts']]],
+  ['compositestep',['CompositeStep',['../namespaceSpacy_1_1Concepts_1_1CompositeStep.html',1,'Spacy::Concepts']]],
+  ['concepts',['Concepts',['../namespaceSpacy_1_1Concepts.html',1,'Spacy']]],
+  ['damping',['Damping',['../namespaceSpacy_1_1Newton_1_1Damping.html',1,'Spacy::Newton']]],
+  ['fenics',['FEniCS',['../namespaceSpacy_1_1FEniCS.html',1,'Spacy']]],
+  ['kaskade',['Kaskade',['../namespaceSpacy_1_1Kaskade.html',1,'Spacy']]],
+  ['mixin',['Mixin',['../namespaceSpacy_1_1Mixin.html',1,'Spacy']]],
+  ['newton',['Newton',['../namespaceSpacy_1_1Concepts_1_1Newton.html',1,'Spacy::Concepts']]],
+  ['newton',['Newton',['../namespaceSpacy_1_1Newton.html',1,'Spacy']]],
+  ['productspace',['ProductSpace',['../namespaceSpacy_1_1ProductSpace.html',1,'Spacy']]],
+  ['realspace',['RealSpace',['../namespaceSpacy_1_1RealSpace.html',1,'Spacy']]],
   ['scalarproduct',['ScalarProduct',['../classSpacy_1_1ProductSpace_1_1ScalarProduct.html',1,'Spacy::ProductSpace']]],
   ['scalarproduct',['scalarProduct',['../classSpacy_1_1VectorSpace.html#a6f63e2ef5afe7530cbc9480cbc37a8d7',1,'Spacy::VectorSpace::scalarProduct()'],['../group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1',1,'Spacy::ScalarProduct()']]],
   ['scalarproductconcept',['ScalarProductConcept',['../group__ConceptGroup_ga1308724cda3078f228fb05c29556805d.html#ga1308724cda3078f228fb05c29556805d',1,'Spacy::Concepts']]],
@@ -44,8 +56,8 @@ var searchData=
   ['singularoperatorexception',['SingularOperatorException',['../classSpacy_1_1SingularOperatorException.html',1,'Spacy']]],
   ['size',['size',['../classSpacy_1_1FEniCS_1_1Vector_ae5357c7dc9622b782e9aa10a98c610a8.html#ae5357c7dc9622b782e9aa10a98c610a8',1,'Spacy::FEniCS::Vector']]],
   ['solve',['solve',['../classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab.html#a23770606bb41f2d8f5a6ae71d07934ab',1,'Spacy::CG::Solver']]],
-  ['solver',['solver',['../classSpacy_1_1FEniCS_1_1LinearOperator_aa5aacfc25bb0d710f56c2323753d451f.html#aa5aacfc25bb0d710f56c2323753d451f',1,'Spacy::FEniCS::LinearOperator::solver()'],['../classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91.html#a843c904f87af508090604adc28488e91',1,'Spacy::Kaskade::LinearOperator::solver()'],['../classSpacy_1_1Hessian_ab198b43edafe331ba98299e136dc6daa.html#ab198b43edafe331ba98299e136dc6daa',1,'Spacy::Hessian::solver()'],['../classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6.html#a8e26eebdf3236200c738ab76eed5d3d6',1,'Spacy::LinearizedOperator::solver()'],['../classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5.html#a4b6e80b42da6ee9a64cbd07f85964cd5',1,'Spacy::CG::Solver::Solver()']]],
   ['solver',['Solver',['../classSpacy_1_1CG_1_1Solver.html',1,'Spacy::CG']]],
+  ['solver',['solver',['../classSpacy_1_1FEniCS_1_1LinearOperator_aa5aacfc25bb0d710f56c2323753d451f.html#aa5aacfc25bb0d710f56c2323753d451f',1,'Spacy::FEniCS::LinearOperator::solver()'],['../classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91.html#a843c904f87af508090604adc28488e91',1,'Spacy::Kaskade::LinearOperator::solver()'],['../classSpacy_1_1Hessian_ab198b43edafe331ba98299e136dc6daa.html#ab198b43edafe331ba98299e136dc6daa',1,'Spacy::Hessian::solver()'],['../classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6.html#a8e26eebdf3236200c738ab76eed5d3d6',1,'Spacy::LinearizedOperator::solver()'],['../classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5.html#a4b6e80b42da6ee9a64cbd07f85964cd5',1,'Spacy::CG::Solver::Solver()']]],
   ['space',['space',['../classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044.html#a95e87ce98f5a7646055d4e87e6024044',1,'Spacy::VectorBase']]],
   ['spaces',['Spaces',['../classSpacy_1_1Kaskade_1_1C2Functional.html#afb866208161b4421f74aab07f50af065',1,'Spacy::Kaskade::C2Functional::Spaces()'],['../classSpacy_1_1Kaskade_1_1C2Functional.html#ac334455723ea59d001fef33e056b1ea7',1,'Spacy::Kaskade::C2Functional::spaces() const noexcept']]],
   ['spacy',['Spacy',['../namespaceSpacy.html',1,'']]],
@@ -63,5 +75,7 @@ var searchData=
   ['supportedoperatorbase_3c_20linearoperator_3c_20ansatzvariablesetdescription_2c_20testvariablesetdescription_20_3e_20_3e',['SupportedOperatorBase&lt; LinearOperator&lt; AnsatzVariableSetDescription, TestVariableSetDescription &gt; &gt;',['../classSpacy_1_1SupportedOperatorBase.html',1,'Spacy']]],
   ['supportedoperatorbase_3c_20real_20_3e',['SupportedOperatorBase&lt; Real &gt;',['../classSpacy_1_1SupportedOperatorBase.html',1,'Spacy']]],
   ['supportedoperatorbase_3c_20vector_20_3e',['SupportedOperatorBase&lt; Vector &gt;',['../classSpacy_1_1SupportedOperatorBase.html',1,'Spacy']]],
-  ['supportedoperatorbase_3c_20vector_3c_20description_20_3e_20_3e',['SupportedOperatorBase&lt; Vector&lt; Description &gt; &gt;',['../classSpacy_1_1SupportedOperatorBase.html',1,'Spacy']]]
+  ['supportedoperatorbase_3c_20vector_3c_20description_20_3e_20_3e',['SupportedOperatorBase&lt; Vector&lt; Description &gt; &gt;',['../classSpacy_1_1SupportedOperatorBase.html',1,'Spacy']]],
+  ['termination',['Termination',['../namespaceSpacy_1_1Newton_1_1Termination.html',1,'Spacy::Newton']]],
+  ['termination',['Termination',['../namespaceSpacy_1_1CG_1_1Termination.html',1,'Spacy::CG']]]
 ];

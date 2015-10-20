@@ -189,7 +189,7 @@ void \hyperlink{classSpacy_1_1Mixin_1_1MaxSteps_a8b093369a1ce5a6323f3dc3c41a738e
 \subsection{Detailed Description}
 Conjugate gradient method. 
 
-This implements a preconditioned C\+G iteration for an operator $ A: X\to x^* $, preconditioned by a preconditioner $ B^{-1}: X^* \to X $. The default termination criterion is based on an estimate of the relative energy error (see Strakos\+Tichy\+Energy\+Error).
+This implements a preconditioned \hyperlink{namespaceSpacy_1_1CG}{C\+G} iteration for an operator $ A: X\to x^* $, preconditioned by a preconditioner $ B^{-1}: X^* \to X $. The default termination criterion is based on an estimate of the relative energy error (see Strakos\+Tichy\+Energy\+Error).
 
 Different implementations are available\+:
 
@@ -197,8 +197,8 @@ Different implementations are available\+:
 \begin{DoxyItemize}
 \item \char`\"{}\+C\+G\char`\"{}\+: Standard preconditioned conjugate gradient method (see \cite{Hestenes1952}).
 \item \char`\"{}\+T\+C\+G\char`\"{}\+: Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is encountered.
-\item \char`\"{}\+R\+C\+G\char`\"{}\+: Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by $A$ and the preconditioner by $P$. Then if a direction of negative curvature is encountered $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the C\+G method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.
-\item \char`\"{}\+T\+R\+C\+G\char`\"{}\+: Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by $A$ and the preconditioner by $P$, $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the C\+G method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see \cite{Lubkoll2015a}). 
+\item \char`\"{}\+R\+C\+G\char`\"{}\+: Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by $A$ and the preconditioner by $P$. Then if a direction of negative curvature is encountered $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{C\+G} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.
+\item \char`\"{}\+T\+R\+C\+G\char`\"{}\+: Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by $A$ and the preconditioner by $P$, $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{C\+G} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see \cite{Lubkoll2015a}). 
 \end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
