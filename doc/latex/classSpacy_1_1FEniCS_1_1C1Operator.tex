@@ -1,0 +1,268 @@
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator}{}\section{Spacy\+:\+:F\+Eni\+C\+S\+:\+:C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$ Class Template Reference}
+\label{classSpacy_1_1FEniCS_1_1C1Operator}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$}}
+
+
+Operator interface for F\+Eni\+C\+S. Models a differentiable operator $A:X\rightarrow Y$.  
+
+
+
+
+{\ttfamily \#include $<$c1\+Operator.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classSpacy_1_1FEniCS_1_1C1Operator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classSpacy_1_1FEniCS_1_1C1Operator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_af23d84bd48d0902011bf80ba2f4cd394_af23d84bd48d0902011bf80ba2f4cd394}{C1\+Operator} (const Residual\+Form \&F, const Jacobian\+Form \&J, const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&bcs, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain}, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range})
+\begin{DoxyCompactList}\small\item\em Construct operator for F\+Enics. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_afe6c4eb8960290212a16a1eca2267b48_afe6c4eb8960290212a16a1eca2267b48}{C1\+Operator} (const Residual\+Form \&F, const Jacobian\+Form \&J, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain}, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range})
+\begin{DoxyCompactList}\small\item\em Construct operator without boundary conditions for F\+Enics. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_a4ab2b79f50f05b4cc4403269dad87e1e_a4ab2b79f50f05b4cc4403269dad87e1e}{C1\+Operator} (\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_a8bedc9295f43ebe21be9e2a9337da1e5_a8bedc9295f43ebe21be9e2a9337da1e5}{C1\+Operator} (const \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \&other)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \& \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_a1e74d332b9cb30ed83d757a39453c47c_a1e74d332b9cb30ed83d757a39453c47c}{operator=} (const \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \& \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_ae611721c1f172413877c91a3e99ae69b_ae611721c1f172413877c91a3e99ae69b}{operator=} (\hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{C1\+Operator} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_a5e2b3831a7583793f6c134eedd2be9bc}{}\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_a5e2b3831a7583793f6c134eedd2be9bc}{operator()} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const \label{classSpacy_1_1FEniCS_1_1C1Operator_a5e2b3831a7583793f6c134eedd2be9bc}
+
+\begin{DoxyCompactList}\small\item\em Compute $A(x)$. \end{DoxyCompactList}\item 
+\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_a610d7a4a5daec3b512ab3ccf46a7b9e9_a610d7a4a5daec3b512ab3ccf46a7b9e9}{d1} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&dx) const 
+\begin{DoxyCompactList}\small\item\em Compute $A'(x)dx$. \end{DoxyCompactList}\item 
+auto \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator_aab603c2b35f2b710b2e646cf3fb7ee9c_aab603c2b35f2b710b2e646cf3fb7ee9c}{linearization} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Access $A'(x)$ as linear operator $X\rightarrow Y$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const 
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const 
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Residual\+Form, class Jacobian\+Form$>$class Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator$<$ Residual\+Form, Jacobian\+Form $>$}
+
+Operator interface for F\+Eni\+C\+S. Models a differentiable operator $A:X\rightarrow Y$. 
+
+\begin{DoxyWarning}{Warning}
+In the .ufl file you have to name the argument of $f$ by \char`\"{}x\char`\"{}! 
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620_C1OperatorAnchor}{C1\+Operator}, \hyperlink{group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b_C1OperatorConceptAnchor}{C1\+Operator\+Concept} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_af23d84bd48d0902011bf80ba2f4cd394_af23d84bd48d0902011bf80ba2f4cd394}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{C1\+Operator@{C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::{\bf C1\+Operator} (
+\begin{DoxyParamCaption}
+\item[{const Residual\+Form \&}]{F, }
+\item[{const Jacobian\+Form \&}]{J, }
+\item[{const std\+::vector$<$ const dolfin\+::\+Dirichlet\+B\+C $\ast$ $>$ \&}]{bcs, }
+\item[{{\bf Vector\+Space} \&}]{domain, }
+\item[{{\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_af23d84bd48d0902011bf80ba2f4cd394_af23d84bd48d0902011bf80ba2f4cd394}
+
+
+Construct operator for F\+Enics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em F} & Residual form for the evaluation of $A$ \\
+\hline
+{\em J} & Jacobian form for the evaluation of $A'$ \\
+\hline
+{\em bcs} & Dirichlet boundary conditions \\
+\hline
+{\em domain} & domain space $X$ \\
+\hline
+{\em range} & range space $Y$ \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_afe6c4eb8960290212a16a1eca2267b48_afe6c4eb8960290212a16a1eca2267b48}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{C1\+Operator@{C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::{\bf C1\+Operator} (
+\begin{DoxyParamCaption}
+\item[{const Residual\+Form \&}]{F, }
+\item[{const Jacobian\+Form \&}]{J, }
+\item[{{\bf Vector\+Space} \&}]{domain, }
+\item[{{\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_afe6c4eb8960290212a16a1eca2267b48_afe6c4eb8960290212a16a1eca2267b48}
+
+
+Construct operator without boundary conditions for F\+Enics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em F} & Residual form for the evaluation of $A$ \\
+\hline
+{\em J} & Jacobian form for the evaluation of $A'$ \\
+\hline
+{\em domain} & domain space $X$ \\
+\hline
+{\em range} & range space $Y$ \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_a4ab2b79f50f05b4cc4403269dad87e1e_a4ab2b79f50f05b4cc4403269dad87e1e}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{C1\+Operator@{C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::{\bf C1\+Operator} (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$ \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_a4ab2b79f50f05b4cc4403269dad87e1e_a4ab2b79f50f05b4cc4403269dad87e1e}
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to move from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_a8bedc9295f43ebe21be9e2a9337da1e5_a8bedc9295f43ebe21be9e2a9337da1e5}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{C1\+Operator@{C1\+Operator}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::{\bf C1\+Operator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$ \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_a8bedc9295f43ebe21be9e2a9337da1e5_a8bedc9295f43ebe21be9e2a9337da1e5}
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to copy from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_a610d7a4a5daec3b512ab3ccf46a7b9e9_a610d7a4a5daec3b512ab3ccf46a7b9e9}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!d1@{d1}}
+\index{d1@{d1}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ \+::{\bf Spacy\+::\+Vector} {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::d1 (
+\begin{DoxyParamCaption}
+\item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x, }
+\item[{const \+::{\bf Spacy\+::\+Vector} \&}]{dx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_a610d7a4a5daec3b512ab3ccf46a7b9e9_a610d7a4a5daec3b512ab3ccf46a7b9e9}
+
+
+Compute $A'(x)dx$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & iterate \\
+\hline
+{\em dx} & correction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$A'(x)dx$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!domain@{domain}}
+\index{domain@{domain}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{domain}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::domain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}
+
+
+Access domain space $X$. 
+
+\begin{DoxyReturn}{Returns}
+domain space $X$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_aab603c2b35f2b710b2e646cf3fb7ee9c_aab603c2b35f2b710b2e646cf3fb7ee9c}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!linearization@{linearization}}
+\index{linearization@{linearization}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{linearization}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ auto {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::linearization (
+\begin{DoxyParamCaption}
+\item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_aab603c2b35f2b710b2e646cf3fb7ee9c_aab603c2b35f2b710b2e646cf3fb7ee9c}
+
+
+Access $A'(x)$ as linear operator $X\rightarrow Y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & current iterate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1LinearizedOperator}{Linearized\+Operator} 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classSpacy_1_1LinearizedOperator}{Linearized\+Operator}, \hyperlink{classSpacy_1_1FEniCS_1_1LinearOperator}{Linear\+Operator}, Linear\+Operator\+Concept 
+\end{DoxySeeAlso}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_a1e74d332b9cb30ed83d757a39453c47c_a1e74d332b9cb30ed83d757a39453c47c}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$ \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_a1e74d332b9cb30ed83d757a39453c47c_a1e74d332b9cb30ed83d757a39453c47c}
+
+
+Copy assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1FEniCS_1_1C1Operator_ae611721c1f172413877c91a3e99ae69b_ae611721c1f172413877c91a3e99ae69b}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\+Form , class Jacobian\+Form $>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\+Operator}$<$ Residual\+Form, Jacobian\+Form $>$ \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1FEniCS_1_1C1Operator_ae611721c1f172413877c91a3e99ae69b_ae611721c1f172413877c91a3e99ae69b}
+
+
+Move assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & object to move from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}!range@{range}}
+\index{range@{range}!Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator@{Spacy\+::\+F\+Eni\+C\+S\+::\+C1\+Operator}}
+\subsubsection[{range}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}
+
+
+Access range space $Y$. 
+
+\begin{DoxyReturn}{Returns}
+range space $Y$. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/\+Adapter/\+F\+Eni\+C\+S/c1\+Operator.\+hh\end{DoxyCompactItemize}

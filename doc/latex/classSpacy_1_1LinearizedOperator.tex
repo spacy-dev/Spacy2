@@ -1,0 +1,165 @@
+\hypertarget{classSpacy_1_1LinearizedOperator}{}\section{Spacy\+:\+:Linearized\+Operator Class Reference}
+\label{classSpacy_1_1LinearizedOperator}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+
+
+Linearized operator $A'(x)$ of a differentiable operator $A$.  
+
+
+
+
+{\ttfamily \#include $<$linearized\+Operator.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:Linearized\+Operator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classSpacy_1_1LinearizedOperator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:Linearized\+Operator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classSpacy_1_1LinearizedOperator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1LinearizedOperator_a4abd53567430614653c56cc29a6fcde0_a4abd53567430614653c56cc29a6fcde0}{Linearized\+Operator} (\hyperlink{group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620_ga87ae8cb0d7a567a4bb181e0a9f182620}{C1\+Operator} A, \hyperlink{classSpacy_1_1Vector}{Vector} x)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1LinearizedOperator_ab0141d921ce22831128dd1f2a5a89eda_ab0141d921ce22831128dd1f2a5a89eda}{Linearized\+Operator} (\hyperlink{group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620_ga87ae8cb0d7a567a4bb181e0a9f182620}{C1\+Operator} A, \hyperlink{classSpacy_1_1Vector}{Vector} x, \hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Linear\+Solver} \hyperlink{classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6_a8e26eebdf3236200c738ab76eed5d3d6}{solver})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1LinearizedOperator_a9cbed75d8eee66210769d385d4a31ef0_a9cbed75d8eee66210769d385d4a31ef0}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const 
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Linear\+Solver} \hyperlink{classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6_a8e26eebdf3236200c738ab76eed5d3d6}{solver} () const 
+\begin{DoxyCompactList}\small\item\em Access linear solver. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const 
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const 
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Linearized operator $A'(x)$ of a differentiable operator $A$. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640_LinearOperatorAnchor}{Linear\+Operator}, Linear\+Operator\+Concept 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1LinearizedOperator_a4abd53567430614653c56cc29a6fcde0_a4abd53567430614653c56cc29a6fcde0}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!Linearized\+Operator@{Linearized\+Operator}}
+\index{Linearized\+Operator@{Linearized\+Operator}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{Linearized\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Linearized\+Operator\+::\+Linearized\+Operator (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\+Operator}}]{A, }
+\item[{{\bf Vector}}]{x}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1LinearizedOperator_a4abd53567430614653c56cc29a6fcde0_a4abd53567430614653c56cc29a6fcde0}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & differentiable operator. \\
+\hline
+{\em x} & point of linearization. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1LinearizedOperator_ab0141d921ce22831128dd1f2a5a89eda_ab0141d921ce22831128dd1f2a5a89eda}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!Linearized\+Operator@{Linearized\+Operator}}
+\index{Linearized\+Operator@{Linearized\+Operator}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{Linearized\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Linearized\+Operator\+::\+Linearized\+Operator (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\+Operator}}]{A, }
+\item[{{\bf Vector}}]{x, }
+\item[{{\bf Linear\+Solver}}]{solver}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1LinearizedOperator_ab0141d921ce22831128dd1f2a5a89eda_ab0141d921ce22831128dd1f2a5a89eda}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & differentiable operator. \\
+\hline
+{\em x} & point of linearization. \\
+\hline
+{\em solver} & linear solver to (approximately) compute $A(x)^{-1}y$ \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!domain@{domain}}
+\index{domain@{domain}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{domain}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::domain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}
+
+
+Access domain space $X$. 
+
+\begin{DoxyReturn}{Returns}
+domain space $X$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1LinearizedOperator_a9cbed75d8eee66210769d385d4a31ef0_a9cbed75d8eee66210769d385d4a31ef0}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Linearized\+Operator\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector} \&}]{dx}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1LinearizedOperator_a9cbed75d8eee66210769d385d4a31ef0_a9cbed75d8eee66210769d385d4a31ef0}
+
+
+Apply operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & point of evaluation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$y=A'(x)dx$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!range@{range}}
+\index{range@{range}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{range}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}
+
+
+Access range space $Y$. 
+
+\begin{DoxyReturn}{Returns}
+range space $Y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6_a8e26eebdf3236200c738ab76eed5d3d6}{}\index{Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}!solver@{solver}}
+\index{solver@{solver}!Spacy\+::\+Linearized\+Operator@{Spacy\+::\+Linearized\+Operator}}
+\subsubsection[{solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Solver} Spacy\+::\+Linearized\+Operator\+::solver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1LinearizedOperator_a8e26eebdf3236200c738ab76eed5d3d6_a8e26eebdf3236200c738ab76eed5d3d6}
+
+
+Access linear solver. 
+
+\begin{DoxyReturn}{Returns}
+linear solver representing $(A'(x))^{-1}$ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/linearized\+Operator.\+hh\end{DoxyCompactItemize}

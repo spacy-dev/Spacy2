@@ -1,0 +1,6 @@
+<map id="Vector Spaces" name="Vector Spaces">
+<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS. " alt="" coords="169,5,340,32"/>
+<area shape="rect" id="node2" href="$group__KaskadeGroup.html" title="Vector spaces, functionals and operators for Kaskade 7. " alt="" coords="161,56,348,83"/>
+<area shape="rect" id="node3" href="$group__RealGroup.html" title="A one dimensional vector space representing the space of real numbers. " alt="" coords="209,107,300,133"/>
+<area shape="rect" id="node4" href="$group__ProductSpaceGroup.html" title="A product space that supports distinction between primal and dual variables. " alt="" coords="201,157,309,184"/>
+</map>

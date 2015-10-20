@@ -1,0 +1,250 @@
+\hypertarget{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant}{}\section{Spacy\+:\+:Newton\+:\+:Damping\+:\+:Affine\+Covariant Class Reference}
+\label{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+
+
+Affine covariant damping strategy as described in \cite{Deuflhard2004} \mbox{[}Sec. 3.\+3\mbox{]}.  
+
+
+
+
+{\ttfamily \#include $<$damping\+Strategies.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:Newton\+:\+:Damping\+:\+:Affine\+Covariant\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:Newton\+:\+:Damping\+:\+:Affine\+Covariant\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a316bca14949ace2b808f071a72191e5e}{}\hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a316bca14949ace2b808f071a72191e5e}{Affine\+Covariant} (const \hyperlink{group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455_ga3f89622eba80cf840b2a7102f1303455}{Operator} \&F)\label{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a316bca14949ace2b808f071a72191e5e}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a6c83b5a335e93b256130c01d90499d3b}{}\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a6c83b5a335e93b256130c01d90499d3b}{operator()} (const \hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Linear\+Solver} \&D\+F\+Inv\+\_\+, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const \label{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant_a6c83b5a335e93b256130c01d90499d3b}
+
+\begin{DoxyCompactList}\small\item\em Compute damping factor. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})
+\begin{DoxyCompactList}\small\item\em Set maximal attainable accuracy $\varepsilon$. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access maximal attainable accuracy. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access square root of maximal attainable accuracy. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get third root of maximal attainable accuracy. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}{attach\+Eps} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&other)
+\begin{DoxyCompactList}\small\item\em Attach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}{detach\+Eps} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&other)\label{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}
+
+\begin{DoxyCompactList}\small\item\em Detach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps} before it gets deleted. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a051394f2ffb0abd9a26ab7a64c590eee_a051394f2ffb0abd9a26ab7a64c590eee}{set\+Lower\+Bound} (\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a8a807e4449e6b6b64e7e81834d331597_a8a807e4449e6b6b64e7e81834d331597}{lower\+Bound})
+\begin{DoxyCompactList}\small\item\em Set lower bound of regularity test for termination criteria. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a8a807e4449e6b6b64e7e81834d331597_a8a807e4449e6b6b64e7e81834d331597}{lower\+Bound} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access lower bound. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_afe2fd3259850b874a85779d4f562e7f6_afe2fd3259850b874a85779d4f562e7f6}{regularity\+Test\+Passed} (\hyperlink{classSpacy_1_1Real}{Real} nu) const noexcept
+\begin{DoxyCompactList}\small\item\em Apply regularity test. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a26217e26765bb6f938224ea76612c8c0_a26217e26765bb6f938224ea76612c8c0}{regularity\+Test\+Failed} (\hyperlink{classSpacy_1_1Real}{Real} nu) const noexcept
+\begin{DoxyCompactList}\small\item\em Apply regularity test. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_aeb6598687d622ef266d1ed515d2b42bf_aeb6598687d622ef266d1ed515d2b42bf}{attach\+Regularity\+Test} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae2887fec9a5bdd42239b3df6750bf2e9_ae2887fec9a5bdd42239b3df6750bf2e9}{Regularity\+Test} \&other)
+\begin{DoxyCompactList}\small\item\em Attach \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Regularity\+Test}. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a289d6422bd82864d661bdbcfc7dc321e}{}void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a289d6422bd82864d661bdbcfc7dc321e}{detach\+Regularity\+Test} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae2887fec9a5bdd42239b3df6750bf2e9_ae2887fec9a5bdd42239b3df6750bf2e9}{Regularity\+Test} \&other)\label{classSpacy_1_1Mixin_1_1RegularityTest_a289d6422bd82864d661bdbcfc7dc321e}
+
+\begin{DoxyCompactList}\small\item\em Detach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps} before it gets deleted. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_ae3bfc55bec9fe3068adffb6d24b3b964}{}void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae3bfc55bec9fe3068adffb6d24b3b964}{update} (Mixin\+Connection$<$ \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae2887fec9a5bdd42239b3df6750bf2e9_ae2887fec9a5bdd42239b3df6750bf2e9}{Regularity\+Test} $>$ $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1RegularityTest_ae3bfc55bec9fe3068adffb6d24b3b964}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae2887fec9a5bdd42239b3df6750bf2e9_ae2887fec9a5bdd42239b3df6750bf2e9}{Regularity\+Test} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ae2887fec9a5bdd42239b3df6750bf2e9_ae2887fec9a5bdd42239b3df6750bf2e9}{Regularity\+Test} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Affine covariant damping strategy as described in \cite{Deuflhard2004} \mbox{[}Sec. 3.\+3\mbox{]}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!attach\+Eps@{attach\+Eps}}
+\index{attach\+Eps@{attach\+Eps}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{attach\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Eps\+::attach\+Eps (
+\begin{DoxyParamCaption}
+\item[{{\bf Eps} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}
+
+
+Attach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}. 
+
+When \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{set\+Eps(double eps)} is called, then also other.\+set\+Eps(eps) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_aeb6598687d622ef266d1ed515d2b42bf_aeb6598687d622ef266d1ed515d2b42bf}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!attach\+Regularity\+Test@{attach\+Regularity\+Test}}
+\index{attach\+Regularity\+Test@{attach\+Regularity\+Test}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{attach\+Regularity\+Test}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Regularity\+Test\+::attach\+Regularity\+Test (
+\begin{DoxyParamCaption}
+\item[{{\bf Regularity\+Test} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1RegularityTest_aeb6598687d622ef266d1ed515d2b42bf_aeb6598687d622ef266d1ed515d2b42bf}
+
+
+Attach \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Regularity\+Test}. 
+
+When set\+Lower\+Bound(double lower\+Bound) is called, then also other.\+set\+Lower\+Bound(lower\+Bound) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!cbrt\+Eps@{cbrt\+Eps}}
+\index{cbrt\+Eps@{cbrt\+Eps}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{cbrt\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::cbrt\+Eps (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}
+
+
+Get third root of maximal attainable accuracy. 
+
+\begin{DoxyReturn}{Returns}
+$\varepsilon^{1/3}$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!eps@{eps}}
+\index{eps@{eps}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::eps (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}
+
+
+Access maximal attainable accuracy. 
+
+\begin{DoxyReturn}{Returns}
+$\varepsilon$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a8a807e4449e6b6b64e7e81834d331597_a8a807e4449e6b6b64e7e81834d331597}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!lower\+Bound@{lower\+Bound}}
+\index{lower\+Bound@{lower\+Bound}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{lower\+Bound}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Real} Spacy\+::\+Mixin\+::\+Regularity\+Test\+::lower\+Bound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1RegularityTest_a8a807e4449e6b6b64e7e81834d331597_a8a807e4449e6b6b64e7e81834d331597}
+
+
+Access lower bound. 
+
+\begin{DoxyReturn}{Returns}
+lower bound 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a26217e26765bb6f938224ea76612c8c0_a26217e26765bb6f938224ea76612c8c0}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!regularity\+Test\+Failed@{regularity\+Test\+Failed}}
+\index{regularity\+Test\+Failed@{regularity\+Test\+Failed}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{regularity\+Test\+Failed}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Regularity\+Test\+::regularity\+Test\+Failed (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{nu}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1RegularityTest_a26217e26765bb6f938224ea76612c8c0_a26217e26765bb6f938224ea76612c8c0}
+
+
+Apply regularity test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nu} & damping factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$nu <= lowerBound_$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_afe2fd3259850b874a85779d4f562e7f6_afe2fd3259850b874a85779d4f562e7f6}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!regularity\+Test\+Passed@{regularity\+Test\+Passed}}
+\index{regularity\+Test\+Passed@{regularity\+Test\+Passed}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{regularity\+Test\+Passed}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Regularity\+Test\+::regularity\+Test\+Passed (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{nu}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1RegularityTest_afe2fd3259850b874a85779d4f562e7f6_afe2fd3259850b874a85779d4f562e7f6}
+
+
+Apply regularity test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nu} & damping factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$nu > lowerBound_$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!set\+Eps@{set\+Eps}}
+\index{set\+Eps@{set\+Eps}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{set\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Eps\+::set\+Eps (
+\begin{DoxyParamCaption}
+\item[{double}]{eps}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}
+
+
+Set maximal attainable accuracy $\varepsilon$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em eps} & new maximal attainable accuracy \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a051394f2ffb0abd9a26ab7a64c590eee_a051394f2ffb0abd9a26ab7a64c590eee}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!set\+Lower\+Bound@{set\+Lower\+Bound}}
+\index{set\+Lower\+Bound@{set\+Lower\+Bound}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{set\+Lower\+Bound}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Regularity\+Test\+::set\+Lower\+Bound (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{lower\+Bound}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1RegularityTest_a051394f2ffb0abd9a26ab7a64c590eee_a051394f2ffb0abd9a26ab7a64c590eee}
+
+
+Set lower bound of regularity test for termination criteria. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower\+Bound} & new lower bound \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}{}\index{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}!sqrt\+Eps@{sqrt\+Eps}}
+\index{sqrt\+Eps@{sqrt\+Eps}!Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant@{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}}
+\subsubsection[{sqrt\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::sqrt\+Eps (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}
+
+
+Access square root of maximal attainable accuracy. 
+
+\begin{DoxyReturn}{Returns}
+$\sqrt\varepsilon$ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/\+Algorithm/\+Newton/damping\+Strategies.\+hh\end{DoxyCompactItemize}

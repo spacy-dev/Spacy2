@@ -1,0 +1,241 @@
+
+/* This is a help message
+
+    _Text editor styles, CSS styles_
+
+    Change these styles in order to change the text editor styles:
+    .text-element HEADER is Title
+    .text-element H1 is Title 1
+    .text-element H2 is Title 2
+    .text-element H3 is Title 3
+    .text-element is Normal text
+
+    Bellow this is the default formatting
+*/
+.text-element HEADER,
+.text-element H1,
+.text-element H2,
+.text-element H3,
+.text-element {
+    color: #666666;
+}
+.text-element,
+.text-element H1,
+.text-element H2,
+.text-element HEADER {
+    color: black;
+    font-weight: normal;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size: 20px;
+}
+.text-element HEADER {
+    font-size: 35px;
+}
+.text-element * {
+    color: black;
+    font-weight: normal;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+}
+.text-element{
+    font-size: 14px;
+}
+.text-element a {
+    font-weight: bold;
+}
+.nav .text-element {
+    color: black;
+}
+.nav:hover .image-element {
+    display: inherit;
+}
+
+.nav:hover {
+    background-color:orange;
+}
+
+.footer .text-element {
+    color: grey;
+    font-size: 12px;
+}
+
+.background-image-container {
+    background-color: transparent; 
+    top: 5px; 
+    left: 5px; 
+    width: 1000px; 
+    height: 1451px; 
+    background-attachment: scroll; 
+    position: absolute; 
+    background-repeat-x: repeat; 
+    background-repeat-y: repeat; 
+}
+.page-contact-container{
+    position: absolute; 
+    background-color: transparent; 
+    top: 45px; 
+    left: auto; 
+    width: 100px; 
+}    
+.navigation-bar {
+    height: 45px; 
+    width: 400px; 
+    top: 45px; 
+    left: 550px; 
+    background-color: transparent; 
+}
+
+.navigation-home {
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 0px; 
+    width: 100px; 
+    height: 45px; 
+    border-top-color: rgb(0, 0, 0); 
+    border-right-color: rgb(0, 0, 0); 
+    border-bottom-color: rgb(0, 0, 0); 
+    border-left-color: rgb(0, 0, 0); 
+}
+
+.navigation-get-spacy {
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 100px; 
+    width: 100px; 
+    height: 45px; 
+    border-top-color: rgb(0, 0, 0); 
+    border-right-color: rgb(0, 0, 0); 
+    border-bottom-color: rgb(0, 0, 0); 
+    border-left-color: rgb(0, 0, 0); 
+}
+
+.navigation-features {
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 200px; 
+    width: 100px; 
+    height: 45px; 
+    border-top-color: rgb(0, 0, 0); 
+    border-right-color: rgb(0, 0, 0); 
+    border-bottom-color: rgb(0, 0, 0); 
+    border-left-color: rgb(0, 0, 0); 
+}
+
+.navigation-contact {
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 300px; 
+    width: 100px; 
+    height: 45px; 
+    border-top-color: rgb(0, 0, 0); 
+    border-right-color: rgb(0, 0, 0); 
+    border-bottom-color: rgb(0, 0, 0); 
+    border-left-color: rgb(0, 0, 0); 
+}
+
+.page-body-container {
+    width: 1100px; 
+    height: 1456px; 
+    cursor: auto; 
+    background-attachment: scroll; 
+    background-color: rgb(240, 240, 240); 
+    background-size: auto auto; 
+    top: 0px; 
+}
+
+.page-placeholder-1 {
+    position: absolute; 
+    width: 1000px; 
+    top: 112px; 
+    background-color: transparent; 
+    left: 0px; 
+    height: 16px; 
+    border-top-width: 0px; 
+    border-right-width: 0px; 
+    border-bottom-width: 1px; 
+    border-left-width: 0px; 
+    border-top-style: solid; 
+    border-right-style: solid; 
+    border-bottom-style: solid; 
+    border-left-style: solid; 
+    border-top-color: rgb(204, 204, 204); 
+    border-right-color: rgb(204, 204, 204); 
+    border-bottom-color: rgb(204, 204, 204); 
+    border-left-color: rgb(204, 204, 204); 
+}
+.welcome-page {
+    position: absolute; 
+    width: 900px; 
+    top: 150px; 
+    left: 50px; 
+    background-color: transparent; 
+    height: 438px; 
+}
+.logo-container {
+    position: absolute; 
+    top: 45px; 
+    background-color: transparent; 
+    left: 50px; 
+    border-top-width: 1px; 
+    border-right-width: 1px; 
+    border-bottom-width: 1px; 
+    border-left-width: 1px; 
+    border-top-style: solid; 
+    border-right-style: solid; 
+    border-bottom-style: solid; 
+    border-left-style: solid; 
+    border-image-source: initial; 
+    border-image-slice: initial; 
+    border-image-width: initial; 
+    border-image-outset: initial; 
+    border-image-repeat: initial; 
+    height: 40px; 
+    border-top-color: rgb(69, 69, 69); 
+    border-right-color: rgb(69, 69, 69); 
+    border-bottom-color: rgb(69, 69, 69); 
+    border-left-color: rgb(69, 69, 69); 
+}
+
+.page-get-spacy-css {
+    position: absolute; 
+    width: 900px; 
+    top: 155px; 
+    left: 50px; 
+    background-color: transparent; 
+    height: 660px; 
+}
+.page-features-css {
+    position: absolute; 
+    width: 900px; 
+    top: 155px; 
+    left: 50px; 
+    background-color: transparent; 
+    height: 882px; 
+}
+.page-contact {
+    position: absolute; 
+    width: 900px; 
+    top: 155px; 
+    left: 50px; 
+    background-color: transparent; 
+    height: 569px; 
+}
+/*        .navigation-features{
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 200px; 
+    width: 100px; 
+    height: 45px; 
+}
+.page-contact-container{
+    position: absolute; 
+    background-color: rgb(153, 153, 153); 
+    top: 0px; 
+    left: 300px; 
+    width: 100px; 
+    height: 45px; 
+}*/

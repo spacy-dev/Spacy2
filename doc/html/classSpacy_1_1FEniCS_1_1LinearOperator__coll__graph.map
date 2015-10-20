@@ -1,0 +1,7 @@
+<map id="Spacy::FEniCS::LinearOperator" name="Spacy::FEniCS::LinearOperator">
+<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="448,5,595,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="454,56,589,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1SupportedOperatorBase.html" title="Spacy::SupportedOperator\lBase\&lt; LinearOperator \&gt;" alt="" coords="433,107,609,149"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="256,115,385,141"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,107,208,149"/>
+</map>

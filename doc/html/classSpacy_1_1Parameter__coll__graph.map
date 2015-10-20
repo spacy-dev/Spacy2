@@ -1,0 +1,10 @@
+<map id="Spacy::Parameter" name="Spacy::Parameter">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="296,21,425,47"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1RelativeAccuracy.html" title="Mixin class for relative accuracy. " alt="" coords="256,82,465,109"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; RelativeAccuracy \&gt;" alt="" coords="5,71,208,112"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity. " alt="" coords="280,139,441,166"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="5,136,208,177"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1MaxSteps.html" title="Mixin class for maximal number of steps/iterations. " alt="" coords="278,197,443,223"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; MaxSteps \&gt;" alt="" coords="5,201,208,243"/>
+</map>
