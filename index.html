@@ -18,6 +18,15 @@
     <link href="css/front-end.css" rel="stylesheet">
 
     <script type="text/javascript" class="silex-script"></script>
+    <!-- load content -->
+    <script>
+    $(document).ready(function(){
+        $("#container-spacy-home").load("content-home.html");
+        $("#container-get-spacy").load("content-get-spacy.html");
+        $("#container-features").load("content-features.html");
+        $("#container-contact").load("content-contact.html");
+    });
+    </script>
 
     <style id="current-page-style">
         .page-home{display:inherit; }
@@ -26,192 +35,66 @@
     <!-- End of Silex HEAD tag do not remove -->
     
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/tabs.css" rel="stylesheet">
 </head>
 
-<body style="" data-silex-type="container" class="container-element page-body-container silex-runtime" data-silex-id="page-body-container">
-    <div class="background editable-style container-element ui-dropzone-active prevent-draggable background-image-container" data-silex-type="container" data-silex-id="background-image-container">
+<body style="" data-silex-type="container" class="container-element page-body-container silex-runtime">
+
+    <div class="background editable-style container-element ui-dropzone-active prevent-draggable background-image-container" data-silex-type="container">
+
+    <div id="navrow1" class="tabs">
+        <ul class="logo">
+        <li class="tableft"><span class="tableft logo-right">Spacy</span></li>
+        </ul>
+        <ul class="tablist">
+        <li class="current"><a class="link-home" href="#!page-home"><span>&#160;Home&#160;</span></a></li>
+        <li><a href="#!page-get-spacy"><span>Get&#160;Spacy</span></a></li>
+        <li><a href="#!page-features"><span>Features</span></a></li>
+        <li class="tabright"><a class="tabright" href="#!page-contact"><span>Contact</span></a></li>
+        </ul>
+    </div>
     
-        <div data-silex-id="navigation-bar" class="editable-style navigation-bar container-element page-home" data-silex-type="container">
-           
         
-            <a data-silex-type="container" class="editable-style container-element page-home page-link-active" data-silex-id="navigation-home" href="#!page-home">
-                <div data-silex-type="text" class="editable-style nav text-element navigation-home" data-silex-id="navigation-home">
-                    <div class="silex-element-content">
-                        <p style="text-align: center;" class="normal">home</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a data-silex-type="container" class="editable-style container-element nav navigation-get-spacy-link page-link-active" data-silex-id="navigation-get-spacy-link" href="#!page-get-spacy">
-                <div data-silex-type="text" class="editable-style nav text-element navigation-get-spacy" data-silex-id="navigation-get-spacy">
-                    <div class="silex-element-content">
-                        <p style="text-align: center;" class="normal">get spacy</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a data-silex-type="container" class="editable-style container-element nav navigation-features-link page-link-active" data-silex-id="navigation-features-link" href="#!page-features">
-                <div data-silex-type="text" class="editable-style nav text-element navigation-features" data-silex-id="navigation-features">
-                    <div class="silex-element-content">
-                        <p style="text-align: center;" class="normal">features</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a data-silex-type="container" class="editable-style container-element nav navigation-contact-link page-link-active" data-silex-id="navigation-contact-link" href="#!page-contact">
-                <div data-silex-type="text" class="editable-style nav text-element navigation-contact" data-silex-id="navigation-contact">
-                    <div class="silex-element-content">
-                        <p style="text-align: center;" class="normal">contact</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-
-
-        <div data-silex-type="container" class="editable-style container-element page-placeholder-1" data-silex-id="page-placeholder-1"></div>
-
-        
-        <div data-silex-type="text" class="editable-style text-element logo-container page-link-active" data-silex-href="#!page-home" data-silex-id="logo-container">
+        <!-- CONTENT 
+        <div data-silex-type="text" class="editable-style text-element logo-container page-link-active" data-silex-href="#!page-home">
             <div class="silex-element-content">
-                <header>Minimal<i><font style="background-color: rgb(153, 153, 153);" color="#999999">Sp<span style="background-color: rgb(153, 153, 153);"><span style=""></span></span>acy</font></i>
-                </header>
+                <span class="logo-left">Minimal<i><font style="background-color: rgb(153, 153, 153);" color="#999999"></span><span class="logo-right">Sp<span style="background-color: rgb(153, 153, 153);"><span style=""></span></span>acy</font></i></span>
+            </div>
+        </div>-->
+
+
+        <!-- WELCOME PAGE -->
+        <div data-silex-type="text" class="editable-style text-element welcome-page paged-element page-home">
+            <div class="silex-element-content" id="container-spacy-home">
             </div>
         </div>
 
-        <div data-silex-type="text" class="editable-style text-element page-home paged-element welcome-page" data-silex-id="welcome-page">
-            <div class="silex-element-content">
-                <h1>Welcome to Spacy,</h1>
-                <p>an abstraction layer for sharing and developing vector space algorithms. It is motivated by the following ideas:</p>
-                <h3 class="heading3">Sharing</h3>
-                <p>The main aim of this library is to facilitate sharing of algorithms. Wit Spacy researchers and users can develop and share algorithms without being tied to specific frameworks for the problem definition.</p>
-                <h3 class="heading3">Cleaner Code</h3>The separation of problem definition and solution algorithm helps in revealing the algorithmic structure in its implementation. Moreover it helps enforcing the separation of responsibilities.
-                <br>
-                <h3 class="heading3">Rapid Prototyping</h3>
-                <p>Spacy uses type erasure for the definition of interfaces. Consequently it supports duck-typing and value-semantics. Thus it becomes easy to develop new algorithms.
-                    <br>
-                </p>
-                <p class="normal">
-                    <br><span style="line-height: 21px;"></span></p>
-                <h1 class="normal"><span class="heading1" style="line-height: 21px;">Documentation</span></h1>
-                <p>The doxygen documentation can be found <a href="doc/html/index.html">here.</a>
-                    <br>
-                </p>
+        <!-- GET SPACY -->        
+        <div data-silex-type="text" class="editable-style text-element page-get-spacy-css paged-element page-get-spacy">
+            <div class="silex-element-content" id = "container-get-spacy">
             </div>
         </div>
 
         
-        <div data-silex-type="text" class="editable-style text-element page-get-spacy-css page-get-spacy paged-element" data-silex-id="page-get-spacy-css">
-            <div class="silex-element-content">
-                <h1 class="heading1">Download Spacy<br></h1>
-                <h3 class="heading3">Spacy 0.1</h3>
-                <p>First alpha release of Spacy: <a href="https://github.com/lubkoll/Spacy/archive/0.1.tar.gz">Spacy0.1.tar.gz</a></p>
-                <p><br></p>
-                <h3 class="heading3">Working branch</h3>
-                <p>You can also clone the git repository via</p>
-                <p><span style="font-family: courier new,monospace;">git clone https://github.com/lubkoll/Spacy.git</span></p>
-                <p>
-                    <br><span style="font-family: courier new,monospace;"></span></p>
-                <h1><span class="normal" style="font-family: courier new,monospace;">Dependencies</span></h1>
-                <p>Spacy depends on <a href="//www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a> (available from Version 1.54.0).
-                    <br>
-                </p>
-                <p>In Ubuntu you can install boost with</p>
-                <p><span style="font-family: courier new,monospace;">sudo apt-get install libboost-dev</span>
-                    <br>
-                </p>
-                <p>
-                    <br>
-                </p>
-                <h1 class="heading1">Installation<br></h1>
-                <p>Spacy can be easily installed with cmake. Boost.TypeErasure and, if present, <a href="//fenicsproject.org">FEniCS</a> (dolfin) should be detected automatically.</p>
-                <p>The usual installation procedure is:</p>
-                <ul>
-                    <li>cg Spacy_root_dir
-                        <br>
-                    </li>
-                    <li>mkdir build</li>
-                    <li>cd build</li>
-                    <li>cmake ..</li>
-                    <li>make
-                        <br>
-                    </li>
-                </ul>
-                <h1>
-                </h1>
-                <h1 class="heading1">
-            </h1></div>
+        <!-- FEATURES -->
+        <div data-silex-type="text" class="editable-style text-element page-features-css page-features paged-element">
+            <div class="silex-element-content" id = "container-features">
+            </div>
         </div>
-        <div data-silex-type="text" class="editable-style text-element page-features-css page-features paged-element" data-silex-id="page-features-css">
-            <div class="silex-element-content">
-                <h1 class="heading1">Algorithms</h1>
-                <h3 class="heading3">Conjugate Gradients</h3>
-                <p>There are four different conjugate gradient implementations all with exchangeable termination criterion. The default criterion is based on the relative energy error.</p>
-                <p>Available implementations:</p>
-                <ul>
-                    <li>Conjugate Gradients (CG)</li>
-                    <li>Truncated Conjugate Gradients (TCG)</li>
-                    <li>Regularized Conjugate Gradients (RCG)</li>
-                    <li>Truncated Regularized Conjugate Gradients (TRCG)</li>
-                </ul>
-                <p><br></p>
-                <h3 class="heading3">Newton Methods</h3>
-                <p>There is a generic Newton method that allows to customize termination criterion and damping strategy.
-                    <br>
-                </p>
-                <p>Available implementations:</p>
-                <ul>
-                    <li>a local Newton method</li>
-                    <li>an affine covariant Newton method</li>
-                    <li>an affine contravariant Newton method</li>
-                </ul>
-                <p><br></p>
-                <h3 class="heading3">Composite Step Methods</h3>
-                <p class="normal">There is a composite step method for nonconvex optimization, where the normal solver can be customized.
-                    <br>
-                </p>
-                <p class="normal">Available Implementations:</p>
-                <ul>
-                    <li>an affine covariant composite method</li>
-                </ul>
-                <p>
-                    <br><span style="font-family: courier new,monospace;"></span></p>
-                <h1 class="heading1">Vector Spaces<br></h1>
-                <ul>
-                    <li>a real space </li>
-                    <li>a product space that admits separation of primal and dual variables (i.e. Lagrange multipliers).
-                        <br>
-                    </li>
-                </ul>
-                <br>
-                <h1 class="heading1">Adapters</h1>
-                <p>Currently there are adapters for</p>
-                <ul>
-                    <li><a href="//fenicsproject.org">FEniCS</a></li>
-                    <li><a href="//www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a>
-                    </li>
-                </ul>
-                <p><br></p>
-                <h1>
-                </h1>
-                <h1 class="heading1">
-            </h1></div>
+
+        
+        <!-- CONTACT -->
+        <div data-silex-type="text" class="editable-style text-element page-contact-link page-contact paged-element">
+            <div class="silex-element-content" id = "container-contact">
+            </div>
         </div>
-        <div data-silex-type="text" class="editable-style text-element page-contact-link page-contact paged-element" data-silex-id="page-contact-link">
-            <div class="silex-element-content">
-                Coming soon.
-                <br>
-                <h1>
-                </h1>
-                <h1 class="heading1">
-            </h1></div>
-        </div>
+        <!-- END OF CONTENT -->
     </div>
 
 
-    <a id="page-home" data-silex-type="page" class="page-element">home</a>
-    <a id="page-get-spacy" data-silex-type="page" class="page-element">get-spacy</a><a id="page-features" data-silex-type="page" class="page-element">features</a><a id="page-contact" data-silex-type="page" class="page-element">contact</a>
-
+<!--    <a data-silex-type="page" class="page-element"><span>&#160;Home&#160;</span></a>
+    <a data-silex-type="page" class="page-element">get-spacy</a><a data-silex-type="page" class="page-element">features</a><a data-silex-type="page" class="page-element">contact</a>
+-->
 </body>
 
 </html>

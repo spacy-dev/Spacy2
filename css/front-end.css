@@ -43,7 +43,7 @@ body{
   text-decoration: inherit;
 }
 .text-element a:hover, a.text-element:hover{
-  color: orange;
+  color: rgb(102,102,102);
 }
 /* Remove dots surrounding links in Firefox
     because of normalize.css */
