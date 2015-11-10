@@ -1,17 +1,21 @@
+body{
+  min-width: 99%;
+  min-height: 99%;
+  position: absolute;
+  padding: 15px;
+}
 
-/* This is a help message
+.text-element a, a.text-element{
+  color: inherit;
+  text-decoration: inherit;
+}
+.text-element a:hover, a.text-element:hover{
+  color: rgb(102,102,102);
+}
+/* Remove dots surrounding links in Firefox
+    because of normalize.css */
+a:focus{ outline: none;}
 
-    _Text editor styles, CSS styles_
-
-    Change these styles in order to change the text editor styles:
-    .text-element HEADER is Title
-    .text-element H1 is Title 1
-    .text-element H2 is Title 2
-    .text-element H3 is Title 3
-    .text-element is Normal text
-
-    Bellow this is the default formatting
-*/
 .text-element HEADER,
 .text-element H1,
 .text-element H2,
@@ -44,16 +48,6 @@
 .text-element a {
     font-weight: bold;
 }
-.nav .text-element {
-    color: black;
-}
-.nav:hover .image-element {
-    display: inherit;
-}
-
-/*.nav:hover div {
-    background-color:rgb(204,204,204);
-}*/
 
 .footer .text-element {
     color: grey;
@@ -62,15 +56,17 @@
 
 html
 {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
-.page-body-container {
-    position:absolute;
-    width: 1100px;
+.body-container {
+    position:relative;
+    width: 60%;
+    min-width: 600px
     min-height: 100%;
-    height: 1100px;
+    height: 100%/*1100px;*/
     cursor: auto; 
     background-attachment: scroll; 
     background-color: black; 
@@ -79,89 +75,46 @@ html
     left: 0px;
 }
 
-.background-image-container {
-    position:relative;
+
+.start-page {
+    position: relative;
     border-radius: 10px;
-    background-color: rgb(240, 240, 240); 
-    top: 25px; 
-    left: 15%;
+    background-color: black;/*rgb(240, 240, 240); */
+    top: 0; 
+    left: 0;
     width: 1000px;
-    height: 100%; 
+    min-height: 100px; 
     background-attachment: scroll; 
-    position: absolute; 
     background-repeat-x: repeat; 
     background-repeat-y: repeat;
-    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    padding: 0;
+}
+
+.background-image-container {
+    position: relative;
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240); 
+    top: 0; 
+    left: 0;
+    width: 1000px;
+    min-height: 100px; 
+    background-attachment: scroll; 
+    background-repeat-x: repeat; 
+    background-repeat-y: repeat;
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
 }
-.page-contact-container{
-    position: absolute; 
-    background-color: transparent; 
-    top: 45px; 
-    left: auto; 
-    width: 100px; 
-}    
-.navigation-bar {
-    height: 45px; 
-    width: 400px; 
-    top: 45px; 
-    left: 550px; 
-    background-color: transparent; 
+
+.hidden-element {
+    display: none;
 }
 
-.navigation-home {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute; 
-/*    background-image: url('../doc/html/tab_b.png');*/
-    background-color: rgb(153,153,153);
-    top: 0px; 
-    left: 2px; 
-    width: 98px; 
-    height: 45px; 
-}
-
-.navigation-get-spacy {
-    position: absolute; 
-/*    background-image: url('../doc/html/tab_b.png');*/
-    background-color: rgb(153, 153, 153); 
-    top: 0px; 
-    left: 100px; 
-    width: 98px; 
-    height: 45px; 
-    border-left-width: 2px; 
-    border-left-style: dashed; 
-    border-left-color: black;
-}
-
-.navigation-features {
-    position: absolute; 
-/*    background-image: url('../doc/html/tab_b.png');*/
-    background-color: rgb(153, 153, 153); 
-    top: 0px; 
-    left: 200px; 
-    width: 98px; 
-    height: 45px;
-    border-left-width: 2px; 
-    border-left-style: dashed; 
-    border-left-color: black;
-}
-
-.navigation-contact {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-/*    background-image: url('../doc/html/tab_b.png');*/
-    position: absolute; 
-    background-color: rgb(153, 153, 153); 
-    top: 0px; 
-    left: 300px; 
-    width: 98px; 
-    height: 45px; 
-    border-left-width: 2px; 
-    border-left-style: dashed; 
-    border-left-color: black;
+.start-page{
+    float:center;
 }
 
 .page-placeholder-1 {
@@ -169,7 +122,7 @@ html
     width: 900px; 
     top: 112px; 
     background-color: transparent; 
-    left: 50px; 
+    left: 0px; 
     height: 16px; 
     border-top-width: 2px; 
     border-right-width: 0px; 
@@ -206,15 +159,6 @@ html
     border-left-color: rgb(204, 204, 204); 
 }
 
-.welcome-page {
-    position: absolute; 
-    width: 900px; 
-    top: 100px; 
-    left: 50px; 
-    background-color: transparent; 
-    height: 500px; 
-}
-
 
 .logo-container {
     border-radius: 10px;
@@ -222,10 +166,6 @@ html
     top: 80px;
     position: absolute; 
     background-color: transparent; 
-  /*  border-top-width: 1px; 
-    border-right-width: 1px; 
-    border-bottom-width: 1px; 
-    border-left-width: 1px;*/ 
     border-width: 0px;
     border-top-style: solid; 
     border-right-style: solid; 
@@ -264,38 +204,17 @@ html
     padding: 0 50px 0 50px;
 }
 
-.logo-content
-{
-    position:relative;
-    left: 20px;
-    font-size: 20px; 
-}
-
-.page-get-spacy-css {
-    position: absolute; 
-    width: 900px; 
+.main-content {
+    display: inherit;
+    position: relative; 
+    min-width: 600px;
+    width: 90%; 
     top: 100px; 
-    left: 50px; 
+    left: 5%; 
     background-color: transparent; 
-    height: 750px; 
+    min-height:200px;
+    overflow: hidden;
 }
-.page-features-css {
-    position: absolute; 
-    width: 900px; 
-    top: 100px; 
-    left: 50px; 
-    background-color: transparent; 
-    height: 900px; 
-}
-.page-contact {
-    position: absolute; 
-    width: 900px; 
-    top: 100px; 
-    left: 50px; 
-    background-color: transparent; 
-    height: 500px; 
-}
-
 
 .code-style{
     font-family: courier new, monospace;
@@ -304,19 +223,3 @@ html
     border-style: solid;
     border-color: white;
 }
-/*        .navigation-features{
-    position: absolute; 
-    background-color: rgb(153, 153, 153); 
-    top: 0px; 
-    left: 200px; 
-    width: 100px; 
-    height: 45px; 
-}
-.page-contact-container{
-    position: absolute; 
-    background-color: rgb(153, 153, 153); 
-    top: 0px; 
-    left: 300px; 
-    width: 100px; 
-    height: 45px; 
-}*/

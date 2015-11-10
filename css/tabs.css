@@ -12,9 +12,9 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     position:absolute;
-    left: 50px;
+    left: 40px;
     top: 38px;
-    width: 900px;
+    width: 920px;
     background-image:url('../images/tab_b.png');
     background-color: rgb(204,204,204);
 }

@@ -2,99 +2,44 @@
 <html>
 
 <head>
-    <title>Minimal Spacy</title>
+    <title>Spacy</title>
     <meta charset="UTF-8">
-    <meta name="generator" content="Silex v2.2.5">
-    <!-- leave this for stats -->
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="js/pageable.js"></script>
-    <script type="text/javascript" src="js/front-end.js"></script>
-    <link rel="icon" type="image/png" href="css/silex.png">
+    <!--<meta name="generator" content="Silex v2.2.5">-->
+    
     <!-- Normalize -->
     <link href="css/normalize.css" rel="stylesheet">
-    <!-- Silex style -->
-    <link href="css/front-end.css" rel="stylesheet">
-
-    <script type="text/javascript" class="silex-script"></script>
-    <!-- load content -->
-    <script>
-    $(document).ready(function(){
-        $("#container-spacy-home").load("content-home.html");
-        $("#container-get-spacy").load("content-get-spacy.html");
-        $("#container-features").load("content-features.html");
-        $("#container-contact").load("content-contact.html");
-    });
-    </script>
-
-    <style id="current-page-style">
-        .page-home{display:inherit; }
-    </style>
-    <!-- Silex HEAD tag do not remove -->
-    <!-- End of Silex HEAD tag do not remove -->
-    
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/tabs.css" rel="stylesheet">
+
+    <!-- load content -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/loadContent.js"></script>
+    <script type="text/javascript" src="js/mail.js"></script>
 </head>
 
-<body style="" data-silex-type="container" class="container-element page-body-container silex-runtime">
+<body class="body-container">
 
-    <div class="background editable-style container-element ui-dropzone-active prevent-draggable background-image-container" data-silex-type="container">
+    <div class="start-page"><a href="#home">
+        <img src="images/schlern.jpg" style="width:1000px; border-radius:10px;">
+    </a></div>
 
-    <div id="navrow1" class="tabs">
-        <ul class="logo">
-        <li class="tableft"><span class="tableft logo-right">Spacy</span></li>
-        </ul>
-        <ul class="tablist">
-        <li class="current"><a class="link-home" href="#!page-home"><span>&#160;Home&#160;</span></a></li>
-        <li><a href="#!page-get-spacy"><span>Get&#160;Spacy</span></a></li>
-        <li><a href="#!page-features"><span>Features</span></a></li>
-        <li class="tabright"><a class="tabright" href="#!page-contact"><span>Contact</span></a></li>
-        </ul>
+    <div class="background-image-container hidden-element">
+        <!-- NAVIGATION -->
+        <div id="navrow1" class="tabs">
+            <ul class="logo">
+                <li class="tableft"><span class="tableft logo-right">Spacy</span></li>
+            </ul>
+            <menu class="tablist">
+                <li class="current"><a href="#home"><span>&#160;Home&#160;</span></a></li>
+                <li><a href="#get-spacy"><span>Get&#160;Spacy</span></a></li>
+                <li><a href="#features"><span>Features</span></a></li>
+                <li class="tabright"><a class="tabright" href="#contact"><span>Contact</span></a></li>
+            </menu>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="text-element main-content"></div>
     </div>
-    
-        
-        <!-- CONTENT 
-        <div data-silex-type="text" class="editable-style text-element logo-container page-link-active" data-silex-href="#!page-home">
-            <div class="silex-element-content">
-                <span class="logo-left">Minimal<i><font style="background-color: rgb(153, 153, 153);" color="#999999"></span><span class="logo-right">Sp<span style="background-color: rgb(153, 153, 153);"><span style=""></span></span>acy</font></i></span>
-            </div>
-        </div>-->
-
-
-        <!-- WELCOME PAGE -->
-        <div data-silex-type="text" class="editable-style text-element welcome-page paged-element page-home">
-            <div class="silex-element-content" id="container-spacy-home">
-            </div>
-        </div>
-
-        <!-- GET SPACY -->        
-        <div data-silex-type="text" class="editable-style text-element page-get-spacy-css paged-element page-get-spacy">
-            <div class="silex-element-content" id = "container-get-spacy">
-            </div>
-        </div>
-
-        
-        <!-- FEATURES -->
-        <div data-silex-type="text" class="editable-style text-element page-features-css page-features paged-element">
-            <div class="silex-element-content" id = "container-features">
-            </div>
-        </div>
-
-        
-        <!-- CONTACT -->
-        <div data-silex-type="text" class="editable-style text-element page-contact-link page-contact paged-element">
-            <div class="silex-element-content" id = "container-contact">
-            </div>
-        </div>
-        <!-- END OF CONTENT -->
-    </div>
-
-
-<!--    <a data-silex-type="page" class="page-element"><span>&#160;Home&#160;</span></a>
-    <a data-silex-type="page" class="page-element">get-spacy</a><a data-silex-type="page" class="page-element">features</a><a data-silex-type="page" class="page-element">contact</a>
--->
 </body>
 
 </html>
