@@ -3,6 +3,7 @@ body{
   min-height: 99%;
   position: absolute;
   padding: 25px;
+  line-height: 1.5;
 }
 
 .text-element a, a.text-element{
@@ -15,6 +16,10 @@ body{
 /* Remove dots surrounding links in Firefox
     because of normalize.css */
 a:focus{ outline: none;}
+
+.example-list li.current-example a{
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, .5);
+}
 
 .text-element HEADER,
 .text-element H1,
@@ -113,50 +118,35 @@ html
     display: none;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
 .start-page{
     float:center;
 }
 
-.page-placeholder-1 {
-    position: relative; 
-    width: 900px; 
-    top: 112px; 
-    background-color: transparent; 
-    left: 0px; 
-    height: 16px; 
-    border-top-width: 2px; 
-    border-right-width: 0px; 
-    border-bottom-width: 0px; 
-    border-left-width: 0px; 
-    border-top-style: solid; 
-    border-right-style: solid; 
-    border-bottom-style: solid; 
-    border-left-style: solid; 
-    border-top-color: rgb(153,153,153); 
-    border-right-color: rgb(204, 204, 204); 
-    border-bottom-color: rgb(153,153,153); 
-    border-left-color: rgb(204, 204, 204); 
-}
-
-.page-placeholder-2 {
+.separator {
     position: relative; 
     width: 900; 
     top: 0px; 
     background-color: transparent; 
     left: 0px; 
-    height: 2px; 
+    height: 0px; 
     border-top-width: 2px; 
     border-right-width: 0px; 
     border-bottom-width: 0px; 
     border-left-width: 0px; 
     border-top-style: solid; 
-    border-right-style: solid; 
-    border-bottom-style: solid; 
-    border-left-style: solid; 
+    border-right-style: none; 
+    border-bottom-style: none; 
+    border-left-style: none; 
     border-top-color: rgb(204, 204, 204); 
     border-right-color: rgb(204, 204, 204); 
     border-bottom-color: rgb(204, 204, 204); 
-    border-left-color: rgb(204, 204, 204); 
+    border-left-color: rgb(204, 204, 204);
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 
@@ -208,20 +198,41 @@ html
     display: inherit;
     position: relative; 
     min-width: 600px;
-    width: 90%; 
+    width: 84%; 
     top: 100px; 
-    left: 5%; 
+    left: 8%; 
     background-color: transparent; 
     min-height:200px;
     overflow: hidden;
 }
 
-.code-style{
+code {
     font-family: courier new, monospace;
     background-color: white;
-    border-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-right-width: 3px;
     border-style: solid;
     border-color: white;
+}
+
+.boxshadow{
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);    
+}
+
+.code-style{
+    position:relative;
+    left:2%;
+    width:94%;
+    font-family: courier new, monospace;
+    background-color: white;
+    border-width: 1%;
+    border-style: solid;
+    border-color: white;
+    margin-bottom:5px;
 }
 
 .welcome-paragraph{
@@ -248,6 +259,28 @@ html
     letter-spacing: -1px;  
 }
 
+.centered-image{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 span.spacer {
    padding:0 5px;
+}
+
+ol li{
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.googletable{
+    position:relative;
+    width:500px;
+    left: 50%;
+    transform: translateX(-50%);
 }
