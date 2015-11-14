@@ -37,6 +37,7 @@ TEST(RealSpaceTest,ScalarProductTest)
   EXPECT_DOUBLE_EQ( to_double(y), -2. );
   EXPECT_DOUBLE_EQ( toDouble(x*y), -2. );
   EXPECT_DOUBLE_EQ( toDouble(x*y), toDouble(R.scalarProduct()(x,y)) );
+  EXPECT_TRUE( R.isHilbertSpace() );
 }
 
 TEST(RealSpaceTest,NormTest)

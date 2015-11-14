@@ -4,7 +4,7 @@
 #include "Spacy/vectorSpace.hh"
 #include "l2Product.hh"
 #include "vector.hh"
-#include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
+#include "Spacy/Spaces/PrimalDualProductSpace/vectorSpace.hh"
 
 #include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 
@@ -74,7 +74,7 @@ namespace Spacy
         spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( *subSpace,dofmap ) );
       }
 
-      return ProductSpace::makeHilbertSpace( spaces , primalIds , dualIds );
+      return PrimalDualProductSpace::makeHilbertSpace( spaces , primalIds , dualIds );
     }
   }
 }

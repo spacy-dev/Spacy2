@@ -1,7 +1,7 @@
 #include "vectorSpace.hh"
 
 #include "Spacy/Util/cast.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include "real.hh"
 #include "Spacy/vector.hh"
 
 Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace(bool defaultIndex)

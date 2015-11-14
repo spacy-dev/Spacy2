@@ -1,11 +1,11 @@
-#ifndef SPACY_PRODUCT_SPACE_VECTOR_HH
-#define SPACY_PRODUCT_SPACE_VECTOR_HH
+#ifndef SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH
+#define SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH
 
 #include <memory>
 #include <vector>
 
+#include "Spacy/vector.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/primalDualSwitch.hh"
 
 namespace Spacy
 {
@@ -23,12 +23,9 @@ namespace Spacy
      * @ingroup ProductSpaceGroup
      * @brief Product space vector.
      *
-     * Represents a vector \f$x=(x_0,x_1,\ldots,x_n)\f$ of a product space \f$X = \{X_0,X_1,\ldots,X_n\}\f$. This structure may be further
-     * restricted by specifying if variables act as "primal" or "dual" variables. Then we get
-     * \f$ x = (x_p,x_d) \in X=\{ X_p, X_d \}\f$, where \f$X_p=\{X_i\}_i,\ i\in I \f$ is associated to the primal variables and \f$X_d=\{X_j\}_j,\ j\in J\f$
-     * is associated to the dual variables.
+     * Represents a vector \f$x=(x_0,x_1,\ldots,x_n)\f$ of a product space \f$X = \{X_0,X_1,\ldots,X_n\}\f$.
      */
-    class Vector : public VectorBase, public Mixin::PrimalDualSwitch
+    class Vector : public VectorBase
     {
     public:
       /**
@@ -38,57 +35,10 @@ namespace Spacy
       explicit Vector(const VectorSpace& space);
 
       /**
-       * @brief Copy constructor.
-       *
-       * Calling primal(y), resp. dual(y), before copy-construction yields
-       * a restriction of the copy operation to primal, resp dual, variables.
-       *
-       * Variables that are excluded by the restriction are initialized to 0.
-       *
-       * @param y vector to copy from
-       */
-      Vector(const Vector& y);
-
-      /**
-       * @brief Move constructor.
-       *
-       * Calling primal(y), resp. dual(y), before copy-construction yields
-       * a restriction of the move operation to primal, resp dual, variables.
-       *
-       * Variables that are excluded by the restriction are initialized to 0.
-       *
-       * @param y vector to move from
-       */
-      Vector(Vector&& y);
-
-      /**
-       * @brief Copy assignment.
-       *
-       * Calling primal(y), resp. dual(y), before copy-assignment yields
-       * a restriction of the copy operation to primal, resp dual, variables.
-       *
-       * @param y vector to copy from
-       */
-      Vector& operator=(const Vector& y);
-
-      /**
-       * @brief Move assignment.
-       *
-       * Calling primal(y), resp. dual(y), before move-assignment yields
-       * a restriction of the move operation to primal, resp dual, variables.
-       *
-       * @param y vector to copy from
-       */
-      Vector& operator=(Vector&& y);
-
-      /**
        * @brief In-place summation.
        *
-       * Calling primal(y), resp. dual(y), before summation yields
-       * a restriction of the summation operation to primal, resp dual, variables.
-       *
        * @param y vector to add
-       * @return x+y
+       * @return \f$x+y\f$
        */
       Vector& operator+=(const Vector& y);
 
@@ -98,44 +48,32 @@ namespace Spacy
       /**
        * @brief In-place subtraction.
        *
-       * Calling primal(y), resp. dual(y), before subtraction yields
-       * a restriction of the subtraction operation to primal, resp dual, variables.
-       *
        * @param y vector to subtract
-       * @return x-y
+       * @return \f$x-y\f$
        */
       Vector& operator-=(const Vector& y);
 
       /**
        * @brief In-place multiplication.
        *
-       * Calling primal(y), resp. dual(y), before multiplication yields
-       * a restriction of the multiplication operation to primal, resp dual, variables.
-       *
        * @param a scaling factor
-       * @return ax
+       * @return \f$ax\f$
        */
       Vector& operator*=(double a);
 
       /**
        * @brief Negation.
-       *
-       * Calling primal(y), resp. dual(y), before multiplication yields
-       * a restriction of the multiplication operation to primal, resp dual, variables.
-       *
-       * @return -x.
+       * @return \f$-x\f$
        */
       Vector operator- () const;
 
       /**
        * @brief Equality comparison.
-       *
-       * Calling primal(y), resp. dual(y), before comparison yields
-       * a restriction of the comparison operation to primal, resp dual, variables.
-       *
-       * @return true, if x=y, else false
+       * @return true, if \f$x=y\f$, else false
        */
       bool operator==(const Vector& y) const;
+
+      unsigned numberOfVariables() const;
 
       /**
        * @brief Access k-th variable.
@@ -152,52 +90,10 @@ namespace Spacy
       const ::Spacy::Vector& variable(unsigned k) const;
 
       /**
-       * @brief Access primal variables as product space vector.
-       * @return \f$x_p\f$
-       */
-      Vector& primalComponent();
-
-      /**
-       * @brief Access primal variables as product space vector.
-       * @return \f$x_p\f$
-       */
-      const Vector& primalComponent() const;
-
-      /**
-       * @brief Set primal vector \f$x_p\f$.
-       * @param y product space vector
-       */
-      void setPrimalComponent(Vector y);
-
-      /**
-       * @brief Access dual variables as product space vector.
-       * @return \f$x_d\f$
-       */
-      Vector& dualComponent();
-
-      /**
-       * @brief Access dual variables as product space vector.
-       * @return \f$x_d\f$
-       */
-      const Vector& dualComponent() const;
-
-      /**
-       * @brief Set dual variable \f$x_d\f$.
-       * @param y product space vector.
-       */
-      void setDualComponent(Vector y);
-
-      /**
        * @brief Access VectorCreator object.
        * @see ProductSpace::VectorCreator
        */
       const VectorCreator& creator() const;
-
-      /**
-       * @brief Checks whether this product space has primal-dual structure or is a simple product space.
-       * @return true if this product space has primal-dual structure, else false
-       */
-      bool isPrimalDual() const;
 
       /**
        * @brief Apply as dual element.
@@ -212,4 +108,4 @@ namespace Spacy
   }
 }
 
-#endif // SPACY_PRODUCT_SPACE_VECTOR_HH
+#endif // SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH

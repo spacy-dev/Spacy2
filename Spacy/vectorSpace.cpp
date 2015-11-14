@@ -4,7 +4,8 @@
 #include "Spacy/Util/cmath.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
-#include "Spacy/Spaces/productSpace.hh"
+#include "Spacy/Spaces/primalDualProductSpace.hh"
+#include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
 #include "Spacy/vector.hh"
 
 #include <boost/type_erasure/is_empty.hpp>
@@ -52,7 +53,8 @@ namespace Spacy
     if( &V == V.dualSpace_)
       setDualSpace(this);
     else
-      setDualSpace(V.dualSpace_);
+      if( V.dualSpace_ != nullptr)
+        setDualSpace(V.dualSpace_);
   }
 
   VectorSpace& VectorSpace::operator=(VectorSpace&& V)
@@ -66,7 +68,8 @@ namespace Spacy
     if( &V == V.dualSpace_)
       setDualSpace(this);
     else
-      setDualSpace(V.dualSpace_);
+      if( V.dualSpace_ != nullptr )
+        setDualSpace(V.dualSpace_);
     return *this;
   }
 
@@ -98,7 +101,7 @@ namespace Spacy
 
   const ScalarProduct& VectorSpace::scalarProduct() const
   {
-    if( is_empty(sp_) ) throw std::runtime_error("No scalar product defined!");
+    if( !sp_ ) throw std::runtime_error( (std::string("No scalar product defined in space ") + std::to_string(index()) + "!").c_str());
     return sp_;
   }
 
@@ -118,18 +121,20 @@ namespace Spacy
 
   const VectorSpace& VectorSpace::dualSpace() const
   {
-    assert( dualSpace_ != nullptr );
+    if( dualSpace_ == nullptr ) throw InvalidArgumentException("VectorSpace::dualSpace()");
     return *dualSpace_;
   }
 
   void VectorSpace::setDualSpace(const VectorSpace* Y)
   {
     dualSpace_ = Y;
+    addDualSpace(*dualSpace_);
   }
 
   bool VectorSpace::isHilbertSpace() const
   {
-    return !is_empty(sp_);
+    if( sp_ ) return true;
+    return false;
   }
 
   bool VectorSpace::isAdmissible(const Vector& x) const
@@ -148,6 +153,42 @@ namespace Spacy
     return VectorSpace{std::move(creator),std::move(norm)};
   }
 
+  namespace
+  {
+    void connectSubSpaces(PrimalDualProductSpace::VectorCreator& creator)
+    {
+      for( auto i = 0u; i < creator.subSpaces().size(); ++i)
+      {
+        auto& subSpace = creator.subSpace(i);
+        subSpace.setDualSpace(&subSpace);
+        subSpace.addDualSpace(subSpace);
+      }
+    }
+
+    void connectSubSpaces(ProductSpace::VectorCreator& creator)
+    {
+      for( auto i = 0u; i < creator.subSpaces().size(); ++i)
+      {
+        auto& subSpace = creator.subSpace(i);
+        subSpace.setDualSpace(&subSpace);
+        subSpace.addDualSpace(subSpace);
+      }
+    }
+
+    template <class Creator>
+    void connectSubSpacesIfConsistent(VectorCreator& creator)
+    {
+      if( is<Creator>(creator) )
+        connectSubSpaces( cast_ref<Creator>(creator) );
+    }
+
+    void connectSubSpaces(VectorCreator& creator)
+    {
+      connectSubSpacesIfConsistent<PrimalDualProductSpace::VectorCreator>(creator);
+      connectSubSpacesIfConsistent<ProductSpace::VectorCreator>(creator);
+    }
+  }
+
   VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex)
   {
     auto V = VectorSpace{std::move(creator),HilbertSpaceNorm{scalarProduct},defaultIndex};
@@ -155,21 +196,17 @@ namespace Spacy
     V.setDualSpace(&V);
     V.addDualSpace(V);
 
-    if( is<ProductSpace::VectorCreator>(creator) )
-    {
-      auto& productSpaceCreator = cast_ref<ProductSpace::VectorCreator>(creator);
-      for( auto i = 0u; i < productSpaceCreator.subSpaces().size(); ++i)
-      {
-        auto subSpace = productSpaceCreator.sharedSubSpace(i);
-        subSpace->setDualSpace(subSpace.get());
-        subSpace->addDualSpace(*subSpace);
-      }
-    }
+    connectSubSpaces(creator);
 
-    return std::move(V);
+    return V;
   }
 
   void connect(VectorSpace& X, VectorSpace& Y)
+  {
+    X.addDualSpace( Y );
+  }
+
+  void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y)
   {
     X.addDualSpace( Y );
   }

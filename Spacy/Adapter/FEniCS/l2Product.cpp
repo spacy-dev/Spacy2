@@ -16,6 +16,5 @@ namespace Spacy
       checkSpaceCompatibility(x.space(),y.space());
       return cast_ref<Vector>(x).impl().inner( cast_ref<Vector>(y).impl() );
     }
-
   }
 }

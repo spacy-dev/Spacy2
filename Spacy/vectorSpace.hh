@@ -23,17 +23,21 @@ namespace Spacy
   namespace Detail { static unsigned spaceIndex = 1; }
   /// @endcond
 
+  /** @addtogroup SpacyGroup
+   * @{
+   */
+
   /**
-   * @ingroup SpacyGroup
    * @anchor VectorCreatorAnchor
    * @brief Vector creator for feeding into VectorSpace.
    * See \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
    */
+//  using VectorCreator = std::function< boost::type_erasure::any<VectorConcept>(const VectorSpace*) const>;
+
   using VectorCreator = boost::type_erasure::any< Concepts::VectorCreatorConcept >;
 
 
   /**
-   * @ingroup SpacyGroup
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    * @see @ref VectorCreatorAnchor "VectorCreator".
    */
@@ -150,7 +154,6 @@ namespace Spacy
   };
 
   /**
-   * @ingroup SpacyGroup
    * @brief Construct Banach space.
    * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
    * @param norm norm satisfying \ref NormConceptAnchor "NormConcept"
@@ -159,7 +162,6 @@ namespace Spacy
   VectorSpace makeBanachSpace(VectorCreator creator, Norm norm);
 
   /**
-   * @ingroup SpacyGroup
    * @brief Construct Hilbert space.
    * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
    * @param scalarProduct scalar product satisfying \ref ScalarProductConceptAnchor "ScalarProductConcept"
@@ -168,7 +170,6 @@ namespace Spacy
   VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex = false);
 
   /**
-   * @ingroup SpacyGroup
    * @brief Relate function spaces.
    * @param X primal space
    * @param Y dual space
@@ -179,8 +180,12 @@ namespace Spacy
    */
   void connect(VectorSpace& X, VectorSpace& Y);
 
+  void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y);
+
   void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
 
   void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W);
+
+  /** @} */
 }
 #endif // SPACY_VECTOR_SPACE_HH

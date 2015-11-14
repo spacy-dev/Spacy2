@@ -9,7 +9,6 @@
 
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/Base/functionalBase.hh"
-#include "Spacy/Util/Mixins/primalDualSwitch.hh"
 
 #include "assignXIfPresent.hh"
 #include "util.hh"
@@ -152,8 +151,7 @@ namespace Spacy
        */
       double operator()(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
-
+        assembleFunctional(x);
         return value_;
       }
 
@@ -165,7 +163,7 @@ namespace Spacy
        */
       ::Spacy::Vector d1(const ::Spacy::Vector &x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleJacobian,std::ref(*this), std::placeholders::_1),x);
+        assembleJacobian(x);
 
         auto y = this->domain().dualSpace().vector();
         copy(*b_,y);
@@ -181,7 +179,7 @@ namespace Spacy
        */
       ::Spacy::Vector d2(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        assembleHessian(x);
 
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(dx,x_);
@@ -201,7 +199,7 @@ namespace Spacy
        */
       auto hessian(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        assembleHessian(x);
 
         assert( A_ != nullptr );
         return LinearOperator{ A_->copy() , *operatorSpace_ , J_.function_space(0) };

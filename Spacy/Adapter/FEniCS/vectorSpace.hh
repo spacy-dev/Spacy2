@@ -7,7 +7,7 @@
 #include <dolfin.h>
 
 #include "Spacy/Util/Mixins/impl.hh"
-#include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
+#include "Spacy/Spaces/PrimalDualProductSpace/vectorSpace.hh"
 
 namespace Spacy
 {

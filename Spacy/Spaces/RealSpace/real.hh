@@ -63,7 +63,7 @@ namespace Spacy
      * @param y vector to add
      * @return \f$x+y\f$
      */
-    Real& operator+=(const Vector& y);
+    Real& operator+=(const Real& y);
 
     /**
      * @brief In-place subtraction.
@@ -71,7 +71,7 @@ namespace Spacy
      * @param y vector to subtract
      * @return \f$x-y\f$
      */
-    Real& operator-=(const Vector& y);
+    Real& operator-=(const Real& y);
 
     /**
      * @brief Assignment from Real stored in a ::Spacy::Vector.
@@ -101,6 +101,11 @@ namespace Spacy
 
     friend double& toDouble(Real& x);
   };
+
+
+  double toDouble(const Vector& x);
+
+  double& toDouble(Vector& x);
 
   /// Compute \f$x/y\f$.
   Real operator/(Real x, const Real& y);

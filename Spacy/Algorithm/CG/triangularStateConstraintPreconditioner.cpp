@@ -1,6 +1,6 @@
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "Spacy/Spaces/ProductSpace/vector.hh"
+#include "Spacy/Spaces/PrimalDualProductSpace/vector.hh"
 #include "Spacy/vectorSpace.hh"
 
 #include <utility>
@@ -23,9 +23,9 @@ namespace Spacy
 
     Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x) const
     {
-      auto x_ = cast_ref<ProductSpace::Vector>(x);
+      auto x_ = cast_ref<PrimalDualProductSpace::Vector>(x);
       auto y = range().vector();
-      auto& y_ = cast_ref<ProductSpace::Vector>(y);
+      auto& y_ = cast_ref<PrimalDualProductSpace::Vector>(y);
 
       y_.variable(adjointIndex()) = adjointSolver_( x_.variable(stateIndex()) );
       x_.variable(controlIndex()) -= BT_( y_.variable(adjointIndex()) );
@@ -42,7 +42,7 @@ namespace Spacy
     Vector TriangularStateConstraintPreconditioner::kernelOffset(const Vector& rhs) const
     {
       auto y = range().vector();
-      cast_ref<ProductSpace::Vector>(y).variable(stateIndex()) = stateSolver_( cast_ref<ProductSpace::Vector>(rhs).variable(adjointIndex()) );
+      cast_ref<PrimalDualProductSpace::Vector>(y).variable(stateIndex()) = stateSolver_( cast_ref<PrimalDualProductSpace::Vector>(rhs).variable(adjointIndex()) );
       return std::move(y);
     }
   }

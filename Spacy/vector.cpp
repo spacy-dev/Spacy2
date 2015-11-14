@@ -66,6 +66,11 @@ namespace Spacy
     return x*=a;//Scale<Arithmetic>{a,x};
   }
 
+  Vector operator*(Vector x, double a)
+  {
+    return x*=a;//Scale<Arithmetic>{a,x};
+  }
+
   Vector operator+(Vector x, const Vector& y)
   {
     return x += y;

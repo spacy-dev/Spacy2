@@ -46,13 +46,13 @@ namespace Spacy
      *   MyVector& operator*=(double a);
      *
      *   // Negation -y.
-     *   MyVector operator-(const MyVector& y);
+     *   MyVector operator-(const MyVector& y) const;
      *
      *   // Equality comparison x==y.
-     *   bool operator==(const MyVector& y);
+     *   bool operator==(const MyVector& y) const;
      *
      *   // Apply as dual element x(y).
-     *   Vector operator()(const MyVector& y);
+     *   Vector operator()(const MyVector& y) const;
      *
      *   // Access pointer to underlying function space.
      *   const VectorSpace* space() const;
@@ -68,8 +68,8 @@ namespace Spacy
       boost::type_erasure::multiply_assignable< boost::type_erasure::_self , double > ,
       boost::type_erasure::add_assignable<> ,
       boost::type_erasure::subtract_assignable<> ,
-      boost::type_erasure::negatable<> ,
-      boost::type_erasure::equality_comparable<> ,
+      boost::type_erasure::negatable< const boost::type_erasure::_self > ,
+      boost::type_erasure::equality_comparable< > ,
       boost::type_erasure::callable<Vector(const boost::type_erasure::_self&),
                                     const boost::type_erasure::_self> ,
       has_space<const VectorSpace*(),

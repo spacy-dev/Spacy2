@@ -22,6 +22,12 @@ namespace Spacy
     return *this;
   }
 
+  DampingFactor& DampingFactor::operator=(double nu)
+  {
+    set(nu);
+    return *this;
+  }
+
   DampingFactor::operator Real() const
   {
     return nu_;

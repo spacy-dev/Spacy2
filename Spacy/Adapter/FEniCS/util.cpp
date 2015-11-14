@@ -4,15 +4,26 @@
 #include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 
 #include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/ProductSpace/vector.hh"
+#include "Spacy/Spaces/PrimalDualProductSpace/vector.hh"
 #include "vector.hh"
 #include "vectorSpace.hh"
 
 #include <dolfin.h>
 #include <iostream>
 
+
+
 namespace Spacy
 {
+//  namespace
+//  {
+//    void copyVectorIfConsistent(const Vector& x, dolfin::GenericVector& y)
+//    {
+//      if(is<FEniCS::Vector>(x))
+//        y = cast_ref<FEniCS::Vector>(x).impl();
+//    }
+//  }
+
   namespace FEniCS
   {
     void copyCoefficients(const dolfin::Form& F, dolfin::Form& G)
@@ -23,15 +34,16 @@ namespace Spacy
 
     void copy(const ::Spacy::Vector& x, dolfin::GenericVector& y)
     {
+//      copyVectorIfConsistent(x,y);
       if( is<Vector>(x) )
       {
         y = cast_ref<Vector>(x).impl();
         return;
       }
 
-      if( is<ProductSpace::Vector>(x) )
+      if( is<PrimalDualProductSpace::Vector>(x) )
       {
-        const auto& x_ = cast_ref<ProductSpace::Vector>(x);
+        const auto& x_ = cast_ref<PrimalDualProductSpace::Vector>(x);
 
           for( auto i : x_.creator().primalSubSpaceIds() )
           {
@@ -39,10 +51,7 @@ namespace Spacy
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
-
-              if(x_.isPrimalEnabled())
-                y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
-              else y.setitem(space.inverseDofmap(j),0.);
+              y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
             }
           }
           for( auto i : x_.creator().dualSubSpaceIds() )
@@ -51,10 +60,7 @@ namespace Spacy
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
-
-              if(x_.isDualEnabled())
-                y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
-              else y.setitem(space.inverseDofmap(j),0.);
+              y.setitem(space.inverseDofmap(j),xv_.impl().getitem(j));
             }
           }
 
@@ -79,10 +85,10 @@ namespace Spacy
         return;
       }
 
-      if( is<ProductSpace::Vector>(x) )
+      if( is<PrimalDualProductSpace::Vector>(x) )
       {
 
-        auto& x_ = cast_ref<ProductSpace::Vector>(x);
+        auto& x_ = cast_ref<PrimalDualProductSpace::Vector>(x);
 
           for( auto i : x_.creator().primalSubSpaceIds() )
           {
@@ -90,9 +96,7 @@ namespace Spacy
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
-              if( x_.isPrimalEnabled())
-                xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
-              else xv_.impl().setitem( j , 0. );
+              xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
             }
             cast_ref<Vector>( x_.variable(i) ).impl().apply("insert");
           }
@@ -103,10 +107,7 @@ namespace Spacy
             for(auto j=0u; j<xv_.size(); ++j)
             {
               const auto& space = cast_ref<VectorCreator>(xv_.space()->impl());
-              if( x_.isDualEnabled())
-                xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
-              else
-                xv_.impl().setitem( j , 0. );
+              xv_.impl().setitem( j , y.getitem( space.inverseDofmap(j) ) );
             }
             cast_ref<Vector>( x_.variable(i) ).impl().apply("insert");
           }

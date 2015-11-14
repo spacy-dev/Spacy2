@@ -12,7 +12,6 @@
 #include "Mixins/iterativeRefinements.hh"
 #include "Mixins/maxSteps.hh"
 #include "Mixins/minimalAccuracy.hh"
-#include "Mixins/primalDualSwitch.hh"
 #include "Mixins/regularityTest.hh"
 #include "Mixins/relativeAccuracy.hh"
 #include "Mixins/stateIndex.hh"

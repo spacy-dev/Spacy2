@@ -1,5 +1,5 @@
-#ifndef SPACY_PRODUCT_SPACE_PRODUCT_HH
-#define SPACY_PRODUCT_SPACE_PRODUCT_HH
+#ifndef SPACY_SPACES_PRODUCT_SPACE_PRODUCT_HH
+#define SPACY_SPACES_PRODUCT_SPACE_PRODUCT_HH
 
 namespace Spacy
 {
@@ -17,15 +17,10 @@ namespace Spacy
     class ScalarProduct
     {
     public:
-      /**
-       * @brief Compute l2 product.
-       * @param x vector (ProductSpace::Vector)
-       * @param y vector (ProductSpace::Vector)
-       * @return \f$(x,y) = \sum_i x_i y_i \f$.
-       */
+      /// Apply scalar product.
       Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
     };
   }
 }
 
-#endif // SPACY_PRODUCT_SPACE_PRODUCT_HH
+#endif // SPACY_SPACES_PRODUCT_SPACE_PRODUCT_HH

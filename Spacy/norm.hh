@@ -1,17 +1,31 @@
 #ifndef SPACY_NORM_HH
 #define SPACY_NORM_HH
 
-#include <boost/type_erasure/any.hpp>
-#include "Util/Concepts/normConcept.hh"
+#include <functional>
 
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  class Vector;
+  /// @endcond
+
   /**
    * \ingroup SpacyGroup
-   * \anchor NormAnchor
-   * \brief Norm class.  Can store objects that satisfy the requirements of \ref NormConceptAnchor "NormConcept".
+   * \brief Type erased norm.
+   *
+   * The minimal signature (besides copy and/or move constructor/assignment) of a norm is:
+   * @code
+   * // My norm.
+   * class MyNorm
+   * {
+   * public:
+   *   // Compute ||x||.
+   *   Real operator()(const ::Spacy::Vector& x) const;
+   * };
+   * @endcode
    */
-  using Norm = boost::type_erasure::any< Concepts::NormConcept >;
+  using Norm = std::function<Real(const Vector&)>;
 }
 
 

@@ -37,6 +37,15 @@ namespace Spacy
     DampingFactor& operator=(Real nu);
 
     /**
+     * @brief Set damping factor \f$\nu\f$.
+     *
+     * If \f$ |\nu-1| < \varepsilon \f$ then \f$\nu\f$ is set to 1.
+     *
+     * @param nu damping factor
+     */
+    DampingFactor& operator=(double nu);
+
+    /**
      * @brief Access damping factor
      * @return \f$\nu\f$
      */

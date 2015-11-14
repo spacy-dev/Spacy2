@@ -68,17 +68,15 @@ namespace Spacy
     return *this * y;
   }
 
-  Real& Real::operator+=(const Vector& y)
+  Real& Real::operator+=(const Real& y)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
-    impl() += cast_ref<Real>(y).impl();
+    impl() += y.impl();
     return *this;
   }
 
-  Real& Real::operator-=(const Vector& y)
+  Real& Real::operator-=(const Real& y)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
-    impl() -= cast_ref<Real>(y).impl();
+    impl() -= y.impl();
     return *this;
   }
 
@@ -103,9 +101,21 @@ namespace Spacy
     return x.impl();
   }
 
-  double& toDouble(Real& x)
+  double& toDouble(Real &x)
   {
     return x.impl();
+  }
+
+  double toDouble(const Vector& x)
+  {
+    if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(const Vector& v)");
+    return toDouble(cast_ref<Real>(x));
+  }
+
+  double& toDouble(Vector& x)
+  {
+    if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(Vector& v)");
+    return toDouble(cast_ref<Real>(x));
   }
 
   Real operator/(Real x, const Real& y)
