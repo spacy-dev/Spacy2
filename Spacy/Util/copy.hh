@@ -1,0 +1,46 @@
+#ifndef SPACY_UTIL_COPY_HH
+#define SPACY_UTIL_COPY_HH
+
+#include "Spacy/vector.hh"
+#include "Spacy/Spaces/ProductSpace/vector.hh"
+
+namespace Spacy
+{
+  template <class Target>
+  void copyProductSpaceVectorIfConsistent(const Vector& x, Target& y, std::function<void(const Vector&,Target&)> copyTargetIfConsistent)
+  {
+    if( !is<ProductSpace::Vector>(x) ) return;
+
+    const auto& x_ = cast_ref<ProductSpace::Vector>(x);
+
+    for(auto i=0u; i<x_.numberOfVariables(); ++i)
+    {
+      copyTargetIfConsistent(x_.component(i),y);
+      copyProductSpaceVectorIfConsistent(x_.component(i),y,copyTargetIfConsistent);
+    }
+  }
+
+  template <class Target>
+  void copyProductSpaceVectorIfConsistent(const Target& x, Vector& y, std::function<void(const Target&,Vector&)> copyTargetIfConsistent)
+  {
+    if( !is<ProductSpace::Vector>(y) ) return;
+
+    auto& y_ = cast_ref<ProductSpace::Vector>(y);
+
+    for(auto i=0u; i<y_.numberOfVariables(); ++i)
+    {
+      copyTargetIfConsistent(x,y_.component(i));
+      copyProductSpaceVectorIfConsistent(x,y_.component(i),copyTargetIfConsistent);
+    }
+  }
+
+
+  template<class Origin, class Target>
+  void genericCopy(const Origin& x, Target& y, std::function<void(const Origin&,Target&)> copyTargetIfConsistent)
+  {
+    copyTargetIfConsistent(x,y);
+    copyProductSpaceVectorIfConsistent(x,y,copyTargetIfConsistent);
+  }
+}
+
+#endif // SPACY_UTIL_COPY_HH

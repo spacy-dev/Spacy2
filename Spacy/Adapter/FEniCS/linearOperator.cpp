@@ -14,8 +14,8 @@ namespace Spacy
   namespace FEniCS
   {
     LinearOperator::LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace)
-      : OperatorBase(cast_ref<LinearOperatorCreator>(space.impl()).domain() ,
-                     cast_ref<LinearOperatorCreator>(space.impl()).range()) ,
+      : OperatorBase(creator<LinearOperatorCreator>(space).domain() ,
+                     creator<LinearOperatorCreator>(space).range()) ,
         VectorBase(space) ,
         A_(std::move(A)) ,
         space_(dolfinSpace)
@@ -23,8 +23,8 @@ namespace Spacy
 
     LinearOperator::LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace,
                    std::function<LinearSolver(const LinearOperator&)> solverCreator)
-      : OperatorBase(cast_ref<LinearOperatorCreator>(space.impl()).domain(),
-                     cast_ref<LinearOperatorCreator>(space.impl()).range()),
+      : OperatorBase(creator<LinearOperatorCreator>(space).domain(),
+                     creator<LinearOperatorCreator>(space).range()),
         VectorBase(space),
         A_(std::move(A)),
         solverCreator_(std::move(solverCreator)),

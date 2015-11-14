@@ -15,10 +15,22 @@ namespace Spacy
     VectorSpace makeHilbertSpace(bool defaultIndex = false);
   }
 
-  namespace StaticDetail
+  /**
+   * @ingroup SpacyGroup
+   * @brief Construct space of real numbers.
+   * @return ::RealSpace::makeHilbertSpace()
+   */
+  VectorSpace makeRealSpace(bool defaultIndex = false);
+
+  namespace Space
   {
-    static VectorSpace R = RealSpace::makeHilbertSpace();
-//    static VectorSpace M{};
+    /**
+     * @ingroup GlobalSpaceGroup
+     * @brief Global space of real numbers with space index 0.
+     *
+     * This space is used by class Real if the underlying space is left unspecified.
+     */
+    static VectorSpace R = RealSpace::makeHilbertSpace(true);
   }
 }
 

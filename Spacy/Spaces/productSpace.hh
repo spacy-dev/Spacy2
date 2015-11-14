@@ -5,4 +5,4 @@
 #include "ProductSpace/vector.hh"
 #include "ProductSpace/vectorSpace.hh"
 
-#endif // SPACY_PRIMAL_DUAL_PRODUCT_SPACE_HH
+#endif // SPACY_PRODUCT_SPACE_HH

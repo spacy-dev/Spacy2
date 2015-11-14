@@ -7,7 +7,7 @@
 
 #include "Spacy/inducedScalarProduct.hh"
 #include "Spacy/Util/cast.hh"
-#include "Spacy/Spaces/PrimalDualProductSpace/vector.hh"
+#include "Spacy/Spaces/ProductSpace/vector.hh"
 #include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
 
 #include <boost/type_erasure/is_empty.hpp>
@@ -16,27 +16,28 @@
 #include <iostream>
 #include <utility>
 
-namespace
-{
-  auto primalProjection(const Spacy::Vector& v)
-  {
-    auto w = v;
-    auto& w_ = Spacy::cast_ref<Spacy::PrimalDualProductSpace::Vector>(w);
-    w_.dualComponent() *= 0;
-    return w;
-  }
-
-  auto dualProjection(const Spacy::Vector& v)
-  {
-    auto w = v;
-    auto& w_ = Spacy::cast_ref<Spacy::PrimalDualProductSpace::Vector>(w);
-    w_.primalComponent() *= 0;
-    return w;
-  }
-}
-
 namespace Spacy
 {
+  namespace
+  {
+    auto primalProjection(const Spacy::Vector& v)
+    {
+      auto w = v;
+      auto& w_ = cast_ref<ProductSpace::Vector>(w);
+      w_.component(DUAL) *= 0;
+      return w;
+    }
+
+    auto dualProjection(const Spacy::Vector& v)
+    {
+      auto w = v;
+      auto& w_ = cast_ref<ProductSpace::Vector>(w);
+      w_.component(PRIMAL) *= 0;
+      return w;
+    }
+  }
+
+
   namespace CompositeStep
   {
     enum class AffineCovariantSolver::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };

@@ -17,7 +17,8 @@ namespace Spacy
   {
     Vector::Vector(const VectorSpace& space)
       : VectorBase(space),
-        v_(cast_ref<VectorCreator>(space.impl()).impl())
+        v_( creator<VectorCreator>(space).impl() )
+//      v_(cast_ref<VectorCreator>(space.impl()).impl())
     {}
 
     Vector& Vector::operator=(const dolfin::Function& v)

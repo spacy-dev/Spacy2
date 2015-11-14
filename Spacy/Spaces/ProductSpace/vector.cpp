@@ -17,17 +17,17 @@ namespace Spacy
     Vector::Vector(const VectorSpace& space)
       : VectorBase(space)
     {
-    const auto& spaces = cast_ref<VectorCreator>(space.impl()).subSpaces();
+    const auto& spaces = Spacy::creator<VectorCreator>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i)
-      variables_.push_back( spaces[i]->vector() );
+      components_.push_back( spaces[i]->vector() );
     }
 
     Vector& Vector::operator+=(const Vector& y)
     {
       checkSpaceCompatibility(this->space(),y.space());
 
-      for(auto i=0u; i<variables_.size(); ++i)
-        variable(i) += y.variable(i);
+      for(auto i=0u; i<components_.size(); ++i)
+        component(i) += y.component(i);
       return *this;
     }
 
@@ -57,15 +57,15 @@ namespace Spacy
     {
       checkSpaceCompatibility(this->space(),y.space());
 
-      for(auto i=0u; i<variables_.size(); ++i)
-        variable(i) -= y.variable(i);
+      for(auto i=0u; i<components_.size(); ++i)
+        component(i) -= y.component(i);
       return *this;
     }
 
     Vector& Vector::operator*=(double a)
     {
-      for(auto i=0u; i<variables_.size(); ++i)
-        variable(i) *= a;
+      for(auto i=0u; i<components_.size(); ++i)
+        component(i) *= a;
       return *this;
     }
 
@@ -79,8 +79,8 @@ namespace Spacy
     {
       checkSpaceCompatibility(this->space(),y.space());
 
-      for(auto i=0u; i<variables_.size(); ++i)
-        if( !(variable(i) == y.variable(i)) )
+      for(auto i=0u; i<components_.size(); ++i)
+        if( !(component(i) == y.component(i)) )
           return false;
 
       return true;
@@ -88,34 +88,34 @@ namespace Spacy
 
     unsigned Vector::numberOfVariables() const
     {
-        return variables_.size();
+        return components_.size();
     }
 
-    ::Spacy::Vector& Vector::variable(unsigned k)
+    ::Spacy::Vector& Vector::component(unsigned k)
     {
-      return variables_[k];
+      return components_[k];
     }
 
-    const ::Spacy::Vector& Vector::variable(unsigned k) const
+    const ::Spacy::Vector& Vector::component(unsigned k) const
     {
-      return variables_[k];
+      return components_[k];
     }
 
     const VectorCreator& Vector::creator() const
     {
-      return cast_ref<VectorCreator>(space()->impl());
+      return Spacy::creator<VectorCreator>(*space());
     }
 
 
     Real Vector::operator()(const Vector& y) const
     {
       checkDualPairing(*this,y);
-      assert( variables_.size() == y.variables_.size() );
+      assert( components_.size() == y.components_.size() );
 
-    auto result = Real{0.};
-    for(auto i=0u; i<variables_.size(); ++i)
-      result += variable(i)( y.variable(i) );
-    return result;
+      auto result = Real{0.};
+      for(auto i=0u; i<components_.size(); ++i)
+        result += component(i)( y.component(i) );
+      return result;
     }
   }
 }

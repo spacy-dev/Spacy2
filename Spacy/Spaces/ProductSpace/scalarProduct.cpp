@@ -20,7 +20,7 @@ namespace Spacy
 
       auto result = Real{0.};
       for( auto i=0u; i< x_.numberOfVariables(); ++i )
-        result += x_.variable(i) * y_.variable(i);
+        result += x_.component(i) * y_.component(i);
       return result;
     }
   }

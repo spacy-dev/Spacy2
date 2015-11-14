@@ -11,8 +11,6 @@
 #include "Spacy/Spaces/RealSpace/real.hh"
 
 #include "Spacy/Util/Concepts/vectorConcept.hh"
-#include "Spacy/Util/Concepts/vectorCreatorConcept.hh"
-#include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/vector.hh"
 
 namespace Spacy
@@ -28,32 +26,45 @@ namespace Spacy
    */
 
   /**
-   * @anchor VectorCreatorAnchor
    * @brief Vector creator for feeding into VectorSpace.
-   * See \ref VectorCreatorConceptAnchor "VectorCreatorConcept".
+   *
+   * The minimal signature (besides copy and/or move constructor/assignment) of a vector creator is:
+   * @code
+   * // My vector creator.
+   * class MyVectorCreator
+   * {
+   * public:
+   *   // Compute ||x||.
+   *   Vector operator()(const VectorSpace* space) const;
+   * };
+   * @endcode
    */
-//  using VectorCreator = std::function< boost::type_erasure::any<VectorConcept>(const VectorSpace*) const>;
+  using VectorCreator = std::function< boost::type_erasure::any<Concepts::VectorConcept>(const VectorSpace*) >;
 
-  using VectorCreator = boost::type_erasure::any< Concepts::VectorCreatorConcept >;
 
+  template <class T>
+  T& creator(VectorSpace& space);
+
+  template <class T>
+  const T& creator(const VectorSpace& space);
 
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    * @see @ref VectorCreatorAnchor "VectorCreator".
    */
-  class VectorSpace : public Mixin::Impl<VectorCreator>
+  class VectorSpace
   {
   public:
     VectorSpace() = default;
     /**
      * @brief Construct function space from @ref VectorCreatorAnchor "VectorCreator" and @ref NormAnchor "Norm".
-     * @param impl object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
-     * @param norm object satisfying the @ref NormConceptAnchor "NormConcept"
+     * @param creator object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
+     * @param norm type-erased norm
      * @param defaultIndex if false, then this space gets a unique index, else it gets the default index 0
      *
      * The default index can be used to use different locally defined function spaces together.
      */
-    VectorSpace(VectorCreator impl, Norm norm, bool defaultIndex = false);
+    VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex = false);
 
     /**
      * @brief Move constructor.
@@ -144,7 +155,12 @@ namespace Spacy
      */
     bool isAdmissible(const Vector& x) const;
 
+    VectorCreator& creator();
+
+    const VectorCreator& creator() const;
+
   private:
+    VectorCreator creator_ = VectorCreator{};
     Norm norm_ = {};
     ScalarProduct sp_ = {};
     unsigned index_ = Detail::spaceIndex++;
@@ -152,6 +168,18 @@ namespace Spacy
     const VectorSpace* dualSpace_ = nullptr;
     std::function<bool(const Vector&)> restriction_ = [](const Vector&){ return true; };
   };
+
+  template <class T>
+  T& creator(VectorSpace& space)
+  {
+    return *space.creator().template target<T>();
+  }
+
+  template <class T>
+  const T& creator(const VectorSpace& space)
+  {
+    return *space.creator().template target<T>();
+  }
 
   /**
    * @brief Construct Banach space.

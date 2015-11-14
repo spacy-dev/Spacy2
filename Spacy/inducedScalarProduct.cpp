@@ -1,7 +1,7 @@
 #include "inducedScalarProduct.hh"
 
 #include "Util/cast.hh"
-#include "Spacy/Spaces/PrimalDualProductSpace/vector.hh"
+#include "Spacy/Spaces/ProductSpace/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/vector.hh"
 
@@ -25,8 +25,10 @@ namespace Spacy
 
   Real PrimalInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
   {
-    const auto& x_ = cast_ref<PrimalDualProductSpace::Vector>(x);
-    const auto& y_ = cast_ref<PrimalDualProductSpace::Vector>(y);
+    const auto& x_ = cast_ref<ProductSpace::Vector>(x);
+    const auto& y_ = cast_ref<ProductSpace::Vector>(y);
+
+    /* TODO PROJECTION */
 
     return M_(y_)(x_);
   }

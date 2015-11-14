@@ -38,7 +38,7 @@ namespace Spacy
   {}
 
   Real::Real(double x)
-    : Real(x,StaticDetail::R)
+    : Real(x,Space::R)
   {}
 
   Real& Real::operator=(double y)

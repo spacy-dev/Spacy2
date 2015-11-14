@@ -5,36 +5,29 @@
 
 //using namespace Spacy;
 
-//TEST(PrimalDualProductSpace,Index)
+//TEST(PrimalDualProductSpace,CreateVector)
 //{
 //  auto space = makePrimalDualProductHilbertSpace();
-//  ASSERT_EQ( std::get<0>(space).index() , std::get<2>(space)+1u );
-//  ASSERT_EQ( std::get<0>(space).index() , std::get<1>(space)+2u );
+//  auto vector = space.vector();
+//  ASSERT_NO_THROW( cast_ref<PrimalDualProductSpace::Vector>(vector) );
 //}
 
-//TEST(ProductSpace,Vector)
+//TEST(PrimalDualProductSpace, IsHilbertSpace)
 //{
-//  auto space = makeProductHilbertSpace();
-//  auto vector = std::get<0>(space).vector();
-//  ASSERT_NO_THROW( cast_ref<SimpleProductSpace::Vector>(vector) );
+//  auto space = makePrimalDualProductHilbertSpace();
+//  ASSERT_TRUE( space.isHilbertSpace() );
 //}
 
-//TEST(ProductSpace, IsHilbertSpace)
+//TEST(PrimalDualProductSpace, Norm)
 //{
-//  auto space = makeProductHilbertSpace();
-//  ASSERT_TRUE( std::get<0>(space).isHilbertSpace() );
+//  auto space = makePrimalDualProductHilbertSpace();
+//  auto vector = space.vector();
+//  ASSERT_EQ( space.norm()(vector) , sqrt(3*Mock::ScalarProduct::testValue) );
 //}
 
-//TEST(ProductSpace, Norm)
+//TEST(PrimalDualProductSpace, ScalarProduct)
 //{
-//  auto space = makeProductHilbertSpace();
-//  auto vector = std::get<0>(space).vector();
-//  ASSERT_EQ( std::get<0>(space).norm()(vector) , sqrt(2*Mock::ScalarProduct::testValue) );
-//}
-
-//TEST(ProductSpace, ScalarProduct)
-//{
-//  auto space = makeProductHilbertSpace();
-//  auto vector = std::get<0>(space).vector();
-//  ASSERT_EQ( std::get<0>(space).scalarProduct()(vector,vector) , 2.*Mock::ScalarProduct::testValue );
+//  auto space = makePrimalDualProductHilbertSpace();
+//  auto vector = space.vector();
+//  ASSERT_EQ( space.scalarProduct()(vector,vector) , 3.*Mock::ScalarProduct::testValue );
 //}

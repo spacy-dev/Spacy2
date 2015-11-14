@@ -1,5 +1,5 @@
-#ifndef SPACY_SCALARPRODUCT_HH
-#define SPACY_SCALARPRODUCT_HH
+#ifndef SPACY_SCALAR_PRODUCT_HH
+#define SPACY_SCALAR_PRODUCT_HH
 
 #include <functional>
 
@@ -12,7 +12,7 @@ namespace Spacy
 
   /**
    * \ingroup SpacyGroup
-   * \brief Type erased scalar product.
+   * \brief Type-erased scalar product.
    *
    * The minimal signature (besides copy and/or move constructor/assignment) of a scalar product is:
    * @code
@@ -27,4 +27,4 @@ namespace Spacy
    */
   using ScalarProduct = std::function<Real(const Vector&, const Vector&)>;
 }
-#endif // SPACYS_SCALARPRODUCT_HH
+#endif // SPACYS_SCALAR_PRODUCT_HH

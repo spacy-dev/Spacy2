@@ -17,3 +17,8 @@ Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace(bool defaultIndex)
                                     defaultIndex
                                    );
 }
+
+Spacy::VectorSpace Spacy::makeRealSpace(bool defaultIndex)
+{
+  return Spacy::RealSpace::makeHilbertSpace(defaultIndex);
+}

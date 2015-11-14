@@ -4,7 +4,6 @@
 #include "Spacy/Util/cmath.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
-#include "Spacy/Spaces/primalDualProductSpace.hh"
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
 #include "Spacy/vector.hh"
 
@@ -35,15 +34,15 @@ namespace Spacy
   }
 
 
-  VectorSpace::VectorSpace(VectorCreator impl, Norm norm, bool defaultIndex)
-    : Mixin::Impl<VectorCreator>{std::move(impl)},
+  VectorSpace::VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex)
+    : creator_(creator),
       norm_{norm}
   {
     if(defaultIndex) index_ = 0;
   }
 
   VectorSpace::VectorSpace(VectorSpace&& V)
-    : Mixin::Impl<VectorCreator>{V.impl()} ,
+    : creator_{V.creator_} ,
       norm_{std::move(V.norm_)} ,
       sp_{std::move(V.sp_)} ,
       index_{std::move(V.index_)} ,
@@ -59,7 +58,7 @@ namespace Spacy
 
   VectorSpace& VectorSpace::operator=(VectorSpace&& V)
   {
-    Mixin::Impl<VectorCreator>::operator=(std::move(V));
+    creator_ = std::move(V.creator_);
     norm_ = std::move(V.norm_);
     sp_ = std::move(V.sp_);
     index_ = V.index_;
@@ -85,7 +84,7 @@ namespace Spacy
 
   Vector VectorSpace::vector() const
   {
-    return impl()(this);
+    return creator_(this);
   }
 
   unsigned VectorSpace::index() const
@@ -147,6 +146,17 @@ namespace Spacy
     restriction_ = std::move(f);
   }
 
+  VectorCreator& VectorSpace::creator()
+  {
+    return creator_;
+  }
+
+  const VectorCreator& VectorSpace::creator() const
+  {
+    return creator_;
+  }
+
+
 
   VectorSpace makeBanachSpace(VectorCreator creator, Norm norm)
   {
@@ -155,36 +165,32 @@ namespace Spacy
 
   namespace
   {
-    void connectSubSpaces(PrimalDualProductSpace::VectorCreator& creator)
+    template <class Space>
+    void setDualSpace(Space& subSpace)
     {
-      for( auto i = 0u; i < creator.subSpaces().size(); ++i)
-      {
-        auto& subSpace = creator.subSpace(i);
-        subSpace.setDualSpace(&subSpace);
-        subSpace.addDualSpace(subSpace);
-      }
+      subSpace.setDualSpace(&subSpace);
+      subSpace.addDualSpace(subSpace);
     }
+
+
+    template <class Creator>
+    void connectSubSpacesIfConsistent(VectorCreator& creator);
 
     void connectSubSpaces(ProductSpace::VectorCreator& creator)
     {
       for( auto i = 0u; i < creator.subSpaces().size(); ++i)
-      {
-        auto& subSpace = creator.subSpace(i);
-        subSpace.setDualSpace(&subSpace);
-        subSpace.addDualSpace(subSpace);
-      }
+        setDualSpace( creator.subSpace(i) );
     }
 
     template <class Creator>
     void connectSubSpacesIfConsistent(VectorCreator& creator)
     {
-      if( is<Creator>(creator) )
-        connectSubSpaces( cast_ref<Creator>(creator) );
+      if( creator.template target<Creator>() != nullptr )
+        connectSubSpaces( *creator.template target<Creator>() );
     }
 
     void connectSubSpaces(VectorCreator& creator)
     {
-      connectSubSpacesIfConsistent<PrimalDualProductSpace::VectorCreator>(creator);
       connectSubSpacesIfConsistent<ProductSpace::VectorCreator>(creator);
     }
   }

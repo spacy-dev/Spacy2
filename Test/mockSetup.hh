@@ -10,8 +10,6 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Spacy/Spaces/productSpace.hh"
-//#include "Spacy/Spaces/PrimalDualProductSpace/vector.hh"
-//#include "Spacy/Spaces/PrimalDualProductSpace/vectorSpace.hh"
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
@@ -48,6 +46,20 @@ inline auto createMockHilbertSpace()
   return Spacy::makeHilbertSpace( Mock::VectorCreator() , Mock::ScalarProduct() );
 }
 
+
+inline auto firstGlobalId(){ return 2u; }
+inline auto secondGlobalId(){ return 1u; }
+inline auto thirdGlobalId(){ return 5u; }
+inline auto notGlobalId(){ return 0u; }
+
+
+inline auto createGlobalIds()
+{
+  std::vector<unsigned> globalIds = { firstGlobalId() , secondGlobalId() };
+  return globalIds;
+}
+
+
 inline auto createProductSpaceCreatorWithSpaceIndices()
 {
   using namespace Spacy;
@@ -55,6 +67,16 @@ inline auto createProductSpaceCreatorWithSpaceIndices()
   for(auto i=0u; i<numberOfVariables(); ++i)
     spaces.push_back( std::make_shared<VectorSpace>( createMockBanachSpace() ) );
   auto creator = ProductSpace::VectorCreator(spaces);
+  return makeTuple( creator , spaces , std::make_integer_sequence<unsigned,numberOfVariables()>() );
+}
+
+inline auto createProductSpaceCreatorWithSpaceIndicesAndMap()
+{
+  using namespace Spacy;
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<numberOfVariables(); ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockBanachSpace() ) );
+  auto creator = ProductSpace::VectorCreator(spaces,createGlobalIds());
   return makeTuple( creator , spaces , std::make_integer_sequence<unsigned,numberOfVariables()>() );
 }
 
@@ -67,33 +89,60 @@ inline auto makeProductHilbertSpace()
   return makeTuple( ProductSpace::makeHilbertSpace(spaces) , spaces , std::make_integer_sequence<unsigned,numberOfVariables()>() );
 }
 
-//inline auto makePrimalDualProductSpaceCreatorWithSpaceIndices()
-//{
-//  using namespace Spacy;
-//  auto V = std::make_shared<VectorSpace>(createMockBanachSpace());
-//  auto W = std::make_shared<VectorSpace>(createMockBanachSpace());
-//  auto creator = PrimalDualProductSpace::VectorCreator( V , W );
-//  return std::make_tuple( creator , V->index() , W->index() );
-//}
+inline auto makeProductHilbertSpaceWithMap()
+{
+  using namespace Spacy;
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<numberOfVariables(); ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockHilbertSpace() ) );
+  return makeTuple( ProductSpace::makeHilbertSpace(spaces,createGlobalIds()) , spaces , std::make_integer_sequence<unsigned,numberOfVariables()>() );
+}
 
-//inline auto makePrimalDualProductHilbertSpace()
-//{
-//  using namespace Spacy;
-//  auto V = std::make_shared<VectorSpace>(createMockBanachSpace());
-//  auto W = std::make_shared<VectorSpace>(createMockBanachSpace());
-//  return std::make_tuple( PrimalDualProductSpace::makeHilbertSpace(V,W) , V->index() , W->index() );
-//}
+inline auto makePrimalDualProductSpaceCreatorWithSpaceIndices()
+{
+  using namespace Spacy;
+
+  auto primalSubSpace = std::make_shared<VectorSpace>(std::get<0>(makeProductHilbertSpaceWithMap()));
+  auto dualSubSpace = std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace({std::make_shared<VectorSpace>(createMockHilbertSpace())},{thirdGlobalId()}) );
+  auto creator = ProductSpace::VectorCreator( { primalSubSpace, dualSubSpace } );
+  return std::make_tuple( creator ,
+                          Spacy::creator<ProductSpace::VectorCreator>(*primalSubSpace).subSpace(0).index() ,
+                          Spacy::creator<ProductSpace::VectorCreator>(*primalSubSpace).subSpace(1).index()  ,
+                          Spacy::creator<ProductSpace::VectorCreator>(*dualSubSpace).subSpace(0).index() );
+}
+
+inline auto makePrimalDualSpaceCreatorWithSpaceIndices()
+{
+  using namespace Spacy;
+
+  auto primalSubSpace = std::make_shared<VectorSpace>(createMockHilbertSpace());
+  auto dualSubSpace = std::make_shared<VectorSpace>(createMockHilbertSpace());
+  auto creator = ProductSpace::VectorCreator( { primalSubSpace, dualSubSpace } );
+  return std::make_tuple( creator ,
+                          primalSubSpace->index(),
+                          dualSubSpace->index() );
+}
+
+inline auto makePrimalDualProductHilbertSpace()
+{
+  using namespace Spacy;
+
+  auto primalSubSpace = std::make_shared<VectorSpace>(std::get<0>(makeProductHilbertSpaceWithMap()));
+  auto dualSubSpace = std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace({std::make_shared<VectorSpace>(createMockHilbertSpace())},{thirdGlobalId()}) );
+
+  return ProductSpace::makeHilbertSpace( { primalSubSpace , dualSubSpace } );
+}
 
 inline const auto& valueOfComponent(const Spacy::Vector& v, unsigned i)
 {
   using namespace Spacy;
-  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).variable(i)));
+  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).component(i)));
 }
 
 inline auto& valueOfComponent(Spacy::Vector& v, unsigned i)
 {
   using namespace Spacy;
-  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).variable(i)));
+  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).component(i)));
 }
 
 

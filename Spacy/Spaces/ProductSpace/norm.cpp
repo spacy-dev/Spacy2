@@ -20,7 +20,7 @@ namespace Spacy
       auto result = Real{0.};
       for( auto i=0u; i< x_.numberOfVariables(); ++i )
       {
-        auto nx = norm( x_.variable(i) );
+        auto nx = norm( x_.component(i) );
         result += nx * nx;
       }
       return sqrt(result);

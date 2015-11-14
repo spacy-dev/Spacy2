@@ -13,14 +13,19 @@ namespace Spacy
   class Real;
   /// @endcond
 
+  enum { PRIMAL=0 , DUAL=1 };
+
   namespace ProductSpace
   {
     /// @cond
     class VectorCreator;
     /// @endcond
 
+    /** @addtogroup ProductSpaceGroup
+     * @{
+     */
+
     /**
-     * @ingroup ProductSpaceGroup
      * @brief Product space vector.
      *
      * Represents a vector \f$x=(x_0,x_1,\ldots,x_n)\f$ of a product space \f$X = \{X_0,X_1,\ldots,X_n\}\f$.
@@ -35,9 +40,6 @@ namespace Spacy
       explicit Vector(const VectorSpace& space);
 
       /**
-       * @brief In-place summation.
-       *
-       * @param y vector to add
        * @return \f$x+y\f$
        */
       Vector& operator+=(const Vector& y);
@@ -46,31 +48,21 @@ namespace Spacy
       //    AbstractVector& axpy(double a, const AbstractVector& y);
 
       /**
-       * @brief In-place subtraction.
-       *
-       * @param y vector to subtract
        * @return \f$x-y\f$
        */
       Vector& operator-=(const Vector& y);
 
       /**
-       * @brief In-place multiplication.
-       *
-       * @param a scaling factor
        * @return \f$ax\f$
        */
       Vector& operator*=(double a);
 
       /**
-       * @brief Negation.
        * @return \f$-x\f$
        */
       Vector operator- () const;
 
-      /**
-       * @brief Equality comparison.
-       * @return true, if \f$x=y\f$, else false
-       */
+      /// Equality comparison (possibly up to the maximal attainable accuracy).
       bool operator==(const Vector& y) const;
 
       unsigned numberOfVariables() const;
@@ -80,14 +72,14 @@ namespace Spacy
        * @param k global variable index
        * @return associated vector \f$x_k\f$
        */
-      ::Spacy::Vector& variable(unsigned k);
+      ::Spacy::Vector& component(unsigned k);
 
       /**
        * @brief Access k-th variable.
        * @param k global variable index
        * @return associated vector \f$x_k\f$
        */
-      const ::Spacy::Vector& variable(unsigned k) const;
+      const ::Spacy::Vector& component(unsigned k) const;
 
       /**
        * @brief Access VectorCreator object.
@@ -103,8 +95,9 @@ namespace Spacy
       Real operator()(const Vector& y) const;
 
     private:
-      std::vector< ::Spacy::Vector > variables_ = {};
+      std::vector< ::Spacy::Vector > components_ = {};
     };
+    /** @} */
   }
 }
 

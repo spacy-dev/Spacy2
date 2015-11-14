@@ -17,8 +17,11 @@ namespace Spacy
     class Vector;
     /// @endcond
 
+    /** @addtogroup ProductSpaceGroup
+     * @{
+     */
+
     /**
-     * @ingroup ProductSpaceGroup
      * @brief Creator for ProductSpace::Vector.
      *
      * Represents a product space \f$X = \{X_0,X_1,\ldots,X_n\}\f$.
@@ -31,6 +34,14 @@ namespace Spacy
        * @param spaces vector of spaces \f$\{X_k\}_k\f$
        */
       explicit VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
+
+      /**
+       * @brief Construct product space \f$ X = \{ X_0 , X_1 , \ldots , X_n \} \f$.
+       * @param spaces vector of spaces \f$\{X_k\}_k\f$
+       * @param idMap map relating global space indices with the local indices \f$1,\ldots,n\f$
+       */
+      VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
+                    const std::vector<unsigned>& globalIds);
 
       /// Access sub-spaces.
       const std::vector<std::shared_ptr<VectorSpace> >& subSpaces() const;
@@ -63,8 +74,7 @@ namespace Spacy
        */
       unsigned idMap(unsigned k) const;
 
-      void setIdMap(const std::map<unsigned,unsigned>& map);
-
+      /// Check if product space contains a subspace with global index k.
       bool hasId(unsigned k) const;
 
     private:
@@ -73,11 +83,30 @@ namespace Spacy
     };
 
     /**
-     * @ingroup ProductSpaceGroup
      * @brief Create product space.
      * @param spaces vector of sub-spaces
      */
     VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces);
+
+    /**
+     * @brief Create product space.
+     * @param spaces vector of sub-spaces
+     * @param idMap map relating global space indices with the local indices \f$1,\ldots,n\f$
+     */
+    VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
+                                 const std::vector<unsigned>& globalIds);
+
+    /**
+     * @brief Create primal-dual product space.
+     *
+     * @param spaces vector of spaces
+     * @param primalSubSpaceIds entries of spaces that correspond to primal variables
+     * @param dualSubSpaceIds entries of spaces that correspond to dual variables
+     */
+    VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
+                                 const std::vector<unsigned>& primalSubSpaceIds,
+                                 const std::vector<unsigned>& dualSubSpaceIds);
+    /** @} */
   }
 }
 

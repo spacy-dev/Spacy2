@@ -17,6 +17,12 @@ namespace
   }
 }
 
+TEST(RealSpaceTest, DefaultIndex)
+{
+  auto r = Spacy::Real{2.};
+  ASSERT_EQ( r.space()->index() , 0 );
+}
+
 TEST(RealSpaceTest,ElementTest)
 {
   using namespace Spacy;
