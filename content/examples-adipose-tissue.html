@@ -22,7 +22,7 @@ auto generateAdiposeTissue(double cCells, double k1, double k2,
 
 f.update(F) //  change function argument
 
-double value = f(); // or f.d0()
+double value = f();
 double firstDerivative  = f.d1(dF0);
 double secondDerivative = f.d2(dF0,dF1);
 double thirdDerivative  = f.d3(dF0,dF1,dF2);

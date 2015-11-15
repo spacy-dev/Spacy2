@@ -20,7 +20,7 @@ auto heatModel(double c, double d, const Vec&amp; u0, const Mat&amp; du0)
 
 f.template update&lt;0&gt;(std::make_tuple(u,du));
 
-double value       = f(); // or f.d0()
+double value       = f();
 double df_dx       = f.template d1&lt;0&gt;(std::make_tuple(v,dv));
 ...
 </pre> 

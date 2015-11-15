@@ -15,7 +15,7 @@ auto generateFunction(const Variable&amp; x)
 
 f.template update&lt;0&gt;(1.) //  change function argument
 
-auto value = f(); // or f.d0()
+auto value = f();
 auto firstDerivative  = f.template d1&lt;0&gt;(1);
 auto secondDerivative = f.template d2&lt;0,0&gt;(1,1);
 auto thirdDerivative  = f.template d3&lt;0,0,0&gt;(1,1,1);
