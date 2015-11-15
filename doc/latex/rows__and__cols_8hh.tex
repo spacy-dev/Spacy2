@@ -1,0 +1,24 @@
+\hypertarget{rows__and__cols_8hh}{}\section{fung/linear\+\_\+algebra/rows\+\_\+and\+\_\+cols.hh File Reference}
+\label{rows__and__cols_8hh}\index{fung/linear\+\_\+algebra/rows\+\_\+and\+\_\+cols.\+hh@{fung/linear\+\_\+algebra/rows\+\_\+and\+\_\+cols.\+hh}}
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include \char`\"{}fung/util/extract\+\_\+rows\+\_\+and\+\_\+cols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks\+\_\+nrows\+\_\+ncols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{namespaceFunG_1_1LinearAlgebra_abd3afa2fcd2194787342b2662cfa9f5a}{Fun\+G\+::\+Linear\+Algebra\+::rows} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Number of rows of a dynamic size matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\constexpr auto \hyperlink{namespaceFunG_1_1LinearAlgebra_ab401cccb1259e724bf37d2e198e2ca3d}{Fun\+G\+::\+Linear\+Algebra\+::rows} ()
+\begin{DoxyCompactList}\small\item\em Number of rows of a constant size matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{namespaceFunG_1_1LinearAlgebra_ae981b8bee32eea3ce87f41874835c9c1}{Fun\+G\+::\+Linear\+Algebra\+::cols} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Number of columns of a dynamic size matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\constexpr auto \hyperlink{namespaceFunG_1_1LinearAlgebra_a9eb685419fe4c5f91619d5aa0f973320}{Fun\+G\+::\+Linear\+Algebra\+::cols} ()
+\begin{DoxyCompactList}\small\item\em Number of columns of a constant size matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,33 @@
+\hypertarget{skin__tissue__hendriks_8hh}{}\section{fung/examples/biomechanics/skin\+\_\+tissue\+\_\+hendriks.hh File Reference}
+\label{skin__tissue__hendriks_8hh}\index{fung/examples/biomechanics/skin\+\_\+tissue\+\_\+hendriks.\+hh@{fung/examples/biomechanics/skin\+\_\+tissue\+\_\+hendriks.\+hh}}
+
+
+Versions of the skin model of \cite{Hendriks2005}.  
+
+
+{\ttfamily \#include \char`\"{}fung/finalize.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/generate.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/strain\+\_\+tensor.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/unit\+\_\+matrix.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/principal\+\_\+invariants.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , int n = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_gaa20bf15ef6976d64d89490429035b2c4}{Fun\+G\+::incompressible\+Skin\+\_\+\+Hendriks} (double c0, double c1, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Model for skin tissue of \cite{Hendriks2005}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , int n = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_gad8653218bd2afb4e3cfd601a5142956c}{Fun\+G\+::incompressible\+Skin\+\_\+\+Hendriks} (const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Model for skin tissue of \cite{Hendriks2005}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation\+Penalty , class Compression\+Penalty , class Matrix , int n = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga07b4c52c6ecf7e72f73ab5832fb262cd}{Fun\+G\+::compressible\+Skin\+\_\+\+Hendriks} (double c0, double c1, double d0, double d1, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for skin tissue of \cite{Hendriks2005}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation\+Penalty , class Compression\+Penalty , class Matrix , int n = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga42721e772b7eada1b0bca98247ad440f}{Fun\+G\+::compressible\+Skin\+\_\+\+Hendriks} (double d0, double d1, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for skin tissue of \cite{Hendriks2005}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Versions of the skin model of \cite{Hendriks2005}. 
+

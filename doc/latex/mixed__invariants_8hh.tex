@@ -1,0 +1,37 @@
+\hypertarget{mixed__invariants_8hh}{}\section{fung/linear\+\_\+algebra/mixed\+\_\+invariants.hh File Reference}
+\label{mixed__invariants_8hh}\index{fung/linear\+\_\+algebra/mixed\+\_\+invariants.\+hh@{fung/linear\+\_\+algebra/mixed\+\_\+invariants.\+hh}}
+{\ttfamily \#include \char`\"{}fung/constant.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/identity.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/generate.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/mathematical\+\_\+operations/chain.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/mathematical\+\_\+operations/product.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/mathematical\+\_\+operations/squared.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}principal\+\_\+invariants.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga1898785172ecce11af0c27e54d555009}{Fun\+G\+::\+Linear\+Algebra\+::i4} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate first mixed invariant $ \iota_4=\iota_1(AM) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga0df96cdb1e4b8b5a040f2adc97c51100}{Fun\+G\+::\+Linear\+Algebra\+::i4} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate first mixed invariant $ \iota_4\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gabedc42182203d883278e29fd16b355a0}{Fun\+G\+::\+Linear\+Algebra\+::i5} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate second mixed invariant $ \iota_5=\iota_1(A^2M) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gaed7e47c39d89f2b01e25c992da78b44d}{Fun\+G\+::\+Linear\+Algebra\+::i5} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate second mixed invariant $ \iota_5\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gad9f0627946667bb052212f65ecdd002b}{Fun\+G\+::\+Linear\+Algebra\+::i6} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate third mixed invariant $ \iota_6=\iota_1(AM^2) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga2536c80df733bb3e089487202c3688c1}{Fun\+G\+::\+Linear\+Algebra\+::i6} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate third mixed invariant $ \iota_6\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga7ee54c5d056877bdefefb8e54ad17791}{Fun\+G\+::\+Linear\+Algebra\+::mi4} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), first modified mixed invariant $ \bar\iota_4(A)=\iota_4\iota_3^{-1/3} $, where $\iota_4$ is the first mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga189bc682b34d13902da335c5eb502faa}{Fun\+G\+::\+Linear\+Algebra\+::mi5} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_5(A)=\iota_5\iota_3^{-2/3} $, where $\iota_5$ is the second mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga3e451f9e15fa95080f81d0c0f69f93e6}{Fun\+G\+::\+Linear\+Algebra\+::mi6} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_6(A)=\iota_6\iota_3^{-1/3} $, where $\iota_6$ is the third mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\end{DoxyCompactItemize}

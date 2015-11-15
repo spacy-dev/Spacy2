@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>Spacy: Spacy/Util/voider.hh Source File</title>
+<title>FunG: fung/util/voider.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Spacy
+   <div id="projectname">FunG
    </div>
   </td>
  </tr>
@@ -70,6 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -88,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9d903fe7e592d66559f10550c5229e96.html">Spacy</a></li><li class="navelem"><a class="el" href="dir_2b7eb22514315939eb123e315346d5e1.html">Util</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_11cbdf91b8ee8cc09aabfde7148319ec.html">fung</a></li><li class="navelem"><a class="el" href="dir_c07f75946d1de6db7f0b762e3b815d09.html">util</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -96,46 +97,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">voider.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/*                                                                             */</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/*   This file is part of the C++-library RFFGen.                              */</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">/*   Copyright 2015 Lars Lubkoll                                               */</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">/*                                                                             */</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">/*   RFFGen is free software: you can redistribute it and/or modify            */</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/*   it under the terms of the GNU General Public License as published by      */</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*   the Free Software Foundation, either version 3 of the License, or         */</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*   (at your option) any later version.                                       */</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*                                                                             */</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/*   RFFGen is distributed in the hope that it will be useful,                 */</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*   but WITHOUT ANY WARRANTY; without even the implied warranty of            */</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             */</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*   GNU General Public License for more details.                              */</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/*                                                                             */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/*   You should have received a copy of the GNU General Public License         */</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*   along with RFFGen.  If not, see &lt;http://www.gnu.org/licenses/&gt;.           */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*                                                                             */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_VOIDER_HH</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define SPACY_UTIL_VOIDER_HH</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">namespace </span>Detail</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>...&gt; <span class="keyword">struct </span>voider { <span class="keyword">using</span> type = void; };</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Types&gt;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="namespaceSpacy.html#a63ae343327f8e3bde02913c0be7d8655">   40</a></span>&#160;  <span class="keyword">using</span> <a class="code" href="namespaceSpacy.html#a63ae343327f8e3bde02913c0be7d8655">void_t</a> = <span class="keyword">typename</span> Detail::voider&lt;Types...&gt;::type;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_VOIDER_HH</span></div>
-<div class="ttc" id="namespaceSpacy_html_a63ae343327f8e3bde02913c0be7d8655"><div class="ttname"><a href="namespaceSpacy.html#a63ae343327f8e3bde02913c0be7d8655">Spacy::void_t</a></div><div class="ttdeci">typename Detail::voider&lt; Types...&gt;::type void_t</div><div class="ttdoc">Most fascinating type ever. Is always void. </div><div class="ttdef"><b>Definition:</b> voider.hh:40</div></div>
-<div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<a href="voider_8hh.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef FUNG_UTIL_VOIDER_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define FUNG_UTIL_VOIDER_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceFunG.html">FunG</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">namespace </span>Detail</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>...&gt; <span class="keyword">struct </span>voider { <span class="keyword">using</span> type = void; };</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Types&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespaceFunG.html#a0cde667596590eb8d32e4a5ee76ddbb9">   23</a></span>&#160;  <span class="keyword">using</span> <a class="code" href="namespaceFunG.html#a0cde667596590eb8d32e4a5ee76ddbb9">void_t</a> = <span class="keyword">typename</span> Detail::voider&lt;Types...&gt;::type;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif // FUNG_UTIL_VOIDER_HH</span></div>
+<div class="ttc" id="namespaceFunG_html_a0cde667596590eb8d32e4a5ee76ddbb9"><div class="ttname"><a href="namespaceFunG.html#a0cde667596590eb8d32e4a5ee76ddbb9">FunG::void_t</a></div><div class="ttdeci">typename Detail::voider&lt; Types...&gt;::type void_t</div><div class="ttdoc">Most fascinating type ever. Is void for all input types. </div><div class="ttdef"><b>Definition:</b> voider.hh:23</div></div>
+<div class="ttc" id="namespaceFunG_html"><div class="ttname"><a href="namespaceFunG.html">FunG</a></div><div class="ttdoc">Main namespace of the FunG library. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 15 2015 13:52:06 for FunG by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

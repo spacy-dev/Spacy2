@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kerneloffset',['kernelOffset',['../classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a959f6f366b868163b6cbeda7c96bcc8e.html#a959f6f366b868163b6cbeda7c96bcc8e',1,'Spacy::CG::TriangularStateConstraintPreconditioner']]]
+  ['j2',['j2',['../group__InvariantGroup.html#ga9a2bc859fe1ae34b1a3ada91a39d69df',1,'FunG::LinearAlgebra']]]
 ];

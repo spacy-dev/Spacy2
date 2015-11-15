@@ -1,0 +1,122 @@
+\hypertarget{structFunG_1_1Log2}{}\section{Fun\+G\+:\+:Log2 Struct Reference}
+\label{structFunG_1_1Log2}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+
+
+Base 2 logarithm including first three derivatives.  
+
+
+
+
+{\ttfamily \#include $<$log.\+hh$>$}
+
+Inheritance diagram for Fun\+G\+:\+:Log2\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structFunG_1_1Log2}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structFunG_1_1Log2_ab3fe35bf3d976e51797bff7128d2f16b}{Log2} (double x=1.)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{structFunG_1_1Log2_a2052168d207ca31e00620238c71b94f3}{update} (double x)
+\begin{DoxyCompactList}\small\item\em Set point of evaluation. \end{DoxyCompactList}\item 
+double \hyperlink{structFunG_1_1Log2_a11b6311bb395c3e77cdb874ec2eab240}{d0} () const noexcept
+\begin{DoxyCompactList}\small\item\em Function value. \end{DoxyCompactList}\item 
+double \hyperlink{structFunG_1_1Log2_ab8d1169c44c1940953c19e85e292a9b9}{d1} (double dx=1.) const 
+\begin{DoxyCompactList}\small\item\em First (directional) derivative. \end{DoxyCompactList}\item 
+double \hyperlink{structFunG_1_1Log2_aa90f4f3ccfca5cff8d6027a04fae1ea1}{d2} (double dx=1., double dy=1.) const 
+\begin{DoxyCompactList}\small\item\em Second (directional) derivative. \end{DoxyCompactList}\item 
+double \hyperlink{structFunG_1_1Log2_a9012b223a7cc98604bcb3acd756b3902}{d3} (double dx=1., double dy=1., double dz=1.) const 
+\begin{DoxyCompactList}\small\item\em Third (directional) derivative. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base 2 logarithm including first three derivatives. 
+
+For scalar functions directional derivatives are less interesting. Incorporating this function as building block for more complex functions requires directional derivatives. These occur during applications of the chain rule. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structFunG_1_1Log2_ab3fe35bf3d976e51797bff7128d2f16b}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!Log2@{Log2}}
+\index{Log2@{Log2}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{Log2}]{\setlength{\rightskip}{0pt plus 5cm}Fun\+G\+::\+Log2\+::\+Log2 (
+\begin{DoxyParamCaption}
+\item[{double}]{x = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{structFunG_1_1Log2_ab3fe35bf3d976e51797bff7128d2f16b}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & point of evaluation \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structFunG_1_1Log2_a11b6311bb395c3e77cdb874ec2eab240}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!d0@{d0}}
+\index{d0@{d0}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{d0}]{\setlength{\rightskip}{0pt plus 5cm}double Fun\+G\+::\+Log2\+::d0 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{structFunG_1_1Log2_a11b6311bb395c3e77cdb874ec2eab240}
+
+
+Function value. 
+
+\hypertarget{structFunG_1_1Log2_ab8d1169c44c1940953c19e85e292a9b9}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!d1@{d1}}
+\index{d1@{d1}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}double Fun\+G\+::\+Log2\+::d1 (
+\begin{DoxyParamCaption}
+\item[{double}]{dx = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1Log2_ab8d1169c44c1940953c19e85e292a9b9}
+
+
+First (directional) derivative. 
+
+\hypertarget{structFunG_1_1Log2_aa90f4f3ccfca5cff8d6027a04fae1ea1}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!d2@{d2}}
+\index{d2@{d2}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}double Fun\+G\+::\+Log2\+::d2 (
+\begin{DoxyParamCaption}
+\item[{double}]{dx = {\ttfamily 1.}, }
+\item[{double}]{dy = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1Log2_aa90f4f3ccfca5cff8d6027a04fae1ea1}
+
+
+Second (directional) derivative. 
+
+\hypertarget{structFunG_1_1Log2_a9012b223a7cc98604bcb3acd756b3902}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!d3@{d3}}
+\index{d3@{d3}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{d3}]{\setlength{\rightskip}{0pt plus 5cm}double Fun\+G\+::\+Log2\+::d3 (
+\begin{DoxyParamCaption}
+\item[{double}]{dx = {\ttfamily 1.}, }
+\item[{double}]{dy = {\ttfamily 1.}, }
+\item[{double}]{dz = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1Log2_a9012b223a7cc98604bcb3acd756b3902}
+
+
+Third (directional) derivative. 
+
+\hypertarget{structFunG_1_1Log2_a2052168d207ca31e00620238c71b94f3}{}\index{Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}!update@{update}}
+\index{update@{update}!Fun\+G\+::\+Log2@{Fun\+G\+::\+Log2}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Fun\+G\+::\+Log2\+::update (
+\begin{DoxyParamCaption}
+\item[{double}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1Log2_a2052168d207ca31e00620238c71b94f3}
+
+
+Set point of evaluation. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+fung/cmath/\hyperlink{log_8hh}{log.\+hh}\end{DoxyCompactItemize}

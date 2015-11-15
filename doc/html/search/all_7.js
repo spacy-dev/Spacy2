@@ -1,5 +1,20 @@
 var searchData=
 [
-  ['hessian',['Hessian',['../classSpacy_1_1Hessian.html',1,'Spacy']]],
-  ['hessian',['Hessian',['../classSpacy_1_1Hessian_a0d68a39d36030fb578c6082e66cd1733.html#a0d68a39d36030fb578c6082e66cd1733',1,'Spacy::Hessian::Hessian(C2Functional F, Vector x)'],['../classSpacy_1_1Hessian_a164c5994d90dbc86018e5763b20d406e.html#a164c5994d90dbc86018e5763b20d406e',1,'Spacy::Hessian::Hessian(C2Functional F, Vector x, LinearSolver solver)'],['../classSpacy_1_1FEniCS_1_1C2Functional_aceec6783f701e121b35ffa482629e1dd.html#aceec6783f701e121b35ffa482629e1dd',1,'Spacy::FEniCS::C2Functional::hessian()'],['../classSpacy_1_1Kaskade_1_1C2Functional_a73e0b9a2499e89bf85eddf1aa74fe9ba.html#a73e0b9a2499e89bf85eddf1aa74fe9ba',1,'Spacy::Kaskade::C2Functional::hessian()']]]
+  ['hasconsistentfirstderivative',['hasConsistentFirstDerivative',['../group__Checks.html#ga5f9a3a474205df6f565dd1a03ebb5e28',1,'FunG::Checks']]],
+  ['hasconsistentsecondderivative',['hasConsistentSecondDerivative',['../group__Checks.html#ga072e2c21fa90be998a34975fb2975772',1,'FunG::Checks']]],
+  ['hasconsistentthirdderivative',['hasConsistentThirdDerivative',['../group__Checks.html#gaad092e45db1d0c1d7b6f69a5562679fa',1,'FunG::Checks']]],
+  ['hasfree_5fmultiplication',['hasFree_Multiplication',['../group__Checks.html#ga81302dfb773e50401ec899c3b9a53c4c',1,'FunG::Checks']]],
+  ['hasfree_5fsummation',['hasFree_Summation',['../group__Checks.html#ga8545906a81acf9f533c3342b0d02a6e9',1,'FunG::Checks']]],
+  ['hasmem_5fn_5fcols',['hasMem_n_cols',['../group__Checks.html#ga0a87aaa714499abcaabd921297be61e4',1,'FunG::Checks']]],
+  ['hasmem_5fn_5frows',['hasMem_n_rows',['../group__Checks.html#ga6f66adbc63ed46140f1080e9914cb5de',1,'FunG::Checks']]],
+  ['hasmemfn_5fcols',['hasMemFn_cols',['../group__Checks.html#ga4979df2d7b7abebb0253a569e41274b1',1,'FunG::Checks']]],
+  ['hasmemfn_5finplacemultiplication',['hasMemFn_InPlaceMultiplication',['../group__Checks.html#ga1fb52331af88ccf29e380c8e5597e801',1,'FunG::Checks']]],
+  ['hasmemfn_5finplacesummation',['hasMemFn_InPlaceSummation',['../group__Checks.html#ga5357edca3d0fdcfbc1fba5fd43713b40',1,'FunG::Checks']]],
+  ['hasmemfn_5frightmultiplyany',['hasMemFn_rightmultiplyany',['../group__Checks.html#ga88d1f93f87cf5f51d426fcfee862d6f6',1,'FunG::Checks']]],
+  ['hasmemfn_5frows',['hasMemFn_rows',['../group__Checks.html#ga68fd30eff9d106c399b2b0e9a1f1b822',1,'FunG::Checks']]],
+  ['hasmorethanonevariable',['hasMoreThanOneVariable',['../group__Checks.html#ga5ff379f125d36c212332fd51012195d5',1,'FunG::Checks']]],
+  ['hasvariable',['hasVariable',['../group__Checks.html#ga6d289274975a662346a1b5adf0d31f37',1,'FunG::Checks']]],
+  ['hasvariableid',['hasVariableId',['../group__Checks.html#ga0d42132679e0563893cc6c1809dc9a55',1,'FunG::Checks']]],
+  ['have_5fboost',['HAVE_BOOST',['../third_8hh.html#a1644f282a4f84575a270f96b98d4f3c6',1,'third.hh']]],
+  ['heatmodel',['heatModel',['../namespaceFunG.html#aab17a1468e61f58564333b3fcd7900d6',1,'FunG']]]
 ];

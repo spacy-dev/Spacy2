@@ -1,0 +1,20 @@
+\hypertarget{tensor__product_8hh}{}\section{fung/linear\+\_\+algebra/tensor\+\_\+product.hh File Reference}
+\label{tensor__product_8hh}\index{fung/linear\+\_\+algebra/tensor\+\_\+product.\+hh@{fung/linear\+\_\+algebra/tensor\+\_\+product.\+hh}}
+{\ttfamily \#include \char`\"{}fung/util/at.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}rows\+\_\+and\+\_\+cols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/zero.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , class Vector1 , class Vector2 , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\Matrix \hyperlink{group__LinearAlgebraGroup_ga5d0e066e6184fb3324d96d20087b5578}{Fun\+G\+::\+Linear\+Algebra\+::tensor\+Product} (const Vector1 \&v, const Vector2 \&w)
+\begin{DoxyCompactList}\small\item\em Compute tensor product $ M = v \otimes w $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , class Vector $>$ }\\Matrix \hyperlink{group__LinearAlgebraGroup_gae5e82b9e66319511dae5ff0d9304a6b7}{Fun\+G\+::\+Linear\+Algebra\+::tensor\+Product} (const Vector \&v)
+\begin{DoxyCompactList}\small\item\em Compute tensor product $ M = v \otimes v $. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,21 @@
+\hypertarget{cofactor_8hh}{}\section{fung/linear\+\_\+algebra/cofactor.hh File Reference}
+\label{cofactor_8hh}\index{fung/linear\+\_\+algebra/cofactor.\+hh@{fung/linear\+\_\+algebra/cofactor.\+hh}}
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include \char`\"{}dimension.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/concept\+\_\+check.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/at.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$int row, int col, class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr, class  = Concepts\+::\+Matrix\+Concept\+Check$<$\+Matrix$>$$>$ }\\auto \hyperlink{group__LinearAlgebraGroup_gace32a0876d4a8333f3bfc564316085ed}{Fun\+G\+::\+Linear\+Algebra\+::compute\+Cofactor} (Matrix const \&A)
+\begin{DoxyCompactList}\small\item\em Compute the $(row,col)$-\/cofactor of $ A $. Implemented for $ A\in \mathbb{R}^{n,n} $ with $ n=2,3 $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int row, int col, class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr, class  = Concepts\+::\+Matrix\+Concept\+Check$<$\+Matrix$>$$>$ }\\auto \hyperlink{group__LinearAlgebraGroup_ga3970ee7fa4d47612427a59cecf56746c}{Fun\+G\+::\+Linear\+Algebra\+::compute\+Cofactor\+Directional\+Derivative} (Matrix const \&A, Matrix const \&B)
+\begin{DoxyCompactList}\small\item\em Compute the first directional derivative in direction $ B $ of the $(row,col)$-\/cofactor of $ A $. Implemented for $ A\in \mathbb{R}^{n,n} $ with $ n=2,3 $. \end{DoxyCompactList}\end{DoxyCompactItemize}

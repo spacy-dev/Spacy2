@@ -1,0 +1,20 @@
+\hypertarget{volumetric__penalty__functions_8hh}{}\section{fung/examples/volumetric\+\_\+penalty\+\_\+functions.hh File Reference}
+\label{volumetric__penalty__functions_8hh}\index{fung/examples/volumetric\+\_\+penalty\+\_\+functions.\+hh@{fung/examples/volumetric\+\_\+penalty\+\_\+functions.\+hh}}
+{\ttfamily \#include \char`\"{}fung/generate.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/cmath/log.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/cmath/pow.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/determinant.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Inflation , class Compression , class Matrix $>$ }\\auto \hyperlink{namespaceFunG_ad26faeb264bb4b1cd7e70f3811c366c8}{Fun\+G\+::volumetric\+Penalty} (double d0, double d1, const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Create volumetric penalty function composed of a penalty for inflation and one for compression. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix $>$ }\\auto \hyperlink{namespaceFunG_aaf30b9c36ed86e01b94f6b7c1d95cae8}{Fun\+G\+::volumetric\+Quad\+And\+Log} (double d0, double d1, const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Create the volumetric penalty function $ d_0 j^2 + d_1 \log(j),\ j=\det(A) $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix $>$ }\\auto \hyperlink{namespaceFunG_adf4be5df85ea9df10cc9e11c11aaeb7b}{Fun\+G\+::volumetric\+Hartmann\+Neff} (double d0, double d1, const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Create the volumetric penalty function $ d_0 j^5 + d_1 j^{-5},\ j=\det(A) $. \end{DoxyCompactList}\end{DoxyCompactItemize}

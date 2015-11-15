@@ -1,0 +1,35 @@
+\hypertarget{adipose__tissue__sommer__holzapfel_8hh}{}\section{fung/examples/biomechanics/adipose\+\_\+tissue\+\_\+sommer\+\_\+holzapfel.hh File Reference}
+\label{adipose__tissue__sommer__holzapfel_8hh}\index{fung/examples/biomechanics/adipose\+\_\+tissue\+\_\+sommer\+\_\+holzapfel.\+hh@{fung/examples/biomechanics/adipose\+\_\+tissue\+\_\+sommer\+\_\+holzapfel.\+hh}}
+
+
+Model for adipose tissue of \cite{Sommer2013}.  
+
+
+{\ttfamily \#include \char`\"{}fung/finalize.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/generate.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/cmath/exp.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/principal\+\_\+invariants.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/mixed\+\_\+invariants.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/strain\+\_\+tensor.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/tensor\+\_\+product.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_gac269eefc1abb994044e1634c20a98061}{Fun\+G\+::incompressible\+Adipose\+Tissue\+\_\+\+Sommer\+Holzapfel} (double c\+Cells, double k1, double k2, double kappa, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Model for adipose tissue of \cite{Sommer2013}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga01ab128bcf179f4431b0270179af9e20}{Fun\+G\+::incompressible\+Adipose\+Tissue\+\_\+\+Sommer\+Holzapfel} (const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Model for adipose tissue of \cite{Sommer2013}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation , class Compression , class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga5c3388564c0420b62e58f48c739d27f1}{Fun\+G\+::compressible\+Adipose\+Tissue\+\_\+\+Sommer\+Holzapfel} (double c\+Cells, double k1, double k2, double kappa, double d0, double d1, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for adipose tissue of \cite{Sommer2013}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation , class Compression , class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga27bb3f7c579ce8c21a69ea4d4d0169d7}{Fun\+G\+::compressible\+Adipose\+Tissue\+\_\+\+Sommer\+Holzapfel} (double d0, double d1, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for adipose tissue of \cite{Sommer2013}. Material parameters are taken from the same publication, Table 2, i.\+e. $c_\mathrm{Cells}=0.15 (\,\mathrm{kPa})$, $k_1=0.8 (\,\mathrm{kPa})$, $k_2=47.3$ and $\kappa=0.09$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Model for adipose tissue of \cite{Sommer2013}. 
+

@@ -1,0 +1,25 @@
+\hypertarget{type__traits_8hh}{}\section{fung/util/type\+\_\+traits.hh File Reference}
+\label{type__traits_8hh}\index{fung/util/type\+\_\+traits.\+hh@{fung/util/type\+\_\+traits.\+hh}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\\*
+{\ttfamily \#include \char`\"{}static\+\_\+checks.\+hh\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structFunG_1_1Decay}{Fun\+G\+::\+Decay$<$ F, class $>$}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structFunG_1_1Identity}{Identity}, i.\+e. \hyperlink{structFunG_1_1Decay_a4b2916cbb7c8587ab3fccc9b896b9df4}{Decay$<$\+F$>$\+::type} == F. \end{DoxyCompactList}\item 
+struct \hyperlink{structFunG_1_1Decay_3_01F_00_01void__t_3_01Checks_1_1TryNestedType__PlainObject_3_01F_01_4_01_4_01_4}{Fun\+G\+::\+Decay$<$ F, void\+\_\+t$<$ Checks\+::\+Try\+Nested\+Type\+\_\+\+Plain\+Object$<$ F $>$ $>$ $>$}
+\begin{DoxyCompactList}\small\item\em Underlying type for expression templates of the Eigen library. \end{DoxyCompactList}\item 
+struct \hyperlink{structFunG_1_1IsArithmetic}{Fun\+G\+::\+Is\+Arithmetic$<$ F $>$}
+\begin{DoxyCompactList}\small\item\em Specialize this template class to register arithmetic types that are not built-\/in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class F $>$ }\\using \hyperlink{namespaceFunG_a195ac37d8696970c89b112c81a1e4d6e}{Fun\+G\+::decay\+\_\+t} = typename Decay$<$ std\+::decay\+\_\+t$<$ F $>$ $>$\+::type
+\begin{DoxyCompactList}\small\item\em Access underlying type (if it is hidden by expression templates). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F $>$ }\\using \hyperlink{namespaceFunG_a6dd0f05fb05ea031b7b9678fe3730c73}{Fun\+G\+::is\+\_\+arithmetic} = std\+::integral\+\_\+constant$<$ bool, std\+::is\+\_\+arithmetic$<$ F $>$\+::value$\vert$$\vert$Is\+Arithmetic$<$ F $>$\+::value $>$
+\end{DoxyCompactItemize}

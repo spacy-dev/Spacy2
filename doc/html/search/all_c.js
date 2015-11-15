@@ -1,14 +1,19 @@
 var searchData=
 [
-  ['newton',['newton',['../group__NewtonGroup_gac1e03448966c56b3a119f9bea07e6dd6.html#gac1e03448966c56b3a119f9bea07e6dd6',1,'Spacy::Newton::newton(const C1Operator &amp;F, const Vector &amp;x0, const DampingStrategy &amp;dampingStrategy, const TerminationCriterion &amp;terminationCriterion, const Parameter &amp;p)'],['../group__NewtonGroup_ga39c7915072931fafca5d3012aa6349bf.html#ga39c7915072931fafca5d3012aa6349bf',1,'Spacy::Newton::newton(const C1Operator &amp;F, const Vector &amp;x0, const Parameter &amp;p)']]],
-  ['newton_20methods',['Newton Methods',['../group__NewtonGroup.html',1,'']]],
-  ['none',['None',['../classSpacy_1_1Newton_1_1Damping_1_1None.html#a76bdbc09dbc04ef03f7b95259233abc0',1,'Spacy::Newton::Damping::None']]],
-  ['none',['None',['../classSpacy_1_1Newton_1_1Damping_1_1None.html',1,'Spacy::Newton::Damping']]],
-  ['nonowningpimpl',['NonOwningPImpl',['../classSpacy_1_1Mixin_1_1NonOwningPImpl.html',1,'Spacy::Mixin']]],
-  ['nonowningpimpl',['NonOwningPImpl',['../classSpacy_1_1Mixin_1_1NonOwningPImpl.html#a56983a18183bc646278b6a41272b6462',1,'Spacy::Mixin::NonOwningPImpl::NonOwningPImpl()=default'],['../classSpacy_1_1Mixin_1_1NonOwningPImpl_ac89a1f4159d143ee2b32c183758d047f.html#ac89a1f4159d143ee2b32c183758d047f',1,'Spacy::Mixin::NonOwningPImpl::NonOwningPImpl(Type &amp;impl)']]],
-  ['norm',['norm',['../classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c',1,'Spacy::VectorSpace::norm()'],['../group__SpacyGroup_gaf4f33b11d657c48566d961a013c92bd1.html#gaf4f33b11d657c48566d961a013c92bd1',1,'Spacy::Norm()'],['../group__SpacyGroup_ga86a4fc266aa19a07b0af16388907354b.html#ga86a4fc266aa19a07b0af16388907354b',1,'Spacy::norm(const Vector &amp;x)']]],
-  ['normconcept',['NormConcept',['../group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b.html#ga8b6032c46f6e31840a2c956c6360549b',1,'Spacy::Concepts']]],
-  ['notify',['notify',['../classSpacy_1_1Mixin_1_1MixinConnection.html#a1ddeaa78a3bb4a38c2cca36d1f99fe36',1,'Spacy::Mixin::MixinConnection']]],
-  ['nthreads',['nThreads',['../classSpacy_1_1Mixin_1_1NumberOfThreads_a385963b95b5e1ddf422393146cc71ee1.html#a385963b95b5e1ddf422393146cc71ee1',1,'Spacy::Mixin::NumberOfThreads']]],
-  ['numberofthreads',['NumberOfThreads',['../classSpacy_1_1Mixin_1_1NumberOfThreads.html',1,'Spacy::Mixin']]]
+  ['neo_5fhooke_2ehh',['neo_hooke.hh',['../neo__hooke_8hh.html',1,'']]],
+  ['nonlinear_5fheat_2ehh',['nonlinear_heat.hh',['../nonlinear__heat_8hh.html',1,'']]],
+  ['nonsymmetricmatrixexception',['NonSymmetricMatrixException',['../classFunG_1_1NonSymmetricMatrixException.html',1,'FunG']]],
+  ['nonsymmetricmatrixexception',['NonSymmetricMatrixException',['../classFunG_1_1NonSymmetricMatrixException.html#a1c11fd643c37e5fa2145aba2cc7ab09d',1,'FunG::NonSymmetricMatrixException']]],
+  ['numberofcolumns',['NumberOfColumns',['../structFunG_1_1LinearAlgebra_1_1NumberOfColumns.html',1,'FunG::LinearAlgebra']]],
+  ['numberofcolumns',['numberOfColumns',['../namespaceFunG_1_1LinearAlgebra.html#a4ed2c140b262ec0c33c93af62d65d1b1',1,'FunG::LinearAlgebra']]],
+  ['numberofcolumns_3c_20matrix_3c_20n_2c_20m_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfColumns&lt; Matrix&lt; n, m &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfColumns_3_01Matrix_3_01n_00_01m_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofcolumns_3c_20matrix_3c_20t_2c_20n_2c_20m_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfColumns&lt; Matrix&lt; T, n, m &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfColumns_3_01Matrix_3_01T_00_01n_00_01m_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofcolumns_3c_20matrix_3c_20t_2c_20n_2c_20m_2c_20other_2e_2e_2e_3e_2c_20matrixconceptcheck_20_3e',['NumberOfColumns&lt; Matrix&lt; T, n, m, other...&gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfColumns_3_01Matrix_3_01T_00_01n_00_01m_00_01other_8_8_8_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows',['numberOfRows',['../namespaceFunG_1_1LinearAlgebra.html#ac1ff54cc5554748b5a9585c09745f139',1,'FunG::LinearAlgebra']]],
+  ['numberofrows',['NumberOfRows',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows_3c_20matrix_3c_20n_2c_20m_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfRows&lt; Matrix&lt; n, m &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows_3_01Matrix_3_01n_00_01m_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows_3c_20matrix_3c_20t_2c_20n_2c_20m_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfRows&lt; Matrix&lt; T, n, m &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows_3_01Matrix_3_01T_00_01n_00_01m_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows_3c_20matrix_3c_20t_2c_20n_2c_20m_2e_2e_2e_3e_2c_20matrixconceptcheck_20_3e',['NumberOfRows&lt; Matrix&lt; T, n, m...&gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows_3_01Matrix_3_01T_00_01n_00_01m_8_8_8_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows_3c_20vector_3c_20n_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfRows&lt; Vector&lt; n &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows_3_01Vector_3_01n_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]],
+  ['numberofrows_3c_20vector_3c_20t_2c_20n_20_3e_2c_20matrixconceptcheck_20_3e',['NumberOfRows&lt; Vector&lt; T, n &gt;, MatrixConceptCheck &gt;',['../structFunG_1_1LinearAlgebra_1_1NumberOfRows_3_01Vector_3_01T_00_01n_01_4_00_01MatrixConceptCheck_01_4.html',1,'FunG::LinearAlgebra']]]
 ];

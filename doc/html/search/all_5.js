@@ -1,9 +1,15 @@
 var searchData=
 [
-  ['fieldmatrix',['FieldMatrix',['../classDune_1_1FieldMatrix.html',1,'Dune']]],
-  ['fieldvector',['FieldVector',['../classDune_1_1FieldVector.html',1,'Dune']]],
-  ['fieldvector_3c_20scalar_2c_20dim_20_3e',['FieldVector&lt; Scalar, dim &gt;',['../classDune_1_1FieldVector.html',1,'Dune']]],
-  ['findminimizer',['findMinimizer',['../group__CSGroup_gadffb0e7fa07418c47de2474156d90a35.html#gadffb0e7fa07418c47de2474156d90a35',1,'Spacy::CompositeStep']]],
-  ['functional',['Functional',['../group__SpacyGroup_ga673218f603c93790864aef12c89d3a35.html#ga673218f603c93790864aef12c89d3a35',1,'Spacy']]],
-  ['functionalconcept',['FunctionalConcept',['../group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d',1,'Spacy::Concepts']]]
+  ['checks',['Checks',['../namespaceFunG_1_1Checks.html',1,'FunG']]],
+  ['concepts',['Concepts',['../namespaceFunG_1_1Concepts.html',1,'FunG']]],
+  ['finalize',['finalize',['../namespaceFunG.html#a3a2af76439713dc7635e0c538ac34f15',1,'FunG']]],
+  ['finalize_2ehh',['finalize.hh',['../finalize_8hh.html',1,'']]],
+  ['frobenius_5fnorm_2ehh',['frobenius_norm.hh',['../frobenius__norm_8hh.html',1,'']]],
+  ['frobeniusnorm',['FrobeniusNorm',['../group__LinearAlgebraGroup.html#gad209833e37a25e863fe72868d37795b8',1,'FunG::LinearAlgebra::FrobeniusNorm()'],['../group__LinearAlgebraGroup.html#gaa893e7d667dde98d2b119ca004745186',1,'FunG::LinearAlgebra::frobeniusNorm(const Matrix &amp;A)'],['../group__LinearAlgebraGroup.html#gafa2f358f9310cecb787620ad8ec460a6',1,'FunG::LinearAlgebra::frobeniusNorm(const F &amp;f)']]],
+  ['functionconcept',['FunctionConcept',['../structFunG_1_1Concepts_1_1FunctionConcept.html',1,'FunG::Concepts']]],
+  ['functionconceptcheck',['FunctionConceptCheck',['../structFunG_1_1Concepts_1_1FunctionConceptCheck.html',1,'FunG::Concepts']]],
+  ['fung',['FunG',['../namespaceFunG.html',1,'']]],
+  ['fung_2ehh',['fung.hh',['../fung_8hh.html',1,'']]],
+  ['linearalgebra',['LinearAlgebra',['../namespaceFunG_1_1LinearAlgebra.html',1,'FunG']]],
+  ['mathematicaloperations',['MathematicalOperations',['../namespaceFunG_1_1MathematicalOperations.html',1,'FunG']]]
 ];

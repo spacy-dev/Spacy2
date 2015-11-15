@@ -1,6 +1,15 @@
 var searchData=
 [
-  ['uniqueimpl',['UniqueImpl',['../classSpacy_1_1Mixin_1_1UniqueImpl.html',1,'Spacy::Mixin']]],
-  ['uniqueimpl',['UniqueImpl',['../classSpacy_1_1Mixin_1_1UniqueImpl.html#ae24356ea93af338e7bc0f1a63ef00ca7',1,'Spacy::Mixin::UniqueImpl::UniqueImpl()=default'],['../classSpacy_1_1Mixin_1_1UniqueImpl_a373c260ea64be0cd24f36507cfbe3071.html#a373c260ea64be0cd24f36507cfbe3071',1,'Spacy::Mixin::UniqueImpl::UniqueImpl(std::unique_ptr&lt; Type &gt; &amp;&amp;impl)']]],
-  ['update',['update',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1ab7f5d5bfe95629caedfba6a6d974af.html#a1ab7f5d5bfe95629caedfba6a6d974af',1,'Spacy::CG::Termination::StrakosTichyEnergyError::update()'],['../classSpacy_1_1Mixin_1_1AbsoluteAccuracy.html#a7e5910ba9a6ac7a4b332efdbbff27787',1,'Spacy::Mixin::AbsoluteAccuracy::update()'],['../classSpacy_1_1Mixin_1_1AdjointIndex.html#ad91ccf68601950801cd062afee8a8cf2',1,'Spacy::Mixin::AdjointIndex::update()'],['../classSpacy_1_1Mixin_1_1ControlIndex.html#aa534a05629e88a5cc479f161139cf3f7',1,'Spacy::Mixin::ControlIndex::update()'],['../classSpacy_1_1Mixin_1_1Eps.html#a151216968daef3da5f5cdc0b957ce01b',1,'Spacy::Mixin::Eps::update()'],['../classSpacy_1_1Mixin_1_1IterativeRefinements.html#adcb6062728331e48515a05f539628062',1,'Spacy::Mixin::IterativeRefinements::update()'],['../classSpacy_1_1Mixin_1_1MaxSteps.html#a8e0f4d29b15dff17d4503788a9e2e081',1,'Spacy::Mixin::MaxSteps::update()'],['../classSpacy_1_1Mixin_1_1MinimalAccuracy.html#a98dc7eb03f50165f6f2e0df17c2b7d44',1,'Spacy::Mixin::MinimalAccuracy::update()'],['../classSpacy_1_1Mixin_1_1RegularityTest.html#ae3bfc55bec9fe3068adffb6d24b3b964',1,'Spacy::Mixin::RegularityTest::update()'],['../classSpacy_1_1Mixin_1_1RelativeAccuracy.html#acf0b58224d9a2879d05b5d2947f37527',1,'Spacy::Mixin::RelativeAccuracy::update()'],['../classSpacy_1_1Mixin_1_1StateIndex.html#a632299c8de748ea73d1fcbbb4d8f734a',1,'Spacy::Mixin::StateIndex::update()'],['../classSpacy_1_1Mixin_1_1Verbosity.html#a8cff860c587fcda2cdc86ba744302b33',1,'Spacy::Mixin::Verbosity::update()']]]
+  ['variable',['Variable',['../structFunG_1_1Variable.html',1,'FunG']]],
+  ['variable',['Variable',['../structFunG_1_1Variable.html#a20d207e651ee9e93c86dfa4ea1053f56',1,'FunG::Variable::Variable()=default'],['../structFunG_1_1Variable.html#a10238450dac2ec4c98400b106543ff8f',1,'FunG::Variable::Variable(const T &amp;t_)'],['../namespaceFunG.html#a1c474456411f028e14eab67ff6eebe0c',1,'FunG::variable()']]],
+  ['variable_2ehh',['variable.hh',['../variable_8hh.html',1,'']]],
+  ['variable_5ft',['Variable_t',['../namespaceFunG.html#a3d589ef7d011a46a72847eabcbbb4532',1,'FunG']]],
+  ['vectorconcept',['VectorConcept',['../structFunG_1_1Concepts_1_1VectorConcept.html',1,'FunG::Concepts']]],
+  ['vectorconceptcheck',['VectorConceptCheck',['../structFunG_1_1Concepts_1_1VectorConceptCheck.html',1,'FunG::Concepts']]],
+  ['void_5ft',['void_t',['../namespaceFunG.html#a0cde667596590eb8d32e4a5ee76ddbb9',1,'FunG']]],
+  ['voider_2ehh',['voider.hh',['../voider_8hh.html',1,'']]],
+  ['volumetric_5fpenalty_5ffunctions_2ehh',['volumetric_penalty_functions.hh',['../volumetric__penalty__functions_8hh.html',1,'']]],
+  ['volumetrichartmannneff',['volumetricHartmannNeff',['../namespaceFunG.html#adf4be5df85ea9df10cc9e11c11aaeb7b',1,'FunG']]],
+  ['volumetricpenalty',['volumetricPenalty',['../namespaceFunG.html#ad26faeb264bb4b1cd7e70f3811c366c8',1,'FunG']]],
+  ['volumetricquadandlog',['volumetricQuadAndLog',['../namespaceFunG.html#aaf30b9c36ed86e01b94f6b7c1d95cae8',1,'FunG']]]
 ];

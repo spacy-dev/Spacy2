@@ -1,0 +1,28 @@
+\hypertarget{trace_8hh}{}\section{fung/linear\+\_\+algebra/trace.hh File Reference}
+\label{trace_8hh}\index{fung/linear\+\_\+algebra/trace.\+hh@{fung/linear\+\_\+algebra/trace.\+hh}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include \char`\"{}fung/util/at.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/exceptions.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/type\+\_\+traits.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}dimension.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}rows\+\_\+and\+\_\+cols.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix $>$ }\\using \hyperlink{group__LinearAlgebraGroup_ga43e327309edc349c75ceecd29b7abde2}{Fun\+G\+::\+Linear\+Algebra\+::\+Trace} = std\+::conditional\+\_\+t$<$ Checks\+::is\+Constant\+Size$<$ Matrix $>$(), Constant\+Size\+Trace$<$ Matrix $>$, Dynamic\+Size\+Trace$<$ Matrix $>$ $>$
+\begin{DoxyCompactList}\small\item\em Trace of a matrix (sum of diagonal elements). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__LinearAlgebraGroup_ga4d73eb4d46dd9196a31e2d6d557d509e}{Fun\+G\+::\+Linear\+Algebra\+::trace} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Generate $\mathrm{tr}(A)$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$() $>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__LinearAlgebraGroup_ga950717870525c43be79245413717673c}{Fun\+G\+::\+Linear\+Algebra\+::trace} (const F \&f)
+\begin{DoxyCompactList}\small\item\em Generate $\mathrm{tr}\circ f$, where $f:\cdot\mapsto\mathbb{R}^{n,n} $. \end{DoxyCompactList}\end{DoxyCompactItemize}

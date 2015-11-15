@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['algorithms',['Algorithms',['../group__AlgorithmGroup.html',1,'']]]
+  ['biomechanics',['Biomechanics',['../group__Biomechanics.html',1,'']]]
 ];

@@ -1,0 +1,69 @@
+<h1>Optimization Strategies</h1>
+
+<h3>Inlining</h3>
+<p>Since this library is based on code generation with template meta-programming and inlining, compiler rules for inlining have a strong influence on performance. The default rules, which work quite well in general, 
+can be improved by adjusting specific parameters. For the models in "examples/biomechanics" the choices</p>
+<ul>
+<li>max-inline-insns-auto=3000</li>
+<li>early-inlining-insns=5000</li>
+<li>inline-unit-growth=100</li>
+</ul>
+<p>for gcc-4.9.2 yields a significant performance increase (up to 14x).</p>
+<p><br></p>
+
+
+<h3>Caching</h3>
+<p>Significant performance increases are due to caching. In contrast to lazy evaluation, here the strategy is to compute intermediate results as soon as possible. This has various impacts:</p>
+<ol>
+<li> The evaluation of cached results is one of the simplest function calls and is likely to be inlined.</li>
+<li> In many expressions, the computed intermediate results can be reused in the computation of higher derivatives.</li>
+<li> Most important, in many cases we can significantly reduce the size of temporaries as well as the number of generated temporaries by directly performing simple computations.</li>
+</ol>
+<p><br></p>
+
+<h3>Elimination of Compile-Time Zeros</h3>
+<p>
+A good example for the effects of this optimization strategy is the product $f=M(F^TF)$, which occurs in the computation of the first mixed strain invariant. In this context $M$ 
+is treated as a constant and $F$ denotes the unknown and both are matrices in $\mathbb{R}^{3,3}$. For simplicity  we assume that we have a function $C=F^T F$.
+The following graph illustrates the mathematical operations that are performed when evaluating the second derivative of this product.
+</p>
+<figure>
+<img width=95% style="border-style: none" src="images/product_rule_d2_2.gif" class="centered-image boxshadow">
+<figcaption>Mathematical operations required for the evaluation of the second derivative of the product rule.</figcaption>
+</figure>
+<p>Since all derivatives of $M$ vanish only the part marked in orange will be computed. The remaining computations are discarded during compilation.</p>
+<div class="page-placeholder-2"></div>
+
+
+<h1>Performance</h1>
+
+<h3>Comparison with AD-libraries</h3>
+<p>The performance of FunG is demonstrated by several examples comparing it with forward mode automatic differentation of <a href="http://www.fadbad.com">FADBAD++</a> and <a href="https://trilinos.org/packages/sacado">SACADO</a>. 
+All examples were compiled with <code>-O2</code> compiler option with gcc-4.9.2. They were run on an ASUS UX32V. All examples were evaluated 10.000.000 times (function value + derivative(s)) with varying arguments.</p>
+
+<h4>A simple example</h4>
+<p>Consider $f(x)=x^{3/2}+\sin(\sqrt{x})$.</p>
+<div id="chart1_div" align=center class="googletable boxshadow"></div>
+
+<h4>A more complex example</h4>
+<p>Consider $f(x)= x ( \exp(\sqrt{x}) + 1 ) + \sin(2\exp(\sqrt{x})+1)$.</p>
+<div id="chart2_div" align=center class="googletable boxshadow"></div>
+<p>(here, SACADO fails)</p>
+
+<h4>An example with three variables</h4>
+<p>Consider $f(x,y,z)= (y+z) \sqrt{x}+\sin(\sqrt{x})$.</p>
+<div id="chart3_div" align=center class="googletable boxshadow"></div>
+
+<h3>A Model for Muscle Tissue</h3>
+<p>For functions that take matrices as arguments automatic differentation libraries can typically not be used directly. To get an idea of the performance, consider the function</p>
+\[\begin{align*}W(F)&amp;=c(\exp(b(\bar\iota_1-3))-1) + A(\exp(a(\bar\iota_6-1)^2)-1) \\ &amp;+d_0\Gamma_\mathrm{Inf}(\det(F))+d_1\Gamma_\mathrm{Com}(\det(F)), \end{align*}\]
+<p>with</p> \[\begin{align*}\Gamma_\mathrm{Inf}(t) &amp;=t^2, \\ \Gamma_\mathrm{Com}(t) &amp;=\mathrm{ln}(t), \\ \bar\iota_1(C) &amp;=\mathrm{tr}(C)\det(C)^{-1/3}, \\ \bar\iota_6(C,M)&amp;=\mathrm{tr}(CM^2)\det(C)^{-1/3}, \end{align*}\]
+<p>with $C=F^T F$ and structural tensor $M$. Again each function is called 10.000.000 times with varying arguments.</p>
+<div id="chart4_div" align=center class="googletable boxshadow"></div>
+<p>
+In the computations above compiler options as described in <a href=#optimization_strategies_inlining>Inlining</a> were used. Computation times only with <code>-02</code> are given below.
+</p>
+<div id="chart5_div" align=center class="googletable boxshadow"></div>
+<p>
+Due to the extensive caching the call to <code>update</code> is more costly than the evaluation of <code>d0</code> or <code>d1</code>. As a consequence the call to <code>d0</code> is almost for free, since it only consists in copying the cached value. Large parts of the cached results can be reused, which is reflected in the small costs for the evaluation of <code>d1</code> and <code>d2</code>. In the computation of the third derivative the computations involving the perturbations start to dominate the overall computational costs.
+</p>

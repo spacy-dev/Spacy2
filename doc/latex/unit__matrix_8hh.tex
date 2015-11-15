@@ -1,0 +1,21 @@
+\hypertarget{unit__matrix_8hh}{}\section{fung/linear\+\_\+algebra/unit\+\_\+matrix.hh File Reference}
+\label{unit__matrix_8hh}\index{fung/linear\+\_\+algebra/unit\+\_\+matrix.\+hh@{fung/linear\+\_\+algebra/unit\+\_\+matrix.\+hh}}
+{\ttfamily \#include \char`\"{}fung/util/at.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/extract\+\_\+rows\+\_\+and\+\_\+cols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/voider.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/zero.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}dimension.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , class  = std\+::enable\+\_\+if\+\_\+t$<$\+Checks\+::is\+Constant\+Size$<$\+Matrix$>$()$>$$>$ }\\Matrix \hyperlink{group__LinearAlgebraGroup_ga88a596b8526c0ed98ce241244fb85948}{Fun\+G\+::\+Linear\+Algebra\+::unit\+Matrix} ()
+\begin{DoxyCompactList}\small\item\em Compute unit matrix for the specified constant size matrix type. This requires that a corresponding specialization of \hyperlink{structFunG_1_1Zero}{Zero} is provided. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , class  = std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Constant\+Size$<$\+Matrix$>$()$>$$>$ }\\Matrix \hyperlink{group__LinearAlgebraGroup_gae50c49f62ed072019079a7563688e5de}{Fun\+G\+::\+Linear\+Algebra\+::unit\+Matrix} (int rows)
+\begin{DoxyCompactList}\small\item\em Compute unit matrix for the specified dynamic size matrix type. This requires that a corresponding specialization of \hyperlink{structFunG_1_1Zero}{Zero} is provided. \end{DoxyCompactList}\end{DoxyCompactItemize}

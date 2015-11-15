@@ -1,0 +1,36 @@
+\hypertarget{muscle__tissue__martins_8hh}{}\section{fung/examples/biomechanics/muscle\+\_\+tissue\+\_\+martins.hh File Reference}
+\label{muscle__tissue__martins_8hh}\index{fung/examples/biomechanics/muscle\+\_\+tissue\+\_\+martins.\+hh@{fung/examples/biomechanics/muscle\+\_\+tissue\+\_\+martins.\+hh}}
+
+
+Versions of the muscle model of \cite{Martins1998}.  
+
+
+{\ttfamily \#include \char`\"{}fung/finalize.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/generate.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/cmath/exp.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/principal\+\_\+invariants.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/mixed\+\_\+invariants.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/strain\+\_\+tensor.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/linear\+\_\+algebra/tensor\+\_\+product.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/examples/volumetric\+\_\+penalty\+\_\+functions.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_gafcc36a1958899ca9246c4c1b3c9bfd85}{Fun\+G\+::incompressible\+Muscle\+Tissue\+\_\+\+Martins} (double c, double b, double A, double a, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Incompressible version of the model for muscle tissue of \cite{Martins1998}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga9e414585a90b1988e9fa88d17d875055}{Fun\+G\+::incompressible\+Muscle\+Tissue\+\_\+\+Martins} (const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Incompressible version of the model for muscle tissue of \cite{Martins1998}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation , class Compression , class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_gad831914c493a3da04ed40c3c0ce87a62}{Fun\+G\+::compressible\+Muscle\+Tissue\+\_\+\+Martins} (double c, double b, double A, double a, double d0, double d1, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for muscle tissue of \cite{Martins1998}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Inflation , class Compression , class Matrix , int offset = Linear\+Algebra\+::dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__Biomechanics_ga46a70ccb2285e12addad87b6a8aaaae8}{Fun\+G\+::compressible\+Muscle\+Tissue\+\_\+\+Martins} (double d0, double d1, const Matrix \&M, const Matrix \&F)
+\begin{DoxyCompactList}\small\item\em Compressible version of the model for muscle tissue of \cite{Martins1998}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Versions of the muscle model of \cite{Martins1998}. 
+

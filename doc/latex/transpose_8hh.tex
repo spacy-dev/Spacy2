@@ -1,0 +1,24 @@
+\hypertarget{transpose_8hh}{}\section{fung/linear\+\_\+algebra/transpose.hh File Reference}
+\label{transpose_8hh}\index{fung/linear\+\_\+algebra/transpose.\+hh@{fung/linear\+\_\+algebra/transpose.\+hh}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\\*
+{\ttfamily \#include \char`\"{}fung/util/at.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/extract\+\_\+rows\+\_\+and\+\_\+cols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks\+\_\+nrows\+\_\+ncols.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/zero.\+hh\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceFunG_1_1LinearAlgebra}{Fun\+G\+::\+Linear\+Algebra}
+\begin{DoxyCompactList}\small\item\em Functionality from linear algebra such as (modified) principal and mixed matrix invariants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , class Transposed\+Matrix  = Matrix, std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+same$<$ Matrix, Transposed\+Matrix $>$\+::value \&\&\+Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\Transposed\+Matrix \hyperlink{group__LinearAlgebraGroup_gaf299ac9490ae23da0a3a3d784e379d1f}{Fun\+G\+::\+Linear\+Algebra\+::transpose} (Matrix A)
+\begin{DoxyCompactList}\small\item\em Compute transpose of square matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Transposed\+Matrix , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$ Matrix, Transposed\+Matrix $>$\+::value \&\&\+Checks\+::is\+Constant\+Size$<$ Matrix $>$()\&\&\+Checks\+::is\+Constant\+Size$<$ Transposed\+Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\Transposed\+Matrix \hyperlink{group__LinearAlgebraGroup_gaffe414459cb85a455a3c5a2099cfc6ee}{Fun\+G\+::\+Linear\+Algebra\+::transpose} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Compute transpose of non-\/square matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Constant\+Size$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\Matrix \hyperlink{group__LinearAlgebraGroup_gac3427d39b75727a255e5ea387c50ff10}{Fun\+G\+::\+Linear\+Algebra\+::transpose} (Matrix A)
+\begin{DoxyCompactList}\small\item\em Compute transpose of square matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,37 @@
+<h1>Welcome to FunG,</h1>
+<p>a C++-library for invariant-based modeling and the generation of complex functions, including first three derivatives and arbitrary (meaningful) variable types. The implementation is optimized for finite-element computations.
+It is motivated by the following ideas:</p>
+
+<h3>Generic Programming</h3>
+<p>FunG does not depend on specific types. Instead only a small interface must be satisfied (see <a href="#get-fung">Arithmetic Types</a>). This interface is naturally fulfilled by built-in arithmetic types.
+Instead a small set of requirements, that is fulfilled by built-in arithmetic types, has been taken from mathematics (see HERE) to work with vectors, matrices and other objects one would possibly want to use. 
+This is achieved with modern C++-features such as <code>auto</code>, <code>decltype</code>, <code>std::declval</code> and the incredible <code>void_t</code> (if you don't know it, <a href="https://www.youtube.com/watch?v=a0FliKwcwXE#t=1750">watch this</a>).</p>
+
+<h3>Invariant-based Modeling</h3>
+<p>Reasonable physical models require invariance with respect to the observer. For this different sets of invariants have been developed. FunG provides optimized implementations of modified and unmodified versions of principal and mixed invariants. With 
+their complex invariant-based models can be implemented within few seconds.</p>
+
+<h3>Naming</h3>
+<p>The name FunG was chosen as a tribute to <a href="https://en.wikipedia.org/wiki/Yuan-Cheng_Fung">Yuan-Cheng Fung</a> and his numerous contributions to the field of biomechanics. State-of-the-art models based on his exponential constitutive relation where the motivation to write this library.</p>
+<div class="page-placeholder-2"></div>
+
+<h1>Talks</h1>
+<ul>
+<li><span class="bold">FunG - Biomechanical Models in Modern C++</span><br> DUNE User Meeting, Heidelberg, 28.09.2015 </li>
+<li><span class="bold">not to code</span><br> C++-Meetup, Berlin, 19.05.2015</li>
+</ul>
+
+<div class="page-placeholder-2"></div>
+
+<h1>Related Publications</h1>
+<p>Preliminary versions of FunG have been used in:</p>
+<ul>
+<li>L. Lubkoll, A. Schiela, M. Weiser: <span class="bold">An affine covariant composite step method for optimization with PDEs as equality constraints.</span><br> Submitted at Opt. Meth. Soft., Preprint: ZIB-Report 15-09, 2015</li>
+<li>L. Lubkoll: <span class="bold">An Optimal Control Approach to Implant Shape Design: Modeling, Analysis and Numerics.</span><br> Dissertation, Universität Bayreuth, 2015</li>
+</ul>
+
+<div class="page-placeholder-2"></div>
+
+<h1>Documentation</h1>
+<p>The doxygen documentation can be found <a href="doc/html/index.html">here.</a><br>
+</p>

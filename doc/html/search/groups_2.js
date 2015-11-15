@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exceptions',['Exceptions',['../group__ExceptionGroup.html',1,'']]]
+  ['examples',['Examples',['../group__Examples.html',1,'']]]
 ];

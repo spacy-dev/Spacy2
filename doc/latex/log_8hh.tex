@@ -1,0 +1,29 @@
+\hypertarget{log_8hh}{}\section{fung/cmath/log.hh File Reference}
+\label{log_8hh}\index{fung/cmath/log.\+hh@{fung/cmath/log.\+hh}}
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}fung/util/chainer.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/exceptions.\+hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fung/util/static\+\_\+checks.\+hh\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structFunG_1_1LN}{Fun\+G\+::\+L\+N}
+\begin{DoxyCompactList}\small\item\em Natural logarithm including first three derivatives. \end{DoxyCompactList}\item 
+struct \hyperlink{structFunG_1_1Log10}{Fun\+G\+::\+Log10}
+\begin{DoxyCompactList}\small\item\em Common (base 10) logarithm including first three derivatives. \end{DoxyCompactList}\item 
+struct \hyperlink{structFunG_1_1Log2}{Fun\+G\+::\+Log2}
+\begin{DoxyCompactList}\small\item\em Base 2 logarithm including first three derivatives. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceFunG}{Fun\+G}
+\begin{DoxyCompactList}\small\item\em Main namespace of the Fun\+G library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Function , class  = std\+::enable\+\_\+if\+\_\+t$<$\+Checks\+::is\+Function$<$\+Function$>$()$>$$>$ }\\auto \hyperlink{group__CMathGroup_ga31313571b08f65b853643e14fc8fc714}{Fun\+G\+::ln} (const Function \&f)
+\begin{DoxyCompactList}\small\item\em Generate $ \mathrm{ln}\circ f $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function , class  = std\+::enable\+\_\+if\+\_\+t$<$\+Checks\+::is\+Function$<$\+Function$>$()$>$$>$ }\\auto \hyperlink{group__CMathGroup_gae9506f4e0e6fad4f756f636044697bfe}{Fun\+G\+::log10} (const Function \&f)
+\begin{DoxyCompactList}\small\item\em Generate $ \mathrm{log}_{10}\circ f $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function , class  = std\+::enable\+\_\+if\+\_\+t$<$\+Checks\+::is\+Function$<$\+Function$>$()$>$$>$ }\\auto \hyperlink{group__CMathGroup_gacd6be7e9de7bbd54c852f0acf0c7d2c2}{Fun\+G\+::log2} (const Function \&f)
+\begin{DoxyCompactList}\small\item\em Generate $ \mathrm{log}_{2}\circ f $. \end{DoxyCompactList}\end{DoxyCompactItemize}

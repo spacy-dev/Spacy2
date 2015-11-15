@@ -1,0 +1,333 @@
+\hypertarget{group__InvariantGroup}{}\section{Invariants}
+\label{group__InvariantGroup}\index{Invariants@{Invariants}}
+
+
+Matrix Invariants (principal and mixed, modified (isochoric) invariants and deviatoric invariants).  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga9a2bc859fe1ae34b1a3ada91a39d69df}{Fun\+G\+::\+Linear\+Algebra\+::j2} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Second deviatoric invariant $ j_2(\sigma)=\sqrt{\bar\sigma\negthinspace:\negthinspace\bar\sigma} $ with $\bar\sigma = \sigma - \frac{\mathrm{tr}(\sigma)}{n}I$ and $\sigma\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga1898785172ecce11af0c27e54d555009}{Fun\+G\+::\+Linear\+Algebra\+::i4} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate first mixed invariant $ \iota_4=\iota_1(AM) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga0df96cdb1e4b8b5a040f2adc97c51100}{Fun\+G\+::\+Linear\+Algebra\+::i4} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate first mixed invariant $ \iota_4\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gabedc42182203d883278e29fd16b355a0}{Fun\+G\+::\+Linear\+Algebra\+::i5} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate second mixed invariant $ \iota_5=\iota_1(A^2M) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gaed7e47c39d89f2b01e25c992da78b44d}{Fun\+G\+::\+Linear\+Algebra\+::i5} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate second mixed invariant $ \iota_5\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gad9f0627946667bb052212f65ecdd002b}{Fun\+G\+::\+Linear\+Algebra\+::i6} (const Matrix \&A, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate third mixed invariant $ \iota_6=\iota_1(AM^2) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga2536c80df733bb3e089487202c3688c1}{Fun\+G\+::\+Linear\+Algebra\+::i6} (const F \&f, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Generate third mixed invariant $ \iota_6\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga7ee54c5d056877bdefefb8e54ad17791}{Fun\+G\+::\+Linear\+Algebra\+::mi4} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), first modified mixed invariant $ \bar\iota_4(A)=\iota_4\iota_3^{-1/3} $, where $\iota_4$ is the first mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga189bc682b34d13902da335c5eb502faa}{Fun\+G\+::\+Linear\+Algebra\+::mi5} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_5(A)=\iota_5\iota_3^{-2/3} $, where $\iota_5$ is the second mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga3e451f9e15fa95080f81d0c0f69f93e6}{Fun\+G\+::\+Linear\+Algebra\+::mi6} (const Arg \&x, const Matrix \&M)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_6(A)=\iota_6\iota_3^{-1/3} $, where $\iota_6$ is the third mixed and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\auto \hyperlink{group__InvariantGroup_gafaead59b618d87239270f8eca2bf75c8}{Fun\+G\+::\+Linear\+Algebra\+::i1} (const Arg \&x)
+\begin{DoxyCompactList}\small\item\em Generate first principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ !\+Checks\+::is\+Function$<$ Matrix $>$() $>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_ga9e442bab8f203bcd5634a3d0e65bf802}{Fun\+G\+::\+Linear\+Algebra\+::i2} (const Matrix \&A)
+\begin{DoxyCompactList}\small\item\em Convenient generation of second principal invariant $ \iota_2(A)=\mathrm{tr}(\mathrm{cof}(A)) $ for $A\in\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$() $>$ $\ast$  = nullptr$>$ }\\auto \hyperlink{group__InvariantGroup_gad3987f97353c8696e602ed1915b3cf47}{Fun\+G\+::\+Linear\+Algebra\+::i2} (const F \&f)
+\begin{DoxyCompactList}\small\item\em Convenient generation of second principal invariant $ \iota_2\circ f $ for $f:\cdot\mapsto\mathbb{R}^{n,n}$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\auto \hyperlink{group__InvariantGroup_gae1ad80b4b2f34a10564114fad28bc313}{Fun\+G\+::\+Linear\+Algebra\+::i3} (const Arg \&x)
+\begin{DoxyCompactList}\small\item\em Generate third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , int n = dim$<$\+Arg$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga7eed5e2661171d81e192ac1db791244c}{Fun\+G\+::\+Linear\+Algebra\+::mi1} (const Arg \&x)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), first modified principal invariant $ \bar\iota_1(A)=\iota_1\iota_3^{-1/3} $, where $\iota_1$ is the first and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg , int n = dim$<$\+Arg$>$()$>$ }\\auto \hyperlink{group__InvariantGroup_ga9d219c5c48cce1d3af60345916963524}{Fun\+G\+::\+Linear\+Algebra\+::mi2} (const Arg \&x)
+\begin{DoxyCompactList}\small\item\em Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_2(A)=\iota_2\iota_3^{-1/3} $, where $\iota_2$ is the second and $\iota_3$ is the third principal invariant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Matrix Invariants (principal and mixed, modified (isochoric) invariants and deviatoric invariants). 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{group__InvariantGroup_gafaead59b618d87239270f8eca2bf75c8}{}\index{Invariants@{Invariants}!i1@{i1}}
+\index{i1@{i1}!Invariants@{Invariants}}
+\subsubsection[{i1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg $>$ auto Fun\+G\+::\+Linear\+Algebra\+::i1 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gafaead59b618d87239270f8eca2bf75c8}
+
+
+Generate first principal invariant. 
+
+Depending on the argument either generates $\mathrm{tr}(A)$ or $\mathrm{tr}\circ f$.
+
+\begin{DoxyReturn}{Returns}
+if x is a matrix then the this functions returns Trace$<$\+Arg$>$(x), if x is a function, then it returns Trace$<$ std\+::decay\+\_\+t$<$decltype(x.\+d0())$>$ $>$( x.\+d0() )( x ); 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_ga9e442bab8f203bcd5634a3d0e65bf802}{}\index{Invariants@{Invariants}!i2@{i2}}
+\index{i2@{i2}!Invariants@{Invariants}}
+\subsubsection[{i2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ !\+Checks\+::is\+Function$<$ Matrix $>$() $>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i2 (
+\begin{DoxyParamCaption}
+\item[{const Matrix \&}]{A}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga9e442bab8f203bcd5634a3d0e65bf802}
+
+
+Convenient generation of second principal invariant $ \iota_2(A)=\mathrm{tr}(\mathrm{cof}(A)) $ for $A\in\mathbb{R}^{n,n}$. 
+
+\begin{DoxyReturn}{Returns}
+Second\+Principal\+Invariant$<$\+Matrix$>$(\+A) 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_gad3987f97353c8696e602ed1915b3cf47}{}\index{Invariants@{Invariants}!i2@{i2}}
+\index{i2@{i2}!Invariants@{Invariants}}
+\subsubsection[{i2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$() $>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i2 (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gad3987f97353c8696e602ed1915b3cf47}
+
+
+Convenient generation of second principal invariant $ \iota_2\circ f $ for $f:\cdot\mapsto\mathbb{R}^{n,n}$. 
+
+\begin{DoxyReturn}{Returns}
+Second\+Principal\+Invariant$<$\+Matrix$>$(\+A) 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_gae1ad80b4b2f34a10564114fad28bc313}{}\index{Invariants@{Invariants}!i3@{i3}}
+\index{i3@{i3}!Invariants@{Invariants}}
+\subsubsection[{i3}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg $>$ auto Fun\+G\+::\+Linear\+Algebra\+::i3 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gae1ad80b4b2f34a10564114fad28bc313}
+
+
+Generate third principal invariant. 
+
+Depending on the argument either generates $\det(A)$ or $\det\circ f$.
+
+\begin{DoxyReturn}{Returns}
+if x is a matrix then the this functions returns Determinant$<$\+Arg$>$(x), if x is a function, then it returns Determinant$<$ std\+::decay\+\_\+t$<$decltype(x.\+d0())$>$ $>$( x.\+d0() )( x ); 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_ga1898785172ecce11af0c27e54d555009}{}\index{Invariants@{Invariants}!i4@{i4}}
+\index{i4@{i4}!Invariants@{Invariants}}
+\subsubsection[{i4}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i4 (
+\begin{DoxyParamCaption}
+\item[{const Matrix \&}]{A, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga1898785172ecce11af0c27e54d555009}
+
+
+Generate first mixed invariant $ \iota_4=\iota_1(AM) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_ga0df96cdb1e4b8b5a040f2adc97c51100}{}\index{Invariants@{Invariants}!i4@{i4}}
+\index{i4@{i4}!Invariants@{Invariants}}
+\subsubsection[{i4}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i4 (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga0df96cdb1e4b8b5a040f2adc97c51100}
+
+
+Generate first mixed invariant $ \iota_4\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function returning a square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_gabedc42182203d883278e29fd16b355a0}{}\index{Invariants@{Invariants}!i5@{i5}}
+\index{i5@{i5}!Invariants@{Invariants}}
+\subsubsection[{i5}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i5 (
+\begin{DoxyParamCaption}
+\item[{const Matrix \&}]{A, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gabedc42182203d883278e29fd16b355a0}
+
+
+Generate second mixed invariant $ \iota_5=\iota_1(A^2M) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_gaed7e47c39d89f2b01e25c992da78b44d}{}\index{Invariants@{Invariants}!i5@{i5}}
+\index{i5@{i5}!Invariants@{Invariants}}
+\subsubsection[{i5}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i5 (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gaed7e47c39d89f2b01e25c992da78b44d}
+
+
+Generate second mixed invariant $ \iota_5\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function returning a square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_gad9f0627946667bb052212f65ecdd002b}{}\index{Invariants@{Invariants}!i6@{i6}}
+\index{i6@{i6}!Invariants@{Invariants}}
+\subsubsection[{i6}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i6 (
+\begin{DoxyParamCaption}
+\item[{const Matrix \&}]{A, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_gad9f0627946667bb052212f65ecdd002b}
+
+
+Generate third mixed invariant $ \iota_6=\iota_1(AM^2) $ of a matrix $A\in\mathbb{R}^{n,n}$ with respect to the structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_ga2536c80df733bb3e089487202c3688c1}{}\index{Invariants@{Invariants}!i6@{i6}}
+\index{i6@{i6}!Invariants@{Invariants}}
+\subsubsection[{i6}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class Matrix , std\+::enable\+\_\+if\+\_\+t$<$ Checks\+::is\+Function$<$ F $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::i6 (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga2536c80df733bb3e089487202c3688c1}
+
+
+Generate third mixed invariant $ \iota_6\circ f $ with $f\mapsto\mathbb{R}^{n,n}$ and structural tensor $M\in\mathbb{R}^{n,n}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function returning a square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_ga9a2bc859fe1ae34b1a3ada91a39d69df}{}\index{Invariants@{Invariants}!j2@{j2}}
+\index{j2@{j2}!Invariants@{Invariants}}
+\subsubsection[{j2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Matrix , std\+::enable\+\_\+if\+\_\+t$<$!\+Checks\+::is\+Function$<$ Matrix $>$()$>$ $\ast$  = nullptr$>$ auto Fun\+G\+::\+Linear\+Algebra\+::j2 (
+\begin{DoxyParamCaption}
+\item[{const Matrix \&}]{A}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga9a2bc859fe1ae34b1a3ada91a39d69df}
+
+
+Second deviatoric invariant $ j_2(\sigma)=\sqrt{\bar\sigma\negthinspace:\negthinspace\bar\sigma} $ with $\bar\sigma = \sigma - \frac{\mathrm{tr}(\sigma)}{n}I$ and $\sigma\in\mathbb{R}^{n,n}$. 
+
+\hypertarget{group__InvariantGroup_ga7eed5e2661171d81e192ac1db791244c}{}\index{Invariants@{Invariants}!mi1@{mi1}}
+\index{mi1@{mi1}!Invariants@{Invariants}}
+\subsubsection[{mi1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg , int n = dim$<$\+Arg$>$()$>$ auto Fun\+G\+::\+Linear\+Algebra\+::mi1 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga7eed5e2661171d81e192ac1db791244c}
+
+
+Isochoric (volume-\/preserving), first modified principal invariant $ \bar\iota_1(A)=\iota_1\iota_3^{-1/3} $, where $\iota_1$ is the first and $\iota_3$ is the third principal invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & either a square matrix or a function returning a square matrix \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_ga9d219c5c48cce1d3af60345916963524}{}\index{Invariants@{Invariants}!mi2@{mi2}}
+\index{mi2@{mi2}!Invariants@{Invariants}}
+\subsubsection[{mi2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg , int n = dim$<$\+Arg$>$()$>$ auto Fun\+G\+::\+Linear\+Algebra\+::mi2 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga9d219c5c48cce1d3af60345916963524}
+
+
+Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_2(A)=\iota_2\iota_3^{-1/3} $, where $\iota_2$ is the second and $\iota_3$ is the third principal invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & either a square matrix or a function returning a square matrix \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__InvariantGroup_ga7ee54c5d056877bdefefb8e54ad17791}{}\index{Invariants@{Invariants}!mi4@{mi4}}
+\index{mi4@{mi4}!Invariants@{Invariants}}
+\subsubsection[{mi4}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ auto Fun\+G\+::\+Linear\+Algebra\+::mi4 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga7ee54c5d056877bdefefb8e54ad17791}
+
+
+Isochoric (volume-\/preserving), first modified mixed invariant $ \bar\iota_4(A)=\iota_4\iota_3^{-1/3} $, where $\iota_4$ is the first mixed and $\iota_3$ is the third principal invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & either a square matrix or a function returning a square matrix \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\bar\iota_4(x)$ if x is a matrix, else $\bar\iota_4 \circ x$ 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_ga189bc682b34d13902da335c5eb502faa}{}\index{Invariants@{Invariants}!mi5@{mi5}}
+\index{mi5@{mi5}!Invariants@{Invariants}}
+\subsubsection[{mi5}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ auto Fun\+G\+::\+Linear\+Algebra\+::mi5 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga189bc682b34d13902da335c5eb502faa}
+
+
+Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_5(A)=\iota_5\iota_3^{-2/3} $, where $\iota_5$ is the second mixed and $\iota_3$ is the third principal invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & either a square matrix or a function returning a square matrix. \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\bar\iota_5(x)$ if x is a matrix, else $\bar\iota_5 \circ x$ 
+\end{DoxyReturn}
+\hypertarget{group__InvariantGroup_ga3e451f9e15fa95080f81d0c0f69f93e6}{}\index{Invariants@{Invariants}!mi6@{mi6}}
+\index{mi6@{mi6}!Invariants@{Invariants}}
+\subsubsection[{mi6}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Arg , class Matrix , int n = dim$<$\+Matrix$>$()$>$ auto Fun\+G\+::\+Linear\+Algebra\+::mi6 (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x, }
+\item[{const Matrix \&}]{M}
+\end{DoxyParamCaption}
+)}\label{group__InvariantGroup_ga3e451f9e15fa95080f81d0c0f69f93e6}
+
+
+Isochoric (volume-\/preserving), second modified principal invariant $ \bar\iota_6(A)=\iota_6\iota_3^{-1/3} $, where $\iota_6$ is the third mixed and $\iota_3$ is the third principal invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & either a square matrix or a function returning a square matrix. \\
+\hline
+{\em M} & structural tensor describing principal (fiber) direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\bar\iota_6(x)$ if x is a matrix, else $\bar\iota_6 \circ x$ 
+\end{DoxyReturn}

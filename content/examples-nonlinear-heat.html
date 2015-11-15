@@ -1,0 +1,26 @@
+<p>Eventually we consider the weak form of a model of nonlinear heat transfer, given through \[A(u,\nabla u)=(c+du^2)\nabla u.\] In this case $u$ and $ \nabla u$ are represented by 
+different types but are associated to the same variable.</p>
+
+<pre class="code-style boxshadow">#include "fung.hh"
+
+template &lt;class Vec,class Mat&gt;
+auto heatModel(double c, double d, const Vec&amp; u0, const Mat&amp; du0)
+{
+  using namespace Fung;
+  auto u = variable&lt;0&gt;(u0);
+  auto du = variable&lt;0&gt;(du0);
+  auto f = ( c + d*(u^2) ) * du;
+  return finalize( f );
+}
+</pre>
+
+<p> To work with such a model it is allowed to pack arguments into tuples. Then usage is as follows (for unknown u, with gradient du, and perturbation v, with gradient dv):</p>
+
+<pre class="code-style boxshadow">auto f = heatModel(1,1,u,du);
+
+f.template update&lt;0&gt;(std::make_tuple(u,du));
+
+double value       = f(); // or f.d0()
+double df_dx       = f.template d1&lt;0&gt;(std::make_tuple(v,dv));
+...
+</pre> 

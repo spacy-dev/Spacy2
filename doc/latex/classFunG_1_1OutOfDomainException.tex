@@ -1,0 +1,68 @@
+\hypertarget{classFunG_1_1OutOfDomainException}{}\section{Fun\+G\+:\+:Out\+Of\+Domain\+Exception Class Reference}
+\label{classFunG_1_1OutOfDomainException}\index{Fun\+G\+::\+Out\+Of\+Domain\+Exception@{Fun\+G\+::\+Out\+Of\+Domain\+Exception}}
+
+
+Exception for scalar function arguments that are outside the domain of the function.  
+
+
+
+
+{\ttfamily \#include $<$exceptions.\+hh$>$}
+
+Inheritance diagram for Fun\+G\+:\+:Out\+Of\+Domain\+Exception\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFunG_1_1OutOfDomainException}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Value , class  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+arithmetic$<$\+Value$>$\+::value$>$$>$ }\\\hyperlink{classFunG_1_1OutOfDomainException_ab5dcdcbbe00be01b008e1945a1504d1b}{Out\+Of\+Domain\+Exception} (const std\+::string \&function, const std\+::string \&range, const Value \&value, const std\+::string \&file, const int line)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Exception for scalar function arguments that are outside the domain of the function. 
+
+Example\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if}( x < 0 )
+  \textcolor{keywordflow}{throw} \hyperlink{classFunG_1_1OutOfDomainException_ab5dcdcbbe00be01b008e1945a1504d1b}{OutOfDomainException}(\textcolor{stringliteral}{"[0,inf["},\textcolor{stringliteral}{"Sqrt"} x,\_\_FILE\_\_,\_\_LINE\_\_);
+\end{DoxyCode}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFunG_1_1OutOfDomainException_ab5dcdcbbe00be01b008e1945a1504d1b}{}\index{Fun\+G\+::\+Out\+Of\+Domain\+Exception@{Fun\+G\+::\+Out\+Of\+Domain\+Exception}!Out\+Of\+Domain\+Exception@{Out\+Of\+Domain\+Exception}}
+\index{Out\+Of\+Domain\+Exception@{Out\+Of\+Domain\+Exception}!Fun\+G\+::\+Out\+Of\+Domain\+Exception@{Fun\+G\+::\+Out\+Of\+Domain\+Exception}}
+\subsubsection[{Out\+Of\+Domain\+Exception}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Value , class  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+arithmetic$<$\+Value$>$\+::value$>$$>$ Fun\+G\+::\+Out\+Of\+Domain\+Exception\+::\+Out\+Of\+Domain\+Exception (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{function, }
+\item[{const std\+::string \&}]{range, }
+\item[{const Value \&}]{value, }
+\item[{const std\+::string \&}]{file, }
+\item[{const int}]{line}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classFunG_1_1OutOfDomainException_ab5dcdcbbe00be01b008e1945a1504d1b}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em range} & std\+::string that contains the mathematical expression for the valid range \\
+\hline
+{\em function} & name of the function throwing this exception \\
+\hline
+{\em value} & value outside range \\
+\hline
+{\em file} & file containing the throwing code \\
+\hline
+{\em line} & line containing the throwing code \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+fung/util/\hyperlink{exceptions_8hh}{exceptions.\+hh}\end{DoxyCompactItemize}

@@ -1,0 +1,159 @@
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product}{}\section{Fun\+G\+:\+:Mathematical\+Operations\+:\+:Product$<$ F, G, class, class $>$ Struct Template Reference}
+\label{structFunG_1_1MathematicalOperations_1_1Product}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product$<$ F, G, class, class $>$@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product$<$ F, G, class, class $>$}}
+
+
+Product $fg$ of functions of type F and G (F and G must satisfy the requirements of \hyperlink{structFunG_1_1Concepts_1_1FunctionConcept}{Concepts\+::\+Function\+Concept}).  
+
+
+
+
+{\ttfamily \#include $<$product.\+hh$>$}
+
+Inheritance diagram for Fun\+G\+:\+:Mathematical\+Operations\+:\+:Product$<$ F, G, class, class $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.728395cm]{structFunG_1_1MathematicalOperations_1_1Product}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Init\+F , class Init\+G $>$ }\\\hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a98d62512443b8c9d31466998b0fa6ee8}{Product} (const Init\+F \&f\+\_\+, const Init\+G \&g\+\_\+)
+\begin{DoxyCompactList}\small\item\em Constructor passing arguments to function constructors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\void \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a5b45c1bac06651ee5b6ea79fb5128ef9}{update} (Arg const \&x)
+\begin{DoxyCompactList}\small\item\em Update point of evaluation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int index, class Arg $>$ }\\void \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a8db3d935bbe273c0436ff3bc6bb6b786}{update} (const Arg \&x)
+\begin{DoxyCompactList}\small\item\em Update variable corresponding to index. \end{DoxyCompactList}\item 
+decltype(auto) \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a2dcd0cd8b29911b24ee830b8aaa6441c}{d0} () const noexcept
+\begin{DoxyCompactList}\small\item\em Function value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int id, class Arg , class Indexed\+Arg  = Indexed\+Type$<$\+Arg,id$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D1\+Type$<$\+Indexed\+Arg$>$\+::present $>$$>$ }\\auto \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_aea69feaac16f79717a85d7b089a80f8f}{d1} (Arg const \&dx) const 
+\begin{DoxyCompactList}\small\item\em First directional derivative. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int idx, int idy, class Arg\+X , class Arg\+Y , class Indexed\+Arg\+X  = Indexed\+Type$<$\+Arg\+X,idx$>$, class Indexed\+Arg\+Y  = Indexed\+Type$<$\+Arg\+Y,idy$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D2\+Type$<$\+Indexed\+Arg\+X,\+Indexed\+Arg\+Y$>$\+::present $>$$>$ }\\auto \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a91802ff95963324b5f36016ac5f8c5e0}{d2} (Arg\+X const \&dx, Arg\+Y const \&dy) const 
+\begin{DoxyCompactList}\small\item\em Second directional derivative. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int idx, int idy, int idz, class Arg\+X , class Arg\+Y , class Arg\+Z , class Indexed\+Arg\+X  = Indexed\+Type$<$\+Arg\+X,idx$>$, class Indexed\+Arg\+Y  = Indexed\+Type$<$\+Arg\+Y,idy$>$, class Indexed\+Arg\+Z  = Indexed\+Type$<$\+Arg\+Z,idz$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D3\+Type$<$\+Indexed\+Arg\+X,\+Indexed\+Arg\+Y,\+Indexed\+Arg\+Z$>$\+::present $>$$>$ }\\auto \hyperlink{structFunG_1_1MathematicalOperations_1_1Product_a1ba58e174ea3864a63a4158b95fc8db0}{d3} (Arg\+X const \&dx, Arg\+Y const \&dy, Arg\+Z const \&dz) const 
+\begin{DoxyCompactList}\small\item\em Third directional derivative. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class F, class G, class = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$struct Fun\+G\+::\+Mathematical\+Operations\+::\+Product$<$ F, G, class, class $>$}
+
+Product $fg$ of functions of type F and G (F and G must satisfy the requirements of \hyperlink{structFunG_1_1Concepts_1_1FunctionConcept}{Concepts\+::\+Function\+Concept}). 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a98d62512443b8c9d31466998b0fa6ee8}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!Product@{Product}}
+\index{Product@{Product}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{Product}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$class Init\+F , class Init\+G $>$ {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::{\bf Product} (
+\begin{DoxyParamCaption}
+\item[{const Init\+F \&}]{f\+\_\+, }
+\item[{const Init\+G \&}]{g\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a98d62512443b8c9d31466998b0fa6ee8}
+
+
+Constructor passing arguments to function constructors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+\_\+} & input for constructor of left side of product \\
+\hline
+{\em g\+\_\+} & input for constructor of right side of product \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a2dcd0cd8b29911b24ee830b8aaa6441c}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!d0@{d0}}
+\index{d0@{d0}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{d0}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ decltype(auto) {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::d0 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a2dcd0cd8b29911b24ee830b8aaa6441c}
+
+
+Function value. 
+
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_aea69feaac16f79717a85d7b089a80f8f}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!d1@{d1}}
+\index{d1@{d1}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$int id, class Arg , class Indexed\+Arg  = Indexed\+Type$<$\+Arg,id$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D1\+Type$<$\+Indexed\+Arg$>$\+::present $>$$>$ auto {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::d1 (
+\begin{DoxyParamCaption}
+\item[{Arg const \&}]{dx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_aea69feaac16f79717a85d7b089a80f8f}
+
+
+First directional derivative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & direction for which the derivative is computed \\
+\hline
+\end{DoxyParams}
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a91802ff95963324b5f36016ac5f8c5e0}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!d2@{d2}}
+\index{d2@{d2}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$int idx, int idy, class Arg\+X , class Arg\+Y , class Indexed\+Arg\+X  = Indexed\+Type$<$\+Arg\+X,idx$>$, class Indexed\+Arg\+Y  = Indexed\+Type$<$\+Arg\+Y,idy$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D2\+Type$<$\+Indexed\+Arg\+X,\+Indexed\+Arg\+Y$>$\+::present $>$$>$ auto {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::d2 (
+\begin{DoxyParamCaption}
+\item[{Arg\+X const \&}]{dx, }
+\item[{Arg\+Y const \&}]{dy}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a91802ff95963324b5f36016ac5f8c5e0}
+
+
+Second directional derivative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & direction for which the derivative is computed \\
+\hline
+{\em dy} & direction for which the derivative is computed \\
+\hline
+\end{DoxyParams}
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a1ba58e174ea3864a63a4158b95fc8db0}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!d3@{d3}}
+\index{d3@{d3}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{d3}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$int idx, int idy, int idz, class Arg\+X , class Arg\+Y , class Arg\+Z , class Indexed\+Arg\+X  = Indexed\+Type$<$\+Arg\+X,idx$>$, class Indexed\+Arg\+Y  = Indexed\+Type$<$\+Arg\+Y,idy$>$, class Indexed\+Arg\+Z  = Indexed\+Type$<$\+Arg\+Z,idz$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ D3\+Type$<$\+Indexed\+Arg\+X,\+Indexed\+Arg\+Y,\+Indexed\+Arg\+Z$>$\+::present $>$$>$ auto {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::d3 (
+\begin{DoxyParamCaption}
+\item[{Arg\+X const \&}]{dx, }
+\item[{Arg\+Y const \&}]{dy, }
+\item[{Arg\+Z const \&}]{dz}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a1ba58e174ea3864a63a4158b95fc8db0}
+
+
+Third directional derivative. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & direction for which the derivative is computed \\
+\hline
+{\em dy} & direction for which the derivative is computed \\
+\hline
+{\em dz} & direction for which the derivative is computed \\
+\hline
+\end{DoxyParams}
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a5b45c1bac06651ee5b6ea79fb5128ef9}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!update@{update}}
+\index{update@{update}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$class Arg $>$ void {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::update (
+\begin{DoxyParamCaption}
+\item[{Arg const \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a5b45c1bac06651ee5b6ea79fb5128ef9}
+
+
+Update point of evaluation. 
+
+\hypertarget{structFunG_1_1MathematicalOperations_1_1Product_a8db3d935bbe273c0436ff3bc6bb6b786}{}\index{Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}!update@{update}}
+\index{update@{update}!Fun\+G\+::\+Mathematical\+Operations\+::\+Product@{Fun\+G\+::\+Mathematical\+Operations\+::\+Product}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class F , class G , class  = Concepts\+::\+Function\+Concept\+Check$<$\+F$>$, class  = Concepts\+::\+Function\+Concept\+Check$<$\+G$>$$>$ template$<$int index, class Arg $>$ void {\bf Fun\+G\+::\+Mathematical\+Operations\+::\+Product}$<$ F, G, class, class $>$\+::update (
+\begin{DoxyParamCaption}
+\item[{const Arg \&}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structFunG_1_1MathematicalOperations_1_1Product_a8db3d935bbe273c0436ff3bc6bb6b786}
+
+
+Update variable corresponding to index. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+fung/mathematical\+\_\+operations/\hyperlink{product_8hh}{product.\+hh}\end{DoxyCompactItemize}

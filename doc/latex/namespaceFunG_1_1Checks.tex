@@ -1,0 +1,52 @@
+\hypertarget{namespaceFunG_1_1Checks}{}\section{Fun\+G\+:\+:Checks Namespace Reference}
+\label{namespaceFunG_1_1Checks}\index{Fun\+G\+::\+Checks@{Fun\+G\+::\+Checks}}
+
+
+Static checks for the presence of different operators and functions.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class F $>$ }\\constexpr bool \hyperlink{group__Checks_gac6e6c5574a8497cc0749e5a613e4d57c}{is\+Function} ()
+\item 
+{\footnotesize template$<$class F $>$ }\\constexpr bool \hyperlink{group__Checks_ga5f9a3a474205df6f565dd1a03ebb5e28}{has\+Consistent\+First\+Derivative} ()
+\item 
+{\footnotesize template$<$class Arg1 , class Arg2 $>$ }\\constexpr bool \hyperlink{group__Checks_ga81302dfb773e50401ec899c3b9a53c4c}{has\+Free\+\_\+\+Multiplication} ()
+\begin{DoxyCompactList}\small\item\em Check if objects of typed Arg1 and Arg2 support multiplication (free operator$\ast$). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg1 , class Arg2 $>$ }\\constexpr bool \hyperlink{group__Checks_ga1fb52331af88ccf29e380c8e5597e801}{has\+Mem\+Fn\+\_\+\+In\+Place\+Multiplication} ()
+\begin{DoxyCompactList}\small\item\em Check if objects of type Arg1 support in-\/place multiplication with objects of type Arg2. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg1 , class Arg2 $>$ }\\constexpr bool \hyperlink{group__Checks_ga88d1f93f87cf5f51d426fcfee862d6f6}{has\+Mem\+Fn\+\_\+rightmultiplyany} ()
+\begin{DoxyCompactList}\small\item\em Check if objects of type Arg1 support multiplication with objects of type Arg2 via call to rightmultiplyany(\+Arg2). \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\constexpr bool \hyperlink{group__Checks_ga8545906a81acf9f533c3342b0d02a6e9}{has\+Free\+\_\+\+Summation} ()
+\begin{DoxyCompactList}\small\item\em Check if objects of type Arg support summation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\constexpr bool \hyperlink{group__Checks_ga5357edca3d0fdcfbc1fba5fd43713b40}{has\+Mem\+Fn\+\_\+\+In\+Place\+Summation} ()
+\begin{DoxyCompactList}\small\item\em Check if objects of type Arg support in-\/place summation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Arg $>$ }\\constexpr bool \hyperlink{group__Checks_gadcc3e179af2ed0384a3773ea086045b9}{is\+Constant\+Size} ()
+\begin{DoxyCompactList}\small\item\em Check if object is a static vector for some type satisfying \hyperlink{structFunG_1_1Concepts_1_1VectorConcept}{Concepts\+::\+Vector\+Concept}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Indexed\+Arg\+X , class Indexed\+Arg\+Y $>$ }\\constexpr bool \hyperlink{group__Checks_ga072e2c21fa90be998a34975fb2975772}{has\+Consistent\+Second\+Derivative} ()
+\item 
+{\footnotesize template$<$class F , class Indexed\+Arg\+X , class Indexed\+Arg\+Y , class Indexed\+Arg\+Z $>$ }\\constexpr bool \hyperlink{group__Checks_gaad092e45db1d0c1d7b6f69a5562679fa}{has\+Consistent\+Third\+Derivative} ()
+\item 
+{\footnotesize template$<$class Matrix $>$ }\\constexpr bool \hyperlink{group__Checks_ga68fd30eff9d106c399b2b0e9a1f1b822}{has\+Mem\+Fn\+\_\+rows} ()
+\begin{DoxyCompactList}\small\item\em Check if object of type Matrix has a member function \hyperlink{namespaceFunG_1_1LinearAlgebra_abd3afa2fcd2194787342b2662cfa9f5a}{rows()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix $>$ }\\constexpr bool \hyperlink{group__Checks_ga6f66adbc63ed46140f1080e9914cb5de}{has\+Mem\+\_\+n\+\_\+rows} ()
+\begin{DoxyCompactList}\small\item\em Check if object of type Matrix has a member n\+\_\+rows. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix $>$ }\\constexpr bool \hyperlink{group__Checks_ga4979df2d7b7abebb0253a569e41274b1}{has\+Mem\+Fn\+\_\+cols} ()
+\begin{DoxyCompactList}\small\item\em Check if object of type Matrix has a member function \hyperlink{namespaceFunG_1_1LinearAlgebra_ae981b8bee32eea3ce87f41874835c9c1}{cols()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Matrix $>$ }\\constexpr bool \hyperlink{group__Checks_ga0a87aaa714499abcaabd921297be61e4}{has\+Mem\+\_\+n\+\_\+cols} ()
+\begin{DoxyCompactList}\small\item\em Check if object of type Matrix has a member n\+\_\+cols. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \hyperlink{group__Checks_gac2a1a8aedf54c42cb6d47b3b64bbc761}{is\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Check if T is of type Variable$<$\+Type,n$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \hyperlink{group__Checks_ga6d289274975a662346a1b5adf0d31f37}{has\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Check if T contains a type Variable$<$\+Type,n$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , int id$>$ }\\constexpr bool \hyperlink{group__Checks_ga0d42132679e0563893cc6c1809dc9a55}{has\+Variable\+Id} ()
+\begin{DoxyCompactList}\small\item\em Check if T contains a type Variable$<$\+Type,id$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Type $>$ }\\constexpr bool \hyperlink{group__Checks_ga5ff379f125d36c212332fd51012195d5}{has\+More\+Than\+One\+Variable} ()
+\begin{DoxyCompactList}\small\item\em Check if T contains at least two variables. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F , class Type , int id$>$ }\\constexpr bool \hyperlink{group__Checks_ga31790e5d021a40ac34b7469323c658f9}{check\+Argument} ()
+\begin{DoxyCompactList}\small\item\em Check if variable with index id has type Type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Static checks for the presence of different operators and functions. 
