@@ -4,22 +4,22 @@
 #include <memory>
 #include <utility>
 #include <stdexcept>
+#include <type_traits>
 
 #include "Spacy/Util/voider.hh"
 
 namespace Spacy
 {
+  /** @addtogroup MixinGroup
+   * @{
+   */
   namespace Mixin
   {
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type and provides access via member function impl().
-     */
+    /// Stores an object of type Type and provides access via member function impl().
     template <class Type>
     class Impl
     {
     public:
-      /// Default constructor.
       Impl()
         : impl_{}
       {}
@@ -32,19 +32,13 @@ namespace Spacy
         : impl_(std::move(impl))
       {}
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       Type& impl()
       {
         return impl_;
       }
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         return impl_;
@@ -54,15 +48,11 @@ namespace Spacy
       Type impl_;
     };
 
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type by const reference and provides access via member function impl().
-     */
+    /// Stores an object of type Type by const reference and provides access via member function impl().
     template <class Type>
     class Impl<const Type&>
     {
     public:
-      /// Default constructor.
       Impl() = default;
 
       /**
@@ -73,9 +63,7 @@ namespace Spacy
         : impl_(impl)
       {}
 
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         return impl_;
@@ -85,22 +73,15 @@ namespace Spacy
       const Type& impl_;
     };
 
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type by const reference and provides access via member function impl().
-     */
+    /// Stores an object of type Type by const reference and provides access via member function impl().
     template <class Type>
     using CRefImpl = Impl<const Type&>;
 
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type as unique pointer and provides access via member function impl().
-     */
+    /// Stores an object of type Type as unique pointer and provides access via member function impl().
     template < class Type >
     class UniqueImpl
     {
     public:
-      /// Default constructor.
       UniqueImpl() = default;
 
       /**
@@ -111,18 +92,14 @@ namespace Spacy
         : impl_(std::move(impl))
       {}
 
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       Type& impl()
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl().");
         return *impl_;
       }
 
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl() const.");
@@ -139,22 +116,22 @@ namespace Spacy
       std::unique_ptr<Type> impl_ = nullptr;
     };
 
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type as unique pointer and provides access via member function impl().
-     */
+    /// Stores an object of type Type as unique pointer and provides access via member function impl().
     template < class Type >
     class CopyingUniqueImpl
     {
     public:
-      /// Default constructor.
       CopyingUniqueImpl() = default;
 
-      /**
-       * @brief Constructor.
-       * @param impl value to be stored.
-       */
-      explicit CopyingUniqueImpl(std::unique_ptr<Type>&& impl)
+      virtual ~CopyingUniqueImpl() = default;
+
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      explicit CopyingUniqueImpl(T&& impl)
+        : impl_(std::make_unique< std::decay_t<T> >(std::forward<T>(impl)))
+      {}
+
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      explicit CopyingUniqueImpl(std::unique_ptr<T>&& impl)
         : impl_(std::move(impl))
       {}
 
@@ -162,57 +139,55 @@ namespace Spacy
         : impl_(std::make_unique<Type>(other.impl()))
       {}
 
+      CopyingUniqueImpl(CopyingUniqueImpl&&) = default;
+
+      CopyingUniqueImpl& operator=(CopyingUniqueImpl&& other) = default;
+
       CopyingUniqueImpl& operator=(const CopyingUniqueImpl& other)
       {
         impl_ = std::make_unique<Type>(other.impl());
         return *this;
       }
 
-      CopyingUniqueImpl(CopyingUniqueImpl&&) = default;
-
-      CopyingUniqueImpl& operator=(CopyingUniqueImpl&& other)
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      CopyingUniqueImpl& operator=(T&& impl)
       {
-        *impl_ = std::move(*other.impl_);
+        impl_ = std::make_unique< std::decay_t<T> >(std::forward<T>(impl));
         return *this;
       }
 
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       Type& impl()
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl().");
         return *impl_;
       }
 
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl() const.");
         return *impl_;
       }
 
-      /// Check if stored object is null pointer.
-      bool implIsNullPtr() const
-      {
-        return impl_ == nullptr;
-      }
+      template <class T>
+      friend bool is_empty(const CopyingUniqueImpl<T>& impl);
 
     private:
       std::unique_ptr<Type> impl_ = nullptr;
     };
 
-   /**
-    * @ingroup MixinGroup
-    * @brief Stores an object of type Type as shared pointer and provides access via member function impl().
-    */
+    template <class Type>
+    bool is_empty(const CopyingUniqueImpl<Type>& impl)
+    {
+      return impl.impl_ == nullptr;
+    }
+
+   /// Stores an object of type Type as shared pointer and provides access via member function impl().
     template <class Type>
     class SharedImpl
     {
     public:
-      /// Default constructor.
       SharedImpl() = default;
 
       /**
@@ -223,28 +198,21 @@ namespace Spacy
         : impl_(impl)
       {}
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       Type& impl()
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in SharedImpl::impl().");
         return *impl_;
       }
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in SharedImpl::impl() const.");
         return *impl_;
       }
-      /**
-       * @brief Access shared pointer to implementation.
-       */
+
+      /// Access shared pointer to implementation.
       std::shared_ptr<Type> sharedImpl() const
       {
         return impl_;
@@ -254,15 +222,11 @@ namespace Spacy
       std::shared_ptr<Type> impl_;
     };
 
-    /**
-     * @ingroup MixinGroup
-     * @brief Stores an object of type Type as (non-owning) raw pointer and provides access via member function impl().
-     */
+    /// Stores an object of type Type as (non-owning) raw pointer and provides access via member function impl().
     template <class Type>
     class NonOwningPImpl
     {
     public:
-      /// Default constructor.
       NonOwningPImpl() = default;
 
       /**
@@ -273,20 +237,14 @@ namespace Spacy
         : impl_(&impl)
       {}
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       Type& impl()
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in NonOwningPImpl::impl().");
         return *impl_;
       }
 
-
-      /**
-       * @brief Access implementation.
-       */
+      /// Access implementation.
       const Type& impl() const
       {
         if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in NonOwningPImpl::impl() const.");
@@ -305,6 +263,7 @@ namespace Spacy
       Type* impl_ = nullptr;
     };
   }
+  /** @} */
 }
 
 #endif // SPACYS_UTIL_Impl_HH

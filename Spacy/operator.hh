@@ -44,13 +44,13 @@ namespace Spacy
    * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
-  boost::type_erasure::any<Concepts::LinearSolverConcept> operator^(const LinearOperator& A, int k);
+  std::function<Vector(const Vector&)> operator^(const LinearOperator& A, int k);
 
   /**
    * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
-  boost::type_erasure::any<Concepts::LinearSolverConcept> operator^(LinearOperator&& A, int k);
+  std::function<Vector(const Vector&)> operator^(LinearOperator&& A, int k);
 
   /**
    * @ingroup SpacyGroup

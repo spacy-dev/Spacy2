@@ -5,7 +5,6 @@
 #include <boost/type_erasure/callable.hpp>
 
 #include "Spacy/Util/Concepts/conceptBase.hh"
-#include "Spacy/Util/Concepts/linearSolverConcept.hh"
 #include "Spacy/Util/Concepts/vectorConcept.hh"
 
 namespace Spacy
@@ -47,7 +46,7 @@ namespace Spacy
       using DampingStrategyConcept =
       boost::mpl::vector<
         ::Spacy::Concepts::ConceptBase ,
-        boost::type_erasure::callable< ::Spacy::DampingFactor(const boost::type_erasure::any< ::Spacy::Concepts::LinearSolverConcept >&,
+        boost::type_erasure::callable< ::Spacy::DampingFactor(const std::function<Vector(const Vector&)>&,
                                                     const Vector&,
                                                     const Vector&),
                                       const boost::type_erasure::_self>

@@ -7,8 +7,9 @@
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/RealSpace/vectorSpace.hh"
-#include "Spacy/Util/cast.hh"
-#include <iostream>
+
+#include <cassert>
+
 namespace Spacy
 {
   namespace FEniCS

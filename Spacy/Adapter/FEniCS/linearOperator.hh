@@ -1,6 +1,8 @@
 #ifndef SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
 #define SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
 
+#include <functional>
+#include <memory>
 #include <utility>
 
 #include "Spacy/linearSolver.hh"

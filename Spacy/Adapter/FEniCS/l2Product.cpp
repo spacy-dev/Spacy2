@@ -2,9 +2,9 @@
 
 #include "vector.hh"
 #include "Spacy/Util/cast.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 
 namespace Spacy

@@ -3,7 +3,6 @@
 
 #include "conceptBase.hh"
 #include "singleConcepts.hh"
-#include "linearSolverConcept.hh"
 #include "vectorConcept.hh"
 
 namespace Spacy
@@ -122,7 +121,7 @@ namespace Spacy
     boost::mpl::vector<
       OperatorConcept ,
       VectorConcept ,
-      has_solver<boost::type_erasure::any<LinearSolverConcept>(),
+      has_solver<std::function<Vector(const Vector&)>(),
                  const boost::type_erasure::_self>
     >;
 

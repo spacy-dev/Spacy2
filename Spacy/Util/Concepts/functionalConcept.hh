@@ -4,7 +4,6 @@
 #include <boost/type_erasure/callable.hpp>
 #include "conceptBase.hh"
 #include "singleConcepts.hh"
-#include "linearSolverConcept.hh"
 #include "operatorConcept.hh"
 #include "vectorConcept.hh"
 

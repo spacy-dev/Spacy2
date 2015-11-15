@@ -17,7 +17,7 @@ namespace Spacy
     class Norm
     {
     public:
-      /// Apply norm product.
+      /// Apply norm.
       Real operator()(const ::Spacy::Vector& x) const;
     };
   }

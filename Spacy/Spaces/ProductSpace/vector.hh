@@ -39,27 +39,19 @@ namespace Spacy
        */
       explicit Vector(const VectorSpace& space);
 
-      /**
-       * @return \f$x+y\f$
-       */
+      /** @return \f$x+y\f$ */
       Vector& operator+=(const Vector& y);
 
   //    /// Axpy-operation \f$x = x + ay\f$.
       //    AbstractVector& axpy(double a, const AbstractVector& y);
 
-      /**
-       * @return \f$x-y\f$
-       */
+      /** @return \f$x-y\f$ */
       Vector& operator-=(const Vector& y);
 
-      /**
-       * @return \f$ax\f$
-       */
+      /** @return \f$ax\f$ */
       Vector& operator*=(double a);
 
-      /**
-       * @return \f$-x\f$
-       */
+      /** @return \f$-x\f$ */
       Vector operator- () const;
 
       /// Equality comparison (possibly up to the maximal attainable accuracy).

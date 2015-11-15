@@ -15,6 +15,8 @@ namespace Mock
   public:
     static constexpr int testValue = 3;
 
+    Vector() = default;
+
     Vector(const Spacy::VectorSpace& space);
 
     Vector& operator+=(const Vector& y );
@@ -34,8 +36,8 @@ namespace Mock
     private:
     friend const double& value(const Vector& v) { return v.value_; }
     friend double& value(Vector& v) { return v.value_; }
-      double value_ = testValue;
-      const Spacy::VectorSpace* space_ = nullptr;
+    double value_ = testValue;
+    const Spacy::VectorSpace* space_ = nullptr;
   };
 }
 

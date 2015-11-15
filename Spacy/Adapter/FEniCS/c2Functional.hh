@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include "Spacy/hessian.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 

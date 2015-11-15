@@ -2,9 +2,7 @@
 #define SPACY_DERIVATIVE_HH
 
 #include "Spacy/functional.hh"
-#include "Spacy/hessian.hh"
 #include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
 
 namespace Spacy
 {

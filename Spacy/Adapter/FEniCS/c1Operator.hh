@@ -5,7 +5,6 @@
 
 #include <dolfin.h>
 
-#include "Spacy/linearizedOperator.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 
