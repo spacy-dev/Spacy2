@@ -1,0 +1,93 @@
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution}{}\section{Spacy\+:\+:Kaskade\+:\+:Error\+Distribution$<$ Functional, Extended\+Ansatz\+Vars $>$ Class Template Reference}
+\label{classSpacy_1_1Kaskade_1_1ErrorDistribution}\index{Spacy\+::\+Kaskade\+::\+Error\+Distribution$<$ Functional, Extended\+Ansatz\+Vars $>$@{Spacy\+::\+Kaskade\+::\+Error\+Distribution$<$ Functional, Extended\+Ansatz\+Vars $>$}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSpacy_1_1Kaskade_1_1ErrorDistribution_1_1BoundaryCache}{Boundary\+Cache}
+\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1ErrorDistribution_1_1D1}{D1}
+\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1ErrorDistribution_1_1D2}{D2}
+\item 
+class \hyperlink{classSpacy_1_1Kaskade_1_1ErrorDistribution_1_1DomainCache}{Domain\+Cache}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a151f5d8fc6114ff4b7b0b06549584af2}{}using {\bfseries Scalar} = typename Functional\+::\+Scalar\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a151f5d8fc6114ff4b7b0b06549584af2}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_aa7396c03722dd287c0fc935ec99f15b8}{}using {\bfseries Ansatz\+Space} = \+::Kaskade\+::\+F\+E\+Function\+Space$<$ Discontinuous\+Lagrange\+Mapper$<$ Scalar, typename Grid\+::\+Leaf\+Grid\+View $>$ $>$\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_aa7396c03722dd287c0fc935ec99f15b8}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a3e1417e1fb71b3a8b7e917b1f68af237}{}using {\bfseries Ansatz\+Spaces} = boost\+::fusion\+::vector$<$ Ansatz\+Space const $\ast$ $>$\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a3e1417e1fb71b3a8b7e917b1f68af237}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_ad20840f2ac96c679120fd27078a33a2d}{}using {\bfseries Ansatz\+Variable\+Information} = \+::Kaskade\+::\+Variable$<$ Space\+Index$<$ 0 $>$, Components$<$ 1 $>$, Variable\+Id$<$ 0 $>$ $>$\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_ad20840f2ac96c679120fd27078a33a2d}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a368e7e738d712b13476409aaa0984e1a}{}using {\bfseries Variable\+Descriptions} = boost\+::fusion\+::vector$<$ Ansatz\+Variable\+Information $>$\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a368e7e738d712b13476409aaa0984e1a}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a2c752f20145c9948f9b00b5472382c7f}{}using {\bfseries Ansatz\+Vars} = \+::Kaskade\+::\+Variable\+Set\+Description$<$ Ansatz\+Spaces, Variable\+Descriptions $>$\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a2c752f20145c9948f9b00b5472382c7f}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a4e8ecdbc79b38e576213d768a744a5f9}{}using {\bfseries Test\+Vars} = Ansatz\+Vars\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a4e8ecdbc79b38e576213d768a744a5f9}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a240b5610b044689fca859e77e61e826b}{}using {\bfseries Origin\+Vars} = Ansatz\+Vars\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a240b5610b044689fca859e77e61e826b}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_ac3d5179ee630171a58f7bacc87c3011e}{}using {\bfseries Error\+Vector} = typename Ansatz\+Vars\+::template Coefficient\+Vector\+Representation$<$$>$\+::type\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_ac3d5179ee630171a58f7bacc87c3011e}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a4a981feb92d9e3b609a496195a1bd363}{}using {\bfseries Cell} = typename Ansatz\+Vars\+::\+Grid\+::template Codim$<$ 0 $>$\+::Entity\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a4a981feb92d9e3b609a496195a1bd363}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_add3ba2008f1ea9b470f6ca22c6d6d2fd}{}{\bfseries Error\+Distribution} (\hyperlink{group__SpacyGroup_ga673218f603c93790864aef12c89d3a35_ga673218f603c93790864aef12c89d3a35}{Functional} const \&functional\+\_\+, typename Original\+Ansatz\+Vars\+::\+Variable\+Set const \&iterate\+\_\+, typename Original\+Ansatz\+Vars\+::\+Variable\+Set const \&error\+Estimate\+L\+\_\+, typename Extended\+Ansatz\+Vars\+::\+Variable\+Set const \&error\+Estimate\+H\+\_\+)\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_add3ba2008f1ea9b470f6ca22c6d6d2fd}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_ab0e1b703d6aa9f12864faf50077b6601}{}{\footnotesize template$<$class Cell $>$ }\\int {\bfseries integration\+Order} (Cell const \&, int, bool) const \label{classSpacy_1_1Kaskade_1_1ErrorDistribution_ab0e1b703d6aa9f12864faf50077b6601}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a89d3a13808ef14f73a8aed1fe399863a}{}Ansatz\+Spaces const \& {\bfseries spaces} () const \label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a89d3a13808ef14f73a8aed1fe399863a}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a6a10b9121e554a24f06f4b263a7c2b9d}{}Ansatz\+Vars const \& {\bfseries variable\+Set\+Description} () const \label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a6a10b9121e554a24f06f4b263a7c2b9d}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a9c25ab92fea23d79d203048f75ed19b1}{}static int const {\bfseries dim} = Grid\+::dimension\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a9c25ab92fea23d79d203048f75ed19b1}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a1aa21778983330a3615628579566db86}{}static Problem\+Type const {\bfseries type} = Functional\+::type\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a1aa21778983330a3615628579566db86}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a2510ab0d41021648f44de94789e9dbeb}{}static constexpr int {\bfseries y\+Idx} = 0\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a2510ab0d41021648f44de94789e9dbeb}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_abd08a2e81efe31f5e945d5fac17ff62b}{}static constexpr int {\bfseries space\+Index} = result\+\_\+of\+::value\+\_\+at\+\_\+c$<$typename Original\+Ansatz\+Vars\+::\+Variables, y\+Idx$>$\+::type\+::space\+Index\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_abd08a2e81efe31f5e945d5fac17ff62b}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_abadb7dbc2aec081b37f0f226ccc80328}{}static constexpr int {\bfseries extension\+Space\+Index} = result\+\_\+of\+::value\+\_\+at\+\_\+c$<$typename Extended\+Ansatz\+Vars\+::\+Variables, y\+Idx$>$\+::type\+::space\+Index\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_abadb7dbc2aec081b37f0f226ccc80328}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_a918b51c8fef3109afd5f45ccc20e45a8}{}class {\bfseries Domain\+Cache}\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_a918b51c8fef3109afd5f45ccc20e45a8}
+
+\item 
+\hypertarget{classSpacy_1_1Kaskade_1_1ErrorDistribution_ae7fb3658f92beb7b11c76472abbadf38}{}class {\bfseries Boundary\+Cache}\label{classSpacy_1_1Kaskade_1_1ErrorDistribution_ae7fb3658f92beb7b11c76472abbadf38}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/\+Adapter/\+Kaskade/\+Definitions/error\+\_\+distribution.\+hh\end{DoxyCompactItemize}

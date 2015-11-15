@@ -1,0 +1,8 @@
+<map id="Spacy::VectorBase" name="Spacy::VectorBase">
+<area shape="rect" id="node2" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS. " alt="" coords="191,5,397,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1Vector.html" title="Vector implementation for FEniCS (single space). " alt="" coords="215,56,373,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7. " alt="" coords="188,107,400,163"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Kaskade_1_1Vector.html" title="Coefficient vector implementation for Kaskade 7 (single space). " alt="" coords="212,186,376,227"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1ProductSpace_1_1Vector.html" title="Product space vector. " alt="" coords="219,251,369,293"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Real.html" title="Real number. " alt="" coords="247,317,341,344"/>
+</map>

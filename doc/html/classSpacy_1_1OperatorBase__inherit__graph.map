@@ -1,0 +1,16 @@
+<map id="Spacy::OperatorBase" name="Spacy::OperatorBase">
+<area shape="rect" id="node2" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="240,5,407,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner.html" title="A triangular state constraint preconditioner used in . " alt="" coords="232,57,415,98"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator . " alt="" coords="215,122,432,163"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1FEniCS_1_1DynamicC1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator . " alt="" coords="228,187,419,258"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS. " alt="" coords="220,283,427,309"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1FEniCS_1_1LUSolver.html" title="LU solver for FEniCS. " alt="" coords="236,333,411,360"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1FEniCS_1_1TransposedLUSolver.html" title="Transposed LU solver for FEniCS. " alt="" coords="229,385,418,426"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Hessian.html" title="Linear operator &#160;for a twice differentiable functional . " alt="" coords="266,451,381,477"/>
+<area shape="rect" id="node10" href="$classSpacy_1_1Kaskade_1_1C1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="227,502,420,543"/>
+<area shape="rect" id="node11" href="$classSpacy_1_1Kaskade_1_1DirectSolver.html" title="Direct solver interface for Kaskade 7. " alt="" coords="200,567,447,623"/>
+<area shape="rect" id="node12" href="$classSpacy_1_1Kaskade_1_1DynamicC1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="226,647,421,703"/>
+<area shape="rect" id="node13" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7. " alt="" coords="217,727,429,783"/>
+<area shape="rect" id="node14" href="$classSpacy_1_1Kaskade_1_1Operator.html" title="Operator interface for Kaskade 7. Models an operator . " alt="" coords="235,806,411,847"/>
+<area shape="rect" id="node15" href="$classSpacy_1_1LinearizedOperator.html" title="Linearized operator &#160;of a differentiable operator . " alt="" coords="235,872,411,899"/>
+</map>

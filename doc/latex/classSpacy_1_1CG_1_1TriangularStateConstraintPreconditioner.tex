@@ -1,0 +1,344 @@
+\hypertarget{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner}{}\section{Spacy\+:\+:C\+G\+:\+:Triangular\+State\+Constraint\+Preconditioner Class Reference}
+\label{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+
+
+A triangular state constraint preconditioner used in \cite{Lubkoll2015a}.  
+
+
+
+
+{\ttfamily \#include $<$triangular\+State\+Constraint\+Preconditioner.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:C\+G\+:\+:Triangular\+State\+Constraint\+Preconditioner\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:C\+G\+:\+:Triangular\+State\+Constraint\+Preconditioner\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a8bbfa8bf7bdfcd3c308d4dbec8c448d0_a8bbfa8bf7bdfcd3c308d4dbec8c448d0}{Triangular\+State\+Constraint\+Preconditioner} (\+::\hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Spacy\+::\+Linear\+Solver} state\+Solver,\+::\hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Spacy\+::\+Linear\+Solver} control\+Solver,\+::\hyperlink{namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba_a7d5cd1c6fb9dd85aa345b536caf30bba}{Spacy\+::\+Linear\+Solver} adjoint\+Solver, \hyperlink{group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f_ga2b74020d806ad800795cdd97dab3466f}{Callable\+Operator} B, \hyperlink{group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f_ga2b74020d806ad800795cdd97dab3466f}{Callable\+Operator} B\+T, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_acf6c7985d679599274592917fdae5cbc_acf6c7985d679599274592917fdae5cbc}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Apply preconditioner $P$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a959f6f366b868163b6cbeda7c96bcc8e_a959f6f366b868163b6cbeda7c96bcc8e}{kernel\+Offset} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&rhs) const 
+\begin{DoxyCompactList}\small\item\em Compute $ z = \left( \begin{array}{c} z_p \\ 0 \\ 0 \end{array} \right) = \left( \begin{array}{c} A^{-1}rhs_p \\ 0 \\ 0 \end{array} \right) $. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const 
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const 
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a30d4dd8b61175144c84c5bbf964528d7_a30d4dd8b61175144c84c5bbf964528d7}{set\+Adjoint\+Index} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Set index of the adjoint variable. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_afd5c0f6bd67d20c88ea65b7f8fe4ab45_afd5c0f6bd67d20c88ea65b7f8fe4ab45}{adjoint\+Index} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access index of the adjoint variable. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a6ac8bb62f7d40cdf7aee68539026a647_a6ac8bb62f7d40cdf7aee68539026a647}{attach\+Adjoint\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a18dca16025bfc2af67da2eee34be9699_a18dca16025bfc2af67da2eee34be9699}{Adjoint\+Index} \&other)
+\begin{DoxyCompactList}\small\item\em Attach adjoint index. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1AdjointIndex_af07504e2900cd83446469b4bb0ce0a4a}{}void \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_af07504e2900cd83446469b4bb0ce0a4a}{detach\+Adjoint\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a18dca16025bfc2af67da2eee34be9699_a18dca16025bfc2af67da2eee34be9699}{Adjoint\+Index} \&other)\label{classSpacy_1_1Mixin_1_1AdjointIndex_af07504e2900cd83446469b4bb0ce0a4a}
+
+\begin{DoxyCompactList}\small\item\em Detach verbosity before it gets deleted. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1AdjointIndex_ad91ccf68601950801cd062afee8a8cf2}{}void \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_ad91ccf68601950801cd062afee8a8cf2}{update} (\hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a18dca16025bfc2af67da2eee34be9699_a18dca16025bfc2af67da2eee34be9699}{Adjoint\+Index} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1AdjointIndex_ad91ccf68601950801cd062afee8a8cf2}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_a4e6c305c148d81f15638fc214f60ed00_a4e6c305c148d81f15638fc214f60ed00}{set\+Control\+Index} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Set index of the control variable. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_a04fd74c67e320942ff6513fe0a741913_a04fd74c67e320942ff6513fe0a741913}{control\+Index} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get index of control variable. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_a31b734645d51290cb4db6798018ab232_a31b734645d51290cb4db6798018ab232}{attach\+Control\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_afa09ff1cc2b7476e8b6e7e26e71cd775_afa09ff1cc2b7476e8b6e7e26e71cd775}{Control\+Index} \&other)
+\begin{DoxyCompactList}\small\item\em Attach control index. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1ControlIndex_a3b39990dd9cf45d046966fb026c4a9ee}{}void \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_a3b39990dd9cf45d046966fb026c4a9ee}{detach\+Control\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_afa09ff1cc2b7476e8b6e7e26e71cd775_afa09ff1cc2b7476e8b6e7e26e71cd775}{Control\+Index} \&other)\label{classSpacy_1_1Mixin_1_1ControlIndex_a3b39990dd9cf45d046966fb026c4a9ee}
+
+\begin{DoxyCompactList}\small\item\em Detach verbosity before it gets deleted. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1ControlIndex_aa534a05629e88a5cc479f161139cf3f7}{}void \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_aa534a05629e88a5cc479f161139cf3f7}{update} (\hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_afa09ff1cc2b7476e8b6e7e26e71cd775_afa09ff1cc2b7476e8b6e7e26e71cd775}{Control\+Index} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1ControlIndex_aa534a05629e88a5cc479f161139cf3f7}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319_a7547d4239437b878cde8a60a95b0b319}{set\+State\+Index} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Set index of state variable. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa_a8f6d3b42f3ffe6698ed9915355d22baa}{state\+Index} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access index of state variable. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a_af307c6e75fe7839a3f74ea400b9aea4a}{attach\+State\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_a0dfcecf87c0982d6c4d8859661aad1fa}{State\+Index} \&other)
+\begin{DoxyCompactList}\small\item\em Attach state index. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1StateIndex_ac193f8197435643fb7f509756607e464}{}void \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_ac193f8197435643fb7f509756607e464}{detach\+State\+Index} (\hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_a0dfcecf87c0982d6c4d8859661aad1fa}{State\+Index} \&other)\label{classSpacy_1_1Mixin_1_1StateIndex_ac193f8197435643fb7f509756607e464}
+
+\begin{DoxyCompactList}\small\item\em Detach verbosity before it gets deleted. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1StateIndex_a632299c8de748ea73d1fcbbb4d8f734a}{}void \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a632299c8de748ea73d1fcbbb4d8f734a}{update} (\hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_a0dfcecf87c0982d6c4d8859661aad1fa}{State\+Index} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1StateIndex_a632299c8de748ea73d1fcbbb4d8f734a}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a18dca16025bfc2af67da2eee34be9699_a18dca16025bfc2af67da2eee34be9699}{Adjoint\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a18dca16025bfc2af67da2eee34be9699_a18dca16025bfc2af67da2eee34be9699}{Adjoint\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_afa09ff1cc2b7476e8b6e7e26e71cd775_afa09ff1cc2b7476e8b6e7e26e71cd775}{Control\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_afa09ff1cc2b7476e8b6e7e26e71cd775_afa09ff1cc2b7476e8b6e7e26e71cd775}{Control\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_a0dfcecf87c0982d6c4d8859661aad1fa}{State\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_a0dfcecf87c0982d6c4d8859661aad1fa}{State\+Index} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A triangular state constraint preconditioner used in \cite{Lubkoll2015a}. 
+
+A preconditioner for optimal control problems of the form \[ P=\left( \begin{array}{ccc} & & A^{-T} \\ & M^{-1} & -B^T \\ A^{-1} & -B & \end{array} \right)\], where $A$ is the state operator, $B$ the control operator and $M$ induces a scalar product on the control space. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a8bbfa8bf7bdfcd3c308d4dbec8c448d0_a8bbfa8bf7bdfcd3c308d4dbec8c448d0}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!Triangular\+State\+Constraint\+Preconditioner@{Triangular\+State\+Constraint\+Preconditioner}}
+\index{Triangular\+State\+Constraint\+Preconditioner@{Triangular\+State\+Constraint\+Preconditioner}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{Triangular\+State\+Constraint\+Preconditioner}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner\+::\+Triangular\+State\+Constraint\+Preconditioner (
+\begin{DoxyParamCaption}
+\item[{\+::{\bf Spacy\+::\+Linear\+Solver}}]{state\+Solver, }
+\item[{\+::{\bf Spacy\+::\+Linear\+Solver}}]{control\+Solver, }
+\item[{\+::{\bf Spacy\+::\+Linear\+Solver}}]{adjoint\+Solver, }
+\item[{{\bf Callable\+Operator}}]{B, }
+\item[{{\bf Callable\+Operator}}]{B\+T, }
+\item[{const {\bf Vector\+Space} \&}]{domain, }
+\item[{const {\bf Vector\+Space} \&}]{range}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a8bbfa8bf7bdfcd3c308d4dbec8c448d0_a8bbfa8bf7bdfcd3c308d4dbec8c448d0}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+Solver} & solver for the evaluation of $A^{-1}r$ \\
+\hline
+{\em control\+Solver} & solver for the evaluation of $M^{-1}r$ \\
+\hline
+{\em adjoint\+Solver} & solver for the evaluation of $M^{-T}r$ \\
+\hline
+{\em B} & control operator \\
+\hline
+{\em B\+T} & adjoint control operator \\
+\hline
+{\em domain} & domain space \\
+\hline
+{\em range} & range space \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1Mixin_1_1AdjointIndex_afd5c0f6bd67d20c88ea65b7f8fe4ab45_afd5c0f6bd67d20c88ea65b7f8fe4ab45}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!adjoint\+Index@{adjoint\+Index}}
+\index{adjoint\+Index@{adjoint\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{adjoint\+Index}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Adjoint\+Index\+::adjoint\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1AdjointIndex_afd5c0f6bd67d20c88ea65b7f8fe4ab45_afd5c0f6bd67d20c88ea65b7f8fe4ab45}
+
+
+Access index of the adjoint variable. 
+
+\begin{DoxyReturn}{Returns}
+index of the adjoint variable 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1AdjointIndex_a6ac8bb62f7d40cdf7aee68539026a647_a6ac8bb62f7d40cdf7aee68539026a647}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!attach\+Adjoint\+Index@{attach\+Adjoint\+Index}}
+\index{attach\+Adjoint\+Index@{attach\+Adjoint\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{attach\+Adjoint\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Adjoint\+Index\+::attach\+Adjoint\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf Adjoint\+Index} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1AdjointIndex_a6ac8bb62f7d40cdf7aee68539026a647_a6ac8bb62f7d40cdf7aee68539026a647}
+
+
+Attach adjoint index. 
+
+When \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex_a30d4dd8b61175144c84c5bbf964528d7_a30d4dd8b61175144c84c5bbf964528d7}{set\+Adjoint\+Index(unsigned index)} is called, then also other.\+set\+Adjoint\+Index(unsigned index) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1ControlIndex_a31b734645d51290cb4db6798018ab232_a31b734645d51290cb4db6798018ab232}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!attach\+Control\+Index@{attach\+Control\+Index}}
+\index{attach\+Control\+Index@{attach\+Control\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{attach\+Control\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Control\+Index\+::attach\+Control\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf Control\+Index} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1ControlIndex_a31b734645d51290cb4db6798018ab232_a31b734645d51290cb4db6798018ab232}
+
+
+Attach control index. 
+
+When \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex_a4e6c305c148d81f15638fc214f60ed00_a4e6c305c148d81f15638fc214f60ed00}{set\+Control\+Index(unsigned index)} is called, then also other.\+set\+Control\+Index(unsigned index) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a_af307c6e75fe7839a3f74ea400b9aea4a}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!attach\+State\+Index@{attach\+State\+Index}}
+\index{attach\+State\+Index@{attach\+State\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{attach\+State\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+State\+Index\+::attach\+State\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf State\+Index} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a_af307c6e75fe7839a3f74ea400b9aea4a}
+
+
+Attach state index. 
+
+When \hyperlink{classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319_a7547d4239437b878cde8a60a95b0b319}{set\+State\+Index(unsigned index)} is called, then also other.\+set\+State\+Index(unsigned index) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1ControlIndex_a04fd74c67e320942ff6513fe0a741913_a04fd74c67e320942ff6513fe0a741913}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!control\+Index@{control\+Index}}
+\index{control\+Index@{control\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{control\+Index}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Control\+Index\+::control\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1ControlIndex_a04fd74c67e320942ff6513fe0a741913_a04fd74c67e320942ff6513fe0a741913}
+
+
+Get index of control variable. 
+
+\begin{DoxyReturn}{Returns}
+control index 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!domain@{domain}}
+\index{domain@{domain}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{domain}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::domain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f_a2588f9b3e0188820c4c494e63293dc6f}
+
+
+Access domain space $X$. 
+
+\begin{DoxyReturn}{Returns}
+domain space $X$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a959f6f366b868163b6cbeda7c96bcc8e_a959f6f366b868163b6cbeda7c96bcc8e}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!kernel\+Offset@{kernel\+Offset}}
+\index{kernel\+Offset@{kernel\+Offset}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{kernel\+Offset}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner\+::kernel\+Offset (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector} \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_a959f6f366b868163b6cbeda7c96bcc8e_a959f6f366b868163b6cbeda7c96bcc8e}
+
+
+Compute $ z = \left( \begin{array}{c} z_p \\ 0 \\ 0 \end{array} \right) = \left( \begin{array}{c} A^{-1}rhs_p \\ 0 \\ 0 \end{array} \right) $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & right hand side \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_acf6c7985d679599274592917fdae5cbc_acf6c7985d679599274592917fdae5cbc}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner_acf6c7985d679599274592917fdae5cbc_acf6c7985d679599274592917fdae5cbc}
+
+
+Apply preconditioner $P$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$P(x)$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!range@{range}}
+\index{range@{range}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{range}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Operator\+Base\+::range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6_ab19d3b7a6f290b1079248f1e567e53d6}
+
+
+Access range space $Y$. 
+
+\begin{DoxyReturn}{Returns}
+range space $Y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1Mixin_1_1AdjointIndex_a30d4dd8b61175144c84c5bbf964528d7_a30d4dd8b61175144c84c5bbf964528d7}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!set\+Adjoint\+Index@{set\+Adjoint\+Index}}
+\index{set\+Adjoint\+Index@{set\+Adjoint\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{set\+Adjoint\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Adjoint\+Index\+::set\+Adjoint\+Index (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1AdjointIndex_a30d4dd8b61175144c84c5bbf964528d7_a30d4dd8b61175144c84c5bbf964528d7}
+
+
+Set index of the adjoint variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & new index of the adjoint variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1Mixin_1_1ControlIndex_a4e6c305c148d81f15638fc214f60ed00_a4e6c305c148d81f15638fc214f60ed00}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!set\+Control\+Index@{set\+Control\+Index}}
+\index{set\+Control\+Index@{set\+Control\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{set\+Control\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Control\+Index\+::set\+Control\+Index (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1ControlIndex_a4e6c305c148d81f15638fc214f60ed00_a4e6c305c148d81f15638fc214f60ed00}
+
+
+Set index of the control variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & of the control variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319_a7547d4239437b878cde8a60a95b0b319}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!set\+State\+Index@{set\+State\+Index}}
+\index{set\+State\+Index@{set\+State\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{set\+State\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+State\+Index\+::set\+State\+Index (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319_a7547d4239437b878cde8a60a95b0b319}
+
+
+Set index of state variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & new index of state variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa_a8f6d3b42f3ffe6698ed9915355d22baa}{}\index{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}!state\+Index@{state\+Index}}
+\index{state\+Index@{state\+Index}!Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner@{Spacy\+::\+C\+G\+::\+Triangular\+State\+Constraint\+Preconditioner}}
+\subsubsection[{state\+Index}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+State\+Index\+::state\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa_a8f6d3b42f3ffe6698ed9915355d22baa}
+
+
+Access index of state variable. 
+
+\begin{DoxyReturn}{Returns}
+index of state variable 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/\+Algorithm/\+C\+G/triangular\+State\+Constraint\+Preconditioner.\+hh\end{DoxyCompactItemize}

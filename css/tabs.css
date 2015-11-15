@@ -1,0 +1,106 @@
+.tabs, .tabs2, .tabs3 {
+    background-image: url('tab_b.png');
+    width: 100%;
+    z-index: 101;
+    font-size: 13px;
+    font-family: 'Lucida Grande',Geneva,Helvetica,Arial,sans-serif;
+}
+
+.tabs {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position:absolute;
+    left: 40px;
+    top: 38px;
+    width: 920px;
+    background-image:url('../images/tab_b.png');
+    background-color: rgb(204,204,204);
+}
+
+.tableft {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.tabright {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.tabs2 {
+    font-size: 10px;
+}
+.tabs3 {
+    font-size: 9px;
+}
+
+.tablist {
+    position:relative;
+    margin: 0;
+    padding: 0;
+    display: table;
+    border-width: 0px;
+    float:right;
+}
+
+.logo {
+    position:relative;
+    margin: 0;
+    padding: 0;
+    display: table;
+    border-width: 0px;
+    float:left;    
+}
+
+.tablist li, .logo li {
+    float: left;
+    display: table-cell;
+    background-image: url('../images/tab_b.png');
+    line-height: 36px;
+    list-style: none;
+}
+
+.logo li {
+    display: block;
+    font-weight: bold;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
+    background-image:url('../images/tab_s.png');
+    background-repeat:no-repeat;
+    background-position:right;
+}
+
+.tablist a{
+    display: block;
+    padding: 0 20px;
+    font-weight: bold;
+    background-image:url('../images/tab_s.png');
+    background-repeat:no-repeat;
+    background-position:left;
+    color:black;
+    /*color: #283A5D;*/
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    outline: none;
+}
+
+.tabs3 .tablist a {
+    padding: 0 10px;
+}
+
+.tablist a:hover {
+    display:inherit;
+    background-image: url('../images/tab_h.png');
+    background-repeat:repeat-x;
+    color: #fff;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 1.0);
+    text-decoration: none;
+}
+
+.tablist li.current a {
+    background-image: url('../images/tab_a.png');
+    background-repeat:repeat-x;
+    color: #fff;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 1.0);
+}

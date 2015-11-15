@@ -1,0 +1,82 @@
+\hypertarget{group__CGConceptGroup}{}\section{Concepts for conjugate gradient methods}
+\label{group__CGConceptGroup}\index{Concepts for conjugate gradient methods@{Concepts for conjugate gradient methods}}
+
+
+Concept for termination criteria for conjugate gradient methods.  
+
+
+Collaboration diagram for Concepts for conjugate gradient methods\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{group__CGConceptGroup}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{group__CGConceptGroup_ga6b30d103c365816efcfb038d922aef07_ga6b30d103c365816efcfb038d922aef07}{Spacy\+::\+Concepts\+::\+C\+G\+::\+Termination\+Criterion\+Concept} = boost\+::mpl\+::vector$<$ Concept\+Base, boost\+::type\+\_\+erasure\+::callable$<$ bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self $>$, has\+\_\+cg\+\_\+terminate\+\_\+clear$<$ void()$>$, has\+\_\+cg\+\_\+terminate\+\_\+update$<$ void(Real, Real, Real, Real)$>$, has\+\_\+cg\+\_\+terminate\+\_\+vanishing\+Step$<$ bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self $>$, has\+\_\+cg\+\_\+terminate\+\_\+minimal\+Decrease\+Achieved$<$ bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self $>$, has\+\_\+cg\+\_\+terminate\+\_\+set\+Eps$<$ void(double)$>$, has\+\_\+cg\+\_\+terminate\+\_\+set\+Relative\+Accuracy$<$ void(double)$>$, has\+\_\+cg\+\_\+terminate\+\_\+set\+Absolute\+Accuracy$<$ void(double)$>$, has\+\_\+cg\+\_\+terminate\+\_\+set\+Minimal\+Accuracy$<$ void(double)$>$ $>$
+\begin{DoxyCompactList}\small\item\em Concept for termination criteria for conjugate gradient methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Concept for termination criteria for conjugate gradient methods. 
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{group__CGConceptGroup_ga6b30d103c365816efcfb038d922aef07_ga6b30d103c365816efcfb038d922aef07}{}\index{Concepts for conjugate gradient methods@{Concepts for conjugate gradient methods}!Termination\+Criterion\+Concept@{Termination\+Criterion\+Concept}}
+\index{Termination\+Criterion\+Concept@{Termination\+Criterion\+Concept}!Concepts for conjugate gradient methods@{Concepts for conjugate gradient methods}}
+\subsubsection[{Termination\+Criterion\+Concept}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Concepts\+::\+C\+G\+::\+Termination\+Criterion\+Concept} = typedef boost\+::mpl\+::vector$<$ Concept\+Base , boost\+::type\+\_\+erasure\+::callable$<$bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self$>$ , has\+\_\+cg\+\_\+terminate\+\_\+clear$<$void()$>$ , has\+\_\+cg\+\_\+terminate\+\_\+update$<$void(Real,Real,Real,Real)$>$ , has\+\_\+cg\+\_\+terminate\+\_\+vanishing\+Step$<$bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self$>$ , has\+\_\+cg\+\_\+terminate\+\_\+minimal\+Decrease\+Achieved$<$bool(), const boost\+::type\+\_\+erasure\+::\+\_\+self$>$ , has\+\_\+cg\+\_\+terminate\+\_\+set\+Eps$<$void(double)$>$ , has\+\_\+cg\+\_\+terminate\+\_\+set\+Relative\+Accuracy$<$void(double)$>$ , has\+\_\+cg\+\_\+terminate\+\_\+set\+Absolute\+Accuracy$<$void(double)$>$ , has\+\_\+cg\+\_\+terminate\+\_\+set\+Minimal\+Accuracy$<$void(double)$>$ $>$}\label{group__CGConceptGroup_ga6b30d103c365816efcfb038d922aef07_ga6b30d103c365816efcfb038d922aef07}
+
+
+Concept for termination criteria for conjugate gradient methods. 
+
+\label{group__CGConceptGroup_ga6b30d103c365816efcfb038d922aef07_CG_TerminationCriterionConceptAnchor}%
+\hypertarget{group__CGConceptGroup_ga6b30d103c365816efcfb038d922aef07_CG_TerminationCriterionConceptAnchor}{}%
+The minimal signature of a termination criterion is\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// My termination criterion.}
+\textcolor{keyword}{class }MyTerminationCriterion
+\{
+\textcolor{keyword}{public}:
+  \textcolor{comment}{// Copy constructor.}
+  MyTerminationCriterion(\textcolor{keyword}{const} MyTerminationCriterion&);
+
+  \textcolor{comment}{// Move constructor.}
+  MyTerminationCriterion(MyTerminationCriterion&&);
+
+  \textcolor{comment}{// Check if termination criterion is satisfied.}
+  \textcolor{keywordtype}{bool} operator()() \textcolor{keyword}{const};
+
+  \textcolor{comment}{// Clear internal storage for new cg run.}
+  \textcolor{keywordtype}{void} clear();
+
+  \textcolor{comment}{// Provide algorithmic quantities required to evaluate termination criteria.}
+  \textcolor{keywordtype}{void} update(Real stepLength, Real qAq, Real qPq, Real rPINVr)
+
+  \textcolor{comment}{// Checks if the step length of the computed step is below the maximal attainable accuracy.}
+  \textcolor{keywordtype}{bool} vanishingStep() \textcolor{keyword}{const};
+
+  \textcolor{comment}{// Checks if at least the minimal required decrease is satisfied. This is required for the}
+  \textcolor{comment}{// truncated regularized conjugate gradient method (TRCG).}
+  \textcolor{keywordtype}{bool} minimalDecreaseAchieved() \textcolor{keyword}{const};
+
+  \textcolor{comment}{// Set maximal attainable accuracy}
+  \textcolor{keywordtype}{void} setEps(\textcolor{keywordtype}{double});
+
+  \textcolor{comment}{// Set relative accuracy.}
+  \textcolor{keywordtype}{void} setRelativeAccuracy(\textcolor{keywordtype}{double});
+
+  \textcolor{comment}{// Set absolute accuracy.}
+  \textcolor{keywordtype}{void} setAbsoluteAccuracy(\textcolor{keywordtype}{double});
+
+  \textcolor{comment}{// Set minimal accuracy. Only required for truncated regularized conjugate gradients (TRCG).}
+  \textcolor{keywordtype}{void} setMinimalAccuracy(\textcolor{keywordtype}{double});
+\};
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__CGGroup_gaa927be31b313bb4ce635668c77b55860_CG_TerminationCriterionAnchor}{C\+G\+:\+:Termination\+Criterion} 
+\end{DoxySeeAlso}

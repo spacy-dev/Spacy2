@@ -1,0 +1,26 @@
+<map id="Spacy::CompositeStep::AffineCovariantSolver" name="Spacy::CompositeStep::AffineCovariantSolver">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1RegularityTest.html" title="Mixin class for maximal number of steps/iterations. " alt="" coords="274,13,465,39"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; RegularityTest \&gt;" alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1Timer.html" title="Spacy::Mixin::Timer\l\&lt; std::chrono::milliseconds \&gt;" alt="" coords="274,64,465,105"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1AdjointIndex.html" title="Mixin class for index of the adjoint variable. " alt="" coords="280,130,459,157"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; AdjointIndex \&gt;" alt="" coords="5,108,208,149"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Mixin_1_1ControlIndex.html" title="Mixin class for index of the control variable. " alt="" coords="279,181,459,207"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; ControlIndex \&gt;" alt="" coords="5,173,208,215"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Mixin_1_1StateIndex.html" title="Mixin class for index of state variable. " alt="" coords="285,231,454,258"/>
+<area shape="rect" id="node10" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; StateIndex \&gt;" alt="" coords="5,239,208,280"/>
+<area shape="rect" id="node11" href="$classSpacy_1_1Mixin_1_1ContractionRate.html" title="Mixin class for contraction rates. " alt="" coords="269,282,470,309"/>
+<area shape="rect" id="node12" href="$classSpacy_1_1Mixin_1_1DecreaseCondition.html" title="Mixin class for accepting local models &#160;of nonlinear optimization problems . " alt="" coords="261,333,478,359"/>
+<area shape="rect" id="node13" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="305,383,434,410"/>
+<area shape="rect" id="node14" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,368,208,409"/>
+<area shape="rect" id="node15" href="$classSpacy_1_1Mixin_1_1MaxSteps.html" title="Mixin class for maximal number of steps/iterations. " alt="" coords="287,434,452,461"/>
+<area shape="rect" id="node16" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; MaxSteps \&gt;" alt="" coords="5,433,208,475"/>
+<area shape="rect" id="node17" href="$classSpacy_1_1Mixin_1_1DampingAccuracy.html" title="Mixin class for the accuracy of damping factors. " alt="" coords="263,485,476,511"/>
+<area shape="rect" id="node18" href="$classSpacy_1_1Mixin_1_1MinimalAccuracy.html" title="Mixin class for minimal accuracy. " alt="" coords="266,535,473,562"/>
+<area shape="rect" id="node19" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; MinimalAccuracy \&gt;" alt="" coords="5,509,208,551"/>
+<area shape="rect" id="node20" href="$classSpacy_1_1Mixin_1_1RelativeAccuracy.html" title="Mixin class for relative accuracy. " alt="" coords="265,586,474,613"/>
+<area shape="rect" id="node21" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; RelativeAccuracy \&gt;" alt="" coords="5,575,208,616"/>
+<area shape="rect" id="node22" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity. " alt="" coords="289,643,450,670"/>
+<area shape="rect" id="node23" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="5,640,208,681"/>
+<area shape="rect" id="node24" href="$classSpacy_1_1Mixin_1_1IterativeRefinements.html" title="Mixin class for iterative refinements. " alt="" coords="256,701,483,727"/>
+<area shape="rect" id="node25" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; IterativeRefinements \&gt;" alt="" coords="5,705,208,747"/>
+</map>

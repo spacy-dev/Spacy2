@@ -1,0 +1,6 @@
+<map id="Spacy::Mixin::IterativeRefinements" name="Spacy::Mixin::IterativeRefinements">
+<area shape="rect" id="node3" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="531,5,697,32"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method. " alt="" coords="548,56,680,83"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="535,107,693,149"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; IterativeRefinements \&gt;" alt="" coords="5,49,208,90"/>
+</map>

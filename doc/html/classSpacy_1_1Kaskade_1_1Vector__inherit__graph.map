@@ -1,0 +1,6 @@
+<map id="Spacy::Kaskade::Vector&lt; Description &gt;" name="Spacy::Kaskade::Vector&lt; Description &gt;">
+<area shape="rect" id="node2" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="5,177,140,203"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1SupportedOperatorBase.html" title="Spacy::SupportedOperator\lBase\&lt; Vector\&lt; Description \&gt; \&gt;" alt="" coords="164,169,368,211"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="201,95,331,121"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="165,5,367,47"/>
+</map>

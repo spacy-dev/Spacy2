@@ -1,0 +1,173 @@
+\hypertarget{classSpacy_1_1VectorBase}{}\section{Spacy\+:\+:Vector\+Base Class Reference}
+\label{classSpacy_1_1VectorBase}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+
+
+Base class for vector implementations.  
+
+
+
+
+{\ttfamily \#include $<$vector\+Base.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:Vector\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1VectorBase__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1VectorBase_acc9bea6ed6976ba12cb39b050af80ef3_acc9bea6ed6976ba12cb39b050af80ef3}{Vector\+Base} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044_a95e87ce98f5a7646055d4e87e6024044}{space})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorBase_ade615921dc4add4c10ea7c440a28a571_ade615921dc4add4c10ea7c440a28a571}{Vector\+Base} (const \hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \&y)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorBase_a7e4fab196fdc47a6b7447204e03553d8_a7e4fab196fdc47a6b7447204e03553d8}{Vector\+Base} (\hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \&\&y) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \& \hyperlink{classSpacy_1_1VectorBase_a4a3ee139f1aff4b5dcc8714b761b4767_a4a3ee139f1aff4b5dcc8714b761b4767}{operator=} (const \hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \&y)
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \& \hyperlink{classSpacy_1_1VectorBase_a729a491f5b5574decc546ab9ed1b984c_a729a491f5b5574decc546ab9ed1b984c}{operator=} (\hyperlink{classSpacy_1_1VectorBase}{Vector\+Base} \&\&y) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $\ast$ \hyperlink{classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044_a95e87ce98f5a7646055d4e87e6024044}{space} () const 
+\begin{DoxyCompactList}\small\item\em Access underlying vector space. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1VectorBase_afb1386a51c713d85ea2fc7a2cb41d04e_afb1386a51c713d85ea2fc7a2cb41d04e}{to\+File} (const std\+::string \&filename) const 
+\begin{DoxyCompactList}\small\item\em Write vector to file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for vector implementations. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & derived vector implementation, provided for C\+R\+T\+P\\
+\hline
+\end{DoxyTemplParams}
+Provides access to the underlying vector space and related operations. \begin{DoxySeeAlso}{See also}
+\hyperlink{classSpacy_1_1Kaskade_1_1Vector}{Kaskade\+::\+Vector}, Fenics\+::\+Vector 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1VectorBase_acc9bea6ed6976ba12cb39b050af80ef3_acc9bea6ed6976ba12cb39b050af80ef3}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!Vector\+Base@{Vector\+Base}}
+\index{Vector\+Base@{Vector\+Base}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{Vector\+Base}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Vector\+Base\+::\+Vector\+Base (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\+Space} \&}]{space}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1VectorBase_acc9bea6ed6976ba12cb39b050af80ef3_acc9bea6ed6976ba12cb39b050af80ef3}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & underlying vector space \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1VectorBase_ade615921dc4add4c10ea7c440a28a571_ade615921dc4add4c10ea7c440a28a571}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!Vector\+Base@{Vector\+Base}}
+\index{Vector\+Base@{Vector\+Base}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{Vector\+Base}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Vector\+Base\+::\+Vector\+Base (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\+Base} \&}]{y}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1VectorBase_ade615921dc4add4c10ea7c440a28a571_ade615921dc4add4c10ea7c440a28a571}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1VectorBase_a7e4fab196fdc47a6b7447204e03553d8_a7e4fab196fdc47a6b7447204e03553d8}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!Vector\+Base@{Vector\+Base}}
+\index{Vector\+Base@{Vector\+Base}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{Vector\+Base}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Vector\+Base\+::\+Vector\+Base (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector\+Base} \&\&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1VectorBase_a7e4fab196fdc47a6b7447204e03553d8_a7e4fab196fdc47a6b7447204e03553d8}
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & object to move from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1VectorBase_a4a3ee139f1aff4b5dcc8714b761b4767_a4a3ee139f1aff4b5dcc8714b761b4767}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Base}\& Spacy\+::\+Vector\+Base\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\+Base} \&}]{y}
+\end{DoxyParamCaption}
+)}\label{classSpacy_1_1VectorBase_a4a3ee139f1aff4b5dcc8714b761b4767_a4a3ee139f1aff4b5dcc8714b761b4767}
+
+
+Copy assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1VectorBase_a729a491f5b5574decc546ab9ed1b984c_a729a491f5b5574decc546ab9ed1b984c}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Base}\& Spacy\+::\+Vector\+Base\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector\+Base} \&\&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1VectorBase_a729a491f5b5574decc546ab9ed1b984c_a729a491f5b5574decc546ab9ed1b984c}
+
+
+Move assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & object to move from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044_a95e87ce98f5a7646055d4e87e6024044}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!space@{space}}
+\index{space@{space}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{space}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}$\ast$ Spacy\+::\+Vector\+Base\+::space (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044_a95e87ce98f5a7646055d4e87e6024044}
+
+
+Access underlying vector space. 
+
+\begin{DoxyReturn}{Returns}
+underlying vector space 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1VectorBase_afb1386a51c713d85ea2fc7a2cb41d04e_afb1386a51c713d85ea2fc7a2cb41d04e}{}\index{Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}!to\+File@{to\+File}}
+\index{to\+File@{to\+File}!Spacy\+::\+Vector\+Base@{Spacy\+::\+Vector\+Base}}
+\subsubsection[{to\+File}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Vector\+Base\+::to\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1VectorBase_afb1386a51c713d85ea2fc7a2cb41d04e_afb1386a51c713d85ea2fc7a2cb41d04e}
+
+
+Write vector to file. 
+
+Default implementation, does nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & output file name \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/\+Util/\+Base/vector\+Base.\+hh\end{DoxyCompactItemize}
