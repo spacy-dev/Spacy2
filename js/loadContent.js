@@ -80,6 +80,11 @@ function getPageName(fullPageName){
     return newPageName;
 }
 
+function clearNavigationLinks(){
+    $('.current').each( function() {
+        $(this).removeClass('current');
+    });
+}
 
 $(document).ready( function(){    
     $('.send-mail').click( function(){
