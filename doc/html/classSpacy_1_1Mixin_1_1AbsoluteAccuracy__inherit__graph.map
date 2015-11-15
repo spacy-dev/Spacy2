@@ -1,6 +1,0 @@
-<map id="Spacy::Mixin::AbsoluteAccuracy" name="Spacy::Mixin::AbsoluteAccuracy">
-<area shape="rect" id="node3" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="521,5,687,32"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method. " alt="" coords="538,56,670,83"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html" title="Termination criterion for conjugate gradient methods based on an estimate of the relative energy erro..." alt="" coords="516,107,692,149"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; AbsoluteAccuracy \&gt;" alt="" coords="5,49,208,90"/>
-</map>

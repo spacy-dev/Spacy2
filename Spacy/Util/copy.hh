@@ -45,7 +45,7 @@ namespace Spacy
    * @brief Copy from x to y.
    *
    * One of Origin or Target is a Spacy::Vector, the other is some other type.
-   * This function treats product space structures and uses copyTargetIfConsistent to copy single subspaces.
+   * This function treats (nested) product space structures and uses copyTargetIfConsistent to copy single subspaces.
    */
   template<class Origin, class Target>
   void genericCopy(const Origin& x, Target& y, std::function<void(const Origin&,Target&)> copyTargetIfConsistent)

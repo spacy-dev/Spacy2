@@ -118,4 +118,24 @@ namespace Spacy
       return result;
     }
   }
+
+  ::Spacy::Vector& primalComponent(::Spacy::Vector& v)
+  {
+    return cast_ref<ProductSpace::Vector>(v).component(PRIMAL);
+  }
+
+  const ::Spacy::Vector& primalComponent(const ::Spacy::Vector& v)
+  {
+    return cast_ref<ProductSpace::Vector>(v).component(PRIMAL);
+  }
+
+  ::Spacy::Vector& dualComponent(::Spacy::Vector& v)
+  {
+    return cast_ref<ProductSpace::Vector>(v).component(DUAL);
+  }
+
+  const ::Spacy::Vector& dualComponent(const ::Spacy::Vector& v)
+  {
+    return cast_ref<ProductSpace::Vector>(v).component(DUAL);
+  }
 }

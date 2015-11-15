@@ -13,6 +13,9 @@ namespace Spacy
   class Real;
   /// @endcond
 
+  /** @addtogroup ProductSpaceGroup
+   * @{
+   */
   enum { PRIMAL=0 , DUAL=1 };
 
   namespace ProductSpace
@@ -20,10 +23,6 @@ namespace Spacy
     /// @cond
     class VectorCreator;
     /// @endcond
-
-    /** @addtogroup ProductSpaceGroup
-     * @{
-     */
 
     /**
      * @brief Product space vector.
@@ -88,9 +87,21 @@ namespace Spacy
 
     private:
       std::vector< ::Spacy::Vector > components_ = {};
-    };
-    /** @} */
+    };    
   }
+
+  /** @return cast_ref<ProductSpace::Vector>(v).component(PRIMAL); */
+  ::Spacy::Vector& primalComponent(::Spacy::Vector& v);
+
+  /** @return cast_ref<ProductSpace::Vector>(v).component(PRIMAL); */
+  const ::Spacy::Vector& primalComponent(const ::Spacy::Vector& v);
+
+  /** @return cast_ref<ProductSpace::Vector>(v).component(DUAL); */
+  ::Spacy::Vector& dualComponent(::Spacy::Vector& v);
+
+  /** @return cast_ref<ProductSpace::Vector>(v).component(DUAL); */
+  const ::Spacy::Vector& dualComponent(const ::Spacy::Vector& v);
+  /** @} */
 }
 
 #endif // SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH

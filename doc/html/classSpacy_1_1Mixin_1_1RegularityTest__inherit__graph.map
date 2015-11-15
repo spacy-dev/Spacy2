@@ -1,7 +1,0 @@
-<map id="Spacy::Mixin::RegularityTest" name="Spacy::Mixin::RegularityTest">
-<area shape="rect" id="node3" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="506,5,663,47"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html" title="Affine contravariant damping strategy as described in &#160;[Sec. 3.2]. " alt="" coords="499,71,671,112"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant.html" title="Affine covariant damping strategy as described in &#160;[Sec. 3.3]. " alt="" coords="499,136,671,177"/>
-<area shape="rect" id="node6" href="$structSpacy_1_1Newton_1_1Parameter.html" title="Spacy::Newton::Parameter" alt="" coords="495,202,675,229"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; RegularityTest \&gt;" alt="" coords="5,104,208,145"/>
-</map>
