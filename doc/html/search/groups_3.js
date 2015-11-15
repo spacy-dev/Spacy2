@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['invariants',['Invariants',['../group__InvariantGroup.html',1,'']]]
+  ['mixins',['Mixins',['../group__MixinGroup.html',1,'']]]
 ];

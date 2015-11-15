@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['functionconcept',['FunctionConcept',['../structFunG_1_1Concepts_1_1FunctionConcept.html',1,'FunG::Concepts']]],
-  ['functionconceptcheck',['FunctionConceptCheck',['../structFunG_1_1Concepts_1_1FunctionConceptCheck.html',1,'FunG::Concepts']]]
+  ['eps',['Eps',['../classSpacy_1_1Mixin_1_1Eps.html',1,'Spacy::Mixin']]],
+  ['errordistribution',['ErrorDistribution',['../classSpacy_1_1Kaskade_1_1ErrorDistribution.html',1,'Spacy::Kaskade']]]
 ];

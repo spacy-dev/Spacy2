@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['variable_5ft',['Variable_t',['../namespaceFunG.html#a3d589ef7d011a46a72847eabcbbb4532',1,'FunG']]],
-  ['void_5ft',['void_t',['../namespaceFunG.html#a0cde667596590eb8d32e4a5ee76ddbb9',1,'FunG']]]
+  ['matrix',['Matrix',['../classSpacy_1_1Kaskade_1_1C2Functional.html#aa7247706c3561818b2bf7d84c8841fe5',1,'Spacy::Kaskade::C2Functional']]],
+  ['myerrorestimatorconcept',['MyErrorEstimatorConcept',['../group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08.html#ga6b5c97b0e58318ef98c43a9b8a7dae08',1,'Spacy::Concepts']]]
 ];

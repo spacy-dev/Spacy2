@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['trace',['Trace',['../group__LinearAlgebraGroup.html#ga43e327309edc349c75ceecd29b7abde2',1,'FunG::LinearAlgebra']]],
-  ['type',['type',['../structFunG_1_1Decay.html#a4b2916cbb7c8587ab3fccc9b896b9df4',1,'FunG::Decay::type()'],['../structFunG_1_1Decay_3_01F_00_01void__t_3_01Checks_1_1TryNestedType__PlainObject_3_01F_01_4_01_4_01_4.html#aaf19af34cb1c06b71ea99737d9375f52',1,'FunG::Decay&lt; F, void_t&lt; Checks::TryNestedType_PlainObject&lt; F &gt; &gt; &gt;::type()']]]
+  ['linearoperator',['LinearOperator',['../group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640',1,'Spacy']]],
+  ['linearoperatorconcept',['LinearOperatorConcept',['../group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055',1,'Spacy::Concepts']]],
+  ['linearsolver',['LinearSolver',['../namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#a7d5cd1c6fb9dd85aa345b536caf30bba',1,'Spacy']]],
+  ['linearsolverconcept',['LinearSolverConcept',['../group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd',1,'Spacy::Concepts']]]
 ];

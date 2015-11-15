@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['zero',['Zero',['../structFunG_1_1Zero.html',1,'FunG']]],
-  ['zero_3c_20matrix_2c_20void_5ft_3c_20checks_3a_3atrycalltofill_3c_20matrix_20_3e_20_3e_20_3e',['Zero&lt; Matrix, void_t&lt; Checks::TryCallToFill&lt; Matrix &gt; &gt; &gt;',['../structFunG_1_1Zero_3_01Matrix_00_01void__t_3_01Checks_1_1TryCallToFill_3_01Matrix_01_4_01_4_01_4.html',1,'FunG']]]
+  ['quadratic',['Quadratic',['../classSpacy_1_1Functions__1D_1_1Quadratic.html',1,'Spacy::Functions_1D']]],
+  ['quadraturerule',['QuadratureRule',['../classDune_1_1QuadratureRule.html',1,'Dune']]]
 ];

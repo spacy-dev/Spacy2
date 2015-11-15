@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['arithmeticconcept',['ArithmeticConcept',['../structFunG_1_1Concepts_1_1ArithmeticConcept.html',1,'FunG::Concepts']]],
-  ['arithmeticconceptcheck',['ArithmeticConceptCheck',['../structFunG_1_1Concepts_1_1ArithmeticConceptCheck.html',1,'FunG::Concepts']]],
-  ['arithmeticconceptcheck_3c_20matrix_20_3e',['ArithmeticConceptCheck&lt; Matrix &gt;',['../structFunG_1_1Concepts_1_1ArithmeticConceptCheck.html',1,'FunG::Concepts']]],
-  ['arithmeticconceptcheck_3c_20vector_20_3e',['ArithmeticConceptCheck&lt; Vector &gt;',['../structFunG_1_1Concepts_1_1ArithmeticConceptCheck.html',1,'FunG::Concepts']]],
-  ['asin',['ASin',['../structFunG_1_1ASin.html',1,'FunG']]]
+  ['absoluteaccuracy',['AbsoluteAccuracy',['../classSpacy_1_1Mixin_1_1AbsoluteAccuracy.html',1,'Spacy::Mixin']]],
+  ['adjointindex',['AdjointIndex',['../classSpacy_1_1Mixin_1_1AdjointIndex.html',1,'Spacy::Mixin']]],
+  ['affinecontravariant',['AffineContravariant',['../classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html',1,'Spacy::Newton::Damping']]],
+  ['affinecontravariant',['AffineContravariant',['../classSpacy_1_1Newton_1_1Termination_1_1AffineContravariant.html',1,'Spacy::Newton::Termination']]],
+  ['affinecovariant',['AffineCovariant',['../classSpacy_1_1Newton_1_1Termination_1_1AffineCovariant.html',1,'Spacy::Newton::Termination']]],
+  ['affinecovariant',['AffineCovariant',['../classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant.html',1,'Spacy::Newton::Damping']]],
+  ['affinecovariantsolver',['AffineCovariantSolver',['../classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html',1,'Spacy::CompositeStep']]]
 ];

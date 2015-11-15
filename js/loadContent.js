@@ -1,71 +1,20 @@
+function loadAndAdjustBackground(newPageName){
+    $('.main-content').load('content-' + newPageName + '.html' , function(){
+        var contentHeight = $('.main-content').height();
+        var headerOffset = 150;
+        $('.background-image-container').height(contentHeight + headerOffset);
+        
+        if(newPageName === 'contact')
+        {
+            $('.send-mail').attr('href',mailTo());
+        }
+//        $('.send-mail').text(mailAddress());
+    });
+}
+
 function spacyDelimiter(){
     return '#';
 }
-
-function clearNavigationLinks(){
-    $('.current').each( function() {
-        $(this).removeClass('current');
-    });
-}
-
-function clearExampleLinks(){
-    $('.current-example').each( function() {
-        $(this).removeClass('current-example');
-    });
-}
-
-
-function adjustBackgroundHeight(){
-    var contentHeight = $('.main-content').height();
-    var headerOffset = 150;
-    $('.background-image-container').height(contentHeight + headerOffset);
-}
-
-
-function loadAndAdjustBackground(newPageName){
-    $('.main-content').load('content/' + newPageName + '.html' , function(){
-        if( newPageName === 'details'){
-            MathJax.Hub.Queue( adjustBackgroundHeight );
-            MathJax.Hub.Queue( drawChart );
-            MathJax.Hub.Queue( adjustBackgroundHeight );
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-            MathJax.Hub.Queue( adjustBackgroundHeight );
-        }
-        else{
-            adjustBackgroundHeight();
-
-            if(newPageName === 'contact')
-            {
-                $('.send-mail').attr('href',mailTo());
-            }
-        }
-    });
-}
-
-function loadExample(newPageName){
-    $('.example-container').addClass('hidden');
-    $('.example-container').load('content/' + newPageName + '.html' , function(){
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub], adjustBackgroundHeight);
-        MathJax.Hub.Queue( function(){
-            clearExampleLinks();
-            $('[href="' + spacyDelimiter() + newPageName + '"]').parent().addClass('current-example');
-            $('.example-container').removeClass('hidden');
-        });
-    });
-}
-
-function loadExampleAndAdjustBackground(newPageName){
-    if( $('.main-content').find('.example-list').length > 0){
-        loadExample(newPageName);
-    }
-    else{
-        $('.main-content').load('content/examples.html', function(){
-            loadExample(newPageName);
-        });
-    }
-}
-
-
 
 function getPageName(fullPageName){
     var newPageName = fullPageName;
@@ -86,6 +35,12 @@ function clearNavigationLinks(){
     });
 }
 
+//$(document).ready( function(){
+//    $('.mail-link').click( function(){
+//        $(this).text(emailMe());
+//    });
+//});
+
 $(document).ready( function(){    
     $('.send-mail').click( function(){
         emailMe();
@@ -99,10 +54,6 @@ $(document).ready( function(){
         location.hash=$(this).attr('href').match(/(^.*)\./)[1]
         return false;
     });
-    $('.example-list li a').click( function(){
-        location.hash=$(this).attr('href').match(/(^.*)\./)[1]
-        return false;
-    });
     
     function hashChange(){
             var page=location.hash.slice(spacyDelimiter().length);
@@ -110,22 +61,12 @@ $(document).ready( function(){
                 $('.background-image-container').removeClass('hidden-element');
                 $('.start-page').addClass('hidden-element');
                 
-                if(/^examples/.test(page) && page.length > 8){
-                    loadExampleAndAdjustBackground(page);
-                }
-                else{
-                    loadAndAdjustBackground(page);
-                }
+                loadAndAdjustBackground(page);
                 
                 clearNavigationLinks();
-
+                
                 var fullPageName = spacyDelimiter() + page;
-                if(/^examples/.test(page) && page.length > 8){
-                    $('[href=#examples]').parent().addClass('current');
-                }
-                else{
-                    $('[href="' + fullPageName + '"]').parent().addClass('current');
-                }
+                $('[href="' + fullPageName + '"]').parent().addClass('current');
             }
             else{
                 $('.background-image-container').addClass('hidden-element');

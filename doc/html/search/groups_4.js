@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['linear_20algebra',['Linear Algebra',['../group__LinearAlgebraGroup.html',1,'']]]
+  ['newton_20methods',['Newton Methods',['../group__NewtonGroup.html',1,'']]]
 ];

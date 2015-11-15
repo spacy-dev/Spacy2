@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['variable',['Variable',['../structFunG_1_1Variable.html',1,'FunG']]],
-  ['vectorconcept',['VectorConcept',['../structFunG_1_1Concepts_1_1VectorConcept.html',1,'FunG::Concepts']]],
-  ['vectorconceptcheck',['VectorConceptCheck',['../structFunG_1_1Concepts_1_1VectorConceptCheck.html',1,'FunG::Concepts']]]
+  ['parameter',['Parameter',['../structSpacy_1_1Newton_1_1Parameter.html',1,'Spacy::Newton']]],
+  ['parameter',['Parameter',['../classSpacy_1_1Parameter.html',1,'Spacy']]],
+  ['primaldualswitch',['PrimalDualSwitch',['../classSpacy_1_1Mixin_1_1PrimalDualSwitch.html',1,'Spacy::Mixin']]],
+  ['primalinducedscalarproduct',['PrimalInducedScalarProduct',['../classSpacy_1_1PrimalInducedScalarProduct.html',1,'Spacy']]]
 ];

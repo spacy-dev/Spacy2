@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['cbrt',['Cbrt',['../group__CMathGroup.html#ga2e4363ad8400e1c8431c10de2152ec2b',1,'FunG']]],
-  ['cbrt2',['Cbrt2',['../group__CMathGroup.html#ga9bcbef859d7ffd0d6570d69e1bd8503a',1,'FunG']]]
+  ['anyvector',['AnyVector',['../group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54.html#gafc144d2730ef87a67e54f8cd750b1f54',1,'Spacy']]],
+  ['assembler',['Assembler',['../classSpacy_1_1Kaskade_1_1C2Functional.html#ac4a1a2e519af22616ae7d6214c95b1ed',1,'Spacy::Kaskade::C2Functional']]]
 ];

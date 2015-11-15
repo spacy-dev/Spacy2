@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['summationconcept',['SummationConcept',['../group__SummationConcept.html',1,'']]]
+  ['spacy',['Spacy',['../group__SpacyGroup.html',1,'']]]
 ];
