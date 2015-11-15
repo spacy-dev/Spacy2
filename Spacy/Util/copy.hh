@@ -1,11 +1,17 @@
 #ifndef SPACY_UTIL_COPY_HH
 #define SPACY_UTIL_COPY_HH
 
+#include <functional>
+
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/ProductSpace/vector.hh"
 
+/** @addtogroup SpacyGroup
+ * @{
+ */
 namespace Spacy
 {
+  /// @cond
   template <class Target>
   void copyProductSpaceVectorIfConsistent(const Vector& x, Target& y, std::function<void(const Vector&,Target&)> copyTargetIfConsistent)
   {
@@ -33,8 +39,14 @@ namespace Spacy
       copyProductSpaceVectorIfConsistent(x,y_.component(i),copyTargetIfConsistent);
     }
   }
+  /// @endcond
 
-
+  /**
+   * @brief Copy from x to y.
+   *
+   * One of Origin or Target is a Spacy::Vector, the other is some other type.
+   * This function treats product space structures and uses copyTargetIfConsistent to copy single subspaces.
+   */
   template<class Origin, class Target>
   void genericCopy(const Origin& x, Target& y, std::function<void(const Origin&,Target&)> copyTargetIfConsistent)
   {
@@ -42,5 +54,6 @@ namespace Spacy
     copyProductSpaceVectorIfConsistent(x,y,copyTargetIfConsistent);
   }
 }
+/** @} */
 
 #endif // SPACY_UTIL_COPY_HH
