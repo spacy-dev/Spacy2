@@ -4,6 +4,7 @@
 #include "scalarProduct.hh"
 
 #include "Spacy/vectorSpace.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {

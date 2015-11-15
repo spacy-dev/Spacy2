@@ -2,6 +2,7 @@
 
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {

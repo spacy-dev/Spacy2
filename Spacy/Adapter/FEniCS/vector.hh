@@ -23,7 +23,7 @@ namespace Spacy
      */
     class Vector :
         public VectorBase ,
-        public SupportedOperatorBase<Vector>
+        public AddArithmeticOperators<Vector>
     {
     public:
       /**

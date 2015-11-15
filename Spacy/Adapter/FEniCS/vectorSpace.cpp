@@ -5,6 +5,7 @@
 #include "l2Product.hh"
 #include "vector.hh"
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {

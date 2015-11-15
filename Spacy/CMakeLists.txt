@@ -11,6 +11,7 @@ if(DOLFIN_FOUND)
 endif()
 
 aux_source_directory(. SRC_LIST)
+aux_source_directory(Adapter/Scalar SRC_LIST)
 aux_source_directory(Algorithm SRC_LIST)
 aux_source_directory(Algorithm/Functions_1D SRC_LIST)
 aux_source_directory(Algorithm/CG SRC_LIST)

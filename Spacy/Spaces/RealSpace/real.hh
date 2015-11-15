@@ -22,7 +22,7 @@ namespace Spacy
   class Real :
       public VectorBase ,
       public Mixin::Impl<double> ,
-      public SupportedOperatorBase<Real>
+      public AddArithmeticOperators<Real>
   {
   public:
     /**

@@ -1,12 +1,12 @@
 #ifndef SPACY_VECTOR_BASE_HH
 #define SPACY_VECTOR_BASE_HH
 
-#include "Spacy/Util/Mixins/eps.hh"
+#include <algorithm>
+#include "Spacy/vectorSpace.hh"
 
 namespace Spacy
 {
   /// @cond
-  class VectorSpace;
   void checkSpaceCompatibility(const VectorSpace* x, const VectorSpace* y);
   /// @endcond
 
@@ -70,7 +70,7 @@ namespace Spacy
    * @see Real::Vector, Fenics::Vector, Kaskade::Vector
    */
   template <class Derived>
-  class SupportedOperatorBase : public Mixin::Eps
+  class AddArithmeticOperators
   {
   public:
     /**
@@ -127,9 +127,10 @@ namespace Spacy
     bool operator==(const Derived& y) const
     {
       checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
+      auto l2NormY = y(y), l2NormX = static_cast<const Derived&>(*this)( static_cast<const Derived&>(*this) );
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
-      return dx(dx) < eps()*eps();
+      return dx(dx) < std::max(l2NormX,l2NormY)*y.space()->eps()*y.space()->eps();
     }
   };
 }

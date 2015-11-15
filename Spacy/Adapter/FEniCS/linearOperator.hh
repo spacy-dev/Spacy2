@@ -30,7 +30,7 @@ namespace Spacy
     class LinearOperator :
         public OperatorBase ,
         public VectorBase ,
-        public SupportedOperatorBase< LinearOperator >
+        public AddArithmeticOperators< LinearOperator >
     {
     public:
       /**
