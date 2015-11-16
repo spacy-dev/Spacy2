@@ -7,6 +7,7 @@
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/hilbertSpaceNorm.hh"
 
 #include <boost/type_erasure/is_empty.hpp>
 
@@ -15,26 +16,6 @@
 
 namespace Spacy
 {
-  namespace
-  {
-    class HilbertSpaceNorm
-    {
-    public:
-      explicit HilbertSpaceNorm(ScalarProduct sp)
-        : sp_(std::move(sp))
-      {}
-
-      Real operator()(const Vector& x) const
-      {
-        return sqrt(sp_(x,x));
-      }
-
-    private:
-      ScalarProduct sp_;
-    };
-  }
-
-
   VectorSpace::VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex)
     : creator_(creator),
       norm_{norm}
@@ -228,82 +209,5 @@ namespace Spacy
   void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W)
   {
     checkSpaceCompatibility(*V,*W);
-  }
-
-
-  void MyVectorSpace::setNorm(Norm norm)
-  {
-    impl().setNorm(std::move(norm));
-  }
-
-  const Norm& MyVectorSpace::norm() const
-  {
-    return impl().norm();
-  }
-
-  Vector MyVectorSpace::vector() const
-  {
-    return impl().vector();
-  }
-
-  unsigned MyVectorSpace::index() const
-  {
-    return impl().index();
-  }
-
-  void MyVectorSpace::setScalarProduct(ScalarProduct sp)
-  {
-    impl().setScalarProduct(std::move(sp));
-  }
-
-  const ScalarProduct& MyVectorSpace::scalarProduct() const
-  {
-    return impl().scalarProduct();
-  }
-
-  const MyVectorSpace& MyVectorSpace::dualSpace() const
-  {
-    return impl().dualSpace();
-  }
-
-  void MyVectorSpace::setDualSpace(const MyVectorSpace* space)
-  {
-    impl().setDualSpace(space);
-  }
-
-  void MyVectorSpace::addDualSpace(const MyVectorSpace& space)
-  {
-    impl().addDualSpace(space);
-  }
-
-  bool MyVectorSpace::isPrimalWRT(const MyVectorSpace& space) const
-  {
-    return impl().isPrimalWRT(space);
-  }
-
-  bool MyVectorSpace::isHilbertSpace() const
-  {
-    return impl().isHilbertSpace();
-  }
-
-  void MyVectorSpace::setRestriction(std::function<bool(const Vector&)> restriction)
-  {
-    impl().setRestriction(restriction);
-  }
-
-  bool MyVectorSpace::isAdmissible(const Vector& x) const
-  {
-    return impl().isAdmissible(x);
-  }
-
-
-  MyVectorSpace::AbstractBase& MyVectorSpace::impl()
-  {
-    return base_.impl();
-  }
-
-  const MyVectorSpace::AbstractBase& MyVectorSpace::impl() const
-  {
-    return base_.impl();
   }
 }

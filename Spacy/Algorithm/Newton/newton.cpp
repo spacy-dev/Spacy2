@@ -2,6 +2,7 @@
 
 #include "Spacy/derivative.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/Util/Exceptions/notConvergedException.hh"
 
 #include <iostream>
 
@@ -19,6 +20,9 @@ namespace Spacy
       p.startTimer();
 
       auto x = x0;
+      if( terminationCriterion(1.,x,x) )
+        return x;
+
       for(unsigned i = 1; i <= p.maxSteps(); ++i)
       {
         if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
@@ -38,7 +42,7 @@ namespace Spacy
         }
       }
 
-      return x;
+      throw Exception::NotConverged("Newton");
     }
   }
 

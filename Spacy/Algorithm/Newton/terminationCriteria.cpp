@@ -29,6 +29,11 @@ namespace Spacy
 
       bool AffineCovariant::operator()(DampingFactor nu, const Vector& x, const Vector& dx) const
       {
+        if(beforeFirstIteration_)
+        {
+          beforeFirstIteration_ = false;
+          return false;
+        }
         if(abs(nu()-1) > eps()) return false;
 
         auto norm_x = norm(x), norm_dx = norm(dx);
@@ -55,12 +60,14 @@ namespace Spacy
         {
           initialResidual = norm( F_(x) );
           if( verbose() ) std::cout << "Initial residual: " << initialResidual << std::endl;
+          if( initialResidual == 0 )
+            return true;
           return false;
         }
 
         if(abs(nu()-1) > eps()) return false;
 
-        if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << std::endl;
+        if( verbose() ) std::cout << std::scientific << "Residual: " << norm(F_(x)) << ", relative accuracy: " << relativeAccuracy() << ", initialResidual: " << initialResidual << std::endl;
 
         if( norm( F_(x) ) < relativeAccuracy() * initialResidual )
         {

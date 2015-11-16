@@ -47,6 +47,9 @@ namespace Spacy
          * @return true if \f$\nu=1\f$ and \f$ \|dx\|<rel_acc\|x\| \f$ or \f$\|x\|=\|dx\|=0\f$, else false
          */
         bool operator()(DampingFactor nu, const Vector& x, const Vector& dx) const;
+
+      private:
+        mutable bool beforeFirstIteration_ = true;
       };
 
       /**

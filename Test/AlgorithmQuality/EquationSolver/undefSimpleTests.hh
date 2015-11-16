@@ -1,0 +1,3 @@
+#ifdef GENERATE_SCALAR_TEST
+  #undef GENERATE_SCALAR_TEST
+#endif

@@ -62,7 +62,7 @@ TEST(VectorSpace,IsHilbertSpace)
 
 TEST(VectorSpace,MakeBanachSpace)
 {
-  auto space = makeBanachSpace( Mock::VectorCreator{} , Mock::Norm{} );
+  auto space = createMockBanachSpace();
   auto vector = space.vector();
   ASSERT_EQ( mockValue(vector) , static_cast<double>(Mock::Vector::testValue) );
   ASSERT_EQ( toDouble(space.norm()(vector))  , static_cast<double>(Mock::Norm::testValue) );
@@ -98,5 +98,3 @@ TEST(VectorSpace, AddDualSpace)
   ASSERT_TRUE( V.isPrimalWRT(W) );
   ASSERT_FALSE( W.isPrimalWRT(V) );
 }
-
-

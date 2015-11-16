@@ -127,10 +127,13 @@ namespace Spacy
     bool operator==(const Derived& y) const
     {
       checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
-      auto l2NormY = y(y), l2NormX = static_cast<const Derived&>(*this)( static_cast<const Derived&>(*this) );
+      auto l2NormY = toDouble(y(y)), l2NormX = toDouble(static_cast<const Derived&>(*this)( static_cast<const Derived&>(*this) ));
+      auto max = std::max(l2NormX,l2NormY);
+      if( max == 0 )
+        max = 1;
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
-      return dx(dx) < std::max(l2NormX,l2NormY)*y.space()->eps()*y.space()->eps();
+      return dx(dx) < max*y.space()->eps()*y.space()->eps();
     }
   };
 }

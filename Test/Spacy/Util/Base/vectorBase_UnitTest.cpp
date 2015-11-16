@@ -81,4 +81,7 @@ TEST(VectorBase,Comparison)
   space.setEps(1e-6);
   ASSERT_TRUE( v0 == v0 );
   ASSERT_TRUE( v0 == v1 );
+
+  v0.impl() = v1.impl() = 0;
+  ASSERT_TRUE( v0 == v1 );
 }
