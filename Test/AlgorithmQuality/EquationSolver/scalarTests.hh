@@ -1,5 +1,5 @@
-#ifndef TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SIMPLE_TESTS_HH
-#define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SIMPLE_TESTS_HH
+#ifndef TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
+#define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
 
 #include <gtest/gtest.h>
 #include "Spacy/Adapter/scalar.hh"
@@ -66,15 +66,15 @@ struct Quadratic
   }
 };
 
-#endif // TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SIMPLE_TESTS_HH
+#endif // TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
 
-#define GENERATE_SCALAR_TEST(ALGORITHM,TESTCASE,STEPS) \
+#define GENERATE_SCALAR_TEST(ALGORITHM,TESTCASE,REQUIRED_STEPS) \
 TEST(EquationSolver_##ALGORITHM##_Test,TESTCASE##Equation) \
 { \
   TESTCASE testCase; \
-  auto solver1 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),STEPS); \
-  auto solver2 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),STEPS+1); \
-  auto solver3 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),STEPS-1); \
+  auto solver1 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),REQUIRED_STEPS); \
+  auto solver2 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),REQUIRED_STEPS+1); \
+  auto solver3 = createSolver(testCase.example(),testCase.relativeAccuracy(),testCase.eps(),REQUIRED_STEPS-1); \
   \
   auto x0 = testCase.initialValue(); \
   auto x1 = solver1(x0); \

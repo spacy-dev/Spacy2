@@ -3,10 +3,12 @@
 
 #include <functional>
 #include "Spacy/Algorithm/Newton/newton.hh"
+#include "Spacy/inducedScalarProduct.hh"
+#include "Spacy/Spaces/realSpace.hh"
 
 using namespace Spacy;
 
-auto createLocalNewton(const C1Operator& F, double relativeAccuracy, double eps, unsigned maxSteps)
+auto createLocalNewton(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);
@@ -19,12 +21,13 @@ auto createLocalNewton(const C1Operator& F, double relativeAccuracy, double eps,
   };
 }
 
-auto createCovariantNewton(const C1Operator& F, double relativeAccuracy, double eps, unsigned maxSteps)
+auto createCovariantNewton(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);
   p.setEps(eps);
   p.setMaxSteps(maxSteps);
+  Space::R.setScalarProduct( InducedScalarProduct(F.linearization(F.domain().vector())) );
 
   return [F,p](const Vector& x0)
   {
@@ -32,7 +35,7 @@ auto createCovariantNewton(const C1Operator& F, double relativeAccuracy, double 
   };
 }
 
-auto createContravariantNewton(const C1Operator& F, double relativeAccuracy, double eps, unsigned maxSteps)
+auto createContravariantNewton(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);

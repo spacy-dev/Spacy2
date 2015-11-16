@@ -1,4 +1,4 @@
-#include "Test/AlgorithmQuality/EquationSolver/simpleTests.hh"
+#include "Test/AlgorithmQuality/EquationSolver/scalarTests.hh"
 #include "Test/AlgorithmQuality/EquationSolver/Newton/newtonTestSetup.hh"
 
 #include "Spacy/Spaces/realSpace.hh"
@@ -7,7 +7,7 @@ using namespace Spacy;
 
 namespace LocalNewton
 {
-  inline auto createSolver(const C1Operator&F, double relativeAccuracy, double eps, unsigned maxSteps)
+  inline auto createSolver(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
   {
     return createLocalNewton(F,relativeAccuracy,eps,maxSteps);
   }
@@ -19,7 +19,7 @@ namespace LocalNewton
 
 namespace CovariantNewton
 {
-  inline auto createSolver(const C1Operator&F, double relativeAccuracy, double eps, unsigned maxSteps)
+  inline auto createSolver(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
   {
     return createCovariantNewton(F,relativeAccuracy,eps,maxSteps);
   }
@@ -31,7 +31,7 @@ namespace CovariantNewton
 
 namespace ContravariantNewton
 {
-  inline auto createSolver(const C1Operator&F, double relativeAccuracy, double eps, unsigned maxSteps)
+  inline auto createSolver(C1Operator F, double relativeAccuracy, double eps, unsigned maxSteps)
   {
     return createContravariantNewton(F,relativeAccuracy,eps,maxSteps);
   }
@@ -41,4 +41,4 @@ namespace ContravariantNewton
   GENERATE_SCALAR_TEST(ContravariantNewton,Quadratic,6)
 }
 
-#include "Test/AlgorithmQuality/EquationSolver/undefSimpleTests.hh"
+#include "Test/AlgorithmQuality/EquationSolver/undefScalarTests.hh"
