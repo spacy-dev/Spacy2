@@ -77,7 +77,7 @@ namespace Spacy
       auto y_ = x_.vector()->copy();
       A_->mult(*x_.vector(), *y_);
 
-      auto y = range().vector();
+      auto y = range().zeroVector();
       copy(*y_,y);
 
       return std::move(y);

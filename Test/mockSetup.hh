@@ -148,7 +148,7 @@ inline auto& valueOfComponent(Spacy::Vector& v, unsigned i)
 
 inline auto createFirstTestVector(const Spacy::VectorSpace& V)
 {
-  auto v = V.vector();
+  auto v = V.zeroVector();
   valueOfComponent(v,0) = 1;
   valueOfComponent(v,1) = 2;
   return v;
@@ -156,7 +156,7 @@ inline auto createFirstTestVector(const Spacy::VectorSpace& V)
 
 inline auto createSecondTestVector(const Spacy::VectorSpace& V)
 {
-  auto v = V.vector();
+  auto v = V.zeroVector();
   valueOfComponent(v,0) = 1;
   valueOfComponent(v,1) = 3;
   return v;

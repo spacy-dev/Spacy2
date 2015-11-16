@@ -26,7 +26,7 @@ namespace Spacy
       auto x_ = cast_ref<ProductSpace::Vector>(x);
       auto& xp_ = cast_ref<ProductSpace::Vector>(x_.component(PRIMAL));
       auto& xd_ = cast_ref<ProductSpace::Vector>(x_.component(DUAL));
-      auto y = range().vector();
+      auto y = range().zeroVector();
       auto& y_ = cast_ref<ProductSpace::Vector>(y);
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
       auto& yd_ = cast_ref<ProductSpace::Vector>(y_.component(DUAL));
@@ -52,7 +52,7 @@ namespace Spacy
       auto& rhs_ = cast_ref<ProductSpace::Vector>(rhs);
       auto& rhsd_ = cast_ref<ProductSpace::Vector>(rhs_.component(DUAL));
 
-      auto y = range().vector();
+      auto y = range().zeroVector();
       auto& y_ = cast_ref<ProductSpace::Vector>(y);
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
       auto localStateIndex = creator<ProductSpace::VectorCreator>(*yp_.space()).idMap(stateIndex());

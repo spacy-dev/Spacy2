@@ -27,7 +27,7 @@ auto createCovariantNewton(C1Operator F, double relativeAccuracy, double eps, un
   p.setRelativeAccuracy(relativeAccuracy);
   p.setEps(eps);
   p.setMaxSteps(maxSteps);
-  Space::R.setScalarProduct( InducedScalarProduct(F.linearization(F.domain().vector())) );
+  Space::R.setScalarProduct( InducedScalarProduct(F.linearization(F.domain().zeroVector())) );
 
   return [F,p](const Vector& x0)
   {

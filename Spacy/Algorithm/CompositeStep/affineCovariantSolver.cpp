@@ -50,7 +50,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::operator()()
     {
-      return operator()( domain_.vector() );
+      return operator()( domain_.zeroVector() );
     }
 
     Vector AffineCovariantSolver::operator()(const Vector& x0)

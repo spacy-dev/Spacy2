@@ -32,7 +32,7 @@ TEST(ProductSpace, IdMap)
 TEST(ProductSpace,Vector)
 {
   auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).vector();
+  auto vector = std::get<0>(space).zeroVector();
   ASSERT_NO_THROW( cast_ref<ProductSpace::Vector>(vector) );
 }
 
@@ -45,13 +45,13 @@ TEST(ProductSpace, IsHilbertSpace)
 TEST(ProductSpace, Norm)
 {
   auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).vector();
+  auto vector = std::get<0>(space).zeroVector();
   ASSERT_EQ( std::get<0>(space).norm()(vector) , sqrt(2*Mock::ScalarProduct::testValue) );
 }
 
 TEST(ProductSpace, ScalarProduct)
 {
   auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).vector();
+  auto vector = std::get<0>(space).zeroVector();
   ASSERT_EQ( std::get<0>(space).scalarProduct()(vector,vector) , 2.*Mock::ScalarProduct::testValue );
 }

@@ -164,7 +164,7 @@ namespace Spacy
       {
         assembleJacobian(x);
 
-        auto y = this->domain().dualSpace().vector();
+        auto y = this->domain().dualSpace().zeroVector();
         copy(*b_,y);
         return y;
       }
@@ -185,7 +185,7 @@ namespace Spacy
         auto Ax = x_.vector()->copy();
         A_->mult(*x_.vector(), *Ax);
 
-        auto result = this->domain().dualSpace().vector();
+        auto result = this->domain().dualSpace().zeroVector();
         copy(*Ax,result);
 
         return result;

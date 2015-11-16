@@ -101,7 +101,7 @@ namespace Spacy
     /**
      * @brief Create new vector \f$v=0\f$.
      */
-    Vector vector() const;
+    Vector zeroVector() const;
 
     /**
      * @brief Access unique index of the function space.

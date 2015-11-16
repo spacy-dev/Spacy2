@@ -46,7 +46,7 @@ namespace Spacy
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve( *y_, *x_.vector() );
-      auto y = range().vector();
+      auto y = range().zeroVector();
 
       copy(*y_, y);
       return y;
@@ -73,7 +73,7 @@ namespace Spacy
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve_transpose( *y_, *x_.vector() );
-      auto y = range().vector();
+      auto y = range().zeroVector();
 
       copy(*y_, y);
       return y;

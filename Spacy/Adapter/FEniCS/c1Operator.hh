@@ -154,7 +154,7 @@ namespace Spacy
       {
         primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copy(*b_,y);
         return std::move(y);
       }
@@ -174,7 +174,7 @@ namespace Spacy
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copy(*y_,y);
 
         return std::move(y);

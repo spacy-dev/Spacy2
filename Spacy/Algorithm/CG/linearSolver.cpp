@@ -36,7 +36,7 @@ namespace Spacy
 
     Vector LinearSolver::operator()(const Vector& y) const
     {
-      return cg.solve(range().vector(),y);
+      return cg.solve(range().zeroVector(),y);
     }
 
     Solver& LinearSolver::impl()

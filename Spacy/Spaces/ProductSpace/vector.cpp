@@ -19,7 +19,7 @@ namespace Spacy
     {
     const auto& spaces = Spacy::creator<VectorCreator>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i)
-      components_.push_back( spaces[i]->vector() );
+      components_.push_back( spaces[i]->zeroVector() );
     }
 
     Vector& Vector::operator+=(const Vector& y)

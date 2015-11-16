@@ -25,8 +25,8 @@ TEST(ProductSpaceVector, AddThrow)
   auto V = makeProductHilbertSpace();
   auto W = makeProductHilbertSpace();
 
-  auto v = std::get<0>(V).vector();
-  auto w = std::get<0>(W).vector();
+  auto v = std::get<0>(V).zeroVector();
+  auto w = std::get<0>(W).zeroVector();
 
   ASSERT_THROW( v + w , IncompatibleSpaceException );
 }
@@ -52,8 +52,8 @@ TEST(ProductSpaceVector, SubtractThrow)
   auto V = makeProductHilbertSpace();
   auto W = makeProductHilbertSpace();
 
-  auto v = std::get<0>(V).vector();
-  auto w = std::get<0>(W).vector();
+  auto v = std::get<0>(V).zeroVector();
+  auto w = std::get<0>(W).zeroVector();
 
   ASSERT_THROW( v - w , IncompatibleSpaceException );
 }
@@ -106,7 +106,7 @@ TEST(ProductSpaceVector,ComparisonThrow)
 TEST(ProductSpaceVector,NumberOfVariables)
 {
   auto V = makeProductHilbertSpace();
-  auto v = std::get<0>(V).vector();
+  auto v = std::get<0>(V).zeroVector();
 
   ASSERT_EQ( cast_ref<ProductSpace::Vector>(v).numberOfVariables() , numberOfVariables() );
 }
@@ -123,7 +123,7 @@ TEST(ProductSpaceVector,VariableAccess)
 TEST(ProductSpaceVector,CreatorAccess)
 {
   auto V = makeProductHilbertSpace();
-  auto v = std::get<0>(V).vector();
+  auto v = std::get<0>(V).zeroVector();
 
   auto consistentType = std::is_same< std::decay_t<decltype( cast_ref<ProductSpace::Vector>(v).creator() )> , ProductSpace::VectorCreator >::value;
   ASSERT_TRUE( consistentType );

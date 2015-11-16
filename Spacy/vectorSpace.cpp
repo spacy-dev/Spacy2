@@ -64,7 +64,7 @@ namespace Spacy
     return norm_;
   }
 
-  Vector VectorSpace::vector() const
+  Vector VectorSpace::zeroVector() const
   {
     return creator_(this);
   }
