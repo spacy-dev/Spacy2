@@ -35,7 +35,7 @@ add_definitions(${DOLFIN_CXX_DEFINITIONS})
 find_package(Spacy REQUIRED)
 include_directories(${SPACY_INCLUDE_DIRS})
 link_directories(${SPACY_LIBRARY_DIR})
-set(LIBS ${LIBS} ${SPACY_LIBRARIES})
+#set(LIBS ${LIBS} ${SPACY_LIBRARIES})
 # Compiler flags from Spacy, i.e. -std=c++1y
 add_compile_options(${SPACY_CXX_OPTIONS})
 
@@ -43,4 +43,4 @@ add_compile_options(${SPACY_CXX_OPTIONS})
 add_executable(${PROJECT_NAME} main.cpp)
 
 # Target libraries
-target_link_libraries(${PROJECT_NAME} ${LIBS})
+target_link_libraries(${PROJECT_NAME} ${LIBS} ${SPACY_LIBRARY_DIR}/libspacy.a)

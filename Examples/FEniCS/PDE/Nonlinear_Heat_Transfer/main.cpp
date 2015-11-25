@@ -67,7 +67,7 @@ int main()
   // create operator
   auto A = FEniCS::makeC1Operator( L , a , bcs , domain , range );
   // set scalar product for affine covariant newton method
-  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.vector()) ) );
+  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.zeroVector()) ) );
 
   // specify parameters for Newton's method
   auto p = Spacy::Newton::Parameter{};

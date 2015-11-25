@@ -27,7 +27,7 @@ namespace Spacy
 
     std::size_t VectorCreator::dofmap(std::size_t i) const
     {
-
+      if( dofmap_.empty() ) return i;
       auto j = dofmap_.find(i);
       if( j == end(dofmap_) ) throw std::runtime_error("dofmap");
       return j->second;
@@ -35,7 +35,7 @@ namespace Spacy
 
     std::size_t VectorCreator::inverseDofmap(std::size_t i) const
     {
-      if(inverseDofmap_.empty()) throw std::runtime_error("inverseDofmap");
+      if(inverseDofmap_.empty()) return i;
       return inverseDofmap_[i];
     }
 

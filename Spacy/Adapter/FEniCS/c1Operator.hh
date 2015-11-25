@@ -152,7 +152,7 @@ namespace Spacy
        */
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator(x);
 
         auto y = range().zeroVector();
         copy(*b_,y);
@@ -167,9 +167,9 @@ namespace Spacy
        */
       ::Spacy::Vector d1(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
 
-        auto dx_ = dolfin::Function( cast_ref<VectorCreator>(domain().impl()).impl() );
+        auto dx_ = dolfin::Function( cast_ref<VectorCreator>(domain().creator()).impl() );
         copy(dx,dx_);
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
@@ -188,7 +188,7 @@ namespace Spacy
        */
       auto linearization(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
         assert(A_ != nullptr);
         assert(operatorSpace_ != nullptr);
 

@@ -42,7 +42,7 @@ add_subdirectory(Spacy)
 # enable/disable unit tests
 option(BuildTest "BuildTest" ON)
 
-if(BuildTest)
+#if(BuildTest)
   if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -Weffc++")
   endif()
@@ -63,6 +63,7 @@ if(BuildTest)
   aux_source_directory(Test/Mock TEST_SRC_LIST)
   aux_source_directory(Test/Spacy TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Adapter/Scalar TEST_SRC_LIST)
+  aux_source_directory(Test/Spacy/Adapter/Eigen TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Algorithm TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Spaces TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Spaces/ProductSpace TEST_SRC_LIST)
@@ -70,10 +71,16 @@ if(BuildTest)
   aux_source_directory(Test/Spacy/Util TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Util/Base TEST_SRC_LIST)
   aux_source_directory(Test/AlgorithmQuality/EquationSolver/Newton/Scalar TEST_SRC_LIST)
+
+  find_package(Eigen3)
+  if(EIGEN3_FOUND)
+    include_directories(${EIGEN3_INCLUDE_DIR})
+    aux_source_directory(Test/Spacy/Adapter/Eigen TEST_SRC_LIST)
+  endif()
+
   add_executable(unit_tests ${TEST_SRC_LIST})
-  add_dependencies(unit_tests gtest)
   target_link_libraries(unit_tests spacy gtest pthread)
-endif()
+#endif()
 
 
 # export add_library
