@@ -1,5 +1,5 @@
-#include "Test/AlgorithmQuality/EquationSolver/scalarTests.hh"
-#include "Test/AlgorithmQuality/EquationSolver/Newton/newtonTestSetup.hh"
+#include "Test/Spacy/Algorithm/scalarTests.hh"
+#include "Test/Spacy/Algorithm/Newton/newtonTestSetup.hh"
 
 #include "Spacy/Spaces/realSpace.hh"
 
@@ -41,4 +41,4 @@ namespace ContravariantNewton
   GENERATE_SCALAR_TEST(ContravariantNewton,Quadratic,6)
 }
 
-#include "Test/AlgorithmQuality/EquationSolver/undefScalarTests.hh"
+#include "Test/Spacy/Algorithm/undefScalarTests.hh"
