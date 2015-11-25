@@ -41,12 +41,6 @@ namespace Spacy
 //      Vector& axpy(double a, const AbstractVector& y);
 
       /**
-       * @brief Degrees of freedom.
-       * @return number of degrees of freedom (size of coefficient vector)
-       */
-      unsigned size() const;
-
-      /**
        * @brief Access reference to underlying vector.
        */
       dolfin::GenericVector& impl();

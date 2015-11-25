@@ -39,7 +39,7 @@ add_subdirectory(Spacy)
 # Does not debug auto, but is less sloppy than gcc
 # set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
 
-# enable/disable unit tests
+# enable/disable tests
 option(BuildTest "BuildTest" ON)
 
 #if(BuildTest)

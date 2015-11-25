@@ -18,7 +18,7 @@ namespace Spacy
       if( !is<FEniCS::Vector>(x) ) return;
 
       const auto& x_ = cast_ref<FEniCS::Vector>(x);
-      for(auto j=0u; j<x_.size(); ++j)
+      for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space()->creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(*x_.space());
         y.setitem(creator.inverseDofmap(j),x_.impl().getitem(j));
@@ -31,7 +31,7 @@ namespace Spacy
       if( !is<FEniCS::Vector>(x) ) return;
 
       auto& x_ = cast_ref<FEniCS::Vector>(x);
-      for(auto j=0u; j<x_.size(); ++j)
+      for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space()->creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(*x_.space());
         x_.impl().setitem( j , y.getitem( creator.inverseDofmap(j) ) );

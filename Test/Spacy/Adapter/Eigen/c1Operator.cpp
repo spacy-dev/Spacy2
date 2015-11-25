@@ -8,7 +8,7 @@
 
 using namespace Spacy;
 
-TEST(Eigen,C1Operator_Apply)
+TEST(Rn,C1Operator_Apply)
 {
   auto space = Rn::makeHilbertSpace(testDim());
   auto A = testOperator(space,space);
@@ -20,7 +20,7 @@ TEST(Eigen,C1Operator_Apply)
   ASSERT_EQ( w_.impl()[1] , 1.1*testVector()[1] );
 }
 
-TEST(Eigen,C1Operator_Derivative)
+TEST(Rn,C1Operator_Derivative)
 {
   auto space = Rn::makeHilbertSpace(testDim());
   auto A = testOperator(space,space);
@@ -34,7 +34,7 @@ TEST(Eigen,C1Operator_Derivative)
   ASSERT_EQ( x_.impl()[1] , 1.1*w_.impl()[1] );
 }
 
-TEST(Eigen,C1Operator_Linearization)
+TEST(Rn,C1Operator_Linearization)
 {
   auto space = Rn::makeHilbertSpace(testDim());
   auto A = testOperator(space,space);

@@ -45,6 +45,11 @@ namespace Spacy
       return Vector{*space};
     }
 
+    unsigned VectorCreator::size() const
+    {
+      return impl().dim();
+    }
+
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space)
     {
       return ::Spacy::makeHilbertSpace( VectorCreator{space} , l2Product{} );

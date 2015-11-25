@@ -33,11 +33,6 @@ namespace Spacy
 //      return *this;
 //    }
 
-    unsigned Vector::size() const
-    {
-      return impl().size(); // todo generalize
-    }
-
     dolfin::GenericVector& Vector::impl()
     {
       return *v_.vector();

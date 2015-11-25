@@ -96,10 +96,6 @@ namespace Spacy
      * @return \f$x(y)\f$
      */
     Real operator()(const Real& y) const;
-
-    friend double toDouble(const Real& x);
-
-    friend double& toDouble(Real& x);
   };
 
 

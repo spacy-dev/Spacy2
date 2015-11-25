@@ -59,6 +59,9 @@ namespace Spacy
        */
       Vector operator()(const VectorSpace* space) const;
 
+      /// Degrees of freedom.
+      unsigned size() const;
+
     private:
       using map = std::unordered_map<std::size_t,std::size_t>;
       map dofmap_ = map{};
