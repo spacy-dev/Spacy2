@@ -33,11 +33,15 @@ endforeach()
 # set up include-directories
 include_directories("${PROJECT_SOURCE_DIR}")
 
+#include_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/include)
+#link_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/lib)
+
 # set up subdirectory containing code
 add_subdirectory(Spacy)
   
 # Does not debug auto, but is less sloppy than gcc
 # set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
+#set(CMAKE_CXX_COMPILER "/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/gcc/bin/g++")
 
 # enable/disable tests
 option(BuildTest "BuildTest" ON)
@@ -63,7 +67,6 @@ option(BuildTest "BuildTest" ON)
   aux_source_directory(Test/Mock TEST_SRC_LIST)
   aux_source_directory(Test/Spacy TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Adapter/Scalar TEST_SRC_LIST)
-  aux_source_directory(Test/Spacy/Adapter/Eigen TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Algorithm TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Algorithm/Newton/Scalar TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Spaces TEST_SRC_LIST)
