@@ -4,7 +4,7 @@
 #ifndef SPACY_ADAPTER_EIGEN_VECTOR_HH
 #define SPACY_ADAPTER_EIGEN_VECTOR_HH
 
-#include <Eigen/Dense>
+#include "Eigen/Dense"
 
 #include "Spacy/Adapter/Generic/vector.hh"
 
