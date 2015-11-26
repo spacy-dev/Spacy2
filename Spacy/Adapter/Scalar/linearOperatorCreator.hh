@@ -7,7 +7,7 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
-  /** @addtogroup ScalarAdapterGroup
+  /** @addtogroup ScalarGroup
    * @{
    */
   namespace Scalar

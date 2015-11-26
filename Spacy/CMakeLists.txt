@@ -14,7 +14,8 @@ if(EIGEN3_FOUND)
   include_directories(${EIGEN3_INCLUDE_DIR})
   aux_source_directory(Adapter/Eigen SRC_LIST)
 endif()
-
+#find_package(Boost 1.55 REQUIRED)
+#include_directories(${Boost_INCLUDE_DIR})
 aux_source_directory(. SRC_LIST)
 aux_source_directory(Adapter/Scalar SRC_LIST)
 aux_source_directory(Adapter/Generic SRC_LIST)
@@ -33,7 +34,6 @@ aux_source_directory(Util/Exceptions SRC_LIST)
 
 
 add_library(spacy ${SRC_LIST})
-
 install(TARGETS spacy
 	EXPORT SpacyTargets
 	ARCHIVE DESTINATION "${PROJECT_BINARY_DIR}/Spacy" COMPONENT lib

@@ -57,7 +57,7 @@ namespace Spacy
 
         solver_->apply( x_ , y_ );
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableDescription>(y_,y);
 
         return y;

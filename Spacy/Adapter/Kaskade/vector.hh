@@ -27,7 +27,7 @@ namespace Spacy
     template <class Description>
     class Vector :
         public VectorBase ,
-        public SupportedOperatorBase< Vector<Description> >
+        public AddArithmeticOperators< Vector<Description> >
     {
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
@@ -40,7 +40,7 @@ namespace Spacy
        */
       Vector(const VectorSpace& space)
         : VectorBase(space),
-          spaces_(&cast_ref< VectorCreator<Description> >(space.impl()).impl()),
+          spaces_(&cast_ref< VectorCreator<Description> >(space.creator()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
       {}
 

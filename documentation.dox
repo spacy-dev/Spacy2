@@ -39,6 +39,23 @@
     * @brief Vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
     */
      
+  /**
+   * @defgroup GenericGroup Generic Implementations for Vector Space Implementations.
+   * @ingroup VectorSpaceGroup
+   */
+
+  /**
+   * @defgroup ScalarGroup Operators, Functionals and Solvers for Scalar Problems
+   * @ingroup VectorSpaceGroup
+   */
+   
+  /**
+   * @defgroup RnGroup Operators, Functionals and Solvers for Finite Dimensional Problems
+   * @ingroup VectorSpaceGroup
+   * @brief Vector spaces, functionals and operators based on <a href="http://eigen.tuxfamily.org">Eigen</a>.
+   */
+
+   
 /**
  * @defgroup MixinGroup Mixins
  * @brief Components that are frequently used and can be added to your classes via (multiple) inheritance.
@@ -119,20 +136,20 @@
  
  
    /**
-   * @namespace Algorithm::CG
+   * @namespace Spacy::CG
    * @ingroup CGGroup
    * @brief Conjugate gradient methods for convex and nonconvex problems (%CG, Truncated %CG, Regularized %CG and Truncated Regularized %CG).
    * @see CGGroup, CGConceptGroup
    */ 
      
     /**
-     * @namespace Algorithm::CG::Termination
+     * @namespace Spacy::CG::Termination
      * @brief Termination criteria for conjugate gradient methods.
      * @see CGGroup, CGConceptGroup
      */
   
   /**
-   * @namespace Algorithm::Newton
+   * @namespace Spacy::Newton
    * @brief %Newton methods, largely following @cite Deuflhard2004.
    *
    * Contains a local %Newton method, an affine covariant %Newton method, an affine contravariant %Newton method as well as a generic implementation that admits the implementation of further termination 
@@ -141,53 +158,64 @@
    */
      
     /**
-     * @namespace Algorithm::Newton::Damping
+     * @namespace Spacy::Newton::Damping
      * @brief Damping strategies for Newton's method.
      * @see NewtonGroup, NewtonConceptGroup
      */
      
     /**
-     * @namespace Algorithm::Newton::Termination
+     * @namespace Spacy::Newton::Termination
      * @brief Termination criteria for Newton's method.
      * @see NewtonGroup, NewtonConceptGroup
      */
        
   /**
-   * @namespace Algorithm::Concepts::CompositeStep
+   * @namespace Spacy::Concepts::CompositeStep
    * @brief Contains the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
    * @see CSGroup
    */
      
-     
- 
-  /**
-   * @namespace Algorithm::RealSpace
-   * @brief A one dimensional vector space representing the space of real numbers.
-   * @see RealGroup
-   */
 
   /**
-   * @namespace Algorithm::ProductSpace
+   * @namespace Spacy::ProductSpace
    * @brief  A product space that supports distinction between primal and dual variables.
    * @see ProductSpaceGroup
    */
    
   /**
-   * @namespace Algorithm::FEniCS
+   * @namespace Spacy::FEniCS
    * @brief Contains vector spaces, functionals and operators for <a href="www.fenicsproject.org">FEniCS</a>.
    * @see FenicsGroup
    */
    
   /**
-   * @namespace Algorithm::Kaskade
+   * @namespace Spacy::Kaskade
    * @brief Contains vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
    * @see KaskadeGroup
+   */
+   
+  /**
+   * @namespace Spacy::Scalar
+   * @brief Contains functionals and operators for scalar problems.
+   * @see ScalarGroup
+   */
+   
+  /**
+   * @namespace Spacy::Rn
+   * @brief Contains functionals and operators for finite dimensional vector space problems.
+   * @see RnGroup
+   */
+   
+  /**
+   * @namespace Spacy::Generic
+   * @brief Contains generic implementations for easier definitions of vectors and a generic scalar product implementation.
+   * @see GenericGroup, VectorBase, AddArithmeticOperators, OperatorBase, FunctionalBase
    */
    
    
    
   /**
-   * @namespace Algorithm::Mixin
+   * @namespace Spacy::Mixin
    * @brief Contains components that are frequently used and can be added to your classes via (multiple) inheritance.
    * @see MixinGroup
    */
@@ -195,19 +223,19 @@
    
    
   /**
-   * @namespace Algorithm::Concepts
+   * @namespace Spacy::Concepts
    * @brief %Concepts for vectors, functional, operators, ...
    * @see ConceptGroup
    */
    
     /**
-     * @namespace Algorithm::Concepts::Newton
+     * @namespace Spacy::Concepts::Newton
      * @brief %Concepts for damping strategy and termination criteria for %Newton's method.
      * @see NewtonConceptGroup
      */
      
     /**
-     * @namespace Algorithm::Concepts::CG
+     * @namespace Spacy::Concepts::CG
      * @brief Concept for termination criteria for conjugate gradient methods.
      * @see CGConceptGroup
      */

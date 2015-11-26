@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <memory>
+#include <iostream>
 
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
@@ -40,7 +41,12 @@ namespace Spacy
       /// Generate vector for %Kaskade 7.
       Vector<Description> operator()(const VectorSpace* space) const
       {
-        return Vector<Description>{*space};
+        std::cout << "creating vector" << std::endl;
+        auto v = Vector<Description>{*space};
+        std::cout << "done" << std::endl;
+        Spacy::Vector tmp(v);
+        std::cout << "copied to spacy::vector" << std::endl;
+        return v;
       }
     };
 

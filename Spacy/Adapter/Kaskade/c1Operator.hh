@@ -10,7 +10,6 @@
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 
-#include "Spacy/linearizedOperator.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "directSolver.hh"
@@ -141,11 +140,11 @@ namespace Spacy
        */
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator(x);
 
         VectorImpl v( assembler_.rhs() );
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(v,y);
         return y;
       }
@@ -158,7 +157,7 @@ namespace Spacy
        */
       ::Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
 
         VectorImpl dx_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
         copyToCoefficientVector<AnsatzVariableSetDescription>(dx,dx_);
@@ -166,7 +165,7 @@ namespace Spacy
 
         A_.apply( dx_ , y_ );
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
@@ -179,7 +178,7 @@ namespace Spacy
        */
       auto linearization(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C1Operator::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
 
         return Linearization(A_,*operatorSpace_,solverCreator_);
         //return LinearizedOperator( *this , x , solverCreator_(*this) );

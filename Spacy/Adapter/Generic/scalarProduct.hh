@@ -13,7 +13,10 @@ namespace Spacy
 
   namespace Generic
   {
-    /// Generic euclidean scalar product, based on the dual pairing in hilbert spaces.
+    /**
+     * @ingroup GenericGroup
+     * @brief Generic euclidean scalar product, based on the dual pairing in hilbert spaces.
+     */
     class EuclideanScalarProduct
     {
     public:

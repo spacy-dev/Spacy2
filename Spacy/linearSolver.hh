@@ -106,6 +106,8 @@ namespace Spacy
 
     bool isPositiveDefinite() const;
 
+    operator bool() const;
+
     friend bool is_empty(const IndefiniteLinearSolver&);
 
   private:

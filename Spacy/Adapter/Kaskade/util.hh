@@ -16,6 +16,35 @@ namespace Spacy
 {
   namespace Kaskade
   {
+//    namespace
+//    {
+//      void copyToDolfinVectorIfConsistent(const Vector& x, dolfin::GenericVector& y)
+//      {
+//        if( !is<FEniCS::Vector>(x) ) return;
+
+//        const auto& x_ = cast_ref<FEniCS::Vector>(x);
+//        for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space()->creator()).size(); ++j)
+//        {
+//          const auto& creator = Spacy::creator<FEniCS::VectorCreator>(*x_.space());
+//          y.setitem(creator.inverseDofmap(j),x_.impl().getitem(j));
+//        }
+//        y.apply("insert");
+//      }
+
+//      void copyFromDolfinVectorIfConsistent(const dolfin::GenericVector& y, Vector& x)
+//      {
+//        if( !is<FEniCS::Vector>(x) ) return;
+
+//        auto& x_ = cast_ref<FEniCS::Vector>(x);
+//        for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space()->creator()).size(); ++j)
+//        {
+//          const auto& creator = Spacy::creator<FEniCS::VectorCreator>(*x_.space());
+//          x_.impl().setitem( j , y.getitem( creator.inverseDofmap(j) ) );
+//        }
+//        x_.impl().apply("insert");
+//      }
+//    }
+
     /// \cond
     template <class> class VectorCreator;
 
@@ -63,7 +92,7 @@ namespace Spacy
         using Variables = typename Description::Variables;
         static auto apply(const ProductSpace::VectorCreator& spaces)
         {
-          return &cast_ref< VectorCreator< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).impl()).impl();
+          return &cast_ref< VectorCreator< ExtractDescription_t<Description,j> > >( spaces.subSpace(j).creator()).impl();
         }
       };
 
@@ -90,7 +119,7 @@ namespace Spacy
 
         static Spaces apply(const  VectorSpace& spaces)
         {
-          return Spaces{ &cast_ref< VectorCreator<Description> >(spaces.impl()).impl() };
+          return Spaces{ &cast_ref< VectorCreator<Description> >(spaces.creator()).impl() };
         }
       };
 
@@ -125,27 +154,21 @@ namespace Spacy
         template <class Description>
         static void apply(const ProductSpace::Vector& x, ::Kaskade::VariableSet<Description>& y)
         {
-          if( ( x.creator().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
-              ( x.creator().isDualSubSpaceId(i) && x.isDualEnabled() ) )
-            boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.variable(i)).impl().data);
+          boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(i)).impl().data);
           Copy<i+1,n>::apply(x,y);
         }
 
         template <class Description, class CoeffVector>
         static void toCoefficientVector(const ProductSpace::Vector& x, CoeffVector& y)
         {
-          if( ( x.creator().isPrimalSubSpaceId(i) && x.isPrimalEnabled() ) ||
-              ( x.creator().isDualSubSpaceId(i) && x.isDualEnabled() ) )
-            boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.variable(i)).impl().data);
+          boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(i)).impl().data);
           Copy<i+1,n>::template toCoefficientVector<Description>(x,y);
         }
 
         template <class Description, class CoeffVector>
         static void fromCoefficientVector(const CoeffVector& x, ProductSpace::Vector& y)
         {
-          if( ( y.creator().isPrimalSubSpaceId(i) && y.isPrimalEnabled() ) ||
-              ( y.creator().isDualSubSpaceId(i) && y.isDualEnabled() ) )
-            boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.variable(i)).impl().data) = boost::fusion::at_c<i>(x.data);
+          boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.component(i)).impl().data) = boost::fusion::at_c<i>(x.data);
           Copy<i+1,n>::template fromCoefficientVector<Description>(x,y);
         }
       };
@@ -165,9 +188,7 @@ namespace Spacy
           if( is<ProductSpace::Vector>(x))
           {
             const auto& x_ = cast_ref<ProductSpace::Vector>(x);
-            if( ( x_.creator().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
-                ( x_.creator().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
-            boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
+            boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.component(0)).impl().data);
             Copy<1,n>::apply(x_,y);
             return;
           }
@@ -187,9 +208,7 @@ namespace Spacy
           if( is<ProductSpace::Vector>(x))
           {
             const auto& x_ = cast_ref<ProductSpace::Vector>(x);
-            if( ( x_.creator().isPrimalSubSpaceId(0) && x_.isPrimalEnabled() ) ||
-                ( x_.creator().isDualSubSpaceId(0) && x_.isDualEnabled() ) )
-              boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.variable(0)).impl().data);
+            boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(x_.component(0)).impl().data);
             Copy<1,n>::template toCoefficientVector<Description>(x_,y);
             return;
           }
@@ -209,9 +228,7 @@ namespace Spacy
           if( is<ProductSpace::Vector>(y))
           {
             auto& y_ = cast_ref<ProductSpace::Vector>(y);
-            if( ( y_.creator().isPrimalSubSpaceId(0) && y_.isPrimalEnabled() ) ||
-                ( y_.creator().isDualSubSpaceId(0) && y_.isDualEnabled() ) )
-              boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(y_.variable(0)).impl().data) = boost::fusion::at_c<0>(x.data);
+            boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,0> > >(y_.component(0)).impl().data) = boost::fusion::at_c<0>(x.data);
             Copy<1,n>::template fromCoefficientVector<Description>(x,y_);
             return;
           }
@@ -249,12 +266,12 @@ namespace Spacy
     {
       using Spaces = typename Description::Spaces;
 
-      if( is< VectorCreator<Description> >(spaces.impl()) )
+      if( is< VectorCreator<Description> >(spaces.creator()) )
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
 
-      if( is<ProductSpace::VectorCreator>(spaces.impl()) )
+      if( is<ProductSpace::VectorCreator>(spaces.creator()) )
       {
-        const auto& spaces_ = cast_ref<ProductSpace::VectorCreator>(spaces.impl());
+        const auto& spaces_ = cast_ref<ProductSpace::VectorCreator>(spaces.creator());
         using seq = std::make_integer_sequence<unsigned,boost::fusion::result_of::size<Spaces>::value>;
         return Detail::extractSpaces<Description>(spaces_,seq{});
       }

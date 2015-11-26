@@ -12,6 +12,11 @@ namespace Spacy
     return base_.impl().isPositiveDefinite();
   }
 
+  IndefiniteLinearSolver::operator bool() const
+  {
+    return !is_empty(base_);
+  }
+
   bool is_empty(const IndefiniteLinearSolver& solver)
   {
     return is_empty(solver.base_);

@@ -97,11 +97,11 @@ namespace Spacy
        */
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&Operator::assembleOperator,std::ref(*this), std::placeholders::_1),x);
+        assembleOperator(x);
 
         VectorImpl v( assembler_.rhs() );
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(v,y);
         return y;
       }

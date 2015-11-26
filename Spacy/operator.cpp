@@ -7,6 +7,48 @@
 
 namespace Spacy
 {
+  Vector Operator::operator()(const Vector& x) const
+  {
+    return base_.impl()(x);
+  }
+
+  const VectorSpace& Operator::domain() const
+  {
+    return base_.impl().domain();
+  }
+
+  const VectorSpace& Operator::range() const
+  {
+    return base_.impl().range();
+  }
+
+
+  Vector C1Operator::operator()(const Vector& x) const
+  {
+    return base_.impl()(x);
+  }
+
+  Vector C1Operator::d1(const Vector& x, const Vector& dx) const
+  {
+    return base_.impl().d1(x,dx);
+  }
+
+  LinearOperator C1Operator::linearization(const Vector& x) const
+  {
+    return base_.impl().linearization(x);
+  }
+
+  const VectorSpace& C1Operator::domain() const
+  {
+    return base_.impl().domain();
+  }
+
+  const VectorSpace& C1Operator::range() const
+  {
+    return base_.impl().range();
+  }
+
+
   LinearSolver operator^(const LinearOperator& A, int k)
   {
     if( k == -1 ) return A.solver();

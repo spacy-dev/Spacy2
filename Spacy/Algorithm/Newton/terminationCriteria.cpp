@@ -4,6 +4,7 @@
 #include "Spacy/vector.hh"
 
 #include <cmath>
+#include <iostream>
 
 namespace Spacy
 {

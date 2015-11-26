@@ -10,7 +10,6 @@
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
-#include "Spacy/hessian.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 #include "Spacy/Util/Base/functionalBase.hh"
 
@@ -148,7 +147,7 @@ namespace Spacy
        */
       double operator()(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleFunctional,std::ref(*this), std::placeholders::_1),x);
+        assembleFunctional(x);
 
         return assembler().functional();
       }
@@ -161,11 +160,11 @@ namespace Spacy
        */
       ::Spacy::Vector d1(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleGradient,std::ref(*this), std::placeholders::_1),x);
+        assembleGradient(x);
 
         CoefficientVector v( assembler_.rhs() );
 
-        auto y = this->domain().dualSpace().vector();
+        auto y = this->domain().dualSpace().zeroVector();
         copyFromCoefficientVector<VariableSetDescription>(v,y);
         return y;
       }
@@ -179,7 +178,7 @@ namespace Spacy
        */
       ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
+        assembleHessian(x);
 
         CoefficientVector dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
         copyToCoefficientVector<VariableSetDescription>(dx,dx_);
@@ -187,7 +186,7 @@ namespace Spacy
 
         A_.apply( dx_ , y_ );
 
-        auto y = this->domain().dualSpace().vector();
+        auto y = this->domain().dualSpace().zeroVector();
         copyFromCoefficientVector<VariableSetDescription>(y_,y);
 
         return y;
@@ -200,10 +199,8 @@ namespace Spacy
        */
       auto hessian(const ::Spacy::Vector& x) const
       {
-        primalDualIgnoreReset(std::bind(&C2Functional::assembleHessian,std::ref(*this), std::placeholders::_1),x);
-
+        assembleHessian(x);
         return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
-        //return Hessian( *this , x , solverCreator_(*this) );
       }
 
       /**

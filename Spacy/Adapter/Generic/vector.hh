@@ -13,6 +13,7 @@ namespace Spacy
 {
   namespace Generic
   {
+    /// @cond
     template <class> class Vector;
 
     namespace Detail
@@ -68,9 +69,10 @@ namespace Spacy
         }
       };
     }
+    /// @endcond
 
     /**
-     * @ingroup GenericVectorGroup
+     * @ingroup GenericGroup
      * @brief Generic vector implementation for %Rn.
      */
     template <class VectorImpl>

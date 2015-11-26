@@ -11,8 +11,11 @@ namespace Spacy
 {
   namespace Generic
   {
-    /// Generic vector creator implementation
-    /// @todo generalize vector creation
+    /**
+     * @ingroup GenericGroup
+     * @brief Generic vector creator implementation
+     * @todo generalize vector creation
+     */
     template <class VectorImpl>
     class VectorCreator
     {

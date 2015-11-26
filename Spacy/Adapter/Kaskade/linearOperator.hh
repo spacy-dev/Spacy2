@@ -28,7 +28,7 @@ namespace Spacy
     class LinearOperator :
         public OperatorBase ,
         public VectorBase ,
-        public SupportedOperatorBase< LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription> >
+        public AddArithmeticOperators< LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription> >
     {
       using Spaces = typename AnsatzVariableSetDescription::Spaces;
       using Variables = typename AnsatzVariableSetDescription::Variables;
@@ -46,11 +46,11 @@ namespace Spacy
        * @param range range space
        */
       LinearOperator(OperatorImpl A, const VectorSpace& space)
-        : OperatorBase(cast_ref<OperatorCreator>(space.impl()).domain(),
-                       cast_ref<OperatorCreator>(space.impl()).range()),
+        : OperatorBase(cast_ref<OperatorCreator>(space.creator()).domain(),
+                       cast_ref<OperatorCreator>(space.creator()).range()),
           VectorBase(space) ,
           A_(std::move(A)),
-          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.impl()).domain()) )
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.creator()).domain()) )
       {}
 
       /**
@@ -61,11 +61,11 @@ namespace Spacy
        * @param solverCreator function/functor implementing the creation of a linear solver
        */
       LinearOperator(OperatorImpl A, const VectorSpace& space, std::function<LinearSolver(const LinearOperator&)> solverCreator)
-        : OperatorBase(cast_ref<OperatorCreator>(space.impl()).domain(),
-                       cast_ref<OperatorCreator>(space.impl()).range()),
+        : OperatorBase(cast_ref<OperatorCreator>(space.creator()).domain(),
+                       cast_ref<OperatorCreator>(space.creator()).range()),
           VectorBase(space) ,
           A_(std::move(A)),
-          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.impl()).domain()) ) ,
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.creator()).domain()) ) ,
           solverCreator_(std::move(solverCreator))
       {}
 
@@ -81,7 +81,7 @@ namespace Spacy
 
         A_.apply(x_,y_);
 
-        auto y = range().vector();
+        auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;

@@ -118,6 +118,67 @@ namespace Spacy
 
     /// Stores an object of type Type as unique pointer and provides access via member function impl().
     template < class Type >
+    class CopyViaCloneUniqueImpl
+    {
+    public:
+      CopyViaCloneUniqueImpl() = default;
+
+      virtual ~CopyViaCloneUniqueImpl() = default;
+
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      explicit CopyViaCloneUniqueImpl(T&& impl)
+        : impl_(std::make_unique< std::decay_t<T> >(std::forward<T>(impl)))
+      {}
+
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      explicit CopyViaCloneUniqueImpl(std::unique_ptr<T>&& impl)
+        : impl_(std::move(impl))
+      {}
+
+      CopyViaCloneUniqueImpl(const CopyViaCloneUniqueImpl& other)
+        : impl_(other.impl().clone())
+      {}
+
+      CopyViaCloneUniqueImpl(CopyViaCloneUniqueImpl&&) = default;
+
+      CopyViaCloneUniqueImpl& operator=(CopyViaCloneUniqueImpl&& other) = default;
+
+      CopyViaCloneUniqueImpl& operator=(const CopyViaCloneUniqueImpl& other)
+      {
+        impl_ = other.impl().clone();
+        return *this;
+      }
+
+      template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
+      CopyViaCloneUniqueImpl& operator=(T&& impl)
+      {
+        impl_ = std::make_unique< std::decay_t<T> >(std::forward<T>(impl));
+        return *this;
+      }
+
+      /// Access implementation.
+      Type& impl()
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl().");
+        return *impl_;
+      }
+
+      /// Access implementation.
+      const Type& impl() const
+      {
+        if( impl_ == nullptr ) throw std::runtime_error("impl_ undefined in UniqueImpl::impl() const.");
+        return *impl_;
+      }
+
+      template <class T>
+      friend bool is_empty(const CopyViaCloneUniqueImpl<T>& impl);
+
+    private:
+      std::unique_ptr<Type> impl_ = nullptr;
+    };
+
+    /// Stores an object of type Type as unique pointer and provides access via member function impl().
+    template < class Type >
     class CopyingUniqueImpl
     {
     public:
@@ -179,6 +240,12 @@ namespace Spacy
 
     template <class Type>
     bool is_empty(const CopyingUniqueImpl<Type>& impl)
+    {
+      return impl.impl_ == nullptr;
+    }
+
+    template <class Type>
+    bool is_empty(const CopyViaCloneUniqueImpl<Type>& impl)
     {
       return impl.impl_ == nullptr;
     }
