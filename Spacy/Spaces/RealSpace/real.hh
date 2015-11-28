@@ -3,10 +3,7 @@
 
 #include <ostream>
 
-#include <boost/type_erasure/any.hpp>
-
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 
 namespace Spacy
@@ -21,8 +18,7 @@ namespace Spacy
    */
   class Real :
       public VectorBase ,
-      public Mixin::Impl<double> ,
-      public AddArithmeticOperators<Real>
+      public Mixin::Impl<double>
   {
   public:
     /**
@@ -74,6 +70,19 @@ namespace Spacy
     Real& operator-=(const Real& y);
 
     /**
+     * @brief Negation \f$ -x\f$.
+     * @return \f$ -x \f$.
+     */
+    Real operator-() const;
+
+    /**
+     * @brief Comparison operator \f$ x==y\f$.
+     * @param y vector to compare with this vector
+     * @return \f$ x==y\f$.
+     */
+    bool operator==(const Real& y) const;
+
+    /**
      * @brief Assignment from Real stored in a ::Spacy::Vector.
      * @param y value to assign
      * @throws InvalidArgumentException if casting y to const Real::Vector& fails
@@ -81,6 +90,12 @@ namespace Spacy
     Real& operator=(const Vector& y);
 
     Real& operator*=(const Real& y);
+
+    Real& operator*=(double a)
+    {
+      impl() *= a;
+      return *this;
+    }
 
     /**
      * @brief Implicit conversion to double.
@@ -103,6 +118,10 @@ namespace Spacy
 
   double& toDouble(Vector& x);
 
+  double& toDouble(Real& x);
+
+  double toDouble(const Real &x);
+
   /// Compute \f$x/y\f$.
   Real operator/(Real x, const Real& y);
 
@@ -117,7 +136,12 @@ namespace Spacy
   Real operator*(Real x, const Real& y);
 
   /// Compute \f$x*y\f$.
-  Real operator*(double x, Real y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator*(Arithmetic x, Real y)
+  {
+    return y *= x;
+  }
 
   /// Compute \f$x*y\f$.
   Real operator*(Real x, double y);

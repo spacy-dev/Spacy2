@@ -1,13 +1,13 @@
 #ifndef SPACY_VECTOR_HH
 #define SPACY_VECTOR_HH
 
-#include <type_traits>
-#include <boost/type_erasure/any.hpp>
-
-#include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/target.hh"
+#include "Spacy/Util/memFnChecks.hh"
+#include "Spacy/Util/memOpChecks.hh"
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/typeErasedStorage.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -24,191 +24,213 @@ namespace Spacy
    * @anchor VectorAnchor
    * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
    */
-  using AnyVector = boost::type_erasure::any< Concepts::VectorConcept >;
+//  using AnyVector = boost::type_erasure::any< Concepts::VectorConcept >;
 
-//  class Vector : public TypeErasedStorage
-//  {
-//  public:
-//    Vector() = default;
 
-//    /// Construct from vector implementation.
-//    template <class Impl,
-//              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value> >
-//    Vector(Impl&& impl)
-//      : TypeErasedStorage(std::forward<Impl>(impl)),
-//        add_( [this](const Vector& y) -> Vector&
-//        {
-//          (*Spacy::target<Impl>(*this)) += (*Spacy::target<Impl>(y));
-//          return *this;
-//        } ),
-//        subtract_( [this](const Vector& y) -> Vector&
-//        {
-//          (*Spacy::target<Impl>(*this)) -= (*Spacy::target<Impl>(y));
-//          return *this;
-//        } ),
-//        multiply_( [this](double a) -> Vector&
-//        {
-//          (*Spacy::target<Impl>(*this)) *= a;
-//          return *this;
-//        } ),
-//        negate_( [this]() -> Vector
-//        {
-//          return -(*Spacy::target<Impl>(*this));
-//        } ),
-//        compare_( [this](const Vector& y)
-//        {
-//          return (*Spacy::target<Impl>(*this)) == (*Spacy::target<Impl>(y));
-//        } ),
-//        asDual_( [this](const Vector& y) -> Vector { return (*Spacy::target<Impl>(*this))( *Spacy::target<Impl>(y) ); } ),
-//        //asDual_( std::cref(*Spacy::target<Impl>(*this)) ),
-//        space_( std::bind(&std::decay_t<Impl>::space, Spacy::target<Impl>(*this) ) )
-//    {}
-
-//    /// Assign from vector implementation.
-//    template <class Impl,
-//              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value> >
-//    Vector& operator=(Impl&& impl)
-//    {
-//      TypeErasedStorage::operator =(std::forward<Impl>(impl));
-//      add_ = [this](const Vector& y) -> Vector&
-//      {
-//        (*Spacy::target<Impl>(*this)) += (*Spacy::target<Impl>(y));
-//        return *this;
-//      };
-//      subtract_ = [this](const Vector& y) -> Vector&
-//      {
-//        (*Spacy::target<Impl>(*this)) -= (*Spacy::target<Impl>(y));
-//        return *this;
-//      };
-//      multiply_ = [this](double a) -> Vector&
-//      {
-//        (*Spacy::target<Impl>(*this)) *= a;
-//        return *this;
-//      };
-//      negate_ = [this]() -> Vector
-//      {
-//        return -(*Spacy::target<Impl>(*this));
-//      };
-//      compare_ = [this](const Vector& y)
-//      {
-//        return (*Spacy::target<Impl>(*this)) == (*Spacy::target<Impl>(y));
-//      };
-//      asDual_ = [this](const Vector& y) -> Vector { return (*Spacy::target<Impl>(*this))( *Spacy::target<Impl>(y) ); };
-////      asDual_ = std::cref(*Spacy::target<Impl>(*this));
-//      space_ = std::bind(&std::decay_t<Impl>::space, Spacy::target<Impl>(*this) );
-//      return *this;
-//    }
-
-//    /// In-place summation \f$ x += y \f$.
-//    Vector& operator+=(const Vector& y);
-
-//    /// In-place subraction \f$ x -= y \f$.
-//    Vector& operator-=(const Vector& y);
-
-//    /// In-place multiplication \f$ x *= a \f$.
-//    Vector& operator*=(double a);
-
-//    /// Negation \f$-x\f$
-//    Vector operator-() const;
-
-//    /// Equality comparison (with respect to accuracy specified in the underlying function space).
-//    bool operator==(const Vector& y) const;
-
-//    /// Apply as dual element \f$x(y)\f$.
-//    Vector operator()(const Vector& y) const;
-
-//    /// Access underlying vector space \f$X\f$.
-//    const VectorSpace& space() const;
-
-//    /// Check if an implementation has been assigned.
-//    operator bool() const;
-
-//  private:
-//    std::function<Vector&(const Vector&)> add_;
-//    std::function<Vector&(const Vector&)> subtract_;
-//    std::function<Vector&(double)> multiply_;
-//    std::function<Vector()> negate_;
-//    std::function<bool(const Vector&)> compare_;
-//    std::function<Vector(const Vector&)> asDual_;
-//    std::function<const VectorSpace*()> space_;
-//  };
-
-  class Vector : public Mixin::CopyingUniqueImpl<AnyVector>
+  /// Type-erased linear operator \f$A:\ X \to Y \f$.
+  class Vector : public Mixin::ToTarget<Vector>
   {
+    friend class ToTarget<Vector>;
+
+    struct AbstractBase
+    {
+      virtual ~AbstractBase(){}
+      virtual Real operator()(const Vector& x) const = 0;
+      virtual void add(const Vector& y) = 0;
+      virtual void subtract(const Vector& y) = 0;
+      virtual void multiply(double a) = 0;
+      virtual Vector negate() const = 0;
+      virtual bool compare(const Vector& y) const = 0;
+      virtual const VectorSpace* space() const = 0;
+      virtual std::unique_ptr<AbstractBase> clone() const = 0;
+    };
+
+    template <class Impl>
+    struct Base : AbstractBase, Mixin::Impl<Impl>
+    {
+      Base(Impl const& impl)
+        : Mixin::Impl<Impl>(impl)
+      {}
+
+      Base(Impl&& impl)
+        : Mixin::Impl<Impl>(std::move(impl))
+      {}
+
+      Real operator()(const Vector& x) const final override
+      {
+        return this->impl()(*x.template target<Impl>());
+      }
+
+      void add(const Vector& y) final override
+      {
+        this->impl() += (*y.template target<Impl>());
+      }
+      void subtract(const Vector& y) final override
+      {
+        this->impl() -= (*y.template target<Impl>());
+      }
+
+      void multiply(double a) final override
+      {
+        this->impl() *= a;
+      }
+
+      Vector negate() const final override
+      {
+        return Vector( -this->impl() );
+      }
+
+      bool compare(const Vector& y) const final override
+      {
+        return this->impl() == (*y.template target<Impl>());
+      }
+
+      const VectorSpace* space() const final override
+      {
+        return this->impl().space();
+      }
+
+      std::unique_ptr<AbstractBase> clone() const final override
+      {
+        return std::make_unique< Base<Impl> >(this->impl());
+      }
+    };
+
   public:
-    Vector()
-      : Mixin::CopyingUniqueImpl<AnyVector>( std::make_unique<AnyVector>() )
+    Vector() = default;
+
+    /// Construct from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>/*,
+//              class = std::enable_if_t<HasMemOp_callable<Impl,Impl,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
+//              class = std::enable_if_t<HasMemOp_negate<Impl>::value>,
+              class = void_t< TryMemOp_negate<Impl> >,
+              class = std::enable_if_t<HasMemFn_space<Impl>::value>*/ >
+    Vector(Impl&& impl)
+      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
     {}
 
-    template <class VImpl,
-              class = std::enable_if_t<!std::is_same<std::decay_t<VImpl>,Vector>::value>
-              >
-    Vector(VImpl&& v)
-      : Mixin::CopyingUniqueImpl<AnyVector>(std::make_unique<AnyVector>(std::forward<VImpl>(v)))
-    {}
+    /// Assign from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
+//              class = std::enable_if_t<HasMemOp_callable<Impl,Impl,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
+              class = void_t< TryMemOp_negate<Impl> >,
+              class = std::enable_if_t<HasMemFn_space<Impl>::value> >
+    Vector& operator=(Impl&& impl)
+    {
+      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      return *this;
+    }
 
-//    Vector(AnyVector v);
 
- //   operator AnyVector() const;
+    /// Apply operator.
+    Real operator()(const Vector& x) const;
 
-    /**
-     * @brief In-place summation \f$ x+=y\f$.
-     * @param y vector to add to this vector
-     * @return \f$ x+=y\f$.
-     */
     Vector& operator+=(const Vector& y);
 
-    /**
-     * @brief In-place subtraction \f$ x-=y\f$.
-     * @param y vector to subtract from this vector
-     * @return \f$ x-=y\f$.
-     */
     Vector& operator-=(const Vector& y);
 
-    /**
-     * @brief In-place multiplication \f$ x*=a\f$.
-     * @param a scaling factor
-     * @return \f$ x*=a\f$.
-     */
     Vector& operator*=(double a);
 
-    /**
-     * @brief Negation \f$ -x\f$.
-     * @return \f$ -x \f$.
-     */
     Vector operator-() const;
 
-    Vector operator()(const Vector& y) const;
-
-    /**
-     * @brief Comparison operator \f$ x==y\f$.
-     * @param y vector to compare with this vector
-     * @return \f$ x==y\f$.
-     */
     bool operator==(const Vector& y) const;
 
+    /// Access underlying space of linear operators.
     const VectorSpace& space() const;
+
+    /// Check if an implementation has been assigned.
+    operator bool() const;
+
+  private:
+    CopyViaClonePtr<AbstractBase> base_;
   };
+
+//  class Vector : public Mixin::CopyingUniqueImpl<AnyVector>
+//  {
+//  public:
+//    Vector()
+//      : Mixin::CopyingUniqueImpl<AnyVector>( std::make_unique<AnyVector>() )
+//    {}
+
+//    template <class VImpl,
+//              class = std::enable_if_t<!std::is_same<std::decay_t<VImpl>,Vector>::value>
+//              >
+//    Vector(VImpl&& v)
+//      : Mixin::CopyingUniqueImpl<AnyVector>(std::make_unique<AnyVector>(std::forward<VImpl>(v)))
+//    {}
+
+////    Vector(AnyVector v);
+
+// //   operator AnyVector() const;
+
+//    /**
+//     * @brief In-place summation \f$ x+=y\f$.
+//     * @param y vector to add to this vector
+//     * @return \f$ x+=y\f$.
+//     */
+//    Vector& operator+=(const Vector& y);
+
+//    /**
+//     * @brief In-place subtraction \f$ x-=y\f$.
+//     * @param y vector to subtract from this vector
+//     * @return \f$ x-=y\f$.
+//     */
+//    Vector& operator-=(const Vector& y);
+
+//    /**
+//     * @brief In-place multiplication \f$ x*=a\f$.
+//     * @param a scaling factor
+//     * @return \f$ x*=a\f$.
+//     */
+//    Vector& operator*=(double a);
+
+//    /**
+//     * @brief Negation \f$ -x\f$.
+//     * @return \f$ -x \f$.
+//     */
+//    Vector operator-() const;
+
+//    Vector operator()(const Vector& y) const;
+
+//    /**
+//     * @brief Comparison operator \f$ x==y\f$.
+//     * @param y vector to compare with this vector
+//     * @return \f$ x==y\f$.
+//     */
+//    bool operator==(const Vector& y) const;
+
+//    const VectorSpace& space() const;
+//  };
 
   template <class ToType>
   bool is(const Spacy::Vector& v)
   {
+    return v.template target<ToType>() != nullptr;
 //    return Spacy::target<ToType>(v) != nullptr;
-    return is<ToType>(v.impl());
+//    return is<ToType>(v.impl());
   }
 
   template <class ToType>
   const ToType& cast_ref(const Spacy::Vector& v)
   {
+    return *v.template target<ToType>();
 //    return *Spacy::target<ToType>(v);
-    return cast_ref<ToType>(v.impl());
+//    return cast_ref<ToType>(v.impl());
   }
 
   template <class ToType>
   ToType& cast_ref(Spacy::Vector& v)
   {
+    return *v.template target<ToType>();
 //    return *Spacy::target<ToType>(v);
-    return cast_ref<ToType>(v.impl());
+//    return cast_ref<ToType>(v.impl());
   }
 
 ////  template <class> struct Scale;
@@ -217,9 +239,12 @@ namespace Spacy
    * @brief Multiplication with arithmetic types (double,float,int,...).
    * @return \f$z=a*x\f$.
    */
-//  template <class Arithmetic,
-//            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
-  Vector operator*(double a, Vector x);
+  template <class Arithmetic,
+            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
+  Vector operator*(Arithmetic a, Vector x)
+  {
+    return x *= a;
+  }
 
   Vector operator*(Vector x, double a);
 

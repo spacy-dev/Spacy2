@@ -4,6 +4,7 @@
 #include <dolfin.h>
 
 #include "Spacy/vector.hh"
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 

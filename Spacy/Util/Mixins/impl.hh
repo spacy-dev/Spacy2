@@ -53,8 +53,6 @@ namespace Spacy
     class Impl<const Type&>
     {
     public:
-      Impl() = default;
-
       /**
        * @brief Constructor.
        * @param impl value to be stored.
@@ -75,7 +73,39 @@ namespace Spacy
 
     /// Stores an object of type Type by const reference and provides access via member function impl().
     template <class Type>
+    class Impl<Type&>
+    {
+    public:
+      /**
+       * @brief Constructor.
+       * @param impl value to be stored.
+       */
+      explicit Impl(Type& impl)
+        : impl_(impl)
+      {}
+
+      /// Access implementation.
+      Type& impl()
+      {
+        return impl_;
+      }
+
+      /// Access implementation.
+      const Type& impl() const
+      {
+        return impl_;
+      }
+
+    private:
+      Type& impl_;
+    };
+
+    /// Stores an object of type Type by const reference and provides access via member function impl().
+    template <class Type>
     using CRefImpl = Impl<const Type&>;
+
+    template <class Type>
+    using RefImpl = Impl<Type&>;
 
     /// Stores an object of type Type as unique pointer and provides access via member function impl().
     template < class Type >

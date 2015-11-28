@@ -5,9 +5,13 @@
 #define SPACY_FUNCTIONAL_HH
 
 #include <functional>
-#include "Spacy/Util/typeErasedStorage.hh"
 #include "Spacy/Util/memFnChecks.hh"
 #include "Spacy/Util/memOpChecks.hh"
+#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/target.hh"
+#include "Spacy/vector.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -22,9 +26,47 @@ namespace Spacy
    * @{
    */
 
-  /// Type-erased functional.
-  class Functional : public TypeErasedStorage
+
+  /// Type-erased functional \f$f:\ X \to \mathbb{R} \f$.
+  class Functional : public Mixin::ToTarget<Functional>
   {
+    friend class ToTarget<Functional>;
+
+    struct AbstractBase
+    {
+      virtual ~AbstractBase(){}
+      virtual Real operator()(const Vector& x) const = 0;
+      virtual const VectorSpace& domain() const = 0;
+      virtual std::unique_ptr<AbstractBase> clone() const = 0;
+    };
+
+    template <class Impl>
+    struct Base : AbstractBase, Mixin::Impl<Impl>
+    {
+      Base(Impl const& impl)
+        : Mixin::Impl<Impl>(impl)
+      {}
+
+      Base(Impl&& impl)
+        : Mixin::Impl<Impl>(std::move(impl))
+      {}
+
+      Real operator()(const Vector& x) const final override
+      {
+        return this->impl()(x);
+      }
+
+      const VectorSpace& domain() const final override
+      {
+        return this->impl().domain();
+      }
+
+      std::unique_ptr<AbstractBase> clone() const final override
+      {
+        return std::make_unique< Base<Impl> >(this->impl());
+      }
+    };
+
   public:
     Functional() = default;
 
@@ -34,10 +76,8 @@ namespace Spacy
               class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     Functional(Impl&& impl)
-      : TypeErasedStorage(std::forward<Impl>(impl))
-    {
-      init<Impl>();
-    }
+      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+    {}
 
     /// Assign from functional implementation.
     template <class Impl,
@@ -46,12 +86,12 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     Functional& operator=(Impl&& impl)
     {
-      TypeErasedStorage::operator =(std::forward<Impl>(impl));
-      init<Impl>();
+      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
       return *this;
     }
 
-    /// Apply functional.
+
+    /// Apply operator.
     Real operator()(const Vector& x) const;
 
     /// Access domain space \f$X\f$.
@@ -61,21 +101,56 @@ namespace Spacy
     operator bool() const;
 
   private:
-    template <class Impl>
-    void init()
-    {
-      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
-      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
-    }
-
-    std::function<Real(const Vector&)> apply_;
-    std::function<const VectorSpace&()> domain_;
+    CopyViaClonePtr<AbstractBase> base_;
   };
 
 
-  /// Type-erased differentiable functional.
-  class C1Functional : public TypeErasedStorage
+  /// Type-erased differentiable functional \f$f:\ X \to \mathbb{R} \f$.
+  class C1Functional : public Mixin::ToTarget<C1Functional>
   {
+    friend class ToTarget<C1Functional>;
+
+    struct AbstractBase
+    {
+      virtual ~AbstractBase(){}
+      virtual Real operator()(const Vector& x) const = 0;
+      virtual Vector d1(const Vector &x) const = 0;
+      virtual const VectorSpace& domain() const = 0;
+      virtual std::unique_ptr<AbstractBase> clone() const = 0;
+    };
+
+    template <class Impl>
+    struct Base : AbstractBase, Mixin::Impl<Impl>
+    {
+      Base(Impl const& impl)
+        : Mixin::Impl<Impl>(impl)
+      {}
+
+      Base(Impl&& impl)
+        : Mixin::Impl<Impl>(std::move(impl))
+      {}
+
+      Real operator()(const Vector& x) const final override
+      {
+        return this->impl()(x);
+      }
+
+      Vector d1(const Vector &x) const final override
+      {
+        return this->impl().d1(x);
+      }
+
+      const VectorSpace& domain() const final override
+      {
+        return this->impl().domain();
+      }
+
+      std::unique_ptr<AbstractBase> clone() const final override
+      {
+        return std::make_unique< Base<Impl> >(this->impl());
+      }
+    };
+
   public:
     C1Functional() = default;
 
@@ -86,10 +161,8 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional(Impl&& impl)
-      : TypeErasedStorage(std::forward<Impl>(impl))
-    {
-      init<Impl>();
-    }
+      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+    {}
 
     /// Assign from functional implementation.
     template <class Impl,
@@ -99,12 +172,12 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional& operator=(Impl&& impl)
     {
-      TypeErasedStorage::operator =(std::forward<Impl>(impl));
-      init<Impl>();
+      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
       return *this;
     }
 
-    /// Apply functional.
+
+    /// Apply operator.
     Real operator()(const Vector& x) const;
 
     /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
@@ -117,23 +190,68 @@ namespace Spacy
     operator bool() const;
 
   private:
-    template <class Impl>
-    void init()
-    {
-      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
-      d1_ = std::bind( &std::decay_t<Impl>::d1, Spacy::target<Impl>(*this) , std::placeholders::_1 );
-      domain_ = std::bind( &std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
-    }
-
-    std::function<Real(const Vector&)> apply_;
-    std::function<Vector(const Vector&)> d1_;
-    std::function<const VectorSpace&()> domain_;
+    CopyViaClonePtr<AbstractBase> base_;
   };
 
 
-  /// Type-erased twice differentiable functional.
-  class C2Functional : public TypeErasedStorage
+  /// Type-erased twice differentiable functional \f$f:\ X \to \mathbb{R} \f$.
+  class C2Functional : public Mixin::ToTarget<C2Functional>
   {
+    friend class ToTarget<C2Functional>;
+
+    struct AbstractBase
+    {
+      virtual ~AbstractBase(){}
+      virtual Real operator()(const Vector& x) const = 0;
+      virtual Vector d1(const Vector &x) const = 0;
+      virtual Vector d2(const Vector &x, const Vector &dx) const = 0;
+      virtual LinearOperator hessian(const Vector &x) const = 0;
+      virtual const VectorSpace& domain() const = 0;
+      virtual std::unique_ptr<AbstractBase> clone() const = 0;
+    };
+
+    template <class Impl>
+    struct Base : AbstractBase, Mixin::Impl<Impl>
+    {
+      Base(Impl const& impl)
+        : Mixin::Impl<Impl>(impl)
+      {}
+
+      Base(Impl&& impl)
+        : Mixin::Impl<Impl>(std::move(impl))
+      {}
+
+      Real operator()(const Vector& x) const final override
+      {
+        return this->impl()(x);
+      }
+
+      Vector d1(const Vector &x) const final override
+      {
+        return this->impl().d1(x);
+      }
+
+      Vector d2(const Vector &x, const Vector &dx) const final override
+      {
+        return this->impl().d2(x,dx);
+      }
+
+      LinearOperator hessian(const Vector &x) const final override
+      {
+        return this->impl().hessian(x);
+      }
+
+      const VectorSpace& domain() const final override
+      {
+        return this->impl().domain();
+      }
+
+      std::unique_ptr<AbstractBase> clone() const final override
+      {
+        return std::make_unique< Base<Impl> >(this->impl());
+      }
+    };
+
   public:
     C2Functional() = default;
 
@@ -146,10 +264,8 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C2Functional(Impl&& impl)
-      : TypeErasedStorage(std::forward<Impl>(impl))
-    {
-      init<Impl>();
-    }
+      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+    {}
 
     /// Assign from functional implementation.
     template <class Impl,
@@ -161,12 +277,11 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C2Functional& operator=(Impl&& impl)
     {
-      TypeErasedStorage::operator =(std::forward<Impl>(impl));
-      init<Impl>();
+      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
       return *this;
     }
 
-    /// Apply functional.
+    /// Apply operator.
     Real operator()(const Vector& x) const;
 
     /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
@@ -185,22 +300,9 @@ namespace Spacy
     operator bool() const;
 
   private:
-    template <class Impl>
-    void init()
-    {
-      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
-      d1_ = std::bind(&std::decay_t<Impl>::d1, Spacy::target<Impl>(*this) , std::placeholders::_1 );
-      d2_ = std::bind(&std::decay_t<Impl>::d2, Spacy::target<Impl>(*this) , std::placeholders::_1 , std::placeholders::_2 );
-      hessian_ = std::bind(&std::decay_t<Impl>::hessian, Spacy::target<Impl>(*this) , std::placeholders::_1 );
-      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
-    }
-
-    std::function<Real(const Vector&)> apply_;
-    std::function<Vector(const Vector&)> d1_;
-    std::function<Vector(const Vector&,const Vector&)> d2_;
-    std::function<LinearOperator(const Vector &x)> hessian_;
-    std::function<const VectorSpace&()> domain_;
+    CopyViaClonePtr<AbstractBase> base_;
   };
+
 
   /**
    * @brief For a functional \f$ f: X\to \mathbb{R} \f$, compute \f$f'\f$ at \f$x\in X\f$ as dual element \f$ f'(x) \in X^* \f$.

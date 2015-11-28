@@ -1,7 +1,11 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "terminationCriteria.hh"
 
 #include "Spacy/Algorithm/dampingFactor.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/operator.hh"
 
 #include <cmath>
 #include <iostream>

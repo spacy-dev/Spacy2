@@ -1,28 +1,24 @@
-#ifndef SPACY_NEWTON_DAMPINGSTRATEGIES_HH
-#define SPACY_NEWTON_DAMPINGSTRATEGIES_HH
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
 
-#include <boost/type_erasure/any.hpp>
+#ifndef SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH
+#define SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH
 
-#include "Spacy/linearSolver.hh"
-#include "Spacy/operator.hh"
+#include <functional>
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Algorithm/dampingFactor.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/regularityTest.hh"
-#include "Spacy/Util/Concepts/Newton/dampingStrategyConcept.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Operator;
+  /// @endcond
+
   namespace Newton
   {
-    /**
-     * \brief Damping strategies for newton methods.
-     * \anchor Newton_DampingStrategyAnchor
-     * See \ref Newton_DampingStrategyConceptAnchor "DampingStrategyConcept".
-     */
-    using DampingStrategy = boost::type_erasure::any< ::Spacy::Concepts::Newton::DampingStrategyConcept >;
-
     namespace Damping
     {
       /**
@@ -36,7 +32,7 @@ namespace Spacy
         AffineCovariant(const Operator& F);
 
         /// Compute damping factor.
-        DampingFactor operator()(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const;
+        DampingFactor operator()(const std::function<Vector(const Vector&)>& DFInv_, const Vector& x, const Vector& dx) const;
 
       private:
         const Operator& F_;
@@ -57,7 +53,7 @@ namespace Spacy
         AffineContravariant(const Operator& F);
 
         /// Compute damping factor.
-        DampingFactor operator()(const LinearSolver&, const Vector& x, const Vector& dx) const;
+        DampingFactor operator()(const std::function<Vector(const Vector&)>&, const Vector& x, const Vector& dx) const;
 
       private:
         const Operator& F_;
@@ -78,10 +74,10 @@ namespace Spacy
          * @brief Compute damping factor.
          * @return 1
          */
-        DampingFactor operator()(const LinearSolver&, const Vector&, const Vector&) const;
+        DampingFactor operator()(const std::function<Vector(const Vector&)>&, const Vector&, const Vector&) const;
       };
     }
   }
 }
 
-#endif // SPACY_NEWTON_DAMPINGSTRATEGIES_HH
+#endif // SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH

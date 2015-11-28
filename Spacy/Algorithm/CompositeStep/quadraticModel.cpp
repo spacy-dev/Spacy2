@@ -1,9 +1,10 @@
 #include "quadraticModel.hh"
 
-#include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/invoke.hh"
+#include "Spacy/functional.hh"
 #include "Spacy/scalarProduct.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/vectorSpace.hh"
 
 #include <cmath>
 #include <tuple>

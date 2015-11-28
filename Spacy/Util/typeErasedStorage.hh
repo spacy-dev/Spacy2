@@ -91,6 +91,18 @@ namespace Spacy
   {
     return storage.template target< std::decay_t<T> >();
   }
+
+  template <class T, class Return, class... Args>
+  std::decay_t<T>* target(std::function<Return(Args...)>& storage)
+  {
+    return storage.template target< std::decay_t<T> >();
+  }
+
+  template <class T, class Return, class... Args>
+  const std::decay_t<T>* target(const std::function<Return(Args...)>& storage)
+  {
+    return storage.template target< std::decay_t<T> >();
+  }
 }
 
 #endif // SPACY_UTIL_TYPE_ERASED_STORAGE_HH

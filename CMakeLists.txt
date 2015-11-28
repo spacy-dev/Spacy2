@@ -42,6 +42,7 @@ add_subdirectory(Spacy)
 # Does not debug auto, but is less sloppy than gcc
 # set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
 #set(CMAKE_CXX_COMPILER "/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/gcc/bin/g++")
+#set(CMAKE_CXX_COMPILER "/usr/bin/g++-5")
 
 # enable/disable tests
 option(BuildTest "BuildTest" ON)
@@ -76,29 +77,29 @@ option(Kaskade "Kaskade" OFF)
   aux_source_directory(Test/Spacy/Util TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Util/Base TEST_SRC_LIST)
 
-  find_package(Eigen3)
-  if(EIGEN3_FOUND)
-    include_directories(${EIGEN3_INCLUDE_DIR})
-    aux_source_directory(Test/Spacy/Adapter/Eigen TEST_SRC_LIST)
-  endif()
+#  find_package(Eigen3)
+#  if(EIGEN3_FOUND)
+#    include_directories(${EIGEN3_INCLUDE_DIR})
+#    aux_source_directory(Test/Spacy/Adapter/Eigen TEST_SRC_LIST)
+#  endif()
 
   if(Kaskade)
     include_directories(/home/lars/Projects/OpenSource/Kaskade/Kaskade7.3
 #                       /home/lars/libs/acml/acml5.3.1/gfortran64/include
                         /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/include
-                        /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include)
-#                        /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include/ug)
+                        /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include
+                        /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include/ug)
     link_directories(/home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/libs
 #                     /home/lars/libs/acml/acml5.3.1/gfortran64/lib
-                     /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/lib)
-#                     /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/lib)
+                     /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/lib
+                     /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/lib)
     aux_source_directory(Test/Spacy/Adapter/Kaskade TEST_SRC_LIST)
   endif()
 
   add_executable(unit_tests ${TEST_SRC_LIST})
   target_link_libraries(unit_tests spacy gtest pthread)
   if(Kaskade)
-    target_link_libraries(unit_tests kaskade boost_system)
+    target_link_libraries(unit_tests kaskade boost_system dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX)
 #    target_link_libraries(unit_tests kaskade dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX boost_signals boost_program_options boost_system boost_timer boost_thread boost_chrono acml)
   endif()
 #endif()

@@ -1,5 +1,8 @@
-#ifndef SPACY_SPACY_NEWTON_HH
-#define SPACY_SPACY_NEWTON_HH
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
+#ifndef SPACY_ALGORITHM_NEWTON_HH
+#define SPACY_ALGORITHM_NEWTON_HH
 
 #include "Spacy/operator.hh"
 #include "Spacy/Algorithm/Newton/dampingStrategies.hh"
@@ -8,10 +11,13 @@
 
 namespace Spacy
 {
+  /** @addtogroup NewtonGroup
+   * @{
+   */
+
   namespace Newton
   {
     /**
-     * @ingroup NewtonGroup
      * @brief Generic %Newton method.
      *
      * @param F operator
@@ -23,12 +29,11 @@ namespace Spacy
      * @see Newton::Parameter, @ref Newton_DampingStrategyAnchor "DampingStrategy", @ref Newton_TerminationCriterionAnchor "TerminationCriterion"
      */
     Vector newton(const C1Operator& F, const Vector& x0,
-                  const DampingStrategy& dampingStrategy,
-                  const TerminationCriterion& terminationCriterion,
+                  const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
+                  const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
                   const Parameter p);
 
     /**
-     * @ingroup NewtonGroup
      * @brief Generic %Newton method.
      *
      * @param F operator
@@ -50,7 +55,6 @@ namespace Spacy
   }
 
   /**
-   * @ingroup NewtonGroup
    * @brief Local %Newton method.
    *
    * @param F operator
@@ -65,7 +69,6 @@ namespace Spacy
   Vector localNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
 
   /**
-   * @ingroup NewtonGroup
    * @brief Local %Newton method with default initial iterate (x0=0).
    *
    * @param F operator
@@ -79,7 +82,6 @@ namespace Spacy
   Vector localNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
   /**
-   * @ingroup NewtonGroup
    * @brief Affine covariant %Newton method.
    *
    * @param F operator
@@ -94,7 +96,6 @@ namespace Spacy
   Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
 
   /**
-   * @ingroup NewtonGroup
    * @brief Affine covariant %Newton method.
    *
    * @param F operator
@@ -108,7 +109,6 @@ namespace Spacy
   Vector covariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
   /**
-   * @ingroup NewtonGroup
    * @brief Affine contravariant %Newton method.
    *
    * @param F operator
@@ -123,7 +123,6 @@ namespace Spacy
   Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
 
   /**
-   * @ingroup NewtonGroup
    * @brief Affine contravariant %Newton method.
    *
    * @param F operator
@@ -136,5 +135,6 @@ namespace Spacy
    */
   Vector contravariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
 
+  /** @} */
 }
-#endif // SPACY_SPACY_NEWTON_HH
+#endif // SPACY_ALGORITHM_NEWTON_HH

@@ -3,6 +3,7 @@
 #include "Spacy/Util/Base/functionalBase.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/vectorSpace.hh"
 
 namespace Spacy
 {

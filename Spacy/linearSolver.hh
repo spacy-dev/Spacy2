@@ -66,15 +66,16 @@ namespace Spacy
       virtual ~AbstractBase(){}
       virtual Vector operator()(const Vector&) const = 0;
       virtual bool isPositiveDefinite() const = 0 ;
+      virtual std::unique_ptr<AbstractBase> clone() const = 0;
     };
 
     template <class Impl>
     struct Base :
         public AbstractBase,
-        public Mixin::CopyingUniqueImpl<Impl>
+        public Mixin::Impl<Impl>
     {
       explicit Base(const Impl& impl)
-        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
+        : Mixin::Impl<Impl>(impl)
       {}
 
       Vector operator()(const Vector& x) const final override
@@ -86,6 +87,11 @@ namespace Spacy
       {
         return this->impl().isPositiveDefinite();
       }
+
+      std::unique_ptr<AbstractBase> clone() const
+      {
+        return std::make_unique< Base<Impl> >(this->impl());
+      }
     };
 
   public:
@@ -93,14 +99,16 @@ namespace Spacy
 
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,IndefiniteLinearSolver>::value>,
-              class = void_t< TryMemFn_isPositiveDefinite<Impl> > >
+              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,Vector,Vector>::value>,
+              class = void_t< TryMemFn_isPositiveDefinite<std::decay_t<Impl> > > >
     IndefiniteLinearSolver(Impl&& impl)
       : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
     {}
 
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,IndefiniteLinearSolver>::value>,
-              class = void_t< TryMemFn_isPositiveDefinite<Impl> > >
+              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,Vector,Vector>::value>,
+              class = void_t< TryMemFn_isPositiveDefinite<std::decay_t<Impl> > > >
     IndefiniteLinearSolver& operator=(Impl&& impl)
     {
       base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
@@ -113,13 +121,9 @@ namespace Spacy
 
     operator bool() const;
 
-    friend bool is_empty(const IndefiniteLinearSolver&);
-
   private:
-    Mixin::CopyingUniqueImpl<AbstractBase> base_ = {};
+    CopyViaClonePtr<AbstractBase> base_ = {};
   };
-
-  bool is_empty(const IndefiniteLinearSolver& solver);
 }
 /** @} */
 

@@ -1,7 +1,11 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "newton.hh"
 
 #include "Spacy/derivative.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/Exceptions/notConvergedException.hh"
 
 #include <iostream>
@@ -11,9 +15,9 @@ namespace Spacy
   namespace Newton
   {
     Vector newton(const C1Operator& F, const Vector& x0,
-                  const DampingStrategy& dampingStrategy,
-                  const TerminationCriterion& terminationCriterion,
-                  const Newton::Parameter p)
+                  const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
+                  const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
+                  const Parameter p)
     {
       using namespace std::chrono;
       if( p.verbose() ) std::cout << "Starting newton iteration." << std::endl;
@@ -25,7 +29,8 @@ namespace Spacy
 
       for(unsigned i = 1; i <= p.maxSteps(); ++i)
       {
-        if( p.verbose() ) std::cout << "\nIteration " << i << ": ";
+//        if( p.verbose() )
+          std::cout << "\nIteration " << i << ": ";
 
         auto dF_inv = d1(F,x)^-1;
 

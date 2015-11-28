@@ -1,6 +1,11 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "dampingStrategies.hh"
 
 #include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
+#include "Spacy/vectorSpace.hh"
+#include "Spacy/operator.hh"
 
 #include <iostream>
 
@@ -14,7 +19,7 @@ namespace Spacy
         : F_(F), oldDs(F.domain().zeroVector())
       {}
 
-      DampingFactor AffineCovariant::operator()(const LinearSolver& DFInv_, const Vector& x, const Vector& dx) const
+      DampingFactor AffineCovariant::operator()(const std::function<Vector(const Vector&)>& DFInv_, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1;
         auto mu = Real{1.}, normDx =  norm(dx);
@@ -65,7 +70,7 @@ namespace Spacy
         : F_(F)
       {}
 
-      DampingFactor AffineContravariant::operator()(const LinearSolver&, const Vector& x, const Vector& dx) const
+      DampingFactor AffineContravariant::operator()(const std::function<Vector(const Vector&)>&, const Vector& x, const Vector& dx) const
       {
         DampingFactor nu = 1.;
         auto norm_F_x = norm(F_(x));
@@ -109,7 +114,7 @@ namespace Spacy
       None::None(const Operator&)
       {}
 
-      DampingFactor None::operator()(const LinearSolver&, const Vector&, const Vector&) const
+      DampingFactor None::operator()(const std::function<Vector(const Vector&)>&, const Vector&, const Vector&) const
       {
         return 1;
       }

@@ -14,6 +14,7 @@
 #include "vector.hh"
 #include "operatorSpace.hh"
 #include "linearOperator.hh"
+#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -148,7 +149,7 @@ namespace Spacy
        * @param x argument
        * @return \f$f(x)\f$
        */
-      double operator()(const ::Spacy::Vector& x) const
+      Real operator()(const ::Spacy::Vector& x) const
       {
         assembleFunctional(x);
         return value_;
@@ -196,7 +197,7 @@ namespace Spacy
        * @param x point of linearization
        * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      auto hessian(const ::Spacy::Vector& x) const
+      ::Spacy::LinearOperator hessian(const ::Spacy::Vector& x) const
       {
         assembleHessian(x);
 

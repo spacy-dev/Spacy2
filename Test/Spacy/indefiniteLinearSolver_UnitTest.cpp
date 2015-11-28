@@ -11,16 +11,16 @@ TEST(IndefiniteLinearSolver,Construction)
 {
   auto solver = Mock::IndefiniteLinearSolver{};
   IndefiniteLinearSolver typeErasedSolver( solver );
-  ASSERT_FALSE( is_empty(typeErasedSolver) );
+  ASSERT_FALSE( !typeErasedSolver );
 }
 
 TEST(IndefiniteLinearSolver,Assignment)
 {
   auto solver = Mock::IndefiniteLinearSolver{};
   IndefiniteLinearSolver typeErasedSolver;
-  ASSERT_TRUE( is_empty(typeErasedSolver) );
+  ASSERT_TRUE( !typeErasedSolver );
   typeErasedSolver = solver;
-  ASSERT_FALSE( is_empty(typeErasedSolver) );
+  ASSERT_FALSE( !typeErasedSolver );
 }
 
 TEST(IndefiniteLinearSolver,Apply)

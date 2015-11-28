@@ -16,33 +16,29 @@ namespace
     EXPECT_EQ( 0u , f.domain().index() );
     EXPECT_EQ( 0u , f.range().index() );
 
-//    auto L = f.solver();
-//    auto expected = L;
-//    EXPECT_TRUE(expected);
+    auto L = f.solver();
+    auto expected = Spacy::target<Mock::IndefiniteLinearSolver>(L) != nullptr;
+    EXPECT_TRUE(expected);
   }
 }
 
-//TEST(LinearOperator,IsEmpty)
-//{
-//  auto X = createMockBanachSpace();
-//  auto Y = createMockBanachSpace();
-//  LinearOperator f;
-//  LinearOperator g = TestLinearOperator(X,Y);
+TEST(LinearOperator,IsEmpty)
+{
+  LinearOperator f;
+  LinearOperator g = Mock::LinearOperator(1);
 
-//  bool f_is_empty = !f;
-//  bool g_is_empty = !g;
-//  ASSERT_TRUE( f_is_empty );
-//  ASSERT_FALSE( g_is_empty );
-//}
+  bool f_is_empty = !f;
+  bool g_is_empty = !g;
+  ASSERT_TRUE( f_is_empty );
+  ASSERT_FALSE( g_is_empty );
+}
 
-////TEST(LinearOperator,Cast)
-////{
-////  auto X = createMockBanachSpace();
-////  auto Y = createMockBanachSpace();
-////  LinearOperator f = TestLinearOperator(X,Y);
+TEST(LinearOperator,Cast)
+{
+  LinearOperator f = Mock::LinearOperator();
 
-////  ASSERT_TRUE( f.target<TestLinearOperator>() != nullptr );
-////}
+  ASSERT_TRUE( f.target<Mock::LinearOperator>() != nullptr );
+}
 
 TEST(LinearOperator,StoreRValue)
 {
@@ -85,24 +81,24 @@ TEST(LinearOperator,Multiply)
   test(f,2);
 }
 
-//TEST(LinearOperator,Negate)
-//{
-//  LinearOperator g = Mock::LinearOperator(1);
-//  auto f = -g;
-//  test(f,-1);
-//}
+TEST(LinearOperator,Negate)
+{
+  LinearOperator g = Mock::LinearOperator(1);
+  auto f = -g;
+  test(f,-1);
+}
 
-//TEST(LinearOperator,Move)
-//{
-//  LinearOperator g = Mock::LinearOperator(1);
-//  bool is_empty_before_move = !g;
-//  LinearOperator f = std::move(g);
-//  bool is_empty_after_move = !g;
+TEST(LinearOperator,Move)
+{
+  LinearOperator g = Mock::LinearOperator(1);
+  bool is_empty_before_move = !g;
+  LinearOperator f = std::move(g);
+  bool is_empty_after_move = !g;
 
-//  EXPECT_FALSE(is_empty_before_move);
-//  EXPECT_TRUE(is_empty_after_move);
+  EXPECT_FALSE(is_empty_before_move);
+  EXPECT_TRUE(is_empty_after_move);
 
-//  test(f,1);
-//}
+  test(f,1);
+}
 
 

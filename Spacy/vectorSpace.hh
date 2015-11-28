@@ -10,7 +10,6 @@
 
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/target.hh"
-#include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/vector.hh"
 
 namespace Spacy

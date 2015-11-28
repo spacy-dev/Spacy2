@@ -1,27 +1,24 @@
-#ifndef AFFINECOVARIANTTERMINATIONCRITERION_HH
-#define AFFINECOVARIANTTERMINATIONCRITERION_HH
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
 
-#include "Spacy/operator.hh"
+#ifndef SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH
+#define SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH
+
 #include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/mixins.hh"
-#include "Spacy/Util/Concepts/Newton/terminationCriterionConcept.hh"
+#include "Spacy/Util/Mixins/relativeAccuracy.hh"
+#include "Spacy/Util/Mixins/verbosity.hh"
+#include "Spacy/Util/Mixins/eps.hh"
 
 namespace Spacy
 {
   /// @cond
   class DampingFactor;
+  class Operator;
   class Vector;
   /// @endcond
 
   namespace Newton
-  {    
-    /**
-     * \brief Termination criteria for newton methods.
-     * \anchor Newton_TerminationCriterionAnchor
-     * See \ref Newton_TerminationCriterionConceptAnchor "TerminationCriterionConcept".
-     */
-    using TerminationCriterion = boost::type_erasure::any< Concepts::Newton::TerminationCriterionConcept >;
-
+  {
     namespace Termination
     {
       /**
@@ -83,4 +80,4 @@ namespace Spacy
   }
 }
 
-#endif // AFFINECOVARIANTTERMINATIONCRITERION_HH
+#endif // SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH

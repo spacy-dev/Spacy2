@@ -57,7 +57,7 @@ namespace Spacy
        * @param space pointer to vector space implementation
        * @return vector associated with space
        */
-      Vector operator()(const VectorSpace* space) const;
+      ::Spacy::Vector operator()(const VectorSpace* space) const;
 
       /// Degrees of freedom.
       unsigned size() const;

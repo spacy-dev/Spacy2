@@ -4,6 +4,7 @@
 #ifndef SPACY_ADAPTER_GENERIC_VECTOR_HH
 #define SPACY_ADAPTER_GENERIC_VECTOR_HH
 
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"

@@ -2,6 +2,7 @@
 #define SPACY_ADAPTER_SCALAR_LINEAR_OPERATOR_HH
 
 #include <functional>
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/Mixins/impl.hh"

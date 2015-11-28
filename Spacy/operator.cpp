@@ -12,102 +12,126 @@ namespace Spacy
 {
   Vector Operator::operator()(const Vector& x) const
   {
-    return apply_(x);
+    assert(base_);
+    return base_->operator ()(x);
+//    return apply_(x);
   }
 
   const VectorSpace& Operator::domain() const
   {
-    return domain_();
+    assert(base_);
+    return base_->domain();
+//    return domain_();
   }
 
   const VectorSpace& Operator::range() const
   {
-    return range_();
+    assert(base_);
+    return base_->range();
+//    return range_();
   }
 
   Operator::operator bool() const
   {
-    return apply_ && domain_ && range_;
+    return base_;
+//    return !is_empty(*this);
   }
 
 
   Vector C1Operator::operator()(const Vector& x) const
   {
-    assert( apply_ );
-    return apply_(x);
-//    return base_.impl()(x);
+    assert(base_);
+    return base_->operator ()(x);
+//    assert( apply_ );
+//    return apply_(x);
   }
 
   Vector C1Operator::d1(const Vector& x, const Vector& dx) const
   {
-    assert( d1_ );
-    return d1_(x,dx);
-//    return base_.impl().d1(x,dx);
+    assert(base_);
+    return base_->d1(x,dx);
+//    assert( d1_ );
+//    return d1_(x,dx);
   }
 
   LinearOperator C1Operator::linearization(const Vector& x) const
   {
-    assert( linearization_ );
-    if( !linearization_ ) std::cout << "grr" << std::endl;
-    std::cout << "access linearization" << std::endl;
-    return linearization_(x);
-//    return base_.impl().linearization(x);
+    assert(base_);
+    return base_->linearization(x);
+//    assert( linearization_ );
+//    return linearization_(x);
   }
 
   const VectorSpace& C1Operator::domain() const
   {
-    assert( domain_ );
-    return domain_();
-//    return base_.impl().domain();
+    assert(base_);
+    return base_->domain();
+//    assert( domain_ );
+//    return domain_();
   }
 
   const VectorSpace& C1Operator::range() const
   {
-    assert( range_ );
-    return range_();
-    //    return base_.impl().range();
+    assert(base_);
+    return base_->range();
+//    assert( range_ );
+//    return range_();
   }
 
   C1Operator::operator bool() const
   {
-    return apply_ && d1_ && linearization_ && domain_ && range_;
-//    return !is_empty(base_);
+    return base_;
+//    return !is_empty(*this);
   }
 
 
   Vector LinearOperator::operator()(const Vector& x) const
   {
-    return apply_(x);
+    return base_->operator ()(x);
+//    return apply_(x);
   }
 
   std::function<Vector(const Vector&)> LinearOperator::solver() const
   {
-    return solver_();
+    return base_->solver();
+//    return solver_();
   }
 
   LinearOperator& LinearOperator::operator+=(const LinearOperator& y)
   {
-    return add_(y);
+    base_->add(y);
+    return *this;
+//    return base_->operator +=(y);
+//    return add_(y);
   }
 
   LinearOperator& LinearOperator::operator-=(const LinearOperator& y)
   {
-    return subtract_(y);
+    base_->subtract(y);
+    return *this;
+//    return base_->operator -=(y);
+//    return subtract_(y);
   }
 
   LinearOperator& LinearOperator::operator*=(double a)
   {
-    return multiply_(a);
+    base_->multiply(a);
+    return *this;
+//    return base_->operator *=(a);
+//    return multiply_(a);
   }
 
   LinearOperator LinearOperator::operator-() const
   {
-    return negate_();
+    return base_->negate();
+//    return base_->operator -();
+//    return negate_();
   }
 
   bool LinearOperator::operator==(const LinearOperator& y) const
   {
-    return compare_(y);
+    return base_->operator ==(y);
+//    return compare_(y);
   }
 
 //  Vector LinearOperator::operator()(const LinearOperator& y) const
@@ -117,23 +141,28 @@ namespace Spacy
 
   const VectorSpace* LinearOperator::space() const
   {
-    return space_();
+    return base_->space();
+//    return space_();
   }
 
   const VectorSpace& LinearOperator::domain() const
   {
-    return domain_();
+    return base_->domain();
+//    return domain_();
   }
 
   const VectorSpace& LinearOperator::range() const
   {
-    return range_();
+    return base_->range();
+//    return range_();
   }
 
   LinearOperator::operator bool() const
   {
-    return apply_ && solver_ && add_ && subtract_ && multiply_ && compare_ /*&& applyAsDual_*/ && space_ && domain_ && range_;
+    return base_;
+    //return apply_ && solver_ && add_ && subtract_ && multiply_ && compare_ /*&& applyAsDual_*/ && space_ && domain_ && range_;
   }
+
 
 
   LinearSolver operator^(const LinearOperator& A, int k)

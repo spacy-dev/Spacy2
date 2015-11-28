@@ -40,7 +40,7 @@ namespace Spacy
     }
 
 
-    Vector VectorCreator::operator()(const VectorSpace* space) const
+    ::Spacy::Vector VectorCreator::operator()(const VectorSpace* space) const
     {
       return Vector{*space};
     }

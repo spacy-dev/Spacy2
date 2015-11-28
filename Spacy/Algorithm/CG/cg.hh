@@ -169,7 +169,7 @@ namespace Spacy
 
       // parameters for regularized conjugate gradient methods
       mutable Real theta = Real{0};
-      unsigned maxIncrease = 1000, minIncrease = 2;
+      double maxIncrease = 1000, minIncrease = 2;
     };
   }
 }

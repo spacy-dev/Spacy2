@@ -3,13 +3,13 @@
 
 #include <cassert>
 
-#include "Spacy/functional.hh"
 #include "Spacy/Algorithm/Functions_1D/quadratic.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
   /// @cond
+  class C2Functional;
   class Vector;
   /// @endcond
 

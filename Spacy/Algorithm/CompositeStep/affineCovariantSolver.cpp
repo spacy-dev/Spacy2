@@ -10,8 +10,6 @@
 #include "Spacy/Spaces/ProductSpace/vector.hh"
 #include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
 
-#include <boost/type_erasure/is_empty.hpp>
-
 #include <cmath>
 #include <iostream>
 #include <utility>
@@ -308,7 +306,7 @@ namespace Spacy
 
     bool AffineCovariantSolver::convergenceTest(Real nu, Real tau, Real norm_x, Real norm_dx)
     {
-      if( !is_empty(tangentialSolver) && !tangentialSolver.isPositiveDefinite() ) return false;
+      if( tangentialSolver && !tangentialSolver.isPositiveDefinite() ) return false;
       if( nu < 1 || tau < 1 ) return false;
 
       if( norm_dx < relativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
@@ -337,7 +335,7 @@ namespace Spacy
     Real AffineCovariantSolver::updateOmegaL(const Vector& soc, Real q_tau,
                                                        Real tau, Real norm_x, Real norm_dx, const CompositeStep::CubicModel& cubic)
     {
-      if( is_empty(tangentialSolver) ) return 1;
+      if( !tangentialSolver ) return 1;
 
       Real eta = 1;
       if( abs( cubic(tau) - cubic(0) ) > sqrtEps()*norm_x )

@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "Spacy/linearSolver.hh"
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 

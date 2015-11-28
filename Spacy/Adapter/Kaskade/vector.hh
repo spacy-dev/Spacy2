@@ -2,6 +2,7 @@
 #define SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 #include "Spacy/Util/cast.hh"
 
@@ -42,7 +43,9 @@ namespace Spacy
         : VectorBase(space),
           spaces_(&cast_ref< VectorCreator<Description> >(space.creator()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
-      {}
+      {
+        std::cout << "Create variable. id=" << Variable::id << ", m=" << Variable::m << ", spaceIndex=" << Variable::spaceIndex << std::endl;
+      }
 
       /**
        * @brief Assign from coefficient vector of %Kaskade 7.

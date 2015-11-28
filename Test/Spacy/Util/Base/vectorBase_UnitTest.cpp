@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 
 #include "Test/mockSetup.hh"

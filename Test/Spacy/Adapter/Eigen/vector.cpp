@@ -27,7 +27,7 @@ TEST(Rn,AssignFromEigen_VectorXd)
   auto vec = testVector();
 
   auto space = createMockBanachSpace();
-  Spacy::Rn::Vector spacy_v(0*vec,space);
+  Spacy::Rn::Vector spacy_v(0.*vec,space);
 
   ASSERT_EQ( spacy_v.impl()[0] , 0.);
   ASSERT_EQ( spacy_v.impl()[1] , 0.);

@@ -86,6 +86,18 @@ namespace Spacy
     return *this;
   }
 
+  Real Real::operator-() const
+  {
+    auto result = *this;
+    result.impl() *= -1;
+    return result;
+  }
+
+  bool Real::operator==(const Real& y) const
+  {
+    return impl() == y.impl();
+  }
+
 
 //    Real::operator double() const
 //    {
@@ -96,12 +108,17 @@ namespace Spacy
 //    {
 //      return impl();
 //    }
-  double toDouble(const Real& x)
+//  double toDouble(const Real& x)
+//  {
+//    return x.impl();
+//  }
+
+  double& toDouble(Real &x)
   {
     return x.impl();
   }
 
-  double& toDouble(Real &x)
+  double toDouble(const Real &x)
   {
     return x.impl();
   }
@@ -140,11 +157,11 @@ namespace Spacy
     return x;
   }
 
-  Real operator*(double x, Real y)
-  {
-    toDouble(y) *= x;
-    return y;
-  }
+//  Real operator*(double x, Real y)
+//  {
+//    toDouble(y) *= x;
+//    return y;
+//  }
 
   Real operator*(Real x, double y)
   {

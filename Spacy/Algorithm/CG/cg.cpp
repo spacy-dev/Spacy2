@@ -3,6 +3,7 @@
 #include "Spacy/Util/Exceptions/singularOperatorException.hh"
 #include "Spacy/vector.hh"
 
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <iostream>
