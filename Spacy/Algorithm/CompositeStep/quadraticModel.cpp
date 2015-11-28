@@ -17,9 +17,9 @@ namespace Spacy
     {
       auto quadraticCoefficients(Real nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
       {
-        auto constant = L(x) + nu*d1(L,x)(dn) + 0.5*nu*nu*d2(L,x)(dn)(dn);
-        auto linear = d1(L,x)(dt) + nu*d2(L,x)(dn)(dt);
-        auto quadratic = 0.5*d2(L,x)(dt)(dt);
+        auto constant = L(x) + nu*L.d1(x)(dn) + 0.5*nu*nu*L.d2(x,dn)(dn);
+        auto linear = L.d1(x)(dt) + nu*L.d2(x,dn)(dt);
+        auto quadratic = 0.5*L.d2(x,dt)(dt);
         return std::make_tuple(constant,linear,quadratic);
       }
     }

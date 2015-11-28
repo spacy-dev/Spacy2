@@ -1,195 +1,232 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_FUNCTIONAL_HH
 #define SPACY_FUNCTIONAL_HH
 
-#include <boost/type_erasure/any.hpp>
-#include "Util/Concepts/functionalConcept.hh"
-#include "Util/Mixins/impl.hh"
-#include "Util/Mixins/target.hh"
-
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include <functional>
+#include "Spacy/Util/typeErasedStorage.hh"
+#include "Spacy/Util/memFnChecks.hh"
+#include "Spacy/Util/memOpChecks.hh"
 
 namespace Spacy
 {
-  /**
-   * @ingroup SpacyGroup
-   * @anchor FunctionalAnchor
-   * @brief Functional. Can store objects that satisfy the requirements of \ref FunctionalConceptAnchor "FunctionalConcept".
+  /// @cond
+  class LinearOperator;
+  class Real;
+  class Vector;
+  class VectorSpace;
+  /// @endcond
+
+  /** @addtogroup SpacyGroup
+   * @{
    */
-//  using Functional = boost::type_erasure::any<Concepts::FunctionalConcept>;
-  class Functional : public Mixin::Target<Functional>
+
+  /// Type-erased functional.
+  class Functional : public TypeErasedStorage
   {
-    struct AbstractBase
-    {
-      virtual ~AbstractBase(){}
-      virtual Real operator()(const Vector&) const = 0;
-      virtual const VectorSpace& domain() const = 0;
-      virtual std::unique_ptr<AbstractBase> clone() const = 0;
-    };
-
-    template <class Impl>
-    struct Base :
-        public AbstractBase,
-        public Mixin::CopyingUniqueImpl<Impl>
-    {
-      explicit Base(const Impl& impl)
-        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
-      {}
-
-      Real operator()(const Vector& x) const final override
-      {
-        return this->impl()(x);
-      }
-
-      const VectorSpace& domain() const final override
-      {
-        return this->impl().domain();
-      }
-
-      std::unique_ptr<AbstractBase> clone() const final override
-      {
-        return std::make_unique< Base<Impl> >(this->impl());
-      }
-    };
-
   public:
     Functional() = default;
 
-    template <class Impl>
+    /// Construct from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     Functional(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
-    {}
+      : TypeErasedStorage(std::forward<Impl>(impl))
+    {
+      init<Impl>();
+    }
 
-    template <class Impl>
+    /// Assign from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     Functional& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
       return *this;
     }
 
+    /// Apply functional.
     Real operator()(const Vector& x) const;
 
+    /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
 
+    /// Check if an implementation has been assigned.
     operator bool() const;
 
   private:
-    Mixin::CopyViaCloneUniqueImpl<AbstractBase> base_ = {};
+    template <class Impl>
+    void init()
+    {
+      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
+      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+    }
+
+    std::function<Real(const Vector&)> apply_;
+    std::function<const VectorSpace&()> domain_;
   };
 
-  /**
-   * @ingroup SpacyGroup
-   * @anchor C1FunctionalAnchor
-   * @brief Differentiable functional. Can store objects that satisfy the requirements of \ref C1FunctionalConceptAnchor "C1FunctionalConcept".
-   */
-//  using C1Functional = boost::type_erasure::any<Concepts::C1FunctionalConcept>;
 
-  class C1Functional : public Mixin::Target<Functional>
+  /// Type-erased differentiable functional.
+  class C1Functional : public TypeErasedStorage
   {
-    struct AbstractBase
-    {
-      virtual ~AbstractBase(){}
-      virtual Real operator()(const Vector&) const = 0;
-      virtual Vector d1(const Vector&) const = 0;
-      virtual const VectorSpace& domain() const = 0;
-      virtual std::unique_ptr<AbstractBase> clone() const = 0;
-    };
-
-    template <class Impl>
-    struct Base :
-        public AbstractBase,
-        public Mixin::CopyingUniqueImpl<Impl>
-    {
-      explicit Base(const Impl& impl)
-        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
-      {}
-
-      Real operator()(const Vector& x) const final override
-      {
-        return this->impl()(x);
-      }
-
-      Vector d1(const Vector& x) const final override
-      {
-        return this->impl().d1(x);
-      }
-
-      const VectorSpace& domain() const final override
-      {
-        return this->impl().domain();
-      }
-
-      std::unique_ptr<AbstractBase> clone() const final override
-      {
-        return std::make_unique< Base<Impl> >(this->impl());
-      }
-    };
-
   public:
     C1Functional() = default;
 
-    template <class Impl>
+    /// Construct from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
-    {}
+      : TypeErasedStorage(std::forward<Impl>(impl))
+    {
+      init<Impl>();
+    }
 
-    template <class Impl>
+    /// Assign from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
       return *this;
     }
 
+    /// Apply functional.
     Real operator()(const Vector& x) const;
 
-    Vector d1(const Vector& x) const;
+    /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
+    Vector d1(const Vector &x) const;
 
+    /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
 
+    /// Check if an implementation has been assigned.
     operator bool() const;
 
   private:
-    Mixin::CopyViaCloneUniqueImpl<AbstractBase> base_ = {};
+    template <class Impl>
+    void init()
+    {
+      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
+      d1_ = std::bind( &std::decay_t<Impl>::d1, Spacy::target<Impl>(*this) , std::placeholders::_1 );
+      domain_ = std::bind( &std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+    }
+
+    std::function<Real(const Vector&)> apply_;
+    std::function<Vector(const Vector&)> d1_;
+    std::function<const VectorSpace&()> domain_;
+  };
+
+
+  /// Type-erased twice differentiable functional.
+  class C2Functional : public TypeErasedStorage
+  {
+  public:
+    C2Functional() = default;
+
+    /// Construct from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C2Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_d2_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+    C2Functional(Impl&& impl)
+      : TypeErasedStorage(std::forward<Impl>(impl))
+    {
+      init<Impl>();
+    }
+
+    /// Assign from functional implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C2Functional>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_d2_Functional<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+    C2Functional& operator=(Impl&& impl)
+    {
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
+      return *this;
+    }
+
+    /// Apply functional.
+    Real operator()(const Vector& x) const;
+
+    /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
+    Vector d1(const Vector &x) const;
+
+    /// Compute second derivative as function space element in \f$X^*\f$, where \f$x,dx\in X\f$.
+    Vector d2(const Vector &x, const Vector& dx) const;
+
+    /// Access hessian as linear operator \f$ X \rightarrow X^* \f$.
+    LinearOperator hessian(const Vector &x) const;
+
+    /// Access domain space \f$X\f$.
+    const VectorSpace& domain() const;
+
+    /// Check if an implementation has been assigned.
+    operator bool() const;
+
+  private:
+    template <class Impl>
+    void init()
+    {
+      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
+      d1_ = std::bind(&std::decay_t<Impl>::d1, Spacy::target<Impl>(*this) , std::placeholders::_1 );
+      d2_ = std::bind(&std::decay_t<Impl>::d2, Spacy::target<Impl>(*this) , std::placeholders::_1 , std::placeholders::_2 );
+      hessian_ = std::bind(&std::decay_t<Impl>::hessian, Spacy::target<Impl>(*this) , std::placeholders::_1 );
+      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+    }
+
+    std::function<Real(const Vector&)> apply_;
+    std::function<Vector(const Vector&)> d1_;
+    std::function<Vector(const Vector&,const Vector&)> d2_;
+    std::function<LinearOperator(const Vector &x)> hessian_;
+    std::function<const VectorSpace&()> domain_;
   };
 
   /**
-   * @ingroup SpacyGroup
-   * @anchor C2FunctionalAnchor
-   * @brief Twice differentiable functional. Can store objects that satisfy the requirements of \ref C2FunctionalConceptAnchor "C2FunctionalConcept".
-   */
-  using C2Functional = boost::type_erasure::any<Concepts::C2FunctionalConcept>;
-
-
-  /**
-   * @ingroup SpacyGroup
    * @brief For a functional \f$ f: X\to \mathbb{R} \f$, compute \f$f'\f$ at \f$x\in X\f$ as dual element \f$ f'(x) \in X^* \f$.
    *
-   * This function is provided for providing unified access to the k-th derivative via dk(f,x)(arg0)...(argn).
    * Equivalent to calling f.d1(x).
    *
    * @param f twice differentiable functional
    * @param x point of linearization
    * @return \f$f'(x)\f$, i.e. f.d1(x).
-   * @see @ref C2FunctionalAnchor "C2Functional"
+   * @see C2Functional
    */
   Vector d1(const C2Functional& f, const Vector& x);
-//  boost::type_erasure::any< Concepts::VectorConcept > d1(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
 
   /**
-   * @ingroup SpacyGroup
    * @brief For a functional \f$ f: X\to \mathbb{R} \f$, compute \f$f''\f$ at \f$x\in X\f$ as linear opeator \f$ f''(x): X \to X^* \f$.
    *
-   * This function is provided for providing unified access to the k-th derivative via dk(f,x)(arg0)...(argn).
    * Equivalent to calling f.hessian(x).
    *
    * @param f twice differentiable functional
    * @param x point of linearization
    * @return \f$f''(x)\f$, i.e. f.hessian(x).
-   * @see @ref C2FunctionalAnchor "C2Functional"
+   * @see C2Functional
    */
-  boost::type_erasure::any< Concepts::LinearOperatorConcept > d2(const C2Functional& f, const Vector& x);
+  LinearOperator d2(const C2Functional& f, const Vector& x);
 //  boost::type_erasure::any< Concepts::LinearOperatorConcept > d2(const C2Functional& f, const boost::type_erasure::any< Concepts::VectorConcept >& x);
+  /** @} */
 }
 
 #endif // SPACY_FUNCTIONAL_HH

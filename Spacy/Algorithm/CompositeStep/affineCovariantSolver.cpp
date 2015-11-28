@@ -111,7 +111,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeTangentialStep(Real nu, const Vector &x, const Vector& dn, bool lastStepWasUndamped) const
     {
-      if( is_empty(L_) ) return Vector(0*x);
+      if( !L_ ) return Vector(0*x);
 
       tangentialSolver = makeTangentialSolver(nu,x,lastStepWasUndamped);
 
@@ -176,7 +176,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeNormalStep(const Vector &x) const
     {
-      if( is_empty(N_) ) return Vector(0*x);
+      if( !N_ ) return Vector(0*x);
 
       normalSolver = N_.hessian(primalProjection(x))^-1;
       return computeMinimumNormCorrection(x);
@@ -184,7 +184,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeSimplifiedNormalStep(const Vector &trial) const
     {
-      if( is_empty(N_) ) return Vector(0*trial);
+      if( !N_ ) return Vector(0*trial);
       return computeMinimumNormCorrection(trial);
     }
 
@@ -213,7 +213,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeLagrangeMultiplier(const Vector& x) const
     {
-      if( is_empty(N_) || is_empty(L_) ) return Vector(0*x);
+      if( !N_ || !L_ ) return Vector(0*x);
       return dualProjection( normalSolver( primalProjection(-d1(L_,x)) ) );
     }
 
@@ -323,7 +323,7 @@ namespace Spacy
 
     void AffineCovariantSolver::updateOmegaC(Real norm_x, Real norm_dx, Real norm_ds)
     {
-      if( is_empty(N_) ) return;
+      if( !N_ ) return;
       if( norm_dx < sqrtEps() * norm_x ) return;
       setContraction( norm_ds/norm_dx );
       //    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
@@ -363,7 +363,7 @@ namespace Spacy
 
     Real AffineCovariantSolver::computeNormalStepDampingFactor(Real norm_Dn) const
     {
-      if( is_empty(N_) ) return 1;
+      if( !N_ ) return 1;
       DampingFactor nu = 1.;
       if( norm_Dn > eps() && abs(norm_Dn*omegaC()) > eps() ) nu = min(1.,desiredContraction()/(omegaC()*norm_Dn));
       return nu;
@@ -371,7 +371,7 @@ namespace Spacy
 
     Real AffineCovariantSolver::computeTangentialStepDampingFactor(Real norm_dn, Real norm_Dt, const CompositeStep::CubicModel& cubic) const
     {
-      if( is_empty(L_) ) return 1;
+      if( !L_ ) return 1;
       if( norm_Dt < sqrtEps() ) return 1;
 
       auto maxTau = Real{1.};
@@ -385,14 +385,14 @@ namespace Spacy
     {
       if( norm_Dx < eps() * norm_x ) return AcceptanceTest::Passed;
 
-      if( !is_empty(L_) && !acceptableDecrease( eta ) )
+      if( !!L_ && !acceptableDecrease( eta ) )
       {
         if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
         tangentialStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::TangentialStepFailed;
       }
 
-      if( !is_empty(N_) && !admissibleContraction() )
+      if( !!N_ && !admissibleContraction() )
       {
         if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
         normalStepMonitor = StepMonitor::Rejected;

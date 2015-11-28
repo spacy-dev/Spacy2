@@ -18,7 +18,6 @@
 #include "Test/Mock/scalarProduct.hh"
 #include "Test/Mock/norm.hh"
 
-
 template <class Space, class Spaces, unsigned... indices>
 inline auto makeTuple(Space&& space, const Spaces& spaces, std::integer_sequence<unsigned,indices...>)
 {

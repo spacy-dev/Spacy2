@@ -27,6 +27,8 @@ namespace Spacy
 
       ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
+      LinearOperator operator-() const;
+
       std::function< ::Spacy::Vector(const ::Spacy::Vector&) > solver() const;
     };
   }

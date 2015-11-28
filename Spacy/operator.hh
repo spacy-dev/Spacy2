@@ -1,331 +1,269 @@
 #ifndef SPACY_OPERATOR_HH
 #define SPACY_OPERATOR_HH
 
-#include <boost/type_erasure/any.hpp>
-
-#include "Util/Concepts/operatorConcept.hh"
-#include "Util/Concepts/vectorConcept.hh"
-
-#include "Util/Mixins/impl.hh"
-#include "Util/Mixins/target.hh"
-
-#include "vectorSpace.hh"
+#include "Util/typeErasedStorage.hh"
+#include "Util/memFnChecks.hh"
+#include "Util/memOpChecks.hh"
 
 namespace Spacy
 {
-  /**
-   * \ingroup SpacyGroup
-   * \anchor CallableOperatorAnchor
-   * \brief Simplest possible operator class. Can store objects that satisfy the requirements of \ref CallableOperatorConceptAnchor "CallableOperatorConcept".
-   *
-   * Use this if only application of an operator is required.
+  /// @cond
+  class Vector;
+  class VectorSpace;
+  /// @endcond
+
+  /** @addtogroup SpacyGroup
+   * @{
    */
-  //using CallableOperator = boost::type_erasure::any< Concepts::CallableOperatorConcept >;
+
+  /// Simplest possible operator definition.
   using CallableOperator = std::function<Vector(const Vector&)>;
 
-  /**
-   * \ingroup SpacyGroup
-   * \anchor LinearOperatorAnchor
-   * \brief Linear operator class. Can store objects that satisfy the requirements of \ref LinearOperatorConceptAnchor "LinearOperatorConcept".
-   */
-  using LinearOperator = boost::type_erasure::any< Concepts::LinearOperatorConcept >;
 
-//  class LinearOperator : public Mixin::Target<LinearOperator>
-//  {
-//    struct AbstractBase
-//    {
-//      virtual ~AbstractBase(){}
-//      virtual Vector operator()(const Vector&) const = 0;
-//      virtual std::function<Vector(const Vector&)> solver() const = 0;
-//      virtual LinearOperator& operator+=(const LinearOperator& y) = 0;
-//      virtual LinearOperator& operator-=(const LinearOperator& y) = 0;
-//      virtual LinearOperator& operator*=(double a) = 0;
-//      virtual LinearOperator operator-(const LinearOperator& y) const = 0;
-//      virtual bool operator==(const LinearOperator& y) const = 0;
-//      virtual Vector operator()(const LinearOperator& y) const = 0;
-//      virtual const VectorSpace* space() const = 0;
-//      virtual const VectorSpace& domain() const = 0;
-//      virtual const VectorSpace& range() const = 0;
-//      virtual std::unique_ptr<AbstractBase> clone() const = 0;
-//    };
-
-//    template <class Impl>
-//    struct Base :
-//        public AbstractBase,
-//        public Mixin::CopyingUniqueImpl<Impl>
-//    {
-//      explicit Base(const Impl& impl)
-//        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
-//      {}
-
-//      Vector operator()(const Vector& x) const final override
-//      {
-//        return this->impl()(x);
-//      }
-
-//      std::function<Vector(const Vector&)> solver() const
-//      {
-//        return this->impl().solver();
-//      }
-
-//      LinearOperator& operator+=(const LinearOperator& y)
-//      {
-//        return this->impl() += *y.template target<Impl>();
-//      }
-
-//      LinearOperator& operator-=(const LinearOperator& y)
-//      {
-//        return this->impl() -= *y.template target<Impl>();
-//      }
-
-//      LinearOperator& operator*=(double a)
-//      {
-//        return this->impl() *= a;
-//      }
-
-//      LinearOperator operator-(const LinearOperator& y) const
-//      {
-//        return - (*y.template target<Impl>());
-//      }
-
-//      bool operator==(const LinearOperator& y) const
-//      {
-//        return this->impl() == *y.template target<Impl>();
-//      }
-
-//      Vector operator()(const LinearOperator& y) const
-//      {
-//        return this->impl()( *y.template target<Impl>() );
-//      }
-
-//      const VectorSpace* space() const
-//      {
-//        return this->impl().space();
-//      }
-
-//      const VectorSpace& domain() const final override
-//      {
-//        return this->impl().domain();
-//      }
-
-//      const VectorSpace& range() const final override
-//      {
-//        return this->impl().range();
-//      }
-
-//      std::unique_ptr<AbstractBase> clone() const final override
-//      {
-//        return std::make_unique< Base<Impl> >(this->impl());
-//      }
-//    };
-
-//  public:
-//    LinearOperator() = default;
-
-//    template <class Impl>
-//    LinearOperator(Impl&& impl)
-//      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
-//    {}
-
-//    template <class Impl>
-//    LinearOperator& operator=(Impl&& impl)
-//    {
-//      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
-//      return *this;
-//    }
-
-//    Vector operator()(const Vector& x) const;
-
-//    const VectorSpace& domain() const;
-
-//    const VectorSpace& range() const;
-
-//    operator bool() const;
-
-//  private:
-//    Mixin::CopyViaCloneUniqueImpl<AbstractBase> base_ = {};
-//  };
-
-  /**
-   * \ingroup SpacyGroup
-   * \anchor OperatorAnchor
-   * \brief Operator class. Can store objects that satisfy the requirements of \ref OperatorConceptAnchor "OperatorConcept".
-   */
-//  using Operator = boost::type_erasure::any< Concepts::OperatorConcept >;
-
-  class Operator : public Mixin::Target<Operator>
+  /// Type-erased linear operator \f$A:\ X \to Y \f$.
+  class LinearOperator : public TypeErasedStorage
   {
-    struct AbstractBase
-    {
-      virtual ~AbstractBase(){}
-      virtual Vector operator()(const Vector&) const = 0;
-      virtual const VectorSpace& domain() const = 0;
-      virtual const VectorSpace& range() const = 0;
-      virtual std::unique_ptr<AbstractBase> clone() const = 0;
-    };
+  public:
+    LinearOperator() = default;
 
+    /// Construct from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::LinearOperator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+//              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
+              class = void_t< TryMemOp_negate<Impl> >,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_space<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_solver<Impl>::value> >
+    LinearOperator(Impl&& impl)
+      : TypeErasedStorage(std::forward<Impl>(impl)),
+        apply_( std::cref(*Spacy::target<Impl>(*this) ) )
+    {
+      init<Impl>();
+    }
+
+    /// Assign from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::LinearOperator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+//              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
+              class = void_t< TryMemOp_negate<Impl> >,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_space<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_solver<Impl>::value> >
+    LinearOperator& operator=(Impl&& impl)
+    {
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
+      return *this;
+    }
+
+    /// Apply operator.
+    Vector operator()(const Vector& x) const;
+
+//    Vector operator()(const LinearOperator& x) const;
+
+    LinearOperator& operator+=(const LinearOperator& y);
+
+    LinearOperator& operator-=(const LinearOperator& y);
+
+    LinearOperator& operator*=(double a);
+
+    LinearOperator operator-() const;
+
+    bool operator==(const LinearOperator& y) const;
+
+    std::function<Vector(const Vector&)> solver() const;
+
+    /// Access domain space \f$X\f$.
+    const VectorSpace& domain() const;
+
+    /// Access range space \f$Y\f$.
+    const VectorSpace& range() const;
+
+    /// Access underlying space of linear operators.
+    const VectorSpace* space() const;
+
+    /// Check if an implementation has been assigned.
+    operator bool() const;
+
+  private:
     template <class Impl>
-    struct Base :
-        public AbstractBase,
-        public Mixin::CopyingUniqueImpl<Impl>
+    void init()
     {
-      explicit Base(const Impl& impl)
-        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
-      {}
+      apply_ = [this](const Vector& x) { return (*Spacy::target<Impl>(*this))(x); };
+//      applyAsDual_ = [this](const LinearOperator& y) { return (*Spacy::target<Impl>(*this))(y); };
+      add_ = [this](const LinearOperator& y) -> LinearOperator& { (*Spacy::target<Impl>(*this)) += (*Spacy::target<Impl>(y)); return *this; };
+      subtract_ = [this](const LinearOperator& y) -> LinearOperator& { (*Spacy::target<Impl>(*this)) -= (*Spacy::target<Impl>(y)); return *this; };
+      multiply_ = [this](double a) -> LinearOperator& { (*Spacy::target<Impl>(*this)) *= a; return *this; };
+      negate_ = [this]() -> LinearOperator { return LinearOperator( -(*Spacy::target<Impl>(*this)) ); };
+      compare_ = [this](const LinearOperator& y) { return (*Spacy::target<Impl>(*this)) == (*Spacy::target<Impl>(y)); };
+      solver_ = [this]() -> std::function<Vector(const Vector&)> { return Spacy::target<Impl>(*this)->solver(); };
+      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+      range_ = std::bind(&std::decay_t<Impl>::range, Spacy::target<Impl>(*this) );
+      space_ = std::bind(&std::decay_t<Impl>::space, Spacy::target<Impl>(*this));
+    }
 
-      Vector operator()(const Vector& x) const final override
-      {
-        return this->impl()(x);
-      }
+    std::function<Vector(const Vector&)> apply_;
+//    std::function<Real(const Vector&)> applyAsDual_;
+    std::function<LinearOperator&(const LinearOperator&)> add_, subtract_;
+    std::function<LinearOperator&(double a)> multiply_;
+    std::function<LinearOperator()> negate_;
+    std::function<bool(const LinearOperator&)> compare_;
+    std::function<std::function<Vector(const Vector&)>()> solver_;
+    std::function<const VectorSpace&()> domain_, range_;
+    std::function<const VectorSpace*()> space_;
+  };
 
-      const VectorSpace& domain() const final override
-      {
-        return this->impl().domain();
-      }
 
-      const VectorSpace& range() const final override
-      {
-        return this->impl().range();
-      }
-
-      std::unique_ptr<AbstractBase> clone() const final override
-      {
-        return std::make_unique< Base<Impl> >(this->impl());
-      }
-    };
-
+  /// Type-erased operator.
+  class Operator : public TypeErasedStorage
+  {
   public:
     Operator() = default;
 
-    template <class Impl>
+    /// Construct from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::Operator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     Operator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
-    {}
+      : TypeErasedStorage(std::forward<Impl>(impl))
+    {
+      init<Impl>();
+    }
 
-    template <class Impl>
+    /// Assign from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::Operator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     Operator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
       return *this;
     }
 
+    /// Apply operator.
     Vector operator()(const Vector& x) const;
 
+    /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
 
+    /// Access range space \f$Y\f$.
     const VectorSpace& range() const;
 
+    /// Check if an implementation has been assigned.
     operator bool() const;
 
   private:
-    Mixin::CopyViaCloneUniqueImpl<AbstractBase> base_ = {};
+    template <class Impl>
+    void init()
+    {
+      apply_ = std::cref( *Spacy::target<Impl>(*this) );
+//      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
+      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+      range_ = std::bind(&std::decay_t<Impl>::range, Spacy::target<Impl>(*this) );
+    }
+
+    std::function<Vector(const Vector&)> apply_;
+    std::function<const VectorSpace&()> domain_, range_;
   };
 
-  class C1Operator : public Mixin::Target<C1Operator>
+  /// Type-erased differentiable operator.
+  class C1Operator : public TypeErasedStorage
   {
-    struct AbstractBase
-    {
-      virtual ~AbstractBase(){}
-      virtual Vector operator()(const Vector&) const = 0;
-      virtual Vector d1(const Vector&, const Vector&) const = 0;
-      virtual LinearOperator linearization(const Vector&) const = 0;
-      virtual const VectorSpace& domain() const = 0;
-      virtual const VectorSpace& range() const = 0;
-      virtual std::unique_ptr<AbstractBase> clone() const = 0;
-    };
-
-    template <class Impl>
-    struct Base :
-        public AbstractBase,
-        public Mixin::CopyingUniqueImpl<Impl>
-    {
-      explicit Base(const Impl& impl)
-        : Mixin::CopyingUniqueImpl<Impl>(std::make_unique<Impl>(impl))
-      {}
-
-      Vector operator()(const Vector& x) const final override
-      {
-        return this->impl()(x);
-      }
-
-      Vector d1(const Vector& x, const Vector& dx) const final override
-      {
-        return this->impl().d1(x,dx);
-      }
-
-      LinearOperator linearization(const Vector& x) const final override
-      {
-        return this->impl().linearization(x);
-      }
-
-      const VectorSpace& domain() const final override
-      {
-        return this->impl().domain();
-      }
-
-      const VectorSpace& range() const final override
-      {
-        return this->impl().range();
-      }
-
-      std::unique_ptr<AbstractBase> clone() const final override
-      {
-        return std::make_unique< Base<Impl> >(this->impl());
-      }
-    };
-
   public:
     C1Operator() = default;
 
-    template <class Impl>
+    /// Construct from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::C1Operator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Operator<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_linearization<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     C1Operator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
-    {}
+      : TypeErasedStorage(std::forward<Impl>(impl)),
+        apply_( std::cref(*Spacy::target<Impl>(*this) ) )
+    {
+      init<Impl>();
+    }
 
-    template <class Impl>
+    /// Assign from operator implementation.
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,::Spacy::C1Operator>::value>,
+              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Operator<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_linearization<Impl,Vector>::value>,
+              class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
+              class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     C1Operator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
+      TypeErasedStorage::operator =(std::forward<Impl>(impl));
+      init<Impl>();
       return *this;
     }
 
+    /// Apply operator.
     Vector operator()(const Vector& x) const;
 
-    Vector d1(const Vector& x, const Vector& dx) const;
+    /// Compute directional derivative \f$A'(x)\delta x\f$.
+    Vector d1(const Vector &x, const Vector &dx) const;
 
+    /// Get linearization \f$A'(x):\ X\to Y \f$
     LinearOperator linearization(const Vector& x) const;
 
+    /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
 
+    /// Access range space \f$Y\f$.
     const VectorSpace& range() const;
 
+    /// Check if an implementation has been assigned.
     operator bool() const;
 
   private:
-    Mixin::CopyViaCloneUniqueImpl<AbstractBase> base_ = {};
+    template <class Impl>
+    void init()
+    {
+      apply_ = std::bind(&std::decay_t<Impl>::operator(), Spacy::target<Impl>(*this), std::placeholders::_1);
+      d1_ = std::bind(&std::decay_t<Impl>::d1, Spacy::target<Impl>(*this), std::placeholders::_1, std::placeholders::_2);
+      linearization_ = std::bind(&std::decay_t<Impl>::linearization, Spacy::target<Impl>(*this), std::placeholders::_1);
+      domain_ = std::bind(&std::decay_t<Impl>::domain, Spacy::target<Impl>(*this) );
+      range_ = std::bind(&std::decay_t<Impl>::range, Spacy::target<Impl>(*this) );
+    }
+
+    std::function<Vector(const Vector&)> apply_;
+    std::function<Vector(const Vector&, const Vector&)> d1_;
+    std::function<LinearOperator(const Vector&)> linearization_;
+    std::function<const VectorSpace&()> domain_, range_;
   };
 
-  /**
-   * \ingroup SpacyGroup
-   * \anchor C1OperatorAnchor
-   * \brief Differentiable operator class. Can store objects that satisfy the requirements of \ref C1OperatorConceptAnchor "C1OperatorConcept".
-   */
-//  using C1Operator = boost::type_erasure::any< Concepts::C1OperatorConcept >;
 
   /**
-   * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
   std::function<Vector(const Vector&)> operator^(const LinearOperator& A, int k);
 
   /**
-   * \ingroup SpacyGroup
    * \brief Access solver via A^-1. Throws for k!=-1.
    */
   std::function<Vector(const Vector&)> operator^(LinearOperator&& A, int k);
 
   /**
-   * @ingroup SpacyGroup
    * @brief For an operator \f$ A: X\to Y \f$, compute \f$A'\f$ at \f$x\in X\f$ as linear operator \f$ A'(x): X \to Y \f$.
    *
    * Equivalent to calling A.linearization(x).
@@ -337,6 +275,8 @@ namespace Spacy
    */
   LinearOperator d1(const C1Operator& A, const Vector& x);
 //  LinearOperator d1(const C1Operator& A, const boost::type_erasure::any< Concepts::VectorConcept >& x);
+
+  /** @} */
 }
 
 #endif // SPACY_OPERATOR_HH

@@ -56,10 +56,11 @@ namespace Spacy
    * };
    * @endcode
    */
-//  using IndefiniteLinearSolver = boost::type_erasure::any< Concepts::IndefiniteLinearSolverConcept >;
-
   class IndefiniteLinearSolver : public Mixin::Target<IndefiniteLinearSolver>
   {
+    template <class T>
+    using TryMemFn_isPositiveDefinite = decltype(std::declval<T>().isPositiveDefinite());
+
     struct AbstractBase
     {
       virtual ~AbstractBase(){}
@@ -90,12 +91,16 @@ namespace Spacy
   public:
     IndefiniteLinearSolver() = default;
 
-    template <class Impl>
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,IndefiniteLinearSolver>::value>,
+              class = void_t< TryMemFn_isPositiveDefinite<Impl> > >
     IndefiniteLinearSolver(Impl&& impl)
       : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
     {}
 
-    template <class Impl>
+    template <class Impl,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,IndefiniteLinearSolver>::value>,
+              class = void_t< TryMemFn_isPositiveDefinite<Impl> > >
     IndefiniteLinearSolver& operator=(Impl&& impl)
     {
       base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );

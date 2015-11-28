@@ -5,6 +5,8 @@
 #include "linearOperator.hh"
 #include "linearOperatorCreator.hh"
 
+#include <cassert>
+
 namespace Spacy
 {
   namespace Scalar
@@ -24,16 +26,20 @@ namespace Spacy
 
     Spacy::Vector C1Operator::operator()(const ::Spacy::Vector& x) const
     {
+      assert( value_ );
       return Real( value_( toDouble(x) ) );
     }
 
     Spacy::Vector C1Operator::d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
     {
+      assert(derivative_);
       return Real( derivative_( toDouble(x) ) * toDouble(dx) );
     }
 
-    LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
+    ::Spacy::LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
     {
+      assert(derivative_);
+      assert(operatorSpace_ != nullptr);
       return LinearOperator( *operatorSpace_, derivative_( toDouble(x) ) );
     }
   }

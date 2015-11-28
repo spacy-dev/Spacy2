@@ -39,7 +39,7 @@ namespace Spacy
    * };
    * @endcode
    */
-  using VectorCreator = std::function< boost::type_erasure::any<Concepts::VectorConcept>(const VectorSpace*) >;
+  using VectorCreator = std::function< Vector(const VectorSpace*) >;
 
 
   template <class T>

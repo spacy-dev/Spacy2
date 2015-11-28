@@ -4,42 +4,85 @@
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 
+#include <cassert>
+
 namespace Spacy
 {
   Real Functional::operator()(const Vector& x) const
   {
-    return base_.impl()(x);
+    assert(apply_);
+    return apply_(x);
   }
 
   const VectorSpace& Functional::domain() const
   {
-    return base_.impl().domain();
+    assert(domain_);
+    return domain_();
   }
 
   Functional::operator bool() const
   {
-    return !is_empty(base_);
+    return !is_empty(static_cast<const TypeErasedStorage&>(*this));
   }
 
 
   Real C1Functional::operator()(const Vector& x) const
   {
-    return base_.impl()(x);
+    assert(apply_);
+    return apply_(x);
   }
 
   Vector C1Functional::d1(const Vector& x) const
   {
-    return base_.impl().d1(x);
+    assert(d1_);
+    return d1_(x);
   }
 
   const VectorSpace& C1Functional::domain() const
   {
-    return base_.impl().domain();
+    assert(domain_);
+    return domain_();
   }
 
   C1Functional::operator bool() const
   {
-    return !is_empty(base_);
+    return !is_empty(static_cast<const TypeErasedStorage&>(*this));
+  }
+
+
+  Real C2Functional::operator()(const Vector& x) const
+  {
+    assert(apply_);
+    return apply_(x);
+  }
+
+  Vector C2Functional::d1(const Vector& x) const
+  {
+    assert(d1_);
+    return d1_(x);
+  }
+
+  const VectorSpace& C2Functional::domain() const
+  {
+    assert(domain_);
+    return domain_();
+  }
+
+  C2Functional::operator bool() const
+  {
+    return !is_empty(static_cast<const TypeErasedStorage&>(*this));
+  }
+
+  Vector C2Functional::d2(const Vector& x, const Vector& dx) const
+  {
+    assert(d2_);
+    return d2_(x,dx);
+  }
+
+  LinearOperator C2Functional::hessian(const Vector& x) const
+  {
+    assert(hessian_);
+    return hessian_(x);
   }
 
 

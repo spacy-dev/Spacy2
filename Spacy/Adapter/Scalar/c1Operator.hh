@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "Spacy/Util/Base/operatorBase.hh"
+#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -32,7 +33,7 @@ namespace Spacy
 
      Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
 
-     LinearOperator linearization(const ::Spacy::Vector& x) const;
+     ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const;
 
     private:
       std::function<double(double)> value_ = [](double x) { return x*x-1;};

@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 
 #include "Spacy/functional.hh"
+#include "Spacy/operator.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"
+#include "Test/Mock/linearOperator.hh"
 
 using namespace Spacy;
 
@@ -19,6 +21,21 @@ namespace
       return Real(3.);
     }
 
+    Vector d1(const Vector&) const
+    {
+      return Real(2.);
+    }
+
+    Vector d2(const Vector&, const Vector&) const
+    {
+      return Real(1.);
+    }
+
+    LinearOperator hessian(const ::Spacy::Vector&) const
+    {
+      return Mock::LinearOperator();
+    }
+
     const VectorSpace& domain() const
     {
       return domain_;
@@ -28,18 +45,20 @@ namespace
     const VectorSpace& domain_;
   };
 
-  void test(const Functional& f, const VectorSpace& X)
+  void test(const C2Functional&f, const VectorSpace& X)
   {
     EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
+    EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
+    EXPECT_EQ( toDouble(f.d2(X.zeroVector(),X.zeroVector())) , 1. );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }
 
-TEST(Functional,IsEmpty)
+TEST(C2Functional,IsEmpty)
 {
   auto X = createMockBanachSpace();
-  Functional f;
-  Functional g = TestFunctional(X);
+  C2Functional f;
+  C2Functional g = TestFunctional(X);
 
   bool f_is_empty = !f;
   bool g_is_empty = !g;
@@ -47,52 +66,46 @@ TEST(Functional,IsEmpty)
   ASSERT_FALSE( g_is_empty );
 }
 
-TEST(Functional,Cast)
+TEST(C2Functional,StoreRValue)
 {
   auto X = createMockBanachSpace();
-  Functional f = TestFunctional(X);
-
-  ASSERT_TRUE( f.target<TestFunctional>() != nullptr );
-}
-
-TEST(Functional,StoreRValue)
-{
-  auto X = createMockBanachSpace();
-  Functional f = TestFunctional(X);
+  C2Functional f = TestFunctional(X);
 
   test(f,X);
 }
 
-TEST(Functional,StoreCopy)
+TEST(C2Functional,StoreCopy)
 {
   auto X = createMockBanachSpace();
   auto g = TestFunctional(X);
-  Functional f = g;
+  C2Functional f = g;
 
   test(f,X);
 }
 
-TEST(Functional,Copy)
+TEST(C2Functional,Copy)
 {
   auto X = createMockBanachSpace();
-  Functional g = TestFunctional(X);
-  Functional f = g;
+  C2Functional g = TestFunctional(X);
+  C2Functional f = g;
 
   test(f,X);
 }
 
-TEST(Functional,Move)
+TEST(C2Functional,Move)
 {
   auto X = createMockBanachSpace();
-  Functional g = TestFunctional(X);
+  C2Functional g = TestFunctional(X);
   bool is_empty_before_move = !g;
-  Functional f = std::move(g);
+  C2Functional f = std::move(g);
   bool is_empty_after_move = !g;
 
   EXPECT_FALSE(is_empty_before_move);
   EXPECT_TRUE(is_empty_after_move);
 
-  test(f,X);
+  EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
+  EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
+  EXPECT_EQ( X.index() , f.domain().index() );
 }
 
 

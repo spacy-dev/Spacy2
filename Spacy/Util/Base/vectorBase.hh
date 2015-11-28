@@ -133,7 +133,7 @@ namespace Spacy
         max = 1;
       auto dx = y;
       dx -= static_cast<const Derived&>(*this);
-      return dx(dx) < max*y.space()->eps()*y.space()->eps();
+      return Real(dx(dx)) < max*y.space()->eps()*y.space()->eps();
     }
   };
 }

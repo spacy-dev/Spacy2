@@ -24,5 +24,10 @@ namespace Spacy
     {
       return LinearSolver(impl());
     }
+
+    LinearOperator LinearOperator::operator-() const
+    {
+      return LinearOperator(*space(),-impl());
+    }
   }
 }
