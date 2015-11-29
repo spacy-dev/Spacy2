@@ -53,16 +53,16 @@ namespace Spacy
 
       Real operator()(const Vector& x) const final override
       {
-        return this->impl()(*x.template target<Impl>());
+        return this->impl()(*Spacy::target<Impl>(x));
       }
 
       void add(const Vector& y) final override
       {
-        this->impl() += (*y.template target<Impl>());
+        this->impl() += (*Spacy::target<Impl>(y));
       }
       void subtract(const Vector& y) final override
       {
-        this->impl() -= (*y.template target<Impl>());
+        this->impl() -= (*Spacy::target<Impl>(y));
       }
 
       void multiply(double a) final override
@@ -77,7 +77,7 @@ namespace Spacy
 
       bool compare(const Vector& y) const final override
       {
-        return this->impl() == (*y.template target<Impl>());
+        return this->impl() == (*Spacy::target<Impl>(y));
       }
 
       const VectorSpace* space() const final override
