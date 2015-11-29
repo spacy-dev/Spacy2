@@ -7,8 +7,6 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/operator.hh"
 
-#include <iostream>
-
 namespace Spacy
 {
   namespace Newton

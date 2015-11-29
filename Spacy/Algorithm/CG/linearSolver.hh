@@ -1,22 +1,22 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH
 #define SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH
 
-#include "Spacy/operator.hh"
 #include "cg.hh"
 
 #include "Spacy/Util/mixins.hh"
-#include "Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 
 namespace Spacy
 {
+  /** @addtogroup CGGroup
+   * @{
+   */
   namespace CG
   {
-    /**
-     * @ingroup CGGroup
-     * @brief Conjugate gradient solver satisfying the \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept"
-     * @see \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept", Solver
-     */
+    /// Conjugate gradient solver satisfying the \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept"
     class LinearSolver :
         public OperatorBase ,
         public Mixin::AbsoluteAccuracy,
@@ -76,7 +76,6 @@ namespace Spacy
   }
 
   /**
-   * @ingroup CGGroup
    * @brief Construct conjugate gradient method.
    * @param A operator
    * @param P preconditioner
@@ -88,7 +87,6 @@ namespace Spacy
   CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
 
   /**
-   * @ingroup CGGroup
    * @brief Construct regularized conjugate gradient method.
    * @param A operator
    * @param P preconditioner
@@ -100,7 +98,6 @@ namespace Spacy
   CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
 
   /**
-   * @ingroup CGGroup
    * @brief Construct truncated conjugate gradient method.
    * @param A operator
    * @param P preconditioner
@@ -112,7 +109,6 @@ namespace Spacy
   CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
 
   /**
-   * @ingroup CGGroup
    * @brief Construct truncated regularized conjugate gradient method.
    * @param A operator
    * @param P preconditioner
@@ -122,6 +118,8 @@ namespace Spacy
    * @return CGSolver(A,P,"TRCG")
    */
   CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
+
+  /** @} */
 }
 
 #endif // SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH

@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_AFFINECOVARIANTCOMPOSITESTEPS_HH
 #define SPACY_AFFINECOVARIANTCOMPOSITESTEPS_HH
 
@@ -5,7 +8,7 @@
 #include <tuple>
 
 #include "Spacy/linearSolver.hh"
-#include "Spacy/functional.hh"
+#include "Spacy/c2Functional.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Algorithm/lipschitzConstant.hh"

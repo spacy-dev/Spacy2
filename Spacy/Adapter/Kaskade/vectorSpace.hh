@@ -3,7 +3,6 @@
 
 #include <type_traits>
 #include <memory>
-#include <iostream>
 
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
@@ -17,13 +16,12 @@
 
 namespace Spacy
 {
+  /** @addtogroup Kaskade
+   * @{
+   */
   namespace Kaskade
   {
-    /**
-     * @ingroup KaskadeGroup
-     * @brief Creator for vector space elements for %Kaskade 7
-     * @see @ref VectorCreatorAnchor "VectorCreator", @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
-     */
+    /// Creator for vector space elements for %Kaskade 7
     template <class Description>
     class VectorCreator :
         public Mixin::Impl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
@@ -41,17 +39,11 @@ namespace Spacy
       /// Generate vector for %Kaskade 7.
       Vector<Description> operator()(const VectorSpace* space) const
       {
-        std::cout << "creating vector" << std::endl;
-        auto v = Vector<Description>{*space};
-        std::cout << "done" << std::endl;
-        Spacy::Vector tmp(v);
-        std::cout << "copied to spacy::vector" << std::endl;
-        return v;
+        return Vector<Description>{*space};
       }
     };
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Create single space with hilbert space structure for %Kaskade 7.
      * @param space single %Kaskade 7 function space (no product space)
      */
@@ -62,7 +54,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Create product space with hilbert space structure for %Kaskade 7.
      * @param spaces boost fusion forward sequence of const pointers to %Kaskade 7 function spaces
      * @param primalIds ids of primal variables
@@ -79,6 +70,7 @@ namespace Spacy
       return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
     }
   }
+  /** @} */
 }
 
 #endif // SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH

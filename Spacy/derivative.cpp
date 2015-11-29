@@ -1,9 +1,14 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "derivative.hh"
 
 #include "Spacy/Util/Base/functionalBase.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/vectorSpace.hh"
+#include "Spacy/c2Functional.hh"
+#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -24,8 +29,7 @@ namespace Spacy
 
       Vector d1(const Vector& x, const Vector& dx) const
       {
-        return d2(f_,x)(dx);
-//        return f_.d2(x,dx);
+        return f_.d2(x,dx);
       }
 
       LinearOperator linearization(const Vector& x) const

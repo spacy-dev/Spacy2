@@ -119,7 +119,6 @@ namespace Spacy
 
         static Spaces apply(const  VectorSpace& spaces)
         {
-          std::cout << "extracting space" << std::endl;
           return Spaces{ &cast_ref< VectorCreator<Description> >(spaces.creator()).impl() };
         }
       };
@@ -269,12 +268,10 @@ namespace Spacy
 
       if( is< VectorCreator<Description> >(spaces.creator()) )
       {
-        std::cout << "extract single space" << std::endl;
         return Detail::ExtractSingleSpace<Description,Description::noOfVariables!=1>::apply(spaces);
       }
       if( is<ProductSpace::VectorCreator>(spaces.creator()) )
       {
-        std::cout << "extract product space" << std::endl;
         const auto& spaces_ = cast_ref<ProductSpace::VectorCreator>(spaces.creator());
         using seq = std::make_integer_sequence<unsigned,boost::fusion::result_of::size<Spaces>::value>;
         return Detail::extractSpaces<Description>(spaces_,seq{});

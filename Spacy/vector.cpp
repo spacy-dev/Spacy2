@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "vector.hh"
 
 #include "Spacy/Util/cast.hh"
@@ -10,100 +13,6 @@
 
 namespace Spacy
 {
-//  Vector& Vector::operator+=(const Vector& y)
-//  {
-//    return add_(y);
-//  }
-
-//  Vector& Vector::operator-=(const Vector& y)
-//  {
-//    return subtract_(y);
-//  }
-
-//  Vector& Vector::operator*=(double a)
-//  {
-//    return multiply_(a);
-//  }
-
-//  Vector Vector::operator-() const
-//  {
-//    return negate_();
-//  }
-
-//  bool Vector::operator==(const Vector& y) const
-//  {
-//    return compare_(y);
-//  }
-
-//  Vector Vector::operator()(const Vector& y) const
-//  {
-//    return asDual_(y);
-//  }
-
-//  const VectorSpace& Vector::space() const
-//  {
-//    return *space_();
-//  }
-
-//  Vector::operator bool() const
-//  {
-//    return add_ && subtract_ && multiply_ && negate_ && compare_ && asDual_ && space_;
-//  }
-
-//  Vector::Vector(AnyVector v)
-//    : Mixin::Impl<AnyVector>(std::move(v))
-//  {}
-
-
-
-
-//  Vector::operator AnyVector() const
-//  {
-//    return impl();
-//  }
-
-//  Vector& Vector::operator+=(const Vector& y)
-//  {
-//    impl() += y.impl();
-//    return *this;
-//  }
-
-//  Vector& Vector::operator-=(const Vector& y)
-//  {
-//    impl() -= y.impl();
-//    return *this;
-//  }
-
-//  Vector& Vector::operator*=(double a)
-//  {
-//    impl() *= a;
-//    return *this;
-//  }
-
-//  Vector Vector::operator-() const
-//  {
-//    Vector v(impl());
-//    v *= -1;
-//    return v;
-//  }
-
-//  Vector Vector::operator()(const Vector& y) const
-//  {
-//    return impl()(y.impl());
-//  }
-
-//  bool Vector::operator==(const Vector& y) const
-//  {
-//    return impl() == y.impl();
-//  }
-
-//  const VectorSpace& Vector::space() const
-//  {
-//    return *impl().space();
-//  }
-
-
-
   Real Vector::operator()(const Vector& x) const
   {
     assert(base_);
@@ -159,16 +68,6 @@ namespace Spacy
 
 
   // free functions
-//  Vector operator*(double a, Vector x)
-//  {
-//    return x*=a;//Scale<Arithmetic>{a,x};
-//  }
-
-  Vector operator*(Vector x, double a)
-  {
-    return x*=a;//Scale<Arithmetic>{a,x};
-  }
-
   Vector operator+(Vector x, const Vector& y)
   {
     return x += y;

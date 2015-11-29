@@ -27,7 +27,7 @@ namespace Spacy
     {}
 
     CopyViaClonePtr(const CopyViaClonePtr& other)
-      : impl_(other->clone())
+      : impl_( ( other == nullptr ) ? nullptr : other->clone() )
     {}
 
     CopyViaClonePtr(CopyViaClonePtr&&) = default;
@@ -36,7 +36,10 @@ namespace Spacy
 
     CopyViaClonePtr& operator=(const CopyViaClonePtr& other)
     {
-      impl_ = other->clone();
+      if( other )
+        impl_ = other->clone();
+      else
+        impl_ = nullptr;
       return *this;
     }
 
@@ -76,7 +79,7 @@ namespace Spacy
       return impl_ != nullptr;
     }
 
-    bool operator==(std::nullptr_t&& t)
+    bool operator==(std::nullptr_t&& t) const
     {
       return impl_ == t;
     }
@@ -153,7 +156,7 @@ namespace Spacy
       return impl_ != nullptr;
     }
 
-    bool operator==(std::nullptr_t&& t)
+    bool operator==(std::nullptr_t&& t) const
     {
       return impl_ == t;
     }

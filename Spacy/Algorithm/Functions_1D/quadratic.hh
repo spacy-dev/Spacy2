@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_FUNCTIONS_1D_QUADRATIC_FUNCTION_HH
 #define SPACY_FUNCTIONS_1D_QUADRATIC_FUNCTION_HH
 

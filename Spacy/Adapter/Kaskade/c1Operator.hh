@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_KASKADE_C1_OPERATOR_HH
 #define SPACY_KASKADE_C1_OPERATOR_HH
 
@@ -23,13 +26,14 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
+  /** @addtogroup KaskadeGroup
+   * @{
+   */
   namespace Kaskade
   {
     /**
-     * @ingroup KaskadeGroup
      * @brief %Operator interface for %Kaskade 7. Models a differentiable operator \f$A:X\rightarrow Y\f$.
-     *
-     * @see @ref C1OperatorAnchor "C1Operator", @ref C1OperatorConceptAnchor "C1OperatorConcept"
+     * @see Spacy::C1Operator
      */
     template <class OperatorDefinition>
     class C1Operator :
@@ -67,7 +71,6 @@ namespace Spacy
         : OperatorBase(domain,range),
           f_(f),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain) ),
-          assembler_(spaces_),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
           operatorSpace_( std::make_shared<VectorSpace>(
                             LinearOperatorCreator<AnsatzVariableSetDescription,TestVariableSetDescription>(domain,range) ,
@@ -92,15 +95,15 @@ namespace Spacy
         : OperatorBase(B),
           NumberOfThreads(B),
           f_(B.f_), spaces_(B.spaces_),
-          assembler_(spaces_),
-//          A_(B.A_),
-//          old_X_A_(B.old_X_A_),
-//          old_X_dA_(B.old_X_dA_),
+          A_( B.A_ ),
+          rhs_(B.rhs_),
+          old_X_A_(B.old_X_A_),
+          old_X_dA_(B.old_X_dA_),
           onlyLowerTriangle_(B.onlyLowerTriangle_),
           rbegin_(B.rbegin_), rend_(B.rend_), cbegin_(B.cbegin_), cend_(B.cend_),
           solverCreator_(B.solverCreator_),
           operatorSpace_(B.operatorSpace_)
-      {std::cout << "copy constructor" << std::endl;}
+      {}
 
       /**
        * @brief Copy assignment.
@@ -111,10 +114,10 @@ namespace Spacy
         setNumberOfThreads(B.nThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
-//        assembler_ = Assembler(spaces_);
-  //      A_ = B.A_;
-  //      old_X_A_ = B.old_X_A_;
-  //      old_X_dA_ = B.old_X_dA_;
+        A_ = B.A_;
+        rhs_ = B.rhs_;
+        old_X_A_ = B.old_X_A_;
+        old_X_dA_ = B.old_X_dA_;
         onlyLowerTriangle_ = B.onlyLowerTriangle_;
         rbegin_ = B.rbegin_;
         rend_ = B.rend_;
@@ -144,12 +147,7 @@ namespace Spacy
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
         assembleOperator(x);
-
-        VectorImpl v( assembler_.rhs() );
-
-        auto y = range().zeroVector();
-        copyFromCoefficientVector<TestVariableSetDescription>(v,y);
-        return y;
+        return rhs_;
       }
 
       /**
@@ -166,7 +164,7 @@ namespace Spacy
         copyToCoefficientVector<AnsatzVariableSetDescription>(dx,dx_);
         VectorImpl y_( TestVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
-        A_->apply( dx_ , y_ );
+        A_.apply( dx_ , y_ );
 
         auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
@@ -177,21 +175,9 @@ namespace Spacy
       /// Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
       ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const
       {
-        std::cout << "linearization assemble" << std::endl;
         assembleGradient(x);
-        std::cout << "linear operator" << std::endl;
 
-        return Linearization(KaskadeOperator( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) ),*operatorSpace_,solverCreator_);
-        //return LinearizedOperator( *this , x , solverCreator_(*this) );
-      }
-
-      /**
-       * @brief Access assembler.
-       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
-       */
-      const Assembler& assembler() const noexcept
-      {
-        return assembler_;
+        return Linearization(A_,*operatorSpace_,solverCreator_);
       }
 
       /**
@@ -199,7 +185,7 @@ namespace Spacy
        */
       const KaskadeOperator& A() const noexcept
       {
-        return *A_;
+        return A_;
       }
 
       /**
@@ -224,14 +210,18 @@ namespace Spacy
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
-        if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && old_X_A_ && (old_X_A_==x) ) return;
+        if( old_X_A_ && (old_X_A_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
         typename AnsatzVariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
+        Assembler assembler_(spaces_);
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+
+        rhs_ = range().zeroVector();
+        copyFromCoefficientVector<TestVariableSetDescription>(VectorImpl(assembler_.rhs()),rhs_);
 
         old_X_A_ = x;
       }
@@ -239,22 +229,23 @@ namespace Spacy
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && old_X_dA_ && (old_X_dA_==x) ) return;
+        if( old_X_dA_ && (old_X_dA_==x) ) return;
 
         AnsatzVariableSetDescription variableSet(spaces_);
         typename AnsatzVariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
+        Assembler assembler_(spaces_);
         assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
-        A_ = std::make_shared<KaskadeOperator>( assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        A_ = assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_);
         old_X_dA_ = x;
       }
 
       OperatorDefinition f_;
       Spaces spaces_;
-      mutable Assembler assembler_;
-      mutable std::shared_ptr<KaskadeOperator> A_ = nullptr;
+      mutable KaskadeOperator A_;
+      mutable ::Spacy::Vector rhs_;
       mutable ::Spacy::Vector old_X_A_ = {}, old_X_dA_ = {};
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=OperatorDefinition::AnsatzVars::noOfVariables;
@@ -263,16 +254,15 @@ namespace Spacy
         {
             return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() ,
                                                                                               M.range() ,
-                                                                                              M.domain() ,
+                                                                                              M.domain() /*,
                                                                                               DirectType::MUMPS ,
-                                                                                              MatrixProperties::GENERAL );
+                                                                                              MatrixProperties::GENERAL*/ );
 
         };
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ from %Kaskade 7.
      * @param f operator definition from %Kaskade 7
      * @param domain domain space \f$X\f$
@@ -295,7 +285,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X^*\f$ from %Kaskade 7.
      * @param f operator definition from %Kaskade 7
      * @param domain domain space \f$X\f$
@@ -316,6 +305,7 @@ namespace Spacy
       return C1Operator<OperatorDefinition>( f, domain , domain.dualSpace() , rbegin , rend , cbegin , cend);
     }
   }
+  /** @} */
 }
 
 #endif // SPACY_KASKADE_C1_OPERATOR_HH

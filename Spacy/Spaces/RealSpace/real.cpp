@@ -163,11 +163,11 @@ namespace Spacy
 //    return y;
 //  }
 
-  Real operator*(Real x, double y)
-  {
-    toDouble(x) *= y;
-    return x;
-  }
+//  Real operator*(Real x, double y)
+//  {
+//    toDouble(x) *= y;
+//    return x;
+//  }
 
 
   Real operator+(Real x, const Real& y)

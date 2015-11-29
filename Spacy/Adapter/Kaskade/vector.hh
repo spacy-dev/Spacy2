@@ -43,33 +43,22 @@ namespace Spacy
         : VectorBase(space),
           spaces_(&cast_ref< VectorCreator<Description> >(space.creator()).impl()),
           v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
-      {
-        std::cout << "Create variable. id=" << Variable::id << ", m=" << Variable::m << ", spaceIndex=" << Variable::spaceIndex << std::endl;
-      }
+      {}
 
-      /**
-       * @brief Assign from coefficient vector of %Kaskade 7.
-       * @param v coefficient vector
-       */
-      Vector& operator=(const VectorImpl& v)
+      /// Assign from coefficient vector of %Kaskade 7.
+      Vector& operator=(const typename Description::template CoefficientVectorRepresentation<>::type& v)
       {
         v_ = v;
         return *this;
       }
 
-      /**
-       * @brief Access coefficient vector.
-       * @return coefficient vector
-       */
+      /// Access coefficient vector.
       VectorImpl& impl()
       {
         return v_;
       }
 
-      /**
-       * @brief Access coefficient vector.
-       * @return coefficient vector
-       */
+      /// Access coefficient vector.
       const VectorImpl& impl() const
       {
         return v_;

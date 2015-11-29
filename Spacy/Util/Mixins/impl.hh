@@ -153,8 +153,6 @@ namespace Spacy
     public:
       CopyViaCloneUniqueImpl() = default;
 
-      virtual ~CopyViaCloneUniqueImpl() = default;
-
       template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
       explicit CopyViaCloneUniqueImpl(T&& impl)
         : impl_(std::make_unique< std::decay_t<T> >(std::forward<T>(impl)))
@@ -213,8 +211,6 @@ namespace Spacy
     {
     public:
       CopyingUniqueImpl() = default;
-
-      virtual ~CopyingUniqueImpl() = default;
 
       template <class T, class = std::enable_if_t< std::is_convertible<std::decay_t<T>*,Type*>::value > >
       explicit CopyingUniqueImpl(T&& impl)

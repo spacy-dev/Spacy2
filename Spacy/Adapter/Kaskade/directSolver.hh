@@ -16,8 +16,6 @@ namespace Spacy
     /**
      * @ingroup KaskadeGroup
      * @brief Direct solver interface for %Kaskade 7.
-     *
-     * Performs lazy construction of the solver.
      */
     template <class KaskadeOperator, class AnsatzVariableDescription, class TestVariableDescription>
     class DirectSolver :
@@ -38,11 +36,11 @@ namespace Spacy
        * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
        */
       DirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
-                   DirectType directSolver = DirectType::MUMPS, MatrixProperties property = MatrixProperties::GENERAL )
+                   DirectType directSolver = DirectType::UMFPACK, MatrixProperties property = MatrixProperties::GENERAL )
         : OperatorBase(domain,range),
           A_(std::move(A)),
           spaces_( extractSpaces<AnsatzVariableDescription>(domain) ),
-          directSolver_(directSolver),
+          directSolver_(/*directSolver*/DirectType::UMFPACK),
           property_(property)
       {}
 
@@ -51,6 +49,7 @@ namespace Spacy
       {
         if( solver_ == nullptr) solver_ = std::make_shared< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
             ( ::Kaskade::directInverseOperator(A_, directSolver_, property_) );
+
         Range y_(TestVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         copyToCoefficientVector<AnsatzVariableDescription>(x,x_);

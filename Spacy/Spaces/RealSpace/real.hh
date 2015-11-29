@@ -144,7 +144,12 @@ namespace Spacy
   }
 
   /// Compute \f$x*y\f$.
-  Real operator*(Real x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator*(Real x, Arithmetic y)
+  {
+    return x *= y;
+  }
 
   /// Compute \f$a*y\f$.
   Vector operator*(Real a, Vector x);

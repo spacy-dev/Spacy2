@@ -1,5 +1,8 @@
-#include "linearSolver.hh"
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
 
+#include "linearSolver.hh"
+#include "Spacy/operator.hh"
 #include "Spacy/vectorSpace.hh"
 #include <utility>
 

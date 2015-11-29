@@ -3,10 +3,15 @@
 
 #include "newton.hh"
 
-#include "Spacy/derivative.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
+
+#include "Spacy/Algorithm/Newton/dampingStrategies.hh"
+#include "Spacy/Algorithm/Newton/terminationCriteria.hh"
+
 #include "Spacy/Util/Exceptions/notConvergedException.hh"
+
+#include "Spacy/derivative.hh"
+#include "Spacy/operator.hh"
+#include "Spacy/vectorSpace.hh"
 
 #include <iostream>
 
@@ -29,7 +34,7 @@ namespace Spacy
 
       for(unsigned i = 1; i <= p.maxSteps(); ++i)
       {
-//        if( p.verbose() )
+        if( p.verbose() )
           std::cout << "\nIteration " << i << ": ";
 
         auto dF_inv = d1(F,x)^-1;

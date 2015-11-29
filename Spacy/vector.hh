@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_VECTOR_HH
 #define SPACY_VECTOR_HH
 
@@ -19,13 +22,6 @@ namespace Spacy
   /** \addtogroup SpacyGroup
    * @{
    */
-
-  /**
-   * @anchor VectorAnchor
-   * @brief Vector class.  Can store objects that satisfy the requirements of \ref VectorConceptAnchor "VectorConcept".
-   */
-//  using AnyVector = boost::type_erasure::any< Concepts::VectorConcept >;
-
 
   /// Type-erased linear operator \f$A:\ X \to Y \f$.
   class Vector : public Mixin::ToTarget<Vector>
@@ -101,14 +97,14 @@ namespace Spacy
 
     /// Construct from operator implementation.
     template <class Impl,
-              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>/*,
-//              class = std::enable_if_t<HasMemOp_callable<Impl,Impl,Real>::value>,
-              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
-              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
-              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
-//              class = std::enable_if_t<HasMemOp_negate<Impl>::value>,
-              class = void_t< TryMemOp_negate<Impl> >,
-              class = std::enable_if_t<HasMemFn_space<Impl>::value>*/ >
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
+//              class = void_t< TryMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl> > >,
+//              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl>,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl> >::value>,
+              class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemOp_negate<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
     Vector(Impl&& impl)
       : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
     {}
@@ -116,12 +112,12 @@ namespace Spacy
     /// Assign from operator implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
-//              class = std::enable_if_t<HasMemOp_callable<Impl,Impl,Real>::value>,
-              class = std::enable_if_t<HasMemOp_add<Impl>::value>,
-              class = std::enable_if_t<HasMemOp_subtract<Impl>::value>,
-              class = std::enable_if_t<HasMemOp_multiply<Impl>::value>,
-              class = void_t< TryMemOp_negate<Impl> >,
-              class = std::enable_if_t<HasMemFn_space<Impl>::value> >
+//              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl>,Real>::value>,
+              class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemOp_negate<std::decay_t<Impl>>::value>,
+              class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
     Vector& operator=(Impl&& impl)
     {
       base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
@@ -152,85 +148,23 @@ namespace Spacy
     CopyViaClonePtr<AbstractBase> base_;
   };
 
-//  class Vector : public Mixin::CopyingUniqueImpl<AnyVector>
-//  {
-//  public:
-//    Vector()
-//      : Mixin::CopyingUniqueImpl<AnyVector>( std::make_unique<AnyVector>() )
-//    {}
-
-//    template <class VImpl,
-//              class = std::enable_if_t<!std::is_same<std::decay_t<VImpl>,Vector>::value>
-//              >
-//    Vector(VImpl&& v)
-//      : Mixin::CopyingUniqueImpl<AnyVector>(std::make_unique<AnyVector>(std::forward<VImpl>(v)))
-//    {}
-
-////    Vector(AnyVector v);
-
-// //   operator AnyVector() const;
-
-//    /**
-//     * @brief In-place summation \f$ x+=y\f$.
-//     * @param y vector to add to this vector
-//     * @return \f$ x+=y\f$.
-//     */
-//    Vector& operator+=(const Vector& y);
-
-//    /**
-//     * @brief In-place subtraction \f$ x-=y\f$.
-//     * @param y vector to subtract from this vector
-//     * @return \f$ x-=y\f$.
-//     */
-//    Vector& operator-=(const Vector& y);
-
-//    /**
-//     * @brief In-place multiplication \f$ x*=a\f$.
-//     * @param a scaling factor
-//     * @return \f$ x*=a\f$.
-//     */
-//    Vector& operator*=(double a);
-
-//    /**
-//     * @brief Negation \f$ -x\f$.
-//     * @return \f$ -x \f$.
-//     */
-//    Vector operator-() const;
-
-//    Vector operator()(const Vector& y) const;
-
-//    /**
-//     * @brief Comparison operator \f$ x==y\f$.
-//     * @param y vector to compare with this vector
-//     * @return \f$ x==y\f$.
-//     */
-//    bool operator==(const Vector& y) const;
-
-//    const VectorSpace& space() const;
-//  };
 
   template <class ToType>
   bool is(const Spacy::Vector& v)
   {
     return v.template target<ToType>() != nullptr;
-//    return Spacy::target<ToType>(v) != nullptr;
-//    return is<ToType>(v.impl());
   }
 
   template <class ToType>
   const ToType& cast_ref(const Spacy::Vector& v)
   {
     return *v.template target<ToType>();
-//    return *Spacy::target<ToType>(v);
-//    return cast_ref<ToType>(v.impl());
   }
 
   template <class ToType>
   ToType& cast_ref(Spacy::Vector& v)
   {
     return *v.template target<ToType>();
-//    return *Spacy::target<ToType>(v);
-//    return cast_ref<ToType>(v.impl());
   }
 
 ////  template <class> struct Scale;
@@ -246,7 +180,12 @@ namespace Spacy
     return x *= a;
   }
 
-  Vector operator*(Vector x, double a);
+  template <class Arithmetic,
+            class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
+  Vector operator*(Vector x, Arithmetic a)
+  {
+    return x *= a;
+  }
 
   /**
    * @brief Sum of vectors.

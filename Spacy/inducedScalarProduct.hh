@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH
 #define SPACY_INDUCED_SCALAR_PRODUCT_HH
 

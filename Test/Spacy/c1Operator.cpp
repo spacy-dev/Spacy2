@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include <gtest/gtest.h>
 
 #include "Spacy/operator.hh"
@@ -71,14 +74,15 @@ TEST(C1Operator,IsEmpty)
   ASSERT_FALSE( g_is_empty );
 }
 
-//TEST(C1Operator,Cast)
-//{
-//  auto X = createMockBanachSpace();
-//  auto Y = createMockBanachSpace();
-//  C1Operator f = TestC1Operator(X,Y);
+TEST(C1Operator,Cast)
+{
+  auto X = createMockBanachSpace();
+  auto Y = createMockBanachSpace();
+  C1Operator f = TestC1Operator(X,Y);
 
-//  ASSERT_TRUE( f.target<TestC1Operator>() != nullptr );
-//}
+  bool validCast = f.template target<TestC1Operator>() != nullptr;
+  ASSERT_TRUE( validCast );
+}
 
 TEST(C1Operator,StoreRValue)
 {
@@ -97,6 +101,7 @@ TEST(C1Operator,StoreCopy)
   C1Operator f = g;
 
   test(f,X,Y);
+  test(g,X,Y);
 }
 
 TEST(C1Operator,Copy)

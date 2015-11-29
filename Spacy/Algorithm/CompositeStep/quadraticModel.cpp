@@ -1,14 +1,16 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "quadraticModel.hh"
 
 #include "Spacy/Util/invoke.hh"
-#include "Spacy/functional.hh"
+#include "Spacy/c2Functional.hh"
 #include "Spacy/scalarProduct.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 
 #include <cmath>
 #include <tuple>
-#include <iostream>
 
 namespace Spacy
 {

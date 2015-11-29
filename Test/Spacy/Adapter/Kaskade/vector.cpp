@@ -3,58 +3,45 @@
 
 #include <gtest/gtest.h>
 
-#include "dune/grid/config.h"
-#include "dune/grid/uggrid.hh"
-
-#include "fem/assemble.hh"
-#include "fem/gridmanager.hh"
-#include "fem/lagrangespace.hh"
-#include "fem/variables.hh"
-#include "utilities/gridGeneration.hh" //  createUnitSquare
-
+#include "setup.hh"
 //#include "Spacy/Adapter/Kaskade/vector.hh"
 #include "Spacy/Adapter/Kaskade/vectorSpace.hh"
-//#include "Spacy/Adapter/Eigen/vectorCreator.hh"
+#include "Spacy/vectorSpace.hh"
 
 #include "Test/mockSetup.hh"
-#include "setup.hh"
+
 
 using namespace Kaskade;
 
-TEST(Kaskade,CreateVectorCreator)
+TEST(Kaskade,VectorCreator_Create)
 {
-  constexpr int dim = 2, order = 1;
-
-  using Grid = Dune::UGGrid<dim>;
-  using LeafView = Grid::LeafGridView;
-  using H1Space = FEFunctionSpace<ContinuousLagrangeMapper<double,LeafView> >;
-  using Spaces = boost::fusion::vector<H1Space const*>;
-  using VariableDescriptions = boost::fusion::vector<Variable<SpaceIndex<0>,Components<1>,VariableId<0> > >;
-  using VariableSetDesc = VariableSetDescription<Spaces,VariableDescriptions>;
-//  using CoefficientVectors = VariableSetDesc::CoefficientVectorRepresentation<0,1>::type;
-
-
-  GridManager<Grid> gridManager( createUnitSquare<Grid>() );
-
-  // construction of finite element space for the scalar solution u.
-  H1Space temperatureSpace(gridManager,gridManager.grid().leafGridView(),order);
-//  Spaces spaces(&temperatureSpace);
-//  VariableSetDesc variableSetDesc(spaces,{ "u" });
-
-  //construct Galerkin representation
-//  VariableSetDesc::VariableSet u(variableSetDesc);
-//  CoefficientVectors x(VariableSetDesc::CoefficientVectorRepresentation<>::init(spaces));
+  KASKADE_SINGLE_SPACE_SETUP
 
   Spacy::Kaskade::VectorCreator<VariableSetDesc> creator(temperatureSpace);
+  ASSERT_EQ( creator.impl().degreesOfFreedom() , temperatureSpace.degreesOfFreedom() );
 
-//  auto vec = testVector();
-
-//  auto space = createMockBanachSpace();
-//  Spacy::Rn::Vector spacyVector(vec,space);
-
-//  ASSERT_EQ( spacyVector.impl()[0] , 1.);
-//  ASSERT_EQ( spacyVector.impl()[1] , 2.);
+  Spacy::VectorCreator spacyCreator(creator);
+  ASSERT_EQ( spacyCreator.target<Spacy::Kaskade::VectorCreator<VariableSetDesc>>()->impl().degreesOfFreedom() , temperatureSpace.degreesOfFreedom() );
 }
+
+
+TEST(Kaskade,VectorCreator_CreateVector)
+{
+  KASKADE_SINGLE_SPACE_SETUP
+
+  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+
+  auto v = V.zeroVector();
+
+  ASSERT_EQ( norm(v) , 0. );
+
+  auto& kv = *v.target< Spacy::Kaskade::Vector<VariableSetDesc> >();
+
+  boost::fusion::at_c<0>(kv.impl().data)[0] = 2;
+  ASSERT_EQ( norm(v) , 2. );
+}
+
+
 
 //TEST(Rn,AssignFromEigen_VectorXd)
 //{

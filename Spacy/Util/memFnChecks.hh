@@ -4,6 +4,7 @@
 #ifndef SPACY_UTIL_MEM_FN_CHECKS_HH
 #define SPACY_UTIL_MEM_FN_CHECKS_HH
 
+#include <functional>
 #include <type_traits>
 #include <utility>
 #include "Spacy/Util/voider.hh"
@@ -11,7 +12,9 @@
 namespace Spacy
 {
   /// @cond
+  class LinearOperator;
   class VectorSpace;
+  class Vector;
   /// @endcond
 
 
@@ -41,6 +44,9 @@ namespace Spacy
 
   template <class T>
   using TryMemFn_solver = decltype( std::declval<T>().solver() );
+
+  template <class T>
+  using TryMemFn_isPositiveDefinite = decltype(std::declval<T>().isPositiveDefinite());
 
 
   template <class,class=void>
@@ -96,8 +102,7 @@ namespace Spacy
 
   template <class T,class V>
   struct HasMemFn_hessian< T , V , void_t< TryMemFn_hessian<T,V> > >
-  : std::true_type
-      //    : std::is_same< V ,TryMemFn_hessian<T,V> >::type
+  : std::is_convertible< std::decay_t< TryMemFn_hessian<T,V> >* , LinearOperator* >::type
   {};
 
   template <class,class,class=void>
@@ -105,8 +110,7 @@ namespace Spacy
 
   template <class T,class V>
   struct HasMemFn_linearization< T , V , void_t< TryMemFn_linearization<T,V> > >
-  : std::true_type
-      //    : std::is_same< V ,TryMemFn_linearization<T,V> >::type
+  : std::is_convertible< std::decay_t< TryMemFn_linearization<T,V> >* , LinearOperator* >::type
   {};
 
   template <class,class=void>
@@ -114,8 +118,15 @@ namespace Spacy
 
   template <class T>
   struct HasMemFn_solver< T , void_t< TryMemFn_solver<T> > >
-  : std::true_type
-      //    : std::is_same< V ,TryMemFn_solver<T,V> >::type
+  : std::is_convertible< TryMemFn_solver<T>* , std::function<Vector(const Vector&)>* >::type
+  {};
+
+  template <class,class=void>
+  struct HasMemFn_isPositiveDefinite : std::false_type{};
+
+  template <class T>
+  struct HasMemFn_isPositiveDefinite< T , void_t< TryMemFn_isPositiveDefinite<T> > >
+  : std::is_same< bool , TryMemFn_isPositiveDefinite<T> >::type
   {};
 }
 

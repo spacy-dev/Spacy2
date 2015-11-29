@@ -1,7 +1,7 @@
 // Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
 // Released under the terms of the GNU General Public License version 3 or later.
 
-#include "functional.hh"
+#include "c1Functional.hh"
 
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
@@ -10,19 +10,25 @@
 
 namespace Spacy
 {
-  Real Functional::operator()(const Vector& x) const
+  Real C1Functional::operator()(const Vector& x) const
   {
     assert(base_);
     return base_->operator ()(x);
   }
 
-  const VectorSpace& Functional::domain() const
+  Vector C1Functional::d1(const Vector& x) const
+  {
+    assert(base_);
+    return base_->d1(x);
+  }
+
+  const VectorSpace& C1Functional::domain() const
   {
     assert(base_);
     return base_->domain();
   }
 
-  Functional::operator bool() const
+  C1Functional::operator bool() const
   {
     return base_;
   }

@@ -131,9 +131,9 @@ namespace Spacy
         {
             return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() ,
                                                                                               M.range() ,
-                                                                                              M.domain() ,
+                                                                                              M.domain() /*,
                                                                                               DirectType::MUMPS ,
-                                                                                              MatrixProperties::GENERAL );
+                                                                                              MatrixProperties::GENERAL*/ );
         };
     };
 

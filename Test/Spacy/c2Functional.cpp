@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Spacy/functional.hh"
+#include "Spacy/c2Functional.hh"
 #include "Spacy/operator.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"

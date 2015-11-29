@@ -1,6 +1,7 @@
-#include "quadratic.hh"
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
 
-#include "iostream"
+#include "quadratic.hh"
 
 namespace Spacy
 {
@@ -8,14 +9,10 @@ namespace Spacy
   {
     Quadratic::Quadratic(Real a, Real b, Real c) noexcept
       : a_(a), b_(b), c_(c)
-    {
-//      std::cout << "constructor (quadratic): " << a_ << ", " << b_ << ", " << c_ << std::endl;
-    }
+    {}
 
     Real Quadratic::operator()(Real t) const noexcept
     {
-//      std::cout << "eval (quadratic): " << a_ << ", " << b_ << ", " << c_ << ", " << t << std::endl;
-//      std::cout << (a_ + t*b_ + t*t*c_) << std::endl;
       return a_ + t*b_ + t*t*c_;
     }
   }

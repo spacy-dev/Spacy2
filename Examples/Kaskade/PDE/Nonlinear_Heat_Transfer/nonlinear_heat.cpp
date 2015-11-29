@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <dune/grid/config.h>
-#define HAVE_UG
 #include <dune/grid/uggrid.hh>
 
 #include <Spacy/Adapter/kaskade.hh>
@@ -47,8 +46,8 @@ int main()
   auto range = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
   Spacy::connect(domain,range);
 
-  auto A = Spacy::Kaskade::makeC1Operator( F , domain , range );
-  domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(domain.vector())) );
+  Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator( F , domain , range );
+  domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(domain.zeroVector())) );
   
   auto p = Spacy::Newton::Parameter{};
   p.setVerbosity(true);

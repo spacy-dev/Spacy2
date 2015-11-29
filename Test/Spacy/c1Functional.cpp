@@ -1,6 +1,9 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include <gtest/gtest.h>
 
-#include "Spacy/functional.hh"
+#include "Spacy/c1Functional.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"
 
@@ -68,6 +71,7 @@ TEST(C1Functional,StoreCopy)
   C1Functional f = g;
 
   test(f,X);
+  test(g,X);
 }
 
 TEST(C1Functional,Copy)
@@ -77,6 +81,7 @@ TEST(C1Functional,Copy)
   C1Functional f = g;
 
   test(f,X);
+  test(g,X);
 }
 
 TEST(C1Functional,Move)
@@ -90,9 +95,7 @@ TEST(C1Functional,Move)
   EXPECT_FALSE(is_empty_before_move);
   EXPECT_TRUE(is_empty_after_move);
 
-  EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
-  EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
-  EXPECT_EQ( X.index() , f.domain().index() );
+  test(f,X);
 }
 
 

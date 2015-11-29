@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
 #define SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
 
@@ -13,10 +16,13 @@ namespace Spacy
   class Vector;
   /// @endcond
 
+  /** @addtogroup CSGroup
+   * {
+   */
+
   namespace CompositeStep
   {
     /**
-     * @ingroup CSGroup
      * @brief Constructs the quadratic model of a Lagrange functional for a composite step method.
      * @param nu normal step damping factor
      * @param dn normal step
@@ -36,7 +42,6 @@ namespace Spacy
                                       const C2Functional& L, const Vector& x);
 
     /**
-     * @ingroup CSGroup
      * @brief Constructs the quadratic model a norm for a composite step method.
      * @param nu normal step damping factor
      * @param dn normal step
@@ -45,10 +50,7 @@ namespace Spacy
      */
     Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
 
-    /**
-     * @ingroup CSGroup
-     * @brief The cubic regularized model for AffineCovariantCompositeSteps.
-     */
+    /// The cubic regularized model for AffineCovariantCompositeSteps.
     class CubicModel
     {
     public:
@@ -74,7 +76,6 @@ namespace Spacy
     };
 
     /**
-     * @ingroup CSGroup
      * @brief Generate cubic regularized model for AffineCovariantCompositeSteps
      * @param nu normal step damping factor
      * @param dn normal step
@@ -88,7 +89,6 @@ namespace Spacy
                               const C2Functional& L, const Vector& x, Real omega);
 
     /**
-     * @ingroup CSGroup
      * @brief Find global minimizer of \f$f\f$ in \f$[a,b]\f$.
      * @param f Nonlinear function \f$ f: \mathbb{R}\to\mathbb{R} \f$
      * @param a lower bound of the admissible interval
@@ -117,6 +117,8 @@ namespace Spacy
       return tmin;
     }
   }
+
+  /** @} */
 }
 
 #endif // SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH

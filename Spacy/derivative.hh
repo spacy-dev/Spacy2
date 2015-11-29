@@ -1,11 +1,16 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_DERIVATIVE_HH
 #define SPACY_DERIVATIVE_HH
 
-#include "Spacy/functional.hh"
-#include "Spacy/operator.hh"
-
 namespace Spacy
 {
+  /// @cond
+  class C1Operator;
+  class C2Functional;
+  /// @endcond
+
   /**
    * @ingroup SpacyGroup
    * @brief Compute the derivative of a functional \f$ f: X\to \mathbb{R} \f$ as (nonlinear) operator \f$ f':X\to X^* \f$.

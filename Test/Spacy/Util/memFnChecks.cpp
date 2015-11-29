@@ -1,7 +1,6 @@
 // Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
 // Released under the terms of the GNU General Public License version 3 or later.
 
-
 #include <gtest/gtest.h>
 
 #include "Spacy/Util/memFnChecks.hh"
@@ -36,12 +35,12 @@ namespace
 
   struct Linearization
   {
-    const LinearOperator linearization(const Vector&) const;
+    LinearOperator linearization(const Vector&) const;
   };
 
   struct Hessian
   {
-    const LinearOperator hessian(const Vector&) const;
+    LinearOperator hessian(const Vector&) const;
   };
 }
 

@@ -1,11 +1,12 @@
 // Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
 // Released under the terms of the GNU General Public License version 3 or later.
 
-#ifndef SPACY_FUNCTIONAL_HH
-#define SPACY_FUNCTIONAL_HH
+#ifndef SPACY_C1_FUNCTIONAL_HH
+#define SPACY_C1_FUNCTIONAL_HH
 
 #include "Spacy/Util/memFnChecks.hh"
 #include "Spacy/Util/memOpChecks.hh"
+#include "Spacy/Util/smartPointer.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/vector.hh"
@@ -23,16 +24,16 @@ namespace Spacy
    * @{
    */
 
-
-  /// Type-erased functional \f$f:\ X \to \mathbb{R} \f$.
-  class Functional : public Mixin::ToTarget<Functional>
+  /// Type-erased differentiable functional \f$f:\ X \to \mathbb{R} \f$.
+  class C1Functional : public Mixin::ToTarget<C1Functional>
   {
-    friend class ToTarget<Functional>;
+    friend class ToTarget<C1Functional>;
 
     struct AbstractBase
     {
       virtual ~AbstractBase(){}
       virtual Real operator()(const Vector& x) const = 0;
+      virtual Vector d1(const Vector &x) const = 0;
       virtual const VectorSpace& domain() const = 0;
       virtual std::unique_ptr<AbstractBase> clone() const = 0;
     };
@@ -53,6 +54,11 @@ namespace Spacy
         return this->impl()(x);
       }
 
+      Vector d1(const Vector &x) const final override
+      {
+        return this->impl().d1(x);
+      }
+
       const VectorSpace& domain() const final override
       {
         return this->impl().domain();
@@ -65,23 +71,25 @@ namespace Spacy
     };
 
   public:
-    Functional() = default;
+    C1Functional() = default;
 
     /// Construct from functional implementation.
     template <class Impl,
-              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
               class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
-    Functional(Impl&& impl)
+    C1Functional(Impl&& impl)
       : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from functional implementation.
     template <class Impl,
-              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
+              class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
               class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
+              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
-    Functional& operator=(Impl&& impl)
+    C1Functional& operator=(Impl&& impl)
     {
       base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
       return *this;
@@ -90,6 +98,9 @@ namespace Spacy
 
     /// Apply operator.
     Real operator()(const Vector& x) const;
+
+    /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
+    Vector d1(const Vector &x) const;
 
     /// Access domain space \f$X\f$.
     const VectorSpace& domain() const;
@@ -100,7 +111,8 @@ namespace Spacy
   private:
     CopyViaClonePtr<AbstractBase> base_;
   };
+
   /** @} */
 }
 
-#endif // SPACY_FUNCTIONAL_HH
+#endif // SPACY_C1_FUNCTIONAL_HH

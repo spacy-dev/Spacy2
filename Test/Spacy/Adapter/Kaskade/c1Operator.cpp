@@ -1,12 +1,87 @@
-//#include <gtest/gtest.h>
+#include <iostream>
+#include <gtest/gtest.h>
 
-//#include "Spacy/Adapter/Eigen/vector.hh"
-//#include "Spacy/Adapter/Eigen/vectorCreator.hh"
-//#include "Spacy/Adapter/Eigen/c1Operator.hh"
-//#include "Spacy/Adapter/Eigen/linearOperator.hh"
-//#include "setup.hh"
+#include "setup.hh"
+#include "Spacy/Adapter/Kaskade/c1Operator.hh"
+#include "Spacy/Adapter/Kaskade/vector.hh"
+#include "Spacy/Adapter/Kaskade/vectorSpace.hh"
 
-//using namespace Spacy;
+using namespace Kaskade;
+
+template <class Description>
+void test(const Spacy::Kaskade::C1Operator<Description>& A, const Spacy::VectorSpace& V)
+{
+//  auto x0 = A( A.domain().zeroVector() );
+//  EXPECT_EQ( norm(x0) , norm(A.domain().zeroVector()) );
+
+  auto x1 = A.d1( A.domain().zeroVector() , A.domain().zeroVector() );
+  EXPECT_EQ( norm(x1) , norm(A.domain().zeroVector()) );
+
+  EXPECT_EQ( A.domain().index() , V.index() );
+  EXPECT_EQ( A.range().index() , V.index() );
+}
+
+void test(const Spacy::C1Operator& A, const Spacy::VectorSpace& V)
+{
+  auto x0 = A( A.domain().zeroVector() );
+//  EXPECT_EQ( norm(x0) , norm(A.domain().zeroVector()) );
+
+  auto x1 = A.d1( A.domain().zeroVector() , A.domain().zeroVector() );
+  EXPECT_EQ( norm(x1) , norm(A.domain().zeroVector()) );
+
+  auto dA = A.linearization(A.domain().zeroVector());
+  auto x2 = dA(A.domain().zeroVector());
+  EXPECT_EQ( norm(x2) , norm(A.domain().zeroVector()) );
+
+  EXPECT_EQ( A.domain().index() , V.index() );
+  EXPECT_EQ( A.range().index() , V.index() );
+}
+
+TEST(Kaskade,C1Operator_Create)
+{
+  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_OPERATOR
+
+  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto Op = Spacy::Kaskade::makeC1Operator(F,V);
+
+  test(Op,V);
+}
+
+TEST(Kaskade,C1Operator_MoveCreateSpacyVector)
+{
+  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_OPERATOR
+
+  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  Spacy::C1Operator Op = Spacy::Kaskade::makeC1Operator(F,V);
+
+  test(Op,V);
+}
+
+TEST(Kaskade,C1Operator_MoveToSpacyVector)
+{
+  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_OPERATOR
+
+  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto Op0 = Spacy::Kaskade::makeC1Operator(F,V);
+  Spacy::C1Operator Op = std::move(Op0);
+
+  test(Op,V);
+}
+
+TEST(Kaskade,C1Operator_FreeD1)
+{
+  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_OPERATOR
+
+  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  Spacy::C1Operator Op = Spacy::Kaskade::makeC1Operator(F,V);
+
+  auto lin = d1(Op,Op.domain().zeroVector());
+  ASSERT_EQ( norm(lin(Op.domain().zeroVector())) , norm(V.zeroVector()) );
+}
 
 //TEST(Rn,C1Operator_Apply)
 //{
