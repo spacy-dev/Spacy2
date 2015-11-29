@@ -48,6 +48,9 @@ namespace Spacy
   template <class T>
   using TryMemFn_isPositiveDefinite = decltype(std::declval<T>().isPositiveDefinite());
 
+  template <class T>
+  using TryMemFn_clone = decltype(std::declval<T>().clone());
+
 
   template <class,class=void>
   struct HasMemFn_space : std::false_type{};

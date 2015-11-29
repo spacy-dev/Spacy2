@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
 #define SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
 
@@ -18,19 +21,21 @@
 
 namespace Spacy
 {
+  /** @addtogroup FenicsGroup
+   * @{
+   */
   namespace FEniCS
   {
     /**
-     * @ingroup FenicsGroup
      * @brief %Functional interface for %FEniCS. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
      * @tparam F dolfin::Form describing the functional value
      * @tparam DF dolfin::Form describing the derivative
      * @tparam DDF dolfin::Form describing the second derivative
      * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
-     * @see @ref C2FunctionalAnchor "C2Functional", @ref C2FunctionalConceptAnchor "C2FunctionalConcept"
+     * @see Spacy::C2Functional
      */
     template <class F, class DF, class DDF>
-    class C2Functional : public C2FunctionalBase
+    class C2Functional : public FunctionalBase
     {
     public:
       /**
@@ -43,7 +48,7 @@ namespace Spacy
        */
       C2Functional(const F& f, const DF& J, const DDF& H,
                  const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& domain)
-        : C2FunctionalBase( domain ),
+        : FunctionalBase( domain ),
           f_( f.mesh_shared_ptr() ),
           J_( J.function_space(0) ),
           H_( H.function_space(0) , H.function_space(1) ),
@@ -63,7 +68,7 @@ namespace Spacy
        * @param g functional to copy from
        */
       C2Functional(const C2Functional& g)
-        : C2FunctionalBase( g.domain() ) ,
+        : FunctionalBase( g.domain() ) ,
           f_( g.f_.mesh_shared_ptr() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
@@ -106,7 +111,7 @@ namespace Spacy
        * @param g functional to move from
        */
       C2Functional(C2Functional&& g)
-        : C2FunctionalBase( g.domain() ) ,
+        : FunctionalBase( g.domain() ) ,
           f_( g.f_.mesh_shared_ptr() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
@@ -266,7 +271,6 @@ namespace Spacy
     };
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ as used in %FEniCS.
      * @param f form for the evaluation of \f$f\f$.
      * @param J form for the evaluation of \f$f'\f$
@@ -283,7 +287,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$
      * with out Dirichlet boundary conditions as used in %FEniCS.
      * @param f form for the evaluation of \f$f\f$.
@@ -298,6 +301,7 @@ namespace Spacy
       return C2Functional<F,DF,DDF>( f , J , H , {} , space );
     }
   }
+  /** @} */
 }
 
 #endif // SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH

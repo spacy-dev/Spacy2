@@ -1,22 +1,5 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*                                                                             */
-/*   This file is part of the C++-library RFFGen.                              */
-/*   Copyright 2015 Lars Lubkoll                                               */
-/*                                                                             */
-/*   RFFGen is free software: you can redistribute it and/or modify            */
-/*   it under the terms of the GNU General Public License as published by      */
-/*   the Free Software Foundation, either version 3 of the License, or         */
-/*   (at your option) any later version.                                       */
-/*                                                                             */
-/*   RFFGen is distributed in the hope that it will be useful,                 */
-/*   but WITHOUT ANY WARRANTY; without even the implied warranty of            */
-/*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             */
-/*   GNU General Public License for more details.                              */
-/*                                                                             */
-/*   You should have received a copy of the GNU General Public License         */
-/*   along with RFFGen.  If not, see <http://www.gnu.org/licenses/>.           */
-/*                                                                             */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
 
 #ifndef SPACY_UTIL_VOIDER_HH
 #define SPACY_UTIL_VOIDER_HH
@@ -28,7 +11,7 @@ namespace Spacy
    */
   namespace Detail
   {
-    /// helper to make gcc happy
+    /// Helper, required in order to make void_t work with gcc.
     template <class...> struct voider { using type = void; };
   }
   /**

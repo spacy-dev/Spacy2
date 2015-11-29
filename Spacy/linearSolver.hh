@@ -69,7 +69,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,Vector,Vector>::value>,
               class = std::enable_if_t< HasMemFn_isPositiveDefinite<std::decay_t<Impl> >::value > >
     IndefiniteLinearSolver(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >( std::forward<Impl>(impl) ) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >( std::forward<Impl>(impl) ) )
     {}
 
     template <class Impl,
@@ -78,7 +78,7 @@ namespace Spacy
               class = std::enable_if_t< HasMemFn_isPositiveDefinite<std::decay_t<Impl> >::value > >
     IndefiniteLinearSolver& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >( std::forward<Impl>(impl) );
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >( std::forward<Impl>(impl) );
       return *this;
     }
 

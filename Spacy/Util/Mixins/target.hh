@@ -12,6 +12,7 @@ namespace Spacy
     template <class Derived>
     struct ToTarget
     {
+      /// Cast to T* if possible, else returns nullptr.
       template <class T>
       T* target()
       {
@@ -24,6 +25,7 @@ namespace Spacy
         return &dynamic_cast<typename Derived::template Base<T>*>(static_cast<Derived*>(this)->base_.get())->impl();
       }
 
+      /// Cast to const T* if possible, else returns nullptr.
       template <class T>
       const T* target() const
       {
@@ -36,6 +38,36 @@ namespace Spacy
         return &dynamic_cast<const typename Derived::template Base<T>*>(static_cast<const Derived*>(this)->base_.get())->impl();
       }
     };
+  }
+
+  /// Convenient access to t.template target<T>().
+  template <class T, class Derived,
+            class = std::enable_if_t< std::is_base_of<Mixin::ToTarget<Derived>,Derived>::value> >
+  T* target(Mixin::ToTarget<Derived>& t)
+  {
+    return t.template target<T>();
+  }
+
+  /// Convenient access to t.template target<T>().
+  template <class T, class Derived,
+            class = std::enable_if_t< std::is_base_of<Mixin::ToTarget<Derived>,Derived>::value> >
+  const T* target(const Mixin::ToTarget<Derived>& t)
+  {
+    return t.template target<T>();
+  }
+
+  /// Convenient access to f.template target<T>().
+  template <class T, class Signature>
+  T* target(std::function<Signature>& f)
+  {
+    return f.template target<T>();
+  }
+
+  /// Convenient access to f.template target<T>().
+  template <class T, class Signature>
+  const T* target(const std::function<Signature>& f)
+  {
+    return f.template target<T>();
   }
 }
 

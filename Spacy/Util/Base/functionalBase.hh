@@ -1,7 +1,8 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_FUNCTIONAL_BASE_HH
 #define SPACY_FUNCTIONAL_BASE_HH
-
-#include "Spacy/vector.hh"
 
 namespace Spacy
 {
@@ -12,25 +13,17 @@ namespace Spacy
   /**
    * @brief Base class for twice differentiable functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
    */
-  class C2FunctionalBase
+  class FunctionalBase
   {
   public:
     /**
      * @brief Constructor.
      * @param domain domain space \f$X\f$.
      */
-    explicit C2FunctionalBase(const VectorSpace& domain)
-      : domain_(domain)
-    {}
+    explicit FunctionalBase(const VectorSpace& domain);
 
-    /**
-     * @brief Access domain space \f$X\f$.
-     * @return domain space \f$X\f$.
-     */
-    const VectorSpace& domain() const
-    {
-      return domain_;
-    }
+    /// Access domain space \f$X\f$.
+    const VectorSpace& domain() const;
 
   private:
     const VectorSpace& domain_;

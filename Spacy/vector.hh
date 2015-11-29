@@ -9,13 +9,12 @@
 #include "Spacy/Util/memFnChecks.hh"
 #include "Spacy/Util/memOpChecks.hh"
 #include "Spacy/Util/cast.hh"
-#include "Spacy/Util/typeErasedStorage.hh"
+#include "Spacy/Util/smartPointer.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
   /// @cond
-  class Real;
   class VectorSpace;
   /// @endcond
 
@@ -98,21 +97,18 @@ namespace Spacy
     /// Construct from operator implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
-//              class = void_t< TryMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl> > >,
-//              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl>,Real>::value>,
               class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl> >::value>,
               class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemOp_negate<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
     Vector(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from operator implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
-//              class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,std::decay_t<Impl>,Real>::value>,
               class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
@@ -120,7 +116,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
     Vector& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 

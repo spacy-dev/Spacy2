@@ -96,7 +96,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C2Functional(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from functional implementation.
@@ -109,7 +109,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C2Functional& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 

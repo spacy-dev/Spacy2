@@ -80,7 +80,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from functional implementation.
@@ -91,7 +91,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
     C1Functional& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 

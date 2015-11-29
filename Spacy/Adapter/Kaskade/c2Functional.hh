@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
 #define SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
 
@@ -31,7 +34,7 @@ namespace Spacy
      */
     template <class FunctionalDefinition>
     class C2Functional :
-        public C2FunctionalBase ,
+        public FunctionalBase ,
         public Mixin::NumberOfThreads
     {
     public:
@@ -65,7 +68,7 @@ namespace Spacy
       C2Functional(const FunctionalDefinition& f, const VectorSpace& domain,
                    int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
                    int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
-        : C2FunctionalBase(domain),
+        : FunctionalBase(domain),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
           assembler_(spaces_),
@@ -91,7 +94,7 @@ namespace Spacy
        * @param g functional to copy from
        */
       C2Functional(const C2Functional& g)
-        : C2FunctionalBase(g.domain()),
+        : FunctionalBase(g.domain()),
           NumberOfThreads(g),
           f_(g.f_), spaces_(g.spaces_),
           assembler_(spaces_),

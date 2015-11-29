@@ -64,7 +64,7 @@ namespace Spacy
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,CallableOperator>::value>,
               class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,Vector,Vector>::value> >
     CallableOperator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from operator implementation.
@@ -73,7 +73,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemOp_callable<std::decay_t<Impl>,Vector,Vector>::value> >
     CallableOperator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 
@@ -205,7 +205,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemFn_solver<std::decay_t<Impl>>::value> >
     LinearOperator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from operator implementation.
@@ -223,7 +223,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_solver<std::decay_t<Impl>>::value> >
     LinearOperator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 
@@ -318,7 +318,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<Impl>::value>,
               class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     Operator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from operator implementation.
@@ -329,7 +329,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_range<Impl>::value> >
     Operator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 
@@ -421,7 +421,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_domain<std::decay_t<Impl>>::value>,
               class = std::enable_if_t<HasMemFn_range<std::decay_t<Impl>>::value> >
     C1Operator(Impl&& impl)
-      : base_( Base< std::decay_t<Impl> >(std::forward<Impl>(impl)) )
+      : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
     /// Assign from operator implementation.
@@ -434,7 +434,7 @@ namespace Spacy
               class = std::enable_if_t<HasMemFn_range<std::decay_t<Impl>>::value> >
     C1Operator& operator=(Impl&& impl)
     {
-      base_ = Base< std::decay_t<Impl> >(std::forward<Impl>(impl));
+      base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
       return *this;
     }
 

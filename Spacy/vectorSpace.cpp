@@ -4,7 +4,6 @@
 #include "vectorSpace.hh"
 
 #include "Spacy/Util/cast.hh"
-#include "Spacy/Util/cmath.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
 
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
