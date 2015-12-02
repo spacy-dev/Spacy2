@@ -217,8 +217,6 @@ namespace Spacy
   void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y);
 
   void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
-
-  void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W);
   /** @} */
 }
 #endif // SPACY_VECTOR_SPACE_HH

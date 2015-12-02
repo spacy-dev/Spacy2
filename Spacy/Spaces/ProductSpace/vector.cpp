@@ -106,7 +106,7 @@ namespace Spacy
 
     const VectorCreator& Vector::creator() const
     {
-      return Spacy::creator<VectorCreator>(*space());
+      return Spacy::creator<VectorCreator>(space());
     }
 
 

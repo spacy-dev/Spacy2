@@ -27,8 +27,11 @@ namespace Spacy
     return *this;
   }
 
-  const VectorSpace* VectorBase::space() const
+  const VectorSpace& VectorBase::space() const
   {
-    return &space_;
+    return space_;
   }
+
+  void VectorBase::toFile(const std::string&) const
+  {}
 }

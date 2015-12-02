@@ -11,7 +11,7 @@ namespace
   struct TestOperator
   {
     TestOperator(const VectorSpace& domain, const VectorSpace& range)
-      : domain_(domain), range_(range)
+      : domain_(&domain), range_(&range)
     {}
 
     Vector operator()(const Vector&) const
@@ -21,17 +21,17 @@ namespace
 
     const VectorSpace& domain() const
     {
-      return domain_;
+      return *domain_;
     }
 
     const VectorSpace& range() const
     {
-      return range_;
+      return *range_;
     }
 
   private:
-    const VectorSpace& domain_;
-    const VectorSpace& range_;
+    const VectorSpace* domain_;
+    const VectorSpace* range_;
   };
 
   void test(const Operator& f, const VectorSpace& X, const VectorSpace& Y)

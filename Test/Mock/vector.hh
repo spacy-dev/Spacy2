@@ -1,5 +1,10 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef MOCK_VECTOR_HH
 #define MOCK_VECTOR_HH
+
+#include <string>
 
 namespace Spacy
 {
@@ -31,7 +36,9 @@ namespace Mock
 
     Spacy::Real operator()(const Vector& y) const;
 
-    const Spacy::VectorSpace* space() const;
+    const Spacy::VectorSpace& space() const;
+
+    void toFile(const std::string&) const;
 
     private:
     friend const double& value(const Vector& v) { return v.value_; }

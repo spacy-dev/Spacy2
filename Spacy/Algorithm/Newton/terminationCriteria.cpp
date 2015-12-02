@@ -5,7 +5,7 @@
 
 #include "Spacy/Algorithm/dampingFactor.hh"
 #include "Spacy/vector.hh"
-#include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
 
 #include <cmath>
 #include <iostream>
@@ -27,7 +27,7 @@ namespace Spacy
 //      }
 
 
-      AffineCovariant::AffineCovariant(const Operator&, double relativeAccuracy, bool verbose)
+      AffineCovariant::AffineCovariant(const C1Operator&, double relativeAccuracy, bool verbose)
         : Mixin::RelativeAccuracy(relativeAccuracy),
           Mixin::Verbosity(verbose)
       {}
@@ -54,7 +54,7 @@ namespace Spacy
       }
 
 
-      AffineContravariant::AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose)
+      AffineContravariant::AffineContravariant(const C1Operator& F, double relativeAccuracy, bool verbose)
         : Mixin::RelativeAccuracy(relativeAccuracy),
           Mixin::Verbosity(verbose), F_(F)
       {}

@@ -59,6 +59,7 @@ namespace Spacy
       auto lastStepWasUndamped = false;
       auto x = x0;
 
+      std::cout << "starting composite step solver" << std::endl;
       for(unsigned step = 1; step < maxSteps(); ++step)
       {
         normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;

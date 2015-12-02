@@ -63,7 +63,7 @@ namespace Spacy
      * @param y vector
      * @return \f$(x,y)_M\f$.
      */
-    Real operator()(const Vector& x, const Vector& y) const;
+    Real operator()(Vector x, Vector y) const;
 
   private:
     CallableOperator M_;

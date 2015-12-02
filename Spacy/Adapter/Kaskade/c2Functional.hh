@@ -71,7 +71,7 @@ namespace Spacy
         : FunctionalBase(domain),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
-          assembler_(spaces_),
+          rhs_(domain.dualSpace().zeroVector()),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
           operatorSpace_( std::make_shared<VectorSpace>(
                             LinearOperatorCreator<VariableSetDescription,VariableSetDescription>(domain,domain.dualSpace()) ,
@@ -97,11 +97,12 @@ namespace Spacy
         : FunctionalBase(g.domain()),
           NumberOfThreads(g),
           f_(g.f_), spaces_(g.spaces_),
-          assembler_(spaces_),
           A_(g.A_),
+          value_(g.value_),
           old_X_f_(g.old_X_f_),
           old_X_df_(g.old_X_df_),
           old_X_ddf_(g.old_X_ddf_),
+          rhs_(g.rhs_),
           onlyLowerTriangle_(g.onlyLowerTriangle_),
           rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_),
           solverCreator_(g.solverCreator_),
@@ -117,11 +118,12 @@ namespace Spacy
         setNumberOfThreads(g.nThreads());
         f_ = g.f_;
         spaces_ = g.spaces_;
-        assembler_ = Assembler(spaces_);
         A_ = g.A_;
+        value_ = g.value_;
         old_X_f_ = g.old_X_f_;
         old_X_df_ = g.old_X_df_;
         old_X_ddf_ = g.old_X_ddf_;
+        rhs_ = g.rhs_;
         onlyLowerTriangle_ = g.onlyLowerTriangle_;
         rbegin_ = g.rbegin_;
         rend_ = g.rend_;
@@ -148,11 +150,11 @@ namespace Spacy
        * @param x argument
        * @return \f$f(x)\f$
        */
-      double operator()(const ::Spacy::Vector& x) const
+      Real operator()(const ::Spacy::Vector& x) const
       {
         assembleFunctional(x);
 
-        return assembler().functional();
+        return value_;
       }
 
       /**
@@ -165,11 +167,7 @@ namespace Spacy
       {
         assembleGradient(x);
 
-        CoefficientVector v( assembler_.rhs() );
-
-        auto y = this->domain().dualSpace().zeroVector();
-        copyFromCoefficientVector<VariableSetDescription>(v,y);
-        return y;
+        return rhs_;
       }
 
       /**
@@ -205,25 +203,6 @@ namespace Spacy
         assembleHessian(x);
         return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
       }
-
-      /**
-       * @brief Access assembler.
-       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
-       */
-      Assembler& assembler()
-      {
-        return assembler_;
-      }
-
-      /**
-       * @brief Access assembler.
-       * @return object of type %Kaskade::VariationalFunctionalAssembler<...>
-       */
-      const Assembler& assembler() const noexcept
-      {
-        return assembler_;
-      }
-
       /**
        * @brief Access operator representing \f$f''\f$.
        */
@@ -262,14 +241,16 @@ namespace Spacy
       /// Assemble \f$f(x)\f$.
       void assembleFunctional(const ::Spacy::Vector& x) const
       {
-        if( ( (assembler_.valid() & Assembler::VALUE) != 0 ) && (old_X_f_==x) ) return;
+        if( old_X_f_ && (old_X_f_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nThreads() );
+        Assembler assembler(spaces_);
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nThreads() );
+        value_ = assembler.functional();
 
         old_X_f_ = x;
       }
@@ -277,14 +258,16 @@ namespace Spacy
       /// Assemble discrete representation of \f$f'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( ( (assembler_.valid() & Assembler::RHS) != 0 ) && (old_X_df_==x) ) return;
+        if( old_X_df_ && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        Assembler assembler(spaces_);
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        copyFromCoefficientVector<VariableSetDescription>(CoefficientVector(assembler.rhs()),rhs_);
 
         old_X_df_ = x;
       }
@@ -292,24 +275,25 @@ namespace Spacy
       /// Assemble discrete representation of \f$f''(x)\f$.
       void assembleHessian(const ::Spacy::Vector& x) const
       {
-        if( ( (assembler_.valid() & Assembler::MATRIX) != 0 ) && (old_X_ddf_==x) ) return;
+        if( old_X_ddf_ && (old_X_ddf_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
-        A_ = KaskadeOperator( assembler().template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        Assembler assembler(spaces_);
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
+        A_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_ddf_ = x;
       }
 
       FunctionalDefinition f_;
       Spaces spaces_;
-      mutable Assembler assembler_;
       mutable KaskadeOperator A_ = {};
-      mutable ::Spacy::Vector old_X_f_ = {}, old_X_df_ = {}, old_X_ddf_ = {};
+      mutable double value_ = 0;
+      mutable ::Spacy::Vector old_X_f_ = {}, old_X_df_ = {}, old_X_ddf_ = {}, rhs_ {};
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;

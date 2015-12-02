@@ -5,7 +5,7 @@
 
 #include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
 #include "Spacy/vectorSpace.hh"
-#include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
 
 namespace Spacy
 {
@@ -13,7 +13,7 @@ namespace Spacy
   {
     namespace Damping
     {
-      AffineCovariant::AffineCovariant(const Operator& F)
+      AffineCovariant::AffineCovariant(const C1Operator& F)
         : F_(F), oldDs(F.domain().zeroVector())
       {}
 
@@ -64,7 +64,7 @@ namespace Spacy
       }
 
 
-      AffineContravariant::AffineContravariant(const Operator& F)
+      AffineContravariant::AffineContravariant(const C1Operator& F)
         : F_(F)
       {}
 
@@ -109,7 +109,7 @@ namespace Spacy
       }
 
 
-      None::None(const Operator&)
+      None::None(const C1Operator&)
       {}
 
       DampingFactor None::operator()(const std::function<Vector(const Vector&)>&, const Vector&, const Vector&) const

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Spacy/operator.hh"
+#include "Spacy/linearOperator.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"
 #include "Test/Mock/linearOperator.hh"

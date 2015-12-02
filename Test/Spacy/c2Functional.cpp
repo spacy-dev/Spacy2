@@ -13,7 +13,7 @@ namespace
   struct TestFunctional
   {
     TestFunctional(const VectorSpace& space)
-      : domain_(space)
+      : domain_(&space)
     {}
 
     Real operator()(const Vector&) const
@@ -38,11 +38,11 @@ namespace
 
     const VectorSpace& domain() const
     {
-      return domain_;
+      return *domain_;
     }
 
   private:
-    const VectorSpace& domain_;
+    const VectorSpace* domain_;
   };
 
   void test(const C2Functional&f, const VectorSpace& X)

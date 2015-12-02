@@ -1,11 +1,13 @@
 #ifndef SPACY_VECTOR_BASE_HH
 #define SPACY_VECTOR_BASE_HH
 
+#include <string>
+
 namespace Spacy
 {
   /// @cond
   class VectorSpace;
-  void checkSpaceCompatibility(const VectorSpace* x, const VectorSpace* y);
+  void checkSpaceCompatibility(const VectorSpace& x, const VectorSpace& y);
   /// @endcond
 
 
@@ -25,35 +27,23 @@ namespace Spacy
      */
     VectorBase( const VectorSpace& space );
 
-    /**
-     * @brief Copy constructor.
-     * @param y object to copy from
-     */
+    /// Copy constructor.
     VectorBase(const VectorBase& y);
 
-    /**
-     * @brief Move constructor.
-     * @param y object to move from
-     */
+    /// Move constructor.
     VectorBase(VectorBase&& y) noexcept;
 
-    /**
-     * @brief Copy assignment.
-     * @param y object to copy from
-     */
+    /// Copy assignment.
     VectorBase& operator=(const VectorBase& y);
 
-    /**
-     * @brief Move assignment.
-     * @param y object to move from
-     */
+    /// Move assignment.
     VectorBase& operator=(VectorBase&& y) noexcept;
 
-    /**
-     * @brief Access underlying vector space.
-     * @return underlying vector space
-     */
-    const VectorSpace* space() const;
+    /// Access underlying vector space.
+    const VectorSpace& space() const;
+
+    /// Empty default implementation.
+    void toFile(const std::string&) const;
 
   private:
     const VectorSpace& space_;

@@ -10,7 +10,7 @@
 #include "Spacy/Util/Exceptions/notConvergedException.hh"
 
 #include "Spacy/derivative.hh"
-#include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
 #include "Spacy/vectorSpace.hh"
 
 #include <iostream>

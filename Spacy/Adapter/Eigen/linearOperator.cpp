@@ -2,6 +2,7 @@
 
 #include "linearSolver.hh"
 #include "vector.hh"
+#include "Spacy/vector.hh"
 
 namespace Spacy
 {
@@ -18,7 +19,7 @@ namespace Spacy
       return Vector( impl()*cast_ref<Vector>(dx).impl(), dx.space() );
     }
 
-    ::Spacy::LinearSolver LinearOperator::solver() const
+    LinearSolver LinearOperator::solver() const
     {
       return LinearSolver(impl(),domain());
     }

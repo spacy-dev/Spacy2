@@ -4,13 +4,12 @@
 #ifndef SPACY_C1_FUNCTIONAL_HH
 #define SPACY_C1_FUNCTIONAL_HH
 
-#include "Spacy/Util/memFnChecks.hh"
-#include "Spacy/Util/memOpChecks.hh"
+#include "Spacy/vector.hh"
+#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Util/Concepts/c1FunctionalConcept.hh"
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/Util/Mixins/target.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -76,9 +75,7 @@ namespace Spacy
     /// Construct from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<C1FunctionalConcept<std::decay_t<Impl>>::value> >
     C1Functional(Impl&& impl)
       : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
@@ -86,9 +83,7 @@ namespace Spacy
     /// Assign from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C1Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<C1FunctionalConcept<std::decay_t<Impl>>::value> >
     C1Functional& operator=(Impl&& impl)
     {
       base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));

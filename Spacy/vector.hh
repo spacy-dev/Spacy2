@@ -6,8 +6,7 @@
 
 #include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/Util/Mixins/target.hh"
-#include "Spacy/Util/memFnChecks.hh"
-#include "Spacy/Util/memOpChecks.hh"
+#include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
@@ -36,7 +35,9 @@ namespace Spacy
       virtual void multiply(double a) = 0;
       virtual Vector negate() const = 0;
       virtual bool compare(const Vector& y) const = 0;
-      virtual const VectorSpace* space() const = 0;
+      virtual const VectorSpace& space() const = 0;
+      virtual void toFile(const std::string&) const = 0;
+      virtual void copyFrom(const AbstractBase&) = 0;
       virtual std::unique_ptr<AbstractBase> clone() const = 0;
     };
 
@@ -80,9 +81,20 @@ namespace Spacy
         return this->impl() == (*Spacy::target<Impl>(y));
       }
 
-      const VectorSpace* space() const final override
+      const VectorSpace& space() const final override
       {
         return this->impl().space();
+      }
+
+      void toFile(const std::string& filename) const final override
+      {
+        return this->impl().toFile(filename);
+      }
+
+      void copyFrom(const AbstractBase& y) final override
+      {
+        if( dynamic_cast< const Base<Impl>* >(&y) == nullptr ) throw std::runtime_error("AAAAAAAAAAARRRRRRRRRRRGGGGGGGGGGGGG");
+        this->impl() = dynamic_cast<const Base<Impl>&>(y).impl();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
@@ -97,11 +109,7 @@ namespace Spacy
     /// Construct from operator implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
-              class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl> >::value>,
-              class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemOp_negate<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
+              class = std::enable_if_t< VectorConcept<std::decay_t<Impl>>::value > >
     Vector(Impl&& impl)
       : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
@@ -109,11 +117,7 @@ namespace Spacy
     /// Assign from operator implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
-              class = std::enable_if_t<HasMemOp_add<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemOp_subtract<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemOp_multiply<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemOp_negate<std::decay_t<Impl>>::value>,
-              class = std::enable_if_t<HasMemFn_space<std::decay_t<Impl>>::value> >
+              class = std::enable_if_t< VectorConcept<std::decay_t<Impl>>::value > >
     Vector& operator=(Impl&& impl)
     {
       base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));
@@ -137,11 +141,13 @@ namespace Spacy
     /// Access underlying space of linear operators.
     const VectorSpace& space() const;
 
+    void toFile(const std::string& filename) const;
+
     /// Check if an implementation has been assigned.
     operator bool() const;
 
   private:
-    CopyViaClonePtr<AbstractBase> base_;
+    CopyAndClonePtr<AbstractBase> base_;
   };
 
 
@@ -162,8 +168,6 @@ namespace Spacy
   {
     return *v.template target<ToType>();
   }
-
-////  template <class> struct Scale;
 
   /**
    * @brief Multiplication with arithmetic types (double,float,int,...).
@@ -208,18 +212,6 @@ namespace Spacy
   Real norm(const Vector& x);
 
   void checkDualPairing(const Vector& x, const Vector& y);
-//  template <class T>
-//  struct Scale
-//  {
-//    operator Vector() const
-//    {
-//      auto y = x;
-//      return y *= a;
-//    }
-
-//    T a;
-//    const Vector& x;
-//  };
   /** @} */
 }
 

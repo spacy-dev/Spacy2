@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "real.hh"
 
 #include "Spacy/Util/cast.hh"
@@ -64,18 +67,20 @@ namespace Spacy
 
   Real Real::operator()(const Real& y) const
   {
-    //checkDualPairing(*this,y);
+    checkDualPairing(*this,y);
     return *this * y;
   }
 
   Real& Real::operator+=(const Real& y)
   {
+    checkSpaceCompatibility(this->space(),y.space());
     impl() += y.impl();
     return *this;
   }
 
   Real& Real::operator-=(const Real& y)
   {
+    checkSpaceCompatibility(this->space(),y.space());
     impl() -= y.impl();
     return *this;
   }
@@ -95,6 +100,7 @@ namespace Spacy
 
   bool Real::operator==(const Real& y) const
   {
+    checkSpaceCompatibility(this->space(),y.space());
     return impl() == y.impl();
   }
 
@@ -142,12 +148,12 @@ namespace Spacy
 
   Real operator/(double x, const Real& y)
   {
-    return Real(x,*y.space())/y;
+    return Real(x,y.space())/y;
   }
 
   Real operator/(const Real& x, double y)
   {
-    return x/Real(y,*x.space());
+    return x/Real(y,x.space());
   }
 
 
@@ -324,16 +330,16 @@ namespace Spacy
 
   Real pow(Real x, double y)
   {
-    return Real(computePow(toDouble(x),y),*x.space());
+    return Real(computePow(toDouble(x),y),x.space());
   }
 
   Real sqrt(Real x)
   {
-    return Real(computeSqrt(toDouble(x)),*x.space());
+    return Real(computeSqrt(toDouble(x)),x.space());
   }
 
   Real cbrt(Real x)
   {
-    return Real(computeCbrt(toDouble(x)),*x.space());
+    return Real(computeCbrt(toDouble(x)),x.space());
   }
 }

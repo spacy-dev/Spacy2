@@ -26,13 +26,15 @@ namespace Spacy
     : M_(std::move(M))
   {}
 
-  Real PrimalInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
+  Real PrimalInducedScalarProduct::operator()(Vector x, Vector y) const
   {
-    const auto& x_ = cast_ref<ProductSpace::Vector>(x);
-    const auto& y_ = cast_ref<ProductSpace::Vector>(y);
+    auto& x_ = cast_ref<ProductSpace::Vector>(x);
+    auto& y_ = cast_ref<ProductSpace::Vector>(y);
+    x_.component(DUAL) *= 0;
+    y_.component(DUAL) *= 0;
 
     /* TODO PROJECTION */
 
-    return M_(y_)(x_);
+    return M_(y)(x);
   }
 }

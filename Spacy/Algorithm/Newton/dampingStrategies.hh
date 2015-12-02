@@ -14,7 +14,7 @@
 namespace Spacy
 {
   /// @cond
-  class Operator;
+  class C1Operator;
   /// @endcond
 
   namespace Newton
@@ -29,13 +29,13 @@ namespace Spacy
       {
       public:
         /// Constructor.
-        AffineCovariant(const Operator& F);
+        AffineCovariant(const C1Operator& F);
 
         /// Compute damping factor.
         DampingFactor operator()(const std::function<Vector(const Vector&)>& DFInv_, const Vector& x, const Vector& dx) const;
 
       private:
-        const Operator& F_;
+        const C1Operator& F_;
 
         mutable DampingFactor oldNu = -1;
         mutable Real normOldDx = Real{-1}, normOldDs = Real{-1};
@@ -50,13 +50,13 @@ namespace Spacy
       {
       public:
         /// Constructor.
-        AffineContravariant(const Operator& F);
+        AffineContravariant(const C1Operator& F);
 
         /// Compute damping factor.
         DampingFactor operator()(const std::function<Vector(const Vector&)>&, const Vector& x, const Vector& dx) const;
 
       private:
-        const Operator& F_;
+        const C1Operator& F_;
         mutable Real muPrime = Real{-1}, norm_F_x_old = Real{-1};
       };
 
@@ -68,7 +68,7 @@ namespace Spacy
       {
       public:
         /// Constructor.
-        None(const Operator&);
+        None(const C1Operator&);
 
         /**
          * @brief Compute damping factor.

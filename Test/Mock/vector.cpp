@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/realSpace.hh"
@@ -46,8 +49,12 @@ namespace Mock
     return value( z *= value(*this) );
   }
 
-  const Spacy::VectorSpace* Vector::space() const
+  const Spacy::VectorSpace& Vector::space() const
   {
-    return space_;
+    assert( space_ != nullptr );
+    return *space_;
   }
+
+  void Vector::toFile(const std::string&) const
+  {}
 }

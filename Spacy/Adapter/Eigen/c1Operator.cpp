@@ -34,7 +34,7 @@ namespace Spacy
       return Vector( derivative_( cast_ref<Vector>(x).impl() ) * cast_ref<Vector>(dx).impl() , range() );
     }
 
-    ::Spacy::LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
+    LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
     {
       return LinearOperator(derivative_( cast_ref<Vector>(x).impl()) , *operatorSpace_, domain(), range());
     }

@@ -5,13 +5,12 @@
 #define SPACY_C2_FUNCTIONAL_HH
 
 #include <functional>
-#include "Spacy/Util/memFnChecks.hh"
-#include "Spacy/Util/memOpChecks.hh"
+#include "Spacy/Util/Concepts/c2FunctionalConcept.hh"
 #include "Spacy/Util/Mixins/impl.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/operator.hh"
+#include "Spacy/linearOperator.hh"
 
 namespace Spacy
 {
@@ -90,11 +89,7 @@ namespace Spacy
     /// Construct from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C2Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_d2_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<C2FunctionalConcept<std::decay_t<Impl>>::value> >
     C2Functional(Impl&& impl)
       : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
@@ -102,11 +97,7 @@ namespace Spacy
     /// Assign from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,C2Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_d1_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_d2_Functional<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_hessian<Impl,Vector>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<C2FunctionalConcept<std::decay_t<Impl>>::value> >
     C2Functional& operator=(Impl&& impl)
     {
       base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));

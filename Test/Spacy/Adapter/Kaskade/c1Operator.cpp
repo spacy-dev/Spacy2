@@ -42,7 +42,7 @@ TEST(Kaskade,C1Operator_Create)
   KASKADE_SINGLE_SPACE_SETUP
   KASKADE_SINGLE_SPACE_OPERATOR
 
-  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
   auto Op = Spacy::Kaskade::makeC1Operator(F,V);
 
   test(Op,V);
@@ -53,7 +53,7 @@ TEST(Kaskade,C1Operator_MoveCreateSpacyVector)
   KASKADE_SINGLE_SPACE_SETUP
   KASKADE_SINGLE_SPACE_OPERATOR
 
-  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
   Spacy::C1Operator Op = Spacy::Kaskade::makeC1Operator(F,V);
 
   test(Op,V);
@@ -64,7 +64,7 @@ TEST(Kaskade,C1Operator_MoveToSpacyVector)
   KASKADE_SINGLE_SPACE_SETUP
   KASKADE_SINGLE_SPACE_OPERATOR
 
-  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
   auto Op0 = Spacy::Kaskade::makeC1Operator(F,V);
   Spacy::C1Operator Op = std::move(Op0);
 
@@ -76,7 +76,7 @@ TEST(Kaskade,C1Operator_FreeD1)
   KASKADE_SINGLE_SPACE_SETUP
   KASKADE_SINGLE_SPACE_OPERATOR
 
-  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+  auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
   Spacy::C1Operator Op = Spacy::Kaskade::makeC1Operator(F,V);
 
   auto lin = d1(Op,Op.domain().zeroVector());

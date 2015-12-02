@@ -207,9 +207,4 @@ namespace Spacy
     if( V.index() != W.index() )
       throw IncompatibleSpaceException(V.index(),W.index());
   }
-
-  void checkSpaceCompatibility(const VectorSpace* V, const VectorSpace* W)
-  {
-    checkSpaceCompatibility(*V,*W);
-  }
 }

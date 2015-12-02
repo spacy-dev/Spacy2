@@ -13,7 +13,7 @@ namespace Spacy
 {
   /// @cond
   class DampingFactor;
-  class Operator;
+  class C1Operator;
   class Vector;
   /// @endcond
 
@@ -34,7 +34,7 @@ namespace Spacy
         /**
          * @brief Constuctor.
          */
-        AffineCovariant(const Operator&, double relativeAccuracy, bool verbose = false);
+        AffineCovariant(const C1Operator&, double relativeAccuracy, bool verbose = false);
 
         /**
          * @brief Apply termination criterion.
@@ -62,7 +62,7 @@ namespace Spacy
         /**
          * @brief Constructor.
          */
-        AffineContravariant(const Operator& F, double relativeAccuracy, bool verbose = false);
+        AffineContravariant(const C1Operator& F, double relativeAccuracy, bool verbose = false);
 
         /**
          * @brief Apply termination criterion.
@@ -73,7 +73,7 @@ namespace Spacy
         bool operator()(DampingFactor nu, const Vector& x, const Vector&) const;
 
       private:
-        const Operator& F_;
+        const C1Operator& F_;
         mutable Real initialResidual = Real{-1};
       };
     }

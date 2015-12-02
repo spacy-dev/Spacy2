@@ -8,10 +8,13 @@
 
 #include <Eigen/Dense>
 
-#include "Spacy/vectorSpace.hh"
-
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  class VectorSpace;
+  /// @endcond
+
   namespace Rn
   {
     class LinearSolver

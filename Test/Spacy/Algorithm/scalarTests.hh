@@ -2,6 +2,7 @@
 #define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
 
 #include <gtest/gtest.h>
+#include "Spacy/c1Operator.hh"
 #include "Spacy/Adapter/scalar.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/Exceptions/notConvergedException.hh"

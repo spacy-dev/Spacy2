@@ -3,6 +3,7 @@
 #include "Spacy/Adapter/Eigen/vector.hh"
 #include "Spacy/Adapter/Eigen/vectorCreator.hh"
 #include "Spacy/Adapter/Eigen/linearOperator.hh"
+#include "Spacy/Adapter/Eigen/linearSolver.hh"
 #include "setup.hh"
 
 using namespace Spacy;

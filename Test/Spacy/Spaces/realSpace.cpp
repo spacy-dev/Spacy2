@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include <gtest/gtest.h>
 
 #include "Spacy/vector.hh"
@@ -7,7 +10,7 @@
 TEST(RealSpaceTest, DefaultIndex)
 {
   auto r = Spacy::Real{2.};
-  ASSERT_EQ( r.space()->index() , 0 );
+  ASSERT_EQ( r.space().index() , 0 );
 }
 
 TEST(RealSpaceTest,ElementTest)

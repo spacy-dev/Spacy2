@@ -1,15 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/*                                                                           */
-/*  This file is part of the library KASKADE 7                               */
-/*    see http://www.zib.de/en/numerik/software/kaskade-7.html               */
-/*                                                                           */
-/*  Copyright (C) 2002-2015 Zuse Institute Berlin                            */
-/*                                                                           */
-/*  KASKADE 7 is distributed under the terms of the ZIB Academic License.    */
-/*    see $KASKADE/academic.txt                                              */
-/*                                                                           */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 #ifndef SPACY_TEST_ADAPTER_KASKADE_HEAT_TRANSFER_HH
 #define SPACY_TEST_ADAPTER_KASKADE_HEAT_TRANSFER_HH
 
@@ -83,7 +71,7 @@ public:
   class BoundaryCache : public CacheBase<HeatFunctional,BoundaryCache>
   {
   public:
-    BoundaryCache(HeatFunctional<RType,AnsatzVars> const&,
+    BoundaryCache(HeatFunctional const&,
                   typename AnsatzVars::VariableSet const& vars_,
                   int flags=7):
       data(vars_), penalty(1e9), u(0.), uDirichletBoundaryValue(0.)

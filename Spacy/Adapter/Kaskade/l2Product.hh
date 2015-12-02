@@ -1,14 +1,17 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
 #define SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
 
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
-#include "Spacy/Util/cast.hh"
-
 namespace Spacy
 {
+  /// @cond
+  class Real;
+  class Vector;
+  class VectorSpace;
+  /// @endcond
+
   namespace Kaskade
   {
     /// @cond

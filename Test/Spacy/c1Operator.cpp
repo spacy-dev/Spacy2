@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"
 #include "Test/Mock/linearOperator.hh"
@@ -15,7 +16,7 @@ namespace
   struct TestC1Operator
   {
     TestC1Operator(const VectorSpace& domain, const VectorSpace& range)
-      : domain_(domain), range_(range)
+      : domain_(&domain), range_(&range)
     {}
 
     Vector operator()(const Vector&) const
@@ -35,17 +36,17 @@ namespace
 
     const VectorSpace& domain() const
     {
-      return domain_;
+      return *domain_;
     }
 
     const VectorSpace& range() const
     {
-      return range_;
+      return *range_;
     }
 
   private:
-    const VectorSpace& domain_;
-    const VectorSpace& range_;
+    const VectorSpace* domain_;
+    const VectorSpace* range_;
   };
 
   void test(const C1Operator& f, const VectorSpace& X, const VectorSpace& Y)
@@ -58,6 +59,13 @@ namespace
     auto L = f.linearization(X.zeroVector());
     auto expected = is<Mock::LinearOperator>(L);
     EXPECT_TRUE(expected);
+  }
+
+  void testOp(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
+  {
+    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
+    EXPECT_EQ( X.index() , f.domain().index() );
+    EXPECT_EQ( Y.index() , f.range().index() );
   }
 }
 
@@ -128,6 +136,23 @@ TEST(C1Operator,Move)
   EXPECT_TRUE(is_empty_after_move);
 
   test(f,X,Y);
+}
+
+TEST(C1Operator,ToOperator)
+{
+  auto X = createMockBanachSpace();
+  auto Y = createMockBanachSpace();
+  C1Operator g = TestC1Operator(X,Y);
+  C1Operator h = TestC1Operator(X,Y);
+
+  Operator copied = g;
+  const Operator& bound = h;
+  auto fun  = [&X](const Operator& A) { return A(X.zeroVector()); };
+  auto x = fun(h);
+  Operator moved = std::move(g);
+  testOp(copied,X,Y);
+  testOp(moved,X,Y);
+  testOp(bound,X,Y);
 }
 
 

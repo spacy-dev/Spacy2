@@ -30,7 +30,7 @@ namespace
 
   struct Space
   {
-    const VectorSpace* space() const;
+    const VectorSpace& space() const;
   };
 
   struct Linearization

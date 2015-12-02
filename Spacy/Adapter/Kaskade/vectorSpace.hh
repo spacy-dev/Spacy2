@@ -1,14 +1,15 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH
 #define SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH
 
 #include <type_traits>
-#include <memory>
 
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/productSpace.hh"
 #include "Spacy/Util/Mixins/impl.hh"
-#include "Spacy/Util/cast.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
@@ -24,16 +25,17 @@ namespace Spacy
     /// Creator for vector space elements for %Kaskade 7
     template <class Description>
     class VectorCreator :
-        public Mixin::Impl< std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > > >
+        public Mixin::Impl<Description>
     {
-      using Space = std::decay_t< std::remove_pointer_t< std::decay_t<typename boost::fusion::result_of::at_c<typename Description::Spaces,0>::type> > >;
     public:
       /**
        * @brief Create from %Kaskade 7 function space.
        * @param space single %Kaskade 7 function space (no product space)
        */
-      VectorCreator(const Space& space)
-        : Mixin::Impl<Space>{space}
+      template <class... Args,
+                class = std::enable_if_t<std::is_constructible<Description,Args...>::value> >
+      VectorCreator(Args&&... args)
+        : Mixin::Impl<Description>( std::forward<Args>(args)... )
       {}
 
       /// Generate vector for %Kaskade 7.
@@ -47,10 +49,10 @@ namespace Spacy
      * @brief Create single space with hilbert space structure for %Kaskade 7.
      * @param space single %Kaskade 7 function space (no product space)
      */
-    template <class Description, class Space>
-    auto makeHilbertSpace(const Space& space)
+    template <class Description>
+    auto makeHilbertSpace(const Description& description)
     {
-      return ::Spacy::makeHilbertSpace( Kaskade::VectorCreator<Description>{space} , l2Product<Description>{} );
+      return ::Spacy::makeHilbertSpace( Kaskade::VectorCreator<Description>{description} , l2Product<Description>{} );
     }
 
     /**
@@ -59,15 +61,18 @@ namespace Spacy
      * @param primalIds ids of primal variables
      * @param dualIds ids of dual variables
      */
-    template <class Description, class Spaces>
-    auto makeHilbertSpace(const Spaces& spaces, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {})
+    template <class Description>
+    auto makeHilbertSpace(const Description& description, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {})
     {
       constexpr int n = boost::fusion::result_of::size<typename Description::Variables>::value;
       std::vector<std::shared_ptr< VectorSpace > > newSpaces( n );
 
-      Detail::MakeSpaces<Description,0,n>::apply(spaces,newSpaces);
+      Detail::MakeSpaces<Description,0,n>::apply(description,newSpaces);
 
-      return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
+      if( dualIds.size() > 0)
+        return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
+
+      return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds );
     }
   }
   /** @} */

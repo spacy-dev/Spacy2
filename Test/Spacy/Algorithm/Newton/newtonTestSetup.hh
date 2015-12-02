@@ -2,6 +2,7 @@
 #define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_NEWTON_TEST_SETUP_HH
 
 #include <functional>
+#include "Spacy/c1Operator.hh"
 #include "Spacy/Algorithm/Newton/newton.hh"
 #include "Spacy/inducedScalarProduct.hh"
 #include "Spacy/Spaces/realSpace.hh"

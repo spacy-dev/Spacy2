@@ -8,7 +8,7 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /// Mixin class that provides a member function target() to access type-erased content (@see std::function).
+    /// Mixin class that provides a member function target() to access type-erased content (same behaviour as @see std::function::target()).
     template <class Derived>
     struct ToTarget
     {
@@ -42,16 +42,8 @@ namespace Spacy
 
   /// Convenient access to t.template target<T>().
   template <class T, class Derived,
-            class = std::enable_if_t< std::is_base_of<Mixin::ToTarget<Derived>,Derived>::value> >
-  T* target(Mixin::ToTarget<Derived>& t)
-  {
-    return t.template target<T>();
-  }
-
-  /// Convenient access to t.template target<T>().
-  template <class T, class Derived,
-            class = std::enable_if_t< std::is_base_of<Mixin::ToTarget<Derived>,Derived>::value> >
-  const T* target(const Mixin::ToTarget<Derived>& t)
+            class = std::enable_if_t< std::is_base_of<Mixin::ToTarget<std::decay_t<Derived> >,std::decay_t<Derived>>::value> >
+  auto target(Derived&& t)
   {
     return t.template target<T>();
   }

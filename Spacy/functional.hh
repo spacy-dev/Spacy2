@@ -4,12 +4,12 @@
 #ifndef SPACY_FUNCTIONAL_HH
 #define SPACY_FUNCTIONAL_HH
 
-#include "Spacy/Util/memFnChecks.hh"
-#include "Spacy/Util/memOpChecks.hh"
-#include "Spacy/Util/Mixins/impl.hh"
-#include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Util/Concepts/functionalConcept.hh"
+#include "Spacy/Util/smartPointer.hh"
+#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/target.hh"
 
 namespace Spacy
 {
@@ -70,8 +70,7 @@ namespace Spacy
     /// Construct from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<FunctionalConcept<std::decay_t<Impl>>::value> >
     Functional(Impl&& impl)
       : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
@@ -79,8 +78,7 @@ namespace Spacy
     /// Assign from functional implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Functional>::value>,
-              class = std::enable_if_t<HasMemOp_callable<Impl,Vector,Real>::value>,
-              class = std::enable_if_t<HasMemFn_domain<Impl>::value> >
+              class = std::enable_if_t<FunctionalConcept<std::decay_t<Impl>>::value> >
     Functional& operator=(Impl&& impl)
     {
       base_ = std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl));

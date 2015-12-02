@@ -9,7 +9,6 @@
 #include <Eigen/Dense>
 
 #include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -19,6 +18,10 @@ namespace Spacy
 
   namespace Rn
   {
+    /// @cond
+    class LinearOperator;
+    /// @endcond
+
     /**
      * @ingroup EigenGroup
      * @brief A differential operator \f$A:X\rightarrow Y\f$ for finite-dimensional problems, based on the %Eigen library.
@@ -45,7 +48,7 @@ namespace Spacy
       ::Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
 
       /// Get linearization representing A'(x).
-      ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const;
+      LinearOperator linearization(const ::Spacy::Vector& x) const;
 
     private:
       std::function< ::Eigen::VectorXd(const ::Eigen::VectorXd&) > value_;

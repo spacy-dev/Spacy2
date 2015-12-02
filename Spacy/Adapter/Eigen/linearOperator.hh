@@ -10,12 +10,15 @@
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/linearSolver.hh"
 
 namespace Spacy
 {
   namespace Rn
   {
+    /// @cond
+    class LinearSolver;
+    /// @endcond
+
     /**
      * @ingroup EigenGroup
      * @brief A linear operator \f$A:X\rightarrow Y\f$ for finite-dimensional problems, based on the %Eigen library.
@@ -40,7 +43,7 @@ namespace Spacy
       ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
       /// Access solver representing \f$A^{-1}\f$
-      ::Spacy::LinearSolver solver() const;
+      LinearSolver solver() const;
     };
   }
 }

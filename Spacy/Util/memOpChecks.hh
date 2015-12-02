@@ -26,8 +26,8 @@ namespace Spacy
   template <class T>
   using TryMemOp_negate = decltype(std::declval<T>().operator-());
 
-  template <class T, class V>
-  using TryMemOp_callable = decltype(std::declval<T>()(std::declval<V>()));
+  template <class T, class... Args>
+  using TryMemOp_callable = decltype(std::declval<T>()(std::declval<Args>()...));
 
 
   template <class,class=void>
@@ -69,6 +69,19 @@ namespace Spacy
   struct HasMemOp_callable< T , Arg , Return , void_t< TryMemOp_callable<T,Arg> > >
     : std::is_same< Return ,TryMemOp_callable<T,Arg> >::type
   {};
+
+  template <class Return, class... Args>
+  struct HasMemOp_variadicCallable
+  {
+    template <class,class = void>
+    struct apply : std::false_type
+    {};
+
+    template <class T>
+    struct apply<T, void_t< TryMemOp_callable<T,Args...> > >
+        : std::is_convertible< TryMemOp_callable<T,Args...>* , Return*>::type
+    {};
+  };
 }
 
 #endif // SPACY_UTIL_MEM_OP_CHECKS_HH

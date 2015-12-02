@@ -12,7 +12,7 @@ namespace Spacy
   {
     Spacy::Real EuclideanScalarProduct::operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const
     {
-      checkSpaceCompatibility(&x.space(),&y.space());
+      checkSpaceCompatibility(x.space(),y.space());
       return x(y);
     }
   }

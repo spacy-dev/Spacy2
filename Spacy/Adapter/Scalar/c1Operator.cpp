@@ -36,7 +36,7 @@ namespace Spacy
       return Real( derivative_( toDouble(x) ) * toDouble(dx) );
     }
 
-    ::Spacy::LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
+    LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
     {
       assert(derivative_);
       assert(operatorSpace_ != nullptr);

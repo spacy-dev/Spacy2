@@ -31,8 +31,10 @@ namespace Spacy
        * @brief Constructor.
        * @param impl value to be stored.
        */
-      explicit Impl( Type impl)
-        : impl_(std::move(impl))
+      template <class... Args,
+                class = std::enable_if_t<std::is_constructible<Type,Args...>::value> >
+      explicit Impl(Args&&... args)
+        : impl_(std::forward<Args>(args)...)
       {}
 
       /// Access implementation.

@@ -13,7 +13,8 @@
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 
-#include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
+#include "Spacy/linearOperator.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "directSolver.hh"
@@ -173,7 +174,7 @@ namespace Spacy
       }
 
       /// Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
-      ::Spacy::LinearOperator linearization(const ::Spacy::Vector& x) const
+      auto linearization(const ::Spacy::Vector& x) const
       {
         assembleGradient(x);
 

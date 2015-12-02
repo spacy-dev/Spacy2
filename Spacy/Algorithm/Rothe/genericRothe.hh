@@ -1,16 +1,19 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ALGORITHM_GENERIC_ROTHE_HH
 #define SPACY_ALGORITHM_GENERIC_ROTHE_HH
 
-#include "Spacy/dynamicOperator.hh"
-#include "Spacy/vector.hh"
-
 namespace Spacy
 {
-  class TimeIntegrator;
+  /// @cond
+  class DynamicC1Operator;
+  class Vector;
+  /// @endcond
 
   namespace Rothe
   {
-    Vector genericMethod(const DynamicC1Operator& A, TimeIntegrator integrator);
+    Vector genericMethod(const DynamicC1Operator& A, double t0=0, double t1=1);
   }
 }
 

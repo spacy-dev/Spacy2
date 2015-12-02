@@ -8,7 +8,8 @@
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/c2Functional.hh"
-#include "Spacy/operator.hh"
+#include "Spacy/c1Operator.hh"
+#include "Spacy/linearOperator.hh"
 
 namespace Spacy
 {

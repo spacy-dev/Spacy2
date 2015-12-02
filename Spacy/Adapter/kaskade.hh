@@ -3,6 +3,7 @@
 
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/c2Functional.hh"
+#include "Kaskade/dynamicC1Operator.hh"
 #include "Kaskade/l2Product.hh"
 #include "Kaskade/lagrangeCGSolver.hh"
 #include "Kaskade/linearOperator.hh"

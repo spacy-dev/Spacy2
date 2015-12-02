@@ -30,7 +30,7 @@ namespace Spacy
 
     LinearOperator LinearOperator::operator-() const
     {
-      return LinearOperator(*space(),-impl());
+      return LinearOperator(space(),-impl());
     }
   }
 }

@@ -1,5 +1,8 @@
-#ifndef SPACY_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
-#define SPACY_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
+#ifndef SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH
+#define SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH
 
 #include <utility>
 
@@ -14,15 +17,18 @@
 
 namespace Spacy
 {
+  /** @addtogroup KaskadeGroup
+   * @{
+   */
+
   namespace Kaskade
   {
     /**
-     * @ingroup KaskadeGroup
      * @brief Linear operator interface for operators in %Kaskade 7.
      * @tparam OperatorImpl %Kaskade 7 operator, i.e. %Kaskade::AssembledGalerkinOperator or %Kaskade::MatrixRepresentedOperator.
      * @tparam AnsatzVariableSetDescription %Kaskade::VariableSetDescription for ansatz variables
      * @tparam TestVariableSetDescription %Kaskade::VariableSetDescription for test variables
-     * @see LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
+     * @see ::Spacy::LinearOperator
      */
     template <class AnsatzVariableSetDescription, class TestVariableSetDescription>
     class LinearOperator :
@@ -138,7 +144,6 @@ namespace Spacy
     };
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Convenient generation of a linear operator for %Kaskade 7.
      * @param A operator from %Kaskade 7
      * @param domain domain space
@@ -154,6 +159,7 @@ namespace Spacy
       return LinearOperator<AnsatzVariableSetDescription, TestVariableSetDescription>( A , domain , range );
     }
   }
+  /** @} */
 }
 
-#endif // SPACY_OPERATORS_KASKADE_LINEAR_OPERATOR_HH
+#endif // SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH

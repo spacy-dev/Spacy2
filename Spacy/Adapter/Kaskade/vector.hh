@@ -1,12 +1,17 @@
-#ifndef SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
-#define SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
+#ifndef SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH
+#define SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH
 
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/cast.hh"
+#include "Spacy/vectorSpace.hh"
 
 #include "util.hh"
+
+#include "io/vtk.hh"
 
 namespace Spacy
 {  
@@ -41,8 +46,8 @@ namespace Spacy
        */
       Vector(const VectorSpace& space)
         : VectorBase(space),
-          spaces_(&cast_ref< VectorCreator<Description> >(space.creator()).impl()),
-          v_( Description::template CoefficientVectorRepresentation<>::init( spaces_ ))
+          description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).impl()) ),
+          v_( Description::template CoefficientVectorRepresentation<>::init( description_->spaces ))
       {}
 
       /// Assign from coefficient vector of %Kaskade 7.
@@ -81,11 +86,21 @@ namespace Spacy
       //        return *this;
       //      }
 
+      void toFile(const std::string& filename) const
+      {
+//        typename Description::VariableSet x(*description_);
+//        copy(*this,x);
+//        ::Kaskade::writeVTKFile(boost::fusion::at_c<0>(description_->spaces)->gridManager().grid().leafGridView(),
+//                                x,
+//                                filename,::Kaskade::IoOptions{},
+//                                1);//at_c<0>(spaces_)->mapper().getOrder());
+      }
+
     private:
-      typename Description::Spaces spaces_;
+      std::shared_ptr<Description> description_;
       VectorImpl v_;
     };
   }
 }
 
-#endif // SPACY_FUNCTION_SPACES_KASKADE_VECTOR_SPACE_ELEMENT_HH
+#endif // SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH

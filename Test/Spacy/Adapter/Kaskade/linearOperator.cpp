@@ -1,11 +1,22 @@
 //#include <gtest/gtest.h>
 
-//#include "Spacy/Adapter/Eigen/vector.hh"
-//#include "Spacy/Adapter/Eigen/vectorCreator.hh"
-//#include "Spacy/Adapter/Eigen/linearOperator.hh"
 //#include "setup.hh"
+//#include "Spacy/Adapter/Kaskade/linearOperator.hh"
+//#include "Spacy/Adapter/Kaskade/vector.hh"
+//#include "Spacy/Adapter/Kaskade/vectorSpace.hh"
 
-//using namespace Spacy;
+//using namespace Kaskade;
+
+//TEST(Kaskade,LinearOperator_Create)
+//{
+//  KASKADE_SINGLE_SPACE_SETUP
+//  KASKADE_SINGLE_SPACE_OPERATOR
+
+//  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
+//  auto Op = Spacy::Kaskade::LinearOperator<VariableSetDesc,VariableSetDesc>()
+
+//  test(Op,V);
+//}
 
 //TEST(Rn,LinearOperator_Apply)
 //{
