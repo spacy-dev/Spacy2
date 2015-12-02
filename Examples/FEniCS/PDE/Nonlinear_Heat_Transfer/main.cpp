@@ -3,6 +3,7 @@
 #include <Spacy/Adapter/fenics.hh>
 #include <Spacy/Algorithm/Newton/newton.hh>
 #include <Spacy/inducedScalarProduct.hh>
+#include <Spacy/c1Operator.hh>
 
 #include "NonlinearHeat.h"
 
@@ -65,7 +66,7 @@ int main()
   connect(domain,range);
   
   // create operator
-  auto A = FEniCS::makeC1Operator( L , a , bcs , domain , range );
+  Spacy::C1Operator A = FEniCS::makeC1Operator( L , a , bcs , domain , range );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.zeroVector()) ) );
 

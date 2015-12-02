@@ -17,6 +17,7 @@
 namespace Spacy
 {
   /// @cond
+  class Real;
   class Vector;
   class VectorSpace;
   /// @endcond
@@ -55,6 +56,8 @@ namespace Spacy
        * @param x operator argument
        */
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+
+      Real operator()(const LinearOperator&) const;
 
       /**
        * @brief Access solver.

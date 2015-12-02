@@ -200,9 +200,8 @@ namespace Spacy
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
        * @param x point of linearization
-       * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
        */
-      ::Spacy::LinearOperator hessian(const ::Spacy::Vector& x) const
+      auto hessian(const ::Spacy::Vector& x) const
       {
         assembleHessian(x);
 

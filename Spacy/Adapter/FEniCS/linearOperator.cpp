@@ -6,7 +6,7 @@
 #include "operatorSpace.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/vectorSpace.hh"
+#include "Spacy/Spaces/realSpace.hh"
 
 #include <cassert>
 
@@ -37,10 +37,15 @@ namespace Spacy
       if( x.space().index() == domain().index() )
         return applyAsOperator(x);
 
-      if( x.space().isPrimalWRT(*space()))
+      if( x.space().isPrimalWRT(space()))
         return applyAsDualElement(x);
 
       assert(false);
+    }
+
+    Real LinearOperator::operator ()(const LinearOperator& A) const
+    {
+        return Real( applyAsDualElement(A) );
     }
 
     LinearSolver LinearOperator::solver() const
