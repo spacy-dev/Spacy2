@@ -90,7 +90,9 @@ namespace Spacy
 
     private:
       std::vector< ::Spacy::Vector > components_ = {};
-    };    
+    };
+    
+    
   }
 
   /** @return cast_ref<ProductSpace::Vector>(v).component(PRIMAL); */
