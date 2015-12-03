@@ -25,8 +25,8 @@ script:
   - lcov --capture --initial --no-external --directory ${TRAVIS_BUILD_DIR}/build --base-directory ${TRAVIS_BUILD_DIR} --output-file initial.info
   - ./unit_tests
   - lcov --capture --no-external --directory ${TRAVIS_BUILD_DIR}/build --base-directory ${TRAVIS_BUILD_DIR} --output-file final.info
-  - lcov --remove coverage.info '*/Test/*' '*/External/*' '*/cmake/*' '*/CMakeFiles/*' '*/Testing/*'
   - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info
+  - lcov --remove coverage.info '*/Test/*' '*/External/*' '*/cmake/*' '*/CMakeFiles/*' '*/Testing/*'
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - cd build
