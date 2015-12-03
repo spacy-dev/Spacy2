@@ -24,6 +24,7 @@ script:
   - lcov --capture --initial --no-external --directory . --base-directory .. --output-file out/initial.info
   - ./unit_tests
 after_success:
+  - cd build
   - lcov --capture --no-external --directory . --base-directory .. --output-file out/final.info
   - lcov --add-tracefile out/initial.info --add-tracefile out/final.info --output-file out/coverage.info
   - coveralls-lcov --repo-token XQlVreS1r1o5V7qn14UiqF3W3kZiy7TUM out/coverage.info
