@@ -29,7 +29,7 @@ namespace Spacy
     Derived& operator+=(const Derived& y)
     {
       checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
-      static_cast<Derived*>(this)->impl() += y.impl();
+      static_cast<Derived*>(this)->get() += y.get();
       return static_cast<Derived&>(*this);
     }
 
@@ -41,7 +41,7 @@ namespace Spacy
     Derived& operator-=(const Derived& y)
     {
       checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
-      static_cast<Derived*>(this)->impl() -= y.impl();
+      static_cast<Derived*>(this)->get() -= y.get();
       return static_cast<Derived&>(*this);
     }
 
@@ -52,7 +52,7 @@ namespace Spacy
      */
     Derived& operator*=(double a)
     {
-      static_cast<Derived*>(this)->impl() *= a;
+      static_cast<Derived*>(this)->get() *= a;
       return static_cast<Derived&>(*this);
     }
 
@@ -63,7 +63,7 @@ namespace Spacy
     Derived operator-() const
     {
       Derived y = static_cast<const Derived&>(*this);
-      y.impl() *= -1;
+      y.get() *= -1;
       return y;
     }
 

@@ -47,9 +47,9 @@ namespace
 
   void test(const C2Functional&f, const VectorSpace& X)
   {
-    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
-    EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
-    EXPECT_EQ( toDouble(f.d2(X.zeroVector(),X.zeroVector())) , 1. );
+    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector())) , 2 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d2(X.zeroVector(),X.zeroVector())) , 1 );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }
@@ -103,9 +103,7 @@ TEST(C2Functional,Move)
   EXPECT_FALSE(is_empty_before_move);
   EXPECT_TRUE(is_empty_after_move);
 
-  EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
-  EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
-  EXPECT_EQ( X.index() , f.domain().index() );
+  test(f,X);
 }
 
 

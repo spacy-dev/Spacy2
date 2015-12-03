@@ -8,11 +8,14 @@
 #include <string>
 
 #include "Spacy/operator.hh"
+#include "Spacy/Util/Mixins/absoluteAccuracy.hh"
+#include "Spacy/Util/Mixins/relativeAccuracy.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/iterativeRefinements.hh"
+#include "Spacy/Util/Mixins/maxSteps.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"
 
-#include "terminationCriteria.hh"
+#include "terminationCriterion.hh"
 
 namespace Spacy
 {

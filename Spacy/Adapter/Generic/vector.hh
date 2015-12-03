@@ -6,7 +6,7 @@
 
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/voider.hh"
 
@@ -46,7 +46,7 @@ namespace Spacy
         template <template <class> class Vector>
         static auto apply(const Vector<VectorImpl>& x, const Vector<VectorImpl>& y)
         {
-          return x.impl()*y.impl();
+          return x.get()*y.get();
         }
       };
 
@@ -56,7 +56,7 @@ namespace Spacy
         template <template <class> class Vector>
         static Spacy::Real apply(const Vector<VectorImpl>& x, const Vector<VectorImpl>& y)
         {
-          return x.impl().dot(y.impl());
+          return x.get().dot(y.get());
         }
       };
 
@@ -66,7 +66,7 @@ namespace Spacy
         template <template <class> class Vector>
         static Spacy::Real apply(const Vector<VectorImpl>& x, const Vector<VectorImpl>& y)
         {
-          return x.impl().inner(y.impl());
+          return x.get().inner(y.get());
         }
       };
     }
@@ -78,7 +78,7 @@ namespace Spacy
      */
     template <class VectorImpl>
     class Vector :
-      public Mixin::Impl<VectorImpl> ,
+      public Mixin::Get<VectorImpl> ,
       public VectorBase ,
       public AddArithmeticOperators< Vector<VectorImpl> >
     {
@@ -89,7 +89,7 @@ namespace Spacy
        * @param space underlying vector space
        */
       Vector(const VectorImpl& v, const VectorSpace& space)
-        : Mixin::Impl<VectorImpl>( v ),
+        : Mixin::Get<VectorImpl>( v ),
           VectorBase(space)
       {}
 
@@ -99,7 +99,7 @@ namespace Spacy
        */
       Vector& operator=(const VectorImpl& v)
       {
-        this->impl() = v;
+        this->get() = v;
         return *this;
       }
 

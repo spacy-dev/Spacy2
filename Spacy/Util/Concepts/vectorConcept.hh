@@ -13,8 +13,45 @@ namespace Spacy
   class Real;
   /// @endcond
 
-  /// Concept for vector implementations.
-  /// Evaluates to std::true_type if Impl satisfies VectorConcept, else to std::false_type.
+  /**
+   * @ingroup ConceptGroup
+   * @brief Concept for vectors in %Spacy.
+   *
+   * @code
+   * class MyVector
+   * {
+   * public:
+   *   // Copy constructor.
+   *   MyVector(const MyVector&);
+   *
+   *   // Copy assignable x=y.
+   *   MyVector& operator=(const MyVector& y);
+   *
+   *   // In-place summation x+=y.
+   *   MyVector& operator+=(const MyVector& y);
+   *
+   *   // In-place subtraction x-=y.
+   *   MyVector& operator-=(const MyVector& y);
+   *
+   *   // In-place multiplication x*=a.
+   *   MyVector& operator*=(double a);
+   *
+   *   // Negation -y.
+   *   MyVector operator-(const MyVector& y);
+   *
+   *   // Equality comparison x==y.
+   *   bool operator==(const MyVector& y);
+   *
+   *   // Apply as dual element x(y).
+   *   Real operator()(const MyVector& y);
+   *
+   *   // Access pointer to underlying function space.
+   *   const VectorSpace& space() const;
+   * };
+   * @endcode
+   *
+   * @see ::Spacy::Vector
+   */
   template <class Impl>
   using VectorConcept =
   std::integral_constant< bool ,

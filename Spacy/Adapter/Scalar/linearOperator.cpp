@@ -15,22 +15,22 @@ namespace Spacy
     LinearOperator::LinearOperator(const VectorSpace& space, double value) :
       VectorBase(space),
       OperatorBase(Space::R,Space::R),
-      Mixin::Impl<double>(value)
+      Mixin::Get<double>(value)
     {}
 
     ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const
     {
-      return Real( impl()*toDouble(dx) );
+      return Real( get()*toDouble(dx) );
     }
 
     ::Spacy::LinearSolver LinearOperator::solver() const
     {
-      return LinearSolver(impl());
+      return LinearSolver(get());
     }
 
     LinearOperator LinearOperator::operator-() const
     {
-      return LinearOperator(space(),-impl());
+      return LinearOperator(space(),-get());
     }
   }
 }

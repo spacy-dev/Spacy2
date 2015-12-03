@@ -6,6 +6,28 @@
 
 #include "Spacy/Util/Concepts/functionalConcept.hh"
 
+/**
+ * @ingroup ConceptGroup
+ * @brief Concept for differentiable functionals in %Spacy.
+ *
+ * @code
+ * // f: X->R.
+ * class MyFunctional
+ * {
+ * public:
+ *   // Compute f(x).
+ *   Real operator()(const ::Spacy::Vector& x) const;
+ *
+ *   // Compute f'(x) as element of the dual space X*.
+ *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+ *
+ *   // Access underlying domain space X.
+ *   const VectorSpace& domain() const;
+ * };
+ * @endcode
+ *
+ * @see FunctionalConcept, ::Spacy::C1Functional
+ */
 namespace Spacy
 {
   /// @cond

@@ -46,7 +46,7 @@ namespace Spacy
        */
       Vector(const VectorSpace& space)
         : VectorBase(space),
-          description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).impl()) ),
+          description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).get()) ),
           v_( Description::template CoefficientVectorRepresentation<>::init( description_->spaces ))
       {}
 
@@ -58,13 +58,13 @@ namespace Spacy
       }
 
       /// Access coefficient vector.
-      VectorImpl& impl()
+      VectorImpl& get()
       {
         return v_;
       }
 
       /// Access coefficient vector.
-      const VectorImpl& impl() const
+      const VectorImpl& get() const
       {
         return v_;
       }
@@ -77,7 +77,7 @@ namespace Spacy
        */
       Real operator()(const Vector& y) const
       {
-        return impl() * y.impl();
+        return get() * y.get();
       }
 
       //      Vector& axpy(double a, const AbstractVector& y)

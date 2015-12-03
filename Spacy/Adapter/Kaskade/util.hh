@@ -70,7 +70,7 @@ namespace Spacy
         using Variables = typename Description::Variables;
         static auto apply(const ProductSpace::VectorCreator& spaces)
         {
-          return creator< VectorCreator< ExtractDescription_t<Description,j> > >( spaces.subSpace(j) ).impl().spaces;
+          return creator< VectorCreator< ExtractDescription_t<Description,j> > >( spaces.subSpace(j) ).get().spaces;
         }
       };
 
@@ -97,7 +97,7 @@ namespace Spacy
 
         static Spaces apply(const  VectorSpace& spaces)
         {
-          return creator< VectorCreator<Description> >(spaces).impl().spaces;
+          return creator< VectorCreator<Description> >(spaces).get().spaces;
         }
       };
 
@@ -131,7 +131,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(x.component(j)) )
         {
-          boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).impl().data);
+          boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data);
           return;
         }
 
@@ -149,7 +149,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(x.component(j)) )
         {
-          boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).impl().data);
+          boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data);
           return;
         }
 
@@ -168,7 +168,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(y.component(j)) )
         {
-          boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.component(j)).impl().data) = boost::fusion::at_c<i>(x.data);
+          boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.component(j)).get().data) = boost::fusion::at_c<i>(x.data);
           return;
         }
 
@@ -273,7 +273,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(x) )
       {
-        boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).impl().data);
+        boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data);
         return;
       }
 
@@ -290,7 +290,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(x) )
       {
-        boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).impl().data);
+        boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data);
         return;
       }
 
@@ -308,7 +308,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(y) )
       {
-        boost::fusion::at_c<0>(cast_ref< Vector< Description > >(y).impl().data) = boost::fusion::at_c<0>(x.data);
+        boost::fusion::at_c<0>(cast_ref< Vector< Description > >(y).get().data) = boost::fusion::at_c<0>(x.data);
         return;
       }
 

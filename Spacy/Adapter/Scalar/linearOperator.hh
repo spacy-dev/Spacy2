@@ -8,7 +8,7 @@
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 
 namespace Spacy
 {
@@ -24,7 +24,7 @@ namespace Spacy
     struct LinearOperator :
       VectorBase ,
       OperatorBase ,
-      Mixin::Impl<double> ,
+      Mixin::Get<double> ,
       AddArithmeticOperators<LinearOperator>
     {
       LinearOperator(const VectorSpace& space, double value);

@@ -6,7 +6,7 @@
 
 #include <Eigen/Dense>
 
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
@@ -24,7 +24,7 @@ namespace Spacy
      * @brief A linear operator \f$A:X\rightarrow Y\f$ for finite-dimensional problems, based on the %Eigen library.
      */
     class LinearOperator :
-      public Mixin::Impl< ::Eigen::MatrixXd >,
+      public Mixin::Get< ::Eigen::MatrixXd >,
       public VectorBase,
       public OperatorBase ,
       public AddArithmeticOperators<LinearOperator>

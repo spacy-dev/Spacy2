@@ -4,7 +4,7 @@
 #ifndef SPACY_VECTOR_HH
 #define SPACY_VECTOR_HH
 
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/Util/Concepts/vectorConcept.hh"
 #include "Spacy/Util/cast.hh"
@@ -42,64 +42,64 @@ namespace Spacy
     };
 
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Real operator()(const Vector& x) const final override
       {
-        return this->impl()(*Spacy::target<Impl>(x));
+        return this->get()(*Spacy::target<Impl>(x));
       }
 
       void add(const Vector& y) final override
       {
-        this->impl() += (*Spacy::target<Impl>(y));
+        this->get() += (*Spacy::target<Impl>(y));
       }
       void subtract(const Vector& y) final override
       {
-        this->impl() -= (*Spacy::target<Impl>(y));
+        this->get() -= (*Spacy::target<Impl>(y));
       }
 
       void multiply(double a) final override
       {
-        this->impl() *= a;
+        this->get() *= a;
       }
 
       Vector negate() const final override
       {
-        return Vector( -this->impl() );
+        return Vector( -this->get() );
       }
 
       bool compare(const Vector& y) const final override
       {
-        return this->impl() == (*Spacy::target<Impl>(y));
+        return this->get() == (*Spacy::target<Impl>(y));
       }
 
       const VectorSpace& space() const final override
       {
-        return this->impl().space();
+        return this->get().space();
       }
 
       void toFile(const std::string& filename) const final override
       {
-        return this->impl().toFile(filename);
+        return this->get().toFile(filename);
       }
 
       void copyFrom(const AbstractBase& y) final override
       {
         if( dynamic_cast< const Base<Impl>* >(&y) == nullptr ) throw std::runtime_error("AAAAAAAAAAARRRRRRRRRRRGGGGGGGGGGGGG");
-        this->impl() = dynamic_cast<const Base<Impl>&>(y).impl();
+        this->get() = dynamic_cast<const Base<Impl>&>(y).get();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

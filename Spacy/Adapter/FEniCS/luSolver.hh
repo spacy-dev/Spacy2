@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_FENICS_LUSOLVER_HH
 #define SPACY_ADAPTER_FENICS_LUSOLVER_HH
 
@@ -6,12 +9,14 @@
 
 #include <dolfin.h>
 
-#include "Spacy/vector.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  /// @endcond
+
   namespace FEniCS
   {
     /**

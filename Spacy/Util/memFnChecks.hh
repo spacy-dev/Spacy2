@@ -63,6 +63,30 @@ namespace Spacy
   template <class T>
   using TryMemFn_toFile = decltype(std::declval<T>().toFile(std::declval<std::string>()));
 
+  template <class T>
+  using TryMemFn_clear = decltype(std::declval<T>().clear());
+
+  template <class T>
+  using TryMemFn_update = decltype(std::declval<T>().update(1.,1.,1.,1.));
+
+  template <class T>
+  using TryMemFn_vanishingStep = decltype(std::declval<T>().vanishingStep());
+
+  template <class T>
+  using TryMemFn_minimalDecreaseAchieved = decltype(std::declval<T>().minimalDecreaseAchieved());
+
+  template <class T>
+  using TryMemFn_setEps = decltype(std::declval<T>().setEps(1.));
+
+  template <class T>
+  using TryMemFn_setRelativeAccuracy = decltype(std::declval<T>().setRelativeAccuracy(1.));
+
+  template <class T>
+  using TryMemFn_setAbsoluteAccuracy = decltype(std::declval<T>().setAbsoluteAccuracy(1.));
+
+  template <class T>
+  using TryMemFn_setMinimalAccuracy = decltype(std::declval<T>().setMinimalAccuracy(1.));
+
 
   template <class,class=void>
   struct HasMemFn_space : std::false_type{};
@@ -149,8 +173,42 @@ namespace Spacy
 
   template <class T>
   struct HasMemFn_isPositiveDefinite< T , void_t< TryMemFn_isPositiveDefinite<T> > >
-      : std::is_same< bool , TryMemFn_isPositiveDefinite<T> >::type
+      : std::is_same< bool , TryMemFn_isPositiveDefinite<T> >
   {};
+
+  template <class T>
+  using HasMemFn_clear = typename IsVoid<T>::template apply<TryMemFn_clear>;
+
+  template <class T>
+  using HasMemFn_update = typename IsVoid<T>::template apply<TryMemFn_update>;
+
+  template <class,class=void>
+  struct HasMemFn_vanishingStep : std::false_type{};
+
+  template <class T>
+  struct HasMemFn_vanishingStep< T , void_t< TryMemFn_vanishingStep<T> > >
+      : std::is_same< bool , TryMemFn_vanishingStep<T> >
+  {};
+
+  template <class,class=void>
+  struct HasMemFn_minimalDecreaseAchieved : std::false_type{};
+
+  template <class T>
+  struct HasMemFn_minimalDecreaseAchieved< T , void_t< TryMemFn_minimalDecreaseAchieved<T> > >
+      : std::is_same< bool , TryMemFn_minimalDecreaseAchieved<T> >
+  {};
+
+  template <class T>
+  using HasMemFn_setEps = typename IsVoid<T>::template apply<TryMemFn_setEps>;
+
+  template <class T>
+  using HasMemFn_setRelativeAccuracy = typename IsVoid<T>::template apply<TryMemFn_setRelativeAccuracy>;
+
+  template <class T>
+  using HasMemFn_setAbsoluteAccuracy = typename IsVoid<T>::template apply<TryMemFn_setAbsoluteAccuracy>;
+
+  template <class T>
+  using HasMemFn_setMinimalAccuracy = typename IsVoid<T>::template apply<TryMemFn_setMinimalAccuracy>;
 }
 
 #endif // SPACY_UTIL_MEM_FN_CHECKS_HH

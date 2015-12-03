@@ -6,7 +6,7 @@
 
 #include "Spacy/Util/memOpChecks.hh"
 #include "Spacy/Util/Concepts/operatorConcept.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/vector.hh"
 
@@ -38,34 +38,34 @@ namespace Spacy
     };
     
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
       
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
       
       Vector operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
       
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
       
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
       
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
     

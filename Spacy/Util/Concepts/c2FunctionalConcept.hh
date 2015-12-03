@@ -12,6 +12,36 @@ namespace Spacy
   class Vector;
   /// @endcond
 
+  /**
+   * @ingroup ConceptGroup
+   * @brief Concept for twice differentiable functionals in %Spacy.
+   *
+   * @code
+   * // f: X->R.
+   * class MyFunctional
+   * {
+   * public:
+   *   // Compute f(x).
+   *   Real operator()(const ::Spacy::Vector& x) const;
+   *
+   *   // Compute f'(x) as element of the dual space X*.
+   *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+   *
+   *   // Compute f''(x)dx as element of the dual space X*.
+   *   ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+   *
+   *   // Access f''(x) as mapping f''(x): X->X*.
+   *   LinearOperator hessian(const ::Spacy::Vector& x);
+   *
+   *   // Access underlying domain space X.
+   *   const VectorSpace& domain() const;
+   * };
+   * @endcode
+   *
+   * The member function `hessian(x)` is allowed to return any type that satisfies the LinearOperatorConcept.
+   *
+   * @see FunctionalConcept, C1FunctionalConcept, ::Spacy::C2Functional
+   */
   template <class Impl>
   using C2FunctionalConcept =
   std::integral_constant< bool ,

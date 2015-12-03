@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "vectorSpace.hh"
 
 #include "Spacy/vector.hh"
@@ -12,11 +15,11 @@ namespace Spacy
   namespace FEniCS
   {
     VectorCreator::VectorCreator(const dolfin::FunctionSpace& space)
-      : Mixin::Impl<dolfin::FunctionSpace>(space)
+      : Mixin::Get<dolfin::FunctionSpace>(space)
     {}
 
     VectorCreator::VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t, std::size_t>& dofmap)
-      : Mixin::Impl<dolfin::FunctionSpace>(space),
+      : Mixin::Get<dolfin::FunctionSpace>(space),
         dofmap_(dofmap),
         inverseDofmap_(dofmap_.size())
     {
@@ -47,7 +50,7 @@ namespace Spacy
 
     unsigned VectorCreator::size() const
     {
-      return impl().dim();
+      return get().dim();
     }
 
     VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space)

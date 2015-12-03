@@ -1,12 +1,13 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_FENICS_VECTOR_HH
 #define SPACY_ADAPTER_FENICS_VECTOR_HH
 
 #include <dolfin.h>
 
-#include "Spacy/vector.hh"
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/impl.hh"
 
 
 namespace Spacy
@@ -44,12 +45,12 @@ namespace Spacy
       /**
        * @brief Access reference to underlying vector.
        */
-      dolfin::GenericVector& impl();
+      dolfin::GenericVector& get();
 
       /**
        * @brief Access reference to underlying vector.
        */
-      const dolfin::GenericVector& impl() const;
+      const dolfin::GenericVector& get() const;
 
       /**
        * @brief Apply as dual element.

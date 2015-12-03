@@ -26,17 +26,17 @@ namespace Spacy
 
     ::Spacy::Vector C1Operator::operator()(const ::Spacy::Vector& x) const
     {
-      return Vector( value_( cast_ref<Vector>(x).impl() ) , range());
+      return Vector( value_( cast_ref<Vector>(x).get() ) , range());
     }
 
     ::Spacy::Vector C1Operator::d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
     {
-      return Vector( derivative_( cast_ref<Vector>(x).impl() ) * cast_ref<Vector>(dx).impl() , range() );
+      return Vector( derivative_( cast_ref<Vector>(x).get() ) * cast_ref<Vector>(dx).get() , range() );
     }
 
     LinearOperator C1Operator::linearization(const ::Spacy::Vector& x) const
     {
-      return LinearOperator(derivative_( cast_ref<Vector>(x).impl()) , *operatorSpace_, domain(), range());
+      return LinearOperator(derivative_( cast_ref<Vector>(x).get()) , *operatorSpace_, domain(), range());
     }
   }
 }

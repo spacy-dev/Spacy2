@@ -5,6 +5,7 @@
 
 #include "Spacy/Util/Exceptions/singularOperatorException.hh"
 #include "Spacy/vector.hh"
+#include "terminationCriteria.hh"
 
 #include <algorithm>
 #include <cassert>

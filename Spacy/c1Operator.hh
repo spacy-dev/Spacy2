@@ -5,7 +5,7 @@
 #define SPACY_C1_OPERATOR_HH
 
 #include "Spacy/Util/Concepts/c1OperatorConcept.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/linearOperator.hh"
@@ -32,44 +32,44 @@ namespace Spacy
     };
 
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
 
       Vector d1(const Vector &x, const Vector &dx) const final override
       {
-        return this->impl().d1(x,dx);
+        return this->get().d1(x,dx);
       }
 
       LinearOperator linearization(const Vector &x) const final override
       {
-        return this->impl().linearization(x);
+        return this->get().linearization(x);
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

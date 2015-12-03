@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "vector.hh"
 
 #include "vectorSpace.hh"
@@ -17,8 +20,7 @@ namespace Spacy
   {
     Vector::Vector(const VectorSpace& space)
       : VectorBase(space),
-        v_( creator<VectorCreator>(space).impl() )
-//      v_(cast_ref<VectorCreator>(space.impl()).impl())
+        v_( creator<VectorCreator>(space).get() )
     {}
 
     Vector& Vector::operator=(const dolfin::Function& v)
@@ -29,23 +31,23 @@ namespace Spacy
 
 //    Vector& Vector::axpy(double a, const Vector& y)
 //    {
-//      impl().vector()->axpy(a,*castTo<Vector>(y).impl().vector());
+//      get().vector()->axpy(a,*castTo<Vector>(y).get().vector());
 //      return *this;
 //    }
 
-    dolfin::GenericVector& Vector::impl()
+    dolfin::GenericVector& Vector::get()
     {
       return *v_.vector();
     }
 
-    const dolfin::GenericVector& Vector::impl() const
+    const dolfin::GenericVector& Vector::get() const
     {
       return *v_.vector();
     }
 
     Real Vector::operator()(const Vector& y) const
     {
-      return impl().inner( y.impl() );
+      return get().inner( y.get() );
     }
   }
 }

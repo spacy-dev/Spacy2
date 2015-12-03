@@ -7,7 +7,7 @@
 #include <ostream>
 
 #include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 
 namespace Spacy
 {
@@ -21,7 +21,7 @@ namespace Spacy
    */
   class Real :
       public VectorBase ,
-      public Mixin::Impl<double>
+      public Mixin::Get<double>
   {
   public:
     /**
@@ -96,7 +96,7 @@ namespace Spacy
 
     Real& operator*=(double a)
     {
-      impl() *= a;
+      get() *= a;
       return *this;
     }
 

@@ -75,10 +75,7 @@ namespace Spacy
           solverCreator_(std::move(solverCreator))
       {}
 
-      /**
-       * @brief Compute \f$A(x)\f$.
-       * @param x operator argument
-       */
+      /// Compute \f$A(x)\f$.
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
         Domain x_( AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
@@ -93,22 +90,19 @@ namespace Spacy
         return y;
       }
 
-      /**
-       * @brief Access solver.
-       * @return linear solver representing \f$A^{-1}\f$
-       */
+      /// Access solver representing \f$A^{-1}\f$.
       auto solver() const
       {
         return solverCreator_(*this);
         //        return DirectSolver<OperatorImpl,AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range() , domain() );
       }
 
-      auto& impl()
+      auto& get()
       {
         return A_.get_non_const();
       }
 
-      const auto& impl() const
+      const auto& get() const
       {
         return A_.template get<Matrix>();
       }

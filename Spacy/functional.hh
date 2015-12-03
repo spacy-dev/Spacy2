@@ -8,7 +8,7 @@
 #include "Spacy/Spaces/RealSpace/real.hh"
 #include "Spacy/Util/Concepts/functionalConcept.hh"
 #include "Spacy/Util/smartPointer.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Mixins/target.hh"
 
 namespace Spacy
@@ -38,29 +38,29 @@ namespace Spacy
     };
 
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Real operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

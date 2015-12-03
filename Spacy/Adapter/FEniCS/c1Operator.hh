@@ -19,10 +19,12 @@
 
 namespace Spacy
 {
+  /** @addtogroup FenicsGroup
+   * @{
+   */
   namespace FEniCS
   {
     /**
-     * @ingroup FenicsGroup
      * @brief %Operator interface for %FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
      * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
      * @see @ref C1OperatorAnchor "C1Operator", @ref C1OperatorConceptAnchor "C1OperatorConcept"
@@ -47,7 +49,7 @@ namespace Spacy
           bcs_( bcs ),
           operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(domain,range,J.function_space(0)) , [](const Spacy::Vector& v)
           {
-            return dolfin::Matrix( cast_ref<LinearOperator>(v).impl()).norm("frobenius");
+            return dolfin::Matrix( cast_ref<LinearOperator>(v).get()).norm("frobenius");
           } , true ) )
       {
         copyCoefficients(F,F_);
@@ -64,23 +66,7 @@ namespace Spacy
       C1Operator(const ResidualForm& F, const JacobianForm& J, VectorSpace& domain, VectorSpace& range)
         : C1Operator(F,J,{},domain,range)
       {}
-//        : OperatorBase( domain , range ),
-//          F_( F.function_space(0) ),
-//          J_( J.function_space(0) , J.function_space(1) ),
-//          bcs_() ,
-//          operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(domain,range,*J.function_space(0)) , [](const Spacy::Vector& v)
-//          {
-//            return dolfin::Matrix( cast_ref<LinearOperator>(v).impl()).norm("frobenius");
-//          } , true ) )
-//      {
-//        copyCoefficients(F,F_);
-//        copyCoefficients(J,J_);
-//      }
 
-      /**
-       * @brief Move constructor.
-       * @param other object to move from
-       */
       C1Operator(C1Operator&& other)
         : OperatorBase( other ) ,
           F_( other.F_.function_space(0) ) ,
@@ -94,10 +80,6 @@ namespace Spacy
         copyCoefficients(other.J_,J_);
       }
 
-      /**
-       * @brief Move constructor.
-       * @param other object to copy from
-       */
       C1Operator(const C1Operator& other)
         : OperatorBase( other ) ,
           F_( other.F_.function_space(0) ) ,
@@ -111,10 +93,6 @@ namespace Spacy
         copyCoefficients(other.J_,J_);
       }
 
-      /**
-       * @brief Copy assignment.
-       * @param other object to copy from
-       */
       C1Operator& operator=(const C1Operator& other)
       {
         OperatorBase::operator=( other );
@@ -129,10 +107,6 @@ namespace Spacy
         copyCoefficients(other.J_,J_);
       }
 
-      /**
-       * @brief Move assignment.
-       * @param other object to move from
-       */
       C1Operator& operator=(C1Operator&& other)
       {
         OperatorBase::operator=( other );
@@ -147,9 +121,7 @@ namespace Spacy
         copyCoefficients(other.J_,J_);
       }
 
-      /**
-       * @brief Compute \f$A(x)\f$.
-       */
+      /// Compute \f$A(x)\f$.
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
         assembleOperator(x);
@@ -159,17 +131,12 @@ namespace Spacy
         return std::move(y);
       }
 
-      /**
-       * @brief Compute \f$A'(x)dx\f$.
-       * @param x iterate
-       * @param dx correction
-       * @return \f$A'(x)dx\f$
-       */
+      /// Compute \f$A'(x)dx\f$.
       ::Spacy::Vector d1(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const
       {
         assembleGradient(x);
 
-        auto dx_ = dolfin::Function( cast_ref<VectorCreator>(domain().creator()).impl() );
+        auto dx_ = dolfin::Function( cast_ref<VectorCreator>(domain().creator()).get() );
         copy(dx,dx_);
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
@@ -182,9 +149,7 @@ namespace Spacy
 
       /**
        * @brief Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
-       * @param x current iterate
-       * @return LinearizedOperator
-       * @see LinearizedOperator, LinearOperator, LinearOperatorConcept
+       * @see LinearOperator, ::Spacy::LinearOperator
        */
       auto linearization(const ::Spacy::Vector& x) const
       {
@@ -193,7 +158,6 @@ namespace Spacy
         assert(operatorSpace_ != nullptr);
 
         return LinearOperator{ A_->copy() , *operatorSpace_ , J_.function_space(0) };
-//        return LinearizedOperator( *this , x , LUSolver( *A_ , range() , domain() ) );
       }
 
     private:
@@ -247,7 +211,6 @@ namespace Spacy
 
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ as used in %FEniCS.
      * @return @ref C1Operator "::Spacy::Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , bcs , domain , range )"
      */
@@ -259,7 +222,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ from %FEniCS(dolfin).
      * @return @ref C1Operator "::Spacy::Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , domain , range )"
      */
@@ -270,7 +232,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from %FEniCS(dolfin).
      * @return @ref C1Operator "::Spacy::Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )"
      */
@@ -281,7 +242,6 @@ namespace Spacy
     }
 
     /**
-     * @ingroup FenicsGroup
      * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow X\f$ from %FEniCS(dolfin).
      * @return @ref C1Operator "Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , space , space )"
      */
@@ -291,6 +251,7 @@ namespace Spacy
       return C1Operator<ResidualForm,JacobianForm>{ F , J , space , space };
     }
   }
+  /** @} */
 }
 
 #endif // SPACY_ADAPTER_FENICS_C1_OPERATOR_HH

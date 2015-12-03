@@ -5,7 +5,7 @@
 #define SPACY_TEST_MOCK_LINEAR_OPERATOR_HH
 
 #include "Spacy/linearSolver.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
@@ -13,7 +13,7 @@
 namespace Mock
 {
   class LinearOperator
-      : public Spacy::Mixin::Impl<double>,
+      : public Spacy::Mixin::Get<double>,
         public Spacy::OperatorBase,
         public Spacy::VectorBase,
         public Spacy::AddArithmeticOperators<LinearOperator>

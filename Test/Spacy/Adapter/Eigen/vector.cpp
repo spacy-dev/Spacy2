@@ -18,8 +18,8 @@ TEST(Rn,CreateFromEigen_VectorXd)
   auto space = createMockBanachSpace();
   Spacy::Rn::Vector spacyVector(vec,space);
 
-  ASSERT_EQ( spacyVector.impl()[0] , 1.);
-  ASSERT_EQ( spacyVector.impl()[1] , 2.);
+  ASSERT_EQ( spacyVector.get()[0] , 1.);
+  ASSERT_EQ( spacyVector.get()[1] , 2.);
 }
 
 TEST(Rn,AssignFromEigen_VectorXd)
@@ -29,12 +29,12 @@ TEST(Rn,AssignFromEigen_VectorXd)
   auto space = createMockBanachSpace();
   Spacy::Rn::Vector spacy_v(0.*vec,space);
 
-  ASSERT_EQ( spacy_v.impl()[0] , 0.);
-  ASSERT_EQ( spacy_v.impl()[1] , 0.);
+  ASSERT_EQ( spacy_v.get()[0] , 0.);
+  ASSERT_EQ( spacy_v.get()[1] , 0.);
 
   spacy_v = vec;
-  ASSERT_EQ( spacy_v.impl()[0] , 1.);
-  ASSERT_EQ( spacy_v.impl()[1] , 2.);
+  ASSERT_EQ( spacy_v.get()[0] , 1.);
+  ASSERT_EQ( spacy_v.get()[1] , 2.);
 }
 
 TEST(Rn,AddVectors)
@@ -45,8 +45,8 @@ TEST(Rn,AddVectors)
   Spacy::Rn::Vector spacy_v(vec,space);
 
   spacy_v += spacy_v;
-  ASSERT_EQ( spacy_v.impl()[0] , 2.);
-  ASSERT_EQ( spacy_v.impl()[1] , 4.);
+  ASSERT_EQ( spacy_v.get()[0] , 2.);
+  ASSERT_EQ( spacy_v.get()[1] , 4.);
 }
 
 TEST(Rn,SubtractVectors)
@@ -57,8 +57,8 @@ TEST(Rn,SubtractVectors)
   Spacy::Rn::Vector spacy_v(vec,space);
 
   spacy_v -= spacy_v;
-  ASSERT_EQ( spacy_v.impl()[0] , 0.);
-  ASSERT_EQ( spacy_v.impl()[1] , 0.);
+  ASSERT_EQ( spacy_v.get()[0] , 0.);
+  ASSERT_EQ( spacy_v.get()[1] , 0.);
 }
 
 TEST(Rn,MultiplyVectorWithScalar)
@@ -69,8 +69,8 @@ TEST(Rn,MultiplyVectorWithScalar)
   Spacy::Rn::Vector spacy_v(vec,space);
 
   spacy_v *= 3;
-  ASSERT_EQ( spacy_v.impl()[0] , 3.);
-  ASSERT_EQ( spacy_v.impl()[1] , 6.);
+  ASSERT_EQ( spacy_v.get()[0] , 3.);
+  ASSERT_EQ( spacy_v.get()[1] , 6.);
 }
 
 TEST(Rn,ApplyAsDual)
@@ -92,8 +92,8 @@ TEST(Rn,Negation)
   Spacy::Rn::Vector spacy_v(vec,space);
 
   auto spacy_w = -spacy_v;
-  ASSERT_EQ( spacy_w.impl()[0] , -1.);
-  ASSERT_EQ( spacy_w.impl()[1] , -2.);
+  ASSERT_EQ( spacy_w.get()[0] , -1.);
+  ASSERT_EQ( spacy_w.get()[1] , -2.);
 }
 
 TEST(Rn,Comparison)
@@ -107,9 +107,9 @@ TEST(Rn,Comparison)
   ASSERT_TRUE( spacy_v == spacy_w );
 
   space.setEps(1e-5);
-  spacy_w.impl()[0] = 1 - 5e-6;
+  spacy_w.get()[0] = 1 - 5e-6;
 
   ASSERT_TRUE( spacy_v == spacy_w );
-  spacy_w.impl()[0] = 1 - 1.1e-5;
+  spacy_w.get()[0] = 1 - 1.1e-5;
   ASSERT_FALSE( spacy_v == spacy_w );
 }

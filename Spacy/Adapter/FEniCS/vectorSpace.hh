@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACYS_ADAPTER_FENICS_VECTOR_SPACE_HH
 #define SPACYS_ADAPTER_FENICS_VECTOR_SPACE_HH
 
@@ -6,23 +9,23 @@
 
 #include <dolfin.h>
 
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  class VectorSpace;
+  /// @endcond
+
   namespace FEniCS
   {
-    /// @cond
-    class Vector;
-    /// @endcond
-
     /**
      * @ingroup FenicsGroup
      * @brief Creator for vector space elements for %FEniCS.
      * See @ref VectorCreatorAnchor "::Spacy::VectorCreator", @ref VectorCreatorConceptAnchor "::Spacy::VectorCreatorConcept".
      */
-    class VectorCreator : public Mixin::Impl<dolfin::FunctionSpace>
+    class VectorCreator : public Mixin::Get<dolfin::FunctionSpace>
     {
     public:
       /**

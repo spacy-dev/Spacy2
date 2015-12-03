@@ -5,7 +5,7 @@
 #define SPACY_LINEAR_OPERATOR_HH
 
 #include "Spacy/Util/Concepts/linearOperatorConcept.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Mixins/target.hh"
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/linearOperator.hh"
@@ -45,70 +45,70 @@ namespace Spacy
     };
 
     template <class Impl, class = std::enable_if_t<!std::is_reference<Impl>::value> >
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
 
   //    Vector operator()(const LinearOperator& x) const;
 
       void add(const LinearOperator& y) final override
       {
-        this->impl() += (*::Spacy::target<Impl>(y));
+        this->get() += (*::Spacy::target<Impl>(y));
       }
       void subtract(const LinearOperator& y) final override
       {
-        this->impl() -= (*::Spacy::target<Impl>(y));
+        this->get() -= (*::Spacy::target<Impl>(y));
       }
 
       void multiply(double a) final override
       {
-        this->impl() *= a;
+        this->get() *= a;
       }
 
       LinearOperator negate() const final override
       {
-        return LinearOperator( -this->impl() );
+        return LinearOperator( -this->get() );
       }
 
       bool operator==(const LinearOperator& y) const final override
       {
-        return this->impl() == (*::Spacy::target<Impl>(y));
+        return this->get() == (*::Spacy::target<Impl>(y));
       }
 
       std::function<Vector(const Vector&)> solver() const final override
       {
-        return this->impl().solver();
+        return this->get().solver();
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
 
       const VectorSpace& space() const final override
       {
-        return this->impl().space();
+        return this->get().space();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

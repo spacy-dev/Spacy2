@@ -4,7 +4,7 @@
 #ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH
 #define SPACY_INDUCED_SCALAR_PRODUCT_HH
 
-#include "Spacy/operator.hh"
+#include "Spacy/linearOperator.hh"
 
 namespace Spacy
 {
@@ -24,7 +24,7 @@ namespace Spacy
      * @brief Constructor.
      * @param M operator defining the scalar product.
      */
-    explicit InducedScalarProduct(CallableOperator M);
+    explicit InducedScalarProduct(LinearOperator M);
 
     /**
      * @brief Compute scalar product.
@@ -35,7 +35,7 @@ namespace Spacy
     Real operator()(const Vector& x, const Vector& y) const;
 
   private:
-    CallableOperator M_;
+    LinearOperator M_;
   };
 
   /**
@@ -55,7 +55,7 @@ namespace Spacy
      * @brief Constructor.
      * @param M operator defining the scalar product.
      */
-    explicit PrimalInducedScalarProduct(CallableOperator M);
+    explicit PrimalInducedScalarProduct(LinearOperator M);
 
     /**
      * @brief Compute scalar product.
@@ -66,7 +66,7 @@ namespace Spacy
     Real operator()(Vector x, Vector y) const;
 
   private:
-    CallableOperator M_;
+    LinearOperator M_;
   };
 }
 

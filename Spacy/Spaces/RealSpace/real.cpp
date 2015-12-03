@@ -33,7 +33,7 @@ namespace Spacy
 {
   Real::Real(double x, const VectorSpace& space)
     : VectorBase(space),
-      Mixin::Impl<double>(x)
+      Mixin::Get<double>(x)
   {}
 
   Real::Real(const VectorSpace& space)
@@ -46,20 +46,20 @@ namespace Spacy
 
   Real& Real::operator=(double y)
   {
-    impl() = y;
+    get() = y;
     return *this;
   }
 
   Real& Real::operator=(const Vector& y)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
-    impl() = cast_ref<Real>(y).impl();
+    get() = cast_ref<Real>(y).get();
     return *this;
   }
 
   Real::Real(const Vector& y)
     : VectorBase(y.space()),
-      Mixin::Impl<double>(0)
+      Mixin::Get<double>(0)
   {
     if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
     *this = cast_ref<Real>(y);
@@ -74,59 +74,45 @@ namespace Spacy
   Real& Real::operator+=(const Real& y)
   {
     checkSpaceCompatibility(this->space(),y.space());
-    impl() += y.impl();
+    get() += y.get();
     return *this;
   }
 
   Real& Real::operator-=(const Real& y)
   {
     checkSpaceCompatibility(this->space(),y.space());
-    impl() -= y.impl();
+    get() -= y.get();
     return *this;
   }
 
   Real& Real::operator*=(const Real& y)
   {
-    impl() *= y.impl();
+    get() *= y.get();
     return *this;
   }
 
   Real Real::operator-() const
   {
     auto result = *this;
-    result.impl() *= -1;
+    result.get() *= -1;
     return result;
   }
 
   bool Real::operator==(const Real& y) const
   {
     checkSpaceCompatibility(this->space(),y.space());
-    return impl() == y.impl();
+    return get() == y.get();
   }
 
 
-//    Real::operator double() const
-//    {
-//      return impl();
-//    }
-
-//    Real::operator double&()
-//    {
-//      return impl();
-//    }
-//  double toDouble(const Real& x)
-//  {
-//    return x.impl();
-//  }
-
   double& toDouble(Real &x)
   {
-    return x.impl();
+    return x.get();
   }
 
   double toDouble(const Real &x)
   {
-    return x.impl();
+    return x.get();
   }
 
   double toDouble(const Vector& x)

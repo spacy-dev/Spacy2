@@ -6,7 +6,7 @@
 
 #include <functional>
 
-#include "Util/Mixins/impl.hh"
+#include "Util/Mixins/get.hh"
 #include "Util/Mixins/target.hh"
 
 #include "vector.hh"
@@ -39,25 +39,29 @@ namespace Spacy
     template <class Impl>
     struct Base :
         public AbstractBase,
-        public Mixin::Impl<Impl>
+        public Mixin::Get<Impl>
     {
       explicit Base(const Impl& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
+      {}
+
+      explicit Base(Impl&& impl)
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
 
       bool isPositiveDefinite() const final override
       {
-        return this->impl().isPositiveDefinite();
+        return this->get().isPositiveDefinite();
       }
 
       std::unique_ptr<AbstractBase> clone() const
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

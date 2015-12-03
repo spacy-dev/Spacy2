@@ -51,8 +51,8 @@ namespace
 
   void test(const C1Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
-    EXPECT_EQ( toDouble(f.d1(X.zeroVector(),X.zeroVector())) , 2. );
+    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector(),X.zeroVector())) , 2 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
 
@@ -63,7 +63,7 @@ namespace
 
   void testOp(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
+    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
   }

@@ -12,7 +12,7 @@ namespace
 {
   void test(const LinearOperator& f, double value)
   {
-    EXPECT_EQ( toDouble(f(Space::R.zeroVector())) , value );
+    EXPECT_DOUBLE_EQ( toDouble(f(Space::R.zeroVector())) , value );
     EXPECT_EQ( 0u , f.domain().index() );
     EXPECT_EQ( 0u , f.range().index() );
 

@@ -9,10 +9,11 @@
 #include "Spacy/vector.hh"
 
 #include <utility>
+#include <iostream>
 
 namespace Spacy
 {
-  InducedScalarProduct::InducedScalarProduct(CallableOperator M)
+  InducedScalarProduct::InducedScalarProduct(LinearOperator M)
     : M_(std::move(M))
   {}
 
@@ -22,16 +23,17 @@ namespace Spacy
   }
 
 
-  PrimalInducedScalarProduct::PrimalInducedScalarProduct(CallableOperator M)
+  PrimalInducedScalarProduct::PrimalInducedScalarProduct(LinearOperator M)
     : M_(std::move(M))
   {}
 
   Real PrimalInducedScalarProduct::operator()(Vector x, Vector y) const
   {
-    auto& x_ = cast_ref<ProductSpace::Vector>(x);
-    auto& y_ = cast_ref<ProductSpace::Vector>(y);
-    x_.component(DUAL) *= 0;
-    y_.component(DUAL) *= 0;
+//    std::cout << "induced scalar product" << std::endl;
+//    auto& x_ = cast_ref<ProductSpace::Vector>(x);
+//    auto& y_ = cast_ref<ProductSpace::Vector>(y);
+//    x_.component(DUAL) *= 0;
+//    y_.component(DUAL) *= 0;
 
     /* TODO PROJECTION */
 

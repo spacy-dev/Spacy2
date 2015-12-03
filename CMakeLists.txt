@@ -13,6 +13,7 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${CMAKE_SOURCE_DIR}/cmake
     )
+set(DOLFIN_DIR ${PROJECT_SOURCE_DIR}/cmake)
   
 # Do not allow in-source builds  
 include(ConfigSafeGuards)  
@@ -36,6 +37,9 @@ include_directories("${PROJECT_SOURCE_DIR}")
 #include_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/include)
 #link_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/lib)
 
+if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -Weffc++ -fprofile-arcs -ftest-coverage")
+endif()
 # set up subdirectory containing code
 add_subdirectory(Spacy)
   
@@ -45,13 +49,10 @@ add_subdirectory(Spacy)
 #set(CMAKE_CXX_COMPILER "/usr/bin/g++-5")
 
 # enable/disable tests
-option(BuildTest "BuildTest" ON)
+option(BuildTest "BuildTest" OFF)
 option(Kaskade "Kaskade" OFF)
 
-#if(BuildTest)
-  if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -Weffc++")
-  endif()
+if(BuildTest)
   include_directories(${PROJECT_SOURCE_DIR}/External/googletest ${PROJECT_SOURCE_DIR}/External/googletest/include )
   add_custom_target(git_update
                     COMMAND git submodule init
@@ -104,7 +105,12 @@ option(Kaskade "Kaskade" OFF)
     target_link_libraries(unit_tests kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)
 #    target_link_libraries(unit_tests kaskade dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX boost_signals boost_program_options boost_system boost_timer boost_thread boost_chrono acml)
   endif()
-#endif()
+
+  include(CTest)
+  enable_testing()
+
+  add_test(unit ${PROJECT_BINARY_DIR}/unit_tests)
+endif()
 
 
 # export add_library

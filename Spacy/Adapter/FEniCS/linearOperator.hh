@@ -1,3 +1,6 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
 #define SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
 
@@ -10,7 +13,6 @@
 #include "Spacy/Util/Base/operatorBase.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 
-#include "vectorSpace.hh"
 #include "luSolver.hh"
 
 
@@ -27,7 +29,7 @@ namespace Spacy
     /**
      * @ingroup FenicsGroup
      * @brief Linear operator interface for operators in %FEniCS.
-     * @see LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
+     * @see ::Spacy::LinearOperator
      */
     class LinearOperator :
         public OperatorBase ,
@@ -39,17 +41,10 @@ namespace Spacy
        * @brief Construct linear operator for %FEniCS.
        * @param A shared matrix from %FEniCS
        * @param space operator space (holds information on domain and range)
-       */
-      LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace);
-
-      /**
-       * @brief Construct linear operator for %FEniCS.
-       * @param A shared matrix from %FEniCS
-       * @param space operator space (holds information on domain and range)
        * @param solverCreator function/functor implementing the creation of a linear solver
        */
       LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace,
-                     std::function<LinearSolver(const LinearOperator&)> solverCreator);
+                     std::function<LinearSolver(const LinearOperator&)> solverCreator = {});
 
       /**
        * @brief Compute \f$A(x)\f$.
@@ -59,15 +54,15 @@ namespace Spacy
 
       Real operator()(const LinearOperator&) const;
 
+      dolfin::GenericMatrix& get();
+
+      const dolfin::GenericMatrix& get() const;
+
       /**
        * @brief Access solver.
        * @return linear solver representing \f$A^{-1}\f$
        */
       LinearSolver solver() const;
-
-      dolfin::GenericMatrix& impl();
-
-      const dolfin::GenericMatrix& impl() const;
 
       std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace() const;
 
@@ -78,11 +73,11 @@ namespace Spacy
 
       ::Spacy::Vector applyAsDualElement(const ::Spacy::Vector& x) const;
 
-      std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
+      std::shared_ptr<dolfin::GenericMatrix> A_;
       bool symmetric_ = false;
       std::function<LinearSolver(const LinearOperator&)> solverCreator_ = [](const LinearOperator& M)
         {
-            return LUSolver( M.impl().copy() , M.dolfinSpace() , M.range() , M.domain() , M.symmetric() );
+            return LUSolver( M.get().copy() , M.dolfinSpace() , M.range() , M.domain() , M.symmetric() );
         };
       std::shared_ptr<const dolfin::FunctionSpace> space_;
     };

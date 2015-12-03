@@ -11,7 +11,6 @@
 #include "Mixins/dampingAccuracy.hh"
 #include "Mixins/decreaseCondition.hh"
 #include "Mixins/eps.hh"
-#include "Mixins/impl.hh"
 #include "Mixins/iterativeRefinements.hh"
 #include "Mixins/maxSteps.hh"
 #include "Mixins/minimalAccuracy.hh"

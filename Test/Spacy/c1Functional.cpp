@@ -38,8 +38,8 @@ namespace
 
   void test(const C1Functional&f, const VectorSpace& X)
   {
-    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
-    EXPECT_EQ( toDouble(f.d1(X.zeroVector())) , 2. );
+    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector())) , 2 );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }

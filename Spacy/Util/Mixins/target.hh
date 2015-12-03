@@ -4,6 +4,8 @@
 #ifndef SPACY_UTIL_MIXINS_TARGET_HH
 #define SPACY_UTIL_MIXINS_TARGET_HH
 
+#include <functional>
+
 namespace Spacy
 {
   namespace Mixin
@@ -22,7 +24,7 @@ namespace Spacy
         if( dynamic_cast<typename Derived::template Base<T>*>(static_cast<Derived*>(this)->base_.get()) == nullptr )
           return nullptr;
 
-        return &dynamic_cast<typename Derived::template Base<T>*>(static_cast<Derived*>(this)->base_.get())->impl();
+        return &dynamic_cast<typename Derived::template Base<T>*>(static_cast<Derived*>(this)->base_.get())->get();
       }
 
       /// Cast to const T* if possible, else returns nullptr.
@@ -35,7 +37,7 @@ namespace Spacy
         if( dynamic_cast<const typename Derived::template Base<T>*>(static_cast<const Derived*>(this)->base_.get()) == nullptr )
           return nullptr;
 
-        return &dynamic_cast<const typename Derived::template Base<T>*>(static_cast<const Derived*>(this)->base_.get())->impl();
+        return &dynamic_cast<const typename Derived::template Base<T>*>(static_cast<const Derived*>(this)->base_.get())->get();
       }
     };
   }

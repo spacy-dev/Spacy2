@@ -16,8 +16,8 @@ TEST(Rn,C1Operator_Apply)
   cast_ref<Rn::Vector>(v) = testVector();
   auto w = A(v);
   const Rn::Vector& w_ = cast_ref<Rn::Vector>(w);
-  ASSERT_EQ( w_.impl()[0] , 1.1*testVector()[0] );
-  ASSERT_EQ( w_.impl()[1] , 1.1*testVector()[1] );
+  ASSERT_EQ( w_.get()[0] , 1.1*testVector()[0] );
+  ASSERT_EQ( w_.get()[1] , 1.1*testVector()[1] );
 }
 
 TEST(Rn,C1Operator_Derivative)
@@ -30,8 +30,8 @@ TEST(Rn,C1Operator_Derivative)
   auto x = A.d1(v,w);
   const Rn::Vector& w_ = cast_ref<Rn::Vector>(w);
   const Rn::Vector& x_ = cast_ref<Rn::Vector>(x);
-  ASSERT_EQ( x_.impl()[0] , 1.1*w_.impl()[0] );
-  ASSERT_EQ( x_.impl()[1] , 1.1*w_.impl()[1] );
+  ASSERT_EQ( x_.get()[0] , 1.1*w_.get()[0] );
+  ASSERT_EQ( x_.get()[1] , 1.1*w_.get()[1] );
 }
 
 TEST(Rn,C1Operator_Linearization)
@@ -43,6 +43,6 @@ TEST(Rn,C1Operator_Linearization)
   auto dA = A.linearization(v);
   auto w = dA(v);
   const Rn::Vector& w_ = cast_ref<Rn::Vector>(w);
-  ASSERT_EQ( w_.impl()[0] , 1.1*testVector()[0] );
-  ASSERT_EQ( w_.impl()[1] , 1.1*testVector()[1] );
+  ASSERT_EQ( w_.get()[0] , 1.1*testVector()[0] );
+  ASSERT_EQ( w_.get()[1] , 1.1*testVector()[1] );
 }

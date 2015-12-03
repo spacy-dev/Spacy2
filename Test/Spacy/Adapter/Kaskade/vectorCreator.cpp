@@ -16,7 +16,7 @@ namespace
   {
     using Creator = Spacy::Kaskade::VectorCreator<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,i>>;
     ASSERT_TRUE( Spacy::is<Creator>(spaces[i]->creator()) );
-    ASSERT_EQ( Spacy::creator<Creator>(*spaces[i]).impl().names[0] , names[i] );
+    ASSERT_EQ( Spacy::creator<Creator>(*spaces[i]).get().names[0] , names[i] );
   }
 }
 

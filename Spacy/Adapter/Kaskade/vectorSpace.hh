@@ -9,7 +9,7 @@
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/productSpace.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 
 #include "l2Product.hh"
 #include "vector.hh"
@@ -25,7 +25,7 @@ namespace Spacy
     /// Creator for vector space elements for %Kaskade 7
     template <class Description>
     class VectorCreator :
-        public Mixin::Impl<Description>
+        public Mixin::Get<Description>
     {
     public:
       /**
@@ -35,7 +35,7 @@ namespace Spacy
       template <class... Args,
                 class = std::enable_if_t<std::is_constructible<Description,Args...>::value> >
       VectorCreator(Args&&... args)
-        : Mixin::Impl<Description>( std::forward<Args>(args)... )
+        : Mixin::Get<Description>( std::forward<Args>(args)... )
       {}
 
       /// Generate vector for %Kaskade 7.

@@ -1,9 +1,13 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "util.hh"
 
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/copy.hh"
 
 #include "Spacy/vectorSpace.hh"
+#include "Spacy/vector.hh"
 #include "vector.hh"
 #include "vectorSpace.hh"
 
@@ -21,7 +25,7 @@ namespace Spacy
       for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space().creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(x_.space());
-        y.setitem(creator.inverseDofmap(j),x_.impl().getitem(j));
+        y.setitem(creator.inverseDofmap(j),x_.get().getitem(j));
       }
       y.apply("insert");
     }
@@ -34,9 +38,9 @@ namespace Spacy
       for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space().creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(x_.space());
-        x_.impl().setitem( j , y.getitem( creator.inverseDofmap(j) ) );
+        x_.get().setitem( j , y.getitem( creator.inverseDofmap(j) ) );
       }
-      x_.impl().apply("insert");
+      x_.get().apply("insert");
     }
   }
 

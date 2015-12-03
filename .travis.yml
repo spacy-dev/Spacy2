@@ -16,8 +16,8 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake -DBuildTest=ON ..
+  - cmake -DBuildTest=ON .. -DCMAKE_BUILD_TYPE=Debug
   - make
   - ./unit_tests
 after_success:
-  - coveralls --root .. -E ".*googletest.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" --gcov-options '\-lp' --gcov 'gcov-4.9'
+  - coveralls --root .. -E ".*googletest.*" - E ".*/cmake/.*" -E ".*/Examples/.*" -E ".*CMakeFiles.*" -E ".*Test/.*.cpp.*" --gcov-options '\-lp' --gcov 'gcov-4.9'

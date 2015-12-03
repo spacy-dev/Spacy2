@@ -4,8 +4,6 @@
 #ifndef SPACY_ADAPTER_EIGEN_LINEAR_SOLVER_HH
 #define SPACY_ADAPTER_EIGEN_LINEAR_SOLVER_HH
 
-#include <utility>
-
 #include <Eigen/Dense>
 
 namespace Spacy

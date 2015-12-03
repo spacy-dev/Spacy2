@@ -6,28 +6,23 @@
 
 #include <vector>
 
-#include <boost/type_erasure/any.hpp>
-
-#include "Spacy/Util/mixins.hh"
-#include "Spacy/Util/Concepts/CG/terminationCriterionConcept.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Util/Mixins/absoluteAccuracy.hh"
+#include "Spacy/Util/Mixins/relativeAccuracy.hh"
+#include "Spacy/Util/Mixins/minimalAccuracy.hh"
+#include "Spacy/Util/Mixins/eps.hh"
+#include "Spacy/Util/Mixins/maxSteps.hh"
+#include "Spacy/Util/Mixins/verbosity.hh"
 
 namespace Spacy
 {
+  /** @addtogroup CGGroup
+   * @{
+   */
   namespace CG
   {
-    /**
-     * @ingroup CGGroup
-     * @brief Termination criteria for conjugate gradient methods.
-     * @anchor CG_TerminationCriterionAnchor
-     * See @ref CG_TerminationCriterionConceptAnchor "TerminationCriterionConcept".
-     */
-    using TerminationCriterion = boost::type_erasure::any< Concepts::CG::TerminationCriterionConcept >;
-
     namespace Termination
     {
       /**
-       * @ingroup CGGroup
        * @brief Termination criterion for conjugate gradient methods based on an estimate of the relative energy error.
        *
        * Relative energy error termination criterion according to @cite Strakos2005 (see also @cite Hestenes1952, @cite Arioli2004).
@@ -56,7 +51,7 @@ namespace Spacy
          * @param qPq squared \f$P\f$-norm, i. e. the norm induced by the preconditioner, of the conjugate search direction \f$q\f$ (here: unused)
          * @param rPINVr squared \f$P^{-1}\f$-norm of the residual
          */
-        void update(Real alpha, Real qAq, Real qPq, Real rPINVr);
+        void update(double alpha, double qAq, double qPq, double rPINVr);
 
         /**
          * \brief check if the energy norm of the current step \f$\|q\|_A=\sqrt(qAq)\f$ is smaller than the maximal attainable accuracy multiplied with the energy norm of the iterate \f$\varepsilon_{max}\|x\|_A\f$.
@@ -88,12 +83,12 @@ namespace Spacy
         /**
          * \brief returns the estimated sqaured absolute energy error
          */
-        Real squaredRelativeError() const noexcept;
+        double squaredRelativeError() const noexcept;
 
         unsigned lookAhead_ = 5;
-        std::vector<Real> scaledGamma2 = std::vector<Real>{};
-        Real energyNorm2 = 0;
-        Real stepLength2 = 0.;
+        std::vector<double> scaledGamma2 = std::vector<double>{};
+        double energyNorm2 = 0;
+        double stepLength2 = 0.;
       };
 
 

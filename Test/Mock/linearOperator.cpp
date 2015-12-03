@@ -9,14 +9,14 @@
 namespace Mock
 {
   LinearOperator::LinearOperator(double value)
-    : Spacy::Mixin::Impl<double>(value),
+    : Spacy::Mixin::Get<double>(value),
       Spacy::OperatorBase(Spacy::Space::R,Spacy::Space::R),
       Spacy::VectorBase(Spacy::Space::R)
   {}
 
   ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const
   {
-    return Spacy::Real(impl());
+    return Spacy::Real(get());
   }
 
   /// Access solver representing \f$A^{-1}\f$

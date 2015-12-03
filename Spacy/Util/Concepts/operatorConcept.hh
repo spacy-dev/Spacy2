@@ -13,11 +13,29 @@ namespace Spacy
   class Vector;
   /// @endcond
 
+  /**
+   * @ingroup SpacyGroup
+   * @brief Concept for operators in %Spacy.
+   *
+   * @code
+   * // A: X->Y.
+   * class MyOperator
+   * {
+   * public:
+   *   // Compute A(x).
+   *   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+   *
+   *   // Access domain space X.
+   *   const VectorSpace& domain() const;
+   *
+   *   // Access range space Y.
+   *   const VectorSpace& range() const;
+   * };
+   * @endcode
+   */
   template <class Impl>
   using OperatorConcept =
   std::integral_constant< bool ,
-    std::is_copy_constructible<Impl>::value &&
-    std::is_copy_assignable<Impl>::value &&
     HasMemOp_callable<Impl,Vector,Vector>::value &&
     HasMemFn_domain<Impl>::value &&
     HasMemFn_range<Impl>::value

@@ -55,7 +55,7 @@ namespace Spacy
           bcs_( bcs ) ,
           operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(domain,domain.dualSpace(),J.function_space(0)) , [](const Spacy::Vector& v)
           {
-            return dolfin::Matrix( cast_ref<LinearOperator>(v).impl()).norm("frobenius");
+            return dolfin::Matrix( cast_ref<LinearOperator>(v).get()).norm("frobenius");
           } , true ) )
       {
         copyCoefficients(f,f_);

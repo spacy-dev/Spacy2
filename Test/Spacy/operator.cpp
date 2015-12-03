@@ -36,7 +36,7 @@ namespace
 
   void test(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_EQ( toDouble(f(X.zeroVector())) , 3. );
+    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
   }

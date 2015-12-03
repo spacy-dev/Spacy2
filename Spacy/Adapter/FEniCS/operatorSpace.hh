@@ -1,7 +1,17 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_FENICS_OPERATOR_SPACE_HH
 #define SPACY_ADAPTER_FENICS_OPERATOR_SPACE_HH
 
-#include "vector.hh"
+#include <memory>
+
+/// @cond
+namespace dolfin
+{
+  class FunctionSpace;
+}
+/// @endcond
 
 namespace Spacy
 {

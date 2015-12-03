@@ -24,13 +24,16 @@
 
 namespace Spacy
 {
+  /** @addtogroup KaskadeGroup
+   * @{
+   */
+
   namespace Kaskade
   {
     /**
-     * @ingroup KaskadeGroup
      * @brief %Functional interface for %Kaskade 7. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
      * @tparam FunctionalDefinition functional definition from %Kaskade 7
-     * @see @ref C2FunctionalAnchor "::Spacy::C2Functional", @ref C2FunctionalConceptAnchor "C2FunctionalConcept"
+     * @see ::Spacy::C2Functional
      */
     template <class FunctionalDefinition>
     class C2Functional :
@@ -79,7 +82,7 @@ namespace Spacy
           {
             using std::begin;
             using std::end;
-            const auto& m = cast_ref<Linearization>(v).impl();
+            const auto& m = cast_ref<Linearization>(v).get();
             auto iend = end(m);
             auto result = 0.;
             for(auto iter = begin(m); iter!=iend; ++iter)
@@ -196,7 +199,7 @@ namespace Spacy
       /**
        * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
        * @param x point of linearization
-       * @see Hessian, @ref LinearOperatorAnchor "LinearOperator", @ref LinearOperatorConceptAnchor "LinearOperatorConcept"
+       * @see LinearOperator, ::Spacy::LinearOperator
        */
       auto hessian(const ::Spacy::Vector& x) const
       {
@@ -301,16 +304,15 @@ namespace Spacy
         {
             return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() ,
                                                                                      f.range() ,
-                                                                                     f.domain() ,
+                                                                                     f.domain() /*,
                                                                                      DirectType::MUMPS ,
-                                                                                     MatrixProperties::GENERAL );
+                                                                                     MatrixProperties::GENERAL */);
 
         };
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
     /**
-     * @ingroup KaskadeGroup
      * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ for %Kaskade 7.
      * @param f operator definition from %Kaskade 7
      * @param domain domain space
@@ -331,6 +333,7 @@ namespace Spacy
       return C2Functional<FunctionalDefinition>( f, domain , rbegin, rend , cbegin , cend );
     }
   }
+  /** @} */
 }
 
 #endif // SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH

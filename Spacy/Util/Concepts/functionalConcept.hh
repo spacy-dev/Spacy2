@@ -14,11 +14,28 @@ namespace Spacy
   class Vector;
   /// @endcond
 
+  /**
+   * @ingroup ConceptGroup
+   * @brief Concept for functionals in %Spacy.
+   *
+   * @code
+   * // f: X->R.
+   * class MyFunctional
+   * {
+   * public:
+   *   // Compute f(x).
+   *   Real operator()(const ::Spacy::Vector& x) const;
+   *
+   *   // Access underlying domain space X.
+   *   const VectorSpace& domain() const;
+   * };
+   *
+   * @see ::Spacy::Functional
+   * @endcode
+   */
   template <class Impl>
   using FunctionalConcept =
   std::integral_constant< bool ,
-    std::is_copy_constructible<Impl>::value &&
-    std::is_copy_assignable<Impl>::value &&
     HasMemOp_callable<Impl,Vector,Real>::value &&
     HasMemFn_domain<Impl>::value
   >;

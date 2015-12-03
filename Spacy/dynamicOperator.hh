@@ -5,6 +5,8 @@
 #include "Spacy/Util/memFnChecks.hh"
 #include "Spacy/Util/memOpChecks.hh"
 #include "Spacy/Util/smartPointer.hh"
+#include "Spacy/Util/Mixins/get.hh"
+#include "Spacy/Util/Mixins/target.hh"
 
 #include "linearOperator.hh"
 #include "vectorSpace.hh"
@@ -45,39 +47,39 @@ namespace Spacy
     };
 
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(const Vector& x) const final override
       {
-        return this->impl()(x);
+        return this->get()(x);
       }
 
       LinearOperator M() const final override
       {
-        return this->impl().M();
+        return this->get().M();
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 
@@ -153,70 +155,70 @@ namespace Spacy
     };
 
     template <class Impl, class = std::enable_if_t<!std::is_reference<Impl>::value> >
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(double t, const Vector& x) const final override
       {
-        return this->impl()(t,x);
+        return this->get()(t,x);
       }
 
   //    Vector operator()(const DynamicLinearOperator& x) const;
 
       void add(const DynamicLinearOperator& y) final override
       {
-        this->impl() += (*y.template target<Impl>());
+        this->get() += (*y.template target<Impl>());
       }
       void subtract(const DynamicLinearOperator& y) final override
       {
-        this->impl() -= (*y.template target<Impl>());
+        this->get() -= (*y.template target<Impl>());
       }
 
       void multiply(double a) final override
       {
-        this->impl() *= a;
+        this->get() *= a;
       }
 
       DynamicLinearOperator negate() const final override
       {
-        return DynamicLinearOperator( -this->impl() );
+        return DynamicLinearOperator( -this->get() );
       }
 
       bool operator==(const DynamicLinearOperator& y) const final override
       {
-        return this->impl() == (*y.template target<Impl>());
+        return this->get() == (*y.template target<Impl>());
       }
 
       std::function<Vector(const Vector&)> solver() const final override
       {
-        return this->impl().solver();
+        return this->get().solver();
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
 
       const VectorSpace& space() const final override
       {
-        return this->impl().space();
+        return this->get().space();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 
@@ -313,49 +315,49 @@ namespace Spacy
     };
 
     template <class Impl>
-    struct Base : AbstractBase, Mixin::Impl<Impl>
+    struct Base : AbstractBase, Mixin::Get<Impl>
     {
       Base(Impl const& impl)
-        : Mixin::Impl<Impl>(impl)
+        : Mixin::Get<Impl>(impl)
       {}
 
       Base(Impl&& impl)
-        : Mixin::Impl<Impl>(std::move(impl))
+        : Mixin::Get<Impl>(std::move(impl))
       {}
 
       Vector operator()(double t, const Vector& x) const final override
       {
-        return this->impl()(t,x);
+        return this->get()(t,x);
       }
 
       Vector d1(double t, const Vector &x, const Vector &dx) const final override
       {
-        return this->impl().d1(t,x,dx);
+        return this->get().d1(t,x,dx);
       }
 
       LinearOperator linearization(double t, const Vector &x) const final override
       {
-        return this->impl().linearization(t,x);
+        return this->get().linearization(t,x);
       }
 
       LinearOperator M() const final override
       {
-        return this->impl().M();
+        return this->get().M();
       }
 
       const VectorSpace& domain() const final override
       {
-        return this->impl().domain();
+        return this->get().domain();
       }
 
       const VectorSpace& range() const final override
       {
-        return this->impl().range();
+        return this->get().range();
       }
 
       std::unique_ptr<AbstractBase> clone() const final override
       {
-        return std::make_unique< Base<Impl> >(this->impl());
+        return std::make_unique< Base<Impl> >(this->get());
       }
     };
 

@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 #include "Spacy/Util/memOpChecks.hh"
-#include "Spacy/Util/Mixins/impl.hh"
+#include "Spacy/Util/Mixins/get.hh"
 #include "Spacy/Util/Base/addArithmeticOperators.hh"
 #include "Spacy/Util/Base/vectorBase.hh"
 
@@ -64,7 +64,7 @@ namespace
     void operator()(double);
   };
 
-  struct NegateFromVectorBase : Mixin::Impl<double> , AddArithmeticOperators<NegateFromVectorBase>
+  struct NegateFromVectorBase : Mixin::Get<double> , AddArithmeticOperators<NegateFromVectorBase>
   {};
 }
 

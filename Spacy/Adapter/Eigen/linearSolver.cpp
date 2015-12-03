@@ -5,6 +5,8 @@
 #include "Spacy/vectorSpace.hh"
 #include "vector.hh"
 
+#include <utility>
+
 namespace Spacy
 {
   namespace Rn
@@ -14,7 +16,7 @@ namespace Spacy
 
     Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& y) const
     {
-      return Vector(A_.lu().solve(cast_ref<Vector>(y).impl() ) , domain_ );
+      return Vector(A_.lu().solve(cast_ref<Vector>(y).get() ) , domain_ );
     }
   }
 }

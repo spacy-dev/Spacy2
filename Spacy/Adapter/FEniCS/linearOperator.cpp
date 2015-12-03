@@ -1,5 +1,9 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #include "linearOperator.hh"
 
+#include "vectorSpace.hh"
 #include "Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh"
 
 #include "util.hh" // copy
@@ -14,23 +18,17 @@ namespace Spacy
 {
   namespace FEniCS
   {
-    LinearOperator::LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace)
-      : OperatorBase(creator<LinearOperatorCreator>(space).domain() ,
-                     creator<LinearOperatorCreator>(space).range()) ,
-        VectorBase(space) ,
-        A_(std::move(A)) ,
-        space_(dolfinSpace)
-    {}
-
     LinearOperator::LinearOperator(std::shared_ptr<dolfin::GenericMatrix> A, const VectorSpace& space, std::shared_ptr<const dolfin::FunctionSpace> dolfinSpace,
                    std::function<LinearSolver(const LinearOperator&)> solverCreator)
       : OperatorBase(creator<LinearOperatorCreator>(space).domain(),
                      creator<LinearOperatorCreator>(space).range()),
         VectorBase(space),
-        A_(std::move(A)),
-        solverCreator_(std::move(solverCreator)),
+        A_( A ),
         space_(dolfinSpace)
-    {}
+    {
+      if( solverCreator )
+        solverCreator_ = std::move(solverCreator);
+    }
 
     ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& x) const
     {
@@ -53,13 +51,13 @@ namespace Spacy
       return solverCreator_(*this);
     }
 
-    dolfin::GenericMatrix& LinearOperator::impl()
+    dolfin::GenericMatrix& LinearOperator::get()
     {
       assert(A_ != nullptr);
       return *A_;
     }
 
-    const dolfin::GenericMatrix& LinearOperator::impl() const
+    const dolfin::GenericMatrix& LinearOperator::get() const
     {
       assert(A_ != nullptr);
       return *A_;
@@ -75,12 +73,13 @@ namespace Spacy
       return space_;
     }
 
+
     ::Spacy::Vector LinearOperator::applyAsOperator(const ::Spacy::Vector& x) const
     {
       auto x_ = dolfin::Function( space_ );
       copy(x,x_);
       auto y_ = x_.vector()->copy();
-      A_->mult(*x_.vector(), *y_);
+      get().mult(*x_.vector(), *y_);
 
       auto y = range().zeroVector();
       copy(*y_,y);

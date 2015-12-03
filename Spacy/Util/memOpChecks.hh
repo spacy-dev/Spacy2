@@ -35,7 +35,7 @@ namespace Spacy
 
   template <class T>
   struct HasMemOp_add< T , void_t< TryMemOp_add<T> > >
-    : std::is_same< T& ,TryMemOp_add<T> >::type
+    : std::is_same< T& ,TryMemOp_add<T> >
   {};
 
   template <class,class=void>
@@ -43,7 +43,7 @@ namespace Spacy
 
   template <class T>
   struct HasMemOp_subtract< T , void_t< TryMemOp_subtract<T> > >
-    : std::is_same< T& ,TryMemOp_subtract<T> >::type
+    : std::is_same< T& ,TryMemOp_subtract<T> >
   {};
 
   template <class,class=void>
@@ -51,7 +51,7 @@ namespace Spacy
 
   template <class T>
   struct HasMemOp_multiply< T , void_t< TryMemOp_multiply<T> > >
-    : std::is_same< T& ,TryMemOp_multiply<T> >::type
+    : std::is_same< T& ,TryMemOp_multiply<T> >
   {};
 
   template <class,class=void>
@@ -67,7 +67,7 @@ namespace Spacy
 
   template <class T,class Arg, class Return>
   struct HasMemOp_callable< T , Arg , Return , void_t< TryMemOp_callable<T,Arg> > >
-    : std::is_same< Return ,TryMemOp_callable<T,Arg> >::type
+    : std::is_same< Return ,TryMemOp_callable<T,Arg> >
   {};
 
   template <class Return, class... Args>
@@ -79,7 +79,7 @@ namespace Spacy
 
     template <class T>
     struct apply<T, void_t< TryMemOp_callable<T,Args...> > >
-        : std::is_convertible< TryMemOp_callable<T,Args...>* , Return*>::type
+        : std::is_same< TryMemOp_callable<T,Args...> , Return >
     {};
   };
 }

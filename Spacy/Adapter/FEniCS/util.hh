@@ -1,7 +1,8 @@
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #ifndef SPACY_ADAPTER_FENICS_UTIL_HH
 #define SPACY_ADAPTER_FENICS_UTIL_HH
-
-#include "Spacy/vector.hh"
 
 /// \cond
 namespace dolfin
@@ -14,6 +15,10 @@ namespace dolfin
 
 namespace Spacy
 {
+  /// @cond
+  class Vector;
+  /// @endcond
+
   namespace FEniCS
   {
     /**

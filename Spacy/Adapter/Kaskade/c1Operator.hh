@@ -79,7 +79,7 @@ namespace Spacy
           {
             using std::begin;
             using std::end;
-            const auto& m = cast_ref<Linearization>(v).impl();
+            const auto& m = cast_ref<Linearization>(v).get();
             auto iend = end(m);
             auto result = 0.;
             for(auto iter = begin(m); iter!=iend; ++iter)
