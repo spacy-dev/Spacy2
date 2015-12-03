@@ -11,8 +11,6 @@
 #include "Spacy/vector.hh"
 #include "Spacy/hilbertSpaceNorm.hh"
 
-#include <boost/type_erasure/is_empty.hpp>
-
 #include <stdexcept>
 #include <utility>
 

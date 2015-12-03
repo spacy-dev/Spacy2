@@ -6,7 +6,6 @@
 
 #include <functional>
 #include <vector>
-#include <boost/type_erasure/any.hpp>
 
 #include "Spacy/norm.hh"
 #include "Spacy/scalarProduct.hh"
