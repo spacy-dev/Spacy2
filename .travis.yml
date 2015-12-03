@@ -22,8 +22,8 @@ script:
   - make
   - lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info
   - ./unit_tests
-  - lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info
-  - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info
+  - lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --strip 5
+  - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --strip 5
   - cd ..
 after_success:
   - cd build
