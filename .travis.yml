@@ -20,4 +20,4 @@ script:
   - make
   - ./unit_tests
 after_success:
-  - coveralls --root .. -E ".*googletest.*" - E ".*/cmake/.*" -E ".*/Examples/.*" -E ".*CMakeFiles.*" -E ".*Test/.*.cpp.*" --gcov-options '\-lp' --gcov 'gcov-4.9'
+  - coveralls --root .. -E ".*googletest.*" - E ".*cmake.*" -E ".*Examples.*" -E ".*CMakeFiles.*" -E ".*Test.*.cpp.*" --gcov-options '\-lp' --gcov 'gcov-4.9'
