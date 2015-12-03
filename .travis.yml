@@ -1,6 +1,5 @@
 language: cpp
 before_install:
-  - cd ${TRAVIS_BUILD_DIR}
   - $CXX --version
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
@@ -17,16 +16,15 @@ before_install:
   # install lcov to coveralls conversion + upload tool
   - gem install coveralls-lcov
 script:
-  - cd ${TRAVIS_BUILD_DIR}
   - mkdir build
   - cd build
   - cmake -DBuildTest=ON -DCMAKE_BUILD_TYPE=Debug ..
   - make
   - lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info
   - ./unit_tests
-  - lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --strip ${TRAVIS_BUILD_DIR}
-  - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --strip ${TRAVIS_BUILD_DIR}
+  - lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info
+  - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info
+  - cd ..
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}
   - cd build
   - coveralls-lcov --repo-token XQlVreS1r1o5V7qn14UiqF3W3kZiy7TUM coverage.info
