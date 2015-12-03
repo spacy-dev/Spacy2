@@ -21,9 +21,9 @@ script:
   - cd build
   - cmake -DBuildTest=ON -DCMAKE_BUILD_TYPE=Debug ..
   - make
-  - lcov --capture --initial --no-external --directory . --base-directory .. --output-file initial.info
+  - lcov --capture --initial --no-external --directory ${TRAVIS_BUILD_DIR}/build --base-directory ${TRAVIS_BUILD_DIR} --output-file initial.info
   - ./unit_tests
-  - lcov --capture --no-external --directory . --base-directory .. --output-file final.info
+  - lcov --capture --no-external --directory ${TRAVIS_BUILD_DIR}/build --base-directory ${TRAVIS_BUILD_DIR} --output-file final.info
   - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
