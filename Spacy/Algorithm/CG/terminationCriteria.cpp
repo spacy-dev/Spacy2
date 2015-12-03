@@ -18,8 +18,7 @@ namespace Spacy
     {
       bool StrakosTichyEnergyError::operator()() const
       {
-        using std::max;
-        auto tol = max( relativeAccuracy() , eps() );
+        auto tol = std::max( relativeAccuracy() , eps() );
         if( verbosityLevel() > 1 ) std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
         return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
       }
@@ -27,7 +26,6 @@ namespace Spacy
 
       void StrakosTichyEnergyError::update(double alpha, double qAq, double, double rPINVr)
       {
-        using std::abs;
         scaledGamma2.push_back( alpha * rPINVr );
         energyNorm2 += alpha * rPINVr;
         stepLength2 = abs(qAq);
@@ -35,9 +33,8 @@ namespace Spacy
 
       bool StrakosTichyEnergyError::vanishingStep() const noexcept
       {
-        using std::min;
         double tol = absoluteAccuracy()*absoluteAccuracy();
-        if( energyNorm2 > tol) tol = min(tol,eps()*eps()*energyNorm2);
+        if( energyNorm2 > tol) tol = std::min(tol,eps()*eps()*energyNorm2);
         return stepLength2 < tol;
       }
 

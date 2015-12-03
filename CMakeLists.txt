@@ -20,9 +20,9 @@ include(ConfigSafeGuards)
   
 # Set compiler flags
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y")# -Weffc++")
+  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -coverage") #-Weffc++ ")
 endif()
-  
+
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
   set(var INSTALL_${p}_DIR)
@@ -34,19 +34,11 @@ endforeach()
 # set up include-directories
 include_directories("${PROJECT_SOURCE_DIR}")
 
-#include_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/include)
-#link_directories(/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost_1_59_0/lib)
-
-if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -Weffc++ -fprofile-arcs -ftest-coverage")
-endif()
 # set up subdirectory containing code
 add_subdirectory(Spacy)
   
 # Does not debug auto, but is less sloppy than gcc
 # set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
-#set(CMAKE_CXX_COMPILER "/home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/gcc/bin/g++")
-#set(CMAKE_CXX_COMPILER "/usr/bin/g++-5")
 
 # enable/disable tests
 option(BuildTest "BuildTest" OFF)
