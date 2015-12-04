@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classSpacy_1_1Mixin_1_1SharedImpl.html" title="Stores an object of type Type as shared pointer and provides access via member function impl()..." alt="" coords="5,5,177,47"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1Mixin_1_1ToTarget.html" title="Spacy::Mixin::ToTarget\l\&lt; C1Functional \&gt;" alt="" coords="5,5,164,47"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1C1Functional.html" title="Type&#45;erased differentiable functional . " alt="" coords="212,13,356,39"/>
 </map>

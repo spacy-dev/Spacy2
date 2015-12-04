@@ -96,83 +96,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">quadraticModel.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Spacy/functional.hh&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/Algorithm/Functions_1D/quadratic.hh&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">class </span>Vector;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">namespace </span>CompositeStep</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    Functions_1D::Quadratic <a class="code" href="group__CSGroup_gad4acace8423370ac1b3d53a03fbde523.html#gad4acace8423370ac1b3d53a03fbde523">makeQuadraticModel</a>(Real nu,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                      <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                                      <span class="keyword">const</span> <a class="code" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a>&amp; L, <span class="keyword">const</span> Vector&amp; x);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    Functions_1D::Quadratic <a class="code" href="group__CSGroup_ga2d9442c6e622766cb33dc14aa497c945.html#ga2d9442c6e622766cb33dc14aa497c945">makeQuadraticNormModel</a>(Real nu, <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">   52</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">CubicModel</a></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel_abbae58ccfdd50120fc10245251048b91.html#abbae58ccfdd50120fc10245251048b91">CubicModel</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a>&amp; quadraticModel, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a>&amp; squaredNorm, <a class="code" href="classSpacy_1_1Real.html">Real</a> omega);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel_a5669f387117cfdc47b5be45a29f387ce.html#a5669f387117cfdc47b5be45a29f387ce">operator()</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> t) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a> quadraticModel_;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a> squaredNorm_;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> omega_;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">CubicModel</a> <a class="code" href="group__CSGroup_ga408c87c25b624012e03bca53e6ec3d10.html#ga408c87c25b624012e03bca53e6ec3d10">makeCubicModel</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; dn, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; dt,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                              <span class="keyword">const</span> <a class="code" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a>&amp; L, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; x, <a class="code" href="classSpacy_1_1Real.html">Real</a> omega);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Model&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="group__CSGroup_gadffb0e7fa07418c47de2474156d90a35.html#gadffb0e7fa07418c47de2474156d90a35">  100</a></span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="group__CSGroup_gadffb0e7fa07418c47de2474156d90a35.html#gadffb0e7fa07418c47de2474156d90a35">findMinimizer</a>(<span class="keyword">const</span> Model&amp; f, <a class="code" href="classSpacy_1_1Real.html">Real</a> a, <a class="code" href="classSpacy_1_1Real.html">Real</a> b, <a class="code" href="classSpacy_1_1Real.html">Real</a> eps = 1e-2)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      assert(a&lt;b);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      eps *= b-a;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> t = a;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> tmin = t;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> fmin = f(t);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keywordflow">while</span>( (t+=eps) &lt;= b)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">if</span>( f(t) &lt; fmin )</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;          fmin = f(t);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;          tmin = t;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <span class="keywordflow">return</span> tmin;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif // SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
-<div class="ttc" id="group__CSGroup_gad4acace8423370ac1b3d53a03fbde523_html_gad4acace8423370ac1b3d53a03fbde523"><div class="ttname"><a href="group__CSGroup_gad4acace8423370ac1b3d53a03fbde523.html#gad4acace8423370ac1b3d53a03fbde523">Spacy::CompositeStep::makeQuadraticModel</a></div><div class="ttdeci">Functions_1D::Quadratic makeQuadraticModel(Real nu, const Vector &amp;dn, const Vector &amp;dt, const C2Functional &amp;L, const Vector &amp;x)</div><div class="ttdoc">Constructs the quadratic model of a Lagrange functional for a composite step method. </div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Spacy/Algorithm/Functions_1D/quadratic.hh&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">class </span>C2Functional;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">class </span><a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">namespace </span>CompositeStep</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    Functions_1D::Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#ad4acace8423370ac1b3d53a03fbde523">makeQuadraticModel</a>(Real nu,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                      <span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; dn, <span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; dt,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                      <span class="keyword">const</span> C2Functional&amp; L, <span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; x);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    Functions_1D::Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#a2d9442c6e622766cb33dc14aa497c945">makeQuadraticNormModel</a>(Real nu, <span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; dn, <span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; dt);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">   51</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">CubicModel</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html#abbae58ccfdd50120fc10245251048b91">CubicModel</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a>&amp; quadraticModel, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a>&amp; squaredNorm, <a class="code" href="classSpacy_1_1Real.html">Real</a> omega);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html#a5669f387117cfdc47b5be45a29f387ce">operator()</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> t) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a> quadraticModel_;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <a class="code" href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Functions_1D::Quadratic</a> squaredNorm_;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> omega_;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">CubicModel</a> <a class="code" href="namespaceSpacy_1_1CompositeStep.html#a408c87c25b624012e03bca53e6ec3d10">makeCubicModel</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; dn, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; dt,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                              <span class="keyword">const</span> <a class="code" href="classSpacy_1_1C2Functional.html">C2Functional</a>&amp; L, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; x, <a class="code" href="classSpacy_1_1Real.html">Real</a> omega);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Model&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="namespaceSpacy_1_1CompositeStep.html#adffb0e7fa07418c47de2474156d90a35">   97</a></span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="namespaceSpacy_1_1CompositeStep.html#adffb0e7fa07418c47de2474156d90a35">findMinimizer</a>(<span class="keyword">const</span> Model&amp; f, <a class="code" href="classSpacy_1_1Real.html">Real</a> a, <a class="code" href="classSpacy_1_1Real.html">Real</a> b, <a class="code" href="classSpacy_1_1Real.html">Real</a> eps = 1e-2)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      assert(a&lt;b);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      eps *= b-a;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> t = a;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> tmin = t;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> fmin = f(t);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="keywordflow">while</span>( (t+=eps) &lt;= b)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">if</span>( f(t) &lt; fmin )</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;          fmin = f(t);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;          tmin = t;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      <span class="keywordflow">return</span> tmin;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#endif // SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH</span></div>
 <div class="ttc" id="classSpacy_1_1Functions__1D_1_1Quadratic_html"><div class="ttname"><a href="classSpacy_1_1Functions__1D_1_1Quadratic.html">Spacy::Functions_1D::Quadratic</a></div><div class="ttdoc">A one-dimensional quadratic function . </div><div class="ttdef"><b>Definition:</b> quadratic.hh:14</div></div>
-<div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdef"><b>Definition:</b> vector.hh:24</div></div>
-<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_html"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel.html">Spacy::CompositeStep::CubicModel</a></div><div class="ttdoc">The cubic regularized model for AffineCovariantCompositeSteps. </div><div class="ttdef"><b>Definition:</b> quadraticModel.hh:52</div></div>
-<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_a5669f387117cfdc47b5be45a29f387ce_html_a5669f387117cfdc47b5be45a29f387ce"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel_a5669f387117cfdc47b5be45a29f387ce.html#a5669f387117cfdc47b5be45a29f387ce">Spacy::CompositeStep::CubicModel::operator()</a></div><div class="ttdeci">Real operator()(Real t) const </div><div class="ttdoc">Evaluate cubic model . </div></div>
-<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:22</div></div>
-<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_abbae58ccfdd50120fc10245251048b91_html_abbae58ccfdd50120fc10245251048b91"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel_abbae58ccfdd50120fc10245251048b91.html#abbae58ccfdd50120fc10245251048b91">Spacy::CompositeStep::CubicModel::CubicModel</a></div><div class="ttdeci">CubicModel(const Functions_1D::Quadratic &amp;quadraticModel, const Functions_1D::Quadratic &amp;squaredNorm, Real omega)</div><div class="ttdoc">Constructor. </div></div>
-<div class="ttc" id="group__CSGroup_ga408c87c25b624012e03bca53e6ec3d10_html_ga408c87c25b624012e03bca53e6ec3d10"><div class="ttname"><a href="group__CSGroup_ga408c87c25b624012e03bca53e6ec3d10.html#ga408c87c25b624012e03bca53e6ec3d10">Spacy::CompositeStep::makeCubicModel</a></div><div class="ttdeci">CubicModel makeCubicModel(Real nu, const Vector &amp;dn, const Vector &amp;dt, const C2Functional &amp;L, const Vector &amp;x, Real omega)</div><div class="ttdoc">Generate cubic regularized model for AffineCovariantCompositeSteps. </div></div>
-<div class="ttc" id="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65_html_gaf5b89e117806134b06a1ce4629fb2b65"><div class="ttname"><a href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">Spacy::C2Functional</a></div><div class="ttdeci">boost::type_erasure::any&lt; Concepts::C2FunctionalConcept &gt; C2Functional</div><div class="ttdoc">Twice differentiable functional. Can store objects that satisfy the requirements of C2FunctionalConce...</div><div class="ttdef"><b>Definition:</b> functional.hh:31</div></div>
-<div class="ttc" id="group__CSGroup_gadffb0e7fa07418c47de2474156d90a35_html_gadffb0e7fa07418c47de2474156d90a35"><div class="ttname"><a href="group__CSGroup_gadffb0e7fa07418c47de2474156d90a35.html#gadffb0e7fa07418c47de2474156d90a35">Spacy::CompositeStep::findMinimizer</a></div><div class="ttdeci">Real findMinimizer(const Model &amp;f, Real a, Real b, Real eps=1e-2)</div><div class="ttdoc">Find global minimizer of  in . </div><div class="ttdef"><b>Definition:</b> quadraticModel.hh:100</div></div>
-<div class="ttc" id="group__CSGroup_ga2d9442c6e622766cb33dc14aa497c945_html_ga2d9442c6e622766cb33dc14aa497c945"><div class="ttname"><a href="group__CSGroup_ga2d9442c6e622766cb33dc14aa497c945.html#ga2d9442c6e622766cb33dc14aa497c945">Spacy::CompositeStep::makeQuadraticNormModel</a></div><div class="ttdeci">Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector &amp;dn, const Vector &amp;dt)</div><div class="ttdoc">Constructs the quadratic model a norm for a composite step method. </div></div>
+<div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdoc">Type-erased vector. </div><div class="ttdef"><b>Definition:</b> vector.hh:23</div></div>
+<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_html_abbae58ccfdd50120fc10245251048b91"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel.html#abbae58ccfdd50120fc10245251048b91">Spacy::CompositeStep::CubicModel::CubicModel</a></div><div class="ttdeci">CubicModel(const Functions_1D::Quadratic &amp;quadraticModel, const Functions_1D::Quadratic &amp;squaredNorm, Real omega)</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_html"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel.html">Spacy::CompositeStep::CubicModel</a></div><div class="ttdoc">The cubic regularized model for AffineCovariantCompositeSteps. </div><div class="ttdef"><b>Definition:</b> quadraticModel.hh:51</div></div>
+<div class="ttc" id="namespaceSpacy_1_1CompositeStep_html_ad4acace8423370ac1b3d53a03fbde523"><div class="ttname"><a href="namespaceSpacy_1_1CompositeStep.html#ad4acace8423370ac1b3d53a03fbde523">Spacy::CompositeStep::makeQuadraticModel</a></div><div class="ttdeci">Functions_1D::Quadratic makeQuadraticModel(Real nu, const Vector &amp;dn, const Vector &amp;dt, const C2Functional &amp;L, const Vector &amp;x)</div><div class="ttdoc">Constructs the quadratic model of a Lagrange functional for a composite step method. </div></div>
+<div class="ttc" id="classSpacy_1_1C2Functional_html"><div class="ttname"><a href="classSpacy_1_1C2Functional.html">Spacy::C2Functional</a></div><div class="ttdoc">Type-erased twice differentiable functional . </div><div class="ttdef"><b>Definition:</b> c2Functional.hh:25</div></div>
+<div class="ttc" id="namespaceSpacy_1_1CompositeStep_html_adffb0e7fa07418c47de2474156d90a35"><div class="ttname"><a href="namespaceSpacy_1_1CompositeStep.html#adffb0e7fa07418c47de2474156d90a35">Spacy::CompositeStep::findMinimizer</a></div><div class="ttdeci">Real findMinimizer(const Model &amp;f, Real a, Real b, Real eps=1e-2)</div><div class="ttdoc">Find global minimizer of  in . </div><div class="ttdef"><b>Definition:</b> quadraticModel.hh:97</div></div>
+<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:21</div></div>
+<div class="ttc" id="namespaceSpacy_1_1CompositeStep_html_a2d9442c6e622766cb33dc14aa497c945"><div class="ttname"><a href="namespaceSpacy_1_1CompositeStep.html#a2d9442c6e622766cb33dc14aa497c945">Spacy::CompositeStep::makeQuadraticNormModel</a></div><div class="ttdeci">Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector &amp;dn, const Vector &amp;dt)</div><div class="ttdoc">Constructs the quadratic model a norm for a composite step method. </div></div>
+<div class="ttc" id="group__VectorSpaceGroup_html_gafda42fd5aa3f7597a42b9831bf4dfd07"><div class="ttname"><a href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Spacy::Rn::Vector</a></div><div class="ttdeci">Generic::Vector&lt; ::Eigen::VectorXd &gt; Vector</div><div class="ttdoc">Vector for Rn, based on the Eigen library. </div><div class="ttdef"><b>Definition:</b> vector.hh:18</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<div class="ttc" id="classSpacy_1_1CompositeStep_1_1CubicModel_html_a5669f387117cfdc47b5be45a29f387ce"><div class="ttname"><a href="classSpacy_1_1CompositeStep_1_1CubicModel.html#a5669f387117cfdc47b5be45a29f387ce">Spacy::CompositeStep::CubicModel::operator()</a></div><div class="ttdeci">Real operator()(Real t) const </div><div class="ttdoc">Evaluate cubic model . </div></div>
+<div class="ttc" id="namespaceSpacy_1_1CompositeStep_html_a408c87c25b624012e03bca53e6ec3d10"><div class="ttname"><a href="namespaceSpacy_1_1CompositeStep.html#a408c87c25b624012e03bca53e6ec3d10">Spacy::CompositeStep::makeCubicModel</a></div><div class="ttdeci">CubicModel makeCubicModel(Real nu, const Vector &amp;dn, const Vector &amp;dt, const C2Functional &amp;L, const Vector &amp;x, Real omega)</div><div class="ttdoc">Generate cubic regularized model for AffineCovariantCompositeSteps. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

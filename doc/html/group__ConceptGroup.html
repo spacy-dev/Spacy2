@@ -84,103 +84,329 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">Concepts</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Concepts for vectors, functional, operators, ...  
+<p>Concepts for vectors, functionals, operators, ...  
 <a href="#details">More...</a></p>
-<div class="dynheader">
-Collaboration diagram for Concepts:</div>
-<div class="dyncontent">
-<center><table><tr><td><img src="group__ConceptGroup.png" border="0" alt="" usemap="#group____ConceptGroup"/>
-<map name="group____ConceptGroup" id="group____ConceptGroup">
-<area shape="rect" id="node2" href="group__NewtonConceptGroup.html" title="Concepts for damping strategy and termination criteria for Newton&#39;s method. " alt="" coords="133,5,289,47"/><area shape="rect" id="node3" href="group__CGConceptGroup.html" title="Concept for termination criteria for conjugate gradient methods. " alt="" coords="132,71,289,112"/></map>
-</td></tr></table></center>
-</div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-Modules</h2></td></tr>
-<tr class="memitem:group__NewtonConceptGroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonConceptGroup.html">Concepts for Newton's method</a></td></tr>
-<tr class="memdesc:group__NewtonConceptGroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concepts for damping strategy and termination criteria for Newton's method. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__CGConceptGroup"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CGConceptGroup.html">Concepts for conjugate gradient methods</a></td></tr>
-<tr class="memdesc:group__CGConceptGroup"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for termination criteria for conjugate gradient methods. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceSpacy"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html">Spacy</a></td></tr>
+<tr class="memdesc:namespaceSpacy"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace of the Spacy library. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga63426675cc05ccce03ead56a4fa90d96"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">Spacy::Concepts::ConceptBase</a> = boost::mpl::vector&lt; boost::type_erasure::copy_constructible&lt;&gt;, boost::type_erasure::typeid_&lt;&gt;, boost::type_erasure::relaxed &gt;</td></tr>
-<tr class="memdesc:ga63426675cc05ccce03ead56a4fa90d96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base concept.  <a href="group__ConceptGroup_ga63426675cc05ccce03ead56a4fa90d96.html#ga63426675cc05ccce03ead56a4fa90d96">More...</a><br /></td></tr>
-<tr class="separator:ga63426675cc05ccce03ead56a4fa90d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga30692db093ead5a1a074905363a2f043"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga30692db093ead5a1a074905363a2f043.html#ga30692db093ead5a1a074905363a2f043">Spacy::Concepts::DynamicCallableOperatorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Vector(double t, const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga30692db093ead5a1a074905363a2f043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining the simplest possible time-dependent operator, only providing <a class="el" href="classSpacy_1_1Vector.html">Vector</a> operator()(double t, const Vector&amp;).  <a href="group__ConceptGroup_ga30692db093ead5a1a074905363a2f043.html#ga30692db093ead5a1a074905363a2f043">More...</a><br /></td></tr>
-<tr class="separator:ga30692db093ead5a1a074905363a2f043"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2c979d268f0ca7a436776a9631d10af7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7.html#ga2c979d268f0ca7a436776a9631d10af7">Spacy::Concepts::DynamicOperatorConcept</a> = boost::mpl::vector&lt; DynamicCallableOperatorConcept, has_M&lt; boost::type_erasure::any&lt; LinearOperatorConcept &gt;(), const boost::type_erasure::_self &gt;, has_domain&lt; const VectorSpace &amp;(), const boost::type_erasure::_self &gt;, has_range&lt; const VectorSpace &amp;(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga2c979d268f0ca7a436776a9631d10af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining general time-dependent operators.  <a href="group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7.html#ga2c979d268f0ca7a436776a9631d10af7">More...</a><br /></td></tr>
-<tr class="separator:ga2c979d268f0ca7a436776a9631d10af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga015b0d099011a2ef73a16aa9b36a7346"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga015b0d099011a2ef73a16aa9b36a7346.html#ga015b0d099011a2ef73a16aa9b36a7346">Spacy::Concepts::DynamicLinearOperatorConcept</a> = boost::mpl::vector&lt; DynamicOperatorConcept, has_solver&lt; const boost::type_erasure::any&lt; LinearSolverConcept &gt; &amp;(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga015b0d099011a2ef73a16aa9b36a7346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining time-dependent linear operators.  <a href="group__ConceptGroup_ga015b0d099011a2ef73a16aa9b36a7346.html#ga015b0d099011a2ef73a16aa9b36a7346">More...</a><br /></td></tr>
-<tr class="separator:ga015b0d099011a2ef73a16aa9b36a7346"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa7ef0ce2d66b0610035541b580564b11"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11">Spacy::Concepts::DynamicC1OperatorConcept</a> = boost::mpl::vector&lt; DynamicOperatorConcept, has_d1&lt; Vector(double t, const Vector &amp;, const Vector &amp;), const boost::type_erasure::_self &gt;, has_linearization&lt; boost::type_erasure::any&lt; LinearOperatorConcept &gt;(double t, const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gaa7ef0ce2d66b0610035541b580564b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining time-dependent operators that are differentiable with respect to the spatial variable.  <a href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11">More...</a><br /></td></tr>
-<tr class="separator:gaa7ef0ce2d66b0610035541b580564b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b5c97b0e58318ef98c43a9b8a7dae08"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08.html#ga6b5c97b0e58318ef98c43a9b8a7dae08">Spacy::Concepts::MyErrorEstimatorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; double(const Vector &amp;, const Vector &amp;), const boost::type_erasure::_self &gt;, has_refine&lt; void()&gt; &gt;</td></tr>
-<tr class="memdesc:ga6b5c97b0e58318ef98c43a9b8a7dae08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for time integrators.  <a href="group__ConceptGroup_ga6b5c97b0e58318ef98c43a9b8a7dae08.html#ga6b5c97b0e58318ef98c43a9b8a7dae08">More...</a><br /></td></tr>
-<tr class="separator:ga6b5c97b0e58318ef98c43a9b8a7dae08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5273b50bd3e8c9a3f5a1e6b5f170836d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d">Spacy::Concepts::FunctionalConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Real(const Vector &amp;), const boost::type_erasure::_self &gt;, has_domain&lt; const VectorSpace &amp;(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga5273b50bd3e8c9a3f5a1e6b5f170836d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for functionals.  <a href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d">More...</a><br /></td></tr>
-<tr class="separator:ga5273b50bd3e8c9a3f5a1e6b5f170836d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga205b55d8291e0f2e143f116cf78bc54f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga205b55d8291e0f2e143f116cf78bc54f.html#ga205b55d8291e0f2e143f116cf78bc54f">Spacy::Concepts::C1FunctionalConcept</a> = boost::mpl::vector&lt; FunctionalConcept, has_d1_dual&lt; Vector(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga205b55d8291e0f2e143f116cf78bc54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for differentiable functionals.  <a href="group__ConceptGroup_ga205b55d8291e0f2e143f116cf78bc54f.html#ga205b55d8291e0f2e143f116cf78bc54f">More...</a><br /></td></tr>
-<tr class="separator:ga205b55d8291e0f2e143f116cf78bc54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafb4414561b07b27100cad81ecf152e47"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gafb4414561b07b27100cad81ecf152e47.html#gafb4414561b07b27100cad81ecf152e47">Spacy::Concepts::C2FunctionalConcept</a> = boost::mpl::vector&lt; C1FunctionalConcept, has_d2_dual&lt; Vector(const Vector &amp;, const Vector &amp;), const boost::type_erasure::_self &gt;, has_hessian&lt; boost::type_erasure::any&lt; LinearOperatorConcept &gt;(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gafb4414561b07b27100cad81ecf152e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for twice differentiable functionals.  <a href="group__ConceptGroup_gafb4414561b07b27100cad81ecf152e47.html#gafb4414561b07b27100cad81ecf152e47">More...</a><br /></td></tr>
-<tr class="separator:gafb4414561b07b27100cad81ecf152e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac7d6a94c7131c8613e2ab26fddeb50bd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Spacy::Concepts::LinearSolverConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Vector(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gac7d6a94c7131c8613e2ab26fddeb50bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for linear solver implementations. Same as <a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#CallableOperatorConceptAnchor">CallableOperatorConcept</a>.  <a href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">More...</a><br /></td></tr>
-<tr class="separator:gac7d6a94c7131c8613e2ab26fddeb50bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga582dd34334cdecc7b27883f4e8239490"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga582dd34334cdecc7b27883f4e8239490.html#ga582dd34334cdecc7b27883f4e8239490">Spacy::Concepts::IndefiniteLinearSolverConcept</a> = boost::mpl::vector&lt; LinearSolverConcept, has_isPositiveDefinite&lt; bool(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga582dd34334cdecc7b27883f4e8239490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for linear solver implementations that monitor positive definiteness.  <a href="group__ConceptGroup_ga582dd34334cdecc7b27883f4e8239490.html#ga582dd34334cdecc7b27883f4e8239490">More...</a><br /></td></tr>
-<tr class="separator:ga582dd34334cdecc7b27883f4e8239490"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8b6032c46f6e31840a2c956c6360549b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b.html#ga8b6032c46f6e31840a2c956c6360549b">Spacy::Concepts::NormConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Real(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga8b6032c46f6e31840a2c956c6360549b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for norm implementations.  <a href="group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b.html#ga8b6032c46f6e31840a2c956c6360549b">More...</a><br /></td></tr>
-<tr class="separator:ga8b6032c46f6e31840a2c956c6360549b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadec0c664abaacc2065dadd8b11cc8d30"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#gadec0c664abaacc2065dadd8b11cc8d30">Spacy::Concepts::CallableOperatorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Vector(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gadec0c664abaacc2065dadd8b11cc8d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining the simplest possible operator, only providing <a class="el" href="classSpacy_1_1Vector.html">Vector</a> operator()(const Vector&amp;).  <a href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#gadec0c664abaacc2065dadd8b11cc8d30">More...</a><br /></td></tr>
-<tr class="separator:gadec0c664abaacc2065dadd8b11cc8d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7d984281b647a6d8e4c0a7ea5faeb90e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e.html#ga7d984281b647a6d8e4c0a7ea5faeb90e">Spacy::Concepts::OperatorConcept</a> = boost::mpl::vector&lt; CallableOperatorConcept, has_domain&lt; const VectorSpace &amp;(), const boost::type_erasure::_self &gt;, has_range&lt; const VectorSpace &amp;(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga7d984281b647a6d8e4c0a7ea5faeb90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining general operators.  <a href="group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e.html#ga7d984281b647a6d8e4c0a7ea5faeb90e">More...</a><br /></td></tr>
-<tr class="separator:ga7d984281b647a6d8e4c0a7ea5faeb90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf0e18e41c434cfceb77ccb8e785a8055"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">Spacy::Concepts::LinearOperatorConcept</a> = boost::mpl::vector&lt; OperatorConcept, VectorConcept, has_solver&lt; boost::type_erasure::any&lt; LinearSolverConcept &gt;(), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gaf0e18e41c434cfceb77ccb8e785a8055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining linear operators.  <a href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">More...</a><br /></td></tr>
-<tr class="separator:gaf0e18e41c434cfceb77ccb8e785a8055"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga14a12c741dc237e32862fa4bc315451b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b.html#ga14a12c741dc237e32862fa4bc315451b">Spacy::Concepts::C1OperatorConcept</a> = boost::mpl::vector&lt; OperatorConcept, has_d1&lt; Vector(const Vector &amp;, const Vector &amp;), const boost::type_erasure::_self &gt;, has_linearization&lt; boost::type_erasure::any&lt; LinearOperatorConcept &gt;(const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga14a12c741dc237e32862fa4bc315451b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept defining differentiable operators.  <a href="group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b.html#ga14a12c741dc237e32862fa4bc315451b">More...</a><br /></td></tr>
-<tr class="separator:ga14a12c741dc237e32862fa4bc315451b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1308724cda3078f228fb05c29556805d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga1308724cda3078f228fb05c29556805d.html#ga1308724cda3078f228fb05c29556805d">Spacy::Concepts::ScalarProductConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Real(const Vector &amp;, const Vector &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga1308724cda3078f228fb05c29556805d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for scalar products.  <a href="group__ConceptGroup_ga1308724cda3078f228fb05c29556805d.html#ga1308724cda3078f228fb05c29556805d">More...</a><br /></td></tr>
-<tr class="separator:ga1308724cda3078f228fb05c29556805d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45ecfe57ffb996aa97c9ff89a647f095"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga45ecfe57ffb996aa97c9ff89a647f095.html#ga45ecfe57ffb996aa97c9ff89a647f095">Spacy::Concepts::TimeIntegratorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; Vector(double, const Vector &amp;), const boost::type_erasure::_self &gt;, has_setTimeStep&lt; void(double)&gt; &gt;</td></tr>
-<tr class="memdesc:ga45ecfe57ffb996aa97c9ff89a647f095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for time integrators.  <a href="group__ConceptGroup_ga45ecfe57ffb996aa97c9ff89a647f095.html#ga45ecfe57ffb996aa97c9ff89a647f095">More...</a><br /></td></tr>
-<tr class="separator:ga45ecfe57ffb996aa97c9ff89a647f095"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad6958389d1fa2758a8a64a0a24c36004"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">Spacy::Concepts::VectorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::assignable&lt;&gt;, boost::type_erasure::multiply_assignable&lt; boost::type_erasure::_self, double &gt;, boost::type_erasure::add_assignable&lt;&gt;, boost::type_erasure::subtract_assignable&lt;&gt;, boost::type_erasure::negatable&lt;&gt;, boost::type_erasure::equality_comparable&lt;&gt;, boost::type_erasure::callable&lt; Vector(const boost::type_erasure::_self &amp;), const boost::type_erasure::_self &gt;, has_space&lt; const VectorSpace *(), const boost::type_erasure::_self &gt;, has_toFile&lt; void(const std::string &amp;), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:gad6958389d1fa2758a8a64a0a24c36004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for vector implementations.  <a href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">More...</a><br /></td></tr>
-<tr class="separator:gad6958389d1fa2758a8a64a0a24c36004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3064301642b7c66b1b08f88a12a04645"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ConceptGroup_ga3064301642b7c66b1b08f88a12a04645.html#ga3064301642b7c66b1b08f88a12a04645">Spacy::Concepts::VectorCreatorConcept</a> = boost::mpl::vector&lt; ConceptBase, boost::type_erasure::callable&lt; boost::type_erasure::any&lt; VectorConcept &gt;(const VectorSpace *), const boost::type_erasure::_self &gt; &gt;</td></tr>
-<tr class="memdesc:ga3064301642b7c66b1b08f88a12a04645"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Vector.html">Vector</a> creator concept.  <a href="group__ConceptGroup_ga3064301642b7c66b1b08f88a12a04645.html#ga3064301642b7c66b1b08f88a12a04645">More...</a><br /></td></tr>
-<tr class="separator:ga3064301642b7c66b1b08f88a12a04645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga61ea9fe1d23e9f45e4e5fe940fe0e0cb">Spacy::C1OperatorConcept</a> = std::integral_constant&lt; bool, OperatorConcept&lt; Impl &gt;::value &amp;&amp;HasMemFn_d1_Operator&lt; Impl, Vector &gt;::value &amp;&amp;HasMemFn_linearization&lt; Impl, Vector &gt;::value &gt;</td></tr>
+<tr class="separator:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga265f0821ce6e0688d6e9abb8d8e0af6a">Spacy::C2FunctionalConcept</a> = std::integral_constant&lt; bool, C1FunctionalConcept&lt; Impl &gt;::value &amp;&amp;HasMemFn_d2_Functional&lt; Impl, Vector &gt;::value &amp;&amp;HasMemFn_hessian&lt; Impl, Vector &gt;::value &gt;</td></tr>
+<tr class="separator:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a296e4942cbfeba1e8538594a6e9c26"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ga5a296e4942cbfeba1e8538594a6e9c26"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga5a296e4942cbfeba1e8538594a6e9c26">Spacy::CG::TerminationCriterionConcept</a> = std::integral_constant&lt; bool, HasMemOp_variadicCallable&lt; bool &gt;::template apply&lt; T &gt;::value &amp;&amp;HasMemFn_clear&lt; T &gt;::value &amp;&amp;HasMemFn_update&lt; T &gt;::value &amp;&amp;HasMemFn_vanishingStep&lt; T &gt;::value &amp;&amp;HasMemFn_minimalDecreaseAchieved&lt; T &gt;::value &amp;&amp;HasMemFn_setEps&lt; T &gt;::value &amp;&amp;HasMemFn_setAbsoluteAccuracy&lt; T &gt;::value &amp;&amp;HasMemFn_setRelativeAccuracy&lt; T &gt;::value &amp;&amp;HasMemFn_setMinimalAccuracy&lt; T &gt;::value &gt;</td></tr>
+<tr class="separator:ga5a296e4942cbfeba1e8538594a6e9c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f">Spacy::FunctionalConcept</a> = std::integral_constant&lt; bool, HasMemOp_callable&lt; Impl, Vector, Real &gt;::value &amp;&amp;HasMemFn_domain&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="memdesc:gae45328d2e01ef6c8e5d948b69fda385f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for functionals in Spacy.  <a href="#gae45328d2e01ef6c8e5d948b69fda385f">More...</a><br /></td></tr>
+<tr class="separator:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga8d3bdfc9abd844ab446a31fcd3f8ef8c">Spacy::LinearOperatorConcept</a> = std::integral_constant&lt; bool, VectorConcept&lt; Impl &gt;::value &amp;&amp;OperatorConcept&lt; Impl &gt;::value &amp;&amp;HasMemFn_solver&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="separator:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">Spacy::OperatorConcept</a> = std::integral_constant&lt; bool, HasMemOp_callable&lt; Impl, Vector, Vector &gt;::value &amp;&amp;HasMemFn_domain&lt; Impl &gt;::value &amp;&amp;HasMemFn_range&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="separator:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8fbeed0f838941e90ebe635a546e1db"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:gac8fbeed0f838941e90ebe635a546e1db"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">Spacy::VectorConcept</a> = std::integral_constant&lt; bool, std::is_copy_constructible&lt; Impl &gt;::value &amp;&amp;std::is_copy_assignable&lt; Impl &gt;::value &amp;&amp;HasMemOp_add&lt; Impl &gt;::value &amp;&amp;HasMemOp_subtract&lt; Impl &gt;::value &amp;&amp;HasMemOp_multiply&lt; Impl &gt;::value &amp;&amp;HasMemOp_negate&lt; Impl &gt;::value &amp;&amp;HasMemFn_space&lt; Impl &gt;::value &amp;&amp;IsVoid&lt; Impl &gt;::template apply&lt; TryMemFn_toFile &gt;::value &gt;</td></tr>
+<tr class="separator:gac8fbeed0f838941e90ebe635a546e1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Concepts for vectors, functional, operators, ... </p>
-<p>The concepts are employed with Boost.TypeErasure, i.e. VectorConcept yields the type boost::type_erasure::any&lt;VectorConcept&gt;. </p>
+<p>Concepts for vectors, functionals, operators, ... </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#ga61ea9fe1d23e9f45e4e5fe940fe0e0cb">Spacy::C1OperatorConcept</a> = typedef std::integral_constant&lt; bool , OperatorConcept&lt;Impl&gt;::value &amp;&amp; HasMemFn_d1_Operator&lt;Impl,Vector&gt;::value &amp;&amp; HasMemFn_linearization&lt;Impl,Vector&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="anchor" id="C1OperatorConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="comment">// A: X-&gt;Y.</span></div>
+<div class="line"><span class="keyword">class </span>MyOperator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute A(x).</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Compute A&#39;(x)dx.</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Get linearization representing A&#39;(x).</span></div>
+<div class="line"> LinearOperator linearization(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access range space Y.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>The member function <code>linearization(x)</code> is allowed to return any type that satisfies the LinearOperatorConcept.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>, <a class="el" href="classSpacy_1_1C1Operator.html" title="Type-erased differentiable operator . ">C1Operator</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga265f0821ce6e0688d6e9abb8d8e0af6a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#ga265f0821ce6e0688d6e9abb8d8e0af6a">Spacy::C2FunctionalConcept</a> = typedef std::integral_constant&lt; bool , C1FunctionalConcept&lt;Impl&gt;::value &amp;&amp; HasMemFn_d2_Functional&lt;Impl,Vector&gt;::value &amp;&amp; HasMemFn_hessian&lt;Impl,Vector&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="anchor" id="C2FunctionalConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="comment">// f: X-&gt;R.</span></div>
+<div class="line"><span class="keyword">class </span>MyFunctional</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute f(x).</span></div>
+<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Compute f&#39;(x) as element of the dual space X*.</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Compute f&#39;&#39;(x)dx as element of the dual space X*.</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#a569d8fc0b4a0e292f257dd6307a25c8f">d2</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access f&#39;&#39;(x) as mapping f&#39;&#39;(x): X-&gt;X*.</span></div>
+<div class="line">  LinearOperator hessian(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access underlying domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>The member function <code>hessian(x)</code> is allowed to return any type that satisfies the LinearOperatorConcept.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f" title="Concept for functionals in Spacy. ">FunctionalConcept</a>, C1FunctionalConcept, <a class="el" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional . ">C2Functional</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5a296e4942cbfeba1e8538594a6e9c26"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#ga5a296e4942cbfeba1e8538594a6e9c26">Spacy::CG::TerminationCriterionConcept</a> = typedef std::integral_constant&lt; bool , HasMemOp_variadicCallable&lt;bool&gt;::template apply&lt;T&gt;::value &amp;&amp; HasMemFn_clear&lt;T&gt;::value &amp;&amp; HasMemFn_update&lt;T&gt;::value &amp;&amp; HasMemFn_vanishingStep&lt;T&gt;::value &amp;&amp; HasMemFn_minimalDecreaseAchieved&lt;T&gt;::value &amp;&amp; HasMemFn_setEps&lt;T&gt;::value &amp;&amp; HasMemFn_setAbsoluteAccuracy&lt;T&gt;::value &amp;&amp; HasMemFn_setRelativeAccuracy&lt;T&gt;::value &amp;&amp; HasMemFn_setMinimalAccuracy&lt;T&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="anchor" id="CG_TerminationCriterionConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="keyword">class </span>MyTerminationCriterion</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Check if termination criterion is satisfied.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> operator()() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Clear internal storage for new cg run.</span></div>
+<div class="line">  <span class="keywordtype">void</span> clear();</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Provide algorithmic quantities required to evaluate termination criteria.</span></div>
+<div class="line">  <span class="keywordtype">void</span> update(<span class="keywordtype">double</span> alpha, <span class="keywordtype">double</span> qAq, <span class="keywordtype">double</span> qPq, <span class="keywordtype">double</span> rPINVr)</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Checks if the step length of the computed step is below the maximal attainable accuracy.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> vanishingStep() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Checks if at least the minimal required decrease is satisfied. This is required for the</span></div>
+<div class="line">  <span class="comment">// truncated regularized conjugate gradient method (TRCG).</span></div>
+<div class="line">  <span class="keywordtype">bool</span> minimalDecreaseAchieved() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Set maximal attainable accuracy</span></div>
+<div class="line">  <span class="keywordtype">void</span> setEps(<span class="keywordtype">double</span>);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Set relative accuracy.</span></div>
+<div class="line">  <span class="keywordtype">void</span> setRelativeAccuracy(<span class="keywordtype">double</span>);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Set absolute accuracy.</span></div>
+<div class="line">  <span class="keywordtype">void</span> setAbsoluteAccuracy(<span class="keywordtype">double</span>);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Set minimal accuracy. Only required for truncated regularized conjugate gradients (TRCG).</span></div>
+<div class="line">  <span class="keywordtype">void</span> setMinimalAccuracy(<span class="keywordtype">double</span>);</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1CG_1_1TerminationCriterion.html">CG::TerminationCriterion</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gae45328d2e01ef6c8e5d948b69fda385f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f">Spacy::FunctionalConcept</a> = typedef std::integral_constant&lt; bool , HasMemOp_callable&lt;Impl,Vector,Real&gt;::value &amp;&amp; HasMemFn_domain&lt;Impl&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concept for functionals in Spacy. </p>
+<p><a class="anchor" id="FunctionalConceptGroup"></a></p><div class="fragment"><div class="line"><span class="comment">// f: X-&gt;R.</span></div>
+<div class="line"><span class="keyword">class </span>MyFunctional</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute f(x).</span></div>
+<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access underlying domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1Functional.html" title="Type-erased functional . ">Functional</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga8d3bdfc9abd844ab446a31fcd3f8ef8c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#ga8d3bdfc9abd844ab446a31fcd3f8ef8c">Spacy::LinearOperatorConcept</a> = typedef std::integral_constant&lt; bool , VectorConcept&lt;Impl&gt;::value &amp;&amp; OperatorConcept&lt;Impl&gt;::value &amp;&amp; HasMemFn_solver&lt;Impl&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="anchor" id="LinearOperatorConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="comment">// A: X-&gt;Y.</span></div>
+<div class="line"><span class="keyword">class </span>MyOperator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Copy constructor.</span></div>
+<div class="line">  MyOperator(<span class="keyword">const</span> MyOperator&amp;);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Copy assignable x=y.</span></div>
+<div class="line">  MyOperator&amp; operator=(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Compute A(x).</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place summation x+=y.</span></div>
+<div class="line">  MyOperator&amp; operator+=(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place subtraction x-=y.</span></div>
+<div class="line">  MyOperator&amp; operator-=(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place multiplication x*=a.</span></div>
+<div class="line">  MyOperator&amp; operator*=(<span class="keywordtype">double</span> a);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Negation -y.</span></div>
+<div class="line">  MyOperator <a class="code" href="namespaceSpacy.html#a8bc98f51c7beab86185bf97a29b36395">operator-</a>(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Equality comparison x==y.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a class="code" href="namespaceSpacy.html#aef4930427aac4c8089b4c43b1c97cf25">operator==</a>(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Apply as dual element x(y).</span></div>
+<div class="line">  Real operator()(<span class="keyword">const</span> MyOperator&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access pointer to underlying function space.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; space() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access linear solver representing A(x)^-1</span></div>
+<div class="line"> <a class="code" href="namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2">LinearSolver</a> solver() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access range space Y.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>The member function <code>solver()</code> is allowed to return anything that fits into a <code>std::function&lt;Vector(const Vector&amp;)&gt;</code>.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>, <a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">VectorConcept</a>, <a class="el" href="classSpacy_1_1LinearOperator.html" title="Type-erased linear operator . ">LinearOperator</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga0cd6ba53feff75abbb6822b45fd6265e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">Spacy::OperatorConcept</a> = typedef std::integral_constant&lt; bool , HasMemOp_callable&lt;Impl,Vector,Vector&gt;::value &amp;&amp; HasMemFn_domain&lt;Impl&gt;::value &amp;&amp; HasMemFn_range&lt;Impl&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="anchor" id="OperatorConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="comment">// A: X-&gt;Y.</span></div>
+<div class="line"><span class="keyword">class </span>MyOperator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute A(x).</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access range space Y.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1Operator.html" title="Type-erased operator . ">Operator</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gac8fbeed0f838941e90ebe635a546e1db"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">Spacy::VectorConcept</a> = typedef std::integral_constant&lt; bool , std::is_copy_constructible&lt;Impl&gt;::value &amp;&amp; std::is_copy_assignable&lt;Impl&gt;::value &amp;&amp; HasMemOp_add&lt;Impl&gt;::value &amp;&amp; HasMemOp_subtract&lt;Impl&gt;::value &amp;&amp; HasMemOp_multiply&lt;Impl&gt;::value &amp;&amp; HasMemOp_negate&lt;Impl&gt;::value &amp;&amp; HasMemFn_space&lt;Impl&gt;::value &amp;&amp; IsVoid&lt; Impl &gt;::template apply&lt;TryMemFn_toFile&gt;::value &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="keyword">class </span>MyVector</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Copy constructor.</span></div>
+<div class="line">  MyVector(<span class="keyword">const</span> MyVector&amp;);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Copy assignable x=y.</span></div>
+<div class="line">  MyVector&amp; operator=(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place summation x+=y.</span></div>
+<div class="line">  MyVector&amp; operator+=(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place subtraction x-=y.</span></div>
+<div class="line">  MyVector&amp; operator-=(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// In-place multiplication x*=a.</span></div>
+<div class="line">  MyVector&amp; operator*=(<span class="keywordtype">double</span> a);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Negation -y.</span></div>
+<div class="line">  MyVector <a class="code" href="namespaceSpacy.html#a8bc98f51c7beab86185bf97a29b36395">operator-</a>(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Equality comparison x==y.</span></div>
+<div class="line">  <span class="keywordtype">bool</span> <a class="code" href="namespaceSpacy.html#aef4930427aac4c8089b4c43b1c97cf25">operator==</a>(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Apply as dual element x(y).</span></div>
+<div class="line">  Real operator()(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access pointer to underlying function space.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; space() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Spacy::Vector</a> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

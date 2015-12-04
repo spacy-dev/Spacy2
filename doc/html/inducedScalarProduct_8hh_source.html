@@ -96,54 +96,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">inducedScalarProduct.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Spacy/operator.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keyword">class </span>Real;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">class </span>Vector;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/linearOperator.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">class </span>Real;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">class </span><a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classSpacy_1_1InducedScalarProduct.html">   17</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classSpacy_1_1InducedScalarProduct.html">InducedScalarProduct</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1InducedScalarProduct_a19126347daec01565853232a7e3d2b72.html#a19126347daec01565853232a7e3d2b72">InducedScalarProduct</a>(<a class="code" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> M);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1InducedScalarProduct.html#a8cf4d6c0823b6c9d59be783d3627130e">InducedScalarProduct</a>(<a class="code" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> M);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1InducedScalarProduct_ab16021f05080b32714276f9b125df8af.html#ab16021f05080b32714276f9b125df8af">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1InducedScalarProduct.html#ab16021f05080b32714276f9b125df8af">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; y) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> M_;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> M_;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  };</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classSpacy_1_1PrimalInducedScalarProduct.html">   48</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classSpacy_1_1PrimalInducedScalarProduct.html">PrimalInducedScalarProduct</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1PrimalInducedScalarProduct_a165fcad280603bf2931dac7df467953a.html#a165fcad280603bf2931dac7df467953a">PrimalInducedScalarProduct</a>(<a class="code" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> M);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c.html#aee0ed0c7fe70e8630cbf77702d73c97c">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Vector</a>&amp; y) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> M_;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  };</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif // SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
-<div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdef"><b>Definition:</b> vector.hh:24</div></div>
-<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c_html_aee0ed0c7fe70e8630cbf77702d73c97c"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c.html#aee0ed0c7fe70e8630cbf77702d73c97c">Spacy::PrimalInducedScalarProduct::operator()</a></div><div class="ttdeci">Real operator()(const Vector &amp;x, const Vector &amp;y) const </div><div class="ttdoc">Compute scalar product. </div></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classSpacy_1_1PrimalInducedScalarProduct.html">   47</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classSpacy_1_1PrimalInducedScalarProduct.html">PrimalInducedScalarProduct</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1PrimalInducedScalarProduct.html#acfea3362a4d59ae0c689bd525870d830">PrimalInducedScalarProduct</a>(<a class="code" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> M);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1PrimalInducedScalarProduct.html#a74ba39d9a97f3c782088493450c03a6b">operator()</a>(<a class="code" href="classSpacy_1_1Vector.html">Vector</a> x, <a class="code" href="classSpacy_1_1Vector.html">Vector</a> y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> M_;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  };</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif // SPACY_INDUCED_SCALAR_PRODUCT_HH</span></div>
+<div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdoc">Type-erased vector. </div><div class="ttdef"><b>Definition:</b> vector.hh:23</div></div>
 <div class="ttc" id="classSpacy_1_1InducedScalarProduct_html"><div class="ttname"><a href="classSpacy_1_1InducedScalarProduct.html">Spacy::InducedScalarProduct</a></div><div class="ttdoc">Induced scalar product , where . </div><div class="ttdef"><b>Definition:</b> inducedScalarProduct.hh:17</div></div>
-<div class="ttc" id="classSpacy_1_1InducedScalarProduct_ab16021f05080b32714276f9b125df8af_html_ab16021f05080b32714276f9b125df8af"><div class="ttname"><a href="classSpacy_1_1InducedScalarProduct_ab16021f05080b32714276f9b125df8af.html#ab16021f05080b32714276f9b125df8af">Spacy::InducedScalarProduct::operator()</a></div><div class="ttdeci">Real operator()(const Vector &amp;x, const Vector &amp;y) const </div><div class="ttdoc">Compute scalar product. </div></div>
-<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:22</div></div>
-<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_html"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct.html">Spacy::PrimalInducedScalarProduct</a></div><div class="ttdoc">Induced scalar product for the primal variables (i.e. for constrained optimization problems)...</div><div class="ttdef"><b>Definition:</b> inducedScalarProduct.hh:48</div></div>
-<div class="ttc" id="classSpacy_1_1InducedScalarProduct_a19126347daec01565853232a7e3d2b72_html_a19126347daec01565853232a7e3d2b72"><div class="ttname"><a href="classSpacy_1_1InducedScalarProduct_a19126347daec01565853232a7e3d2b72.html#a19126347daec01565853232a7e3d2b72">Spacy::InducedScalarProduct::InducedScalarProduct</a></div><div class="ttdeci">InducedScalarProduct(CallableOperator M)</div><div class="ttdoc">Constructor. </div></div>
-<div class="ttc" id="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f_html_ga2b74020d806ad800795cdd97dab3466f"><div class="ttname"><a href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">Spacy::CallableOperator</a></div><div class="ttdeci">boost::type_erasure::any&lt; Concepts::CallableOperatorConcept &gt; CallableOperator</div><div class="ttdoc">Simplest possible operator class. Can store objects that satisfy the requirements of CallableOperator...</div><div class="ttdef"><b>Definition:</b> operator.hh:20</div></div>
-<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_a165fcad280603bf2931dac7df467953a_html_a165fcad280603bf2931dac7df467953a"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct_a165fcad280603bf2931dac7df467953a.html#a165fcad280603bf2931dac7df467953a">Spacy::PrimalInducedScalarProduct::PrimalInducedScalarProduct</a></div><div class="ttdeci">PrimalInducedScalarProduct(CallableOperator M)</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:21</div></div>
+<div class="ttc" id="classSpacy_1_1LinearOperator_html"><div class="ttname"><a href="classSpacy_1_1LinearOperator.html">Spacy::LinearOperator</a></div><div class="ttdoc">Type-erased linear operator . </div><div class="ttdef"><b>Definition:</b> linearOperator.hh:21</div></div>
+<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_html"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct.html">Spacy::PrimalInducedScalarProduct</a></div><div class="ttdoc">Induced scalar product for the primal variables (i.e. for constrained optimization problems)...</div><div class="ttdef"><b>Definition:</b> inducedScalarProduct.hh:47</div></div>
+<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_html_a74ba39d9a97f3c782088493450c03a6b"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct.html#a74ba39d9a97f3c782088493450c03a6b">Spacy::PrimalInducedScalarProduct::operator()</a></div><div class="ttdeci">Real operator()(Vector x, Vector y) const </div><div class="ttdoc">Compute scalar product. </div></div>
+<div class="ttc" id="classSpacy_1_1InducedScalarProduct_html_ab16021f05080b32714276f9b125df8af"><div class="ttname"><a href="classSpacy_1_1InducedScalarProduct.html#ab16021f05080b32714276f9b125df8af">Spacy::InducedScalarProduct::operator()</a></div><div class="ttdeci">Real operator()(const Vector &amp;x, const Vector &amp;y) const </div><div class="ttdoc">Compute scalar product. </div></div>
+<div class="ttc" id="group__VectorSpaceGroup_html_gafda42fd5aa3f7597a42b9831bf4dfd07"><div class="ttname"><a href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Spacy::Rn::Vector</a></div><div class="ttdeci">Generic::Vector&lt; ::Eigen::VectorXd &gt; Vector</div><div class="ttdoc">Vector for Rn, based on the Eigen library. </div><div class="ttdef"><b>Definition:</b> vector.hh:18</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<div class="ttc" id="classSpacy_1_1PrimalInducedScalarProduct_html_acfea3362a4d59ae0c689bd525870d830"><div class="ttname"><a href="classSpacy_1_1PrimalInducedScalarProduct.html#acfea3362a4d59ae0c689bd525870d830">Spacy::PrimalInducedScalarProduct::PrimalInducedScalarProduct</a></div><div class="ttdeci">PrimalInducedScalarProduct(LinearOperator M)</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1InducedScalarProduct_html_a8cf4d6c0823b6c9d59be783d3627130e"><div class="ttname"><a href="classSpacy_1_1InducedScalarProduct.html#a8cf4d6c0823b6c9d59be783d3627130e">Spacy::InducedScalarProduct::InducedScalarProduct</a></div><div class="ttdeci">InducedScalarProduct(LinearOperator M)</div><div class="ttdoc">Constructor. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

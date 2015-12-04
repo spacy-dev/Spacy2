@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['fieldmatrix',['FieldMatrix',['../classDune_1_1FieldMatrix.html',1,'Dune']]],
-  ['fieldvector',['FieldVector',['../classDune_1_1FieldVector.html',1,'Dune']]],
-  ['fieldvector_3c_20scalar_2c_20dim_20_3e',['FieldVector&lt; Scalar, dim &gt;',['../classDune_1_1FieldVector.html',1,'Dune']]],
-  ['findminimizer',['findMinimizer',['../group__CSGroup_gadffb0e7fa07418c47de2474156d90a35.html#gadffb0e7fa07418c47de2474156d90a35',1,'Spacy::CompositeStep']]],
-  ['functional',['Functional',['../group__SpacyGroup_ga673218f603c93790864aef12c89d3a35.html#ga673218f603c93790864aef12c89d3a35',1,'Spacy']]],
-  ['functionalconcept',['FunctionalConcept',['../group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d',1,'Spacy::Concepts']]]
+  ['fenics',['FEniCS',['../group__FenicsGroup.html',1,'']]],
+  ['findminimizer',['findMinimizer',['../namespaceSpacy_1_1CompositeStep.html#adffb0e7fa07418c47de2474156d90a35',1,'Spacy::CompositeStep']]],
+  ['functional',['Functional',['../classSpacy_1_1Functional.html',1,'Spacy']]],
+  ['functional',['Functional',['../classSpacy_1_1Functional.html#ac3be0a8589d27e5fec37102ab820fca8',1,'Spacy::Functional']]],
+  ['functionalbase',['FunctionalBase',['../classSpacy_1_1FunctionalBase.html#aa655b0f2b96f02a3137dad89e3f0d2ac',1,'Spacy::FunctionalBase']]],
+  ['functionalbase',['FunctionalBase',['../classSpacy_1_1FunctionalBase.html',1,'Spacy']]],
+  ['functionalconcept',['FunctionalConcept',['../group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f',1,'Spacy']]]
 ];

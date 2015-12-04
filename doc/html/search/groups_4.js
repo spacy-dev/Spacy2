@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newton_20methods',['Newton Methods',['../group__NewtonGroup.html',1,'']]]
+  ['generic',['Generic',['../group__GenericGroup.html',1,'']]]
 ];

@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSpacy_1_1FEniCS_1_1LUSolver-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy::FEniCS::LUSolver Class Reference<div class="ingroups"><a class="el" href="group__VectorSpaceGroup.html">Vector Spaces</a> &raquo; <a class="el" href="group__FenicsGroup.html">Vector Space for FEniCS</a></div></div>  </div>
+<div class="title">Spacy::FEniCS::LUSolver Class Reference<div class="ingroups"><a class="el" href="group__AdapterGroup.html">Adapters</a> &raquo; <a class="el" href="group__FenicsGroup.html">FEniCS</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -124,29 +124,121 @@ Collaboration diagram for Spacy::FEniCS::LUSolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1df1ff0eb8243ce5f6f4a6b62aa1a553"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1LUSolver_a1df1ff0eb8243ce5f6f4a6b62aa1a553.html#a1df1ff0eb8243ce5f6f4a6b62aa1a553">LUSolver</a> (std::shared_ptr&lt; dolfin::GenericMatrix &gt; A, std::shared_ptr&lt; const dolfin::FunctionSpace &gt; space, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>, bool symmetric=false, const std::string &amp;solverName=&quot;mumps&quot;)</td></tr>
-<tr class="memdesc:a1df1ff0eb8243ce5f6f4a6b62aa1a553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classSpacy_1_1FEniCS_1_1LUSolver_a1df1ff0eb8243ce5f6f4a6b62aa1a553.html#a1df1ff0eb8243ce5f6f4a6b62aa1a553">More...</a><br /></td></tr>
+<tr class="memitem:a1df1ff0eb8243ce5f6f4a6b62aa1a553"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1LUSolver.html#a1df1ff0eb8243ce5f6f4a6b62aa1a553">LUSolver</a> (std::shared_ptr&lt; dolfin::GenericMatrix &gt; A, std::shared_ptr&lt; const dolfin::FunctionSpace &gt; space, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>, bool symmetric=false, const std::string &amp;solverName=&quot;mumps&quot;)</td></tr>
+<tr class="memdesc:a1df1ff0eb8243ce5f6f4a6b62aa1a553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a1df1ff0eb8243ce5f6f4a6b62aa1a553">More...</a><br /></td></tr>
 <tr class="separator:a1df1ff0eb8243ce5f6f4a6b62aa1a553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33c044181a3c6985734e8a79bcde1363"><td class="memItemLeft" align="right" valign="top">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1LUSolver_a33c044181a3c6985734e8a79bcde1363.html#a33c044181a3c6985734e8a79bcde1363">operator()</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x) const </td></tr>
-<tr class="memdesc:a33c044181a3c6985734e8a79bcde1363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply LU-solver.  <a href="classSpacy_1_1FEniCS_1_1LUSolver_a33c044181a3c6985734e8a79bcde1363.html#a33c044181a3c6985734e8a79bcde1363">More...</a><br /></td></tr>
+<tr class="memitem:a33c044181a3c6985734e8a79bcde1363"><td class="memItemLeft" align="right" valign="top">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1LUSolver.html#a33c044181a3c6985734e8a79bcde1363">operator()</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x) const </td></tr>
+<tr class="memdesc:a33c044181a3c6985734e8a79bcde1363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply LU-solver.  <a href="#a33c044181a3c6985734e8a79bcde1363">More...</a><br /></td></tr>
 <tr class="separator:a33c044181a3c6985734e8a79bcde1363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2588f9b3e0188820c4c494e63293dc6f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a> () const </td></tr>
-<tr class="memdesc:a2588f9b3e0188820c4c494e63293dc6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\).  <a href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">More...</a><br /></td></tr>
+<tr class="memitem:a2588f9b3e0188820c4c494e63293dc6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2588f9b3e0188820c4c494e63293dc6f"></a>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a> () const </td></tr>
+<tr class="memdesc:a2588f9b3e0188820c4c494e63293dc6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br /></td></tr>
 <tr class="separator:a2588f9b3e0188820c4c494e63293dc6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a> () const </td></tr>
-<tr class="memdesc:ab19d3b7a6f290b1079248f1e567e53d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\).  <a href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">More...</a><br /></td></tr>
+<tr class="memitem:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab19d3b7a6f290b1079248f1e567e53d6"></a>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a> () const </td></tr>
+<tr class="memdesc:ab19d3b7a6f290b1079248f1e567e53d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br /></td></tr>
 <tr class="separator:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>LU solver for FEniCS. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#a7d5cd1c6fb9dd85aa345b536caf30bba" title="Linear solver class. Same as CallableOperator. ">LinearSolver</a> </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2" title="Type-erased linear solver. ">LinearSolver</a> </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1df1ff0eb8243ce5f6f4a6b62aa1a553"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Spacy::FEniCS::LUSolver::LUSolver </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; dolfin::GenericMatrix &gt;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; const dolfin::FunctionSpace &gt;&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>symmetric</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>solverName</em> = <code>&quot;mumps&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>matrix to be inverted </td></tr>
+    <tr><td class="paramname">space</td><td>dolfin::FunctionSpace, required to initialize temporary storage </td></tr>
+    <tr><td class="paramname">domain</td><td>domain space of the solver </td></tr>
+    <tr><td class="paramname">range</td><td>range space of the solver </td></tr>
+    <tr><td class="paramname">symmetric</td><td>true if A is symmetric, else false </td></tr>
+    <tr><td class="paramname">solverName</td><td>name of the solver, i.e. "default", "mumps", "petsc" or "umfpack". </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a33c044181a3c6985734e8a79bcde1363"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> Spacy::FEniCS::LUSolver::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply LU-solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>right hand side for \(A^{-1}\) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\(A^{-1}x\). </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>Spacy/Adapter/FEniCS/<a class="el" href="luSolver_8hh_source.html">luSolver.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:07 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

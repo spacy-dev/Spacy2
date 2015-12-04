@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSpacy_1_1Kaskade_1_1DirectSolver-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy::Kaskade::DirectSolver&lt; KaskadeOperator, AnsatzVariableDescription, TestVariableDescription &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__VectorSpaceGroup.html">Vector Spaces</a> &raquo; <a class="el" href="group__KaskadeGroup.html">Vector Space for Kaskade 7</a></div></div>  </div>
+<div class="title">Spacy::Kaskade::DirectSolver&lt; KaskadeOperator, AnsatzVariableDescription, TestVariableDescription &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__AdapterGroup.html">Adapters</a> &raquo; <a class="el" href="group__KaskadeGroup.html">Kaskade7</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -124,18 +124,20 @@ Collaboration diagram for Spacy::Kaskade::DirectSolver&lt; KaskadeOperator, Ansa
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a52ed83fd0cd00bc57d4f09963dfe2e98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1DirectSolver_a52ed83fd0cd00bc57d4f09963dfe2e98.html#a52ed83fd0cd00bc57d4f09963dfe2e98">DirectSolver</a> (KaskadeOperator A, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>, DirectType directSolver=DirectType::MUMPS, MatrixProperties property=MatrixProperties::GENERAL)</td></tr>
-<tr class="memdesc:a52ed83fd0cd00bc57d4f09963dfe2e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classSpacy_1_1Kaskade_1_1DirectSolver_a52ed83fd0cd00bc57d4f09963dfe2e98.html#a52ed83fd0cd00bc57d4f09963dfe2e98">More...</a><br /></td></tr>
-<tr class="separator:a52ed83fd0cd00bc57d4f09963dfe2e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5611dfb01fb96730c7af6a7cc54b513"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1DirectSolver.html#ab5611dfb01fb96730c7af6a7cc54b513">DirectSolver</a> (KaskadeOperator A, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>, DirectType directSolver=DirectType::UMFPACK, MatrixProperties property=MatrixProperties::GENERAL)</td></tr>
+<tr class="memdesc:ab5611dfb01fb96730c7af6a7cc54b513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ab5611dfb01fb96730c7af6a7cc54b513">More...</a><br /></td></tr>
+<tr class="separator:ab5611dfb01fb96730c7af6a7cc54b513"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3b85c906968d662c23bdde7df96ca87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3b85c906968d662c23bdde7df96ca87"></a>
 ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1DirectSolver.html#ae3b85c906968d662c23bdde7df96ca87">operator()</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x) const </td></tr>
 <tr class="memdesc:ae3b85c906968d662c23bdde7df96ca87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(A^{-1}x\). <br /></td></tr>
 <tr class="separator:ae3b85c906968d662c23bdde7df96ca87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2588f9b3e0188820c4c494e63293dc6f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a> () const </td></tr>
-<tr class="memdesc:a2588f9b3e0188820c4c494e63293dc6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\).  <a href="classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f.html#a2588f9b3e0188820c4c494e63293dc6f">More...</a><br /></td></tr>
+<tr class="memitem:a2588f9b3e0188820c4c494e63293dc6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2588f9b3e0188820c4c494e63293dc6f"></a>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a> () const </td></tr>
+<tr class="memdesc:a2588f9b3e0188820c4c494e63293dc6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br /></td></tr>
 <tr class="separator:a2588f9b3e0188820c4c494e63293dc6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a> () const </td></tr>
-<tr class="memdesc:ab19d3b7a6f290b1079248f1e567e53d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\).  <a href="classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6.html#ab19d3b7a6f290b1079248f1e567e53d6">More...</a><br /></td></tr>
+<tr class="memitem:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab19d3b7a6f290b1079248f1e567e53d6"></a>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a> () const </td></tr>
+<tr class="memdesc:ab19d3b7a6f290b1079248f1e567e53d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br /></td></tr>
 <tr class="separator:ab19d3b7a6f290b1079248f1e567e53d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -143,14 +145,81 @@ Public Member Functions</h2></td></tr>
 class Spacy::Kaskade::DirectSolver&lt; KaskadeOperator, AnsatzVariableDescription, TestVariableDescription &gt;</h3>
 
 <p>Direct solver interface for Kaskade 7. </p>
-<p>Performs lazy construction of the solver. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ab5611dfb01fb96730c7af6a7cc54b513"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class KaskadeOperator, class AnsatzVariableDescription, class TestVariableDescription&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1Kaskade_1_1DirectSolver.html">Spacy::Kaskade::DirectSolver</a>&lt; KaskadeOperator, AnsatzVariableDescription, TestVariableDescription &gt;::<a class="el" href="classSpacy_1_1Kaskade_1_1DirectSolver.html">DirectSolver</a> </td>
+          <td>(</td>
+          <td class="paramtype">KaskadeOperator&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DirectType&#160;</td>
+          <td class="paramname"><em>directSolver</em> = <code>DirectType::UMFPACK</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MatrixProperties&#160;</td>
+          <td class="paramname"><em>property</em> = <code>MatrixProperties::GENERAL</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Kaskade operator (i.e., AssembledGalerkinOperator or MatrixRepresentedOperator) </td></tr>
+    <tr><td class="paramname">spaces</td><td>boost fusion forward sequence of space pointers required to initialize temporary storage </td></tr>
+    <tr><td class="paramname">domain</td><td>domain space of the solver </td></tr>
+    <tr><td class="paramname">range</td><td>range space of the solver </td></tr>
+    <tr><td class="paramname">directSolver</td><td>solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU) </td></tr>
+    <tr><td class="paramname">property</td><td>matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>Spacy/Adapter/Kaskade/<a class="el" href="directSolver_8hh_source.html">directSolver.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:07 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['genericexception',['GenericException',['../classSpacy_1_1GenericException.html',1,'Spacy']]]
+  ['hilbertspacenorm',['HilbertSpaceNorm',['../classSpacy_1_1HilbertSpaceNorm.html',1,'Spacy']]]
 ];

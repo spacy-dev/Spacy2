@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mixins',['Mixins',['../group__MixinGroup.html',1,'']]]
+  ['fenics',['FEniCS',['../group__FenicsGroup.html',1,'']]]
 ];

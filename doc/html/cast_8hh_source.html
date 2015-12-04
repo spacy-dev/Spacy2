@@ -96,46 +96,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">cast.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACYS_UTIL_CAST_TO_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACYS_UTIL_CAST_TO_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;boost/type_erasure/any_cast.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Exceptions/invalidArgumentException.hh&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">class </span>Vector;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  template &lt; class ToType , class FromType , class = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt; &gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728.html#ga16b67d1bc0157426af3ee1e91afcf728">   17</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728.html#ga16b67d1bc0157426af3ee1e91afcf728">is</a>(<span class="keyword">const</span> FromType&amp; x)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> boost::type_erasure::any_cast&lt; <span class="keyword">const</span> std::decay_t&lt;ToType&gt;* &gt;(&amp;x) != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  template &lt; class ToType , class FromType , class = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt; &gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">   28</a></span>&#160;  ToType&amp; <a class="code" href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">cast_ref</a>(FromType&amp; x)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span>( !is&lt;ToType&gt;(x) ) <span class="keywordflow">throw</span> <a class="code" href="classSpacy_1_1InvalidArgumentException.html">InvalidArgumentException</a>(<span class="stringliteral">&quot;cast_ref&quot;</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> boost::type_erasure::any_cast&lt;ToType&amp;&gt;(x);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  template &lt; class ToType , class FromType , class = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt; &gt;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group__SpacyGroup_gaf03cb3abce3186570889439abac37917.html#gaf03cb3abce3186570889439abac37917">   40</a></span>&#160;  <span class="keyword">const</span> ToType&amp; <a class="code" href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">cast_ref</a>(<span class="keyword">const</span> FromType&amp; x)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>( !is&lt;ToType&gt;(x) ) <span class="keywordflow">throw</span> <a class="code" href="classSpacy_1_1InvalidArgumentException.html">InvalidArgumentException</a>(<span class="stringliteral">&quot;cast_ref&quot;</span>);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> boost::type_erasure::any_cast&lt;<span class="keyword">const</span> ToType&amp;&gt;(x);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif // SPACYS_UTIL_CAST_TO_HH</span></div>
-<div class="ttc" id="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728_html_ga16b67d1bc0157426af3ee1e91afcf728"><div class="ttname"><a href="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728.html#ga16b67d1bc0157426af3ee1e91afcf728">Spacy::is</a></div><div class="ttdeci">bool is(const FromType &amp;x)</div><div class="ttdoc">Check if x can be cast to a reference of type ToType. </div><div class="ttdef"><b>Definition:</b> cast.hh:17</div></div>
-<div class="ttc" id="classSpacy_1_1InvalidArgumentException_html"><div class="ttname"><a href="classSpacy_1_1InvalidArgumentException.html">Spacy::InvalidArgumentException</a></div><div class="ttdoc">Exception to be thrown on invalid arguments. </div><div class="ttdef"><b>Definition:</b> invalidArgumentException.hh:13</div></div>
-<div class="ttc" id="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906_html_gaf74aa266d04acaba7263ee8d36b5b906"><div class="ttname"><a href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">Spacy::cast_ref</a></div><div class="ttdeci">ToType &amp; cast_ref(FromType &amp;x)</div><div class="ttdoc">cast x of type &#39;FromType&&#39; to &#39;ToType&&#39; with boost::type_erasure::any_cast </div><div class="ttdef"><b>Definition:</b> cast.hh:28</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACYS_UTIL_CAST_TO_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACYS_UTIL_CAST_TO_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">template</span> &lt; <span class="keyword">class</span> ToType , <span class="keyword">class</span> FromType&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceSpacy.html#ae44bfd08fa77272bab4149665b26233a">   11</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="namespaceSpacy.html#ae44bfd08fa77272bab4149665b26233a">is</a>(<span class="keyword">const</span> FromType&amp; x)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">return</span> x.template target&lt;ToType&gt;() != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  }</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">template</span> &lt; <span class="keyword">class</span> ToType , <span class="keyword">class</span> FromType&gt;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305">   18</a></span>&#160;  ToType&amp; <a class="code" href="namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305">cast_ref</a>(FromType&amp; x)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> *x.template target&lt;ToType&gt;();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">template</span> &lt; <span class="keyword">class</span> ToType , <span class="keyword">class</span> FromType&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespaceSpacy.html#a00fc9d674cd8813c4e20a05adf3aaaa4">   25</a></span>&#160;  <span class="keyword">const</span> ToType&amp; <a class="code" href="namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305">cast_ref</a>(<span class="keyword">const</span> FromType&amp; x)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> *x.template target&lt;ToType&gt;();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif // SPACYS_UTIL_CAST_TO_HH</span></div>
+<div class="ttc" id="namespaceSpacy_html_abb0550fc1d402f00e42c165ae8eb3305"><div class="ttname"><a href="namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305">Spacy::cast_ref</a></div><div class="ttdeci">ToType &amp; cast_ref(FromType &amp;x)</div><div class="ttdoc">cast x of type &#39;FromType&&#39; to &#39;ToType&&#39; </div><div class="ttdef"><b>Definition:</b> cast.hh:18</div></div>
+<div class="ttc" id="namespaceSpacy_html_ae44bfd08fa77272bab4149665b26233a"><div class="ttname"><a href="namespaceSpacy.html#ae44bfd08fa77272bab4149665b26233a">Spacy::is</a></div><div class="ttdeci">bool is(const FromType &amp;x)</div><div class="ttdoc">Check if x can be cast to a reference of type ToType. </div><div class="ttdef"><b>Definition:</b> cast.hh:11</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

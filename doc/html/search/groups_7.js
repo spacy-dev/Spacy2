@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['spacy',['Spacy',['../group__SpacyGroup.html',1,'']]]
+  ['product_20space',['Product Space',['../group__ProductSpaceGroup.html',1,'']]]
 ];

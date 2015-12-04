@@ -96,50 +96,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">maxSteps.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classSpacy_1_1Mixin_1_1MaxSteps.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1Mixin_1_1MixinConnection.html">MixinConnection</a>&lt;MaxSteps&gt;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_a8e5d8290884bdc760147862d5b9644dc.html#a8e5d8290884bdc760147862d5b9644dc">MaxSteps</a>(<span class="keywordtype">unsigned</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977.html#aaeb0b209c78e7b8dd9b268641ce11977">maxSteps</a> = 100) noexcept;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a>(<span class="keywordtype">unsigned</span> maxSteps = 100) noexcept;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keywordtype">void</span> setMaxSteps(<span class="keywordtype">unsigned</span> maxSteps);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keywordtype">unsigned</span> maxSteps() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9.html#a72f0b7eb50c9a017b5f5e6c2ccf7dfd9">setMaxSteps</a>(<span class="keywordtype">unsigned</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977.html#aaeb0b209c78e7b8dd9b268641ce11977">maxSteps</a>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977.html#aaeb0b209c78e7b8dd9b268641ce11977">maxSteps</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps_a8b093369a1ce5a6323f3dc3c41a738e6.html#a8b093369a1ce5a6323f3dc3c41a738e6">attachMaxSteps</a>(<a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a>&amp; other);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html#ac16eca4cd967aed1856f072b08f4aabd">detachMaxSteps</a>(<a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a>&amp; other);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html#a8e0f4d29b15dff17d4503788a9e2e081">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a>* changedSubject);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordtype">unsigned</span> maxSteps_;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_a8e5d8290884bdc760147862d5b9644dc_html_a8e5d8290884bdc760147862d5b9644dc"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps_a8e5d8290884bdc760147862d5b9644dc.html#a8e5d8290884bdc760147862d5b9644dc">Spacy::Mixin::MaxSteps::MaxSteps</a></div><div class="ttdeci">MaxSteps(unsigned maxSteps=100) noexcept</div><div class="ttdoc">Constructor. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_a8b093369a1ce5a6323f3dc3c41a738e6_html_a8b093369a1ce5a6323f3dc3c41a738e6"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps_a8b093369a1ce5a6323f3dc3c41a738e6.html#a8b093369a1ce5a6323f3dc3c41a738e6">Spacy::Mixin::MaxSteps::attachMaxSteps</a></div><div class="ttdeci">void attachMaxSteps(MaxSteps &amp;other)</div><div class="ttdoc">Attach MaxSteps. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9_html_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9.html#a72f0b7eb50c9a017b5f5e6c2ccf7dfd9">Spacy::Mixin::MaxSteps::setMaxSteps</a></div><div class="ttdeci">void setMaxSteps(unsigned maxSteps)</div><div class="ttdoc">Set maximal number of steps/iterations for iterative solvers. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977_html_aaeb0b209c78e7b8dd9b268641ce11977"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977.html#aaeb0b209c78e7b8dd9b268641ce11977">Spacy::Mixin::MaxSteps::maxSteps</a></div><div class="ttdeci">unsigned maxSteps() const noexcept</div><div class="ttdoc">Get maximal number of steps/iterations for iterative solvers. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_html_ac16eca4cd967aed1856f072b08f4aabd"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps.html#ac16eca4cd967aed1856f072b08f4aabd">Spacy::Mixin::MaxSteps::detachMaxSteps</a></div><div class="ttdeci">void detachMaxSteps(MaxSteps &amp;other)</div><div class="ttdoc">Detach Eps before it gets deleted. </div></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html#a8e0f4d29b15dff17d4503788a9e2e081">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1MaxSteps.html">MaxSteps</a>* changedSubject);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">unsigned</span> maxSteps_;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_MAXSTEPS_HH</span></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps.html">Spacy::Mixin::MaxSteps</a></div><div class="ttdoc">Mixin class for maximal number of steps/iterations. </div><div class="ttdef"><b>Definition:</b> maxSteps.hh:14</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:14</div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:12</div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1MaxSteps_html_a8e0f4d29b15dff17d4503788a9e2e081"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MaxSteps.html#a8e0f4d29b15dff17d4503788a9e2e081">Spacy::Mixin::MaxSteps::update</a></div><div class="ttdeci">void update(MaxSteps *changedSubject)</div><div class="ttdoc">update function for observer pattern. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

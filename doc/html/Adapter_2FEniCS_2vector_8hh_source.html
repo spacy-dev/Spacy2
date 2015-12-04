@@ -96,68 +96,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">vector.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;dolfin.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Spacy/vector.hh&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Base/vectorBase.hh&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Mixins/impl.hh&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keyword">class </span>Real;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">class </span>VectorSpace;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">namespace </span>FEniCS</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  {</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classSpacy_1_1FEniCS_1_1Vector.html">   24</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a> :</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">public</span> <a class="code" href="classSpacy_1_1VectorBase.html">VectorBase</a> ,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">public</span> <a class="code" href="classSpacy_1_1SupportedOperatorBase.html">SupportedOperatorBase</a>&lt;Vector&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector_ad73e826490b7b7be5588e9c0c9318cb5.html#ad73e826490b7b7be5588e9c0c9318cb5">Vector</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044.html#a95e87ce98f5a7646055d4e87e6024044">space</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a>&amp; <a class="code" href="classSpacy_1_1FEniCS_1_1Vector_ad4d68b813d9374aa83f37ec2b3ad02fc.html#ad4d68b813d9374aa83f37ec2b3ad02fc">operator=</a>(<span class="keyword">const</span> dolfin::Function&amp; v);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//      Vector&amp; axpy(double a, const AbstractVector&amp; y);</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;dolfin.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Base/addArithmeticOperators.hh&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Base/vectorBase.hh&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">class </span>Real;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">class </span>VectorSpace;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">namespace </span>FEniCS</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  {</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classSpacy_1_1FEniCS_1_1Vector.html">   26</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a> :</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">public</span> <a class="code" href="classSpacy_1_1VectorBase.html">VectorBase</a> ,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">public</span> <a class="code" href="classSpacy_1_1AddArithmeticOperators.html">AddArithmeticOperators</a>&lt;Vector&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html#ad73e826490b7b7be5588e9c0c9318cb5">Vector</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1VectorBase.html#aa999dbf9d679d895dfe04c10fbf9f5e9">space</a>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a>&amp; <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html#ad4d68b813d9374aa83f37ec2b3ad02fc">operator=</a>(<span class="keyword">const</span> dolfin::Function&amp; v);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector_ae5357c7dc9622b782e9aa10a98c610a8.html#ae5357c7dc9622b782e9aa10a98c610a8">size</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      dolfin::GenericVector&amp; <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html#a3e0841a23289f7a843d8a3cf2720a03f">impl</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keyword">const</span> dolfin::GenericVector&amp; <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html#a3e0841a23289f7a843d8a3cf2720a03f">impl</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector_a99a75031c47961b9ef1161197c4d3f8e.html#a99a75031c47961b9ef1161197c4d3f8e">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a>&amp; y) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector_ad16ebdcfce3c1e561873506c351bc905.html#ad16ebdcfce3c1e561873506c351bc905">toFile</a>(<span class="keyword">const</span> std::string&amp; filename) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      dolfin::Function v_;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif // SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
-<div class="ttc" id="classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044_html_a95e87ce98f5a7646055d4e87e6024044"><div class="ttname"><a href="classSpacy_1_1VectorBase_a95e87ce98f5a7646055d4e87e6024044.html#a95e87ce98f5a7646055d4e87e6024044">Spacy::VectorBase::space</a></div><div class="ttdeci">const VectorSpace * space() const </div><div class="ttdoc">Access underlying vector space. </div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_ae5357c7dc9622b782e9aa10a98c610a8_html_ae5357c7dc9622b782e9aa10a98c610a8"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector_ae5357c7dc9622b782e9aa10a98c610a8.html#ae5357c7dc9622b782e9aa10a98c610a8">Spacy::FEniCS::Vector::size</a></div><div class="ttdeci">unsigned size() const </div><div class="ttdoc">Degrees of freedom. </div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_a99a75031c47961b9ef1161197c4d3f8e_html_a99a75031c47961b9ef1161197c4d3f8e"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector_a99a75031c47961b9ef1161197c4d3f8e.html#a99a75031c47961b9ef1161197c4d3f8e">Spacy::FEniCS::Vector::operator()</a></div><div class="ttdeci">Real operator()(const Vector &amp;y) const </div><div class="ttdoc">Apply as dual element. </div></div>
-<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:22</div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_ad4d68b813d9374aa83f37ec2b3ad02fc_html_ad4d68b813d9374aa83f37ec2b3ad02fc"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector_ad4d68b813d9374aa83f37ec2b3ad02fc.html#ad4d68b813d9374aa83f37ec2b3ad02fc">Spacy::FEniCS::Vector::operator=</a></div><div class="ttdeci">Vector &amp; operator=(const dolfin::Function &amp;v)</div><div class="ttdoc">Assign from dolfin::Function. </div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html_a3e0841a23289f7a843d8a3cf2720a03f"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html#a3e0841a23289f7a843d8a3cf2720a03f">Spacy::FEniCS::Vector::impl</a></div><div class="ttdeci">dolfin::GenericVector &amp; impl()</div><div class="ttdoc">Access reference to underlying vector. </div></div>
-<div class="ttc" id="classSpacy_1_1VectorSpace_html"><div class="ttname"><a href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a></div><div class="ttdoc">Function space . </div><div class="ttdef"><b>Definition:</b> vectorSpace.hh:40</div></div>
-<div class="ttc" id="classSpacy_1_1VectorBase_html"><div class="ttname"><a href="classSpacy_1_1VectorBase.html">Spacy::VectorBase</a></div><div class="ttdoc">Base class for vector implementations. </div><div class="ttdef"><b>Definition:</b> vectorBase.hh:22</div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html">Spacy::FEniCS::Vector</a></div><div class="ttdoc">Vector implementation for FEniCS (single space). </div><div class="ttdef"><b>Definition:</b> vector.hh:24</div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_ad16ebdcfce3c1e561873506c351bc905_html_ad16ebdcfce3c1e561873506c351bc905"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector_ad16ebdcfce3c1e561873506c351bc905.html#ad16ebdcfce3c1e561873506c351bc905">Spacy::FEniCS::Vector::toFile</a></div><div class="ttdeci">void toFile(const std::string &amp;filename) const </div><div class="ttdoc">Write vector to file. </div></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//      Vector&amp; axpy(double a, const AbstractVector&amp; y);</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      dolfin::GenericVector&amp; <span class="keyword">get</span>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keyword">const</span> dolfin::GenericVector&amp; <span class="keyword">get</span>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html#a99a75031c47961b9ef1161197c4d3f8e">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html">Vector</a>&amp; y) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      dolfin::Function v_;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // SPACY_ADAPTER_FENICS_VECTOR_HH</span></div>
+<div class="ttc" id="classSpacy_1_1VectorBase_html_aa999dbf9d679d895dfe04c10fbf9f5e9"><div class="ttname"><a href="classSpacy_1_1VectorBase.html#aa999dbf9d679d895dfe04c10fbf9f5e9">Spacy::VectorBase::space</a></div><div class="ttdeci">const VectorSpace &amp; space() const </div><div class="ttdoc">Access underlying vector space. </div></div>
+<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:21</div></div>
+<div class="ttc" id="classSpacy_1_1VectorSpace_html"><div class="ttname"><a href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a></div><div class="ttdoc">Function space . </div><div class="ttdef"><b>Definition:</b> vectorSpace.hh:56</div></div>
+<div class="ttc" id="classSpacy_1_1VectorBase_html"><div class="ttname"><a href="classSpacy_1_1VectorBase.html">Spacy::VectorBase</a></div><div class="ttdoc">Base class for vector implementations. </div><div class="ttdef"><b>Definition:</b> vectorBase.hh:21</div></div>
+<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html">Spacy::FEniCS::Vector</a></div><div class="ttdoc">Vector implementation for FEniCS (single space). </div><div class="ttdef"><b>Definition:</b> vector.hh:26</div></div>
+<div class="ttc" id="classSpacy_1_1AddArithmeticOperators_html"><div class="ttname"><a href="classSpacy_1_1AddArithmeticOperators.html">Spacy::AddArithmeticOperators</a></div><div class="ttdoc">Base class providing some operations for vectors via CRTP. </div><div class="ttdef"><b>Definition:</b> addArithmeticOperators.hh:21</div></div>
+<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html_a99a75031c47961b9ef1161197c4d3f8e"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html#a99a75031c47961b9ef1161197c4d3f8e">Spacy::FEniCS::Vector::operator()</a></div><div class="ttdeci">Real operator()(const Vector &amp;y) const </div><div class="ttdoc">Apply as dual element. </div></div>
+<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html_ad73e826490b7b7be5588e9c0c9318cb5"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html#ad73e826490b7b7be5588e9c0c9318cb5">Spacy::FEniCS::Vector::Vector</a></div><div class="ttdeci">Vector(const VectorSpace &amp;space)</div><div class="ttdoc">Construct vector  from underlying vector space. </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
-<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_ad73e826490b7b7be5588e9c0c9318cb5_html_ad73e826490b7b7be5588e9c0c9318cb5"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector_ad73e826490b7b7be5588e9c0c9318cb5.html#ad73e826490b7b7be5588e9c0c9318cb5">Spacy::FEniCS::Vector::Vector</a></div><div class="ttdeci">Vector(const VectorSpace &amp;space)</div><div class="ttdoc">Construct vector  from underlying vector space. </div></div>
-<div class="ttc" id="classSpacy_1_1SupportedOperatorBase_html"><div class="ttname"><a href="classSpacy_1_1SupportedOperatorBase.html">Spacy::SupportedOperatorBase</a></div><div class="ttdoc">Base class providing some operations for vectors via CRTP. </div><div class="ttdef"><b>Definition:</b> vectorBase.hh:83</div></div>
+<div class="ttc" id="classSpacy_1_1FEniCS_1_1Vector_html_ad4d68b813d9374aa83f37ec2b3ad02fc"><div class="ttname"><a href="classSpacy_1_1FEniCS_1_1Vector.html#ad4d68b813d9374aa83f37ec2b3ad02fc">Spacy::FEniCS::Vector::operator=</a></div><div class="ttdeci">Vector &amp; operator=(const dolfin::Function &amp;v)</div><div class="ttdoc">Assign from dolfin::Function. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

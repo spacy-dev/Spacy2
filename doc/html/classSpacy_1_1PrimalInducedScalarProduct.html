@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSpacy_1_1PrimalInducedScalarProduct-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy::PrimalInducedScalarProduct Class Reference<div class="ingroups"><a class="el" href="group__SpacyGroup.html">Spacy</a></div></div>  </div>
+<div class="title">Spacy::PrimalInducedScalarProduct Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -110,12 +110,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a165fcad280603bf2931dac7df467953a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1PrimalInducedScalarProduct_a165fcad280603bf2931dac7df467953a.html#a165fcad280603bf2931dac7df467953a">PrimalInducedScalarProduct</a> (<a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> M)</td></tr>
-<tr class="memdesc:a165fcad280603bf2931dac7df467953a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classSpacy_1_1PrimalInducedScalarProduct_a165fcad280603bf2931dac7df467953a.html#a165fcad280603bf2931dac7df467953a">More...</a><br /></td></tr>
-<tr class="separator:a165fcad280603bf2931dac7df467953a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee0ed0c7fe70e8630cbf77702d73c97c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c.html#aee0ed0c7fe70e8630cbf77702d73c97c">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y) const </td></tr>
-<tr class="memdesc:aee0ed0c7fe70e8630cbf77702d73c97c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute scalar product.  <a href="classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c.html#aee0ed0c7fe70e8630cbf77702d73c97c">More...</a><br /></td></tr>
-<tr class="separator:aee0ed0c7fe70e8630cbf77702d73c97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfea3362a4d59ae0c689bd525870d830"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1PrimalInducedScalarProduct.html#acfea3362a4d59ae0c689bd525870d830">PrimalInducedScalarProduct</a> (<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> M)</td></tr>
+<tr class="memdesc:acfea3362a4d59ae0c689bd525870d830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#acfea3362a4d59ae0c689bd525870d830">More...</a><br /></td></tr>
+<tr class="separator:acfea3362a4d59ae0c689bd525870d830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ba39d9a97f3c782088493450c03a6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1PrimalInducedScalarProduct.html#a74ba39d9a97f3c782088493450c03a6b">operator()</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> y) const </td></tr>
+<tr class="memdesc:a74ba39d9a97f3c782088493450c03a6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute scalar product.  <a href="#a74ba39d9a97f3c782088493450c03a6b">More...</a><br /></td></tr>
+<tr class="separator:a74ba39d9a97f3c782088493450c03a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Induced scalar product for the primal variables (i.e. for constrained optimization problems). </p>
@@ -123,13 +123,83 @@ Public Member Functions</h2></td></tr>
 \[ (z_1,z_2)_M = (Ax_1)(x_2) + (p_1,p_2)_Q \]
 </p>
 <p> for \(z_i = (x_i,p_i)\in X\times Q,\ i=1,2\). </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acfea3362a4d59ae0c689bd525870d830"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Spacy::PrimalInducedScalarProduct::PrimalInducedScalarProduct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a>&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>operator defining the scalar product. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a74ba39d9a97f3c782088493450c03a6b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1Real.html">Real</a> Spacy::PrimalInducedScalarProduct::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute scalar product. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>vector </td></tr>
+    <tr><td class="paramname">y</td><td>vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\((x,y)_M\). </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>Spacy/<a class="el" href="inducedScalarProduct_8hh_source.html">inducedScalarProduct.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

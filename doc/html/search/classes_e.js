@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['quadratic',['Quadratic',['../classSpacy_1_1Functions__1D_1_1Quadratic.html',1,'Spacy::Functions_1D']]],
-  ['quadraturerule',['QuadratureRule',['../classDune_1_1QuadratureRule.html',1,'Dune']]]
+  ['real',['Real',['../classSpacy_1_1Real.html',1,'Spacy']]],
+  ['regularitytest',['RegularityTest',['../classSpacy_1_1Mixin_1_1RegularityTest.html',1,'Spacy::Mixin']]],
+  ['regularitytestfailedexception',['RegularityTestFailedException',['../classSpacy_1_1RegularityTestFailedException.html',1,'Spacy']]],
+  ['relativeaccuracy',['RelativeAccuracy',['../classSpacy_1_1Mixin_1_1RelativeAccuracy.html',1,'Spacy::Mixin']]]
 ];

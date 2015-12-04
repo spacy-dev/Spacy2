@@ -96,28 +96,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">derivative.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_DERIVATIVE_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_DERIVATIVE_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Spacy/functional.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Spacy/hessian.hh&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Spacy/operator.hh&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/vector.hh&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> <a class="code" href="group__SpacyGroup_ga002fe344fa6d04a6ac59a74ea25fddb6.html#ga002fe344fa6d04a6ac59a74ea25fddb6">derivative</a>(<a class="code" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a> f);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif // SPACY_DERIVATIVE_HH</span></div>
-<div class="ttc" id="group__SpacyGroup_ga002fe344fa6d04a6ac59a74ea25fddb6_html_ga002fe344fa6d04a6ac59a74ea25fddb6"><div class="ttname"><a href="group__SpacyGroup_ga002fe344fa6d04a6ac59a74ea25fddb6.html#ga002fe344fa6d04a6ac59a74ea25fddb6">Spacy::derivative</a></div><div class="ttdeci">C1Operator derivative(C2Functional f)</div><div class="ttdoc">Compute the derivative of a functional  as (nonlinear) operator . </div></div>
-<div class="ttc" id="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620_html_ga87ae8cb0d7a567a4bb181e0a9f182620"><div class="ttname"><a href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">Spacy::C1Operator</a></div><div class="ttdeci">boost::type_erasure::any&lt; Concepts::C1OperatorConcept &gt; C1Operator</div><div class="ttdoc">Differentiable operator class. Can store objects that satisfy the requirements of C1OperatorConcept...</div><div class="ttdef"><b>Definition:</b> operator.hh:41</div></div>
-<div class="ttc" id="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65_html_gaf5b89e117806134b06a1ce4629fb2b65"><div class="ttname"><a href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">Spacy::C2Functional</a></div><div class="ttdeci">boost::type_erasure::any&lt; Concepts::C2FunctionalConcept &gt; C2Functional</div><div class="ttdoc">Twice differentiable functional. Can store objects that satisfy the requirements of C2FunctionalConce...</div><div class="ttdef"><b>Definition:</b> functional.hh:31</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_DERIVATIVE_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_DERIVATIVE_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">class </span>C1Operator;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">class </span>C2Functional;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  C1Operator <a class="code" href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">derivative</a>(C2Functional f);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif // SPACY_DERIVATIVE_HH</span></div>
+<div class="ttc" id="namespaceSpacy_html_a002fe344fa6d04a6ac59a74ea25fddb6"><div class="ttname"><a href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">Spacy::derivative</a></div><div class="ttdeci">C1Operator derivative(C2Functional f)</div><div class="ttdoc">Compute the derivative of a functional  as (nonlinear) operator . </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

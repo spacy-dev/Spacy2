@@ -96,47 +96,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">dampingFactor.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_DAMPING_FACTOR_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_DAMPING_FACTOR_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Mixins/eps.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_DAMPING_FACTOR_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_DAMPING_FACTOR_HH</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/Util/Mixins/eps.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classSpacy_1_1DampingFactor.html">   13</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classSpacy_1_1DampingFactor.html">DampingFactor</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Mixin::Eps</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor_a03128fa4d2d17bd2024eaaff5a6cf03a.html#a03128fa4d2d17bd2024eaaff5a6cf03a">DampingFactor</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu, <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-3);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor.html#a03128fa4d2d17bd2024eaaff5a6cf03a">DampingFactor</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu, <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-3);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor_a03128fa4d2d17bd2024eaaff5a6cf03a.html#a03128fa4d2d17bd2024eaaff5a6cf03a">DampingFactor</a>(<span class="keywordtype">double</span> nu, <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-3);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor.html#a03128fa4d2d17bd2024eaaff5a6cf03a">DampingFactor</a>(<span class="keywordtype">double</span> nu, <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-3);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&amp; <a class="code" href="classSpacy_1_1DampingFactor_a214beda25cc00fbe6c953308ba1ca9b3.html#a214beda25cc00fbe6c953308ba1ca9b3">operator=</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&amp; <a class="code" href="classSpacy_1_1DampingFactor.html#a214beda25cc00fbe6c953308ba1ca9b3">operator=</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">operator</span> <a class="code" href="classSpacy_1_1Real.html">Real</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1DampingFactor_aa14911dc85380f66fdb3541935cf893c.html#aa14911dc85380f66fdb3541935cf893c">operator()</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&amp; <a class="code" href="classSpacy_1_1DampingFactor.html#a214beda25cc00fbe6c953308ba1ca9b3">operator=</a>(<span class="keywordtype">double</span> nu);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">operator</span> <a class="code" href="classSpacy_1_1Real.html">Real</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> set(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1DampingFactor.html#aa14911dc85380f66fdb3541935cf893c">operator()</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> nu_ = 1;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  };</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif // SPACY_DAMPING_FACTOR_HH</span></div>
-<div class="ttc" id="classSpacy_1_1DampingFactor_a03128fa4d2d17bd2024eaaff5a6cf03a_html_a03128fa4d2d17bd2024eaaff5a6cf03a"><div class="ttname"><a href="classSpacy_1_1DampingFactor_a03128fa4d2d17bd2024eaaff5a6cf03a.html#a03128fa4d2d17bd2024eaaff5a6cf03a">Spacy::DampingFactor::DampingFactor</a></div><div class="ttdeci">DampingFactor(Real nu, double eps=1e-3)</div><div class="ttdoc">Constructor. </div></div>
-<div class="ttc" id="classSpacy_1_1DampingFactor_aa14911dc85380f66fdb3541935cf893c_html_aa14911dc85380f66fdb3541935cf893c"><div class="ttname"><a href="classSpacy_1_1DampingFactor_aa14911dc85380f66fdb3541935cf893c.html#aa14911dc85380f66fdb3541935cf893c">Spacy::DampingFactor::operator()</a></div><div class="ttdeci">Real operator()() const </div><div class="ttdoc">Access damping factor. </div></div>
-<div class="ttc" id="classSpacy_1_1DampingFactor_a214beda25cc00fbe6c953308ba1ca9b3_html_a214beda25cc00fbe6c953308ba1ca9b3"><div class="ttname"><a href="classSpacy_1_1DampingFactor_a214beda25cc00fbe6c953308ba1ca9b3.html#a214beda25cc00fbe6c953308ba1ca9b3">Spacy::DampingFactor::operator=</a></div><div class="ttdeci">DampingFactor &amp; operator=(Real nu)</div><div class="ttdoc">Set damping factor . </div></div>
-<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:22</div></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> set(<a class="code" href="classSpacy_1_1Real.html">Real</a> nu);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classSpacy_1_1Real.html">Real</a> nu_ = 1;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  };</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // SPACY_DAMPING_FACTOR_HH</span></div>
+<div class="ttc" id="classSpacy_1_1DampingFactor_html_a214beda25cc00fbe6c953308ba1ca9b3"><div class="ttname"><a href="classSpacy_1_1DampingFactor.html#a214beda25cc00fbe6c953308ba1ca9b3">Spacy::DampingFactor::operator=</a></div><div class="ttdeci">DampingFactor &amp; operator=(Real nu)</div><div class="ttdoc">Set damping factor . </div></div>
+<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:21</div></div>
 <div class="ttc" id="classSpacy_1_1DampingFactor_html"><div class="ttname"><a href="classSpacy_1_1DampingFactor.html">Spacy::DampingFactor</a></div><div class="ttdoc">A simple model of a damping factor  that is computed up to a prescribed accuracy . </div><div class="ttdef"><b>Definition:</b> dampingFactor.hh:13</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_html_a40e2ba8f3abd2b5370ef41238cfaaf8b"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">Spacy::Mixin::Eps::eps</a></div><div class="ttdeci">double eps() const noexcept</div><div class="ttdoc">Access maximal attainable accuracy. </div></div>
+<div class="ttc" id="classSpacy_1_1DampingFactor_html_a03128fa4d2d17bd2024eaaff5a6cf03a"><div class="ttname"><a href="classSpacy_1_1DampingFactor.html#a03128fa4d2d17bd2024eaaff5a6cf03a">Spacy::DampingFactor::DampingFactor</a></div><div class="ttdeci">DampingFactor(Real nu, double eps=1e-3)</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a40e2ba8f3abd2b5370ef41238cfaaf8b"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">Spacy::Mixin::Eps::eps</a></div><div class="ttdeci">double eps() const noexcept</div><div class="ttdoc">Access . </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html">Spacy::Mixin::Eps</a></div><div class="ttdoc">Mixin class for maximal attainable accuracy . </div><div class="ttdef"><b>Definition:</b> eps.hh:14</div></div>
+<div class="ttc" id="classSpacy_1_1DampingFactor_html_aa14911dc85380f66fdb3541935cf893c"><div class="ttname"><a href="classSpacy_1_1DampingFactor.html#aa14911dc85380f66fdb3541935cf893c">Spacy::DampingFactor::operator()</a></div><div class="ttdeci">Real operator()() const </div><div class="ttdoc">Access damping factor . </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

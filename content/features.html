@@ -1,0 +1,53 @@
+<h1 class="heading1">Algorithms</h1>
+
+<h3 class="heading3">Conjugate Gradients</h3>
+<p>There are four different conjugate gradient implementations, all with exchangeable termination criterion. The default criterion is based on the relative energy error.</p>
+<p>Available implementations:</p>
+<ul>
+    <li>Conjugate Gradients (CG)</li>
+    <li>Truncated Conjugate Gradients (TCG)</li>
+    <li>Regularized Conjugate Gradients (RCG)</li>
+    <li>Truncated Regularized Conjugate Gradients (TRCG)</li>
+</ul>
+<p><br></p>
+
+
+<h3 class="heading3">Newton Methods</h3>
+<p>There is a generic Newton method that allows to customize termination criterion and damping strategy.
+    <br>
+</p>
+<p>Available implementations:</p>
+<ul>
+    <li>a local Newton method</li>
+    <li>an affine covariant Newton method</li>
+    <li>an affine contravariant Newton method</li>
+</ul>
+<p><br></p>
+
+<h3 class="heading3">Composite Step Methods</h3>
+<p class="normal">There is a composite step method for nonconvex optimization (the normal solver can be customized).</p>
+<p class="normal">Available Implementations:</p>
+<ul>
+    <li>an affine covariant composite method</li>
+</ul>
+<div class="separator"></div>
+
+
+<h1 class="heading1">Vector Spaces<br></h1>
+<p class="normal">Available Implementations:</p>
+<ul>
+    <li>a real space </li>
+    <li>product spaces that can be nested to group variables</li>
+    <li>finite dimensional vector spaces based on <a href="http://eigen.tuxfamily.org">Eigen</a>
+    <li>function spaces based on <a href="http://fenicsproject.org">FEniCS</a> and/or <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a></li>
+</ul>
+<div class="separator"></div>
+
+
+<h1 class="heading1">Adapters</h1>
+<p>Currently there are adapters for</p>
+<ul>
+    <li><a href="http://eigen.tuxfamily.org">Eigen</a> (for finite dimensional problems)</li>
+    <li><a href="http://fenicsproject.org">FEniCS</a></li>
+    <li><a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a></li>
+</ul>

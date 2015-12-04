@@ -2,7 +2,7 @@
 \label{namespaceSpacy_1_1Mixin}\index{Spacy\+::\+Mixin@{Spacy\+::\+Mixin}}
 
 
-Contains components that are frequently used and can be added to your classes via (multiple) inheritance.  
+Contains small independent components that are frequently used and can be added to classes via (multiple) inheritance.  
 
 
 \subsection*{Classes}
@@ -16,18 +16,14 @@ class \hyperlink{classSpacy_1_1Mixin_1_1ContractionRate}{Contraction\+Rate}
 \begin{DoxyCompactList}\small\item\em Mixin class for contraction rates. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex}{Control\+Index}
 \begin{DoxyCompactList}\small\item\em Mixin class for index of the control variable. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1CopyingUniqueImpl}{Copying\+Unique\+Impl}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type as unique pointer and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_ab7cc202fd000ba1753ef8596c09dc803}{impl()}. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1DampingAccuracy}{Damping\+Accuracy}
 \begin{DoxyCompactList}\small\item\em Mixin class for the accuracy of damping factors. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition}{Decrease\+Condition}
 \begin{DoxyCompactList}\small\item\em Mixin class for accepting local models $m$ of nonlinear optimization problems $\min f(x)$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}
 \begin{DoxyCompactList}\small\item\em Mixin class for maximal attainable accuracy $\varepsilon$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1Impl}{Impl}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1Impl_a5e61399bae41338a87e701b24b13f52a}{impl()}. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1Impl_3_01const_01Type_01_6_01_4}{Impl$<$ const Type \& $>$}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type by const reference and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1Impl_3_01const_01Type_01_6_01_4_a5999a2a31217f4d4e5a0354f0bd14f66}{impl()}. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}
+\begin{DoxyCompactList}\small\item\em Stores an object of type Type and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1Get_aaa3afedcb9b9e943f81d1686b70417db}{get()}. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1IterativeRefinements}{Iterative\+Refinements}
 \begin{DoxyCompactList}\small\item\em Mixin class for iterative refinements. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1MaxSteps}{Max\+Steps}
@@ -35,38 +31,31 @@ class \hyperlink{classSpacy_1_1Mixin_1_1MaxSteps}{Max\+Steps}
 class \hyperlink{classSpacy_1_1Mixin_1_1MinimalAccuracy}{Minimal\+Accuracy}
 \begin{DoxyCompactList}\small\item\em Mixin class for minimal accuracy. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection}{Mixin\+Connection}
-\begin{DoxyCompactList}\small\item\em Connect objects of type \hyperlink{classSpacy_1_1Mixin_1_1Impl}{Impl} that provides a suitable method void update(\+Impl$\ast$) to another object of same type. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1NonOwningPImpl}{Non\+Owning\+P\+Impl}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type as (non-\/owning) raw pointer and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1NonOwningPImpl_aeeb3e0a5f6fd8f22633040dcf94355f9}{impl()}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Connect objects of type Impl that provides a suitable method void update(\+Impl$\ast$) to another object of same type. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1NumberOfThreads}{Number\+Of\+Threads}
 \begin{DoxyCompactList}\small\item\em Mixin class for number of threads \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1PrimalDualSwitch}{Primal\+Dual\+Switch}
-\begin{DoxyCompactList}\small\item\em Mixin class for separating primal and dual variables. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Regularity\+Test}
 \begin{DoxyCompactList}\small\item\em Mixin class for maximal number of steps/iterations. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1RelativeAccuracy}{Relative\+Accuracy}
 \begin{DoxyCompactList}\small\item\em Mixin class for relative accuracy. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1SharedImpl}{Shared\+Impl}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type as shared pointer and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1SharedImpl_a4bed4faca68901d0dd463c4234fb2fe6}{impl()}. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1StateIndex}{State\+Index}
 \begin{DoxyCompactList}\small\item\em Mixin class for index of state variable. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Timer}{Timer}
 \begin{DoxyCompactList}\small\item\em Mixin class providing a simple timer. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1UniqueImpl}{Unique\+Impl}
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type as unique pointer and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1UniqueImpl_ae183ae8b045db161111f761a32703547}{impl()}. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1ToTarget}{To\+Target}
+\begin{DoxyCompactList}\small\item\em Mixin class that provides a member function \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target()} to access type-\/erased content (see \href{http://en.cppreference.com/w/cpp/utility/functional/function/target}{\tt std\+::function\+::target()}). \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Verbosity}{Verbosity}
 \begin{DoxyCompactList}\small\item\em Mixin class for verbosity. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-\hypertarget{group__MixinGroup_ga3289264a84ff7bc4942d07318a22bfd7}{}{\footnotesize template$<$class Type $>$ }\\using \hyperlink{group__MixinGroup_ga3289264a84ff7bc4942d07318a22bfd7}{C\+Ref\+Impl} = \hyperlink{classSpacy_1_1Mixin_1_1Impl}{Impl}$<$ const Type \& $>$\label{group__MixinGroup_ga3289264a84ff7bc4942d07318a22bfd7}
-
-\begin{DoxyCompactList}\small\item\em Stores an object of type Type by const reference and provides access via member function impl(). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Contains components that are frequently used and can be added to your classes via (multiple) inheritance. 
+Contains small independent components that are frequently used and can be added to classes via (multiple) inheritance. 
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{group__MixinGroup}{Mixins} 
-\end{DoxySeeAlso}
+Among the mixin components are
+\begin{DoxyItemize}
+\item components for different accuracy requirements (\hyperlink{classSpacy_1_1Mixin_1_1RelativeAccuracy}{Mixin\+::\+Relative\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1AbsoluteAccuracy}{Mixin\+::\+Absolute\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1MinimalAccuracy}{Mixin\+::\+Minimal\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1DampingAccuracy}{Mixin\+::\+Damping\+Accuracy})
+\item a component for the maximal attainable accuracy (\hyperlink{classSpacy_1_1Mixin_1_1Eps}{Mixin\+::\+Eps})
+\item a component for the maximal number of steps/iterations (\hyperlink{classSpacy_1_1Mixin_1_1MaxSteps}{Mixin\+::\+Max\+Steps})
+\item components for elementary algorithmic decisions (\hyperlink{classSpacy_1_1Mixin_1_1ContractionRate}{Mixin\+::\+Contraction\+Rate}, \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition}{Mixin\+::\+Decrease\+Condition}, \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Mixin\+::\+Regularity\+Test})
+\item indices for variables in optimization and optimal control problems ... 
+\end{DoxyItemize}

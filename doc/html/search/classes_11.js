@@ -1,8 +1,15 @@
 var searchData=
 [
-  ['timer',['Timer',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
-  ['timer_3c_20std_3a_3achrono_3a_3amilliseconds_20_3e',['Timer&lt; std::chrono::milliseconds &gt;',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
-  ['timer_3c_20std_3a_3achrono_3a_3aseconds_20_3e',['Timer&lt; std::chrono::seconds &gt;',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
-  ['transposedlusolver',['TransposedLUSolver',['../classSpacy_1_1FEniCS_1_1TransposedLUSolver.html',1,'Spacy::FEniCS']]],
-  ['triangularstateconstraintpreconditioner',['TriangularStateConstraintPreconditioner',['../classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner.html',1,'Spacy::CG']]]
+  ['vector',['Vector',['../classSpacy_1_1Kaskade_1_1Vector.html',1,'Spacy::Kaskade']]],
+  ['vector',['Vector',['../classSpacy_1_1Generic_1_1Vector.html',1,'Spacy::Generic']]],
+  ['vector',['Vector',['../classSpacy_1_1ProductSpace_1_1Vector.html',1,'Spacy::ProductSpace']]],
+  ['vector',['Vector',['../classSpacy_1_1FEniCS_1_1Vector.html',1,'Spacy::FEniCS']]],
+  ['vector',['Vector',['../classSpacy_1_1Vector.html',1,'Spacy']]],
+  ['vectorbase',['VectorBase',['../classSpacy_1_1VectorBase.html',1,'Spacy']]],
+  ['vectorcreator',['VectorCreator',['../classSpacy_1_1Generic_1_1VectorCreator.html',1,'Spacy::Generic']]],
+  ['vectorcreator',['VectorCreator',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html',1,'Spacy::ProductSpace']]],
+  ['vectorcreator',['VectorCreator',['../classSpacy_1_1Kaskade_1_1VectorCreator.html',1,'Spacy::Kaskade']]],
+  ['vectorcreator',['VectorCreator',['../classSpacy_1_1FEniCS_1_1VectorCreator.html',1,'Spacy::FEniCS']]],
+  ['vectorspace',['VectorSpace',['../classSpacy_1_1VectorSpace.html',1,'Spacy']]],
+  ['verbosity',['Verbosity',['../classSpacy_1_1Mixin_1_1Verbosity.html',1,'Spacy::Mixin']]]
 ];

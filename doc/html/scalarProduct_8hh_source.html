@@ -96,23 +96,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">scalarProduct.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_SCALARPRODUCT_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_SCALARPRODUCT_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_SCALAR_PRODUCT_HH</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_SCALAR_PRODUCT_HH</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;boost/type_erasure/any.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Util/Concepts/scalarProductConcept.hh&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">   14</a></span>&#160;  <span class="keyword">using</span> <a class="code" href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">ScalarProduct</a> = boost::type_erasure::any&lt; Concepts::ScalarProductConcept &gt;;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif // SPACYS_SCALARPRODUCT_HH</span></div>
-<div class="ttc" id="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1_html_ga9fe0b4de20da1ab1ca3d04a0f96343e1"><div class="ttname"><a href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">Spacy::ScalarProduct</a></div><div class="ttdeci">boost::type_erasure::any&lt; Concepts::ScalarProductConcept &gt; ScalarProduct</div><div class="ttdoc">Scalar product class. Can store objects that satisfy the requirements of ScalarProductConcept. </div><div class="ttdef"><b>Definition:</b> scalarProduct.hh:14</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keyword">class </span>Real;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <span class="keyword">class </span><a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">   27</a></span>&#160;  <span class="keyword">using</span> <a class="code" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">ScalarProduct</a> = std::function&lt;Real(const Vector&amp;, const Vector&amp;)&gt;;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif // SPACYS_SCALAR_PRODUCT_HH</span></div>
+<div class="ttc" id="group__VectorSpaceGroup_html_gafda42fd5aa3f7597a42b9831bf4dfd07"><div class="ttname"><a href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Spacy::Rn::Vector</a></div><div class="ttdeci">Generic::Vector&lt; ::Eigen::VectorXd &gt; Vector</div><div class="ttdoc">Vector for Rn, based on the Eigen library. </div><div class="ttdef"><b>Definition:</b> vector.hh:18</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<div class="ttc" id="namespaceSpacy_html_aa995526aa0e3fa58aca8dd6772311cad"><div class="ttname"><a href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">Spacy::ScalarProduct</a></div><div class="ttdeci">std::function&lt; Real(const Vector &amp;, const Vector &amp;)&gt; ScalarProduct</div><div class="ttdoc">Type-erased scalar product. </div><div class="ttdef"><b>Definition:</b> scalarProduct.hh:27</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

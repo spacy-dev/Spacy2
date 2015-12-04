@@ -96,56 +96,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">eps.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_EPS_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_EPS_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_EPS_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_EPS_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classSpacy_1_1Mixin_1_1Eps.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Eps</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1Mixin_1_1MixinConnection.html">MixinConnection</a>&lt;Eps&gt;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4.html#a51dbe0b9cc950e0f3dfd34a481f08ae4">Eps</a>(<span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-15) noexcept;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4.html#a1bbfd62541610d5d80f2782ab77158e4">setEps</a>(<span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1.html#a29e8c25dc3f1fdede57b8eb06f520fe1">sqrtEps</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d.html#a1879ebbf1b467cb4be36bcc63307018d">cbrtEps</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192.html#af69cd3dee52e723302b21ca2a25f1192">attachEps</a>(<a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Eps</a>&amp; other);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#ab49910e189cb86b6fd6f89b6f2af14cc">detachEps</a>(<a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Eps</a>&amp; other);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a151216968daef3da5f5cdc0b957ce01b">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Eps</a>* changedSubject);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordtype">double</span> eps_;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    };</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_EPS_HH</span></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_html_a29e8c25dc3f1fdede57b8eb06f520fe1"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1.html#a29e8c25dc3f1fdede57b8eb06f520fe1">Spacy::Mixin::Eps::sqrtEps</a></div><div class="ttdeci">double sqrtEps() const noexcept</div><div class="ttdoc">Access square root of maximal attainable accuracy. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_html_af69cd3dee52e723302b21ca2a25f1192"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192.html#af69cd3dee52e723302b21ca2a25f1192">Spacy::Mixin::Eps::attachEps</a></div><div class="ttdeci">void attachEps(Eps &amp;other)</div><div class="ttdoc">Attach Eps. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_html_a1bbfd62541610d5d80f2782ab77158e4"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4.html#a1bbfd62541610d5d80f2782ab77158e4">Spacy::Mixin::Eps::setEps</a></div><div class="ttdeci">void setEps(double eps)</div><div class="ttdoc">Set maximal attainable accuracy . </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_html_a1879ebbf1b467cb4be36bcc63307018d"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d.html#a1879ebbf1b467cb4be36bcc63307018d">Spacy::Mixin::Eps::cbrtEps</a></div><div class="ttdeci">double cbrtEps() const noexcept</div><div class="ttdoc">Get third root of maximal attainable accuracy. </div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a51dbe0b9cc950e0f3dfd34a481f08ae4">Eps</a>(<span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a> = 1e-15) noexcept;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      <span class="keywordtype">void</span> setEps(<span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">eps</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a29e8c25dc3f1fdede57b8eb06f520fe1">sqrtEps</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a1879ebbf1b467cb4be36bcc63307018d">cbrtEps</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1Eps.html#a151216968daef3da5f5cdc0b957ce01b">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1Eps.html">Eps</a>* changedSubject);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordtype">double</span> eps_;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_EPS_HH</span></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a1879ebbf1b467cb4be36bcc63307018d"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a1879ebbf1b467cb4be36bcc63307018d">Spacy::Mixin::Eps::cbrtEps</a></div><div class="ttdeci">double cbrtEps() const noexcept</div><div class="ttdoc">Access . </div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a29e8c25dc3f1fdede57b8eb06f520fe1"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a29e8c25dc3f1fdede57b8eb06f520fe1">Spacy::Mixin::Eps::sqrtEps</a></div><div class="ttdeci">double sqrtEps() const noexcept</div><div class="ttdoc">Access . </div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a151216968daef3da5f5cdc0b957ce01b"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a151216968daef3da5f5cdc0b957ce01b">Spacy::Mixin::Eps::update</a></div><div class="ttdeci">void update(Eps *changedSubject)</div><div class="ttdoc">update function for observer pattern. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_html_a40e2ba8f3abd2b5370ef41238cfaaf8b"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">Spacy::Mixin::Eps::eps</a></div><div class="ttdeci">double eps() const noexcept</div><div class="ttdoc">Access maximal attainable accuracy. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_ab49910e189cb86b6fd6f89b6f2af14cc"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#ab49910e189cb86b6fd6f89b6f2af14cc">Spacy::Mixin::Eps::detachEps</a></div><div class="ttdeci">void detachEps(Eps &amp;other)</div><div class="ttdoc">Detach Eps before it gets deleted. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_html_a51dbe0b9cc950e0f3dfd34a481f08ae4"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4.html#a51dbe0b9cc950e0f3dfd34a481f08ae4">Spacy::Mixin::Eps::Eps</a></div><div class="ttdeci">Eps(double eps=1e-15) noexcept</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a40e2ba8f3abd2b5370ef41238cfaaf8b"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a40e2ba8f3abd2b5370ef41238cfaaf8b">Spacy::Mixin::Eps::eps</a></div><div class="ttdeci">double eps() const noexcept</div><div class="ttdoc">Access . </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html">Spacy::Mixin::Eps</a></div><div class="ttdoc">Mixin class for maximal attainable accuracy . </div><div class="ttdef"><b>Definition:</b> eps.hh:14</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:14</div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:12</div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html_a51dbe0b9cc950e0f3dfd34a481f08ae4"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html#a51dbe0b9cc950e0f3dfd34a481f08ae4">Spacy::Mixin::Eps::Eps</a></div><div class="ttdeci">Eps(double eps=1e-15) noexcept</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

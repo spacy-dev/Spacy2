@@ -96,67 +96,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">contractionRate.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/Spaces/RealSpace/real.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classSpacy_1_1Mixin_1_1ContractionRate.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate.html">ContractionRate</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a3d6b03823ce3951bafd51ceaac732bf7.html#a3d6b03823ce3951bafd51ceaac732bf7">ContractionRate</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_aaefb97e44b51fb6c8017eb2b40659d64.html#aaefb97e44b51fb6c8017eb2b40659d64">desiredContraction</a> = 0.25,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                               <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a569e3e3766394ccc46a13bd6ca122394.html#a569e3e3766394ccc46a13bd6ca122394">relaxedDesiredContraction</a> = 0.5,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                               <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_adea1388b1e492db1392f67cbe7e89302.html#adea1388b1e492db1392f67cbe7e89302">maximalContraction</a> = 0.75) noexcept;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7">ContractionRate</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> desiredContraction = 0.25,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                               <a class="code" href="classSpacy_1_1Real.html">Real</a> relaxedDesiredContraction = 0.5,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                               <a class="code" href="classSpacy_1_1Real.html">Real</a> maximalContraction = 0.75) noexcept;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_ab9215981f0454bd5d641abad582e64e5.html#ab9215981f0454bd5d641abad582e64e5">setContraction</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a6c5e653393be91e468364733702e5334.html#a6c5e653393be91e468364733702e5334">contraction</a>) noexcept;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">void</span> setContraction(<a class="code" href="classSpacy_1_1Real.html">Real</a> contraction) noexcept;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      <span class="keywordtype">void</span> setDesiredContraction(<a class="code" href="classSpacy_1_1Real.html">Real</a> desiredContraction) noexcept;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordtype">void</span> setRelaxedDesiredContraction(<a class="code" href="classSpacy_1_1Real.html">Real</a> relaxedDesiredContraction) noexcept;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a26eaa6344b5b2191931a9fd87ed96f39.html#a26eaa6344b5b2191931a9fd87ed96f39">setDesiredContraction</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_aaefb97e44b51fb6c8017eb2b40659d64.html#aaefb97e44b51fb6c8017eb2b40659d64">desiredContraction</a>) noexcept;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordtype">void</span> setMaximalContraction(<a class="code" href="classSpacy_1_1Real.html">Real</a> maximalContraction) noexcept;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> contraction() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> desiredContraction() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_ac6e47c0ab683643fea7490703f02632d.html#ac6e47c0ab683643fea7490703f02632d">setRelaxedDesiredContraction</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a569e3e3766394ccc46a13bd6ca122394.html#a569e3e3766394ccc46a13bd6ca122394">relaxedDesiredContraction</a>) noexcept;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> relaxedDesiredContraction() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> maximalContraction() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="keywordtype">bool</span> admissibleContraction() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_acc99ba536cd9a027baa50a1412d9d216.html#acc99ba536cd9a027baa50a1412d9d216">setMaximalContraction</a>(<a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_adea1388b1e492db1392f67cbe7e89302.html#adea1388b1e492db1392f67cbe7e89302">maximalContraction</a>) noexcept;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a6c5e653393be91e468364733702e5334.html#a6c5e653393be91e468364733702e5334">contraction</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_aaefb97e44b51fb6c8017eb2b40659d64.html#aaefb97e44b51fb6c8017eb2b40659d64">desiredContraction</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a569e3e3766394ccc46a13bd6ca122394.html#a569e3e3766394ccc46a13bd6ca122394">relaxedDesiredContraction</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_adea1388b1e492db1392f67cbe7e89302.html#adea1388b1e492db1392f67cbe7e89302">maximalContraction</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keywordtype">bool</span> <a class="code" href="classSpacy_1_1Mixin_1_1ContractionRate_a7dd3c5eb5a7d14d8269207e3d1203aec.html#a7dd3c5eb5a7d14d8269207e3d1203aec">admissibleContraction</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> contraction_ = 1;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> desiredContraction_;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> relaxedDesiredContraction_;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> maximalContraction_;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    };</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_a6c5e653393be91e468364733702e5334_html_a6c5e653393be91e468364733702e5334"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_a6c5e653393be91e468364733702e5334.html#a6c5e653393be91e468364733702e5334">Spacy::Mixin::ContractionRate::contraction</a></div><div class="ttdeci">Real contraction() const noexcept</div><div class="ttdoc">Access contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_ab9215981f0454bd5d641abad582e64e5_html_ab9215981f0454bd5d641abad582e64e5"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_ab9215981f0454bd5d641abad582e64e5.html#ab9215981f0454bd5d641abad582e64e5">Spacy::Mixin::ContractionRate::setContraction</a></div><div class="ttdeci">void setContraction(Real contraction) noexcept</div><div class="ttdoc">Set contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:22</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_acc99ba536cd9a027baa50a1412d9d216_html_acc99ba536cd9a027baa50a1412d9d216"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_acc99ba536cd9a027baa50a1412d9d216.html#acc99ba536cd9a027baa50a1412d9d216">Spacy::Mixin::ContractionRate::setMaximalContraction</a></div><div class="ttdeci">void setMaximalContraction(Real maximalContraction) noexcept</div><div class="ttdoc">Set maximal contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_adea1388b1e492db1392f67cbe7e89302_html_adea1388b1e492db1392f67cbe7e89302"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_adea1388b1e492db1392f67cbe7e89302.html#adea1388b1e492db1392f67cbe7e89302">Spacy::Mixin::ContractionRate::maximalContraction</a></div><div class="ttdeci">Real maximalContraction() const noexcept</div><div class="ttdoc">Get desired contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_a26eaa6344b5b2191931a9fd87ed96f39_html_a26eaa6344b5b2191931a9fd87ed96f39"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_a26eaa6344b5b2191931a9fd87ed96f39.html#a26eaa6344b5b2191931a9fd87ed96f39">Spacy::Mixin::ContractionRate::setDesiredContraction</a></div><div class="ttdeci">void setDesiredContraction(Real desiredContraction) noexcept</div><div class="ttdoc">Set desired contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_aaefb97e44b51fb6c8017eb2b40659d64_html_aaefb97e44b51fb6c8017eb2b40659d64"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_aaefb97e44b51fb6c8017eb2b40659d64.html#aaefb97e44b51fb6c8017eb2b40659d64">Spacy::Mixin::ContractionRate::desiredContraction</a></div><div class="ttdeci">Real desiredContraction() const noexcept</div><div class="ttdoc">Access desired contraction rate. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_a3d6b03823ce3951bafd51ceaac732bf7_html_a3d6b03823ce3951bafd51ceaac732bf7"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_a3d6b03823ce3951bafd51ceaac732bf7.html#a3d6b03823ce3951bafd51ceaac732bf7">Spacy::Mixin::ContractionRate::ContractionRate</a></div><div class="ttdeci">ContractionRate(Real desiredContraction=0.25, Real relaxedDesiredContraction=0.5, Real maximalContraction=0.75) noexcept</div><div class="ttdoc">Constructor. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_a7dd3c5eb5a7d14d8269207e3d1203aec_html_a7dd3c5eb5a7d14d8269207e3d1203aec"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_a7dd3c5eb5a7d14d8269207e3d1203aec.html#a7dd3c5eb5a7d14d8269207e3d1203aec">Spacy::Mixin::ContractionRate::admissibleContraction</a></div><div class="ttdeci">bool admissibleContraction() const noexcept</div><div class="ttdoc">Check if contraction is admissible. </div></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> contraction_ = 1;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> desiredContraction_;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> relaxedDesiredContraction_;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <a class="code" href="classSpacy_1_1Real.html">Real</a> maximalContraction_;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    };</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH</span></div>
+<div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> real.hh:21</div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate.html">Spacy::Mixin::ContractionRate</a></div><div class="ttdoc">Mixin class for contraction rates. </div><div class="ttdef"><b>Definition:</b> contractionRate.hh:14</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_ac6e47c0ab683643fea7490703f02632d_html_ac6e47c0ab683643fea7490703f02632d"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_ac6e47c0ab683643fea7490703f02632d.html#ac6e47c0ab683643fea7490703f02632d">Spacy::Mixin::ContractionRate::setRelaxedDesiredContraction</a></div><div class="ttdeci">void setRelaxedDesiredContraction(Real relaxedDesiredContraction) noexcept</div><div class="ttdoc">Set relaxed desired contraction rate. </div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_html_a3d6b03823ce3951bafd51ceaac732bf7"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7">Spacy::Mixin::ContractionRate::ContractionRate</a></div><div class="ttdeci">ContractionRate(Real desiredContraction=0.25, Real relaxedDesiredContraction=0.5, Real maximalContraction=0.75) noexcept</div><div class="ttdoc">Constructor. </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1ContractionRate_a569e3e3766394ccc46a13bd6ca122394_html_a569e3e3766394ccc46a13bd6ca122394"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1ContractionRate_a569e3e3766394ccc46a13bd6ca122394.html#a569e3e3766394ccc46a13bd6ca122394">Spacy::Mixin::ContractionRate::relaxedDesiredContraction</a></div><div class="ttdeci">Real relaxedDesiredContraction() const noexcept</div><div class="ttdoc">Get relaxed desired contraction rate. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

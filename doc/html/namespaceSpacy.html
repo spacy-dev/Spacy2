@@ -93,9 +93,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy Namespace Reference</div>  </div>
+<div class="title">Spacy Namespace Reference<div class="ingroups"><a class="el" href="group__ConceptGroup.html">Concepts</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -107,17 +109,20 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceSpacy_1_1CG"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1CG.html">CG</a></td></tr>
 <tr class="memdesc:namespaceSpacy_1_1CG"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Truncated Regularized CG). <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceSpacy_1_1Concepts"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Concepts.html">Concepts</a></td></tr>
-<tr class="memdesc:namespaceSpacy_1_1Concepts"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concepts for vectors, functional, operators, ... <br /></td></tr>
+<tr class="memitem:namespaceSpacy_1_1CompositeStep"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1CompositeStep.html">CompositeStep</a></td></tr>
+<tr class="memdesc:namespaceSpacy_1_1CompositeStep"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the affine covariant composite step method of <a class="el" href="citelist.html#CITEREF_Lubkoll2015">[5]</a>, <a class="el" href="citelist.html#CITEREF_Lubkoll2015a">[4]</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceSpacy_1_1FEniCS"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1FEniCS.html">FEniCS</a></td></tr>
 <tr class="memdesc:namespaceSpacy_1_1FEniCS"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains vector spaces, functionals and operators for <a href="www.fenicsproject.org">FEniCS</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceSpacy_1_1Generic"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Generic.html">Generic</a></td></tr>
+<tr class="memdesc:namespaceSpacy_1_1Generic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains generic implementations for easier definitions of vectors and a generic scalar product implementation. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceSpacy_1_1Kaskade"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Kaskade.html">Kaskade</a></td></tr>
 <tr class="memdesc:namespaceSpacy_1_1Kaskade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceSpacy_1_1Mixin"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Mixin.html">Mixin</a></td></tr>
-<tr class="memdesc:namespaceSpacy_1_1Mixin"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains components that are frequently used and can be added to your classes via (multiple) inheritance. <br /></td></tr>
+<tr class="memdesc:namespaceSpacy_1_1Mixin"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains small independent components that are frequently used and can be added to classes via (multiple) inheritance. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceSpacy_1_1Newton"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Newton.html">Newton</a></td></tr>
 <tr class="memdesc:namespaceSpacy_1_1Newton"><td class="mdescLeft">&#160;</td><td class="mdescRight">Newton methods, largely following <a class="el" href="citelist.html#CITEREF_Deuflhard2004">[2]</a>. <br /></td></tr>
@@ -125,29 +130,63 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceSpacy_1_1ProductSpace"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1ProductSpace.html">ProductSpace</a></td></tr>
 <tr class="memdesc:namespaceSpacy_1_1ProductSpace"><td class="mdescLeft">&#160;</td><td class="mdescRight">A product space that supports distinction between primal and dual variables. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceSpacy_1_1RealSpace"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1RealSpace.html">RealSpace</a></td></tr>
-<tr class="memdesc:namespaceSpacy_1_1RealSpace"><td class="mdescLeft">&#160;</td><td class="mdescRight">A one dimensional vector space representing the space of real numbers. <br /></td></tr>
+<tr class="memitem:namespaceSpacy_1_1Rn"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Rn.html">Rn</a></td></tr>
+<tr class="memdesc:namespaceSpacy_1_1Rn"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains functionals and operators for finite dimensional vector space problems, based on <a href="http://eigen.tuxfamily.org">Eigen</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceSpacy_1_1Scalar"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Scalar.html">Scalar</a></td></tr>
+<tr class="memdesc:namespaceSpacy_1_1Scalar"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains functionals and operators for scalar problems. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C2FunctionalBase.html">C2FunctionalBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for twice differentiable functionals \( f:\ X\rightarrow \mathbb{R}\).  <a href="classSpacy_1_1C2FunctionalBase.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1AddArithmeticOperators.html">AddArithmeticOperators</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class providing some operations for vectors via CRTP.  <a href="classSpacy_1_1AddArithmeticOperators.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Functional.html">C1Functional</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased differentiable functional \(f:\ X \to \mathbb{R} \).  <a href="classSpacy_1_1C1Functional.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased differentiable operator \(A:\ X \to Y \).  <a href="classSpacy_1_1C1Operator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased twice differentiable functional \(f:\ X \to \mathbb{R} \).  <a href="classSpacy_1_1C2Functional.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CallOfUndefinedFunctionException.html">CallOfUndefinedFunctionException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown if a virtual function is not implemented.  <a href="classSpacy_1_1CallOfUndefinedFunctionException.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CopyAndClonePtr.html">CopyAndClonePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CopyViaClonePtr.html">CopyViaClonePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple model of a damping factor \(\nu\) that is computed up to a prescribed accuracy \(\varepsilon\).  <a href="classSpacy_1_1DampingFactor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicC1Operator.html">DynamicC1Operator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased time-dependent differentiable operator \(A:\ [0,T] \times X \to Y \).  <a href="classSpacy_1_1DynamicC1Operator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicLinearOperator.html">DynamicLinearOperator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased time-dependent linear operator \(A:\ [0,T] \times X \to Y \).  <a href="classSpacy_1_1DynamicLinearOperator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased time-dependent operator \(A:\ [0,T] \times X \to Y \).  <a href="classSpacy_1_1DynamicOperator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html">Functional</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased functional \(f:\ X \to \mathbb{R} \).  <a href="classSpacy_1_1Functional.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FunctionalBase.html">FunctionalBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for twice differentiable functionals \( f:\ X\rightarrow \mathbb{R}\).  <a href="classSpacy_1_1FunctionalBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1GenericException.html">GenericException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic exception class that serves as base for all exceptions in this library.  <a href="classSpacy_1_1GenericException.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Hessian.html">Hessian</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear operator \(f&#39;&#39;(x)\) for a twice differentiable functional \(f\).  <a href="classSpacy_1_1Hessian.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1HilbertSpaceNorm.html">HilbertSpaceNorm</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">\( \|\cdot\|=\sqrt{(\cdot,\cdot)} \)  <a href="classSpacy_1_1HilbertSpaceNorm.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1IncompatibleSpaceException.html">IncompatibleSpaceException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown when encountering incompatible spaces.  <a href="classSpacy_1_1IncompatibleSpaceException.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1IndefiniteLinearSolver.html">IndefiniteLinearSolver</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased indefinite linear solver. Additionally monitors if the underlying operator is positive definite.  <a href="classSpacy_1_1IndefiniteLinearSolver.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1InducedScalarProduct.html">InducedScalarProduct</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Induced scalar product \((x,y)_M = (Mx)y\), where \(M:X\rightarrow X^*\).  <a href="classSpacy_1_1InducedScalarProduct.html#details">More...</a><br /></td></tr>
@@ -155,11 +194,16 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1InvalidArgumentException.html">InvalidArgumentException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown on invalid arguments.  <a href="classSpacy_1_1InvalidArgumentException.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearizedOperator.html">LinearizedOperator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linearized operator \(A&#39;(x)\) of a differentiable operator \(A\).  <a href="classSpacy_1_1LinearizedOperator.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1IsVoid.html">IsVoid</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased linear operator \(A:\ X \to Y \).  <a href="classSpacy_1_1LinearOperator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LipschitzConstant.html">LipschitzConstant</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple model for a Lipschitz constant \(\omega\).  <a href="classSpacy_1_1LipschitzConstant.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Operator.html">Operator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased operator \(A:\ X \to Y \).  <a href="classSpacy_1_1Operator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1OperatorBase.html">OperatorBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for operators \(A:\ X\rightarrow Y\), between function spaces \(X\) and \(Y\).  <a href="classSpacy_1_1OperatorBase.html#details">More...</a><br /></td></tr>
@@ -171,7 +215,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Induced scalar product for the primal variables (i.e. for constrained optimization problems).  <a href="classSpacy_1_1PrimalInducedScalarProduct.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Real.html">Real</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Real.html" title="Real number. ">Real</a> number.  <a href="classSpacy_1_1Real.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real number.  <a href="classSpacy_1_1Real.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1RegularityTestFailedException.html">RegularityTestFailedException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown if regularity test fails.  <a href="classSpacy_1_1RegularityTestFailedException.html#details">More...</a><br /></td></tr>
@@ -179,10 +223,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1SingularOperatorException.html">SingularOperatorException</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown if singular operators are inverted.  <a href="classSpacy_1_1SingularOperatorException.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1SupportedOperatorBase.html">SupportedOperatorBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class providing some operations for vectors via CRTP.  <a href="classSpacy_1_1SupportedOperatorBase.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Vector.html">Vector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased vector.  <a href="classSpacy_1_1Vector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorBase.html">VectorBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for vector implementations.  <a href="classSpacy_1_1VectorBase.html#details">More...</a><br /></td></tr>
@@ -193,118 +235,133 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga750d55072f7a3a16a1263961147333c0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga750d55072f7a3a16a1263961147333c0.html#ga750d55072f7a3a16a1263961147333c0">DynamicCallableOperator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga30692db093ead5a1a074905363a2f043.html#ga30692db093ead5a1a074905363a2f043">Concepts::DynamicCallableOperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga750d55072f7a3a16a1263961147333c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplest possible time-dependent operator. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga30692db093ead5a1a074905363a2f043.html#DynamicCallableOperatorConceptAnchor">DynamicCallableOperatorConcept</a>.  <a href="group__SpacyGroup_ga750d55072f7a3a16a1263961147333c0.html#ga750d55072f7a3a16a1263961147333c0">More...</a><br /></td></tr>
-<tr class="separator:ga750d55072f7a3a16a1263961147333c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaad10aa7d5443703377b768fa41a3c7ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaad10aa7d5443703377b768fa41a3c7ea.html#gaad10aa7d5443703377b768fa41a3c7ea">DynamicLinearOperator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga015b0d099011a2ef73a16aa9b36a7346.html#ga015b0d099011a2ef73a16aa9b36a7346">Concepts::DynamicLinearOperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:gaad10aa7d5443703377b768fa41a3c7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time-dependent linear operator class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga015b0d099011a2ef73a16aa9b36a7346.html#DynamicLinearOperatorConceptAnchor">DynamicLinearOperatorConcept</a>.  <a href="group__SpacyGroup_gaad10aa7d5443703377b768fa41a3c7ea.html#gaad10aa7d5443703377b768fa41a3c7ea">More...</a><br /></td></tr>
-<tr class="separator:gaad10aa7d5443703377b768fa41a3c7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e692134dfe46346d5692acfd1a9bd8e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga8e692134dfe46346d5692acfd1a9bd8e.html#ga8e692134dfe46346d5692acfd1a9bd8e">DynamicOperator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7.html#ga2c979d268f0ca7a436776a9631d10af7">Concepts::DynamicOperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga8e692134dfe46346d5692acfd1a9bd8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time-dependent operator. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga2c979d268f0ca7a436776a9631d10af7.html#DynamicOperatorConceptAnchor">DynamicOperatorConcept</a>.  <a href="group__SpacyGroup_ga8e692134dfe46346d5692acfd1a9bd8e.html#ga8e692134dfe46346d5692acfd1a9bd8e">More...</a><br /></td></tr>
-<tr class="separator:ga8e692134dfe46346d5692acfd1a9bd8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabc9c830d2a7e020bcab097b10ee6f642"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gabc9c830d2a7e020bcab097b10ee6f642.html#gabc9c830d2a7e020bcab097b10ee6f642">DynamicC1Operator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#gaa7ef0ce2d66b0610035541b580564b11">Concepts::DynamicC1OperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:gabc9c830d2a7e020bcab097b10ee6f642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time-dependent differentiable operator. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_gaa7ef0ce2d66b0610035541b580564b11.html#DynamicC1OperatorConceptAnchor">DynamicC1OperatorConcept</a>.  <a href="group__SpacyGroup_gabc9c830d2a7e020bcab097b10ee6f642.html#gabc9c830d2a7e020bcab097b10ee6f642">More...</a><br /></td></tr>
-<tr class="separator:gabc9c830d2a7e020bcab097b10ee6f642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga673218f603c93790864aef12c89d3a35"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga673218f603c93790864aef12c89d3a35.html#ga673218f603c93790864aef12c89d3a35">Functional</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#ga5273b50bd3e8c9a3f5a1e6b5f170836d">Concepts::FunctionalConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga673218f603c93790864aef12c89d3a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functional. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga5273b50bd3e8c9a3f5a1e6b5f170836d.html#FunctionalConceptAnchor">FunctionalConcept</a>.  <a href="group__SpacyGroup_ga673218f603c93790864aef12c89d3a35.html#ga673218f603c93790864aef12c89d3a35">More...</a><br /></td></tr>
-<tr class="separator:ga673218f603c93790864aef12c89d3a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa7cb8ef6c287b0af0352d3dd0eb9f200"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaa7cb8ef6c287b0af0352d3dd0eb9f200.html#gaa7cb8ef6c287b0af0352d3dd0eb9f200">C1Functional</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga205b55d8291e0f2e143f116cf78bc54f.html#ga205b55d8291e0f2e143f116cf78bc54f">Concepts::C1FunctionalConcept</a> &gt;</td></tr>
-<tr class="memdesc:gaa7cb8ef6c287b0af0352d3dd0eb9f200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differentiable functional. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga205b55d8291e0f2e143f116cf78bc54f.html#C1FunctionalConceptAnchor">C1FunctionalConcept</a>.  <a href="group__SpacyGroup_gaa7cb8ef6c287b0af0352d3dd0eb9f200.html#gaa7cb8ef6c287b0af0352d3dd0eb9f200">More...</a><br /></td></tr>
-<tr class="separator:gaa7cb8ef6c287b0af0352d3dd0eb9f200"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf5b89e117806134b06a1ce4629fb2b65"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gafb4414561b07b27100cad81ecf152e47.html#gafb4414561b07b27100cad81ecf152e47">Concepts::C2FunctionalConcept</a> &gt;</td></tr>
-<tr class="memdesc:gaf5b89e117806134b06a1ce4629fb2b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Twice differentiable functional. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_gafb4414561b07b27100cad81ecf152e47.html#C2FunctionalConceptAnchor">C2FunctionalConcept</a>.  <a href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">More...</a><br /></td></tr>
-<tr class="separator:gaf5b89e117806134b06a1ce4629fb2b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d5cd1c6fb9dd85aa345b536caf30bba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#a7d5cd1c6fb9dd85aa345b536caf30bba">LinearSolver</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Concepts::LinearSolverConcept</a> &gt;</td></tr>
-<tr class="memdesc:a7d5cd1c6fb9dd85aa345b536caf30bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear solver class. Same as CallableOperator.  <a href="namespaceSpacy_a7d5cd1c6fb9dd85aa345b536caf30bba.html#a7d5cd1c6fb9dd85aa345b536caf30bba">More...</a><br /></td></tr>
-<tr class="separator:a7d5cd1c6fb9dd85aa345b536caf30bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a168383be933a8316169c145f5e419604"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_a168383be933a8316169c145f5e419604.html#a168383be933a8316169c145f5e419604">IndefiniteLinearSolver</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga582dd34334cdecc7b27883f4e8239490.html#ga582dd34334cdecc7b27883f4e8239490">Concepts::IndefiniteLinearSolverConcept</a> &gt;</td></tr>
-<tr class="memdesc:a168383be933a8316169c145f5e419604"><td class="mdescLeft">&#160;</td><td class="mdescRight">General linear solver class. Additionally monitors if the underlying operator is positive definite.  <a href="namespaceSpacy_a168383be933a8316169c145f5e419604.html#a168383be933a8316169c145f5e419604">More...</a><br /></td></tr>
-<tr class="separator:a168383be933a8316169c145f5e419604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf4f33b11d657c48566d961a013c92bd1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaf4f33b11d657c48566d961a013c92bd1.html#gaf4f33b11d657c48566d961a013c92bd1">Norm</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b.html#ga8b6032c46f6e31840a2c956c6360549b">Concepts::NormConcept</a> &gt;</td></tr>
-<tr class="memdesc:gaf4f33b11d657c48566d961a013c92bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Norm class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga8b6032c46f6e31840a2c956c6360549b.html#NormConceptAnchor">NormConcept</a>.  <a href="group__SpacyGroup_gaf4f33b11d657c48566d961a013c92bd1.html#gaf4f33b11d657c48566d961a013c92bd1">More...</a><br /></td></tr>
-<tr class="separator:gaf4f33b11d657c48566d961a013c92bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2b74020d806ad800795cdd97dab3466f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#gadec0c664abaacc2065dadd8b11cc8d30">Concepts::CallableOperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga2b74020d806ad800795cdd97dab3466f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplest possible operator class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_gadec0c664abaacc2065dadd8b11cc8d30.html#CallableOperatorConceptAnchor">CallableOperatorConcept</a>.  <a href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">More...</a><br /></td></tr>
-<tr class="separator:ga2b74020d806ad800795cdd97dab3466f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga584f7b9d82a844302ba0d77c3a1b6640"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">Concepts::LinearOperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga584f7b9d82a844302ba0d77c3a1b6640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear operator class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#LinearOperatorConceptAnchor">LinearOperatorConcept</a>.  <a href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">More...</a><br /></td></tr>
-<tr class="separator:ga584f7b9d82a844302ba0d77c3a1b6640"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3f89622eba80cf840b2a7102f1303455"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">Operator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e.html#ga7d984281b647a6d8e4c0a7ea5faeb90e">Concepts::OperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga3f89622eba80cf840b2a7102f1303455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga7d984281b647a6d8e4c0a7ea5faeb90e.html#OperatorConceptAnchor">OperatorConcept</a>.  <a href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">More...</a><br /></td></tr>
-<tr class="separator:ga3f89622eba80cf840b2a7102f1303455"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga87ae8cb0d7a567a4bb181e0a9f182620"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b.html#ga14a12c741dc237e32862fa4bc315451b">Concepts::C1OperatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga87ae8cb0d7a567a4bb181e0a9f182620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Differentiable operator class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga14a12c741dc237e32862fa4bc315451b.html#C1OperatorConceptAnchor">C1OperatorConcept</a>.  <a href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">More...</a><br /></td></tr>
-<tr class="separator:ga87ae8cb0d7a567a4bb181e0a9f182620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9fe0b4de20da1ab1ca3d04a0f96343e1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">ScalarProduct</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga1308724cda3078f228fb05c29556805d.html#ga1308724cda3078f228fb05c29556805d">Concepts::ScalarProductConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga9fe0b4de20da1ab1ca3d04a0f96343e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar product class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_ga1308724cda3078f228fb05c29556805d.html#ScalarProductConceptAnchor">ScalarProductConcept</a>.  <a href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">More...</a><br /></td></tr>
-<tr class="separator:ga9fe0b4de20da1ab1ca3d04a0f96343e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81a1e86d95b7d87a67d152fc01ee83e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ad81a1e86d95b7d87a67d152fc01ee83e">DynamicCallableOperator</a> = std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(double, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
+<tr class="memdesc:ad81a1e86d95b7d87a67d152fc01ee83e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplest possible time-dependent operator. Can store objects that satisfy the requirements of DynamicCallableOperatorConcept.  <a href="#ad81a1e86d95b7d87a67d152fc01ee83e">More...</a><br /></td></tr>
+<tr class="separator:ad81a1e86d95b7d87a67d152fc01ee83e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd614ddb41dd29e68a723dadd5602f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cd614ddb41dd29e68a723dadd5602f2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2">LinearSolver</a> = std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
+<tr class="memdesc:a4cd614ddb41dd29e68a723dadd5602f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased linear solver. <br /></td></tr>
+<tr class="separator:a4cd614ddb41dd29e68a723dadd5602f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dbe77a4e1282ef88017e94d50d17791"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> = std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
+<tr class="memdesc:a0dbe77a4e1282ef88017e94d50d17791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased norm.  <a href="#a0dbe77a4e1282ef88017e94d50d17791">More...</a><br /></td></tr>
+<tr class="separator:a0dbe77a4e1282ef88017e94d50d17791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4cfd8f41e0beb5b8b0b410658016b95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4cfd8f41e0beb5b8b0b410658016b95"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CallableOperator</b> = std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
+<tr class="separator:ab4cfd8f41e0beb5b8b0b410658016b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa995526aa0e3fa58aca8dd6772311cad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">ScalarProduct</a> = std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
+<tr class="memdesc:aa995526aa0e3fa58aca8dd6772311cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased scalar product.  <a href="#aa995526aa0e3fa58aca8dd6772311cad">More...</a><br /></td></tr>
+<tr class="separator:aa995526aa0e3fa58aca8dd6772311cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f9fcb851e928f78cfecb72d7af8935e"><td class="memTemplParams" colspan="2"><a class="anchor" id="a0f9fcb851e928f78cfecb72d7af8935e"></a>
+template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:a0f9fcb851e928f78cfecb72d7af8935e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>C1FunctionalConcept</b> = std::integral_constant&lt; bool, <a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f">FunctionalConcept</a>&lt; Impl &gt;::value &amp;&amp;HasMemFn_d1_Functional&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &gt;</td></tr>
+<tr class="separator:a0f9fcb851e928f78cfecb72d7af8935e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga61ea9fe1d23e9f45e4e5fe940fe0e0cb">C1OperatorConcept</a> = std::integral_constant&lt; bool, <a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>&lt; Impl &gt;::value &amp;&amp;HasMemFn_d1_Operator&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &amp;&amp;HasMemFn_linearization&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &gt;</td></tr>
+<tr class="separator:ga61ea9fe1d23e9f45e4e5fe940fe0e0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga265f0821ce6e0688d6e9abb8d8e0af6a">C2FunctionalConcept</a> = std::integral_constant&lt; bool, C1FunctionalConcept&lt; Impl &gt;::value &amp;&amp;HasMemFn_d2_Functional&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &amp;&amp;HasMemFn_hessian&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &gt;</td></tr>
+<tr class="separator:ga265f0821ce6e0688d6e9abb8d8e0af6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f">FunctionalConcept</a> = std::integral_constant&lt; bool, HasMemOp_callable&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a>, <a class="el" href="classSpacy_1_1Real.html">Real</a> &gt;::value &amp;&amp;HasMemFn_domain&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="memdesc:gae45328d2e01ef6c8e5d948b69fda385f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for functionals in Spacy.  <a href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f">More...</a><br /></td></tr>
+<tr class="separator:gae45328d2e01ef6c8e5d948b69fda385f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga8d3bdfc9abd844ab446a31fcd3f8ef8c">LinearOperatorConcept</a> = std::integral_constant&lt; bool, <a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">VectorConcept</a>&lt; Impl &gt;::value &amp;&amp;<a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>&lt; Impl &gt;::value &amp;&amp;HasMemFn_solver&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="separator:ga8d3bdfc9abd844ab446a31fcd3f8ef8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a> = std::integral_constant&lt; bool, HasMemOp_callable&lt; Impl, <a class="el" href="classSpacy_1_1Vector.html">Vector</a>, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &gt;::value &amp;&amp;HasMemFn_domain&lt; Impl &gt;::value &amp;&amp;HasMemFn_range&lt; Impl &gt;::value &gt;</td></tr>
+<tr class="separator:ga0cd6ba53feff75abbb6822b45fd6265e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8fbeed0f838941e90ebe635a546e1db"><td class="memTemplParams" colspan="2">template&lt;class Impl &gt; </td></tr>
+<tr class="memitem:gac8fbeed0f838941e90ebe635a546e1db"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">VectorConcept</a> = std::integral_constant&lt; bool, std::is_copy_constructible&lt; Impl &gt;::value &amp;&amp;std::is_copy_assignable&lt; Impl &gt;::value &amp;&amp;HasMemOp_add&lt; Impl &gt;::value &amp;&amp;HasMemOp_subtract&lt; Impl &gt;::value &amp;&amp;HasMemOp_multiply&lt; Impl &gt;::value &amp;&amp;HasMemOp_negate&lt; Impl &gt;::value &amp;&amp;HasMemFn_space&lt; Impl &gt;::value &amp;&amp;<a class="el" href="structSpacy_1_1IsVoid.html">IsVoid</a>&lt; Impl &gt;::template apply&lt; TryMemFn_toFile &gt;::value &gt;</td></tr>
+<tr class="separator:gac8fbeed0f838941e90ebe635a546e1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63ae343327f8e3bde02913c0be7d8655"><td class="memTemplParams" colspan="2"><a class="anchor" id="a63ae343327f8e3bde02913c0be7d8655"></a>
 template&lt;class... Types&gt; </td></tr>
 <tr class="memitem:a63ae343327f8e3bde02913c0be7d8655"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a63ae343327f8e3bde02913c0be7d8655">void_t</a> = typename Detail::voider&lt; Types...&gt;::type</td></tr>
 <tr class="memdesc:a63ae343327f8e3bde02913c0be7d8655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Most fascinating type ever. Is always void. <br /></td></tr>
 <tr class="separator:a63ae343327f8e3bde02913c0be7d8655"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafc144d2730ef87a67e54f8cd750b1f54"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54.html#gafc144d2730ef87a67e54f8cd750b1f54">AnyVector</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#gad6958389d1fa2758a8a64a0a24c36004">Concepts::VectorConcept</a> &gt;</td></tr>
-<tr class="memdesc:gafc144d2730ef87a67e54f8cd750b1f54"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Vector.html">Vector</a> class. Can store objects that satisfy the requirements of <a class="el" href="group__ConceptGroup_gad6958389d1fa2758a8a64a0a24c36004.html#VectorConceptAnchor">VectorConcept</a>.  <a href="group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54.html#gafc144d2730ef87a67e54f8cd750b1f54">More...</a><br /></td></tr>
-<tr class="separator:gafc144d2730ef87a67e54f8cd750b1f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1f5316487c031a478247206764bb2efb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga1f5316487c031a478247206764bb2efb.html#ga1f5316487c031a478247206764bb2efb">VectorCreator</a> = boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_ga3064301642b7c66b1b08f88a12a04645.html#ga3064301642b7c66b1b08f88a12a04645">Concepts::VectorCreatorConcept</a> &gt;</td></tr>
-<tr class="memdesc:ga1f5316487c031a478247206764bb2efb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Vector.html">Vector</a> creator for feeding into <a class="el" href="classSpacy_1_1VectorSpace.html" title="Function space . ">VectorSpace</a>. See <a class="el" href="group__ConceptGroup_ga3064301642b7c66b1b08f88a12a04645.html#VectorCreatorConceptAnchor">VectorCreatorConcept</a>.  <a href="group__SpacyGroup_ga1f5316487c031a478247206764bb2efb.html#ga1f5316487c031a478247206764bb2efb">More...</a><br /></td></tr>
-<tr class="separator:ga1f5316487c031a478247206764bb2efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61567d9e23ef27cc6ecd52ab3512fb1"><td class="memTemplParams" colspan="2"><a class="anchor" id="ac61567d9e23ef27cc6ecd52ab3512fb1"></a>
+template&lt;class Concept &gt; </td></tr>
+<tr class="memitem:ac61567d9e23ef27cc6ecd52ab3512fb1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ac61567d9e23ef27cc6ecd52ab3512fb1">Require</a> = typename Detail::Require&lt; Concept &gt;::type</td></tr>
+<tr class="memdesc:ac61567d9e23ef27cc6ecd52ab3512fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if Concept is satisfied. <br /></td></tr>
+<tr class="separator:ac61567d9e23ef27cc6ecd52ab3512fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94fc7a4b9d3b26ef835e61647fac4d9b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">VectorCreator</a> = std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *) &gt;</td></tr>
+<tr class="memdesc:a94fc7a4b9d3b26ef835e61647fac4d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Vector</a> creator for feeding into <a class="el" href="classSpacy_1_1VectorSpace.html" title="Function space . ">VectorSpace</a>.  <a href="#a94fc7a4b9d3b26ef835e61647fac4d9b">More...</a><br /></td></tr>
+<tr class="separator:a94fc7a4b9d3b26ef835e61647fac4d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gaf65a00de69cbc808db7cddb728796894"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaf65a00de69cbc808db7cddb728796894"></a>enum &#160;</td><td class="memItemRight" valign="bottom">{ <b>PRIMAL</b> =0, 
+<b>DUAL</b> =1
+ }</td></tr>
+<tr class="separator:gaf65a00de69cbc808db7cddb728796894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaafd9bf87164dd48991d2016aec8bad08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CGGroup_gaafd9bf87164dd48991d2016aec8bad08.html#gaafd9bf87164dd48991d2016aec8bad08">makeCGSolver</a> (<a class="el" href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">Operator</a> A, <a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
-<tr class="memdesc:gaafd9bf87164dd48991d2016aec8bad08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct conjugate gradient method.  <a href="group__CGGroup_gaafd9bf87164dd48991d2016aec8bad08.html#gaafd9bf87164dd48991d2016aec8bad08">More...</a><br /></td></tr>
-<tr class="separator:gaafd9bf87164dd48991d2016aec8bad08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf9ddae62858412fe5309d11aac7b8ed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CGGroup_gaf9ddae62858412fe5309d11aac7b8ed3.html#gaf9ddae62858412fe5309d11aac7b8ed3">makeRCGSolver</a> (<a class="el" href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">Operator</a> A, <a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
-<tr class="memdesc:gaf9ddae62858412fe5309d11aac7b8ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct regularized conjugate gradient method.  <a href="group__CGGroup_gaf9ddae62858412fe5309d11aac7b8ed3.html#gaf9ddae62858412fe5309d11aac7b8ed3">More...</a><br /></td></tr>
-<tr class="separator:gaf9ddae62858412fe5309d11aac7b8ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5693f62a60708a49f51cf451991b96ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CGGroup_ga5693f62a60708a49f51cf451991b96ec.html#ga5693f62a60708a49f51cf451991b96ec">makeTCGSolver</a> (<a class="el" href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">Operator</a> A, <a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
-<tr class="memdesc:ga5693f62a60708a49f51cf451991b96ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct truncated conjugate gradient method.  <a href="group__CGGroup_ga5693f62a60708a49f51cf451991b96ec.html#ga5693f62a60708a49f51cf451991b96ec">More...</a><br /></td></tr>
-<tr class="separator:ga5693f62a60708a49f51cf451991b96ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga66f5afbc97e887274b28be9c94aa3103"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CGGroup_ga66f5afbc97e887274b28be9c94aa3103.html#ga66f5afbc97e887274b28be9c94aa3103">makeTRCGSolver</a> (<a class="el" href="group__SpacyGroup_ga3f89622eba80cf840b2a7102f1303455.html#ga3f89622eba80cf840b2a7102f1303455">Operator</a> A, <a class="el" href="group__SpacyGroup_ga2b74020d806ad800795cdd97dab3466f.html#ga2b74020d806ad800795cdd97dab3466f">CallableOperator</a> P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
-<tr class="memdesc:ga66f5afbc97e887274b28be9c94aa3103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct truncated regularized conjugate gradient method.  <a href="group__CGGroup_ga66f5afbc97e887274b28be9c94aa3103.html#ga66f5afbc97e887274b28be9c94aa3103">More...</a><br /></td></tr>
-<tr class="separator:ga66f5afbc97e887274b28be9c94aa3103"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga448b8e78b2e84ed78e70c42114ea7599"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599.html#ga448b8e78b2e84ed78e70c42114ea7599">localNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:ga448b8e78b2e84ed78e70c42114ea7599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local Newton method.  <a href="group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599.html#ga448b8e78b2e84ed78e70c42114ea7599">More...</a><br /></td></tr>
-<tr class="separator:ga448b8e78b2e84ed78e70c42114ea7599"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafbe5e25f46f7b0d237f5e9971cef998a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a.html#gafbe5e25f46f7b0d237f5e9971cef998a">localNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:gafbe5e25f46f7b0d237f5e9971cef998a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local Newton method with default initial iterate (x0=0).  <a href="group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a.html#gafbe5e25f46f7b0d237f5e9971cef998a">More...</a><br /></td></tr>
-<tr class="separator:gafbe5e25f46f7b0d237f5e9971cef998a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab9d1c5b64e93d7ac051f8a7b41bf520a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_gab9d1c5b64e93d7ac051f8a7b41bf520a.html#gab9d1c5b64e93d7ac051f8a7b41bf520a">covariantNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:gab9d1c5b64e93d7ac051f8a7b41bf520a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine covariant Newton method.  <a href="group__NewtonGroup_gab9d1c5b64e93d7ac051f8a7b41bf520a.html#gab9d1c5b64e93d7ac051f8a7b41bf520a">More...</a><br /></td></tr>
-<tr class="separator:gab9d1c5b64e93d7ac051f8a7b41bf520a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf1a54d96b031527304e8d7e421005a07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_gaf1a54d96b031527304e8d7e421005a07.html#gaf1a54d96b031527304e8d7e421005a07">covariantNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:gaf1a54d96b031527304e8d7e421005a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine covariant Newton method.  <a href="group__NewtonGroup_gaf1a54d96b031527304e8d7e421005a07.html#gaf1a54d96b031527304e8d7e421005a07">More...</a><br /></td></tr>
-<tr class="separator:gaf1a54d96b031527304e8d7e421005a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa32f667c573986b2b2721ec6532fc832"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832.html#gaa32f667c573986b2b2721ec6532fc832">contravariantNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:gaa32f667c573986b2b2721ec6532fc832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832.html#gaa32f667c573986b2b2721ec6532fc832">More...</a><br /></td></tr>
-<tr class="separator:gaa32f667c573986b2b2721ec6532fc832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gace045630c7f0c7a1a5a48d2d0807f608"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608.html#gace045630c7f0c7a1a5a48d2d0807f608">contravariantNewton</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
-<tr class="memdesc:gace045630c7f0c7a1a5a48d2d0807f608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608.html#gace045630c7f0c7a1a5a48d2d0807f608">More...</a><br /></td></tr>
-<tr class="separator:gace045630c7f0c7a1a5a48d2d0807f608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga002fe344fa6d04a6ac59a74ea25fddb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga002fe344fa6d04a6ac59a74ea25fddb6.html#ga002fe344fa6d04a6ac59a74ea25fddb6">derivative</a> (<a class="el" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a> f)</td></tr>
-<tr class="memdesc:ga002fe344fa6d04a6ac59a74ea25fddb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the derivative of a functional \( f: X\to \mathbb{R} \) as (nonlinear) operator \( f&#39;:X\to X^* \).  <a href="group__SpacyGroup_ga002fe344fa6d04a6ac59a74ea25fddb6.html#ga002fe344fa6d04a6ac59a74ea25fddb6">More...</a><br /></td></tr>
-<tr class="separator:ga002fe344fa6d04a6ac59a74ea25fddb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6646eb7068eb9f1369e639cf0b620a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2.html#gab6646eb7068eb9f1369e639cf0b620a2">d1</a> (const <a class="el" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a> &amp;f, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="memdesc:gab6646eb7068eb9f1369e639cf0b620a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^* \).  <a href="group__SpacyGroup_gab6646eb7068eb9f1369e639cf0b620a2.html#gab6646eb7068eb9f1369e639cf0b620a2">More...</a><br /></td></tr>
-<tr class="separator:gab6646eb7068eb9f1369e639cf0b620a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga22f56f6ffd46496e786b435cabca71e0"><td class="memItemLeft" align="right" valign="top">boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gaf0e18e41c434cfceb77ccb8e785a8055.html#gaf0e18e41c434cfceb77ccb8e785a8055">Concepts::LinearOperatorConcept</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga22f56f6ffd46496e786b435cabca71e0.html#ga22f56f6ffd46496e786b435cabca71e0">d2</a> (const <a class="el" href="group__SpacyGroup_gaf5b89e117806134b06a1ce4629fb2b65.html#gaf5b89e117806134b06a1ce4629fb2b65">C2Functional</a> &amp;f, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="memdesc:ga22f56f6ffd46496e786b435cabca71e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear opeator \( f&#39;&#39;(x): X \to X^* \).  <a href="group__SpacyGroup_ga22f56f6ffd46496e786b435cabca71e0.html#ga22f56f6ffd46496e786b435cabca71e0">More...</a><br /></td></tr>
-<tr class="separator:ga22f56f6ffd46496e786b435cabca71e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga59dbadcd7afe1450933406e614381038"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga59dbadcd7afe1450933406e614381038"></a>
-boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Concepts::LinearSolverConcept</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup.html#ga59dbadcd7afe1450933406e614381038">operator^</a> (const <a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> &amp;A, int k)</td></tr>
-<tr class="memdesc:ga59dbadcd7afe1450933406e614381038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access solver via A^-1. Throws for k!=-1. <br /></td></tr>
-<tr class="separator:ga59dbadcd7afe1450933406e614381038"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab598ac107e22bc6d409a77d3335ac85d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab598ac107e22bc6d409a77d3335ac85d"></a>
-boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gac7d6a94c7131c8613e2ab26fddeb50bd.html#gac7d6a94c7131c8613e2ab26fddeb50bd">Concepts::LinearSolverConcept</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup.html#gab598ac107e22bc6d409a77d3335ac85d">operator^</a> (<a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> &amp;&amp;A, int k)</td></tr>
-<tr class="memdesc:gab598ac107e22bc6d409a77d3335ac85d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access solver via A^-1. Throws for k!=-1. <br /></td></tr>
-<tr class="separator:gab598ac107e22bc6d409a77d3335ac85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2205e2a2c4bb5242665bbc09929d35d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga2205e2a2c4bb5242665bbc09929d35d2.html#ga2205e2a2c4bb5242665bbc09929d35d2">d1</a> (const <a class="el" href="group__SpacyGroup_ga87ae8cb0d7a567a4bb181e0a9f182620.html#ga87ae8cb0d7a567a4bb181e0a9f182620">C1Operator</a> &amp;A, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="memdesc:ga2205e2a2c4bb5242665bbc09929d35d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">For an operator \( A: X\to Y \), compute \(A&#39;\) at \(x\in X\) as linear operator \( A&#39;(x): X \to Y \).  <a href="group__SpacyGroup_ga2205e2a2c4bb5242665bbc09929d35d2.html#ga2205e2a2c4bb5242665bbc09929d35d2">More...</a><br /></td></tr>
-<tr class="separator:ga2205e2a2c4bb5242665bbc09929d35d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1475b1a3b4579a27909467329ffb76fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1475b1a3b4579a27909467329ffb76fc"></a>
-<a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>axpy</b> (<a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> A, double a, <a class="el" href="group__SpacyGroup_ga584f7b9d82a844302ba0d77c3a1b6640.html#ga584f7b9d82a844302ba0d77c3a1b6640">LinearOperator</a> B)</td></tr>
-<tr class="separator:a1475b1a3b4579a27909467329ffb76fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd9bf87164dd48991d2016aec8bad08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#aafd9bf87164dd48991d2016aec8bad08">makeCGSolver</a> (<a class="el" href="classSpacy_1_1Operator.html">Operator</a> A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
+<tr class="memdesc:aafd9bf87164dd48991d2016aec8bad08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct conjugate gradient method.  <a href="#aafd9bf87164dd48991d2016aec8bad08">More...</a><br /></td></tr>
+<tr class="separator:aafd9bf87164dd48991d2016aec8bad08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9ddae62858412fe5309d11aac7b8ed3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#af9ddae62858412fe5309d11aac7b8ed3">makeRCGSolver</a> (<a class="el" href="classSpacy_1_1Operator.html">Operator</a> A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
+<tr class="memdesc:af9ddae62858412fe5309d11aac7b8ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct regularized conjugate gradient method.  <a href="#af9ddae62858412fe5309d11aac7b8ed3">More...</a><br /></td></tr>
+<tr class="separator:af9ddae62858412fe5309d11aac7b8ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5693f62a60708a49f51cf451991b96ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a5693f62a60708a49f51cf451991b96ec">makeTCGSolver</a> (<a class="el" href="classSpacy_1_1Operator.html">Operator</a> A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
+<tr class="memdesc:a5693f62a60708a49f51cf451991b96ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct truncated conjugate gradient method.  <a href="#a5693f62a60708a49f51cf451991b96ec">More...</a><br /></td></tr>
+<tr class="separator:a5693f62a60708a49f51cf451991b96ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66f5afbc97e887274b28be9c94aa3103"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a66f5afbc97e887274b28be9c94aa3103">makeTRCGSolver</a> (<a class="el" href="classSpacy_1_1Operator.html">Operator</a> A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)</td></tr>
+<tr class="memdesc:a66f5afbc97e887274b28be9c94aa3103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct truncated regularized conjugate gradient method.  <a href="#a66f5afbc97e887274b28be9c94aa3103">More...</a><br /></td></tr>
+<tr class="separator:a66f5afbc97e887274b28be9c94aa3103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70230bc5f8b83684e04685b584967882"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#ga70230bc5f8b83684e04685b584967882">localNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:ga70230bc5f8b83684e04685b584967882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local Newton method.  <a href="group__NewtonGroup.html#ga70230bc5f8b83684e04685b584967882">More...</a><br /></td></tr>
+<tr class="separator:ga70230bc5f8b83684e04685b584967882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad86d75d93e7d0307c492513c98c48fed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#gad86d75d93e7d0307c492513c98c48fed">localNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:gad86d75d93e7d0307c492513c98c48fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local Newton method with default initial iterate (x0=0).  <a href="group__NewtonGroup.html#gad86d75d93e7d0307c492513c98c48fed">More...</a><br /></td></tr>
+<tr class="separator:gad86d75d93e7d0307c492513c98c48fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0949f3b48cdec1915b947e716b56d707"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#ga0949f3b48cdec1915b947e716b56d707">covariantNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:ga0949f3b48cdec1915b947e716b56d707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine covariant Newton method.  <a href="group__NewtonGroup.html#ga0949f3b48cdec1915b947e716b56d707">More...</a><br /></td></tr>
+<tr class="separator:ga0949f3b48cdec1915b947e716b56d707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1564e156effda6be6636e29333e8250d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#ga1564e156effda6be6636e29333e8250d">covariantNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:ga1564e156effda6be6636e29333e8250d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine covariant Newton method.  <a href="group__NewtonGroup.html#ga1564e156effda6be6636e29333e8250d">More...</a><br /></td></tr>
+<tr class="separator:ga1564e156effda6be6636e29333e8250d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga323071fce88ea5e655bb18fb4233101c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#ga323071fce88ea5e655bb18fb4233101c">contravariantNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:ga323071fce88ea5e655bb18fb4233101c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup.html#ga323071fce88ea5e655bb18fb4233101c">More...</a><br /></td></tr>
+<tr class="separator:ga323071fce88ea5e655bb18fb4233101c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8cde4ccdf9479141f8f8b92607f0f724"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#ga8cde4ccdf9479141f8f8b92607f0f724">contravariantNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
+<tr class="memdesc:ga8cde4ccdf9479141f8f8b92607f0f724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup.html#ga8cde4ccdf9479141f8f8b92607f0f724">More...</a><br /></td></tr>
+<tr class="separator:ga8cde4ccdf9479141f8f8b92607f0f724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6646eb7068eb9f1369e639cf0b620a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a> (const <a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> &amp;f, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="memdesc:ab6646eb7068eb9f1369e639cf0b620a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^* \).  <a href="#ab6646eb7068eb9f1369e639cf0b620a2">More...</a><br /></td></tr>
+<tr class="separator:ab6646eb7068eb9f1369e639cf0b620a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a569d8fc0b4a0e292f257dd6307a25c8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a569d8fc0b4a0e292f257dd6307a25c8f">d2</a> (const <a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> &amp;f, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="memdesc:a569d8fc0b4a0e292f257dd6307a25c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear opeator \( f&#39;&#39;(x): X \to X^* \).  <a href="#a569d8fc0b4a0e292f257dd6307a25c8f">More...</a><br /></td></tr>
+<tr class="separator:a569d8fc0b4a0e292f257dd6307a25c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002fe344fa6d04a6ac59a74ea25fddb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">derivative</a> (<a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> f)</td></tr>
+<tr class="memdesc:a002fe344fa6d04a6ac59a74ea25fddb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the derivative of a functional \( f: X\to \mathbb{R} \) as (nonlinear) operator \( f&#39;:X\to X^* \).  <a href="#a002fe344fa6d04a6ac59a74ea25fddb6">More...</a><br /></td></tr>
+<tr class="separator:a002fe344fa6d04a6ac59a74ea25fddb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2205e2a2c4bb5242665bbc09929d35d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a2205e2a2c4bb5242665bbc09929d35d2">d1</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;A, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="memdesc:a2205e2a2c4bb5242665bbc09929d35d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">For an operator \( A: X\to Y \), compute \(A&#39;\) at \(x\in X\) as linear operator \( A&#39;(x): X \to Y \).  <a href="#a2205e2a2c4bb5242665bbc09929d35d2">More...</a><br /></td></tr>
+<tr class="separator:a2205e2a2c4bb5242665bbc09929d35d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55ac280003bc1cafd067f7a956e2042c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55ac280003bc1cafd067f7a956e2042c"></a>
+<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>axpy</b> (<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;A, double a, <a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> B)</td></tr>
+<tr class="separator:a55ac280003bc1cafd067f7a956e2042c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa040ba5c24284687e0df19c99dd688a6"><td class="memItemLeft" align="right" valign="top">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gaa040ba5c24284687e0df19c99dd688a6">primalComponent</a> (::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
+<tr class="separator:gaa040ba5c24284687e0df19c99dd688a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga88c5bcc74072f75c63ab7d9448f80a7e"><td class="memItemLeft" align="right" valign="top">const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#ga88c5bcc74072f75c63ab7d9448f80a7e">primalComponent</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
+<tr class="separator:ga88c5bcc74072f75c63ab7d9448f80a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafe51c084e3b03205db94e91309e834f7"><td class="memItemLeft" align="right" valign="top">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gafe51c084e3b03205db94e91309e834f7">dualComponent</a> (::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
+<tr class="separator:gafe51c084e3b03205db94e91309e834f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe5978657aab46b1575e2521b336407d"><td class="memItemLeft" align="right" valign="top">const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gabe5978657aab46b1575e2521b336407d">dualComponent</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
+<tr class="separator:gabe5978657aab46b1575e2521b336407d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa483f25537054790b8c29403999e7c11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa483f25537054790b8c29403999e7c11"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>toDouble</b> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="separator:aa483f25537054790b8c29403999e7c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c74ced017dd754a0e23d682dbbb77a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18c74ced017dd754a0e23d682dbbb77a"></a>
+double &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>toDouble</b> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="separator:a18c74ced017dd754a0e23d682dbbb77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6517502cf2352e27191ac928f87ec7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f6517502cf2352e27191ac928f87ec7"></a>
+double &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>toDouble</b> (<a class="el" href="classSpacy_1_1Real.html">Real</a> &amp;x)</td></tr>
+<tr class="separator:a2f6517502cf2352e27191ac928f87ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb2c081d221dc3fa62efda31e495d48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcb2c081d221dc3fa62efda31e495d48"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>toDouble</b> (const <a class="el" href="classSpacy_1_1Real.html">Real</a> &amp;x)</td></tr>
+<tr class="separator:afcb2c081d221dc3fa62efda31e495d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af49415264c387ee164987699a32a57ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af49415264c387ee164987699a32a57ba"></a>
 <a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#af49415264c387ee164987699a32a57ba">operator/</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> x, const <a class="el" href="classSpacy_1_1Real.html">Real</a> &amp;y)</td></tr>
 <tr class="memdesc:af49415264c387ee164987699a32a57ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x/y\). <br /></td></tr>
@@ -321,14 +378,16 @@ boost::type_erasure::any&lt; <a class="el" href="group__ConceptGroup_gac7d6a94c7
 <a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a77cee8a890ece2f07c1a20769525daab">operator*</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> x, const <a class="el" href="classSpacy_1_1Real.html">Real</a> &amp;y)</td></tr>
 <tr class="memdesc:a77cee8a890ece2f07c1a20769525daab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x*y\). <br /></td></tr>
 <tr class="separator:a77cee8a890ece2f07c1a20769525daab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b0d61ffe18f1a13e7d585e2d186ff29"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b0d61ffe18f1a13e7d585e2d186ff29"></a>
-<a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a6b0d61ffe18f1a13e7d585e2d186ff29">operator*</a> (double x, <a class="el" href="classSpacy_1_1Real.html">Real</a> y)</td></tr>
-<tr class="memdesc:a6b0d61ffe18f1a13e7d585e2d186ff29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x*y\). <br /></td></tr>
-<tr class="separator:a6b0d61ffe18f1a13e7d585e2d186ff29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed08400214b2913e3f03b5d1db347647"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed08400214b2913e3f03b5d1db347647"></a>
-<a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#aed08400214b2913e3f03b5d1db347647">operator*</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> x, double y)</td></tr>
-<tr class="memdesc:aed08400214b2913e3f03b5d1db347647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x*y\). <br /></td></tr>
-<tr class="separator:aed08400214b2913e3f03b5d1db347647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e9ea51b184c04946f429263e56df92a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4e9ea51b184c04946f429263e56df92a"></a>
+template&lt;class Arithmetic , class  = std::enable_if_t&lt;std::is_arithmetic&lt;Arithmetic&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a4e9ea51b184c04946f429263e56df92a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a4e9ea51b184c04946f429263e56df92a">operator*</a> (Arithmetic x, <a class="el" href="classSpacy_1_1Real.html">Real</a> y)</td></tr>
+<tr class="memdesc:a4e9ea51b184c04946f429263e56df92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x*y\). <br /></td></tr>
+<tr class="separator:a4e9ea51b184c04946f429263e56df92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d19ae9f3266ca0613b90055c60b8ea8"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9d19ae9f3266ca0613b90055c60b8ea8"></a>
+template&lt;class Arithmetic , class  = std::enable_if_t&lt;std::is_arithmetic&lt;Arithmetic&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a9d19ae9f3266ca0613b90055c60b8ea8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a9d19ae9f3266ca0613b90055c60b8ea8">operator*</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> x, Arithmetic y)</td></tr>
+<tr class="memdesc:a9d19ae9f3266ca0613b90055c60b8ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(x*y\). <br /></td></tr>
+<tr class="separator:a9d19ae9f3266ca0613b90055c60b8ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a078a8d272a6293f6262e4440aec0a058"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a078a8d272a6293f6262e4440aec0a058"></a>
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a078a8d272a6293f6262e4440aec0a058">operator*</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> a, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> x)</td></tr>
 <tr class="memdesc:a078a8d272a6293f6262e4440aec0a058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \(a*y\). <br /></td></tr>
@@ -453,98 +512,824 @@ std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="
 <a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a64093cc47f73b71ba92bc0dd37e9572b">cbrt</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> x)</td></tr>
 <tr class="memdesc:a64093cc47f73b71ba92bc0dd37e9572b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute \( x^{1/3} \). <br /></td></tr>
 <tr class="separator:a64093cc47f73b71ba92bc0dd37e9572b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga16b67d1bc0157426af3ee1e91afcf728"><td class="memTemplParams" colspan="2">template&lt;class ToType , class FromType , class  = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:ga16b67d1bc0157426af3ee1e91afcf728"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728.html#ga16b67d1bc0157426af3ee1e91afcf728">is</a> (const FromType &amp;x)</td></tr>
-<tr class="memdesc:ga16b67d1bc0157426af3ee1e91afcf728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if x can be cast to a reference of type ToType.  <a href="group__SpacyGroup_ga16b67d1bc0157426af3ee1e91afcf728.html#ga16b67d1bc0157426af3ee1e91afcf728">More...</a><br /></td></tr>
-<tr class="separator:ga16b67d1bc0157426af3ee1e91afcf728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf74aa266d04acaba7263ee8d36b5b906"><td class="memTemplParams" colspan="2">template&lt;class ToType , class FromType , class  = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:gaf74aa266d04acaba7263ee8d36b5b906"><td class="memTemplItemLeft" align="right" valign="top">ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">cast_ref</a> (FromType &amp;x)</td></tr>
-<tr class="memdesc:gaf74aa266d04acaba7263ee8d36b5b906"><td class="mdescLeft">&#160;</td><td class="mdescRight">cast x of type 'FromType&amp;' to 'ToType&amp;' with boost::type_erasure::any_cast  <a href="group__SpacyGroup_gaf74aa266d04acaba7263ee8d36b5b906.html#gaf74aa266d04acaba7263ee8d36b5b906">More...</a><br /></td></tr>
-<tr class="separator:gaf74aa266d04acaba7263ee8d36b5b906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf03cb3abce3186570889439abac37917"><td class="memTemplParams" colspan="2">template&lt;class ToType , class FromType , class  = std::enable_if_t&lt;!std::is_same&lt;FromType,::Spacy::Vector&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:gaf03cb3abce3186570889439abac37917"><td class="memTemplItemLeft" align="right" valign="top">const ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gaf03cb3abce3186570889439abac37917.html#gaf03cb3abce3186570889439abac37917">cast_ref</a> (const FromType &amp;x)</td></tr>
-<tr class="memdesc:gaf03cb3abce3186570889439abac37917"><td class="mdescLeft">&#160;</td><td class="mdescRight">cast x of type 'const FromType&amp;' to 'const ToType&amp;' with boost::type_erasure::any_cast  <a href="group__SpacyGroup_gaf03cb3abce3186570889439abac37917.html#gaf03cb3abce3186570889439abac37917">More...</a><br /></td></tr>
-<tr class="separator:gaf03cb3abce3186570889439abac37917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga64250818ba7ff711c207af6ab40ff986"><td class="memTemplParams" colspan="2">template&lt;typename Func , typename Tup &gt; </td></tr>
-<tr class="memitem:ga64250818ba7ff711c207af6ab40ff986"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga64250818ba7ff711c207af6ab40ff986.html#ga64250818ba7ff711c207af6ab40ff986">invoke</a> (Func &amp;&amp;func, Tup &amp;&amp;tup)</td></tr>
-<tr class="memdesc:ga64250818ba7ff711c207af6ab40ff986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke function with arguments contained in tup.  <a href="group__SpacyGroup_ga64250818ba7ff711c207af6ab40ff986.html#ga64250818ba7ff711c207af6ab40ff986">More...</a><br /></td></tr>
-<tr class="separator:ga64250818ba7ff711c207af6ab40ff986"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae823c82326475d3cc3b166533deddf21"><td class="memTemplParams" colspan="2">template&lt;typename Type , typename Tup &gt; </td></tr>
-<tr class="memitem:gae823c82326475d3cc3b166533deddf21"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gae823c82326475d3cc3b166533deddf21.html#gae823c82326475d3cc3b166533deddf21">create</a> (Tup &amp;&amp;tup)</td></tr>
-<tr class="memdesc:gae823c82326475d3cc3b166533deddf21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object of type Type from elements contained in tup.  <a href="group__SpacyGroup_gae823c82326475d3cc3b166533deddf21.html#gae823c82326475d3cc3b166533deddf21">More...</a><br /></td></tr>
-<tr class="separator:gae823c82326475d3cc3b166533deddf21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86fc19860827749c1d825b689cfbc6cd"><td class="memTemplParams" colspan="2">template&lt;class F , class Vector &gt; </td></tr>
-<tr class="memitem:a86fc19860827749c1d825b689cfbc6cd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_a86fc19860827749c1d825b689cfbc6cd.html#a86fc19860827749c1d825b689cfbc6cd">primalDualIgnoreReset</a> (F &amp;&amp;f, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="memdesc:a86fc19860827749c1d825b689cfbc6cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply f(x) without resetting primal/dual flags in intermediate computations.  <a href="namespaceSpacy_a86fc19860827749c1d825b689cfbc6cd.html#a86fc19860827749c1d825b689cfbc6cd">More...</a><br /></td></tr>
-<tr class="separator:a86fc19860827749c1d825b689cfbc6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6410e7ef118eb48c8339cd91c5b647f"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab6410e7ef118eb48c8339cd91c5b647f"></a>
-template&lt;class F , class Vector &gt; </td></tr>
-<tr class="memitem:ab6410e7ef118eb48c8339cd91c5b647f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>primalDualIgnoreReset</b> (F &amp;&amp;f, double t, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="separator:ab6410e7ef118eb48c8339cd91c5b647f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9723cd932bd79709ff03e4ed6c8ac1b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9723cd932bd79709ff03e4ed6c8ac1b0"></a>
-<a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>primal</b> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="separator:a9723cd932bd79709ff03e4ed6c8ac1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f893b9998bd0f3895b8899f54be471"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99f893b9998bd0f3895b8899f54be471"></a>
-const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>primal</b> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="separator:a99f893b9998bd0f3895b8899f54be471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d2c8b2c6b30c9b76efea6b67804605f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d2c8b2c6b30c9b76efea6b67804605f"></a>
-<a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>dual</b> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="separator:a0d2c8b2c6b30c9b76efea6b67804605f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58c983157e71cf6009ed046a3adea1b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58c983157e71cf6009ed046a3adea1b3"></a>
-const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>dual</b> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="separator:a58c983157e71cf6009ed046a3adea1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77116dbec86e38dd1baca8c782eab231"><td class="memTemplParams" colspan="2"><a class="anchor" id="a77116dbec86e38dd1baca8c782eab231"></a>
-template&lt;class ToType &gt; </td></tr>
-<tr class="memitem:a77116dbec86e38dd1baca8c782eab231"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>is</b> (const <a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
-<tr class="separator:a77116dbec86e38dd1baca8c782eab231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaa7aa09b09fc4d390ab0fb11eb2c202"><td class="memTemplParams" colspan="2"><a class="anchor" id="aaaa7aa09b09fc4d390ab0fb11eb2c202"></a>
-template&lt;class ToType &gt; </td></tr>
-<tr class="memitem:aaaa7aa09b09fc4d390ab0fb11eb2c202"><td class="memTemplItemLeft" align="right" valign="top">const ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cast_ref</b> (const <a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
-<tr class="separator:aaaa7aa09b09fc4d390ab0fb11eb2c202"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8de857176661184311b04035c1e39850"><td class="memTemplParams" colspan="2"><a class="anchor" id="a8de857176661184311b04035c1e39850"></a>
-template&lt;class ToType &gt; </td></tr>
-<tr class="memitem:a8de857176661184311b04035c1e39850"><td class="memTemplItemLeft" align="right" valign="top">ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cast_ref</b> (<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
-<tr class="separator:a8de857176661184311b04035c1e39850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9471ec2eaf7138385a168f5f7c61b7f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga9471ec2eaf7138385a168f5f7c61b7f4.html#ga9471ec2eaf7138385a168f5f7c61b7f4">operator*</a> (double a, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> x)</td></tr>
-<tr class="memdesc:ga9471ec2eaf7138385a168f5f7c61b7f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication with arithmetic types (double,float,int,...).  <a href="group__SpacyGroup_ga9471ec2eaf7138385a168f5f7c61b7f4.html#ga9471ec2eaf7138385a168f5f7c61b7f4">More...</a><br /></td></tr>
-<tr class="separator:ga9471ec2eaf7138385a168f5f7c61b7f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga19486acb05af1627ec49c376b204a61c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga19486acb05af1627ec49c376b204a61c.html#ga19486acb05af1627ec49c376b204a61c">operator+</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
-<tr class="memdesc:ga19486acb05af1627ec49c376b204a61c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of vectors.  <a href="group__SpacyGroup_ga19486acb05af1627ec49c376b204a61c.html#ga19486acb05af1627ec49c376b204a61c">More...</a><br /></td></tr>
-<tr class="separator:ga19486acb05af1627ec49c376b204a61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga9eaf4be1a4e8f3ee03e4c4fdafa5687d.html#ga9eaf4be1a4e8f3ee03e4c4fdafa5687d">operator-</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
-<tr class="memdesc:ga9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract vectors.  <a href="group__SpacyGroup_ga9eaf4be1a4e8f3ee03e4c4fdafa5687d.html#ga9eaf4be1a4e8f3ee03e4c4fdafa5687d">More...</a><br /></td></tr>
-<tr class="separator:ga9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d84603fc2bfbefca6a020b1217519ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga1d84603fc2bfbefca6a020b1217519ad.html#ga1d84603fc2bfbefca6a020b1217519ad">operator*</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
-<tr class="memdesc:ga1d84603fc2bfbefca6a020b1217519ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute scalar product.  <a href="group__SpacyGroup_ga1d84603fc2bfbefca6a020b1217519ad.html#ga1d84603fc2bfbefca6a020b1217519ad">More...</a><br /></td></tr>
-<tr class="separator:ga1d84603fc2bfbefca6a020b1217519ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga86a4fc266aa19a07b0af16388907354b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga86a4fc266aa19a07b0af16388907354b.html#ga86a4fc266aa19a07b0af16388907354b">norm</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
-<tr class="memdesc:ga86a4fc266aa19a07b0af16388907354b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm, where the norm associated with the underlying function space is used.  <a href="group__SpacyGroup_ga86a4fc266aa19a07b0af16388907354b.html#ga86a4fc266aa19a07b0af16388907354b">More...</a><br /></td></tr>
-<tr class="separator:ga86a4fc266aa19a07b0af16388907354b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4b05902653c5fc8d6411142dcb352f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a4f4b05902653c5fc8d6411142dcb352f">makeRealSpace</a> (bool defaultIndex=false)</td></tr>
+<tr class="memdesc:a4f4b05902653c5fc8d6411142dcb352f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct space of real numbers.  <a href="#a4f4b05902653c5fc8d6411142dcb352f">More...</a><br /></td></tr>
+<tr class="separator:a4f4b05902653c5fc8d6411142dcb352f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae44bfd08fa77272bab4149665b26233a"><td class="memTemplParams" colspan="2"><a class="anchor" id="ae44bfd08fa77272bab4149665b26233a"></a>
+template&lt;class ToType , class FromType &gt; </td></tr>
+<tr class="memitem:ae44bfd08fa77272bab4149665b26233a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ae44bfd08fa77272bab4149665b26233a">is</a> (const FromType &amp;x)</td></tr>
+<tr class="memdesc:ae44bfd08fa77272bab4149665b26233a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if x can be cast to a reference of type ToType. <br /></td></tr>
+<tr class="separator:ae44bfd08fa77272bab4149665b26233a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0550fc1d402f00e42c165ae8eb3305"><td class="memTemplParams" colspan="2"><a class="anchor" id="abb0550fc1d402f00e42c165ae8eb3305"></a>
+template&lt;class ToType , class FromType &gt; </td></tr>
+<tr class="memitem:abb0550fc1d402f00e42c165ae8eb3305"><td class="memTemplItemLeft" align="right" valign="top">ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305">cast_ref</a> (FromType &amp;x)</td></tr>
+<tr class="memdesc:abb0550fc1d402f00e42c165ae8eb3305"><td class="mdescLeft">&#160;</td><td class="mdescRight">cast x of type 'FromType&amp;' to 'ToType&amp;' <br /></td></tr>
+<tr class="separator:abb0550fc1d402f00e42c165ae8eb3305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00fc9d674cd8813c4e20a05adf3aaaa4"><td class="memTemplParams" colspan="2"><a class="anchor" id="a00fc9d674cd8813c4e20a05adf3aaaa4"></a>
+template&lt;class ToType , class FromType &gt; </td></tr>
+<tr class="memitem:a00fc9d674cd8813c4e20a05adf3aaaa4"><td class="memTemplItemLeft" align="right" valign="top">const ToType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a00fc9d674cd8813c4e20a05adf3aaaa4">cast_ref</a> (const FromType &amp;x)</td></tr>
+<tr class="memdesc:a00fc9d674cd8813c4e20a05adf3aaaa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">cast x of type 'const FromType&amp;' to 'const ToType&amp;' <br /></td></tr>
+<tr class="separator:a00fc9d674cd8813c4e20a05adf3aaaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd8ce352c45e326cf8966befd5159ce"><td class="memTemplParams" colspan="2">template&lt;class Origin , class Target &gt; </td></tr>
+<tr class="memitem:a7dd8ce352c45e326cf8966befd5159ce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a7dd8ce352c45e326cf8966befd5159ce">genericCopy</a> (const Origin &amp;x, Target &amp;y, std::function&lt; void(const Origin &amp;, Target &amp;)&gt; copyTargetIfConsistent)</td></tr>
+<tr class="memdesc:a7dd8ce352c45e326cf8966befd5159ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from x to y.  <a href="#a7dd8ce352c45e326cf8966befd5159ce">More...</a><br /></td></tr>
+<tr class="separator:a7dd8ce352c45e326cf8966befd5159ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64250818ba7ff711c207af6ab40ff986"><td class="memTemplParams" colspan="2">template&lt;typename Func , typename Tup &gt; </td></tr>
+<tr class="memitem:a64250818ba7ff711c207af6ab40ff986"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a64250818ba7ff711c207af6ab40ff986">invoke</a> (Func &amp;&amp;func, Tup &amp;&amp;tup)</td></tr>
+<tr class="memdesc:a64250818ba7ff711c207af6ab40ff986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke function with arguments contained in tup.  <a href="#a64250818ba7ff711c207af6ab40ff986">More...</a><br /></td></tr>
+<tr class="separator:a64250818ba7ff711c207af6ab40ff986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae823c82326475d3cc3b166533deddf21"><td class="memTemplParams" colspan="2">template&lt;typename Type , typename Tup &gt; </td></tr>
+<tr class="memitem:ae823c82326475d3cc3b166533deddf21"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ae823c82326475d3cc3b166533deddf21">create</a> (Tup &amp;&amp;tup)</td></tr>
+<tr class="memdesc:ae823c82326475d3cc3b166533deddf21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create object of type Type from elements contained in tup.  <a href="#ae823c82326475d3cc3b166533deddf21">More...</a><br /></td></tr>
+<tr class="separator:ae823c82326475d3cc3b166533deddf21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc9a8a0cad11b10fb4453e6bea7a7e1"><td class="memTemplParams" colspan="2"><a class="anchor" id="accc9a8a0cad11b10fb4453e6bea7a7e1"></a>
+template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
+<tr class="memitem:accc9a8a0cad11b10fb4453e6bea7a7e1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>castAndAttach</b> (Source &amp;source, ToAttach &amp;toAttach)</td></tr>
+<tr class="separator:accc9a8a0cad11b10fb4453e6bea7a7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e6018674d6169a33a2fa75a35e2fef3"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9e6018674d6169a33a2fa75a35e2fef3"></a>
+template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
+<tr class="memitem:a9e6018674d6169a33a2fa75a35e2fef3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>castAndDetach</b> (Source &amp;source, ToAttach &amp;toAttach)</td></tr>
+<tr class="separator:a9e6018674d6169a33a2fa75a35e2fef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d1790a41a9a5dd65b99ddd231fc652"><td class="memTemplParams" colspan="2"><a class="anchor" id="a84d1790a41a9a5dd65b99ddd231fc652"></a>
+template&lt;class T , class Derived , class  = std::enable_if_t&lt; std::is_base_of&lt;Mixin::ToTarget&lt;std::decay_t&lt;Derived&gt; &gt;,std::decay_t&lt;Derived&gt;&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a84d1790a41a9a5dd65b99ddd231fc652"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a84d1790a41a9a5dd65b99ddd231fc652">target</a> (Derived &amp;&amp;t)</td></tr>
+<tr class="memdesc:a84d1790a41a9a5dd65b99ddd231fc652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient access to t.template <a class="el" href="namespaceSpacy.html#a84d1790a41a9a5dd65b99ddd231fc652" title="Convenient access to t.template target<T>(). ">target&lt;T&gt;()</a>. <br /></td></tr>
+<tr class="separator:a84d1790a41a9a5dd65b99ddd231fc652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e53832889e5dc17800d40056fc8940b"><td class="memTemplParams" colspan="2"><a class="anchor" id="a1e53832889e5dc17800d40056fc8940b"></a>
+template&lt;class T , class Signature &gt; </td></tr>
+<tr class="memitem:a1e53832889e5dc17800d40056fc8940b"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a1e53832889e5dc17800d40056fc8940b">target</a> (std::function&lt; Signature &gt; &amp;f)</td></tr>
+<tr class="memdesc:a1e53832889e5dc17800d40056fc8940b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient access to f.template <a class="el" href="namespaceSpacy.html#a84d1790a41a9a5dd65b99ddd231fc652" title="Convenient access to t.template target<T>(). ">target&lt;T&gt;()</a>. <br /></td></tr>
+<tr class="separator:a1e53832889e5dc17800d40056fc8940b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbbe651cb37fe1aa14abd4f85f640f6a"><td class="memTemplParams" colspan="2"><a class="anchor" id="abbbe651cb37fe1aa14abd4f85f640f6a"></a>
+template&lt;class T , class Signature &gt; </td></tr>
+<tr class="memitem:abbbe651cb37fe1aa14abd4f85f640f6a"><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#abbbe651cb37fe1aa14abd4f85f640f6a">target</a> (const std::function&lt; Signature &gt; &amp;f)</td></tr>
+<tr class="memdesc:abbbe651cb37fe1aa14abd4f85f640f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient access to f.template <a class="el" href="namespaceSpacy.html#a84d1790a41a9a5dd65b99ddd231fc652" title="Convenient access to t.template target<T>(). ">target&lt;T&gt;()</a>. <br /></td></tr>
+<tr class="separator:abbbe651cb37fe1aa14abd4f85f640f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a1cbb3d98d6ac0a82727959038f4b4"><td class="memTemplParams" colspan="2"><a class="anchor" id="ae0a1cbb3d98d6ac0a82727959038f4b4"></a>
+template&lt;class Arithmetic , class  = std::enable_if_t&lt; std::is_arithmetic&lt;Arithmetic&gt;::value &gt;&gt; </td></tr>
+<tr class="memitem:ae0a1cbb3d98d6ac0a82727959038f4b4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4">operator*</a> (Arithmetic a, <a class="el" href="classSpacy_1_1Vector.html">Vector</a> x)</td></tr>
+<tr class="memdesc:ae0a1cbb3d98d6ac0a82727959038f4b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication with arithmetic types (double,float,int,...). <br /></td></tr>
+<tr class="separator:ae0a1cbb3d98d6ac0a82727959038f4b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0120fd6b1d7580a9f7b8f24e646cbc6c"><td class="memTemplParams" colspan="2"><a class="anchor" id="a0120fd6b1d7580a9f7b8f24e646cbc6c"></a>
+template&lt;class Arithmetic , class  = std::enable_if_t&lt; std::is_arithmetic&lt;Arithmetic&gt;::value &gt;&gt; </td></tr>
+<tr class="memitem:a0120fd6b1d7580a9f7b8f24e646cbc6c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a0120fd6b1d7580a9f7b8f24e646cbc6c">operator*</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, Arithmetic a)</td></tr>
+<tr class="memdesc:a0120fd6b1d7580a9f7b8f24e646cbc6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication with arithmetic types (double,float,int,...). <br /></td></tr>
+<tr class="separator:a0120fd6b1d7580a9f7b8f24e646cbc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19486acb05af1627ec49c376b204a61c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19486acb05af1627ec49c376b204a61c"></a>
+<a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a19486acb05af1627ec49c376b204a61c">operator+</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
+<tr class="memdesc:a19486acb05af1627ec49c376b204a61c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of vectors \(z=x+y\). <br /></td></tr>
+<tr class="separator:a19486acb05af1627ec49c376b204a61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9eaf4be1a4e8f3ee03e4c4fdafa5687d"></a>
+<a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a9eaf4be1a4e8f3ee03e4c4fdafa5687d">operator-</a> (<a class="el" href="classSpacy_1_1Vector.html">Vector</a> x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
+<tr class="memdesc:a9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract vectors \(z=x-y\). <br /></td></tr>
+<tr class="separator:a9eaf4be1a4e8f3ee03e4c4fdafa5687d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d84603fc2bfbefca6a020b1217519ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d84603fc2bfbefca6a020b1217519ad"></a>
+<a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a1d84603fc2bfbefca6a020b1217519ad">operator*</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
+<tr class="memdesc:a1d84603fc2bfbefca6a020b1217519ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute scalar product \(z=x*y=(x,y)\). <br /></td></tr>
+<tr class="separator:a1d84603fc2bfbefca6a020b1217519ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86a4fc266aa19a07b0af16388907354b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86a4fc266aa19a07b0af16388907354b"></a>
+<a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x)</td></tr>
+<tr class="memdesc:a86a4fc266aa19a07b0af16388907354b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute norm, where the norm associated with the underlying function space is used \( z = \|x\| \). <br /></td></tr>
+<tr class="separator:a86a4fc266aa19a07b0af16388907354b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac354f06d21282619482e3ef4a841cd76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac354f06d21282619482e3ef4a841cd76"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>checkDualPairing</b> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;y)</td></tr>
 <tr class="separator:ac354f06d21282619482e3ef4a841cd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabfc17f845736365ee79be8ce68d50b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gabfc17f845736365ee79be8ce68d50b27.html#gabfc17f845736365ee79be8ce68d50b27">makeBanachSpace</a> (<a class="el" href="group__SpacyGroup_ga1f5316487c031a478247206764bb2efb.html#ga1f5316487c031a478247206764bb2efb">VectorCreator</a> creator, <a class="el" href="group__SpacyGroup_gaf4f33b11d657c48566d961a013c92bd1.html#gaf4f33b11d657c48566d961a013c92bd1">Norm</a> <a class="el" href="group__SpacyGroup_ga86a4fc266aa19a07b0af16388907354b.html#ga86a4fc266aa19a07b0af16388907354b">norm</a>)</td></tr>
-<tr class="memdesc:gabfc17f845736365ee79be8ce68d50b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct Banach space.  <a href="group__SpacyGroup_gabfc17f845736365ee79be8ce68d50b27.html#gabfc17f845736365ee79be8ce68d50b27">More...</a><br /></td></tr>
-<tr class="separator:gabfc17f845736365ee79be8ce68d50b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga63c49d211bf214be1fb321440ed03aad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_ga63c49d211bf214be1fb321440ed03aad.html#ga63c49d211bf214be1fb321440ed03aad">makeHilbertSpace</a> (<a class="el" href="group__SpacyGroup_ga1f5316487c031a478247206764bb2efb.html#ga1f5316487c031a478247206764bb2efb">VectorCreator</a> creator, <a class="el" href="group__SpacyGroup_ga9fe0b4de20da1ab1ca3d04a0f96343e1.html#ga9fe0b4de20da1ab1ca3d04a0f96343e1">ScalarProduct</a> scalarProduct, bool defaultIndex=false)</td></tr>
-<tr class="memdesc:ga63c49d211bf214be1fb321440ed03aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct Hilbert space.  <a href="group__SpacyGroup_ga63c49d211bf214be1fb321440ed03aad.html#ga63c49d211bf214be1fb321440ed03aad">More...</a><br /></td></tr>
-<tr class="separator:ga63c49d211bf214be1fb321440ed03aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad115dc8703f23d8070c7da07a59ca067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SpacyGroup_gad115dc8703f23d8070c7da07a59ca067.html#gad115dc8703f23d8070c7da07a59ca067">connect</a> (<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;X, <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y)</td></tr>
-<tr class="memdesc:gad115dc8703f23d8070c7da07a59ca067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relate function spaces.  <a href="group__SpacyGroup_gad115dc8703f23d8070c7da07a59ca067.html#gad115dc8703f23d8070c7da07a59ca067">More...</a><br /></td></tr>
-<tr class="separator:gad115dc8703f23d8070c7da07a59ca067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affaca762d59da675eef594854762cdcd"><td class="memTemplParams" colspan="2"><a class="anchor" id="affaca762d59da675eef594854762cdcd"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:affaca762d59da675eef594854762cdcd"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>creator</b> (<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;space)</td></tr>
+<tr class="separator:affaca762d59da675eef594854762cdcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed55e3a3401be0e74e174a12858baffa"><td class="memTemplParams" colspan="2"><a class="anchor" id="aed55e3a3401be0e74e174a12858baffa"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:aed55e3a3401be0e74e174a12858baffa"><td class="memTemplItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>creator</b> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;space)</td></tr>
+<tr class="separator:aed55e3a3401be0e74e174a12858baffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc17f845736365ee79be8ce68d50b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#abfc17f845736365ee79be8ce68d50b27">makeBanachSpace</a> (<a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">VectorCreator</a> creator, <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> <a class="el" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a>)</td></tr>
+<tr class="memdesc:abfc17f845736365ee79be8ce68d50b27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct Banach space.  <a href="#abfc17f845736365ee79be8ce68d50b27">More...</a><br /></td></tr>
+<tr class="separator:abfc17f845736365ee79be8ce68d50b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c49d211bf214be1fb321440ed03aad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a63c49d211bf214be1fb321440ed03aad">makeHilbertSpace</a> (<a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">VectorCreator</a> creator, <a class="el" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">ScalarProduct</a> scalarProduct, bool defaultIndex=false)</td></tr>
+<tr class="memdesc:a63c49d211bf214be1fb321440ed03aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct Hilbert space.  <a href="#a63c49d211bf214be1fb321440ed03aad">More...</a><br /></td></tr>
+<tr class="separator:a63c49d211bf214be1fb321440ed03aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad115dc8703f23d8070c7da07a59ca067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#ad115dc8703f23d8070c7da07a59ca067">connect</a> (<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;X, <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y)</td></tr>
+<tr class="memdesc:ad115dc8703f23d8070c7da07a59ca067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relate function spaces.  <a href="#ad115dc8703f23d8070c7da07a59ca067">More...</a><br /></td></tr>
+<tr class="separator:ad115dc8703f23d8070c7da07a59ca067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72844d3d381380c382cd9dce912e2664"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72844d3d381380c382cd9dce912e2664"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>connectAsPrimalDualPair</b> (<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;X, <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y)</td></tr>
+<tr class="separator:a72844d3d381380c382cd9dce912e2664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae18423491adef608743902f1c40844e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae18423491adef608743902f1c40844e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>checkSpaceCompatibility</b> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;V, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;W)</td></tr>
 <tr class="separator:aae18423491adef608743902f1c40844e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac814992b4f38529dc1daca8a6856af03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac814992b4f38529dc1daca8a6856af03"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>checkSpaceCompatibility</b> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *V, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *W)</td></tr>
-<tr class="separator:ac814992b4f38529dc1daca8a6856af03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a39b7357abb0410ba6e6c640029425400"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39b7357abb0410ba6e6c640029425400"></a>
+std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a39b7357abb0410ba6e6c640029425400">operator^</a> (const <a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;A, int k)</td></tr>
+<tr class="memdesc:a39b7357abb0410ba6e6c640029425400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access solver via A^-1. Throws for k!=-1. <br /></td></tr>
+<tr class="separator:a39b7357abb0410ba6e6c640029425400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main namespace of the Spacy library. </p>
-</div></div><!-- contents -->
+<p>NAMESPACES</p>
+<p><a class="anchor" id="C1FunctionalConceptAnchor"></a> </p><div class="fragment"><div class="line"><span class="comment">// f: X-&gt;R.</span></div>
+<div class="line"><span class="keyword">class </span>MyFunctional</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute f(x).</span></div>
+<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Compute f&#39;(x) as element of the dual space X*.</span></div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line">  <span class="comment">// Access underlying domain space X.</span></div>
+<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f" title="Concept for functionals in Spacy. ">FunctionalConcept</a>, <a class="el" href="classSpacy_1_1C1Functional.html" title="Type-erased differentiable functional . ">C1Functional</a> </dd></dl>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="ad81a1e86d95b7d87a67d152fc01ee83e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceSpacy.html#ad81a1e86d95b7d87a67d152fc01ee83e">Spacy::DynamicCallableOperator</a> = typedef std::function&lt;<a class="el" href="classSpacy_1_1Vector.html">Vector</a>(double,const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simplest possible time-dependent operator. Can store objects that satisfy the requirements of DynamicCallableOperatorConcept. </p>
+<p><a class="anchor" id="DynamicCallableOperatorAnchor"></a>Use this if only application of an operator is required. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0dbe77a4e1282ef88017e94d50d17791"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Spacy::Norm</a> = typedef std::function&lt;<a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type-erased norm. </p>
+<p>The minimal signature (besides copy and/or move constructor/assignment) of a norm is: </p><div class="fragment"><div class="line"><span class="comment">// My norm.</span></div>
+<div class="line"><span class="keyword">class </span>MyNorm</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute ||x||.</span></div>
+<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="aa995526aa0e3fa58aca8dd6772311cad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">Spacy::ScalarProduct</a> = typedef std::function&lt;<a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type-erased scalar product. </p>
+<p>The minimal signature (besides copy and/or move constructor/assignment) of a scalar product is: </p><div class="fragment"><div class="line"><span class="comment">// My scalar product.</span></div>
+<div class="line"><span class="keyword">class </span>MyScalarProduct</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute (x,y).</span></div>
+<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; y) <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="a94fc7a4b9d3b26ef835e61647fac4d9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">Spacy::VectorCreator</a> = typedef std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>*) &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Vector</a> creator for feeding into <a class="el" href="classSpacy_1_1VectorSpace.html" title="Function space . ">VectorSpace</a>. </p>
+<p>The minimal signature (besides copy and/or move constructor/assignment) of a vector creator is: </p><div class="fragment"><div class="line"><span class="comment">// My vector creator.</span></div>
+<div class="line"><span class="keyword">class </span>MyVectorCreator</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  <span class="comment">// Compute ||x||.</span></div>
+<div class="line">  <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a> operator()(<span class="keyword">const</span> VectorSpace* space) <span class="keyword">const</span>;</div>
+<div class="line">};</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aafd9bf87164dd48991d2016aec8bad08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a> Spacy::makeCGSolver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Operator.html">Operator</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CallableOperator&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relativeAccuracy</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eps</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct conjugate gradient method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>operator </td></tr>
+    <tr><td class="paramname">P</td><td>preconditioner </td></tr>
+    <tr><td class="paramname">relativeAccuracy</td><td>relative accuracy </td></tr>
+    <tr><td class="paramname">eps</td><td>maximal attainable accuracy </td></tr>
+    <tr><td class="paramname">verbose</td><td>verbosity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CGSolver(A,P,"CG") </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af9ddae62858412fe5309d11aac7b8ed3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a> Spacy::makeRCGSolver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Operator.html">Operator</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CallableOperator&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relativeAccuracy</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eps</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct regularized conjugate gradient method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>operator </td></tr>
+    <tr><td class="paramname">P</td><td>preconditioner </td></tr>
+    <tr><td class="paramname">relativeAccuracy</td><td>relative accuracy </td></tr>
+    <tr><td class="paramname">eps</td><td>maximal attainable accuracy </td></tr>
+    <tr><td class="paramname">verbose</td><td>verbosity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CGSolver(A,P,"RCG") </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5693f62a60708a49f51cf451991b96ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a> Spacy::makeTCGSolver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Operator.html">Operator</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CallableOperator&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relativeAccuracy</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eps</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct truncated conjugate gradient method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>operator </td></tr>
+    <tr><td class="paramname">P</td><td>preconditioner </td></tr>
+    <tr><td class="paramname">relativeAccuracy</td><td>relative accuracy </td></tr>
+    <tr><td class="paramname">eps</td><td>maximal attainable accuracy </td></tr>
+    <tr><td class="paramname">verbose</td><td>verbosity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CGSolver(A,P,"TCG") </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a66f5afbc97e887274b28be9c94aa3103"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1CG_1_1LinearSolver.html">CG::LinearSolver</a> Spacy::makeTRCGSolver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1Operator.html">Operator</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CallableOperator&#160;</td>
+          <td class="paramname"><em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relativeAccuracy</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eps</em> = <code>1e-15</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct truncated regularized conjugate gradient method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>operator </td></tr>
+    <tr><td class="paramname">P</td><td>preconditioner </td></tr>
+    <tr><td class="paramname">relativeAccuracy</td><td>relative accuracy </td></tr>
+    <tr><td class="paramname">eps</td><td>maximal attainable accuracy </td></tr>
+    <tr><td class="paramname">verbose</td><td>verbosity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CGSolver(A,P,"TRCG") </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab6646eb7068eb9f1369e639cf0b620a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1Vector.html">Vector</a> Spacy::d1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^* \). </p>
+<p>Equivalent to calling f.d1(x).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>twice differentiable functional </td></tr>
+    <tr><td class="paramname">x</td><td>point of linearization </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\(f&#39;(x)\), i.e. f.d1(x). </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional . ">C2Functional</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a569d8fc0b4a0e292f257dd6307a25c8f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> Spacy::d2 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear opeator \( f&#39;&#39;(x): X \to X^* \). </p>
+<p>Equivalent to calling f.hessian(x).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>twice differentiable functional </td></tr>
+    <tr><td class="paramname">x</td><td>point of linearization </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\(f&#39;&#39;(x)\), i.e. f.hessian(x). </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional . ">C2Functional</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a002fe344fa6d04a6ac59a74ea25fddb6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> Spacy::derivative </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a>&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the derivative of a functional \( f: X\to \mathbb{R} \) as (nonlinear) operator \( f&#39;:X\to X^* \). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>twice differentiable functional </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\(f&#39;\) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2205e2a2c4bb5242665bbc09929d35d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> Spacy::d1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For an operator \( A: X\to Y \), compute \(A&#39;\) at \(x\in X\) as linear operator \( A&#39;(x): X \to Y \). </p>
+<p>Equivalent to calling A.linearization(x).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>differentiable operator </td></tr>
+    <tr><td class="paramname">x</td><td>point of linearization </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\(A&#39;(x)\), i.e. A.linearization(x). </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>C1Operator, LinearOperator </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4f4b05902653c5fc8d6411142dcb352f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> Spacy::makeRealSpace </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>defaultIndex</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct space of real numbers. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__RealGroup.html#gaa07f743f9874ecff062c511b7126f8b6" title="Construct space of real numbers. ">RealSpace::makeHilbertSpace()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7dd8ce352c45e326cf8966befd5159ce"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Origin , class Target &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Spacy::genericCopy </td>
+          <td>(</td>
+          <td class="paramtype">const Origin &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Target &amp;&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(const Origin &amp;, Target &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>copyTargetIfConsistent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy from x to y. </p>
+<p>One of Origin or Target is a <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Spacy::Vector</a>, the other is some other type. This function treats (nested) product space structures and uses copyTargetIfConsistent to copy single subspaces. </p>
+
+</div>
+</div>
+<a class="anchor" id="a64250818ba7ff711c207af6ab40ff986"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func , typename Tup &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Spacy::invoke </td>
+          <td>(</td>
+          <td class="paramtype">Func &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Tup &amp;&amp;&#160;</td>
+          <td class="paramname"><em>tup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Invoke function with arguments contained in tup. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>function to be invoked </td></tr>
+    <tr><td class="paramname">tup</td><td>= (a0,a1,...) arguments, individual entries must be accessible with std::get.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Candidates for Tup are std::tuple, std::array, std::pair.</p>
+<dl class="section return"><dt>Returns</dt><dd>func(a0,a1,...) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae823c82326475d3cc3b166533deddf21"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Type , typename Tup &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Spacy::create </td>
+          <td>(</td>
+          <td class="paramtype">Tup &amp;&amp;&#160;</td>
+          <td class="paramname"><em>tup</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create object of type Type from elements contained in tup. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tup</td><td>= (a0,a1,...) constructor arguments, individual entries must be accessible with std::get.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Candidates for Tup are std::tuple, std::array, std::pair.</p>
+<dl class="section return"><dt>Returns</dt><dd>Type(a0,a1,...) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abfc17f845736365ee79be8ce68d50b27"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> Spacy::makeBanachSpace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">VectorCreator</a>&#160;</td>
+          <td class="paramname"><em>creator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a>&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct Banach space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">creator</td><td>object satisfying VectorCreatorConcept </td></tr>
+    <tr><td class="paramname">norm</td><td>norm satisfying NormConcept </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>VectorSpace(impl,norm) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a63c49d211bf214be1fb321440ed03aad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> Spacy::makeHilbertSpace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceSpacy.html#a94fc7a4b9d3b26ef835e61647fac4d9b">VectorCreator</a>&#160;</td>
+          <td class="paramname"><em>creator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">ScalarProduct</a>&#160;</td>
+          <td class="paramname"><em>scalarProduct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>defaultIndex</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct Hilbert space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">creator</td><td>object satisfying VectorCreatorConcept </td></tr>
+    <tr><td class="paramname">scalarProduct</td><td>scalar product satisfying ScalarProductConcept </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>hilbert space </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad115dc8703f23d8070c7da07a59ca067"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Spacy::connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>Y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Relate function spaces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>primal space </td></tr>
+    <tr><td class="paramname">Y</td><td>dual space</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Makes \(X\) the primal space of \(Y\) and makes \(Y\) the dual space of \(X\). This admits the evaluation of \(y(x)\) for \(x\in X\) and \(y\in Y\). </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

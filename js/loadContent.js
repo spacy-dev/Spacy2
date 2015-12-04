@@ -1,7 +1,7 @@
 function loadAndAdjustBackground(newPageName){
-    $('.main-content').load('content-' + newPageName + '.html' , function(){
+    $('.main-content').load('content/' + newPageName + '.html' , function(){
         var contentHeight = $('.main-content').height();
-        var headerOffset = 150;
+        var headerOffset = 105;
         $('.background-image-container').height(contentHeight + headerOffset);
         
         if(newPageName === 'contact')
@@ -34,12 +34,6 @@ function clearNavigationLinks(){
         $(this).removeClass('current');
     });
 }
-
-//$(document).ready( function(){
-//    $('.mail-link').click( function(){
-//        $(this).text(emailMe());
-//    });
-//});
 
 $(document).ready( function(){    
     $('.send-mail').click( function(){

@@ -30,44 +30,41 @@ Collaboration diagram for Spacy\+:\+:Lipschitz\+Constant\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}{Lipschitz\+Constant} (\hyperlink{classSpacy_1_1Real}{Real} initial\+Omega=1e-\/3)
+\hyperlink{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}{Lipschitz\+Constant} (\hyperlink{classSpacy_1_1Real}{Real} initial\+Omega=1e-\/3)
 \begin{DoxyCompactList}\small\item\em Construct Lipschitz constant. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LipschitzConstant}{Lipschitz\+Constant} \& \hyperlink{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd_a7f5636d01898427c65555da9b55450dd}{operator=} (\hyperlink{classSpacy_1_1Real}{Real} new\+Omega)
+\hyperlink{classSpacy_1_1LipschitzConstant}{Lipschitz\+Constant} \& \hyperlink{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd}{operator=} (\hyperlink{classSpacy_1_1Real}{Real} new\+Omega)
 \begin{DoxyCompactList}\small\item\em Assign new value to Lipschitz constant. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71_ab62af4397f997ca46374f89f06463a71}{operator Real} () const 
-\begin{DoxyCompactList}\small\item\em Access value of Lipschitz constant. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71}{}\hyperlink{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71}{operator Real} () const \label{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71}
+
+\begin{DoxyCompactList}\small\item\em Access value of Lipschitz constant $\omega$. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1LipschitzConstant_a440e8652f1b67cbcff2ea57a05e7e7b5}{}\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator()} () const \label{classSpacy_1_1LipschitzConstant_a440e8652f1b67cbcff2ea57a05e7e7b5}
 
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd_a3a91ae4dea16ff7e83f1d51797145cbd}{previous} () const 
+\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd}{previous} () const 
 \begin{DoxyCompactList}\small\item\em Access previous value of Lipschitz constant. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c_a5e4f00a4178814300de3f2a0ac391c1c}{set\+Max\+Factor} (\hyperlink{classSpacy_1_1Real}{Real} factor)
+void \hyperlink{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c}{set\+Max\+Factor} (\hyperlink{classSpacy_1_1Real}{Real} factor)
 \begin{DoxyCompactList}\small\item\em Set allowed maximal relative increase. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282_ac5dbb64f6535fe26b6f5e43c95d85282}{set\+Min\+Factor} (\hyperlink{classSpacy_1_1Real}{Real} factor)
+void \hyperlink{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282}{set\+Min\+Factor} (\hyperlink{classSpacy_1_1Real}{Real} factor)
 \begin{DoxyCompactList}\small\item\em Set relative decrease for negative estimates. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})
-\begin{DoxyCompactList}\small\item\em Set maximal attainable accuracy $\varepsilon$. \end{DoxyCompactList}\item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept
-\begin{DoxyCompactList}\small\item\em Access maximal attainable accuracy. \end{DoxyCompactList}\item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept
-\begin{DoxyCompactList}\small\item\em Access square root of maximal attainable accuracy. \end{DoxyCompactList}\item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept
-\begin{DoxyCompactList}\small\item\em Get third root of maximal attainable accuracy. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}{attach\+Eps} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&other)
-\begin{DoxyCompactList}\small\item\em Attach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}{detach\+Eps} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&other)\label{classSpacy_1_1Mixin_1_1Eps_ab49910e189cb86b6fd6f89b6f2af14cc}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}{}void {\bfseries set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}
 
-\begin{DoxyCompactList}\small\item\em Detach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps} before it gets deleted. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}
+
+\begin{DoxyCompactList}\small\item\em Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
 
 \begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
 
 \begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
@@ -79,13 +76,13 @@ void \hyperlink{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af6
 A simple model for a Lipschitz constant $\omega$. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!Lipschitz\+Constant@{Lipschitz\+Constant}}
+\hypertarget{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!Lipschitz\+Constant@{Lipschitz\+Constant}}
 \index{Lipschitz\+Constant@{Lipschitz\+Constant}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
 \subsubsection[{Lipschitz\+Constant}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Lipschitz\+Constant\+::\+Lipschitz\+Constant (
 \begin{DoxyParamCaption}
 \item[{{\bf Real}}]{initial\+Omega = {\ttfamily 1e-\/3}}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}
+)}\label{classSpacy_1_1LipschitzConstant_aa260cc7420e3f5cfc7fe2d78fb2aa7ad}
 
 
 Construct Lipschitz constant. 
@@ -98,66 +95,13 @@ Construct Lipschitz constant.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!attach\+Eps@{attach\+Eps}}
-\index{attach\+Eps@{attach\+Eps}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{attach\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Eps\+::attach\+Eps (
-\begin{DoxyParamCaption}
-\item[{{\bf Eps} \&}]{other}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_af69cd3dee52e723302b21ca2a25f1192_af69cd3dee52e723302b21ca2a25f1192}
-
-
-Attach \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}. 
-
-When \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{set\+Eps(double eps)} is called, then also other.\+set\+Eps(eps) is invoked. \hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!cbrt\+Eps@{cbrt\+Eps}}
-\index{cbrt\+Eps@{cbrt\+Eps}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{cbrt\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::cbrt\+Eps (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d_a1879ebbf1b467cb4be36bcc63307018d}
-
-
-Get third root of maximal attainable accuracy. 
-
-\begin{DoxyReturn}{Returns}
-$\varepsilon^{1/3}$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!eps@{eps}}
-\index{eps@{eps}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::eps (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b_a40e2ba8f3abd2b5370ef41238cfaaf8b}
-
-
-Access maximal attainable accuracy. 
-
-\begin{DoxyReturn}{Returns}
-$\varepsilon$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71_ab62af4397f997ca46374f89f06463a71}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!operator Real@{operator Real}}
-\index{operator Real@{operator Real}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{operator Real}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Lipschitz\+Constant\+::operator {\bf Real} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1LipschitzConstant_ab62af4397f997ca46374f89f06463a71_ab62af4397f997ca46374f89f06463a71}
-
-
-Access value of Lipschitz constant. 
-
-\begin{DoxyReturn}{Returns}
-$\omega$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd_a7f5636d01898427c65555da9b55450dd}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!operator=@{operator=}}
+\hypertarget{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!operator=@{operator=}}
 \index{operator=@{operator=}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
 \subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lipschitz\+Constant}\& Spacy\+::\+Lipschitz\+Constant\+::operator= (
 \begin{DoxyParamCaption}
 \item[{{\bf Real}}]{new\+Omega}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd_a7f5636d01898427c65555da9b55450dd}
+)}\label{classSpacy_1_1LipschitzConstant_a7f5636d01898427c65555da9b55450dd}
 
 
 Assign new value to Lipschitz constant. 
@@ -169,13 +113,13 @@ If $\omega_{new}<0$ sets the Lipschitz constant to $minFactor * previousOmega$. 
 {\em new\+Omega} & new Lipschitz constant \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd_a3a91ae4dea16ff7e83f1d51797145cbd}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!previous@{previous}}
+\hypertarget{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!previous@{previous}}
 \index{previous@{previous}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
 \subsubsection[{previous}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Real} Spacy\+::\+Lipschitz\+Constant\+::previous (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd_a3a91ae4dea16ff7e83f1d51797145cbd}
+) const}\label{classSpacy_1_1LipschitzConstant_a3a91ae4dea16ff7e83f1d51797145cbd}
 
 
 Access previous value of Lipschitz constant. 
@@ -183,29 +127,13 @@ Access previous value of Lipschitz constant.
 \begin{DoxyReturn}{Returns}
 $\omega_{k-1}$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!set\+Eps@{set\+Eps}}
-\index{set\+Eps@{set\+Eps}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{set\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Eps\+::set\+Eps (
-\begin{DoxyParamCaption}
-\item[{double}]{eps}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4_a1bbfd62541610d5d80f2782ab77158e4}
-
-
-Set maximal attainable accuracy $\varepsilon$. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em eps} & new maximal attainable accuracy \\
-\hline
-\end{DoxyParams}
-\hypertarget{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c_a5e4f00a4178814300de3f2a0ac391c1c}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!set\+Max\+Factor@{set\+Max\+Factor}}
+\hypertarget{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!set\+Max\+Factor@{set\+Max\+Factor}}
 \index{set\+Max\+Factor@{set\+Max\+Factor}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
 \subsubsection[{set\+Max\+Factor}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Lipschitz\+Constant\+::set\+Max\+Factor (
 \begin{DoxyParamCaption}
 \item[{{\bf Real}}]{factor}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c_a5e4f00a4178814300de3f2a0ac391c1c}
+)}\label{classSpacy_1_1LipschitzConstant_a5e4f00a4178814300de3f2a0ac391c1c}
 
 
 Set allowed maximal relative increase. 
@@ -215,13 +143,13 @@ Set allowed maximal relative increase.
 {\em factor} & new allowed maximal relative increase \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282_ac5dbb64f6535fe26b6f5e43c95d85282}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!set\+Min\+Factor@{set\+Min\+Factor}}
+\hypertarget{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!set\+Min\+Factor@{set\+Min\+Factor}}
 \index{set\+Min\+Factor@{set\+Min\+Factor}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
 \subsubsection[{set\+Min\+Factor}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Lipschitz\+Constant\+::set\+Min\+Factor (
 \begin{DoxyParamCaption}
 \item[{{\bf Real}}]{factor}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282_ac5dbb64f6535fe26b6f5e43c95d85282}
+)}\label{classSpacy_1_1LipschitzConstant_ac5dbb64f6535fe26b6f5e43c95d85282}
 
 
 Set relative decrease for negative estimates. 
@@ -231,20 +159,6 @@ Set relative decrease for negative estimates.
 {\em factor} & new relative decrease for negative estimates of the Lipschitz constant \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}{}\index{Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}!sqrt\+Eps@{sqrt\+Eps}}
-\index{sqrt\+Eps@{sqrt\+Eps}!Spacy\+::\+Lipschitz\+Constant@{Spacy\+::\+Lipschitz\+Constant}}
-\subsubsection[{sqrt\+Eps}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Eps\+::sqrt\+Eps (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1_a29e8c25dc3f1fdede57b8eb06f520fe1}
-
-
-Access square root of maximal attainable accuracy. 
-
-\begin{DoxyReturn}{Returns}
-$\sqrt\varepsilon$ 
-\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

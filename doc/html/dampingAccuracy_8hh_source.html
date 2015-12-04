@@ -96,38 +96,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">dampingAccuracy.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  {</div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classSpacy_1_1Mixin_1_1DampingAccuracy.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1Mixin_1_1DampingAccuracy.html">DampingAccuracy</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1DampingAccuracy_a3cc2f537debc13218852ae8bfbcc4b37.html#a3cc2f537debc13218852ae8bfbcc4b37">DampingAccuracy</a>(<span class="keywordtype">double</span> accuracy = 1e-3) noexcept;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1DampingAccuracy.html">DampingAccuracy</a>(<span class="keywordtype">double</span> accuracy = 1e-3) noexcept;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;      <span class="keywordtype">void</span> setDampingAccuracy(<span class="keywordtype">double</span> accuracy) noexcept;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keywordtype">double</span> dampingAccuracy() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1DampingAccuracy_af934aaf17595b7029d9a8ecec2561599.html#af934aaf17595b7029d9a8ecec2561599">setDampingAccuracy</a>(<span class="keywordtype">double</span> accuracy) noexcept;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      <span class="keywordtype">double</span> dampingAccuracy_;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1DampingAccuracy_a070c4c1b64c4392c6b21478bcf4c4a75.html#a070c4c1b64c4392c6b21478bcf4c4a75">dampingAccuracy</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordtype">double</span> dampingAccuracy_;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    };</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_DAMPING_ACCURACY_HH</span></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1DampingAccuracy_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1DampingAccuracy.html">Spacy::Mixin::DampingAccuracy</a></div><div class="ttdoc">Mixin class for the accuracy of damping factors. </div><div class="ttdef"><b>Definition:</b> dampingAccuracy.hh:12</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1DampingAccuracy_af934aaf17595b7029d9a8ecec2561599_html_af934aaf17595b7029d9a8ecec2561599"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1DampingAccuracy_af934aaf17595b7029d9a8ecec2561599.html#af934aaf17595b7029d9a8ecec2561599">Spacy::Mixin::DampingAccuracy::setDampingAccuracy</a></div><div class="ttdeci">void setDampingAccuracy(double accuracy) noexcept</div><div class="ttdoc">Set accuracy for damping factors. </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1DampingAccuracy_a070c4c1b64c4392c6b21478bcf4c4a75_html_a070c4c1b64c4392c6b21478bcf4c4a75"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1DampingAccuracy_a070c4c1b64c4392c6b21478bcf4c4a75.html#a070c4c1b64c4392c6b21478bcf4c4a75">Spacy::Mixin::DampingAccuracy::dampingAccuracy</a></div><div class="ttdeci">double dampingAccuracy() const noexcept</div><div class="ttdoc">Access accuracy for damping factors. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1DampingAccuracy_a3cc2f537debc13218852ae8bfbcc4b37_html_a3cc2f537debc13218852ae8bfbcc4b37"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1DampingAccuracy_a3cc2f537debc13218852ae8bfbcc4b37.html#a3cc2f537debc13218852ae8bfbcc4b37">Spacy::Mixin::DampingAccuracy::DampingAccuracy</a></div><div class="ttdeci">DampingAccuracy(double accuracy=1e-3) noexcept</div><div class="ttdoc">Constructor. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

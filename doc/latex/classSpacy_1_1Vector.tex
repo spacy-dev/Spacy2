@@ -2,11 +2,20 @@
 \label{classSpacy_1_1Vector}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}}
 
 
+Type-\/erased vector.  
+
+
+
+
+{\ttfamily \#include $<$vector.\+hh$>$}
+
+
+
 Inheritance diagram for Spacy\+:\+:Vector\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=226pt]{classSpacy_1_1Vector__inherit__graph}
+\includegraphics[width=199pt]{classSpacy_1_1Vector__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -15,154 +24,65 @@ Collaboration diagram for Spacy\+:\+:Vector\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=226pt]{classSpacy_1_1Vector__coll__graph}
+\includegraphics[width=199pt]{classSpacy_1_1Vector__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1Vector_a593ac1d34348d747e2c147142a08a518}{}{\footnotesize template$<$class V\+Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+V\+Impl$>$,\+Vector$>$\+::value$>$$>$ }\\{\bfseries Vector} (V\+Impl \&\&v)\label{classSpacy_1_1Vector_a593ac1d34348d747e2c147142a08a518}
+\hypertarget{classSpacy_1_1Vector_a1a31b17d62d98e2358a917821da8bf91}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Vector$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ Vector\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector_a1a31b17d62d98e2358a917821da8bf91}{Vector} (Impl \&\&impl)\label{classSpacy_1_1Vector_a1a31b17d62d98e2358a917821da8bf91}
+
+\begin{DoxyCompactList}\small\item\em Construct from implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Vector_a253e3683c82828567c6ccd4bbfa5ded4}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Vector$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ Vector\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1Vector_a253e3683c82828567c6ccd4bbfa5ded4}{operator=} (Impl \&\&impl)\label{classSpacy_1_1Vector_a253e3683c82828567c6ccd4bbfa5ded4}
+
+\begin{DoxyCompactList}\small\item\em Assign from implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Vector_af6f1ec896b05538a931e72dbecdebbb1}{}\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Vector_af6f1ec896b05538a931e72dbecdebbb1}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \label{classSpacy_1_1Vector_af6f1ec896b05538a931e72dbecdebbb1}
+
+\begin{DoxyCompactList}\small\item\em Apply as dual space element. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Vector_a6d5770a3bd58db532e79b16f2526c275}{}\hyperlink{classSpacy_1_1Vector}{Vector} \& {\bfseries operator+=} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\label{classSpacy_1_1Vector_a6d5770a3bd58db532e79b16f2526c275}
 
 \item 
-\hypertarget{classSpacy_1_1Vector_a48f933bde3b851d3134f06e3a2ef4d0f}{}{\bfseries operator Any\+Vector} () const \label{classSpacy_1_1Vector_a48f933bde3b851d3134f06e3a2ef4d0f}
+\hypertarget{classSpacy_1_1Vector_afbebc56400ed2e281815fee88b78b3f6}{}\hyperlink{classSpacy_1_1Vector}{Vector} \& {\bfseries operator-\/=} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\label{classSpacy_1_1Vector_afbebc56400ed2e281815fee88b78b3f6}
 
 \item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1Vector_a6d5770a3bd58db532e79b16f2526c275_a6d5770a3bd58db532e79b16f2526c275}{operator+=} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)
-\begin{DoxyCompactList}\small\item\em In-\/place summation $ x+=y$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1Vector_afbebc56400ed2e281815fee88b78b3f6_afbebc56400ed2e281815fee88b78b3f6}{operator-\/=} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)
-\begin{DoxyCompactList}\small\item\em In-\/place subtraction $ x-=y$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1Vector_a06a3538f752f001b289c2f690357e1e7_a06a3538f752f001b289c2f690357e1e7}{operator$\ast$=} (double a)
-\begin{DoxyCompactList}\small\item\em In-\/place multiplication $ x*=a$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1Vector_a050dba43b304fdf5f15141d25465be56_a050dba43b304fdf5f15141d25465be56}{operator-\/} () const 
-\begin{DoxyCompactList}\small\item\em Negation $ -x$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Vector_ad14609b2ab0255107924b19f803b0896}{}\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y) const \label{classSpacy_1_1Vector_ad14609b2ab0255107924b19f803b0896}
+\hypertarget{classSpacy_1_1Vector_a06a3538f752f001b289c2f690357e1e7}{}\hyperlink{classSpacy_1_1Vector}{Vector} \& {\bfseries operator$\ast$=} (double a)\label{classSpacy_1_1Vector_a06a3538f752f001b289c2f690357e1e7}
 
 \item 
-bool \hyperlink{classSpacy_1_1Vector_a0d634e69572e8da07c3c7056ec911208_a0d634e69572e8da07c3c7056ec911208}{operator==} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y) const 
-\begin{DoxyCompactList}\small\item\em Comparison operator $ x==y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Vector_a8a549d4ed045ddf563afca5bc942397b}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& {\bfseries space} () const \label{classSpacy_1_1Vector_a8a549d4ed045ddf563afca5bc942397b}
+\hypertarget{classSpacy_1_1Vector_a050dba43b304fdf5f15141d25465be56}{}\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator-\/} () const \label{classSpacy_1_1Vector_a050dba43b304fdf5f15141d25465be56}
 
 \item 
-void \hyperlink{classSpacy_1_1Vector_ad23f6fcd19004e69200f675d3f3ad7fc_ad23f6fcd19004e69200f675d3f3ad7fc}{to\+File} (const std\+::string \&filename) const 
-\begin{DoxyCompactList}\small\item\em Write vector to file. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_ab7cc202fd000ba1753ef8596c09dc803}{}\hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_gafc144d2730ef87a67e54f8cd750b1f54}{Any\+Vector} \& \hyperlink{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_ab7cc202fd000ba1753ef8596c09dc803}{impl} ()\label{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_ab7cc202fd000ba1753ef8596c09dc803}
+\hypertarget{classSpacy_1_1Vector_a0d634e69572e8da07c3c7056ec911208}{}bool {\bfseries operator==} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&y) const \label{classSpacy_1_1Vector_a0d634e69572e8da07c3c7056ec911208}
 
-\begin{DoxyCompactList}\small\item\em Access implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_a6bdd26b4d36f442aa606a9e65d41c71c}{}const \hyperlink{group__SpacyGroup_gafc144d2730ef87a67e54f8cd750b1f54_gafc144d2730ef87a67e54f8cd750b1f54}{Any\+Vector} \& \hyperlink{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_a6bdd26b4d36f442aa606a9e65d41c71c}{impl} () const\label{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_a6bdd26b4d36f442aa606a9e65d41c71c}
+\item 
+\hypertarget{classSpacy_1_1Vector_a8a549d4ed045ddf563afca5bc942397b}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1Vector_a8a549d4ed045ddf563afca5bc942397b}{space} () const \label{classSpacy_1_1Vector_a8a549d4ed045ddf563afca5bc942397b}
 
-\begin{DoxyCompactList}\small\item\em Access implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_aaa5b34c44e72ae4fe0d7f283d67600d0}{}bool \hyperlink{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_aaa5b34c44e72ae4fe0d7f283d67600d0}{impl\+Is\+Null\+Ptr} () const\label{classSpacy_1_1Mixin_1_1CopyingUniqueImpl_aaa5b34c44e72ae4fe0d7f283d67600d0}
+\begin{DoxyCompactList}\small\item\em Access underlying space. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Vector_ad23f6fcd19004e69200f675d3f3ad7fc}{}void {\bfseries to\+File} (const std\+::string \&filename) const \label{classSpacy_1_1Vector_ad23f6fcd19004e69200f675d3f3ad7fc}
 
-\begin{DoxyCompactList}\small\item\em Check if stored object is null pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Vector_a075e65e95f81d640c46afc7b55420abe}{}\hyperlink{classSpacy_1_1Vector_a075e65e95f81d640c46afc7b55420abe}{operator bool} () const \label{classSpacy_1_1Vector_a075e65e95f81d640c46afc7b55420abe}
 
+\begin{DoxyCompactList}\small\item\em Check if an implementation has been assigned. \end{DoxyCompactList}\item 
+\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{}T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target} ()\label{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}
 
-\subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1Vector_a06a3538f752f001b289c2f690357e1e7_a06a3538f752f001b289c2f690357e1e7}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!operator$\ast$=@{operator$\ast$=}}
-\index{operator$\ast$=@{operator$\ast$=}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector}\& Spacy\+::\+Vector\+::operator$\ast$= (
-\begin{DoxyParamCaption}
-\item[{double}]{a}
-\end{DoxyParamCaption}
-)}\label{classSpacy_1_1Vector_a06a3538f752f001b289c2f690357e1e7_a06a3538f752f001b289c2f690357e1e7}
+\begin{DoxyCompactList}\small\item\em Cast to T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\item 
+\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{}const T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{target} () const\label{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}
 
+\begin{DoxyCompactList}\small\item\em Cast to const T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Vector_a8acabf8da8eb9b39c88a68493002d288}{}class {\bfseries To\+Target$<$ Vector $>$}\label{classSpacy_1_1Vector_a8acabf8da8eb9b39c88a68493002d288}
 
-In-\/place multiplication $ x*=a$. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a} & scaling factor \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$ x*=a$. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Vector_a6d5770a3bd58db532e79b16f2526c275_a6d5770a3bd58db532e79b16f2526c275}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!operator+=@{operator+=}}
-\index{operator+=@{operator+=}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector}\& Spacy\+::\+Vector\+::operator+= (
-\begin{DoxyParamCaption}
-\item[{const {\bf Vector} \&}]{y}
-\end{DoxyParamCaption}
-)}\label{classSpacy_1_1Vector_a6d5770a3bd58db532e79b16f2526c275_a6d5770a3bd58db532e79b16f2526c275}
+\end{DoxyCompactItemize}
 
 
-In-\/place summation $ x+=y$. 
+\subsection{Detailed Description}
+Type-\/erased vector. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em y} & vector to add to this vector \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$ x+=y$. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Vector_a050dba43b304fdf5f15141d25465be56_a050dba43b304fdf5f15141d25465be56}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Vector\+::operator-\/ (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1Vector_a050dba43b304fdf5f15141d25465be56_a050dba43b304fdf5f15141d25465be56}
-
-
-Negation $ -x$. 
-
-\begin{DoxyReturn}{Returns}
-$ -x $. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Vector_afbebc56400ed2e281815fee88b78b3f6_afbebc56400ed2e281815fee88b78b3f6}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!operator-\/=@{operator-\/=}}
-\index{operator-\/=@{operator-\/=}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector}\& Spacy\+::\+Vector\+::operator-\/= (
-\begin{DoxyParamCaption}
-\item[{const {\bf Vector} \&}]{y}
-\end{DoxyParamCaption}
-)}\label{classSpacy_1_1Vector_afbebc56400ed2e281815fee88b78b3f6_afbebc56400ed2e281815fee88b78b3f6}
-
-
-In-\/place subtraction $ x-=y$. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em y} & vector to subtract from this vector \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$ x-=y$. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Vector_a0d634e69572e8da07c3c7056ec911208_a0d634e69572e8da07c3c7056ec911208}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!operator==@{operator==}}
-\index{operator==@{operator==}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Vector\+::operator== (
-\begin{DoxyParamCaption}
-\item[{const {\bf Vector} \&}]{y}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1Vector_a0d634e69572e8da07c3c7056ec911208_a0d634e69572e8da07c3c7056ec911208}
-
-
-Comparison operator $ x==y$. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em y} & vector to compare with this vector \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$ x==y$. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Vector_ad23f6fcd19004e69200f675d3f3ad7fc_ad23f6fcd19004e69200f675d3f3ad7fc}{}\index{Spacy\+::\+Vector@{Spacy\+::\+Vector}!to\+File@{to\+File}}
-\index{to\+File@{to\+File}!Spacy\+::\+Vector@{Spacy\+::\+Vector}}
-\subsubsection[{to\+File}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Vector\+::to\+File (
-\begin{DoxyParamCaption}
-\item[{const std\+::string \&}]{filename}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1Vector_ad23f6fcd19004e69200f675d3f3ad7fc_ad23f6fcd19004e69200f675d3f3ad7fc}
-
-
-Write vector to file. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em filename} & output file name \\
-\hline
-\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__ConceptGroup_gac8fbeed0f838941e90ebe635a546e1db}{Vector\+Concept} 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

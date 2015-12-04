@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hessian',['Hessian',['../classSpacy_1_1Hessian.html',1,'Spacy']]],
-  ['hessian',['Hessian',['../classSpacy_1_1Hessian_a0d68a39d36030fb578c6082e66cd1733.html#a0d68a39d36030fb578c6082e66cd1733',1,'Spacy::Hessian::Hessian(C2Functional F, Vector x)'],['../classSpacy_1_1Hessian_a164c5994d90dbc86018e5763b20d406e.html#a164c5994d90dbc86018e5763b20d406e',1,'Spacy::Hessian::Hessian(C2Functional F, Vector x, LinearSolver solver)'],['../classSpacy_1_1FEniCS_1_1C2Functional_aceec6783f701e121b35ffa482629e1dd.html#aceec6783f701e121b35ffa482629e1dd',1,'Spacy::FEniCS::C2Functional::hessian()'],['../classSpacy_1_1Kaskade_1_1C2Functional_a73e0b9a2499e89bf85eddf1aa74fe9ba.html#a73e0b9a2499e89bf85eddf1aa74fe9ba',1,'Spacy::Kaskade::C2Functional::hessian()']]]
+  ['hasid',['hasId',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#af548ea11a6e7f6a5c0cb78bfa7895f4a',1,'Spacy::ProductSpace::VectorCreator']]],
+  ['hessian',['hessian',['../classSpacy_1_1FEniCS_1_1C2Functional.html#aceec6783f701e121b35ffa482629e1dd',1,'Spacy::FEniCS::C2Functional::hessian()'],['../classSpacy_1_1Kaskade_1_1C2Functional.html#a73e0b9a2499e89bf85eddf1aa74fe9ba',1,'Spacy::Kaskade::C2Functional::hessian()'],['../classSpacy_1_1C2Functional.html#a97eeeb376ed178ea7e2f109967f99c24',1,'Spacy::C2Functional::hessian()']]],
+  ['hilbertspacenorm',['HilbertSpaceNorm',['../classSpacy_1_1HilbertSpaceNorm.html',1,'Spacy']]]
 ];

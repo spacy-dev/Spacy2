@@ -1,0 +1,53 @@
+\hypertarget{namespaceSpacy_1_1Rn}{}\section{Spacy\+:\+:Rn Namespace Reference}
+\label{namespaceSpacy_1_1Rn}\index{Spacy\+::\+Rn@{Spacy\+::\+Rn}}
+
+
+Contains functionals and operators for finite dimensional vector space problems, based on \href{http://eigen.tuxfamily.org}{\tt Eigen}.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSpacy_1_1Rn_1_1C1Operator}{C1\+Operator}
+\begin{DoxyCompactList}\small\item\em A differential operator $A:X\rightarrow Y$ for finite-\/dimensional problems, based on the Eigen library. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Rn_1_1LinearOperator}{Linear\+Operator}
+\begin{DoxyCompactList}\small\item\em A linear operator $A:X\rightarrow Y$ for finite-\/dimensional problems, based on the Eigen library. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Rn_1_1LinearOperatorCreator}{Linear\+Operator\+Creator}
+\begin{DoxyCompactList}\small\item\em Vector\+Creator for linear operators $X\rightarrow Y$, based on the Eigen library. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Rn_1_1LinearSolver}{Linear\+Solver}
+\begin{DoxyCompactList}\small\item\em Linear solver for Eigen matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group__EigenGroup_gaf2be4f79056513f7e3e35f7afdc794ee}{}using \hyperlink{group__EigenGroup_gaf2be4f79056513f7e3e35f7afdc794ee}{Euclidean\+Scalar\+Product} = \hyperlink{classSpacy_1_1Generic_1_1EuclideanScalarProduct}{Generic\+::\+Euclidean\+Scalar\+Product}\label{group__EigenGroup_gaf2be4f79056513f7e3e35f7afdc794ee}
+
+\begin{DoxyCompactList}\small\item\em Euclidean scalar product for Rn, based on the Eigen library. \end{DoxyCompactList}\item 
+using \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{Vector} = \hyperlink{classSpacy_1_1Generic_1_1Vector}{Generic\+::\+Vector}$<$ \+::Eigen\+::\+Vector\+Xd $>$
+\begin{DoxyCompactList}\small\item\em Vector for Rn, based on the Eigen library. \end{DoxyCompactList}\item 
+using \hyperlink{group__VectorSpaceGroup_gab3b27cb653ec69d12c809394126b046a}{Vector\+Creator} = \hyperlink{classSpacy_1_1Generic_1_1VectorCreator}{Generic\+::\+Vector\+Creator}$<$ \+::Eigen\+::\+Vector\+Xd $>$
+\begin{DoxyCompactList}\small\item\em Vector creator for Rn, based on the Eigen library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{namespaceSpacy_1_1Rn_abadd5b9e11793fdb2f689a3ee908e5e7}{make\+Hilbert\+Space} (unsigned dim)
+\begin{DoxyCompactList}\small\item\em Convenient generation of a hilbert space based on the Eigen library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains functionals and operators for finite dimensional vector space problems, based on \href{http://eigen.tuxfamily.org}{\tt Eigen}. 
+
+\subsection{Function Documentation}
+\hypertarget{namespaceSpacy_1_1Rn_abadd5b9e11793fdb2f689a3ee908e5e7}{}\index{Spacy\+::\+Rn@{Spacy\+::\+Rn}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Spacy\+::\+Rn@{Spacy\+::\+Rn}}
+\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space} Spacy\+::\+Rn\+::make\+Hilbert\+Space (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{dim}
+\end{DoxyParamCaption}
+)}\label{namespaceSpacy_1_1Rn_abadd5b9e11793fdb2f689a3ee908e5e7}
+
+
+Convenient generation of a hilbert space based on the Eigen library. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy_a63c49d211bf214be1fb321440ed03aad}{\+:\+:Spacy\+:\+:make\+Hilbert\+Space( Vector\+Creator\{dim\} , Euclidean\+Scalar\+Product\{\} )} 
+\end{DoxyReturn}

@@ -1,3 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classSpacy_1_1Newton_1_1Damping_1_1None.html" title="No damping, yields local newton method. " alt="" coords="5,5,177,47"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1Mixin_1_1ToTarget.html" title="Mixin class that provides a member function target() to access type&#45;erased content (see std::function..." alt="" coords="5,99,164,141"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1C1Operator.html" title="Type&#45;erased differentiable operator . " alt="" coords="241,5,375,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1C2Functional.html" title="Type&#45;erased twice differentiable functional . " alt="" coords="236,56,380,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1DynamicOperator.html" title="Type&#45;erased time&#45;dependent operator . " alt="" coords="223,107,393,133"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1IndefiniteLinearSolver.html" title="Type&#45;erased indefinite linear solver. Additionally monitors if the underlying operator is positive de..." alt="" coords="212,157,404,184"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1LinearOperator.html" title="Type&#45;erased linear operator . " alt="" coords="232,208,384,235"/>
 </map>

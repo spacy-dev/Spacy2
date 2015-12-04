@@ -1,0 +1,7 @@
+<map id="Adapters" name="Adapters">
+<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS. " alt="" coords="134,5,202,32"/>
+<area shape="rect" id="node2" href="$group__KaskadeGroup.html" title="Vector spaces, functionals and operators for Kaskade 7. " alt="" coords="128,56,208,83"/>
+<area shape="rect" id="node3" href="$group__EigenGroup.html" title="Vector spaces, functionals and operators for Eigen. " alt="" coords="141,107,195,133"/>
+<area shape="rect" id="node4" href="$group__GenericGroup.html" title="Generic implementations for vector spaces to simplify the implementation of adapters. " alt="" coords="135,157,201,184"/>
+<area shape="rect" id="node5" href="$group__ScalarGroup.html" title="Operators, functionals and solvers for scalar problems. " alt="" coords="139,208,197,235"/>
+</map>

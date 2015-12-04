@@ -96,50 +96,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">stateIndex.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;mixinConnection.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">namespace </span>Mixin</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classSpacy_1_1Mixin_1_1StateIndex.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1Mixin_1_1MixinConnection.html">MixinConnection</a>&lt;StateIndex&gt;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa.html#a0dfcecf87c0982d6c4d8859661aad1fa">StateIndex</a>(<span class="keywordtype">unsigned</span> index = 0) noexcept;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;      <span class="keyword">explicit</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a>(<span class="keywordtype">unsigned</span> index = 0) noexcept;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keywordtype">void</span> setStateIndex(<span class="keywordtype">unsigned</span> index);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keywordtype">double</span> stateIndex() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319.html#a7547d4239437b878cde8a60a95b0b319">setStateIndex</a>(<span class="keywordtype">unsigned</span> index);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa.html#a8f6d3b42f3ffe6698ed9915355d22baa">stateIndex</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a.html#af307c6e75fe7839a3f74ea400b9aea4a">attachStateIndex</a>(<a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a>&amp; other);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html#ac193f8197435643fb7f509756607e464">detachStateIndex</a>(<a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a>&amp; other);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html#a632299c8de748ea73d1fcbbb4d8f734a">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a>* changedSubject);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordtype">unsigned</span> index_;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html#a632299c8de748ea73d1fcbbb4d8f734a">update</a>(<a class="code" href="classSpacy_1_1Mixin_1_1StateIndex.html">StateIndex</a>* changedSubject);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordtype">unsigned</span> index_;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif // SPACY_UTIL_MIXIN_STATE_INDEX_HH</span></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_html_a632299c8de748ea73d1fcbbb4d8f734a"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex.html#a632299c8de748ea73d1fcbbb4d8f734a">Spacy::Mixin::StateIndex::update</a></div><div class="ttdeci">void update(StateIndex *changedSubject)</div><div class="ttdoc">update function for observer pattern. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319_html_a7547d4239437b878cde8a60a95b0b319"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex_a7547d4239437b878cde8a60a95b0b319.html#a7547d4239437b878cde8a60a95b0b319">Spacy::Mixin::StateIndex::setStateIndex</a></div><div class="ttdeci">void setStateIndex(unsigned index)</div><div class="ttdoc">Set index of state variable. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a_html_af307c6e75fe7839a3f74ea400b9aea4a"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex_af307c6e75fe7839a3f74ea400b9aea4a.html#af307c6e75fe7839a3f74ea400b9aea4a">Spacy::Mixin::StateIndex::attachStateIndex</a></div><div class="ttdeci">void attachStateIndex(StateIndex &amp;other)</div><div class="ttdoc">Attach state index. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa_html_a8f6d3b42f3ffe6698ed9915355d22baa"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex_a8f6d3b42f3ffe6698ed9915355d22baa.html#a8f6d3b42f3ffe6698ed9915355d22baa">Spacy::Mixin::StateIndex::stateIndex</a></div><div class="ttdeci">double stateIndex() const noexcept</div><div class="ttdoc">Access index of state variable. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_html_ac193f8197435643fb7f509756607e464"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex.html#ac193f8197435643fb7f509756607e464">Spacy::Mixin::StateIndex::detachStateIndex</a></div><div class="ttdeci">void detachStateIndex(StateIndex &amp;other)</div><div class="ttdoc">Detach verbosity before it gets deleted. </div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex.html">Spacy::Mixin::StateIndex</a></div><div class="ttdoc">Mixin class for index of state variable. </div><div class="ttdef"><b>Definition:</b> stateIndex.hh:14</div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:14</div></div>
-<div class="ttc" id="classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa_html_a0dfcecf87c0982d6c4d8859661aad1fa"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1StateIndex_a0dfcecf87c0982d6c4d8859661aad1fa.html#a0dfcecf87c0982d6c4d8859661aad1fa">Spacy::Mixin::StateIndex::StateIndex</a></div><div class="ttdeci">StateIndex(unsigned index=0) noexcept</div><div class="ttdoc">Constructor. </div></div>
+<div class="ttc" id="classSpacy_1_1Mixin_1_1MixinConnection_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1MixinConnection.html">Spacy::Mixin::MixinConnection</a></div><div class="ttdoc">Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of ...</div><div class="ttdef"><b>Definition:</b> mixinConnection.hh:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -96,32 +96,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">vectorSpace.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPACY_REAL_SPACE_CREATOR_HH</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPACY_REAL_SPACE_CREATOR_HH</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Released under the terms of the GNU General Public License version 3 or later.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Spacy/vectorSpace.hh&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">namespace </span>RealSpace</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    VectorSpace <a class="code" href="group__RealGroup_gaa07f743f9874ecff062c511b7126f8b6.html#gaa07f743f9874ecff062c511b7126f8b6">makeHilbertSpace</a>(<span class="keywordtype">bool</span> defaultIndex = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">namespace </span>StaticDetail</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">static</span> VectorSpace R = <a class="code" href="group__RealGroup_gaa07f743f9874ecff062c511b7126f8b6.html#gaa07f743f9874ecff062c511b7126f8b6">RealSpace::makeHilbertSpace</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//    static VectorSpace M{};</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif // SPACY_REAL_SPACE_CREATOR_HH</span></div>
-<div class="ttc" id="group__RealGroup_gaa07f743f9874ecff062c511b7126f8b6_html_gaa07f743f9874ecff062c511b7126f8b6"><div class="ttname"><a href="group__RealGroup_gaa07f743f9874ecff062c511b7126f8b6.html#gaa07f743f9874ecff062c511b7126f8b6">Spacy::RealSpace::makeHilbertSpace</a></div><div class="ttdeci">VectorSpace makeHilbertSpace(bool defaultIndex=false)</div><div class="ttdoc">Construct space of real numbers. </div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef SPACY_REAL_SPACE_CREATOR_HH</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define SPACY_REAL_SPACE_CREATOR_HH</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Spacy/vectorSpace.hh&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceSpacy.html">Spacy</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">namespace </span>RealSpace</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    VectorSpace <a class="code" href="namespaceSpacy.html#a63c49d211bf214be1fb321440ed03aad">makeHilbertSpace</a>(<span class="keywordtype">bool</span> defaultIndex = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  VectorSpace <a class="code" href="namespaceSpacy.html#a4f4b05902653c5fc8d6411142dcb352f">makeRealSpace</a>(<span class="keywordtype">bool</span> defaultIndex = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">namespace </span>Space</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">static</span> VectorSpace R = <a class="code" href="group__RealGroup.html#gaa07f743f9874ecff062c511b7126f8b6">RealSpace::makeHilbertSpace</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif // SPACY_REAL_SPACE_CREATOR_HH</span></div>
+<div class="ttc" id="group__RealGroup_html_gaa07f743f9874ecff062c511b7126f8b6"><div class="ttname"><a href="group__RealGroup.html#gaa07f743f9874ecff062c511b7126f8b6">Spacy::RealSpace::makeHilbertSpace</a></div><div class="ttdeci">VectorSpace makeHilbertSpace(bool defaultIndex=false)</div><div class="ttdoc">Construct space of real numbers. </div></div>
+<div class="ttc" id="namespaceSpacy_html_a63c49d211bf214be1fb321440ed03aad"><div class="ttname"><a href="namespaceSpacy.html#a63c49d211bf214be1fb321440ed03aad">Spacy::makeHilbertSpace</a></div><div class="ttdeci">VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex=false)</div><div class="ttdoc">Construct Hilbert space. </div></div>
 <div class="ttc" id="namespaceSpacy_html"><div class="ttname"><a href="namespaceSpacy.html">Spacy</a></div><div class="ttdoc">Main namespace of the Spacy library. </div></div>
+<div class="ttc" id="namespaceSpacy_html_a4f4b05902653c5fc8d6411142dcb352f"><div class="ttname"><a href="namespaceSpacy.html#a4f4b05902653c5fc8d6411142dcb352f">Spacy::makeRealSpace</a></div><div class="ttdeci">VectorSpace makeRealSpace(bool defaultIndex=false)</div><div class="ttdoc">Construct space of real numbers. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2015 14:13:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 4 2015 23:11:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

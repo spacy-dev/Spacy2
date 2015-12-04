@@ -1,0 +1,70 @@
+\hypertarget{classSpacy_1_1Operator}{}\section{Spacy\+:\+:Operator Class Reference}
+\label{classSpacy_1_1Operator}\index{Spacy\+::\+Operator@{Spacy\+::\+Operator}}
+
+
+Type-\/erased operator $A:\ X \to Y $.  
+
+
+
+
+{\ttfamily \#include $<$operator.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:Operator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classSpacy_1_1Operator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:Operator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classSpacy_1_1Operator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Operator_a2b2cdfbd76e33693de336981f66b0ece}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Operator$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Operator\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1Operator_a2b2cdfbd76e33693de336981f66b0ece}{Operator} (Impl \&\&impl)\label{classSpacy_1_1Operator_a2b2cdfbd76e33693de336981f66b0ece}
+
+\begin{DoxyCompactList}\small\item\em Construct from operator implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Operator_a52b59211b138394330c7cba3f52ab791}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Operator$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Operator\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1Operator}{Operator} \& \hyperlink{classSpacy_1_1Operator_a52b59211b138394330c7cba3f52ab791}{operator=} (Impl \&\&impl)\label{classSpacy_1_1Operator_a52b59211b138394330c7cba3f52ab791}
+
+\begin{DoxyCompactList}\small\item\em Assign from operator implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Operator_a2ab6072d6f9d98e0d5590531c080e3ad}{}\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1Operator_a2ab6072d6f9d98e0d5590531c080e3ad}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \label{classSpacy_1_1Operator_a2ab6072d6f9d98e0d5590531c080e3ad}
+
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Operator_a3b3d457bee48adf00d683a6aec4aa841}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1Operator_a3b3d457bee48adf00d683a6aec4aa841}{domain} () const \label{classSpacy_1_1Operator_a3b3d457bee48adf00d683a6aec4aa841}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Operator_a8cf3b1e3b6c5c6ab5ddc09224ed8ab24}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1Operator_a8cf3b1e3b6c5c6ab5ddc09224ed8ab24}{range} () const \label{classSpacy_1_1Operator_a8cf3b1e3b6c5c6ab5ddc09224ed8ab24}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Operator_af488f6211b1e253c625fd33b93821e5d}{}\hyperlink{classSpacy_1_1Operator_af488f6211b1e253c625fd33b93821e5d}{operator bool} () const \label{classSpacy_1_1Operator_af488f6211b1e253c625fd33b93821e5d}
+
+\begin{DoxyCompactList}\small\item\em Check if an implementation has been assigned. \end{DoxyCompactList}\item 
+\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{}T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target} ()\label{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}
+
+\begin{DoxyCompactList}\small\item\em Cast to T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\item 
+\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{}const T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{target} () const\label{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}
+
+\begin{DoxyCompactList}\small\item\em Cast to const T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1Operator_a2e0dc7f807dfac22461d503dce72435e}{}class {\bfseries To\+Target$<$ Operator $>$}\label{classSpacy_1_1Operator_a2e0dc7f807dfac22461d503dce72435e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Type-\/erased operator $A:\ X \to Y $. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Spacy/operator.\+hh\end{DoxyCompactItemize}

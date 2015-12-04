@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['none',['None',['../classSpacy_1_1Newton_1_1Damping_1_1None.html',1,'Spacy::Newton::Damping']]],
-  ['nonowningpimpl',['NonOwningPImpl',['../classSpacy_1_1Mixin_1_1NonOwningPImpl.html',1,'Spacy::Mixin']]],
-  ['numberofthreads',['NumberOfThreads',['../classSpacy_1_1Mixin_1_1NumberOfThreads.html',1,'Spacy::Mixin']]]
+  ['operator',['Operator',['../classSpacy_1_1Kaskade_1_1Operator.html',1,'Spacy::Kaskade']]],
+  ['operator',['Operator',['../classSpacy_1_1Operator.html',1,'Spacy']]],
+  ['operatorbase',['OperatorBase',['../classSpacy_1_1OperatorBase.html',1,'Spacy']]]
 ];

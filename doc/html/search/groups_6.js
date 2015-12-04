@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['real_20space',['Real Space',['../group__RealGroup.html',1,'']]]
+  ['newton_20methods',['Newton Methods',['../group__NewtonGroup.html',1,'']]]
 ];

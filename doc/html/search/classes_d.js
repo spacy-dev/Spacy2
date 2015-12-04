@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['parameter',['Parameter',['../structSpacy_1_1Newton_1_1Parameter.html',1,'Spacy::Newton']]],
-  ['parameter',['Parameter',['../classSpacy_1_1Parameter.html',1,'Spacy']]],
-  ['primaldualswitch',['PrimalDualSwitch',['../classSpacy_1_1Mixin_1_1PrimalDualSwitch.html',1,'Spacy::Mixin']]],
-  ['primalinducedscalarproduct',['PrimalInducedScalarProduct',['../classSpacy_1_1PrimalInducedScalarProduct.html',1,'Spacy']]]
+  ['quadratic',['Quadratic',['../classSpacy_1_1Functions__1D_1_1Quadratic.html',1,'Spacy::Functions_1D']]]
 ];

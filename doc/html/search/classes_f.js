@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['real',['Real',['../classSpacy_1_1Real.html',1,'Spacy']]],
-  ['regularitytest',['RegularityTest',['../classSpacy_1_1Mixin_1_1RegularityTest.html',1,'Spacy::Mixin']]],
-  ['regularitytestfailedexception',['RegularityTestFailedException',['../classSpacy_1_1RegularityTestFailedException.html',1,'Spacy']]],
-  ['relativeaccuracy',['RelativeAccuracy',['../classSpacy_1_1Mixin_1_1RelativeAccuracy.html',1,'Spacy::Mixin']]]
+  ['scalarproduct',['ScalarProduct',['../classSpacy_1_1ProductSpace_1_1ScalarProduct.html',1,'Spacy::ProductSpace']]],
+  ['singularoperatorexception',['SingularOperatorException',['../classSpacy_1_1SingularOperatorException.html',1,'Spacy']]],
+  ['solver',['Solver',['../classSpacy_1_1CG_1_1Solver.html',1,'Spacy::CG']]],
+  ['stateindex',['StateIndex',['../classSpacy_1_1Mixin_1_1StateIndex.html',1,'Spacy::Mixin']]],
+  ['strakostichyenergyerror',['StrakosTichyEnergyError',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html',1,'Spacy::CG::Termination']]]
 ];

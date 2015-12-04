@@ -12,60 +12,39 @@ Creator for \hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Product\+Space\+::\
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd_a73b6243d0ba00d019319e66bb06784dd}{Vector\+Creator} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \&spaces)
+\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd}{Vector\+Creator} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \&spaces)
 \begin{DoxyCompactList}\small\item\em Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a5b1da48f6bc460c17c8d49717ac279e2_a5b1da48f6bc460c17c8d49717ac279e2}{Vector\+Creator} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \&spaces, const std\+::vector$<$ unsigned $>$ \&\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a89612f21ccc70a36cc0c96dbc79616d4_a89612f21ccc70a36cc0c96dbc79616d4}{primal\+Sub\+Space\+Ids}, const std\+::vector$<$ unsigned $>$ \&\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a8efa5277e276b058bbb08ea36cd02ec4_a8efa5277e276b058bbb08ea36cd02ec4}{dual\+Sub\+Space\+Ids})
-\begin{DoxyCompactList}\small\item\em Construct product space $ X = \{ X_p , X_d \}$. \end{DoxyCompactList}\item 
-const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87_aa46303313c37f29cdfe54479d85cfe87}{sub\+Spaces} () const 
-\begin{DoxyCompactList}\small\item\em Access sub-\/spaces. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc_a4a74b3d51f41ba2ec1c6e755c520a5cc}{sub\+Space} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Access the sub-\/space associated with the k-\/th variable. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a184340fe2174c02561f2ceca8c21c490_a184340fe2174c02561f2ceca8c21c490}{shared\+Sub\+Space} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Access shared pointer to the sub-\/space associated with the k-\/th variable. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a62838fa0e7bc808c202d649aeb374e4b_a62838fa0e7bc808c202d649aeb374e4b}{primal\+Sub\+Space} ()
-\begin{DoxyCompactList}\small\item\em Access primal subspace as product space. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ac0730f7ac4b40e1ce7ee8d3730202664_ac0730f7ac4b40e1ce7ee8d3730202664}{primal\+Sub\+Space} () const 
-\begin{DoxyCompactList}\small\item\em Access primal subspace as product space. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_af2c0d26a76deb47c1549960ba726fc9a}{}std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_af2c0d26a76deb47c1549960ba726fc9a}{shared\+Primal\+Sub\+Space} () const \label{classSpacy_1_1ProductSpace_1_1VectorCreator_af2c0d26a76deb47c1549960ba726fc9a}
+\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}{Vector\+Creator} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \&spaces, const std\+::vector$<$ unsigned $>$ \&global\+Ids)
+\begin{DoxyCompactList}\small\item\em Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}{}const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ $>$ \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}{sub\+Spaces} () const \label{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}
 
-\begin{DoxyCompactList}\small\item\em Access shared pointer to primal subspace as product space. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ab83776cf1f74a82a14efc1c054346620_ab83776cf1f74a82a14efc1c054346620}{dual\+Sub\+Space} ()
-\begin{DoxyCompactList}\small\item\em Access dual subspace as product space. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_aeb73cfc3c6afc2afb06cbb1386d2534d_aeb73cfc3c6afc2afb06cbb1386d2534d}{dual\+Sub\+Space} () const 
-\begin{DoxyCompactList}\small\item\em Access dual subspace as product space. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $>$ \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ab21c8e91ed993a1f831e92a3312941ab_ab21c8e91ed993a1f831e92a3312941ab}{shared\+Dual\+Sub\+Space} () const 
-\begin{DoxyCompactList}\small\item\em Access shared pointer to dual sub-\/space as product space. \end{DoxyCompactList}\item 
-const std\+::vector$<$ unsigned $>$ \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a89612f21ccc70a36cc0c96dbc79616d4_a89612f21ccc70a36cc0c96dbc79616d4}{primal\+Sub\+Space\+Ids} () const 
-\begin{DoxyCompactList}\small\item\em Access ids of primal sub-\/spaces. \end{DoxyCompactList}\item 
-const std\+::vector$<$ unsigned $>$ \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a8efa5277e276b058bbb08ea36cd02ec4_a8efa5277e276b058bbb08ea36cd02ec4}{dual\+Sub\+Space\+Ids} () const 
-\begin{DoxyCompactList}\small\item\em Access ids of dual sub-\/spaces. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ae2222235fcde0f0c3b0ae8ca24a7e37e_ae2222235fcde0f0c3b0ae8ca24a7e37e}{is\+Primal\+Sub\+Space\+Id} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Checks whether the k-\/th sub-\/space is a primal space. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a21ce9dcef53ffc64a33153824449df5c_a21ce9dcef53ffc64a33153824449df5c}{is\+Dual\+Sub\+Space\+Id} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Checks whether the k-\/th sub-\/space is a dual space. \end{DoxyCompactList}\item 
-unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ad2f0e7c69670de6e11dfaae1e7e1a84c_ad2f0e7c69670de6e11dfaae1e7e1a84c}{primal\+Id\+Map} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Maps global space index to local space index in the primal product space. \end{DoxyCompactList}\item 
-unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ace373390f4e15f62c86c684c8bbee4f8_ace373390f4e15f62c86c684c8bbee4f8}{dual\+Id\+Map} (unsigned k) const 
-\begin{DoxyCompactList}\small\item\em Maps global space index to local space index in the dual product space. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_ad42b83acab18ed6a5f7b813403ad8ea5_ad42b83acab18ed6a5f7b813403ad8ea5}{is\+Primal\+Dual} () const 
-\begin{DoxyCompactList}\small\item\em Checks whether this product space has primal-\/dual structure or is a simple product space. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Vector} \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a_a733adf12a3b60abc8b93b8a1476c5e8a}{operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $\ast$space) const 
-\begin{DoxyCompactList}\small\item\em Generate product space vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access sub-\/spaces. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_aa61f9413eb3537879a92823dfdd0d6da}{sub\+Space} (unsigned k)
+\begin{DoxyCompactList}\small\item\em Access the sub-\/space associated with the k-\/th variable. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc}{sub\+Space} (unsigned k) const 
+\begin{DoxyCompactList}\small\item\em Access the sub-\/space associated with the k-\/th variable. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Vector} \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a}{operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} $\ast$space) const 
+\begin{DoxyCompactList}\small\item\em Generate product space vector. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a9995b95ffd41f3a5281d8db28e95e2d8}{id\+Map} (unsigned k) const 
+\begin{DoxyCompactList}\small\item\em Maps global space index to local space index in the product space. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}{}bool \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}{has\+Id} (unsigned k) const \label{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}
+
+\begin{DoxyCompactList}\small\item\em Check if product space contains a subspace with global index k. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Creator for \hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Product\+Space\+::\+Vector}. 
 
-Represents a product space $X = \{X_0,X_1,\ldots,X_n\}$. This structure may be further restricted by specifying if variables act as \char`\"{}primal\char`\"{} or \char`\"{}dual\char`\"{} variables. Then we get $X=\{ X_p, X_d \}$, where $X_p=\{X_i\}_i,\ i\in I $ is associated to the primal variables and $X_d=\{X_j\}_j,\ j\in J$ is associated to the dual variables. 
+Represents a product space $X = \{X_0,X_1,\ldots,X_n\}$. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd_a73b6243d0ba00d019319e66bb06784dd}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!Vector\+Creator@{Vector\+Creator}}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!Vector\+Creator@{Vector\+Creator}}
 \index{Vector\+Creator@{Vector\+Creator}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
 \subsubsection[{Vector\+Creator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::\+Vector\+Creator (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ {\bf Vector\+Space} $>$ $>$ \&}]{spaces}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd_a73b6243d0ba00d019319e66bb06784dd}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd}
 
 
 Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. 
@@ -75,266 +54,35 @@ Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $.
 {\em spaces} & vector of spaces $\{X_k\}_k$ \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a5b1da48f6bc460c17c8d49717ac279e2_a5b1da48f6bc460c17c8d49717ac279e2}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!Vector\+Creator@{Vector\+Creator}}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!Vector\+Creator@{Vector\+Creator}}
 \index{Vector\+Creator@{Vector\+Creator}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
 \subsubsection[{Vector\+Creator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::\+Vector\+Creator (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ {\bf Vector\+Space} $>$ $>$ \&}]{spaces, }
-\item[{const std\+::vector$<$ unsigned $>$ \&}]{primal\+Sub\+Space\+Ids, }
-\item[{const std\+::vector$<$ unsigned $>$ \&}]{dual\+Sub\+Space\+Ids}
+\item[{const std\+::vector$<$ unsigned $>$ \&}]{global\+Ids}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a5b1da48f6bc460c17c8d49717ac279e2_a5b1da48f6bc460c17c8d49717ac279e2}
+)}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}
 
 
-Construct product space $ X = \{ X_p , X_d \}$. 
-
-$ \{X_i\}_{i\in I} $ are spaces associated with primal variables. $ \{X_j\}_{j\in J} $ are spaces associated with dual variables.
+Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em spaces} & shared spaces to build the product space from \\
+{\em spaces} & vector of spaces $\{X_k\}_k$ \\
 \hline
-{\em primal\+Sub\+Space\+Ids} & indices $I$ of spaces $X_i$ associated with primal variables \\
-\hline
-{\em dual\+Sub\+Space\+Ids} & indices $J$ of spaces $X_j$ associated with dual variables \\
+{\em id\+Map} & map relating global space indices with the local indices $1,\ldots,n$ \\
 \hline
 \end{DoxyParams}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ace373390f4e15f62c86c684c8bbee4f8_ace373390f4e15f62c86c684c8bbee4f8}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!dual\+Id\+Map@{dual\+Id\+Map}}
-\index{dual\+Id\+Map@{dual\+Id\+Map}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{dual\+Id\+Map}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::dual\+Id\+Map (
-\begin{DoxyParamCaption}
-\item[{unsigned}]{k}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ace373390f4e15f62c86c684c8bbee4f8_ace373390f4e15f62c86c684c8bbee4f8}
-
-
-Maps global space index to local space index in the dual product space. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em k} & global space index \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-local space index with respect to dual product space 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ab83776cf1f74a82a14efc1c054346620_ab83776cf1f74a82a14efc1c054346620}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!dual\+Sub\+Space@{dual\+Sub\+Space}}
-\index{dual\+Sub\+Space@{dual\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{dual\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::dual\+Sub\+Space (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ab83776cf1f74a82a14efc1c054346620_ab83776cf1f74a82a14efc1c054346620}
-
-
-Access dual subspace as product space. 
-
-\begin{DoxyReturn}{Returns}
-$X_d$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_aeb73cfc3c6afc2afb06cbb1386d2534d_aeb73cfc3c6afc2afb06cbb1386d2534d}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!dual\+Sub\+Space@{dual\+Sub\+Space}}
-\index{dual\+Sub\+Space@{dual\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{dual\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::dual\+Sub\+Space (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_aeb73cfc3c6afc2afb06cbb1386d2534d_aeb73cfc3c6afc2afb06cbb1386d2534d}
-
-
-Access dual subspace as product space. 
-
-\begin{DoxyReturn}{Returns}
-$X_d$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a8efa5277e276b058bbb08ea36cd02ec4_a8efa5277e276b058bbb08ea36cd02ec4}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!dual\+Sub\+Space\+Ids@{dual\+Sub\+Space\+Ids}}
-\index{dual\+Sub\+Space\+Ids@{dual\+Sub\+Space\+Ids}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{dual\+Sub\+Space\+Ids}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$unsigned$>$\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::dual\+Sub\+Space\+Ids (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a8efa5277e276b058bbb08ea36cd02ec4_a8efa5277e276b058bbb08ea36cd02ec4}
-
-
-Access ids of dual sub-\/spaces. 
-
-\begin{DoxyReturn}{Returns}
-vector of ids of dual sub-\/spaces. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a21ce9dcef53ffc64a33153824449df5c_a21ce9dcef53ffc64a33153824449df5c}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!is\+Dual\+Sub\+Space\+Id@{is\+Dual\+Sub\+Space\+Id}}
-\index{is\+Dual\+Sub\+Space\+Id@{is\+Dual\+Sub\+Space\+Id}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{is\+Dual\+Sub\+Space\+Id}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::is\+Dual\+Sub\+Space\+Id (
-\begin{DoxyParamCaption}
-\item[{unsigned}]{k}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a21ce9dcef53ffc64a33153824449df5c_a21ce9dcef53ffc64a33153824449df5c}
-
-
-Checks whether the k-\/th sub-\/space is a dual space. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em k} & variable index \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if k-\/th subpsace is dual, else false 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ad42b83acab18ed6a5f7b813403ad8ea5_ad42b83acab18ed6a5f7b813403ad8ea5}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!is\+Primal\+Dual@{is\+Primal\+Dual}}
-\index{is\+Primal\+Dual@{is\+Primal\+Dual}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{is\+Primal\+Dual}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::is\+Primal\+Dual (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ad42b83acab18ed6a5f7b813403ad8ea5_ad42b83acab18ed6a5f7b813403ad8ea5}
-
-
-Checks whether this product space has primal-\/dual structure or is a simple product space. 
-
-\begin{DoxyReturn}{Returns}
-true if this product space has primal-\/dual structure, else false 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ae2222235fcde0f0c3b0ae8ca24a7e37e_ae2222235fcde0f0c3b0ae8ca24a7e37e}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!is\+Primal\+Sub\+Space\+Id@{is\+Primal\+Sub\+Space\+Id}}
-\index{is\+Primal\+Sub\+Space\+Id@{is\+Primal\+Sub\+Space\+Id}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{is\+Primal\+Sub\+Space\+Id}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::is\+Primal\+Sub\+Space\+Id (
-\begin{DoxyParamCaption}
-\item[{unsigned}]{k}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ae2222235fcde0f0c3b0ae8ca24a7e37e_ae2222235fcde0f0c3b0ae8ca24a7e37e}
-
-
-Checks whether the k-\/th sub-\/space is a primal space. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em k} & variable index \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if k-\/th subpsace is primal, else false 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a_a733adf12a3b60abc8b93b8a1476c5e8a}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!operator()@{operator()}}
-\index{operator()@{operator()}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::operator() (
-\begin{DoxyParamCaption}
-\item[{const {\bf Vector\+Space} $\ast$}]{space}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a_a733adf12a3b60abc8b93b8a1476c5e8a}
-
-
-Generate product space vector. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em space} & pointer to vector space implementation \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-vector associated with space 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ad2f0e7c69670de6e11dfaae1e7e1a84c_ad2f0e7c69670de6e11dfaae1e7e1a84c}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!primal\+Id\+Map@{primal\+Id\+Map}}
-\index{primal\+Id\+Map@{primal\+Id\+Map}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{primal\+Id\+Map}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::primal\+Id\+Map (
-\begin{DoxyParamCaption}
-\item[{unsigned}]{k}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ad2f0e7c69670de6e11dfaae1e7e1a84c_ad2f0e7c69670de6e11dfaae1e7e1a84c}
-
-
-Maps global space index to local space index in the primal product space. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em k} & global space index \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-local space index with respect to primal product space 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a62838fa0e7bc808c202d649aeb374e4b_a62838fa0e7bc808c202d649aeb374e4b}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!primal\+Sub\+Space@{primal\+Sub\+Space}}
-\index{primal\+Sub\+Space@{primal\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{primal\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::primal\+Sub\+Space (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a62838fa0e7bc808c202d649aeb374e4b_a62838fa0e7bc808c202d649aeb374e4b}
-
-
-Access primal subspace as product space. 
-
-\begin{DoxyReturn}{Returns}
-$X_p$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ac0730f7ac4b40e1ce7ee8d3730202664_ac0730f7ac4b40e1ce7ee8d3730202664}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!primal\+Sub\+Space@{primal\+Sub\+Space}}
-\index{primal\+Sub\+Space@{primal\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{primal\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::primal\+Sub\+Space (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ac0730f7ac4b40e1ce7ee8d3730202664_ac0730f7ac4b40e1ce7ee8d3730202664}
-
-
-Access primal subspace as product space. 
-
-\begin{DoxyReturn}{Returns}
-$X_p$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a89612f21ccc70a36cc0c96dbc79616d4_a89612f21ccc70a36cc0c96dbc79616d4}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!primal\+Sub\+Space\+Ids@{primal\+Sub\+Space\+Ids}}
-\index{primal\+Sub\+Space\+Ids@{primal\+Sub\+Space\+Ids}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{primal\+Sub\+Space\+Ids}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$unsigned$>$\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::primal\+Sub\+Space\+Ids (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a89612f21ccc70a36cc0c96dbc79616d4_a89612f21ccc70a36cc0c96dbc79616d4}
-
-
-Access ids of primal sub-\/spaces. 
-
-\begin{DoxyReturn}{Returns}
-vector of ids of primal sub-\/spaces. 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_ab21c8e91ed993a1f831e92a3312941ab_ab21c8e91ed993a1f831e92a3312941ab}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!shared\+Dual\+Sub\+Space@{shared\+Dual\+Sub\+Space}}
-\index{shared\+Dual\+Sub\+Space@{shared\+Dual\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{shared\+Dual\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Vector\+Space}$>$ Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::shared\+Dual\+Sub\+Space (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_ab21c8e91ed993a1f831e92a3312941ab_ab21c8e91ed993a1f831e92a3312941ab}
-
-
-Access shared pointer to dual sub-\/space as product space. 
-
-\begin{DoxyReturn}{Returns}
-shared pointer to dual sub-\/space 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a184340fe2174c02561f2ceca8c21c490_a184340fe2174c02561f2ceca8c21c490}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!shared\+Sub\+Space@{shared\+Sub\+Space}}
-\index{shared\+Sub\+Space@{shared\+Sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{shared\+Sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Vector\+Space}$>$ Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::shared\+Sub\+Space (
-\begin{DoxyParamCaption}
-\item[{unsigned}]{k}
-\end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a184340fe2174c02561f2ceca8c21c490_a184340fe2174c02561f2ceca8c21c490}
-
-
-Access shared pointer to the sub-\/space associated with the k-\/th variable. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em k} & variable index \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-std\+::shared\+\_\+ptr to the corresponding sub-\/space $X_k$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc_a4a74b3d51f41ba2ec1c6e755c520a5cc}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!sub\+Space@{sub\+Space}}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_aa61f9413eb3537879a92823dfdd0d6da}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!sub\+Space@{sub\+Space}}
 \index{sub\+Space@{sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::sub\+Space (
+\subsubsection[{sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::sub\+Space (
 \begin{DoxyParamCaption}
 \item[{unsigned}]{k}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc_a4a74b3d51f41ba2ec1c6e755c520a5cc}
+)}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_aa61f9413eb3537879a92823dfdd0d6da}
 
 
 Access the sub-\/space associated with the k-\/th variable. 
@@ -347,21 +95,62 @@ Access the sub-\/space associated with the k-\/th variable.
 \begin{DoxyReturn}{Returns}
 corresponding sub-\/space $X_k$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87_aa46303313c37f29cdfe54479d85cfe87}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!sub\+Spaces@{sub\+Spaces}}
-\index{sub\+Spaces@{sub\+Spaces}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
-\subsubsection[{sub\+Spaces}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Vector\+Space}$>$ $>$\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::sub\+Spaces (
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!sub\+Space@{sub\+Space}}
+\index{sub\+Space@{sub\+Space}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
+\subsubsection[{sub\+Space}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Vector\+Space}\& Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::sub\+Space (
 \begin{DoxyParamCaption}
-{}
+\item[{unsigned}]{k}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87_aa46303313c37f29cdfe54479d85cfe87}
+) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a4a74b3d51f41ba2ec1c6e755c520a5cc}
 
 
-Access sub-\/spaces. 
+Access the sub-\/space associated with the k-\/th variable. 
 
-If this space is a primal-\/dual product space then it has up to two sub-\/spaces which are itself product space vectors.
 
+\begin{DoxyParams}{Parameters}
+{\em k} & variable index \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-vector of sub-\/spaces. 
+corresponding sub-\/space $X_k$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\+Space} $\ast$}]{space}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a733adf12a3b60abc8b93b8a1476c5e8a}
+
+
+Generate product space vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & pointer to vector space implementation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector associated with space 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a9995b95ffd41f3a5281d8db28e95e2d8}{}\index{Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}!id\+Map@{id\+Map}}
+\index{id\+Map@{id\+Map}!Spacy\+::\+Product\+Space\+::\+Vector\+Creator@{Spacy\+::\+Product\+Space\+::\+Vector\+Creator}}
+\subsubsection[{id\+Map}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Spacy\+::\+Product\+Space\+::\+Vector\+Creator\+::id\+Map (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+) const}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a9995b95ffd41f3a5281d8db28e95e2d8}
+
+
+Maps global space index to local space index in the product space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & global space index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+local space index with respect to product space 
 \end{DoxyReturn}
 
 

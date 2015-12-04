@@ -1,0 +1,34 @@
+<h1>Download<br></h1>
+
+<p>Spacy is hosted on GitHub: <a href="https://github.com/lubkoll/Spacy">view on GitHub</a>.</p>
+<table>
+    <tr>
+        <td>Current Release:</td>
+        <td><span class="spacer"></span></td>
+        <td><a href="https://github.com/lubkoll/Spacy/archive/0.1.tar.gz">Spacy-0.1.tar.gz</a></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><span class="spacer"></span></td>
+        <td><a href="https://github.com/lubkoll/Spacy/archive/0.1.zip">Spacy-0.1.zip</a></td>
+    </tr>
+</table>
+<div class="separator"></div>
+
+
+<h1>Dependencies</h1>
+<p>Spacy itself does not require anything than a recent C++-compiler. For testing <a href="https://github.com/google/googletest">googletest</a> is used and will be downloaded by cmake.</p>
+<div class="separator"></div>
+
+<h1>Installation<br></h1>
+<p>Spacy can be easily installed with cmake. The usual installation procedure is:</p>
+<div class="code-style boxshadow">
+<ul>
+    <li>cd spacy/root/dir</li>
+    <li>mkdir build</li>
+    <li>cd build</li>
+    <li>cmake ..</li>
+    <li>make</li>
+</ul>
+</div>
+<p>Libraries that are build with cmake, such as <a href="http://eigen.tuxfamily.org">Eigen</a>  or <a href="http://fenicsproject.org">FEniCS</a>, should be detected by cmake. For usage with <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a> run <code>cmake -DKaskade=ON ..</code>. For building the tests you have to specify <code>cmake -DBuildTest=ON ..</code>.</p>
