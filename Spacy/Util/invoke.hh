@@ -43,7 +43,6 @@ namespace Spacy
 
 
   /**
-   * @ingroup SpacyGroup
    * @brief Invoke function with arguments contained in tup.
    * @param func function to be invoked
    * @param tup = (a0,a1,...) arguments, individual entries must be accessible with std::get.
@@ -62,7 +61,6 @@ namespace Spacy
   }
 
   /**
-   * @ingroup SpacyGroup
    * @brief Create object of type Type from elements contained in tup.
    * @param tup = (a0,a1,...) constructor arguments, individual entries must be accessible with std::get.
    *

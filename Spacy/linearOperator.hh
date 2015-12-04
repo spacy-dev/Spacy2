@@ -11,9 +11,6 @@
 #include "Spacy/linearOperator.hh"
 #include "Spacy/vector.hh"
 
-/** @addtogroup SpacyGroup
- * @{
- */
 namespace Spacy
 {
   /// @cond
@@ -186,7 +183,6 @@ namespace Spacy
   LinearOperator d1(const C1Operator& A, const Vector& x);
 
   LinearOperator& axpy(LinearOperator& A, double a, LinearOperator B);
-  /** @} */
 }
 
 #endif // SPACY_LINEAR_OPERATOR_HH

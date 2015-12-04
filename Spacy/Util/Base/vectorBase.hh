@@ -16,7 +16,7 @@ namespace Spacy
    * @tparam Derived derived vector implementation, provided for CRTP
    *
    * Provides access to the underlying vector space and related operations.
-   * @see Kaskade::Vector, Fenics::Vector
+   * @see Kaskade::Vector, Fenics::Vector, Rn::Vector
    */
   class VectorBase
   {

@@ -15,7 +15,6 @@ namespace Spacy
 
   /**
    * @ingroup ConceptGroup
-   * @brief Concept for vectors in %Spacy.
    *
    * @code
    * class MyVector

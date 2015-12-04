@@ -9,10 +9,7 @@
 
 namespace Spacy
 {
-  /**
-   * @ingroup SpacyGroup
-   * @brief A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.
-   */
+  /// A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.
   class DampingFactor : public Mixin::Eps
   {
   public:
@@ -48,16 +45,10 @@ namespace Spacy
      */
     DampingFactor& operator=(double nu);
 
-    /**
-     * @brief Access damping factor
-     * @return \f$\nu\f$
-     */
+    /// Access damping factor \f$\nu\f$.
     operator Real() const;
 
-    /**
-     * @brief Access damping factor
-     * @return \f$\nu\f$
-     */
+    /// Access damping factor \f$\nu\f$.
     Real operator()() const;
 
   private:

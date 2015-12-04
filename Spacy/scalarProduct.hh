@@ -11,8 +11,7 @@ namespace Spacy
   /// @endcond
 
   /**
-   * \ingroup SpacyGroup
-   * \brief Type-erased scalar product.
+   * @brief Type-erased scalar product.
    *
    * The minimal signature (besides copy and/or move constructor/assignment) of a scalar product is:
    * @code

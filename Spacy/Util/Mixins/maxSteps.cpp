@@ -27,15 +27,5 @@ namespace Spacy
     {
       setMaxSteps( changedSubject->maxSteps() );
     }
-
-    void MaxSteps::attachMaxSteps(MaxSteps& other)
-    {
-      attach(other);
-    }
-
-    void MaxSteps::detachMaxSteps(MaxSteps& other)
-    {
-      detach(other);
-    }
   }
 }

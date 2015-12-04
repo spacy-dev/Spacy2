@@ -9,9 +9,6 @@
 #include "Spacy/vector.hh"
 #include "Spacy/Spaces/ProductSpace/vector.hh"
 
-/** @addtogroup SpacyGroup
- * @{
- */
 namespace Spacy
 {
   /// @cond
@@ -57,6 +54,5 @@ namespace Spacy
     copyProductSpaceVectorIfConsistent(x,y,copyTargetIfConsistent);
   }
 }
-/** @} */
 
 #endif // SPACY_UTIL_COPY_HH

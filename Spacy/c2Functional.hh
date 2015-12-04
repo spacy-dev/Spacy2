@@ -21,10 +21,6 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
-  /** @addtogroup SpacyGroup
-   * @{
-   */
-
   /// Type-erased twice differentiable functional \f$f:\ X \to \mathbb{R} \f$.
   class C2Functional : public Mixin::ToTarget<C2Functional>
   {
@@ -104,7 +100,7 @@ namespace Spacy
       return *this;
     }
 
-    /// Apply operator.
+    /// Apply functional.
     Real operator()(const Vector& x) const;
 
     /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
@@ -150,7 +146,6 @@ namespace Spacy
    * @see C2Functional
    */
   LinearOperator d2(const C2Functional& f, const Vector& x);
-  /** @} */
 }
 
 #endif // SPACY_C2_FUNCTIONAL_HH

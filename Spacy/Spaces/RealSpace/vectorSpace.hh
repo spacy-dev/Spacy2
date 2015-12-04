@@ -19,7 +19,6 @@ namespace Spacy
   }
 
   /**
-   * @ingroup SpacyGroup
    * @brief Construct space of real numbers.
    * @return ::RealSpace::makeHilbertSpace()
    */
@@ -28,7 +27,6 @@ namespace Spacy
   namespace Space
   {
     /**
-     * @ingroup GlobalSpaceGroup
      * @brief Global space of real numbers with space index 0.
      *
      * This space is used by class Real if the underlying space is left unspecified.

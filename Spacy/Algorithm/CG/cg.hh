@@ -128,9 +128,7 @@ namespace Spacy
       /// CG Implementation.
       Vector cgLoop (Vector x, Vector r) const;
 
-      /**
-       * @brief Apply preconditioner.
-       */
+      /// Apply preconditioner.
       Vector Q(const Vector& r) const;
 
       /// Check if step length is below maximal attainable accuracy.
@@ -145,24 +143,16 @@ namespace Spacy
        */
       bool terminateOnNonconvexity(Real qAq, Real qPq, Vector& x, const Vector& q, unsigned step) const;
 
-      /**
-       * @brief Set \f$\theta=0\f$.
-       */
+      /// Set \f$\theta=0\f$.
       void initializeRegularization() const noexcept;
 
-      /**
-       * @brief Replace \f$qAq\f$ with \f$ qAq + \theta qPq\f$.
-       */
+      /// Replace \f$qAq\f$ with \f$ qAq + \theta qPq\f$.
       void regularize(Real& qAq, Real qPq) const noexcept;
 
-      /**
-       * @brief Update regularization parameter \f$\theta\f$ in regularized conjugate gradient methods.
-       */
+      /// Update regularization parameter \f$\theta\f$ in regularized conjugate gradient methods.
       void updateRegularization(Real qAq, Real qPq) const;
 
-      /**
-       * @brief Replace \f$r\f$ with \f$ r - \alpha\theta\Pq \f$ in regularized conjugate gradient methods.
-       */
+      /// Replace \f$r\f$ with \f$ r - \alpha\theta\Pq \f$ in regularized conjugate gradient methods.
       void adjustRegularizedResidual(Real alpha, const Vector& Pq, Vector& r) const;
 
 

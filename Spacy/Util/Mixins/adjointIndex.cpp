@@ -24,13 +24,3 @@ void Spacy::Mixin::AdjointIndex::update(AdjointIndex* changedSubject)
 {
   setAdjointIndex( changedSubject->adjointIndex() );
 }
-
-void Spacy::Mixin::AdjointIndex::attachAdjointIndex(AdjointIndex& other)
-{
-  attach(other);
-}
-
-void Spacy::Mixin::AdjointIndex::detachAdjointIndex(AdjointIndex& other)
-{
-  detach(other);
-}

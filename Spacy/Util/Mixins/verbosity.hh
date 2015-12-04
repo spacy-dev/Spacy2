@@ -10,16 +10,13 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /**
-     * @ingroup MixinGroup
-     * @brief %Mixin class for verbosity.
-     */
+    /// %Mixin class for verbosity.
     class Verbosity : public MixinConnection<Verbosity>
     {
     public:
       /**
        * @brief Constructor.
-       * @param verbosityLevel verbosity level (0=silent,...)
+       * @param verbosityLevel verbosity level (0 = silent, 1 = print information, 2 = print detailed information)
        */
       explicit Verbosity(unsigned verbosityLevel = 0) noexcept;
 
@@ -29,42 +26,15 @@ namespace Spacy
        */
       void setVerbosity(bool verbose);
 
-      /**
-       * @brief Check if verbosity is turned on.
-       * @return true if verbosityLevel > 0
-       */
+      /// Check if verbosityLevel > 0
       bool verbose() const noexcept;
 
-      /**
-       * @brief Set verbosity level.
-       * @param level verbosity level
-       */
       void setVerbosityLevel(unsigned level) noexcept;
 
-      /**
-       * @brief Access verbosity level.
-       * @return verbosity level
-       */
+      /// Access verbosity level.
       unsigned verbosityLevel() const noexcept;
 
-      /**
-       * @brief Attach verbosity.
-       *
-       * When setVerbosity(bool verbose) is called, then also
-       * other.setVerbosity(verbose) is invoked.
-       * When setDetailedVerbosity(bool verbose) is called, then also
-       * other.setDetailedVerbosity(verbose) is invoked.
-       */
-      void attachVerbosity(Verbosity& other);
-
-      /**
-       * @brief Detach verbosity before it gets deleted.
-       */
-      void detachVerbosity(Verbosity& other);
-
-      /**
-       * @brief update function for observer pattern.
-       */
+      /// update function for observer pattern.
       void update(Verbosity* changedSubject);
 
     private:

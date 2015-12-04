@@ -22,10 +22,6 @@ namespace Spacy
   namespace Detail { static unsigned spaceIndex = 1; }
   /// @endcond
 
-  /** @addtogroup SpacyGroup
-   * @{
-   */
-
   /**
    * @brief Vector creator for feeding into VectorSpace.
    *
@@ -216,6 +212,5 @@ namespace Spacy
   void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y);
 
   void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
-  /** @} */
 }
 #endif // SPACY_VECTOR_SPACE_HH

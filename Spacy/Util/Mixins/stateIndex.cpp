@@ -24,13 +24,3 @@ void Spacy::Mixin::StateIndex::update(StateIndex* changedSubject)
 {
   setStateIndex( changedSubject->stateIndex() );
 }
-
-void Spacy::Mixin::StateIndex::attachStateIndex(StateIndex& other)
-{
-  attach(other);
-}
-
-void Spacy::Mixin::StateIndex::detachStateIndex(StateIndex& other)
-{
-  detach(other);
-}

@@ -16,10 +16,7 @@ namespace Spacy
   class Vector;
   /// @endcond
 
-  /** @addtogroup CSGroup
-   * {
-   */
-
+  /** @addtogroup CSGroup @{ */
   namespace CompositeStep
   {
     /**

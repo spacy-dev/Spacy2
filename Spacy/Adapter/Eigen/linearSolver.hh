@@ -15,6 +15,10 @@ namespace Spacy
 
   namespace Rn
   {
+    /**
+     * @ingroup EigenGroup
+     * @brief Linear solver for %Eigen matrices.
+     */
     class LinearSolver
     {
     public:

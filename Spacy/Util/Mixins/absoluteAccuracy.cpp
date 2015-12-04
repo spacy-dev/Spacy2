@@ -33,15 +33,5 @@ namespace Spacy
     {
       setAbsoluteAccuracy( changedSubject->absoluteAccuracy() );
     }
-
-    void AbsoluteAccuracy::attachAbsoluteAccuracy(AbsoluteAccuracy& other)
-    {
-      attach(other);
-    }
-
-    void AbsoluteAccuracy::detachAbsoluteAccuracy(AbsoluteAccuracy& other)
-    {
-      detach(other);
-    }
   }
 }

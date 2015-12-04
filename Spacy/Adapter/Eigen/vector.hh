@@ -5,7 +5,6 @@
 #define SPACY_ADAPTER_EIGEN_VECTOR_HH
 
 #include "Eigen/Dense"
-
 #include "Spacy/Adapter/Generic/vector.hh"
 
 namespace Spacy
@@ -13,7 +12,7 @@ namespace Spacy
   namespace Rn
   {
     /**
-     * @ingroup EigenGroup
+     * @ingroup EigenGroup, VectorSpaceGroup
      * @brief %Vector for %Rn, based on the %Eigen library.
      */
     using Vector = Generic::Vector< ::Eigen::VectorXd >;

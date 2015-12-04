@@ -12,7 +12,6 @@ namespace Spacy
 {
   /// @cond
   class VectorSpace;
-  /// @endcond
 
   template <class T>
   using TryMemOp_add = decltype(std::declval<T>() += std::declval<T>());
@@ -82,6 +81,7 @@ namespace Spacy
         : std::is_same< TryMemOp_callable<T,Args...> , Return >
     {};
   };
+  /// @endcond
 }
 
 #endif // SPACY_UTIL_MEM_OP_CHECKS_HH

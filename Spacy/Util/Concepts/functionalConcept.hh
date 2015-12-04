@@ -16,6 +16,7 @@ namespace Spacy
 
   /**
    * @ingroup ConceptGroup
+   * @anchor FunctionalConceptGroup
    * @brief Concept for functionals in %Spacy.
    *
    * @code
@@ -30,8 +31,8 @@ namespace Spacy
    *   const VectorSpace& domain() const;
    * };
    *
-   * @see ::Spacy::Functional
    * @endcode
+   * @see Functional
    */
   template <class Impl>
   using FunctionalConcept =

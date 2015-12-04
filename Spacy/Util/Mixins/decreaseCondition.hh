@@ -10,12 +10,7 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /**
-     * @ingroup MixinGroup
-     * @brief %Mixin class for accepting local models \f$m\f$ of nonlinear optimization problems \f$\min f(x)\f$.
-     *
-     *
-     */
+    /// %Mixin class for accepting local models \f$m\f$ of nonlinear optimization problems \f$\min f(x)\f$.
     class DecreaseCondition
     {
     public:

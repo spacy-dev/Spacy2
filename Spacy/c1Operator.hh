@@ -10,9 +10,6 @@
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/linearOperator.hh"
 
-/** @addtogroup SpacyGroup
- * @{
- */
 namespace Spacy
 {
   /// Type-erased differentiable operator \f$A:\ X \to Y \f$.
@@ -117,6 +114,5 @@ namespace Spacy
     CopyViaClonePtr<AbstractBase> base_;
   };
 }
-/** @} */
 
 #endif // SPACY_C1_OPERATOR_HH

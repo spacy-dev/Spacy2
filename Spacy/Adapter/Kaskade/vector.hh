@@ -26,7 +26,7 @@ namespace Spacy
     /// \endcond
 
     /**
-     * @ingroup KaskadeGroup
+     * @ingroup KaskadeGroup VectorSapceGroup
      * @brief Coefficient vector implementation for %Kaskade 7 (single space).
      * @tparam Description %Kaskade::VariableSetDescription
      */

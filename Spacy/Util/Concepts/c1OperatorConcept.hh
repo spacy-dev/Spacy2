@@ -14,7 +14,7 @@ namespace Spacy
 
   /**
    * @ingroup ConceptGroup
-   * @brief Concept for differentiable operators in %Spacy.
+   * @anchor C1OperatorConceptAnchor
    *
    * @code
    * // A: X->Y.
@@ -40,7 +40,7 @@ namespace Spacy
    *
    * The member function `linearization(x)` is allowed to return any type that satisfies the LinearOperatorConcept.
    *
-   * @see OperatorConcept, ::Spacy::C1Operator
+   * @see OperatorConcept, C1Operator
    */
   template <class Impl>
   using C1OperatorConcept =

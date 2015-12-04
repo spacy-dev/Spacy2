@@ -14,7 +14,7 @@ namespace Spacy
 
   /**
    * @ingroup ConceptGroup
-   * @brief Concept for twice differentiable functionals in %Spacy.
+   * @anchor C2FunctionalConceptAnchor
    *
    * @code
    * // f: X->R.
@@ -40,7 +40,7 @@ namespace Spacy
    *
    * The member function `hessian(x)` is allowed to return any type that satisfies the LinearOperatorConcept.
    *
-   * @see FunctionalConcept, C1FunctionalConcept, ::Spacy::C2Functional
+   * @see FunctionalConcept, C1FunctionalConcept, C2Functional
    */
   template <class Impl>
   using C2FunctionalConcept =

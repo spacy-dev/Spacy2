@@ -11,10 +11,7 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /**
-     * @ingroup MixinGroup
-     * @brief %Mixin class for maximal number of steps/iterations.
-     */
+    /// %Mixin class for maximal number of steps/iterations.
     class RegularityTest : public MixinConnection<RegularityTest>
     {
     public:
@@ -24,16 +21,9 @@ namespace Spacy
        */
       explicit RegularityTest(Real lowerBound = 1e-12) noexcept;
 
-      /**
-       * @brief Set lower bound of regularity test for termination criteria.
-       * @param lowerBound new lower bound
-       */
+      /// Set lower bound of regularity test for termination criteria.
       void setLowerBound(Real lowerBound);
 
-      /**
-       * @brief Access lower bound.
-       * @return lower bound
-       */
       Real lowerBound() const noexcept;
 
       /**
@@ -50,22 +40,7 @@ namespace Spacy
        */
       bool regularityTestFailed(Real nu) const noexcept;
 
-      /**
-       * @brief Attach RegularityTest.
-       *
-       * When setLowerBound(double lowerBound) is called, then also
-       * other.setLowerBound(lowerBound) is invoked.
-       */
-      void attachRegularityTest(RegularityTest& other);
-
-      /**
-       * @brief Detach Eps before it gets deleted.
-       */
-      void detachRegularityTest(RegularityTest& other);
-
-      /**
-       * @brief update function for observer pattern.
-       */
+      /// update function for observer pattern.
       void update(MixinConnection<RegularityTest>* changedSubject);
 
     private:

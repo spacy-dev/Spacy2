@@ -14,8 +14,8 @@ namespace Spacy
   /// @endcond
 
   /**
-   * @ingroup SpacyGroup
-   * @brief Concept for linear operators in %Spacy.
+   * @ingroup ConceptGroup
+   * @anchor LinearOperatorConceptAnchor
    *
    * @code
    * // A: X->Y.
@@ -65,7 +65,7 @@ namespace Spacy
    *
    * The member function `solver()` is allowed to return anything that fits into a `std::function<Vector(const Vector&)>`.
    *
-   * @see OperatorConcept, VectorConcept, ::Spacy::LinearOperator
+   * @see OperatorConcept, VectorConcept, LinearOperator
    */
   template <class Impl>
   using LinearOperatorConcept =

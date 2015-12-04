@@ -11,8 +11,7 @@ namespace Spacy
   /// @endcond
 
   /**
-   * \ingroup SpacyGroup
-   * \brief Type-erased norm.
+   * @brief Type-erased norm.
    *
    * The minimal signature (besides copy and/or move constructor/assignment) of a norm is:
    * @code

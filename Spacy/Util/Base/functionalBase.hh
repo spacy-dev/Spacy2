@@ -10,9 +10,7 @@ namespace Spacy
   class VectorSpace;
   /// \endcond
 
-  /**
-   * @brief Base class for twice differentiable functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
-   */
+  /// Base class for twice differentiable functionals \f$ f:\ X\rightarrow \mathbb{R}\f$.
   class FunctionalBase
   {
   public:

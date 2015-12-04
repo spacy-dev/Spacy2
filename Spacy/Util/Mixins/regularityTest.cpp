@@ -34,15 +34,5 @@ namespace Spacy
   {
     setLowerBound( static_cast<RegularityTest*>(changedSubject)->lowerBound() );
   }
-
-  void Mixin::RegularityTest::attachRegularityTest(RegularityTest& other)
-  {
-    attach(other);
-  }
-
-  void Mixin::RegularityTest::detachRegularityTest(RegularityTest& other)
-  {
-    detach(other);
-  }
 }
 

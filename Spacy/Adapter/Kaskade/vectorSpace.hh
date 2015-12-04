@@ -17,9 +17,7 @@
 
 namespace Spacy
 {
-  /** @addtogroup Kaskade
-   * @{
-   */
+  /** @addtogroup KaskadeGroup @{ */
   namespace Kaskade
   {
     /// Creator for vector space elements for %Kaskade 7
@@ -29,6 +27,7 @@ namespace Spacy
     {
     public:
       /**
+       * @ingroup VectorSpaceGroup
        * @brief Create from %Kaskade 7 function space.
        * @param space single %Kaskade 7 function space (no product space)
        */
@@ -46,6 +45,7 @@ namespace Spacy
     };
 
     /**
+     * @ingroup VectorSpaceGroup
      * @brief Create single space with hilbert space structure for %Kaskade 7.
      * @param space single %Kaskade 7 function space (no product space)
      */
@@ -56,6 +56,7 @@ namespace Spacy
     }
 
     /**
+     * @ingroup VectorSpaceGroup
      * @brief Create product space with hilbert space structure for %Kaskade 7.
      * @param spaces boost fusion forward sequence of const pointers to %Kaskade 7 function spaces
      * @param primalIds ids of primal variables

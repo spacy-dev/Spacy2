@@ -19,11 +19,6 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
-  /** @addtogroup SpacyGroup
-   * @{
-   */
-
-
   /// Type-erased functional \f$f:\ X \to \mathbb{R} \f$.
   class Functional : public Mixin::ToTarget<Functional>
   {
@@ -86,7 +81,7 @@ namespace Spacy
     }
 
 
-    /// Apply operator.
+    /// Apply functional.
     Real operator()(const Vector& x) const;
 
     /// Access domain space \f$X\f$.
@@ -98,7 +93,6 @@ namespace Spacy
   private:
     CopyViaClonePtr<AbstractBase> base_;
   };
-  /** @} */
 }
 
 #endif // SPACY_FUNCTIONAL_HH

@@ -24,6 +24,7 @@ namespace Spacy
   namespace CompositeStep
   {
     /**
+     * @ingroup CSGroup
      * @brief The affine covariant step method described in @cite Lubkoll2015, @cite Lubkoll2015a for the solution of equality constraint optimization problems.
      *
      * An affine covariant composite step method for the solution of problems of the form

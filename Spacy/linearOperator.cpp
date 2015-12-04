@@ -3,6 +3,8 @@
 
 #include "linearOperator.hh"
 
+#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
+
 #include "linearSolver.hh"
 #include "c1Operator.hh"
 
@@ -13,40 +15,40 @@ namespace Spacy
     assert(base_);
     return base_->operator ()(x);
   }
-
+  
   std::function<Vector(const Vector&)> LinearOperator::solver() const
   {
     assert(base_);
     return base_->solver();
   }
-
+  
   LinearOperator& LinearOperator::operator+=(const LinearOperator& y)
   {
     assert(base_);
     base_->add(y);
     return *this;
   }
-
+  
   LinearOperator& LinearOperator::operator-=(const LinearOperator& y)
   {
     assert(base_);
     base_->subtract(y);
     return *this;
   }
-
+  
   LinearOperator& LinearOperator::operator*=(double a)
   {
     assert(base_);
     base_->multiply(a);
     return *this;
   }
-
+  
   LinearOperator LinearOperator::operator-() const
   {
     assert(base_);
     return base_->negate();
   }
-
+  
   bool LinearOperator::operator==(const LinearOperator& y) const
   {
     if( !base_ && !y ) return true;
@@ -54,49 +56,49 @@ namespace Spacy
     if( base_ && !y ) return false;
     return base_->operator ==(y);
   }
-
+  
   const VectorSpace& LinearOperator::space() const
   {
     assert(base_);
     return base_->space();
   }
-
+  
   const VectorSpace& LinearOperator::domain() const
   {
     assert(base_);
     return base_->domain();
   }
-
+  
   const VectorSpace& LinearOperator::range() const
   {
     assert(base_);
     return base_->range();
   }
-
+  
   LinearOperator::operator bool() const
   {
     return base_;
   }
-
-
-
+  
+  
+  
   LinearSolver operator^(const LinearOperator& A, int k)
   {
     if( k == -1 ) return A.solver();
     throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
   }
-
+  
   LinearSolver operator^(LinearOperator&& A, int k)
   {
     if( k == -1 ) return std::move(A.solver());
     throw InvalidArgumentException("operator^ for LinearOperator only defined for exponent: k = -1.");
   }
-
+  
   LinearOperator d1(const C1Operator& A, const Vector& x)
   {
     return A.linearization(x);
   }
-
+  
   LinearOperator& axpy(LinearOperator& A, double a, LinearOperator B)
   {
     return A += ( B*= a );

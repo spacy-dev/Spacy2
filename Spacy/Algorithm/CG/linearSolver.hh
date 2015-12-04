@@ -11,9 +11,7 @@
 
 namespace Spacy
 {
-  /** @addtogroup CGGroup
-   * @{
-   */
+  /** @addtogroup CGGroup @{ */
   namespace CG
   {
     /// Conjugate gradient solver satisfying the \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept"
@@ -35,39 +33,21 @@ namespace Spacy
        */
       LinearSolver(Operator A_, CallableOperator P_, const std::string& type );
 
-      /**
-       * @brief Copy constructor.
-       * @param other solver to copy from
-       */
       LinearSolver(const LinearSolver& other);
 
-      /**
-       * @brief Apply conjugate gradient solver.
-       * @param y right hand side \f$y\f$.
-       */
+      /// Apply conjugate gradient solver.
       Vector operator()(const Vector& y) const;
 
-      /**
-       * @brief Access conjugate gradient implementation.
-       */
+      /// Access conjugate gradient implementation.
       Solver& impl();
 
-      /**
-       * @brief Checks positive definiteness of \f$A\f$.
-       * @return true if \f$A\f$ is positive definite, else false
-       */
+      /// Checks positive definiteness of \f$A\f$.
       bool isPositiveDefinite() const;
 
-      /**
-       * @brief Access preconditioner.
-       * @return preconditioner \f$P\f$
-       */
+      /// Access preconditioner \f$P\f$.
       const CallableOperator& P() const;
 
-      /**
-       * @brief Access operator.
-       * @return operator \f$A\f$
-       */
+      /// Access operator \f$A\f$.
       const CallableOperator& A() const;
 
     private:

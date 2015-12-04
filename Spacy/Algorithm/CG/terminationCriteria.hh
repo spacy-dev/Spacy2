@@ -15,9 +15,7 @@
 
 namespace Spacy
 {
-  /** @addtogroup CGGroup
-   * @{
-   */
+  /** @addtogroup CGGroup  @{ */
   namespace CG
   {
     namespace Termination
@@ -38,10 +36,7 @@ namespace Spacy
           public Mixin::Verbosity
       {
       public:
-        /**
-         * \brief termination decision
-         * \return true if the iteration has reached the required accuracy
-         */
+        /// termination decision
         bool operator()() const;
 
         /**
@@ -59,9 +54,7 @@ namespace Spacy
          */
         bool vanishingStep() const noexcept;
 
-        /**
-         * \brief re-initializes the termination criterion for a new CG run
-         */
+        /// re-initializes the termination criterion for a new CG run
         void clear() noexcept;
 
         /**
@@ -80,9 +73,7 @@ namespace Spacy
         bool minimalDecreaseAchieved() const noexcept;
 
       private:
-        /**
-         * \brief returns the estimated sqaured absolute energy error
-         */
+        /// returns the estimated sqaured absolute energy error
         double squaredRelativeError() const noexcept;
 
         unsigned lookAhead_ = 5;

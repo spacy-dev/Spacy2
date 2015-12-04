@@ -1,5 +1,7 @@
 #error Documentation only.
 
+namespace Spacy
+{
 /*! \mainpage %Spacy documentation
  * 
  * \section sec_intro Introduction
@@ -10,18 +12,18 @@
  * - leaving you all freedom you want to implement your fancy algorithm (as long as you don't violate the mathematical structure of vector spaces)
  * 
  * \section sec_overview Overview
- * The basis of %Spacy is the abstraction layer for vector space settings. The interface of %Spacy essentially builds on type erasure techniques
- * provided by <a href="http://www.boost.org/doc/libs/1_59_0/doc/html/boost_typeerasure.html">Boost.TypeErasure</a>. Moreover, C++11/14-features such
+ * The basis of %Spacy is an abstraction layer for vector space settings. The interface of %Spacy essentially builds on type erasure techniques.  C++11/14-features such
  * as <a href="http://en.cppreference.com/w/cpp/language/value_category">R-values</a> are used, so make sure to use the
  * compiler option -std=c++1y.
  *
  * \subsection sub_concepts Main concepts
  * - First there is a vector space class (::Spacy::VectorSpace), which models a \ref ::Spacy::makeBanachSpace() "Banach space" <span lang="latex"> 
- *   (X,||.||)</span> or a \ref ::Spacy::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a \ref NormAnchor "norm" and possibly a \ref ScalarProductAnchor "scalar product". Moreover, vector spaces can be 
+ *   (X,||.||)</span> or a \ref ::Spacy::makeHilbertSpace() "Hilbert space" <span lang="latex"> (X,(.,.))</span>. Thus, vector spaces provide access to a Norm and possibly a ScalarProduct. Moreover, vector spaces can be 
  *   related to each other as primal or dual spaces. Eventually they can generate vectors.
- * - Vectors (see \ref VectorAnchor "Vector", \ref VectorConceptAnchor "VectorConcept") can be any class satisfying the \ref VectorConceptAnchor "VectorConcept", i.e. vectors must be vectors in an almost pure mathematical sense.
- * - Operator (see \ref OperatorAnchor "Operator", \ref OperatorConceptAnchor "OperatorConcept") are mappings between different vector spaces.
- * - Functionals (see \ref FunctionalAnchor "Functional", \ref FunctionalConceptAnchor "FunctionalConcept") are mappings from a vector spaces into the space of real numbers \f$ \mathbb{R} \f$.
+ * - a Vector can be any class satisfying the @ref Spacy::VectorConcept "VectorConcept", i.e. vectors must be vectors in a pure mathematical sense (almost).
+ * - an Operator (see @ref Spacy::OperatorConcept "OperatorConcept") is a mapping vector spaces.
+ * - a Functional (see @ref Spacy::FunctionalConcept "FunctionalConcept") is a mapping from a vector spaces into the space of real numbers \f$ \mathbb{R} \f$.
+ * - a LinearOperator( see @ref Spacy::LinearOperatorConcept "LinearOperatorConcept") is a linear mapping between vector spaces that provides a solver for numerically evaluating its inverse. In addition linear operators satisfy the @ref Spacy::VectorConcept  "VectorConcept".
  *
  * \section sec_usage_fenics Usage with FEnics
  * Examples for nonlinear PDEs and optimal control problems with <a href="http://www.fenicsproject.org">FEniCS</a> are given in Examples/FEniCS.
@@ -89,11 +91,5 @@
  * Spacy::Kaskade::copy( x , u );
  * ...
  * @endcode
- *
- *
- * \section sec_supported_libs Supported libraries
- * Currently Spacy supports 
- * - <a href="http://www.fenicsproject.org">the FEniCS Project,</a>
- * - <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">the Kaskade 7 Finite Element Toolbox.</a>
  */
- 
+}

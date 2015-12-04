@@ -17,12 +17,7 @@ namespace Spacy
   class Vector;
   /// @endcond
 
-  /** @addtogroup
-   * @{
-   */
-
   /**
-   * \ingroup SpacyGroup
    * \anchor DynamicCallableOperatorAnchor
    * \brief Simplest possible time-dependent operator. Can store objects that satisfy the requirements of \ref DynamicCallableOperatorConceptAnchor "DynamicCallableOperatorConcept".
    *
@@ -416,9 +411,6 @@ namespace Spacy
   private:
     CopyViaClonePtr<AbstractBase> base_;
   };
-
-
-  /** @} */
 }
 
 #endif // SPACY_DYNAMIC_OPERATOR_HH

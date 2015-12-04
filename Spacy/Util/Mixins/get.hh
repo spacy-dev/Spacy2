@@ -9,9 +9,6 @@
 
 namespace Spacy
 {
-  /** @addtogroup MixinGroup
-   * @{
-   */
   namespace Mixin
   {
     /// Stores an object of type Type and provides access via member function get().
@@ -22,10 +19,6 @@ namespace Spacy
       Get() : t_{}
       {}
 
-      /**
-       * @brief Constructor.
-       * @param impl value to be stored.
-       */
       template <class... Args,
                 class = std::enable_if_t<std::is_constructible<Type,Args...>::value> >
       explicit Get(Args&&... args)
@@ -48,7 +41,6 @@ namespace Spacy
       Type t_;
     };
   }
-  /** @} */
 }
 
 #endif // SPACYS_UTIL_GET_HH

@@ -14,8 +14,8 @@ namespace Spacy
   /// @endcond
 
   /**
-   * @ingroup SpacyGroup
-   * @brief Concept for operators in %Spacy.
+   * @ingroup ConceptGroup
+   * @anchor OperatorConceptAnchor
    *
    * @code
    * // A: X->Y.
@@ -32,6 +32,7 @@ namespace Spacy
    *   const VectorSpace& range() const;
    * };
    * @endcode
+   * @see Operator
    */
   template <class Impl>
   using OperatorConcept =

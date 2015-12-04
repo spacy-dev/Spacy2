@@ -17,10 +17,6 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
   
-  /** @addtogroup SpacyGroup
-   * @{
-   */
-
   using CallableOperator = std::function<Vector(const Vector&)>;
   
   /// Type-erased operator \f$A:\ X \to Y \f$.
@@ -106,7 +102,6 @@ namespace Spacy
   private:
     CopyViaClonePtr<AbstractBase> base_;
   };
-  /** @} */
 }
 
 #endif // SPACY_OPERATOR_HH

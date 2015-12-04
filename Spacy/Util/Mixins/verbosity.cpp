@@ -37,15 +37,5 @@ namespace Spacy
     {
       setVerbosityLevel( changedSubject->verbosityLevel() );
     }
-
-    void Verbosity::attachVerbosity(Verbosity& other)
-    {
-      attach(other);
-    }
-
-    void Verbosity::detachVerbosity(Verbosity& other)
-    {
-      detach(other);
-    }
   }
 }

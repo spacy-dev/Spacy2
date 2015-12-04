@@ -39,15 +39,5 @@ namespace Spacy
     {
       setEps( changedSubject->eps() );
     }
-
-    void Eps::attachEps(Eps& other)
-    {
-      attach(other);
-    }
-
-    void Eps::detachEps(Eps& other)
-    {
-      detach(other);
-    }
   }
 }

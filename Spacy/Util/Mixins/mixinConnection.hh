@@ -7,13 +7,11 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /**
-     * @brief Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of same type.
-     */
+    /// Connect objects of type Impl that provides a suitable method void update(Impl*) to another object of same type.
     template <class Impl>
     class MixinConnection
     {
-    protected:
+    public:
       /// Attach observer.
       void attach(Impl& observer)
       {
@@ -42,6 +40,18 @@ namespace Spacy
     private:
       std::vector<Impl*> observers_ = {};
     };
+  }
+
+  template <class Base, class Source, class ToAttach>
+  void castAndAttach(Source& source, ToAttach& toAttach)
+  {
+    static_cast<Base&>(source).attach(static_cast<Base&>(toAttach));
+  }
+
+  template <class Base, class Source, class ToAttach>
+  void castAndDetach(Source& source, ToAttach& toAttach)
+  {
+    static_cast<Base&>(source).detach(static_cast<Base&>(toAttach));
   }
 }
 

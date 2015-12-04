@@ -26,15 +26,5 @@ namespace Spacy
     {
       setIterativeRefinements( changedSubject->iterativeRefinements() );
     }
-
-    void IterativeRefinements::attachIterativeRefinements(IterativeRefinements& other)
-    {
-      attach(other);
-    }
-
-    void IterativeRefinements::detachIterativeRefinements(IterativeRefinements& other)
-    {
-      detach(other);
-    }
   }
 }

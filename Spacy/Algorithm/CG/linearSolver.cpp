@@ -14,12 +14,13 @@ namespace Spacy
       : OperatorBase(A_.range(),A_.domain()),
         cg(std::move(A_),std::move(P_),type)
     {
-      attachEps(cg);
-      attachAbsoluteAccuracy(cg);
-      attachRelativeAccuracy(cg);
-      attachVerbosity(cg);
-      attachIterativeRefinements(cg);
-      attachMaxSteps(cg);
+      using namespace Mixin;
+      castAndAttach<Eps>(*this,cg);
+      castAndAttach<AbsoluteAccuracy>(*this,cg);
+      castAndAttach<RelativeAccuracy>(*this,cg);
+      castAndAttach<Verbosity>(*this,cg);
+      castAndAttach<IterativeRefinements>(*this,cg);
+      castAndAttach<MaxSteps>(*this,cg);
     }
 
     LinearSolver::LinearSolver(const LinearSolver& other) :
@@ -27,15 +28,16 @@ namespace Spacy
       Mixin::AbsoluteAccuracy(other.absoluteAccuracy()),
       Mixin::RelativeAccuracy(other.relativeAccuracy()),
       Mixin::Eps(other.eps()),
-      Mixin::Verbosity(other.verbose()),
+      Mixin::Verbosity(other.verbosityLevel()),
       cg(other.cg)
     {
-      attachEps(cg);
-      attachAbsoluteAccuracy(cg);
-      attachRelativeAccuracy(cg);
-      attachVerbosity(cg);
-      attachIterativeRefinements(cg);
-      setVerbosityLevel(other.verbosityLevel());
+      using namespace Mixin;
+      castAndAttach<Eps>(*this,cg);
+      castAndAttach<AbsoluteAccuracy>(*this,cg);
+      castAndAttach<RelativeAccuracy>(*this,cg);
+      castAndAttach<Verbosity>(*this,cg);
+      castAndAttach<IterativeRefinements>(*this,cg);
+      castAndAttach<MaxSteps>(*this,cg);
     }
 
     Vector LinearSolver::operator()(const Vector& y) const

@@ -13,13 +13,12 @@ namespace Spacy
   namespace Rn
   {
     /**
-     * @ingroup EigenGroup
+     * @ingroup EigenGroup, VectorSpaceGroup
      * @brief %Vector creator for %Rn, based on the %Eigen library.
      */
     using VectorCreator = Generic::VectorCreator< ::Eigen::VectorXd >;
 
     /**
-     * @ingroup EigenGroup
      * @brief Convenient generation of a hilbert space based on the %Eigen library.
      * @return @ref ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( VectorCreator{dim} , EuclideanScalarProduct{} )"
      */

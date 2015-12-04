@@ -26,15 +26,5 @@ namespace Spacy
     {
       setMinimalAccuracy( changedSubject->minimalAccuracy() );
     }
-
-    void MinimalAccuracy::attachMinimalAccuracy(MinimalAccuracy& other)
-    {
-      attach(other);
-    }
-
-    void MinimalAccuracy::detachMinimalAccuracy(MinimalAccuracy& other)
-    {
-      detach(other);
-    }
   }
 }

@@ -14,49 +14,19 @@ namespace Spacy
 
   namespace Mixin
   {
-    /**
-     * @ingroup MixinGroup
-     * @brief %Mixin class for absolute accuracy.
-     */
+    /// %Mixin class for absolute accuracy.
     class AbsoluteAccuracy :public MixinConnection<AbsoluteAccuracy>
     {
     public:
-      /**
-       * @brief Constructor.
-       * @param accuracy absolute accuracy
-       */
       explicit AbsoluteAccuracy(double accuracy = 1e-15) noexcept;
 
-      /**
-       * @brief Set absolute accuracy.
-       * @param accuracy absolute accuracy
-       */
       void setAbsoluteAccuracy(double accuracy);
 
       void setAbsoluteAccuracy(Real accuracy);
 
-      /**
-       * @brief Access absolute accuracy.
-       * @return absolute accuracy
-       */
       double absoluteAccuracy() const noexcept;
 
-      /**
-       * @brief Attach AbsoluteAccuracy.
-       *
-       * When setAbsoluteAccuracy(double accuracy) is called, then also
-       * other.setAbsoluteAccuracy(accuracy) is invoked.
-       */
-      void attachAbsoluteAccuracy(AbsoluteAccuracy& other);
-
-      /**
-       * @brief Detach verbosity before it gets deleted.
-       */
-      void detachAbsoluteAccuracy(AbsoluteAccuracy& other);
-
-      /**
-       * @brief update function for observer pattern.
-       */
+      /// update function for observer pattern.
       void update(AbsoluteAccuracy* changedSubject);
 
     private:

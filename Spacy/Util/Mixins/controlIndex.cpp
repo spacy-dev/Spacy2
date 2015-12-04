@@ -24,13 +24,3 @@ void Spacy::Mixin::ControlIndex::update(ControlIndex* changedSubject)
 {
   setControlIndex( changedSubject->controlIndex() );
 }
-
-void Spacy::Mixin::ControlIndex::attachControlIndex(ControlIndex& other)
-{
-  attach(other);
-}
-
-void Spacy::Mixin::ControlIndex::detachControlIndex(ControlIndex& other)
-{
-  detach(other);
-}

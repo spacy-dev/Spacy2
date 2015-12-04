@@ -17,11 +17,9 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
-  /** \addtogroup SpacyGroup
-   * @{
+  /** @brief Type-erased vector.
+   *  @see VectorConcept
    */
-
-  /// Type-erased linear operator \f$A:\ X \to Y \f$.
   class Vector : public Mixin::ToTarget<Vector>
   {
     friend class ToTarget<Vector>;
@@ -93,7 +91,6 @@ namespace Spacy
 
       void copyFrom(const AbstractBase& y) final override
       {
-        if( dynamic_cast< const Base<Impl>* >(&y) == nullptr ) throw std::runtime_error("AAAAAAAAAAARRRRRRRRRRRGGGGGGGGGGGGG");
         this->get() = dynamic_cast<const Base<Impl>&>(y).get();
       }
 
@@ -106,7 +103,7 @@ namespace Spacy
   public:
     Vector() = default;
 
-    /// Construct from operator implementation.
+    /// Construct from implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
               class = std::enable_if_t< VectorConcept<std::decay_t<Impl>>::value > >
@@ -114,7 +111,7 @@ namespace Spacy
       : base_( std::make_unique< Base< std::decay_t<Impl> > >(std::forward<Impl>(impl)) )
     {}
 
-    /// Assign from operator implementation.
+    /// Assign from implementation.
     template <class Impl,
               class = std::enable_if_t<!std::is_same<std::decay_t<Impl>,Vector>::value>,
               class = std::enable_if_t< VectorConcept<std::decay_t<Impl>>::value > >
@@ -125,7 +122,7 @@ namespace Spacy
     }
 
 
-    /// Apply operator.
+    /// Apply as dual space element.
     Real operator()(const Vector& x) const;
 
     Vector& operator+=(const Vector& y);
@@ -138,7 +135,7 @@ namespace Spacy
 
     bool operator==(const Vector& y) const;
 
-    /// Access underlying space of linear operators.
+    /// Access underlying space.
     const VectorSpace& space() const;
 
     void toFile(const std::string& filename) const;
@@ -150,29 +147,7 @@ namespace Spacy
     CopyAndClonePtr<AbstractBase> base_;
   };
 
-
-  template <class ToType>
-  bool is(const Spacy::Vector& v)
-  {
-    return v.template target<ToType>() != nullptr;
-  }
-
-  template <class ToType>
-  const ToType& cast_ref(const Spacy::Vector& v)
-  {
-    return *v.template target<ToType>();
-  }
-
-  template <class ToType>
-  ToType& cast_ref(Spacy::Vector& v)
-  {
-    return *v.template target<ToType>();
-  }
-
-  /**
-   * @brief Multiplication with arithmetic types (double,float,int,...).
-   * @return \f$z=a*x\f$.
-   */
+  /// Multiplication with arithmetic types (double,float,int,...).
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
   Vector operator*(Arithmetic a, Vector x)
@@ -180,6 +155,7 @@ namespace Spacy
     return x *= a;
   }
 
+  /// Multiplication with arithmetic types (double,float,int,...).
   template <class Arithmetic,
             class = std::enable_if_t< std::is_arithmetic<Arithmetic>::value > >
   Vector operator*(Vector x, Arithmetic a)
@@ -187,32 +163,19 @@ namespace Spacy
     return x *= a;
   }
 
-  /**
-   * @brief Sum of vectors.
-   * @return Compute \f$z=x+y\f$.
-   */
+  /// Sum of vectors \f$z=x+y\f$.
   Vector operator+(Vector x, const Vector& y);
 
-  /**
-   * @brief Subtract vectors.
-   * @return \f$z=x-y\f$.
-   */
+  /// Subtract vectors \f$z=x-y\f$.
   Vector operator-(Vector x, const Vector& y);
 
-  /**
-   * @brief Compute scalar product.
-   * @return \f$z=x*y=(x,y)\f$.
-   */
+  /// Compute scalar product \f$z=x*y=(x,y)\f$.
   Real operator*(const Vector& x, const Vector& y);
 
-  /**
-   * @brief Compute norm, where the norm associated with the underlying function space is used.
-   * @return \f$ z = \|x\| \f$.
-   */
+  /// Compute norm, where the norm associated with the underlying function space is used \f$ z = \|x\| \f$.
   Real norm(const Vector& x);
 
   void checkDualPairing(const Vector& x, const Vector& y);
-  /** @} */
 }
 
 #endif // SPACY_VECTOR_HH

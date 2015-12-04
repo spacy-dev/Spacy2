@@ -15,10 +15,9 @@ namespace Spacy
   class Vector;
   /// @endcond
 
-  /**
-   * @ingroup RealGroup
-   * @brief Real number.
-   */
+  /** @addtogroup RealGroup @{ */
+
+  /// %Real number.
   class Real :
       public VectorBase ,
       public Mixin::Get<double>
@@ -46,48 +45,25 @@ namespace Spacy
     /**
      * @brief Construction form vector.
      * @throws if y does not hold an object of type Real
-     * @param y value to assign
      */
     Real(const Vector& y);
 
-    /**
-     * @brief Assignment from double.
-     * @param y value to assign
-     */
     Real& operator=(double y);
 
-    /**
-     * @brief In-place summation.
-     * @throws if y does not hold an object of type Real
-     * @param y vector to add
-     * @return \f$x+y\f$
-     */
+    /// In-place summation \f$x+y\f$.
     Real& operator+=(const Real& y);
 
-    /**
-     * @brief In-place subtraction.
-     * @throws if y does not hold an object of type Real
-     * @param y vector to subtract
-     * @return \f$x-y\f$
-     */
+    /// In-place subtraction \f$x-y\f$
     Real& operator-=(const Real& y);
 
-    /**
-     * @brief Negation \f$ -x\f$.
-     * @return \f$ -x \f$.
-     */
+    /// Negation \f$ -x\f$.
     Real operator-() const;
 
-    /**
-     * @brief Comparison operator \f$ x==y\f$.
-     * @param y vector to compare with this vector
-     * @return \f$ x==y\f$.
-     */
+    /// Comparison operator \f$ x==y\f$.
     bool operator==(const Real& y) const;
 
     /**
      * @brief Assignment from Real stored in a ::Spacy::Vector.
-     * @param y value to assign
      * @throws InvalidArgumentException if casting y to const Real::Vector& fails
      */
     Real& operator=(const Vector& y);
@@ -100,19 +76,7 @@ namespace Spacy
       return *this;
     }
 
-    /**
-     * @brief Implicit conversion to double.
-     * @return value of this vector
-     */
-   // operator double() const;
-
-//      operator double&();
-
-    /**
-     * @brief Apply as dual element.
-     * @param y primal vector
-     * @return \f$x(y)\f$
-     */
+    /// Apply as dual element (i.e. compute \f$x*y\f$).
     Real operator()(const Real& y) const;
   };
 
@@ -246,6 +210,8 @@ namespace Spacy
 
   /// Compute \f$ x^{1/3} \f$.
   Real cbrt(Real x);
+
+  /** @} */
 }
 
 #endif // SPACY_REAL_SPACE_VECTOR_HH

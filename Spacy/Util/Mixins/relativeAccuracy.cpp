@@ -26,15 +26,5 @@ namespace Spacy
     {
       setRelativeAccuracy( changedSubject->relativeAccuracy() );
     }
-
-    void RelativeAccuracy::attachRelativeAccuracy(RelativeAccuracy& other)
-    {
-      attach(other);
-    }
-
-    void RelativeAccuracy::detachRelativeAccuracy(RelativeAccuracy& other)
-    {
-      detach(other);
-    }
   }
 }

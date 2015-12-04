@@ -15,7 +15,6 @@ namespace Spacy
     /**
      * @ingroup ConceptGroup
      * @anchor CG_TerminationCriterionConceptAnchor
-     * @brief Concept for termination criteria for conjugate gradient methods.
      *
      * @code
      * class MyTerminationCriterion
@@ -51,7 +50,7 @@ namespace Spacy
      * };
      * @endcode
      *
-     * @see @ref CG_TerminationCriterionAnchor "CG::TerminationCriterion"
+     * @see CG::TerminationCriterion
      */
     template <class T>
     using TerminationCriterionConcept =

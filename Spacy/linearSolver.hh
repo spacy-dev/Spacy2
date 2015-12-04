@@ -11,9 +11,6 @@
 
 #include "vector.hh"
 
-/** @addtogroup SpacyGroup
- * @{
- */
 namespace Spacy
 {
   /// @cond
@@ -96,6 +93,5 @@ namespace Spacy
     CopyViaClonePtr<AbstractBase> base_ = {};
   };
 }
-/** @} */
 
 #endif // SPACY_LINEAR_SOLVER_HH

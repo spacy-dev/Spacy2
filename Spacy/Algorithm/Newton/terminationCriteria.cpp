@@ -16,17 +16,6 @@ namespace Spacy
   {
     namespace Termination
     {
-//      Base::Base(double relativeAccuracy, bool verbose)
-//        : Mixin::RelativeAccuracy(relativeAccuracy),
-//          Mixin::Verbosity(verbose)
-//      {}
-
-//      bool Base::operator()(double nu, const Vector& x, const Vector& dx) const
-//      {
-//        return passed(nu,x,dx);
-//      }
-
-
       AffineCovariant::AffineCovariant(const C1Operator&, double relativeAccuracy, bool verbose)
         : Mixin::RelativeAccuracy(relativeAccuracy),
           Mixin::Verbosity(verbose)
@@ -72,7 +61,7 @@ namespace Spacy
 
         if(abs(nu()-1) > eps()) return false;
 
-        if( verbose() ) std::cout << std::scientific << "Residual: " << norm(F_(x)) << ", relative accuracy: " << relativeAccuracy() << ", initialResidual: " << initialResidual << std::endl;
+        if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << ", relative accuracy: " << relativeAccuracy() << ", initialResidual: " << initialResidual << std::endl;
 
         if( norm( F_(x) ) < relativeAccuracy() * initialResidual )
         {

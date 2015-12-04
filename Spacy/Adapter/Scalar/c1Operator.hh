@@ -14,9 +14,7 @@ namespace Spacy
   class Vector;
   /// @endcond
 
-  /** @addtogroup ScalarGroup
-   * @{
-   */
+  /** @addtogroup ScalarGroup @{ */
   namespace Scalar
   {
     /// @cond

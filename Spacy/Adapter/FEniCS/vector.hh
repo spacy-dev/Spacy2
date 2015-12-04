@@ -20,7 +20,7 @@ namespace Spacy
   namespace FEniCS
   {
     /**
-     * @ingroup FenicsGroup
+     * @ingroup FenicsGroup VectorSpaceGroup
      * @brief %Vector implementation for %FEniCS (single space).
      */
     class Vector :

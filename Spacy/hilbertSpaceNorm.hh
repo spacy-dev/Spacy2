@@ -8,6 +8,7 @@
 
 namespace Spacy
 {
+  /// \f$ \|\cdot\|=\sqrt{(\cdot,\cdot)} \f$
   class HilbertSpaceNorm
   {
   public:

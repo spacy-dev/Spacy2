@@ -19,10 +19,6 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
-  /** @addtogroup SpacyGroup
-   * @{
-   */
-
   /// Type-erased differentiable functional \f$f:\ X \to \mathbb{R} \f$.
   class C1Functional : public Mixin::ToTarget<C1Functional>
   {
@@ -91,7 +87,7 @@ namespace Spacy
     }
 
 
-    /// Apply operator.
+    /// Apply functional.
     Real operator()(const Vector& x) const;
 
     /// Compute derivative as function space element in \f$X^*\f$, where \f$x\in X\f$.
@@ -106,8 +102,6 @@ namespace Spacy
   private:
     CopyViaClonePtr<AbstractBase> base_;
   };
-
-  /** @} */
 }
 
 #endif // SPACY_C1_FUNCTIONAL_HH

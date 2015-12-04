@@ -8,7 +8,7 @@
 
 /**
  * @ingroup ConceptGroup
- * @brief Concept for differentiable functionals in %Spacy.
+ * @anchor C1FunctionalConceptAnchor
  *
  * @code
  * // f: X->R.
@@ -26,7 +26,7 @@
  * };
  * @endcode
  *
- * @see FunctionalConcept, ::Spacy::C1Functional
+ * @see FunctionalConcept, C1Functional
  */
 namespace Spacy
 {

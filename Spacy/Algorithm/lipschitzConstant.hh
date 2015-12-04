@@ -9,10 +9,7 @@
 
 namespace Spacy
 {
-  /**
-   * @ingroup SpacyGroup
-   * @brief A simple model for a Lipschitz constant \f$\omega\f$.
-   */
+  /// A simple model for a Lipschitz constant \f$\omega\f$.
   class LipschitzConstant : public Mixin::Eps
   {
   public:
@@ -32,10 +29,7 @@ namespace Spacy
      */
     LipschitzConstant& operator=(Real newOmega);
 
-    /**
-     * @brief Access value of Lipschitz constant.
-     * @return \f$\omega\f$
-     */
+    /// Access value of Lipschitz constant \f$\omega\f$.
     operator Real() const;
 
     Real operator()() const;

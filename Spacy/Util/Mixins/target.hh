@@ -10,7 +10,7 @@ namespace Spacy
 {
   namespace Mixin
   {
-    /// Mixin class that provides a member function target() to access type-erased content (same behaviour as @see std::function::target()).
+    /// %Mixin class that provides a member function target() to access type-erased content (see <a href="http://en.cppreference.com/w/cpp/utility/functional/function/target">std::function::target()</a>).
     template <class Derived>
     struct ToTarget
     {

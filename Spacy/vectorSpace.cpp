@@ -5,6 +5,7 @@
 
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
+#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 
 #include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"

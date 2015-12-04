@@ -16,7 +16,6 @@ namespace Spacy
   class LinearOperator;
   class VectorSpace;
   class Vector;
-  /// @endcond
 
   template <class TypeErased, class Type>
   using isConstructibleOrSame = std::integral_constant< bool , std::is_constructible< TypeErased , Type >::value || std::is_same< TypeErased , Type >::value>;
@@ -209,6 +208,7 @@ namespace Spacy
 
   template <class T>
   using HasMemFn_setMinimalAccuracy = typename IsVoid<T>::template apply<TryMemFn_setMinimalAccuracy>;
+  /// @endcond
 }
 
 #endif // SPACY_UTIL_MEM_FN_CHECKS_HH

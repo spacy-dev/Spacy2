@@ -21,9 +21,9 @@ namespace Spacy
   namespace FEniCS
   {
     /**
-     * @ingroup FenicsGroup
+     * @ingroup FenicsGroup VectorSpaceGroup
      * @brief Creator for vector space elements for %FEniCS.
-     * See @ref VectorCreatorAnchor "::Spacy::VectorCreator", @ref VectorCreatorConceptAnchor "::Spacy::VectorCreatorConcept".
+     * @see VectorSpace
      */
     class VectorCreator : public Mixin::Get<dolfin::FunctionSpace>
     {
