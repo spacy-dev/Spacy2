@@ -22,19 +22,19 @@ namespace Spacy
    * {
    * public:
    *   // Compute f(x).
-   *   Real operator()(const ::Spacy::Vector& x) const;
+   *   Spacy::Real operator()(const Spacy::Vector& x) const;
    *
    *   // Compute f'(x) as element of the dual space X*.
-   *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+   *   Spacy::Vector d1(const Spacy::Vector& x) const;
    *
    *   // Compute f''(x)dx as element of the dual space X*.
-   *   ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+   *   Spacy::Vector d2(const Spacy::Vector& x, const Spacy::Vector& dx) const;
    *
    *   // Access f''(x) as mapping f''(x): X->X*.
-   *   LinearOperator hessian(const ::Spacy::Vector& x);
+   *   Spacy::LinearOperator hessian(const Spacy::Vector& x);
    *
    *   // Access underlying domain space X.
-   *   const VectorSpace& domain() const;
+   *   const Spacy::VectorSpace& domain() const;
    * };
    * @endcode
    *

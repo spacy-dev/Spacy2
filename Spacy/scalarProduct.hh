@@ -20,7 +20,7 @@ namespace Spacy
    * {
    * public:
    *   // Compute (x,y).
-   *   Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const;
+   *   Spacy::Real operator()(const Spacy::Vector& x, const Spacy::Vector& y) const;
    * };
    * @endcode
    */

@@ -22,19 +22,19 @@ namespace Spacy
    * {
    * public:
    *   // Compute A(x).
-   *   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+   *   Spacy::Vector operator()(const Spacy::Vector& x) const;
    *
    *   // Compute A'(x)dx.
-   *   ::Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+   *   Spacy::Vector d1(const Spacy::Vector& x, const Spacy::Vector& dx) const;
    *
    *   // Get linearization representing A'(x).
-   *  LinearOperator linearization(const ::Spacy::Vector& x) const;
+   *  Spacy::LinearOperator linearization(const Spacy::Vector& x) const;
    *
    *   // Access domain space X.
-   *   const VectorSpace& domain() const;
+   *   const Spacy::VectorSpace& domain() const;
    *
    *   // Access range space Y.
-   *   const VectorSpace& range() const;
+   *   const Spacy::VectorSpace& range() const;
    * };
    * @endcode
    *

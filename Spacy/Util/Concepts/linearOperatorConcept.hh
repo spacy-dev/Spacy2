@@ -50,16 +50,16 @@ namespace Spacy
    *   Real operator()(const MyOperator& y);
    *
    *   // Access pointer to underlying function space.
-   *   const VectorSpace& space() const;
+   *   const Spacy::VectorSpace& space() const;
    *
    *   // Access linear solver representing A(x)^-1
-   *  LinearSolver solver() const;
+   *  Spacy::LinearSolver solver() const;
    *
    *   // Access domain space X.
-   *   const VectorSpace& domain() const;
+   *   const Spacy::VectorSpace& domain() const;
    *
    *   // Access range space Y.
-   *   const VectorSpace& range() const;
+   *   const Spacy::VectorSpace& range() const;
    * };
    * @endcode
    *

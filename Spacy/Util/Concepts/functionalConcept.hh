@@ -25,10 +25,10 @@ namespace Spacy
    * {
    * public:
    *   // Compute f(x).
-   *   Real operator()(const ::Spacy::Vector& x) const;
+   *   Spacy::Real operator()(const Spacy::Vector& x) const;
    *
    *   // Access underlying domain space X.
-   *   const VectorSpace& domain() const;
+   *   const Spacy::VectorSpace& domain() const;
    * };
    *
    * @endcode

@@ -23,7 +23,7 @@ namespace Spacy
    * {
    * public:
    *   // Compute A(x).
-   *   ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+   *   Vector operator()(const Vector& x) const;
    *
    *   // Access domain space X.
    *   const VectorSpace& domain() const;

@@ -42,14 +42,14 @@ namespace Spacy
    *   bool operator==(const MyVector& y);
    *
    *   // Apply as dual element x(y).
-   *   Real operator()(const MyVector& y);
+   *   Spacy::Real operator()(const MyVector& y);
    *
    *   // Access pointer to underlying function space.
-   *   const VectorSpace& space() const;
+   *   const Spacy::VectorSpace& space() const;
    * };
    * @endcode
    *
-   * @see ::Spacy::Vector
+   * @see Spacy::Vector
    */
   template <class Impl>
   using VectorConcept =

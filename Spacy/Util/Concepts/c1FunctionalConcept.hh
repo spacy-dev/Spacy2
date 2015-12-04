@@ -16,13 +16,13 @@
  * {
  * public:
  *   // Compute f(x).
- *   Real operator()(const ::Spacy::Vector& x) const;
+ *   Spacy::Real operator()(const Spacy::Vector& x) const;
  *
  *   // Compute f'(x) as element of the dual space X*.
- *   ::Spacy::Vector d1(const ::Spacy::Vector& x) const;
+ *   Spacy::Vector d1(const Spacy::Vector& x) const;
  *
  *   // Access underlying domain space X.
- *   const VectorSpace& domain() const;
+ *   const Spacy::VectorSpace& domain() const;
  * };
  * @endcode
  *
