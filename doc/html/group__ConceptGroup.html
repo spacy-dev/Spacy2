@@ -144,19 +144,19 @@ template&lt;class Impl &gt; </div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  <span class="comment">// Compute A(x).</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> operator()(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Compute A&#39;(x)dx.</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Get linearization representing A&#39;(x).</span></div>
-<div class="line"> LinearOperator linearization(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line"> <a class="code" href="classSpacy_1_1LinearOperator.html">Spacy::LinearOperator</a> linearization(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access domain space X.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; domain() <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access range space Y.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; range() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>The member function <code>linearization(x)</code> is allowed to return any type that satisfies the LinearOperatorConcept.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>, <a class="el" href="classSpacy_1_1C1Operator.html" title="Type-erased differentiable operator . ">C1Operator</a> </dd></dl>
@@ -179,19 +179,19 @@ template&lt;class Impl &gt; </div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  <span class="comment">// Compute f(x).</span></div>
-<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Real.html">Spacy::Real</a> operator()(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Compute f&#39;(x) as element of the dual space X*.</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#ab6646eb7068eb9f1369e639cf0b620a2">d1</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Compute f&#39;&#39;(x)dx as element of the dual space X*.</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#a569d8fc0b4a0e292f257dd6307a25c8f">d2</a>(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> <a class="code" href="namespaceSpacy.html#a569d8fc0b4a0e292f257dd6307a25c8f">d2</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; dx) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access f&#39;&#39;(x) as mapping f&#39;&#39;(x): X-&gt;X*.</span></div>
-<div class="line">  LinearOperator hessian(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x);</div>
+<div class="line">  <a class="code" href="classSpacy_1_1LinearOperator.html">Spacy::LinearOperator</a> hessian(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access underlying domain space X.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; domain() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>The member function <code>hessian(x)</code> is allowed to return any type that satisfies the LinearOperatorConcept.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#gae45328d2e01ef6c8e5d948b69fda385f" title="Concept for functionals in Spacy. ">FunctionalConcept</a>, C1FunctionalConcept, <a class="el" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional . ">C2Functional</a> </dd></dl>
@@ -262,10 +262,10 @@ template&lt;class Impl &gt; </div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  <span class="comment">// Compute f(x).</span></div>
-<div class="line">  Real operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Real.html">Spacy::Real</a> operator()(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access underlying domain space X.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; domain() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1Functional.html" title="Type-erased functional . ">Functional</a> </dd></dl>
 
@@ -314,16 +314,16 @@ template&lt;class Impl &gt; </div>
 <div class="line">  Real operator()(<span class="keyword">const</span> MyOperator&amp; y);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access pointer to underlying function space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; space() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; space() <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access linear solver representing A(x)^-1</span></div>
-<div class="line"> <a class="code" href="namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2">LinearSolver</a> solver() <span class="keyword">const</span>;</div>
+<div class="line"> <a class="code" href="namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2">Spacy::LinearSolver</a> solver() <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access domain space X.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; domain() <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access range space Y.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; range() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; range() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>The member function <code>solver()</code> is allowed to return anything that fits into a <code>std::function&lt;Vector(const Vector&amp;)&gt;</code>.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ConceptGroup.html#ga0cd6ba53feff75abbb6822b45fd6265e">OperatorConcept</a>, <a class="el" href="group__ConceptGroup.html#gac8fbeed0f838941e90ebe635a546e1db">VectorConcept</a>, <a class="el" href="classSpacy_1_1LinearOperator.html" title="Type-erased linear operator . ">LinearOperator</a> </dd></dl>
@@ -346,7 +346,7 @@ template&lt;class Impl &gt; </div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  <span class="comment">// Compute A(x).</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Vector.html">::Spacy::Vector</a> operator()(<a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">const ::Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
+<div class="line">  <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a> operator()(<span class="keyword">const</span> <a class="code" href="group__VectorSpaceGroup.html#gafda42fd5aa3f7597a42b9831bf4dfd07">Vector</a>&amp; x) <span class="keyword">const</span>;</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access domain space X.</span></div>
 <div class="line">  <span class="keyword">const</span> VectorSpace&amp; domain() <span class="keyword">const</span>;</div>
@@ -394,10 +394,10 @@ template&lt;class Impl &gt; </div>
 <div class="line">  <span class="keywordtype">bool</span> <a class="code" href="namespaceSpacy.html#aef4930427aac4c8089b4c43b1c97cf25">operator==</a>(<span class="keyword">const</span> MyVector&amp; y);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Apply as dual element x(y).</span></div>
-<div class="line">  Real operator()(<span class="keyword">const</span> MyVector&amp; y);</div>
+<div class="line">  <a class="code" href="classSpacy_1_1Real.html">Spacy::Real</a> operator()(<span class="keyword">const</span> MyVector&amp; y);</div>
 <div class="line"></div>
 <div class="line">  <span class="comment">// Access pointer to underlying function space.</span></div>
-<div class="line">  <span class="keyword">const</span> VectorSpace&amp; space() <span class="keyword">const</span>;</div>
+<div class="line">  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a>&amp; space() <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 </div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Spacy::Vector</a> </dd></dl>
 
@@ -406,7 +406,7 @@ template&lt;class Impl &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 4 2015 23:11:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Dec 5 2015 00:02:06 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

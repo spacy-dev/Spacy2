@@ -47,20 +47,20 @@ Concepts for vectors, functionals, operators, ...
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Vector}{Spacy::Vector} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Compute A'(x)dx.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x, 
-      \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& dx) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Vector}{Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x, \textcolor{keyword}{const} 
+      \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& dx) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Get linearization representing A'(x).}
- LinearOperator linearization(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+ \hyperlink{classSpacy_1_1LinearOperator}{Spacy::LinearOperator} linearization(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access domain space X.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& domain() \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access range space Y.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& range() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
 
@@ -82,20 +82,20 @@ The member function {\ttfamily linearization(x)} is allowed to return any type t
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute f(x).}
-  Real operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Compute f'(x) as element of the dual space X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Vector}{Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Compute f''(x)dx as element of the dual space X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{d2}(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x, 
-      \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& dx) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Vector}{Spacy::Vector} \hyperlink{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{d2}(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x, \textcolor{keyword}{const} 
+      \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& dx) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access f''(x) as mapping f''(x): X->X*.}
-  LinearOperator hessian(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x);
+  \hyperlink{classSpacy_1_1LinearOperator}{Spacy::LinearOperator} hessian(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x);
 
   \textcolor{comment}{// Access underlying domain space X.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& domain() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
 
@@ -165,10 +165,10 @@ Concept for functionals in Spacy.
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute f(x).}
-  Real operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access underlying domain space X.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& domain() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
  \begin{DoxySeeAlso}{See also}
@@ -213,16 +213,16 @@ Concept for functionals in Spacy.
   Real operator()(\textcolor{keyword}{const} MyOperator& y);
 
   \textcolor{comment}{// Access pointer to underlying function space.}
-  \textcolor{keyword}{const} VectorSpace& space() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& space() \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access linear solver representing A(x)^-1}
- \hyperlink{namespaceSpacy_a4cd614ddb41dd29e68a723dadd5602f2}{LinearSolver} solver() \textcolor{keyword}{const};
+ \hyperlink{namespaceSpacy_a4cd614ddb41dd29e68a723dadd5602f2}{Spacy::LinearSolver} solver() \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access domain space X.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& domain() \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access range space Y.}
-  \textcolor{keyword}{const} VectorSpace& range() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& range() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
 
@@ -244,7 +244,7 @@ The member function {\ttfamily solver()} is allowed to return anything that fits
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute A(x).}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{Vector} operator()(\textcolor{keyword}{const} \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access domain space X.}
   \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
@@ -286,10 +286,10 @@ The member function {\ttfamily solver()} is allowed to return anything that fits
   \textcolor{keywordtype}{bool} \hyperlink{namespaceSpacy_aef4930427aac4c8089b4c43b1c97cf25}{operator==}(\textcolor{keyword}{const} MyVector& y);
 
   \textcolor{comment}{// Apply as dual element x(y).}
-  Real operator()(\textcolor{keyword}{const} MyVector& y);
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} MyVector& y);
 
   \textcolor{comment}{// Access pointer to underlying function space.}
-  \textcolor{keyword}{const} VectorSpace& space() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& space() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
 

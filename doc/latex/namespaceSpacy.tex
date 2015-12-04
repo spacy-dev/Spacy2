@@ -399,13 +399,13 @@ N\+A\+M\+E\+S\+P\+A\+C\+E\+S
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute f(x).}
-  Real operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Compute f'(x) as element of the dual space X*.}
-  \hyperlink{classSpacy_1_1Vector}{::Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Vector}{Spacy::Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1}(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 
   \textcolor{comment}{// Access underlying domain space X.}
-  \textcolor{keyword}{const} VectorSpace& domain() \textcolor{keyword}{const};
+  \textcolor{keyword}{const} \hyperlink{classSpacy_1_1VectorSpace}{Spacy::VectorSpace}& domain() \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
 
@@ -439,7 +439,7 @@ The minimal signature (besides copy and/or move constructor/assignment) of a nor
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute ||x||.}
-  Real operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
  \hypertarget{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{}\index{Spacy@{Spacy}!Scalar\+Product@{Scalar\+Product}}
@@ -456,8 +456,8 @@ The minimal signature (besides copy and/or move constructor/assignment) of a sca
 \{
 \textcolor{keyword}{public}:
   \textcolor{comment}{// Compute (x,y).}
-  Real operator()(\hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& x, 
-      \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{const ::Spacy::Vector}& y) \textcolor{keyword}{const};
+  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x, \textcolor{keyword}{const} 
+      \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& y) \textcolor{keyword}{const};
 \};
 \end{DoxyCode}
  \hypertarget{namespaceSpacy_a94fc7a4b9d3b26ef835e61647fac4d9b}{}\index{Spacy@{Spacy}!Vector\+Creator@{Vector\+Creator}}
