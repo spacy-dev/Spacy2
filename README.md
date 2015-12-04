@@ -3,7 +3,8 @@
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/6364/badge.svg"/>
 </a>
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lubkoll/spacy/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+<a href='https://coveralls.io/github/lubkoll/Spacy?branch=master'><img src='https://coveralls.io/repos/lubkoll/Spacy/badge.svg?branch=master&service=github' alt='Coverage Status' /></a>
+
 # The Spacy Library - Vector Space Algorithms
 
 ### Download
