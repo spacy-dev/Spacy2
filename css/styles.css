@@ -306,3 +306,9 @@ ol li{
 .contact-td{
     padding-right:15px;
 }
+
+.contact-name{
+    padding-right:15px;
+    font-weight: bold;
+    color: rgb(102,102,102);
+}
