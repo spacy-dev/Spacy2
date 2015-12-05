@@ -6,8 +6,8 @@
 #include <ostream>
 #include <utility>
 
-#include "../../FGlue/fglue/TMP/bind.hh"
-#include "../../FGlue/fglue/TMP/createMissingBaseClasses.hh"
+#include "fglue/TMP/bind.hh"
+#include "fglue/TMP/createMissingBaseClasses.hh"
 
 #include "optional.hh"
 

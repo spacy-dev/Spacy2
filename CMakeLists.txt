@@ -33,8 +33,8 @@ endforeach()
  
 # set up include-directories
 include_directories("${PROJECT_SOURCE_DIR}")
+include_directories(${PROJECT_SOURCE_DIR}/External/FGlue)
 
-# set up subdirectory containing code
 add_subdirectory(Spacy)
   
 # Does not debug auto, but is less sloppy than gcc
