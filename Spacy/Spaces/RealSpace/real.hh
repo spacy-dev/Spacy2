@@ -36,14 +36,11 @@ namespace Spacy
      */
     explicit Real(const VectorSpace& space);
 
-    /**
-     * @brief Construction from double.
-     * @param y value to assign
-     */
+    /// Construction from double, is associated to Space::R;
     Real(double x);
 
     /**
-     * @brief Construction form vector.
+     * @brief Construction from vector.
      * @throws if y does not hold an object of type Real
      */
     Real(const Vector& y);

@@ -1,15 +1,14 @@
-include /home/ignaz/lib/Kaskade7.3/Makefile.Local
-include /home/ignaz/lib/Kaskade7.3/Makefile.Rules
+include /home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/Makefile.Local
+include /home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/Makefile.Rules
 
-INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(MUMPSINC) $(UMFPACKINC) $(SPACYINC)
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) $(SPACYINC)
 FLAGS = $(WFLAGS) $(OPTFLAGS)
 
 nonlinear_heat: nonlinear_heat.o Makefile $(KASKADE7)/libs/libkaskade.a 
-	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/mumps_solve.o $(KASKADELIB) \
+	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/umfpack_solve.o $(KASKADELIB) \
  $(DUNELIB) \
  $(UGLIB) \
  $(BOOSTLIB) \
- $(MUMPSLIB) \
  $(UMFPACKLIB) \
  $(BLASLIB) $(FTNLIB) $(NUMALIB) $(SPACYLIB) -o $@
 
@@ -17,7 +16,7 @@ clean:
 	rm -f gccerr.txt nonlinear_heat nonlinear_heat.o solution.vtu *.bak
 
 depend:
-	cp Makefile.gen Makefile; /home/ignaz/lib/Kaskade7.3/gccmakedep -f Makefile $(INCLUDE) $(MAKEDEPENDFLAGS)  nonlinear_heat.cpp; /home/ignaz/lib/Kaskade7.3/remove_install_deps Makefile
+	cp Makefile.gen Makefile; /home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/gccmakedep -f Makefile $(INCLUDE) $(MAKEDEPENDFLAGS)  nonlinear_heat.cpp; /home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/remove_install_deps Makefile
 
 # DO NOT DELETE
 

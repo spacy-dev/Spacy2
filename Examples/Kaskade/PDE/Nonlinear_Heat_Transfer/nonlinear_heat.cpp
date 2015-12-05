@@ -42,8 +42,8 @@ int main()
   Functional F;
   
   // compute solution
-  auto domain = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
-  auto range = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( temperatureSpace );
+  auto domain = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( variableSetDesc );
+  auto range = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( variableSetDesc );
   Spacy::connect(domain,range);
 
   Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator( F , domain , range );
@@ -58,8 +58,9 @@ int main()
 //  auto sol = Spacy::localNewton(f,p);
 
   //construct Galerkin representation
-  VariableSetDesc::VariableSet u(variableSetDesc);
-  Spacy::Kaskade::copy(x,u);
+  x.toFile("temperature");
+//  VariableSetDesc::VariableSet u(variableSetDesc);
+//  Spacy::Kaskade::copy(x,u);
   
-  writeVTKFile(gridManager.grid().leafGridView(), u ,"temperature",IoOptions(),order);
+//  writeVTKFile(gridManager.grid().leafGridView(), u ,"temperature",IoOptions(),order);
 }

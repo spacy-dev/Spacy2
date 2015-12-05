@@ -18,8 +18,8 @@
 #include <dune/grid/config.h>
 #include <dune/grid/uggrid.hh>
 
-#include "Spacy/Adapter/kaskade.hh"
-#include "Spacy/Algorithm/CompositeStep/affineCovariantSolver.hh"
+#include <Spacy/Adapter/kaskade.hh>
+#include <Spacy/Algorithm/CompositeStep/affineCovariantSolver.hh>
 
 #include "fem/gridmanager.hh"
 #include "fem/lagrangespace.hh"
@@ -52,9 +52,9 @@ int main(int argc, char *argv[])
   int initialRefinements = getParameter(pt, "initialRefinements", 7);
   int iterativeRefinements = getParameter(pt, "iterativeRefinements", 0);
   int FEorder = getParameter(pt, "FEorder", 1);
-  int verbose = getParameter(pt, "verbose", 0);
-  double c = getParameter(pt, "c", 1e-1);
-  double d = getParameter(pt, "dd", 1e1);
+  int verbose = getParameter(pt, "verbose", 2);
+  double c = getParameter(pt, "c", 1e0);
+  double d = getParameter(pt, "d", 0.);
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -92,8 +92,11 @@ int main(int argc, char *argv[])
   H1Space h1Space(gm,leafView,FEorder);
   Spaces spaces(&h1Space);
   Descriptions desc(spaces,names);
+  using std::cout;
+  using std::endl;
 
   // Reference solution
+  cout << "interpolate" << endl;
   VarSet x_ref(desc);
   interpolateGloballyFromFunctor<PlainAverage>(boost::fusion::at_c<stateId>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
   {
@@ -101,30 +104,43 @@ int main(int argc, char *argv[])
     return Dune::FieldVector<double,1>(1);
   });
 
-
+  cout << "create domain" << endl;
   auto domain = Spacy::Kaskade::makeHilbertSpace<Descriptions>(spaces, {0u,1u}, {2u});
   // Normal step functional with cg solver
   //auto fn = Spacy::Kaskade::makeLagrangeCGFunctional<stateId,controlId,adjointId>( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
 
+  cout << "create functional" << endl;
   // Normal step functional with direct solver
   auto fn = Spacy::Kaskade::makeC2Functional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
+  
+  using Impl = decltype(fn);
+  cout << "copy constructible: " << std::is_copy_constructible<Impl>::value << endl;
+  cout << "copy assignable: " << std::is_copy_assignable<Impl>::value << endl;
+  cout << "callable: " << Spacy::HasMemOp_callable<Impl,Spacy::Vector,Spacy::Real>::value << endl;
+  cout << "domain: " << Spacy::HasMemFn_domain<Impl>::value << endl;
+  cout << "d1: " << Spacy::HasMemFn_d1_Functional<Impl,Spacy::Vector>::value << endl;
+  cout << "d2: " << Spacy::HasMemFn_d2_Functional<Impl,Spacy::Vector>::value << endl;
+  cout << "hessian: " << Spacy::HasMemFn_hessian<Impl,Spacy::Vector>::value << endl;
 //  auto solverCreator = Spacy::Kaskade::Lagrange::CGCreator<NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>,stateId,controlId,adjointId>{};
 //  solverCreator.setVerbosity(true);
 //  fn.setSolverCreator( solverCreator );
   
   // Lagrange functional
+  cout << "make tangential functional " << endl;
   auto ft = Spacy::Kaskade::makeC2Functional( TangentialStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d) , domain );
 
+  cout << "set up solver" << endl;
   // algorithm and parameters
   auto cs = Spacy::CompositeStep::AffineCovariantSolver( fn , ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
-  cs.setVerbosityLevel(verbose);
+  cs.setVerbosityLevel(2);
   cs.setMaxSteps(maxSteps);
   cs.setIterativeRefinements(iterativeRefinements);
 
   
+  cout << "start solver" << endl;
   using namespace std::chrono;
   auto startTime = high_resolution_clock::now();
   auto result = cs();

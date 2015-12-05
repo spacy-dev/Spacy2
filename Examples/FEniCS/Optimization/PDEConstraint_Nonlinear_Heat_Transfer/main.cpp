@@ -34,7 +34,7 @@ class DirichletBoundary : public SubDomain
 int main()
 {
   // Create mesh and function space
-  auto n = 256;
+  auto n = 128;//256;
   UnitSquareMesh mesh(n,n);
   LagrangeFunctional::FunctionSpace V(mesh);
 
@@ -47,8 +47,8 @@ int main()
   Function dummy(V);
   Source y_ref;
   Constant alpha(1e-2);
-  Constant c(1e-1);
-  Constant d(10);
+  Constant c(1);
+  Constant d(0);
   L.y0 = y_ref;
   L.alpha = alpha;
   L.c = c;
@@ -71,15 +71,15 @@ int main()
   auto productSpace = FEniCS::makeHilbertSpace( V , primalSpaceIds , dualSpaceIds );
   
   // functionals
-  auto lagrangeFunctional = FEniCS::makeC2Functional( L , dL , ddL , productSpace );
-  auto normalStepFunctional = FEniCS::makeC2Functional( L , dL , Norm , productSpace );
+  Spacy::C2Functional lagrangeFunctional = FEniCS::makeC2Functional( L , dL , ddL , productSpace );
+  Spacy::C2Functional normalStepFunctional = FEniCS::makeC2Functional( L , dL , Norm , productSpace );
 
   // composite step solve
   CompositeStep::AffineCovariantSolver alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
   alg_cs.setRelativeAccuracy(1e-9);
   alg_cs.setEps(1e-12);
   alg_cs.setMaxSteps(500);
-  alg_cs.setVerbosityLevel(1);
+  alg_cs.setVerbosityLevel(2);
   alg_cs.setIterativeRefinements(0);
 
   // solve problem

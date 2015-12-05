@@ -23,16 +23,15 @@ namespace Spacy
   /// @endcond
 
   /**
-   * @brief Vector creator for feeding into VectorSpace.
+   * @brief %Vector creator for feeding into VectorSpace.
    *
-   * The minimal signature (besides copy and/or move constructor/assignment) of a vector creator is:
    * @code
    * // My vector creator.
    * class MyVectorCreator
    * {
    * public:
    *   // Compute ||x||.
-   *   Vector operator()(const VectorSpace* space) const;
+   *   Spacy::Vector operator()(const Spacy::VectorSpace* space) const;
    * };
    * @endcode
    */
@@ -48,18 +47,17 @@ namespace Spacy
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
    *
-   * To construct a function space you need to provide a VectorCreatorAnchor "VectorCreator". It allows to customize the type of vector that is created by the vector space.
+   * To construct a function space you need to provide a VectorCreator. It allows to customize the type of vector that is created by the vector space.
    * Possibly, it provides additional information.
    *
-   * @see @ref VectorCreatorAnchor "VectorCreator".
+   * @see VectorCreator.
    */
   class VectorSpace : public Mixin::Eps
   {
   public:
     VectorSpace() = default;
     /**
-     * @brief Construct function space from @ref VectorCreatorAnchor "VectorCreator" and @ref NormAnchor "Norm".
-     * @param creator object satisfying the @ref VectorCreatorConceptAnchor "VectorCreatorConcept"
+     * @brief Construct function space from VectorCreator and Norm.
      * @param norm type-erased norm
      * @param defaultIndex if false, then this space gets a unique index, else it gets the default index 0
      *
@@ -67,16 +65,8 @@ namespace Spacy
      */
     VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex = false);
 
-    /**
-     * @brief Move constructor.
-     * @param V vector space to move from
-     */
     VectorSpace(VectorSpace&& V);
 
-    /**
-     * @brief Move assignment.
-     * @param V vector space to move from
-     */
     VectorSpace& operator=(VectorSpace&& V);
 
     /// Vector spaces can not copied.
@@ -85,61 +75,40 @@ namespace Spacy
     /// Vector spaces can not copy-assigned.
     VectorSpace& operator=(const VectorSpace&) = delete;
 
-    /**
-     * @brief Change norm of space.
-     */
+    /// Change norm of space.
     void setNorm(Norm norm);
 
-    /**
-     * @brief Access norm.
-     */
+    /// Access norm.
     const Norm& norm() const;
 
-    /**
-     * @brief Create new vector \f$v=0\f$.
-     */
+    /// Create new vector \f$v=0\f$.
     Vector zeroVector() const;
 
-    /**
-     * @brief Access unique index of the function space.
-     */
+    /// Access unique index of the function space.
     unsigned index() const;
 
-    /**
-     * @brief Change scalar product.
-     */
+    /// Change scalar product.
     void setScalarProduct(ScalarProduct sp);
 
-    /**
-     * @brief Access scalar product.
-     */
+    /// Access scalar product.
     const ScalarProduct& scalarProduct() const;
 
-    /**
-     * @brief Access dual space \f$Y=X^*\f$.
-     */
+    /// Access dual space \f$Y=X^*\f$.
     const VectorSpace& dualSpace() const;
 
-    /**
-     * @brief Set dual space \f$Y=X^*\f$.
-     */
+    /// Set dual space \f$Y=X^*\f$.
     void setDualSpace(const VectorSpace* Y);
 
     /**
      * @brief Add space \f$Y\f$ for which this space \f$X\f$ acts as primal space.
-     *
      * This is necessary to allow evaluation of \f$x(y)\f$ for \f$ x\in X \f$ and \f$ y\in Y\f$.
      */
     void addDualSpace(const VectorSpace& Y);
 
-    /**
-     * @brief Checks whether \f$Y\f$ has been assigned as dual space with respect to this space \f$X\f$.
-     */
+    /// Checks whether \f$Y\f$ has been assigned as dual space with respect to this space \f$X\f$.
     bool isPrimalWRT(const VectorSpace& Y) const;
 
-    /**
-     * @brief Checks whether this space is a hilbert space.
-     */
+    /// Checks whether this space is a hilbert space.
     bool isHilbertSpace() const;
 
     /**
@@ -150,10 +119,7 @@ namespace Spacy
      */
     void setRestriction(std::function<bool(const Vector&)> f);
 
-    /**
-     * @brief Checks if vector is admissible. Default implementation always returns true;
-     * @return true if x is admissible, else false
-     */
+    /// Checks if vector is admissible. Default implementation always returns true;
     bool isAdmissible(const Vector& x) const;
 
     VectorCreator& creator();
@@ -182,20 +148,10 @@ namespace Spacy
     return *space.creator().template target<T>();
   }
 
-  /**
-   * @brief Construct Banach space.
-   * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
-   * @param norm norm satisfying \ref NormConceptAnchor "NormConcept"
-   * @return VectorSpace(impl,norm)
-   */
+  /// Construct Banach space.
   VectorSpace makeBanachSpace(VectorCreator creator, Norm norm);
 
-  /**
-   * @brief Construct Hilbert space.
-   * @param creator object satisfying \ref VectorCreatorConceptAnchor "VectorCreatorConcept"
-   * @param scalarProduct scalar product satisfying \ref ScalarProductConceptAnchor "ScalarProductConcept"
-   * @return hilbert space
-   */
+  /// Construct Hilbert space.
   VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex = false);
 
   /**
@@ -207,10 +163,12 @@ namespace Spacy
    * makes \f$Y\f$ the dual space of \f$X\f$.
    * This admits the evaluation of \f$y(x)\f$ for \f$x\in X\f$ and \f$y\in Y\f$.
    */
-  void connect(VectorSpace& X, VectorSpace& Y);
-
   void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y);
 
+  /**
+   * @brief Check if V and W have the same index.
+   * @throws if `V.index() != W.index()` throws IncompatibleSpaceException
+   */
   void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
 }
 #endif // SPACY_VECTOR_SPACE_HH

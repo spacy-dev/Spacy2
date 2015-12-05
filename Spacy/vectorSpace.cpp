@@ -190,11 +190,6 @@ namespace Spacy
     return V;
   }
 
-  void connect(VectorSpace& X, VectorSpace& Y)
-  {
-    X.addDualSpace( Y );
-  }
-
   void connectAsPrimalDualPair(VectorSpace& X, VectorSpace& Y)
   {
     X.addDualSpace( Y );

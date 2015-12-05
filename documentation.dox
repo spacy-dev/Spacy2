@@ -16,7 +16,7 @@
    /**
     * @defgroup KaskadeGroup Kaskade7
     * @ingroup AdapterGroup
-    * @brief %Vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
+    * @brief %Vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a>.
     */
 
    /**
@@ -147,7 +147,7 @@
    
   /**
    * @namespace Spacy::Kaskade
-   * @brief Contains vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade 7</a>.
+   * @brief Contains vector spaces, functionals and operators for <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a>.
    */
    
   /**

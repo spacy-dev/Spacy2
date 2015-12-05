@@ -11,6 +11,7 @@ cmake_policy(SET CMP0004 OLD)
 
 # Get DOLFIN configuration data (DOLFINConfig.cmake must be in
 # DOLFIN_CMAKE_CONFIG_PATH)
+set(DOLFIN_DIR ../../../../cmake)
 find_package(DOLFIN)
 
 # Need to get VTK config because VTK uses advanced VTK features which
