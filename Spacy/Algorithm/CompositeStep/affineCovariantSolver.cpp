@@ -7,6 +7,7 @@
 #include "Spacy/Algorithm/CG/linearSolver.hh"
 #include "Spacy/Algorithm/CG/triangularStateConstraintPreconditioner.hh"
 #include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
+#include "Spacy/Algorithm/Scalar/findGlobalMinimizer.hh"
 
 #include "Spacy/inducedScalarProduct.hh"
 #include "Spacy/Util/cast.hh"
@@ -392,7 +393,7 @@ namespace Spacy
       if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
         maxTau = min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-      return CompositeStep::findMinimizer( cubic, 0, maxTau , dampingAccuracy() );
+      return findGlobalMinimizer( cubic, 0, maxTau , dampingAccuracy() );
     }
 
     AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(Real norm_x, Real norm_Dx, Real eta)

@@ -6,7 +6,7 @@
 
 #include <cassert>
 
-#include "Spacy/Algorithm/Functions_1D/quadratic.hh"
+#include "Spacy/Algorithm/Scalar/quadratic.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
@@ -20,7 +20,7 @@ namespace Spacy
   namespace CompositeStep
   {
     /**
-     * @brief Constructs the quadratic model of a Lagrange functional for a composite step method.
+     * @brief Constructs the quadratic model of a Lagrange functional.
      * @param nu normal step damping factor
      * @param dn normal step
      * @param dt tangential step
@@ -34,18 +34,18 @@ namespace Spacy
      *
      * @return \f$ q(t)=a+bt+ct^2\f$
      */
-    Functions_1D::Quadratic makeQuadraticModel(Real nu,
-                                      const Vector& dn, const Vector& dt,
-                                      const C2Functional& L, const Vector& x);
+    Quadratic makeQuadraticModel(Real nu,
+                                 const Vector& dn, const Vector& dt,
+                                 const C2Functional& L, const Vector& x);
 
     /**
-     * @brief Constructs the quadratic model a norm for a composite step method.
+     * @brief Constructs a quadratic model for the norm of the underlying vector space.
      * @param nu normal step damping factor
      * @param dn normal step
      * @param dt tangential step
      * @return \f$ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 \f$
      */
-    Functions_1D::Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
+    Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
 
     /// The cubic regularized model for AffineCovariantCompositeSteps.
     class CubicModel
@@ -57,7 +57,7 @@ namespace Spacy
        * @param squaredNorm quadratic model \f$q_2\f$ of a norm (generated with makeQuadraticNormModel(...))
        * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
        */
-      CubicModel(const Functions_1D::Quadratic& quadraticModel, const Functions_1D::Quadratic& squaredNorm, Real omega);
+      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega);
 
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
@@ -67,8 +67,8 @@ namespace Spacy
       Real operator()(Real t) const;
 
     private:
-      Functions_1D::Quadratic quadraticModel_;
-      Functions_1D::Quadratic squaredNorm_;
+      Quadratic quadraticModel_;
+      Quadratic squaredNorm_;
       Real omega_;
     };
 
@@ -84,35 +84,6 @@ namespace Spacy
      */
     CubicModel makeCubicModel(Real nu, const Vector& dn, const Vector& dt,
                               const C2Functional& L, const Vector& x, Real omega);
-
-    /**
-     * @brief Find global minimizer of \f$f\f$ in \f$[a,b]\f$.
-     * @param f Nonlinear function \f$ f: \mathbb{R}\to\mathbb{R} \f$
-     * @param a lower bound of the admissible interval
-     * @param b upper bound of the admissible interval
-     * @param eps relative accuracy
-     * @return \f$ x \in \mathrm{argmin}_{[a,b]} \f$
-     */
-    template <class Model>
-    Real findMinimizer(const Model& f, Real a, Real b, Real eps = 1e-2)
-    {
-      assert(a<b);
-      eps *= b-a;
-      Real t = a;
-      Real tmin = t;
-      Real fmin = f(t);
-
-      while( (t+=eps) <= b)
-      {
-        if( f(t) < fmin )
-        {
-          fmin = f(t);
-          tmin = t;
-        }
-      }
-
-      return tmin;
-    }
   }
 
   /** @} */
