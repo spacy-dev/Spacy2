@@ -97,7 +97,7 @@ namespace Spacy
         std::tie(tau,dx,ds,norm_x,norm_dx) = computeCompositeStep( nu , norm_Dn , x , Dn , Dt );
 
         x += primalProjection(dx);
-        if( contraction() < 0.25 ) x += primalProjection(ds);
+        if( getContraction() < 0.25 ) x += primalProjection(ds);
 
         norm_x = norm(primalProjection(x));
 
@@ -340,12 +340,12 @@ namespace Spacy
       if( !N_ ) return;
       if( norm_dx < sqrtEps() * norm_x ) return;
       setContraction( norm_ds/norm_dx );
-      //    if( contraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
+      //    if( getContraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
 
-      if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*contraction()/norm_dx )
-        omegaC = 2*contraction()/norm_dx;
+      if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*getContraction()/norm_dx )
+        omegaC = 2*getContraction()/norm_dx;
 
-      if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
+      if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << getContraction() << ", omegaC: " << omegaC << std::endl;
     }
 
     Real AffineCovariantSolver::updateOmegaL(const Vector& soc, Real q_tau,
@@ -380,7 +380,7 @@ namespace Spacy
     {
       if( !N_ ) return 1;
       DampingFactor nu = 1.;
-      if( norm_Dn > eps() && abs(norm_Dn*omegaC) > eps() ) nu = min(1.,desiredContraction()/(omegaC*norm_Dn));
+      if( norm_Dn > eps() && abs(norm_Dn*omegaC) > eps() ) nu = min(1.,getDesiredContraction()/(omegaC*norm_Dn));
       return nu;
     }
 
@@ -390,8 +390,8 @@ namespace Spacy
       if( norm_Dt < sqrtEps() ) return 1;
 
       auto maxTau = Real{1.};
-      if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
-        maxTau = min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
+      if( pow(getRelaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
+        maxTau = min( 1. , sqrt( pow( 2*getRelaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
       return findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() );
     }
@@ -407,9 +407,9 @@ namespace Spacy
         return AcceptanceTest::TangentialStepFailed;
       }
 
-      if( !!N_ && !admissibleContraction() )
+      if( !!N_ && !contractionIsAdmissible() )
       {
-        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << getContraction() << std::endl;
         normalStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::NormalStepFailed;
       }

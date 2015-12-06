@@ -4,8 +4,6 @@
 #ifndef SPACY_UTIL_MIXIN_DECREASE_CONDITION_HH
 #define SPACY_UTIL_MIXIN_DECREASE_CONDITION_HH
 
-#include "Spacy/Spaces/RealSpace/real.hh"
-
 namespace Spacy
 {
   namespace Mixin
@@ -19,19 +17,19 @@ namespace Spacy
        * @param minimalDecrease minimal required decrease
        * @param relaxedMinimalDecrease relaxed required decrease
        */
-      explicit DecreaseCondition(Real minimalDecrease = 0.5, Real relaxedMinimalDecrease = 0.1) noexcept;
+      explicit DecreaseCondition(double minimalDecrease = 0.5, double relaxedMinimalDecrease = 0.1) noexcept;
 
       /**
        * @brief Set required minimal decrease.
        * @param decrease minimal required decrease
        */
-      void setMinimalDecrease(Real decrease) noexcept;
+      void setMinimalDecrease(double decrease) noexcept;
 
       /**
        * @brief Access minimal decrease.
        * @return minimal decrease
        */
-      Real minimalDecrease() const noexcept;
+      double minimalDecrease() const noexcept;
 
       /**
        * @brief Set relaxed minimal decrease.
@@ -39,22 +37,22 @@ namespace Spacy
        *
        * This is used for deciding about rejecting tangential steps in CompositeSteps::AffineCovariantSolver.
        */
-      void setRelaxedMinimalDecrease(Real decrease) noexcept;
+      void setRelaxedMinimalDecrease(double decrease) noexcept;
 
       /**
        * @brief Decide if measure relative decrease is acceptable.
        * @param decrease measured relative decrease \f$\delta m/\delta f\f$.
        */
-      bool acceptableDecrease(Real decrease) const noexcept;
+      bool acceptableDecrease(double decrease) const noexcept;
 
       /**
        * @brief Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition.
        * @param decrease measured relative decrease \f$\delta m/\delta f\f$.
        */
-      bool acceptableRelaxedDecrease(Real decrease) const noexcept;
+      bool acceptableRelaxedDecrease(double decrease) const noexcept;
 
     private:
-      Real minimalDecrease_, relaxedMinimalDecrease_;
+      double minimalDecrease_, relaxedMinimalDecrease_;
     };
   }
 }

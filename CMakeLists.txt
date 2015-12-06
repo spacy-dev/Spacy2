@@ -72,6 +72,7 @@ if(BuildTest)
   aux_source_directory(Test/Spacy/Spaces/PrimalDualProductSpace TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Util TEST_SRC_LIST)
   aux_source_directory(Test/Spacy/Util/Base TEST_SRC_LIST)
+  aux_source_directory(Test/Spacy/Util/Mixins TEST_SRC_LIST)
 
   find_package(Eigen3)
   if(EIGEN3_FOUND)

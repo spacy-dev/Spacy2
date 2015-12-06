@@ -5,7 +5,6 @@
 #define SPACY_UTIL_MIXIN_REGULARITY_TEST_HH
 
 #include "mixinConnection.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -19,32 +18,32 @@ namespace Spacy
        * @brief Constructor.
        * @param lowerBound lower bound for regularity test
        */
-      explicit RegularityTest(Real lowerBound = 1e-12) noexcept;
+      explicit RegularityTest(double lowerBound = 1e-12) noexcept;
 
       /// Set lower bound of regularity test for termination criteria.
-      void setLowerBound(Real lowerBound);
+      void setLowerBound(double lowerBound);
 
-      Real lowerBound() const noexcept;
+      double getLowerBound() const noexcept;
 
       /**
        * @brief Apply regularity test.
        * @param nu damping factor
        * @return \f$nu > lowerBound_\f$
        */
-      bool regularityTestPassed(Real nu) const noexcept;
+      bool regularityTestPassed(double nu) const noexcept;
 
       /**
        * @brief Apply regularity test.
        * @param nu damping factor
        * @return \f$nu <= lowerBound_\f$
        */
-      bool regularityTestFailed(Real nu) const noexcept;
+      bool regularityTestFailed(double nu) const noexcept;
 
       /// update function for observer pattern.
-      void update(MixinConnection<RegularityTest>* changedSubject);
+      void update(RegularityTest* changedSubject);
 
     private:
-      Real lowerBound_;
+      double lowerBound_;
     };
   }
 }

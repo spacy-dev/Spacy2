@@ -5,34 +5,34 @@
 
 namespace Spacy
 {
-  Mixin::RegularityTest::RegularityTest(Real lowerBound) noexcept
+  Mixin::RegularityTest::RegularityTest(double lowerBound) noexcept
     : lowerBound_(lowerBound)
   {}
 
-  void Mixin::RegularityTest::setLowerBound(Real lowerBound)
+  void Mixin::RegularityTest::setLowerBound(double lowerBound)
   {
     lowerBound_ = lowerBound;
     notify();
   }
 
-  Real Mixin::RegularityTest::lowerBound() const noexcept
+  double Mixin::RegularityTest::getLowerBound() const noexcept
   {
     return lowerBound_;
   }
 
-  bool Mixin::RegularityTest::regularityTestPassed(Real nu) const noexcept
+  bool Mixin::RegularityTest::regularityTestPassed(double nu) const noexcept
   {
     return nu > lowerBound_;
   }
 
-  bool Mixin::RegularityTest::regularityTestFailed(Real nu) const noexcept
+  bool Mixin::RegularityTest::regularityTestFailed(double nu) const noexcept
   {
     return !regularityTestPassed(nu);
   }
 
-  void Mixin::RegularityTest::update(MixinConnection<RegularityTest>* changedSubject)
+  void Mixin::RegularityTest::update(RegularityTest* changedSubject)
   {
-    setLowerBound( static_cast<RegularityTest*>(changedSubject)->lowerBound() );
+    setLowerBound( changedSubject->getLowerBound() );
   }
 }
 

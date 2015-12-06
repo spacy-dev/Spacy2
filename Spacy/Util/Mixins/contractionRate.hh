@@ -4,8 +4,6 @@
 #ifndef SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH
 #define SPACY_UTIL_MIXIN_CONTRACTION_RATE_HH
 
-#include "Spacy/Spaces/RealSpace/real.hh"
-
 namespace Spacy
 {
   namespace Mixin
@@ -20,33 +18,33 @@ namespace Spacy
        * @param relaxedDesiredContraction relaxed contraction rate
        * @param maximalContraction maximal allowed contraction rate
        */
-      explicit ContractionRate(Real desiredContraction = 0.25,
-                               Real relaxedDesiredContraction = 0.5,
-                               Real maximalContraction = 0.75) noexcept;
+      explicit ContractionRate(double desiredContraction = 0.25,
+                               double relaxedDesiredContraction = 0.5,
+                               double maximalContraction = 0.75) noexcept;
 
-      void setContraction(Real contraction) noexcept;
+      void setContraction(double contraction) noexcept;
 
-      void setDesiredContraction(Real desiredContraction) noexcept;
+      void setDesiredContraction(double desiredContraction) noexcept;
 
-      void setRelaxedDesiredContraction(Real relaxedDesiredContraction) noexcept;
+      void setRelaxedDesiredContraction(double relaxedDesiredContraction) noexcept;
 
-      void setMaximalContraction(Real maximalContraction) noexcept;
+      void setMaximalContraction(double maximalContraction) noexcept;
 
-      Real contraction() const noexcept;
+      double getContraction() const noexcept;
 
-      Real desiredContraction() const noexcept;
+      double getDesiredContraction() const noexcept;
 
-      Real relaxedDesiredContraction() const noexcept;
+      double getRelaxedDesiredContraction() const noexcept;
 
-      Real maximalContraction() const noexcept;
+      double getMaximalContraction() const noexcept;
 
-      bool admissibleContraction() const noexcept;
+      bool contractionIsAdmissible() const noexcept;
 
     private:
-      Real contraction_ = 1;
-      Real desiredContraction_;
-      Real relaxedDesiredContraction_;
-      Real maximalContraction_;
+      double contraction_ = 1;
+      double desiredContraction_;
+      double relaxedDesiredContraction_;
+      double maximalContraction_;
     };
   }
 }
