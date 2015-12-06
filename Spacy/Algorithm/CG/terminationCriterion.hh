@@ -18,6 +18,7 @@ namespace Spacy
 
   namespace CG
   {
+    /// Type-erased termination criterion for conjugate gradient methods.
     class TerminationCriterion
     {
       struct AbstractBase

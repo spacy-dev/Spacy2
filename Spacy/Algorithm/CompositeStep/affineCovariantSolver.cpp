@@ -128,7 +128,7 @@ namespace Spacy
       Real trcgRelativeAccuracy = getMinimalAccuracy();
       if( nu == 1 && lastStepWasUndamped )
       {
-        trcgRelativeAccuracy = max( getRelativeAccuracy() , min( getMinimalAccuracy() , omegaL() * norm_dx_old ) );
+        trcgRelativeAccuracy = max( getRelativeAccuracy() , min( getMinimalAccuracy() , omegaL * norm_dx_old ) );
         if( norm_dx_old > 0 && lastStepWasUndamped )
           trcgRelativeAccuracy = min( max( getRelativeAccuracy()/norm_dx_old , trcgRelativeAccuracy ) , getMinimalAccuracy() );
         if( getVerbosityLevel() > 1 )
@@ -380,7 +380,7 @@ namespace Spacy
     {
       if( !N_ ) return 1;
       DampingFactor nu = 1.;
-      if( norm_Dn > eps() && abs(norm_Dn*omegaC()) > eps() ) nu = min(1.,desiredContraction()/(omegaC()*norm_Dn));
+      if( norm_Dn > eps() && abs(norm_Dn*omegaC) > eps() ) nu = min(1.,desiredContraction()/(omegaC*norm_Dn));
       return nu;
     }
 
@@ -393,7 +393,7 @@ namespace Spacy
       if( pow(relaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
         maxTau = min( 1. , sqrt( pow( 2*relaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-      return findGlobalMinimizer( cubic, 0, maxTau , dampingAccuracy() );
+      return findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() );
     }
 
     AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(Real norm_x, Real norm_Dx, Real eta)

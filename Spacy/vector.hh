@@ -59,6 +59,7 @@ namespace Spacy
       {
         this->get() += (*Spacy::target<Impl>(y));
       }
+
       void subtract(const Vector& y) final override
       {
         this->get() -= (*Spacy::target<Impl>(y));

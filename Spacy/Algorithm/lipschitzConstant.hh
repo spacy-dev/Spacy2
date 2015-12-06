@@ -5,7 +5,6 @@
 #define SPACY_LIPSCHITZ_CONSTANT_HH
 
 #include "Spacy/Util/Mixins/eps.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -17,7 +16,7 @@ namespace Spacy
      * @brief Construct Lipschitz constant.
      * @param initialOmega initial estimate for Lipschitz constant
      */
-    LipschitzConstant(Real initialOmega = 1e-3);
+    LipschitzConstant(double initialOmega = 1e-3);
 
     /**
      * \brief Assign new value to Lipschitz constant.
@@ -27,33 +26,31 @@ namespace Spacy
      *
      * @param newOmega new Lipschitz constant
      */
-    LipschitzConstant& operator=(Real newOmega);
+    LipschitzConstant& operator=(double newOmega);
 
     /// Access value of Lipschitz constant \f$\omega\f$.
-    operator Real() const;
-
-    Real operator()() const;
+    operator double() const;
 
     /**
      * @brief Access previous value of Lipschitz constant.
      * @return \f$\omega_{k-1}\f$
      */
-    Real previous() const;
+    double previous() const;
 
     /**
      * @brief Set allowed maximal relative increase.
      * @param factor new allowed maximal relative increase
      */
-    void setMaxFactor(Real factor);
+    void setMaxFactor(double factor);
 
     /**
      * @brief Set relative decrease for negative estimates.
      * @param factor new relative decrease for negative estimates of the Lipschitz constant
      */
-    void setMinFactor(Real factor);
+    void setMinFactor(double factor);
 
   private:
-    Real omega_ = 1e-3, previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-1;
+    double omega_ = 1e-3, previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-1;
   };
 }
 

@@ -86,7 +86,6 @@ namespace Spacy
         @brief Apply iterative method to solve \f$Ax=b\f$.
         @param x initial iterate
         @param b initial right hand side
-        @param res some statistics
        */
       Vector operator()(Vector x, Vector b)
       {

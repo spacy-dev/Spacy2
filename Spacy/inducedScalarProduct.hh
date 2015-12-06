@@ -23,12 +23,7 @@ namespace Spacy
      */
     explicit InducedScalarProduct(LinearOperator M);
 
-    /**
-     * @brief Compute scalar product.
-     * @param x vector
-     * @param y vector
-     * @return \f$(x,y)_M\f$.
-     */
+    /// Compute scalar product \f$(x,y)_M\f$.
     Real operator()(const Vector& x, const Vector& y) const;
 
   private:
@@ -49,16 +44,11 @@ namespace Spacy
   public:
     /**
      * @brief Constructor.
-     * @param M operator defining the scalar product.
+     * @param M linear operator defining the scalar product.
      */
     explicit PrimalInducedScalarProduct(LinearOperator M);
 
-    /**
-     * @brief Compute scalar product.
-     * @param x vector
-     * @param y vector
-     * @return \f$(x,y)_M\f$.
-     */
+    /// @brief Compute scalar product \f$(x,y)_M\f$.
     Real operator()(Vector x, Vector y) const;
 
   private:

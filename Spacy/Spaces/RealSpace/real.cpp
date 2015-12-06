@@ -172,25 +172,25 @@ namespace Spacy
   }
 
 
-  bool operator<(const Real& x, const Real& y)
-  {
-    return x.get() < y.get();
-  }
+//  bool operator<(const Real& x, const Real& y)
+//  {
+//    return x.get() < y.get();
+//  }
 
-  bool operator>(const Real& x, const Real& y)
-  {
-    return x.get() > y.get();
-  }
+//  bool operator>(const Real& x, const Real& y)
+//  {
+//    return x.get() > y.get();
+//  }
 
-  bool operator>=(const Real& x, const Real& y)
-  {
-    return x.get() >= y.get();
-  }
+//  bool operator>=(const Real& x, const Real& y)
+//  {
+//    return x.get() >= y.get();
+//  }
 
-  bool operator<=(const Real& x, const Real& y)
-  {
-    return x.get() <= y.get();
-  }
+//  bool operator<=(const Real& x, const Real& y)
+//  {
+//    return x.get() <= y.get();
+//  }
 
   std::ostream& operator<<(std::ostream& os, const Real& x)
   {

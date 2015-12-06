@@ -28,7 +28,7 @@ namespace Spacy
           beforeFirstIteration_ = false;
           return false;
         }
-        if(abs(nu()-1) > eps()) return false;
+        if(abs(nu-1) > eps()) return false;
 
         auto norm_x = norm(x), norm_dx = norm(dx);
         if( norm_x == 0 && norm_dx == 0 ) return true;
@@ -59,7 +59,7 @@ namespace Spacy
           return false;
         }
 
-        if(abs(nu()-1) > eps()) return false;
+        if(abs(nu-1) > eps()) return false;
 
         if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << ", relative accuracy: " << getRelativeAccuracy() << ", initialResidual: " << initialResidual << std::endl;
 

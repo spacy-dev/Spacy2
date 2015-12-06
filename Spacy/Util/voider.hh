@@ -41,7 +41,10 @@ namespace Spacy
 
   /// Check if Concept is satisfied.
   template <class Concept>
-  using Require = typename Detail::Require<Concept>::type;
+  struct Require
+  {
+    static_assert( Concept::value , "Concept failed" );
+  };
 }
 
 #endif // SPACY_UTIL_VOIDER_HH

@@ -112,7 +112,7 @@ namespace Spacy
        */
       C1Operator& operator=(const C1Operator& B)
       {
-        setNumberOfThreads(B.nThreads());
+        setNumberOfThreads(B.getNumberOfThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
         A_ = B.A_;
@@ -219,7 +219,7 @@ namespace Spacy
         copy(x,u);
 
         Assembler assembler_(spaces_);
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
 
         rhs_ = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(VectorImpl(assembler_.rhs()),rhs_);
@@ -238,7 +238,7 @@ namespace Spacy
         copy(x,u);
 
         Assembler assembler_(spaces_);
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , getNumberOfThreads() );
         A_ = assembler_.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_);
         old_X_dA_ = x;
       }

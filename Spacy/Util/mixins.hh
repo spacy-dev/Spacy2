@@ -6,7 +6,6 @@
 
 #include "Mixins/accuracy.hh"
 #include "Mixins/contractionRate.hh"
-#include "Mixins/dampingAccuracy.hh"
 #include "Mixins/decreaseCondition.hh"
 #include "Mixins/eps.hh"
 #include "Mixins/index.hh"

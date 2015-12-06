@@ -11,4 +11,6 @@ GENERATE_MIXIN_SOURCE(double,RelativeAccuracy)
 
 GENERATE_MIXIN_SOURCE(double,MinimalAccuracy)
 
+GENERATE_MIXIN_SOURCE(double,DampingAccuracy)
+
 #include "undefMacros.hh"

@@ -60,9 +60,9 @@ TEST(CompositeStep,QuadraticModel)
 
   auto q = CompositeStep::makeQuadraticModel(nu,dn,dt,f,x);
 
-  EXPECT_DOUBLE_EQ( toDouble( q(0) )  , toDouble( f(x+nu*dn)      ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(nu) ) , toDouble( f(x+nu*(dn+dt)) ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(1) )  , toDouble( f(x+nu*dn+dt)   ) );
+  EXPECT_DOUBLE_EQ( q(0)  , f(x+nu*dn)      );
+  EXPECT_DOUBLE_EQ( q(nu) , f(x+nu*(dn+dt)) );
+  EXPECT_DOUBLE_EQ( q(1)  , f(x+nu*dn+dt)   );
 }
 
 TEST(CompositeStep,NormModel)
@@ -75,9 +75,9 @@ TEST(CompositeStep,NormModel)
 
   auto norm2 = [](const auto& x) { return norm(x)*norm(x); };
 
-  EXPECT_DOUBLE_EQ( toDouble( q(0) )  , toDouble( norm2(nu*dn)      ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(nu) ) , toDouble( norm2(nu*(dn+dt)) ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(1) )  , toDouble( norm2(nu*dn+dt)   ) );
+  EXPECT_DOUBLE_EQ( q(0)  , norm2(nu*dn)      );
+  EXPECT_DOUBLE_EQ( q(nu) , norm2(nu*(dn+dt)) );
+  EXPECT_DOUBLE_EQ( q(1)  , norm2(nu*dn+dt)   );
 }
 
 TEST(CompositeStep,CubicModel)
@@ -94,8 +94,8 @@ TEST(CompositeStep,CubicModel)
   auto q0 = CompositeStep::makeQuadraticModel(nu,dn,dt,f,x);
   auto q1 = CompositeStep::makeQuadraticNormModel(nu,dn,dt);
 
-  EXPECT_DOUBLE_EQ( toDouble( q(0) )   , toDouble( q0(0) + omega/6*pow(q1(0),1.5)   ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(nu) )  , toDouble( q0(nu) + omega/6*pow(q1(nu),1.5) ) );
-  EXPECT_DOUBLE_EQ( toDouble( q(1) )   , toDouble( q0(1) + omega/6*pow(q1(1),1.5)   ) );
+  EXPECT_DOUBLE_EQ( q(0)   , q0(0) + omega/6*pow(q1(0),1.5)   );
+  EXPECT_DOUBLE_EQ( q(nu)  , q0(nu) + omega/6*pow(q1(nu),1.5) );
+  EXPECT_DOUBLE_EQ( q(1)   , q0(1) + omega/6*pow(q1(1),1.5)   );
 }
 

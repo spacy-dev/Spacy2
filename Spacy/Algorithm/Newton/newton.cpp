@@ -41,11 +41,11 @@ namespace Spacy
 
         auto dx = dF_inv(-F(x));
         auto nu = dampingStrategy(dF_inv,x,dx);
-        x += nu()*dx;
+        x += nu*dx;
 
-        if( p.verbose() ) std::cout << "nu = " << nu() << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
+        if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
 
-        if( terminationCriterion(nu(),x,dx) )
+        if( terminationCriterion(nu,x,dx) )
         {
           if( p.verbose() ) std::cout << "Newton iteration converged. Computation time: " << p.elapsedTime() << "s." << std::endl;
           return x;

@@ -3,26 +3,16 @@
 
 #include "dampingFactor.hh"
 
+#include "Spacy/Spaces/RealSpace/real.hh"
+
 #include <cmath>
 
 namespace Spacy
 {
-  DampingFactor::DampingFactor(Real nu, double eps)
-    : Mixin::Eps(eps)
-  {
-    set(nu);
-  }
-
   DampingFactor::DampingFactor(double nu, double eps)
     : Mixin::Eps(eps)
   {
     set(nu);
-  }
-
-  DampingFactor& DampingFactor::operator=(Real nu)
-  {
-    set(nu);
-    return *this;
   }
 
   DampingFactor& DampingFactor::operator=(double nu)
@@ -31,18 +21,23 @@ namespace Spacy
     return *this;
   }
 
+  DampingFactor::operator double() const
+  {
+    return nu_;
+  }
+
   DampingFactor::operator Real() const
   {
-    return nu_;
+    return Real(nu_);
   }
 
-  Real DampingFactor::operator()() const
+  void DampingFactor::set(double nu)
   {
-    return nu_;
+    nu_ = ( abs(1-nu) < eps() ) ? 1. : nu;
   }
 
-  void DampingFactor::set(Real nu)
+  std::ostream& operator<<(std::ostream& os, DampingFactor nu)
   {
-    nu_ = ( abs(1-nu) < eps() ) ? Real{1.} : nu;
+    return os << static_cast<double>(nu);
   }
 }

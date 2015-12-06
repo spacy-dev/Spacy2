@@ -7,7 +7,6 @@
 #include <cassert>
 
 #include "Spacy/Algorithm/Scalar/quadratic.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
@@ -33,7 +32,7 @@ namespace Spacy
      *
      * @return \f$ q(t)=a+bt+ct^2\f$
      */
-    Quadratic makeQuadraticModel(Real nu,
+    Quadratic makeQuadraticModel(double nu,
                                  const Vector& dn, const Vector& dt,
                                  const C2Functional& L, const Vector& x);
 
@@ -44,7 +43,7 @@ namespace Spacy
      * @param dt tangential step
      * @return \f$ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 \f$
      */
-    Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
+    Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt);
 
     /// The cubic regularized model for the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
     class CubicModel
@@ -56,19 +55,19 @@ namespace Spacy
        * @param squaredNorm quadratic model \f$q_2\f$ of a norm (generated with makeQuadraticNormModel(...))
        * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
        */
-      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega);
+      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, double omega);
 
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
        * @param t argument
        * @return \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$
        */
-      Real operator()(Real t) const;
+      double operator()(double t) const;
 
     private:
       Quadratic quadraticModel_;
       Quadratic squaredNorm_;
-      Real omega_;
+      double omega_;
     };
 
     /**
@@ -81,8 +80,8 @@ namespace Spacy
      * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
      * @return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega )
      */
-    CubicModel makeCubicModel(Real nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, Real omega);
+    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
+                              const C2Functional& L, const Vector& x, double omega);
   }
 
   /** @} */

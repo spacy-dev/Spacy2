@@ -12,6 +12,8 @@ GENERATE_MIXIN_HEADER(double,RelativeAccuracy,1e-15)
 
 GENERATE_MIXIN_HEADER(double,MinimalAccuracy,1e-15)
 
+GENERATE_MIXIN_HEADER(double,DampingAccuracy,1e-3)
+
 #include "undefMacros.hh"
 
 #endif // SPACY_UTIL_MIXIN_ACCURACY_HH

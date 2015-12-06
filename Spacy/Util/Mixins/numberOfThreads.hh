@@ -4,23 +4,10 @@
 #ifndef SPACY_MIXINS_NUMBER_OF_THREADS_
 #define SPACY_MIXINS_NUMBER_OF_THREADS_
 
-namespace Spacy
-{
-  namespace Mixin
-  {
-    /// %Mixin class for number of threads
-    class NumberOfThreads
-    {
-    public:
-      void setNumberOfThreads(unsigned nThreads = 1);
+#include "macros.hh"
 
-      /// Access number of allowed threads.
-      unsigned nThreads() const noexcept;
+GENERATE_MIXIN_HEADER(unsigned,NumberOfThreads,1)
 
-    private:
-      unsigned nThreads_ = 1;
-    };
-  }
-}
+#include "undefMacros.hh"
 
 #endif // SPACY_MIXINS_NUMBER_OF_THREADS_

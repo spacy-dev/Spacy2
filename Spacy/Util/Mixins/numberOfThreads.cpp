@@ -3,18 +3,8 @@
 
 #include "numberOfThreads.hh"
 
-namespace Spacy
-{
-  namespace Mixin
-  {
-    void NumberOfThreads::setNumberOfThreads(unsigned nThreads)
-    {
-      nThreads_ = nThreads;
-    }
+#include "macros.hh"
 
-    unsigned NumberOfThreads::nThreads() const noexcept
-    {
-      return nThreads_;
-    }
-  }
-}
+GENERATE_MIXIN_SOURCE(unsigned,NumberOfThreads)
+
+#include "undefMacros.hh"

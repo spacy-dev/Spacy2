@@ -28,28 +28,28 @@ namespace Spacy
     }
 
 
-    Quadratic makeQuadraticModel(Real nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
+    Quadratic makeQuadraticModel(double nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
     {
       return create<Quadratic>(quadraticCoefficients(nu,dn,dt,L,x));
     }
 
 
-    Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt)
+    Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt)
     {
       return Quadratic( nu*nu*dn*dn , 2*nu*dn*dt , dt*dt);
     }
 
-    CubicModel makeCubicModel(Real nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, Real omega)
+    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
+                              const C2Functional& L, const Vector& x, double omega)
     {
       return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega );
     }
 
-    CubicModel::CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega)
+    CubicModel::CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, double omega)
       : quadraticModel_(quadraticModel), squaredNorm_(squaredNorm), omega_(omega)
     {}
 
-    Real CubicModel::operator()(Real t) const
+    double CubicModel::operator()(double t) const
     {
       return quadraticModel_(t) + omega_/6 * pow( squaredNorm_(t), 1.5 );
     }

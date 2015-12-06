@@ -26,23 +26,23 @@ namespace Spacy
 
         if( oldNu > 0 )
         {
-          mu = normOldDx * normOldDs * oldNu() / ( normDx * norm(oldDs - dx) );
+          mu = normOldDx * normOldDs * oldNu / ( normDx * norm(oldDs - dx) );
           nu = min(1.,mu);
         }
 
         while(true)
         {
-          if( regularityTestFailed(nu()) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",toDouble(nu()));
+          if( regularityTestFailed(nu) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",nu);
 
-          auto trial = x + nu()*dx;
-          auto ds = DFInv_(-F_(trial)) - (1.-nu())*dx;
+          auto trial = x + nu*dx;
+          auto ds = DFInv_(-F_(trial)) - (1.-nu)*dx;
           auto normDs = norm(ds);
 
-          auto muPrime = 0.5 * nu() * nu() / normDs;
+          auto muPrime = 0.5 * nu * nu / normDs;
 
           if( normDs/normDx >= 1)
           {
-            nu = min(0.5*nu(),muPrime);
+            nu = min(0.5*nu,muPrime);
             continue;
           }
 
@@ -50,9 +50,9 @@ namespace Spacy
 
           if( nu == 1 && nuPrime == 1 && normDs < eps() ) break;
 
-          if( nuPrime >= 4*nu())
+          if( nuPrime >= 4*nu)
           {
-            nu = 4*nu();
+            nu = 4*nu;
 //            nu = nuPrime;
             continue;
           }
@@ -78,26 +78,26 @@ namespace Spacy
 
         while( true )
         {
-          if( !regularityTestPassed(nu())) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",toDouble(nu()));
+          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",nu);
 
-          auto trial = x + nu()*dx;
+          auto trial = x + nu*dx;
 
           auto norm_F_trial = norm(F_(trial));
 
           auto theta = norm_F_trial/norm_F_x;
-          muPrime = 0.5*norm_F_x*nu()*nu() / norm( F_(trial) - (1-nu)*F_(x) );
+          muPrime = 0.5*norm_F_x*nu*nu / norm( F_(trial) - (1-nu)*F_(x) );
 
           if( theta >= 1 )
           {
-            nu = min( muPrime , 0.5*nu() );
+            nu = min( muPrime , 0.5*nu );
             continue;
           }
 
           auto oldNu = nu;
           nu = min( 1. , muPrime );
-          if( nu >= 4*oldNu() )
+          if( nu >= 4*oldNu )
           {
-            nu = 4*oldNu();
+            nu = 4*oldNu;
             continue;
           }
 

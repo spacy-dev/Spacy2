@@ -118,7 +118,7 @@ namespace Spacy
        */
       C2Functional& operator=(const C2Functional& g)
       {
-        setNumberOfThreads(g.nThreads());
+        setNumberOfThreads(g.getNumberOfThreads());
         f_ = g.f_;
         spaces_ = g.spaces_;
         A_ = g.A_;
@@ -252,7 +252,7 @@ namespace Spacy
         copy(x,u);
 
         Assembler assembler(spaces_);
-        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , nThreads() );
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , getNumberOfThreads() );
         value_ = assembler.functional();
 
         old_X_f_ = x;
@@ -269,7 +269,7 @@ namespace Spacy
         copy(x,u);
 
         Assembler assembler(spaces_);
-        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
         copyFromCoefficientVector<VariableSetDescription>(CoefficientVector(assembler.rhs()),rhs_);
 
         old_X_df_ = x;
@@ -286,7 +286,7 @@ namespace Spacy
         copy(x,u);
 
         Assembler assembler(spaces_);
-        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , getNumberOfThreads() );
         A_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
 
         old_X_ddf_ = x;
