@@ -26,9 +26,7 @@ namespace Spacy
     {
       virtual ~AbstractBase(){}
       virtual Vector operator()(const Vector& x) const = 0;
-
-  //    Vector operator()(const LinearOperator& x) const;
-
+      virtual Real operator()(const LinearOperator& y) const = 0;
       virtual void add(const LinearOperator& y) = 0;
       virtual void subtract(const LinearOperator& y) = 0;
       virtual void multiply(double a) = 0;
@@ -57,7 +55,10 @@ namespace Spacy
         return this->get()(x);
       }
 
-  //    Vector operator()(const LinearOperator& x) const;
+      Real operator()(const LinearOperator& y) const final override
+      {
+        return this->get()(*::Spacy::target<Impl>(y));
+      }
 
       void add(const LinearOperator& y) final override
       {
@@ -134,7 +135,7 @@ namespace Spacy
     /// Apply operator.
     Vector operator()(const Vector& x) const;
 
-//    Vector operator()(const LinearOperator& x) const;
+    Real operator()(const LinearOperator& x) const;
 
     LinearOperator& operator+=(const LinearOperator& y);
 

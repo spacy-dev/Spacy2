@@ -3,7 +3,7 @@
 
 #include "lipschitzConstant.hh"
 
-#include <algorithm>;
+#include <algorithm>
 
 namespace Spacy
 {

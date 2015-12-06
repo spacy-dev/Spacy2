@@ -20,7 +20,7 @@ include(ConfigSafeGuards)
   
 # Set compiler flags
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y -coverage") #-Weffc++ ")
+  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y") #-Weffc++ ")
 endif()
 
 # Make relative paths absolute (needed later on)
@@ -45,6 +45,10 @@ option(BuildTest "BuildTest" OFF)
 option(Kaskade "Kaskade" OFF)
 
 if(BuildTest)
+  if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+    set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -coverage")
+    set(CMAKE_BUILD_TYPE Debug)
+  endif()
   include_directories(${PROJECT_SOURCE_DIR}/External/googletest ${PROJECT_SOURCE_DIR}/External/googletest/include )
   add_custom_target(git_update
                     COMMAND git submodule init

@@ -13,7 +13,13 @@ namespace Spacy
   Vector LinearOperator::operator()(const Vector& x) const
   {
     assert(base_);
-    return base_->operator ()(x);
+    return base_->operator()(x);
+  }
+
+  Real LinearOperator::operator()(const LinearOperator& y) const
+  {
+    assert(base_);
+    return base_->operator()(y);
   }
   
   std::function<Vector(const Vector&)> LinearOperator::solver() const

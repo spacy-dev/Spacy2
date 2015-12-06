@@ -44,6 +44,15 @@ namespace
   }
 }
 
+TEST(C1Functional,Assert)
+{
+  auto X = createMockBanachSpace();
+  C1Functional f;
+  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.d1(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.domain() , "" );
+}
+
 TEST(C1Functional,IsEmpty)
 {
   auto X = createMockBanachSpace();

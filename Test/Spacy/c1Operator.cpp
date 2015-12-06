@@ -69,6 +69,18 @@ namespace
   }
 }
 
+
+TEST(C1Operator,Assert)
+{
+  auto X = createMockBanachSpace();
+  C1Operator f;
+  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.d1(X.zeroVector(),X.zeroVector()) , "" );
+  ASSERT_DEATH( f.linearization(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.domain() , "" );
+  ASSERT_DEATH( f.range() , "" );
+}
+
 TEST(C1Operator,IsEmpty)
 {
   auto X = createMockBanachSpace();

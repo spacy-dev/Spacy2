@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "Spacy/vector.hh"
 #include "Spacy/linearOperator.hh"
 #include "Spacy/Spaces/realSpace.hh"
 #include "Test/mockSetup.hh"
@@ -20,6 +21,32 @@ namespace
     auto expected = Spacy::target<Mock::IndefiniteLinearSolver>(L) != nullptr;
     EXPECT_TRUE(expected);
   }
+}
+
+TEST(LinearOperator,Assert)
+{
+  auto X = createMockBanachSpace();
+  LinearOperator f;
+  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.solver() , "" );
+  ASSERT_DEATH( f.domain() , "" );
+  ASSERT_DEATH( f.range() , "" );
+  ASSERT_DEATH( -f , "" );
+
+  LinearOperator g;
+  ASSERT_DEATH( f*=1 , "" );
+  ASSERT_DEATH( f+=g , "" );
+  ASSERT_DEATH( f-=g , "" );
+  ASSERT_DEATH( f(g) , "" );
+
+  f = Mock::LinearOperator(1);
+  ASSERT_DEATH( f+=g , "" );
+  ASSERT_DEATH( f-=g , "" );
+  ASSERT_DEATH( f(g) , "" );
+
+  ASSERT_DEATH( g+=f , "" );
+  ASSERT_DEATH( g-=f , "" );
+  ASSERT_DEATH( g(f) , "" );
 }
 
 TEST(LinearOperator,IsEmpty)

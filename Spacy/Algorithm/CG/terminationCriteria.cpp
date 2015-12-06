@@ -28,7 +28,7 @@ namespace Spacy
       {
         scaledGamma2.push_back( alpha * rPINVr );
         energyNorm2 += alpha * rPINVr;
-        stepLength2 = abs(qAq);
+        stepLength2 = std::abs(qAq);
       }
 
       bool StrakosTichyEnergyError::vanishingStep() const noexcept

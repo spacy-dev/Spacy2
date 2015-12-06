@@ -4,7 +4,6 @@
 #include <gtest/gtest.h>
 
 #include "setup.hh"
-//#include "Spacy/Adapter/Kaskade/vector.hh"
 #include "Spacy/Adapter/Kaskade/vectorSpace.hh"
 #include "Spacy/Adapter/Kaskade/util.hh"
 #include "Spacy/vectorSpace.hh"
@@ -34,12 +33,12 @@ TEST(Kaskade,VectorCreator_CreateVector)
 
   auto v = V.zeroVector();
 
-  ASSERT_EQ( norm(v) , 0. );
+  ASSERT_DOUBLE_EQ( norm(v) , 0 );
 
   auto& kv = *v.target< Spacy::Kaskade::Vector<Descriptions> >();
 
   boost::fusion::at_c<0>(kv.get().data)[testIndex()] = testValue();
-  ASSERT_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
 }
 
 //TEST(Kaskade, ProductSpace_VectorCreator_Create)
@@ -61,8 +60,8 @@ TEST(Kaskade,SingleSpace_CopyVector)
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<0>(Spacy::target<Spacy::Kaskade::Vector<Descriptions> >(w)->get().data)[testIndex()] , testValue() );
-  ASSERT_EQ( at_c<0>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<0>(Spacy::target<Spacy::Kaskade::Vector<Descriptions> >(w)->get().data)[testIndex()] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<0>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 TEST(Kaskade,ProductSpace_CopyVector_StateVariable)
@@ -82,15 +81,15 @@ TEST(Kaskade,ProductSpace_CopyVector_StateVariable)
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 TEST(Kaskade,ProductSpace_CopyVector_ControlVariable)
@@ -110,15 +109,15 @@ TEST(Kaskade,ProductSpace_CopyVector_ControlVariable)
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<controlId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<controlId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 TEST(Kaskade,ProductSpace_CopyVector_StateVariable_PermutedVariableOrder)
@@ -138,15 +137,15 @@ TEST(Kaskade,ProductSpace_CopyVector_StateVariable_PermutedVariableOrder)
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 TEST(Kaskade,PrimalDualProductSpace_CopyVector_StateVariable)
@@ -169,15 +168,15 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_StateVariable)
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 
@@ -201,15 +200,15 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_StateVariable_PermutedVariableOrd
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<stateId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 TEST(Kaskade,PrimalDualProductSpace_CopyVector_ControlVariable)
@@ -232,15 +231,15 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_ControlVariable)
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_EQ( norm(v) , testValue() );
-  ASSERT_EQ( (x*x) , testValue()*testValue() );
-  ASSERT_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
+  ASSERT_DOUBLE_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
 
   auto w = V.zeroVector();
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_EQ( at_c<controlId>(u.data).coefficients()[testIndex()][0] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<controlId>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
 //TEST(Rn,AssignFromEigen_VectorXd)

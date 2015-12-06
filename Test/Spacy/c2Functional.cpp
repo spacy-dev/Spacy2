@@ -21,6 +21,18 @@ namespace
   }
 }
 
+
+TEST(C2Functional,Assert)
+{
+  auto X = createMockBanachSpace();
+  C2Functional f;
+  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.d1(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.d2(X.zeroVector(),X.zeroVector()) , "" );
+  ASSERT_DEATH( f.hessian(X.zeroVector()) , "" );
+  ASSERT_DEATH( f.domain() , "" );
+}
+
 TEST(C2Functional,IsEmpty)
 {
   auto X = createMockBanachSpace();
@@ -73,4 +85,12 @@ TEST(C2Functional,Move)
   test(f,X);
 }
 
+TEST(C2Functional,AccessHessian)
+{
+  auto X = createMockBanachSpace();
+  C2Functional f = Mock::C2Functional(X);
 
+  auto h = f.hessian(X.zeroVector());
+  auto value = is<Mock::LinearOperator>(h);
+  ASSERT_TRUE(value);
+}
