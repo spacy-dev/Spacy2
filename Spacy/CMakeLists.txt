@@ -2,12 +2,15 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${CMAKE_SOURCE_DIR}/cmake
     )
-    
-find_package(DOLFIN)
-if(DOLFIN_FOUND)
-  include_directories(${DOLFIN_INCLUDE_DIRS})
-  include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
-  aux_source_directory(Adapter/FEniCS SRC_LIST)
+
+option(Dolfin "Dolfin" OFF)
+if(Dolfin)
+  find_package(DOLFIN)
+  if(DOLFIN_FOUND)
+    include_directories(${DOLFIN_INCLUDE_DIRS})
+    include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
+    aux_source_directory(Adapter/FEniCS SRC_LIST)
+  endif()
 endif()
 find_package(Eigen3)
 if(EIGEN3_FOUND)
