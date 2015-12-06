@@ -18,9 +18,9 @@ namespace Spacy
     {
       bool StrakosTichyEnergyError::operator()() const
       {
-        auto tol = std::max( relativeAccuracy() , eps() );
-        if( verbosityLevel() > 1 ) std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
-        return scaledGamma2.size() > maxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
+        auto tol = std::max( getRelativeAccuracy() , eps() );
+        if( getVerbosityLevel() > 1 ) std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
+        return scaledGamma2.size() > getMaxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
       }
 
 
@@ -33,7 +33,7 @@ namespace Spacy
 
       bool StrakosTichyEnergyError::vanishingStep() const noexcept
       {
-        double tol = absoluteAccuracy()*absoluteAccuracy();
+        double tol = getAbsoluteAccuracy()*getAbsoluteAccuracy();
         if( energyNorm2 > tol) tol = std::min(tol,eps()*eps()*energyNorm2);
         return stepLength2 < tol;
       }
@@ -51,7 +51,7 @@ namespace Spacy
 
       bool StrakosTichyEnergyError::minimalDecreaseAchieved() const noexcept
       {
-        return squaredRelativeError() < minimalAccuracy()*minimalAccuracy();
+        return squaredRelativeError() < getMinimalAccuracy()*getMinimalAccuracy();
       }
 
       double StrakosTichyEnergyError::squaredRelativeError() const noexcept

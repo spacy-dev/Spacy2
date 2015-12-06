@@ -4,29 +4,10 @@
 #ifndef SPACY_UTIL_MIXIN_MAXSTEPS_HH
 #define SPACY_UTIL_MIXIN_MAXSTEPS_HH
 
-#include "mixinConnection.hh"
+#include "macros.hh"
 
-namespace Spacy
-{
-  namespace Mixin
-  {
-    /// %Mixin class for maximal number of steps/iterations.
-    class MaxSteps : public MixinConnection<MaxSteps>
-    {
-    public:
-      explicit MaxSteps(unsigned maxSteps = 100) noexcept;
+GENERATE_MIXIN_HEADER(unsigned,MaxSteps,1000)
 
-      void setMaxSteps(unsigned maxSteps);
-
-      unsigned maxSteps() const noexcept;
-
-      /// update function for observer pattern.
-      void update(MaxSteps* changedSubject);
-
-    private:
-      unsigned maxSteps_;
-    };
-  }
-}
+#include "undefMacros.hh"
 
 #endif // SPACY_UTIL_MIXIN_MAXSTEPS_HH

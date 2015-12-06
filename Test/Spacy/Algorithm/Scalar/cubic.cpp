@@ -9,7 +9,7 @@ TEST(Algorithm_Scalar_Cubic,CreateAndApply)
 {
   auto f = Spacy::Cubic(4,3,2,1);
 
-  ASSERT_DOUBLE_EQ( toDouble(f(2)) , 26 );
+  ASSERT_DOUBLE_EQ( f(2) , 26 );
 }
 
 

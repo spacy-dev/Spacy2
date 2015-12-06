@@ -64,27 +64,27 @@ namespace
   {
     void init(Vector& x, Vector& b)
     {
-      x0 = Real(1);
-      b0 = Real(2);
+      x0 = x;
+      b0 = b;
       initialized = true;
     }
 
     void reset(Vector& x, Vector& b)
     {
-      x0 = Real(3);
-      b0 = Real(4);
+      x0 = x;
+      b0 = b;
       resetted = true;
     }
 
-    void compute(Vector& x, Vector& b)
+    void compute()
     {
-      x += b;
+      x0 += b0;
     }
 
-    void postProcess(Vector& x)
+    Vector getFinalIterate()
     {
-      x0 = Real(5);
       postProcessed = true;
+      return x0;
     }
 
     std::string name() const
@@ -104,21 +104,21 @@ namespace
 
     void init(Vector& x, Vector& b)
     {
-      x0 = Real(1);
-      b0 = Real(2);
+      x0 = x;
+      b0 = b;
       initialized = true;
     }
 
     void reset(Vector& x, Vector& b)
     {
-      x0 = Real(3);
-      b0 = Real(4);
+      x0 = x;
+      b0 = b;
       resetted = true;
     }
 
-    void compute(Vector& x, Vector& b)
+    void compute()
     {
-      x += b;
+      x0 += b0;
     }
 
     bool terminate() const
@@ -132,10 +132,10 @@ namespace
       return doRestart;
     }
 
-    void postProcess(Vector& x)
+    Vector getFinalIterate()
     {
-      x0 = Real(5);
       postProcessed = true;
+      return x0;
     }
 
     std::string name() const
@@ -152,27 +152,27 @@ namespace
   {
     void init(Vector& x, Vector& b)
     {
-      x0 = Real(1);
-      b0 = Real(2);
+      x0 = x;
+      b0 = b;
       initialized = true;
     }
 
     void reset(Vector& x, Vector& b)
     {
-      x0 = Real(3);
-      b0 = Real(4);
+      x0 = x;
+      b0 = b;
       resetted = true;
     }
 
-    void compute(Vector& x, Vector& b)
+    void compute()
     {
-      x += b;
+      x0 += b0;
     }
 
-    void postProcess(Vector& x)
+    Vector getFinalIterate()
     {
-      x0 = Real(5);
       postProcessed = true;
+      return x0;
     }
 
     std::string name() const
@@ -296,13 +296,13 @@ TEST(GenericIterativeMethod,MixinParameters)
 {
   auto dummySolver = Generic::IterativeMethod<Step,MixinTerminationCriterion>(Step(),MixinTerminationCriterion());
   dummySolver.setAbsoluteAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().absoluteAccuracy() , testAccuracy() );
+  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getAbsoluteAccuracy() , testAccuracy() );
   dummySolver.setRelativeAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().relativeAccuracy() , testAccuracy() );
+  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getRelativeAccuracy() , testAccuracy() );
   dummySolver.setMinimalAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().minimalAccuracy() , testAccuracy() );
+  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getMinimalAccuracy() , testAccuracy() );
   dummySolver.setEps(testAccuracy());
   EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().eps() , testAccuracy() );
   dummySolver.setVerbosityLevel(2);
-  EXPECT_EQ( dummySolver.getTerminationCriterion().verbosityLevel() , 2 );
+  EXPECT_EQ( dummySolver.getTerminationCriterion().getVerbosityLevel() , 2 );
 }

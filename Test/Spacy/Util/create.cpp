@@ -19,7 +19,7 @@ TEST(Invoke,MakeQuadratic)
   auto args = std::make_tuple(3,2,1);
   auto f = Spacy::invoke(makeQuadratic,args);
 
-  ASSERT_DOUBLE_EQ( toDouble(f(2)) , 11 );
+  ASSERT_DOUBLE_EQ( f(2) , 11 );
 }
 
 TEST(Create,CreateQuadratic)
@@ -27,5 +27,5 @@ TEST(Create,CreateQuadratic)
   auto args = std::make_tuple(3,2,1);
   auto f = Spacy::create<Spacy::Quadratic>(args);
 
-  ASSERT_DOUBLE_EQ( toDouble(f(2)) , 11 );
+  ASSERT_DOUBLE_EQ( f(2) , 11 );
 }

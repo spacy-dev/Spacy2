@@ -28,14 +28,14 @@ namespace Spacy
       notify();
     }
 
-    unsigned Verbosity::verbosityLevel() const noexcept
+    unsigned Verbosity::getVerbosityLevel() const noexcept
     {
       return verbosityLevel_;
     }
 
     void Verbosity::update(Verbosity* changedSubject)
     {
-      setVerbosityLevel( changedSubject->verbosityLevel() );
+      setVerbosityLevel( changedSubject->getVerbosityLevel() );
     }
   }
 }

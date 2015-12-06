@@ -43,6 +43,6 @@ namespace Spacy
 
   void DampingFactor::set(Real nu)
   {
-    nu_ = ( abs(1-nu) < eps() ) ? 1. : nu;
+    nu_ = ( abs(1-nu) < eps() ) ? Real{1.} : nu;
   }
 }

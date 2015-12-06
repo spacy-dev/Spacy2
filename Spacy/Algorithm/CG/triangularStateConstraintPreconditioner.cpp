@@ -34,9 +34,9 @@ namespace Spacy
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
       auto& yd_ = cast_ref<ProductSpace::Vector>(y_.component(DUAL));
 
-      auto localAdjointIndex = creator<ProductSpace::VectorCreator>(yd_.space()).idMap(adjointIndex());
-      auto localControlIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(controlIndex());
-      auto localStateIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(stateIndex());
+      auto localAdjointIndex = creator<ProductSpace::VectorCreator>(yd_.space()).idMap(getAdjointIndex());
+      auto localControlIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(getControlIndex());
+      auto localStateIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(getStateIndex());
 
       yd_.component(localAdjointIndex) = adjointSolver_( xp_.component(localStateIndex) );
       xp_.component(localControlIndex) -= BT_( yd_.component(localAdjointIndex) );
@@ -58,8 +58,8 @@ namespace Spacy
       auto y = range().zeroVector();
       auto& y_ = cast_ref<ProductSpace::Vector>(y);
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
-      auto localStateIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(stateIndex());
-      auto localAdjointIndex = creator<ProductSpace::VectorCreator>(rhsd_.space()).idMap(adjointIndex());
+      auto localStateIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(getStateIndex());
+      auto localAdjointIndex = creator<ProductSpace::VectorCreator>(rhsd_.space()).idMap(getAdjointIndex());
 
       yp_.component(localStateIndex) = stateSolver_( rhsd_.component(localAdjointIndex) );
       return std::move(y);

@@ -6,9 +6,7 @@
 
 #include <vector>
 
-#include "Spacy/Util/Mixins/absoluteAccuracy.hh"
-#include "Spacy/Util/Mixins/relativeAccuracy.hh"
-#include "Spacy/Util/Mixins/minimalAccuracy.hh"
+#include "Spacy/Util/Mixins/accuracy.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 #include "Spacy/Util/Mixins/maxSteps.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"

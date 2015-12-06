@@ -9,6 +9,6 @@ TEST(Algorithm_Scalar_Quadratic,CreateAndApply)
 {
   auto f = Spacy::Quadratic(3,2,1);
 
-  ASSERT_DOUBLE_EQ( toDouble(f(2)) , 11 );
+  ASSERT_DOUBLE_EQ( f(2) , 11 );
 }
 

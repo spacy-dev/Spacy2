@@ -61,7 +61,7 @@ namespace Spacy
       auto x = x0;
 
       std::cout << "starting composite step solver" << std::endl;
-      for(unsigned step = 1; step < maxSteps(); ++step)
+      for(unsigned step = 1; step < getMaxSteps(); ++step)
       {
         normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
@@ -77,7 +77,7 @@ namespace Spacy
           std::cout << spacing << "Computing normal damping factor" << std::endl;
         }
         Real nu = computeNormalStepDampingFactor(norm_Dn);
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << ", |projected(Dn)| = " << norm(primalProjection(Dn)) << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << ", |projected(Dn)| = " << norm(primalProjection(Dn)) << std::endl;
 
         if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
         x += computeLagrangeMultiplier(x);
@@ -106,7 +106,7 @@ namespace Spacy
 
         if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
         if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
-        if( verbosityLevel() > 1) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
+        if( getVerbosityLevel() > 1) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
       } // end iteration
 
       return x;
@@ -125,28 +125,28 @@ namespace Spacy
 
     IndefiniteLinearSolver AffineCovariantSolver::makeTangentialSolver(Real nu, const Vector &x, bool lastStepWasUndamped) const
     {
-      Real trcgRelativeAccuracy = minimalAccuracy();
+      Real trcgRelativeAccuracy = getMinimalAccuracy();
       if( nu == 1 && lastStepWasUndamped )
       {
-        trcgRelativeAccuracy = max( relativeAccuracy() , min( minimalAccuracy() , omegaL() * norm_dx_old ) );
+        trcgRelativeAccuracy = max( getRelativeAccuracy() , min( getMinimalAccuracy() , omegaL() * norm_dx_old ) );
         if( norm_dx_old > 0 && lastStepWasUndamped )
-          trcgRelativeAccuracy = min( max( relativeAccuracy()/norm_dx_old , trcgRelativeAccuracy ) , minimalAccuracy() );
-        if( verbosityLevel() > 1 )
+          trcgRelativeAccuracy = min( max( getRelativeAccuracy()/norm_dx_old , trcgRelativeAccuracy ) , getMinimalAccuracy() );
+        if( getVerbosityLevel() > 1 )
         {
           std::cout << spacing2 << "relative accuracy = " << trcgRelativeAccuracy << std::endl;
-          std::cout << spacing2 << "absolute step length accuracy = " << relativeAccuracy()*norm(x) << std::endl;
+          std::cout << spacing2 << "absolute step length accuracy = " << getRelativeAccuracy()*norm(x) << std::endl;
         }
       }
 
       auto setParams = [this,&x](auto& solver)
       {
-        solver.setIterativeRefinements(iterativeRefinements());
-        solver.setVerbosityLevel( verbosityLevel() );
+        solver.setIterativeRefinements( getIterativeRefinements() );
+        solver.setVerbosityLevel( getVerbosityLevel() );
         if( norm(primalProjection(x)) > 0)
-          solver.setAbsoluteAccuracy( relativeAccuracy()*norm(primalProjection(x)) );
+          solver.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
         else
           solver.setAbsoluteAccuracy( eps() );
-        solver.setMaxSteps(maxSteps());
+        solver.setMaxSteps(getMaxSteps());
       };
 
   //    std::unique_ptr<CGSolver> trcg = nullptr;
@@ -169,7 +169,7 @@ namespace Spacy
   //    trcg.setIterativeRefinements(iterativeRefinements());
   //    trcg.setDetailedVerbosity(verbose_detailed());
   //    if( norm(primalProjection(x)) > 0)
-  //      trcg.setAbsoluteAccuracy( relativeAccuracy()*norm(primalProjection(x)) );
+  //      trcg.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
   //    else
   //      trcg.setAbsoluteAccuracy( eps() );
   //    trcg.setMaxSteps(maxSteps());
@@ -204,7 +204,7 @@ namespace Spacy
 //        cgSolver.setEps(eps());
 //        cgSolver.setRelativeAccuracy(eps());
 //        cgSolver.setVerbosity(verbose());
-//        cgSolver.setVerbosityLevel(verbosityLevel());
+//        cgSolver.setVerbosityLevel(getVerbosityLevel());
 //        cgSolver.setIterativeRefinements(iterativeRefinements());
 //        cgSolver.setMaxSteps(maxSteps());
 //        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
@@ -230,7 +230,7 @@ namespace Spacy
                                                         const Vector& x, const Vector& Dn, const Vector& Dt)
     {
       auto norm_Dt = norm(Dt);
-      if( verbosityLevel() > 1 ) std::cout << spacing2 << "|Dt| = " << norm_Dt << " vs. " << norm(primalProjection(Dt)) << std::endl;
+      if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|Dt| = " << norm_Dt << " vs. " << norm(primalProjection(Dt)) << std::endl;
       auto cubic = CompositeStep::makeCubicModel( nu, Dn, Dt , L_ , x , omegaL );
       auto tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubic);
 
@@ -245,20 +245,20 @@ namespace Spacy
       {
         if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) nu *= 0.5;
         else nu = computeNormalStepDampingFactor(norm_Dn);
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "nu = " << nu << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "nu = " << nu << std::endl;
 
         auto quadraticModel = CompositeStep::makeQuadraticModel(nu,Dn,Dt,L_,x);
         auto cubicModel = CompositeStep::makeCubicModel(nu, Dn, Dt, L_, x, omegaL);
 
         if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) tau *= 0.5;
         else tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubicModel);
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "tau = " << tau << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "tau = " << tau << std::endl;
         auto q_tau = quadraticModel(tau);
         std::cout << spacing2 << "q(tau) = " << q_tau << std::endl;
 
         dx = primalProjection(nu*Dn) + primalProjection(tau*Dt);
         norm_dx = norm(primalProjection(dx));
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
         auto trial = x + dx;
         std::cout << "|x| = " << norm(x) << ", |trial| = " << norm(trial) << ", norm(projected(trial)) = " << norm(primalProjection(trial)) << std::endl;
 
@@ -275,7 +275,7 @@ namespace Spacy
           updateOmegaC(norm_x, norm_dx, norm(ds));
           eta = updateOmegaL(trial + ds,q_tau,tau,norm_x,norm_dx,cubicModel);
 
-          if( verbosityLevel() > 1 ) std::cout << spacing2 << "|ds| = " << norm(ds) << std::endl;
+          if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|ds| = " << norm(ds) << std::endl;
         }
 
         regularityTest(nu,tau);
@@ -285,12 +285,12 @@ namespace Spacy
 
         if( acceptanceTest == AcceptanceTest::TangentialStepFailed && omegaL < (1 + 0.25 * (1 - minimalDecrease())) * omegaL.previous() )
         {
-          if( verbosityLevel() > 1 ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
+          if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Stagnating update of omegaL. Accepting Step." << std::endl;
           acceptanceTest = AcceptanceTest::Passed;
 
           if( !acceptableRelaxedDecrease( eta ) )
           {
-            if( verbosityLevel() > 1 ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
+            if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
             trial -= tau*Dt;
             dx -= tau*Dt;
             norm_dx = norm(dx);
@@ -302,7 +302,7 @@ namespace Spacy
           norm_dx_old = norm_dx;
         }
 
-        if( verbosityLevel() > 1 )
+        if( getVerbosityLevel() > 1 )
         {
           if( acceptanceTest == AcceptanceTest::Failed ) std::cout << spacing2 << "Acceptance test failed." << std::endl;
           if( acceptanceTest == AcceptanceTest::NormalStepFailed ) std::cout << spacing2 << "Acceptance test normal step failed." << std::endl;
@@ -325,7 +325,7 @@ namespace Spacy
       if( tangentialSolver && !tangentialSolver.isPositiveDefinite() ) return false;
       if( nu < 1 || tau < 1 ) return false;
 
-      if( norm_dx < relativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
+      if( norm_dx < getRelativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
       {
         if( verbose() ) std::cout << spacing << "Terminating (convergent)." << std::endl;
         return true;
@@ -345,7 +345,7 @@ namespace Spacy
       if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*contraction()/norm_dx )
         omegaC = 2*contraction()/norm_dx;
 
-      if( verbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
+      if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "theta = " << contraction() << ", omegaC: " << omegaC << std::endl;
     }
 
     Real AffineCovariantSolver::updateOmegaL(const Vector& soc, Real q_tau,
@@ -362,7 +362,7 @@ namespace Spacy
           omegaL < (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx) )
         omegaL = (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
 
-      if( verbosityLevel() > 1 )
+      if( getVerbosityLevel() > 1 )
       {
         std::cout << spacing2 << "predicted decrease: " << (cubic(tau)-cubic(0)) << std::endl;
         std::cout << spacing2 << "cubic(tau): " << cubic(tau) << ", cubic(0): " << cubic(0) << std::endl;
@@ -402,14 +402,14 @@ namespace Spacy
 
       if( !!L_ && !acceptableDecrease( eta ) )
       {
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting tangential step." << std::endl;
         tangentialStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::TangentialStepFailed;
       }
 
       if( !!N_ && !admissibleContraction() )
       {
-        if( verbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Rejecting normal step: " << contraction() << std::endl;
         normalStepMonitor = StepMonitor::Rejected;
         return AcceptanceTest::NormalStepFailed;
       }

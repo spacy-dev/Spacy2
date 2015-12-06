@@ -5,7 +5,7 @@
 #define SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH
 
 #include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/Mixins/relativeAccuracy.hh"
+#include "Spacy/Util/Mixins/accuracy.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"
 #include "Spacy/Util/Mixins/eps.hh"
 

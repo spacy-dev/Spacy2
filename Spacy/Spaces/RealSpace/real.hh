@@ -67,11 +67,9 @@ namespace Spacy
 
     Real& operator*=(const Real& y);
 
-    Real& operator*=(double a)
-    {
-      get() *= a;
-      return *this;
-    }
+    Real& operator*=(double a);
+
+    operator double() const;
 
     /// Apply as dual element (i.e. compute \f$x*y\f$).
     Real operator()(const Real& y) const;
@@ -82,19 +80,24 @@ namespace Spacy
 
   double& toDouble(Vector& x);
 
-  double& toDouble(Real& x);
-
-  double toDouble(const Real &x);
-
   /// Compute \f$x/y\f$.
   Real operator/(Real x, const Real& y);
 
   /// Compute \f$x/y\f$.
-  Real operator/(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator/(Arithmetic x, const Real& y)
+  {
+    return Real(x/y.get());
+  }
 
   /// Compute \f$x/y\f$.
-  Real operator/(const Real& x, double y);
-
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator/(Real x, Arithmetic y)
+  {
+    return x *= 1/y;
+  }
 
   /// Compute \f$x*y\f$.
   Real operator*(Real x, const Real& y);
@@ -125,10 +128,21 @@ namespace Spacy
   Real operator+(Real x, const Real& y);
 
   /// Compute \f$x+y\f$.
-  Real operator+(Real x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator+(Real x, Arithmetic y)
+  {
+    x.get() += y;
+    return x;
+  }
 
   /// Compute \f$x+y\f$.
-  Real operator+(double x, Real y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator+(Arithmetic x, Real y)
+  {
+    return y + x;
+  }
 
   /// Compute \f$x+y\f$.
   Real operator+(Real x, const Vector& y);
@@ -140,34 +154,77 @@ namespace Spacy
   Real operator-(Real x, const Real& y);
 
   /// Compute \f$x-y\f$.
-  Real operator-(Real x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator-(Real x, Arithmetic y)
+  {
+    x.get() -= y;
+    return x;
+  }
 
   /// Compute \f$x-y\f$.
-  Real operator-(double x, Real y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  Real operator-(Arithmetic x, Real y)
+  {
+    y *= -1;
+    y.get() += x;
+    return y;
+  }
 
   /// Evaluate \f$ x<y \f$.
   bool operator<(const Real& x, const Real& y);
 
   /// Evaluate \f$ x<y \f$.
-  bool operator<(const Real& x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator<(const Real& x, Arithmetic y)
+  {
+    return x.get() < y;
+  }
 
   /// Evaluate \f$ x<y \f$.
-  bool operator<(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator<(Arithmetic x, const Real& y)
+  {
+    return x < y.get();
+  }
 
   /// Evaluate \f$ x>y \f$.
   bool operator>(const Real& x, const Real& y);
 
   /// Evaluate \f$ x>y \f$.
-  bool operator>(const Real& x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator>(const Real& x, Arithmetic y)
+  {
+    return x.get() > y;
+  }
 
   /// Evaluate \f$ x>y \f$.
-  bool operator>(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator>(Arithmetic x, const Real& y)
+  {
+    return x > y.get();
+  }
 
   /// Evaluate \f$ x>=y \f$.
-  bool operator>=(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator>=(Arithmetic x, const Real& y)
+  {
+    return x >= y.get();
+  }
 
   /// Evaluate \f$ x>=y \f$.
-  bool operator>=(const Real& x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator>=(const Real& x, Arithmetic y)
+  {
+    return x.get() >= y;
+  }
 
   /// Evaluate \f$ x>=y \f$.
   bool operator>=(const Real& x, const Real& y);
@@ -176,16 +233,36 @@ namespace Spacy
   bool operator<=(const Real& x, const Real& y);
 
   /// Evaluate \f$ x<=y \f$.
-  bool operator<=(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator<=(Arithmetic x, const Real& y)
+  {
+    return x <= y.get();
+  }
 
   /// Evaluate \f$ x<=y \f$.
-  bool operator<=(const Real& x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator<=(const Real& x, Arithmetic y)
+  {
+    return x.get() <= y;
+  }
 
   /// Evaluate \f$ x==y \f$.
-  bool operator==(const Real& x, double y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator==(const Real& x, Arithmetic y)
+  {
+    return x.get() == y;
+  }
 
   /// Evaluate \f$ x==y \f$.
-  bool operator==(double x, const Real& y);
+  template <class Arithmetic,
+            class = std::enable_if_t<std::is_arithmetic<Arithmetic>::value> >
+  bool operator==(double x, const Real& y)
+  {
+    return x == y.get();
+  }
 
   /// Write to std::ostream.
   std::ostream& operator<<(std::ostream& os, const Real& x);

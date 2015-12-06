@@ -25,10 +25,10 @@ namespace Spacy
 
     LinearSolver::LinearSolver(const LinearSolver& other) :
       OperatorBase(other),
-      Mixin::AbsoluteAccuracy(other.absoluteAccuracy()),
-      Mixin::RelativeAccuracy(other.relativeAccuracy()),
+      Mixin::AbsoluteAccuracy(other.getAbsoluteAccuracy()),
+      Mixin::RelativeAccuracy(other.getRelativeAccuracy()),
       Mixin::Eps(other.eps()),
-      Mixin::Verbosity(other.verbosityLevel()),
+      Mixin::Verbosity(other.getVerbosityLevel()),
       cg(other.cg)
     {
       using namespace Mixin;

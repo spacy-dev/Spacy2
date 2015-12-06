@@ -91,6 +91,17 @@ namespace Spacy
     return *this;
   }
 
+  Real& Real::operator*=(double a)
+  {
+    get() *= a;
+    return *this;
+  }
+
+  Real::operator double() const
+  {
+    return get();
+  }
+
   Real Real::operator-() const
   {
     auto result = *this;
@@ -105,26 +116,16 @@ namespace Spacy
   }
 
 
-  double& toDouble(Real &x)
-  {
-    return x.get();
-  }
-
-  double toDouble(const Real &x)
-  {
-    return x.get();
-  }
-
   double toDouble(const Vector& x)
   {
     if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(const Vector& v)");
-    return toDouble(cast_ref<Real>(x));
+    return cast_ref<Real>(x);
   }
 
   double& toDouble(Vector& x)
   {
     if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(Vector& v)");
-    return toDouble(cast_ref<Real>(x));
+    return cast_ref<Real>(x).get();
   }
 
   Real operator/(Real x, const Real& y)
@@ -132,52 +133,15 @@ namespace Spacy
     return x *= 1./toDouble(y);
   }
 
-  Real operator/(double x, const Real& y)
-  {
-    return Real(x,y.space())/y;
-  }
-
-  Real operator/(const Real& x, double y)
-  {
-    return x/Real(y,x.space());
-  }
-
 
   Real operator*(Real x, const Real& y)
   {
-    toDouble(x) *= toDouble(y);
-    return x;
+    return x *= y;
   }
-
-//  Real operator*(double x, Real y)
-//  {
-//    toDouble(y) *= x;
-//    return y;
-//  }
-
-//  Real operator*(Real x, double y)
-//  {
-//    toDouble(x) *= y;
-//    return x;
-//  }
-
 
   Real operator+(Real x, const Real& y)
   {
-    toDouble(x) += toDouble(y);
-    return x;
-  }
-
-  Real operator+(Real x, double y)
-  {
-    toDouble(x) += y;
-    return x;
-  }
-
-  Real operator+(double x, Real y)
-  {
-    toDouble(y) += x;
-    return y;
+    return x += y;
   }
 
   Real operator+(Real x, const Vector& y)
@@ -193,109 +157,44 @@ namespace Spacy
 
   Real operator-(Real x, const Real& y)
   {
-    toDouble(x) -= toDouble(y);
-    return x;
-  }
-
-  Real operator-(Real x, double y)
-  {
-    toDouble(x) -= y;
-    return x;
-  }
-
-  Real operator-(double x, Real y)
-  {
-    y *= -1;
-    toDouble(y) += x;
-    return y;
+    return x -= y;
   }
 
 
   Vector operator*(Real a, Vector x)
   {
-    return x *= toDouble(a);
+    return x *= a;
   }
 
   Vector operator*(Vector x, Real a)
   {
-    return x *= toDouble(a);
+    return x *= a;
   }
 
 
   bool operator<(const Real& x, const Real& y)
   {
-    return toDouble(x) < toDouble(y);
+    return x.get() < y.get();
   }
 
   bool operator>(const Real& x, const Real& y)
   {
-    return toDouble(x) > toDouble(y);
-  }
-
-  bool operator<(const Real& x, double y)
-  {
-    return toDouble(x) < y;
-  }
-
-  bool operator<(double x, const Real& y)
-  {
-    return x < toDouble(y);
-  }
-
-  bool operator>(const Real& x, double y)
-  {
-    return toDouble(x) > y;
-  }
-
-  bool operator>(double x, const Real& y)
-  {
-    return x > toDouble(y);
-  }
-
-  bool operator>=(double x, const Real& y)
-  {
-    return x >= toDouble(y);
-  }
-
-  bool operator>=(const Real& x, double y)
-  {
-    return toDouble(x) >= y;
+    return x.get() > y.get();
   }
 
   bool operator>=(const Real& x, const Real& y)
   {
-    return toDouble(x) >= toDouble(y);
+    return x.get() >= y.get();
   }
 
   bool operator<=(const Real& x, const Real& y)
   {
-    return toDouble(x) <= toDouble(y);
-  }
-
-  bool operator<=(double x, const Real& y)
-  {
-    return x <= toDouble(y);
-  }
-
-  bool operator<=(const Real& x, double y)
-  {
-    return toDouble(x) <= y;
-  }
-
-  bool operator==(const Real& x, double y)
-  {
-    return toDouble(x) == y;
-  }
-
-  bool operator==(double x, const Real& y)
-  {
-    return x == toDouble(y);
+    return x.get() <= y.get();
   }
 
   std::ostream& operator<<(std::ostream& os, const Real& x)
   {
-    os << toDouble(x);
-    return os;
+    return os << x.get();
   }
 
   Real abs(Real x)
@@ -306,26 +205,26 @@ namespace Spacy
 
   Real max(const Real& x, const Real& y)
   {
-    return ( toDouble(x) > toDouble(y) ) ? x : y;
+    return ( x.get() > y.get() ) ? x : y;
   }
 
   Real min(const Real& x, const Real& y)
   {
-    return ( toDouble(x) < toDouble(y) ) ? x : y;
+    return ( x.get() < y.get() ) ? x : y;
   }
 
   Real pow(Real x, double y)
   {
-    return Real(computePow(toDouble(x),y),x.space());
+    return Real(computePow(x.get(),y),x.space());
   }
 
   Real sqrt(Real x)
   {
-    return Real(computeSqrt(toDouble(x)),x.space());
+    return Real(computeSqrt(x.get()),x.space());
   }
 
   Real cbrt(Real x)
   {
-    return Real(computeCbrt(toDouble(x)),x.space());
+    return Real(computeCbrt(x.get()),x.space());
   }
 }

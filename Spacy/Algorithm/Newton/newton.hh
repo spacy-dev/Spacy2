@@ -52,7 +52,7 @@ namespace Spacy
     {
       return newton(F,x0,
                     Damping(F),
-                    Terminate(F,p.relativeAccuracy(),p.verbosityLevel()>1),
+                    Terminate(F,p.getRelativeAccuracy(),p.getVerbosityLevel()>1),
                     p);
     }
   }

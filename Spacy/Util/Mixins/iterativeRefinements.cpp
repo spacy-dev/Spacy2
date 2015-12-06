@@ -3,28 +3,8 @@
 
 #include "iterativeRefinements.hh"
 
-namespace Spacy
-{
-  namespace Mixin
-  {
-    IterativeRefinements::IterativeRefinements(unsigned refinements)
-      : iterativeRefinements_(refinements)
-    {}
+#include "macros.hh"
 
-    void IterativeRefinements::setIterativeRefinements(unsigned refinements)
-    {
-      iterativeRefinements_ = refinements;
-      notify();
-    }
+GENERATE_MIXIN_SOURCE(unsigned,IterativeRefinements)
 
-    unsigned IterativeRefinements::iterativeRefinements() const
-    {
-      return iterativeRefinements_;
-    }
-
-    void IterativeRefinements::update(IterativeRefinements* changedSubject)
-    {
-      setIterativeRefinements( changedSubject->iterativeRefinements() );
-    }
-  }
-}
+#include "undefMacros.hh"

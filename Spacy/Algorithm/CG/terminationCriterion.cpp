@@ -26,7 +26,7 @@ namespace Spacy
     void TerminationCriterion::update(Real alpha, Real qAq, Real qPq, Real rPINVr)
     {
       assert(base_);
-      base_->update(toDouble(alpha),toDouble(qAq),toDouble(qPq),toDouble(rPINVr));
+      base_->update(alpha,qAq,qPq,rPINVr);
     }
 
     bool TerminationCriterion::vanishingStep() const

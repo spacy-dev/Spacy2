@@ -32,7 +32,7 @@ namespace Spacy
       void setVerbosityLevel(unsigned level) noexcept;
 
       /// Access verbosity level.
-      unsigned verbosityLevel() const noexcept;
+      unsigned getVerbosityLevel() const noexcept;
 
       /// update function for observer pattern.
       void update(Verbosity* changedSubject);

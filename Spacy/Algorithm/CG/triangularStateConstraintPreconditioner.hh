@@ -7,9 +7,7 @@
 #include "Spacy/linearSolver.hh"
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
-#include "Spacy/Util/Mixins/adjointIndex.hh"
-#include "Spacy/Util/Mixins/controlIndex.hh"
-#include "Spacy/Util/Mixins/stateIndex.hh"
+#include "Spacy/Util/Mixins/index.hh"
 #include "Spacy/Util/Base/operatorBase.hh"
 
 namespace Spacy

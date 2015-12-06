@@ -20,11 +20,10 @@ namespace Spacy
   namespace CompositeStep
   {
     /**
-     * @brief Constructs the quadratic model of a Lagrange functional.
+     * @brief Constructs a quadratic model of a functional.
      * @param nu normal step damping factor
      * @param dn normal step
      * @param dt tangential step
-     * @param L Lagrange functional
      * @param x current iterate
      *
      * Constructs a quadratic function \f$ q(t)=a+bt+ct^2\f$, with
@@ -47,7 +46,7 @@ namespace Spacy
      */
     Quadratic makeQuadraticNormModel(Real nu, const Vector& dn, const Vector& dt);
 
-    /// The cubic regularized model for AffineCovariantCompositeSteps.
+    /// The cubic regularized model for the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
     class CubicModel
     {
     public:
@@ -73,7 +72,7 @@ namespace Spacy
     };
 
     /**
-     * @brief Generate cubic regularized model for AffineCovariantCompositeSteps
+     * @brief Generate cubic regularized model for the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
      * @param nu normal step damping factor
      * @param dn normal step
      * @param dt tangential step

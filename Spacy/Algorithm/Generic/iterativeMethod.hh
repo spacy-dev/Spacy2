@@ -14,16 +14,6 @@
 #include "Spacy/Util/mixins.hh"
 #include "Spacy/Util/Exceptions/notConvergedException.hh"
 
-#define SPACY_MIXIN_LIST Mixin::RelativeAccuracy, Mixin::AbsoluteAccuracy, Mixin::MinimalAccuracy
-
-#ifdef SPACY_MIXIN_LIST
-  #define TMP_LIST SPACY_MIXIN_LIST
-  #undef SPACY_MIXIN_LIST
-  #define SPACY_MIXIN_LIST TMP_LIST, Mixin::Eps
-#else
-  #define SPACY_MIXIN_LIST Mixin::Eps
-#endif
-
 namespace Spacy
 {
   /** @addtogroup GenericGroup @{ */
@@ -100,14 +90,14 @@ namespace Spacy
        */
       Vector operator()(Vector x, Vector b)
       {
-        if( this->verbosityLevel() > 1) std::cout << "\n === " << Step::name() << " === " << std::endl;
+        if( this->getVerbosityLevel() > 1) std::cout << "\n === " << Step::name() << " === " << std::endl;
 
         init(x,b);
 
         auto step=1u;
-        for(; step<=maxSteps(); ++step)
+        for(; step<=getMaxSteps(); ++step)
         {
-          Step::compute(x,b);
+          Step::compute();
 
           if( terminate_ || Optional::terminate(*this) )
             break;
@@ -116,10 +106,10 @@ namespace Spacy
             reset(step,x,b);
         }
 
-        if( step > maxSteps() )
+        if( step > getMaxSteps() )
           throw Exception::NotConverged(Step::name());
 
-        Step::postProcess(x);
+        x = Step::getFinalIterate();
 
         return x;
       }

@@ -4,30 +4,10 @@
 #ifndef SPACY_MIXIN_ITERATIVE_REFINEMENTS_HH
 #define SPACY_MIXIN_ITERATIVE_REFINEMENTS_HH
 
-#include "mixinConnection.hh"
+#include "macros.hh"
 
-namespace Spacy
-{
-  namespace Mixin
-  {
-    /// %Mixin class for iterative refinements.
-    class IterativeRefinements : public MixinConnection<IterativeRefinements>
-    {
-    public:
-      explicit IterativeRefinements(unsigned refinements = 0);
+GENERATE_MIXIN_HEADER(unsigned,IterativeRefinements,0)
 
-      void setIterativeRefinements(unsigned refinements);
-
-      unsigned iterativeRefinements() const;
-
-      /// update function for observer pattern.
-      void update(IterativeRefinements* changedSubject) ;
-
-    private:
-      unsigned iterativeRefinements_;
-    };
-
-  }
-}
+#include "undefMacros.hh"
 
 #endif // SPACY_MIXIN_ITERATIVE_REFINEMENTS_HH

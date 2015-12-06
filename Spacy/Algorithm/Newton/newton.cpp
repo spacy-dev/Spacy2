@@ -32,7 +32,7 @@ namespace Spacy
       if( terminationCriterion(1.,x,x) )
         return x;
 
-      for(unsigned i = 1; i <= p.maxSteps(); ++i)
+      for(unsigned i = 1; i <= p.getMaxSteps(); ++i)
       {
         if( p.verbose() )
           std::cout << "\nIteration " << i << ": ";

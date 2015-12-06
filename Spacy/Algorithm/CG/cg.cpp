@@ -35,8 +35,8 @@ namespace Spacy
       result = Result::Failed;
 
       terminate.setEps(eps());
-      terminate.setRelativeAccuracy(relativeAccuracy());
-      terminate.setAbsoluteAccuracy(absoluteAccuracy());
+      terminate.setRelativeAccuracy(getRelativeAccuracy());
+      terminate.setAbsoluteAccuracy(getAbsoluteAccuracy());
 
       if( type_ == "CG" || type_ == "TCG" )
         return cgLoop(x,b);
@@ -87,14 +87,14 @@ namespace Spacy
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
-        if( verbosityLevel() > 1 ) std::cout << "Iteration: " << step << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << "Iteration: " << step << std::endl;
         auto Aq = A_(q);
         Real qAq = Aq(q);
         Real qPq = Pq(q);
         regularize(qAq,qPq);
 
         auto alpha = sigma/qAq;
-        if( verbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
         terminate.update(toDouble(alpha),toDouble(qAq),toDouble(qPq),toDouble(sigma));
 
@@ -114,7 +114,7 @@ namespace Spacy
         if (terminate())
         {
           if( verbose() ) std::cout << "    " << type_ << ": Terminating in iteration " << step << ".\n";
-          result = (step == maxSteps()) ? Result::Failed : Result::Converged;
+          result = (step == getMaxSteps()) ? Result::Failed : Result::Converged;
           break;
         }
 
@@ -139,7 +139,7 @@ namespace Spacy
     Vector Solver::Q(const Vector& r) const
     {
       auto Qr = P_(r);
-      for(auto i=0u; i<iterativeRefinements(); ++i)
+      for(auto i=0u; i<getIterativeRefinements(); ++i)
         Qr += P_(r-A_(Qr));
       return Qr;
     }
@@ -212,9 +212,9 @@ namespace Spacy
       if( type_ == "CG" || type_ == "TCG" ) return;
       Real oldTheta = theta > 0 ? theta : Real(eps());
       theta += (1-qAq)/abs(qPq);
-      if( verbosityLevel() > 1 ) std::cout << "Computed regularization parameter: " << theta << std::endl;
+      if( getVerbosityLevel() > 1 ) std::cout << "Computed regularization parameter: " << theta << std::endl;
       theta = min(max(minIncrease*oldTheta,theta),maxIncrease*oldTheta);
-      if( verbosityLevel() > 1 ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
+      if( getVerbosityLevel() > 1 ) std::cout << "Updating regularization parameter from " << oldTheta << " to " << theta << std::endl;
     }
 
     void Solver::adjustRegularizedResidual(Real alpha, const Vector& Pq, Vector& r) const
