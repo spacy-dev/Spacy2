@@ -13,23 +13,23 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${CMAKE_SOURCE_DIR}/cmake
     )
-set(DOLFIN_DIR ${PROJECT_SOURCE_DIR}/cmake)
-  
-# Do not allow in-source builds  
-include(ConfigSafeGuards)  
+
+# Do not allow in-source builds
+include(ConfigSafeGuards)
+
+option(BuildTest "BuildTest" OFF)
+option(Kaskade "Kaskade" OFF)
+option(Dolfin "Dolfin" OFF)
+
+if(BuildTest)
+  set(CMAKE_BUILD_TYPE Debug)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
+endif()
   
 # Set compiler flags
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
   set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic -std=c++1y") #-Weffc++ ")
 endif()
-
-# Make relative paths absolute (needed later on)
-foreach(p LIB BIN INCLUDE CMAKE)
-  set(var INSTALL_${p}_DIR)
-  if(NOT IS_ABSOLUTE "${${var}}")
-    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
-  endif()
-endforeach()
  
 # set up include-directories
 include_directories("${PROJECT_SOURCE_DIR}")
@@ -40,15 +40,7 @@ add_subdirectory(Spacy)
 # Does not debug auto, but is less sloppy than gcc
 # set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
 
-# enable/disable tests
-option(BuildTest "BuildTest" OFF)
-option(Kaskade "Kaskade" OFF)
-
 if(BuildTest)
-  if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -coverage")
-    set(CMAKE_BUILD_TYPE Debug)
-  endif()
   include_directories(${PROJECT_SOURCE_DIR}/External/googletest ${PROJECT_SOURCE_DIR}/External/googletest/include )
   add_custom_target(git_update
                     COMMAND git submodule init
@@ -62,6 +54,7 @@ if(BuildTest)
 
   set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest-all.cc  PROPERTIES GENERATED 1)
   set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest_main.cc PROPERTIES GENERATED 1)
+
   aux_source_directory(Test TEST_SRC_LIST)
   aux_source_directory(Test/Mock TEST_SRC_LIST)
   aux_source_directory(Test/Spacy TEST_SRC_LIST)
@@ -86,7 +79,7 @@ if(BuildTest)
 
   if(Kaskade)
     include_directories(/home/lars/Projects/OpenSource/Kaskade/Kaskade7.3
-                       /home/lars/libs/acml/acml5.3.1/gfortran64/include
+                        /home/lars/libs/acml/acml5.3.1/gfortran64/include
                         /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/include
                         /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include
                         /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/umfpack-5.4.0/include
@@ -101,6 +94,7 @@ if(BuildTest)
 
   add_executable(unit_tests ${TEST_SRC_LIST})
   target_link_libraries(unit_tests spacy gtest pthread)
+
   if(Kaskade)
     target_link_libraries(unit_tests kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)
 #    target_link_libraries(unit_tests kaskade dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX boost_signals boost_program_options boost_system boost_timer boost_thread boost_chrono acml)
@@ -108,12 +102,20 @@ if(BuildTest)
 
   include(CTest)
   enable_testing()
-
   add_test(unit ${PROJECT_BINARY_DIR}/unit_tests)
+
 endif()
 
 
 # export add_library
+# Make relative paths absolute (needed later on)
+foreach(p LIB BIN INCLUDE CMAKE)
+  set(var INSTALL_${p}_DIR)
+  if(NOT IS_ABSOLUTE "${${var}}")
+    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
+  endif()
+endforeach()
+
 # ==================
 export(TARGETS spacy FILE ${PROJECT_BINARY_DIR}/SpacyTargets.cmake)
 export(PACKAGE Spacy)

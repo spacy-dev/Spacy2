@@ -1,10 +1,6 @@
-set(CMAKE_MODULE_PATH
-    ${CMAKE_MODULE_PATH}
-    ${CMAKE_SOURCE_DIR}/cmake
-    )
-
-option(Dolfin "Dolfin" OFF)
 if(Dolfin)
+  # Tell cmake where to find DOLFINConfig.cmake
+  set(DOLFIN_DIR /home/lars/.hashdist/bld/dolfin/6qf3p654zczj/share/dolfin/cmake)
   find_package(DOLFIN)
   if(DOLFIN_FOUND)
     include_directories(${DOLFIN_INCLUDE_DIRS})
