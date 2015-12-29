@@ -6,10 +6,11 @@
 
 #include <Eigen/Dense>
 #include "Spacy/Adapter/Eigen/c1Operator.hh"
+#include "Spacy/Adapter/Eigen/c2Functional.hh"
 
 inline auto testDim()
 {
-  return 2;
+  return 2u;
 }
 
 inline auto testXValue()
@@ -41,6 +42,14 @@ inline auto testOperator(const Spacy::VectorSpace& domain, const Spacy::VectorSp
   return Spacy::Rn::C1Operator( [](const auto& x){ return 1.1*x; } ,
                                 [](const auto& x){ return 1.1*::Eigen::MatrixXd::Identity(x.size(),x.size()); },
                                 domain, range);
+}
+
+inline auto testFunctional(const Spacy::VectorSpace& domain)
+{
+  return Spacy::Rn::C2Functional( [](const ::Eigen::VectorXd& x){ return x.dot(x); } ,
+                                  [](const auto& x){ return 2*x; },
+                                  [](const auto& x){ return 2*Eigen::MatrixXd::Identity(x.size(),x.size()); },
+                                  domain);
 }
 
 

@@ -10,12 +10,10 @@
 
 namespace Spacy
 {
+  /** @addtogroup EigenGroup, VectorSpaceGroup @{ */
   namespace Rn
   {
-    /**
-     * @ingroup EigenGroup, VectorSpaceGroup
-     * @brief %Vector creator for %Rn, based on the %Eigen library.
-     */
+    /// %Vector creator for %Rn, based on the %Eigen library.
     using VectorCreator = Generic::VectorCreator< ::Eigen::VectorXd >;
 
     /**
@@ -23,6 +21,14 @@ namespace Spacy
      * @return @ref ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( VectorCreator{dim} , EuclideanScalarProduct{} )"
      */
     VectorSpace makeHilbertSpace(unsigned dim);
+
+    /// Convenient generation of a product space based on the %Eigen library.
+    VectorSpace makeHilbertSpace(const std::vector<unsigned>& dims);
+
+    /// Convenient generation of a primal-dual product space based on the %Eigen library.
+    VectorSpace makeHilbertSpace(const std::vector<unsigned>& dims,
+                                 const std::vector<unsigned>& primalIds,
+                                 const std::vector<unsigned>& dualIds);
   }
 }
 

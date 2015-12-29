@@ -19,7 +19,7 @@ before_install:
 script:
   - mkdir build
   - cd build
-  - cmake -DBuildTest=ON ..
+  - cmake -DBuildTest=ON -DCoverage=ON ..
   - make
   - lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
   - ./unit_tests
