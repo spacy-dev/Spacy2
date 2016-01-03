@@ -22,6 +22,8 @@ option(Coverage "Coverage" OFF)
 option(Kaskade "Kaskade" OFF)
 option(Dolfin "Dolfin" OFF)
 
+set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
+
 if(Coverage)
   set(CMAKE_BUILD_TYPE Debug)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -coverage")
@@ -41,44 +43,13 @@ if(BuildTest)
   add_subdirectory(Test)
 endif()
 
-# Does not debug auto, but is less sloppy than gcc
-# set(CMAKE_CXX_COMPILER "/usr/bin/clang++-3.5")
-
-#                  DEPENDS ${PROJECT_BINARY_DIR}/Test/unit_tests)
-
-# export add_library
-# Make relative paths absolute (needed later on)
-#foreach(p LIB BIN INCLUDE CMAKE)
-#  set(var INSTALL_${p}_DIR)
-#  if(NOT IS_ABSOLUTE "${${var}}")
-#    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
-#  endif()
-#endforeach()
-
-# ==================
-#export(TARGETS spacy FILE ${PROJECT_BINARY_DIR}/SpacyTargets.cmake)
-#export(PACKAGE Spacy)
-#file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}" "${PROJECT_SOURCE_DIR}")
-# ... for the build tree
-#include(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in)
-#set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
-#set(CONF_LIBRARY_DIR "${PROJECT_BINARY_DIR}/Spacy")
-#configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in
-#  "${PROJECT_BINARY_DIR}/SpacyConfig.cmake" @ONLY)
-# ... for the install tree
-#set(CONF_INCLUDE_DIRS "\${VSPACE_CMAKE_DIR}/${REL_INCLUDE_DIR}")
-#configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfig.cmake.in
-#  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/SpacyConfig.cmake" @ONLY)
-# ... for both
-#configure_file(${PROJECT_SOURCE_DIR}/cmake/SpacyConfigVersion.cmake.in
-#  "${PROJECT_BINARY_DIR}/SpacyConfigVersion.cmake" @ONLY)
- 
-# Install the SpacyConfig.cmake and SpacyConfigVersion.cmake
-#install(FILES
-#  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/SpacyConfig.cmake"
-#  "${PROJECT_BINARY_DIR}/SpacyConfigVersion.cmake"
-#  DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
- 
-# Install the export set for use with the install-tree
-#install(EXPORT SpacyTargets DESTINATION
-#  "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+# add a target to generate API documentation with Doxygen
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+add_custom_target(doc
+${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+COMMENT "Generating API documentation with Doxygen" VERBATIM
+)
+endif(DOXYGEN_FOUND)
