@@ -23,7 +23,7 @@ namespace Spacy
          copy(x_,x);
         return x;
 
-      return Vector(A_.lu().solve(cast_ref<Vector>(y).get() ) , domain_ );
+    //  return Vector(A_.lu().solve(cast_ref<Vector>(y).get() ) , domain_ );
     }
   }
 }
