@@ -1,5 +1,5 @@
 #include "linearOperator.hh"
-
+#include "util.hh"
 #include "linearSolver.hh"
 #include "vector.hh"
 #include "Spacy/vector.hh"
@@ -16,7 +16,14 @@ namespace Spacy
 
     ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const
     {
-      return Vector( get()*cast_ref<Vector>(dx).get(), dx.space() );
+// This copying is necessary to cover the case, where the Spacy Vector consists of serveral Eigen vectors		
+	 ::Eigen::VectorXd dx_;
+     copy(dx,dx_);           
+     ::Eigen::VectorXd x_=get()*dx_;
+     ::Spacy::Vector x=dx.space().zeroVector();
+     copy(x_,x);
+     return x;	
+  //    return Vector( get()*cast_ref<Vector>(dx).get(), dx.space() );
     }
 
     LinearSolver LinearOperator::solver() const
