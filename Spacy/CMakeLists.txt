@@ -14,6 +14,7 @@ if(EIGEN3_FOUND)
   aux_source_directory(Adapter/Eigen SRC_LIST)
 endif()
 
+#add_subdirectory(Adapter)
 aux_source_directory(. SRC_LIST)
 aux_source_directory(Adapter/Scalar SRC_LIST)
 aux_source_directory(Adapter/Generic SRC_LIST)
@@ -30,10 +31,13 @@ aux_source_directory(Util/Base SRC_LIST)
 aux_source_directory(Util/Mixins SRC_LIST)
 aux_source_directory(Util/Exceptions SRC_LIST)
 
+file(GLOB_RECURSE HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hh)
+
+foreach(HEADER ${HEADERS})
+  string(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
+  install(FILES ${HEADER} DESTINATION include/Spacy/${DIR})
+endforeach(HEADER HEADERS)
 
 add_library(spacy ${SRC_LIST})
-install(TARGETS spacy
-	EXPORT SpacyTargets
-	ARCHIVE DESTINATION "${PROJECT_BINARY_DIR}/Spacy" COMPONENT lib
-	PUBLIC_HEADER DESTINATION "${PROJECT_SOURCE_DIR}"
-	COMPONENT dev)
+
+install (TARGETS spacy DESTINATION lib/Spacy)

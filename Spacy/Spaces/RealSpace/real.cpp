@@ -52,7 +52,7 @@ namespace Spacy
 
   Real& Real::operator=(const Vector& y)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
+    if( !is<Real>(y) ) throw Exception::InvalidArgument("Real::operator=(const ::Spacy::Vector&)");
     get() = cast_ref<Real>(y).get();
     return *this;
   }
@@ -61,7 +61,7 @@ namespace Spacy
     : VectorBase(y.space()),
       Mixin::Get<double>(0)
   {
-    if( !is<Real>(y) ) throw InvalidArgumentException("Real::operator=(const ::Spacy::Vector&)");
+    if( !is<Real>(y) ) throw Exception::InvalidArgument("Real::operator=(const ::Spacy::Vector&)");
     *this = cast_ref<Real>(y);
   }
 
@@ -118,13 +118,13 @@ namespace Spacy
 
   double toDouble(const Vector& x)
   {
-    if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(const Vector& v)");
+    if( !is<Real>(x) ) throw Exception::InvalidArgument("Spacy::toDouble(const Vector& v)");
     return cast_ref<Real>(x);
   }
 
   double& toDouble(Vector& x)
   {
-    if( !is<Real>(x) ) throw InvalidArgumentException("Spacy::toDouble(Vector& v)");
+    if( !is<Real>(x) ) throw Exception::InvalidArgument("Spacy::toDouble(Vector& v)");
     return cast_ref<Real>(x).get();
   }
 
