@@ -60,9 +60,6 @@ namespace Spacy
   using TryMemFn_clone = decltype(std::declval<T>().clone());
 
   template <class T>
-  using TryMemFn_toFile = decltype(std::declval<T>().toFile(std::declval<std::string>()));
-
-  template <class T>
   using TryMemFn_clear = decltype(std::declval<T>().clear());
 
   template <class T>

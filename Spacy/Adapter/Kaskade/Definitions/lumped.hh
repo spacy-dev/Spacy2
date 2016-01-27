@@ -13,7 +13,7 @@ namespace Spacy
   {
 
     template <class Definition>
-    class LumpedDefinition : public FunctionalBase<Definition::type>
+    class LumpedDefinition : public ::Kaskade::FunctionalBase<Definition::type>
     {
     public:
       using Scalar = typename Definition::Scalar;
@@ -111,7 +111,7 @@ namespace Spacy
       };
 
       template <int row>
-      struct D1: public FunctionalBase<Definition::type>::template D1<row>
+      struct D1: public ::Kaskade::FunctionalBase<Definition::type>::template D1<row>
       {
         static bool const present   = Definition::template D1<row>::present;
         static bool const constant  = Definition::template D1<row>::constant;
@@ -119,7 +119,7 @@ namespace Spacy
       };
 
       template <int row, int col>
-      struct D2: public FunctionalBase<Definition::type>::template D2<row,col>
+      struct D2: public ::Kaskade::FunctionalBase<Definition::type>::template D2<row,col>
       {
         static bool const present = Definition::template D2<row,col>::present;
         static bool const symmetric = Definition::template D2<row,col>::symmetric;

@@ -120,6 +120,26 @@ namespace Spacy
         result += component(i)( y.component(i) );
       return result;
     }
+
+    Vector::iterator Vector::begin()
+    {
+      return components_.begin();
+    }
+
+    Vector::iterator Vector::end()
+    {
+      return components_.end();
+    }
+
+    Vector::const_iterator Vector::cbegin() const
+    {
+      return components_.cbegin();
+    }
+
+    Vector::const_iterator Vector::cend() const
+    {
+      return components_.cend();
+    }
   }
 
   ::Spacy::Vector& primalComponent(::Spacy::Vector& v)

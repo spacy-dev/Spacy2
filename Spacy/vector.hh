@@ -34,7 +34,6 @@ namespace Spacy
       virtual Vector negate() const = 0;
       virtual bool compare(const Vector& y) const = 0;
       virtual const VectorSpace& space() const = 0;
-      virtual void toFile(const std::string&) const = 0;
       virtual void copyFrom(const AbstractBase&) = 0;
       virtual std::unique_ptr<AbstractBase> clone() const = 0;
     };
@@ -85,11 +84,6 @@ namespace Spacy
         return this->get().space();
       }
 
-      void toFile(const std::string& filename) const final override
-      {
-        return this->get().toFile(filename);
-      }
-
       void copyFrom(const AbstractBase& y) final override
       {
         this->get() = dynamic_cast<const Base<Impl>&>(y).get();
@@ -138,8 +132,6 @@ namespace Spacy
 
     /// Access underlying space.
     const VectorSpace& space() const;
-
-    void toFile(const std::string& filename) const;
 
     /// Check if an implementation has been assigned.
     operator bool() const;

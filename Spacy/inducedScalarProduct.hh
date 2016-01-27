@@ -14,6 +14,24 @@ namespace Spacy
   /// @endcond
 
   /// Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
+  class AdaptiveInducedScalarProduct
+  {
+  public:
+    /**
+     * @brief Constructor.
+     * @param M operator defining the scalar product.
+     */
+    explicit AdaptiveInducedScalarProduct(std::function<LinearOperator()> operatorCreator);
+
+    /// Compute scalar product \f$(x,y)_M\f$.
+    Real operator()(const Vector& x, const Vector& y) const;
+
+  private:
+//    LinearOperator M_;
+    std::function<LinearOperator()> operatorCreator_;
+  };
+
+  /// Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
   class InducedScalarProduct
   {
   public:

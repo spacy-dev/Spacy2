@@ -254,14 +254,14 @@ namespace Spacy
       {}
 
       template <int row>
-      struct D1 : FunctionalBase<type>::template D1<row>
+      struct D1 : ::Kaskade::FunctionalBase<type>::template D1<row>
       {
         static bool const present   = true;
         static bool const constant  = false;
       };
 
       template <int row, int col>
-      struct D2 : FunctionalBase<type>::template D2<row,col>
+      struct D2 : ::Kaskade::FunctionalBase<type>::template D2<row,col>
       {
         static bool const present = false;
         static bool const symmetric = false;

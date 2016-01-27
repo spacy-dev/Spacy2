@@ -13,6 +13,17 @@
 
 namespace Spacy
 {
+  AdaptiveInducedScalarProduct::AdaptiveInducedScalarProduct(std::function<LinearOperator()> operatorCreator)
+    : operatorCreator_(std::move(operatorCreator))
+  {}
+
+  Real AdaptiveInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
+  {
+    return operatorCreator_()(y)(x);
+//    return M_(y)(x);
+  }
+
+
   InducedScalarProduct::InducedScalarProduct(LinearOperator M)
     : M_(std::move(M))
   {}
@@ -35,7 +46,11 @@ namespace Spacy
 //    x_.component(DUAL) *= 0;
 //    y_.component(DUAL) *= 0;
 
-    /* TODO PROJECTION */
+//    /* TODO PROJECTION */
+//    std::cout << "PISP y: " << norm(y) << std::endl;
+//    std::cout << "PISP My: " << norm(M_(y)) << std::endl;
+//    std::cout << "PISP x: " << norm(x) << std::endl;
+//    std::cout << "PISP xMy: " << M_(y)(x) << std::endl;
 
     return M_(y)(x);
   }

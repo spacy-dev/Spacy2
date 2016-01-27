@@ -52,8 +52,6 @@ namespace Spacy
         std::cout << "Iteration " << i << ", t = " << t << std::endl;
 
         x += integrator(t,x);
-
-        x.toFile("rothe_" + std::to_string(i) + ".pvd");
       }
 
       return x;

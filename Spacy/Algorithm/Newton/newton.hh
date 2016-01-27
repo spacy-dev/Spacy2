@@ -34,6 +34,7 @@ namespace Spacy
     Vector newton(const C1Operator& F, const Vector& x0,
                   const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
                   const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
+                  const std::function<bool(const Vector&,const Vector&)>& errorEstimator,
                   const Parameter p);
 
     /**
@@ -48,12 +49,12 @@ namespace Spacy
      * @see Newton::Parameter
      */
     template <class Damping, class Terminate>
-    Vector newton(const C1Operator& F, const Vector& x0, const Parameter& p)
+    Vector newton(const C1Operator& F, const Vector& x0, const Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {})
     {
       return newton(F,x0,
                     Damping(F),
                     Terminate(F,p.getRelativeAccuracy(),p.getVerbosityLevel()>1),
-                    p);
+                    errorEstimator,p);
     }
   }
 
@@ -96,7 +97,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
+  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine covariant %Newton method.
@@ -109,7 +110,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
+  Vector covariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine contravariant %Newton method.

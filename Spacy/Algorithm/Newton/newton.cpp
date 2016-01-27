@@ -22,6 +22,7 @@ namespace Spacy
     Vector newton(const C1Operator& F, const Vector& x0,
                   const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
                   const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
+                  const std::function<bool(const Vector&, const Vector&)>& errorEstimator,
                   const Parameter p)
     {
       using namespace std::chrono;
@@ -44,6 +45,15 @@ namespace Spacy
         x += nu*dx;
 
         if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;
+
+        if( nu == 1 )
+        {
+          if( errorEstimator && errorEstimator(x,dx) )
+          {
+            std::cout << "grid refinement" << std::endl;
+            continue;
+          }
+        }
 
         if( terminationCriterion(nu,x,dx) )
         {
@@ -68,14 +78,14 @@ namespace Spacy
   }
 
 
-  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter p)
+  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
   {
-    return Newton::newton<Newton::Damping::AffineCovariant,Newton::Termination::AffineCovariant>(F,x0,p);
+    return Newton::newton<Newton::Damping::AffineCovariant,Newton::Termination::AffineCovariant>(F,x0,p,errorEstimator);
   }
 
-  Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p)
+  Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
   {
-    return covariantNewton(F,F.domain().zeroVector(),p);
+    return covariantNewton(F,F.domain().zeroVector(),p,errorEstimator);
   }
 
 

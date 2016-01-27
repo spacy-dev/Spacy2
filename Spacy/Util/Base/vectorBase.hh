@@ -42,9 +42,6 @@ namespace Spacy
     /// Access underlying vector space.
     const VectorSpace& space() const;
 
-    /// Empty default implementation.
-    void toFile(const std::string&) const;
-
   private:
     const VectorSpace& space_;
   };

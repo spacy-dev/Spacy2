@@ -23,8 +23,8 @@ namespace Spacy
 
 
   /// Most fascinating type ever. Is always void.
-  template <class... Types>
-  using void_t = typename Detail::voider<Types...>::type;
+  template <class...>
+  using void_t = void;//typename Detail::voider<Types...>::type;
 
 
   template <class... Args>

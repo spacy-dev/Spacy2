@@ -31,7 +31,4 @@ namespace Spacy
   {
     return space_;
   }
-
-  void VectorBase::toFile(const std::string&) const
-  {}
 }

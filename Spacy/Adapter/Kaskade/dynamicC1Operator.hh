@@ -116,7 +116,7 @@ namespace Spacy
        */
       DynamicC1Operator& operator=(const DynamicC1Operator& B)
       {
-        setNumberOfThreads(B.nThreads());
+        setNumberOfThreads(B.getNumberOfThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
         A_ = B.A_;
@@ -220,7 +220,7 @@ namespace Spacy
         f_.setTime(t);
 
         Assembler assembler(spaces_);
-        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
 
         copyFromCoefficientVector<TestVariableSetDescription>(TestVectorImpl( assembler.rhs() ),rhs_);
 
@@ -240,7 +240,7 @@ namespace Spacy
         f_.setTime(t);
 
         Assembler assembler(spaces_);
-        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , nThreads() );
+        assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , getNumberOfThreads() );
         A_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
         old_X_dA_ = x;
         old_t_dA_ = t;
@@ -253,7 +253,7 @@ namespace Spacy
 
         MassAssembler assembler{spaces_};
         MassDefinition M{};
-        assembler.assemble(::Kaskade::linearization(M,u) , Assembler::MATRIX , nThreads() );
+        assembler.assemble(::Kaskade::linearization(M,u) , Assembler::MATRIX , getNumberOfThreads() );
         M_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
       }
 

@@ -71,7 +71,7 @@ namespace Spacy
        */
       Operator& operator=(const Operator& B)
       {
-        setNumberOfThreads(B.nThreads());
+        setNumberOfThreads(B.getNumberOfThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
         assembler_ = Assembler(spaces_);
@@ -117,7 +117,7 @@ namespace Spacy
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
 
         old_X_A_ = x;
       }

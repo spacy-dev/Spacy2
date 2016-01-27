@@ -54,16 +54,16 @@ namespace Spacy
   template <class Impl>
   using VectorConcept =
   std::integral_constant< bool ,
-// The following line does not compile with gcc-5.2.0
+// The following line does not work properly with gcc-5.2.0
 //    HasMemOp_callable<Impl,Impl,Real>::value &&
-    std::is_copy_constructible<Impl>::value &&
-    std::is_copy_assignable<Impl>::value &&
+// The following lines do not work properly with gcc-5.1.1
+//    std::is_copy_constructible<Impl>::value &&
+//    std::is_copy_assignable<Impl>::value &&
     HasMemOp_add<Impl>::value &&
     HasMemOp_subtract<Impl>::value &&
     HasMemOp_multiply<Impl>::value &&
     HasMemOp_negate<Impl>::value &&
-    HasMemFn_space<Impl>::value &&
-    IsVoid< Impl >::template apply<TryMemFn_toFile>::value
+    HasMemFn_space<Impl>::value
   >;
 }
 

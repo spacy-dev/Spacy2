@@ -154,3 +154,78 @@ TEST(ProductSpaceVector, ApplyAsDual)
   ASSERT_EQ( toDouble(dual(primal)) , 5. );
   ASSERT_THROW( primal(dual) , IncompatibleSpaceException );
 }
+
+TEST(ExtractComponentView, OneLayer)
+{
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<3; ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockHilbertSpace() ) );
+  auto X = ProductSpace::makeHilbertSpace(spaces);
+  auto x = X.zeroVector();
+  const auto y = X.zeroVector();
+
+  auto singleVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(x);
+  auto singleConstVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(y);
+
+  for(auto i=0u; i<spaces.size(); ++i)
+  {
+    ASSERT_EQ( spaces[i]->index() , singleVectorView[i].space().index() );
+    ASSERT_EQ( spaces[i]->index() , singleConstVectorView[i].space().index() );
+  }
+}
+
+TEST(ExtractComponentView, TwoLayers)
+{
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<3; ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockHilbertSpace() ) );
+  auto X = ProductSpace::makeHilbertSpace(spaces,{0,1},{2});
+  auto x = X.zeroVector();
+  const auto y = X.zeroVector();
+
+  auto singleVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(x);
+  auto singleConstVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(y);
+
+  for(auto i=0u; i<spaces.size(); ++i)
+  {
+    ASSERT_EQ( spaces[i]->index() , singleVectorView[i].space().index() );
+    ASSERT_EQ( spaces[i]->index() , singleConstVectorView[i].space().index() );
+  }
+}
+
+TEST(ExtractComponentView, ThreeLayers)
+{
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<3; ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockHilbertSpace() ) );
+
+  auto X = std::make_shared<VectorSpace>(ProductSpace::makeHilbertSpace(spaces,{0,1},{2}));
+  auto Y = std::make_shared<VectorSpace>(ProductSpace::makeHilbertSpace(spaces,{0,1},{2}));
+  auto Z = ProductSpace::makeHilbertSpace({X,Y});
+  auto x = Z.zeroVector();
+  const auto y = Z.zeroVector();
+
+  auto singleVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(x);
+  auto singleConstVectorView = ProductSpace::extractSingleComponentView<Mock::Vector>(y);
+
+  for(auto i=0u; i<spaces.size(); ++i)
+  {
+    ASSERT_EQ( spaces[i]->index() , singleVectorView[i].space().index() );
+    ASSERT_EQ( spaces[i]->index() , singleVectorView[i+spaces.size()].space().index() );
+    ASSERT_EQ( spaces[i]->index() , singleConstVectorView[i].space().index() );
+    ASSERT_EQ( spaces[i]->index() , singleConstVectorView[i+spaces.size()].space().index() );
+  }
+}
+
+TEST(ExtractComponentView,Throw)
+{
+  std::vector< std::shared_ptr<VectorSpace> > spaces;
+  for(auto i=0u; i<3; ++i)
+    spaces.push_back( std::make_shared<VectorSpace>( createMockHilbertSpace() ) );
+  auto X = ProductSpace::makeHilbertSpace(spaces);
+  auto x = X.zeroVector();
+  const auto y = X.zeroVector();
+
+  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(x) , InvalidArgumentException );
+  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(y) , InvalidArgumentException );
+}

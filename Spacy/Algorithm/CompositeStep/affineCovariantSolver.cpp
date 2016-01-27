@@ -13,6 +13,7 @@
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Spaces/ProductSpace/vector.hh"
 #include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
+#include "Spacy/Util/logger.hh"
 
 #include <cmath>
 #include <iostream>
@@ -37,6 +38,19 @@ namespace Spacy
       w_.component(PRIMAL) *= 0;
       return w;
     }
+
+
+    Logger<double> logNu("nu.log");
+    Logger<double> logTau("tau.log");
+    Logger<double> logOmegaC("omegaC.log");
+    Logger<double> logOmegaF("omegaf.log");
+    Logger<double> logThetaC("thetaC.log");
+    Logger<double> logEta("thetaL.log");
+    Logger<double> logDn("dn.log");
+    Logger<double> logDt("dt.log");
+    Logger<double> logDx("dx.log");
+    Logger<double> logCostFunctional("costFunctional.log");
+    Logger<bool> logConvexity("convex.log");
   }
 
 
@@ -59,13 +73,14 @@ namespace Spacy
     {
       auto lastStepWasUndamped = false;
       auto x = x0;
+      logCostFunctional(L_(primalProjection(x)));
 
       std::cout << "starting composite step solver" << std::endl;
       for(unsigned step = 1; step < getMaxSteps(); ++step)
       {
         normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
+//        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
 
         if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
         if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -77,6 +92,7 @@ namespace Spacy
           std::cout << spacing << "Computing normal damping factor" << std::endl;
         }
         Real nu = computeNormalStepDampingFactor(norm_Dn);
+
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << ", |projected(Dn)| = " << norm(primalProjection(Dn)) << std::endl;
 
         if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
@@ -98,6 +114,7 @@ namespace Spacy
 
         x += primalProjection(dx);
         if( getContraction() < 0.25 ) x += primalProjection(ds);
+        logCostFunctional(L_(primalProjection(x)));
 
         norm_x = norm(primalProjection(x));
 
@@ -222,6 +239,9 @@ namespace Spacy
       if( !N_ || !L_ ) return Vector(0*x);
       std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
       std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
+      auto tmp = L_.d1(x);
+      auto tmp2 = N_.d2(x,tmp);
+      std::cout << "lagrange multiplier rhs_xx: " << tmp2(tmp) << std::endl;
       std::cout << "lagrange multiplier rhs: " << norm(primalProjection(d1(L_,x))) << std::endl;
       return dualProjection( normalSolver( primalProjection(-d1(L_,x)) ) );
     }
@@ -256,7 +276,7 @@ namespace Spacy
         auto q_tau = quadraticModel(tau);
         std::cout << spacing2 << "q(tau) = " << q_tau << std::endl;
 
-        dx = primalProjection(nu*Dn) + primalProjection(tau*Dt);
+        dx = nu*Dn + tau*Dt;
         norm_dx = norm(primalProjection(dx));
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
         auto trial = x + dx;
@@ -317,11 +337,22 @@ namespace Spacy
       } // end while (damping factors)
       while( acceptanceTest != AcceptanceTest::Passed );
 
+      logNu(nu);
+      logTau(tau);
+      logOmegaC(omegaC);
+      logOmegaF(omegaL);
+      logDn(norm_Dn);
+      logDt(norm_Dt);
+      logDx(norm_dx);
+      logThetaC(norm(ds)/norm_dx);
+      logEta(eta);
       return std::make_tuple(tau,dx,ds,norm_x,norm_dx);
     }
 
     bool AffineCovariantSolver::convergenceTest(Real nu, Real tau, Real norm_x, Real norm_dx)
     {
+      logConvexity(tangentialSolver.isPositiveDefinite());
+
       if( tangentialSolver && !tangentialSolver.isPositiveDefinite() ) return false;
       if( nu < 1 || tau < 1 ) return false;
 

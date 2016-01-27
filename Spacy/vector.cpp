@@ -60,12 +60,6 @@ namespace Spacy
     return base_->space();
   }
 
-  void Vector::toFile(const std::string& filename) const
-  {
-    assert(base_);
-    return base_->toFile(filename);
-  }
-
   Vector::operator bool() const
   {
     return base_;
