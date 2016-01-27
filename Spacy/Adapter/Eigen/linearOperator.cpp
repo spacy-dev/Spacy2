@@ -19,7 +19,7 @@ namespace Spacy
     {
       ::Eigen::VectorXd dx_;
       copy(dx,dx_);
-      auto x_ = get() * dx_;
+      ::Eigen::VectorXd x_ = get() * dx_;
       auto x = dx.space().zeroVector();
       copy(x_,x);
       return x;
