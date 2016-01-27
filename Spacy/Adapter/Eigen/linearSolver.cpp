@@ -3,6 +3,7 @@
 #include "Spacy/Util/cast.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/vectorSpace.hh"
+#include "util.hh"
 #include "vector.hh"
 
 #include <utility>
@@ -16,7 +17,14 @@ namespace Spacy
 
     Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& y) const
     {
-      return Vector(A_.lu().solve(cast_ref<Vector>(y).get() ) , domain_ );
+      ::Eigen::VectorXd y_;
+      copy(y,y_);
+
+      ::Eigen::VectorXd x_ = A_.lu().solve(y_);
+
+      auto x = domain_.zeroVector();
+      copy(x_,x);
+      return x;
     }
   }
 }

@@ -103,7 +103,7 @@ namespace Spacy
 
   const VectorSpace& VectorSpace::dualSpace() const
   {
-    if( dualSpace_ == nullptr ) throw InvalidArgumentException("VectorSpace::dualSpace()");
+    if( dualSpace_ == nullptr ) throw Exception::InvalidArgument("VectorSpace::dualSpace()");
     return *dualSpace_;
   }
 
