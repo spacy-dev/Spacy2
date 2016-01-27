@@ -226,6 +226,6 @@ TEST(ExtractComponentView,Throw)
   auto x = X.zeroVector();
   const auto y = X.zeroVector();
 
-  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(x) , InvalidArgumentException );
-  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(y) , InvalidArgumentException );
+  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(x) , Exception::InvalidArgument );
+  ASSERT_THROW( ProductSpace::extractSingleComponentView<Real>(y) , Exception::InvalidArgument );
 }

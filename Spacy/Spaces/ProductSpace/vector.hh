@@ -158,7 +158,7 @@ namespace Spacy
         return;
       }
 
-      throw InvalidArgumentException("ProductSpace::Vector::extractSingleSpaceVectors");
+      throw Exception::InvalidArgument("ProductSpace::Vector::extractSingleSpaceVectors");
     }
 
     template <class SingleSpaceVector>
@@ -178,7 +178,7 @@ namespace Spacy
         return;
       }
 
-      throw InvalidArgumentException("ProductSpace::Vector::extractConstSingleSpaceVectors");
+      throw Exception::InvalidArgument("ProductSpace::Vector::extractConstSingleSpaceVectors");
     }
 
     template <class SingleSpaceVector>

@@ -3,7 +3,6 @@
 
 #include "vector.hh"
 
-#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 #include "Spacy/Util/cast.hh"
 
 #include "vectorSpace.hh"
