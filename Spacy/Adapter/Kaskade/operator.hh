@@ -117,7 +117,7 @@ namespace Spacy
 
         copy(x,u);
 
-        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , nThreads() );
+        assembler_.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
 
         old_X_A_ = x;
       }
