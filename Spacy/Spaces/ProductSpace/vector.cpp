@@ -3,7 +3,6 @@
 
 #include "vector.hh"
 
-#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
 #include "Spacy/Util/cast.hh"
 
 #include "vectorSpace.hh"
@@ -119,6 +118,26 @@ namespace Spacy
       for(auto i=0u; i<components_.size(); ++i)
         result += component(i)( y.component(i) );
       return result;
+    }
+
+    Vector::iterator Vector::begin()
+    {
+      return components_.begin();
+    }
+
+    Vector::iterator Vector::end()
+    {
+      return components_.end();
+    }
+
+    Vector::const_iterator Vector::cbegin() const
+    {
+      return components_.cbegin();
+    }
+
+    Vector::const_iterator Vector::cend() const
+    {
+      return components_.cend();
     }
   }
 

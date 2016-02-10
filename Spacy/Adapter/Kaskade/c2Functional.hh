@@ -206,17 +206,14 @@ namespace Spacy
         assembleHessian(x);
         return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
       }
-      /**
-       * @brief Access operator representing \f$f''\f$.
-       */
+
+      /// Access operator representing \f$f''\f$.
       const KaskadeOperator& A() const noexcept
       {
         return A_;
       }
 
-      /**
-       * @brief Access boost::fusion::vector of pointers to spaces.
-       */
+      /// Access boost::fusion::vector of pointers to spaces.
       const Spaces& spaces() const noexcept
       {
         return spaces_;
@@ -261,12 +258,27 @@ namespace Spacy
       /// Assemble discrete representation of \f$f'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( old_X_df_ && (old_X_df_==x) ) return;
+        using boost::fusion::at_c;
+//        if( old_X_df_ && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
+//        std::cout << "assembly1: " << x(x) << std::endl;
+//        std::cout << "assembly20: " << at_c<0>(u.data).coefficients()*at_c<0>(u.data).coefficients() << std::endl;
+//        std::cout << "assembly21: " << at_c<1>(u.data).coefficients()*at_c<1>(u.data).coefficients() << std::endl;
+//        std::cout << "assembly22: " << at_c<2>(u.data).coefficients()*at_c<2>(u.data).coefficients() << std::endl;
+//        std::cout << "first cast" << std::endl;
+//        const auto& pdps = cast_ref<ProductSpace::Vector>(x).component(0);
+//        std::cout << "second cast" << std::endl;
+//        const auto& pps = cast_ref<ProductSpace::Vector>(pdps).component(0);
+//        std::cout << "third cast" << std::endl;
+//        auto tmp = cast_ref< Vector<Detail::ExtractDescription_t<VariableSetDescription,0>> >( pps ).get();
+////        auto tmp = cast_ref< Vector<Detail::ExtractDescription_t<VariableSetDescription,1>> >( cast_ref<ProductSpace::Vector>( cast_ref<ProductSpace::Vector>(x).component(0) ).component(0) ).get();
+//        std::cout << "compute difference" << std::endl;
+//        at_c<0>(tmp.data) -= at_c<1>(u.data).coefficients();
+//        std::cout << "assembly3: " << at_c<0>(tmp.data)*at_c<0>(tmp.data) << std::endl;
 
         Assembler assembler(spaces_);
         assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );

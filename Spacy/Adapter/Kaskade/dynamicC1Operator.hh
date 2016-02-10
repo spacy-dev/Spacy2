@@ -116,7 +116,7 @@ namespace Spacy
        */
       DynamicC1Operator& operator=(const DynamicC1Operator& B)
       {
-        setNumberOfThreads(B.nThreads());
+        setNumberOfThreads(B.getNumberOfThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
         A_ = B.A_;

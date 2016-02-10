@@ -13,8 +13,6 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Spaces/productSpace.hh"
 #include "l2Product.hh"
-#include "vector.hh"
-
 namespace Spacy
 {
   /** @addtogroup KaskadeGroup
@@ -24,6 +22,7 @@ namespace Spacy
   namespace Kaskade
   {
     /// \cond
+    template <class> class Vector;
     template <class> class VectorCreator;
 
     namespace Detail
@@ -131,7 +130,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(x.component(j)) )
         {
-          boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data);
+          boost::fusion::at_c<i>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data).coefficients();
           return;
         }
 
@@ -149,7 +148,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(x.component(j)) )
         {
-          boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data);
+          boost::fusion::at_c<i>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(x.component(j)).get().data).coefficients();
           return;
         }
 
@@ -168,7 +167,7 @@ namespace Spacy
       {
         if( is< Vector< ExtractDescription_t<Description,i> > >(y.component(j)) )
         {
-          boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.component(j)).get().data) = boost::fusion::at_c<i>(x.data);
+          boost::fusion::at_c<0>(cast_ref< Vector< ExtractDescription_t<Description,i> > >(y.component(j)).get().data).coefficients() = boost::fusion::at_c<i>(x.data);
           return;
         }
 
@@ -273,7 +272,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(x) )
       {
-        boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data);
+        boost::fusion::at_c<0>(y.data).coefficients() = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data).coefficients();
         return;
       }
 
@@ -290,7 +289,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(x) )
       {
-        boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data);
+        boost::fusion::at_c<0>(y.data) = boost::fusion::at_c<0>(cast_ref< Vector< Description > >(x).get().data).coefficients();
         return;
       }
 
@@ -308,7 +307,7 @@ namespace Spacy
     {
       if( is< Vector< Description > >(y) )
       {
-        boost::fusion::at_c<0>(cast_ref< Vector< Description > >(y).get().data) = boost::fusion::at_c<0>(x.data);
+        boost::fusion::at_c<0>(cast_ref< Vector< Description > >(y).get().data).coefficients() = boost::fusion::at_c<0>(x.data);
         return;
       }
 
@@ -317,6 +316,52 @@ namespace Spacy
         Detail::Copy<0,Description::noOfVariables>::template fromCoefficientVector<Description>(x,cast_ref<ProductSpace::Vector>(y));
         return;
       }
+    }
+
+    template <int n>
+    struct CoefficientsToVariableSet
+    {
+      template <class CoefficientVector, class VariableSet>
+      static void apply(const CoefficientVector& x, VariableSet& y)
+      {
+        boost::fusion::at_c<n>(y.data).coefficients() = boost::fusion::at_c<n>(x.data);
+      }
+    };
+
+    template <>
+    struct CoefficientsToVariableSet<-1>
+    {
+      template <class CoefficientVector, class VariableSet>
+      static void apply(const CoefficientVector&, VariableSet&){}
+    };
+
+    template <int n>
+    struct VariableSetToCoefficients
+    {
+      template <class VariableSet, class CoefficientVector>
+      static void apply(const VariableSet& x, CoefficientVector& y)
+      {
+        boost::fusion::at_c<n>(y.data) = boost::fusion::at_c<n>(x.data).coefficients();
+      }
+    };
+
+    template <>
+    struct VariableSetToCoefficients<-1>
+    {
+      template <class VariableSet, class CoefficientVector>
+      static void apply(const VariableSet& x, CoefficientVector& y){}
+    };
+
+    template <class CoefficientVector, class VariableSet>
+    void coefficientsToVariableSet(const CoefficientVector& x, VariableSet& y)
+    {
+      CoefficientsToVariableSet<VariableSet::Descriptions::noOfVariables-1>::apply(x,y);
+    }
+
+    template <class VariableSet, class CoefficientVector>
+    void variableSetToCoefficients(const VariableSet& x, CoefficientVector& y)
+    {
+      VariableSetToCoefficients<VariableSet::Descriptions::noOfVariables-1>::apply(x,y);
     }
   }
   /** @} */

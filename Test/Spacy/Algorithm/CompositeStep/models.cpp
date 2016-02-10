@@ -14,37 +14,37 @@ namespace
 {
   struct TestC2Functional
   {
-    TestC2Functional(const Spacy::VectorSpace& space)
+    TestC2Functional(const VectorSpace& space)
       : domain_(&space)
     {}
 
-    Spacy::Real operator()(const Spacy::Vector& x) const
+   Real operator()(const Vector& x) const
     {
-      return Real(toDouble(x)*toDouble(x));
+      return x*x;
     }
 
-    Spacy::Vector d1(const Spacy::Vector& x) const
+    Vector d1(const Vector& x) const
     {
       return 2*x;
     }
 
-    Spacy::Vector d2(const Spacy::Vector& x, const Spacy::Vector& dx) const
+    Vector d2(const Vector& x, const Vector& dx) const
     {
       return 2*dx;
     }
 
-    LinearOperator hessian(const Spacy::Vector&) const
+    LinearOperator hessian(const Vector&) const
     {
       return Mock::LinearOperator();
     }
 
-    const Spacy::VectorSpace& domain() const
+    const VectorSpace& domain() const
     {
       return *domain_;
     }
 
   private:
-    const Spacy::VectorSpace* domain_;
+    const VectorSpace* domain_;
   };
 }
 

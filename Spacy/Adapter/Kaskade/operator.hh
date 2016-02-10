@@ -71,7 +71,7 @@ namespace Spacy
        */
       Operator& operator=(const Operator& B)
       {
-        setNumberOfThreads(B.nThreads());
+        setNumberOfThreads(B.getNumberOfThreads());
         f_ = B.f_;
         spaces_ = B.spaces_;
         assembler_ = Assembler(spaces_);

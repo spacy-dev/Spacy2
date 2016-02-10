@@ -38,6 +38,7 @@ namespace Spacy
       using VectorImpl = typename Description::template CoefficientVectorRepresentation<>::type;
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
+      using VariableSet = typename Description::VariableSet;
 
     public:
       /**
@@ -46,27 +47,33 @@ namespace Spacy
        */
       Vector(const VectorSpace& space)
         : VectorBase(space),
+          variableSet_( creator< VectorCreator<Description> >(space).get() ),
           description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).get()) ),
-          v_( Description::template CoefficientVectorRepresentation<>::init( description_->spaces ))
+          v_( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ))
       {}
 
-      /// Assign from coefficient vector of %Kaskade 7.
-      Vector& operator=(const typename Description::template CoefficientVectorRepresentation<>::type& v)
+//      /// Assign from coefficient vector of %Kaskade 7.
+//      Vector& operator=(const typename Description::template CoefficientVectorRepresentation<>::type& v)
+//      {
+//        variableSet_
+////        v_ = v;
+//        return *this;
+//      }
+
+      /// Access coefficient vector.
+      VariableSet& get()
       {
-        v_ = v;
-        return *this;
+//        v_ = VectorImpl(variableSet_);
+//        return v_;
+        return variableSet_;
       }
 
       /// Access coefficient vector.
-      VectorImpl& get()
+      const VariableSet& get() const
       {
-        return v_;
-      }
-
-      /// Access coefficient vector.
-      const VectorImpl& get() const
-      {
-        return v_;
+//        v_ = VectorImpl(variableSet_);
+//        return v_;
+        return variableSet_;
       }
 
 
@@ -77,28 +84,27 @@ namespace Spacy
        */
       Real operator()(const Vector& y) const
       {
-        return get() * y.get();
+        VectorImpl v( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
+        VectorImpl w( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
+        variableSetToCoefficients(get(),v);
+        variableSetToCoefficients(y.get(),w);
+        return v*w;
+//        return get() * y.get();
+//        auto v = VectorImpl(variableSet_), w = VectorImpl(variableSet_);
+//        return v*w;
       }
-
       //      Vector& axpy(double a, const AbstractVector& y)
       //      {
       //        v_.axpy(a,castTo< Vector<Description> >(y).v_);
       //        return *this;
       //      }
 
-      void toFile(const std::string& filename) const
-      {
-//        typename Description::VariableSet x(*description_);
-//        copy(*this,x);
-//        ::Kaskade::writeVTKFile(boost::fusion::at_c<0>(description_->spaces)->gridManager().grid().leafGridView(),
-//                                x,
-//                                filename,::Kaskade::IoOptions{},
-//                                1);//at_c<0>(spaces_)->mapper().getOrder());
-      }
-
     private:
+      template <class Desc>
+      friend void writeVTK(const Vector<Desc>& x, const std::string& fileName);
+      VariableSet variableSet_;
       std::shared_ptr<Description> description_;
-      VectorImpl v_;
+      mutable VectorImpl v_;
     };
   }
 }

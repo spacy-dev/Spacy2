@@ -16,14 +16,12 @@ namespace Spacy
 
     ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const
     {
-// This copying is necessary to cover the case, where the Spacy Vector consists of serveral Eigen vectors		
-	 ::Eigen::VectorXd dx_;
-     copy(dx,dx_);           
-     ::Eigen::VectorXd x_=get()*dx_;
-     ::Spacy::Vector x=dx.space().zeroVector();
-     copy(x_,x);
-     return x;	
-  //    return Vector( get()*cast_ref<Vector>(dx).get(), dx.space() );
+      ::Eigen::VectorXd dx_;
+      copy(dx,dx_);
+      ::Eigen::VectorXd x_ = get() * dx_;
+      auto x = dx.space().zeroVector();
+      copy(x_,x);
+      return x;
     }
 
     LinearSolver LinearOperator::solver() const
