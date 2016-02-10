@@ -44,10 +44,34 @@ namespace Spacy
   {
     enum class AffineCovariantSolver::AcceptanceTest{ Passed, Failed, LeftAdmissibleDomain, TangentialStepFailed, NormalStepFailed };
 
-    AffineCovariantSolver::AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain)
-      : N_(std::move(N)),
+    AffineCovariantSolver::AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain, std::function<Vector(const Vector&, const Vector&) > retraction)
+      :  retraction_(retraction),
+        dualUpdate_(linearRetraction),
+        N_(std::move(N)),
         L_(std::move(L)),
-        domain_(domain)
+        domain_(domain),
+        chartSpace_(domain)
+    {}
+
+    AffineCovariantSolver::AffineCovariantSolver(C2Functional N, C2Functional L, 
+		VectorSpace& totalSpace, VectorSpace& chartSpace, 
+		std::function<Vector(const Vector&, const Vector&) > retraction, std::function<Vector(const Vector&, const Vector&) > dualUpdate)
+      :  retraction_(retraction),
+         dualUpdate_(dualUpdate),
+        N_(std::move(N)),
+        L_(std::move(L)),
+        domain_(totalSpace),
+        chartSpace_(chartSpace)
+    {}
+
+
+    AffineCovariantSolver::AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain)
+      : retraction_(linearRetraction),
+        dualUpdate_(linearRetraction),
+        N_(std::move(N)),
+        L_(std::move(L)),
+        domain_(domain),
+        chartSpace_(domain)
     {}
 
     Vector AffineCovariantSolver::operator()()
@@ -65,7 +89,7 @@ namespace Spacy
       {
         normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
+        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(x) ) );
 
         if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
         if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
@@ -80,7 +104,7 @@ namespace Spacy
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << ", |projected(Dn)| = " << norm(primalProjection(Dn)) << std::endl;
 
         if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
-        x += computeLagrangeMultiplier(x);
+        x = updateLagrangeMultiplier(x);
 
         if( verbose() ) std::cout << spacing << "Computing tangential step." << std::endl;
         auto Dt = computeTangentialStep(nu,x,Dn,lastStepWasUndamped);
@@ -96,8 +120,8 @@ namespace Spacy
         }
         std::tie(tau,dx,ds,norm_x,norm_dx) = computeCompositeStep( nu , norm_Dn , x , Dn , Dt );
 
-        x += primalProjection(dx);
-        if( getContraction() < 0.25 ) x += primalProjection(ds);
+        if( getContraction() < 0.25 ) x = retractPrimal(x,dx+ds);
+        else x = retractPrimal(x,dx);
 
         norm_x = norm(primalProjection(x));
 
@@ -114,7 +138,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeTangentialStep(Real nu, const Vector &x, const Vector& dn, bool lastStepWasUndamped) const
     {
-      if( !L_ ) return Vector(0*x);
+      if( !L_ ) return chartSpace_.zeroVector();
 
       tangentialSolver = makeTangentialSolver(nu,x,lastStepWasUndamped);
 
@@ -166,14 +190,21 @@ namespace Spacy
   //    if( trcg == nullptr )
        auto trcg = makeTRCGSolver( L_.hessian(x) , normalSolver ,
                                    toDouble(trcgRelativeAccuracy) , eps(), verbose() );
-  //    trcg.setIterativeRefinements(iterativeRefinements());
-  //    trcg.setDetailedVerbosity(verbose_detailed());
-  //    if( norm(primalProjection(x)) > 0)
-  //      trcg.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
-  //    else
-  //      trcg.setAbsoluteAccuracy( eps() );
-  //    trcg.setMaxSteps(maxSteps());
+    //  trcg.setIterativeRefinements(iterativeRefinements());
+    //  trcg.setDetailedVerbosity(verbose_detailed());
+     trcg.setRelativeAccuracy( getRelativeAccuracy() );
+     if( norm(primalProjection(x)) > 0)
+        trcg.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
+     else
+        trcg.setAbsoluteAccuracy( eps() );
+     // trcg.setMaxSteps(maxSteps());
        setParams(trcg);
+        if( getVerbosityLevel() > 1 )
+        {
+          std::cout << spacing2 << "relative accuracy = " << getRelativeAccuracy() << std::endl;
+          std::cout << spacing2 << "absolute step length accuracy = " << getRelativeAccuracy()*norm(x) << std::endl;
+        }
+       
       return IndefiniteLinearSolver(trcg);
       //return std::move(trcg);
   //    return std::unique_ptr<IndefiniteLinearSolver>( trcg.release() );
@@ -189,7 +220,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeSimplifiedNormalStep(const Vector &trial) const
     {
-      if( !N_ ) return Vector(0*trial);
+      if( !N_ ) return chartSpace_.zeroVector();
       return computeMinimumNormCorrection(trial);
     }
 
@@ -197,7 +228,7 @@ namespace Spacy
     {
       auto rhs = dualProjection(-d1(L_,x));
       std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
-      Vector dn0 = 0*x;
+      auto dn0 = chartSpace_.zeroVector();
 //      if( is<CG::LinearSolver>(normalSolver) )
 //      {
 //        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
@@ -217,13 +248,13 @@ namespace Spacy
       return dn0 + primalProjection( normalSolver( rhs ) );
     }
 
-    Vector AffineCovariantSolver::computeLagrangeMultiplier(const Vector& x) const
+    Vector AffineCovariantSolver::updateLagrangeMultiplier(const Vector& x) const
     {
-      if( !N_ || !L_ ) return Vector(0*x);
-      std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
-      std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
+      if( !N_ || !L_ ) return chartSpace_.zeroVector();
+      //std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
+      //std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
       std::cout << "lagrange multiplier rhs: " << norm(primalProjection(d1(L_,x))) << std::endl;
-      return dualProjection( normalSolver( primalProjection(-d1(L_,x)) ) );
+      return dualUpdate_(x,dualProjection( normalSolver( primalProjection(-d1(L_,x)) ) ) );
     }
 
     std::tuple<Real, Vector, Vector, Real, Real> AffineCovariantSolver::computeCompositeStep(Real& nu, Real norm_Dn,
@@ -259,7 +290,7 @@ namespace Spacy
         dx = primalProjection(nu*Dn) + primalProjection(tau*Dt);
         norm_dx = norm(primalProjection(dx));
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
-        auto trial = x + dx;
+        auto trial = retractPrimal(x,dx);
         std::cout << "|x| = " << norm(x) << ", |trial| = " << norm(trial) << ", norm(projected(trial)) = " << norm(primalProjection(trial)) << std::endl;
 
         if( !domain_.isAdmissible(trial) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
@@ -267,13 +298,14 @@ namespace Spacy
         {
           if( verbose() ) std::cout << spacing << "Computing simplified normal correction." << std::endl;
           ds = computeSimplifiedNormalStep(trial);
+          auto trialplus = retractPrimal(x,dx+ds);
           std::cout << "ds1: " << norm(ds) << " vs. " << norm(primalProjection(ds)) << std::endl;
           ds += ( nu - 1 ) * Dn;
           std::cout << "ds2: " << norm(ds) << std::endl;
-          std::cout << "soc: " << norm(trial+ds) << std::endl;
+          std::cout << "soc: " << norm(trialplus) << std::endl;
 
           updateOmegaC(norm_x, norm_dx, norm(ds));
-          eta = updateOmegaL(trial + ds,q_tau,tau,norm_x,norm_dx,cubicModel);
+          eta = updateOmegaL(trialplus,q_tau,tau,norm_x,norm_dx,cubicModel);
 
           if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|ds| = " << norm(ds) << std::endl;
         }
@@ -291,8 +323,8 @@ namespace Spacy
           if( !acceptableRelaxedDecrease( eta ) )
           {
             if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "Ignoring tangential step." << std::endl;
-            trial -= tau*Dt;
             dx -= tau*Dt;
+            trial = retractPrimal(x,dx);
             norm_dx = norm(dx);
           }
         }
@@ -374,6 +406,12 @@ namespace Spacy
 
       return eta;
     }
+    Vector AffineCovariantSolver::retractPrimal(const Vector& origin, const Vector& increment) const
+    {
+		auto result = dualProjection(origin);
+		result += primalProjection(retraction_(primalProjection(origin),primalProjection(increment)));
+		return result;
+	}
 
 
     Real AffineCovariantSolver::computeNormalStepDampingFactor(Real norm_Dn) const
