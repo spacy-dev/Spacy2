@@ -1,0 +1,4 @@
+#!/bin/bash
+
+emtypen_path=/home/lars/Projects/Spacy/Scripts/emtypen
+python2 $emtypen_path/emtypen.py --copy-on-write True --form $emtypen_path/forms/$1.hpp --headers $emtypen_path/headers/$1.hpp --clang-path /usr/lib/llvm-3.8/lib $2
