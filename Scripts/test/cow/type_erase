@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python2 /home/lars/Projects/type_erasure/emtypen/emtypen.py --form /home/lars/Projects/type_erasure/emtypen/forms/cow.hpp --headers /home/lars/Projects/type_erasure/emtypen/headers/cow.hpp --clang-path /usr/lib/llvm-3.8/lib --copy-on-write True plain_interface.hh > interface.hh
