@@ -57,7 +57,7 @@ public:
   public:
     DomainCache(StepFunctional const& f_,
                 typename AnsatzVars::VariableSet const& vars_,int flags=7):
-      f(f_), vars(vars_), c(f.c,f.d), J(f.J)
+      f(f_), vars(vars_), c(f.c,f.d,f.e), J(f.J)
     {}
     
     template <class Position, class Evaluators>
@@ -69,11 +69,11 @@ public:
       p.value = at_c<pIdx>(vars.data).value(at_c<pSIdx>(evaluators));
       
       dy = at_c<yIdx>(vars.data).gradient(at_c<ySIdx>(evaluators));
-      p.gradient = at_c<pIdx>(vars.data).gradient(at_c<pSIdx>(evaluators));
+      p.derivative = at_c<pIdx>(vars.data).derivative(at_c<pSIdx>(evaluators));
       
       c.evaluateAt(y,dy);
       J.evaluateAt(y,u,evaluators);
-      kappa = f.d * ( y * y ) + f.c;
+      if(f.d !=0.0) kappa = f.d * ( y * y ) + f.c; else kappa = 0;
     }
     
     Scalar d0() const
@@ -101,7 +101,8 @@ public:
         if(role == RoleOfFunctional::TANGENTIAL )
           return J.template d2<yIdx,yIdx>(arg1,arg2) + c.template d3<yIdx,yIdx,yIdx>(p,arg1,arg2);
 	else
-	  return kappa*sp(if_(arg1.gradient,dy),if_(arg2.gradient,dy)) + J.template d2<yIdx,yIdx>(arg1,arg2);
+	  return J.template d2<yIdx,yIdx>(arg1,arg2)
+	   +f.alpha*kappa*sp(if_(arg1.derivative,dy),if_(arg2.derivative,dy));//+(1+f.c*abs(sp(dy,p.derivative)))*arg1.value*arg2.value;
       }
       
       if(row==uIdx && col==uIdx)
@@ -172,8 +173,8 @@ public:
   };
   
   
-  explicit StepFunctional(Scalar alpha_, typename AnsatzVars::VariableSet const& ref, Scalar c_=1, Scalar d_=1) :
-    gamma(1e9), c(c_), d(d_), alpha(alpha_), J(alpha,ref)
+  explicit StepFunctional(Scalar alpha_, typename AnsatzVars::VariableSet const& ref, Scalar c_=1, Scalar d_=1, Scalar e_=0) :
+    gamma(1e9), c(c_), d(d_), e(e_), alpha(alpha_), J(alpha,ref)
   {
     assert(gamma >= 0);
   }
@@ -206,7 +207,7 @@ public:
     return 4*shapeFunctionOrder - 2;
   }
   
-  Scalar gamma,  c, d, alpha;
+  Scalar gamma,  c, d, e, alpha;
   TrackingTypeCostFunctional<typename AnsatzVars::VariableSet,yIdx,uIdx> J;
 };
 

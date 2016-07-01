@@ -22,6 +22,7 @@ namespace Spacy
    * @return \f$ x \in \mathrm{argmin}_{[a,b]} \f$
    */
   Real findGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps = 1e-2);
+  Real findLogGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps = 1e-2);
 }
 
 #endif // SPACY_ALGORITHM_FUNCTIONS_1D_FIND_GLOBAL_MINIMIZER_HH

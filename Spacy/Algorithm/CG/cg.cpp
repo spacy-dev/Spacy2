@@ -87,20 +87,21 @@ namespace Spacy
       // the conjugate gradient iteration
       for (unsigned step = 1; true; step++ )
       {
-        if( getVerbosityLevel() > 1 ) std::cout << "Iteration: " << step << std::endl;
+        //if( getVerbosityLevel() > 1 ) std::cout << "Iteration: " << step << std::endl;
         auto Aq = A_(q);
         Real qAq = Aq(q);
         Real qPq = Pq(q);
         regularize(qAq,qPq);
 
         auto alpha = sigma/qAq;
-        if( getVerbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
+        //if( getVerbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
         terminate.update(toDouble(alpha),toDouble(qAq),toDouble(qPq),toDouble(sigma));
 
         //  don't trust small numbers
         if( vanishingStep(step) )
-        {
+        {        
+		  if( step == 1 ) x += q;
           result = Result::Converged;
           break;
         }

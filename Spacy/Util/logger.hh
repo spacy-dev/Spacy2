@@ -28,6 +28,7 @@ namespace Spacy
     void operator()(const T& toLog)
     {
       logFile_ << toLog << separator_;
+      logFile_.flush();
     }
 
   private:

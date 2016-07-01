@@ -57,6 +57,15 @@ namespace Spacy
        */
       Vector operator()(const Vector& x) const;
 
+      
+      /**
+       * @brief Apply preconditioner \f$P\f$ 
+       * @param x argument, q auxilliary vector, needed for inexact differential block
+       * @return first argument: \f$P(x)\f$
+       *
+       */
+      Vector operator()(const Vector& x, Vector& q) const;
+
       /**
        * @brief Compute \f$ z = \left( \begin{array}{c} z_p \\ 0 \\ 0 \end{array} \right) = \left( \begin{array}{c} A^{-1}rhs_p \\ 0 \\ 0 \end{array} \right) \f$.
        * @param rhs right hand side
@@ -64,6 +73,9 @@ namespace Spacy
       Vector kernelOffset(const Vector& rhs) const;
 
     private:
+    
+      void apply(const Vector& x, Vector& y, Vector& q) const;
+    
       ::Spacy::LinearSolver stateSolver_, controlSolver_, adjointSolver_;
       CallableOperator B_, BT_;
     };

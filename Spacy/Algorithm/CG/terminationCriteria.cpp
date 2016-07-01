@@ -20,6 +20,8 @@ namespace Spacy
       {
         auto tol = std::max( getRelativeAccuracy() , eps() );
         if( getVerbosityLevel() > 1 ) std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
+        if ( scaledGamma2.size() > getMaxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol ) )
+            std::cout << "      termination criterion (relative error): " << sqrt(squaredRelativeError()) << "\n      tolerance: " << tol << std::endl;
         return scaledGamma2.size() > getMaxSteps() || ( scaledGamma2.size() > lookAhead_ && squaredRelativeError() < tol*tol );
       }
 
@@ -33,9 +35,11 @@ namespace Spacy
 
       bool StrakosTichyEnergyError::vanishingStep() const noexcept
       {
-        double tol = getAbsoluteAccuracy()*getAbsoluteAccuracy();
-        if( energyNorm2 > tol) tol = std::min(tol,eps()*eps()*energyNorm2);
-        return stepLength2 < tol;
+		// This seems work not very well, discussion necessary until then disfunct
+		return false;
+        //~ double tol = getAbsoluteAccuracy()*getAbsoluteAccuracy();
+        //~ if( energyNorm2 > tol) tol = std::min(tol,eps()*eps()*energyNorm2);
+        //~ return stepLength2 < tol;
       }
 
       void StrakosTichyEnergyError::clear() noexcept

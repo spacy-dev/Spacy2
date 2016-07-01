@@ -50,7 +50,7 @@ namespace Spacy
     void setMinFactor(double factor);
 
   private:
-    double omega_ = 1e-3, previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-1;
+    double omega_ = 1e-3, previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-3;
   };
 }
 

@@ -45,10 +45,12 @@ namespace Spacy
     Logger<double> logOmegaC("omegaC.log");
     Logger<double> logOmegaF("omegaf.log");
     Logger<double> logThetaC("thetaC.log");
-    Logger<double> logEta("thetaL.log");
+    Logger<double> logEta("eta.log");
     Logger<double> logDn("dn.log");
     Logger<double> logDt("dt.log");
     Logger<double> logDx("dx.log");
+    Logger<double> logDL("dL.log");
+    Logger<int> logRejected("rejected.log");
     Logger<double> logCostFunctional("costFunctional.log");
     Logger<bool> logConvexity("convex.log");
   }
@@ -198,7 +200,7 @@ namespace Spacy
         const auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
         if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
-          auto trcg =  makeTRCGSolver( L_.hessian(x) , cgSolver.P() ,
+          auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
                                        toDouble(trcgRelativeAccuracy) , eps() , verbose() );
           setParams(trcg);
           return IndefiniteLinearSolver(trcg);
@@ -206,11 +208,11 @@ namespace Spacy
       }
 
   //    if( trcg == nullptr )
-       auto trcg = makeTRCGSolver( L_.hessian(x) , normalSolver ,
+       auto trcg = makeTCGSolver( L_.hessian(x) , normalSolver ,
                                    toDouble(trcgRelativeAccuracy) , eps(), verbose() );
     //  trcg.setIterativeRefinements(iterativeRefinements());
     //  trcg.setDetailedVerbosity(verbose_detailed());
-     trcg.setRelativeAccuracy( getRelativeAccuracy() );
+     trcg.setRelativeAccuracy( 0.01 );
      if( norm(primalProjection(x)) > 0)
         trcg.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
      else
@@ -271,11 +273,15 @@ namespace Spacy
       if( !N_ || !L_ ) return chartSpace_.zeroVector();
       //std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
       //std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
-      auto tmp = L_.d1(x);
-      auto tmp2 = N_.d2(x,tmp);
-      std::cout << "lagrange multiplier rhs_xx: " << tmp2(tmp) << std::endl;
-      std::cout << "lagrange multiplier rhs: " << norm(primalProjection(d1(L_,x))) << std::endl;
-      return dualUpdate_(x,dualProjection( normalSolver( primalProjection(-d1(L_,x)) ) ) );
+      //auto tmp = L_.d1(x);
+      //auto tmp2 = N_.d2(x,tmp);
+      //std::cout << "lagrange multiplier rhs_xx: " << tmp2(tmp) << std::endl;
+      //std::cout << "lagrange multiplier rhs: " << norm(primalProjection(d1(L_,x))) << std::endl;
+      auto tmp = normalSolver( primalProjection(-d1(L_,x)) );
+      double normDL = norm(primalProjection(tmp));
+      logDL(normDL);
+      std::cout << "Norm of projected gradient: " << normDL << std::endl;
+      return dualUpdate_(x,dualProjection( tmp ) );
     }
 
     std::tuple<Real, Vector, Vector, Real, Real> AffineCovariantSolver::computeCompositeStep(Real& nu, Real norm_Dn,
@@ -293,8 +299,11 @@ namespace Spacy
       auto norm_dx = Real{0.};
       AcceptanceTest acceptanceTest = AcceptanceTest::Failed;
 
+      int rej=-1;
+
       do
       {
+		rej++;
         if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) nu *= 0.5;
         else nu = computeNormalStepDampingFactor(norm_Dn);
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "nu = " << nu << std::endl;
@@ -312,18 +321,19 @@ namespace Spacy
         norm_dx = norm(primalProjection(dx));
         if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dx| = " << norm_dx << std::endl;
         auto trial = retractPrimal(x,dx);
-        std::cout << "|x| = " << norm(x) << ", |trial| = " << norm(trial) << ", norm(projected(trial)) = " << norm(primalProjection(trial)) << std::endl;
+//        std::cout << "|x| = " << norm(x) << ", |trial| = " << norm(trial) << ", norm(projected(trial)) = " << norm(primalProjection(trial)) << std::endl;
 
         if( !domain_.isAdmissible(trial) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
         else
         {
           if( verbose() ) std::cout << spacing << "Computing simplified normal correction." << std::endl;
           ds = computeSimplifiedNormalStep(trial);
-          auto trialplus = retractPrimal(x,dx+ds);
-          std::cout << "ds1: " << norm(ds) << " vs. " << norm(primalProjection(ds)) << std::endl;
+//          auto trialplus = retractPrimal(x,dx+ds);
           ds += ( nu - 1 ) * Dn;
-          std::cout << "ds2: " << norm(ds) << std::endl;
-          std::cout << "soc: " << norm(trialplus) << std::endl;
+//          std::cout << "ds1: " << norm(ds) << " vs. " << norm(primalProjection(ds)) << std::endl;
+          auto trialplus = retractPrimal(x,dx+ds);
+//          std::cout << "ds2: " << norm(ds) << std::endl;
+//          std::cout << "soc: " << norm(trialplus) << std::endl;
 
           updateOmegaC(norm_x, norm_dx, norm(ds));
           eta = updateOmegaL(trialplus,q_tau,tau,norm_x,norm_dx,cubicModel);
@@ -362,10 +372,10 @@ namespace Spacy
           if( acceptanceTest == AcceptanceTest::TangentialStepFailed ) std::cout << spacing2 << "Acceptance test tangential step failed." << std::endl;
           if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) std::cout << spacing2 << "Acceptance test left admissible domain." << std::endl;
           if( acceptanceTest == AcceptanceTest::Passed ) std::cout << spacing2 << "Acceptance test passed." << std::endl;
-          if( normalStepMonitor == StepMonitor::Accepted) std::cout << spacing2 << "NormalStepMonitor::Accepted." << std::endl;
-          else std::cout << spacing2 << "NormalStepMonitor::Rejected" << std::endl;
-          if( tangentialStepMonitor == StepMonitor::Accepted) std::cout << spacing2 << "TangentialStepMonitor::Accepted." << std::endl;
-          else std::cout << spacing2 << "TangentialStepMonitor::Rejected" << std::endl;
+          //~ if( normalStepMonitor == StepMonitor::Accepted) std::cout << spacing2 << "NormalStepMonitor::Accepted." << std::endl;
+          //~ else std::cout << spacing2 << "NormalStepMonitor::Rejected" << std::endl;
+          //~ if( tangentialStepMonitor == StepMonitor::Accepted) std::cout << spacing2 << "TangentialStepMonitor::Accepted." << std::endl;
+          //~ else std::cout << spacing2 << "TangentialStepMonitor::Rejected" << std::endl;
         }
       } // end while (damping factors)
       while( acceptanceTest != AcceptanceTest::Passed );
@@ -379,6 +389,7 @@ namespace Spacy
       logDx(norm_dx);
       logThetaC(norm(ds)/norm_dx);
       logEta(eta);
+      logRejected(rej);
       return std::make_tuple(tau,dx,ds,norm_x,norm_dx);
     }
 
@@ -386,8 +397,8 @@ namespace Spacy
     {
       logConvexity(tangentialSolver.isPositiveDefinite());
 
-      if( tangentialSolver && !tangentialSolver.isPositiveDefinite() ) return false;
-      if( nu < 1 || tau < 1 ) return false;
+      //if( tangentialSolver && !tangentialSolver.isPositiveDefinite() ) return false;
+      if( nu < 1 || tau < 0.95) return false;
 
       if( norm_dx < getRelativeAccuracy() * norm_x || ( norm_x < eps() && norm_dx < eps() )  )
       {
@@ -422,17 +433,22 @@ namespace Spacy
         eta = ( L_(primalProjection(soc)) - cubic(0) )/( cubic(tau) - cubic(0) );
       else eta = 1;
 
-      if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) ||
-          omegaL < (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx) )
-        omegaL = (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
+      double omegaLnew = (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
+
+      if( 
+      !( abs(eta-1) < 0.05 && omegaLnew > omegaL )
+      && 
+      ( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaL < omegaLnew ) 
+      )         
+        omegaL = omegaLnew;
 
       if( getVerbosityLevel() > 1 )
       {
-        std::cout << spacing2 << "predicted decrease: " << (cubic(tau)-cubic(0)) << std::endl;
-        std::cout << spacing2 << "cubic(tau): " << cubic(tau) << ", cubic(0): " << cubic(0) << std::endl;
-        std::cout << spacing2 << "L(primalProjection(soc)): " << L_(primalProjection(soc)) << ", |primalProjection(soc)| = " << norm(primalProjection(soc)) << std::endl;
+        std::cout << spacing2 << "predicted decrease: " << (cubic(tau)-cubic(0));
+//        std::cout << spacing2 << "cubic(tau): " << cubic(tau) << ", cubic(0): " << cubic(0) << std::endl;
+//        std::cout << spacing2 << "L(primalProjection(soc)): " << L_(primalProjection(soc)) << ", |primalProjection(soc)| = " << norm(primalProjection(soc)) << std::endl;
         std::cout << spacing2 << "actual decrease: " << ( L_(primalProjection(soc)) - cubic(0) ) << std::endl;
-        std::cout << spacing2 << "omegaL: " << omegaL << std::endl;
+        std::cout << spacing2 << "omegaL: " << omegaL;
         std::cout << spacing2 << "eta: " << eta << std::endl;
       }
 
@@ -463,7 +479,10 @@ namespace Spacy
       if( pow(getRelaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
         maxTau = min( 1. , sqrt( pow( 2*getRelaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-      return findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() );
+      double tau=0.0;
+      if(maxTau >= 1e-12) tau = findLogGlobalMinimizer( cubic,1e-8, maxTau , getDampingAccuracy() );
+      if(tau <= 1e-8) tau = 0.0;
+      return tau;
     }
 
     AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(Real norm_x, Real norm_Dx, Real eta)
@@ -489,8 +508,8 @@ namespace Spacy
 
     void AffineCovariantSolver::regularityTest(Real nu, Real tau) const
     {
-      if( !regularityTestPassed(nu) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (nu,...)",toDouble(nu));
-      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (...,tau)",toDouble(tau));
+      if( !regularityTestPassed(nu)) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (nu,...)",toDouble(nu));
+//      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (...,tau)",toDouble(tau));
     }
   }
 }

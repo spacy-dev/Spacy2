@@ -17,7 +17,7 @@ namespace Spacy
        * @param minimalDecrease minimal required decrease
        * @param relaxedMinimalDecrease relaxed required decrease
        */
-      explicit DecreaseCondition(double minimalDecrease = 0.5, double relaxedMinimalDecrease = 0.1) noexcept;
+      explicit DecreaseCondition(double minimalDecrease = 0.05, double relaxedMinimalDecrease = 0.01) noexcept;
 
       /**
        * @brief Set required minimal decrease.

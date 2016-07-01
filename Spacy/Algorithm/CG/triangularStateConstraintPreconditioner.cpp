@@ -26,10 +26,28 @@ namespace Spacy
 
     Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x) const
     {
-      auto x_ = cast_ref<ProductSpace::Vector>(x);
+      auto y = domain().zeroVector();
+      auto q = x;
+
+      apply(x,y,q);
+
+      return std::move(y);
+    }
+
+    Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x, Vector& q) const
+    {
+      auto y = domain().zeroVector();
+      q = x;
+
+      return std::move(y);
+    }
+
+    void TriangularStateConstraintPreconditioner::apply(const Vector& x, Vector& y, Vector& q) const
+    {
+      auto& x_ = cast_ref<ProductSpace::Vector>(q);
       auto& xp_ = cast_ref<ProductSpace::Vector>(x_.component(PRIMAL));
       auto& xd_ = cast_ref<ProductSpace::Vector>(x_.component(DUAL));
-      auto y = range().zeroVector();
+
       auto& y_ = cast_ref<ProductSpace::Vector>(y);
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
       auto& yd_ = cast_ref<ProductSpace::Vector>(y_.component(DUAL));
@@ -47,8 +65,8 @@ namespace Spacy
 
       yp_.component(localStateIndex) = stateSolver_( xd_.component(localAdjointIndex) );
 
-      return std::move(y);
-    }
+      xd_.component(localAdjointIndex) = cast_ref<ProductSpace::Vector>(cast_ref<ProductSpace::Vector>(x).component(DUAL)).component(localAdjointIndex);
+	}
 
     Vector TriangularStateConstraintPreconditioner::kernelOffset(const Vector& rhs) const
     {

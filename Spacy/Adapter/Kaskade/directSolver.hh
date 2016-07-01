@@ -39,11 +39,11 @@ namespace Spacy
        * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
        */
       DirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
-                   DirectType directSolver = DirectType::UMFPACK, MatrixProperties property = MatrixProperties::GENERAL )
+                   DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
         : OperatorBase(domain,range),
           A_(std::move(A)),
           spaces_( extractSpaces<AnsatzVariableDescription>(domain) ),
-          directSolver_(/*directSolver*/DirectType::UMFPACK),
+          directSolver_(/*directSolver*/DirectType::UMFPACK3264),
           property_(property)
       {}
 
@@ -68,7 +68,7 @@ namespace Spacy
     private:
       KaskadeOperator A_;
       Spaces spaces_;
-      DirectType directSolver_ = DirectType::UMFPACK;
+      DirectType directSolver_ = DirectType::UMFPACK3264;
       MatrixProperties property_ = MatrixProperties::GENERAL;
       mutable std::shared_ptr< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > > solver_ = nullptr;
     };
@@ -85,7 +85,7 @@ namespace Spacy
      */
     template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator>
     auto makeDirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
-                          DirectType directSolver = DirectType::UMFPACK, MatrixProperties property = MatrixProperties::GENERAL )
+                          DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
     {
       return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
           ( std::move(A) , domain , range , directSolver , property );
