@@ -1,16 +1,6 @@
-include_directories(${PROJECT_SOURCE_DIR}/External/googletest ${PROJECT_SOURCE_DIR}/External/googletest/include )
-add_custom_target(git_update
-                COMMAND git submodule init
-                COMMAND git submodule update
-                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-add_library(gtest
-            ${PROJECT_SOURCE_DIR}/External/googletest/src/gtest-all.cc
-            ${PROJECT_SOURCE_DIR}/External/googletest/src/gtest_main.cc)
+find_package(GTest REQUIRED)
 
-add_dependencies(gtest git_update)
-
-set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest-all.cc  PROPERTIES GENERATED 1)
-set_source_files_properties(${PROJECT_SOURCE_DIR}/External/googletest/src/gtest_main.cc PROPERTIES GENERATED 1)
+include_directories( ${GTEST_INCLUDE_DIRS}
 
 aux_source_directory(. TEST_SRC_LIST)
 aux_source_directory(Mock TEST_SRC_LIST)
@@ -50,7 +40,7 @@ if(Kaskade)
 endif()
 
 add_executable(unit_tests ${TEST_SRC_LIST})
-target_link_libraries(unit_tests spacy gtest pthread)
+target_link_libraries(unit_tests spacy ${GTEST_LIBRARIES} pthread)
 
 if(Kaskade)
   target_link_libraries(unit_tests kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)
