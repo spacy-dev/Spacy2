@@ -1,6 +1,6 @@
 find_package(GTest REQUIRED)
 
-include_directories( ${GTEST_INCLUDE_DIRS}
+include_directories( ${GTEST_INCLUDE_DIRS} )
 
 aux_source_directory(. TEST_SRC_LIST)
 aux_source_directory(Mock TEST_SRC_LIST)
