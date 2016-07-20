@@ -28,7 +28,7 @@ using namespace Kaskade;
 /****************************************************************************************/
 /* Boundary */
 /****************************************************************************************/
-enum class RoleOfFunctional{ NORMAL, TANGENTIAL };
+enum class RoleOfFunctional{ NORMAL, TANGENTIAL, PRECONDITIONING };
 
 template <int stateId, int controlId, int adjointId, class RType, class AnsatzVars_, class TestVars_=AnsatzVars_, class OriginVars_=AnsatzVars_, RoleOfFunctional role = RoleOfFunctional::NORMAL, bool lump=false>
 class StepFunctional
@@ -101,8 +101,13 @@ public:
         if(role == RoleOfFunctional::TANGENTIAL )
           return J.template d2<yIdx,yIdx>(arg1,arg2) + c.template d3<yIdx,yIdx,yIdx>(p,arg1,arg2);
 	else
-	  return J.template d2<yIdx,yIdx>(arg1,arg2)
-	   +f.alpha*kappa*sp(if_(arg1.derivative,dy),if_(arg2.derivative,dy));//+(1+f.c*abs(sp(dy,p.derivative)))*arg1.value*arg2.value;
+	    {
+           if(role == RoleOfFunctional::NORMAL )
+           {
+	         return J.template d2<yIdx,yIdx>(arg1,arg2)
+	          +f.alpha*kappa*sp(if_(arg1.derivative,dy),if_(arg2.derivative,dy));//+(1+f.c*abs(sp(dy,p.derivative)))*arg1.value*arg2.value;
+	       } 
+	    }  
       }
       
       if(row==uIdx && col==uIdx)
@@ -195,9 +200,12 @@ public:
   template <int row, int col>
   struct D2 : public FunctionalBase<WeakFormulation>::D2<row,col>
   {
-    static bool const present = !( ( row == pIdx && col == pIdx ) || ( row == yIdx && col == uIdx ) || ( row == uIdx && col == yIdx ) );
+    static bool const present = !( (row==yIdx && col==yIdx && role==RoleOfFunctional::PRECONDITIONING ) || 
+                               ( row == pIdx && col == pIdx ) || 
+                               ( row == yIdx && col == uIdx ) || 
+                               ( row == uIdx && col == yIdx ) );
     static bool const symmetric = row==col;
-    static bool const lumped = lump;
+    static bool const lumped =  (row==uIdx && col==uIdx && role==RoleOfFunctional::PRECONDITIONING );
   };
   
   template <class Cell>
@@ -217,5 +225,9 @@ using NormalStepFunctional = StepFunctional<stateId,controlId,adjointId,RType,An
 
 template <int stateId, int controlId, int adjointId, class RType, class AnsatzVars, class TestVars=AnsatzVars, class OriginVars=AnsatzVars>
 using TangentialStepFunctional = StepFunctional<stateId,controlId,adjointId,RType,AnsatzVars,TestVars,OriginVars,RoleOfFunctional::TANGENTIAL>;
+
+template <int stateId, int controlId, int adjointId, class RType, class AnsatzVars, class TestVars=AnsatzVars, class OriginVars=AnsatzVars>
+using PreconditioningFunctional = StepFunctional<stateId,controlId,adjointId,RType,AnsatzVars,TestVars,OriginVars,RoleOfFunctional::PRECONDITIONING>;
+
 /// \endcond
 #endif

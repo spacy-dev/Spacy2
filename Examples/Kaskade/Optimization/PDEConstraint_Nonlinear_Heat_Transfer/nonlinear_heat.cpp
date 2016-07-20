@@ -27,7 +27,10 @@
 #include "io/vtk.hh"
 #include "utilities/kaskopt.hh"
 #include "utilities/gridGeneration.hh"
-
+#include <Spacy/Algorithm/CG/linearSolver.hh>
+#include <Spacy/Algorithm/CG/trivialPreconditioner.hh>
+#include <Spacy/Algorithm/CG/directPreconditioner.hh>
+#include <Spacy/Algorithm/CG/directBlockPreconditioner.hh>
 
 #define NCOMPONENTS 1
 #include "nonlinear_control.hh"
@@ -123,6 +126,40 @@ int main(int argc, char *argv[])
   cout << "create functional" << endl;
   // Normal step functional with direct solver
   auto fn = Spacy::Kaskade::makeC2Functional( NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d,e) , domain );
+  auto fp = Spacy::Kaskade::makeC2Functional( PreconditioningFunctional<stateId,controlId,adjointId,double,Descriptions>(alpha,x_ref,c,d,e) , domain );
+
+   using NSF_type = NormalStepFunctional<stateId,controlId,adjointId,double,Descriptions>;
+   using FN_type = Spacy::Kaskade::C2Functional<NSF_type>;
+   using FNLin = FN_type::Linearization;
+
+
+   std::function<Spacy::LinearSolver(const FNLin&, const Spacy::Vector&)> 
+      mySolverCreator = [](const FNLin& f, const Spacy::Vector& x)
+      {
+          return Spacy::Kaskade::makeDirectSolver<FN_type::VariableSetDescription,FN_type::VariableSetDescription>( f.A() ,
+                                                                                     f.range() ,
+                                                                                     f.domain() /*,
+                                                                                     DirectType::MUMPS ,
+                                                                                     MatrixProperties::GENERAL */);
+	 };
+
+   std::function<Spacy::LinearSolver(const FNLin&, const Spacy::Vector& x)> 
+      myPCGSolverCreator = [&fp](const FNLin& f, const Spacy::Vector& x)
+      {
+		  Spacy::CG::DirectPreconditioner P(fp,x,f.domain(),f.domain());
+          return Spacy::makeTCGSolver( f , P);
+	 };
+
+   std::function<Spacy::LinearSolver(const FNLin&, const Spacy::Vector& x)> 
+      myPCG2SolverCreator = [&desc](const FNLin& f, const Spacy::Vector& x)
+      {
+		  Spacy::Kaskade::DirectBlockPreconditioner<NSF_type> P(f.A(),x,desc,f.domain(),f.domain());
+          return Spacy::makeTCGSolver( f , P);
+	 };
+
+
+
+  fn.setSolverCreator(myPCG2SolverCreator);
   
   //~ using Impl = decltype(fn);
   //~ cout << "copy constructible: " << std::is_copy_constructible<Impl>::value << endl;
@@ -142,7 +179,7 @@ int main(int argc, char *argv[])
 
   cout << "set up solver" << endl;
   // algorithm and parameters
-  auto cs = Spacy::CompositeStep::AffineCovariantSolver( fn , ft , domain );
+  auto cs = Spacy::CompositeStep::AffineCovariantSolver( fn, ft , domain );
   cs.setRelativeAccuracy(desiredAccuracy);
   cs.setEps(eps);
   cs.setVerbosityLevel(2);
