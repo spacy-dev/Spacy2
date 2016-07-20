@@ -30,7 +30,7 @@
 #include <Spacy/Algorithm/CG/linearSolver.hh>
 #include <Spacy/Algorithm/CG/trivialPreconditioner.hh>
 #include <Spacy/Algorithm/CG/directPreconditioner.hh>
-#include <Spacy/Algorithm/CG/directBlockPreconditioner.hh>
+#include <Spacy/Adapter/Kaskade/directBlockPreconditioner.hh>
 
 #define NCOMPONENTS 1
 #include "nonlinear_control.hh"
