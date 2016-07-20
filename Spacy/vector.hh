@@ -93,6 +93,7 @@ namespace Spacy
       {
         return std::make_unique< Base<Impl> >(this->get());
       }
+      
     };
 
   public:
@@ -135,6 +136,12 @@ namespace Spacy
 
     /// Check if an implementation has been assigned.
     operator bool() const;
+
+    /// This is not a product space vector 
+    unsigned numberOfVariables() const
+    {
+	  return 1;
+	}
 
   private:
     CopyAndClonePtr<AbstractBase> base_;
