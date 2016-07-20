@@ -264,6 +264,8 @@ namespace Spacy
         return extractProductSpace<Description>(spaces);
 
       assert(false);
+      // Avoid annoying compiler warning
+      return extractSingleSpace<Description>(spaces);
     }
 
     /// Copy from ::Spacy::Vector to %Kaskade::VariableSet<Description>.

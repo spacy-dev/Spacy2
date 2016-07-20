@@ -126,7 +126,10 @@ namespace Spacy
 
         // determine new search direction
         auto sigmaNew = abs( r(Qr) ); // sigma = <Qr,r>
-        auto beta = sigmaNew/sigma;
+        //auto beta = sigmaNew/sigma;
+        // this choice of beta is said to be more robust against inexact evaluation of preconditioners
+        auto beta = -Qr(Aq)/qAq;
+        //std::cout << beta << " " << beta2 << std::endl;
         sigma = sigmaNew;
 
         q *= toDouble(beta); q += Qr;  //  q = Qr + beta*q
