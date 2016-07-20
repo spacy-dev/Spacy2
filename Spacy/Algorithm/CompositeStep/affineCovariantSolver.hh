@@ -57,7 +57,7 @@ namespace Spacy
        * @param L Lagrange functional
        * @param domain domain space \f$X=\{Y,U,P\}\f$
        */
-      AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain);
+      AffineCovariantSolver(C2Functional N,  C2Functional L, VectorSpace& domain);
 
       AffineCovariantSolver(C2Functional N, C2Functional L, VectorSpace& domain, std::function<Vector(const Vector&, const Vector&) > retraction);
 

@@ -109,23 +109,18 @@ namespace Spacy
         domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(x) ) );
 //        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
 
-        if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
-        if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
+        if( verbose() ) std::cout << "\n ----------------- Composite Steps: Iteration " << step << ". ----------------\n";
+        if( verbose() ) std::cout << spacing << "**** Computing normal step **** " << std::endl;
         auto Dn = computeNormalStep(x);
         auto norm_Dn = norm(Dn);
-        if( verbose() )
-        {
-          std::cout << spacing << "Normal step length: " << norm_Dn << std::endl;
-          std::cout << spacing << "Computing normal damping factor" << std::endl;
-        }
         Real nu = computeNormalStepDampingFactor(norm_Dn);
 
-        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|dn| = " << norm_Dn << ", nu = " << nu << ", |projected(Dn)| = " << norm(primalProjection(Dn)) << std::endl;
+        if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|Dn|: " << norm(primalProjection(Dn)) <<  " nu = " << nu << std::endl;
 
-        if( verbose() ) std::cout << spacing << "Computing lagrange multiplier." << std::endl;
+        if( verbose() ) std::cout << spacing << "**** Computing lagrange multiplier ****" << std::endl;
         x = updateLagrangeMultiplier(x);
 
-        if( verbose() ) std::cout << spacing << "Computing tangential step." << std::endl;
+        if( verbose() ) std::cout << spacing << "**** Computing tangential step ****" << std::endl;
         auto Dt = computeTangentialStep(nu,x,Dn,lastStepWasUndamped);
 
         Real tau = 0.;
@@ -135,9 +130,13 @@ namespace Spacy
         if( verbose() )
         {
           std::cout << spacing << "Tangential step length: " << norm(Dt) << std::endl;
-          std::cout << spacing << "Computing damping factors." << std::endl;
         }
+        std::cout << "--- Inner Loop:begin --- " << std::endl;
+
         std::tie(tau,dx,ds,norm_x,norm_dx) = computeCompositeStep( nu , norm_Dn , x , Dn , Dt );
+
+        std::cout << "--- Inner Loop:end --- " << std::endl;
+
 
         if( getContraction() < 0.25 ) x = retractPrimal(x,dx+ds);
         else x = retractPrimal(x,dx);
@@ -150,7 +149,7 @@ namespace Spacy
 
         if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
         if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
-        if( getVerbosityLevel() > 1) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
+//        if( getVerbosityLevel() > 1 && norm_Dn > 0) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
       } // end iteration
 
       return x;
@@ -161,9 +160,6 @@ namespace Spacy
       if( !L_ ) return chartSpace_.zeroVector();
 
       tangentialSolver = makeTangentialSolver(nu,x,lastStepWasUndamped);
-
-      std::cout << " tangential step rhs :"  << norm( primalProjection(-d1(L_,x)) + primalProjection(-nu*d2(L_,x)(dn)) ) << std::endl;
-      std::cout << " = " << norm( primalProjection(-d1(L_,x)) ) << " + " << norm(primalProjection(-nu*d2(L_,x)(dn)) ) << std::endl;
       return primalProjection( tangentialSolver( primalProjection(-d1(L_,x)) + primalProjection(-nu*d2(L_,x)(dn)) ) );
     }
 
@@ -191,6 +187,7 @@ namespace Spacy
         else
           solver.setAbsoluteAccuracy( eps() );
         solver.setMaxSteps(getMaxSteps());
+        solver.setRelativeAccuracy(0.01);
       };
 
   //    std::unique_ptr<CGSolver> trcg = nullptr;
@@ -198,7 +195,7 @@ namespace Spacy
       if( is<CG::LinearSolver>(normalSolver) )
       {
         const auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
+ //       if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
         {
           auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
                                        toDouble(trcgRelativeAccuracy) , eps() , verbose() );
@@ -234,7 +231,9 @@ namespace Spacy
     {
       if( !N_ ) return Vector(0*x);
 
-      normalSolver = N_.hessian(primalProjection(x))^-1;
+      tangentialSolver = {};
+      normalSolver = {};
+      normalSolver = N_.hessian(x)^-1;
       return computeMinimumNormCorrection(x);
     }
 
@@ -247,36 +246,34 @@ namespace Spacy
     Vector AffineCovariantSolver::computeMinimumNormCorrection(const Vector& x) const
     {
       auto rhs = dualProjection(-d1(L_,x));
-      std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
+//      std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
       auto dn0 = chartSpace_.zeroVector();
-//      if( is<CG::LinearSolver>(normalSolver) )
-//      {
-//        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-//        cgSolver.setEps(eps());
-//        cgSolver.setRelativeAccuracy(eps());
-//        cgSolver.setVerbosity(verbose());
-//        cgSolver.setVerbosityLevel(getVerbosityLevel());
-//        cgSolver.setIterativeRefinements(iterativeRefinements());
-//        cgSolver.setMaxSteps(maxSteps());
-//        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-//        {
-//          const auto& P = cast_ref<CG::TriangularStateConstraintPreconditioner>(cgSolver.P());
-//          dn0 = P.kernelOffset(rhs);
-//          rhs -= cgSolver.A()( dn0 );
-//        }
-//      }
+      if( is<CG::LinearSolver>(normalSolver) )
+      {
+        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
+        cgSolver.setEps(eps());
+        cgSolver.setRelativeAccuracy(0.1);
+        cgSolver.setVerbosity(verbose());
+        cgSolver.setVerbosityLevel(getVerbosityLevel());
+        //cgSolver.setIterativeRefinements(iterativeRefinements());
+        //cgSolver.setMaxSteps(maxSteps());
+        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
+        {
+          const auto& P = cast_ref<CG::TriangularStateConstraintPreconditioner>(cgSolver.P());
+          dn0 = P.kernelOffset(rhs);
+          rhs -= cgSolver.A()( dn0 );
+        } else
+        {
+			dn0=cgSolver.P()(rhs);
+			rhs -=cgSolver.A()(dn0);
+		}
+      }
       return dn0 + primalProjection( normalSolver( rhs ) );
     }
 
     Vector AffineCovariantSolver::updateLagrangeMultiplier(const Vector& x) const
     {
       if( !N_ || !L_ ) return chartSpace_.zeroVector();
-      //std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
-      //std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
-      //auto tmp = L_.d1(x);
-      //auto tmp2 = N_.d2(x,tmp);
-      //std::cout << "lagrange multiplier rhs_xx: " << tmp2(tmp) << std::endl;
-      //std::cout << "lagrange multiplier rhs: " << norm(primalProjection(d1(L_,x))) << std::endl;
       auto tmp = normalSolver( primalProjection(-d1(L_,x)) );
       double normDL = norm(primalProjection(tmp));
       logDL(normDL);
@@ -326,7 +323,7 @@ namespace Spacy
         if( !domain_.isAdmissible(trial) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
         else
         {
-          if( verbose() ) std::cout << spacing << "Computing simplified normal correction." << std::endl;
+          if( verbose() ) std::cout << spacing << "**** Computing simplified normal correction ****" << std::endl;
           ds = computeSimplifiedNormalStep(trial);
 //          auto trialplus = retractPrimal(x,dx+ds);
           ds += ( nu - 1 ) * Dn;
