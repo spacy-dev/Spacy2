@@ -15,6 +15,7 @@
 #include "Spacy/vectorSpace.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 #include "Spacy/Util/Base/functionalBase.hh"
+#include "Spacy/Algorithm/CG/trivialPreconditioner.hh"
 
 #include "directSolver.hh"
 #include "vectorSpace.hh"
@@ -40,6 +41,7 @@ namespace Spacy
         public FunctionalBase ,
         public Mixin::NumberOfThreads
     {
+	  using ThisType = C2Functional<FunctionalDefinition>;
     public:
       /// %Kaskade::VariableSetDescription
       using VariableSetDescription = typename FunctionalDefinition::AnsatzVars;
@@ -55,6 +57,7 @@ namespace Spacy
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVector,CoefficientVector>;
 
       using Linearization = LinearOperator<VariableSetDescription,VariableSetDescription>;
+
 
       /**
        * @brief Construct a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
@@ -188,7 +191,7 @@ namespace Spacy
         copyToCoefficientVector<VariableSetDescription>(dx,dx_);
         CoefficientVector y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
-        A_.apply( dx_ , y_ );
+        A_->apply( dx_ , y_ );
 
         auto y = this->domain().dualSpace().zeroVector();
         copyFromCoefficientVector<VariableSetDescription>(y_,y);
@@ -204,13 +207,13 @@ namespace Spacy
       auto hessian(const ::Spacy::Vector& x) const
       {
         assembleHessian(x);
-        return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
+        return Linearization{ A_, *operatorSpace_ , solverCreator_, x };
       }
 
       /// Access operator representing \f$f''\f$.
       const KaskadeOperator& A() const noexcept
       {
-        return A_;
+        return *A_;
       }
 
       /// Access boost::fusion::vector of pointers to spaces.
@@ -232,7 +235,7 @@ namespace Spacy
        * @brief Change solver creator.
        * @param f function/functor for the creation of a linear solver
        */
-      void setSolverCreator(std::function<LinearSolver(const C2Functional&)> f)
+      void setSolverCreator(std::function<LinearSolver(const Linearization&, const ::Spacy::Vector&)> f)
       {
         solverCreator_ = std::move(f);
       }
@@ -247,6 +250,8 @@ namespace Spacy
         typename VariableSetDescription::VariableSet u(variableSet);
 
         copy(x,u);
+		std::cout << "F" << std::flush;
+
 
         Assembler assembler(spaces_);
         assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , getNumberOfThreads() );
@@ -259,7 +264,7 @@ namespace Spacy
       void assembleGradient(const ::Spacy::Vector& x) const
       {
         using boost::fusion::at_c;
-//        if( old_X_df_ && (old_X_df_==x) ) return;
+        if( old_X_df_ && (old_X_df_==x) ) return;
 
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
@@ -280,6 +285,8 @@ namespace Spacy
 //        at_c<0>(tmp.data) -= at_c<1>(u.data).coefficients();
 //        std::cout << "assembly3: " << at_c<0>(tmp.data)*at_c<0>(tmp.data) << std::endl;
 
+		std::cout << "G" << std::flush;
+
         Assembler assembler(spaces_);
         assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
         copyFromCoefficientVector<VariableSetDescription>(CoefficientVector(assembler.rhs()),rhs_);
@@ -292,6 +299,8 @@ namespace Spacy
       {
         if( old_X_ddf_ && (old_X_ddf_==x) ) return;
 
+		std::cout << "H" << std::flush;
+
         VariableSetDescription variableSet(spaces_);
         typename VariableSetDescription::VariableSet u(variableSet);
 
@@ -299,20 +308,24 @@ namespace Spacy
 
         Assembler assembler(spaces_);
         assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , getNumberOfThreads() );
-        A_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+        
+        A_.reset(new KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) ));
 
         old_X_ddf_ = x;
       }
 
       FunctionalDefinition f_;
       Spaces spaces_;
-      mutable KaskadeOperator A_ = {};
+      mutable std::shared_ptr<KaskadeOperator> A_;
       mutable double value_ = 0;
       mutable ::Spacy::Vector old_X_f_ = {}, old_X_df_ = {}, old_X_ddf_ = {}, rhs_ {};
       bool onlyLowerTriangle_ = false;
       int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
       int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;
-      std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& f)
+      
+      
+      std::function<LinearSolver(const Linearization&, const ::Spacy::Vector&)> 
+        solverCreator_ = [](const Linearization& f, const ::Spacy::Vector& x)
         {
             return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() ,
                                                                                      f.range() ,
@@ -321,6 +334,7 @@ namespace Spacy
                                                                                      MatrixProperties::GENERAL */);
 
         };
+
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 

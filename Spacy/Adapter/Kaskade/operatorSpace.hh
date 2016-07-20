@@ -33,7 +33,7 @@ namespace Spacy
 
       LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription> operator()(const VectorSpace* space) const
       {
-        return LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription>{ OperatorImpl{ Matrix{} } , *space };
+        return LinearOperator<AnsatzVariableSetDescription,TestVariableSetDescription>{ std::shared_ptr<OperatorImpl>(new OperatorImpl{ Matrix{} }) , *space };
       }
 
       const VectorSpace& domain() const

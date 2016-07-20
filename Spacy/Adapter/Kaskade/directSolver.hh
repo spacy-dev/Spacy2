@@ -38,10 +38,10 @@ namespace Spacy
        * @param directSolver solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU)
        * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
        */
-      DirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
+      DirectSolver(const KaskadeOperator& A, const VectorSpace& domain, const VectorSpace& range,
                    DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
         : OperatorBase(domain,range),
-          A_(std::move(A)),
+          A_(A),
           spaces_( extractSpaces<AnsatzVariableDescription>(domain) ),
           directSolver_(/*directSolver*/DirectType::UMFPACK3264),
           property_(property)
@@ -50,9 +50,11 @@ namespace Spacy
       /// Compute \f$A^{-1}x\f$.
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
       {
-        if( solver_ == nullptr) solver_ = std::make_shared< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
+        if( solver_ == nullptr) 
+        {
+        solver_ = std::make_shared< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
             ( ::Kaskade::directInverseOperator(A_, directSolver_, property_) );
-
+        }
         Range y_(TestVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
         copyToCoefficientVector<AnsatzVariableDescription>(x,x_);
@@ -66,7 +68,7 @@ namespace Spacy
       }
 
     private:
-      KaskadeOperator A_;
+      const KaskadeOperator& A_;
       Spaces spaces_;
       DirectType directSolver_ = DirectType::UMFPACK3264;
       MatrixProperties property_ = MatrixProperties::GENERAL;
@@ -84,11 +86,11 @@ namespace Spacy
      * @return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>( A , spaces , domain , range , directSolver , property )
      */
     template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator>
-    auto makeDirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
+    auto makeDirectSolver(const KaskadeOperator& A, const VectorSpace& domain, const VectorSpace& range,
                           DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
     {
       return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
-          ( std::move(A) , domain , range , directSolver , property );
+          ( A , domain , range , directSolver , property );
     }
 
   }

@@ -5,6 +5,7 @@
 #define SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH
 
 #include <utility>
+#include <iostream>
 
 #include "Spacy/linearSolver.hh"
 #include "Spacy/vector.hh"
@@ -43,6 +44,7 @@ namespace Spacy
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
       using OperatorImpl = ::Kaskade::MatrixRepresentedOperator<Matrix,Domain,Range>;
       using OperatorCreator = LinearOperatorCreator<AnsatzVariableSetDescription,TestVariableSetDescription>;
+      
 
     public:
       /**
@@ -51,12 +53,13 @@ namespace Spacy
        * @param domain domain space
        * @param range range space
        */
-      LinearOperator(OperatorImpl A, const VectorSpace& space)
+      LinearOperator(std::shared_ptr<OperatorImpl> A, const VectorSpace& space)
         : OperatorBase(cast_ref<OperatorCreator>(space.creator()).domain(),
                        cast_ref<OperatorCreator>(space.creator()).range()),
           VectorBase(space) ,
-          A_(std::move(A)),
-          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.creator()).domain()) )
+          A_(A),
+          spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.creator()).domain()) ),
+          x_(cast_ref<OperatorCreator>(space.creator()).domain().zeroVector())
       {}
 
       /**
@@ -66,14 +69,18 @@ namespace Spacy
        * @param range range space
        * @param solverCreator function/functor implementing the creation of a linear solver
        */
-      LinearOperator(OperatorImpl A, const VectorSpace& space, std::function<LinearSolver(const LinearOperator&)> solverCreator)
+      LinearOperator(std::shared_ptr<OperatorImpl> A, 
+                     const VectorSpace& space, 
+                     std::function<LinearSolver(const LinearOperator&, const ::Spacy::Vector&)> solverCreator,
+                  const Spacy::Vector x)
         : OperatorBase(cast_ref<OperatorCreator>(space.creator()).domain(),
                        cast_ref<OperatorCreator>(space.creator()).range()),
           VectorBase(space) ,
-          A_(std::move(A)),
+          A_(A),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(cast_ref<OperatorCreator>(space.creator()).domain()) ) ,
-          solverCreator_(std::move(solverCreator))
-      {}
+          solverCreator_(std::move(solverCreator)),
+          x_(std::move(x))
+      {  }
 
       /// Compute \f$A(x)\f$.
       ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
@@ -82,7 +89,7 @@ namespace Spacy
         copyToCoefficientVector<AnsatzVariableSetDescription>(x,x_);
         Range y_( TestVariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
 
-        A_.apply(x_,y_);
+        A_->apply(x_,y_);
 
         auto y = range().zeroVector();
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
@@ -93,18 +100,18 @@ namespace Spacy
       /// Access solver representing \f$A^{-1}\f$.
       auto solver() const
       {
-        return solverCreator_(*this);
+        return solverCreator_(*this, x_);
         //        return DirectSolver<OperatorImpl,AnsatzVariableSetDescription,TestVariableSetDescription>( A_ , spaces_, range() , domain() );
       }
 
       auto& get()
       {
-        return A_.get_non_const();
+        return A_->get_non_const();
       }
 
       const auto& get() const
       {
-        return A_.template get<Matrix>();
+        return A_->template get<Matrix>();
       }
 
 //      double operator()(const ::Spacy::Vector& x) const
@@ -121,13 +128,13 @@ namespace Spacy
 
       const auto& A() const
       {
-        return A_;
+        return *A_;
       }
 
     private:
-      OperatorImpl A_;
+      std::shared_ptr<OperatorImpl> A_;
       Spaces spaces_;
-      std::function<LinearSolver(const LinearOperator&)> solverCreator_ = [](const LinearOperator& M)
+      std::function<LinearSolver(const LinearOperator&, const ::Spacy::Vector& )> solverCreator_ = [](const LinearOperator& M, const ::Spacy::Vector& x)
         {
             return makeDirectSolver<TestVariableSetDescription,AnsatzVariableSetDescription>( M.A() ,
                                                                                               M.range() ,
@@ -135,7 +142,12 @@ namespace Spacy
                                                                                               DirectType::MUMPS ,
                                                                                               MatrixProperties::GENERAL*/ );
         };
+
+      Spacy::Vector x_;
+
     };
+
+
 
     /**
      * @brief Convenient generation of a linear operator for %Kaskade 7.

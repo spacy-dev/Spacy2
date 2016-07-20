@@ -29,6 +29,10 @@ namespace Spacy
      * @ingroup KaskadeGroup VectorSapceGroup
      * @brief Coefficient vector implementation for %Kaskade 7 (single space).
      * @tparam Description %Kaskade::VariableSetDescription
+     * 
+     * This vector is used in the context of singe component spaces
+     * For multi-component problems ProductSpace::Vector is used which
+     * then hold a couple of Kaskade::Vectors 
      */
     template <class Description>
     class Vector :
@@ -49,7 +53,7 @@ namespace Spacy
         : VectorBase(space),
           variableSet_( creator< VectorCreator<Description> >(space).get() ),
           description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).get()) ),
-          v_( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ))
+          v_( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ))
       {}
 
 //      /// Assign from coefficient vector of %Kaskade 7.
@@ -76,6 +80,10 @@ namespace Spacy
         return variableSet_;
       }
 
+    unsigned numberOfVariables() const
+    {
+	  return description_->degreesOfFreedom();
+	}
 
       /**
        * @brief Apply as dual element.
@@ -84,8 +92,8 @@ namespace Spacy
        */
       Real operator()(const Vector& y) const
       {
-        VectorImpl v( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
-        VectorImpl w( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
+        VectorImpl v( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ));
+        VectorImpl w( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ));
         variableSetToCoefficients(get(),v);
         variableSetToCoefficients(y.get(),w);
         return v*w;
