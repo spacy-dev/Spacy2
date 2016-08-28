@@ -40,7 +40,7 @@ if(Kaskade)
 endif()
 
 add_executable(unit_tests ${TEST_SRC_LIST})
-target_link_libraries(unit_tests spacy ${GTEST_LIBRARIES} pthread)
+target_link_libraries(unit_tests spacy ${GTEST_STATIC_LIBRARIES} pthread)
 
 if(Kaskade)
   target_link_libraries(unit_tests kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)

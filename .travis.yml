@@ -1,39 +1,107 @@
-language: cpp
-before_install:
-  - $CXX --version
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq g++-5
-  - sudo apt-get remove fenics
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 90
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
-  - sudo apt-get install libeigen3-dev
-  - sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
-  - sudo apt-get update -qq
-  - wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
-  - tar xf lcov_1.11.orig.tar.gz
-  - sudo make -C lcov-1.11/ install
-  # install lcov to coveralls conversion + upload tool
-  - gem install coveralls-lcov
-  - sudo apt-get install libgtest-dev
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt
-  - sudo make 
-  # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
-  - sudo cp *.a /usr/lib
-  - cd $TRAVIS_BUILD_DIR
+language: c++
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.6
+    - llvm-toolchain-precise-3.7
+    - llvm-toolchain-precise-3.8
+    packages:
+    - g++-5
+    - gcc-5
+    - g++-6
+    - gcc-6
+    - clang-3.6
+    - clang-3.7
+    - clang-3.8
+
+env:
+  # Workaround for https://github.com/travis-ci/travis-ci/issues/4681
+  matrix:
+    - TRAVIS_EMPTY_JOB_WORKAROUND=true
+  
+matrix:
+  exclude:
+    - env: TRAVIS_EMPTY_JOB_WORKAROUND=true
+  include:
+    # LINUX
+    # GCC 5
+    - os: linux
+      env: COMPILER=g++-5 COMPUTE_COVERAGE=false
+      compiler: gcc
+
+    # GCC 6
+    - os: linux
+      env: COMPILER=g++-6 COMPUTE_COVERAGE=true
+      compiler: gcc
+      
+    # Clang 3.6
+    - os: linux
+      env: COMPILER=clang++-3.6 CCOMPILER=clang-3.6 COMPUTE_COVERAGE=false
+      compiler: clang
+      
+    # Clang 3.7
+    - os: linux
+      env: COMPILER=clang++-3.7 CCOMPILER=clang-3.7 COMPUTE_COVERAGE=false
+      compiler: clang
+      
+    # Clang 3.8
+    - os: linux
+      env: COMPILER=clang++-3.8 CCOMPILER=clang-3.8 COMPUTE_COVERAGE=false
+      compiler: clang
+     
+install:
+  ############################################################################
+  # Override compiler if needed
+  ############################################################################
+  - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; export CC=${CCOMPILER}; fi
+  
+    ############################################################################
+  # Install a recent CMake (unless already installed on OS X)
+  ############################################################################
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      CMAKE_URL="http://www.cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz"
+      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+    else
+      if ! brew ls --version cmake &>/dev/null; then brew install cmake; fi
+    fi
+  - |
+    if [[ ${COMPUTE_COVERAGE} ]]; then
+      sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
+      sudo apt-get update -qq
+      wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
+      tar xf lcov_1.11.orig.tar.gz
+      sudo make -C lcov-1.11/ install
+      # install lcov to coveralls conversion + upload tool
+      gem install coveralls-lcov
+    fi
+  - |
+    git clone https://github.com/google/googletest.git
+    cd googletest && mkdir build && cd build && cmake .. && make
+    sudo cp -r ../googletest/include/gtest /usr/local/include/
+    sudo cp googlemock/gtest/lib*.a /usr/local/lib
+
 script:
-  - mkdir build
-  - cd build
-  - cmake -DBuildTest=ON -DCoverage=ON ..
-  - make
-  - lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
+  - cd $TRAVIS_BUILD_DIR
+  - mkdir build && cd build
+  - |
+    if [[ ${COMPUTE_COVERAGE} ]]; then
+      cmake -DBuildTest=ON -DCoverage=ON .. && make
+      lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
+    else
+      cmake -DBuildTest=ON .. && make
+    fi
   - Test/unit_tests
-  - lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
-  - lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
+  - |
+    if [[ ${COMPUTE_COVERAGE} ]]; then
+      lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
+      lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
+    fi
   - cd ..
 after_success:
   - cd build
-  - sed 's@/home/travis/build/lubkoll/Spacy/@/@g' coverage.info
+  - sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
   - coveralls-lcov --repo-token XQlVreS1r1o5V7qn14UiqF3W3kZiy7TUM coverage.info
