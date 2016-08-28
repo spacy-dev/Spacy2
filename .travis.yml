@@ -69,7 +69,7 @@ install:
       if ! brew ls --version cmake &>/dev/null; then brew install cmake; fi
     fi
   - |
-    if [[ ${COMPUTE_COVERAGE} ]]; then
+    if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
       sudo apt-get update -qq
       wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
@@ -88,7 +88,7 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - mkdir build && cd build
   - |
-    if [[ ${COMPUTE_COVERAGE} ]]; then
+    if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       cmake -DBuildTest=ON -DCoverage=ON .. && make
       lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
     else
@@ -96,7 +96,7 @@ script:
     fi
   - Test/unit_tests
   - |
-    if [[ ${COMPUTE_COVERAGE} ]]; then
+    if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
       lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
     fi
