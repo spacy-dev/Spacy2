@@ -12,7 +12,6 @@ addons:
     - gcc-5
     - g++-6
     - gcc-6
-    - gcov-6
     - clang-3.6
     - clang-3.7
     - clang-3.8
@@ -57,6 +56,10 @@ install:
   # Override compiler if needed
   ############################################################################
   - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; export CC=${CCOMPILER}; fi
+  - |
+    if [[ "${COMPUTE_COVERATE}" == "true" ]]; then
+      sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 50
+    fi
   
     ############################################################################
   # Install a recent CMake (unless already installed on OS X)
@@ -103,6 +106,9 @@ script:
     fi
   - cd ..
 after_success:
-  - cd build
-  - sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
-  - coveralls-lcov --repo-token XQlVreS1r1o5V7qn14UiqF3W3kZiy7TUM coverage.info
+  - |
+    if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
+      cd build
+      sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
+      coveralls-lcov --repo-token XQlVreS1r1o5V7qn14UiqF3W3kZiy7TUM coverage.info
+    fi
