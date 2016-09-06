@@ -12,6 +12,7 @@ addons:
     - gcc-5
     - g++-6
     - gcc-6
+    - gcov-6
     - clang-3.6
     - clang-3.7
     - clang-3.8
