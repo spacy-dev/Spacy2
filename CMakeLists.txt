@@ -1,6 +1,6 @@
 project(spacy)
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 # The version number
 set (SPACY_MAJOR_VERSION 0)
