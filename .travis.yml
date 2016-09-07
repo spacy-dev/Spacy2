@@ -29,12 +29,12 @@ matrix:
     # LINUX
     # GCC 5
     - os: linux
-      env: COMPILER=g++-5 COMPUTE_COVERAGE=false
+      env: COMPILER=g++-5 CCOMPILER=gcc-5 COMPUTE_COVERAGE=false
       compiler: gcc
 
     # GCC 6
     - os: linux
-      env: COMPILER=g++-6 COMPUTE_COVERAGE=true
+      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=/usr/bin/gcov-6 COMPUTE_COVERAGE=true
       compiler: gcc
       
     # Clang 3.6
@@ -56,11 +56,8 @@ install:
   ############################################################################
   # Override compiler if needed
   ############################################################################
-  - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; export CC=${CCOMPILER}; fi
-  - |
-    if [[ "${COMPUTE_COVERATE}" == "true" ]]; then
-      sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-6 50
-    fi
+  - export CXX=${COMPILER}
+    export CC=${CCOMPILER}
   
     ############################################################################
   # Install a recent CMake (unless already installed on OS X)
@@ -96,15 +93,15 @@ script:
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       cmake -DBuildTest=ON -DCoverage=ON .. && make
-      lcov --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
+      lcov --gcov-tool ${GCOV} --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
     else
       cmake -DBuildTest=ON .. && make
     fi
   - Test/unit_tests
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-      lcov --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
-      lcov --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
+      lcov --gcov-tool ${GCOV} --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
+      lcov --gcov-tool ${GCOV} --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
     fi
   - cd ..
 after_success:
