@@ -58,11 +58,6 @@ matrix:
       compiler: clang
      
 install:
-  ############################################################################
-  # Override compiler if needed
-  ############################################################################
-  - export CXX=${COMPILER}
-    export CC=${CCOMPILER}
   
     ############################################################################
   # Install a recent CMake (unless already installed on OS X)
@@ -103,7 +98,9 @@ install:
       export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LLVM_DIR}/install/lib"
       export PATH="${LLVM_DIR}/clang/bin:${PATH}"
     fi
-
+  - export CXX=${COMPILER}
+  - export CC=${CCOMPILER}
+    
   ############################################################################
   # Install lcov
   ############################################################################
