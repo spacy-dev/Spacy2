@@ -70,7 +70,7 @@ install:
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       CMAKE_URL="http://www.cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+      mkdir cmake && travis_retry wget --no-check-certificate --quiet - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     else
       if ! brew ls --version cmake &>/dev/null; then brew install cmake; fi
@@ -86,7 +86,7 @@ install:
       sudo cp *.a /usr/lib
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         LCOV_URL="http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz"
-        travis_retry wget --no-check-certificate --quiet -O - ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
+        travis_retry wget --no-check-certificate --quiet - ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
         sudo make -C lcov/ install
         sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
         sudo apt-get update -qq
