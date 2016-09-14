@@ -86,7 +86,7 @@ install:
       sudo cp *.a /usr/lib
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         LCOV_URL="http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz"
-        travis_retry wget --quiet ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
+        travis_retry wget --no-check-certificate --quiet ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
         sudo make -C lcov/ install
         sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
         sudo apt-get update -qq
