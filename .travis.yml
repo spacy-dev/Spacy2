@@ -15,6 +15,7 @@ addons:
     - clang-3.6
     - clang-3.7
     - clang-3.8
+    - lcov
 
 env:
   # Workaround for https://github.com/travis-ci/travis-ci/issues/4681
@@ -84,15 +85,15 @@ install:
       sudo make 
       # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
       sudo cp *.a /usr/lib
-      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-        LCOV_URL="http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz"
-        travis_retry wget --no-check-certificate --quiet ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
-        sudo make -C lcov/ install
-        sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
-        sudo apt-get update -qq
+#      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
+#        LCOV_URL="http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz"
+#        travis_retry wget --no-check-certificate --quiet -O - ${LCOV_URL} | tar --strip-components=1 -xz -C lcov
+#        sudo make -C lcov/ install
+#        sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
+#        sudo apt-get update -qq
         # install lcov to coveralls conversion + upload tool
-        gem install coveralls-lcov
-      fi
+#        gem install coveralls-lcov
+#      fi
     fi
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
