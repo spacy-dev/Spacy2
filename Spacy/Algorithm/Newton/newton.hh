@@ -1,11 +1,8 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ALGORITHM_NEWTON_HH
-#define SPACY_ALGORITHM_NEWTON_HH
-
-#include "Spacy/Algorithm/Newton/parameter.hh"
-#include "Spacy/vector.hh"
+#include <Spacy/Algorithm/Newton/parameter.hh>
+#include <Spacy/vector.hh>
+#include <functional>
 
 namespace Spacy
 {
@@ -141,4 +138,3 @@ namespace Spacy
 
   /** @} */
 }
-#endif // SPACY_ALGORITHM_NEWTON_HH

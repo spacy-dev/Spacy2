@@ -3,15 +3,14 @@
 
 #include "newton.hh"
 
+#include <Spacy/Util/Exceptions/notConvergedException.hh>
 
-#include "Spacy/Algorithm/Newton/dampingStrategies.hh"
-#include "Spacy/Algorithm/Newton/terminationCriteria.hh"
+#include <Spacy/Algorithm/Newton/dampingStrategies.hh>
+#include <Spacy/Algorithm/Newton/terminationCriteria.hh>
 
-#include "Spacy/Util/Exceptions/notConvergedException.hh"
-
-#include "Spacy/derivative.hh"
-#include "Spacy/c1Operator.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/derivative.hh>
+#include <Spacy/c1Operator.hh>
+#include <Spacy/vectorSpace.hh>
 
 #include <iostream>
 
