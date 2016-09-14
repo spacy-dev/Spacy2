@@ -64,7 +64,7 @@ install:
   ############################################################################
   - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; export CC=${CCOMPILER}; fi
   
-    ############################################################################
+  ############################################################################
   # Install a recent CMake (unless already installed on OS X)
   ############################################################################
   - |
@@ -76,6 +76,9 @@ install:
       if ! brew ls --version cmake &>/dev/null; then brew install cmake; fi
     fi
     
+  ############################################################################
+  # Install gtest and, if required, lcov
+  ############################################################################
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
@@ -100,7 +103,7 @@ script:
   - mkdir build && cd build
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-      cmake -DBuildTest=ON -DCoverage=ON .. && make
+      cmake -DBuildTest=ON -DCoverage=ON -DCMAKE_CXX_FLAGS="-static-libgcc -static-libstdc++" .. && make
       lcov --gcov-tool ${GCOV} --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
     else
       cmake -DBuildTest=ON .. && make

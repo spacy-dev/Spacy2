@@ -1,3 +1,0 @@
-#!/bin/bash
-
-python2 /home/lars/Projects/type_erasure/emtypen/emtypen.py --form /home/lars/Projects/type_erasure/emtypen/forms/sbo.hpp --headers /home/lars/Projects/type_erasure/emtypen/headers/sbo.hpp --clang-path /usr/lib/llvm-3.8/lib plain_interface.hh > interface.hh
