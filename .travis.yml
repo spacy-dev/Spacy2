@@ -84,7 +84,10 @@ install:
       sudo make 
       # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
       sudo cp *.a /usr/lib
-      sudo apt-get install lcov
+      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
+        travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
+        sudo dpkg -i lcov_1.12-3_all.deb
+      fi
     fi
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
