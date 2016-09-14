@@ -84,7 +84,7 @@ install:
       sudo make 
       # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
       sudo cp *.a /usr/lib
-      if [[ ${COMPUTE_COVERAGE} ]]; then
+      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu/ trusty main restricted" -y
         sudo apt-get update -qq
         wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
