@@ -78,19 +78,17 @@ install:
     
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
+        travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
+        sudo dpkg -i lcov_1.12-3_all.deb
+      fi
       sudo apt-get install libgtest-dev
       cd /usr/src/gtest
       sudo cmake CMakeLists.txt
       sudo make 
       # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
       sudo cp *.a /usr/lib
-      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-        travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
-        sudo dpkg -i lcov_1.12-3_all.deb
-      fi
-    fi
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+    else
       git clone https://github.com/google/googletest.git
       cd googletest && mkdir build && cd build && cmake .. && make
       sudo cp -r ../googletest/include/gtest /usr/local/include/
