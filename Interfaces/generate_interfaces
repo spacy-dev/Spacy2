@@ -1,0 +1,39 @@
+#!/bin/bash
+
+INTERFACE_DIR=../Spacy
+UTIL_DIR=$INTERFACE_DIR/Util
+UTIL_INCLUDE_DIR=Util
+DETAIL_FOLDER=$INTERFACE_DIR/Detail
+DETAIL_PREFIX=details_for_
+EXTENSION=Detail
+BUFFER_SIZE=64
+
+COMMON_ARGS="-cow --table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path /usr/lib/llvm-3.8/lib"
+SMALL_SBO_ARGS="-sbo --buffer $BUFFER_SIZE"
+
+COMMAND=/home/lars/PycharmProjects/friendly-type-erasure/type_erase.py
+
+function generate_interface {
+python2 $COMMAND $COMMON_ARGS $2 --detail-file $DETAIL_PREFIX$1 --interface-file $INTERFACE_DIR/$1 --include-dir /home/lars/tmp2/Spacy --std c++14 $1 
+}
+
+mkdir -p $DETAIL_FOLDER 
+
+echo "generate operator.hh"
+generate_interface        operator.hh "$SMALL_SBO_ARGS"
+#echo "generate linearOperator.hh"
+#generate_interface  linearOperator.hh "$SMALL_SBO_ARGS"
+#echo "generate c1Operator.hh"
+#generate_interface      c1Operator.hh "$SMALL_SBO_ARGS"
+#echo "generate dynamicOperator.hh"
+#generate_interface dynamicOperator.hh "$SMALL_SBO_ARGS"
+#echo "generate functional.hh"
+#generate_interface      functional.hh "$SMALL_SBO_ARGS"
+#echo "generate c1Functional.hh"
+#generate_interface    c1Functional.hh "$SMALL_SBO_ARGS"
+#echo "generate c2Functional.hh"
+#generate_interface    c2Functional.hh "$SMALL_SBO_ARGS"
+#echo "generate vector.hh"
+#generate_interface          vector.hh "$SMALL_SBO_ARGS"
+
+

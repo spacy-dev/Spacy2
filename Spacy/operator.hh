@@ -3,110 +3,107 @@
 
 #pragma once
 
-#include "Detail/details_for_operator.hh"
-#include "Util/vtable_util.hh"
-#include <Spacy/vector.hh>
-#include <Spacy/vectorSpace.hh>
 #include <array>
 #include <functional>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include "Detail/details_for_operator.hh"
+#include "Util/table_util.hh"
 
-namespace Spacy {
-/**
-* An operator that does not know about domain and range spaces.
-* Good enough for some algorithms (i.e. for Krylov-methods).
-*/
-using CallableOperator = std::function<Vector(const Vector &)>;
+namespace Spacy
+{
+    /**
+    * An operator that does not know about domain and range spaces.
+    * Good enough for some algorithms (i.e. for Krylov-methods).
+    */
+    using CallableOperator = std::function< Vector( const Vector& ) >;
 
-/// Type-erased operator \f$A:\ X \to Y \f$.
-class Operator {
-public:
-  Operator() noexcept;
+    /// Type-erased operator \f$A:\ X \to Y \f$.
+    class Operator
+    {
+    public:
+        Operator() noexcept;
 
-  template <
-      typename T,
-      typename std::enable_if<!std::is_same<
-          Operator, typename std::decay<T>::type>::value>::type * = nullptr>
-  Operator(T &&value)
-      : functions_({&type_erasure_vtable_detail::clone_into_shared_ptr<
-                        typename std::decay<T>::type>,
-                    &type_erasure_vtable_detail::clone_into_buffer<
-                        typename std::decay<T>::type, Buffer>,
-                    &OperatorDetail::execution_wrapper<
-                        Operator, typename std::decay<T>::type>::call,
-                    &OperatorDetail::execution_wrapper<
-                        Operator, typename std::decay<T>::type>::domain,
-                    &OperatorDetail::execution_wrapper<
-                        Operator, typename std::decay<T>::type>::range}),
-        impl_(nullptr) {
-    if (sizeof(typename std::decay<T>::type) <= sizeof(Buffer)) {
-      new (&buffer_) typename std::decay<T>::type(std::forward<T>(value));
-      impl_ = std::shared_ptr<typename std::decay<T>::type>(
-          std::shared_ptr<typename std::decay<T>::type>(),
-          static_cast<typename std::decay<T>::type *>(
-              static_cast<void *>(&buffer_)));
-    } else
-      impl_ = std::make_shared<typename std::decay<T>::type>(
-          std::forward<T>(value));
-  }
+        template < typename T, typename std::enable_if<
+                                   !std::is_same< Operator, typename std::decay< T >::type >::value >::type* = nullptr >
+        Operator( T&& value )
+            : functions_( {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
+                           &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
+                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::call,
+                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::domain,
+                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::range} ),
+              impl_( nullptr )
+        {
+            if ( sizeof( typename std::decay< T >::type ) <= sizeof( Buffer ) )
+            {
+                new ( &buffer_ ) typename std::decay< T >::type( std::forward< T >( value ) );
+                impl_ = std::shared_ptr< typename std::decay< T >::type >(
+                    std::shared_ptr< typename std::decay< T >::type >(),
+                    static_cast< typename std::decay< T >::type* >( static_cast< void* >( &buffer_ ) ) );
+            }
+            else
+                impl_ = std::make_shared< typename std::decay< T >::type >( std::forward< T >( value ) );
+        }
 
-  Operator(const Operator &other);
+        Operator( const Operator& other );
 
-  Operator(Operator &&other) noexcept;
+        Operator( Operator&& other ) noexcept;
 
-  template <
-      typename T,
-      typename std::enable_if<!std::is_same<
-          Operator, typename std::decay<T>::type>::value>::type * = nullptr>
-  Operator &operator=(T &&value) {
-    return *this = Operator(std::forward<T>(value));
-  }
+        template < typename T, typename std::enable_if<
+                                   !std::is_same< Operator, typename std::decay< T >::type >::value >::type* = nullptr >
+        Operator& operator=( T&& value )
+        {
+            return *this = Operator( std::forward< T >( value ) );
+        }
 
-  Operator &operator=(const Operator &other);
+        Operator& operator=( const Operator& other );
 
-  Operator &operator=(Operator &&other) noexcept;
+        Operator& operator=( Operator&& other ) noexcept;
 
-  /**
-   * @brief Checks if the type-erased interface holds an implementation.
-   * @return true if an implementation is stored, else false
-   */
-  explicit operator bool() const noexcept;
+        /**
+         * @brief Checks if the type-erased interface holds an implementation.
+         * @return true if an implementation is stored, else false
+         */
+        explicit operator bool() const noexcept;
 
-  /// Apply operator.
-  Vector operator()(const Vector &x) const;
+        /// Apply operator.
+        Vector operator()( const Vector& x ) const;
 
-  /// Access domain space \f$X\f$.
-  const VectorSpace &domain() const;
+        /// Access domain space \f$X\f$.
+        const VectorSpace& domain() const;
 
-  /// Access range space \f$Y\f$.
-  const VectorSpace &range() const;
+        /// Access range space \f$Y\f$.
+        const VectorSpace& range() const;
 
-  /**
-  * @brief Conversion of the stored implementation to @code  T* @endcode.
-  * @return pointer to the stored object if conversion was successful, else
-  * nullptr
-  */
-  template <class T> T *target() noexcept {
-    return type_erasure_vtable_detail::cast_impl<T>(read());
-  }
+        /**
+        * @brief Conversion of the stored implementation to @code  T* @endcode.
+        * @return pointer to the stored object if conversion was successful, else nullptr
+        */
+        template < class T >
+        T* target() noexcept
+        {
+            return type_erasure_table_detail::cast_impl< T >( read() );
+        }
 
-  /**
-  * @brief Conversion of the stored implementation to @code const T* @endcode.
-  * @return pointer to the stored object if conversion was successful, else
-  * nullptr
-  */
-  template <class T> const T *target() const noexcept {
-    return type_erasure_vtable_detail::cast_impl<T>(read());
-  }
+        /**
+        * @brief Conversion of the stored implementation to @code const T* @endcode.
+        * @return pointer to the stored object if conversion was successful, else nullptr
+        */
+        template < class T >
+        const T* target() const noexcept
+        {
+            return type_erasure_table_detail::cast_impl< T >( read() );
+        }
 
-private:
-  using Buffer = std::array<char, 64>;
+    private:
+        using Buffer = std::array< char, 64 >;
 
-  void *read() const noexcept;
+        void* read() const noexcept;
 
-  void *write();
+        void* write();
 
-  OperatorDetail::Functions<Operator, Buffer> functions_;
-  std::shared_ptr<void> impl_ = nullptr;
-  Buffer buffer_;
-};
+        OperatorDetail::Functions< Operator, Buffer > functions_;
+        std::shared_ptr< void > impl_ = nullptr;
+        Buffer buffer_;
+    };
 }

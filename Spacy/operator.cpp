@@ -2,71 +2,82 @@
 // Please do not modify.
 
 #include "operator.hh"
-#include <Spacy/vector.hh>
-#include <Spacy/vectorSpace.hh>
-#include <functional>
 
-namespace Spacy {
-Operator::Operator() noexcept : impl_(nullptr) {}
+namespace Spacy
+{
+    Operator::Operator() noexcept : impl_( nullptr )
+    {
+    }
 
-Operator::Operator(const Operator &other)
-    : functions_(other.functions_), impl_(other.impl_) {}
+    Operator::Operator( const Operator& other ) : functions_( other.functions_ ), impl_( other.impl_ )
+    {
+    }
 
-Operator::Operator(Operator &&other) noexcept : functions_(other.functions_) {
-  if (type_erasure_vtable_detail::is_heap_allocated(other.impl_.get(),
-                                                    other.buffer_))
-    impl_ = std::move(other.impl_);
-  else
-    other.functions_.clone_into(other.impl_.get(), buffer_, impl_);
-  other.impl_ = nullptr;
-}
+    Operator::Operator( Operator&& other ) noexcept : functions_( other.functions_ )
+    {
+        if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            impl_ = std::move( other.impl_ );
+        else
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
+        other.impl_ = nullptr;
+    }
 
-Operator &Operator::operator=(const Operator &other) {
-  functions_ = other.functions_;
-  impl_ = other.impl_;
-  return *this;
-}
+    Operator& Operator::operator=( const Operator& other )
+    {
+        functions_ = other.functions_;
+        impl_ = other.impl_;
+        return *this;
+    }
 
-Operator &Operator::operator=(Operator &&other) noexcept {
-  functions_ = other.functions_;
-  if (type_erasure_vtable_detail::is_heap_allocated(other.impl_.get(),
-                                                    other.buffer_))
-    impl_ = std::move(other.impl_);
-  else
-    other.functions_.clone_into(other.impl_.get(), buffer_, impl_);
-  other.impl_ = nullptr;
-  return *this;
-}
+    Operator& Operator::operator=( Operator&& other ) noexcept
+    {
+        functions_ = other.functions_;
+        if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            impl_ = std::move( other.impl_ );
+        else
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
+        other.impl_ = nullptr;
+        return *this;
+    }
 
-Operator::operator bool() const noexcept { return impl_ != nullptr; }
+    Operator::operator bool() const noexcept
+    {
+        return impl_ != nullptr;
+    }
 
-Vector Operator::operator()(const Vector &x) const {
-  assert(impl_);
-  return functions_.call(*this, read(), x);
-}
+    Vector Operator::operator()( const Vector& x ) const
+    {
+        assert( impl_ );
+        return functions_.call( *this, read(), x );
+    }
 
-const VectorSpace &Operator::domain() const {
-  assert(impl_);
-  return functions_.domain(*this, read());
-}
+    const VectorSpace& Operator::domain() const
+    {
+        assert( impl_ );
+        return functions_.domain( *this, read() );
+    }
 
-const VectorSpace &Operator::range() const {
-  assert(impl_);
-  return functions_.range(*this, read());
-}
+    const VectorSpace& Operator::range() const
+    {
+        assert( impl_ );
+        return functions_.range( *this, read() );
+    }
 
-void *Operator::read() const noexcept {
-  assert(impl_);
-  return impl_.get();
-}
+    void* Operator::read() const noexcept
+    {
+        assert( impl_ );
+        return impl_.get();
+    }
 
-void *Operator::write() {
-  if (!impl_.unique()) {
-    if (type_erasure_vtable_detail::is_heap_allocated(impl_.get(), buffer_))
-      functions_.clone(impl_.get(), impl_);
-    else
-      functions_.clone_into(impl_.get(), buffer_, impl_);
-  }
-  return impl_.get();
-}
+    void* Operator::write()
+    {
+        if ( !impl_.unique() )
+        {
+            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+                functions_.clone( impl_.get(), impl_ );
+            else
+                functions_.clone_into( impl_.get(), buffer_, impl_ );
+        }
+        return impl_.get();
+    }
 }
