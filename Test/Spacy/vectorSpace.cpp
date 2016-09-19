@@ -14,21 +14,21 @@ TEST(VectorSpace,Index)
 TEST(VectorSpace,Vector)
 {
   auto space = createMockBanachSpace();
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   ASSERT_EQ( mockValue(vector) , static_cast<double>(Mock::Vector::testValue) );
 }
 
 TEST(VectorSpace,Norm)
 {
   auto space = createMockBanachSpace();
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   ASSERT_EQ( toDouble(space.norm()(vector))  , static_cast<double>(Mock::Norm::testValue) );
 }
 
 TEST(VectorSpace,SetNorm)
 {
   auto space = createMockBanachSpace();
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   space.setNorm(Mock::Norm10());
   ASSERT_EQ( toDouble(space.norm()(vector))  , static_cast<double>(Mock::Norm10::testValue) );
 }
@@ -42,7 +42,7 @@ TEST(VectorSpace,BanachSpaceScalarProduct)
 TEST(VectorSpace,SetScalarProduct)
 {
   auto space = createMockBanachSpace();
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   space.setScalarProduct(Mock::ScalarProduct());
   ASSERT_EQ( toDouble(space.scalarProduct()(vector,vector))  , static_cast<double>(Mock::ScalarProduct::testValue) );
 }
@@ -63,7 +63,7 @@ TEST(VectorSpace,IsHilbertSpace)
 TEST(VectorSpace,MakeBanachSpace)
 {
   auto space = createMockBanachSpace();
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   ASSERT_EQ( mockValue(vector) , static_cast<double>(Mock::Vector::testValue) );
   ASSERT_EQ( toDouble(space.norm()(vector))  , static_cast<double>(Mock::Norm::testValue) );
   ASSERT_FALSE( space.isHilbertSpace() );
@@ -72,7 +72,7 @@ TEST(VectorSpace,MakeBanachSpace)
 TEST(VectorSpace,MakeHilbertSpace)
 {
   auto space = makeHilbertSpace( Mock::VectorCreator{} , Mock::ScalarProduct{} );
-  auto vector = space.zeroVector();
+  auto vector = zero(space);
   ASSERT_EQ( mockValue(vector) , static_cast<double>(Mock::Vector::testValue) );
   ASSERT_EQ( toDouble(space.norm()(vector))  , static_cast<double>(Mock::Norm::testValue) );
   ASSERT_EQ( toDouble(space.scalarProduct()(vector,vector))  , static_cast<double>(Mock::ScalarProduct::testValue) );

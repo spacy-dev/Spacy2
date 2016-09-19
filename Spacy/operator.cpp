@@ -13,7 +13,7 @@ namespace Spacy
     {
     }
 
-    Operator::Operator( Operator&& other ) noexcept : functions_( other.functions_ )
+    Operator::Operator( Operator&& other ) noexcept : functions_( other.functions_ ), type_id_( other.type_id_ )
     {
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );
@@ -25,6 +25,7 @@ namespace Spacy
     Operator& Operator::operator=( const Operator& other )
     {
         functions_ = other.functions_;
+        type_id_ = other.type_id_;
         impl_ = other.impl_;
         return *this;
     }
@@ -48,7 +49,7 @@ namespace Spacy
     Vector Operator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call( *this, read(), x );
+        return functions_.call_const_Vector__ref_( *this, read(), x );
     }
 
     const VectorSpace& Operator::domain() const

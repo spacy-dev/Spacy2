@@ -5,14 +5,12 @@
 #define SPACY_VECTOR_SPACE_HH
 
 #include <functional>
+#include <memory>
 #include <vector>
 
-#include "Spacy/norm.hh"
-#include "Spacy/scalarProduct.hh"
-
-#include "Spacy/Util/Mixins/eps.hh"
-#include "Spacy/Util/Mixins/target.hh"
-#include "Spacy/vector.hh"
+#include <Spacy/norm.hh>
+#include <Spacy/scalarProduct.hh>
+#include <Spacy/Util/Mixins/eps.hh>
 
 namespace Spacy
 {
@@ -20,29 +18,8 @@ namespace Spacy
   /// Each space gets a unique index, except if defaultIndex is set to true.
   /// In this case it gets the default index 0.
   namespace Detail { static unsigned spaceIndex = 1; }
+  class ZeroVectorCreator;
   /// @endcond
-
-  /**
-   * @brief %Vector creator for feeding into VectorSpace.
-   *
-   * @code
-   * // My vector creator.
-   * class MyVectorCreator
-   * {
-   * public:
-   *   // Compute ||x||.
-   *   Spacy::Vector operator()(const Spacy::VectorSpace* space) const;
-   * };
-   * @endcode
-   */
-  using VectorCreator = std::function< Vector(const VectorSpace*) >;
-
-
-  template <class T>
-  T& creator(VectorSpace& space);
-
-  template <class T>
-  const T& creator(const VectorSpace& space);
 
   /**
    * @brief Function space \f$(X,\|\cdot\|)\f$.
@@ -55,7 +32,10 @@ namespace Spacy
   class VectorSpace : public Mixin::Eps
   {
   public:
-    VectorSpace() = default;
+    VectorSpace();
+
+    ~VectorSpace();
+
     /**
      * @brief Construct function space from VectorCreator and Norm.
      * @param norm type-erased norm
@@ -63,7 +43,7 @@ namespace Spacy
      *
      * The default index can be used to use different locally defined function spaces together.
      */
-    VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex = false);
+    VectorSpace(ZeroVectorCreator&& creator, Norm norm, bool defaultIndex = false);
 
     VectorSpace(VectorSpace&& V);
 
@@ -82,7 +62,7 @@ namespace Spacy
     const Norm& norm() const;
 
     /// Create new vector \f$v=0\f$.
-    Vector zeroVector() const;
+//    Vector zeroVector() const;
 
     /// Access unique index of the function space.
     unsigned index() const;
@@ -122,12 +102,12 @@ namespace Spacy
     /// Checks if vector is admissible. Default implementation always returns true;
     bool isAdmissible(const Vector& x) const;
 
-    VectorCreator& creator();
+    ZeroVectorCreator& creator();
 
-    const VectorCreator& creator() const;
+    const ZeroVectorCreator& creator() const;
 
   private:
-    VectorCreator creator_ = VectorCreator{};
+    std::unique_ptr< ZeroVectorCreator > creator_;
     Norm norm_ = {};
     ScalarProduct sp_ = {};
     unsigned index_ = Detail::spaceIndex++;
@@ -136,23 +116,11 @@ namespace Spacy
     std::function<bool(const Vector&)> restriction_ = [](const Vector&){ return true; };
   };
 
-  template <class T>
-  T& creator(VectorSpace& space)
-  {
-    return *space.creator().template target<T>();
-  }
-
-  template <class T>
-  const T& creator(const VectorSpace& space)
-  {
-    return *space.creator().template target<T>();
-  }
-
   /// Construct Banach space.
-  VectorSpace makeBanachSpace(VectorCreator creator, Norm norm);
+  VectorSpace makeBanachSpace( ZeroVectorCreator&& creator, Norm norm);
 
   /// Construct Hilbert space.
-  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex = false);
+  VectorSpace makeHilbertSpace(ZeroVectorCreator&& creator, ScalarProduct scalarProduct, bool defaultIndex = false);
 
   /**
    * @brief Relate function spaces.

@@ -3,8 +3,9 @@
 
 #include "triangularStateConstraintPreconditioner.hh"
 
-#include "Spacy/Spaces/productSpace.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/Spaces/productSpace.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 
 #include <utility>
 
@@ -26,7 +27,7 @@ namespace Spacy
 
     Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x) const
     {
-      auto y = domain().zeroVector();
+      auto y = zero(domain());
       auto q = x;
 
       apply(x,y,q);
@@ -36,7 +37,7 @@ namespace Spacy
 
     Vector TriangularStateConstraintPreconditioner::operator()(const Vector& x, Vector& q) const
     {
-      auto y = domain().zeroVector();
+      auto y = zero(domain());
       q = x;
 
       return std::move(y);
@@ -73,7 +74,7 @@ namespace Spacy
       auto& rhs_ = cast_ref<ProductSpace::Vector>(rhs);
       auto& rhsd_ = cast_ref<ProductSpace::Vector>(rhs_.component(DUAL));
 
-      auto y = range().zeroVector();
+      auto y = zero(range());
       auto& y_ = cast_ref<ProductSpace::Vector>(y);
       auto& yp_ = cast_ref<ProductSpace::Vector>(y_.component(PRIMAL));
       auto localStateIndex = creator<ProductSpace::VectorCreator>(yp_.space()).idMap(getStateIndex());

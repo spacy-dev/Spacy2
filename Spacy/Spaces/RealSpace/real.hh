@@ -1,13 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_REAL_SPACE_VECTOR_HH
-#define SPACY_REAL_SPACE_VECTOR_HH
+#pragma once
 
 #include <ostream>
 
-#include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/get.hh"
+#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Mixins/get.hh>
 
 namespace Spacy
 {
@@ -287,5 +283,3 @@ namespace Spacy
 
   /** @} */
 }
-
-#endif // SPACY_REAL_SPACE_VECTOR_HH

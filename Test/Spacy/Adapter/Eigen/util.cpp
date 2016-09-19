@@ -14,20 +14,20 @@ using namespace Spacy;
 TEST(Rn,GetSize)
 {
   auto V = Rn::makeHilbertSpace(testDim());
-  auto x = V.zeroVector();
+  auto x = zero(V);
   ASSERT_EQ( Rn::getSize(x) , testDim() );
 }
 
 TEST(Rn,GetSizeOfProductSpace)
 {
   auto V = Rn::makeHilbertSpace( {testDim(),testDim(),testDim()} );
-  auto x = V.zeroVector();
+  auto x = zero(V);
   ASSERT_EQ( Rn::getSize(x) , 3*testDim() );
 }
 
 TEST(Rn,GetSizeOfPrimalDualProductSpace)
 {
   auto V = Rn::makeHilbertSpace( {testDim(),testDim(),testDim()} , {1,2} , {0} );
-  auto x = V.zeroVector();
+  auto x = zero(V);
   ASSERT_EQ( Rn::getSize(x) , 3*testDim() );
 }

@@ -3,11 +3,12 @@
 
 #include "vector.hh"
 
-#include "Spacy/Util/cast.hh"
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/cast.hh>
 
 #include "vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/vectorSpace.hh"
 
 #include <algorithm>
 #include <cassert>
@@ -21,7 +22,7 @@ namespace Spacy
     {
     const auto& spaces = Spacy::creator<VectorCreator>(space).subSpaces();
     for (auto i=0u; i<spaces.size(); ++i)
-      components_.push_back( spaces[i]->zeroVector() );
+      components_.push_back( zero(*spaces[i]) );
     }
 
     Vector& Vector::operator+=(const Vector& y)

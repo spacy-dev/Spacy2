@@ -1,5 +1,8 @@
 #include "linearOperatorCreator.hh"
 
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/cast.hh>
+
 #include <Eigen/Dense>
 
 #include "vectorCreator.hh"

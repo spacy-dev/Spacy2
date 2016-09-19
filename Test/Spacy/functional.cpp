@@ -30,7 +30,7 @@ namespace
 
   void test(const Functional& f, const VectorSpace& X)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }

@@ -1,23 +1,16 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH
-#define SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH
+#pragma once
 
 #include <algorithm>
 #include <memory>
 #include <vector>
 
-#include "Spacy/vector.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class Real;
-  /// @endcond
-
   /** @addtogroup ProductSpaceGroup
    * @{
    */
@@ -212,5 +205,3 @@ namespace Spacy
 
   /** @} */
 }
-
-#endif // SPACY_SPACES_PRODUCT_SPACE_VECTOR_HH

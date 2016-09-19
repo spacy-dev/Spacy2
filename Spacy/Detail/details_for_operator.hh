@@ -17,13 +17,13 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_function = Vector ( * )( const Interface&, void*, const Vector& x );
+            using call_const_Vector__ref__function = Vector ( * )( const Interface&, void*, const Vector& x );
             using domain_function = const VectorSpace& (*)( const Interface&, void* );
             using range_function = const VectorSpace& (*)( const Interface&, void* );
 
             clone_function clone;
             clone_into_function clone_into;
-            call_function call;
+            call_const_Vector__ref__function call_const_Vector__ref_;
             domain_function domain;
             range_function range;
         };
@@ -31,7 +31,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
@@ -50,7 +50,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }

@@ -1,15 +1,10 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "derivative.hh"
 
-#include "Spacy/Util/Base/functionalBase.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/c2Functional.hh"
-#include "Spacy/c1Operator.hh"
-#include "Spacy/linearOperator.hh"
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/linearOperator.hh>
+#include <Spacy/Util/Base/functionalBase.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
 
 namespace Spacy
 {

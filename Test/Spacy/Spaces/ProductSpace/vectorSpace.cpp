@@ -1,60 +1,57 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include <cmath>
 #include <gtest/gtest.h>
 
-#include "Test/mockSetup.hh"
+#include <Test/mockSetup.hh>
 
 using namespace Spacy;
 
 TEST(ProductSpace,Index)
 {
-  auto space = makeProductHilbertSpace();
-  ASSERT_EQ( std::get<0>(space).index() , std::get<2>(space)+1u );
-  ASSERT_EQ( std::get<0>(space).index() , std::get<1>(space)+2u );
-  ASSERT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(space)).idMap(0) , 0u );
-  ASSERT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(space)).idMap(1) , 1u );
+    auto V = makeProductHilbertSpace();
+    EXPECT_EQ( std::get<0>(V).index() , std::get<2>(V)+1u );
+    EXPECT_EQ( std::get<0>(V).index() , std::get<1>(V)+2u );
+    EXPECT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(V)).idMap(0) , 0u );
+    EXPECT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(V)).idMap(1) , 1u );
 }
 
 TEST(ProductSpace, HasId)
 {
-  auto space = makeProductHilbertSpaceWithMap();
-  ASSERT_TRUE( creator<ProductSpace::VectorCreator>(std::get<0>(space)).hasId(firstGlobalId()) );
-  ASSERT_TRUE( creator<ProductSpace::VectorCreator>(std::get<0>(space)).hasId(secondGlobalId()) );
-  ASSERT_FALSE( creator<ProductSpace::VectorCreator>(std::get<0>(space)).hasId(notGlobalId()) );
+  auto V = makeProductHilbertSpaceWithMap();
+  EXPECT_TRUE( creator<ProductSpace::VectorCreator>(std::get<0>(V)).hasId(firstGlobalId()) );
+  EXPECT_TRUE( creator<ProductSpace::VectorCreator>(std::get<0>(V)).hasId(secondGlobalId()) );
+  EXPECT_FALSE( creator<ProductSpace::VectorCreator>(std::get<0>(V)).hasId(notGlobalId()) );
 }
 
 TEST(ProductSpace, IdMap)
 {
-  auto space = makeProductHilbertSpaceWithMap();
-  ASSERT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(space)).idMap(firstGlobalId()) , 0u );
-  ASSERT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(space)).idMap(secondGlobalId()) , 1u );
+  auto V = makeProductHilbertSpaceWithMap();
+  EXPECT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(V)).idMap(firstGlobalId()) , 0u );
+  EXPECT_EQ( creator<ProductSpace::VectorCreator>(std::get<0>(V)).idMap(secondGlobalId()) , 1u );
 }
 
 TEST(ProductSpace,Vector)
 {
-  auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).zeroVector();
-  ASSERT_NO_THROW( cast_ref<ProductSpace::Vector>(vector) );
+  auto V = makeProductHilbertSpace();
+  auto v = zero(std::get<0>(V));
+  EXPECT_NO_THROW( cast_ref<ProductSpace::Vector>(v) );
 }
 
 TEST(ProductSpace, IsHilbertSpace)
 {
-  auto space = makeProductHilbertSpace();
-  ASSERT_TRUE( std::get<0>(space).isHilbertSpace() );
+  auto V = makeProductHilbertSpace();
+  EXPECT_TRUE( std::get<0>(V).isHilbertSpace() );
 }
 
 TEST(ProductSpace, Norm)
 {
-  auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).zeroVector();
-  ASSERT_EQ( std::get<0>(space).norm()(vector) , sqrt(2*Mock::ScalarProduct::testValue) );
+  auto V = makeProductHilbertSpace();
+  auto v = zero(std::get<0>(V));
+  EXPECT_EQ( std::get<0>(V).norm()(v) , sqrt(2*Mock::ScalarProduct::testValue) );
 }
 
 TEST(ProductSpace, ScalarProduct)
 {
-  auto space = makeProductHilbertSpace();
-  auto vector = std::get<0>(space).zeroVector();
-  ASSERT_EQ( std::get<0>(space).scalarProduct()(vector,vector) , 2.*Mock::ScalarProduct::testValue );
+  auto V = makeProductHilbertSpace();
+  auto v = zero(std::get<0>(V));
+  ASSERT_EQ( std::get<0>(V).scalarProduct()(v,v) , 2.*Mock::ScalarProduct::testValue );
 }

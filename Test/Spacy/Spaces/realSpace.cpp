@@ -17,7 +17,7 @@ TEST(RealSpaceTest,ElementTest)
 {
   using namespace Spacy;
   auto R = RealSpace::makeHilbertSpace();
-  auto x = R.zeroVector();
+  auto x = zero(R);
   EXPECT_DOUBLE_EQ( toDouble(x) , 0. );
 }
 
@@ -25,8 +25,8 @@ TEST(RealSpaceTest,ScalarProductTest)
 {
   using namespace Spacy;
   auto R = RealSpace::makeHilbertSpace();
-  auto x = R.zeroVector();
-  auto y = R.zeroVector();
+  auto x = zero(R);
+  auto y = zero(R);
   toDouble(x) = 1;
   toDouble(y) = -2;
   EXPECT_DOUBLE_EQ( toDouble(x), 1. );
@@ -40,8 +40,8 @@ TEST(RealSpaceTest,NormTest)
 {
   using namespace Spacy;
   auto R = RealSpace::makeHilbertSpace();
-  auto x = R.zeroVector();
-  auto y = R.zeroVector();
+  auto x = zero(R);
+  auto y = zero(R);
   toDouble(x) = 1;
   toDouble(y) = -2;
   EXPECT_DOUBLE_EQ( toDouble(x), 1. );

@@ -1,36 +1,37 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "vectorSpace.hh"
 
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
-#include "Spacy/Util/Exceptions/invalidArgumentException.hh"
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
+#include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 
-#include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/hilbertSpaceNorm.hh"
+#include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/hilbertSpaceNorm.hh>
+#include <Spacy/zeroVectorCreator.hh>
 
 #include <stdexcept>
 #include <utility>
 
 namespace Spacy
 {
-  VectorSpace::VectorSpace(VectorCreator creator, Norm norm, bool defaultIndex)
-    : creator_(creator),
+  VectorSpace::VectorSpace( ) = default;
+
+  VectorSpace::~VectorSpace( ) = default;
+
+  VectorSpace::VectorSpace( ZeroVectorCreator&& creator, Norm norm, bool defaultIndex)
+    : creator_(new ZeroVectorCreator( std::move(creator) ) ),
       norm_{norm}
   {
     if(defaultIndex) index_ = 0;
   }
 
   VectorSpace::VectorSpace(VectorSpace&& V)
-    : creator_{V.creator_} ,
-      norm_{std::move(V.norm_)} ,
-      sp_{std::move(V.sp_)} ,
-      index_{std::move(V.index_)} ,
-      primalSpaces_{std::move(V.primalSpaces_)} ,
-      dualSpaces_{std::move(V.dualSpaces_)}
+    : creator_{ std::move(V).creator_} ,
+      norm_{std::move(V).norm_} ,
+      sp_{std::move(V).sp_} ,
+      index_{std::move(V).index_} ,
+      primalSpaces_{std::move(V).primalSpaces_} ,
+      dualSpaces_{std::move(V).dualSpaces_}
   {
     if( &V == V.dualSpace_)
       setDualSpace(this);
@@ -65,10 +66,10 @@ namespace Spacy
     return norm_;
   }
 
-  Vector VectorSpace::zeroVector() const
-  {
-    return creator_(this);
-  }
+//  Vector VectorSpace::zeroVector() const
+//  {
+//    return creator_(this);
+//  }
 
   unsigned VectorSpace::index() const
   {
@@ -129,19 +130,19 @@ namespace Spacy
     restriction_ = std::move(f);
   }
 
-  VectorCreator& VectorSpace::creator()
+  ZeroVectorCreator& VectorSpace::creator()
   {
-    return creator_;
+    return *creator_;
   }
 
-  const VectorCreator& VectorSpace::creator() const
+  const ZeroVectorCreator& VectorSpace::creator() const
   {
-    return creator_;
+    return *creator_;
   }
 
 
 
-  VectorSpace makeBanachSpace(VectorCreator creator, Norm norm)
+  VectorSpace makeBanachSpace(ZeroVectorCreator&& creator, Norm norm)
   {
     return VectorSpace{std::move(creator),std::move(norm)};
   }
@@ -157,7 +158,7 @@ namespace Spacy
 
 
     template <class Creator>
-    void connectSubSpacesIfConsistent(VectorCreator& creator);
+    void connectSubSpacesIfConsistent(ZeroVectorCreator& creator);
 
     void connectSubSpaces(ProductSpace::VectorCreator& creator)
     {
@@ -166,26 +167,26 @@ namespace Spacy
     }
 
     template <class Creator>
-    void connectSubSpacesIfConsistent(VectorCreator& creator)
+    void connectSubSpacesIfConsistent(ZeroVectorCreator& creator)
     {
       if( creator.template target<Creator>() != nullptr )
         connectSubSpaces( *creator.template target<Creator>() );
     }
 
-    void connectSubSpaces(VectorCreator& creator)
+    void connectSubSpaces(ZeroVectorCreator& creator)
     {
       connectSubSpacesIfConsistent<ProductSpace::VectorCreator>(creator);
     }
   }
 
-  VectorSpace makeHilbertSpace(VectorCreator creator, ScalarProduct scalarProduct, bool defaultIndex)
+  VectorSpace makeHilbertSpace(ZeroVectorCreator&& creator, ScalarProduct scalarProduct, bool defaultIndex)
   {
     auto V = VectorSpace{std::move(creator),HilbertSpaceNorm{scalarProduct},defaultIndex};
     V.setScalarProduct(std::move(scalarProduct));
     V.setDualSpace(&V);
     V.addDualSpace(V);
 
-    connectSubSpaces(creator);
+    connectSubSpaces( V.creator( ) );
 
     return V;
   }

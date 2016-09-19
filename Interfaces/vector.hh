@@ -1,13 +1,14 @@
 #pragma once
 
 #include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
 #include <functional>
 
 namespace Spacy
 {
-  // %<Spacy/vectorSpace.hh>%
-  class VectorSpace;
+  /// %<Spacy/zeroVectorCreator.hh>%
+  class ZeroVectorCreator;
 
   /// Type-erased vector.
   class Vector
@@ -75,34 +76,6 @@ namespace Spacy
     if( !y.space().isPrimalWRT(x.space()) )
       throw IncompatibleSpaceException(x.space().index(),y.space().index());
   }
-
-  /**
-   * @brief %Vector creator for feeding into VectorSpace.
-   *
-   * @code
-   * // My vector creator.
-   * class MyVectorCreator
-   * {
-   * public:
-   *   // Compute ||x||.
-   *   Spacy::Vector operator()(const Spacy::VectorSpace* space) const;
-   * };
-   * @endcode
-   */
-  using VectorCreator = std::function< Vector(const VectorSpace*) >;
-
-  template <class T>
-  T& creator(VectorSpace& space)
-  {
-    return *space.creator().template target<T>();
-  }
-
-  template <class T>
-  const T& creator(const VectorSpace& space)
-  {
-    return *space.creator().template target<T>();
-  }
-
 
   /// Create new vector \f$v=0\f$.
   Vector zero(const VectorSpace& space)

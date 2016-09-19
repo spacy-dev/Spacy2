@@ -15,7 +15,7 @@ TEST(ProductSpaceNorm,Apply)
   auto norm = ProductSpace::Norm{};
   auto V = makeProductHilbertSpace();
 
-  auto v = std::get<0>(V).zeroVector();
+  auto v = zero(std::get<0>(V));
 
   ASSERT_EQ( norm(v) , sqrt(2*Mock::Norm::testValue*Mock::Norm::testValue) );
 }

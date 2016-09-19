@@ -1,5 +1,4 @@
-#ifndef SPACY_TEST_MOCK_SETUP_HH
-#define SPACY_TEST_MOCK_SETUP_HH
+#pragma once
 
 #include <memory>
 #include <tuple>
@@ -7,16 +6,18 @@
 #include <vector>
 #include <utility>
 
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/realSpace.hh"
-#include "Spacy/Spaces/productSpace.hh"
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Util/Exceptions/incompatibleSpaceException.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/Spaces/productSpace.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
 
-#include "Test/Mock/vector.hh"
-#include "Test/Mock/vectorCreator.hh"
-#include "Test/Mock/scalarProduct.hh"
-#include "Test/Mock/norm.hh"
+#include <Test/Mock/vector.hh>
+#include <Test/Mock/vectorCreator.hh>
+#include <Test/Mock/scalarProduct.hh>
+#include <Test/Mock/norm.hh>
 
 template <class Space, class Spaces, unsigned... indices>
 inline auto makeTuple(Space&& space, const Spaces& spaces, std::integer_sequence<unsigned,indices...>)
@@ -147,7 +148,7 @@ inline auto& valueOfComponent(Spacy::Vector& v, unsigned i)
 
 inline auto createFirstTestVector(const Spacy::VectorSpace& V)
 {
-  auto v = V.zeroVector();
+  auto v = zero(V);
   valueOfComponent(v,0) = 1;
   valueOfComponent(v,1) = 2;
   return v;
@@ -155,10 +156,8 @@ inline auto createFirstTestVector(const Spacy::VectorSpace& V)
 
 inline auto createSecondTestVector(const Spacy::VectorSpace& V)
 {
-  auto v = V.zeroVector();
+  auto v = zero(V);
   valueOfComponent(v,0) = 1;
   valueOfComponent(v,1) = 3;
   return v;
 }
-
-#endif // SPACY_TEST_MOCK_SETUP_HH

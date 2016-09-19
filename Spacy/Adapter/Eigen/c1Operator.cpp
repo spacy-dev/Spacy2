@@ -1,5 +1,8 @@
 #include "c1Operator.hh"
 
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/cast.hh>
+
 #include "linearOperator.hh"
 #include "linearOperatorCreator.hh"
 #include "vector.hh"

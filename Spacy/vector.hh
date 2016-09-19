@@ -10,13 +10,10 @@
 #include "Spacy/Util/cast.hh"
 #include "Spacy/Util/smartPointer.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include <Spacy/vectorSpace.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class VectorSpace;
-  /// @endcond
-
   /** @brief Type-erased vector.
    *  @see VectorConcept
    */
@@ -169,6 +166,9 @@ namespace Spacy
   Real norm(const Vector& x);
 
   void checkDualPairing(const Vector& x, const Vector& y);
+
+  /// Create new vector \f$v=0\f$.
+  Vector zero(const VectorSpace& space);
 }
 
 #endif // SPACY_VECTOR_HH

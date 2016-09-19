@@ -1,13 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "linearOperatorCreator.hh"
 
-#include <stdexcept>
+#include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 
-#include "Spacy/Spaces/realSpace.hh"
-#include "Spacy/vectorSpace.hh"
 #include "linearOperator.hh"
+
+#include <stdexcept>
 
 namespace Spacy
 {

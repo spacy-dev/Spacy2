@@ -14,7 +14,7 @@ namespace Spacy
     namespace Damping
     {
       AffineCovariant::AffineCovariant(const C1Operator& F)
-        : F_(F), oldDs(F.domain().zeroVector())
+        : F_(F), oldDs(zero(F.domain()))
       {}
 
       DampingFactor AffineCovariant::operator()(const std::function<Vector(const Vector&)>& DFInv_, const Vector& x, const Vector& dx) const

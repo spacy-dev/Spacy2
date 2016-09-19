@@ -39,7 +39,7 @@ namespace Spacy
 
       auto t = t0,
           dt = (t1-t0)/maxSteps;
-      auto x = A.domain().zeroVector();
+      auto x = zero(A.domain());
 
       auto integrator = [&A,&dt](double t, const Vector& x) -> Vector
       {

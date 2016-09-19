@@ -3,6 +3,7 @@
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
+#include <Spacy/linearSolver.hh>
 #include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 #include <functional>
 
@@ -11,6 +12,7 @@ namespace Spacy
   /// Type-erased linear operator \f$A:\ X \to Y \f$.
   class LinearOperator
   {
+  public:
     /// Apply operator.
     Vector operator()(const Vector& x) const;
 

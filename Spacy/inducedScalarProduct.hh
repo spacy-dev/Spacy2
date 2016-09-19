@@ -1,18 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_INDUCED_SCALAR_PRODUCT_HH
-#define SPACY_INDUCED_SCALAR_PRODUCT_HH
-
-#include "Spacy/linearOperator.hh"
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/linearOperator.hh>
+#include <Spacy/vector.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class Real;
-  class Vector;
-  /// @endcond
-
   /// Induced scalar product \f$(x,y)_M = (Mx)y\f$, where \f$M:X\rightarrow X^*\f$.
   class AdaptiveInducedScalarProduct
   {
@@ -73,5 +66,3 @@ namespace Spacy
     LinearOperator M_;
   };
 }
-
-#endif // SPACY_INDUCED_SCALAR_PRODUCT_HH

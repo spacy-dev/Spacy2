@@ -14,9 +14,9 @@ namespace
 {
   void test(const C2Functional&f, const VectorSpace& X)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
-    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector())) , 2 );
-    EXPECT_DOUBLE_EQ( toDouble(f.d2(X.zeroVector(),X.zeroVector())) , 1 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(zero(X))) , 2 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d2(zero(X),zero(X))) , 1 );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }
@@ -26,10 +26,10 @@ TEST(C2Functional,Assert)
 {
   auto X = createMockBanachSpace();
   C2Functional f;
-  ASSERT_DEATH( f(X.zeroVector()) , "" );
-  ASSERT_DEATH( f.d1(X.zeroVector()) , "" );
-  ASSERT_DEATH( f.d2(X.zeroVector(),X.zeroVector()) , "" );
-  ASSERT_DEATH( f.hessian(X.zeroVector()) , "" );
+  ASSERT_DEATH( f(zero(X)) , "" );
+  ASSERT_DEATH( f.d1(zero(X)) , "" );
+  ASSERT_DEATH( f.d2(zero(X),zero(X)) , "" );
+  ASSERT_DEATH( f.hessian(zero(X)) , "" );
   ASSERT_DEATH( f.domain() , "" );
 }
 
@@ -90,7 +90,7 @@ TEST(C2Functional,AccessHessian)
   auto X = createMockBanachSpace();
   C2Functional f = Mock::C2Functional(X);
 
-  auto h = f.hessian(X.zeroVector());
+  auto h = f.hessian(zero(X));
   auto value = is<Mock::LinearOperator>(h);
   ASSERT_TRUE(value);
 }

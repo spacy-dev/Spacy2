@@ -1,10 +1,7 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include <gtest/gtest.h>
 
-#include "Test/mockSetup.hh"
-#include "Spacy/Spaces/ProductSpace/scalarProduct.hh"
+#include <Test/mockSetup.hh>
+#include <Spacy/Spaces/ProductSpace/scalarProduct.hh>
 
 using namespace Spacy;
 
@@ -13,9 +10,9 @@ TEST(ProductSpaceProduct,Apply)
   auto sp = ProductSpace::ScalarProduct{};
   auto V = makeProductHilbertSpace();
 
-  auto v = std::get<0>(V).zeroVector();
+  auto v = zero(std::get<0>(V));
 
-  ASSERT_EQ( sp(v,v) , 2*Mock::ScalarProduct::testValue );
+  EXPECT_EQ( sp(v,v) , 2*Mock::ScalarProduct::testValue );
 }
 
 TEST(ProductSpaceProduct,ApplyThrow)
@@ -24,8 +21,8 @@ TEST(ProductSpaceProduct,ApplyThrow)
   auto V = makeProductHilbertSpace();
   auto W = makeProductHilbertSpace();
 
-  auto v = std::get<0>(V).zeroVector();
-  auto w = std::get<0>(W).zeroVector();
+  auto v = zero(std::get<0>(V));
+  auto w = zero(std::get<0>(W));
 
-  ASSERT_THROW(sp(v,w), IncompatibleSpaceException);
+  EXPECT_THROW(sp(v,w), IncompatibleSpaceException);
 }

@@ -1,9 +1,6 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "linearSolver.hh"
-#include "Spacy/operator.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/operator.hh>
+#include <Spacy/vectorSpace.hh>
 #include <utility>
 
 namespace Spacy
@@ -42,7 +39,7 @@ namespace Spacy
 
     Vector LinearSolver::operator()(const Vector& y) const
     {
-      return cg.solve(range().zeroVector(),y);
+      return cg.solve(zero(range()), y);
     }
 
     Solver& LinearSolver::impl()

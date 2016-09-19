@@ -1,31 +1,27 @@
-#ifndef SPACY_NORM_HH
-#define SPACY_NORM_HH
+#pragma once
 
 #include <functional>
+#include <Spacy/Spaces/RealSpace/real.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class Real;
-  class Vector;
-  /// @endcond
+    /// @cond
+    class Vector;
+    /// @endcond
 
-  /**
-   * @brief Type-erased norm.
-   *
-   * The minimal signature (besides copy and/or move constructor/assignment) of a norm is:
-   * @code
-   * // My norm.
-   * class MyNorm
-   * {
-   * public:
-   *   // Compute ||x||.
-   *   Spacy::Real operator()(const Spacy::Vector& x) const;
-   * };
-   * @endcode
-   */
-  using Norm = std::function<Real(const Vector&)>;
+    /**
+     * @brief Type-erased norm.
+     *
+     * The minimal signature (besides copy and/or move constructor/assignment) of a norm is:
+     * @code
+     * // My norm.
+     * class MyNorm
+     * {
+     * public:
+     *   // Compute ||x||.
+     *   Spacy::Real operator()(const Spacy::Vector& x) const;
+     * };
+     * @endcode
+     */
+    using Norm = std::function<Real(const Vector&)>;
 }
-
-
-#endif // SPACY_NORM_HH

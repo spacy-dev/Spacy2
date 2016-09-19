@@ -36,7 +36,7 @@ namespace
 
   void test(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
   }
@@ -47,7 +47,7 @@ TEST(Operator,Assert)
 {
   auto X = createMockBanachSpace();
   Operator f;
-  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f(zero(X)) , "" );
   ASSERT_DEATH( f.domain() , "" );
   ASSERT_DEATH( f.range() , "" );
 }

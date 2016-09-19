@@ -1,8 +1,10 @@
 #include "linearOperator.hh"
+
+#include <Spacy/vector.hh>
+
 #include "util.hh"
 #include "linearSolver.hh"
 #include "vector.hh"
-#include "Spacy/vector.hh"
 
 namespace Spacy
 {
@@ -19,7 +21,7 @@ namespace Spacy
       ::Eigen::VectorXd dx_;
       copy(dx,dx_);
       ::Eigen::VectorXd x_ = get() * dx_;
-      auto x = dx.space().zeroVector();
+      auto x = zero( dx.space() );
       copy(x_,x);
       return x;
     }

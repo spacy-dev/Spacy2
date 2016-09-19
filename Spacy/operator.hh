@@ -27,12 +27,14 @@ namespace Spacy
         template < typename T, typename std::enable_if<
                                    !std::is_same< Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         Operator( T&& value )
-            : functions_( {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
-                           &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
-                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::call,
-                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::domain,
-                           &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::range} ),
-              impl_( nullptr )
+            : functions_(
+                  {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
+                   &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
+                   &OperatorDetail::execution_wrapper< Operator,
+                                                       typename std::decay< T >::type >::call_const_Vector__ref_,
+                   &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::domain,
+                   &OperatorDetail::execution_wrapper< Operator, typename std::decay< T >::type >::range} ),
+              type_id_( typeid( typename std::decay< T >::type ).hash_code() ), impl_( nullptr )
         {
             if ( sizeof( typename std::decay< T >::type ) <= sizeof( Buffer ) )
             {
@@ -82,7 +84,7 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::cast_impl< T >( read() );
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 
         /**
@@ -92,7 +94,7 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
-            return type_erasure_table_detail::cast_impl< T >( read() );
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 
     private:
@@ -103,6 +105,7 @@ namespace Spacy
         void* write();
 
         OperatorDetail::Functions< Operator, Buffer > functions_;
+        std::size_t type_id_;
         std::shared_ptr< void > impl_ = nullptr;
         Buffer buffer_;
     };

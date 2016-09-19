@@ -92,7 +92,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::operator()()
     {
-      return operator()( domain_.zeroVector() );
+      return operator()( zero(domain_) );
     }
 
     Vector AffineCovariantSolver::operator()(const Vector& x0)
@@ -158,7 +158,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeTangentialStep(Real nu, const Vector &x, const Vector& dn, bool lastStepWasUndamped) const
     {
-      if( !L_ ) return chartSpace_.zeroVector();
+      if( !L_ ) return zero(chartSpace_);
 
       tangentialSolver = makeTangentialSolver(nu,x,lastStepWasUndamped);
 
@@ -240,7 +240,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::computeSimplifiedNormalStep(const Vector &trial) const
     {
-      if( !N_ ) return chartSpace_.zeroVector();
+      if( !N_ ) return zero(chartSpace_);
       return computeMinimumNormCorrection(trial);
     }
 
@@ -248,7 +248,7 @@ namespace Spacy
     {
       auto rhs = dualProjection(-d1(L_,x));
       std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
-      auto dn0 = chartSpace_.zeroVector();
+      auto dn0 = zero(chartSpace_);
 //      if( is<CG::LinearSolver>(normalSolver) )
 //      {
 //        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
@@ -270,7 +270,7 @@ namespace Spacy
 
     Vector AffineCovariantSolver::updateLagrangeMultiplier(const Vector& x) const
     {
-      if( !N_ || !L_ ) return chartSpace_.zeroVector();
+      if( !N_ || !L_ ) return zero(chartSpace_);
       //std::cout << "lagrange multiplier rhs00: " << d1(L_,x)( d1(L_,x) ) << std::endl;
       //std::cout << "lagrange multiplier rhs0: " << norm(d1(L_,x)) << std::endl;
       //auto tmp = L_.d1(x);

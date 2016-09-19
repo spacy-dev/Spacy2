@@ -51,19 +51,19 @@ namespace
 
   void test(const C1Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
-    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector(),X.zeroVector())) , 2 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(zero(X),zero(X))) , 2 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
 
-    auto L = f.linearization(X.zeroVector());
+    auto L = f.linearization(zero(X));
     auto expected = is<Mock::LinearOperator>(L);
     EXPECT_TRUE(expected);
   }
 
   void testOp(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
   }
@@ -74,9 +74,9 @@ TEST(C1Operator,Assert)
 {
   auto X = createMockBanachSpace();
   C1Operator f;
-  ASSERT_DEATH( f(X.zeroVector()) , "" );
-  ASSERT_DEATH( f.d1(X.zeroVector(),X.zeroVector()) , "" );
-  ASSERT_DEATH( f.linearization(X.zeroVector()) , "" );
+  ASSERT_DEATH( f(zero(X)) , "" );
+  ASSERT_DEATH( f.d1(zero(X),zero(X)) , "" );
+  ASSERT_DEATH( f.linearization(zero(X)) , "" );
   ASSERT_DEATH( f.domain() , "" );
   ASSERT_DEATH( f.range() , "" );
 }
@@ -159,7 +159,7 @@ TEST(C1Operator,ToOperator)
 
   Operator copied = g;
   const Operator& bound = h;
-  auto fun  = [&X](const Operator& A) { return A(X.zeroVector()); };
+  auto fun  = [&X](const Operator& A) { return A(zero(X)); };
   auto x = fun(h);
   Operator moved = std::move(g);
   testOp(copied,X,Y);

@@ -1,8 +1,8 @@
 #include "linearSolver.hh"
 
-#include "Spacy/Util/cast.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/Util/cast.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
 #include "vector.hh"
 #include "util.hh"
 #include <utility>
@@ -18,12 +18,10 @@ namespace Spacy
     {
 		  ::Eigen::VectorXd y_;
          copy(y,y_);     
-         ::Eigen::VectorXd x_=A_.lu().solve(y_);
-         ::Spacy::Vector x=domain_.zeroVector();
+         ::Eigen::VectorXd x_ = A_.lu().solve(y_);
+         ::Spacy::Vector x = zero( domain_ );
          copy(x_,x);
         return x;
-
-    //  return Vector(A_.lu().solve(cast_ref<Vector>(y).get() ) , domain_ );
     }
   }
 }

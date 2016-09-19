@@ -10,7 +10,7 @@ namespace Spacy
    * An operator that does not know about domain and range spaces. 
    * Good enough for some algorithms (i.e. for Krylov-methods).
    */
-  using CallableOperator = std::function< Vector (const Vector&)>;
+  using CallableOperator = std::function< Vector (const Vector&) >;
   
   /// Type-erased operator \f$A:\ X \to Y \f$.
   class Operator

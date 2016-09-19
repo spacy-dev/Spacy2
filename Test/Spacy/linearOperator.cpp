@@ -13,7 +13,7 @@ namespace
 {
   void test(const LinearOperator& f, double value)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(Space::R.zeroVector())) , value );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(Space::R))) , value );
     EXPECT_EQ( 0u , f.domain().index() );
     EXPECT_EQ( 0u , f.range().index() );
 
@@ -27,7 +27,7 @@ TEST(LinearOperator,Assert)
 {
   auto X = createMockBanachSpace();
   LinearOperator f;
-  ASSERT_DEATH( f(X.zeroVector()) , "" );
+  ASSERT_DEATH( f( zero(X) ) , "" );
   ASSERT_DEATH( f.solver() , "" );
   ASSERT_DEATH( f.domain() , "" );
   ASSERT_DEATH( f.range() , "" );

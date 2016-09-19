@@ -73,7 +73,7 @@ namespace Spacy
 
   Vector localNewton(const C1Operator& F, const Newton::Parameter p)
   {
-    return localNewton(F,F.domain().zeroVector(),p);
+    return localNewton(F, zero(F.domain()),p);
   }
 
 
@@ -84,7 +84,7 @@ namespace Spacy
 
   Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
   {
-    return covariantNewton(F,F.domain().zeroVector(),p,errorEstimator);
+    return covariantNewton(F,zero(F.domain()),p,errorEstimator);
   }
 
 
@@ -95,6 +95,6 @@ namespace Spacy
 
   Vector contravariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p)
   {
-    return contravariantNewton(F,F.domain().zeroVector(),p);
+    return contravariantNewton(F,zero(F.domain()),p);
   }
 }

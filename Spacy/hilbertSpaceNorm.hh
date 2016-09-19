@@ -1,10 +1,6 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_HILBERT_SPACE_NORM_HH
-#define SPACY_HILBERT_SPACE_NORM_HH
-
-#include "Spacy/scalarProduct.hh"
+#include <Spacy/scalarProduct.hh>
 
 namespace Spacy
 {
@@ -20,5 +16,3 @@ namespace Spacy
     ScalarProduct sp_;
   };
 }
-
-#endif // SPACY_HILBERT_SPACE_NORM_HH

@@ -1,7 +1,8 @@
 #include "c1Operator.hh"
 
-#include "Spacy/Spaces/realSpace.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include "linearOperator.hh"
 #include "linearOperatorCreator.hh"
 

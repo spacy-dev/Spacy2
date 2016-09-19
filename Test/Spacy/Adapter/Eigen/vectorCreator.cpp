@@ -3,9 +3,8 @@
 
 #include <gtest/gtest.h>
 
-#include "Spacy/Adapter/Eigen/vectorCreator.hh"
-
-#include "Test/mockSetup.hh"
+#include <Spacy/Adapter/Eigen/vectorCreator.hh>
+#include <Test/mockSetup.hh>
 #include "setup.hh"
 
 using namespace Spacy;
@@ -13,5 +12,5 @@ using namespace Spacy;
 TEST(Rn,SingleSpaceCreator)
 {
   auto V = Rn::makeHilbertSpace( testDim() );
-  ASSERT_EQ( creator<Rn::VectorCreator>(V).dim() , testDim() );
+  EXPECT_EQ( creator<Rn::VectorCreator>(V).dim() , testDim() );
 }

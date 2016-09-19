@@ -38,8 +38,8 @@ namespace
 
   void test(const C1Functional&f, const VectorSpace& X)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(X.zeroVector())) , 3 );
-    EXPECT_DOUBLE_EQ( toDouble(f.d1(X.zeroVector())) , 2 );
+    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
+    EXPECT_DOUBLE_EQ( toDouble(f.d1(zero(X))) , 2 );
     EXPECT_EQ( X.index() , f.domain().index() );
   }
 }
@@ -48,8 +48,8 @@ TEST(C1Functional,Assert)
 {
   auto X = createMockBanachSpace();
   C1Functional f;
-  ASSERT_DEATH( f(X.zeroVector()) , "" );
-  ASSERT_DEATH( f.d1(X.zeroVector()) , "" );
+  ASSERT_DEATH( f(zero(X)) , "" );
+  ASSERT_DEATH( f.d1(zero(X)) , "" );
   ASSERT_DEATH( f.domain() , "" );
 }
 
