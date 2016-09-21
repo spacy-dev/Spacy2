@@ -7,9 +7,6 @@
 
 namespace Spacy
 {
-  /// %<Spacy/zeroVectorCreator.hh>%
-  class ZeroVectorCreator;
-
   /// Type-erased vector.
   class Vector
   {
@@ -75,11 +72,5 @@ namespace Spacy
   {
     if( !y.space().isPrimalWRT(x.space()) )
       throw IncompatibleSpaceException(x.space().index(),y.space().index());
-  }
-
-  /// Create new vector \f$v=0\f$.
-  Vector zero(const VectorSpace& space)
-  {
-      return space.creator()(&space);
   }
 }

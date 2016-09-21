@@ -1,8 +1,10 @@
 #include "linearSolver.hh"
 
-#include <Spacy/Util/cast.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/cast.hh>
+
 #include "vector.hh"
 #include "util.hh"
 #include <utility>

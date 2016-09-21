@@ -1,6 +1,7 @@
 #include "compositeStepFunctional.hh"
 
 #include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Spaces/productSpace.hh>
 #include <Spacy/Adapter/Eigen/linearOperator.hh>
 #include <Spacy/Adapter/Eigen/util.hh>

@@ -53,4 +53,9 @@ namespace Spacy
         assert( impl_ );
         return functions_.call_const_VectorSpace__ptr_( *this, impl_, V );
     }
+
+    Vector zero( const VectorSpace& space )
+    {
+        return space.creator()( &space );
+    }
 }

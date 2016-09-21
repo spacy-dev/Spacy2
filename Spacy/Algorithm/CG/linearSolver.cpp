@@ -1,6 +1,9 @@
 #include "linearSolver.hh"
+
 #include <Spacy/operator.hh>
 #include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+
 #include <utility>
 
 namespace Spacy

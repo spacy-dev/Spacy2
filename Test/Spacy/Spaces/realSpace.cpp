@@ -1,11 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include <gtest/gtest.h>
 
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/realSpace.hh"
-#include "Spacy/Util/cast.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/Util/cast.hh>
 
 TEST(RealSpaceTest, DefaultIndex)
 {

@@ -5,6 +5,7 @@
 #include <Spacy/Adapter/Eigen/c1Operator.hh>
 #include <Spacy/Adapter/Eigen/linearOperator.hh>
 #include <Spacy/vector.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/cast.hh>
 
 #include "setup.hh"

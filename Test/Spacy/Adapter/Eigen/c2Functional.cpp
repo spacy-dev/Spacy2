@@ -6,6 +6,7 @@
 #include "Spacy/Adapter/Eigen/linearOperator.hh"
 #include "Spacy/Adapter/Eigen/linearSolver.hh"
 #include "Spacy/linearSolver.hh"
+#include <Spacy/zeroVectorCreator.hh>
 #include "setup.hh"
 
 using namespace Spacy;

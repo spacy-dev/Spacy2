@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Spacy/Algorithm/Newton/parameter.hh>
 #include <Spacy/vector.hh>
+#include <Spacy/Algorithm/Newton/parameter.hh>
 #include <functional>
 
 namespace Spacy

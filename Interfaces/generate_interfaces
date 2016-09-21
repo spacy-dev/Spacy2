@@ -21,15 +21,15 @@ python2 $COMMAND $COMMON_ARGS $2 --detail-file $DETAIL_PREFIX$1 --interface-file
 
 mkdir -p $DETAIL_FOLDER 
 
-#generate_interface zeroVectorCreator.hh ""
-#generate_interface          operator.hh "$SMALL_SBO_ARGS"
-#generate_interface    linearOperator.hh "$SMALL_SBO_ARGS"
-#generate_interface        c1Operator.hh "$SMALL_SBO_ARGS"
-#generate_interface   dynamicOperator.hh "$SMALL_SBO_ARGS"
-#generate_interface        functional.hh "$SMALL_SBO_ARGS"
-#generate_interface      c1Functional.hh "$SMALL_SBO_ARGS"
-#generate_interface      c2Functional.hh "$SMALL_SBO_ARGS"
-generate_interface            vector.hh "$SMALL_SBO_ARGS"
-#generate_interface linearSolver.hh ""
+generate_interface zeroVectorCreator.hh ""
+generate_interface          operator.hh "$SMALL_SBO_ARGS"
+generate_interface    linearOperator.hh "$SMALL_SBO_ARGS"
+generate_interface        c1Operator.hh "$SMALL_SBO_ARGS"
+generate_interface   dynamicOperator.hh "$SMALL_SBO_ARGS"
+generate_interface        functional.hh "$SMALL_SBO_ARGS"
+generate_interface      c1Functional.hh "$SMALL_SBO_ARGS"
+generate_interface      c2Functional.hh "$SMALL_SBO_ARGS"
+#generate_interface            vector.hh "$SMALL_SBO_ARGS"
+generate_interface linearSolver.hh ""
 
 

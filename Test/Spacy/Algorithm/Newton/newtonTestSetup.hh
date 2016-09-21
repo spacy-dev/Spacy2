@@ -1,11 +1,11 @@
-#ifndef TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_NEWTON_TEST_SETUP_HH
-#define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_NEWTON_TEST_SETUP_HH
+#pragma once
 
 #include <functional>
-#include "Spacy/c1Operator.hh"
-#include "Spacy/Algorithm/Newton/newton.hh"
-#include "Spacy/inducedScalarProduct.hh"
-#include "Spacy/Spaces/realSpace.hh"
+#include <Spacy/c1Operator.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Algorithm/Newton/newton.hh>
+#include <Spacy/inducedScalarProduct.hh>
+#include <Spacy/Spaces/realSpace.hh>
 
 using namespace Spacy;
 
@@ -48,5 +48,3 @@ auto createContravariantNewton(C1Operator F, double relativeAccuracy, double eps
     return contravariantNewton(F,x0,p);
   };
 }
-
-#endif // TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_NEWTON_TEST_SETUP_HH

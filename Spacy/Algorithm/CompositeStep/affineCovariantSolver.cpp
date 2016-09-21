@@ -1,19 +1,18 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "affineCovariantSolver.hh"
 
-#include "Spacy/Algorithm/dampingFactor.hh"
-#include "Spacy/Algorithm/CG/linearSolver.hh"
-#include "Spacy/Algorithm/CG/triangularStateConstraintPreconditioner.hh"
-#include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
-#include "Spacy/Algorithm/Scalar/findGlobalMinimizer.hh"
+#include "quadraticModel.hh"
 
-#include "Spacy/inducedScalarProduct.hh"
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Spaces/ProductSpace/vector.hh"
-#include "Spacy/Util/Exceptions/regularityTestFailedException.hh"
-#include "Spacy/Util/logger.hh"
+#include <Spacy/Algorithm/dampingFactor.hh>
+#include <Spacy/Algorithm/CG/linearSolver.hh>
+#include <Spacy/Algorithm/CG/triangularStateConstraintPreconditioner.hh>
+#include <Spacy/Algorithm/Scalar/findGlobalMinimizer.hh>
+
+#include <Spacy/inducedScalarProduct.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/ProductSpace/vector.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/regularityTestFailedException.hh>
+#include <Spacy/Util/logger.hh>
 
 #include <cmath>
 #include <iostream>

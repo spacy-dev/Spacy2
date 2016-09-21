@@ -168,7 +168,7 @@ namespace Spacy
   void checkDualPairing(const Vector& x, const Vector& y);
 
   /// Create new vector \f$v=0\f$.
-  Vector zero(const VectorSpace& space);
+//  Vector zero(const VectorSpace& space);
 }
 
 #endif // SPACY_VECTOR_HH

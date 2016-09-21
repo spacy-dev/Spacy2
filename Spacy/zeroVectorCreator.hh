@@ -92,4 +92,7 @@ namespace Spacy
     {
         return *space.creator().template target< T >();
     }
+
+    /// Create new vector \f$v=0\f$.
+    Vector zero( const VectorSpace& space );
 }

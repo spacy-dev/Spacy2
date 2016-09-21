@@ -1,11 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "genericRothe.hh"
 
-#include "Spacy/dynamicOperator.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/linearOperator.hh"
+#include <Spacy/dynamicOperator.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/linearOperator.hh>
 
 #include <iostream>
 #include <utility>

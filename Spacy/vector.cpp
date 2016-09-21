@@ -92,8 +92,8 @@ namespace Spacy
       throw IncompatibleSpaceException(x.space().index(),y.space().index());
   }
 
-  Vector zero(const VectorSpace& space)
-  {
-      return space.creator()(&space);
-  }
+//  Vector zero(const VectorSpace& space)
+//  {
+//      return space.creator()(&space);
+//  }
 }

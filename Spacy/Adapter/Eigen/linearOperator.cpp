@@ -1,6 +1,7 @@
 #include "linearOperator.hh"
 
 #include <Spacy/vector.hh>
+#include <Spacy/zeroVectorCreator.hh>
 
 #include "util.hh"
 #include "linearSolver.hh"
