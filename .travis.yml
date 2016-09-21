@@ -98,8 +98,10 @@ install:
         (cd ${LLVM_DIR}/build/projects/libcxx && make install -j2)
         (cd ${LLVM_DIR}/build/projects/libcxxabi && make install -j2)
       fi
-      export CXXFLAGS="-nostdinc++ -isystem ${LLVM_DIR}/install/include/c++/v1"
-      export LDFLAGS="-L ${LLVM_DIR}/install/lib -l c++ -l c++abi"
+      export CXXFLAGS = "-stdlib=libc++"
+      export LDFLAGS = "-stdlib=libc++"
+#      export CXXFLAGS="-nostdinc++ -isystem ${LLVM_DIR}/install/include/c++/v1 -stdlib=libc++ -lc++abi"
+#      export LDFLAGS="-L ${LLVM_DIR}/install/lib -l c++ -l c++abi"
       export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LLVM_DIR}/install/lib"
       export PATH="${LLVM_DIR}/clang/bin:${PATH}"
       export CXX="${LLVM_DIR}/clang/bin/clang++"
@@ -119,7 +121,7 @@ install:
     fi
   - |
     git clone https://github.com/google/googletest.git
-    cd googletest && mkdir build && cd build && cmake .. && make
+    cd googletest && mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
     sudo cp -r ../googletest/include/gtest /usr/local/include/
     sudo cp googlemock/gtest/lib*.a /usr/local/lib
 
