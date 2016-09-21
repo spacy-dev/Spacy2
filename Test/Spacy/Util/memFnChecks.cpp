@@ -1,16 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include <gtest/gtest.h>
 
-#include "Spacy/Util/memFnChecks.hh"
-
-namespace Spacy
-{
-  class LinearOperator;
-  class Vector;
-  class VectorSpace;
-}
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/linearOperator.hh>
+#include <Spacy/Util/memFnChecks.hh>
 
 using namespace Spacy;
 
