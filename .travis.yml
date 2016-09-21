@@ -119,7 +119,7 @@ install:
     fi
   - |
     git clone https://github.com/google/googletest.git
-    cd googletest && mkdir build && cd build && cmake .. && make
+    cd googletest && mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
     sudo cp -r ../googletest/include/gtest /usr/local/include/
     sudo cp googlemock/gtest/lib*.a /usr/local/lib
 
