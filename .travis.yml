@@ -2,19 +2,21 @@ language: c++
 
 addons:
   apt:
-    sources:
+    sources: &sources
     - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
-    - llvm-toolchain-precise-3.7
-    - llvm-toolchain-precise-3.8
+
     packages:
     - g++-5
     - gcc-5
     - g++-6
     - gcc-6
-    - clang-3.6
-    - clang-3.7
-    - clang-3.8
+
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
+
 
 env:
   # Workaround for https://github.com/travis-ci/travis-ci/issues/4681
@@ -38,17 +40,17 @@ matrix:
       
     # Clang 3.6
     - os: linux
-      env: COMPILER=clang++-3.6 CCOMPILER=clang-3.6 COMPUTE_COVERAGE=false
+      env: LLVM_VERSION=3.6.2 COMPUTE_COVERAGE=false
       compiler: clang
       
     # Clang 3.7
     - os: linux
-      env: COMPILER=clang++-3.7 CCOMPILER=clang-3.7 COMPUTE_COVERAGE=false
+      env: LLVM_VERSION=3.7.1 COMPUTE_COVERAGE=false
       compiler: clang
       
     # Clang 3.8
     - os: linux
-      env: COMPILER=clang++-3.8 CCOMPILER=clang-3.8 COMPUTE_COVERAGE=false
+      env: LLVM_VERSION=3.8.0 COMPUTE_COVERAGE=false
       compiler: clang
      
 
@@ -74,6 +76,35 @@ install:
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     else
       if ! brew ls --version cmake &>/dev/null; then brew install cmake; fi
+    fi
+
+  ############################################################################
+  # Install clang, libc++ and libc++abi
+  ############################################################################
+  - |
+    if [[ "${LLVM_VERSION}" != "" ]]; then
+      LLVM_DIR=${DEPS_DIR}/llvm-${LLVM_VERSION}
+      if [[ -z "$(ls -A ${LLVM_DIR})" ]]; then
+        LLVM_URL="http://llvm.org/releases/${LLVM_VERSION}/llvm-${LLVM_VERSION}.src.tar.xz"
+        LIBCXX_URL="http://llvm.org/releases/${LLVM_VERSION}/libcxx-${LLVM_VERSION}.src.tar.xz"
+        LIBCXXABI_URL="http://llvm.org/releases/${LLVM_VERSION}/libcxxabi-${LLVM_VERSION}.src.tar.xz"
+        CLANG_URL="http://llvm.org/releases/${LLVM_VERSION}/clang+llvm-${LLVM_VERSION}-x86_64-linux-gnu-ubuntu-14.04.tar.xz"
+        mkdir -p ${LLVM_DIR} ${LLVM_DIR}/build ${LLVM_DIR}/projects/libcxx ${LLVM_DIR}/projects/libcxxabi ${LLVM_DIR}/clang
+        travis_retry wget --quiet -O - ${LLVM_URL}      | tar --strip-components=1 -xJ -C ${LLVM_DIR}
+        travis_retry wget --quiet -O - ${LIBCXX_URL}    | tar --strip-components=1 -xJ -C ${LLVM_DIR}/projects/libcxx
+        travis_retry wget --quiet -O - ${LIBCXXABI_URL} | tar --strip-components=1 -xJ -C ${LLVM_DIR}/projects/libcxxabi
+        travis_retry wget --quiet -O - ${CLANG_URL}     | tar --strip-components=1 -xJ -C ${LLVM_DIR}/clang
+        (cd ${LLVM_DIR}/build && cmake .. -DCMAKE_INSTALL_PREFIX=${LLVM_DIR}/install -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang)
+        (cd ${LLVM_DIR}/build/projects/libcxx && make install -j2)
+        (cd ${LLVM_DIR}/build/projects/libcxxabi && make install -j2)
+      fi
+      export CXXFLAGS="-nostdinc++ -isystem ${LLVM_DIR}/install/include/c++/v1"
+      export LDFLAGS="-L ${LLVM_DIR}/install/lib -l c++ -l c++abi"
+      export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LLVM_DIR}/install/lib"
+      export PATH="${LLVM_DIR}/clang/bin:${PATH}"
+      export CXX="${LLVM_DIR}/clang/bin/clang++"
+      export CC="${LLVM_DIR}/clang/bin/clang"
+      ls ${LLVM_DIR}/clang/bin
     fi
     
   ############################################################################
@@ -103,10 +134,10 @@ script:
   - mkdir build && cd build
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-      cmake -DBuildTest=ON -DCoverage=ON -DCMAKE_CXX_FLAGS="-static-libgcc -static-libstdc++" .. && make
+      cmake -DBuildTest=ON -DCoverage=ON .. && make
       lcov --gcov-tool ${GCOV} --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
     else
-      cmake -DBuildTest=ON .. && make
+      cmake -DBuildTest=ON -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
     fi
   - Test/unit_tests
   - |
