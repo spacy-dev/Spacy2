@@ -123,11 +123,20 @@ namespace Spacy
         };
 
         template < class T >
-        using DynamicOperator_Concept = std::integral_constant<
+        using DynamicOperatorConceptImpl = std::integral_constant<
             bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_M< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_range< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct DynamicOperatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct DynamicOperatorConcept< Impl, T, false > : DynamicOperatorConceptImpl< T >
+        {
+        };
     }
 
     namespace DynamicLinearOperatorDetail
@@ -395,7 +404,7 @@ namespace Spacy
         };
 
         template < class T >
-        using DynamicLinearOperator_Concept = std::integral_constant<
+        using DynamicLinearOperatorConceptImpl = std::integral_constant<
             bool, HasMemFn_call_double_const_Vector_ref<
                       type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_add_const_DynamicLinearOperator_ref<
@@ -410,6 +419,15 @@ namespace Spacy
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_range< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_space< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct DynamicLinearOperatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct DynamicLinearOperatorConcept< Impl, T, false > : DynamicLinearOperatorConceptImpl< T >
+        {
+        };
     }
 
     namespace DynamicC1OperatorDetail
@@ -574,7 +592,7 @@ namespace Spacy
         };
 
         template < class T >
-        using DynamicC1Operator_Concept = std::integral_constant<
+        using DynamicC1OperatorConceptImpl = std::integral_constant<
             bool, HasMemFn_call_double_const_Vector_ref<
                       type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_d1< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
@@ -582,5 +600,14 @@ namespace Spacy
                       HasMemFn_M< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_range< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct DynamicC1OperatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct DynamicC1OperatorConcept< Impl, T, false > : DynamicC1OperatorConceptImpl< T >
+        {
+        };
     }
 }

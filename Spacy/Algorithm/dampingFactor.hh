@@ -1,51 +1,60 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_DAMPING_FACTOR_HH
-#define SPACY_DAMPING_FACTOR_HH
-
-#include <ostream>
-#include "Spacy/Util/Mixins/eps.hh"
+#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class Real;
-  /// @endcond
+    /// A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.
+    class DampingFactor :
+            public Mixin::Get<double>,
+            public Mixin::Eps
+    {
+    public:
+        /**
+         * @brief Constructor.
+         * @param nu damping factor \f$\nu\f$
+         * @param eps accuracy \f$\varepsilon\f$.
+         */
+        explicit DampingFactor(double nu, double eps = 1e-3) noexcept;
 
-  /// A simple model of a damping factor \f$\nu\f$ that is computed up to a prescribed accuracy \f$\varepsilon\f$.
-  class DampingFactor : public Mixin::Eps
-  {
-  public:
-    /**
-     * @brief Constructor.
-     * @param nu damping factor \f$\nu\f$
-     * @param eps accuracy \f$\varepsilon\f$.
-     */
-    DampingFactor(double nu, double eps = 1e-3);
+        /**
+         * @brief Constructor.
+         * @param nu damping factor \f$\nu\f$
+         * @param eps accuracy \f$\varepsilon\f$.
+         */
+        explicit DampingFactor(Real nu, double eps = 1e-3) noexcept;
 
-    /**
-     * @brief Set damping factor \f$\nu\f$.
-     *
-     * If \f$ |\nu-1| < \varepsilon \f$ then \f$\nu\f$ is set to 1.
-     *
-     * @param nu damping factor
-     */
-    DampingFactor& operator=(double nu);
+        /**
+         * @brief Set damping factor \f$\nu\f$.
+         *
+         * If \f$ |\nu-1| < \varepsilon \f$ then \f$\nu\f$ is set to 1.
+         *
+         * @param nu damping factor
+         */
+        DampingFactor& operator=(double nu) noexcept;
 
-    /// Access damping factor \f$\nu\f$.
-    operator double() const;
+        /**
+         * @brief Set damping factor \f$\nu\f$.
+         *
+         * If \f$ |\nu-1| < \varepsilon \f$ then \f$\nu\f$ is set to 1.
+         *
+         * @param nu damping factor
+         */
+        DampingFactor& operator=(Real nu) noexcept;
 
-    /// Access damping factor \f$\nu\f$.
-    operator Real() const;
+        /// In-place multiplication
+        DampingFactor& operator*=(double value);
 
-  private:
-    void set(double nu);
+        /// In-place multiplication
+        DampingFactor& operator*=(Real value);
 
-    double nu_ = 1;
-  };
+        /// Invert damping factor
+        DampingFactor operator-() const noexcept;
+    };
 
-  std::ostream& operator<<(std::ostream& os, DampingFactor nu);
+    Real operator*(const DampingFactor& x, Real y);
+
+    Real operator*(Real y, const DampingFactor& x);
 }
-
-#endif // SPACY_DAMPING_FACTOR_HH

@@ -18,10 +18,8 @@ namespace Spacy
     public:
         C1Functional() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C1Functional, typename std::decay< T >::type >::value &&
-                                            C1FunctionalDetail::C1Functional_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C1FunctionalDetail::C1FunctionalConcept<
+                                   C1Functional, typename std::decay< T >::type >::value >::type* = nullptr >
         C1Functional( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -47,10 +45,8 @@ namespace Spacy
 
         C1Functional( C1Functional&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C1Functional, typename std::decay< T >::type >::value &&
-                                            C1FunctionalDetail::C1Functional_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C1FunctionalDetail::C1FunctionalConcept<
+                                   C1Functional, typename std::decay< T >::type >::value >::type* = nullptr >
         C1Functional& operator=( T&& value )
         {
             return *this = C1Functional( std::forward< T >( value ) );

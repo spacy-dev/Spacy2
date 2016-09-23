@@ -24,10 +24,8 @@ namespace Spacy
     public:
         Operator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if<
-                       !std::is_same< Operator, typename std::decay< T >::type >::value &&
-                       OperatorDetail::Operator_Concept< typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< OperatorDetail::OperatorConcept<
+                                   Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         Operator( T&& value )
             : functions_( {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
                            &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
@@ -52,10 +50,8 @@ namespace Spacy
 
         Operator( Operator&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if<
-                       !std::is_same< Operator, typename std::decay< T >::type >::value &&
-                       OperatorDetail::Operator_Concept< typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< OperatorDetail::OperatorConcept<
+                                   Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         Operator& operator=( T&& value )
         {
             return *this = Operator( std::forward< T >( value ) );

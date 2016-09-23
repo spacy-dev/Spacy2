@@ -1,13 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH
-#define SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH
-
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/Mixins/accuracy.hh"
-#include "Spacy/Util/Mixins/verbosity.hh"
-#include "Spacy/Util/Mixins/eps.hh"
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/Mixins/accuracy.hh>
+#include <Spacy/Util/Mixins/verbosity.hh>
+#include <Spacy/Util/Mixins/eps.hh>
 
 namespace Spacy
 {
@@ -79,5 +75,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_ALGORITHM_NEWTON_TERMINATION_CRITERIA_HH

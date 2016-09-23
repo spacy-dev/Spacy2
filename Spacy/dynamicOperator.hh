@@ -24,10 +24,8 @@ namespace Spacy
     public:
         DynamicOperator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< DynamicOperator, typename std::decay< T >::type >::value &&
-                                            DynamicOperatorDetail::DynamicOperator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicOperatorDetail::DynamicOperatorConcept<
+                                   DynamicOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicOperator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -55,10 +53,8 @@ namespace Spacy
 
         DynamicOperator( DynamicOperator&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< DynamicOperator, typename std::decay< T >::type >::value &&
-                                            DynamicOperatorDetail::DynamicOperator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicOperatorDetail::DynamicOperatorConcept<
+                                   DynamicOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicOperator& operator=( T&& value )
         {
             return *this = DynamicOperator( std::forward< T >( value ) );
@@ -124,10 +120,8 @@ namespace Spacy
     public:
         DynamicLinearOperator() noexcept;
 
-        template < typename T, typename std::enable_if<
-                                   !std::is_same< DynamicLinearOperator, typename std::decay< T >::type >::value &&
-                                   DynamicLinearOperatorDetail::DynamicLinearOperator_Concept<
-                                       typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicLinearOperatorDetail::DynamicLinearOperatorConcept<
+                                   DynamicLinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicLinearOperator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -170,10 +164,8 @@ namespace Spacy
 
         DynamicLinearOperator( DynamicLinearOperator&& other ) noexcept;
 
-        template < typename T, typename std::enable_if<
-                                   !std::is_same< DynamicLinearOperator, typename std::decay< T >::type >::value &&
-                                   DynamicLinearOperatorDetail::DynamicLinearOperator_Concept<
-                                       typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicLinearOperatorDetail::DynamicLinearOperatorConcept<
+                                   DynamicLinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicLinearOperator& operator=( T&& value )
         {
             return *this = DynamicLinearOperator( std::forward< T >( value ) );
@@ -252,10 +244,8 @@ namespace Spacy
     public:
         DynamicC1Operator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< DynamicC1Operator, typename std::decay< T >::type >::value &&
-                                            DynamicC1OperatorDetail::DynamicC1Operator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicC1OperatorDetail::DynamicC1OperatorConcept<
+                                   DynamicC1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicC1Operator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -287,10 +277,8 @@ namespace Spacy
 
         DynamicC1Operator( DynamicC1Operator&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< DynamicC1Operator, typename std::decay< T >::type >::value &&
-                                            DynamicC1OperatorDetail::DynamicC1Operator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< DynamicC1OperatorDetail::DynamicC1OperatorConcept<
+                                   DynamicC1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         DynamicC1Operator& operator=( T&& value )
         {
             return *this = DynamicC1Operator( std::forward< T >( value ) );

@@ -10,7 +10,7 @@ namespace Spacy
     }
 
     DynamicOperator::DynamicOperator( const DynamicOperator& other )
-        : functions_( other.functions_ ), impl_( other.impl_ )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
     }
 
@@ -34,6 +34,7 @@ namespace Spacy
 
     DynamicOperator& DynamicOperator::operator=( DynamicOperator&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );
@@ -95,7 +96,7 @@ namespace Spacy
     }
 
     DynamicLinearOperator::DynamicLinearOperator( const DynamicLinearOperator& other )
-        : functions_( other.functions_ ), impl_( other.impl_ )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
     }
 
@@ -120,6 +121,7 @@ namespace Spacy
 
     DynamicLinearOperator& DynamicLinearOperator::operator=( DynamicLinearOperator&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );
@@ -217,7 +219,7 @@ namespace Spacy
     }
 
     DynamicC1Operator::DynamicC1Operator( const DynamicC1Operator& other )
-        : functions_( other.functions_ ), impl_( other.impl_ )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
     }
 
@@ -241,6 +243,7 @@ namespace Spacy
 
     DynamicC1Operator& DynamicC1Operator::operator=( DynamicC1Operator&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );

@@ -1,10 +1,8 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "linearSolver.hh"
 
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/cast.hh>
 
 namespace Spacy
 {
@@ -16,7 +14,7 @@ namespace Spacy
 
     ::Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& y) const
     {
-      return Real( toDouble(y) / value_ );
+      return cast_ref<Real>(y) / value_;
     }
   }
 }

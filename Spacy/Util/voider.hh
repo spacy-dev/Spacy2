@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_VOIDER_HH
-#define SPACY_UTIL_VOIDER_HH
+#pragma once
 
 namespace Spacy
 {
@@ -46,5 +42,3 @@ namespace Spacy
     static_assert( Concept::value , "Concept failed" );
   };
 }
-
-#endif // SPACY_UTIL_VOIDER_HH

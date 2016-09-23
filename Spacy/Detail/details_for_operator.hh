@@ -100,9 +100,18 @@ namespace Spacy
         };
 
         template < class T >
-        using Operator_Concept = std::integral_constant<
+        using OperatorConceptImpl = std::integral_constant<
             bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_range< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct OperatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct OperatorConcept< Impl, T, false > : OperatorConceptImpl< T >
+        {
+        };
     }
 }

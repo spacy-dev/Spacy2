@@ -79,8 +79,17 @@ namespace Spacy
         };
 
         template < class T >
-        using Functional_Concept = std::integral_constant<
+        using FunctionalConceptImpl = std::integral_constant<
             bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct FunctionalConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct FunctionalConcept< Impl, T, false > : FunctionalConceptImpl< T >
+        {
+        };
     }
 }

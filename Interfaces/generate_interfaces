@@ -7,8 +7,10 @@ DETAIL_FOLDER=$INTERFACE_DIR/Detail
 DETAIL_PREFIX=details_for_
 EXTENSION=Detail
 BUFFER_SIZE=64
+CLANG_PATH=/usr/lib/llvm-3.8/lib
+INCLUDE_DIR=/home/lars/Projects/Spacy
 
-BASE_ARGS="--table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path /usr/lib/llvm-3.8/lib"
+BASE_ARGS="--table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path $CLANG_PATH"
 COMMON_ARGS="$BASE_ARGS"
 SMALL_SBO_ARGS="-cow -sbo --buffer $BUFFER_SIZE"
 
@@ -16,7 +18,7 @@ COMMAND=/home/lars/PycharmProjects/friendly-type-erasure/type_erase.py
 
 function generate_interface {
 echo "generate $1"
-python2 $COMMAND $COMMON_ARGS $2 --detail-file $DETAIL_PREFIX$1 --interface-file $INTERFACE_DIR/$1 --include-dir /home/lars/tmp2/Spacy --std c++14 $1 
+python2 $COMMAND $COMMON_ARGS $2 --detail-file $DETAIL_PREFIX$1 --interface-file $INTERFACE_DIR/$1 --include-dir $INCLUDE_DIR --std c++14 $1 
 }
 
 mkdir -p $DETAIL_FOLDER 
@@ -29,7 +31,14 @@ generate_interface   dynamicOperator.hh "$SMALL_SBO_ARGS"
 generate_interface        functional.hh "$SMALL_SBO_ARGS"
 generate_interface      c1Functional.hh "$SMALL_SBO_ARGS"
 generate_interface      c2Functional.hh "$SMALL_SBO_ARGS"
-#generate_interface            vector.hh "$SMALL_SBO_ARGS"
+generate_interface            vector.hh "$SMALL_SBO_ARGS"
 generate_interface linearSolver.hh ""
 
-
+# generate interface for cg-termination-criteria
+CG_DIR=../Spacy/Algorithm/CG
+FILE=terminationCriterion.hh
+DETAIL_FILE=$DETAIL_PREFIX$FILE
+DETAIL_FOLDER=$CG_DIR/Detail
+mkdir -p $DETAIL_FOLDER
+BASE_ARGS="--table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path $CLANG_PATH"
+python2 $COMMAND $BASE_ARGS --interface-file $CG_DIR/$FILE --detail-file ${DETAIL_FILE} --include-dir $INCLUDE_DIR --std c++14 $FILE

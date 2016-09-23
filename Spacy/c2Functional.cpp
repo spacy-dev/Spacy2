@@ -9,7 +9,8 @@ namespace Spacy
     {
     }
 
-    C2Functional::C2Functional( const C2Functional& other ) : functions_( other.functions_ ), impl_( other.impl_ )
+    C2Functional::C2Functional( const C2Functional& other )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
     }
 
@@ -33,6 +34,7 @@ namespace Spacy
 
     C2Functional& C2Functional::operator=( C2Functional&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );

@@ -10,7 +10,8 @@ namespace Spacy
     }
 
     IndefiniteLinearSolver::IndefiniteLinearSolver( const IndefiniteLinearSolver& other )
-        : functions_( other.functions_ ), impl_( other.impl_ ? other.functions_.clone( other.impl_ ) : nullptr )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ),
+          impl_( other.impl_ ? other.functions_.clone( other.impl_ ) : nullptr )
     {
     }
 
@@ -38,6 +39,7 @@ namespace Spacy
 
     IndefiniteLinearSolver& IndefiniteLinearSolver::operator=( IndefiniteLinearSolver&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         impl_ = other.impl_;
         other.impl_ = nullptr;

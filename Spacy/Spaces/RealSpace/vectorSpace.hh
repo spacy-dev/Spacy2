@@ -1,10 +1,6 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_REAL_SPACE_CREATOR_HH
-#define SPACY_REAL_SPACE_CREATOR_HH
-
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/vectorSpace.hh>
 
 namespace Spacy
 {
@@ -34,5 +30,3 @@ namespace Spacy
     static VectorSpace R = RealSpace::makeHilbertSpace(true);
   }
 }
-
-#endif // SPACY_REAL_SPACE_CREATOR_HH

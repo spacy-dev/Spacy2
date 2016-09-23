@@ -1,12 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
-#define SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH
+#pragma once
 
 #include <cassert>
 
-#include "Spacy/Algorithm/Scalar/quadratic.hh"
+#include <Spacy/Algorithm/Scalar/quadratic.hh>
+#include <Spacy/Algorithm/dampingFactor.hh>
 
 namespace Spacy
 {
@@ -32,7 +29,7 @@ namespace Spacy
      *
      * @return \f$ q(t)=a+bt+ct^2\f$
      */
-    Quadratic makeQuadraticModel(double nu,
+    Quadratic makeQuadraticModel(DampingFactor nu,
                                  const Vector& dn, const Vector& dt,
                                  const C2Functional& L, const Vector& x);
 
@@ -43,7 +40,7 @@ namespace Spacy
      * @param dt tangential step
      * @return \f$ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 \f$
      */
-    Quadratic makeQuadraticNormModel(double nu, const Vector& dn, const Vector& dt);
+    Quadratic makeQuadraticNormModel(DampingFactor nu, const Vector& dn, const Vector& dt);
 
     /// The cubic regularized model for the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
     class CubicModel
@@ -62,7 +59,7 @@ namespace Spacy
        * @param t argument
        * @return \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$
        */
-      double operator()(double t) const;
+      Real operator()(Real t) const;
 
     private:
       Quadratic quadraticModel_;
@@ -80,11 +77,9 @@ namespace Spacy
      * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
      * @return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega )
      */
-    CubicModel makeCubicModel(double nu, const Vector& dn, const Vector& dt,
+    CubicModel makeCubicModel(DampingFactor nu, const Vector& dn, const Vector& dt,
                               const C2Functional& L, const Vector& x, double omega);
   }
 
   /** @} */
 }
-
-#endif // SPACY_SPACY_COMPOSITE_STEP_QUADRATICMODEL_HH

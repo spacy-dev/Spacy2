@@ -20,10 +20,8 @@ namespace Spacy
     public:
         IndefiniteLinearSolver() noexcept;
 
-        template < typename T, typename std::enable_if<
-                                   !std::is_same< IndefiniteLinearSolver, typename std::decay< T >::type >::value &&
-                                   IndefiniteLinearSolverDetail::IndefiniteLinearSolver_Concept<
-                                       typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< IndefiniteLinearSolverDetail::IndefiniteLinearSolverConcept<
+                                   IndefiniteLinearSolver, typename std::decay< T >::type >::value >::type* = nullptr >
         IndefiniteLinearSolver( T&& value )
             : functions_( {&type_erasure_table_detail::delete_impl< typename std::decay< T >::type >,
                            &type_erasure_table_detail::clone_impl< typename std::decay< T >::type >,
@@ -42,10 +40,8 @@ namespace Spacy
 
         ~IndefiniteLinearSolver();
 
-        template < typename T, typename std::enable_if<
-                                   !std::is_same< IndefiniteLinearSolver, typename std::decay< T >::type >::value &&
-                                   IndefiniteLinearSolverDetail::IndefiniteLinearSolver_Concept<
-                                       typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< IndefiniteLinearSolverDetail::IndefiniteLinearSolverConcept<
+                                   IndefiniteLinearSolver, typename std::decay< T >::type >::value >::type* = nullptr >
         IndefiniteLinearSolver& operator=( T&& value )
         {
             return *this = IndefiniteLinearSolver( std::forward< T >( value ) );

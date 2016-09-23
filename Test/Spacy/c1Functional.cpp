@@ -45,9 +45,9 @@ TEST(C1Functional,Assert)
 {
   auto X = createMockBanachSpace();
   C1Functional f;
-  ASSERT_DEATH( f(zero(X)) , "" );
-  ASSERT_DEATH( f.d1(zero(X)) , "" );
-  ASSERT_DEATH( f.domain() , "" );
+  EXPECT_DEATH( f(zero(X)) , "" );
+  EXPECT_DEATH( f.d1(zero(X)) , "" );
+  EXPECT_DEATH( f.domain() , "" );
 }
 
 TEST(C1Functional,IsEmpty)
@@ -58,8 +58,8 @@ TEST(C1Functional,IsEmpty)
 
   bool f_is_empty = !f;
   bool g_is_empty = !g;
-  ASSERT_TRUE( f_is_empty );
-  ASSERT_FALSE( g_is_empty );
+  EXPECT_TRUE( f_is_empty );
+  EXPECT_FALSE( g_is_empty );
 }
 
 TEST(C1Functional,StoreRValue)

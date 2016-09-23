@@ -37,7 +37,7 @@ namespace Spacy
       private:
         const C1Operator& F_;
 
-        mutable DampingFactor oldNu = -1;
+        mutable DampingFactor oldNu{-1};
         mutable Real normOldDx = Real{-1}, normOldDs = Real{-1};
         mutable Vector oldDs;
       };

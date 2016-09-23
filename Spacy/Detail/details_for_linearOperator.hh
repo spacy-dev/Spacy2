@@ -297,7 +297,7 @@ namespace Spacy
         };
 
         template < class T >
-        using LinearOperator_Concept = std::integral_constant<
+        using LinearOperatorConceptImpl = std::integral_constant<
             bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_call_const_LinearOperator_ref<
                           type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
@@ -313,5 +313,14 @@ namespace Spacy
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_range< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_space< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct LinearOperatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct LinearOperatorConcept< Impl, T, false > : LinearOperatorConceptImpl< T >
+        {
+        };
     }
 }

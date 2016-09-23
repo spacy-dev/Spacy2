@@ -4,9 +4,11 @@
 #pragma once
 
 #include <memory>
+#include <type_traits>
 #include <functional>
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
+#include <Spacy/Util/Mixins/get.hh>
 #include <Spacy/Util/table_util.hh>
 #include <Spacy/vectorSpace.hh>
 
@@ -204,7 +206,7 @@ namespace Spacy
         };
 
         template < class T >
-        using Vector_Concept = std::integral_constant<
+        using VectorConceptImpl = std::integral_constant<
             bool,
             HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                 HasMemFn_add_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
@@ -215,5 +217,14 @@ namespace Spacy
                 HasMemFn_compare_const_Vector_ref<
                     type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                 HasMemFn_space< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct VectorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct VectorConcept< Impl, T, false > : VectorConceptImpl< T >
+        {
+        };
     }
 }

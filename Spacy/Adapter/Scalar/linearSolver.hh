@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_SCALAR_LINEAR_SOLVER_HH
-#define SPACY_ADAPTER_SCALAR_LINEAR_SOLVER_HH
+#pragma once
 
 namespace Spacy
 {
@@ -16,7 +12,7 @@ namespace Spacy
     class LinearSolver
     {
     public:
-      LinearSolver(double value);
+      explicit LinearSolver(double value);
 
       ::Spacy::Vector operator()(const ::Spacy::Vector& y) const;
 
@@ -26,5 +22,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_SCALAR_LINEAR_SOLVER_HH

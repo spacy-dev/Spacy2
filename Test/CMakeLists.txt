@@ -39,6 +39,17 @@ if(Kaskade)
   aux_source_directory(Spacy/Adapter/Kaskade TEST_SRC_LIST)
 endif()
 
+if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic") #-Weffc++ ")
+endif()
+
+#foreach(TEST ${TEST_SRC_LIST})
+#  get_filename_component(TEST_NAME ${TEST} NAME_WE)
+#  get_filename_component(TEST_DIR ${TEST} DIRECTORY)
+#  string(REGEX REPLACE "/" "_" TEST_DIR ${TEST_DIR})
+#  add_executable("${TEST_DIR}_${TEST_NAME}" ${TEST})
+#  target_link_libraries("${TEST_DIR}_${TEST_NAME}" spacy ${GTEST_LIBRARIES} pthread)
+#endforeach()
 add_executable(unit_tests ${TEST_SRC_LIST})
 target_link_libraries(unit_tests spacy ${GTEST_LIBRARIES} pthread)
 

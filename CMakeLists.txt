@@ -32,7 +32,7 @@ endif()
 # Set compiler flags
 set(CMAKE_CXX_STANDARD 14)
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-  set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic") #-Weffc++ ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Woverloaded-virtual -Wwrite-strings -Wpedantic") #-Weffc++ ")
 endif()
  
 # set up include-directories

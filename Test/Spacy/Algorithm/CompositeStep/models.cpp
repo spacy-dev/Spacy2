@@ -9,9 +9,9 @@ using namespace Spacy;
 
 namespace
 {
-  struct TestC2Functional
+  struct QuadraticFunctional
   {
-    TestC2Functional(const VectorSpace& space)
+    QuadraticFunctional(const VectorSpace& space)
       : domain_(&space)
     {}
 
@@ -48,23 +48,23 @@ namespace
 TEST(CompositeStep,QuadraticModel)
 {
   auto X = createMockBanachSpace();
-  auto f = TestC2Functional(X);
+  auto f = QuadraticFunctional(X);
 
-  auto nu = Real(0.5);
+  auto nu = DampingFactor(0.5);
   auto dn = Real(1);
   auto dt = Real(2);
   auto x = Real(1);
 
   auto q = CompositeStep::makeQuadraticModel(nu,dn,dt,f,x);
 
-  EXPECT_DOUBLE_EQ( q(0)  , f(x+nu*dn)      );
-  EXPECT_DOUBLE_EQ( q(nu) , f(x+nu*(dn+dt)) );
-  EXPECT_DOUBLE_EQ( q(1)  , f(x+nu*dn+dt)   );
+  EXPECT_EQ( q(0)  , f(x+nu*dn)      );
+  EXPECT_EQ( q(Real(get(nu))) , f(x+nu*(dn+dt)) );
+  EXPECT_EQ( q(1)  , f(x+nu*dn+dt)   );
 }
 
 TEST(CompositeStep,NormModel)
 {
-  auto nu = Real(0.5);
+  auto nu = DampingFactor(0.5);
   auto dn = Real(1);
   auto dt = Real(-2);
 
@@ -72,17 +72,18 @@ TEST(CompositeStep,NormModel)
 
   auto norm2 = [](const auto& x) { return norm(x)*norm(x); };
 
-  EXPECT_DOUBLE_EQ( q(0)  , norm2(nu*dn)      );
-  EXPECT_DOUBLE_EQ( q(nu) , norm2(nu*(dn+dt)) );
-  EXPECT_DOUBLE_EQ( q(1)  , norm2(nu*dn+dt)   );
+  EXPECT_EQ( q(0), norm2(nu*dn)      );
+  EXPECT_EQ( q(Real(get(nu))), norm2(nu*(dn+dt)) );
+  EXPECT_EQ( q(1), norm2(nu*dn+dt)   );
 }
 
 TEST(CompositeStep,CubicModel)
 {
   auto X = createMockBanachSpace();
-  auto f = TestC2Functional(X);
+  auto f = QuadraticFunctional(X);
 
-  auto nu = Real(0.5), omega = Real(2);
+  auto nu = DampingFactor(0.5);
+  auto omega = 2.;
   auto dn = Real(1);
   auto dt = Real(2);
   auto x = Real(1);
@@ -91,8 +92,9 @@ TEST(CompositeStep,CubicModel)
   auto q0 = CompositeStep::makeQuadraticModel(nu,dn,dt,f,x);
   auto q1 = CompositeStep::makeQuadraticNormModel(nu,dn,dt);
 
-  EXPECT_DOUBLE_EQ( q(0)   , q0(0) + omega/6*pow(q1(0),1.5)   );
-  EXPECT_DOUBLE_EQ( q(nu)  , q0(nu) + omega/6*pow(q1(nu),1.5) );
-  EXPECT_DOUBLE_EQ( q(1)   , q0(1) + omega/6*pow(q1(1),1.5)   );
+  EXPECT_EQ( get(q(0))   , q0(0) + omega/6*pow(q1(0),1.5)   );
+  auto real_nu = Real(get(nu));
+  EXPECT_EQ( get(q(real_nu))  , q0(real_nu) + omega/6*pow(q1(real_nu),1.5) );
+  EXPECT_EQ( get(q(1))   , q0(1) + omega/6*pow(q1(1),1.5)   );
 }
 

@@ -1,50 +1,47 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "findGlobalMinimizer.hh"
 
 #include <cassert>
 
 namespace Spacy
 {
-  Real findGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps)
-  {
-    assert(a<b);
-    eps *= b-a;
-    Real tmin = a;
-    Real fmin = f(a);
-
-    while( (a+=eps) <= b)
+    Real findGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps)
     {
-      if( f(a) < fmin )
-      {
-        fmin = f(a);
-        tmin = a;
-      }
+        assert(a<b);
+        eps *= b-a;
+        Real tmin = a;
+        Real fmin = f(a);
+
+        while( (a+=eps) <= b)
+        {
+            if( f(a) < fmin )
+            {
+                fmin = f(a);
+                tmin = a;
+            }
+        }
+
+        return tmin;
     }
 
-    return tmin;
-  }
+    Real findLogGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps)
+    {
+        assert(a<b);
+        assert(a>0);
+        Real tmin = b;
+        Real fmin = f(b);
 
-  Real findLogGlobalMinimizer(const std::function<Real(const Real)>& f, Real a, Real b, Real eps)
-  {
-    assert(a<b);
-    assert(a>0);
-    Real tmin = b;
-    Real fmin = f(b);
-
-    eps = min(eps,0.5);
+        eps = min(eps,0.5);
         
-    while( (b*=(1-eps)) >= a)
-    {
-      if( f(b) < fmin )
-      {
-        fmin = f(b);
-        tmin = b;
-      }
-    }
+        while( (b*=(1-eps)) >= a)
+        {
+            if( f(b) < fmin )
+            {
+                fmin = f(b);
+                tmin = b;
+            }
+        }
 
-    return tmin;
-  }
+        return tmin;
+    }
 
 }

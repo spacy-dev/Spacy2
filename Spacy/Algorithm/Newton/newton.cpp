@@ -27,7 +27,8 @@ namespace Spacy
       p.startTimer();
 
       auto x = x0;
-      if( terminationCriterion(1.,x,x) )
+      auto nu = DampingFactor{1};
+      if( terminationCriterion(nu,x,x) )
         return x;
 
       for(unsigned i = 1; i <= p.getMaxSteps(); ++i)
@@ -38,7 +39,7 @@ namespace Spacy
         auto dF_inv = d1(F,x)^-1;
 
         auto dx = dF_inv(-F(x));
-        auto nu = dampingStrategy(dF_inv,x,dx);
+        nu = dampingStrategy(dF_inv,x,dx);
         x += nu*dx;
 
         if( p.verbose() ) std::cout << "nu = " << nu << ", |x| = " << norm(x) << ", |dx| = " << norm(dx) << std::endl;

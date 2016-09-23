@@ -18,7 +18,8 @@ namespace Spacy
         value_(value),
         derivative_(derivative),
         operatorSpace_( std::make_shared<VectorSpace>(
-                          LinearOperatorCreator() ,
+                            [](const ::Spacy::VectorSpace*) { return Real(0.); },
+//                          LinearOperatorCreator() ,
                           [](const ::Spacy::Vector& v)
                           { return Real(0.); } ,
                           true

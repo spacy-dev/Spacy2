@@ -19,6 +19,11 @@ namespace Mock
     return Spacy::Real(get());
   }
 
+  ::Spacy::Real LinearOperator::operator()(const LinearOperator& y) const
+  {
+    return Spacy::Real(get()*y.get());
+  }
+
   /// Access solver representing \f$A^{-1}\f$
   ::Spacy::LinearSolver LinearOperator::solver() const
   {

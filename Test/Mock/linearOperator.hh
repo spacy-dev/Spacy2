@@ -1,14 +1,10 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_TEST_MOCK_LINEAR_OPERATOR_HH
-#define SPACY_TEST_MOCK_LINEAR_OPERATOR_HH
-
-#include "Spacy/linearSolver.hh"
-#include "Spacy/Util/Mixins/get.hh"
-#include "Spacy/Util/Base/addArithmeticOperators.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
+#include <Spacy/linearSolver.hh>
+#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Util/Base/addArithmeticOperators.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
 
 namespace Mock
 {
@@ -23,9 +19,9 @@ namespace Mock
 
     ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
+    ::Spacy::Real operator()(const LinearOperator& y) const;
+
     /// Access solver representing \f$A^{-1}\f$
     ::Spacy::LinearSolver solver() const;
   };
 }
-
-#endif // SPACY_TEST_MOCK_LINEAR_OPERATOR_HH

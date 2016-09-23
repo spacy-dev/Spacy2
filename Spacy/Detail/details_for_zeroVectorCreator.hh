@@ -56,8 +56,17 @@ namespace Spacy
         };
 
         template < class T >
-        using ZeroVectorCreator_Concept =
+        using ZeroVectorCreatorConceptImpl =
             std::integral_constant< bool, HasMemFn_call_const_VectorSpace_ptr<
                                               type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct ZeroVectorCreatorConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct ZeroVectorCreatorConcept< Impl, T, false > : ZeroVectorCreatorConceptImpl< T >
+        {
+        };
     }
 }

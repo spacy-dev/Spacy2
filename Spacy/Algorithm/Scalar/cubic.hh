@@ -1,10 +1,6 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_1D_MODEL_CUBIC_FUNCTION_HH
-#define SPACY_1D_MODEL_CUBIC_FUNCTION_HH
-
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include <Spacy/Spaces/RealSpace/real.hh>
 
 namespace Spacy
 {
@@ -21,5 +17,3 @@ namespace Spacy
     Real a_, b_, c_, d_;
   };
 }
-
-#endif // SPACY_1D_MODEL_CUBIC_FUNCTION_HH

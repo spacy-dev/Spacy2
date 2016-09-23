@@ -3,7 +3,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/linearOperator.hh>
 #include <Spacy/Spaces/realSpace.hh>
-#include <Spacy/Util/Mixins/target.hh>
+#include <Spacy/Util/cast.hh>
 #include <Test/mockSetup.hh>
 #include <Test/Mock/linearOperator.hh>
 #include <Test/Mock/linearSolver.hh>
@@ -19,7 +19,7 @@ namespace
     EXPECT_EQ( 0u , f.range().index() );
 
     auto L = f.solver();
-    auto expected = Spacy::target<Mock::IndefiniteLinearSolver>(L) != nullptr;
+    auto expected = is<Mock::IndefiniteLinearSolver>(L);
     EXPECT_TRUE(expected);
   }
 }
@@ -28,26 +28,26 @@ TEST(LinearOperator,Assert)
 {
   auto X = createMockBanachSpace();
   LinearOperator f;
-  ASSERT_DEATH( f( zero(X) ) , "" );
-  ASSERT_DEATH( f.solver() , "" );
-  ASSERT_DEATH( f.domain() , "" );
-  ASSERT_DEATH( f.range() , "" );
-  ASSERT_DEATH( -f , "" );
+  EXPECT_DEATH( f( zero(X) ) , "" );
+  EXPECT_DEATH( f.solver() , "" );
+  EXPECT_DEATH( f.domain() , "" );
+  EXPECT_DEATH( f.range() , "" );
+  EXPECT_DEATH( -f , "" );
 
   LinearOperator g;
-  ASSERT_DEATH( f*=1 , "" );
-  ASSERT_DEATH( f+=g , "" );
-  ASSERT_DEATH( f-=g , "" );
-  ASSERT_DEATH( f(g) , "" );
+  EXPECT_DEATH( f*=1 , "" );
+  EXPECT_DEATH( f+=g , "" );
+  EXPECT_DEATH( f-=g , "" );
+  EXPECT_DEATH( f(g) , "" );
 
   f = Mock::LinearOperator(1);
-  ASSERT_DEATH( f+=g , "" );
-  ASSERT_DEATH( f-=g , "" );
-  ASSERT_DEATH( f(g) , "" );
+  EXPECT_DEATH( f+=g , "" );
+  EXPECT_DEATH( f-=g , "" );
+  EXPECT_DEATH( f(g) , "" );
 
-  ASSERT_DEATH( g+=f , "" );
-  ASSERT_DEATH( g-=f , "" );
-  ASSERT_DEATH( g(f) , "" );
+  EXPECT_DEATH( g+=f , "" );
+  EXPECT_DEATH( g-=f , "" );
+  EXPECT_DEATH( g(f) , "" );
 }
 
 TEST(LinearOperator,IsEmpty)

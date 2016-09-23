@@ -1,7 +1,7 @@
-#include "Test/Spacy/Algorithm/scalarTests.hh"
-#include "Test/Spacy/Algorithm/Newton/newtonTestSetup.hh"
+#include <Test/Spacy/Algorithm/scalarTests.hh>
+#include <Test/Spacy/Algorithm/Newton/newtonTestSetup.hh>
 
-#include "Spacy/Spaces/realSpace.hh"
+#include <Spacy/Spaces/realSpace.hh>
 
 using namespace Spacy;
 

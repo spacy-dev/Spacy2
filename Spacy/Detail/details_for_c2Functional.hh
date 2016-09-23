@@ -146,11 +146,20 @@ namespace Spacy
         };
 
         template < class T >
-        using C2Functional_Concept = std::integral_constant<
+        using C2FunctionalConceptImpl = std::integral_constant<
             bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_d1< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_d2< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_hessian< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
                       HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+
+        template < class Impl, class T, bool = std::is_same< Impl, T >::value >
+        struct C2FunctionalConcept : std::false_type
+        {
+        };
+        template < class Impl, class T >
+        struct C2FunctionalConcept< Impl, T, false > : C2FunctionalConceptImpl< T >
+        {
+        };
     }
 }

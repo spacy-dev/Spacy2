@@ -5,6 +5,8 @@
 #include <Spacy/c1Operator.hh>
 #include <Spacy/Util/Exceptions/regularityTestFailedException.hh>
 
+#include <cmath>
+
 namespace Spacy
 {
   namespace Newton
@@ -17,20 +19,21 @@ namespace Spacy
 
       DampingFactor AffineCovariant::operator()(const std::function<Vector(const Vector&)>& DFInv_, const Vector& x, const Vector& dx) const
       {
-        DampingFactor nu = 1;
-        auto mu = Real{1.}, normDx =  norm(dx);
+        auto nu = DampingFactor{1};
+        auto mu = 1.;
+        auto normDx =  norm(dx);
 
         if( normDx < sqrtEps() * norm(x) ) return nu;
 
         if( oldNu > 0 )
         {
-          mu = normOldDx * normOldDs * oldNu / ( normDx * norm(oldDs - dx) );
-          nu = min(1.,mu);
+          mu = get(normOldDx * normOldDs * oldNu / ( normDx * norm(oldDs - dx) ));
+          nu = std::min(1.,mu);
         }
 
         while(true)
         {
-          if( regularityTestFailed(nu) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",nu);
+          if( regularityTestFailed(get(nu)) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",get(nu));
 
           auto trial = x + nu*dx;
           auto ds = DFInv_(-F_(trial)) - (1.-nu)*dx;
@@ -68,7 +71,7 @@ namespace Spacy
 
       DampingFactor AffineContravariant::operator()(const std::function<Vector(const Vector&)>&, const Vector& x, const Vector& dx) const
       {
-        DampingFactor nu = 1.;
+        auto nu = DampingFactor(1);
         auto norm_F_x = norm(F_(x));
         if( norm_F_x < sqrtEps() ) return nu;
         if( muPrime > 0 )
@@ -76,7 +79,7 @@ namespace Spacy
 
         while( true )
         {
-          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",nu);
+          if( !regularityTestPassed(get(nu))) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",get(nu));
 
           auto trial = x + nu*dx;
 
@@ -112,7 +115,7 @@ namespace Spacy
 
       DampingFactor None::operator()(const std::function<Vector(const Vector&)>&, const Vector&, const Vector&) const
       {
-        return 1;
+        return DampingFactor(1);
       }
     }
   }

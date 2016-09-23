@@ -18,10 +18,8 @@ namespace Spacy
     public:
         C1Operator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C1Operator, typename std::decay< T >::type >::value &&
-                                            C1OperatorDetail::C1Operator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C1OperatorDetail::C1OperatorConcept<
+                                   C1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         C1Operator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -49,10 +47,8 @@ namespace Spacy
 
         C1Operator( C1Operator&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C1Operator, typename std::decay< T >::type >::value &&
-                                            C1OperatorDetail::C1Operator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C1OperatorDetail::C1OperatorConcept<
+                                   C1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
         C1Operator& operator=( T&& value )
         {
             return *this = C1Operator( std::forward< T >( value ) );

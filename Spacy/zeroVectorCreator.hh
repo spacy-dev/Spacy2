@@ -17,10 +17,8 @@ namespace Spacy
     public:
         ZeroVectorCreator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< ZeroVectorCreator, typename std::decay< T >::type >::value &&
-                                            ZeroVectorCreatorDetail::ZeroVectorCreator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< ZeroVectorCreatorDetail::ZeroVectorCreatorConcept<
+                                   ZeroVectorCreator, typename std::decay< T >::type >::value >::type* = nullptr >
         ZeroVectorCreator( T&& value )
             : functions_( {&type_erasure_table_detail::delete_impl< typename std::decay< T >::type >,
                            &type_erasure_table_detail::clone_impl< typename std::decay< T >::type >,
@@ -37,10 +35,8 @@ namespace Spacy
 
         ~ZeroVectorCreator();
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< ZeroVectorCreator, typename std::decay< T >::type >::value &&
-                                            ZeroVectorCreatorDetail::ZeroVectorCreator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< ZeroVectorCreatorDetail::ZeroVectorCreatorConcept<
+                                   ZeroVectorCreator, typename std::decay< T >::type >::value >::type* = nullptr >
         ZeroVectorCreator& operator=( T&& value )
         {
             return *this = ZeroVectorCreator( std::forward< T >( value ) );

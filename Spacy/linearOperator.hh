@@ -21,10 +21,8 @@ namespace Spacy
     public:
         LinearOperator() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< LinearOperator, typename std::decay< T >::type >::value &&
-                                            LinearOperatorDetail::LinearOperator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< LinearOperatorDetail::LinearOperatorConcept<
+                                   LinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         LinearOperator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -63,10 +61,8 @@ namespace Spacy
 
         LinearOperator( LinearOperator&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< LinearOperator, typename std::decay< T >::type >::value &&
-                                            LinearOperatorDetail::LinearOperator_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< LinearOperatorDetail::LinearOperatorConcept<
+                                   LinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
         LinearOperator& operator=( T&& value )
         {
             return *this = LinearOperator( std::forward< T >( value ) );

@@ -3,7 +3,9 @@
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
+#include <Spacy/Util/Mixins/get.hh>
 #include <functional>
+#include <type_traits>
 
 namespace Spacy
 {
@@ -72,5 +74,20 @@ namespace Spacy
   {
     if( !y.space().isPrimalWRT(x.space()) )
       throw IncompatibleSpaceException(x.space().index(),y.space().index());
+  }
+
+
+  template <class T,
+            typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
+  Vector operator*(const Mixin::Get<T>& x, Vector y)
+  {
+    return y *= get(x);
+  }
+
+  template <class T,
+            typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
+  Vector operator*(const Vector& x, const Mixin::Get<T>& y)
+  {
+    return y * x;
   }
 }

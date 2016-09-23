@@ -19,10 +19,8 @@ namespace Spacy
     public:
         C2Functional() noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C2Functional, typename std::decay< T >::type >::value &&
-                                            C2FunctionalDetail::C2Functional_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C2FunctionalDetail::C2FunctionalConcept<
+                                   C2Functional, typename std::decay< T >::type >::value >::type* = nullptr >
         C2Functional( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
@@ -50,10 +48,8 @@ namespace Spacy
 
         C2Functional( C2Functional&& other ) noexcept;
 
-        template < typename T,
-                   typename std::enable_if< !std::is_same< C2Functional, typename std::decay< T >::type >::value &&
-                                            C2FunctionalDetail::C2Functional_Concept<
-                                                typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if< C2FunctionalDetail::C2FunctionalConcept<
+                                   C2Functional, typename std::decay< T >::type >::value >::type* = nullptr >
         C2Functional& operator=( T&& value )
         {
             return *this = C2Functional( std::forward< T >( value ) );

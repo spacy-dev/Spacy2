@@ -1,43 +1,64 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "dampingFactor.hh"
-
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 #include <cmath>
 
 namespace Spacy
 {
-  DampingFactor::DampingFactor(double nu, double eps)
-    : Mixin::Eps(eps)
-  {
-    set(nu);
-  }
+    namespace {
+        double set(double nu, double eps) noexcept {
+            return ( std::abs(1-nu) < eps ) ? 1. : nu;
+        }
+    }
 
-  DampingFactor& DampingFactor::operator=(double nu)
-  {
-    set(nu);
-    return *this;
-  }
+    DampingFactor::DampingFactor(double nu, double eps) noexcept
+        : Mixin::Get<double>(set(nu, eps)),
+          Mixin::Eps(eps)
+    {}
 
-  DampingFactor::operator double() const
-  {
-    return nu_;
-  }
+    DampingFactor::DampingFactor(Real nu, double eps) noexcept
+        : Mixin::Get<double>(set(nu.get(), eps)),
+          Mixin::Eps(eps)
+    {}
 
-  DampingFactor::operator Real() const
-  {
-    return Real(nu_);
-  }
+    DampingFactor& DampingFactor::operator=(double nu) noexcept
+    {
+        get() = set(nu, eps());
+        return *this;
+    }
 
-  void DampingFactor::set(double nu)
-  {
-    nu_ = ( abs(1-nu) < eps() ) ? 1. : nu;
-  }
+    DampingFactor& DampingFactor::operator=(Real nu) noexcept
+    {
+        get() = set(nu.get(), eps());
+        return *this;
+    }
 
-  std::ostream& operator<<(std::ostream& os, DampingFactor nu)
-  {
-    return os << static_cast<double>(nu);
-  }
+    DampingFactor& DampingFactor::operator*=(double value)
+    {
+        get() *= value;
+        return *this;
+    }
+
+    DampingFactor& DampingFactor::operator*=(Real value)
+    {
+        get() *= value.get();
+        return *this;
+    }
+
+
+    DampingFactor DampingFactor::operator-() const noexcept
+    {
+        return DampingFactor(-get(),eps());
+    }
+
+
+    Real operator*(const DampingFactor& x, Real y)
+    {
+        get(y) *= get(x);
+        return y;
+    }
+
+    Real operator*(Real y, const DampingFactor& x)
+    {
+        return x * y;
+    }
 }

@@ -9,7 +9,8 @@ namespace Spacy
     {
     }
 
-    Operator::Operator( const Operator& other ) : functions_( other.functions_ ), impl_( other.impl_ )
+    Operator::Operator( const Operator& other )
+        : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
     }
 
@@ -32,6 +33,7 @@ namespace Spacy
 
     Operator& Operator::operator=( Operator&& other ) noexcept
     {
+        type_id_ = other.type_id_;
         functions_ = other.functions_;
         if ( type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
             impl_ = std::move( other.impl_ );
