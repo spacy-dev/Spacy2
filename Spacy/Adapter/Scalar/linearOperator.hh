@@ -9,29 +9,35 @@
 
 namespace Spacy
 {
-  /// @cond
-  class Vector;
-  /// @endcond
+    /// @cond
+    class Vector;
+    /// @endcond
 
-  /** @addtogroup ScalarGroup  @{ */
-  namespace Scalar
-  {
-    struct LinearOperator :
-      VectorBase ,
-      OperatorBase ,
-      Mixin::Get<double> ,
-      AddArithmeticOperators<LinearOperator>
+    /** @addtogroup ScalarGroup  @{ */
+    namespace Scalar
     {
-      LinearOperator(const VectorSpace& space, double value);
+        /// Linear operator for scalar problems.
+        struct LinearOperator :
+                VectorBase ,
+                OperatorBase ,
+                Mixin::Get<double> ,
+                AddArithmeticOperators<LinearOperator>
+        {
+            /// Create linear operator.
+            LinearOperator(const VectorSpace& space, double value);
 
-      ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
+            /// Apply linear operator.
+            ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
-      ::Spacy::Real operator()(const LinearOperator& dx) const;
+            /// Apply as dual space element.
+            ::Spacy::Real operator()(const LinearOperator& dx) const;
 
-      LinearOperator operator-() const;
+            /// Get additive inverse.
+            LinearOperator operator-() const;
 
-      std::function< ::Spacy::Vector(const ::Spacy::Vector&) > solver() const;
-    };
-  }
-  /** @} */
+            /// Get solver for the computation of the inverse of this linear operator.
+            std::function< ::Spacy::Vector(const ::Spacy::Vector&) > solver() const;
+        };
+    }
+    /** @} */
 }
