@@ -13,9 +13,9 @@ addons:
 
 cache:
   directories:
-  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
-  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
-  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
+    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
 
 env:
   # Workaround for https://github.com/travis-ci/travis-ci/issues/4681
@@ -98,8 +98,6 @@ install:
       fi
       export CXXFLAGS = "-stdlib=libc++"
       export LDFLAGS = "-stdlib=libc++"
-#      export CXXFLAGS="-nostdinc++ -isystem ${LLVM_DIR}/install/include/c++/v1 -stdlib=libc++ -lc++abi"
-#      export LDFLAGS="-L ${LLVM_DIR}/install/lib -l c++ -l c++abi"
       export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LLVM_DIR}/install/lib"
       export PATH="${LLVM_DIR}/clang/bin:${PATH}"
       export CXX="${LLVM_DIR}/clang/bin/clang++"
