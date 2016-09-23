@@ -2,23 +2,30 @@
 
 namespace Spacy
 {
-  /// @cond
-  class Vector;
-  /// @endcond
+    /// @cond
+    class Vector;
+    /// @endcond
 
-  /** @addtogroup ScalarGroup @{ */
-  namespace Scalar
-  {
-    class LinearSolver
+    /** @addtogroup ScalarGroup @{ */
+    namespace Scalar
     {
-    public:
-      explicit LinearSolver(double value);
+        /**
+         * @brief A linear solver for scalar problems.
+         *
+         * Computes \f$x/y\f$.
+         */
+        class LinearSolver
+        {
+        public:
+            /// Construct linear solver for the computation of \f$\cdot/y\f$.
+            explicit LinearSolver(double y);
 
-      ::Spacy::Vector operator()(const ::Spacy::Vector& y) const;
+            /// Compute \f$x/y\f$
+            ::Spacy::Vector operator()(const ::Spacy::Vector& x) const;
 
-    private:
-      double value_;
-    };
-  }
-  /** @} */
+        private:
+            double y_;
+        };
+    }
+    /** @} */
 }

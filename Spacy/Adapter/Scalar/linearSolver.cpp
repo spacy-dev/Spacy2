@@ -8,13 +8,13 @@ namespace Spacy
 {
   namespace Scalar
   {
-    LinearSolver::LinearSolver(double value)
-      : value_(value)
+    LinearSolver::LinearSolver(double y)
+      : y_(y)
     {}
 
-    ::Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& y) const
+    ::Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& x) const
     {
-      return cast_ref<Real>(y) / value_;
+      return cast_ref<Real>(x) / y_;
     }
   }
 }
