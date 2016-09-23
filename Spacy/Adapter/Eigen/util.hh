@@ -1,28 +1,21 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ADAPTER_EIGEN_UTIL_HH
-#define SPACY_ADAPTER_EIGEN_UTIL_HH
+#include <Spacy/vector.hh>
 
-#include "Eigen/Dense"
-#include "Spacy/vector.hh"
+#include <Eigen/Dense>
 
 namespace Spacy
 {
-  namespace Rn
-  {
-    /**
-     * @ingroup EigenGroup, VectorSpaceGroup
-     * @brief %Vector for %Rn, based on the %Eigen library.
-     */
-    ///  Copy ::Spacy::Vector to flat coefficient vector of %Eigen .
-    void copy(const ::Spacy::Vector& x, Eigen::VectorXd& y);
- 
-    ///  Copy flat coefficient vector of %Eigen to ::Spacy::Vector.
-    void copy(const Eigen::VectorXd& x, ::Spacy::Vector& y);
-    
-    unsigned getSize(const ::Spacy::Vector& y);
-  }
-}
+    /** @addtogroup EigenGroup @{ */
+    namespace Rn
+    {
+        ///  Copy ::Spacy::Vector to flat coefficient vector of %Eigen .
+        void copy(const ::Spacy::Vector& x, Eigen::VectorXd& y);
 
-#endif // SPACY_ADAPTER_EIGEN_UTIL_HH
+        ///  Copy flat coefficient vector of %Eigen to ::Spacy::Vector.
+        void copy(const Eigen::VectorXd& x, ::Spacy::Vector& y);
+
+        unsigned getSize(const ::Spacy::Vector& y);
+    }
+    /** @} */
+}

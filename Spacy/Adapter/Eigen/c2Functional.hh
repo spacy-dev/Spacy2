@@ -1,12 +1,10 @@
-#ifndef SPACY_ADAPTER_EIGEN_C2_FUNCTIONAL_HH
-#define SPACY_ADAPTER_EIGEN_C2_FUNCTIONAL_HH
+#pragma once
 
 #include <functional>
 #include <memory>
 #include <Eigen/Dense>
 
-#include "Spacy/Util/Base/functionalBase.hh"
-
+#include <Spacy/Util/Base/functionalBase.hh>
 
 namespace Spacy
 {
@@ -58,5 +56,3 @@ namespace Spacy
     }
     /** @} */
 }
-
-#endif // SPACY_ADAPTER_EIGEN_C2_FUNCTIONAL_HH

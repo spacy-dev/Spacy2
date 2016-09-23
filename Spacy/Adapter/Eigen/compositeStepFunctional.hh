@@ -1,5 +1,4 @@
-#ifndef SPACY_ADAPTER_EIGEN_COMPOSITE_STEP_FUNCTIONAL_HH
-#define SPACY_ADAPTER_EIGEN_COMPOSITE_STEP_FUNCTIONAL_HH
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -76,5 +75,3 @@ using TangentialStepFunctional = CompositeStepFunctional<RoleOfFunctional::TANGE
 }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_EIGEN_C2_FUNCTIONAL_HH
