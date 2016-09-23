@@ -50,7 +50,7 @@ namespace Spacy
     Real C1Functional::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector__ref_( *this, read(), x );
+        return functions_.call_const_Vector_ref( *this, read(), x );
     }
 
     Vector C1Functional::d1( const Vector& x ) const

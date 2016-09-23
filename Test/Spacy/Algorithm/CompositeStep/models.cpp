@@ -1,12 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include <gtest/gtest.h>
 
-#include "Spacy/c2Functional.hh"
-#include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
-#include "Test/Mock/linearOperator.hh"
-#include "Test/mockSetup.hh"
+#include <Spacy/c2Functional.hh>
+#include <Spacy/Algorithm/CompositeStep/quadraticModel.hh>
+#include <Test/Mock/linearOperator.hh>
+#include <Test/mockSetup.hh>
 
 using namespace Spacy;
 

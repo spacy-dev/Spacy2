@@ -4,12 +4,12 @@
 #pragma once
 
 #include <array>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/linearOperator.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_c2Functional.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -19,14 +19,16 @@ namespace Spacy
     public:
         C2Functional() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   C2Functional, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< C2Functional, typename std::decay< T >::type >::value &&
+                                            C2FunctionalDetail::C2Functional_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         C2Functional( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &C2FunctionalDetail::execution_wrapper< C2Functional,
-                                                           typename std::decay< T >::type >::call_const_Vector__ref_,
+                                                           typename std::decay< T >::type >::call_const_Vector_ref,
                    &C2FunctionalDetail::execution_wrapper< C2Functional, typename std::decay< T >::type >::d1,
                    &C2FunctionalDetail::execution_wrapper< C2Functional, typename std::decay< T >::type >::d2,
                    &C2FunctionalDetail::execution_wrapper< C2Functional, typename std::decay< T >::type >::hessian,
@@ -48,8 +50,10 @@ namespace Spacy
 
         C2Functional( C2Functional&& other ) noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   C2Functional, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< C2Functional, typename std::decay< T >::type >::value &&
+                                            C2FunctionalDetail::C2Functional_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         C2Functional& operator=( T&& value )
         {
             return *this = C2Functional( std::forward< T >( value ) );

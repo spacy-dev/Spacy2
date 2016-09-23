@@ -4,6 +4,7 @@
 #pragma once
 
 #include <functional>
+#include <Spacy/Util/table_util.hh>
 #include <Spacy/vector.hh>
 
 namespace Spacy
@@ -15,19 +16,19 @@ namespace Spacy
         {
             using delete_function = void ( * )( void* );
             using clone_function = void* (*)( void* );
-            using call_const_Vector__ref__function = Vector ( * )( const Interface&, void*, const Vector& x );
+            using call_const_Vector_ref_function = Vector ( * )( const Interface&, void*, const Vector& x );
             using isPositiveDefinite_function = bool ( * )( const Interface&, void* );
 
             delete_function del;
             clone_function clone;
-            call_const_Vector__ref__function call_const_Vector__ref_;
+            call_const_Vector_ref_function call_const_Vector_ref;
             isPositiveDefinite_function isPositiveDefinite;
         };
 
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
@@ -41,7 +42,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
@@ -51,5 +52,34 @@ namespace Spacy
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().isPositiveDefinite();
             }
         };
+
+        template < class T >
+        using TryMemFn_call_const_Vector_ref = decltype( std::declval< T >().operator()( std::declval< Vector >() ) );
+        template < class T, class = void >
+        struct HasMemFn_call_const_Vector_ref : std::false_type
+        {
+        };
+        template < class T >
+        struct HasMemFn_call_const_Vector_ref<
+            T, type_erasure_table_detail::voider< TryMemFn_call_const_Vector_ref< T > > > : std::true_type
+        {
+        };
+        template < class T >
+        using TryMemFn_isPositiveDefinite = decltype( std::declval< T >().isPositiveDefinite() );
+        template < class T, class = void >
+        struct HasMemFn_isPositiveDefinite : std::false_type
+        {
+        };
+        template < class T >
+        struct HasMemFn_isPositiveDefinite< T, type_erasure_table_detail::voider< TryMemFn_isPositiveDefinite< T > > >
+            : std::true_type
+        {
+        };
+
+        template < class T >
+        using IndefiniteLinearSolver_Concept = std::integral_constant<
+            bool,
+            HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                HasMemFn_isPositiveDefinite< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
     }
 }

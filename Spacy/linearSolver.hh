@@ -5,9 +5,9 @@
 
 #include <memory>
 #include <functional>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/vector.hh>
 #include "Detail/details_for_linearSolver.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -20,13 +20,15 @@ namespace Spacy
     public:
         IndefiniteLinearSolver() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   IndefiniteLinearSolver, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if<
+                                   !std::is_same< IndefiniteLinearSolver, typename std::decay< T >::type >::value &&
+                                   IndefiniteLinearSolverDetail::IndefiniteLinearSolver_Concept<
+                                       typename std::decay< T >::type >::value >::type* = nullptr >
         IndefiniteLinearSolver( T&& value )
             : functions_( {&type_erasure_table_detail::delete_impl< typename std::decay< T >::type >,
                            &type_erasure_table_detail::clone_impl< typename std::decay< T >::type >,
                            &IndefiniteLinearSolverDetail::execution_wrapper<
-                               IndefiniteLinearSolver, typename std::decay< T >::type >::call_const_Vector__ref_,
+                               IndefiniteLinearSolver, typename std::decay< T >::type >::call_const_Vector_ref,
                            &IndefiniteLinearSolverDetail::execution_wrapper<
                                IndefiniteLinearSolver, typename std::decay< T >::type >::isPositiveDefinite} ),
               type_id_( typeid( typename std::decay< T >::type ).hash_code() ),
@@ -40,8 +42,10 @@ namespace Spacy
 
         ~IndefiniteLinearSolver();
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   IndefiniteLinearSolver, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T, typename std::enable_if<
+                                   !std::is_same< IndefiniteLinearSolver, typename std::decay< T >::type >::value &&
+                                   IndefiniteLinearSolverDetail::IndefiniteLinearSolver_Concept<
+                                       typename std::decay< T >::type >::value >::type* = nullptr >
         IndefiniteLinearSolver& operator=( T&& value )
         {
             return *this = IndefiniteLinearSolver( std::forward< T >( value ) );

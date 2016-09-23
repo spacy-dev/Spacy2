@@ -4,11 +4,11 @@
 #pragma once
 
 #include <array>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_functional.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -18,14 +18,16 @@ namespace Spacy
     public:
         Functional() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   Functional, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< Functional, typename std::decay< T >::type >::value &&
+                                            FunctionalDetail::Functional_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         Functional( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &FunctionalDetail::execution_wrapper< Functional,
-                                                         typename std::decay< T >::type >::call_const_Vector__ref_,
+                                                         typename std::decay< T >::type >::call_const_Vector_ref,
                    &FunctionalDetail::execution_wrapper< Functional, typename std::decay< T >::type >::domain} ),
               type_id_( typeid( typename std::decay< T >::type ).hash_code() ), impl_( nullptr )
         {
@@ -44,8 +46,10 @@ namespace Spacy
 
         Functional( Functional&& other ) noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   Functional, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< Functional, typename std::decay< T >::type >::value &&
+                                            FunctionalDetail::Functional_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         Functional& operator=( T&& value )
         {
             return *this = Functional( std::forward< T >( value ) );

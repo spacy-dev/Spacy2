@@ -50,31 +50,31 @@ namespace Spacy
     Vector LinearOperator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector__ref_( *this, read(), x );
+        return functions_.call_const_Vector_ref( *this, read(), x );
     }
 
     Real LinearOperator::operator()( const LinearOperator& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_LinearOperator__ref_( *this, read(), x.impl_.get() );
+        return functions_.call_const_LinearOperator_ref( *this, read(), x.impl_.get() );
     }
 
     LinearOperator& LinearOperator::operator+=( const LinearOperator& y )
     {
         assert( impl_ );
-        return functions_.add_const_LinearOperator__ref_( *this, write(), y.impl_.get() );
+        return functions_.add_const_LinearOperator_ref( *this, write(), y.impl_.get() );
     }
 
     LinearOperator& LinearOperator::operator-=( const LinearOperator& y )
     {
         assert( impl_ );
-        return functions_.subtract_const_LinearOperator__ref_( *this, write(), y.impl_.get() );
+        return functions_.subtract_const_LinearOperator_ref( *this, write(), y.impl_.get() );
     }
 
     LinearOperator& LinearOperator::operator*=( double a )
     {
         assert( impl_ );
-        return functions_.multiply_double_( *this, write(), std::move( a ) );
+        return functions_.multiply_double( *this, write(), std::move( a ) );
     }
 
     LinearOperator LinearOperator::operator-() const
@@ -86,7 +86,7 @@ namespace Spacy
     bool LinearOperator::operator==( const LinearOperator& y ) const
     {
         assert( impl_ );
-        return functions_.compare_const_LinearOperator__ref_( *this, read(), y.impl_.get() );
+        return functions_.compare_const_LinearOperator_ref( *this, read(), y.impl_.get() );
     }
 
     std::function< Vector( const Vector& ) > LinearOperator::solver() const

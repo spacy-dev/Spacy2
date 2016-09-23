@@ -4,10 +4,10 @@
 #pragma once
 
 #include <memory>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_zeroVectorCreator.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -17,13 +17,15 @@ namespace Spacy
     public:
         ZeroVectorCreator() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   ZeroVectorCreator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< ZeroVectorCreator, typename std::decay< T >::type >::value &&
+                                            ZeroVectorCreatorDetail::ZeroVectorCreator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         ZeroVectorCreator( T&& value )
             : functions_( {&type_erasure_table_detail::delete_impl< typename std::decay< T >::type >,
                            &type_erasure_table_detail::clone_impl< typename std::decay< T >::type >,
                            &ZeroVectorCreatorDetail::execution_wrapper<
-                               ZeroVectorCreator, typename std::decay< T >::type >::call_const_VectorSpace__ptr_} ),
+                               ZeroVectorCreator, typename std::decay< T >::type >::call_const_VectorSpace_ptr} ),
               type_id_( typeid( typename std::decay< T >::type ).hash_code() ),
               impl_( new typename std::decay< T >::type( std::forward< T >( value ) ) )
         {
@@ -35,8 +37,10 @@ namespace Spacy
 
         ~ZeroVectorCreator();
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   ZeroVectorCreator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< ZeroVectorCreator, typename std::decay< T >::type >::value &&
+                                            ZeroVectorCreatorDetail::ZeroVectorCreator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         ZeroVectorCreator& operator=( T&& value )
         {
             return *this = ZeroVectorCreator( std::forward< T >( value ) );

@@ -103,4 +103,22 @@ namespace type_erasure_table_detail
     {
         return is_heap_allocated( impl, buffer );
     }
+
+    template < class T >
+    using voider = void;
+
+    template < class T >
+    struct remove_reference_wrapper
+    {
+        using type = T;
+    };
+
+    template < class T >
+    struct remove_reference_wrapper< std::reference_wrapper< T > >
+    {
+        using type = T;
+    };
+
+    template < class T >
+    using remove_reference_wrapper_t = typename remove_reference_wrapper< T >::type;
 }

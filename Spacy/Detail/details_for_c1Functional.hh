@@ -6,6 +6,7 @@
 #include <memory>
 #include <functional>
 #include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/table_util.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 
@@ -18,13 +19,13 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_const_Vector__ref__function = Real ( * )( const Interface&, void*, const Vector& x );
+            using call_const_Vector_ref_function = Real ( * )( const Interface&, void*, const Vector& x );
             using d1_function = Vector ( * )( const Interface&, void*, const Vector& x );
             using domain_function = const VectorSpace& (*)( const Interface&, void* );
 
             clone_function clone;
             clone_into_function clone_into;
-            call_const_Vector__ref__function call_const_Vector__ref_;
+            call_const_Vector_ref_function call_const_Vector_ref;
             d1_function d1;
             domain_function domain;
         };
@@ -32,7 +33,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Real call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
@@ -51,7 +52,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Real call_const_Vector__ref_( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
@@ -66,5 +67,43 @@ namespace Spacy
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }
         };
+
+        template < class T >
+        using TryMemFn_call_const_Vector_ref = decltype( std::declval< T >().operator()( std::declval< Vector >() ) );
+        template < class T, class = void >
+        struct HasMemFn_call_const_Vector_ref : std::false_type
+        {
+        };
+        template < class T >
+        struct HasMemFn_call_const_Vector_ref<
+            T, type_erasure_table_detail::voider< TryMemFn_call_const_Vector_ref< T > > > : std::true_type
+        {
+        };
+        template < class T >
+        using TryMemFn_d1 = decltype( std::declval< T >().d1( std::declval< Vector >() ) );
+        template < class T, class = void >
+        struct HasMemFn_d1 : std::false_type
+        {
+        };
+        template < class T >
+        struct HasMemFn_d1< T, type_erasure_table_detail::voider< TryMemFn_d1< T > > > : std::true_type
+        {
+        };
+        template < class T >
+        using TryMemFn_domain = decltype( std::declval< T >().domain() );
+        template < class T, class = void >
+        struct HasMemFn_domain : std::false_type
+        {
+        };
+        template < class T >
+        struct HasMemFn_domain< T, type_erasure_table_detail::voider< TryMemFn_domain< T > > > : std::true_type
+        {
+        };
+
+        template < class T >
+        using C1Functional_Concept = std::integral_constant<
+            bool, HasMemFn_call_const_Vector_ref< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                      HasMemFn_d1< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                      HasMemFn_domain< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
     }
 }

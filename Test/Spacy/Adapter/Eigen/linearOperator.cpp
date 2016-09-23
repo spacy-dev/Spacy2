@@ -6,6 +6,7 @@
 #include <Spacy/Adapter/Eigen/linearSolver.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/cast.hh>
 
 #include "setup.hh"
 

@@ -1,11 +1,12 @@
 #include <gtest/gtest.h>
 
-#include "Spacy/vector.hh"
-#include "Spacy/linearOperator.hh"
-#include "Spacy/Spaces/realSpace.hh"
-#include "Test/mockSetup.hh"
-#include "Test/Mock/linearOperator.hh"
-#include "Test/Mock/linearSolver.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/linearOperator.hh>
+#include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/Util/Mixins/target.hh>
+#include <Test/mockSetup.hh>
+#include <Test/Mock/linearOperator.hh>
+#include <Test/Mock/linearSolver.hh>
 
 using namespace Spacy;
 

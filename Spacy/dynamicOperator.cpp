@@ -51,7 +51,7 @@ namespace Spacy
     Vector DynamicOperator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector__ref_( *this, read(), x );
+        return functions_.call_const_Vector_ref( *this, read(), x );
     }
 
     LinearOperator DynamicOperator::M() const
@@ -137,25 +137,25 @@ namespace Spacy
     Vector DynamicLinearOperator::operator()( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_double__const_Vector__ref_( *this, read(), std::move( t ), x );
+        return functions_.call_double_const_Vector_ref( *this, read(), std::move( t ), x );
     }
 
     DynamicLinearOperator& DynamicLinearOperator::operator+=( const DynamicLinearOperator& y )
     {
         assert( impl_ );
-        return functions_.add_const_DynamicLinearOperator__ref_( *this, write(), y.impl_.get() );
+        return functions_.add_const_DynamicLinearOperator_ref( *this, write(), y.impl_.get() );
     }
 
     DynamicLinearOperator& DynamicLinearOperator::operator-=( const DynamicLinearOperator& y )
     {
         assert( impl_ );
-        return functions_.subtract_const_DynamicLinearOperator__ref_( *this, write(), y.impl_.get() );
+        return functions_.subtract_const_DynamicLinearOperator_ref( *this, write(), y.impl_.get() );
     }
 
     DynamicLinearOperator& DynamicLinearOperator::operator*=( double a )
     {
         assert( impl_ );
-        return functions_.multiply_double_( *this, write(), std::move( a ) );
+        return functions_.multiply_double( *this, write(), std::move( a ) );
     }
 
     DynamicLinearOperator DynamicLinearOperator::operator-() const
@@ -167,7 +167,7 @@ namespace Spacy
     bool DynamicLinearOperator::operator==( const DynamicLinearOperator& y ) const
     {
         assert( impl_ );
-        return functions_.compare_const_DynamicLinearOperator__ref_( *this, read(), y.impl_.get() );
+        return functions_.compare_const_DynamicLinearOperator_ref( *this, read(), y.impl_.get() );
     }
 
     std::function< Vector( const Vector& ) > DynamicLinearOperator::solver() const
@@ -258,7 +258,7 @@ namespace Spacy
     Vector DynamicC1Operator::operator()( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_double__const_Vector__ref_( *this, read(), std::move( t ), x );
+        return functions_.call_double_const_Vector_ref( *this, read(), std::move( t ), x );
     }
 
     Vector DynamicC1Operator::d1( double t, const Vector& x, const Vector& dx ) const

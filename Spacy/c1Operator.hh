@@ -4,11 +4,11 @@
 #pragma once
 
 #include <array>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/linearOperator.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_c1Operator.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -18,14 +18,16 @@ namespace Spacy
     public:
         C1Operator() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   C1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< C1Operator, typename std::decay< T >::type >::value &&
+                                            C1OperatorDetail::C1Operator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         C1Operator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &C1OperatorDetail::execution_wrapper< C1Operator,
-                                                         typename std::decay< T >::type >::call_const_Vector__ref_,
+                                                         typename std::decay< T >::type >::call_const_Vector_ref,
                    &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::d1,
                    &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::linearization,
                    &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::domain,
@@ -47,8 +49,10 @@ namespace Spacy
 
         C1Operator( C1Operator&& other ) noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   C1Operator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< C1Operator, typename std::decay< T >::type >::value &&
+                                            C1OperatorDetail::C1Operator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         C1Operator& operator=( T&& value )
         {
             return *this = C1Operator( std::forward< T >( value ) );

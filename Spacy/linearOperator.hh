@@ -5,13 +5,13 @@
 
 #include <array>
 #include <functional>
+#include "Spacy/Util/table_util.hh"
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 #include <Spacy/linearSolver.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_linearOperator.hh"
-#include "Util/table_util.hh"
 
 namespace Spacy
 {
@@ -21,25 +21,27 @@ namespace Spacy
     public:
         LinearOperator() noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   LinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< LinearOperator, typename std::decay< T >::type >::value &&
+                                            LinearOperatorDetail::LinearOperator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         LinearOperator( T&& value )
             : functions_(
                   {&type_erasure_table_detail::clone_into_shared_ptr< typename std::decay< T >::type >,
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator,
-                                                             typename std::decay< T >::type >::call_const_Vector__ref_,
+                                                             typename std::decay< T >::type >::call_const_Vector_ref,
                    &LinearOperatorDetail::execution_wrapper<
-                       LinearOperator, typename std::decay< T >::type >::call_const_LinearOperator__ref_,
+                       LinearOperator, typename std::decay< T >::type >::call_const_LinearOperator_ref,
                    &LinearOperatorDetail::execution_wrapper<
-                       LinearOperator, typename std::decay< T >::type >::add_const_LinearOperator__ref_,
+                       LinearOperator, typename std::decay< T >::type >::add_const_LinearOperator_ref,
                    &LinearOperatorDetail::execution_wrapper<
-                       LinearOperator, typename std::decay< T >::type >::subtract_const_LinearOperator__ref_,
+                       LinearOperator, typename std::decay< T >::type >::subtract_const_LinearOperator_ref,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator,
-                                                             typename std::decay< T >::type >::multiply_double_,
+                                                             typename std::decay< T >::type >::multiply_double,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator, typename std::decay< T >::type >::negate,
                    &LinearOperatorDetail::execution_wrapper<
-                       LinearOperator, typename std::decay< T >::type >::compare_const_LinearOperator__ref_,
+                       LinearOperator, typename std::decay< T >::type >::compare_const_LinearOperator_ref,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator, typename std::decay< T >::type >::solver,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator, typename std::decay< T >::type >::domain,
                    &LinearOperatorDetail::execution_wrapper< LinearOperator, typename std::decay< T >::type >::range,
@@ -61,8 +63,10 @@ namespace Spacy
 
         LinearOperator( LinearOperator&& other ) noexcept;
 
-        template < typename T, typename std::enable_if< !std::is_same<
-                                   LinearOperator, typename std::decay< T >::type >::value >::type* = nullptr >
+        template < typename T,
+                   typename std::enable_if< !std::is_same< LinearOperator, typename std::decay< T >::type >::value &&
+                                            LinearOperatorDetail::LinearOperator_Concept<
+                                                typename std::decay< T >::type >::value >::type* = nullptr >
         LinearOperator& operator=( T&& value )
         {
             return *this = LinearOperator( std::forward< T >( value ) );
