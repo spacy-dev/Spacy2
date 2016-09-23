@@ -22,7 +22,8 @@
 template <class Space, class Spaces, unsigned... indices>
 inline auto makeTuple(Space&& space, const Spaces& spaces, std::integer_sequence<unsigned,indices...>)
 {
-  return std::make_tuple(std::forward<Space>(space), (spaces[indices]->index())...);
+  return std::make_tuple(typename std::decay<Space>::type( std::forward<Space>(space) ),
+                         (spaces[indices]->index())...);
 }
 
 inline constexpr auto numberOfVariables()
