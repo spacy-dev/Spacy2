@@ -13,10 +13,9 @@ addons:
 
 cache:
   directories:
-    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
-    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
-    - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
-
+  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
+  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
+  - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
 
 env:
   # Workaround for https://github.com/travis-ci/travis-ci/issues/4681
@@ -53,7 +52,6 @@ matrix:
       env: LLVM_VERSION=3.8.0 COMPUTE_COVERAGE=false
       compiler: clang
      
-
 install:
   ############################################################################
   # All the dependencies are installed in ${TRAVIS_BUILD_DIR}/deps/
