@@ -37,20 +37,21 @@ matrix:
       env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=/usr/bin/gcov-6 COMPUTE_COVERAGE=true
       compiler: gcc
       
-    # Clang 3.6
-    - os: linux
-      env: LLVM_VERSION=3.6.2 COMPUTE_COVERAGE=false
-      compiler: clang
+    # OSX
+    # Xcode 6.4
+    - os: osx
+      env: COMPUTE_COVERAGE=false
+      osx_image: xcode6.4
       
-    # Clang 3.7
-    - os: linux
-      env: LLVM_VERSION=3.7.1 COMPUTE_COVERAGE=false
-      compiler: clang
+    # Xcode 7.3
+    - os: osx
+      env: COMPUTE_COVERAGE=false
+      osx_image: xcode7.3
       
-    # Clang 3.8
-    - os: linux
-      env: LLVM_VERSION=3.8.0 COMPUTE_COVERAGE=false
-      compiler: clang
+    # Xcode 8
+    - os: osx
+      env: COMPUTE_COVERAGE=false
+      osx_image: xcode8
      
 install:
   ############################################################################
