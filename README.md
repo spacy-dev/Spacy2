@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lubkoll/Spacy.svg?branch=master)](https://travis-ci.org/lubkoll/Spacy/builds)
+[![Build Status](https://travis-ci.org/spacy-dev/Spacy.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy/builds)
 <a href="https://scan.coverity.com/projects/lubkoll-spacy">
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/6364/badge.svg"/>
