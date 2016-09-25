@@ -132,7 +132,7 @@ script:
     else
       cmake -DBuildTest=ON -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
     fi
-  - Test/unit_tests
+  - cd Test && ctest && cd ..
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       lcov --gcov-tool ${GCOV} --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
