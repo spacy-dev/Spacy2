@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Test/mockSetup.hh>
 #include <Spacy/Spaces/ProductSpace/scalarProduct.hh>

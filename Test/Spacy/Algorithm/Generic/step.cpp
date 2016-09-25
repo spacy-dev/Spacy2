@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Spacy/Algorithm/Generic/step.hh>
 #include <Spacy/Util/mixins.hh>

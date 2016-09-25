@@ -1,4 +1,4 @@
-//#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 //#include "Spacy/Adapter/Scalar/linearSolver.hh"
 //#include "Spacy/Spaces/RealSpace/real.hh"

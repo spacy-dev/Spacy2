@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Spacy/c1Functional.hh>
 #include <Spacy/Spaces/realSpace.hh>

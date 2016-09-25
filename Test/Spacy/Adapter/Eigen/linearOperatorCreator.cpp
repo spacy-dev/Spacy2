@@ -1,4 +1,4 @@
-//#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 //#include "Spacy/Adapter/Scalar/linearOperator.hh"
 //#include "Spacy/Adapter/Scalar/linearOperatorCreator.hh"

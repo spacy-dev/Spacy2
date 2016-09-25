@@ -23,6 +23,7 @@ python2 $COMMAND $COMMON_ARGS $2 --detail-file $DETAIL_PREFIX$1 --interface-file
 
 mkdir -p $DETAIL_FOLDER 
 
+function generate_interfaces {
 generate_interface zeroVectorCreator.hh ""
 generate_interface          operator.hh "$SMALL_SBO_ARGS"
 generate_interface    linearOperator.hh "$SMALL_SBO_ARGS"
@@ -33,8 +34,12 @@ generate_interface      c1Functional.hh "$SMALL_SBO_ARGS"
 generate_interface      c2Functional.hh "$SMALL_SBO_ARGS"
 generate_interface            vector.hh "$SMALL_SBO_ARGS"
 generate_interface linearSolver.hh ""
+}
+
+generate_interfaces
 
 # generate interface for cg-termination-criteria
+echo "for CG: generate terminationCriterion.hh"
 CG_DIR=../Spacy/Algorithm/CG
 FILE=terminationCriterion.hh
 DETAIL_FILE=$DETAIL_PREFIX$FILE
@@ -42,3 +47,13 @@ DETAIL_FOLDER=$CG_DIR/Detail
 mkdir -p $DETAIL_FOLDER
 BASE_ARGS="--table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path $CLANG_PATH"
 python2 $COMMAND $BASE_ARGS --interface-file $CG_DIR/$FILE --detail-file ${DETAIL_FILE} --include-dir $INCLUDE_DIR --std c++14 $FILE
+
+# generate interface for printer of logger
+echo "for logger: generate printer.hh"
+FILE=printer.hh
+DETAIL_FILE=$DETAIL_PREFIX$FILE
+DETAIL_FOLDER=$UTIL_DIR/Detail
+mkdir -p $DETAIL_FOLDER
+BASE_ARGS="--table --detail-folder $DETAIL_FOLDER --detail-extension $EXTENSION --util-path $UTIL_DIR --util-include-path $UTIL_INCLUDE_DIR --clang-path $CLANG_PATH"
+python2 $COMMAND $BASE_ARGS --interface-file $UTIL_DIR/$FILE --detail-file ${DETAIL_FILE} --include-dir $INCLUDE_DIR --std c++14 --non-copyable $FILE
+

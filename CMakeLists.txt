@@ -21,6 +21,10 @@ option(BuildTest "BuildTest" OFF)
 option(Coverage "Coverage" OFF)
 option(Kaskade "Kaskade" OFF)
 option(Dolfin "Dolfin" OFF)
+option(Logging "Logging" OFF)
+if(Logging)
+    add_definitions(-DSPACY_ENABLE_LOGGING)
+endif()
 
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
 

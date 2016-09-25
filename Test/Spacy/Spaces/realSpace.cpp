@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Spacy/vector.hh>
 #include <Spacy/zeroVectorCreator.hh>

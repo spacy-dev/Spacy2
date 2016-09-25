@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Spacy/Util/invoke.hh>
 #include <Spacy/Algorithm/Scalar/quadratic.hh>

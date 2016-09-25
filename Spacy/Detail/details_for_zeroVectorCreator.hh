@@ -44,7 +44,7 @@ namespace Spacy
 
         template < class T >
         using TryMemFn_call_const_VectorSpace_ptr =
-            decltype( std::declval< T >().operator()( std::declval< VectorSpace* >() ) );
+            decltype( std::declval< T >().operator()( std::declval< const VectorSpace* >() ) );
         template < class T, class = void >
         struct HasMemFn_call_const_VectorSpace_ptr : std::false_type
         {

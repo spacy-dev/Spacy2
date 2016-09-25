@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Spacy/c2Functional.hh>
 #include <Spacy/Algorithm/CompositeStep/quadraticModel.hh>

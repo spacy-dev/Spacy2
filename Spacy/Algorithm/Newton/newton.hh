@@ -2,6 +2,7 @@
 
 #include <Spacy/vector.hh>
 #include <Spacy/Algorithm/Newton/parameter.hh>
+#include <Spacy/Util/log.hh>
 #include <functional>
 
 namespace Spacy
@@ -17,6 +18,7 @@ namespace Spacy
 
   namespace Newton
   {
+    DEFINE_LOG_TAG( static const char* log_tag = "Newton" )
     /**
      * @brief Generic %Newton method.
      *

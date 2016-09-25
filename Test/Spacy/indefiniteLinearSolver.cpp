@@ -1,12 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#include <Test/gtest.hh>
 
-#include <gtest/gtest.h>
-
-#include "Spacy/linearSolver.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Test/Mock/linearSolver.hh"
-#include "Test/Mock/vector.hh"
+#include <Spacy/linearSolver.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Test/Mock/linearSolver.hh>
+#include <Test/Mock/vector.hh>
 
 using namespace Spacy;
 

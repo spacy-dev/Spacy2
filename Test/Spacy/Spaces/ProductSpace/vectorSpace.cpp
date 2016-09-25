@@ -1,7 +1,8 @@
-#include <cmath>
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include <Test/mockSetup.hh>
+
+#include <cmath>
 
 using namespace Spacy;
 
