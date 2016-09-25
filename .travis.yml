@@ -138,12 +138,9 @@ script:
       lcov --gcov-tool ${GCOV} --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
       lcov --gcov-tool ${GCOV} --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
     fi
-  - cd ..
 
 after_success:
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
-      cd build
-      sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
       coveralls-lcov --repo-token WWkFFzCiDbGBX52oSOm36c6BsnfWxIKVz coverage.info
     fi

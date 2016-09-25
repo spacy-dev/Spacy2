@@ -9,7 +9,7 @@
 
 ### Download
 Download via
-  - git clone https://github.com/lubkoll/Spacy.git
+  - git clone https://github.com/spacy-dev/Spacy.git
 
 ### Installation
 Go to download folder, i.e.
