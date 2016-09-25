@@ -142,5 +142,7 @@ script:
 after_success:
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
+      sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
       coveralls-lcov --repo-token WWkFFzCiDbGBX52oSOm36c6BsnfWxIKVz coverage.info
     fi
+
