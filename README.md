@@ -3,7 +3,7 @@
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/6364/badge.svg"/>
 </a>
-[![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg?branch=master)](https://coveralls.io/github/spacy-dev/Spacy?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg)](https://coveralls.io/github/spacy-dev/Spacy)
 
 # Spacy - Vector Space Algorithms
 
