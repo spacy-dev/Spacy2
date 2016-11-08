@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
-#define SPACY_ADAPTER_KASKADE_L2PRODUCT_HH
+#pragma once
 
 namespace Spacy
 {
@@ -14,10 +10,6 @@ namespace Spacy
 
   namespace Kaskade
   {
-    /// @cond
-    template <class> class Vector;
-    /// @endcond
-
     /**
      * @ingroup KaskadeGroup
      * @brief Generic l2 scalar product for Kaskade7. Based on the implementation of the dual pairing.
@@ -40,5 +32,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_ADAPTER_KASKADE_L2PRODUCT_HH

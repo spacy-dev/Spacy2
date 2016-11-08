@@ -60,6 +60,7 @@ public:
                   VariationalArg<Scalar,dim,AnsatzVars::template Components<row>::m> const &arg2) const
     {
       if( row == col ) return arg1.value*arg2.value;
+      return 0;
     }
 
   private:

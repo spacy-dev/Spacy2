@@ -25,17 +25,15 @@ if(EIGEN3_FOUND)
 endif()
 
 if(Kaskade)
-  include_directories(/home/lars/Projects/OpenSource/Kaskade/Kaskade7.3
-                      /home/lars/libs/acml/acml5.3.1/gfortran64/include
-                      /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/include
-                      /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include
-                      /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/umfpack-5.4.0/include
-                      /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/include/ug)
-  link_directories(/home/lars/Projects/OpenSource/Kaskade/Kaskade7.3/libs
-                   /home/lars/libs/acml/acml5.3.1/gfortran64/lib
-                   /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/boost-1.59.0/lib
-                   /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/umfpack-5.4.0/lib
-                   /home/lars/Projects/OpenSource/Kaskade/software/gcc-5.2.0/dune-2.4.0/lib)
+  include_directories(/home/lars/Libraries/Kaskade7.3
+                      /opt/acml5.3.1/gfortran64/include
+                      /home/lars/Libraries/software/gcc-5.4.0/dune-2.4.0/include
+                      /home/lars/Libraries/software/gcc-5.4.0/umfpack-5.4.0/include
+                      /home/lars/Libraries/software/gcc-5.4.0/dune-2.4.0/include/ug)
+  link_directories(/home/lars/Libraries/Kaskade7.3/libs
+                   /opt/acml5.3.1/gfortran64/lib
+                   /home/lars/Libraries/software/gcc-5.4.0/umfpack-5.4.0/lib
+                   /home/lars/Libraries/software/gcc-5.4.0/dune-2.4.0/lib)
   aux_source_directory(Spacy/Adapter/Kaskade TEST_SRC_LIST)
 endif()
 
@@ -52,12 +50,10 @@ foreach(TEST ${TEST_SRC_LIST})
   set(TEST_UNIQUE_NAME "${TEST_DIR}_${TEST_NAME}")
   add_executable(${TEST_UNIQUE_NAME} ${TEST} ${MOCK_SRC_LIST})
   target_link_libraries(${TEST_UNIQUE_NAME} spacy ${GTEST_LIBRARIES} pthread)
+  if(Kaskade)
+    target_link_libraries(${TEST_UNIQUE_NAME} kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)
+  endif()
   add_test(${TEST_UNIQUE_NAME} ${PROJECT_BINARY_DIR}/Test/${TEST_UNIQUE_NAME})
 endforeach()
-
-if(Kaskade)
-  target_link_libraries(unit_tests kaskade boost_system boost_timer boost_thread dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX umfpack amd acml)
-#    target_link_libraries(unit_tests kaskade dunegrid dunecommon dunegeometry ugS3 ugS2 ugL3 ugS2 devS devX boost_signals boost_program_options boost_system boost_timer boost_thread boost_chrono acml)
-endif()
 
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})

@@ -1,5 +1,4 @@
-#ifndef SPACY_ADAPTER_KASKADE_HH
-#define SPACY_ADAPTER_KASKADE_HH
+#pragma once
 
 #include "Kaskade/directSolver.hh"
 #include "Kaskade/c2Functional.hh"
@@ -14,6 +13,3 @@
 #include "Kaskade/vector.hh"
 #include "Kaskade/vectorSpace.hh"
 #include "Kaskade/writeVTK.hh"
-
-#endif // SPACY_ADAPTER_KASKADE_HH
-

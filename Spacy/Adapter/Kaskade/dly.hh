@@ -1,9 +1,8 @@
-#ifndef SPACY_KASKADE_DLY_ERROR_ESTIMATOR_HH
-#define SPACY_KASKADE_DLY_ERROR_ESTIMATOR_HH
+#pragma once
 
-#include "Spacy/Util/Mixins/accuracy.hh"
-#include "Spacy/Adapter/Kaskade/Definitions/lumped.hh"
-#include "Spacy/Adapter/Kaskade/Definitions/error_distribution.hh"
+#include <Spacy/Util/Mixins/accuracy.hh>
+#include <Spacy/Adapter/Kaskade/Definitions/lumped.hh>
+#include <Spacy/Adapter/Kaskade/Definitions/error_distribution.hh>
 
 namespace Spacy
 {
@@ -148,5 +147,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_KASKADE_DLY_ERROR_ESTIMATOR_HH

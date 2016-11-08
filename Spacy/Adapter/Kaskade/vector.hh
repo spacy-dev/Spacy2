@@ -1,24 +1,16 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH
-#define SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH
-
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/Base/addArithmeticOperators.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/Base/addArithmeticOperators.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/vectorSpace.hh>
 
 #include "util.hh"
 
 #include "io/vtk.hh"
 
 namespace Spacy
-{  
-  /// \cond
-  class VectorSpace;
-  /// \endcond
-
+{
   namespace Kaskade
   {
     /// \cond
@@ -26,7 +18,7 @@ namespace Spacy
     /// \endcond
 
     /**
-     * @ingroup KaskadeGroup VectorSapceGroup
+     * @ingroup KaskadeGroup VectorSpaceGroup
      * @brief Coefficient vector implementation for %Kaskade 7 (single space).
      * @tparam Description %Kaskade::VariableSetDescription
      */
@@ -49,7 +41,7 @@ namespace Spacy
         : VectorBase(space),
           variableSet_( creator< VectorCreator<Description> >(space).get() ),
           description_( std::make_shared<Description>( creator< VectorCreator<Description> >(space).get()) ),
-          v_( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ))
+          v_( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ))
       {}
 
 //      /// Assign from coefficient vector of %Kaskade 7.
@@ -84,8 +76,8 @@ namespace Spacy
        */
       Real operator()(const Vector& y) const
       {
-        VectorImpl v( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
-        VectorImpl w( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions ));
+        VectorImpl v( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ));
+        VectorImpl w( Description::template CoefficientVectorRepresentation<>::init( variableSet_.descriptions.spaces ));
         variableSetToCoefficients(get(),v);
         variableSetToCoefficients(y.get(),w);
         return v*w;
@@ -101,12 +93,10 @@ namespace Spacy
 
     private:
       template <class Desc>
-      friend void writeVTK(const Vector<Desc>& x, const std::string& fileName);
+      friend void writeVTK(const Vector<Desc>& x, const char* fileName);
       VariableSet variableSet_;
       std::shared_ptr<Description> description_;
       mutable VectorImpl v_;
     };
   }
 }
-
-#endif // SPACY_ADAPTER_KASKADE_VECTOR_SPACE_ELEMENT_HH

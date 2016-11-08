@@ -1,17 +1,18 @@
-#ifndef SPACY_KASKADE_DYNAMIC_C1_OPERATOR_HH
-#define SPACY_KASKADE_DYNAMIC_C1_OPERATOR_HH
+#pragma once
 
 #include <utility>
 
-#include "fem/assemble.hh"
-#include "fem/istlinterface.hh"
-#include "linalg/triplet.hh"
+#include <fem/assemble.hh>
+#include <fem/istlinterface.hh>
+#include <linalg/triplet.hh>
 
-#include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Util/Mixins/numberOfThreads.hh"
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Mixins/numberOfThreads.hh>
 
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+
 #include "directSolver.hh"
 #include "linearOperator.hh"
 #include "operatorSpace.hh"
@@ -19,10 +20,6 @@
 
 namespace Spacy
 {
-  /// @cond
-  class VectorSpace;
-  /// @endcond
-
   /** @addtogroup KaskadeGroup
    * @{
    */
@@ -71,7 +68,7 @@ namespace Spacy
         : OperatorBase(domain,range),
           f_(f),
           spaces_( extractSpaces<AnsatzVariableSetDescription>(domain) ),
-          rhs_(range.zeroVector()),
+          rhs_(zero(range)),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
           operatorSpace_( std::make_shared<VectorSpace>(
                             LinearOperatorCreator<AnsatzVariableSetDescription,TestVariableSetDescription>(domain,range) ,
@@ -164,7 +161,7 @@ namespace Spacy
 
         A_.apply( dx_ , y_ );
 
-        auto y = range().zeroVector();
+        auto y = zero(range());
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
@@ -322,5 +319,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_KASKADE_DYNAMIC_C1_OPERATOR_HH

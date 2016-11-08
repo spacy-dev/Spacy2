@@ -1,13 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include "setup.hh"
-#include "Spacy/Adapter/Kaskade/vector.hh"
-#include "Spacy/Adapter/Kaskade/vectorSpace.hh"
 
-#include "Test/mockSetup.hh"
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Adapter/Kaskade/vector.hh>
+#include <Spacy/Adapter/Kaskade/vectorSpace.hh>
+#include <Test/mockSetup.hh>
 
 namespace
 {

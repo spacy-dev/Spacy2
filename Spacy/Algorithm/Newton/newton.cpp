@@ -14,6 +14,8 @@ namespace Spacy
 {
     namespace Newton
     {
+        DEFINE_LOG_TAG( static const char* log_tag = "Newton" )
+
         Vector newton(const C1Operator& F, const Vector& x0,
                       const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
                       const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
@@ -54,7 +56,7 @@ namespace Spacy
                 if( terminationCriterion(nu,x,dx) )
                 {
                     LOG_INFO(log_tag, "Newton iteration converged.\n")
-                    LOG(log_tag, "computation time in ms", p.elapsedTime())
+                    LOG(log_tag, "computation time (in ms): ", p.elapsedTime())
                     return x;
                 }
                 LOG_END_SECTION(log_tag)

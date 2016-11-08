@@ -106,6 +106,7 @@ namespace Spacy
             /// Access logger.
             static Logger& get();
 
+
             /**
              * @brief Log value.
              * @param level level of logged value
@@ -120,13 +121,13 @@ namespace Spacy
                         printer(tag, name, make_printable(value));
             }
 
-            /// Disable all logs with given tag.
+            /// Enable all logs with given tag.
             void enable(const char* tag);
 
             /// Disable all logs with given tag.
             void disable(const char* tag);
 
-            /// Disable all logs with given tag.
+            /// Disable all logs with given tags.
             void disable(std::vector<std::string> tags);
 
             /// Sets printer, deletes all previously added/set printers.

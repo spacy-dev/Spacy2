@@ -8,7 +8,6 @@
 #include <Spacy/Adapter/kaskade.hh>
 #include <Spacy/Algorithm/Newton/newton.hh>
 #include <Spacy/Util/cast.hh>
-#include <Spacy/Util/log.hh>
 #include <Spacy/inducedScalarProduct.hh>
 
 #include <fem/gridmanager.hh>
@@ -17,10 +16,12 @@
 #include <io/vtk.hh>
 #include <utilities/gridGeneration.hh> //  createUnitSquare
 
-#include "../fung_operator.hh"
+#include "../fung_functional.hh"
 
 #include <fung/fung.hh>
-#include <fung/examples/nonlinear_heat.hh>
+#include <fung/examples/biomechanics/adipose_tissue_sommer_holzapfel.hh>
+#include <fung/examples/rubber/neo_hooke.hh>
+
 
 using namespace Kaskade;
 
@@ -28,18 +29,18 @@ int main()
 {
     SET_LOG_PRINTER(Spacy::Log::StreamPrinter());
 
-    constexpr int dim = 2;
-    int refinements = 6;
+    constexpr int dim = 3;
+    int refinements = 4;
     int order       = 1;
 
     using Grid = Dune::UGGrid<dim>;
     using H1Space = FEFunctionSpace<ContinuousLagrangeMapper<double,Grid::LeafGridView> >;
     using Spaces = boost::fusion::vector<H1Space const*>;
-    using VariableDescriptions = boost::fusion::vector< Variable<SpaceIndex<0>,Components<1>,VariableId<0> > >;
+    using VariableDescriptions = boost::fusion::vector< Variable<SpaceIndex<0>,Components<dim>,VariableId<0> > >;
     using VariableSetDesc = VariableSetDescription<Spaces,VariableDescriptions>;
 
 
-    GridManager<Grid> gridManager( createUnitSquare<Grid>(1.,false) );
+    GridManager<Grid> gridManager( createUnitCube<Grid>(1.,false) );
     gridManager.globalRefine(refinements);
 
     H1Space temperatureSpace(gridManager,gridManager.grid().leafGridView(),order);
@@ -48,11 +49,14 @@ int main()
     VariableSetDesc variableSetDesc(spaces,{ "u" });
 
 
-    double c = 1e-2, d = 1e2;
-    Dune::FieldVector<double,1> u0{0};
-    Dune::FieldMatrix<double,1,dim> du0{0};
-    auto integrand = FunG::heatModel(c, d, u0, du0);
-    auto F = FungOperator<decltype(integrand),VariableSetDesc>(integrand);
+    using Matrix = Dune::FieldMatrix<double,dim,dim>;
+    // fiber tensor for 'fibers' aligned with x-axes
+    auto fiberTensor = Matrix(0);
+    fiberTensor[0][0] = 1;
+    auto y0 = FunG::LinearAlgebra::unitMatrix<Matrix>();
+//    auto integrand = FunG::incompressibleNeoHooke(1.0,y0);
+    auto integrand = FunG::incompressibleAdiposeTissue_SommerHolzapfel(fiberTensor,y0);
+    auto F = FungFunctional<decltype(integrand),VariableSetDesc>(integrand);
 
 
     // compute solution
@@ -65,12 +69,12 @@ int main()
 
     auto p = Spacy::Newton::Parameter{};
     p.setVerbosity(true);
-    p.setRelativeAccuracy(1e-12);
+    p.setRelativeAccuracy(1e-6);
 
     auto x = covariantNewton(A,p);
-    //  auto x = Spacy::contravariantNewton(f,p);
-    //  auto x = Spacy::localNewton(f,p);
+    //  auto x = Spacy::contravariantNewton(A,p);
+    //  auto x = Spacy::localNewton(A,p);
 
     //construct Galerkin representation
-    writeVTK(Spacy::cast_ref< Spacy::Kaskade::Vector<VariableSetDesc> >(x), "temperature");
+    writeVTK(Spacy::cast_ref< Spacy::Kaskade::Vector<VariableSetDesc> >(x), "displacement");
 }

@@ -72,7 +72,7 @@ namespace Spacy
         const VectorSpace& domain() const;
 
         /**
-        * @brief Conversion of the stored implementation to @code  T* @endcode.
+        * @brief Conversion of the stored implementation to @code T* @endcode.
         * @return pointer to the stored object if conversion was successful, else nullptr
         */
         template < class T >

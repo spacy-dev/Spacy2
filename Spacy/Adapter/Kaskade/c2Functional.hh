@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
-#define SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH
+#pragma once
 
 #include <memory>
 
@@ -10,11 +6,12 @@
 #include "fem/istlinterface.hh"
 #include "linalg/triplet.hh"
 
-#include "Spacy/operator.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Util/Mixins/numberOfThreads.hh"
-#include "Spacy/Util/Base/functionalBase.hh"
+#include <Spacy/c1Operator.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/Mixins/numberOfThreads.hh>
+#include <Spacy/Util/Base/functionalBase.hh>
 
 #include "directSolver.hh"
 #include "vectorSpace.hh"
@@ -27,7 +24,6 @@ namespace Spacy
   /** @addtogroup KaskadeGroup
    * @{
    */
-
   namespace Kaskade
   {
     /**
@@ -74,7 +70,7 @@ namespace Spacy
         : FunctionalBase(domain),
           f_(f),
           spaces_( extractSpaces<VariableSetDescription>(domain) ),
-          rhs_(domain.dualSpace().zeroVector()),
+          rhs_( zero(domain.dualSpace()) ),
           rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
           operatorSpace_( std::make_shared<VectorSpace>(
                             LinearOperatorCreator<VariableSetDescription,VariableSetDescription>(domain,domain.dualSpace()) ,
@@ -190,7 +186,7 @@ namespace Spacy
 
         A_.apply( dx_ , y_ );
 
-        auto y = this->domain().dualSpace().zeroVector();
+        auto y = zero( domain().dualSpace() );
         copyFromCoefficientVector<VariableSetDescription>(y_,y);
 
         return y;
@@ -347,5 +343,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_OPERATORS_KASKADE_C2_FUNCTIONAL_HH

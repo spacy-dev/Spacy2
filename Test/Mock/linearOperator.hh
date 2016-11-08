@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Spacy/linearSolver.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/Mixins/get.hh>
 #include <Spacy/Util/Base/addArithmeticOperators.hh>
 #include <Spacy/Util/Base/operatorBase.hh>

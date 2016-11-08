@@ -137,13 +137,13 @@ inline auto makePrimalDualProductHilbertSpace()
 inline const auto& valueOfComponent(const Spacy::Vector& v, unsigned i)
 {
   using namespace Spacy;
-  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).component(i)));
+  return value(Spacy::cast_ref<Mock::Vector>(Spacy::cast_ref<ProductSpace::Vector>(v).component(i)));
 }
 
 inline auto& valueOfComponent(Spacy::Vector& v, unsigned i)
 {
   using namespace Spacy;
-  return value(cast_ref<Mock::Vector>(cast_ref<ProductSpace::Vector>(v).component(i)));
+  return value(Spacy::cast_ref<Mock::Vector>(Spacy::cast_ref<ProductSpace::Vector>(v).component(i)));
 }
 
 

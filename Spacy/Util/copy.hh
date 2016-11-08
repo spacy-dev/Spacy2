@@ -1,13 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_COPY_HH
-#define SPACY_UTIL_COPY_HH
+#pragma once
 
 #include <functional>
 
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/ProductSpace/vector.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/Spaces/ProductSpace/vector.hh>
 
 namespace Spacy
 {
@@ -54,5 +50,3 @@ namespace Spacy
     copyProductSpaceVectorIfConsistent(x,y,copyTargetIfConsistent);
   }
 }
-
-#endif // SPACY_UTIL_COPY_HH

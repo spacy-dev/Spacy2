@@ -1,14 +1,13 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include "setup.hh"
-#include "Spacy/Adapter/Kaskade/vectorSpace.hh"
-#include "Spacy/Adapter/Kaskade/util.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Adapter/Kaskade/vectorSpace.hh>
+#include <Spacy/Adapter/Kaskade/util.hh>
+#include <Spacy/Util/cast.hh>
 
-#include "Test/mockSetup.hh"
+#include <Test/mockSetup.hh>
 
 
 using namespace Kaskade;
@@ -20,7 +19,7 @@ TEST(Kaskade,VectorCreator_Create)
   Spacy::Kaskade::VectorCreator<Descriptions> creator(descriptions);
   ASSERT_EQ( creator.get().degreesOfFreedom() , temperatureSpace.degreesOfFreedom() );
 
-  Spacy::VectorCreator spacyCreator(creator);
+  Spacy::ZeroVectorCreator spacyCreator(creator);
   ASSERT_EQ( spacyCreator.target<Spacy::Kaskade::VectorCreator<Descriptions>>()->get().degreesOfFreedom() , temperatureSpace.degreesOfFreedom() );
 }
 
@@ -31,14 +30,14 @@ TEST(Kaskade,VectorCreator_CreateVector)
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
 
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
-  ASSERT_DOUBLE_EQ( norm(v) , 0 );
+  ASSERT_DOUBLE_EQ( get(norm(v)) , 0 );
 
-  auto& kv = *v.target< Spacy::Kaskade::Vector<Descriptions> >();
+  auto& kv = Spacy::cast_ref< Spacy::Kaskade::Vector<Descriptions> >(v);
 
   boost::fusion::at_c<0>(kv.get().data)[testIndex()] = testValue();
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( get(norm(v)) , testValue() );
 }
 
 //TEST(Kaskade, ProductSpace_VectorCreator_Create)
@@ -52,15 +51,15 @@ TEST(Kaskade,SingleSpace_CopyVector)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
-  auto v = V.zeroVector();
+  auto v = zero(V);
   auto& kv = *v.target< Spacy::Kaskade::Vector<Descriptions> >();
   at_c<0>(kv.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
-  ASSERT_DOUBLE_EQ( at_c<0>(Spacy::target<Spacy::Kaskade::Vector<Descriptions> >(w)->get().data)[testIndex()] , testValue() );
+  ASSERT_DOUBLE_EQ( at_c<0>(Spacy::cast_ref<Spacy::Kaskade::Vector<Descriptions> >(w).get().data)[testIndex()] , testValue() );
   ASSERT_DOUBLE_EQ( at_c<0>(u.data).coefficients()[testIndex()][0] , testValue() );
 }
 
@@ -70,22 +69,22 @@ TEST(Kaskade,ProductSpace_CopyVector_StateVariable)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId,adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
-  auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
+  auto& v_ = Spacy::cast_ref<Spacy::ProductSpace::Vector>( v );
   ASSERT_EQ( v_.numberOfVariables() , 3u );
   using StateVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,stateId> >;
   ASSERT_TRUE( Spacy::is<StateVector>(v_.component(stateId)) );
-  auto& stateVector = *Spacy::target<StateVector>(v_.component(stateId));
+  auto& stateVector = Spacy::cast_ref<StateVector>(v_.component(stateId));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v).get() , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
@@ -98,22 +97,22 @@ TEST(Kaskade,ProductSpace_CopyVector_ControlVariable)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId,adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
-  auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
+  auto& v_ = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v);
   ASSERT_EQ( v_.numberOfVariables() , 3u );
   using ControlVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,controlId> >;
   ASSERT_TRUE( Spacy::is<ControlVector>(v_.component(controlId)) );
-  auto& stateVector = *Spacy::target<ControlVector>(v_.component(controlId));
+  auto& stateVector = Spacy::cast_ref<ControlVector>(v_.component(controlId));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v).get() , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
@@ -126,22 +125,22 @@ TEST(Kaskade,ProductSpace_CopyVector_StateVariable_PermutedVariableOrder)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId,adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
-  auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
+  auto& v_ = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v);
   ASSERT_EQ( v_.numberOfVariables() , 3u );
   using StateVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,stateId> >;
   ASSERT_TRUE( Spacy::is<StateVector>(v_.component(stateId)) );
-  auto& stateVector = *Spacy::target<StateVector>(v_.component(stateId));
+  auto& stateVector = Spacy::cast_ref<StateVector>(v_.component(stateId));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v).get() , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
@@ -154,25 +153,25 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_StateVariable)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId}, {adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
-  auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
+  auto& v_ = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v);
   ASSERT_EQ( v_.numberOfVariables() , 2u );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL)) );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::DUAL)) );
-  auto& primal = *Spacy::target<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
+  auto& primal = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
   using StateVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,stateId> >;
   ASSERT_TRUE( Spacy::is<StateVector>(primal.component(0)) );
-  auto& stateVector = *Spacy::target<StateVector>(primal.component(0));
+  auto& stateVector = Spacy::cast_ref<StateVector>(primal.component(0));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( norm(v).get() , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
@@ -186,25 +185,25 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_StateVariable_PermutedVariableOrd
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId}, {adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
-  auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
+  auto& v_ = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v);
   ASSERT_EQ( v_.numberOfVariables() , 2u );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL)) );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::DUAL)) );
-  auto& primal = *Spacy::target<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
+  auto& primal = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
   using StateVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,stateId> >;
   ASSERT_TRUE( Spacy::is<StateVector>(primal.component(0)) );
-  auto& stateVector = *Spacy::target<StateVector>(primal.component(0));
+  auto& stateVector = Spacy::cast_ref<StateVector>(primal.component(0));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( get(norm(v)) , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<stateId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 
@@ -217,25 +216,25 @@ TEST(Kaskade,PrimalDualProductSpace_CopyVector_ControlVariable)
 
   using boost::fusion::at_c;
   auto V = Spacy::Kaskade::makeHilbertSpace(descriptions, {stateId,controlId}, {adjointId});
-  auto v = V.zeroVector();
+  auto v = zero(V);
 
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v) );
   auto& v_ = *v.target<Spacy::ProductSpace::Vector>();
   ASSERT_EQ( v_.numberOfVariables() , 2u );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL)) );
   ASSERT_TRUE( Spacy::is<Spacy::ProductSpace::Vector>(v_.component(Spacy::DUAL)) );
-  auto& primal = *Spacy::target<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
+  auto& primal = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v_.component(Spacy::PRIMAL));
   using ControlVector = Spacy::Kaskade::Vector<Spacy::Kaskade::Detail::ExtractDescription_t<Descriptions,controlId> >;
   ASSERT_TRUE( Spacy::is<ControlVector>(primal.component(1)) );
-  auto& stateVector = *Spacy::target<ControlVector>(primal.component(1));
+  auto& stateVector = Spacy::cast_ref<ControlVector>(primal.component(1));
   at_c<0>(stateVector.get().data)[testIndex()] = testValue();
   Spacy::Kaskade::copyToCoefficientVector<Descriptions>(v,x);
 
-  ASSERT_DOUBLE_EQ( norm(v) , testValue() );
+  ASSERT_DOUBLE_EQ( get(norm(v)) , testValue() );
   ASSERT_DOUBLE_EQ( (x*x) , testValue()*testValue() );
   ASSERT_DOUBLE_EQ( at_c<controlId>(x.data)[testIndex()][0] , testValue() );
 
-  auto w = V.zeroVector();
+  auto w = zero(V);
   Spacy::Kaskade::copyFromCoefficientVector<Descriptions>(x,w);
   Spacy::Kaskade::copy(w,u);
 

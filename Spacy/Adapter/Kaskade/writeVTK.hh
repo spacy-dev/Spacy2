@@ -1,23 +1,15 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ADAPTER_KASKADE_TO_VTK_HH
-#define SPACY_ADAPTER_KASKADE_TO_VTK_HH
+#include <Spacy/vector.hh>
 
-#include <string>
 #include "vector.hh"
-#include "Spacy/vector.hh"
 
 namespace Spacy
 {
-  /// @cond
-  class Vector;
-  /// @endcond
-
   namespace Kaskade
   {
     template <class Description>
-    void writeVTK(const Vector<Description>& x, const std::string& fileName)
+    void writeVTK(const Vector<Description>& x, const char* fileName)
     {
       typename Description::VariableSet y(*x.description_);
       copy(x,y);
@@ -33,5 +25,3 @@ namespace Spacy
 //    }
   }
 }
-
-#endif // SPACY_ADAPTER_KASKADE_TO_VTK_HH

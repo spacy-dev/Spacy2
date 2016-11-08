@@ -18,7 +18,6 @@ namespace Spacy
 
   namespace Newton
   {
-    DEFINE_LOG_TAG( static const char* log_tag = "Newton" )
     /**
      * @brief Generic %Newton method.
      *

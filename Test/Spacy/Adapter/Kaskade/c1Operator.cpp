@@ -1,21 +1,26 @@
-#include <iostream>
-#include <gtest/gtest.h>
+#include <Test/gtest.hh>
 
 #include "setup.hh"
-#include "Spacy/Adapter/Kaskade/c1Operator.hh"
-#include "Spacy/Adapter/Kaskade/vector.hh"
-#include "Spacy/Adapter/Kaskade/vectorSpace.hh"
+
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Adapter/Kaskade/c1Operator.hh>
+#include <Spacy/Adapter/Kaskade/vector.hh>
+#include <Spacy/Adapter/Kaskade/vectorSpace.hh>
+
+#include <iostream>
 
 using namespace Kaskade;
 
 template <class Description>
 void test(const Spacy::Kaskade::C1Operator<Description>& A, const Spacy::VectorSpace& V)
 {
-//  auto x0 = A( A.domain().zeroVector() );
-//  EXPECT_EQ( norm(x0) , norm(A.domain().zeroVector()) );
+//  auto x0 = A( zero(A.domain()) );
+//  EXPECT_EQ( norm(x0) , norm(zero(A.domain())) );
 
-  auto x1 = A.d1( A.domain().zeroVector() , A.domain().zeroVector() );
-  EXPECT_EQ( norm(x1) , norm(A.domain().zeroVector()) );
+  auto x1 = A.d1( zero(A.domain()) , zero(A.domain()) );
+  EXPECT_EQ( norm(x1) , norm(zero(A.domain())) );
 
   EXPECT_EQ( A.domain().index() , V.index() );
   EXPECT_EQ( A.range().index() , V.index() );
@@ -23,15 +28,15 @@ void test(const Spacy::Kaskade::C1Operator<Description>& A, const Spacy::VectorS
 
 void test(const Spacy::C1Operator& A, const Spacy::VectorSpace& V)
 {
-  auto x0 = A( A.domain().zeroVector() );
-//  EXPECT_EQ( norm(x0) , norm(A.domain().zeroVector()) );
+  auto x0 = A( zero(A.domain()) );
+//  EXPECT_EQ( norm(x0) , norm(zero(A.domain())) );
 
-  auto x1 = A.d1( A.domain().zeroVector() , A.domain().zeroVector() );
-  EXPECT_EQ( norm(x1) , norm(A.domain().zeroVector()) );
+  auto x1 = A.d1( zero(A.domain()) , zero(A.domain()) );
+  EXPECT_EQ( norm(x1) , norm(zero(A.domain())) );
 
-  auto dA = A.linearization(A.domain().zeroVector());
-  auto x2 = dA(A.domain().zeroVector());
-  EXPECT_EQ( norm(x2) , norm(A.domain().zeroVector()) );
+  auto dA = A.linearization(zero(A.domain()));
+  auto x2 = dA(zero(A.domain()));
+  EXPECT_EQ( norm(x2) , norm(zero(A.domain())) );
 
   EXPECT_EQ( A.domain().index() , V.index() );
   EXPECT_EQ( A.range().index() , V.index() );
@@ -77,10 +82,10 @@ TEST(Kaskade,C1Operator_FreeD1)
   KASKADE_SINGLE_SPACE_OPERATOR
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
-  Spacy::C1Operator Op = Spacy::Kaskade::makeC1Operator(F,V);
+  Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator(F,V);
 
-  auto lin = d1(Op,Op.domain().zeroVector());
-  ASSERT_EQ( norm(lin(Op.domain().zeroVector())) , norm(V.zeroVector()) );
+  auto lin = d1(A,zero(A.domain()));
+  ASSERT_EQ( norm(lin(zero(A.domain()))) , norm(zero(V)) );
 }
 
 //TEST(Rn,C1Operator_Apply)

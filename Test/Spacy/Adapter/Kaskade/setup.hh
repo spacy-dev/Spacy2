@@ -1,15 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_TEST_ADAPTER_KASKADE_SETUP_HH
-#define SPACY_TEST_ADAPTER_KASKADE_SETUP_HH
-
-#include "dune/grid/config.h"
-#include "dune/grid/uggrid.hh"
+#include <dune/grid/config.h>
+#include <dune/grid/uggrid.hh>
 
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 #include "fem/gridmanager.hh"
+#include "fem/functionspace.hh"
 #include "fem/lagrangespace.hh"
 #include "fem/variables.hh"
 #include "utilities/gridGeneration.hh" //  createUnitSquare
@@ -153,7 +150,3 @@ constexpr int testIndex() { return 2; }
 //                                [](const auto& x){ return 1.1*::Eigen::MatrixXd::Identity(x.size(),x.size()); },
 //                                domain, range);
 //}
-
-
-#endif // SPACY_TEST_ADAPTER_EIGEN_SETUP_HH
-

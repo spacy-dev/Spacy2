@@ -1,15 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH
-#define SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH
+#pragma once
 
 #include <utility>
 
-#include "Spacy/linearSolver.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
+#include <Spacy/linearSolver.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
 
 #include "operatorSpace.hh"
 #include "directSolver.hh"
@@ -84,10 +80,15 @@ namespace Spacy
 
         A_.apply(x_,y_);
 
-        auto y = range().zeroVector();
+        auto y = zero(range());
         copyFromCoefficientVector<TestVariableSetDescription>(y_,y);
 
         return y;
+      }
+
+      ::Spacy::Real operator()(const LinearOperator&) const
+      {
+        return Real(0);
       }
 
       /// Access solver representing \f$A^{-1}\f$.
@@ -155,5 +156,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_KASKADE_LINEAR_OPERATOR_HH

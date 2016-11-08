@@ -1,7 +1,5 @@
 #pragma once
 
-#include <ostream>
-
 #include <Spacy/Util/Mixins/eps.hh>
 #include <Spacy/Util/Mixins/get.hh>
 #include <Spacy/Spaces/RealSpace/real.hh>
