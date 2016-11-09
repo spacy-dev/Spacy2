@@ -1,10 +1,8 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "luSolver.hh"
 
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/vector.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 
 #include "util.hh"
 #include "vectorSpace.hh"
@@ -50,14 +48,14 @@ namespace Spacy
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve( *y_, *x_.vector() );
-      auto y = range().zeroVector();
+      auto y = zero(range());
 
       copy(*y_, y);
       return y;
     }
 
 
-    TransposedLUSolver::TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
+    TransposedLUSolver::TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, std::shared_ptr<dolfin::FunctionSpace> space,
                                            const VectorSpace& domain , const VectorSpace& range,
                                            bool symmetric, const std::string& solverName)
       : OperatorBase(domain,range),
@@ -77,7 +75,7 @@ namespace Spacy
       copy(x,x_);
       auto y_ = x_.vector()->copy();
       solver_.solve_transpose( *y_, *x_.vector() );
-      auto y = range().zeroVector();
+      auto y = zero(range());
 
       copy(*y_, y);
       return y;

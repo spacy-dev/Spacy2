@@ -1,17 +1,13 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
-#define SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
+#pragma once
 
 #include <functional>
 #include <memory>
 #include <utility>
 
-#include "Spacy/linearSolver.hh"
-#include "Spacy/Util/Base/addArithmeticOperators.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
+#include <Spacy/linearSolver.hh>
+#include <Spacy/Util/Base/addArithmeticOperators.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
 
 #include "luSolver.hh"
 
@@ -71,7 +67,7 @@ namespace Spacy
     private:
       ::Spacy::Vector applyAsOperator(const ::Spacy::Vector& x) const;
 
-      ::Spacy::Vector applyAsDualElement(const ::Spacy::Vector& x) const;
+      ::Spacy::Real applyAsDualElement(const ::Spacy::Vector& x) const;
 
       std::shared_ptr<dolfin::GenericMatrix> A_;
       bool symmetric_ = false;
@@ -83,6 +79,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_OPERATORS_FENICS_LINEAR_OPERATOR_HH
-

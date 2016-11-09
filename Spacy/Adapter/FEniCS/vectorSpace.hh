@@ -1,15 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACYS_ADAPTER_FENICS_VECTOR_SPACE_HH
-#define SPACYS_ADAPTER_FENICS_VECTOR_SPACE_HH
+#pragma once
 
 #include <map>
 #include <memory>
 
 #include <dolfin.h>
 
-#include "Spacy/Util/Mixins/get.hh"
+#include <Spacy/Util/Mixins/get.hh>
 
 namespace Spacy
 {
@@ -25,21 +21,21 @@ namespace Spacy
      * @brief Creator for vector space elements for %FEniCS.
      * @see VectorSpace
      */
-    class VectorCreator : public Mixin::Get<dolfin::FunctionSpace>
+    class VectorCreator : public Mixin::Get< std::shared_ptr<dolfin::FunctionSpace> >
     {
     public:
       /**
        * @brief Create from dolfin::FunctionSpace.
        * @param space single dolfin::FunctionSpace (no product space)
        */
-      explicit VectorCreator(const dolfin::FunctionSpace& space);
+      explicit VectorCreator(std::shared_ptr<dolfin::FunctionSpace> space);
 
       /**
        * @brief Create from dolfin::FunctionSpace.
        * @param space single dolfin::FunctionSpace (no product space)
        * @param dofmap map relating global ids of a product space to local ids in this single space
        */
-      VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
+      VectorCreator(std::shared_ptr<dolfin::FunctionSpace> space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
 
       /**
        * @brief Map global id of a product space to local id in this single space.
@@ -79,7 +75,7 @@ namespace Spacy
      * @param space single dolfin::FunctionSpace (no product space)
      * @return @ref ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( VectorCreator{space} , l2Product{} )"
      */
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space);
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space);
 
     /**
      * @ingroup FenicsGroup
@@ -88,7 +84,7 @@ namespace Spacy
      * @param dofmap map relating global ids of a product space to local ids in this single space
      * @return @ref ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} )"
      */
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space, const std::unordered_map<std::size_t,std::size_t>& dofmap);
 
     /**
      * @ingroup FenicsGroup
@@ -98,8 +94,6 @@ namespace Spacy
      * @param dualIds indices of spaces associated with dual variables
      * @return primal-dual product space
      */
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {});
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {});
   }
 }
-
-#endif // SPACYS_ADAPTER_FENICS_VECTOR_SPACE_HH

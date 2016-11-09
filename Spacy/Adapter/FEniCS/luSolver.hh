@@ -1,15 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_FENICS_LUSOLVER_HH
-#define SPACY_ADAPTER_FENICS_LUSOLVER_HH
+#pragma once
 
 #include <memory>
 #include <string>
 
 #include <dolfin.h>
 
-#include "Spacy/Util/Base/operatorBase.hh"
+#include <Spacy/Util/Base/operatorBase.hh>
 
 namespace Spacy
 {
@@ -70,7 +66,7 @@ namespace Spacy
        * @param solverName name of the solver, i.e. "default", "mumps", "petsc" or "umfpack".
        */
     public:
-      TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, const dolfin::FunctionSpace& space,
+      TransposedLUSolver(std::shared_ptr<dolfin::GenericMatrix> A, std::shared_ptr<dolfin::FunctionSpace> space,
                          const VectorSpace& domain , const VectorSpace& range,
                bool symmetric = false, const std::string& solverName = "mumps");
 
@@ -83,9 +79,7 @@ namespace Spacy
 
     private:
       mutable dolfin::LUSolver solver_;
-      const dolfin::FunctionSpace& space_;
+      std::shared_ptr<dolfin::FunctionSpace> space_;
     };
   }
 }
-
-#endif // SPACY_ADAPTER_FENICS_LUSOLVER_HH

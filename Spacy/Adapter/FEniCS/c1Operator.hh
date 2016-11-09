@@ -1,12 +1,13 @@
-#ifndef SPACY_ADAPTER_FENICS_C1_OPERATOR_HH
-#define SPACY_ADAPTER_FENICS_C1_OPERATOR_HH
+#pragma once
 
 #include <memory>
 
 #include <dolfin.h>
 
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/Spaces/RealSpace/vectorSpace.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/cast.hh>
 
 #include "linearOperator.hh"
 #include "luSolver.hh"
@@ -15,7 +16,6 @@
 #include "vectorSpace.hh"
 
 #include "operatorSpace.hh"
-#include "Spacy/Spaces/RealSpace/vectorSpace.hh"
 
 namespace Spacy
 {
@@ -126,7 +126,7 @@ namespace Spacy
       {
         assembleOperator(x);
 
-        auto y = range().zeroVector();
+        auto y = zero(range());
         copy(*b_,y);
         return std::move(y);
       }
@@ -141,7 +141,7 @@ namespace Spacy
         auto y_ = dx_.vector()->copy();
         A_->mult(*dx_.vector(), *y_);
 
-        auto y = range().zeroVector();
+        auto y = zero(range());
         copy(*y_,y);
 
         return std::move(y);
@@ -166,16 +166,16 @@ namespace Spacy
       {
         if( b_ != nullptr && (oldX_F == x) ) return;
 
-        auto x_ = dolfin::Function( J_.function_space(0) );
-        copy(x,x_);
+        auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
+        copy(x,*x_);
         assign_x_if_present(F_,x_);
-        b_ = x_.vector()->factory().create_vector();
+        b_ = x_->vector()->factory().create_vector(x_->vector()->mpi_comm());
 
         dolfin::Assembler assembler;
         assembler.assemble(*b_, F_);
 
         for(const auto& bc : bcs_)
-          bc->apply( *b_ , *x_.vector() );
+          bc->apply( *b_ , *x_->vector() );
 
         oldX_F = x;
       }
@@ -185,16 +185,16 @@ namespace Spacy
       {
         if( A_ != nullptr && ( oldX_J == x ) ) return;
 
-        auto x_ = dolfin::Function( J_.function_space(0) );
-        copy(x,x_);
+        auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
+        copy(x,*x_);
         assign_x_if_present(J_,x_);
-        auto A = x_.vector()->factory().create_matrix();
+        auto A = x_->vector()->factory().create_matrix(x_->vector()->mpi_comm());
 
         dolfin::Assembler assembler;
         assembler.assemble(*A, J_);
 
         for(const auto& bc : bcs_)
-          bc->apply( *A , *x_.vector() , *x_.vector() );
+          bc->apply( *A , *x_->vector() , *x_->vector() );
         A_ = std::make_shared<dolfin::Matrix>(*A);
 
         oldX_J = x;
@@ -253,5 +253,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_FENICS_C1_OPERATOR_HH

@@ -1,7 +1,6 @@
-#ifndef SPACY_ADAPTER_FENICS_HASX_HH
-#define SPACY_ADAPTER_FENICS_HASX_HH
+#pragma once
 
-#include "Spacy/Util/voider.hh"
+#include <Spacy/Util/voider.hh>
 
 namespace Spacy
 {
@@ -40,6 +39,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_ADAPTER_FENICS_HASX_HH
-

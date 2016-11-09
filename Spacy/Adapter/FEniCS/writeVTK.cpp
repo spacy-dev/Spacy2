@@ -1,15 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "writeVTK.hh"
 
-#include "Spacy/vector.hh"
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Adapter/Generic/writeVTK.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Adapter/Generic/writeVTK.hh>
+
 #include "vector.hh"
 
 #include <dolfin.h>
-#include <cassert>
 
 namespace Spacy
 {

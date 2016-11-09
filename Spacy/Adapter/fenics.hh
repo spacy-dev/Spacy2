@@ -1,5 +1,4 @@
-#ifndef SPACY_ADAPTER_FENICS_HH
-#define SPACY_ADAPTER_FENICS_HH
+#pragma once
 
 #include "FEniCS/c1Operator.hh"
 #include "FEniCS/c2Functional.hh"
@@ -10,5 +9,3 @@
 #include "FEniCS/util.hh"
 #include "FEniCS/vector.hh"
 #include "FEniCS/writeVTK.hh"
-
-#endif // SPACY_ADAPTER_FENICS_HH

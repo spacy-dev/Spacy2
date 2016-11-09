@@ -1,16 +1,14 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "linearOperator.hh"
 
-#include "vectorSpace.hh"
-#include "Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh"
+#include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/realSpace.hh>
 
-#include "util.hh" // copy
 #include "operatorSpace.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/realSpace.hh"
+#include "vectorSpace.hh"
+#include "util.hh" // copy
 
 #include <cassert>
 
@@ -43,7 +41,7 @@ namespace Spacy
 
     Real LinearOperator::operator ()(const LinearOperator& A) const
     {
-        return Real( applyAsDualElement(A) );
+        return applyAsDualElement(A);
     }
 
     LinearSolver LinearOperator::solver() const
@@ -81,13 +79,13 @@ namespace Spacy
       auto y_ = x_.vector()->copy();
       get().mult(*x_.vector(), *y_);
 
-      auto y = range().zeroVector();
+      auto y = zero(range());
       copy(*y_,y);
 
       return std::move(y);
     }
 
-    ::Spacy::Vector LinearOperator::applyAsDualElement(const ::Spacy::Vector& x) const
+    ::Spacy::Real LinearOperator::applyAsDualElement(const ::Spacy::Vector& x) const
     {
       throw CallOfUndefinedFunctionException("FEniCS::LinearOperator::applyAsDualElement");
     }

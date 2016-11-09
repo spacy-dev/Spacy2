@@ -1,25 +1,24 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "vectorSpace.hh"
 
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+
 #include "l2Product.hh"
 #include "vector.hh"
-#include "Spacy/Spaces/ProductSpace/vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
 
 namespace Spacy
 {
   namespace FEniCS
   {
-    VectorCreator::VectorCreator(const dolfin::FunctionSpace& space)
-      : Mixin::Get<dolfin::FunctionSpace>(space)
+    VectorCreator::VectorCreator(std::shared_ptr<dolfin::FunctionSpace> space)
+      : Mixin::Get< std::shared_ptr<dolfin::FunctionSpace> >(space)
     {}
 
-    VectorCreator::VectorCreator(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t, std::size_t>& dofmap)
-      : Mixin::Get<dolfin::FunctionSpace>(space),
+    VectorCreator::VectorCreator(std::shared_ptr<dolfin::FunctionSpace> space, const std::unordered_map<std::size_t, std::size_t>& dofmap)
+      : Mixin::Get< std::shared_ptr<dolfin::FunctionSpace> >(space),
         dofmap_(dofmap),
         inverseDofmap_(dofmap_.size())
     {
@@ -50,20 +49,20 @@ namespace Spacy
 
     unsigned VectorCreator::size() const
     {
-      return get().dim();
+      return get()->dim();
     }
 
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space)
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space)
     {
       return ::Spacy::makeHilbertSpace( VectorCreator{space} , l2Product{} );
     }
 
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::unordered_map<std::size_t,std::size_t>& dofmap)
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space, const std::unordered_map<std::size_t,std::size_t>& dofmap)
     {
       return ::Spacy::makeHilbertSpace( VectorCreator{space,dofmap} , l2Product{} );
     }
 
-    VectorSpace makeHilbertSpace(const dolfin::FunctionSpace& space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
+    VectorSpace makeHilbertSpace(std::shared_ptr<dolfin::FunctionSpace> space, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
       unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
@@ -71,14 +70,14 @@ namespace Spacy
       for(std::size_t i : primalIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
-        auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( *subSpace,dofmap) );
+        auto subSpace = (*space)[i]->collapse(dofmap);
+        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( subSpace,dofmap) );
       }
       for(std::size_t i : dualIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
-        auto subSpace = space[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( *subSpace,dofmap ) );
+        auto subSpace = (*space)[i]->collapse(dofmap);
+        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( subSpace,dofmap ) );
       }
 
       return ProductSpace::makeHilbertSpace( spaces , primalIds , dualIds );

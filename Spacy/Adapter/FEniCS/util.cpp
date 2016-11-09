@@ -1,13 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "util.hh"
 
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Util/copy.hh"
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/copy.hh>
 
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/vector.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+
 #include "vector.hh"
 #include "vectorSpace.hh"
 

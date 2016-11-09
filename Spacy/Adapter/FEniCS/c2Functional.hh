@@ -1,23 +1,18 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
-#define SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
+#pragma once
 
 #include <memory>
 
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-
-#include "Spacy/Util/cast.hh"
-#include "Spacy/Util/Base/functionalBase.hh"
+#include <Spacy/operator.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Base/functionalBase.hh>
 
 #include "assignXIfPresent.hh"
 #include "util.hh"
 #include "vector.hh"
 #include "operatorSpace.hh"
 #include "linearOperator.hh"
-#include "Spacy/operator.hh"
 
 namespace Spacy
 {
@@ -170,7 +165,7 @@ namespace Spacy
       {
         assembleJacobian(x);
 
-        auto y = this->domain().dualSpace().zeroVector();
+        auto y = zero(this->domain().dualSpace());
         copy(*b_,y);
         return y;
       }
@@ -191,7 +186,7 @@ namespace Spacy
         auto Ax = x_.vector()->copy();
         A_->mult(*x_.vector(), *Ax);
 
-        auto result = this->domain().dualSpace().zeroVector();
+        auto result = zero(this->domain().dualSpace());
         copy(*Ax,result);
 
         return result;
@@ -233,7 +228,7 @@ namespace Spacy
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,x_);
         assign_x_if_present(J_,x_);
-        b_ = x_.vector()->factory().create_vector();
+        b_ = x_.vector()->factory().create_vector(x_.vector()->mpi_comm());
 
         dolfin::assemble(*b_,J_);
         for( auto& bc : bcs_) bc->apply(*b_,*x_.vector());
@@ -249,7 +244,7 @@ namespace Spacy
         auto x_ = dolfin::Function( J_.function_space(0) );
         copy(x,*x_.vector());
         assign_x_if_present(H_,x_);
-        A_ = x_.vector()->factory().create_matrix();
+        A_ = x_.vector()->factory().create_matrix(x_.vector()->mpi_comm());
         dolfin::assemble(*A_,H_);
 
         for( auto& bc : bcs_) bc->apply(*A_,*x_.vector(),*x_.vector());
@@ -302,6 +297,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACYS_ADAPTER_FENICS_C2_FUNCTIONAL_HH
-

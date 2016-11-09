@@ -1,17 +1,13 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ADAPTER_FENICS_UTIL_HH
-#define SPACY_ADAPTER_FENICS_UTIL_HH
-
-/// \cond
+/// @cond
 namespace dolfin
 {
   class Form;
   class GenericVector;
   class Function;
 }
-/// \endcond
+/// @endcond
 
 namespace Spacy
 {
@@ -68,6 +64,3 @@ namespace Spacy
     void copy(const dolfin::Function& y, ::Spacy::Vector& x);
   }
 }
-
-#endif // SPACY_ADAPTER_FENICS_UTIL_HH
-
