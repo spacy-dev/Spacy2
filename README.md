@@ -4,6 +4,7 @@
        src="https://scan.coverity.com/projects/6364/badge.svg"/>
 </a>
 [![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg)](https://coveralls.io/github/spacy-dev/Spacy)
+[![Gitter chat](https://badges.gitter.im/spacy-dev/spacy.png)](https://gitter.im/spacy-dev/Spacy)
 
 # Spacy - Vector Space Algorithms
 
