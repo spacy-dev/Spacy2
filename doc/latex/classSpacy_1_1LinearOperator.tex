@@ -9,83 +9,157 @@ Type-\/erased linear operator $A:\ X \to Y $.
 
 {\ttfamily \#include $<$linear\+Operator.\+hh$>$}
 
-
-
-Inheritance diagram for Spacy\+:\+:Linear\+Operator\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=199pt]{classSpacy_1_1LinearOperator__inherit__graph}
-\end{center}
-\end{figure}
-
-
-Collaboration diagram for Spacy\+:\+:Linear\+Operator\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=199pt]{classSpacy_1_1LinearOperator__coll__graph}
-\end{center}
-\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_aa6de056041a02ac4fbfc457f1539ac8b}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+::\+Spacy\+::\+Linear\+Operator$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Linear\+Operator\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1LinearOperator_aa6de056041a02ac4fbfc457f1539ac8b}{Linear\+Operator} (Impl \&\&impl)\label{classSpacy_1_1LinearOperator_aa6de056041a02ac4fbfc457f1539ac8b}
-
-\begin{DoxyCompactList}\small\item\em Construct from operator implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_a7c8ef4165cc858cd8077be677d26cefd}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+::\+Spacy\+::\+Linear\+Operator$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Linear\+Operator\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& \hyperlink{classSpacy_1_1LinearOperator_a7c8ef4165cc858cd8077be677d26cefd}{operator=} (Impl \&\&impl)\label{classSpacy_1_1LinearOperator_a7c8ef4165cc858cd8077be677d26cefd}
-
-\begin{DoxyCompactList}\small\item\em Assign from operator implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{}\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \label{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{}\label{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}
 
 \begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}{}\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator+=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\label{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}
+\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator()} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&x) const \hypertarget{classSpacy_1_1LinearOperator_a75400dbcfa651fed1b37f58a8e722b90}{}\label{classSpacy_1_1LinearOperator_a75400dbcfa651fed1b37f58a8e722b90}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}{}\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator-\/=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\label{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator+=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\hypertarget{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}{}\label{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}{}\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator$\ast$=} (double a)\label{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator-\/=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\hypertarget{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}{}\label{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}{}\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} {\bfseries operator-\/} () const \label{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator$\ast$=} (double a)\hypertarget{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}{}\label{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}{}bool {\bfseries operator==} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y) const \label{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} {\bfseries operator-\/} () const \hypertarget{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}{}\label{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_ad460a63d6ad4683a033df2c0688d08ae}{}std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ {\bfseries solver} () const \label{classSpacy_1_1LinearOperator_ad460a63d6ad4683a033df2c0688d08ae}
+bool {\bfseries operator==} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y) const \hypertarget{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}{}\label{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{domain} () const \label{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}
+std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ {\bfseries solver} () const \hypertarget{classSpacy_1_1LinearOperator_ad460a63d6ad4683a033df2c0688d08ae}{}\label{classSpacy_1_1LinearOperator_ad460a63d6ad4683a033df2c0688d08ae}
+
+\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{domain} () const \hypertarget{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{}\label{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}
 
 \begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{range} () const \label{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{range} () const \hypertarget{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{}\label{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}
 
 \begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{space} () const \label{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{space} () const \hypertarget{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{}\label{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}
 
 \begin{DoxyCompactList}\small\item\em Access underlying space of linear operators. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_a39ea1a7871cbd2ce8f9029298f691bef}{}\hyperlink{classSpacy_1_1LinearOperator_a39ea1a7871cbd2ce8f9029298f691bef}{operator bool} () const \label{classSpacy_1_1LinearOperator_a39ea1a7871cbd2ce8f9029298f691bef}
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Linear\+Operator\+Detail\+::\+Linear\+Operator\+Concept$<$ Linear\+Operator, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\{\bfseries Linear\+Operator} (T \&\&value)\hypertarget{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}{}\label{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}
 
-\begin{DoxyCompactList}\small\item\em Check if an implementation has been assigned. \end{DoxyCompactList}\item 
-\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{}{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target} ()\label{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}
-
-\begin{DoxyCompactList}\small\item\em Cast to T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\item 
-\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{}{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{target} () const \label{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}
-
-\begin{DoxyCompactList}\small\item\em Cast to const T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Friends}
-\begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_ae29ffe0f98f8931b8566b9be964173a8}{}class {\bfseries To\+Target$<$ Linear\+Operator $>$}\label{classSpacy_1_1LinearOperator_ae29ffe0f98f8931b8566b9be964173a8}
+{\bfseries Linear\+Operator} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&other)\hypertarget{classSpacy_1_1LinearOperator_a23c71e4f80fc5ccb45e8de979cbfe45d}{}\label{classSpacy_1_1LinearOperator_a23c71e4f80fc5ccb45e8de979cbfe45d}
 
-\end{DoxyCompactItemize}
+\item 
+{\bfseries Linear\+Operator} (\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&\&other) noexcept\hypertarget{classSpacy_1_1LinearOperator_a54775f0b362198be4b92e13a688bb3b6}{}\label{classSpacy_1_1LinearOperator_a54775f0b362198be4b92e13a688bb3b6}
+
+\item 
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Linear\+Operator\+Detail\+::\+Linear\+Operator\+Concept$<$ Linear\+Operator, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator=} (T \&\&value)\hypertarget{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}{}\label{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&other)\hypertarget{classSpacy_1_1LinearOperator_a3e1ae48eb708b6130ded1aeccc7711aa}{}\label{classSpacy_1_1LinearOperator_a3e1ae48eb708b6130ded1aeccc7711aa}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&\&other) noexcept\hypertarget{classSpacy_1_1LinearOperator_a370ddb98c4e73cab75e648bb02edb97c}{}\label{classSpacy_1_1LinearOperator_a370ddb98c4e73cab75e648bb02edb97c}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}{operator bool} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{}\label{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}
+
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator()} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&x) const \hypertarget{classSpacy_1_1LinearOperator_a75400dbcfa651fed1b37f58a8e722b90}{}\label{classSpacy_1_1LinearOperator_a75400dbcfa651fed1b37f58a8e722b90}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator+=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\hypertarget{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}{}\label{classSpacy_1_1LinearOperator_a42c28cd0068a08b7547e44aa6ab4a4e7}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator-\/=} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y)\hypertarget{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}{}\label{classSpacy_1_1LinearOperator_a38f6913a360e69a37f32487044958262}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries operator$\ast$=} (double a)\hypertarget{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}{}\label{classSpacy_1_1LinearOperator_a1a337571a68b1c5ece14c637682ac8a4}
+
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} {\bfseries operator-\/} () const \hypertarget{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}{}\label{classSpacy_1_1LinearOperator_ac77bf18c27c54f2589cfd8ccd6e44dd9}
+
+\item 
+bool {\bfseries operator==} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&y) const \hypertarget{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}{}\label{classSpacy_1_1LinearOperator_afbb3e1bce81ac646081f46fc3688313b}
+
+\item 
+std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&) $>$ {\bfseries solver} () const \hypertarget{classSpacy_1_1LinearOperator_aeaadbe42f61f44a7019382fdcac0fa40}{}\label{classSpacy_1_1LinearOperator_aeaadbe42f61f44a7019382fdcac0fa40}
+
+\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{domain} () const \hypertarget{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}{}\label{classSpacy_1_1LinearOperator_a1acd2a2f71a95baa2c364b88c4eee126}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{range} () const \hypertarget{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}{}\label{classSpacy_1_1LinearOperator_a29653883e8ebc3460e9294e3bceee5bf}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{space} () const \hypertarget{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{}\label{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}
+
+\begin{DoxyCompactList}\small\item\em Access underlying space of linear operators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}{target} () noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}{target} () const noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Type-\/erased linear operator $A:\ X \to Y $. 
 
+\subsection{Member Function Documentation}
+\index{Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}}
+\subsubsection[{\texorpdfstring{operator bool() const noexcept}{operator bool() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Linear\+Operator\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}{}\label{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}
+
+
+Checks if the type-\/erased interface holds an implementation. 
+
+\begin{DoxyReturn}{Returns}
+true if an implementation is stored, else false 
+\end{DoxyReturn}
+\index{Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}!target@{target}}
+\index{target@{target}!Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}}
+\subsubsection[{\texorpdfstring{target() noexcept}{target() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ Spacy\+::\+Linear\+Operator\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}{}\label{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
+\index{Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}!target@{target}}
+\index{target@{target}!Spacy\+::\+Linear\+Operator@{Spacy\+::\+Linear\+Operator}}
+\subsubsection[{\texorpdfstring{target() const noexcept}{target() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ Spacy\+::\+Linear\+Operator\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}{}\label{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/linear\+Operator.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Interfaces/linear\+Operator.\+hh\end{DoxyCompactItemize}

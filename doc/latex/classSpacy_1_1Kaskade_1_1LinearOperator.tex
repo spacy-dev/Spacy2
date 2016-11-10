@@ -11,7 +11,8 @@ Linear operator interface for operators in Kaskade 7.
 
 
 
-Inheritance diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+:\nopagebreak
+Inheritance diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Vari
 \end{figure}
 
 
-Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+:\nopagebreak
+Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -32,35 +34,35 @@ Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:Linear\+Operator$<$ Ansatz\+Va
 \item 
 \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_a24acb8f5c16194484d4afe5777a5aea5}{Linear\+Operator} (Operator\+Impl A, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space})
 \begin{DoxyCompactList}\small\item\em Construct linear operator for Kaskade 7. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}{Linear\+Operator} (Operator\+Impl A, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space}, std\+::function$<$ \hyperlink{namespaceSpacy_a4cd614ddb41dd29e68a723dadd5602f2}{Linear\+Solver}(const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator} \&)$>$ solver\+Creator)
+\hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}{Linear\+Operator} (Operator\+Impl A, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space}, std\+::function$<$ \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver}(const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator} \&)$>$ solver\+Creator)
 \begin{DoxyCompactList}\small\item\em Construct linear operator for Kaskade 7. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}{}\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}{operator()} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const \label{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}
+\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}{operator()} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const \hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_added0f85104ded29f4c87992f5b5a81b}
 
 \begin{DoxyCompactList}\small\item\em Compute $A(x)$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}{}auto \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}{solver} () const \label{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}
+\+::\hyperlink{classSpacy_1_1Real}{Spacy\+::\+Real} {\bfseries operator()} (const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator} \&) const \hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_af787d5f0a939baeaca4732fcbb7698ad}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_af787d5f0a939baeaca4732fcbb7698ad}
+
+\item 
+auto \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}{solver} () const \hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a843c904f87af508090604adc28488e91}
 
 \begin{DoxyCompactList}\small\item\em Access solver representing $A^{-1}$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_aeb463955039d370fc09effff0179ce41}{}auto \& {\bfseries get} ()\label{classSpacy_1_1Kaskade_1_1LinearOperator_aeb463955039d370fc09effff0179ce41}
+auto \& {\bfseries get} ()\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_aeb463955039d370fc09effff0179ce41}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_aeb463955039d370fc09effff0179ce41}
 
 \item 
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a27968fd83fa73ba09036b81428f0c6b4}{}const auto \& {\bfseries get} () const \label{classSpacy_1_1Kaskade_1_1LinearOperator_a27968fd83fa73ba09036b81428f0c6b4}
+const auto \& {\bfseries get} () const \hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a27968fd83fa73ba09036b81428f0c6b4}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a27968fd83fa73ba09036b81428f0c6b4}
 
 \item 
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_abe2b88cb44e5f28c740dc886e3cc5c4f}{}const auto \& {\bfseries A} () const \label{classSpacy_1_1Kaskade_1_1LinearOperator_abe2b88cb44e5f28c740dc886e3cc5c4f}
+const auto \& {\bfseries A} () const \hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_abe2b88cb44e5f28c740dc886e3cc5c4f}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_abe2b88cb44e5f28c740dc886e3cc5c4f}
 
 \item 
-\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
 
 \begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
 
 \begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space} () const \label{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space} () const \hypertarget{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{}\label{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}
 
 \begin{DoxyCompactList}\small\item\em Access underlying vector space. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1VectorBase_a244a3e85ec49dbf2741ca46ea4b711c9}{}void \hyperlink{classSpacy_1_1VectorBase_a244a3e85ec49dbf2741ca46ea4b711c9}{to\+File} (const std\+::string \&) const \label{classSpacy_1_1VectorBase_a244a3e85ec49dbf2741ca46ea4b711c9}
-
-\begin{DoxyCompactList}\small\item\em Empty default implementation. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& \hyperlink{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}{operator+=} (const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&y)
 \begin{DoxyCompactList}\small\item\em In-\/place summation $ x+=y$. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& \hyperlink{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}{operator-\/=} (const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&y)
@@ -74,7 +76,8 @@ bool \hyperlink{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$class Spacy\+::\+Kaskade\+::\+Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$}
+\subsubsection*{template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$\\*
+class Spacy\+::\+Kaskade\+::\+Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$}
 
 Linear operator interface for operators in Kaskade 7. 
 
@@ -93,14 +96,14 @@ Linear operator interface for operators in Kaskade 7.
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a24acb8f5c16194484d4afe5777a5aea5}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!Linear\+Operator@{Linear\+Operator}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!Linear\+Operator@{Linear\+Operator}}
 \index{Linear\+Operator@{Linear\+Operator}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{Linear\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$ {\bf Spacy\+::\+Kaskade\+::\+Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+::{\bf Linear\+Operator} (
+\subsubsection[{\texorpdfstring{Linear\+Operator(\+Operator\+Impl A, const Vector\+Space \&space)}{LinearOperator(OperatorImpl A, const VectorSpace &space)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$ {\bf Spacy\+::\+Kaskade\+::\+Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+::{\bf Linear\+Operator} (
 \begin{DoxyParamCaption}
 \item[{Operator\+Impl}]{A, }
 \item[{const {\bf Vector\+Space} \&}]{space}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a24acb8f5c16194484d4afe5777a5aea5}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a24acb8f5c16194484d4afe5777a5aea5}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a24acb8f5c16194484d4afe5777a5aea5}
 
 
 Construct linear operator for Kaskade 7. 
@@ -114,15 +117,15 @@ Construct linear operator for Kaskade 7.
 {\em range} & range space \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!Linear\+Operator@{Linear\+Operator}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!Linear\+Operator@{Linear\+Operator}}
 \index{Linear\+Operator@{Linear\+Operator}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{Linear\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$ {\bf Spacy\+::\+Kaskade\+::\+Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+::{\bf Linear\+Operator} (
+\subsubsection[{\texorpdfstring{Linear\+Operator(\+Operator\+Impl A, const Vector\+Space \&space, std\+::function$<$ Linear\+Solver(const Linear\+Operator \&)$>$ solver\+Creator)}{LinearOperator(OperatorImpl A, const VectorSpace &space, std::function< LinearSolver(const LinearOperator &)> solverCreator)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description, class Test\+Variable\+Set\+Description$>$ {\bf Spacy\+::\+Kaskade\+::\+Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$\+::{\bf Linear\+Operator} (
 \begin{DoxyParamCaption}
 \item[{Operator\+Impl}]{A, }
 \item[{const {\bf Vector\+Space} \&}]{space, }
 \item[{std\+::function$<$ {\bf Linear\+Solver}(const {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&)$>$}]{solver\+Creator}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}{}\label{classSpacy_1_1Kaskade_1_1LinearOperator_a5c287f9cae480a07428e49af70875b7a}
 
 
 Construct linear operator for Kaskade 7. 
@@ -141,13 +144,13 @@ Construct linear operator for Kaskade 7.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator+=@{operator+=}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator+=@{operator+=}}
 \index{operator+=@{operator+=}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator+= (
+\subsubsection[{\texorpdfstring{operator+=(const Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&y)}{operator+=(const LinearOperator< AnsatzVariableSetDescription, TestVariableSetDescription > &y)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator+= (
 \begin{DoxyParamCaption}
 \item[{const {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  \&}]{y}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\label{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}{}\label{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}
 
 
 In-\/place summation $ x+=y$. 
@@ -160,13 +163,13 @@ In-\/place summation $ x+=y$.
 \begin{DoxyReturn}{Returns}
 $ x+=y$. 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator-\/=@{operator-\/=}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator-\/=@{operator-\/=}}
 \index{operator-\/=@{operator-\/=}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator-\/= (
+\subsubsection[{\texorpdfstring{operator-\/=(const Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&y)}{operator-=(const LinearOperator< AnsatzVariableSetDescription, TestVariableSetDescription > &y)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator-\/= (
 \begin{DoxyParamCaption}
 \item[{const {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  \&}]{y}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\label{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}{}\label{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}
 
 
 In-\/place subtraction $ x-=y$. 
@@ -179,13 +182,13 @@ In-\/place subtraction $ x-=y$.
 \begin{DoxyReturn}{Returns}
 $ x-=y$. 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator$\ast$=@{operator$\ast$=}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator$\ast$=@{operator$\ast$=}}
 \index{operator$\ast$=@{operator$\ast$=}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator$\ast$= (
+\subsubsection[{\texorpdfstring{operator$\ast$=(double a)}{operator*=(double a)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \& {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator$\ast$= (
 \begin{DoxyParamCaption}
 \item[{double}]{a}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\label{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}{}\label{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}
 
 
 In-\/place multiplication $ x*=a$. 
@@ -198,13 +201,13 @@ In-\/place multiplication $ x*=a$.
 \begin{DoxyReturn}{Returns}
 $ x*=a$. 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator-\/@{operator-\/}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator-\/@{operator-\/}}
 \index{operator-\/@{operator-\/}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator-\/ (
+\subsubsection[{\texorpdfstring{operator-\/() const}{operator-() const}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator-\/ (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\label{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}{}\label{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}
 
 
 Negation $ -x$. 
@@ -212,13 +215,13 @@ Negation $ -x$.
 \begin{DoxyReturn}{Returns}
 $ -x $. 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}{}\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator==@{operator==}}
+\index{Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}!operator==@{operator==}}
 \index{operator==@{operator==}!Spacy\+::\+Kaskade\+::\+Linear\+Operator@{Spacy\+::\+Kaskade\+::\+Linear\+Operator}}
-\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator== (
+\subsubsection[{\texorpdfstring{operator==(const Linear\+Operator$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$ \&y) const}{operator==(const LinearOperator< AnsatzVariableSetDescription, TestVariableSetDescription > &y) const}}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Spacy\+::\+Add\+Arithmetic\+Operators}$<$ {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  $>$\+::operator== (
 \begin{DoxyParamCaption}
 \item[{const {\bf Linear\+Operator}$<$ Ansatz\+Variable\+Set\+Description, Test\+Variable\+Set\+Description $>$  \&}]{y}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\label{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}{}\label{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}
 
 
 Comparison operator $ x==y$. 
@@ -235,4 +238,4 @@ $ x==y$.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Adapter/\+Kaskade/linear\+Operator.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Spacy/\+Adapter/\+Kaskade/linear\+Operator.\+hh\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matrix',['Matrix',['../classSpacy_1_1Kaskade_1_1C2Functional.html#aa7247706c3561818b2bf7d84c8841fe5',1,'Spacy::Kaskade::C2Functional']]]
+  ['norm',['Norm',['../namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791',1,'Spacy']]]
 ];

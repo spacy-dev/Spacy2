@@ -20,9 +20,9 @@ struct \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Parameter}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_1_1Newton_a90e8526badc5b9db03b5ff6e655ad568}{newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const std\+::function$<$ \hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor}(const std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&damping\+Strategy, const std\+::function$<$ bool(\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor}, const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&termination\+Criterion, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Parameter} p)
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_1_1Newton_abb96a752061c77bc7ba166c6e3184ca3}{newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const std\+::function$<$ \hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor}(const std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&damping\+Strategy, const std\+::function$<$ bool(\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor}, const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&termination\+Criterion, const std\+::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&error\+Estimator, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Parameter} p)
 \begin{DoxyCompactList}\small\item\em \hyperlink{namespaceSpacy_1_1Generic}{Generic} Newton method. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Damping , class Terminate $>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_1_1Newton_a39c7915072931fafca5d3012aa6349bf}{newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Parameter} \&p)
+{\footnotesize template$<$class Damping , class Terminate $>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_1_1Newton_ae58104a160c7335748a9b800b2317c6d}{newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Parameter} \&p, const std\+::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&error\+Estimator=\{\})
 \begin{DoxyCompactList}\small\item\em \hyperlink{namespaceSpacy_1_1Generic}{Generic} Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -32,17 +32,18 @@ Newton methods, largely following \cite{Deuflhard2004}.
 Contains a local Newton method, an affine covariant Newton method, an affine contravariant Newton method as well as a generic implementation that admits the implementation of further termination criteria and damping strategies. 
 
 \subsection{Function Documentation}
-\hypertarget{namespaceSpacy_1_1Newton_a90e8526badc5b9db03b5ff6e655ad568}{}\index{Spacy\+::\+Newton@{Spacy\+::\+Newton}!newton@{newton}}
+\index{Spacy\+::\+Newton@{Spacy\+::\+Newton}!newton@{newton}}
 \index{newton@{newton}!Spacy\+::\+Newton@{Spacy\+::\+Newton}}
-\subsubsection[{newton}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Newton\+::newton (
+\subsubsection[{\texorpdfstring{newton(const C1\+Operator \&\+F, const Vector \&x0, const std\+::function$<$ Damping\+Factor(const std\+::function$<$ Vector(const Vector \&)$>$ \&, const Vector \&, const Vector \&)$>$ \&damping\+Strategy, const std\+::function$<$ bool(\+Damping\+Factor, const Vector \&, const Vector \&)$>$ \&termination\+Criterion, const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator, const Parameter p)}{newton(const C1Operator &F, const Vector &x0, const std::function< DampingFactor(const std::function< Vector(const Vector &)> &, const Vector &, const Vector &)> &dampingStrategy, const std::function< bool(DampingFactor, const Vector &, const Vector &)> &terminationCriterion, const std::function< bool(const Vector &, const Vector &)> &errorEstimator, const Parameter p)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+Newton\+::newton (
 \begin{DoxyParamCaption}
 \item[{const {\bf C1\+Operator} \&}]{F, }
 \item[{const {\bf Vector} \&}]{x0, }
 \item[{const std\+::function$<$ {\bf Damping\+Factor}(const std\+::function$<$ {\bf Vector}(const {\bf Vector} \&)$>$ \&, const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{damping\+Strategy, }
 \item[{const std\+::function$<$ bool({\bf Damping\+Factor}, const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{termination\+Criterion, }
+\item[{const std\+::function$<$ bool(const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{error\+Estimator, }
 \item[{const {\bf Parameter}}]{p}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Newton_a90e8526badc5b9db03b5ff6e655ad568}
+)}\hypertarget{namespaceSpacy_1_1Newton_abb96a752061c77bc7ba166c6e3184ca3}{}\label{namespaceSpacy_1_1Newton_abb96a752061c77bc7ba166c6e3184ca3}
 
 
 \hyperlink{namespaceSpacy_1_1Generic}{Generic} Newton method. 
@@ -63,15 +64,16 @@ Contains a local Newton method, an affine covariant Newton method, an affine con
 \begin{DoxySeeAlso}{See also}
 \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
 \end{DoxySeeAlso}
-\hypertarget{namespaceSpacy_1_1Newton_a39c7915072931fafca5d3012aa6349bf}{}\index{Spacy\+::\+Newton@{Spacy\+::\+Newton}!newton@{newton}}
+\index{Spacy\+::\+Newton@{Spacy\+::\+Newton}!newton@{newton}}
 \index{newton@{newton}!Spacy\+::\+Newton@{Spacy\+::\+Newton}}
-\subsubsection[{newton}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Damping , class Terminate $>$ {\bf Vector} Spacy\+::\+Newton\+::newton (
+\subsubsection[{\texorpdfstring{newton(const C1\+Operator \&\+F, const Vector \&x0, const Parameter \&p, const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator=\lcurly{}\rcurly{})}{newton(const C1Operator &F, const Vector &x0, const Parameter &p, const std::function< bool(const Vector &, const Vector &)> &errorEstimator=\{\})}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Damping , class Terminate $>$ {\bf Vector} Spacy\+::\+Newton\+::newton (
 \begin{DoxyParamCaption}
 \item[{const {\bf C1\+Operator} \&}]{F, }
 \item[{const {\bf Vector} \&}]{x0, }
-\item[{const {\bf Parameter} \&}]{p}
+\item[{const {\bf Parameter} \&}]{p, }
+\item[{const std\+::function$<$ bool(const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{error\+Estimator = {\ttfamily \{\}}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Newton_a39c7915072931fafca5d3012aa6349bf}
+)}\hypertarget{namespaceSpacy_1_1Newton_ae58104a160c7335748a9b800b2317c6d}{}\label{namespaceSpacy_1_1Newton_ae58104a160c7335748a9b800b2317c6d}
 
 
 \hyperlink{namespaceSpacy_1_1Generic}{Generic} Newton method. 

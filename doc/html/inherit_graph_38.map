@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structSpacy_1_1Mixin_1_1ToTarget.html" title="Spacy::Mixin::ToTarget\l\&lt; Vector \&gt;" alt="" coords="5,5,164,47"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1Vector.html" title="Type&#45;erased vector. " alt="" coords="212,13,317,39"/>
+<area shape="rect" id="node1" href="$classSpacy_1_1Mixin_1_1Get.html" title="Spacy::Mixin::Get\&lt;\l std::shared_ptr\&lt; dolfin\l::FunctionSpace \&gt; \&gt;" alt="" coords="5,5,161,61"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1FEniCS_1_1VectorCreator.html" title="Creator for vector space elements for FEniCS. " alt="" coords="209,20,412,47"/>
 </map>

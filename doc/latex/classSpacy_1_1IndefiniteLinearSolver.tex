@@ -9,59 +9,103 @@ Type-\/erased indefinite linear solver. Additionally monitors if the underlying 
 
 {\ttfamily \#include $<$linear\+Solver.\+hh$>$}
 
-
-
-Inheritance diagram for Spacy\+:\+:Indefinite\+Linear\+Solver\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=224pt]{classSpacy_1_1IndefiniteLinearSolver__inherit__graph}
-\end{center}
-\end{figure}
-
-
-Collaboration diagram for Spacy\+:\+:Indefinite\+Linear\+Solver\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=224pt]{classSpacy_1_1IndefiniteLinearSolver__coll__graph}
-\end{center}
-\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_ac19f92a58a8b4bfec32c58c1e4842880}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Indefinite\+Linear\+Solver$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Has\+Mem\+Op\+\_\+callable$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Vector,\+Vector$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ Has\+Mem\+Fn\+\_\+is\+Positive\+Definite$<$std\+::decay\+\_\+t$<$\+Impl$>$ $>$\+::value $>$$>$ }\\{\bfseries Indefinite\+Linear\+Solver} (Impl \&\&impl)\label{classSpacy_1_1IndefiniteLinearSolver_ac19f92a58a8b4bfec32c58c1e4842880}
+\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}{}\label{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}
 
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a091ae5c4dcfa22441fe504d03a0c6130}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Indefinite\+Linear\+Solver$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Has\+Mem\+Op\+\_\+callable$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Vector,\+Vector$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$ Has\+Mem\+Fn\+\_\+is\+Positive\+Definite$<$std\+::decay\+\_\+t$<$\+Impl$>$ $>$\+::value $>$$>$ }\\\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \& {\bfseries operator=} (Impl \&\&impl)\label{classSpacy_1_1IndefiniteLinearSolver_a091ae5c4dcfa22441fe504d03a0c6130}
+bool {\bfseries is\+Positive\+Definite} () const \hypertarget{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}{}\label{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}
 
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}{}\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \label{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Indefinite\+Linear\+Solver\+Detail\+::\+Indefinite\+Linear\+Solver\+Concept$<$ Indefinite\+Linear\+Solver, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\{\bfseries Indefinite\+Linear\+Solver} (T \&\&value)\hypertarget{classSpacy_1_1IndefiniteLinearSolver_af60b1bb12efcf0daccfb48122867ea96}{}\label{classSpacy_1_1IndefiniteLinearSolver_af60b1bb12efcf0daccfb48122867ea96}
 
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}{}bool {\bfseries is\+Positive\+Definite} () const \label{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}
+{\bfseries Indefinite\+Linear\+Solver} (const \hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \&other)\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a85f4481ed4c6f349cede484c25ba259e}{}\label{classSpacy_1_1IndefiniteLinearSolver_a85f4481ed4c6f349cede484c25ba259e}
 
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a6c21bb7747e484a3177efb2cd24df410}{}{\bfseries operator bool} () const \label{classSpacy_1_1IndefiniteLinearSolver_a6c21bb7747e484a3177efb2cd24df410}
+{\bfseries Indefinite\+Linear\+Solver} (\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \&\&other) noexcept\hypertarget{classSpacy_1_1IndefiniteLinearSolver_affb21cb06e47a51c0f228f11a84fc3fd}{}\label{classSpacy_1_1IndefiniteLinearSolver_affb21cb06e47a51c0f228f11a84fc3fd}
 
 \item 
-\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{}{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target} ()\label{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Indefinite\+Linear\+Solver\+Detail\+::\+Indefinite\+Linear\+Solver\+Concept$<$ Indefinite\+Linear\+Solver, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \& {\bfseries operator=} (T \&\&value)\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a6ed5d50bdf25e31ea81a3aaa0c35dd8e}{}\label{classSpacy_1_1IndefiniteLinearSolver_a6ed5d50bdf25e31ea81a3aaa0c35dd8e}
 
-\begin{DoxyCompactList}\small\item\em Cast to T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\item 
-\hypertarget{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{}{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}{target} () const \label{structSpacy_1_1Mixin_1_1ToTarget_a98985b22f6fc98d253c8416c54a5e359}
-
-\begin{DoxyCompactList}\small\item\em Cast to const T$\ast$ if possible, else returns nullptr. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Friends}
-\begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1IndefiniteLinearSolver_ac9c0b106218450fc273444c515916ab7}{}class {\bfseries Mixin\+::\+To\+Target$<$ Indefinite\+Linear\+Solver $>$}\label{classSpacy_1_1IndefiniteLinearSolver_ac9c0b106218450fc273444c515916ab7}
+\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \&other)\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a45976eb9a9a9884fabdcb121807d944f}{}\label{classSpacy_1_1IndefiniteLinearSolver_a45976eb9a9a9884fabdcb121807d944f}
 
-\end{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver} \&\&other) noexcept\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a9545a7e978179a546525b18a16b8ae61}{}\label{classSpacy_1_1IndefiniteLinearSolver_a9545a7e978179a546525b18a16b8ae61}
+
+\item 
+\hyperlink{classSpacy_1_1IndefiniteLinearSolver_a4ef57ec75c5f8cf611a99e80fe1a492d}{operator bool} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}{}\label{classSpacy_1_1IndefiniteLinearSolver_a150a854c97a44c1c53c4aa071e1b8b12}
+
+\item 
+bool {\bfseries is\+Positive\+Definite} () const \hypertarget{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}{}\label{classSpacy_1_1IndefiniteLinearSolver_a04191e6ed2c8cd54870c79a919dcae39}
+
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{classSpacy_1_1IndefiniteLinearSolver_a6c0daed405c2671c8957848d731c0a1f}{target} () noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{classSpacy_1_1IndefiniteLinearSolver_a82c21063fa0c4b354d3e86db26ef125a}{target} () const noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Type-\/erased indefinite linear solver. Additionally monitors if the underlying operator is positive definite. 
 
+\subsection{Member Function Documentation}
+\index{Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}}
+\subsubsection[{\texorpdfstring{operator bool() const noexcept}{operator bool() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Indefinite\+Linear\+Solver\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a4ef57ec75c5f8cf611a99e80fe1a492d}{}\label{classSpacy_1_1IndefiniteLinearSolver_a4ef57ec75c5f8cf611a99e80fe1a492d}
+
+
+Checks if the type-\/erased interface holds an implementation. 
+
+\begin{DoxyReturn}{Returns}
+true if an implementation is stored, else false 
+\end{DoxyReturn}
+\index{Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}!target@{target}}
+\index{target@{target}!Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}}
+\subsubsection[{\texorpdfstring{target() noexcept}{target() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ Spacy\+::\+Indefinite\+Linear\+Solver\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a6c0daed405c2671c8957848d731c0a1f}{}\label{classSpacy_1_1IndefiniteLinearSolver_a6c0daed405c2671c8957848d731c0a1f}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
+\index{Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}!target@{target}}
+\index{target@{target}!Spacy\+::\+Indefinite\+Linear\+Solver@{Spacy\+::\+Indefinite\+Linear\+Solver}}
+\subsubsection[{\texorpdfstring{target() const noexcept}{target() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ Spacy\+::\+Indefinite\+Linear\+Solver\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1IndefiniteLinearSolver_a82c21063fa0c4b354d3e86db26ef125a}{}\label{classSpacy_1_1IndefiniteLinearSolver_a82c21063fa0c4b354d3e86db26ef125a}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/linear\+Solver.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Interfaces/linear\+Solver.\+hh\end{DoxyCompactItemize}

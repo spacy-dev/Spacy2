@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['linearoperatorconcept',['LinearOperatorConcept',['../group__ConceptGroup.html#ga8d3bdfc9abd844ab446a31fcd3f8ef8c',1,'Spacy']]],
-  ['linearsolver',['LinearSolver',['../namespaceSpacy.html#a4cd614ddb41dd29e68a723dadd5602f2',1,'Spacy']]]
+  ['matrix',['Matrix',['../classSpacy_1_1Kaskade_1_1C2Functional.html#aa7247706c3561818b2bf7d84c8841fe5',1,'Spacy::Kaskade::C2Functional']]]
 ];

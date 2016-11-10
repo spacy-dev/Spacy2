@@ -1,46 +1,153 @@
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion}{}\section{Spacy\+:\+:C\+G\+:\+:Termination\+Criterion Class Reference}
+\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion}{}\section{Spacy\+:\+:CG\+:\+:Termination\+Criterion Class Reference}
 \label{classSpacy_1_1CG_1_1TerminationCriterion}\index{Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}}
+
+
+Type-\/erased termination criterion for conjugate gradient methods.  
+
+
+
+
+{\ttfamily \#include $<$termination\+Criterion.\+hh$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_add8b840783f16e8c1d870adf804fb1f1}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Termination\+Criterion$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Termination\+Criterion\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_add8b840783f16e8c1d870adf804fb1f1}{Termination\+Criterion} (Impl \&\&impl)\label{classSpacy_1_1CG_1_1TerminationCriterion_add8b840783f16e8c1d870adf804fb1f1}
-
-\begin{DoxyCompactList}\small\item\em Construct from implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_afb1dd2f02ee9b3ce8b098b87f2ffa5b7}{}{\footnotesize template$<$class Impl , class  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$std\+::decay\+\_\+t$<$\+Impl$>$,\+Termination\+Criterion$>$\+::value$>$, class  = std\+::enable\+\_\+if\+\_\+t$<$\+Termination\+Criterion\+Concept$<$std\+::decay\+\_\+t$<$\+Impl$>$$>$\+::value$>$$>$ }\\\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \& \hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_afb1dd2f02ee9b3ce8b098b87f2ffa5b7}{operator=} (Impl \&\&impl)\label{classSpacy_1_1CG_1_1TerminationCriterion_afb1dd2f02ee9b3ce8b098b87f2ffa5b7}
-
-\begin{DoxyCompactList}\small\item\em Assign from implementation. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}{}bool {\bfseries operator()} () const \label{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}
+bool {\bfseries operator()} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}{}void {\bfseries clear} ()\label{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}
+void {\bfseries clear} ()\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a1d62480faacee959cdf628a0e951caa5}{}void {\bfseries update} (\hyperlink{classSpacy_1_1Real}{Real} alpha, \hyperlink{classSpacy_1_1Real}{Real} q\+Aq, \hyperlink{classSpacy_1_1Real}{Real} q\+Pq, \hyperlink{classSpacy_1_1Real}{Real} r\+P\+I\+N\+Vr)\label{classSpacy_1_1CG_1_1TerminationCriterion_a1d62480faacee959cdf628a0e951caa5}
+void {\bfseries update} (double alpha, double q\+Aq, double q\+Pq, double r\+P\+I\+N\+Vr)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a4ef7ad43f594bab9b21f60e36697c516}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a4ef7ad43f594bab9b21f60e36697c516}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}{}bool {\bfseries vanishing\+Step} () const \label{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}
+bool {\bfseries vanishing\+Step} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}{}bool {\bfseries minimal\+Decrease\+Achieved} () const \label{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}
+bool {\bfseries minimal\+Decrease\+Achieved} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}{}void {\bfseries set\+Eps} (double eps)\label{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}
+void {\bfseries set\+Eps} (double eps)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}{}void {\bfseries set\+Absolute\+Accuracy} (double accuracy)\label{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}
+void {\bfseries set\+Absolute\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a1aa3236005b1fac2dcc0517140d05714}{}void {\bfseries set\+Minimal\+Accuray} (double accuracy)\label{classSpacy_1_1CG_1_1TerminationCriterion_a1aa3236005b1fac2dcc0517140d05714}
+void {\bfseries set\+Minimal\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a5e16822944d08001fde24212857f4b2a}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a5e16822944d08001fde24212857f4b2a}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}{}void {\bfseries set\+Relative\+Accuracy} (double accuracy)\label{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}
+void {\bfseries set\+Relative\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}
 
 \item 
-\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_abe19e6c2eeae32de44508ff4131462aa}{}\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_abe19e6c2eeae32de44508ff4131462aa}{operator bool} () const \label{classSpacy_1_1CG_1_1TerminationCriterion_abe19e6c2eeae32de44508ff4131462aa}
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Termination\+Criterion\+Detail\+::\+Termination\+Criterion\+Concept$<$ Termination\+Criterion, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\{\bfseries Termination\+Criterion} (T \&\&value)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a802fa06abd50e597332969cbd7d39bc5}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a802fa06abd50e597332969cbd7d39bc5}
 
-\begin{DoxyCompactList}\small\item\em Check if an implementation has been assigned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+{\bfseries Termination\+Criterion} (const \hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \&other)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a84ed627e669d2eecef2624fc5a63c457}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a84ed627e669d2eecef2624fc5a63c457}
+
+\item 
+{\bfseries Termination\+Criterion} (\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \&\&other) noexcept\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_aebcda59709577698d88bb01fe81dd470}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_aebcda59709577698d88bb01fe81dd470}
+
+\item 
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Termination\+Criterion\+Detail\+::\+Termination\+Criterion\+Concept$<$ Termination\+Criterion, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \& {\bfseries operator=} (T \&\&value)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ac0f2c2ed8e6cb00861ae1131eb2eb3a2}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ac0f2c2ed8e6cb00861ae1131eb2eb3a2}
+
+\item 
+\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \&other)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a5f1b681ad585c508dd3a71b4f24eea6d}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a5f1b681ad585c508dd3a71b4f24eea6d}
+
+\item 
+\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion}{Termination\+Criterion} \&\&other) noexcept\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ad39a2f9dfcdd4f870d10619f36cafe74}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ad39a2f9dfcdd4f870d10619f36cafe74}
+
+\item 
+\hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_a527774f74e16fe94efa958e594c1be6d}{operator bool} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
+bool {\bfseries operator()} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ab109eb287dd3622db54bbbdf0a55660a}
+
+\item 
+void {\bfseries clear} ()\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a347651c14a38ce3bf1c92454aded97ab}
+
+\item 
+void {\bfseries update} (double alpha, double q\+Aq, double q\+Pq, double r\+P\+I\+N\+Vr)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a4ef7ad43f594bab9b21f60e36697c516}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a4ef7ad43f594bab9b21f60e36697c516}
+
+\item 
+bool {\bfseries vanishing\+Step} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_ab92b8e27edb8290ed34c34a242f900d3}
+
+\item 
+bool {\bfseries minimal\+Decrease\+Achieved} () const \hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a928da2a9183b773ca90477057b3d2b8b}
+
+\item 
+void {\bfseries set\+Eps} (double eps)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a59099ba9af213a66a33bb5b7c7061e11}
+
+\item 
+void {\bfseries set\+Absolute\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a833711290bf75d7cf7450f163f537510}
+
+\item 
+void {\bfseries set\+Minimal\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a5e16822944d08001fde24212857f4b2a}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a5e16822944d08001fde24212857f4b2a}
+
+\item 
+void {\bfseries set\+Relative\+Accuracy} (double accuracy)\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_acea2a40d3f62813a3daa69ebbe8f2d16}
+
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_abafe9b4bb23fcd4fddfe747eeaa23b03}{target} () noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{classSpacy_1_1CG_1_1TerminationCriterion_add14819a4372b5f193dc0adb2321e419}{target} () const noexcept
+\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Type-\/erased termination criterion for conjugate gradient methods. 
+
+\subsection{Member Function Documentation}
+\index{Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}}
+\subsubsection[{\texorpdfstring{operator bool() const noexcept}{operator bool() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+C\+G\+::\+Termination\+Criterion\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_a527774f74e16fe94efa958e594c1be6d}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_a527774f74e16fe94efa958e594c1be6d}
+
+
+Checks if the type-\/erased interface holds an implementation. 
+
+\begin{DoxyReturn}{Returns}
+true if an implementation is stored, else false 
+\end{DoxyReturn}
+\index{Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}!target@{target}}
+\index{target@{target}!Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}}
+\subsubsection[{\texorpdfstring{target() noexcept}{target() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ Spacy\+::\+C\+G\+::\+Termination\+Criterion\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_abafe9b4bb23fcd4fddfe747eeaa23b03}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_abafe9b4bb23fcd4fddfe747eeaa23b03}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
+\index{Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}!target@{target}}
+\index{target@{target}!Spacy\+::\+C\+G\+::\+Termination\+Criterion@{Spacy\+::\+C\+G\+::\+Termination\+Criterion}}
+\subsubsection[{\texorpdfstring{target() const noexcept}{target() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ Spacy\+::\+C\+G\+::\+Termination\+Criterion\+::target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1TerminationCriterion_add14819a4372b5f193dc0adb2321e419}{}\label{classSpacy_1_1CG_1_1TerminationCriterion_add14819a4372b5f193dc0adb2321e419}
+
+
+Conversion of the stored implementation to. 
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} T* 
+\end{DoxyCode}
+. \begin{DoxyReturn}{Returns}
+pointer to the stored object if conversion was successful, else nullptr 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Algorithm/\+C\+G/termination\+Criterion.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Interfaces/termination\+Criterion.\+hh\end{DoxyCompactItemize}

@@ -2,7 +2,7 @@
 \label{namespaceSpacy_1_1Kaskade}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
 
 
-Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade 7}.  
+Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade7}.  
 
 
 \subsection*{Classes}
@@ -12,8 +12,14 @@ class \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator}{C1\+Operator}
 \begin{DoxyCompactList}\small\item\em Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarrow Y$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1C2Functional}{C2\+Functional}
 \begin{DoxyCompactList}\small\item\em Functional interface for Kaskade 7. Models a twice differentiable functional $f:X\rightarrow \mathbb{R}$. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1CoefficientsToVariableSet}{Coefficients\+To\+Variable\+Set}
+\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1CoefficientsToVariableSet_3-1_01_4}{Coefficients\+To\+Variable\+Set$<$-\/1 $>$}
+\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1DirectSolver}{Direct\+Solver}
 \begin{DoxyCompactList}\small\item\em Direct solver interface for Kaskade 7. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Kaskade_1_1DLY}{D\+LY}
+\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1DynamicC1Operator}{Dynamic\+C1\+Operator}
 \begin{DoxyCompactList}\small\item\em Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarrow Y$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1l2Product}{l2\+Product}
@@ -24,6 +30,10 @@ class \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperatorCreator}{Linear\+Operato
 \item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1Operator}{Operator}
 \begin{DoxyCompactList}\small\item\em Operator interface for Kaskade 7. Models an operator $A:X\rightarrow Y$. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1VariableSetToCoefficients}{Variable\+Set\+To\+Coefficients}
+\item 
+struct \hyperlink{structSpacy_1_1Kaskade_1_1VariableSetToCoefficients_3-1_01_4}{Variable\+Set\+To\+Coefficients$<$-\/1 $>$}
+\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1Vector}{Vector}
 \begin{DoxyCompactList}\small\item\em Coefficient vector implementation for Kaskade 7 (single space). \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Kaskade_1_1VectorCreator}{Vector\+Creator}
@@ -37,7 +47,7 @@ class \hyperlink{classSpacy_1_1Kaskade_1_1VectorCreator}{Vector\+Creator}
 \begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Kaskade 7. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Functional\+Definition $>$ }\\auto \hyperlink{namespaceSpacy_1_1Kaskade_acef43eab636b05ddcfb7768041a2bc0e}{make\+C2\+Functional} (const Functional\+Definition \&f, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, int rbegin=0, int rend=Functional\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=Functional\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)
 \begin{DoxyCompactList}\small\item\em Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ for Kaskade 7. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Kaskade\+Operator $>$ }\\auto \hyperlink{namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56}{make\+Direct\+Solver} (Kaskade\+Operator A, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range, Direct\+Type direct\+Solver=Direct\+Type\+::\+M\+U\+M\+P\+S, Matrix\+Properties property=Matrix\+Properties\+::\+G\+E\+N\+E\+R\+A\+L)
+{\footnotesize template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Kaskade\+Operator $>$ }\\auto \hyperlink{namespaceSpacy_1_1Kaskade_a69194f378bbaf33acb9b0e4c6f244489}{make\+Direct\+Solver} (Kaskade\+Operator A, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range, Direct\+Type direct\+Solver=Direct\+Type\+::\+U\+M\+F\+P\+A\+C\+K3264, Matrix\+Properties property=Matrix\+Properties\+::\+G\+E\+N\+E\+R\+AL)
 \begin{DoxyCompactList}\small\item\em Convenient generation of direct solver for Kaskade 7. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Operator\+Definition $>$ }\\auto \hyperlink{namespaceSpacy_1_1Kaskade_ac4502ad2f54b2c7d82e2a5d5790dc8b6}{make\+Dynamic\+C1\+Operator} (const Operator\+Definition \&f, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&range, int rbegin=0, int rend=Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)
 \begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kaskade 7. \end{DoxyCompactList}\item 
@@ -49,37 +59,46 @@ class \hyperlink{classSpacy_1_1Kaskade_1_1VectorCreator}{Vector\+Creator}
 \begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kaskade 7. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Operator\+Definition $>$ }\\auto \hyperlink{group__KaskadeGroup_ga3afbd00437ea7bdb406f3d9a1f375522}{make\+Operator} (const Operator\+Definition \&f, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&domain)
 \begin{DoxyCompactList}\small\item\em Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Kaskade 7. \end{DoxyCompactList}\item 
-\hypertarget{namespaceSpacy_1_1Kaskade_a7a68019c0ae26e979531786554e09696}{}{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces {\bfseries extract\+Single\+Space} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\label{namespaceSpacy_1_1Kaskade_a7a68019c0ae26e979531786554e09696}
+{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces {\bfseries extract\+Single\+Space} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\hypertarget{namespaceSpacy_1_1Kaskade_a7a68019c0ae26e979531786554e09696}{}\label{namespaceSpacy_1_1Kaskade_a7a68019c0ae26e979531786554e09696}
 
 \item 
-\hypertarget{namespaceSpacy_1_1Kaskade_a5d09d835be2f21f6fa3e1381e6540465}{}{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces {\bfseries extract\+Product\+Space} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\label{namespaceSpacy_1_1Kaskade_a5d09d835be2f21f6fa3e1381e6540465}
+{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces {\bfseries extract\+Product\+Space} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\hypertarget{namespaceSpacy_1_1Kaskade_a5d09d835be2f21f6fa3e1381e6540465}{}\label{namespaceSpacy_1_1Kaskade_a5d09d835be2f21f6fa3e1381e6540465}
 
 \item 
-\hypertarget{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}{}{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces \hyperlink{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}{extract\+Spaces} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\label{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}
+{\footnotesize template$<$class Description $>$ }\\Description\+::\+Spaces \hyperlink{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}{extract\+Spaces} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&spaces)\hypertarget{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}{}\label{namespaceSpacy_1_1Kaskade_afd93d7104ab12488e127eada5d714759}
 
 \begin{DoxyCompactList}\small\item\em Extract boost\+::fusion\+::vector$<$ const Space0$\ast$, const Space1$\ast$, ... $>$ from spaces. \end{DoxyCompactList}\item 
-\hypertarget{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}{}{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}{copy} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x,\+::Kaskade\+::\+Variable\+Set$<$ Description $>$ \&y)\label{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}
+{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}{copy} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x,\+::Kaskade\+::\+Variable\+Set$<$ Description $>$ \&y)\hypertarget{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}{}\label{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}
 
 \begin{DoxyCompactList}\small\item\em Copy from \hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} to Kaskade\+::\+Variable\+Set. \end{DoxyCompactList}\item 
-\hypertarget{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}{}{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}{copy\+To\+Coefficient\+Vector} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, typename Description\+::template Coefficient\+Vector\+Representation$<$$>$\+::type \&y)\label{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}
+{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}{copy\+To\+Coefficient\+Vector} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, typename Description\+::template Coefficient\+Vector\+Representation$<$$>$\+::type \&y)\hypertarget{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}{}\label{namespaceSpacy_1_1Kaskade_a4d7422b0c155f9622e54b9d3503d82d8}
 
 \begin{DoxyCompactList}\small\item\em Copy from \hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} to coefficient vector of Kaskade 7. \end{DoxyCompactList}\item 
-\hypertarget{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}{}{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}{copy\+From\+Coefficient\+Vector} (const typename Description\+::template Coefficient\+Vector\+Representation$<$$>$\+::type \&x,\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&y)\label{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}
+{\footnotesize template$<$class Description $>$ }\\void \hyperlink{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}{copy\+From\+Coefficient\+Vector} (const typename Description\+::template Coefficient\+Vector\+Representation$<$$>$\+::type \&x,\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&y)\hypertarget{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}{}\label{namespaceSpacy_1_1Kaskade_a75249db31f75e23a474c4a9a5b792d67}
 
 \begin{DoxyCompactList}\small\item\em Copy coefficient vector of Kaskade 7 to \hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Coefficient\+Vector , class Variable\+Set $>$ }\\void {\bfseries coefficients\+To\+Variable\+Set} (const Coefficient\+Vector \&x, Variable\+Set \&y)\hypertarget{namespaceSpacy_1_1Kaskade_a0c0deff2d2c9718c7e707e9e174121d5}{}\label{namespaceSpacy_1_1Kaskade_a0c0deff2d2c9718c7e707e9e174121d5}
+
+\item 
+{\footnotesize template$<$class Variable\+Set , class Coefficient\+Vector $>$ }\\void {\bfseries variable\+Set\+To\+Coefficients} (const Variable\+Set \&x, Coefficient\+Vector \&y)\hypertarget{namespaceSpacy_1_1Kaskade_aa69d49f1744cff3e4bd945d292e32018}{}\label{namespaceSpacy_1_1Kaskade_aa69d49f1744cff3e4bd945d292e32018}
+
+\item 
 {\footnotesize template$<$class Description $>$ }\\auto \hyperlink{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{make\+Hilbert\+Space} (const Description \&description)
 \begin{DoxyCompactList}\small\item\em Create single space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Description $>$ }\\auto \hyperlink{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}{make\+Hilbert\+Space} (const Description \&description, const std\+::vector$<$ unsigned $>$ \&primal\+Ids, const std\+::vector$<$ unsigned $>$ \&dual\+Ids=\{\})
-\begin{DoxyCompactList}\small\item\em Create product space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Create product space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Description $>$ }\\void {\bfseries write\+V\+TK} (const \hyperlink{classSpacy_1_1Kaskade_1_1Vector}{Vector}$<$ Description $>$ \&x, const char $\ast$file\+Name)\hypertarget{namespaceSpacy_1_1Kaskade_ab5f26938161de79afaba223ca4a5dfa8}{}\label{namespaceSpacy_1_1Kaskade_ab5f26938161de79afaba223ca4a5dfa8}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade 7}. 
+Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade7}. 
 
 \subsection{Function Documentation}
-\hypertarget{namespaceSpacy_1_1Kaskade_a6d002a1f8aefa3369e0aae6250296665}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C1\+Operator@{make\+C1\+Operator}}
+\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C1\+Operator@{make\+C1\+Operator}}
 \index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ \+::{\bf Spacy\+::\+C1\+Operator} Spacy\+::\+Kaskade\+::make\+C1\+Operator (
+\subsubsection[{\texorpdfstring{make\+C1\+Operator(const Operator\+Definition \&f, const Vector\+Space \&domain, const Vector\+Space \&range, int rbegin=0, int rend=\+Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{makeC1Operator(const OperatorDefinition &f, const VectorSpace &domain, const VectorSpace &range, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ \+::{\bf Spacy\+::\+C1\+Operator} Spacy\+::\+Kaskade\+::make\+C1\+Operator (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -89,7 +108,7 @@ Contains vector spaces, functionals and operators for \href{http://www.zib.de/pr
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily OperatorDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_a6d002a1f8aefa3369e0aae6250296665}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_a6d002a1f8aefa3369e0aae6250296665}{}\label{namespaceSpacy_1_1Kaskade_a6d002a1f8aefa3369e0aae6250296665}
 
 
 Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kaskade 7. 
@@ -114,9 +133,9 @@ Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kask
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator}{\+:\+:Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$Operator\+Definition$>$( A , domain , range , rbegin , rend , cbegin , cend )}
 \end{DoxyReturn}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{namespaceSpacy_1_1Kaskade_a8af78a452fabadde5f03fc4dc56face8}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C1\+Operator@{make\+C1\+Operator}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C1\+Operator@{make\+C1\+Operator}}
 \index{make\+C1\+Operator@{make\+C1\+Operator}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+C1\+Operator (
+\subsubsection[{\texorpdfstring{make\+C1\+Operator(const Operator\+Definition \&f, const Vector\+Space \&domain, int rbegin=0, int rend=\+Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{makeC1Operator(const OperatorDefinition &f, const VectorSpace &domain, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+C1\+Operator (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -125,7 +144,7 @@ The optional parameters rbegin, rend, cbegin and cend can be used to define oper
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily OperatorDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_a8af78a452fabadde5f03fc4dc56face8}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_a8af78a452fabadde5f03fc4dc56face8}{}\label{namespaceSpacy_1_1Kaskade_a8af78a452fabadde5f03fc4dc56face8}
 
 
 Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Kaskade 7. 
@@ -148,9 +167,9 @@ Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Ka
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator}{\+:\+:Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$Operator\+Definition$>$( A , domain , range , rbegin , rend , cbegin , cend )}
 \end{DoxyReturn}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{namespaceSpacy_1_1Kaskade_acef43eab636b05ddcfb7768041a2bc0e}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C2\+Functional@{make\+C2\+Functional}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+C2\+Functional@{make\+C2\+Functional}}
 \index{make\+C2\+Functional@{make\+C2\+Functional}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+C2\+Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+C2\+Functional (
+\subsubsection[{\texorpdfstring{make\+C2\+Functional(const Functional\+Definition \&f, const Vector\+Space \&domain, int rbegin=0, int rend=\+Functional\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Functional\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{makeC2Functional(const FunctionalDefinition &f, const VectorSpace &domain, int rbegin=0, int rend=FunctionalDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=FunctionalDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+C2\+Functional (
 \begin{DoxyParamCaption}
 \item[{const Functional\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -159,7 +178,7 @@ The optional parameters rbegin, rend, cbegin and cend can be used to define oper
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily FunctionalDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_acef43eab636b05ddcfb7768041a2bc0e}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_acef43eab636b05ddcfb7768041a2bc0e}{}\label{namespaceSpacy_1_1Kaskade_acef43eab636b05ddcfb7768041a2bc0e}
 
 
 Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ for Kaskade 7. 
@@ -182,17 +201,17 @@ Convenient generation of a twice differentiable functional $f: X\rightarrow \mat
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1Kaskade_1_1C2Functional}{\+:\+:Spacy\+:\+:Kaskade\+:\+:C2\+Functional$<$Functional\+Definition$>$( f, domain, rbegin, rend, cbegin, cend )}
 \end{DoxyReturn}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Direct\+Solver@{make\+Direct\+Solver}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Direct\+Solver@{make\+Direct\+Solver}}
 \index{make\+Direct\+Solver@{make\+Direct\+Solver}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+Direct\+Solver}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Kaskade\+Operator $>$ auto Spacy\+::\+Kaskade\+::make\+Direct\+Solver (
+\subsubsection[{\texorpdfstring{make\+Direct\+Solver(\+Kaskade\+Operator A, const Vector\+Space \&domain, const Vector\+Space \&range, Direct\+Type direct\+Solver=\+Direct\+Type\+::\+U\+M\+F\+P\+A\+C\+K3264, Matrix\+Properties property=\+Matrix\+Properties\+::\+G\+E\+N\+E\+R\+A\+L)}{makeDirectSolver(KaskadeOperator A, const VectorSpace &domain, const VectorSpace &range, DirectType directSolver=DirectType::UMFPACK3264, MatrixProperties property=MatrixProperties::GENERAL)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Kaskade\+Operator $>$ auto Spacy\+::\+Kaskade\+::make\+Direct\+Solver (
 \begin{DoxyParamCaption}
 \item[{Kaskade\+Operator}]{A, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
 \item[{const {\bf Vector\+Space} \&}]{range, }
-\item[{Direct\+Type}]{direct\+Solver = {\ttfamily DirectType\+:\+:MUMPS}, }
+\item[{Direct\+Type}]{direct\+Solver = {\ttfamily DirectType\+:\+:UMFPACK3264}, }
 \item[{Matrix\+Properties}]{property = {\ttfamily MatrixProperties\+:\+:GENERAL}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_a9ee22f7d702c4cfc68786dd821dddd56}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_a69194f378bbaf33acb9b0e4c6f244489}{}\label{namespaceSpacy_1_1Kaskade_a69194f378bbaf33acb9b0e4c6f244489}
 
 
 Convenient generation of direct solver for Kaskade 7. 
@@ -207,17 +226,17 @@ Convenient generation of direct solver for Kaskade 7.
 \hline
 {\em range} & range space of the solver \\
 \hline
-{\em direct\+Solver} & solver type (Direct\+Type\+::\+M\+U\+M\+P\+S (default), Direct\+Type\+::\+U\+M\+F\+P\+A\+C\+K, Direct\+Type\+::\+U\+M\+F\+P\+A\+C\+K3264 or Direct\+Type\+::\+S\+U\+P\+E\+R\+L\+U) \\
+{\em direct\+Solver} & solver type (Direct\+Type\+::\+M\+U\+M\+PS (default), Direct\+Type\+::\+U\+M\+F\+P\+A\+CK, Direct\+Type\+::\+U\+M\+F\+P\+A\+C\+K3264 or Direct\+Type\+::\+S\+U\+P\+E\+R\+LU) \\
 \hline
-{\em property} & matrix property (Matrix\+Properties\+::\+G\+E\+N\+E\+R\+A\+L (default) or Matrix\+Properties\+::\+S\+Y\+M\+M\+E\+T\+R\+I\+C) \\
+{\em property} & matrix property (Matrix\+Properties\+::\+G\+E\+N\+E\+R\+AL (default) or Matrix\+Properties\+::\+S\+Y\+M\+M\+E\+T\+R\+IC) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Direct\+Solver$<$\+Kaskade\+Operator,\+Ansatz\+Variable\+Set\+Description,\+Test\+Variable\+Set\+Description$>$( A , spaces , domain , range , direct\+Solver , property ) 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1Kaskade_ac4502ad2f54b2c7d82e2a5d5790dc8b6}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
+\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
 \index{make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+Dynamic\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+Dynamic\+C1\+Operator (
+\subsubsection[{\texorpdfstring{make\+Dynamic\+C1\+Operator(const Operator\+Definition \&f, const Vector\+Space \&domain, const Vector\+Space \&range, int rbegin=0, int rend=\+Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{makeDynamicC1Operator(const OperatorDefinition &f, const VectorSpace &domain, const VectorSpace &range, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+Dynamic\+C1\+Operator (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -227,7 +246,7 @@ Direct\+Solver$<$\+Kaskade\+Operator,\+Ansatz\+Variable\+Set\+Description,\+Test
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily OperatorDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_ac4502ad2f54b2c7d82e2a5d5790dc8b6}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_ac4502ad2f54b2c7d82e2a5d5790dc8b6}{}\label{namespaceSpacy_1_1Kaskade_ac4502ad2f54b2c7d82e2a5d5790dc8b6}
 
 
 Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kaskade 7. 
@@ -252,9 +271,9 @@ Convenient generation of a differentiable operator $A: X\rightarrow Y$ from Kask
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1Kaskade_1_1DynamicC1Operator}{\+:\+:Spacy\+:\+:Kaskade\+:\+:Dynamic\+C1\+Operator$<$Operator\+Definition$>$( A , domain , range , rbegin , rend , cbegin , cend )}
 \end{DoxyReturn}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{namespaceSpacy_1_1Kaskade_acb385469fa2c1465b9ed8cbe6fabc13c}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}}
 \index{make\+Dynamic\+C1\+Operator@{make\+Dynamic\+C1\+Operator}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+Dynamic\+C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+Dynamic\+C1\+Operator (
+\subsubsection[{\texorpdfstring{make\+Dynamic\+C1\+Operator(const Operator\+Definition \&f, const Vector\+Space \&domain, int rbegin=0, int rend=\+Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{makeDynamicC1Operator(const OperatorDefinition &f, const VectorSpace &domain, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition $>$ auto Spacy\+::\+Kaskade\+::make\+Dynamic\+C1\+Operator (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -263,7 +282,7 @@ The optional parameters rbegin, rend, cbegin and cend can be used to define oper
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily OperatorDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_acb385469fa2c1465b9ed8cbe6fabc13c}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_acb385469fa2c1465b9ed8cbe6fabc13c}{}\label{namespaceSpacy_1_1Kaskade_acb385469fa2c1465b9ed8cbe6fabc13c}
 
 
 Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Kaskade 7. 
@@ -286,15 +305,15 @@ Convenient generation of a differentiable operator $A: X\rightarrow X^*$ from Ka
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1Kaskade_1_1DynamicC1Operator}{\+:\+:Spacy\+:\+:Kaskade\+:\+:Dynamic\+C1\+Operator$<$Operator\+Definition$>$( A , domain , range , rbegin , rend , cbegin , cend )}
 \end{DoxyReturn}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{namespaceSpacy_1_1Kaskade_a6bd8e1d7fdd3066ecd7ed14f0a239912}{}\index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Linear\+Operator@{make\+Linear\+Operator}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}!make\+Linear\+Operator@{make\+Linear\+Operator}}
 \index{make\+Linear\+Operator@{make\+Linear\+Operator}!Spacy\+::\+Kaskade@{Spacy\+::\+Kaskade}}
-\subsubsection[{make\+Linear\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Operator\+Impl $>$ auto Spacy\+::\+Kaskade\+::make\+Linear\+Operator (
+\subsubsection[{\texorpdfstring{make\+Linear\+Operator(const Operator\+Impl \&\+A, const Vector\+Space \&domain, const Vector\+Space \&range)}{makeLinearOperator(const OperatorImpl &A, const VectorSpace &domain, const VectorSpace &range)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\+Variable\+Set\+Description , class Test\+Variable\+Set\+Description , class Operator\+Impl $>$ auto Spacy\+::\+Kaskade\+::make\+Linear\+Operator (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Impl \&}]{A, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
 \item[{const {\bf Vector\+Space} \&}]{range}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1Kaskade_a6bd8e1d7fdd3066ecd7ed14f0a239912}
+)}\hypertarget{namespaceSpacy_1_1Kaskade_a6bd8e1d7fdd3066ecd7ed14f0a239912}{}\label{namespaceSpacy_1_1Kaskade_a6bd8e1d7fdd3066ecd7ed14f0a239912}
 
 
 Convenient generation of a linear operator for Kaskade 7. 

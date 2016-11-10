@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zerovector',['zeroVector',['../classSpacy_1_1VectorSpace.html#a1785838bae2c19bc19b375642598d1fa',1,'Spacy::VectorSpace']]]
+  ['zero',['zero',['../namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69',1,'Spacy']]]
 ];

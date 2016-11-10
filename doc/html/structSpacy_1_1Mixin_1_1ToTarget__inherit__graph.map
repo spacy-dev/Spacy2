@@ -1,7 +1,0 @@
-<map id="Spacy::Mixin::ToTarget&lt; Derived &gt;" name="Spacy::Mixin::ToTarget&lt; Derived &gt;">
-<area shape="rect" id="node2" href="$classSpacy_1_1C1Operator.html" title="Type&#45;erased differentiable operator . " alt="" coords="237,5,379,47"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1C2Functional.html" title="Type&#45;erased twice differentiable functional . " alt="" coords="236,71,380,112"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1DynamicOperator.html" title="Type&#45;erased time&#45;dependent operator . " alt="" coords="223,136,393,177"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1IndefiniteLinearSolver.html" title="Type&#45;erased indefinite linear solver. Additionally monitors if the underlying operator is positive de..." alt="" coords="212,201,404,243"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1LinearOperator.html" title="Type&#45;erased linear operator . " alt="" coords="232,267,384,308"/>
-</map>

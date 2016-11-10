@@ -1,3 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classSpacy_1_1CopyAndClonePtr.html" title="Spacy::CopyAndClonePtr\l\&lt; Type, Deleter, class \&gt;" alt="" coords="5,5,177,47"/>
+<area shape="rect" id="node1" title="STL class. " alt="" coords="5,162,109,189"/>
+<area shape="rect" id="node2" title="STL class. " alt="" coords="157,162,281,189"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1CallOfUndefinedFunctionException.html" title="Exception to be thrown if a virtual function is not implemented. " alt="" coords="334,5,547,47"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Exception_1_1InvalidArgument.html" title="Exception to be thrown on invalid arguments. " alt="" coords="355,71,526,112"/>
+<area shape="rect" id="node5" href="$structSpacy_1_1Exception_1_1NotConverged.html" title="Exception to be thrown if an algorithm did not converge. " alt="" coords="332,137,549,163"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1GenericException.html" title="A generic exception class that serves as base for all exceptions in this library. ..." alt="" coords="355,187,526,214"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1RegularityTestFailedException.html" title="Exception to be thrown if regularity test fails. " alt="" coords="347,239,534,280"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1SingularOperatorException.html" title="Exception to be thrown if singular operators are inverted. " alt="" coords="329,305,552,331"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1IncompatibleSpaceException.html" title="Exception to be thrown when encountering incompatible spaces. " alt="" coords="600,180,779,221"/>
 </map>

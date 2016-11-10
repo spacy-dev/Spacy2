@@ -7,5 +7,5 @@
 <area shape="rect" id="node7" href="$classSpacy_1_1ProductSpace_1_1Vector.html" title="Product space vector. " alt="" coords="219,317,369,358"/>
 <area shape="rect" id="node8" href="$classSpacy_1_1Real.html" title="Real number. " alt="" coords="247,383,341,409"/>
 <area shape="rect" id="node9" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="205,433,383,460"/>
-<area shape="rect" id="node10" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Spacy::Scalar::LinearOperator" alt="" coords="195,484,393,511"/>
+<area shape="rect" id="node10" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems. " alt="" coords="195,484,393,511"/>
 </map>

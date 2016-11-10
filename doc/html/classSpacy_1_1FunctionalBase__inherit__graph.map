@@ -1,4 +1,7 @@
 <map id="Spacy::FunctionalBase" name="Spacy::FunctionalBase">
 <area shape="rect" id="node2" href="$classSpacy_1_1FEniCS_1_1C2Functional.html" title="Functional interface for FEniCS. Models a twice differentiable functional . " alt="" coords="213,5,411,47"/>
 <area shape="rect" id="node3" href="$classSpacy_1_1Kaskade_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a twice differentiable functional . " alt="" coords="211,71,413,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Rn_1_1C2Functional.html" title="Spacy::Rn::C2Functional" alt="" coords="227,137,397,163"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Rn_1_1CompositeStepFunctional.html" title="Spacy::Rn::CompositeStep\lFunctional\&lt; role \&gt;" alt="" coords="221,188,403,229"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Scalar_1_1C2Functional.html" title="Spacy::Scalar::C2Functional" alt="" coords="217,254,407,281"/>
 </map>

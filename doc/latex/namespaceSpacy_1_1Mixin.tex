@@ -8,44 +8,132 @@ Contains small independent components that are frequently used and can be added 
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classSpacy_1_1Mixin_1_1AbsoluteAccuracy}{Absolute\+Accuracy}
-\begin{DoxyCompactList}\small\item\em Mixin class for absolute accuracy. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1AdjointIndex}{Adjoint\+Index}
-\begin{DoxyCompactList}\small\item\em Mixin class for index of the adjoint variable. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1are__admissible}{are\+\_\+admissible}
+\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1are__arithmetic}{are\+\_\+arithmetic}
+\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1ContractionRate}{Contraction\+Rate}
 \begin{DoxyCompactList}\small\item\em Mixin class for contraction rates. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1ControlIndex}{Control\+Index}
-\begin{DoxyCompactList}\small\item\em Mixin class for index of the control variable. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1DampingAccuracy}{Damping\+Accuracy}
-\begin{DoxyCompactList}\small\item\em Mixin class for the accuracy of damping factors. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition}{Decrease\+Condition}
 \begin{DoxyCompactList}\small\item\em Mixin class for accepting local models $m$ of nonlinear optimization problems $\min f(x)$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Eps}{Eps}
 \begin{DoxyCompactList}\small\item\em Mixin class for maximal attainable accuracy $\varepsilon$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}
 \begin{DoxyCompactList}\small\item\em Stores an object of type Type and provides access via member function \hyperlink{classSpacy_1_1Mixin_1_1Get_aaa3afedcb9b9e943f81d1686b70417db}{get()}. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1IterativeRefinements}{Iterative\+Refinements}
-\begin{DoxyCompactList}\small\item\em Mixin class for iterative refinements. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1MaxSteps}{Max\+Steps}
-\begin{DoxyCompactList}\small\item\em Mixin class for maximal number of steps/iterations. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1MinimalAccuracy}{Minimal\+Accuracy}
-\begin{DoxyCompactList}\small\item\em Mixin class for minimal accuracy. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1HasMemFn__get}{Has\+Mem\+Fn\+\_\+get}
+\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1HasMemFn__get_3_01T_00_01void__t_3_01TryMemFn__get_3_01T_01_4_01_4_01_4}{Has\+Mem\+Fn\+\_\+get$<$ T, void\+\_\+t$<$ Try\+Mem\+Fn\+\_\+get$<$ T $>$ $>$ $>$}
+\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection}{Mixin\+Connection}
 \begin{DoxyCompactList}\small\item\em Connect objects of type Impl that provides a suitable method void update(\+Impl$\ast$) to another object of same type. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1NumberOfThreads}{Number\+Of\+Threads}
-\begin{DoxyCompactList}\small\item\em Mixin class for number of threads \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1provide__operators}{provide\+\_\+operators}
+\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1provide__operators_3_01T_01_4}{provide\+\_\+operators$<$ T $>$}
+\item 
+struct \hyperlink{structSpacy_1_1Mixin_1_1provide__operators_3_01T_00_01Ts_8_8_8_01_4}{provide\+\_\+operators$<$ T, Ts... $>$}
+\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Regularity\+Test}
 \begin{DoxyCompactList}\small\item\em Mixin class for maximal number of steps/iterations. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1RelativeAccuracy}{Relative\+Accuracy}
-\begin{DoxyCompactList}\small\item\em Mixin class for relative accuracy. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Mixin_1_1StateIndex}{State\+Index}
-\begin{DoxyCompactList}\small\item\em Mixin class for index of state variable. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Timer}{Timer}
 \begin{DoxyCompactList}\small\item\em Mixin class providing a simple timer. \end{DoxyCompactList}\item 
-struct \hyperlink{structSpacy_1_1Mixin_1_1ToTarget}{To\+Target}
-\begin{DoxyCompactList}\small\item\em Mixin class that provides a member function \hyperlink{structSpacy_1_1Mixin_1_1ToTarget_a3510786172c63a074eda127276d13392}{target()} to access type-\/erased content (see \href{http://en.cppreference.com/w/cpp/utility/functional/function/target}{\tt std\+::function\+::target()}). \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Mixin_1_1Verbosity}{Verbosity}
 \begin{DoxyCompactList}\small\item\em Mixin class for verbosity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\using {\bfseries Try\+Mem\+Fn\+\_\+get} = decltype(std\+::declval$<$ T $>$().get())\hypertarget{namespaceSpacy_1_1Mixin_a23898b82050095f41022bb7765ecdfe7}{}\label{namespaceSpacy_1_1Mixin_a23898b82050095f41022bb7765ecdfe7}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T \& {\bfseries get} (\hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&t)\hypertarget{namespaceSpacy_1_1Mixin_ae8e011b6a3a8c86985e72e90ecb50dbd}{}\label{namespaceSpacy_1_1Mixin_ae8e011b6a3a8c86985e72e90ecb50dbd}
+
+\item 
+{\footnotesize template$<$class T $>$ }\\const T \& {\bfseries get} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&t)\hypertarget{namespaceSpacy_1_1Mixin_a56dd66023bc5a5795d8caef26df24a01}{}\label{namespaceSpacy_1_1Mixin_a56dd66023bc5a5795d8caef26df24a01}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator+} (const T \&x, S y) -\/$>$ decltype(get(x)+y)\hypertarget{namespaceSpacy_1_1Mixin_a350150e68052436ddc8a683316cba5ae}{}\label{namespaceSpacy_1_1Mixin_a350150e68052436ddc8a683316cba5ae}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ provide\+\_\+operators$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\T {\bfseries operator+} (T x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a975f77a91bcd4a183664c165e2fa9562}{}\label{namespaceSpacy_1_1Mixin_a975f77a91bcd4a183664c165e2fa9562}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator-\/} (const T \&x, S y) -\/$>$ decltype(get(x)-\/y)\hypertarget{namespaceSpacy_1_1Mixin_a366404e0de77c563fa9a833de599c722}{}\label{namespaceSpacy_1_1Mixin_a366404e0de77c563fa9a833de599c722}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator-\/} (S x, const T \&y) -\/$>$ decltype(x-\/get(y))\hypertarget{namespaceSpacy_1_1Mixin_a416e48c39a8fa66363f266e6eec8abd1}{}\label{namespaceSpacy_1_1Mixin_a416e48c39a8fa66363f266e6eec8abd1}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ provide\+\_\+operators$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\T {\bfseries operator-\/} (T x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_add1dbda74b031450f9185d1c5d953053}{}\label{namespaceSpacy_1_1Mixin_add1dbda74b031450f9185d1c5d953053}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator$\ast$} (const T \&x, S y) -\/$>$ decltype(get(x)$\ast$y)\hypertarget{namespaceSpacy_1_1Mixin_afe39485e968338e160eba0ba6890184e}{}\label{namespaceSpacy_1_1Mixin_afe39485e968338e160eba0ba6890184e}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator$\ast$} (S x, const T \&y) -\/$>$ decltype(y $\ast$x)\hypertarget{namespaceSpacy_1_1Mixin_a44774a9c71e9fb5ddef14e1ec990704d}{}\label{namespaceSpacy_1_1Mixin_a44774a9c71e9fb5ddef14e1ec990704d}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ provide\+\_\+operators$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\T {\bfseries operator$\ast$} (T x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a9374d1cc530ff5071d6fbe8c0db570a9}{}\label{namespaceSpacy_1_1Mixin_a9374d1cc530ff5071d6fbe8c0db570a9}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\T {\bfseries operator/} (T x, S y)\hypertarget{namespaceSpacy_1_1Mixin_aa1143f7efd6ea450abf4cd0f5947cb91}{}\label{namespaceSpacy_1_1Mixin_aa1143f7efd6ea450abf4cd0f5947cb91}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\auto {\bfseries operator/} (S x, const T \&y) -\/$>$ decltype(x/get(y))\hypertarget{namespaceSpacy_1_1Mixin_a0700a640b80373db0c27f405c7e52e9f}{}\label{namespaceSpacy_1_1Mixin_a0700a640b80373db0c27f405c7e52e9f}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ provide\+\_\+operators$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\T {\bfseries operator/} (T x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a0c8ac4ed8b1a63bbe8ad222064f675c9}{}\label{namespaceSpacy_1_1Mixin_a0c8ac4ed8b1a63bbe8ad222064f675c9}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$} (const T \&x, S y)\hypertarget{namespaceSpacy_1_1Mixin_abaed17ac03b210fcb81ada163cbd6ac9}{}\label{namespaceSpacy_1_1Mixin_abaed17ac03b210fcb81ada163cbd6ac9}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$} (S x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a00b6bcab3cc27de1422a4c578a0d14ed}{}\label{namespaceSpacy_1_1Mixin_a00b6bcab3cc27de1422a4c578a0d14ed}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_1_1Mixin_abc3b2e9db7dc8319ff9a435dfb97dec7}{}\label{namespaceSpacy_1_1Mixin_abc3b2e9db7dc8319ff9a435dfb97dec7}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_1_1Mixin_a13fe285ef51594645d4a96734b893654}{}\label{namespaceSpacy_1_1Mixin_a13fe285ef51594645d4a96734b893654}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$=} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_1_1Mixin_a65b966bf02c25acb637530347f5cd838}{}\label{namespaceSpacy_1_1Mixin_a65b966bf02c25acb637530347f5cd838}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$=} (const T \&x, S y)\hypertarget{namespaceSpacy_1_1Mixin_a131d3aa9b0e7936adbbf96cce4d3ebc9}{}\label{namespaceSpacy_1_1Mixin_a131d3aa9b0e7936adbbf96cce4d3ebc9}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$<$=} (S x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a1591c164ff658a1b3595a682291057e2}{}\label{namespaceSpacy_1_1Mixin_a1591c164ff658a1b3595a682291057e2}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$=} (S x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a9627fef30e8c5143bbc5cb1272e58dfd}{}\label{namespaceSpacy_1_1Mixin_a9627fef30e8c5143bbc5cb1272e58dfd}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$=} (const T \&x, S y)\hypertarget{namespaceSpacy_1_1Mixin_ae70bf3841fe3482d0453353ca9c5e520}{}\label{namespaceSpacy_1_1Mixin_ae70bf3841fe3482d0453353ca9c5e520}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$=} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_1_1Mixin_a9e07ddd0d023075f79f25fa116eed519}{}\label{namespaceSpacy_1_1Mixin_a9e07ddd0d023075f79f25fa116eed519}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator==} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_1_1Mixin_a7d0e348c6ad04400c0ba6479cd36394f}{}\label{namespaceSpacy_1_1Mixin_a7d0e348c6ad04400c0ba6479cd36394f}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$} (const T \&x, S y)\hypertarget{namespaceSpacy_1_1Mixin_abe5de2f3edea6bb8b9161fedf09f4573}{}\label{namespaceSpacy_1_1Mixin_abe5de2f3edea6bb8b9161fedf09f4573}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator$>$} (S x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_a06cafb92b3ba700b94a397b212d01837}{}\label{namespaceSpacy_1_1Mixin_a06cafb92b3ba700b94a397b212d01837}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator==} (const T \&x, S y)\hypertarget{namespaceSpacy_1_1Mixin_a15ddbc2afbe2bcb2b8bf4b9a73b57e6e}{}\label{namespaceSpacy_1_1Mixin_a15ddbc2afbe2bcb2b8bf4b9a73b57e6e}
+
+\item 
+{\footnotesize template$<$class T , class S , typename std\+::enable\+\_\+if$<$ are\+\_\+admissible$<$ T, S $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\bool {\bfseries operator==} (S x, const T \&y)\hypertarget{namespaceSpacy_1_1Mixin_aba4049765948959a68991d99cc03d070}{}\label{namespaceSpacy_1_1Mixin_aba4049765948959a68991d99cc03d070}
+
+\item 
+{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Get}$<$ T $>$ \&x)\hypertarget{namespaceSpacy_1_1Mixin_a616a1dc41131de436dc2459ab6336375}{}\label{namespaceSpacy_1_1Mixin_a616a1dc41131de436dc2459ab6336375}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -53,9 +141,9 @@ Contains small independent components that are frequently used and can be added 
 
 Among the mixin components are
 \begin{DoxyItemize}
-\item components for different accuracy requirements (\hyperlink{classSpacy_1_1Mixin_1_1RelativeAccuracy}{Mixin\+::\+Relative\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1AbsoluteAccuracy}{Mixin\+::\+Absolute\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1MinimalAccuracy}{Mixin\+::\+Minimal\+Accuracy}, \hyperlink{classSpacy_1_1Mixin_1_1DampingAccuracy}{Mixin\+::\+Damping\+Accuracy})
+\item components for different accuracy requirements (Mixin\+::\+Relative\+Accuracy, Mixin\+::\+Absolute\+Accuracy, Mixin\+::\+Minimal\+Accuracy, Mixin\+::\+Damping\+Accuracy)
 \item a component for the maximal attainable accuracy (\hyperlink{classSpacy_1_1Mixin_1_1Eps}{Mixin\+::\+Eps})
-\item a component for the maximal number of steps/iterations (\hyperlink{classSpacy_1_1Mixin_1_1MaxSteps}{Mixin\+::\+Max\+Steps})
+\item a component for the maximal number of steps/iterations (Mixin\+::\+Max\+Steps)
 \item components for elementary algorithmic decisions (\hyperlink{classSpacy_1_1Mixin_1_1ContractionRate}{Mixin\+::\+Contraction\+Rate}, \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition}{Mixin\+::\+Decrease\+Condition}, \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest}{Mixin\+::\+Regularity\+Test})
 \item indices for variables in optimization and optimal control problems ... 
 \end{DoxyItemize}

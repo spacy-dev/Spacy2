@@ -1,23 +1,30 @@
 <h1>Download<br></h1>
 
-<p>Spacy is hosted on GitHub: <a href="https://github.com/lubkoll/Spacy">view on GitHub</a>.
+<p>Spacy is hosted on GitHub: <a href="https://github.com/spacy-dev/Spacy">view on GitHub</a>.
 <table>
     <tr>
         <td>Current Release:</td>
         <td><span class="spacer"></span></td>
-        <td><a href="https://github.com/lubkoll/Spacy/archive/0.2.tar.gz">Spacy-0.2.tar.gz</a></td>
+        <td><a href="https://github.com/spacy-dev/Spacy/archive/0.2.tar.gz">Spacy-0.2.tar.gz</a></td>
     </tr>
     <tr>
         <td></td>
         <td><span class="spacer"></span></td>
-        <td><a href="https://github.com/lubkoll/Spacy/archive/0.2.zip">Spacy-0.2.zip</a></td>
+        <td><a href="https://github.com/spacy-dev/Spacy/archive/0.2.zip">Spacy-0.2.zip</a></td>
     </tr>
 </table>
 </p>
 <div class="separator"></div>
 
 <h1>Dependencies</h1>
-<p>Spacy itself does not require anything than a recent C++-compiler. For testing <a href="https://github.com/google/googletest">googletest</a> is used and will be downloaded by cmake.</p>
+<p>Spacy itself does not require anything than a recent C++-compiler with support for C++14. For testing <a href="https://github.com/google/googletest">googletest</a> is used and will be downloaded by cmake.</p>
+<p>The interfaces in Spacy are automatically generated using <a href='https://github.com/lubkoll/friendly-type-erasure'>friendly type erasure</a>. In case you want to modify the interfaces or want to 
+adjust the buffer size for small buffer optimization you need:
+<ul>
+<li>python2</li>
+<li>libclang with python-bindings</li>
+</ul>
+</p>
 <div class="separator"></div>
 
 <h1>Installation<br></h1>

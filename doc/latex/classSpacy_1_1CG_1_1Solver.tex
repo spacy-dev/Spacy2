@@ -1,4 +1,4 @@
-\hypertarget{classSpacy_1_1CG_1_1Solver}{}\section{Spacy\+:\+:C\+G\+:\+:Solver Class Reference}
+\hypertarget{classSpacy_1_1CG_1_1Solver}{}\section{Spacy\+:\+:CG\+:\+:Solver Class Reference}
 \label{classSpacy_1_1CG_1_1Solver}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
 
 
@@ -11,7 +11,8 @@ Conjugate gradient method.
 
 
 
-Inheritance diagram for Spacy\+:\+:C\+G\+:\+:Solver\+:\nopagebreak
+Inheritance diagram for Spacy\+:\+:CG\+:\+:Solver\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Spacy\+:\+:C\+G\+:\+:Solver\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Spacy\+:\+:C\+G\+:\+:Solver\+:\nopagebreak
+Collaboration diagram for Spacy\+:\+:CG\+:\+:Solver\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,140 +32,65 @@ Collaboration diagram for Spacy\+:\+:C\+G\+:\+:Solver\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}{Solver} (Callable\+Operator \hyperlink{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{A}, Callable\+Operator \hyperlink{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{P}, const std\+::string \&type=\char`\"{}C\+G\char`\"{})
+\hyperlink{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}{Solver} (\hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} \hyperlink{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{A}, \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} \hyperlink{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{P}, const std\+::string \&type=\char`\"{}CG\char`\"{})
 \begin{DoxyCompactList}\small\item\em Set up conjugate gradient solver. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab}{solve} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&b) const 
 \item 
 {\footnotesize template$<$class Criterion $>$ }\\void \hyperlink{classSpacy_1_1CG_1_1Solver_a7fe2345e859b267c86acff9f3920db3b}{set\+Termination\+Criterion} (Criterion new\+Terminate)
-\begin{DoxyCompactList}\small\item\em Set a new termination criterion which must satisfy the \hyperlink{group__ConceptGroup_CG_TerminationCriterionConceptAnchor}{Termination\+Criterion\+Concept}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set a new termination criterion which must satisfy the Termination\+Criterion\+Concept. \end{DoxyCompactList}\item 
 bool \hyperlink{classSpacy_1_1CG_1_1Solver_ae0b6c7b754e093610df6d67bf3067acf}{indefinite\+Operator} () const noexcept
 \begin{DoxyCompactList}\small\item\em After solving an equation reports if the underlying operator is indefinite. \end{DoxyCompactList}\item 
 void \hyperlink{classSpacy_1_1CG_1_1Solver_a4009b5e2062e4930f0cfdc9d979c7b80}{set\+Type} (const std\+::string \&other\+Type)
 \begin{DoxyCompactList}\small\item\em Change conjugate gradient implementation. \end{DoxyCompactList}\item 
-const Callable\+Operator \& \hyperlink{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{P} () const 
+const \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} \& \hyperlink{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{P} () const 
 \begin{DoxyCompactList}\small\item\em Access preconditioner. \end{DoxyCompactList}\item 
-const Callable\+Operator \& \hyperlink{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{A} () const 
+const \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} \& \hyperlink{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{A} () const 
 \begin{DoxyCompactList}\small\item\em Access operator. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_a71cfcdc0c504be63c18c3e78df157738}{}void {\bfseries set\+Absolute\+Accuracy} (double accuracy)\label{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_a71cfcdc0c504be63c18c3e78df157738}
+void {\bfseries set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}{}\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}
 
 \item 
-\hypertarget{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_ad099a4a0a770133b56acaaf8783d4ba6}{}void {\bfseries set\+Absolute\+Accuracy} (\hyperlink{classSpacy_1_1Real}{Real} accuracy)\label{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_ad099a4a0a770133b56acaaf8783d4ba6}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_aaa1fbd611cf85a098b71c22986778d8a}{}double {\bfseries absolute\+Accuracy} () const noexcept\label{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_aaa1fbd611cf85a098b71c22986778d8a}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_a7e5910ba9a6ac7a4b332efdbbff27787}{}void \hyperlink{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_a7e5910ba9a6ac7a4b332efdbbff27787}{update} (Absolute\+Accuracy $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1AbsoluteAccuracy_a7e5910ba9a6ac7a4b332efdbbff27787}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (Absolute\+Accuracy \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
-
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (Absolute\+Accuracy \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
-
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
-
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RelativeAccuracy_aee88b71e80aca446a179f1310408a1e3}{}void {\bfseries set\+Relative\+Accuracy} (double accuracy)\label{classSpacy_1_1Mixin_1_1RelativeAccuracy_aee88b71e80aca446a179f1310408a1e3}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RelativeAccuracy_a1da618cf9265c2edae354524df4a7f8a}{}double {\bfseries relative\+Accuracy} () const noexcept\label{classSpacy_1_1Mixin_1_1RelativeAccuracy_a1da618cf9265c2edae354524df4a7f8a}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RelativeAccuracy_acf0b58224d9a2879d05b5d2947f37527}{}void \hyperlink{classSpacy_1_1Mixin_1_1RelativeAccuracy_acf0b58224d9a2879d05b5d2947f37527}{update} (Relative\+Accuracy $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1RelativeAccuracy_acf0b58224d9a2879d05b5d2947f37527}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (Relative\+Accuracy \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
-
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (Relative\+Accuracy \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
-
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
-
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}{}void {\bfseries set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}
 
 \begin{DoxyCompactList}\small\item\em Access $\varepsilon$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{}\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}
 
 \begin{DoxyCompactList}\small\item\em Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{}double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{}\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}
 
 \begin{DoxyCompactList}\small\item\em Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
 
 \begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
 
 \begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
 
 \begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
-
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1IterativeRefinements_afd8815d6932a99b1700f54162d9f633e}{}void {\bfseries set\+Iterative\+Refinements} (unsigned refinements)\label{classSpacy_1_1Mixin_1_1IterativeRefinements_afd8815d6932a99b1700f54162d9f633e}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1IterativeRefinements_a560cd9428928c941765b71dd7c51ae3b}{}unsigned {\bfseries iterative\+Refinements} () const \label{classSpacy_1_1Mixin_1_1IterativeRefinements_a560cd9428928c941765b71dd7c51ae3b}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1IterativeRefinements_adcb6062728331e48515a05f539628062}{}void \hyperlink{classSpacy_1_1Mixin_1_1IterativeRefinements_adcb6062728331e48515a05f539628062}{update} (Iterative\+Refinements $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1IterativeRefinements_adcb6062728331e48515a05f539628062}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (Iterative\+Refinements \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
-
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (Iterative\+Refinements \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
-
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
 
 \begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
 void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{set\+Verbosity} (bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose})
 \begin{DoxyCompactList}\small\item\em Enable/disable verbosity. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{}bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose} () const noexcept\label{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}
+bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}
 
 \begin{DoxyCompactList}\small\item\em Check if verbosity\+Level $>$ 0. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}{}void {\bfseries set\+Verbosity\+Level} (unsigned level) noexcept\label{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}
+void {\bfseries set\+Verbosity\+Level} (unsigned level) noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}{}\label{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}
 
 \item 
-\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a2131f495d276c95d2d6534a6dfce6f9f}{}unsigned \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a2131f495d276c95d2d6534a6dfce6f9f}{verbosity\+Level} () const noexcept\label{classSpacy_1_1Mixin_1_1Verbosity_a2131f495d276c95d2d6534a6dfce6f9f}
+unsigned \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{get\+Verbosity\+Level} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}
 
 \begin{DoxyCompactList}\small\item\em Access verbosity level. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{}void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}
+void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}
 
 \begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
 
 \begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
 
 \begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
-
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MaxSteps_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9}{}void {\bfseries set\+Max\+Steps} (unsigned max\+Steps)\label{classSpacy_1_1Mixin_1_1MaxSteps_a72f0b7eb50c9a017b5f5e6c2ccf7dfd9}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977}{}unsigned {\bfseries max\+Steps} () const noexcept\label{classSpacy_1_1Mixin_1_1MaxSteps_aaeb0b209c78e7b8dd9b268641ce11977}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MaxSteps_a8e0f4d29b15dff17d4503788a9e2e081}{}void \hyperlink{classSpacy_1_1Mixin_1_1MaxSteps_a8e0f4d29b15dff17d4503788a9e2e081}{update} (Max\+Steps $\ast$changed\+Subject)\label{classSpacy_1_1Mixin_1_1MaxSteps_a8e0f4d29b15dff17d4503788a9e2e081}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (Max\+Steps \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
-
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (Max\+Steps \&observer)\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
-
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
 
 \begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -171,7 +98,7 @@ void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020ae
 \subsection{Detailed Description}
 Conjugate gradient method. 
 
-This implements a preconditioned \hyperlink{namespaceSpacy_1_1CG}{C\+G} iteration for an operator $ A: X\to x^* $, preconditioned by a preconditioner $ B^{-1}: X^* \to X $. The default termination criterion is based on an estimate of the relative energy error (see Strakos\+Tichy\+Energy\+Error).
+This implements a preconditioned \hyperlink{namespaceSpacy_1_1CG}{CG} iteration for an operator $ A: X\to x^* $, preconditioned by a preconditioner $ B^{-1}: X^* \to X $. The default termination criterion is based on an estimate of the relative energy error (see Strakos\+Tichy\+Energy\+Error).
 
 Different implementations are available\+:
 
@@ -179,20 +106,20 @@ Different implementations are available\+:
 \begin{DoxyItemize}
 \item \char`\"{}\+C\+G\char`\"{}\+: Standard preconditioned conjugate gradient method (see \cite{Hestenes1952}).
 \item \char`\"{}\+T\+C\+G\char`\"{}\+: Truncated preconditioned conjugate gradient method for nonconvex problems. Stops iteration if a direction of negative curvature is encountered.
-\item \char`\"{}\+R\+C\+G\char`\"{}\+: Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by $A$ and the preconditioner by $P$. Then if a direction of negative curvature is encountered $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{C\+G} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.
-\item \char`\"{}\+T\+R\+C\+G\char`\"{}\+: Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by $A$ and the preconditioner by $P$, $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{C\+G} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see \cite{Lubkoll2015a}). 
+\item \char`\"{}\+R\+C\+G\char`\"{}\+: Regularized preconditioned conjugate gradient method for nonconvex problems. Denote the used operator by $A$ and the preconditioner by $P$. Then if a direction of negative curvature is encountered $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{CG} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible.
+\item \char`\"{}\+T\+R\+C\+G\char`\"{}\+: Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by $A$ and the preconditioner by $P$, $A$ is implicitly replaced by the regularization \$ $A+\thetaP$. Then the \hyperlink{namespaceSpacy_1_1CG}{CG} method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see \cite{Lubkoll2015a}). 
 \end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!Solver@{Solver}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!Solver@{Solver}}
 \index{Solver@{Solver}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{Solver}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+C\+G\+::\+Solver\+::\+Solver (
+\subsubsection[{\texorpdfstring{Solver(\+Callable\+Operator A, Callable\+Operator P, const std\+::string \&type=""CG"")}{Solver(CallableOperator A, CallableOperator P, const std::string &type="CG")}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+C\+G\+::\+Solver\+::\+Solver (
 \begin{DoxyParamCaption}
-\item[{Callable\+Operator}]{A, }
-\item[{Callable\+Operator}]{P, }
+\item[{{\bf Callable\+Operator}}]{A, }
+\item[{{\bf Callable\+Operator}}]{P, }
 \item[{const std\+::string \&}]{type = {\ttfamily \char`\"{}CG\char`\"{}}}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}
+)}\hypertarget{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}{}\label{classSpacy_1_1CG_1_1Solver_a4b6e80b42da6ee9a64cbd07f85964cd5}
 
 
 Set up conjugate gradient solver. 
@@ -209,14 +136,14 @@ Set up conjugate gradient solver.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!solve@{solve}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!solve@{solve}}
 \index{solve@{solve}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{solve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+C\+G\+::\+Solver\+::solve (
+\subsubsection[{\texorpdfstring{solve(const Vector \&x, const Vector \&b) const }{solve(const Vector &x, const Vector &b) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+C\+G\+::\+Solver\+::solve (
 \begin{DoxyParamCaption}
 \item[{const {\bf Vector} \&}]{x, }
 \item[{const {\bf Vector} \&}]{b}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab}
+) const}\hypertarget{classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab}{}\label{classSpacy_1_1CG_1_1Solver_a23770606bb41f2d8f5a6ae71d07934ab}
 
 \begin{DoxyParams}{Parameters}
 {\em x} & initial guess \\
@@ -224,29 +151,29 @@ Set up conjugate gradient solver.
 {\em b} & right hand side \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a7fe2345e859b267c86acff9f3920db3b}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Termination\+Criterion@{set\+Termination\+Criterion}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Termination\+Criterion@{set\+Termination\+Criterion}}
 \index{set\+Termination\+Criterion@{set\+Termination\+Criterion}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{set\+Termination\+Criterion}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Criterion $>$ void Spacy\+::\+C\+G\+::\+Solver\+::set\+Termination\+Criterion (
+\subsubsection[{\texorpdfstring{set\+Termination\+Criterion(\+Criterion new\+Terminate)}{setTerminationCriterion(Criterion newTerminate)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Criterion $>$ void Spacy\+::\+C\+G\+::\+Solver\+::set\+Termination\+Criterion (
 \begin{DoxyParamCaption}
 \item[{Criterion}]{new\+Terminate}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1CG_1_1Solver_a7fe2345e859b267c86acff9f3920db3b}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1CG_1_1Solver_a7fe2345e859b267c86acff9f3920db3b}{}\label{classSpacy_1_1CG_1_1Solver_a7fe2345e859b267c86acff9f3920db3b}
 
 
-Set a new termination criterion which must satisfy the \hyperlink{group__ConceptGroup_CG_TerminationCriterionConceptAnchor}{Termination\+Criterion\+Concept}. 
+Set a new termination criterion which must satisfy the Termination\+Criterion\+Concept. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em new\+Terminate} & new termination criterion \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1CG_1_1Solver_ae0b6c7b754e093610df6d67bf3067acf}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!indefinite\+Operator@{indefinite\+Operator}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!indefinite\+Operator@{indefinite\+Operator}}
 \index{indefinite\+Operator@{indefinite\+Operator}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{indefinite\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+C\+G\+::\+Solver\+::indefinite\+Operator (
+\subsubsection[{\texorpdfstring{indefinite\+Operator() const noexcept}{indefiniteOperator() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+C\+G\+::\+Solver\+::indefinite\+Operator (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1CG_1_1Solver_ae0b6c7b754e093610df6d67bf3067acf}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1Solver_ae0b6c7b754e093610df6d67bf3067acf}{}\label{classSpacy_1_1CG_1_1Solver_ae0b6c7b754e093610df6d67bf3067acf}
 
 
 After solving an equation reports if the underlying operator is indefinite. 
@@ -254,13 +181,13 @@ After solving an equation reports if the underlying operator is indefinite.
 \begin{DoxyReturn}{Returns}
 true\+: if $A$ is indefinite, else false 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a4009b5e2062e4930f0cfdc9d979c7b80}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Type@{set\+Type}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Type@{set\+Type}}
 \index{set\+Type@{set\+Type}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{set\+Type}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+C\+G\+::\+Solver\+::set\+Type (
+\subsubsection[{\texorpdfstring{set\+Type(const std\+::string \&other\+Type)}{setType(const std::string &otherType)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+C\+G\+::\+Solver\+::set\+Type (
 \begin{DoxyParamCaption}
 \item[{const std\+::string \&}]{other\+Type}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1CG_1_1Solver_a4009b5e2062e4930f0cfdc9d979c7b80}
+)}\hypertarget{classSpacy_1_1CG_1_1Solver_a4009b5e2062e4930f0cfdc9d979c7b80}{}\label{classSpacy_1_1CG_1_1Solver_a4009b5e2062e4930f0cfdc9d979c7b80}
 
 
 Change conjugate gradient implementation. 
@@ -270,13 +197,13 @@ Change conjugate gradient implementation.
 {\em other\+Type} & conjugate gradient type (\char`\"{}\+C\+G\char`\"{}, \char`\"{}\+R\+C\+G\char`\"{}, \char`\"{}\+T\+C\+G\char`\"{} or \char`\"{}\+T\+R\+C\+G\char`\"{}) \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!P@{P}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!P@{P}}
 \index{P@{P}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{P}]{\setlength{\rightskip}{0pt plus 5cm}const Callable\+Operator\& Spacy\+::\+C\+G\+::\+Solver\+::\+P (
+\subsubsection[{\texorpdfstring{P() const }{P() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Callable\+Operator}\& Spacy\+::\+C\+G\+::\+Solver\+::P (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}
+) const}\hypertarget{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}{}\label{classSpacy_1_1CG_1_1Solver_a929d2b9deecfd96ef7efb8097e567f37}
 
 
 Access preconditioner. 
@@ -284,13 +211,13 @@ Access preconditioner.
 \begin{DoxyReturn}{Returns}
 preconditioner $P$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!A@{A}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!A@{A}}
 \index{A@{A}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{A}]{\setlength{\rightskip}{0pt plus 5cm}const Callable\+Operator\& Spacy\+::\+C\+G\+::\+Solver\+::\+A (
+\subsubsection[{\texorpdfstring{A() const }{A() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Callable\+Operator}\& Spacy\+::\+C\+G\+::\+Solver\+::A (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}
+) const}\hypertarget{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}{}\label{classSpacy_1_1CG_1_1Solver_a9b0fa76350c42fb60b2fbeb40b343fa2}
 
 
 Access operator. 
@@ -298,13 +225,13 @@ Access operator.
 \begin{DoxyReturn}{Returns}
 operator $A$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{}\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Verbosity@{set\+Verbosity}}
+\index{Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}!set\+Verbosity@{set\+Verbosity}}
 \index{set\+Verbosity@{set\+Verbosity}!Spacy\+::\+C\+G\+::\+Solver@{Spacy\+::\+C\+G\+::\+Solver}}
-\subsubsection[{set\+Verbosity}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Verbosity\+::set\+Verbosity (
+\subsubsection[{\texorpdfstring{set\+Verbosity(bool verbose)}{setVerbosity(bool verbose)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Verbosity\+::set\+Verbosity (
 \begin{DoxyParamCaption}
 \item[{bool}]{verbose}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inherited]}}\label{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}
 
 
 Enable/disable verbosity. 
@@ -318,4 +245,4 @@ Enable/disable verbosity.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Algorithm/\+C\+G/cg.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Spacy/\+Algorithm/\+C\+G/cg.\+hh\end{DoxyCompactItemize}

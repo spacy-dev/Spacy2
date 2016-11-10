@@ -4,10 +4,14 @@ var searchData=
   ['parameter',['Parameter',['../structSpacy_1_1Newton_1_1Parameter.html',1,'Spacy::Newton']]],
   ['parameter',['Parameter',['../classSpacy_1_1Parameter.html',1,'Spacy']]],
   ['pow',['pow',['../namespaceSpacy.html#acffef7eb409609abe7ad87aaad28503f',1,'Spacy']]],
-  ['previous',['previous',['../classSpacy_1_1LipschitzConstant.html#a3a91ae4dea16ff7e83f1d51797145cbd',1,'Spacy::LipschitzConstant']]],
+  ['previous',['previous',['../classSpacy_1_1LipschitzConstant.html#aa4fc084b53474a9e6a0eb651f408add7',1,'Spacy::LipschitzConstant']]],
   ['primalcomponent',['primalComponent',['../group__ProductSpaceGroup.html#gaa040ba5c24284687e0df19c99dd688a6',1,'Spacy::primalComponent(::Spacy::Vector &amp;v)'],['../group__ProductSpaceGroup.html#ga88c5bcc74072f75c63ab7d9448f80a7e',1,'Spacy::primalComponent(const ::Spacy::Vector &amp;v)']]],
-  ['primalinducedscalarproduct',['PrimalInducedScalarProduct',['../classSpacy_1_1PrimalInducedScalarProduct.html#acfea3362a4d59ae0c689bd525870d830',1,'Spacy::PrimalInducedScalarProduct']]],
   ['primalinducedscalarproduct',['PrimalInducedScalarProduct',['../classSpacy_1_1PrimalInducedScalarProduct.html',1,'Spacy']]],
+  ['primalinducedscalarproduct',['PrimalInducedScalarProduct',['../classSpacy_1_1PrimalInducedScalarProduct.html#acfea3362a4d59ae0c689bd525870d830',1,'Spacy::PrimalInducedScalarProduct']]],
   ['printelapsedtime',['printElapsedTime',['../classSpacy_1_1Mixin_1_1Timer.html#a3b79b35213702118d0823f6040d5a315',1,'Spacy::Mixin::Timer']]],
-  ['product_20space',['Product Space',['../group__ProductSpaceGroup.html',1,'']]]
+  ['printer',['Printer',['../classSpacy_1_1Log_1_1Printer.html',1,'Spacy::Log']]],
+  ['product_20space',['Product Space',['../group__ProductSpaceGroup.html',1,'']]],
+  ['provide_5foperators',['provide_operators',['../structSpacy_1_1Mixin_1_1provide__operators.html',1,'Spacy::Mixin']]],
+  ['provide_5foperators_3c_20t_20_3e',['provide_operators&lt; T &gt;',['../structSpacy_1_1Mixin_1_1provide__operators_3_01T_01_4.html',1,'Spacy::Mixin']]],
+  ['provide_5foperators_3c_20t_2c_20ts_2e_2e_2e_20_3e',['provide_operators&lt; T, Ts... &gt;',['../structSpacy_1_1Mixin_1_1provide__operators_3_01T_00_01Ts_8_8_8_01_4.html',1,'Spacy::Mixin']]]
 ];

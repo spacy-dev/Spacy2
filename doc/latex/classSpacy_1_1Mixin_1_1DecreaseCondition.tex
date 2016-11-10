@@ -11,27 +11,28 @@ Mixin class for accepting local models $m$ of nonlinear optimization problems $\
 
 
 
-Inheritance diagram for Spacy\+:\+:Mixin\+:\+:Decrease\+Condition\+:\nopagebreak
+Inheritance diagram for Spacy\+:\+:Mixin\+:\+:Decrease\+Condition\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=243pt]{classSpacy_1_1Mixin_1_1DecreaseCondition__inherit__graph}
+\includegraphics[width=344pt]{classSpacy_1_1Mixin_1_1DecreaseCondition__inherit__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_abc3d63e53f4f7a81110a3b261e12c071}{Decrease\+Condition} (\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}{minimal\+Decrease}=0.\+5, \hyperlink{classSpacy_1_1Real}{Real} relaxed\+Minimal\+Decrease=0.\+1) noexcept
+\hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a84c30dd2da669f79e5a771ffaa51874c}{Decrease\+Condition} (double \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}{minimal\+Decrease}=0.\+05, double relaxed\+Minimal\+Decrease=0.\+01) noexcept
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}{set\+Minimal\+Decrease} (\hyperlink{classSpacy_1_1Real}{Real} decrease) noexcept
+void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}{set\+Minimal\+Decrease} (double decrease) noexcept
 \begin{DoxyCompactList}\small\item\em Set required minimal decrease. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}{minimal\+Decrease} () const noexcept
+double \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}{minimal\+Decrease} () const noexcept
 \begin{DoxyCompactList}\small\item\em Access minimal decrease. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}{set\+Relaxed\+Minimal\+Decrease} (\hyperlink{classSpacy_1_1Real}{Real} decrease) noexcept
+void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}{set\+Relaxed\+Minimal\+Decrease} (double decrease) noexcept
 \begin{DoxyCompactList}\small\item\em Set relaxed minimal decrease. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}{acceptable\+Decrease} (\hyperlink{classSpacy_1_1Real}{Real} decrease) const noexcept
+bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}{acceptable\+Decrease} (double decrease) const noexcept
 \begin{DoxyCompactList}\small\item\em Decide if measure relative decrease is acceptable. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}{acceptable\+Relaxed\+Decrease} (\hyperlink{classSpacy_1_1Real}{Real} decrease) const noexcept
+bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}{acceptable\+Relaxed\+Decrease} (double decrease) const noexcept
 \begin{DoxyCompactList}\small\item\em Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -39,14 +40,14 @@ bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a
 Mixin class for accepting local models $m$ of nonlinear optimization problems $\min f(x)$. 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_abc3d63e53f4f7a81110a3b261e12c071}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!Decrease\+Condition@{Decrease\+Condition}}
+\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!Decrease\+Condition@{Decrease\+Condition}}
 \index{Decrease\+Condition@{Decrease\+Condition}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{Decrease\+Condition}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::\+Decrease\+Condition (
+\subsubsection[{\texorpdfstring{Decrease\+Condition(double minimal\+Decrease=0.\+05, double relaxed\+Minimal\+Decrease=0.\+01) noexcept}{DecreaseCondition(double minimalDecrease=0.05, double relaxedMinimalDecrease=0.01) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::\+Decrease\+Condition (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{minimal\+Decrease = {\ttfamily 0.5}, }
-\item[{{\bf Real}}]{relaxed\+Minimal\+Decrease = {\ttfamily 0.1}}
+\item[{double}]{minimal\+Decrease = {\ttfamily 0.05}, }
+\item[{double}]{relaxed\+Minimal\+Decrease = {\ttfamily 0.01}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_abc3d63e53f4f7a81110a3b261e12c071}
+)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a84c30dd2da669f79e5a771ffaa51874c}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a84c30dd2da669f79e5a771ffaa51874c}
 
 
 Constructor. 
@@ -61,13 +62,13 @@ Constructor.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!set\+Minimal\+Decrease@{set\+Minimal\+Decrease}}
+\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!set\+Minimal\+Decrease@{set\+Minimal\+Decrease}}
 \index{set\+Minimal\+Decrease@{set\+Minimal\+Decrease}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{set\+Minimal\+Decrease}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Minimal\+Decrease (
+\subsubsection[{\texorpdfstring{set\+Minimal\+Decrease(double decrease) noexcept}{setMinimalDecrease(double decrease) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Minimal\+Decrease (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{decrease}
+\item[{double}]{decrease}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}
 
 
 Set required minimal decrease. 
@@ -77,13 +78,13 @@ Set required minimal decrease.
 {\em decrease} & minimal required decrease \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!minimal\+Decrease@{minimal\+Decrease}}
+\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!minimal\+Decrease@{minimal\+Decrease}}
 \index{minimal\+Decrease@{minimal\+Decrease}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{minimal\+Decrease}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Real} Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::minimal\+Decrease (
+\subsubsection[{\texorpdfstring{minimal\+Decrease() const noexcept}{minimalDecrease() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::minimal\+Decrease (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}
 
 
 Access minimal decrease. 
@@ -91,13 +92,13 @@ Access minimal decrease.
 \begin{DoxyReturn}{Returns}
 minimal decrease 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!set\+Relaxed\+Minimal\+Decrease@{set\+Relaxed\+Minimal\+Decrease}}
+\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!set\+Relaxed\+Minimal\+Decrease@{set\+Relaxed\+Minimal\+Decrease}}
 \index{set\+Relaxed\+Minimal\+Decrease@{set\+Relaxed\+Minimal\+Decrease}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{set\+Relaxed\+Minimal\+Decrease}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Relaxed\+Minimal\+Decrease (
+\subsubsection[{\texorpdfstring{set\+Relaxed\+Minimal\+Decrease(double decrease) noexcept}{setRelaxedMinimalDecrease(double decrease) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Relaxed\+Minimal\+Decrease (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{decrease}
+\item[{double}]{decrease}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}
 
 
 Set relaxed minimal decrease. 
@@ -107,13 +108,13 @@ Set relaxed minimal decrease.
 {\em decrease} & relaxed required decrease\\
 \hline
 \end{DoxyParams}
-This is used for deciding about rejecting tangential steps in Composite\+Steps\+::\+Affine\+Covariant\+Solver. \hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!acceptable\+Decrease@{acceptable\+Decrease}}
+This is used for deciding about rejecting tangential steps in Composite\+Steps\+::\+Affine\+Covariant\+Solver. \index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!acceptable\+Decrease@{acceptable\+Decrease}}
 \index{acceptable\+Decrease@{acceptable\+Decrease}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{acceptable\+Decrease}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Decrease (
+\subsubsection[{\texorpdfstring{acceptable\+Decrease(double decrease) const noexcept}{acceptableDecrease(double decrease) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Decrease (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{decrease}
+\item[{double}]{decrease}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}
 
 
 Decide if measure relative decrease is acceptable. 
@@ -123,13 +124,13 @@ Decide if measure relative decrease is acceptable.
 {\em decrease} & measured relative decrease $\delta m/\delta f$. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}{}\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!acceptable\+Relaxed\+Decrease@{acceptable\+Relaxed\+Decrease}}
+\index{Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}!acceptable\+Relaxed\+Decrease@{acceptable\+Relaxed\+Decrease}}
 \index{acceptable\+Relaxed\+Decrease@{acceptable\+Relaxed\+Decrease}!Spacy\+::\+Mixin\+::\+Decrease\+Condition@{Spacy\+::\+Mixin\+::\+Decrease\+Condition}}
-\subsubsection[{acceptable\+Relaxed\+Decrease}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Relaxed\+Decrease (
+\subsubsection[{\texorpdfstring{acceptable\+Relaxed\+Decrease(double decrease) const noexcept}{acceptableRelaxedDecrease(double decrease) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Relaxed\+Decrease (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{decrease}
+\item[{double}]{decrease}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}
 
 
 Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. 
@@ -143,4 +144,4 @@ Decide if measure relative decrease is acceptable with respect to the relaxed de
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Util/\+Mixins/decrease\+Condition.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Spacy/\+Util/\+Mixins/decrease\+Condition.\+hh\end{DoxyCompactItemize}

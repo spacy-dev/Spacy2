@@ -1,20 +1,10 @@
 var searchData=
 [
-  ['l2product',['l2Product',['../classSpacy_1_1FEniCS_1_1l2Product.html',1,'Spacy::FEniCS']]],
-  ['l2product',['l2Product',['../classSpacy_1_1Kaskade_1_1l2Product.html',1,'Spacy::Kaskade']]],
-  ['linearoperator',['LinearOperator',['../classSpacy_1_1FEniCS_1_1LinearOperator.html',1,'Spacy::FEniCS']]],
-  ['linearoperator',['LinearOperator',['../classSpacy_1_1Kaskade_1_1LinearOperator.html',1,'Spacy::Kaskade']]],
-  ['linearoperator',['LinearOperator',['../classSpacy_1_1Rn_1_1LinearOperator.html',1,'Spacy::Rn']]],
-  ['linearoperator',['LinearOperator',['../structSpacy_1_1Scalar_1_1LinearOperator.html',1,'Spacy::Scalar']]],
-  ['linearoperator',['LinearOperator',['../classSpacy_1_1LinearOperator.html',1,'Spacy']]],
-  ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Kaskade_1_1LinearOperatorCreator.html',1,'Spacy::Kaskade']]],
-  ['linearoperatorcreator',['LinearOperatorCreator',['../structSpacy_1_1Rn_1_1LinearOperatorCreator.html',1,'Spacy::Rn']]],
-  ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1FEniCS_1_1LinearOperatorCreator.html',1,'Spacy::FEniCS']]],
-  ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Generic_1_1LinearOperatorCreator.html',1,'Spacy::Generic']]],
-  ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Scalar_1_1LinearOperatorCreator.html',1,'Spacy::Scalar']]],
-  ['linearsolver',['LinearSolver',['../classSpacy_1_1Scalar_1_1LinearSolver.html',1,'Spacy::Scalar']]],
-  ['linearsolver',['LinearSolver',['../classSpacy_1_1CG_1_1LinearSolver.html',1,'Spacy::CG']]],
-  ['linearsolver',['LinearSolver',['../classSpacy_1_1Rn_1_1LinearSolver.html',1,'Spacy::Rn']]],
-  ['lipschitzconstant',['LipschitzConstant',['../classSpacy_1_1LipschitzConstant.html',1,'Spacy']]],
-  ['lusolver',['LUSolver',['../classSpacy_1_1FEniCS_1_1LUSolver.html',1,'Spacy::FEniCS']]]
+  ['ignore',['Ignore',['../structSpacy_1_1Generic_1_1Ignore.html',1,'Spacy::Generic']]],
+  ['incompatiblespaceexception',['IncompatibleSpaceException',['../classSpacy_1_1IncompatibleSpaceException.html',1,'Spacy']]],
+  ['indefinitelinearsolver',['IndefiniteLinearSolver',['../classSpacy_1_1IndefiniteLinearSolver.html',1,'Spacy']]],
+  ['inducedscalarproduct',['InducedScalarProduct',['../classSpacy_1_1InducedScalarProduct.html',1,'Spacy']]],
+  ['invalidargument',['InvalidArgument',['../classSpacy_1_1Exception_1_1InvalidArgument.html',1,'Spacy::Exception']]],
+  ['isvoid',['IsVoid',['../structSpacy_1_1IsVoid.html',1,'Spacy']]],
+  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html',1,'Spacy::Generic']]]
 ];

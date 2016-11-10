@@ -5,7 +5,8 @@
 Collection of available vector spaces.  
 
 
-Collaboration diagram for Vector Spaces\+:\nopagebreak
+Collaboration diagram for Vector Spaces\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,16 +24,16 @@ Collaboration diagram for Vector Spaces\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classSpacy_1_1FEniCS_1_1Vector}{Spacy\+::\+F\+Eni\+C\+S\+::\+Vector}
-\begin{DoxyCompactList}\small\item\em Vector implementation for F\+Eni\+C\+S (single space). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Vector implementation for F\+Eni\+CS (single space). \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator}{Spacy\+::\+F\+Eni\+C\+S\+::\+Vector\+Creator}
-\begin{DoxyCompactList}\small\item\em Creator for vector space elements for F\+Eni\+C\+S. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creator for vector space elements for F\+Eni\+CS. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Kaskade_1_1Vector}{Spacy\+::\+Kaskade\+::\+Vector$<$ Description $>$}
+\begin{DoxyCompactList}\small\item\em Coefficient vector implementation for Kaskade 7 (single space). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 using \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{Spacy\+::\+Rn\+::\+Vector} = Generic\+::\+Vector$<$ \+::Eigen\+::\+Vector\+Xd $>$
-\begin{DoxyCompactList}\small\item\em Vector for Rn, based on the Eigen library. \end{DoxyCompactList}\item 
-using \hyperlink{group__VectorSpaceGroup_gab3b27cb653ec69d12c809394126b046a}{Spacy\+::\+Rn\+::\+Vector\+Creator} = Generic\+::\+Vector\+Creator$<$ \+::Eigen\+::\+Vector\+Xd $>$
-\begin{DoxyCompactList}\small\item\em Vector creator for Rn, based on the Eigen library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Vector for Rn, based on the Eigen library. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,30 +51,23 @@ Collection of available vector spaces.
 Contains models for one-\/dimensional and product spaces as well as vector spaces for F\+Enics and Kaskade 7. 
 
 \subsection{Typedef Documentation}
-\hypertarget{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{}\index{Vector Spaces@{Vector Spaces}!Vector@{Vector}}
+\index{Vector Spaces@{Vector Spaces}!Vector@{Vector}}
 \index{Vector@{Vector}!Vector Spaces@{Vector Spaces}}
-\subsubsection[{Vector}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Rn\+::\+Vector} = typedef Generic\+::\+Vector$<$ \+::Eigen\+::\+Vector\+Xd $>$}\label{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}
+\subsubsection[{\texorpdfstring{Vector}{Vector}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Rn\+::\+Vector} = typedef Generic\+::\+Vector$<$ \+::Eigen\+::\+Vector\+Xd $>$}\hypertarget{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{}\label{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}
 
 
 Vector for Rn, based on the Eigen library. 
 
-, \hypertarget{group__VectorSpaceGroup_gab3b27cb653ec69d12c809394126b046a}{}\index{Vector Spaces@{Vector Spaces}!Vector\+Creator@{Vector\+Creator}}
-\index{Vector\+Creator@{Vector\+Creator}!Vector Spaces@{Vector Spaces}}
-\subsubsection[{Vector\+Creator}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Rn\+::\+Vector\+Creator} = typedef Generic\+::\+Vector\+Creator$<$ \+::Eigen\+::\+Vector\+Xd $>$}\label{group__VectorSpaceGroup_gab3b27cb653ec69d12c809394126b046a}
-
-
-Vector creator for Rn, based on the Eigen library. 
-
 , 
 
 \subsection{Function Documentation}
-\hypertarget{group__VectorSpaceGroup_ga89de372343310640870077e6167df3f4}{}\index{Vector Spaces@{Vector Spaces}!Vector\+Creator@{Vector\+Creator}}
+\index{Vector Spaces@{Vector Spaces}!Vector\+Creator@{Vector\+Creator}}
 \index{Vector\+Creator@{Vector\+Creator}!Vector Spaces@{Vector Spaces}}
-\subsubsection[{Vector\+Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ template$<$class... Args, class  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+constructible$<$\+Description,\+Args...$>$\+::value$>$$>$ {\bf Spacy\+::\+Kaskade\+::\+Vector\+Creator}$<$ Description $>$\+::Vector\+Creator (
+\subsubsection[{\texorpdfstring{Vector\+Creator(\+Args \&\&...\+args)}{VectorCreator(Args &&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ template$<$class... Args, class  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+constructible$<$\+Description,\+Args...$>$\+::value$>$$>$ {\bf Spacy\+::\+Kaskade\+::\+Vector\+Creator}$<$ Description $>$\+::Vector\+Creator (
 \begin{DoxyParamCaption}
 \item[{Args \&\&...}]{args}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__VectorSpaceGroup_ga89de372343310640870077e6167df3f4}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{group__VectorSpaceGroup_ga89de372343310640870077e6167df3f4}{}\label{group__VectorSpaceGroup_ga89de372343310640870077e6167df3f4}
 
 
 Create from Kaskade 7 function space. 
@@ -83,13 +77,13 @@ Create from Kaskade 7 function space.
 {\em space} & single Kaskade 7 function space (no product space) \\
 \hline
 \end{DoxyParams}
-\hypertarget{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{}\index{Vector Spaces@{Vector Spaces}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{Vector Spaces@{Vector Spaces}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
 \index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Vector Spaces@{Vector Spaces}}
-\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ auto Spacy\+::\+Kaskade\+::make\+Hilbert\+Space (
+\subsubsection[{\texorpdfstring{make\+Hilbert\+Space(const Description \&description)}{makeHilbertSpace(const Description &description)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ auto Spacy\+::\+Kaskade\+::make\+Hilbert\+Space (
 \begin{DoxyParamCaption}
 \item[{const Description \&}]{description}
 \end{DoxyParamCaption}
-)}\label{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}
+)}\hypertarget{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{}\label{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}
 
 
 Create single space with hilbert space structure for Kaskade 7. 
@@ -99,15 +93,15 @@ Create single space with hilbert space structure for Kaskade 7.
 {\em space} & single Kaskade 7 function space (no product space) \\
 \hline
 \end{DoxyParams}
-\hypertarget{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}{}\index{Vector Spaces@{Vector Spaces}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
+\index{Vector Spaces@{Vector Spaces}!make\+Hilbert\+Space@{make\+Hilbert\+Space}}
 \index{make\+Hilbert\+Space@{make\+Hilbert\+Space}!Vector Spaces@{Vector Spaces}}
-\subsubsection[{make\+Hilbert\+Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ auto Spacy\+::\+Kaskade\+::make\+Hilbert\+Space (
+\subsubsection[{\texorpdfstring{make\+Hilbert\+Space(const Description \&description, const std\+::vector$<$ unsigned $>$ \&primal\+Ids, const std\+::vector$<$ unsigned $>$ \&dual\+Ids=\lcurly{}\rcurly{})}{makeHilbertSpace(const Description &description, const std::vector< unsigned > &primalIds, const std::vector< unsigned > &dualIds=\{\})}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ auto Spacy\+::\+Kaskade\+::make\+Hilbert\+Space (
 \begin{DoxyParamCaption}
 \item[{const Description \&}]{description, }
 \item[{const std\+::vector$<$ unsigned $>$ \&}]{primal\+Ids, }
 \item[{const std\+::vector$<$ unsigned $>$ \&}]{dual\+Ids = {\ttfamily \{\}}}
 \end{DoxyParamCaption}
-)}\label{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}
+)}\hypertarget{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}{}\label{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}
 
 
 Create product space with hilbert space structure for Kaskade 7. 

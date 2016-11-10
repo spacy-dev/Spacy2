@@ -1,0 +1,313 @@
+\hypertarget{classSpacy_1_1ACR_1_1ACRSolver}{}\section{Spacy\+:\+:A\+CR\+:\+:A\+C\+R\+Solver Class Reference}
+\label{classSpacy_1_1ACR_1_1ACRSolver}\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+
+
+The affine covariant step method described in \cite{Lubkoll2015}, \cite{Lubkoll2015a} for the solution of equality constraint optimization problems.  
+
+
+
+
+{\ttfamily \#include $<$acr.\+hh$>$}
+
+
+
+Inheritance diagram for Spacy\+:\+:A\+CR\+:\+:A\+C\+R\+Solver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1ACR_1_1ACRSolver__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\+:\+:A\+CR\+:\+:A\+C\+R\+Solver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1ACR_1_1ACRSolver__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}{A\+C\+R\+Solver} (\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} f)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}{operator()} ()\hypertarget{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}{}\label{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}
+
+\begin{DoxyCompactList}\small\item\em Compute solution. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1ACR_1_1ACRSolver_ac7bc2ff6568728c4bd79f49f3596d2bc}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0)
+\begin{DoxyCompactList}\small\item\em Compute solution. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a29ae1c15b8447601c2a783352e01bde2}{set\+Lower\+Bound} (double lower\+Bound)\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a29ae1c15b8447601c2a783352e01bde2}{}\label{classSpacy_1_1Mixin_1_1RegularityTest_a29ae1c15b8447601c2a783352e01bde2}
+
+\begin{DoxyCompactList}\small\item\em Set lower bound of regularity test for termination criteria. \end{DoxyCompactList}\item 
+double {\bfseries get\+Lower\+Bound} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_abc194f9b2150b6f02622867f673df4df}{}\label{classSpacy_1_1Mixin_1_1RegularityTest_abc194f9b2150b6f02622867f673df4df}
+
+\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a606383e629ebc0e84dc1cb6796aeeae1}{regularity\+Test\+Passed} (double nu) const noexcept
+\begin{DoxyCompactList}\small\item\em Apply regularity test. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_ac16e5fb18f3b591da58e32b821345f3d}{regularity\+Test\+Failed} (double nu) const noexcept
+\begin{DoxyCompactList}\small\item\em Apply regularity test. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}{update} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a89c4ffe9b8891c1f81d57e84141a2ef6}{Regularity\+Test} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}{}\label{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a89c4ffe9b8891c1f81d57e84141a2ef6}{Regularity\+Test} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a89c4ffe9b8891c1f81d57e84141a2ef6}{Regularity\+Test} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
+void {\bfseries start\+Timer} () const\hypertarget{classSpacy_1_1Mixin_1_1Timer_acf3c292b6d482c7c4ded5f961be4bc4b}{}\label{classSpacy_1_1Mixin_1_1Timer_acf3c292b6d482c7c4ded5f961be4bc4b}
+
+\item 
+std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::rep {\bfseries elapsed\+Time} () const\hypertarget{classSpacy_1_1Mixin_1_1Timer_ab27a20d8e1e9bc90ea56cb18ff752798}{}\label{classSpacy_1_1Mixin_1_1Timer_ab27a20d8e1e9bc90ea56cb18ff752798}
+
+\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}{print\+Elapsed\+Time} () const\hypertarget{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}{}\label{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}
+
+\begin{DoxyCompactList}\small\item\em Print elapsed time to std\+::cout. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}{set\+Minimal\+Decrease} (double decrease) noexcept
+\begin{DoxyCompactList}\small\item\em Set required minimal decrease. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}{minimal\+Decrease} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access minimal decrease. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}{set\+Relaxed\+Minimal\+Decrease} (double decrease) noexcept
+\begin{DoxyCompactList}\small\item\em Set relaxed minimal decrease. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}{acceptable\+Decrease} (double decrease) const noexcept
+\begin{DoxyCompactList}\small\item\em Decide if measure relative decrease is acceptable. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}{acceptable\+Relaxed\+Decrease} (double decrease) const noexcept
+\begin{DoxyCompactList}\small\item\em Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. \end{DoxyCompactList}\item 
+void {\bfseries set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}{}\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}
+
+\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon$. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{}\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}
+
+\begin{DoxyCompactList}\small\item\em Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
+double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{}\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{set\+Verbosity} (bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose})
+\begin{DoxyCompactList}\small\item\em Enable/disable verbosity. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}
+
+\begin{DoxyCompactList}\small\item\em Check if verbosity\+Level $>$ 0. \end{DoxyCompactList}\item 
+void {\bfseries set\+Verbosity\+Level} (unsigned level) noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}{}\label{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}
+
+\item 
+unsigned \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{get\+Verbosity\+Level} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}
+
+\begin{DoxyCompactList}\small\item\em Access verbosity level. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The affine covariant step method described in \cite{Lubkoll2015}, \cite{Lubkoll2015a} for the solution of equality constraint optimization problems. 
+
+An affine covariant composite step method for the solution of problems of the form \[\min f(x)\quad \text{s.t.}\quad c(x)=0\], based on the corresponding Lagrange functional \[L(x,p) = f(x)+pc(x)\]. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!A\+C\+R\+Solver@{A\+C\+R\+Solver}}
+\index{A\+C\+R\+Solver@{A\+C\+R\+Solver}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{A\+C\+R\+Solver(\+C2\+Functional f)}{ACRSolver(C2Functional f)}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver\+::\+A\+C\+R\+Solver (
+\begin{DoxyParamCaption}
+\item[{{\bf C2\+Functional}}]{f}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}{}\label{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & Lagrange functional for the problem \[\min \|\delta x_k\| \quad \text{s.t.} c'(x_k)\delta x_k + c(x_k)=0\] \\
+\hline
+{\em L} & Lagrange functional \\
+\hline
+{\em domain} & domain space $X=\{Y,U,P\}$ \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{operator()(const Vector \&x0)}{operator()(const Vector &x0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector} \&}]{x0}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpacy_1_1ACR_1_1ACRSolver_ac7bc2ff6568728c4bd79f49f3596d2bc}{}\label{classSpacy_1_1ACR_1_1ACRSolver_ac7bc2ff6568728c4bd79f49f3596d2bc}
+
+
+Compute solution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x0} & initial iterate \\
+\hline
+\end{DoxyParams}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!regularity\+Test\+Passed@{regularity\+Test\+Passed}}
+\index{regularity\+Test\+Passed@{regularity\+Test\+Passed}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{regularity\+Test\+Passed(double nu) const noexcept}{regularityTestPassed(double nu) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Regularity\+Test\+::regularity\+Test\+Passed (
+\begin{DoxyParamCaption}
+\item[{double}]{nu}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a606383e629ebc0e84dc1cb6796aeeae1}{}\label{classSpacy_1_1Mixin_1_1RegularityTest_a606383e629ebc0e84dc1cb6796aeeae1}
+
+
+Apply regularity test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nu} & damping factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$nu > lowerBound_$ 
+\end{DoxyReturn}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!regularity\+Test\+Failed@{regularity\+Test\+Failed}}
+\index{regularity\+Test\+Failed@{regularity\+Test\+Failed}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{regularity\+Test\+Failed(double nu) const noexcept}{regularityTestFailed(double nu) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Regularity\+Test\+::regularity\+Test\+Failed (
+\begin{DoxyParamCaption}
+\item[{double}]{nu}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_ac16e5fb18f3b591da58e32b821345f3d}{}\label{classSpacy_1_1Mixin_1_1RegularityTest_ac16e5fb18f3b591da58e32b821345f3d}
+
+
+Apply regularity test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nu} & damping factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$nu <= lowerBound_$ 
+\end{DoxyReturn}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!set\+Minimal\+Decrease@{set\+Minimal\+Decrease}}
+\index{set\+Minimal\+Decrease@{set\+Minimal\+Decrease}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{set\+Minimal\+Decrease(double decrease) noexcept}{setMinimalDecrease(double decrease) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Minimal\+Decrease (
+\begin{DoxyParamCaption}
+\item[{double}]{decrease}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aeebecf3cbbbb6cd2631abe7fd3888aad}
+
+
+Set required minimal decrease. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decrease} & minimal required decrease \\
+\hline
+\end{DoxyParams}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!minimal\+Decrease@{minimal\+Decrease}}
+\index{minimal\+Decrease@{minimal\+Decrease}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{minimal\+Decrease() const noexcept}{minimalDecrease() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}double Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::minimal\+Decrease (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a8e0fba73f86381f6c7479f1a0d524be6}
+
+
+Access minimal decrease. 
+
+\begin{DoxyReturn}{Returns}
+minimal decrease 
+\end{DoxyReturn}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!set\+Relaxed\+Minimal\+Decrease@{set\+Relaxed\+Minimal\+Decrease}}
+\index{set\+Relaxed\+Minimal\+Decrease@{set\+Relaxed\+Minimal\+Decrease}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{set\+Relaxed\+Minimal\+Decrease(double decrease) noexcept}{setRelaxedMinimalDecrease(double decrease) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::set\+Relaxed\+Minimal\+Decrease (
+\begin{DoxyParamCaption}
+\item[{double}]{decrease}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a396bb6f45eb4533e07fa1d174d84ca9f}
+
+
+Set relaxed minimal decrease. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decrease} & relaxed required decrease\\
+\hline
+\end{DoxyParams}
+This is used for deciding about rejecting tangential steps in Composite\+Steps\+::\+Affine\+Covariant\+Solver. \index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!acceptable\+Decrease@{acceptable\+Decrease}}
+\index{acceptable\+Decrease@{acceptable\+Decrease}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{acceptable\+Decrease(double decrease) const noexcept}{acceptableDecrease(double decrease) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Decrease (
+\begin{DoxyParamCaption}
+\item[{double}]{decrease}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a11426318e1cc6d06b6251636d2a14389}
+
+
+Decide if measure relative decrease is acceptable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decrease} & measured relative decrease $\delta m/\delta f$. \\
+\hline
+\end{DoxyParams}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!acceptable\+Relaxed\+Decrease@{acceptable\+Relaxed\+Decrease}}
+\index{acceptable\+Relaxed\+Decrease@{acceptable\+Relaxed\+Decrease}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{acceptable\+Relaxed\+Decrease(double decrease) const noexcept}{acceptableRelaxedDecrease(double decrease) const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+Mixin\+::\+Decrease\+Condition\+::acceptable\+Relaxed\+Decrease (
+\begin{DoxyParamCaption}
+\item[{double}]{decrease}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [noexcept]}, {\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}{}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a343f1fa78010d07db49f36da46495ad5}
+
+
+Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decrease} & measured relative decrease $\delta m/\delta f$. \\
+\hline
+\end{DoxyParams}
+\index{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}!set\+Verbosity@{set\+Verbosity}}
+\index{set\+Verbosity@{set\+Verbosity}!Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver@{Spacy\+::\+A\+C\+R\+::\+A\+C\+R\+Solver}}
+\subsubsection[{\texorpdfstring{set\+Verbosity(bool verbose)}{setVerbosity(bool verbose)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Verbosity\+::set\+Verbosity (
+\begin{DoxyParamCaption}
+\item[{bool}]{verbose}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}
+
+
+Enable/disable verbosity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose} & true\+: if verbosity\+Level = 0, set verbosity\+Level = 1; false\+: if set verbosity\+Level = 0 \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lars/tmp/\+Spacy/\+Spacy/\+Algorithm/\+A\+C\+R/acr.\+hh\end{DoxyCompactItemize}

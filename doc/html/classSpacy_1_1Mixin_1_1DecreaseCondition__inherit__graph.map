@@ -1,3 +1,4 @@
 <map id="Spacy::Mixin::DecreaseCondition" name="Spacy::Mixin::DecreaseCondition">
-<area shape="rect" id="node2" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="35,80,193,121"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="5,87,176,114"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="200,80,357,121"/>
 </map>

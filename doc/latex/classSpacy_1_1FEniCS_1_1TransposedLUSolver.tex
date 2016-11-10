@@ -1,8 +1,8 @@
-\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver}{}\section{Spacy\+:\+:F\+Eni\+C\+S\+:\+:Transposed\+L\+U\+Solver Class Reference}
+\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver}{}\section{Spacy\+:\+:F\+Eni\+CS\+:\+:Transposed\+L\+U\+Solver Class Reference}
 \label{classSpacy_1_1FEniCS_1_1TransposedLUSolver}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}}
 
 
-Transposed L\+U solver for F\+Eni\+C\+S.  
+Transposed LU solver for F\+Eni\+CS.  
 
 
 
@@ -11,7 +11,8 @@ Transposed L\+U solver for F\+Eni\+C\+S.
 
 
 
-Inheritance diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:Transposed\+L\+U\+Solver\+:\nopagebreak
+Inheritance diagram for Spacy\+:\+:F\+Eni\+CS\+:\+:Transposed\+L\+U\+Solver\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:Transposed\+L\+U\+Solver\+:
 \end{figure}
 
 
-Collaboration diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:Transposed\+L\+U\+Solver\+:\nopagebreak
+Collaboration diagram for Spacy\+:\+:F\+Eni\+CS\+:\+:Transposed\+L\+U\+Solver\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,39 +32,39 @@ Collaboration diagram for Spacy\+:\+:F\+Eni\+C\+S\+:\+:Transposed\+L\+U\+Solver\
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ac27b0869e7851bafe8e161482f772b83}{Transposed\+L\+U\+Solver} (std\+::shared\+\_\+ptr$<$ dolfin\+::\+Generic\+Matrix $>$ A, const dolfin\+::\+Function\+Space \&space, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range}, bool symmetric=false, const std\+::string \&solver\+Name=\char`\"{}mumps\char`\"{})
+\hyperlink{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ae41baf6102474c09945bc03cec8da533}{Transposed\+L\+U\+Solver} (std\+::shared\+\_\+ptr$<$ dolfin\+::\+Generic\+Matrix $>$ A, std\+::shared\+\_\+ptr$<$ dolfin\+::\+Function\+Space $>$ space, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range}, bool symmetric=false, const std\+::string \&solver\+Name=\char`\"{}mumps\char`\"{})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1FEniCS_1_1TransposedLUSolver_a41e978758fb3775d56ffa32d5a05431f}{operator()} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const 
 \begin{DoxyCompactList}\small\item\em Apply L\+U-\/solver. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
 
 \begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
 
 \begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Transposed L\+U solver for F\+Eni\+C\+S. 
+Transposed LU solver for F\+Eni\+CS. 
 
 \begin{DoxySeeAlso}{See also}
-\hyperlink{namespaceSpacy_a4cd614ddb41dd29e68a723dadd5602f2}{Linear\+Solver} 
+\hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver} 
 \end{DoxySeeAlso}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ac27b0869e7851bafe8e161482f772b83}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}!Transposed\+L\+U\+Solver@{Transposed\+L\+U\+Solver}}
+\index{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}!Transposed\+L\+U\+Solver@{Transposed\+L\+U\+Solver}}
 \index{Transposed\+L\+U\+Solver@{Transposed\+L\+U\+Solver}!Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}}
-\subsubsection[{Transposed\+L\+U\+Solver}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver\+::\+Transposed\+L\+U\+Solver (
+\subsubsection[{\texorpdfstring{Transposed\+L\+U\+Solver(std\+::shared\+\_\+ptr$<$ dolfin\+::\+Generic\+Matrix $>$ A, std\+::shared\+\_\+ptr$<$ dolfin\+::\+Function\+Space $>$ space, const Vector\+Space \&domain, const Vector\+Space \&range, bool symmetric=false, const std\+::string \&solver\+Name=""mumps"")}{TransposedLUSolver(std::shared_ptr< dolfin::GenericMatrix > A, std::shared_ptr< dolfin::FunctionSpace > space, const VectorSpace &domain, const VectorSpace &range, bool symmetric=false, const std::string &solverName="mumps")}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver\+::\+Transposed\+L\+U\+Solver (
 \begin{DoxyParamCaption}
 \item[{std\+::shared\+\_\+ptr$<$ dolfin\+::\+Generic\+Matrix $>$}]{A, }
-\item[{const dolfin\+::\+Function\+Space \&}]{space, }
+\item[{std\+::shared\+\_\+ptr$<$ dolfin\+::\+Function\+Space $>$}]{space, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
 \item[{const {\bf Vector\+Space} \&}]{range, }
 \item[{bool}]{symmetric = {\ttfamily false}, }
 \item[{const std\+::string \&}]{solver\+Name = {\ttfamily \char`\"{}mumps\char`\"{}}}
 \end{DoxyParamCaption}
-)}\label{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ac27b0869e7851bafe8e161482f772b83}
+)}\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ae41baf6102474c09945bc03cec8da533}{}\label{classSpacy_1_1FEniCS_1_1TransposedLUSolver_ae41baf6102474c09945bc03cec8da533}
 
 
 Constructor. 
@@ -85,13 +87,13 @@ Constructor.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver_a41e978758fb3775d56ffa32d5a05431f}{}\index{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}!operator()@{operator()}}
+\index{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}!operator()@{operator()}}
 \index{operator()@{operator()}!Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver@{Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}\+::{\bf Spacy\+::\+Vector} Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver\+::operator() (
+\subsubsection[{\texorpdfstring{operator()(const \+::\+Spacy\+::\+Vector \&x) const }{operator()(const ::Spacy::Vector &x) const }}]{\setlength{\rightskip}{0pt plus 5cm}\+::{\bf Spacy\+::\+Vector} Spacy\+::\+F\+Eni\+C\+S\+::\+Transposed\+L\+U\+Solver\+::operator() (
 \begin{DoxyParamCaption}
 \item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x}
 \end{DoxyParamCaption}
-) const}\label{classSpacy_1_1FEniCS_1_1TransposedLUSolver_a41e978758fb3775d56ffa32d5a05431f}
+) const}\hypertarget{classSpacy_1_1FEniCS_1_1TransposedLUSolver_a41e978758fb3775d56ffa32d5a05431f}{}\label{classSpacy_1_1FEniCS_1_1TransposedLUSolver_a41e978758fb3775d56ffa32d5a05431f}
 
 
 Apply L\+U-\/solver. 
@@ -108,4 +110,4 @@ $A^{-T}x$.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Adapter/\+F\+Eni\+C\+S/lu\+Solver.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Spacy/\+Adapter/\+F\+Eni\+C\+S/lu\+Solver.\+hh\end{DoxyCompactItemize}

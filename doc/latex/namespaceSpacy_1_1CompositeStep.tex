@@ -11,38 +11,36 @@ Contains the affine covariant composite step method of \cite{Lubkoll2015}, \cite
 class \hyperlink{classSpacy_1_1CompositeStep_1_1AffineCovariantSolver}{Affine\+Covariant\+Solver}
 \begin{DoxyCompactList}\small\item\em The affine covariant step method described in \cite{Lubkoll2015}, \cite{Lubkoll2015a} for the solution of equality constraint optimization problems. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1CompositeStep_1_1CubicModel}{Cubic\+Model}
-\begin{DoxyCompactList}\small\item\em The cubic regularized model for Affine\+Covariant\+Composite\+Steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The cubic regularized model for the affine covariant composite step method of \cite{Lubkoll2015}, \cite{Lubkoll2015a}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1Functions__1D_1_1Quadratic}{Functions\+\_\+1\+D\+::\+Quadratic} \hyperlink{namespaceSpacy_1_1CompositeStep_ad4acace8423370ac1b3d53a03fbde523}{make\+Quadratic\+Model} (\hyperlink{classSpacy_1_1Real}{Real} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt, const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&L, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)
-\begin{DoxyCompactList}\small\item\em Constructs the quadratic model of a Lagrange functional for a composite step method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Functions__1D_1_1Quadratic}{Functions\+\_\+1\+D\+::\+Quadratic} \hyperlink{namespaceSpacy_1_1CompositeStep_a2d9442c6e622766cb33dc14aa497c945}{make\+Quadratic\+Norm\+Model} (\hyperlink{classSpacy_1_1Real}{Real} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt)
-\begin{DoxyCompactList}\small\item\em Constructs the quadratic model a norm for a composite step method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1CompositeStep_1_1CubicModel}{Cubic\+Model} \hyperlink{namespaceSpacy_1_1CompositeStep_a408c87c25b624012e03bca53e6ec3d10}{make\+Cubic\+Model} (\hyperlink{classSpacy_1_1Real}{Real} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt, const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&L, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, \hyperlink{classSpacy_1_1Real}{Real} omega)
-\begin{DoxyCompactList}\small\item\em Generate cubic regularized model for Affine\+Covariant\+Composite\+Steps. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Model $>$ }\\\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_1_1CompositeStep_adffb0e7fa07418c47de2474156d90a35}{find\+Minimizer} (const Model \&f, \hyperlink{classSpacy_1_1Real}{Real} a, \hyperlink{classSpacy_1_1Real}{Real} b, \hyperlink{classSpacy_1_1Real}{Real} eps=1e-\/2)
-\begin{DoxyCompactList}\small\item\em Find global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{classSpacy_1_1Quadratic}{Quadratic} \hyperlink{namespaceSpacy_1_1CompositeStep_a0366dfcec4d1f3f5f304eddce82bc58d}{make\+Quadratic\+Model} (\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt, const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&L, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)
+\begin{DoxyCompactList}\small\item\em Constructs a quadratic model of a functional. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Quadratic}{Quadratic} \hyperlink{namespaceSpacy_1_1CompositeStep_ad7e8e9200b3ebfa44c75b79d08cd7db9}{make\+Quadratic\+Norm\+Model} (\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt)
+\begin{DoxyCompactList}\small\item\em Constructs a quadratic model for the norm of the underlying vector space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1CompositeStep_1_1CubicModel}{Cubic\+Model} \hyperlink{namespaceSpacy_1_1CompositeStep_ab7a53f016abbcc75876b77c3edc3ec23}{make\+Cubic\+Model} (\hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} nu, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dn, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dt, const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&L, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, double omega)
+\begin{DoxyCompactList}\small\item\em Generate cubic regularized model for the affine covariant composite step method of \cite{Lubkoll2015}, \cite{Lubkoll2015a}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Contains the affine covariant composite step method of \cite{Lubkoll2015}, \cite{Lubkoll2015a}. 
 
 \subsection{Function Documentation}
-\hypertarget{namespaceSpacy_1_1CompositeStep_ad4acace8423370ac1b3d53a03fbde523}{}\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Quadratic\+Model@{make\+Quadratic\+Model}}
+\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Quadratic\+Model@{make\+Quadratic\+Model}}
 \index{make\+Quadratic\+Model@{make\+Quadratic\+Model}!Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}}
-\subsubsection[{make\+Quadratic\+Model}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Functions\+\_\+1\+D\+::\+Quadratic} Spacy\+::\+Composite\+Step\+::make\+Quadratic\+Model (
+\subsubsection[{\texorpdfstring{make\+Quadratic\+Model(\+Damping\+Factor nu, const Vector \&dn, const Vector \&dt, const C2\+Functional \&\+L, const Vector \&x)}{makeQuadraticModel(DampingFactor nu, const Vector &dn, const Vector &dt, const C2Functional &L, const Vector &x)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quadratic} Spacy\+::\+Composite\+Step\+::make\+Quadratic\+Model (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{nu, }
+\item[{{\bf Damping\+Factor}}]{nu, }
 \item[{const {\bf Vector} \&}]{dn, }
 \item[{const {\bf Vector} \&}]{dt, }
 \item[{const {\bf C2\+Functional} \&}]{L, }
 \item[{const {\bf Vector} \&}]{x}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1CompositeStep_ad4acace8423370ac1b3d53a03fbde523}
+)}\hypertarget{namespaceSpacy_1_1CompositeStep_a0366dfcec4d1f3f5f304eddce82bc58d}{}\label{namespaceSpacy_1_1CompositeStep_a0366dfcec4d1f3f5f304eddce82bc58d}
 
 
-Constructs the quadratic model of a Lagrange functional for a composite step method. 
+Constructs a quadratic model of a functional. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -51,8 +49,6 @@ Constructs the quadratic model of a Lagrange functional for a composite step met
 {\em dn} & normal step \\
 \hline
 {\em dt} & tangential step \\
-\hline
-{\em L} & Lagrange functional \\
 \hline
 {\em x} & current iterate\\
 \hline
@@ -67,18 +63,18 @@ Constructs a quadratic function $ q(t)=a+bt+ct^2$, with
 \begin{DoxyReturn}{Returns}
 $ q(t)=a+bt+ct^2$ 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1CompositeStep_a2d9442c6e622766cb33dc14aa497c945}{}\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Quadratic\+Norm\+Model@{make\+Quadratic\+Norm\+Model}}
+\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Quadratic\+Norm\+Model@{make\+Quadratic\+Norm\+Model}}
 \index{make\+Quadratic\+Norm\+Model@{make\+Quadratic\+Norm\+Model}!Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}}
-\subsubsection[{make\+Quadratic\+Norm\+Model}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Functions\+\_\+1\+D\+::\+Quadratic} Spacy\+::\+Composite\+Step\+::make\+Quadratic\+Norm\+Model (
+\subsubsection[{\texorpdfstring{make\+Quadratic\+Norm\+Model(\+Damping\+Factor nu, const Vector \&dn, const Vector \&dt)}{makeQuadraticNormModel(DampingFactor nu, const Vector &dn, const Vector &dt)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quadratic} Spacy\+::\+Composite\+Step\+::make\+Quadratic\+Norm\+Model (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{nu, }
+\item[{{\bf Damping\+Factor}}]{nu, }
 \item[{const {\bf Vector} \&}]{dn, }
 \item[{const {\bf Vector} \&}]{dt}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1CompositeStep_a2d9442c6e622766cb33dc14aa497c945}
+)}\hypertarget{namespaceSpacy_1_1CompositeStep_ad7e8e9200b3ebfa44c75b79d08cd7db9}{}\label{namespaceSpacy_1_1CompositeStep_ad7e8e9200b3ebfa44c75b79d08cd7db9}
 
 
-Constructs the quadratic model a norm for a composite step method. 
+Constructs a quadratic model for the norm of the underlying vector space. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -92,21 +88,21 @@ Constructs the quadratic model a norm for a composite step method.
 \begin{DoxyReturn}{Returns}
 $ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 $ 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1CompositeStep_a408c87c25b624012e03bca53e6ec3d10}{}\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Cubic\+Model@{make\+Cubic\+Model}}
+\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!make\+Cubic\+Model@{make\+Cubic\+Model}}
 \index{make\+Cubic\+Model@{make\+Cubic\+Model}!Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}}
-\subsubsection[{make\+Cubic\+Model}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cubic\+Model} Spacy\+::\+Composite\+Step\+::make\+Cubic\+Model (
+\subsubsection[{\texorpdfstring{make\+Cubic\+Model(\+Damping\+Factor nu, const Vector \&dn, const Vector \&dt, const C2\+Functional \&\+L, const Vector \&x, double omega)}{makeCubicModel(DampingFactor nu, const Vector &dn, const Vector &dt, const C2Functional &L, const Vector &x, double omega)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cubic\+Model} Spacy\+::\+Composite\+Step\+::make\+Cubic\+Model (
 \begin{DoxyParamCaption}
-\item[{{\bf Real}}]{nu, }
+\item[{{\bf Damping\+Factor}}]{nu, }
 \item[{const {\bf Vector} \&}]{dn, }
 \item[{const {\bf Vector} \&}]{dt, }
 \item[{const {\bf C2\+Functional} \&}]{L, }
 \item[{const {\bf Vector} \&}]{x, }
-\item[{{\bf Real}}]{omega}
+\item[{double}]{omega}
 \end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1CompositeStep_a408c87c25b624012e03bca53e6ec3d10}
+)}\hypertarget{namespaceSpacy_1_1CompositeStep_ab7a53f016abbcc75876b77c3edc3ec23}{}\label{namespaceSpacy_1_1CompositeStep_ab7a53f016abbcc75876b77c3edc3ec23}
 
 
-Generate cubic regularized model for Affine\+Covariant\+Composite\+Steps. 
+Generate cubic regularized model for the affine covariant composite step method of \cite{Lubkoll2015}, \cite{Lubkoll2015a}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -125,32 +121,4 @@ Generate cubic regularized model for Affine\+Covariant\+Composite\+Steps.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 \hyperlink{classSpacy_1_1CompositeStep_1_1CubicModel}{Cubic\+Model}( make\+Quadratic\+Model(nu,dn,dt,\+L,x), make\+Quadratic\+Norm\+Model(nu,dn,dt), omega ) 
-\end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1CompositeStep_adffb0e7fa07418c47de2474156d90a35}{}\index{Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}!find\+Minimizer@{find\+Minimizer}}
-\index{find\+Minimizer@{find\+Minimizer}!Spacy\+::\+Composite\+Step@{Spacy\+::\+Composite\+Step}}
-\subsubsection[{find\+Minimizer}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Model $>$ {\bf Real} Spacy\+::\+Composite\+Step\+::find\+Minimizer (
-\begin{DoxyParamCaption}
-\item[{const Model \&}]{f, }
-\item[{{\bf Real}}]{a, }
-\item[{{\bf Real}}]{b, }
-\item[{{\bf Real}}]{eps = {\ttfamily 1e-\/2}}
-\end{DoxyParamCaption}
-)}\label{namespaceSpacy_1_1CompositeStep_adffb0e7fa07418c47de2474156d90a35}
-
-
-Find global minimizer of $f$ in $[a,b]$. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em f} & Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
-\hline
-{\em a} & lower bound of the admissible interval \\
-\hline
-{\em b} & upper bound of the admissible interval \\
-\hline
-{\em eps} & relative accuracy \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$ x \in \mathrm{argmin}_{[a,b]} $ 
 \end{DoxyReturn}

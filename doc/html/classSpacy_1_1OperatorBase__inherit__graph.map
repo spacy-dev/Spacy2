@@ -14,6 +14,6 @@
 <area shape="rect" id="node15" href="$classSpacy_1_1Rn_1_1C1Operator.html" title="A differential operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="244,791,403,817"/>
 <area shape="rect" id="node16" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="235,841,412,868"/>
 <area shape="rect" id="node17" href="$classSpacy_1_1Scalar_1_1C1Operator.html" title="Spacy::Scalar::C1Operator" alt="" coords="234,892,413,919"/>
-<area shape="rect" id="node18" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Spacy::Scalar::LinearOperator" alt="" coords="225,943,422,969"/>
+<area shape="rect" id="node18" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems. " alt="" coords="225,943,422,969"/>
 <area shape="rect" id="node9" href="$structSpacy_1_1Rn_1_1LinearOperatorCreator.html" title="VectorCreator for linear operators , based on the Eigen library. " alt="" coords="495,355,672,397"/>
 </map>

@@ -11,20 +11,22 @@ Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarr
 
 
 
-Inheritance diagram for Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$ Operator\+Definition $>$\+:\nopagebreak
+Inheritance diagram for Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$ Operator\+Definition $>$\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classSpacy_1_1Kaskade_1_1C1Operator__inherit__graph}
+\includegraphics[width=334pt]{classSpacy_1_1Kaskade_1_1C1Operator__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$ Operator\+Definition $>$\+:\nopagebreak
+Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$ Operator\+Definition $>$\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classSpacy_1_1Kaskade_1_1C1Operator__coll__graph}
+\includegraphics[width=334pt]{classSpacy_1_1Kaskade_1_1C1Operator__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -44,32 +46,27 @@ Collaboration diagram for Spacy\+:\+:Kaskade\+:\+:C1\+Operator$<$ Operator\+Defi
 \begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
 \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_a32cfd05c372cc4bc8d7e0e8aedc1e8b9}{d1} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x, const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&dx) const 
 \begin{DoxyCompactList}\small\item\em Compute $A'(x)dx$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}{}auto \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}{linearization} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const \label{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}
+auto \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}{linearization} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&x) const \hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_afb9837bb1c40e00b53e7430c745b1931}
 
 \begin{DoxyCompactList}\small\item\em Access $A'(x)$ as linear operator $X\rightarrow Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}{}const Kaskade\+Operator \& \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}{A} () const noexcept\label{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}
+const Kaskade\+Operator \& \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}{A} () const noexcept\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_ab050915a62f3f8bf25e78af1e1289cb8}
 
 \begin{DoxyCompactList}\small\item\em Access operator representing $A'(x)$. \end{DoxyCompactList}\item 
 bool \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_adb85b50e1cc87fb342412560353c2f73}{only\+Lower\+Triangle} () const noexcept
 \begin{DoxyCompactList}\small\item\em Access only\+Lower\+Triangle flag. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}{set\+Solver\+Creator} (std\+::function$<$ \hyperlink{namespaceSpacy_a4cd614ddb41dd29e68a723dadd5602f2}{Linear\+Solver}(const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linearization} \&)$>$ f)
+void \hyperlink{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}{set\+Solver\+Creator} (std\+::function$<$ \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver}(const \hyperlink{classSpacy_1_1Kaskade_1_1LinearOperator}{Linearization} \&)$>$ f)
 \begin{DoxyCompactList}\small\item\em Change solver creator. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const \hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{}\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
 
 \begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const \hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{}\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
 
-\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1NumberOfThreads_ab0c2fca77cb0d613e3bb8ce5bda11fdc}{}void {\bfseries set\+Number\+Of\+Threads} (unsigned \hyperlink{classSpacy_1_1Mixin_1_1NumberOfThreads_a385963b95b5e1ddf422393146cc71ee1}{n\+Threads}=1)\label{classSpacy_1_1Mixin_1_1NumberOfThreads_ab0c2fca77cb0d613e3bb8ce5bda11fdc}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1NumberOfThreads_a385963b95b5e1ddf422393146cc71ee1}{}unsigned \hyperlink{classSpacy_1_1Mixin_1_1NumberOfThreads_a385963b95b5e1ddf422393146cc71ee1}{n\+Threads} () const noexcept\label{classSpacy_1_1Mixin_1_1NumberOfThreads_a385963b95b5e1ddf422393146cc71ee1}
-
-\begin{DoxyCompactList}\small\item\em Access number of allowed threads. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$class Operator\+Definition$>$class Spacy\+::\+Kaskade\+::\+C1\+Operator$<$ Operator\+Definition $>$}
+\subsubsection*{template$<$class Operator\+Definition$>$\\*
+class Spacy\+::\+Kaskade\+::\+C1\+Operator$<$ Operator\+Definition $>$}
 
 Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarrow Y$. 
 
@@ -79,9 +76,9 @@ Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarr
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aa31e9f54fcbb4eb6c40c1cd467d25836}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
 \index{C1\+Operator@{C1\+Operator}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
+\subsubsection[{\texorpdfstring{C1\+Operator(const Operator\+Definition \&f, const Vector\+Space \&domain, const Vector\+Space \&range, int rbegin=0, int rend=\+Operator\+Definition\+::\+Ansatz\+Vars\+::no\+Of\+Variables, int cbegin=0, int cend=\+Operator\+Definition\+::\+Test\+Vars\+::no\+Of\+Variables)}{C1Operator(const OperatorDefinition &f, const VectorSpace &domain, const VectorSpace &range, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
 \begin{DoxyParamCaption}
 \item[{const Operator\+Definition \&}]{f, }
 \item[{const {\bf Vector\+Space} \&}]{domain, }
@@ -91,7 +88,7 @@ Operator interface for Kaskade 7. Models a differentiable operator $A:X\rightarr
 \item[{int}]{cbegin = {\ttfamily 0}, }
 \item[{int}]{cend = {\ttfamily OperatorDefinition\+:\+:TestVars\+:\+:noOfVariables}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_aa31e9f54fcbb4eb6c40c1cd467d25836}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aa31e9f54fcbb4eb6c40c1cd467d25836}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_aa31e9f54fcbb4eb6c40c1cd467d25836}
 
 
 Construct operator for Kaskade 7. 
@@ -113,13 +110,13 @@ Construct operator for Kaskade 7.
 {\em cend} & one after the last column to be considered in the definition of f\\
 \hline
 \end{DoxyParams}
-The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_a69a67a899fb71e106b1371117d006659}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of a system of equation. \index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
 \index{C1\+Operator@{C1\+Operator}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
+\subsubsection[{\texorpdfstring{C1\+Operator(const C1\+Operator \&\+B)}{C1Operator(const C1Operator &B)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
 \begin{DoxyParamCaption}
 \item[{const {\bf C1\+Operator}$<$ Operator\+Definition $>$ \&}]{B}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_a69a67a899fb71e106b1371117d006659}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_a69a67a899fb71e106b1371117d006659}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_a69a67a899fb71e106b1371117d006659}
 
 
 Copy constructor. 
@@ -129,13 +126,13 @@ Copy constructor.
 {\em B} & object to copy from \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aed7bcf133fe772d9ae4b6ad5dcd5674c}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!C1\+Operator@{C1\+Operator}}
 \index{C1\+Operator@{C1\+Operator}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{C1\+Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
+\subsubsection[{\texorpdfstring{C1\+Operator(\+C1\+Operator \&\&\+B)=default}{C1Operator(C1Operator &&B)=default}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::{\bf C1\+Operator} (
 \begin{DoxyParamCaption}
 \item[{{\bf C1\+Operator}$<$ Operator\+Definition $>$ \&\&}]{B}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [default]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_aed7bcf133fe772d9ae4b6ad5dcd5674c}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aed7bcf133fe772d9ae4b6ad5dcd5674c}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_aed7bcf133fe772d9ae4b6ad5dcd5674c}
 
 
 Move constructor. 
@@ -148,13 +145,13 @@ Move constructor.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ac378b7b319e5160a7ac19a3697b4291a}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator=@{operator=}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator=@{operator=}}
 \index{operator=@{operator=}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(const C1\+Operator \&\+B)}{operator=(const C1Operator &B)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator= (
 \begin{DoxyParamCaption}
 \item[{const {\bf C1\+Operator}$<$ Operator\+Definition $>$ \&}]{B}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_ac378b7b319e5160a7ac19a3697b4291a}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ac378b7b319e5160a7ac19a3697b4291a}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_ac378b7b319e5160a7ac19a3697b4291a}
 
 
 Copy assignment. 
@@ -164,13 +161,13 @@ Copy assignment.
 {\em B} & object to copy from \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ab05b1e6565daf571d60ecf1b4584c991}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator=@{operator=}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator=@{operator=}}
 \index{operator=@{operator=}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(\+C1\+Operator \&\&\+B)=default}{operator=(C1Operator &&B)=default}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ {\bf C1\+Operator}\& {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator= (
 \begin{DoxyParamCaption}
 \item[{{\bf C1\+Operator}$<$ Operator\+Definition $>$ \&\&}]{B}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [default]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_ab05b1e6565daf571d60ecf1b4584c991}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_ab05b1e6565daf571d60ecf1b4584c991}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_ab05b1e6565daf571d60ecf1b4584c991}
 
 
 Move assignment. 
@@ -180,13 +177,13 @@ Move assignment.
 {\em B} & object to move from \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aae23a007cd7a66f90bbb1c93da34735d}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator()@{operator()}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!operator()@{operator()}}
 \index{operator()@{operator()}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ \+::{\bf Spacy\+::\+Vector} {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator() (
+\subsubsection[{\texorpdfstring{operator()(const \+::\+Spacy\+::\+Vector \&x) const }{operator()(const ::Spacy::Vector &x) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ \+::{\bf Spacy\+::\+Vector} {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::operator() (
 \begin{DoxyParamCaption}
 \item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_aae23a007cd7a66f90bbb1c93da34735d}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aae23a007cd7a66f90bbb1c93da34735d}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_aae23a007cd7a66f90bbb1c93da34735d}
 
 
 Apply operator. 
@@ -199,14 +196,14 @@ Apply operator.
 \begin{DoxyReturn}{Returns}
 $A(x)$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_a32cfd05c372cc4bc8d7e0e8aedc1e8b9}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!d1@{d1}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!d1@{d1}}
 \index{d1@{d1}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ \+::{\bf Spacy\+::\+Vector} {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::d1 (
+\subsubsection[{\texorpdfstring{d1(const \+::\+Spacy\+::\+Vector \&x, const \+::\+Spacy\+::\+Vector \&dx) const }{d1(const ::Spacy::Vector &x, const ::Spacy::Vector &dx) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ \+::{\bf Spacy\+::\+Vector} {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::d1 (
 \begin{DoxyParamCaption}
 \item[{const \+::{\bf Spacy\+::\+Vector} \&}]{x, }
 \item[{const \+::{\bf Spacy\+::\+Vector} \&}]{dx}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_a32cfd05c372cc4bc8d7e0e8aedc1e8b9}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_a32cfd05c372cc4bc8d7e0e8aedc1e8b9}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_a32cfd05c372cc4bc8d7e0e8aedc1e8b9}
 
 
 Compute $A'(x)dx$. 
@@ -221,13 +218,13 @@ Compute $A'(x)dx$.
 \begin{DoxyReturn}{Returns}
 $A'(x)dx$ 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_adb85b50e1cc87fb342412560353c2f73}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!only\+Lower\+Triangle@{only\+Lower\+Triangle}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!only\+Lower\+Triangle@{only\+Lower\+Triangle}}
 \index{only\+Lower\+Triangle@{only\+Lower\+Triangle}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{only\+Lower\+Triangle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ bool {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::only\+Lower\+Triangle (
+\subsubsection[{\texorpdfstring{only\+Lower\+Triangle() const noexcept}{onlyLowerTriangle() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ bool {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::only\+Lower\+Triangle (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_adb85b50e1cc87fb342412560353c2f73}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_adb85b50e1cc87fb342412560353c2f73}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_adb85b50e1cc87fb342412560353c2f73}
 
 
 Access only\+Lower\+Triangle flag. 
@@ -235,13 +232,13 @@ Access only\+Lower\+Triangle flag.
 \begin{DoxyReturn}{Returns}
 true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}{}\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!set\+Solver\+Creator@{set\+Solver\+Creator}}
+\index{Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}!set\+Solver\+Creator@{set\+Solver\+Creator}}
 \index{set\+Solver\+Creator@{set\+Solver\+Creator}!Spacy\+::\+Kaskade\+::\+C1\+Operator@{Spacy\+::\+Kaskade\+::\+C1\+Operator}}
-\subsubsection[{set\+Solver\+Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ void {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::set\+Solver\+Creator (
+\subsubsection[{\texorpdfstring{set\+Solver\+Creator(std\+::function$<$ Linear\+Solver(const Linearization \&)$>$ f)}{setSolverCreator(std::function< LinearSolver(const Linearization &)> f)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\+Definition$>$ void {\bf Spacy\+::\+Kaskade\+::\+C1\+Operator}$<$ Operator\+Definition $>$\+::set\+Solver\+Creator (
 \begin{DoxyParamCaption}
 \item[{std\+::function$<$ {\bf Linear\+Solver}(const {\bf Linearization} \&)$>$}]{f}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}{}\label{classSpacy_1_1Kaskade_1_1C1Operator_aa0c69955542db6b0f61807181874b4d9}
 
 
 Change solver creator. 
@@ -255,4 +252,4 @@ Change solver creator.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Spacy/\+Adapter/\+Kaskade/c1\+Operator.\+hh\end{DoxyCompactItemize}
+/home/lars/tmp/\+Spacy/\+Spacy/\+Adapter/\+Kaskade/c1\+Operator.\+hh\end{DoxyCompactItemize}
