@@ -10,7 +10,7 @@ addons:
     - gcc-5
     - g++-6
     - gcc-6
-    - gem
+    - rubygems
 
 cache:
   directories:
