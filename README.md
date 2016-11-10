@@ -1,8 +1,5 @@
 [![Build Status](https://travis-ci.org/spacy-dev/Spacy.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy/builds)
-<a href="https://scan.coverity.com/projects/lubkoll-spacy">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/6364/badge.svg"/>
-</a>
+[![Coverity Status](https://scan.coverity.com/projects/10277/badge.svg)](https://scan.coverity.com/projects/spacy)
 [![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg)](https://coveralls.io/github/spacy-dev/Spacy)
 [![Gitter chat](https://badges.gitter.im/spacy-dev/spacy.png)](https://gitter.im/spacy-dev/Spacy)
 
