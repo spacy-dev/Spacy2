@@ -139,6 +139,7 @@ script:
   - cd Test && ctest
 
 after_success:
+  - cd $TRAVIS_BUILD_DIR/build/Test
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
       lcov --gcov-tool ${GCOV} --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
