@@ -114,6 +114,7 @@ install:
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
         sudo dpkg -i lcov_1.12-3_all.deb
+        sudo gem install coveralls-lcov
       fi
     fi
   - |
@@ -127,22 +128,21 @@ script:
   - mkdir build && cd build
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-      cmake -DBuildTest=ON -DCoverage=ON .. && make
-      lcov --gcov-tool ${GCOV} --capture --initial --no-external --directory . --base-directory ../Spacy --output-file initial.info --rc lcov_branch_coverage=1
+      cmake -DBuildTest=ON -DCoverage=ON ..
     else
-      cmake -DBuildTest=ON -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
+      cmake -DBuildTest=ON -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" ..
     fi
-  - cd Test && ctest && cd ..
+  - make
+  - cd Test && ctest
   - |
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-      lcov --gcov-tool ${GCOV} --capture --no-external --directory . --base-directory ../Spacy --output-file final.info --rc lcov_branch_coverage=1
-      lcov --gcov-tool ${GCOV} --add-tracefile initial.info --add-tracefile final.info --output-file coverage.info --rc lcov_branch_coverage=1
+      lcov --capture --no-external --directory .. --base-directory ${TRAVIS_BUILD_DIR}/Spacy --rc lcov_branch_coverage=1 --output-file coverage.info
     fi
 
 after_success:
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
-      sed 's@/home/travis/build/spacy-dev/Spacy/@/@g' coverage.info
+      sed 's@${TRAVIS_BUILD_DIR}/@@g' coverage.info
       coveralls-lcov --repo-token gFEctt1S3wkzvWCbnUdjHDKk9iHMzdnqE coverage.info
     fi
 
