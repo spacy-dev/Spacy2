@@ -142,6 +142,6 @@ after_success:
   - cd $TRAVIS_BUILD_DIR/build/Test
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
-      lcov --gcov-tool ${GCOV} --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
+      lcov --gcov-tool gcov-6 --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
       coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info
     fi
