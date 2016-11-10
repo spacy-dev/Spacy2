@@ -34,7 +34,7 @@ matrix:
 
     # GCC 6
     - os: linux
-      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=/usr/bin/gcov-6 COMPUTE_COVERAGE=true
+      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=gcov-6 COMPUTE_COVERAGE=true
       compiler: gcc
       
     # OSX
@@ -145,7 +145,6 @@ script:
 after_success:
   - |
     if [[ ${COMPUTE_COVERAGE}" == "true" ]]; then
-      sed 's@${TRAVIS_BUILD_DIR}/@@g' coverage.info
-      coveralls-lcov --repo-token gFEctt1S3wkzvWCbnUdjHDKk9iHMzdnqE coverage.info
+      coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info
     fi
 
