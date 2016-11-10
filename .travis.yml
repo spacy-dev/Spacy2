@@ -114,9 +114,9 @@ install:
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
         sudo dpkg -i lcov_1.12-3_all.deb
-        sudo apt-add-repository ppa:brightbox/ruby-ng
-        sudo apt-get update
-        sudo apt-get install ruby2.2
+        sudo apt-add-repository ppa:brightbox/ruby-ng -qq
+        sudo apt-get update -qq
+        sudo apt-get install ruby2.2 -qq
         sudo gem install coveralls-lcov
       fi
     fi
