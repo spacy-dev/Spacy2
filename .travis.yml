@@ -145,4 +145,3 @@ after_success:
       lcov --gcov-tool ${GCOV} --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
       coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info
     fi
-
