@@ -10,8 +10,6 @@ addons:
     - gcc-5
     - g++-6
     - gcc-6
-    - ruby
-    - rubygems
 
 cache:
   directories:
@@ -116,6 +114,7 @@ install:
       if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
         travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
         sudo dpkg -i lcov_1.12-3_all.deb
+        sudo apt-get install ruby rubygems
         sudo gem install coveralls-lcov
       fi
     fi
