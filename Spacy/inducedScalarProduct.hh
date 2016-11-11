@@ -60,7 +60,7 @@ namespace Spacy
     explicit PrimalInducedScalarProduct(LinearOperator M);
 
     /// @brief Compute scalar product \f$(x,y)_M\f$.
-    Real operator()(Vector x, Vector y) const;
+    Real operator()(const Vector& x, const Vector& y) const;
 
   private:
     LinearOperator M_;

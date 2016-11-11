@@ -31,7 +31,7 @@ namespace Spacy
     : M_(std::move(M))
   {}
 
-  Real PrimalInducedScalarProduct::operator()(Vector x, Vector y) const
+  Real PrimalInducedScalarProduct::operator()(const Vector& x, const Vector& y) const
   {
 //    std::cout << "induced scalar product" << std::endl;
 //    auto& x_ = cast_ref<ProductSpace::Vector>(x);

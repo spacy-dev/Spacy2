@@ -20,7 +20,7 @@ namespace Spacy
                       const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
                       const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
                       const std::function<bool(const Vector&, const Vector&)>& errorEstimator,
-                      const Parameter p)
+                      const Parameter& p)
         {
             LOG_INFO(log_tag, "Starting iteration.")
             p.startTimer();
@@ -67,34 +67,34 @@ namespace Spacy
     }
 
 
-    Vector localNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter p)
+    Vector localNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter& p)
     {
         return Newton::newton<Newton::Damping::None,Newton::Termination::AffineCovariant>(F,x0,p);
     }
 
-    Vector localNewton(const C1Operator& F, const Newton::Parameter p)
+    Vector localNewton(const C1Operator& F, const Newton::Parameter& p)
     {
         return localNewton(F, zero(F.domain()),p);
     }
 
 
-    Vector covariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
+    Vector covariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
     {
         return Newton::newton<Newton::Damping::AffineCovariant,Newton::Termination::AffineCovariant>(F,x0,p,errorEstimator);
     }
 
-    Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
+    Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
     {
         return covariantNewton(F,zero(F.domain()),p,errorEstimator);
     }
 
 
-    Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter p)
+    Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter& p)
     {
         return Newton::newton<Newton::Damping::AffineContravariant,Newton::Termination::AffineContravariant>(F,x0,p);
     }
 
-    Vector contravariantNewton(const C1Operator& F, const Spacy::Newton::Parameter p)
+    Vector contravariantNewton(const C1Operator& F, const Spacy::Newton::Parameter& p)
     {
         return contravariantNewton(F,zero(F.domain()),p);
     }

@@ -13,7 +13,7 @@ namespace Spacy
     class C2FunctionalDerivative : public OperatorBase
     {
     public:
-      C2FunctionalDerivative(C2Functional f)
+      C2FunctionalDerivative(C2Functional&& f)
         : OperatorBase(f.domain(),f.domain().dualSpace()),
           f_(std::move(f))
       {}

@@ -33,7 +33,7 @@ namespace Spacy
                   const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,
                   const std::function<bool(DampingFactor,const Vector&,const Vector&)>& terminationCriterion,
                   const std::function<bool(const Vector&,const Vector&)>& errorEstimator,
-                  const Parameter p);
+                  const Parameter& p);
 
     /**
      * @brief Generic %Newton method.
@@ -68,7 +68,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector localNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
+  Vector localNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter& p = Newton::Parameter());
 
   /**
    * @brief Local %Newton method with default initial iterate (x0=0).
@@ -81,7 +81,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector localNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
+  Vector localNewton(const C1Operator& F, const Newton::Parameter& p = Newton::Parameter());
 
   /**
    * @brief Affine covariant %Newton method.
@@ -95,7 +95,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
+  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter& p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine covariant %Newton method.
@@ -108,7 +108,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
+  Vector covariantNewton(const C1Operator& F, const Newton::Parameter& p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine contravariant %Newton method.
@@ -122,7 +122,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter p = Newton::Parameter());
+  Vector contravariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter& p = Newton::Parameter());
 
   /**
    * @brief Affine contravariant %Newton method.
@@ -135,7 +135,7 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector contravariantNewton(const C1Operator& F, const Newton::Parameter p = Newton::Parameter());
+  Vector contravariantNewton(const C1Operator& F, const Newton::Parameter& p = Newton::Parameter());
 
   /** @} */
 }
