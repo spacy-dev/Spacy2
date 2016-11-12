@@ -19,7 +19,7 @@ namespace Spacy
         explicit LipschitzConstant(double initialOmega = 1e-3);
 
         /**
-         * \brief Assign new value to Lipschitz constant.
+         * @brief Assign new value to Lipschitz constant.
          *
          * If \f$\omega_{new}<0\f$ sets the Lipschitz constant to \f$minFactor * previousOmega\f$.
          * Restricts increase such that \f$\omega = min(\omega_{new},maxFactor * previousOmega)\f$.
