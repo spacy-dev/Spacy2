@@ -12,6 +12,8 @@ namespace Spacy
     DynamicOperator::DynamicOperator( const DynamicOperator& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     DynamicOperator::DynamicOperator( DynamicOperator&& other ) noexcept : functions_( other.functions_ ),
@@ -29,6 +31,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -81,14 +85,10 @@ namespace Spacy
 
     void* DynamicOperator::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 
     DynamicLinearOperator::DynamicLinearOperator() noexcept : impl_( nullptr )
@@ -98,6 +98,8 @@ namespace Spacy
     DynamicLinearOperator::DynamicLinearOperator( const DynamicLinearOperator& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     DynamicLinearOperator::DynamicLinearOperator( DynamicLinearOperator&& other ) noexcept
@@ -116,6 +118,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -204,14 +208,10 @@ namespace Spacy
 
     void* DynamicLinearOperator::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 
     DynamicC1Operator::DynamicC1Operator() noexcept : impl_( nullptr )
@@ -221,6 +221,8 @@ namespace Spacy
     DynamicC1Operator::DynamicC1Operator( const DynamicC1Operator& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     DynamicC1Operator::DynamicC1Operator( DynamicC1Operator&& other ) noexcept : functions_( other.functions_ ),
@@ -238,6 +240,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -267,13 +271,13 @@ namespace Spacy
     Vector DynamicC1Operator::d1( double t, const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d1( *this, read(), std::move( t ), x, dx );
+        return functions_.d1_double_const_Vector_ref_const_Vector_ref( *this, read(), std::move( t ), x, dx );
     }
 
     LinearOperator DynamicC1Operator::linearization( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.linearization( *this, read(), std::move( t ), x );
+        return functions_.linearization_double_const_Vector_ref( *this, read(), std::move( t ), x );
     }
 
     LinearOperator DynamicC1Operator::M() const
@@ -302,13 +306,9 @@ namespace Spacy
 
     void* DynamicC1Operator::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 }

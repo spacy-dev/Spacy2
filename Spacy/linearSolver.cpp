@@ -25,12 +25,12 @@ namespace Spacy
 
     IndefiniteLinearSolver::~IndefiniteLinearSolver()
     {
-        if ( impl_ )
-            functions_.del( impl_ );
+        reset();
     }
 
     IndefiniteLinearSolver& IndefiniteLinearSolver::operator=( const IndefiniteLinearSolver& other )
     {
+        reset();
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_ ? other.functions_.clone( other.impl_ ) : nullptr;
@@ -39,6 +39,7 @@ namespace Spacy
 
     IndefiniteLinearSolver& IndefiniteLinearSolver::operator=( IndefiniteLinearSolver&& other ) noexcept
     {
+        reset();
         type_id_ = other.type_id_;
         functions_ = other.functions_;
         impl_ = other.impl_;
@@ -61,5 +62,11 @@ namespace Spacy
     {
         assert( impl_ );
         return functions_.isPositiveDefinite( *this, impl_ );
+    }
+
+    void IndefiniteLinearSolver::reset() noexcept
+    {
+        if ( impl_ )
+            functions_.del( impl_ );
     }
 }

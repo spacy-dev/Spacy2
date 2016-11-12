@@ -26,8 +26,10 @@ namespace Spacy
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &C1OperatorDetail::execution_wrapper< C1Operator,
                                                          typename std::decay< T >::type >::call_const_Vector_ref,
-                   &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::d1,
-                   &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::linearization,
+                   &C1OperatorDetail::execution_wrapper<
+                       C1Operator, typename std::decay< T >::type >::d1_const_Vector_ref_const_Vector_ref,
+                   &C1OperatorDetail::execution_wrapper<
+                       C1Operator, typename std::decay< T >::type >::linearization_const_Vector_ref,
                    &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::domain,
                    &C1OperatorDetail::execution_wrapper< C1Operator, typename std::decay< T >::type >::range} ),
               type_id_( typeid( typename std::decay< T >::type ).hash_code() ), impl_( nullptr )
@@ -86,7 +88,9 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -96,6 +100,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 

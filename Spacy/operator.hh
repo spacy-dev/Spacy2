@@ -83,7 +83,9 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -93,6 +95,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 

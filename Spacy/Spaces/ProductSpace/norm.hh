@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_SPACES_PRODUCT_SPACE_NORM_HH
-#define SPACY_SPACES_PRODUCT_SPACE_NORM_HH
+#pragma once
 
 namespace Spacy
 {
@@ -16,14 +12,15 @@ namespace Spacy
     /**
      * @ingroup ProductSpaceGroup
      * @brief Canonical norm on product spaces.
+     *
+     * This is the norm induced by the subspaces. I.e. for a vector-space \f$V=V_1 \times \ldots \times V_n \f$,
+     * the induced norm is \f$\|\cdot\|_V=\sqrt{\|\cdot\|^2_{V_1} + \ldots + \|\cdot\|^2_{V_n}}\f$.
      */
     class Norm
     {
     public:
-      /// Apply norm.
+      /// Compute norm.
       Real operator()(const ::Spacy::Vector& x) const;
     };
   }
 }
-
-#endif // SPACY_SPACES_PRODUCT_SPACE_NORM_HH

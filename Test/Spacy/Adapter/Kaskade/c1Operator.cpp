@@ -2,8 +2,10 @@
 
 #include "setup.hh"
 
+#include <Spacy/inducedScalarProduct.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
+#include <Spacy/Spaces/realSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Adapter/Kaskade/c1Operator.hh>
 #include <Spacy/Adapter/Kaskade/vector.hh>
@@ -17,7 +19,7 @@ template <class Description>
 void test(const Spacy::Kaskade::C1Operator<Description>& A, const Spacy::VectorSpace& V)
 {
 //  auto x0 = A( zero(A.domain()) );
-//  EXPECT_EQ( norm(x0) , norm(zero(A.domain())) );
+//  EXPECT_EQ( get(norm(x0)) , 1.0 );
 
   auto x1 = A.d1( zero(A.domain()) , zero(A.domain()) );
   EXPECT_EQ( norm(x1) , norm(zero(A.domain())) );
@@ -28,9 +30,7 @@ void test(const Spacy::Kaskade::C1Operator<Description>& A, const Spacy::VectorS
 
 void test(const Spacy::C1Operator& A, const Spacy::VectorSpace& V)
 {
-  auto x0 = A( zero(A.domain()) );
-//  EXPECT_EQ( norm(x0) , norm(zero(A.domain())) );
-
+//  auto x0 = A( zero(A.domain()) );
   auto x1 = A.d1( zero(A.domain()) , zero(A.domain()) );
   EXPECT_EQ( norm(x1) , norm(zero(A.domain())) );
 
@@ -44,7 +44,7 @@ void test(const Spacy::C1Operator& A, const Spacy::VectorSpace& V)
 
 TEST(Kaskade,C1Operator_Create)
 {
-  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_SETUP_TEST_FUNCTIONAL
   KASKADE_SINGLE_SPACE_OPERATOR
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
@@ -55,7 +55,7 @@ TEST(Kaskade,C1Operator_Create)
 
 TEST(Kaskade,C1Operator_MoveCreateSpacyVector)
 {
-  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_SETUP_TEST_FUNCTIONAL
   KASKADE_SINGLE_SPACE_OPERATOR
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
@@ -66,7 +66,7 @@ TEST(Kaskade,C1Operator_MoveCreateSpacyVector)
 
 TEST(Kaskade,C1Operator_MoveToSpacyVector)
 {
-  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_SETUP_TEST_FUNCTIONAL
   KASKADE_SINGLE_SPACE_OPERATOR
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
@@ -78,7 +78,7 @@ TEST(Kaskade,C1Operator_MoveToSpacyVector)
 
 TEST(Kaskade,C1Operator_FreeD1)
 {
-  KASKADE_SINGLE_SPACE_SETUP
+  KASKADE_SINGLE_SPACE_SETUP_TEST_FUNCTIONAL
   KASKADE_SINGLE_SPACE_OPERATOR
 
   auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);

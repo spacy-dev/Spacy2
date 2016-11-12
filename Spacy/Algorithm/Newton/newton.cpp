@@ -78,12 +78,17 @@ namespace Spacy
     }
 
 
-    Vector covariantNewton(const C1Operator& F, const Vector& x0, const Spacy::Newton::Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
+    Vector covariantNewton(const C1Operator& F,
+                           const Vector& x0,
+                           const Spacy::Newton::Parameter& p,
+                           const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
     {
         return Newton::newton<Newton::Damping::AffineCovariant,Newton::Termination::AffineCovariant>(F,x0,p,errorEstimator);
     }
 
-    Vector covariantNewton(const C1Operator& F, const Spacy::Newton::Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
+    Vector covariantNewton(const C1Operator& F,
+                           const Spacy::Newton::Parameter& p,
+                           const std::function<bool(const Vector&,const Vector&)>& errorEstimator)
     {
         return covariantNewton(F,zero(F.domain()),p,errorEstimator);
     }

@@ -15,6 +15,13 @@ namespace type_erasure_table_detail
     }
 
     template < class T >
+    inline void move_into_shared_ptr ( void* impl, std::shared_ptr<void>& ptr )
+    {
+        assert(impl);
+        ptr = std::make_shared<T>( std::move(*static_cast<T*>( impl )) );
+    }
+
+    template < class T >
     inline void clone_into_shared_ptr ( void* impl, std::shared_ptr<void>& ptr )
     {
         assert(impl);
@@ -34,7 +41,15 @@ namespace type_erasure_table_detail
     {
         assert(impl);
         new (&buffer) T( *static_cast<T*>( impl ) );
-	impl_ = std::shared_ptr<T>( std::shared_ptr<T>( nullptr ), static_cast<T*>( static_cast<void*>( &buffer ) ) );
+	    impl_ = std::shared_ptr<T>( std::shared_ptr<T>( nullptr ), static_cast<T*>( static_cast<void*>( &buffer ) ) );
+    }
+
+    template< class T, class Buffer >
+    inline void move_into_buffer( void* impl, Buffer& buffer, std::shared_ptr<void>& impl_ ) noexcept( std::is_nothrow_copy_constructible<T>::value )
+    {
+        assert(impl);
+        new (&buffer) T( std::move(*static_cast<T*>( impl ) ) );
+	    impl_ = std::shared_ptr<T>( std::shared_ptr<T>( nullptr ), static_cast<T*>( static_cast<void*>( &buffer ) ) );
     }
 
     template < class T >

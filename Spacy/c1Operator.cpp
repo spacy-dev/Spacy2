@@ -12,6 +12,8 @@ namespace Spacy
     C1Operator::C1Operator( const C1Operator& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     C1Operator::C1Operator( C1Operator&& other ) noexcept : functions_( other.functions_ ), type_id_( other.type_id_ )
@@ -28,6 +30,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -57,13 +61,13 @@ namespace Spacy
     Vector C1Operator::d1( const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d1( *this, read(), x, dx );
+        return functions_.d1_const_Vector_ref_const_Vector_ref( *this, read(), x, dx );
     }
 
     LinearOperator C1Operator::linearization( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.linearization( *this, read(), x );
+        return functions_.linearization_const_Vector_ref( *this, read(), x );
     }
 
     const VectorSpace& C1Operator::domain() const
@@ -86,14 +90,10 @@ namespace Spacy
 
     void* C1Operator::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 
     LinearOperator d1( const C1Operator& A, const Vector& x )

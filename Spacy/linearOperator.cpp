@@ -12,6 +12,8 @@ namespace Spacy
     LinearOperator::LinearOperator( const LinearOperator& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     LinearOperator::LinearOperator( LinearOperator&& other ) noexcept : functions_( other.functions_ ),
@@ -29,6 +31,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -123,14 +127,10 @@ namespace Spacy
 
     void* LinearOperator::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 
     LinearSolver operator^( const LinearOperator& A, int k )

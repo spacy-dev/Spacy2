@@ -24,12 +24,12 @@ namespace Spacy
 
     ZeroVectorCreator::~ZeroVectorCreator()
     {
-        if ( impl_ )
-            functions_.del( impl_ );
+        reset();
     }
 
     ZeroVectorCreator& ZeroVectorCreator::operator=( const ZeroVectorCreator& other )
     {
+        reset();
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_ ? other.functions_.clone( other.impl_ ) : nullptr;
@@ -38,6 +38,7 @@ namespace Spacy
 
     ZeroVectorCreator& ZeroVectorCreator::operator=( ZeroVectorCreator&& other ) noexcept
     {
+        reset();
         type_id_ = other.type_id_;
         functions_ = other.functions_;
         impl_ = other.impl_;
@@ -54,6 +55,12 @@ namespace Spacy
     {
         assert( impl_ );
         return functions_.call_const_VectorSpace_ptr( *this, impl_, V );
+    }
+
+    void ZeroVectorCreator::reset() noexcept
+    {
+        if ( impl_ )
+            functions_.del( impl_ );
     }
 
     Vector zero( const VectorSpace& space )

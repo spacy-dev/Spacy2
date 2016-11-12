@@ -62,6 +62,8 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, impl_ );
         }
 
@@ -72,10 +74,14 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, impl_ );
         }
 
     private:
+        void reset() noexcept;
+
         ZeroVectorCreatorDetail::Functions< ZeroVectorCreator > functions_;
         std::size_t type_id_;
         void* impl_ = nullptr;

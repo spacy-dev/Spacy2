@@ -1,15 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH
-#define SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH
+#pragma once
 
 #include <type_traits>
 
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Spaces/productSpace.hh"
-#include "Spacy/Util/Mixins/get.hh"
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/Spaces/productSpace.hh>
+#include <Spacy/Util/Mixins/get.hh>
 
 #include "l2Product.hh"
 #include "vector.hh"
@@ -68,6 +64,7 @@ namespace Spacy
       constexpr int n = boost::fusion::result_of::size<typename Description::Variables>::value;
       std::vector<std::shared_ptr< VectorSpace > > newSpaces( n );
 
+      std::cout << "create space with " << n << " variables." << std::endl;
       Detail::MakeSpaces<Description,0,n>::apply(description,newSpaces);
 
       if( dualIds.size() > 0)
@@ -78,5 +75,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_KASKADE_VECTOR_SPACE_HH

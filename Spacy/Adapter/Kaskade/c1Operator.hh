@@ -14,9 +14,9 @@
 #include "linearOperator.hh"
 #include "operatorSpace.hh"
 
-#include "fem/assemble.hh"
-#include "fem/istlinterface.hh"
-#include "linalg/triplet.hh"
+#include <fem/assemble.hh>
+#include <fem/istlinterface.hh>
+#include <linalg/triplet.hh>
 
 namespace Spacy
 {
@@ -240,7 +240,7 @@ namespace Spacy
             Spaces spaces_;
             mutable KaskadeOperator A_;
             mutable ::Spacy::Vector rhs_;
-            mutable ::Spacy::Vector old_X_A_ = {}, old_X_dA_ = {};
+            mutable ::Spacy::Vector old_X_A_{}, old_X_dA_{};
             bool onlyLowerTriangle_ = false;
             int rbegin_=0, rend_=OperatorDefinition::AnsatzVars::noOfVariables;
             int cbegin_=0, cend_=OperatorDefinition::TestVars::noOfVariables;

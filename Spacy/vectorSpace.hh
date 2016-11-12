@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_VECTOR_SPACE_HH
-#define SPACY_VECTOR_SPACE_HH
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -60,9 +56,6 @@ namespace Spacy
 
     /// Access norm.
     const Norm& norm() const;
-
-    /// Create new vector \f$v=0\f$.
-//    Vector zeroVector() const;
 
     /// Access unique index of the function space.
     unsigned index() const;
@@ -139,4 +132,3 @@ namespace Spacy
    */
   void checkSpaceCompatibility(const VectorSpace& V, const VectorSpace& W);
 }
-#endif // SPACY_VECTOR_SPACE_HH

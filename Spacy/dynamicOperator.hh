@@ -88,7 +88,9 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -98,6 +100,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 
@@ -212,7 +216,9 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -222,6 +228,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 
@@ -252,9 +260,10 @@ namespace Spacy
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &DynamicC1OperatorDetail::execution_wrapper<
                        DynamicC1Operator, typename std::decay< T >::type >::call_double_const_Vector_ref,
-                   &DynamicC1OperatorDetail::execution_wrapper< DynamicC1Operator, typename std::decay< T >::type >::d1,
-                   &DynamicC1OperatorDetail::execution_wrapper< DynamicC1Operator,
-                                                                typename std::decay< T >::type >::linearization,
+                   &DynamicC1OperatorDetail::execution_wrapper<
+                       DynamicC1Operator, typename std::decay< T >::type >::d1_double_const_Vector_ref_const_Vector_ref,
+                   &DynamicC1OperatorDetail::execution_wrapper<
+                       DynamicC1Operator, typename std::decay< T >::type >::linearization_double_const_Vector_ref,
                    &DynamicC1OperatorDetail::execution_wrapper< DynamicC1Operator, typename std::decay< T >::type >::M,
                    &DynamicC1OperatorDetail::execution_wrapper< DynamicC1Operator,
                                                                 typename std::decay< T >::type >::domain,
@@ -318,7 +327,9 @@ namespace Spacy
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -328,6 +339,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 

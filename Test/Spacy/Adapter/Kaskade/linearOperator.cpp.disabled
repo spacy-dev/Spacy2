@@ -12,32 +12,32 @@ TEST(Kaskade,LinearOperator_Create)
   KASKADE_SINGLE_SPACE_SETUP
   KASKADE_SINGLE_SPACE_OPERATOR
 
-  auto V = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>(temperatureSpace);
-  auto Op = Spacy::Kaskade::LinearOperator<VariableSetDesc,VariableSetDesc>()
+  auto V = Spacy::Kaskade::makeHilbertSpace<Descriptions>(descriptions);
+  auto Op = Spacy::Kaskade::LinearOperator<Descriptions,Descriptions>()
 
   test(Op,V);
 }
 
-TEST(Rn,LinearOperator_Apply)
-{
-  auto space = Spacy::Rn::makeHilbertSpace(testDim());
-  auto A = Spacy::Rn::LinearOperator(testMatrix(),space,space,space);
-  auto v = Spacy::Rn::Vector( testVector() , space );
+//TEST(Rn,LinearOperator_Apply)
+//{
+//  auto space = Spacy::Rn::makeHilbertSpace(testDim());
+//  auto A = Spacy::Rn::LinearOperator(testMatrix(),space,space,space);
+//  auto v = Spacy::Rn::Vector( testVector() , space );
 
-  auto w = A(v);
-  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[0] ,  1. );
-  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[1] ,  5. );
-}
+//  auto w = A(v);
+//  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[0] ,  1. );
+//  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[1] ,  5. );
+//}
 
 
-TEST(Rn,LinearOperator_ApplySolver)
-{
-  auto space = Spacy::Rn::makeHilbertSpace(testDim());
-  auto A = Spacy::Rn::LinearOperator(testMatrix(),space,space,space);
-  auto v = space.zeroVector();
-  cast_ref<Spacy::Rn::Vector>(v) = testVector();
+//TEST(Rn,LinearOperator_ApplySolver)
+//{
+//  auto space = Spacy::Rn::makeHilbertSpace(testDim());
+//  auto A = Spacy::Rn::LinearOperator(testMatrix(),space,space,space);
+//  auto v = space.zeroVector();
+//  cast_ref<Spacy::Rn::Vector>(v) = testVector();
 
-  auto w = A.solver()(v);
-  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[0] ,  1. );
-  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[1] ,  .5 );
-}
+//  auto w = A.solver()(v);
+//  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[0] ,  1. );
+//  ASSERT_EQ( cast_ref<Spacy::Rn::Vector>(w).impl()[1] ,  .5 );
+//}

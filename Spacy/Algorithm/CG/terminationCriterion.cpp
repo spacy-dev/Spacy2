@@ -27,12 +27,12 @@ namespace Spacy
 
         TerminationCriterion::~TerminationCriterion()
         {
-            if ( impl_ )
-                functions_.del( impl_ );
+            reset();
         }
 
         TerminationCriterion& TerminationCriterion::operator=( const TerminationCriterion& other )
         {
+            reset();
             functions_ = other.functions_;
             type_id_ = other.type_id_;
             impl_ = other.impl_ ? other.functions_.clone( other.impl_ ) : nullptr;
@@ -41,6 +41,7 @@ namespace Spacy
 
         TerminationCriterion& TerminationCriterion::operator=( TerminationCriterion&& other ) noexcept
         {
+            reset();
             type_id_ = other.type_id_;
             functions_ = other.functions_;
             impl_ = other.impl_;
@@ -68,8 +69,8 @@ namespace Spacy
         void TerminationCriterion::update( double alpha, double qAq, double qPq, double rPINVr )
         {
             assert( impl_ );
-            functions_.update( *this, impl_, std::move( alpha ), std::move( qAq ), std::move( qPq ),
-                               std::move( rPINVr ) );
+            functions_.update_double_double_double_double( *this, impl_, std::move( alpha ), std::move( qAq ),
+                                                           std::move( qPq ), std::move( rPINVr ) );
         }
 
         bool TerminationCriterion::vanishingStep() const
@@ -87,25 +88,31 @@ namespace Spacy
         void TerminationCriterion::setEps( double eps )
         {
             assert( impl_ );
-            functions_.setEps( *this, impl_, std::move( eps ) );
+            functions_.setEps_double( *this, impl_, std::move( eps ) );
         }
 
         void TerminationCriterion::setAbsoluteAccuracy( double accuracy )
         {
             assert( impl_ );
-            functions_.setAbsoluteAccuracy( *this, impl_, std::move( accuracy ) );
+            functions_.setAbsoluteAccuracy_double( *this, impl_, std::move( accuracy ) );
         }
 
         void TerminationCriterion::setMinimalAccuracy( double accuracy )
         {
             assert( impl_ );
-            functions_.setMinimalAccuracy( *this, impl_, std::move( accuracy ) );
+            functions_.setMinimalAccuracy_double( *this, impl_, std::move( accuracy ) );
         }
 
         void TerminationCriterion::setRelativeAccuracy( double accuracy )
         {
             assert( impl_ );
-            functions_.setRelativeAccuracy( *this, impl_, std::move( accuracy ) );
+            functions_.setRelativeAccuracy_double( *this, impl_, std::move( accuracy ) );
+        }
+
+        void TerminationCriterion::reset() noexcept
+        {
+            if ( impl_ )
+                functions_.del( impl_ );
         }
     }
 }

@@ -95,7 +95,10 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Vector& x0, const Newton::Parameter& p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
+  Vector covariantNewton(const C1Operator& F,
+                         const Vector& x0,
+                         const Newton::Parameter& p = Newton::Parameter(),
+                         const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine covariant %Newton method.
@@ -108,7 +111,9 @@ namespace Spacy
    *
    * @see Newton::Parameter
    */
-  Vector covariantNewton(const C1Operator& F, const Newton::Parameter& p = Newton::Parameter(), const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
+  Vector covariantNewton(const C1Operator& F,
+                         const Newton::Parameter& p = Newton::Parameter(),
+                         const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {});
 
   /**
    * @brief Affine contravariant %Newton method.

@@ -29,20 +29,20 @@ namespace Spacy
                                                                        typename std::decay< T >::type >::call,
                        &TerminationCriterionDetail::execution_wrapper< TerminationCriterion,
                                                                        typename std::decay< T >::type >::clear,
-                       &TerminationCriterionDetail::execution_wrapper< TerminationCriterion,
-                                                                       typename std::decay< T >::type >::update,
+                       &TerminationCriterionDetail::execution_wrapper<
+                           TerminationCriterion, typename std::decay< T >::type >::update_double_double_double_double,
                        &TerminationCriterionDetail::execution_wrapper< TerminationCriterion,
                                                                        typename std::decay< T >::type >::vanishingStep,
                        &TerminationCriterionDetail::execution_wrapper<
                            TerminationCriterion, typename std::decay< T >::type >::minimalDecreaseAchieved,
                        &TerminationCriterionDetail::execution_wrapper< TerminationCriterion,
-                                                                       typename std::decay< T >::type >::setEps,
+                                                                       typename std::decay< T >::type >::setEps_double,
                        &TerminationCriterionDetail::execution_wrapper<
-                           TerminationCriterion, typename std::decay< T >::type >::setAbsoluteAccuracy,
+                           TerminationCriterion, typename std::decay< T >::type >::setAbsoluteAccuracy_double,
                        &TerminationCriterionDetail::execution_wrapper<
-                           TerminationCriterion, typename std::decay< T >::type >::setMinimalAccuracy,
+                           TerminationCriterion, typename std::decay< T >::type >::setMinimalAccuracy_double,
                        &TerminationCriterionDetail::execution_wrapper<
-                           TerminationCriterion, typename std::decay< T >::type >::setRelativeAccuracy} ),
+                           TerminationCriterion, typename std::decay< T >::type >::setRelativeAccuracy_double} ),
                   type_id_( typeid( typename std::decay< T >::type ).hash_code() ),
                   impl_( new typename std::decay< T >::type( std::forward< T >( value ) ) )
             {
@@ -97,6 +97,8 @@ namespace Spacy
             template < class T >
             T* target() noexcept
             {
+                if ( !impl_ )
+                    return nullptr;
                 return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, impl_ );
             }
 
@@ -107,10 +109,14 @@ namespace Spacy
             template < class T >
             const T* target() const noexcept
             {
+                if ( !impl_ )
+                    return nullptr;
                 return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, impl_ );
             }
 
         private:
+            void reset() noexcept;
+
             TerminationCriterionDetail::Functions< TerminationCriterion > functions_;
             std::size_t type_id_;
             void* impl_ = nullptr;

@@ -12,6 +12,8 @@ namespace Spacy
     C2Functional::C2Functional( const C2Functional& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     C2Functional::C2Functional( C2Functional&& other ) noexcept : functions_( other.functions_ ),
@@ -29,6 +31,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -58,19 +62,19 @@ namespace Spacy
     Vector C2Functional::d1( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.d1( *this, read(), x );
+        return functions_.d1_const_Vector_ref( *this, read(), x );
     }
 
     Vector C2Functional::d2( const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d2( *this, read(), x, dx );
+        return functions_.d2_const_Vector_ref_const_Vector_ref( *this, read(), x, dx );
     }
 
     LinearOperator C2Functional::hessian( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.hessian( *this, read(), x );
+        return functions_.hessian_const_Vector_ref( *this, read(), x );
     }
 
     const VectorSpace& C2Functional::domain() const
@@ -87,14 +91,10 @@ namespace Spacy
 
     void* C2Functional::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 
     Vector d1( const C2Functional& f, const Vector& x )

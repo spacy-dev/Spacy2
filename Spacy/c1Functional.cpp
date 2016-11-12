@@ -12,6 +12,8 @@ namespace Spacy
     C1Functional::C1Functional( const C1Functional& other )
         : functions_( other.functions_ ), type_id_( other.type_id_ ), impl_( other.impl_ )
     {
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
     }
 
     C1Functional::C1Functional( C1Functional&& other ) noexcept : functions_( other.functions_ ),
@@ -29,6 +31,8 @@ namespace Spacy
         functions_ = other.functions_;
         type_id_ = other.type_id_;
         impl_ = other.impl_;
+        if ( !type_erasure_table_detail::is_heap_allocated( other.impl_.get(), other.buffer_ ) )
+            other.functions_.clone_into( other.impl_.get(), buffer_, impl_ );
         return *this;
     }
 
@@ -58,7 +62,7 @@ namespace Spacy
     Vector C1Functional::d1( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.d1( *this, read(), x );
+        return functions_.d1_const_Vector_ref( *this, read(), x );
     }
 
     const VectorSpace& C1Functional::domain() const
@@ -75,13 +79,9 @@ namespace Spacy
 
     void* C1Functional::write()
     {
-        if ( !impl_.unique() )
-        {
-            if ( type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
-                functions_.clone( impl_.get(), impl_ );
-            else
-                functions_.clone_into( impl_.get(), buffer_, impl_ );
-        }
-        return impl_.get();
+        assert( impl_ );
+        if ( !impl_.unique() && type_erasure_table_detail::is_heap_allocated( impl_.get(), buffer_ ) )
+            functions_.clone( read(), impl_ );
+        return read();
     }
 }

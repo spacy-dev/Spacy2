@@ -20,12 +20,12 @@ namespace Spacy
 
         Printer::~Printer()
         {
-            if ( impl_ )
-                functions_.del( impl_ );
+            reset();
         }
 
         Printer& Printer::operator=( Printer&& other ) noexcept
         {
+            reset();
             type_id_ = other.type_id_;
             functions_ = other.functions_;
             impl_ = other.impl_;
@@ -44,6 +44,12 @@ namespace Spacy
             assert( impl_ );
             functions_.call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref(
                 *this, impl_, tag, name, printable );
+        }
+
+        void Printer::reset() noexcept
+        {
+            if ( impl_ )
+                functions_.del( impl_ );
         }
     }
 }

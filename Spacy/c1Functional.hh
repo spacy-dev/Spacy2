@@ -26,7 +26,8 @@ namespace Spacy
                    &type_erasure_table_detail::clone_into_buffer< typename std::decay< T >::type, Buffer >,
                    &C1FunctionalDetail::execution_wrapper< C1Functional,
                                                            typename std::decay< T >::type >::call_const_Vector_ref,
-                   &C1FunctionalDetail::execution_wrapper< C1Functional, typename std::decay< T >::type >::d1,
+                   &C1FunctionalDetail::execution_wrapper< C1Functional,
+                                                           typename std::decay< T >::type >::d1_const_Vector_ref,
                    &C1FunctionalDetail::execution_wrapper< C1Functional, typename std::decay< T >::type >::domain} ),
               type_id_( typeid( typename std::decay< T >::type ).hash_code() ), impl_( nullptr )
         {
@@ -72,13 +73,15 @@ namespace Spacy
         const VectorSpace& domain() const;
 
         /**
-        * @brief Conversion of the stored implementation to @code T* @endcode.
+        * @brief Conversion of the stored implementation to @code  T* @endcode.
         * @return pointer to the stored object if conversion was successful, else nullptr
         */
         template < class T >
         T* target() noexcept
         {
-            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
+            if ( !impl_ )
+                return nullptr;
+            return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, write() );
         }
 
         /**
@@ -88,6 +91,8 @@ namespace Spacy
         template < class T >
         const T* target() const noexcept
         {
+            if ( !impl_ )
+                return nullptr;
             return type_erasure_table_detail::dynamic_cast_impl< T >( type_id_, read() );
         }
 

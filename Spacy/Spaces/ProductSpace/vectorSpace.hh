@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_SPACES_PRODUCT_SPACE_HH
-#define SPACY_SPACES_PRODUCT_SPACE_HH
+#pragma once
 
 #include <map>
 #include <memory>
@@ -112,5 +108,3 @@ namespace Spacy
     /** @} */
   }
 }
-
-#endif // SPACY_SPACES_PRODUCT_SPACE_HH

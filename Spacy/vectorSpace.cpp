@@ -66,11 +66,6 @@ namespace Spacy
     return norm_;
   }
 
-//  Vector VectorSpace::zeroVector() const
-//  {
-//    return creator_(this);
-//  }
-
   unsigned VectorSpace::index() const
   {
     return index_;

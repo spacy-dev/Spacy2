@@ -3,14 +3,15 @@
 #include <dune/grid/config.h>
 #include <dune/grid/uggrid.hh>
 
-#include "fem/assemble.hh"
-#include "fem/istlinterface.hh"
-#include "fem/gridmanager.hh"
-#include "fem/functionspace.hh"
-#include "fem/lagrangespace.hh"
-#include "fem/variables.hh"
-#include "utilities/gridGeneration.hh" //  createUnitSquare
+#include <fem/assemble.hh>
+#include <fem/istlinterface.hh>
+#include <fem/gridmanager.hh>
+#include <fem/functionspace.hh>
+#include <fem/lagrangespace.hh>
+#include <fem/variables.hh>
+#include <utilities/gridGeneration.hh> //  createUnitSquare
 #include "laplace.hh"
+#include "test_functional.hh"
 #include "costFunctional.hh"
 
 inline double testValue() { return 2.; }
@@ -26,6 +27,26 @@ constexpr int testIndex() { return 2; }
   using VariableDescriptions = boost::fusion::vector<Variable<SpaceIndex<0>,Components<1>,VariableId<0> > >; \
   using Descriptions = VariableSetDescription<Spaces,VariableDescriptions>; \
   using Functional = HeatFunctional<double,Descriptions>; \
+  using CoefficientVectors = Descriptions::CoefficientVectorRepresentation<0,1>::type; \
+  \
+  GridManager<Grid> gridManager( createUnitSquare<Grid>() ); \
+  \
+  H1Space temperatureSpace(gridManager,gridManager.grid().leafGridView(),order); \
+  Spaces spaces(&temperatureSpace); \
+  Descriptions descriptions(spaces,{ "u" }); \
+  \
+  Descriptions::VariableSet u(descriptions); \
+  CoefficientVectors x(Descriptions::CoefficientVectorRepresentation<>::init(spaces));
+
+#define KASKADE_SINGLE_SPACE_SETUP_TEST_FUNCTIONAL \
+  constexpr int dim = 2, order = 1; \
+  using Grid = Dune::UGGrid<dim>; \
+  using LeafView = Grid::LeafGridView; \
+  using H1Space = FEFunctionSpace<ContinuousLagrangeMapper<double,LeafView> >; \
+  using Spaces = boost::fusion::vector<H1Space const*>; \
+  using VariableDescriptions = boost::fusion::vector<Variable<SpaceIndex<0>,Components<1>,VariableId<0> > >; \
+  using Descriptions = VariableSetDescription<Spaces,VariableDescriptions>; \
+  using Functional = TestFunctional<double,Descriptions>; \
   using CoefficientVectors = Descriptions::CoefficientVectorRepresentation<0,1>::type; \
   \
   GridManager<Grid> gridManager( createUnitSquare<Grid>() ); \

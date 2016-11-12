@@ -6,11 +6,10 @@
 #include <fem/variables.hh>
 #include <utilities/linalg/scalarproducts.hh>
 #include <iostream>
-
 namespace Kaskade
 {
     template <class RType, class VarSet>
-    class HeatFunctional : public FunctionalBase<VariationalFunctional>
+    class TestFunctional : public FunctionalBase<WeakFormulation>
     {
     public:
         using Scalar = RType;
@@ -23,10 +22,10 @@ namespace Kaskade
         static constexpr int uSpaceIdx = boost::fusion::result_of::value_at_c<typename AnsatzVars::Variables,
         uIdx>::type::spaceIndex;
 
-        class DomainCache : public CacheBase<HeatFunctional,DomainCache>
+        class DomainCache : public CacheBase<TestFunctional,DomainCache>
         {
         public:
-            DomainCache(HeatFunctional const&,
+            DomainCache(TestFunctional const&,
                         typename AnsatzVars::VariableSet const& vars_,
                         int flags=7):
                 data(vars_)
@@ -44,24 +43,20 @@ namespace Kaskade
             Scalar
             d0() const
             {
-                return sp(du,du)/2 - f*u;
+                return 0.5*sp(du,du) + 0.5*(u*u) - f*u;
             }
 
             template<int row>
             Scalar d1_impl (VariationalArg<Scalar,dim,TestVars::template Components<row>::m> const& arg) const
             {
-                Scalar d1 = sp(du,arg.derivative) - f*arg.value;
-                std::cout << "sp = " << sp(du,arg.gradient) << " vs " << sp(du,arg.derivative) << std::endl;
-                std::cout << "src = " << (f*arg.value) << std::endl;
-                std::cout << "d1 = " << d1 << std::endl;
-                return d1;
+                return sp(du,arg.derivative) + (u*arg.value) - f*arg.value;
             }
 
             template<int row, int col>
             Scalar d2_impl (VariationalArg<Scalar,dim,TestVars::template Components<row>::m> const &arg1,
                             VariationalArg<Scalar,dim,AnsatzVars::template Components<col>::m> const &arg2) const
             {
-                return sp(arg1.derivative,arg2.derivative);
+                return sp(arg1.derivative,arg2.derivative) + (arg1.value * arg2.value);
             }
 
         private:
@@ -72,47 +67,40 @@ namespace Kaskade
         };
 
 
-        class BoundaryCache : public CacheBase<HeatFunctional,BoundaryCache>
+        class BoundaryCache : public CacheBase<TestFunctional,BoundaryCache>
         {
         public:
-            BoundaryCache(HeatFunctional const&,
-                          typename AnsatzVars::VariableSet const& vars_,
-                          int flags=7):
-                data(vars_), penalty(1e9), u(0.), uDirichletBoundaryValue(0.)
+            BoundaryCache(TestFunctional const&,
+                          typename AnsatzVars::VariableSet const&,
+                          int)
             {}
 
             template <class Position, class Evaluators>
-            void evaluateAt(Position const&, Evaluators const& evaluators)
+            void evaluateAt(Position const&, Evaluators const&)
             {
-                u = boost::fusion::at_c<uIdx>(data.data).value(boost::fusion::at_c<uSpaceIdx>(evaluators));
             }
 
             Scalar d0() const
             {
-                return penalty*(u-uDirichletBoundaryValue)*(u-uDirichletBoundaryValue)/2;
+                return 0;
             }
 
             template<int row>
             Scalar d1_impl (VariationalArg<Scalar,dim> const& arg) const
             {
-                return penalty*(u-uDirichletBoundaryValue)*arg.value;
+                return 0;
             }
 
             template<int row, int col>
             Scalar d2_impl (VariationalArg<Scalar,dim> const &arg1,
                             VariationalArg<Scalar,dim> const &arg2) const
             {
-                return penalty*arg1.value*arg2.value;
+                return 0;
             }
-
-        private:
-            typename AnsatzVars::VariableSet const& data;
-            Scalar penalty;
-            Dune::FieldVector<Scalar,AnsatzVars::template Components<uIdx>::m> u, uDirichletBoundaryValue;
         };
 
         template <int row>
-        struct D1: public FunctionalBase<VariationalFunctional>::D1<row>
+        struct D1: public FunctionalBase<WeakFormulation>::D1<row>
         {
             static bool const present   = true;
             static bool const constant  = false;
@@ -120,10 +108,10 @@ namespace Kaskade
         };
 
         template <int row, int col>
-        struct D2: public FunctionalBase<VariationalFunctional>::D2<row,col>
+        struct D2: public FunctionalBase<WeakFormulation>::D2<row,col>
         {
             static bool const present = true;
-            static bool const symmetric = false;
+            static bool const symmetric = true;
             static bool const lumped = false;
         };
 
@@ -135,9 +123,9 @@ namespace Kaskade
             else
             {
                 int stiffnessMatrixIntegrationOrder = 2*(shapeFunctionOrder-1);
-                int sourceTermIntegrationOrder = shapeFunctionOrder;        // as rhs f is constant, i.e. of order 0
+                int sourceTermIntegrationOrder = shapeFunctionOrder*shapeFunctionOrder;        // as rhs f is constant, i.e. of order 0
 
-                return std::max(stiffnessMatrixIntegrationOrder,sourceTermIntegrationOrder) + 1;
+                return std::max(stiffnessMatrixIntegrationOrder,sourceTermIntegrationOrder);
             }
         }
     };

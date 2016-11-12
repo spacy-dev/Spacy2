@@ -1,15 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "scalarProduct.hh"
 
 #include "vectorSpace.hh"
 #include "vector.hh"
-#include "Spacy/Spaces/RealSpace/vectorSpace.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/cast.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/vector.hh"
+#include <Spacy/Spaces/RealSpace/vectorSpace.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/vector.hh>
 
 namespace Spacy
 {
