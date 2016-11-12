@@ -1,33 +1,30 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_TEST_MOCK_C2_FUNCTIONAL_HH
-#define SPACY_TEST_MOCK_C2_FUNCTIONAL_HH
-
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "linearOperator.hh"
-
+namespace Spacy
+{
+    class Real;
+    class Vector;
+    class VectorSpace;
+}
 namespace Mock
 {
-  struct C2Functional
-  {
-    C2Functional(const Spacy::VectorSpace& space);
+    class LinearOperator;
 
-    Spacy::Real operator()(const Spacy::Vector&) const;
+    struct C2Functional
+    {
+        C2Functional(const Spacy::VectorSpace& space);
 
-    Spacy::Vector d1(const Spacy::Vector&) const;
+        Spacy::Real operator()(const Spacy::Vector&) const;
 
-    Spacy::Vector d2(const Spacy::Vector&, const Spacy::Vector&) const;
+        Spacy::Vector d1(const Spacy::Vector&) const;
 
-    LinearOperator hessian(const Spacy::Vector&) const;
+        Spacy::Vector d2(const Spacy::Vector&, const Spacy::Vector&) const;
 
-    const Spacy::VectorSpace& domain() const;
+        LinearOperator hessian(const Spacy::Vector&) const;
 
-  private:
-    const Spacy::VectorSpace* domain_;
-  };
+        const Spacy::VectorSpace& domain() const;
+
+    private:
+        const Spacy::VectorSpace* domain_;
+    };
 }
-
-#endif // SPACY_TEST_MOCK_C2_FUNCTIONAL_HH

@@ -1,11 +1,8 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPAYC_UTIL_BASE_ADD_ARITHMETIC_OPERATORS_HH
-#define SPAYC_UTIL_BASE_ADD_ARITHMETIC_OPERATORS_HH
+#include <Spacy/vectorSpace.hh>
 
 #include <algorithm>
-#include "Spacy/vectorSpace.hh"
 
 namespace Spacy
 {
@@ -74,16 +71,14 @@ namespace Spacy
      */
     bool operator==(const Derived& y) const
     {
-      checkSpaceCompatibility(static_cast<const Derived*>(this)->space(),y.space());
-      auto l2NormY = toDouble(y(y)), l2NormX = toDouble(static_cast<const Derived&>(*this)( static_cast<const Derived&>(*this) ));
-      auto max = std::max(l2NormX,l2NormY);
+      const auto& this_ = static_cast<const Derived&>(*this);
+      checkSpaceCompatibility(this_.space(),y.space());
+      auto max = std::max(get(this_(this_)), get(y(y)));
       if( max == 0 )
         max = 1;
       auto dx = y;
-      dx -= static_cast<const Derived&>(*this);
-      return toDouble(dx(dx)) < max*y.space().eps()*y.space().eps();
+      dx -= this_;
+      return get(dx(dx)) < max*y.space().eps()*y.space().eps();
     }
   };
 }
-
-#endif // SPAYC_UTIL_BASE_ADD_ARITHMETIC_OPERATORS_HH

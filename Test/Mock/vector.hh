@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef MOCK_VECTOR_HH
-#define MOCK_VECTOR_HH
+#pragma once
 
 #include <string>
 
@@ -47,5 +43,3 @@ namespace Mock
     const Spacy::VectorSpace* space_ = nullptr;
   };
 }
-
-#endif
