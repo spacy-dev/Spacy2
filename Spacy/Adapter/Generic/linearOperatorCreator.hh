@@ -1,12 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_GENERIC_LINEAR_OPERATOR_CREATOR_HH
-#define SPACY_ADAPTER_GENERIC_LINEAR_OPERATOR_CREATOR_HH
+#pragma once
 
 #include <functional>
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
+
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
 
 namespace Spacy
 {
@@ -32,5 +29,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_ADAPTER_GENERIC_LINEAR_OPERATOR_CREATOR_HH

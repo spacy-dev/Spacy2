@@ -1,14 +1,10 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ADAPTER_GENERIC_VECTOR_HH
-#define SPACY_ADAPTER_GENERIC_VECTOR_HH
-
-#include "Spacy/Util/Base/addArithmeticOperators.hh"
-#include "Spacy/Util/Base/vectorBase.hh"
-#include "Spacy/Util/Mixins/get.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/voider.hh"
+#include <Spacy/Util/Base/addArithmeticOperators.hh>
+#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/voider.hh>
 
 namespace Spacy
 {
@@ -115,5 +111,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_ADAPTER_GENERIC_VECTOR_HH

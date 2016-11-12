@@ -1,14 +1,10 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_ADAPTER_GENERIC_WRITE_VTK_HH
-#define SPACY_ADAPTER_GENERIC_WRITE_VTK_HH
+#pragma once
 
 #include <cassert>
 #include <string>
 
-#include "Spacy/Spaces/ProductSpace/vector.hh"
-#include "Spacy/Util/cast.hh"
+#include <Spacy/Spaces/ProductSpace/vector.hh>
+#include <Spacy/Util/cast.hh>
 
 namespace Spacy
 {
@@ -37,5 +33,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_ADAPTER_GENERIC_WRITE_VTK_HH

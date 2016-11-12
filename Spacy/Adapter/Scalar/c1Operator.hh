@@ -1,10 +1,9 @@
-#ifndef SPACY_ADAPTER_SCALAR_C1_OPERATOR_HH
-#define SPACY_ADAPTER_SCALAR_C1_OPERATOR_HH
+#pragma once
 
 #include <functional>
 #include <memory>
 
-#include "Spacy/Util/Base/operatorBase.hh"
+#include <Spacy/Util/Base/operatorBase.hh>
 
 namespace Spacy
 {
@@ -41,5 +40,3 @@ namespace Spacy
   }
   /** @} */
 }
-
-#endif // SPACY_ADAPTER_SCALAR_C1_OPERATOR_HH
