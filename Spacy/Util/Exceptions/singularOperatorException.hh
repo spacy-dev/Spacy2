@@ -1,5 +1,4 @@
-#ifndef SINGULAROPERATOREXCEPTION_HH
-#define SINGULAROPERATOREXCEPTION_HH
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -20,5 +19,3 @@ namespace Spacy
     SingularOperatorException(const std::string& function);
   };
 }
-
-#endif // SINGULAROPERATOREXCEPTION_HH

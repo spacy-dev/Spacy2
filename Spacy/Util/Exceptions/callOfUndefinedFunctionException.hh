@@ -1,5 +1,4 @@
-#ifndef SPACY_UTIL_CALL_OF_UNDEFINED_FUNCTION_EXCEPTION_HH
-#define SPACY_UTIL_CALL_OF_UNDEFINED_FUNCTION_EXCEPTION_HH
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -20,4 +19,3 @@ namespace Spacy
     CallOfUndefinedFunctionException(const std::string& function);
   };
 }
-#endif // SPACY_UTIL_CALL_OF_UNDEFINED_FUNCTION_EXCEPTION_HH

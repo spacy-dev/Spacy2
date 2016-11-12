@@ -1,5 +1,4 @@
-#ifndef SPACY_UTIL_INCOMPATIBLESPACEEXCEPTION_HH
-#define SPACY_UTIL_INCOMPATIBLESPACEEXCEPTION_HH
+#pragma once
 
 #include "genericException.hh"
 
@@ -20,5 +19,3 @@ namespace Spacy
     IncompatibleSpaceException(unsigned spaceIndex1, unsigned spaceIndex2);
   };
 }
-
-#endif // SPACY_UTIL_INCOMPATIBLESPACEEXCEPTION_HH

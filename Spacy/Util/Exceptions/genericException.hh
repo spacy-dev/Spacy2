@@ -1,5 +1,4 @@
-#ifndef SPACY_GENERIC_EXCEPTION_HH
-#define SPACY_GENERIC_EXCEPTION_HH
+#pragma once
 
 #include <string>
 #include <stdexcept>
@@ -24,5 +23,3 @@ namespace Spacy
                      const std::string& hint = {});
   };
 }
-
-#endif // SPACY_GENERIC_EXCEPTION_HH

@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_MIXIN_ACCURACY_HH
-#define SPACY_UTIL_MIXIN_ACCURACY_HH
+#pragma once
 
 #include "macros.hh"
 
@@ -15,5 +11,3 @@ GENERATE_MIXIN_HEADER(double,MinimalAccuracy,1e-15)
 GENERATE_MIXIN_HEADER(double,DampingAccuracy,5e-2)
 
 #include "undefMacros.hh"
-
-#endif // SPACY_UTIL_MIXIN_ACCURACY_HH

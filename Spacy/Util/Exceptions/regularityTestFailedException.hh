@@ -1,5 +1,4 @@
-#ifndef SPACY_UTIL_REGULARITY_TEST_FAILED_EXCEPTION_HH
-#define SPACY_UTIL_REGULARITY_TEST_FAILED_EXCEPTION_HH
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -21,5 +20,3 @@ namespace Spacy
     RegularityTestFailedException(const std::string& function, double nu);
   };
 }
-
-#endif // SPACY_UTIL_REGULARITY_TEST_FAILED_EXCEPTION_HH

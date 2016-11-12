@@ -1,5 +1,4 @@
-#ifndef SPACY_UTIL_EXCEPTIONS_NOT_CONVERGED_HH
-#define SPACY_UTIL_EXCEPTIONS_NOT_CONVERGED_HH
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -18,5 +17,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_UTIL_EXCEPTIONS_NOT_CONVERGED_HH

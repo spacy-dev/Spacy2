@@ -1,5 +1,4 @@
-#ifndef SPACY_UTIL_INVALID_ARGUMENT_EXCEPTION_HH
-#define SPACY_UTIL_INVALID_ARGUMENT_EXCEPTION_HH
+#pragma once
 
 #include <string>
 #include <stdexcept>
@@ -23,5 +22,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_UTIL_INVALID_ARGUMENT_EXCEPTION_HH

@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_MIXIN_VERBOSITY_HH
-#define SPACY_UTIL_MIXIN_VERBOSITY_HH
+#pragma once
 
 #include "mixinConnection.hh"
 
@@ -42,5 +38,3 @@ namespace Spacy
     };
   }
 }
-
-#endif // SPACY_UTIL_MIXIN_VERBOSITY_HH
