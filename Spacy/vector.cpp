@@ -133,4 +133,14 @@ namespace Spacy
         if ( !y.space().isPrimalWRT( x.space() ) )
             throw IncompatibleSpaceException( x.space().index(), y.space().index() );
     }
+
+    Vector operator*( const Mixin::Get< Real >& x, Vector y )
+    {
+        return y *= get( get( x ) );
+    }
+
+    Vector operator*( const Vector& x, const Mixin::Get< Real >& y )
+    {
+        return y * x;
+    }
 }

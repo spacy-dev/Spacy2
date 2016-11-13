@@ -24,6 +24,7 @@ namespace
   }
 }
 
+#ifndef NDEBUG
 TEST(LinearOperator,Assert)
 {
   auto X = createMockBanachSpace();
@@ -49,6 +50,7 @@ TEST(LinearOperator,Assert)
   EXPECT_DEATH( g-=f , "" );
   EXPECT_DEATH( g(f) , "" );
 }
+#endif
 
 TEST(LinearOperator,IsEmpty)
 {

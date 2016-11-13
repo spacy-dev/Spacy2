@@ -161,4 +161,8 @@ namespace Spacy
     {
         return y * x;
     }
+
+    Vector operator*( const Mixin::Get< Real >& x, Vector y );
+
+    Vector operator*( const Vector& x, const Mixin::Get< Real >& y );
 }

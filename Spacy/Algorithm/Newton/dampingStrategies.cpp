@@ -33,13 +33,13 @@ namespace Spacy
 
         while(true)
         {
-          if( regularityTestFailed(get(nu)) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",get(nu));
+          if( regularityTestFailed(nu) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",get(get(nu)));
 
           auto trial = x + nu*dx;
           auto ds = DFInv_(-F_(trial)) - (1.-nu)*dx;
           auto normDs = norm(ds);
 
-          auto muPrime = 0.5 * nu * nu / normDs;
+          auto muPrime = DampingFactor{0.5 * nu * nu / normDs};
 
           if( normDs/normDx >= 1)
           {
@@ -54,6 +54,8 @@ namespace Spacy
           if( nuPrime >= 4*nu)
           {
             nu = 4*nu;
+            // The following line is the damping strategy according Deuflhard.
+            // To avoid cycling the above heuristic is employed.
 //            nu = nuPrime;
             continue;
           }
@@ -79,7 +81,7 @@ namespace Spacy
 
         while( true )
         {
-          if( !regularityTestPassed(get(nu))) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",get(nu));
+          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",get(get(nu)));
 
           auto trial = x + nu*dx;
 
@@ -90,7 +92,7 @@ namespace Spacy
 
           if( theta >= 1 )
           {
-            nu = min( muPrime , 0.5*nu );
+            nu = min( muPrime , get(0.5*nu) );
             continue;
           }
 

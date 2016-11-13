@@ -3,6 +3,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/Algorithm/Generic/iterativeMethod.hh>
+#include <Spacy/Util/cast.hh>
 #include <Spacy/Util/mixins.hh>
 
 #include <string>
@@ -186,7 +187,7 @@ namespace
     Vector x0, b0;
   };
 
-  inline auto testAccuracy()
+  inline Real testAccuracy()
   {
     return 1e-6;
   }
@@ -243,7 +244,7 @@ TEST(GenericIterativeMethod,Converged)
   EXPECT_TRUE( dummySolver.initialized );
   EXPECT_FALSE( dummySolver.resetted );
   EXPECT_TRUE( dummySolver.postProcessed );
-  EXPECT_DOUBLE_EQ( toDouble(x) , 1 );
+  EXPECT_DOUBLE_EQ( get(cast_ref<Real>(x)) , 1 );
 }
 
 TEST(GenericIterativeMethod,Converged_TerminatingStep)
@@ -258,7 +259,7 @@ TEST(GenericIterativeMethod,Converged_TerminatingStep)
   EXPECT_TRUE( dummySolver.initialized );
   EXPECT_FALSE( dummySolver.resetted );
   EXPECT_TRUE( dummySolver.postProcessed );
-  EXPECT_DOUBLE_EQ( toDouble(x) , 1 );
+  EXPECT_DOUBLE_EQ( get(cast_ref<Real>(x)) , 1 );
 }
 
 TEST(GenericIterativeMethod,RestartAndTerminate)
@@ -272,7 +273,7 @@ TEST(GenericIterativeMethod,RestartAndTerminate)
   EXPECT_TRUE( dummySolver.initialized );
   EXPECT_TRUE( dummySolver.resetted );
   EXPECT_TRUE( dummySolver.postProcessed );
-  EXPECT_DOUBLE_EQ( toDouble(x) , 1 );
+  EXPECT_DOUBLE_EQ( get(cast_ref<Real>(x)) , 1 );
 }
 
 TEST(GenericIterativeMethod,RestartAndDontTerminate)
@@ -286,20 +287,20 @@ TEST(GenericIterativeMethod,RestartAndDontTerminate)
   EXPECT_TRUE( dummySolver.initialized );
   EXPECT_TRUE( dummySolver.resetted );
   EXPECT_TRUE( dummySolver.postProcessed );
-  EXPECT_DOUBLE_EQ( toDouble(x) , 1 );
+  EXPECT_DOUBLE_EQ( get(cast_ref<Real>(x)) , 1 );
 }
 
 TEST(GenericIterativeMethod,MixinParameters)
 {
   auto dummySolver = Generic::IterativeMethod<Step,MixinTerminationCriterion>(Step(),MixinTerminationCriterion());
   dummySolver.setAbsoluteAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getAbsoluteAccuracy() , testAccuracy() );
+  EXPECT_EQ( dummySolver.getTerminationCriterion().getAbsoluteAccuracy() , testAccuracy() );
   dummySolver.setRelativeAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getRelativeAccuracy() , testAccuracy() );
+  EXPECT_EQ( dummySolver.getTerminationCriterion().getRelativeAccuracy() , testAccuracy() );
   dummySolver.setMinimalAccuracy(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().getMinimalAccuracy() , testAccuracy() );
+  EXPECT_EQ( dummySolver.getTerminationCriterion().getMinimalAccuracy() , testAccuracy() );
   dummySolver.setEps(testAccuracy());
-  EXPECT_DOUBLE_EQ( dummySolver.getTerminationCriterion().eps() , testAccuracy() );
+  EXPECT_EQ( dummySolver.getTerminationCriterion().eps() , testAccuracy() );
   dummySolver.setVerbosityLevel(2);
   EXPECT_EQ( dummySolver.getTerminationCriterion().getVerbosityLevel() , 2 );
 }

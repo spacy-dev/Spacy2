@@ -3,6 +3,7 @@
 #include <Spacy/linearSolver.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/Util/cast.hh>
 #include "linearSolver.hh"
 
 namespace Spacy
@@ -17,7 +18,7 @@ namespace Spacy
 
         ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const
         {
-            return Real( get()*toDouble(dx) );
+            return Real( get()*Mixin::get(cast_ref<Real>(dx)) );
         }
 
         ::Spacy::Real LinearOperator::operator()(const LinearOperator& dx) const

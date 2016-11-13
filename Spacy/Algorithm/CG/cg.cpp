@@ -34,9 +34,9 @@ namespace Spacy
       definiteness_ = DefiniteNess::PositiveDefinite;
       result = Result::Failed;
 
-      terminate.setEps(eps());
-      terminate.setRelativeAccuracy(getRelativeAccuracy());
-      terminate.setAbsoluteAccuracy(getAbsoluteAccuracy());
+      terminate.setEps(get(eps()));
+      terminate.setRelativeAccuracy(get(getRelativeAccuracy()));
+      terminate.setAbsoluteAccuracy(get(getAbsoluteAccuracy()));
 
       if( type_ == "CG" || type_ == "TCG" )
         return cgLoop(x,b);
@@ -96,7 +96,7 @@ namespace Spacy
         auto alpha = sigma/qAq;
         //if( getVerbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
-        terminate.update(toDouble(alpha),toDouble(qAq),toDouble(qPq),toDouble(sigma));
+        terminate.update(get(alpha),get(qAq),get(qPq),get(sigma));
 
         //  don't trust small numbers
         if( vanishingStep(step) )
@@ -107,9 +107,11 @@ namespace Spacy
         }
 
 
+        auto Ax = A_(x);
+        std::cout << "qAq/xAx: " << get(qAq) << "/" << get(Ax(x)) << std::endl;
         if( terminateOnNonconvexity(qAq,qPq,x,q,step) ) break;
 
-        x += (toDouble(alpha) * q);
+        x += (get(alpha) * q);
 
         // convergence test
         if (terminate())
@@ -129,8 +131,8 @@ namespace Spacy
         auto beta = sigmaNew/sigma;
         sigma = sigmaNew;
 
-        q *= toDouble(beta); q += Qr;  //  q = Qr + beta*q
-        Pq *= toDouble(beta); Pq += r; // Pq = r + beta*Pq
+        q *= get(beta); q += Qr;  //  q = Qr + beta*q
+        Pq *= get(beta); Pq += r; // Pq = r + beta*Pq
       }
 
       return x;

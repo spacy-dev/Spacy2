@@ -2,6 +2,7 @@
 
 #include <Spacy/operator.hh>
 #include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/Util/cast.hh>
 #include <Test/mockSetup.hh>
 
 using namespace Spacy;
@@ -36,7 +37,7 @@ namespace
 
   void test(const Operator& f, const VectorSpace& X, const VectorSpace& Y)
   {
-    EXPECT_DOUBLE_EQ( toDouble(f(zero(X))) , 3 );
+    EXPECT_DOUBLE_EQ( get(cast_ref<Real>(f(zero(X)))) , 3 );
     EXPECT_EQ( X.index() , f.domain().index() );
     EXPECT_EQ( Y.index() , f.range().index() );
   }

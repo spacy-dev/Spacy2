@@ -1,6 +1,3 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "eps.hh"
 
 #include <cmath>
@@ -10,27 +7,27 @@ namespace Spacy
   namespace Mixin
   {
 
-    Eps::Eps(double eps) noexcept
+    Eps::Eps(Real eps) noexcept
       : eps_(eps)
     {}
 
-    void Eps::setEps(double eps)
+    void Eps::setEps(Real eps)
     {
       eps_ = eps;
       notify();
     }
 
-    double Eps::eps() const noexcept
+    Real Eps::eps() const noexcept
     {
       return eps_;
     }
 
-    double Eps::sqrtEps() const noexcept
+    Real Eps::sqrtEps() const noexcept
     {
       return sqrt(eps_);
     }
 
-    double Eps::cbrtEps() const noexcept
+    Real Eps::cbrtEps() const noexcept
     {
       return cbrt(eps_);
     }

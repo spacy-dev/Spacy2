@@ -149,7 +149,12 @@ namespace Spacy
 
                 if( verbose() ) std::cout << spacing2 << "nu = " << nu << ", tau = " << tau << ", |dx| = " << norm_dx << std::endl;
                 if( verbose() ) std::cout << spacing2 << "|x| = " << norm_x << std::endl;
-                if( getVerbosityLevel() > 1) std::cout << spacing2 << "(Dn,Dt) = " << Dn*Dt/(norm_Dn*norm(Dt)) << std::endl;
+                if( getVerbosityLevel() > 1)
+                {
+                    auto div = get(norm_Dn*norm(Dt));
+                    div = div ? div : 1;
+                    std::cout << spacing2 << "(Dn,Dt)(|Dn||Dt|) = " << Dn*Dt/div << std::endl;
+                }
             } // end iteration
 
             return x;
@@ -200,7 +205,7 @@ namespace Spacy
                 if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
                 {
                     auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
-                                                toDouble(trcgRelativeAccuracy) , eps() , verbose() );
+                                                get(trcgRelativeAccuracy) , eps() , verbose() );
                     setParams(trcg);
                     return IndefiniteLinearSolver(trcg);
                 }
@@ -208,10 +213,10 @@ namespace Spacy
 
             //    if( trcg == nullptr )
             auto trcg = makeTCGSolver( L_.hessian(x) , normalSolver ,
-                                       toDouble(trcgRelativeAccuracy) , eps(), verbose() );
+                                       get(trcgRelativeAccuracy) , eps(), verbose() );
             //  trcg.setIterativeRefinements(iterativeRefinements());
             //  trcg.setDetailedVerbosity(verbose_detailed());
-            trcg.setRelativeAccuracy( 0.01 );
+//            trcg.setRelativeAccuracy( getRelativeAccuracy() );
             if( norm(primalProjection(x)) > 0)
                 trcg.setAbsoluteAccuracy( getRelativeAccuracy()*norm(primalProjection(x)) );
             else
@@ -225,8 +230,6 @@ namespace Spacy
             }
 
             return IndefiniteLinearSolver(trcg);
-            //return std::move(trcg);
-            //    return std::unique_ptr<IndefiniteLinearSolver>( trcg.release() );
         }
 
         Vector AffineCovariantSolver::computeNormalStep(const Vector &x) const
@@ -289,7 +292,7 @@ namespace Spacy
         {
             auto norm_Dt = norm(Dt);
             if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "|Dt| = " << norm_Dt << " vs. " << norm(primalProjection(Dt)) << std::endl;
-            auto cubic = CompositeStep::makeCubicModel( nu, Dn, Dt , L_ , x , get(omegaL) );
+            auto cubic = CompositeStep::makeCubicModel( nu, Dn, Dt , L_ , x , omegaL );
             auto tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubic);
 
             auto ds = Vector{0*Dt};
@@ -309,7 +312,7 @@ namespace Spacy
                 if( getVerbosityLevel() > 1 ) std::cout << spacing2 << "nu = " << nu << std::endl;
 
                 auto quadraticModel = CompositeStep::makeQuadraticModel(nu,Dn,Dt,L_,x);
-                auto cubicModel = CompositeStep::makeCubicModel(nu, Dn, Dt, L_, x, get(omegaL));
+                auto cubicModel = CompositeStep::makeCubicModel(nu, Dn, Dt, L_, x, omegaL);
 
                 if( acceptanceTest == AcceptanceTest::LeftAdmissibleDomain ) tau *= 0.5;
                 else tau = computeTangentialStepDampingFactor(nu*norm_Dn,norm_Dt,cubicModel);
@@ -380,10 +383,10 @@ namespace Spacy
             } // end while (damping factors)
             while( acceptanceTest != AcceptanceTest::Passed );
 
-            logNu(get(nu));
-            logTau(get(tau));
-            logOmegaC(get(omegaC));
-            logOmegaF(get(omegaL));
+            logNu(get(get(nu)));
+            logTau(get(get(tau)));
+            logOmegaC(get(get(omegaC)));
+            logOmegaF(get(get(omegaL)));
             logDn(get(norm_Dn));
             logDt(get(norm_Dt));
             logDx(get(norm_dx));
@@ -433,13 +436,11 @@ namespace Spacy
                 eta = ( L_(primalProjection(soc)) - cubic(0) )/( cubic(get(tau)) - cubic(0) );
                       else eta = 1;
 
-            double omegaLnew = (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
+            auto omegaLnew = (L_(primalProjection(soc)) - q_tau)*6/(norm_dx*norm_dx*norm_dx);
 
-            if(
-                    !( abs(eta-1) < 0.05 && omegaLnew > omegaL )
-                    &&
-                    ( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaL < omegaLnew )
-                    )
+            if( !( abs(eta-1) < 0.05 && omegaLnew > omegaL ) &&
+                ( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaL < omegaLnew )
+              )
                 omegaL = omegaLnew;
 
             if( getVerbosityLevel() > 1 )
@@ -508,8 +509,8 @@ namespace Spacy
 
         void AffineCovariantSolver::regularityTest(DampingFactor nu, DampingFactor tau) const
         {
-            if( !regularityTestPassed(get(nu))) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (nu,...)",get(nu));
-            //      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (...,tau)",toDouble(tau));
+            if( !regularityTestPassed(nu)) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (nu,...)",get(get(nu)));
+            //      if( !regularityTestPassed(tau) ) throw RegularityTestFailedException("AffineCovariantSolver::regularityTest (...,tau)",get(tau));
         }
     }
 }

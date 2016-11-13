@@ -90,4 +90,14 @@ namespace Spacy
   {
     return y * x;
   }
+
+  Vector operator*(const Mixin::Get<Real>& x, Vector y)
+  {
+    return y *= get(get(x));
+  }
+
+  Vector operator*(const Vector& x, const Mixin::Get<Real>& y)
+  {
+    return y * x;
+  }
 }

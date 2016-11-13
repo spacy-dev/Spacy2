@@ -18,7 +18,7 @@
 #include <Test/Mock/vectorCreator.hh>
 #include <Test/Mock/scalarProduct.hh>
 #include <Test/Mock/norm.hh>
-#include <iostream>
+
 template <class Space, class Spaces, unsigned... indices>
 inline auto makeTuple(Space&& space, const Spaces& spaces, std::integer_sequence<unsigned,indices...>)
 {
@@ -153,16 +153,8 @@ inline auto& valueOfComponent(Spacy::Vector& v, unsigned i)
 
 inline auto createFirstTestVector(const Spacy::VectorSpace& V)
 {
-    std::cout << "v" << std::endl;
     auto v = zero(V);
-    std::cout << "vp" << std::endl;
-    auto& vp = Spacy::cast_ref<Spacy::ProductSpace::Vector>(v);
-    std::cout << "component" << std::endl;
-    auto& component = vp.component(0);
-    std::cout << "assign 1" << std::endl;
-    value(Spacy::cast_ref<Mock::Vector>(component)) = 1;
-
-//    valueOfComponent(v,0) = 1;
+    valueOfComponent(v,0) = 1;
     valueOfComponent(v,1) = 2;
     return v;
 }
@@ -173,4 +165,9 @@ inline auto createSecondTestVector(const Spacy::VectorSpace& V)
     valueOfComponent(v,0) = 1;
     valueOfComponent(v,1) = 3;
     return v;
+}
+
+double toDouble(const Spacy::Vector& v)
+{
+    return Spacy::Mixin::get(Spacy::cast_ref<Spacy::Real>(v));
 }

@@ -51,7 +51,7 @@ namespace Spacy
     {
       return newton(F,x0,
                     Damping(F),
-                    Terminate(F,p.getRelativeAccuracy(),p.getVerbosityLevel()>1),
+                    Terminate(F,get(p.getRelativeAccuracy()),p.getVerbosityLevel()>1),
                     errorEstimator,p);
     }
   }

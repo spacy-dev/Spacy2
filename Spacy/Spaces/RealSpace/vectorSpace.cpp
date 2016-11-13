@@ -13,7 +13,7 @@ Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace(bool defaultIndex)
                                       } ,
                                     [](const ::Spacy::Vector& x, const ::Spacy::Vector& y)
                                       {
-                                        return Real( toDouble( cast_ref<Real>(x) * cast_ref<Real>(y) ) );
+                                        return Real( get( cast_ref<Real>(x) * cast_ref<Real>(y) ) );
                                       } ,
                                     defaultIndex
                                    );

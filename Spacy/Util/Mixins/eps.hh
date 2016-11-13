@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Spacy/Spaces/RealSpace/real.hh>
+
 #include "mixinConnection.hh"
 
 namespace Spacy
@@ -13,24 +15,24 @@ namespace Spacy
       /**
        * @param eps maximal attainable accuracy \f$\varepsilon\f$
        */
-      explicit Eps(double eps = 1e-15) noexcept;
+      explicit Eps(Real eps = 1e-15) noexcept;
 
-      void setEps(double eps);
+      void setEps(Real eps);
 
       /// Access \f$\varepsilon\f$.
-      double eps() const noexcept;
+      Real eps() const noexcept;
 
       ///Access \f$\sqrt\varepsilon\f$.
-      double sqrtEps() const noexcept;
+      Real sqrtEps() const noexcept;
 
       /// Access \f$\varepsilon^{1/3}\f$.
-      double cbrtEps() const noexcept;
+      Real cbrtEps() const noexcept;
 
       /// update function for observer pattern.
       void update(Eps* changedSubject);
 
     private:
-      double eps_;
+      Real eps_;
     };
   }
 }

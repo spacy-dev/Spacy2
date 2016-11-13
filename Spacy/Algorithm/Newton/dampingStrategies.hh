@@ -1,15 +1,12 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
+#pragma once
 
-#ifndef SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH
-#define SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH
+#include <Spacy/vector.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Algorithm/dampingFactor.hh>
+#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/regularityTest.hh>
 
 #include <functional>
-#include "Spacy/vector.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Algorithm/dampingFactor.hh"
-#include "Spacy/Util/Mixins/eps.hh"
-#include "Spacy/Util/Mixins/regularityTest.hh"
 
 namespace Spacy
 {
@@ -79,5 +76,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_ALGORITHM_NEWTON_DAMPING_STRATEGIES_HH

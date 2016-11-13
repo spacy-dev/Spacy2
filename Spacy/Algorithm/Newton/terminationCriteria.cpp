@@ -1,11 +1,8 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
 #include "terminationCriteria.hh"
 
-#include "Spacy/Algorithm/dampingFactor.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/c1Operator.hh"
+#include <Spacy/Algorithm/dampingFactor.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/c1Operator.hh>
 
 #include <cmath>
 #include <iostream>
@@ -28,7 +25,7 @@ namespace Spacy
           beforeFirstIteration_ = false;
           return false;
         }
-        if(abs(nu-1) > eps()) return false;
+        if(abs(get(nu-1)) > eps()) return false;
 
         auto norm_x = norm(x), norm_dx = norm(dx);
         if( norm_x == 0 && norm_dx == 0 ) return true;
@@ -59,7 +56,7 @@ namespace Spacy
           return false;
         }
 
-        if(abs(nu-1) > eps()) return false;
+        if(abs(get(nu-1)) > eps()) return false;
 
         if( verbose() ) std::cout << "Residual: " << norm(F_(x)) << ", relative accuracy: " << getRelativeAccuracy() << ", initialResidual: " << initialResidual << std::endl;
 

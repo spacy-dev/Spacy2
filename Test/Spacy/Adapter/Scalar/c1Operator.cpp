@@ -5,6 +5,8 @@
 #include <Spacy/Adapter/Scalar/c1Operator.hh>
 #include <Spacy/Adapter/Scalar/linearOperator.hh>
 
+#include <Test/mockSetup.hh>
+
 using namespace Spacy;
 
 auto linearFunctionValue(double x)

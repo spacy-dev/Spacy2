@@ -83,7 +83,7 @@ TEST(CompositeStep,CubicModel)
   auto f = QuadraticFunctional(X);
 
   auto nu = DampingFactor(0.5);
-  auto omega = 2.;
+  auto omega = LipschitzConstant{2.};
   auto dn = Real(1);
   auto dt = Real(2);
   auto x = Real(1);
@@ -92,9 +92,9 @@ TEST(CompositeStep,CubicModel)
   auto q0 = CompositeStep::makeQuadraticModel(nu,dn,dt,f,x);
   auto q1 = CompositeStep::makeQuadraticNormModel(nu,dn,dt);
 
-  EXPECT_EQ( get(q(0))   , q0(0) + omega/6*pow(q1(0),1.5)   );
+  EXPECT_EQ( get(q(0))   , get(q0(0) + omega/6*pow(q1(0),1.5)   ));
   auto real_nu = Real(get(nu));
-  EXPECT_EQ( get(q(real_nu))  , q0(real_nu) + omega/6*pow(q1(real_nu),1.5) );
-  EXPECT_EQ( get(q(1))   , q0(1) + omega/6*pow(q1(1),1.5)   );
+  EXPECT_EQ( get(q(real_nu))  , get(q0(real_nu) + omega/6*pow(q1(real_nu),1.5)) );
+  EXPECT_EQ( get(q(1))   , get(q0(1) + omega/6*pow(q1(1),1.5)   ));
 }
 

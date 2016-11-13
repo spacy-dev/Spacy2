@@ -1,6 +1,7 @@
 #include <Test/gtest.hh>
 
 #include <Spacy/Algorithm/Generic/step.hh>
+#include <Spacy/Util/cast.hh>
 #include <Spacy/Util/mixins.hh>
 
 using namespace Spacy;
@@ -14,7 +15,7 @@ namespace
 TEST(GenericStep,Empty)
 {
   auto step = Generic::Step<>();
-  EXPECT_EQ( toDouble(step.getFinalIterate()) , 0 );
+  EXPECT_EQ( get(cast_ref<Real>(step.getFinalIterate())) , 0 );
 }
 
 TEST(GenericStep,Parameters)

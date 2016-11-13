@@ -67,7 +67,7 @@ namespace Spacy
   }
 
 
-  CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, double relativeAccuracy, double eps, bool verbose)
+  CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, Real relativeAccuracy, Real eps, bool verbose)
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "CG" );
     solver.setRelativeAccuracy(relativeAccuracy);
@@ -76,7 +76,7 @@ namespace Spacy
     return std::move(solver);
   }
 
-  CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, double relativeAccuracy, double eps, bool verbose)
+  CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy, Real eps, bool verbose)
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "RCG");
     solver.setRelativeAccuracy(relativeAccuracy);
@@ -85,7 +85,7 @@ namespace Spacy
     return std::move(solver);
   }
 
-  CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, double relativeAccuracy, double eps, bool verbose)
+  CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, Real relativeAccuracy, Real eps, bool verbose)
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "TCG");
     solver.setRelativeAccuracy(relativeAccuracy);
@@ -94,7 +94,7 @@ namespace Spacy
     return std::move(solver);
   }
 
-  CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy, double eps, bool verbose)
+  CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy, Real eps, bool verbose)
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "TRCG");
     solver.setRelativeAccuracy(relativeAccuracy);

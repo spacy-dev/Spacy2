@@ -1,30 +1,15 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Util/Mixins/get.hh>
-#include <Spacy/Util/Base/addArithmeticOperators.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
 
 #include <Test/mockSetup.hh>
 
 using namespace Spacy;
 
-struct TestDerived : Mixin::Get<double> , VectorBase , AddArithmeticOperators<TestDerived>
-{
-  TestDerived(const VectorSpace& space)
-    : Mixin::Get<double>(0.) ,
-      VectorBase(space)
-  {}
-
-  auto operator()(const TestDerived& y) const
-  {
-    return Real(get() * y.get());
-  }
-};
-
 TEST(VectorBase,Add)
 {
   auto space = createMockBanachSpace();
-  TestDerived v0(space), v1(space);
+  Real v0(space), v1(space);
   v0.get() = 1;
   v1.get() = 2;
 
@@ -34,7 +19,7 @@ TEST(VectorBase,Add)
 TEST(VectorBase,Subtract)
 {
   auto space = createMockBanachSpace();
-  TestDerived v0(space), v1(space);
+  Real v0(space), v1(space);
   v0.get() = 1;
   v1.get() = 2;
 
@@ -44,7 +29,7 @@ TEST(VectorBase,Subtract)
 TEST(VectorBase,Multiply)
 {
   auto space = createMockBanachSpace();
-  TestDerived v0(space);
+  Real v0(space);
   v0.get() = 2;
 
   ASSERT_EQ( (v0 *= 3).get() , 6. );
@@ -53,7 +38,7 @@ TEST(VectorBase,Multiply)
 TEST(VectorBase,Negation)
 {
   auto space = createMockBanachSpace();
-  TestDerived v0(space);
+  Real v0(space);
   v0.get() = 2;
 
   ASSERT_EQ( (-v0).get() , -2. );
@@ -62,7 +47,7 @@ TEST(VectorBase,Negation)
 TEST(VectorBase,Comparison)
 {
   auto space = createMockBanachSpace();
-  TestDerived v0(space), v1(space);
+  Real v0(space), v1(space);
   v0.get() = 1;
   v1.get() = v0.get() - 1e-6;
 

@@ -1,11 +1,12 @@
-#ifndef TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
-#define TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
+#pragma once
 
 #include <gtest/gtest.h>
-#include "Spacy/c1Operator.hh"
-#include "Spacy/Adapter/scalar.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
-#include "Spacy/Util/Exceptions/notConvergedException.hh"
+
+#include <Spacy/c1Operator.hh>
+#include <Spacy/Adapter/scalar.hh>
+#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/notConvergedException.hh>
 
 struct Linear
 {
@@ -67,8 +68,6 @@ struct Quadratic
   }
 };
 
-#endif // TEST_ALGORITHM_QUALITY_EQUATION_SOLVER_SCALAR_TESTS_HH
-
 #define GENERATE_SCALAR_TEST(ALGORITHM,TESTCASE,REQUIRED_STEPS) \
 TEST(EquationSolver_##ALGORITHM##_Test,TESTCASE##Equation) \
 { \
@@ -82,7 +81,7 @@ TEST(EquationSolver_##ALGORITHM##_Test,TESTCASE##Equation) \
   auto x2 = solver2(x0); \
   \
   ASSERT_TRUE( x1==x2 ); \
-  ASSERT_EQ( toDouble(x1) , testCase.solution() ); \
-  ASSERT_EQ( toDouble(x2) , testCase.solution() ); \
+  ASSERT_EQ( get(cast_ref<Spacy::Real>(x1)) , testCase.solution() ); \
+  ASSERT_EQ( get(cast_ref<Spacy::Real>(x2)) , testCase.solution() ); \
   ASSERT_THROW( solver3(x0) , Spacy::Exception::NotConverged ); \
 }

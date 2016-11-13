@@ -4,45 +4,45 @@
 
 namespace Spacy
 {
-    LipschitzConstant::LipschitzConstant(double initialOmega)
-        : Mixin::Get<double>(initialOmega)
+    LipschitzConstant::LipschitzConstant(Real initialOmega)
+        : Mixin::Get<Real>(initialOmega)
     {}
 
-    LipschitzConstant& LipschitzConstant::operator=(double newOmega)
+    LipschitzConstant& LipschitzConstant::operator=(Real newOmega)
     {
         previousOmega_ = get();
         if( newOmega < 0 ) get() = minFactor_*previousOmega_;
         else get() = newOmega;
 
-        get() = std::max(get(),eps());
-        get() = std::min(get(),previousOmega_*maxFactor_);
+        get() = max(get(), eps());
+        get() = min(get(), previousOmega_*maxFactor_);
         return *this;
     }
 
-    double LipschitzConstant::previous() const
+    Real LipschitzConstant::previous() const
     {
         return previousOmega_;
     }
 
-    void LipschitzConstant::setMaxFactor(double factor)
+    void LipschitzConstant::setMaxFactor(Real factor)
     {
         maxFactor_ = factor;
     }
 
-    void LipschitzConstant::setMinFactor(double factor)
+    void LipschitzConstant::setMinFactor(Real factor)
     {
         minFactor_ = factor;
     }
 
     Real operator*(const LipschitzConstant& x, Real y)
     {
-        get(y) *= get(x);
+        y *= get(x);
         return y;
     }
 
     Real operator*(Real y, const LipschitzConstant& x)
     {
-        get(y) *= get(x);
+        y *= get(x);
         return y;
     }
 }

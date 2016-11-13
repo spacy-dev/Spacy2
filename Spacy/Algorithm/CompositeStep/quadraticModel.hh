@@ -4,6 +4,7 @@
 
 #include <Spacy/Algorithm/Scalar/quadratic.hh>
 #include <Spacy/Algorithm/dampingFactor.hh>
+#include <Spacy/Algorithm/lipschitzConstant.hh>
 
 namespace Spacy
 {
@@ -52,7 +53,7 @@ namespace Spacy
        * @param squaredNorm quadratic model \f$q_2\f$ of a norm (generated with makeQuadraticNormModel(...))
        * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
        */
-      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, double omega);
+      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega);
 
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
@@ -64,7 +65,7 @@ namespace Spacy
     private:
       Quadratic quadraticModel_;
       Quadratic squaredNorm_;
-      double omega_;
+      Real omega_;
     };
 
     /**
@@ -78,7 +79,7 @@ namespace Spacy
      * @return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega )
      */
     CubicModel makeCubicModel(DampingFactor nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, double omega);
+                              const C2Functional& L, const Vector& x, LipschitzConstant omega);
   }
 
   /** @} */

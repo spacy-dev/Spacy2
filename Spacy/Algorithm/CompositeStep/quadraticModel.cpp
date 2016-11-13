@@ -37,12 +37,12 @@ namespace Spacy
     }
 
     CubicModel makeCubicModel(DampingFactor nu, const Vector& dn, const Vector& dt,
-                              const C2Functional& L, const Vector& x, double omega)
+                              const C2Functional& L, const Vector& x, LipschitzConstant omega)
     {
-      return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), omega );
+      return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), get(omega) );
     }
 
-    CubicModel::CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, double omega)
+    CubicModel::CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega)
       : quadraticModel_(quadraticModel), squaredNorm_(squaredNorm), omega_(omega)
     {}
 

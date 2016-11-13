@@ -8,7 +8,7 @@ namespace Spacy
 {
     /// A simple model for a Lipschitz constant \f$\omega\f$.
     class LipschitzConstant :
-            public Mixin::Get< double >,
+            public Mixin::Get<Real>,
             public Mixin::Eps
     {
     public:
@@ -16,7 +16,7 @@ namespace Spacy
          * @brief Construct Lipschitz constant.
          * @param initialOmega initial estimate for Lipschitz constant
          */
-        explicit LipschitzConstant(double initialOmega = 1e-3);
+        explicit LipschitzConstant(Real initialOmega = 1e-3);
 
         /**
          * @brief Assign new value to Lipschitz constant.
@@ -26,28 +26,28 @@ namespace Spacy
          *
          * @param newOmega new Lipschitz constant
          */
-        LipschitzConstant& operator=(double newOmega);
+        LipschitzConstant& operator=(Real newOmega);
 
         /**
          * @brief Access previous value of Lipschitz constant.
          * @return \f$\omega_{k-1}\f$
          */
-        double previous() const;
+        Real previous() const;
 
         /**
          * @brief Set allowed maximal relative increase.
          * @param factor new allowed maximal relative increase
          */
-        void setMaxFactor(double factor);
+        void setMaxFactor(Real factor);
 
         /**
          * @brief Set relative decrease for negative estimates.
          * @param factor new relative decrease for negative estimates of the Lipschitz constant
          */
-        void setMinFactor(double factor);
+        void setMinFactor(Real factor);
 
     private:
-        double previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-3;
+        Real previousOmega_ = 1e-3, maxFactor_ = 1e6, minFactor_ = 1e-3;
     };
 
     Real operator*(const LipschitzConstant& x, Real y);

@@ -134,7 +134,7 @@ TEST(ProductSpaceVector, ApplyAsDualToSelf)
   auto V = makeProductHilbertSpace();
   auto v = createFirstTestVector(std::get<0>(V));
 
-  ASSERT_EQ( toDouble(v(v)) , 5. );
+  ASSERT_EQ( get(v(v)) , 5. );
 }
 
 TEST(ProductSpaceVector, ApplyAsDual)
@@ -148,7 +148,7 @@ TEST(ProductSpaceVector, ApplyAsDual)
   auto primal = createFirstTestVector(V);
   auto dual = createFirstTestVector(W);
 
-  ASSERT_EQ( toDouble(dual(primal)) , 5. );
+  ASSERT_EQ( get(dual(primal)) , 5. );
   ASSERT_THROW( primal(dual) , IncompatibleSpaceException );
 }
 

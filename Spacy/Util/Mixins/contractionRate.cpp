@@ -6,9 +6,9 @@ namespace Spacy
 {
   namespace Mixin
   {
-    ContractionRate::ContractionRate(double desiredContraction,
-                                     double relaxedDesiredContraction,
-                                     double maximalContraction) noexcept
+    ContractionRate::ContractionRate(Real desiredContraction,
+                                     Real relaxedDesiredContraction,
+                                     Real maximalContraction) noexcept
       : desiredContraction_(desiredContraction),
         relaxedDesiredContraction_(relaxedDesiredContraction),
         maximalContraction_(maximalContraction)
@@ -17,42 +17,42 @@ namespace Spacy
       assert( relaxedDesiredContraction_ < maximalContraction_ );
     }
 
-    void ContractionRate::setContraction(double contraction) noexcept
+    void ContractionRate::setContraction(Real contraction) noexcept
     {
       contraction_ = contraction;
     }
 
-    void ContractionRate::setDesiredContraction(double desiredContraction) noexcept
+    void ContractionRate::setDesiredContraction(Real desiredContraction) noexcept
     {
       desiredContraction_ = desiredContraction;
     }
 
-    void ContractionRate::setRelaxedDesiredContraction(double relaxedDesiredContraction) noexcept
+    void ContractionRate::setRelaxedDesiredContraction(Real relaxedDesiredContraction) noexcept
     {
       relaxedDesiredContraction_ = relaxedDesiredContraction;
     }
 
-    void ContractionRate::setMaximalContraction(double maximalContraction) noexcept
+    void ContractionRate::setMaximalContraction(Real maximalContraction) noexcept
     {
       maximalContraction_ = maximalContraction;
     }
 
-    double ContractionRate::getContraction() const noexcept
+    Real ContractionRate::getContraction() const noexcept
     {
       return contraction_;
     }
 
-    double ContractionRate::getDesiredContraction() const noexcept
+    Real ContractionRate::getDesiredContraction() const noexcept
     {
       return desiredContraction_;
     }
 
-    double ContractionRate::getRelaxedDesiredContraction() const noexcept
+    Real ContractionRate::getRelaxedDesiredContraction() const noexcept
     {
       return relaxedDesiredContraction_;
     }
 
-    double ContractionRate::getMaximalContraction() const noexcept
+    Real ContractionRate::getMaximalContraction() const noexcept
     {
       return maximalContraction_;
     }

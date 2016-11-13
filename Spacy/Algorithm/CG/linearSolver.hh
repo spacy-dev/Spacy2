@@ -64,7 +64,7 @@ namespace Spacy
    * @param verbose verbosity
    * @return CGSolver(A,P,"CG")
    */
-  CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
+  CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
 
   /**
    * @brief Construct regularized conjugate gradient method.
@@ -75,7 +75,7 @@ namespace Spacy
    * @param verbose verbosity
    * @return CGSolver(A,P,"RCG")
    */
-  CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
+  CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
 
   /**
    * @brief Construct truncated conjugate gradient method.
@@ -86,7 +86,7 @@ namespace Spacy
    * @param verbose verbosity
    * @return CGSolver(A,P,"TCG")
    */
-  CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
+  CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
 
   /**
    * @brief Construct truncated regularized conjugate gradient method.
@@ -97,7 +97,7 @@ namespace Spacy
    * @param verbose verbosity
    * @return CGSolver(A,P,"TRCG")
    */
-  CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy = 1e-15, double eps = 1e-15, bool verbose = false);
+  CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
 
   /** @} */
 }

@@ -4,31 +4,31 @@ namespace Spacy
 {
   namespace Mixin
   {
-    DecreaseCondition::DecreaseCondition(double minimalDecrease, double relaxedMinimalDecrease) noexcept
+    DecreaseCondition::DecreaseCondition(Real minimalDecrease, Real relaxedMinimalDecrease) noexcept
       : minimalDecrease_(minimalDecrease), relaxedMinimalDecrease_(relaxedMinimalDecrease)
     {}
 
-    void DecreaseCondition::setMinimalDecrease(double decrease) noexcept
+    void DecreaseCondition::setMinimalDecrease(Real decrease) noexcept
     {
       minimalDecrease_ = decrease;
     }
 
-    double DecreaseCondition::minimalDecrease() const noexcept
+    Real DecreaseCondition::minimalDecrease() const noexcept
     {
       return minimalDecrease_;
     }
 
-    void DecreaseCondition::setRelaxedMinimalDecrease(double decrease) noexcept
+    void DecreaseCondition::setRelaxedMinimalDecrease(Real decrease) noexcept
     {
       relaxedMinimalDecrease_ = decrease;
     }
 
-    bool DecreaseCondition::acceptableDecrease(double decrease) const noexcept
+    bool DecreaseCondition::acceptableDecrease(Real decrease) const noexcept
     {
       return decrease > minimalDecrease_;
     }
 
-    bool DecreaseCondition::acceptableRelaxedDecrease(double decrease) const noexcept
+    bool DecreaseCondition::acceptableRelaxedDecrease(Real decrease) const noexcept
     {
       return decrease > relaxedMinimalDecrease_;
     }

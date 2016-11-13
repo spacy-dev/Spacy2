@@ -2,27 +2,27 @@
 
 namespace Spacy
 {
-  Mixin::RegularityTest::RegularityTest(double lowerBound) noexcept
+  Mixin::RegularityTest::RegularityTest(DampingFactor lowerBound) noexcept
     : lowerBound_(lowerBound)
   {}
 
-  void Mixin::RegularityTest::setLowerBound(double lowerBound)
+  void Mixin::RegularityTest::setLowerBound(DampingFactor lowerBound)
   {
     lowerBound_ = lowerBound;
     notify();
   }
 
-  double Mixin::RegularityTest::getLowerBound() const noexcept
+  DampingFactor Mixin::RegularityTest::getLowerBound() const noexcept
   {
     return lowerBound_;
   }
 
-  bool Mixin::RegularityTest::regularityTestPassed(double nu) const noexcept
+  bool Mixin::RegularityTest::regularityTestPassed(DampingFactor nu) const noexcept
   {
     return nu > lowerBound_;
   }
 
-  bool Mixin::RegularityTest::regularityTestFailed(double nu) const noexcept
+  bool Mixin::RegularityTest::regularityTestFailed(DampingFactor nu) const noexcept
   {
     return !regularityTestPassed(nu);
   }

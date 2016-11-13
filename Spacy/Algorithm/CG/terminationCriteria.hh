@@ -1,15 +1,11 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
-#define SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
+#pragma once
 
 #include <vector>
 
-#include "Spacy/Util/Mixins/accuracy.hh"
-#include "Spacy/Util/Mixins/eps.hh"
-#include "Spacy/Util/Mixins/maxSteps.hh"
-#include "Spacy/Util/Mixins/verbosity.hh"
+#include <Spacy/Util/Mixins/accuracy.hh>
+#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/maxSteps.hh>
+#include <Spacy/Util/Mixins/verbosity.hh>
 
 namespace Spacy
 {
@@ -206,5 +202,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_CONJUGATE_GRADIENTS_TERMINATION_CRITERION
