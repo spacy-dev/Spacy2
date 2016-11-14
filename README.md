@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/spacy-dev/Spacy.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy/builds)
 [![Coverity Status](https://scan.coverity.com/projects/10277/badge.svg)](https://scan.coverity.com/projects/spacy)
-[![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg)](https://coveralls.io/github/spacy-dev/Spacy)
+[![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg?branch=master)](https://coveralls.io/github/spacy-dev/Spacy?branch=master)
 [![Gitter chat](https://badges.gitter.im/spacy-dev/spacy.png)](https://gitter.im/spacy-dev/Spacy)
 
 # Spacy - Vector Space Algorithms
