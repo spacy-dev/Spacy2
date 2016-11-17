@@ -9,6 +9,13 @@
 Download via
   - git clone https://github.com/spacy-dev/Spacy.git
 
+### gerrithub
+Download from gerrithub via
+  - git clone https://review.gerrithub.io/spacy-dev/Spacy
+
+Push to gerrithub via (with <branch>=master,...)
+  - git push origin HEAD:refs/for/<branch>
+
 ### Installation
 Go to download folder, i.e.
   - cd Spacy
@@ -20,7 +27,8 @@ and type
   - make
 
 ### Examples
-Currently there are examples for usage with Kaskade 7 and FEniCS. These are located in 
+Currently there are examples for usage with Kaskade 7 and FEniCS.
+These are located in 
  - Spacy/Examples/Kaskade, 
  - Spacy/Examples/FEniCS. 
 
