@@ -58,5 +58,3 @@ namespace Spacy
     return f.hessian(x);
   }
 }
-
-#endif // SPACY_C2_FUNCTIONAL_HH
