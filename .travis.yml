@@ -29,28 +29,28 @@ matrix:
     # LINUX
     # GCC 5
     - os: linux
-      env: COMPILER=g++-5 CCOMPILER=gcc-5 COMPUTE_COVERAGE=false
+      env: COMPILER=g++-5 CCOMPILER=gcc-5 COMPUTE_COVERAGE=false MAKE_DOC=false
       compiler: gcc
 
     # GCC 6
     - os: linux
-      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=gcov-6 COMPUTE_COVERAGE=true
+      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=gcov-6 COMPUTE_COVERAGE=true MAKE_DOC=true
       compiler: gcc
       
     # OSX
     # Xcode 6.4
     - os: osx
-      env: COMPUTE_COVERAGE=false
+      env: COMPUTE_COVERAGE=false MAKE_DOC=false
       osx_image: xcode6.4
       
     # Xcode 7.3
     - os: osx
-      env: COMPUTE_COVERAGE=false
+      env: COMPUTE_COVERAGE=false MAKE_DOC=false
       osx_image: xcode7.3
       
     # Xcode 8
     - os: osx
-      env: COMPUTE_COVERAGE=false
+      env: COMPUTE_COVERAGE=false MAKE_DOC=false
       osx_image: xcode8
      
 install:
@@ -144,4 +144,10 @@ after_success:
     if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
       lcov --gcov-tool gcov-6 --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
       coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info
+    fi
+  - |
+    if [[ "${MAKE_DOC}" == "true" ]]; then
+      sudo apt-get install doxygen
+      cd $TRAVIS_BUILD_DIR/build
+      make doc
     fi
