@@ -141,9 +141,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbb2954f22af6d8248ec9c382a5b1ccd"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::AffineContravariant" ref="afbb2954f22af6d8248ec9c382a5b1ccd" args="(const C1Operator &amp;F)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html#afbb2954f22af6d8248ec9c382a5b1ccd">AffineContravariant</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a494dcf0e1c7837b4b6bd18107efcfe0b"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::operator()" ref="a494dcf0e1c7837b4b6bd18107efcfe0b" args="(const std::function&lt; Vector(const Vector &amp;)&gt; &amp;, const Vector &amp;x, const Vector &amp;dx) const " -->
-<a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html#a494dcf0e1c7837b4b6bd18107efcfe0b">operator()</a> (const std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt; &amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;dx) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute damping factor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html#a494dcf0e1c7837b4b6bd18107efcfe0b">operator()</a> (const std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt; &amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;dx) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b4c38a60848c0ab665fb3a81e181786"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::setEps" ref="a6b4c38a60848c0ab665fb3a81e181786" args="(Real eps)" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setEps</b> (<a class="el" href="classSpacy_1_1Real.html">Real</a> <a class="el" href="classSpacy_1_1Mixin_1_1Eps.html#a812b99b0abc1d78a34b4114907f23f52">eps</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a812b99b0abc1d78a34b4114907f23f52"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::eps" ref="a812b99b0abc1d78a34b4114907f23f52" args="() const noexcept" -->
@@ -193,6 +191,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div class="textblock"><p>Affine contravariant damping strategy as described in. </p>
 <p><a class="el" href="citelist.html#CITEREF_Deuflhard2004">Deuflhard2004</a> [Sec. 3.2]. </p>
 </div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a494dcf0e1c7837b4b6bd18107efcfe0b"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::operator()" ref="a494dcf0e1c7837b4b6bd18107efcfe0b" args="(const std::function&lt; Vector(const Vector &amp;)&gt; &amp;, const Vector &amp;x, const Vector &amp;dx) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a> Spacy::Newton::Damping::AffineContravariant::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;&#160;</td>
+          <td class="paramname"><em>dx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Compute damping factor. </p>
+ 
+</div>
+</div>
 <a class="anchor" id="acb6b3e8c76ebdbded0ec610959513caf"></a><!-- doxytag: member="Spacy::Newton::Damping::AffineContravariant::regularityTestPassed" ref="acb6b3e8c76ebdbded0ec610959513caf" args="(DampingFactor nu) const noexcept" -->
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +298,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 20 2016 20:37:13 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 20 2016 20:44:28 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
