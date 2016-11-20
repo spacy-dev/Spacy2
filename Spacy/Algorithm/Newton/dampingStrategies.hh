@@ -49,7 +49,7 @@ namespace Spacy
         /// Constructor.
         AffineContravariant(const C1Operator& F);
 
-        /// Compute damping factor.
+        /// @copydoc AffineCovariant::operator()()
         DampingFactor operator()(const std::function<Vector(const Vector&)>&, const Vector& x, const Vector& dx) const;
 
       private:
@@ -68,8 +68,8 @@ namespace Spacy
         None(const C1Operator&);
 
         /**
-         * @brief Compute damping factor.
-         * @return 1
+         * @brief Compute damping factor. Always returns 1.
+         * @return DampingFactor(1)
          */
         DampingFactor operator()(const std::function<Vector(const Vector&)>&, const Vector&, const Vector&) const;
       };

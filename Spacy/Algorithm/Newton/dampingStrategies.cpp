@@ -23,7 +23,8 @@ namespace Spacy
         auto mu = 1.;
         auto normDx =  norm(dx);
 
-        if( normDx < sqrtEps() * norm(x) ) return nu;
+        if( normDx < sqrtEps() * norm(x) )
+            return nu;
 
         if( oldNu > 0 )
         {
@@ -33,7 +34,8 @@ namespace Spacy
 
         while(true)
         {
-          if( regularityTestFailed(nu) ) throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",get(get(nu)));
+          if( regularityTestFailed(nu) )
+              throw RegularityTestFailedException("Newton::DampingStrategy::AffineCovariant",get(get(nu)));
 
           auto trial = x + nu*dx;
           auto ds = DFInv_(-F_(trial)) - (1-nu)*dx;
@@ -49,7 +51,8 @@ namespace Spacy
 
           auto nuPrime = min(1.,muPrime);
 
-          if( nu == 1 && nuPrime == 1 && normDs < eps() ) break;
+          if( nu == 1 && nuPrime == 1 && normDs < eps() )
+              break;
 
           if( nuPrime >= 4*nu)
           {
@@ -75,13 +78,16 @@ namespace Spacy
       {
         auto nu = DampingFactor(1);
         auto norm_F_x = norm(F_(x));
-        if( norm_F_x < sqrtEps() ) return nu;
+        if( norm_F_x < sqrtEps() )
+            return nu;
+
         if( muPrime > 0 )
           nu = min( 1. , muPrime*norm_F_x_old/norm_F_x );
 
         while( true )
         {
-          if( !regularityTestPassed(nu)) throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",get(get(nu)));
+          if( !regularityTestPassed(nu))
+              throw RegularityTestFailedException("Newton::DampingStrategy::AffineContravariant",get(get(nu)));
 
           auto trial = x + nu*dx;
 
