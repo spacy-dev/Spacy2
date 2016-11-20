@@ -4,7 +4,7 @@
 
 TEST(Algorithm_Scalar_Quadratic,CreateAndApply)
 {
-  auto f = Spacy::Quadratic(3,2,1);
+  auto f = Spacy::Scalar::Quadratic(3,2,1);
 
   EXPECT_EQ( f(2) , 11 );
 }

@@ -474,21 +474,22 @@ namespace Spacy
         DampingFactor AffineCovariantSolver::computeTangentialStepDampingFactor(Real norm_dn, Real norm_Dt, const CompositeStep::CubicModel& cubic) const
         {
             auto tau = DampingFactor(1);
-            if( !L_ ) return tau;
-            if( norm_Dt < sqrtEps() ) return tau;
+            if( !L_ )
+                return tau;
+            if( norm_Dt < sqrtEps() )
+                return tau;
 
             auto maxTau = Real{1.};
             if( pow(getRelaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
                 maxTau = min( 1. , sqrt( pow( 2*getRelaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-            if(maxTau >= 1e-12) tau = findLogGlobalMinimizer( cubic, 1e-8, maxTau , getDampingAccuracy() );
-            if(tau <= 1e-8) get(tau) = 0.0;
-            return tau;
+            return DampingFactor(Scalar::findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() ));
         }
 
         AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(Real norm_x, Real norm_Dx, Real eta)
         {
-            if( norm_Dx < eps() * norm_x ) return AcceptanceTest::Passed;
+            if( norm_Dx < eps() * norm_x )
+                return AcceptanceTest::Passed;
 
             if( !!L_ && !acceptableDecrease( get(eta) ) )
             {
