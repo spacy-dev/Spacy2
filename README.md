@@ -13,8 +13,8 @@ Download via
 Download from gerrithub via
   - git clone https://review.gerrithub.io/spacy-dev/Spacy
 
-Push to gerrithub via (with <branch>=master,...)
-  - git push origin HEAD:refs/for/<branch>
+Push to gerrithub via (with my-branch=master,...)
+  - git push origin HEAD:refs/for/my-branch
 
 ### Installation
 Go to download folder, i.e.
@@ -27,11 +27,16 @@ and type
   - make
 
 ### Examples
-Currently there are examples for usage with Kaskade 7 and FEniCS.
+Currently there are examples for
+  - simple usage without external libraries (currently a scalar example)
+  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox)
+  - [FEniCS](https://fenicsproject.org).
+
 These are located in
  - Spacy/Examples/Kaskade,
  - Spacy/Examples/FEniCS.
 
+Paths to Kaskade, resp. FEniCs may need to be adjusted according to your setup.
 
 
 
