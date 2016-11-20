@@ -151,4 +151,4 @@ after_success:
       cd $TRAVIS_BUILD_DIR/build
       make doc
       ../deploy_doc.sh
-   fi
+    fi
