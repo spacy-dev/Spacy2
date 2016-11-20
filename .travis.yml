@@ -155,11 +155,4 @@ after_success:
       cd $TRAVIS_BUILD_DIR/build
       make doc
       ../deploy_doc.sh
-
-      # Now that we're all set up, we can push.
-      cd SpacyDoc
-      git status
-      echo "pushing to gh-pages"
-      REPO=`git config remote.origin.url`
-      git push ${REPO/https:\/\/github.com\//git@github.com:} gh-pages
     fi

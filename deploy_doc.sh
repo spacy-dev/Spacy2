@@ -52,3 +52,7 @@ chmod 600 deploy_key
 eval `ssh-agent -s`
 ssh-add deploy_key
 
+# Now that we're all set up, we can push.
+echo "pushing to gh-pages"
+git push ${REPO/https:\/\/github.com\//git@github.com:} gh-pages
+
