@@ -6,7 +6,6 @@ addons:
     - ubuntu-toolchain-r-test
 
     packages:
-    - dot
     - g++-5
     - gcc-5
     - g++-6
