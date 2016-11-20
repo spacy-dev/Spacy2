@@ -148,6 +148,6 @@ after_success:
   - |
     if [[ "${MAKE_DOC}" == "true" ]]; then
       sudo apt-get install doxygen
-      cd $TRAVIS_BUILD_DIR/build
-      make doc
+      cd $TRAVIS_BUILD_DIR
+      ./deploy_doc.sh
     fi
