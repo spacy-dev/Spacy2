@@ -5,6 +5,8 @@ SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
+  echo "generate documentation"
+  cd $TRAVIS_BUILD_DIR/build
   make doc
 }
 
@@ -21,11 +23,13 @@ SHA=`git rev-parse --verify HEAD`
 
 # Clone the existing gh-pages for this repo into out/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
+echo "clone repo"
 git clone $REPO SpacyDoc
 cd SpacyDoc
+echo "checkout $TARGET_BRANCH"
 git checkout $TARGET_BRANCH
+echo "remove doc"
 rm -rf doc
-cd ../build
 
 # Run our compile script
 doCompile
@@ -58,4 +62,5 @@ eval `ssh-agent -s`
 ssh-add deploy_key
 
 # Now that we're all set up, we can push.
+echo "pushing to $TARGET_BRANCH"
 git push $SSH_REPO $TARGET_BRANCH
