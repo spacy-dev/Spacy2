@@ -1,4 +1,4 @@
-<map id="Spacy::Generic::LinearOperatorCreator&lt; LinearOperator &gt;" name="Spacy::Generic::LinearOperatorCreator&lt; LinearOperator &gt;">
-<area shape="rect" id="node3" href="$structSpacy_1_1Rn_1_1LinearOperatorCreator.html" title="VectorCreator for linear operators , based on the Eigen library. " alt="" coords="19,169,197,211"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="35,5,181,32"/>
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$structSpacy_1_1Rn_1_1LinearOperatorCreator.html" title="VectorCreator for linear operators , based on the Eigen library." alt="" coords="20,160,348,189"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Spacy::OperatorBase" alt="" coords="111,5,257,35"/>
 </map>

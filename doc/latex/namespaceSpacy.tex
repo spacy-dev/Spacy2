@@ -1,570 +1,519 @@
-\hypertarget{namespaceSpacy}{}\section{Spacy Namespace Reference}
-\label{namespaceSpacy}\index{Spacy@{Spacy}}
+\hypertarget{namespaceSpacy}{\section{\-Spacy \-Namespace \-Reference}
+\label{namespaceSpacy}\index{\-Spacy@{\-Spacy}}
+}
 
 
-Main namespace of the Spacy library.  
+\-Main namespace of the \-Spacy library.  
 
 
-\subsection*{Namespaces}
+\subsection*{\-Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \hyperlink{namespaceSpacy_1_1CG}{CG}
-\begin{DoxyCompactList}\small\item\em Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Truncated Regularized CG). \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1CompositeStep}{Composite\+Step}
-\begin{DoxyCompactList}\small\item\em Contains the affine covariant composite step method of \cite{Lubkoll2015}, \cite{Lubkoll2015a}. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1FEniCS}{F\+Eni\+CS}
-\begin{DoxyCompactList}\small\item\em Contains vector spaces, functionals and operators for \href{www.fenicsproject.org}{\tt F\+Eni\+CS}. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Generic}{Generic}
-\begin{DoxyCompactList}\small\item\em Contains generic implementations for easier definitions of vectors and a generic scalar product implementation. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade}
-\begin{DoxyCompactList}\small\item\em Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade7}. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Mixin}{Mixin}
-\begin{DoxyCompactList}\small\item\em Contains small independent components that are frequently used and can be added to classes via (multiple) inheritance. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Newton}{Newton}
-\begin{DoxyCompactList}\small\item\em Newton methods, largely following \cite{Deuflhard2004}. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Optional}{Optional}
+namespace \hyperlink{namespaceSpacy_1_1CG}{\-C\-G}
+\begin{DoxyCompactList}\small\item\em \-Conjugate gradient methods for convex and nonconvex problems (\-C\-G, \-Truncated \-C\-G, \-Regularized \-C\-G and \-Truncated \-Regularized \-C\-G). \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Newton}{\-Newton}
+\begin{DoxyCompactList}\small\item\em \-Newton methods, largely following \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1CompositeStep}{\-Composite\-Step}
+\begin{DoxyCompactList}\small\item\em \-Contains the affine covariant composite step method of. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1ProductSpace}{\-Product\-Space}
+\begin{DoxyCompactList}\small\item\em \-A product space that supports distinction between primal and dual variables. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1FEniCS}{\-F\-Eni\-C\-S}
+\begin{DoxyCompactList}\small\item\em \-Contains vector spaces, functionals and operators for \href{www.fenicsproject.org}{\tt \-F\-Eni\-C\-S}. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Kaskade}{\-Kaskade}
+\begin{DoxyCompactList}\small\item\em \-Contains vector spaces, functionals and operators for \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt \-Kaskade7}. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Scalar}{\-Scalar}
+\begin{DoxyCompactList}\small\item\em \-Contains functionals and operators for scalar problems. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Rn}{\-Rn}
+\begin{DoxyCompactList}\small\item\em \-Contains functionals and operators for finite dimensional vector space problems, based on \href{http://eigen.tuxfamily.org}{\tt \-Eigen}. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Generic}{\-Generic}
+\begin{DoxyCompactList}\small\item\em \-Contains generic implementations for easier definitions of vectors and a generic scalar product implementation. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Mixin}{\-Mixin}
+\begin{DoxyCompactList}\small\item\em \-Contains small independent components that are frequently used and can be added to classes via (multiple) inheritance. \end{DoxyCompactList}\item 
+namespace \hyperlink{namespaceSpacy_1_1Optional}{\-Optional}
 \item 
- \hyperlink{namespaceSpacy_1_1ProductSpace}{Product\+Space}
-\begin{DoxyCompactList}\small\item\em A product space that supports distinction between primal and dual variables. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Rn}{Rn}
-\begin{DoxyCompactList}\small\item\em Contains functionals and operators for finite dimensional vector space problems, based on \href{http://eigen.tuxfamily.org}{\tt Eigen}. \end{DoxyCompactList}\item 
- \hyperlink{namespaceSpacy_1_1Scalar}{Scalar}
-\begin{DoxyCompactList}\small\item\em Contains functionals and operators for scalar problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-class \hyperlink{classSpacy_1_1AdaptiveInducedScalarProduct}{Adaptive\+Induced\+Scalar\+Product}
-\begin{DoxyCompactList}\small\item\em Induced scalar product $(x,y)_M = (Mx)y$, where $M:X\rightarrow X^*$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1AddArithmeticOperators}{Add\+Arithmetic\+Operators}
-\begin{DoxyCompactList}\small\item\em Base class providing some operations for vectors via C\+R\+TP. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1C1Functional}{C1\+Functional}
-\begin{DoxyCompactList}\small\item\em Type-\/erased differentiable functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased differentiable operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional}
-\begin{DoxyCompactList}\small\item\em Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1CallOfUndefinedFunctionException}{Call\+Of\+Undefined\+Function\+Exception}
-\begin{DoxyCompactList}\small\item\em Exception to be thrown if a virtual function is not implemented. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Cubic}{Cubic}
-\begin{DoxyCompactList}\small\item\em A one-\/dimensional cubic function $q(t) = a + bt + ct^2 + dt^3$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor}
-\begin{DoxyCompactList}\small\item\em A simple model of a damping factor $\nu$ that is computed up to a prescribed accuracy $\varepsilon$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1DynamicC1Operator}{Dynamic\+C1\+Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1DynamicLinearOperator}{Dynamic\+Linear\+Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased time-\/dependent linear operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Functional}{Functional}
-\begin{DoxyCompactList}\small\item\em Type-\/erased functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1FunctionalBase}{Functional\+Base}
-\begin{DoxyCompactList}\small\item\em Base class for twice differentiable functionals $ f:\ X\rightarrow \mathbb{R}$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1GenericException}{Generic\+Exception}
-\begin{DoxyCompactList}\small\item\em A generic exception class that serves as base for all exceptions in this library. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1HilbertSpaceNorm}{Hilbert\+Space\+Norm}
-\begin{DoxyCompactList}\small\item\em $ \|\cdot\|=\sqrt{(\cdot,\cdot)} $ \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1IncompatibleSpaceException}{Incompatible\+Space\+Exception}
-\begin{DoxyCompactList}\small\item\em Exception to be thrown when encountering incompatible spaces. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1IndefiniteLinearSolver}{Indefinite\+Linear\+Solver}
-\begin{DoxyCompactList}\small\item\em Type-\/erased indefinite linear solver. Additionally monitors if the underlying operator is positive definite. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1InducedScalarProduct}{Induced\+Scalar\+Product}
-\begin{DoxyCompactList}\small\item\em Induced scalar product $(x,y)_M = (Mx)y$, where $M:X\rightarrow X^*$. \end{DoxyCompactList}\item 
-struct \hyperlink{structSpacy_1_1IsVoid}{Is\+Void}
-\item 
-class \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased linear operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1LipschitzConstant}{Lipschitz\+Constant}
-\begin{DoxyCompactList}\small\item\em A simple model for a Lipschitz constant $\omega$. \end{DoxyCompactList}\item 
-struct \hyperlink{structSpacy_1_1Logger}{Logger}
-\begin{DoxyCompactList}\small\item\em \hyperlink{structSpacy_1_1Logger}{Logger} for some quantity of type T. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Operator}{Operator}
-\begin{DoxyCompactList}\small\item\em Type-\/erased operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1OperatorBase}{Operator\+Base}
-\begin{DoxyCompactList}\small\item\em Base class for operators $A:\ X\rightarrow Y$, between function spaces $X$ and $Y$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Parameter}{Parameter}
-\begin{DoxyCompactList}\small\item\em Basic parameters for simple algorithms. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1PrimalInducedScalarProduct}{Primal\+Induced\+Scalar\+Product}
-\begin{DoxyCompactList}\small\item\em Induced scalar product for the primal variables (i.\+e. for constrained optimization problems). \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Quadratic}{Quadratic}
-\begin{DoxyCompactList}\small\item\em A one-\/dimensional quadratic function $q(t) = a + bt + ct^2$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Real}{Real}
-\begin{DoxyCompactList}\small\item\em Real number. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1RegularityTestFailedException}{Regularity\+Test\+Failed\+Exception}
-\begin{DoxyCompactList}\small\item\em Exception to be thrown if regularity test fails. \end{DoxyCompactList}\item 
-struct \hyperlink{structSpacy_1_1Require}{Require}
-\begin{DoxyCompactList}\small\item\em Check if Concept is satisfied. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1SingularOperatorException}{Singular\+Operator\+Exception}
-\begin{DoxyCompactList}\small\item\em Exception to be thrown if singular operators are inverted. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Vector}{Vector}
-\begin{DoxyCompactList}\small\item\em Type-\/erased vector. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1VectorBase}{Vector\+Base}
-\begin{DoxyCompactList}\small\item\em Base class for vector implementations. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space}
-\begin{DoxyCompactList}\small\item\em Function space $(X,\|\cdot\|)$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\+Vector\+Creator}
-\begin{DoxyCompactList}\small\item\em Each \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} needs a zero-\/vector creator to support generation of vector space elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-using \hyperlink{namespaceSpacy_a052e6b83b913fc316b0c2a2cd9535431}{Dynamic\+Callable\+Operator} = std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(double, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$
-\item 
-using \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver} = std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$\hypertarget{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{}\label{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}
-
-\begin{DoxyCompactList}\small\item\em Type-\/erased linear solver. \end{DoxyCompactList}\item 
-using \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} = std\+::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&) $>$
-\item 
-using \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} = std\+::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$
-\begin{DoxyCompactList}\small\item\em Type-\/erased norm. \end{DoxyCompactList}\item 
-using \hyperlink{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{Scalar\+Product} = std\+::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$
-\begin{DoxyCompactList}\small\item\em Type-\/erased scalar product. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class... $>$ }\\using \hyperlink{namespaceSpacy_a31be7cf4f499f7ee57b5730ff15115e8}{void\+\_\+t} = void\hypertarget{namespaceSpacy_a31be7cf4f499f7ee57b5730ff15115e8}{}\label{namespaceSpacy_a31be7cf4f499f7ee57b5730ff15115e8}
-
-\begin{DoxyCompactList}\small\item\em Most fascinating type ever. Is always void. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \{ {\bfseries P\+R\+I\+M\+AL} =0, 
-{\bfseries D\+U\+AL} =1
- \}\hypertarget{group__ProductSpaceGroup_gaf65a00de69cbc808db7cddb728796894}{}\label{group__ProductSpaceGroup_gaf65a00de69cbc808db7cddb728796894}
-
+namespace \hyperlink{namespaceSpacy_1_1Detail}{\-Detail}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsection*{\-Classes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \hyperlink{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}{d1} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&A, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)
-\begin{DoxyCompactList}\small\item\em For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1} (const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&f, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)
-\begin{DoxyCompactList}\small\item\em For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \hyperlink{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{d2} (const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&f, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)
-\begin{DoxyCompactList}\small\item\em For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $. \end{DoxyCompactList}\item 
-\hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver} \hyperlink{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}{operator$^\wedge$} (const \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&A, int k)\hypertarget{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}{}\label{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}
+class \hyperlink{classSpacy_1_1C1Functional}{\-C1\-Functional}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased differentiable functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased differentiable operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1DynamicLinearOperator}{\-Dynamic\-Linear\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased time-\/dependent linear operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1DynamicC1Operator}{\-Dynamic\-C1\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Functional}{\-Functional}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased functional $f:\ X \to \mathbb{R} $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased linear operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1IndefiniteLinearSolver}{\-Indefinite\-Linear\-Solver}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased indefinite linear solver. \-Additionally monitors if the underlying operator is positive definite. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Operator}{\-Operator}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased operator $A:\ X \to Y $. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Vector}{\-Vector}
+\begin{DoxyCompactList}\small\item\em \-Type-\/erased vector. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1ZeroVectorCreator}{\-Zero\-Vector\-Creator}
+\begin{DoxyCompactList}\small\item\em \-Each \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} needs a zero-\/vector creator to support generation of vector space elements. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1DampingFactor}{\-Damping\-Factor}
+\begin{DoxyCompactList}\small\item\em \-A simple model of a damping factor $\nu$ that is computed up to a prescribed accuracy $\varepsilon$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1LipschitzConstant}{\-Lipschitz\-Constant}
+\begin{DoxyCompactList}\small\item\em \-A simple model for a \-Lipschitz constant $\omega$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Parameter}{\-Parameter}
+\begin{DoxyCompactList}\small\item\em \-Basic parameters for simple algorithms. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Cubic}{\-Cubic}
+\begin{DoxyCompactList}\small\item\em \-A one-\/dimensional cubic function $q(t) = a + bt + ct^2 + dt^3$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Quadratic}{\-Quadratic}
+\begin{DoxyCompactList}\small\item\em \-A one-\/dimensional quadratic function $q(t) = a + bt + ct^2$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1HilbertSpaceNorm}{\-Hilbert\-Space\-Norm}
+\begin{DoxyCompactList}\small\item\em $ \|\cdot\|=\sqrt{(\cdot,\cdot)} $ \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1AdaptiveInducedScalarProduct}{\-Adaptive\-Induced\-Scalar\-Product}
+\begin{DoxyCompactList}\small\item\em \-Induced scalar product $(x,y)_M = (Mx)y$, where $M:X\rightarrow X^*$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1InducedScalarProduct}{\-Induced\-Scalar\-Product}
+\begin{DoxyCompactList}\small\item\em \-Induced scalar product $(x,y)_M = (Mx)y$, where $M:X\rightarrow X^*$. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1PrimalInducedScalarProduct}{\-Primal\-Induced\-Scalar\-Product}
+\begin{DoxyCompactList}\small\item\em \-Induced scalar product for the primal variables (i.\-e. for constrained optimization problems). \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Real}{\-Real}
+\begin{DoxyCompactList}\small\item\em \-Real number. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1AddArithmeticOperators}{\-Add\-Arithmetic\-Operators}
+\begin{DoxyCompactList}\small\item\em \-Base class providing some operations for vectors via \-C\-R\-T\-P. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1FunctionalBase}{\-Functional\-Base}
+\item 
+class \hyperlink{classSpacy_1_1OperatorBase}{\-Operator\-Base}
+\item 
+class \hyperlink{classSpacy_1_1VectorBase}{\-Vector\-Base}
+\begin{DoxyCompactList}\small\item\em \-Base class for vector implementations. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1CallOfUndefinedFunctionException}{\-Call\-Of\-Undefined\-Function\-Exception}
+\begin{DoxyCompactList}\small\item\em \-Exception to be thrown if a virtual function is not implemented. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1GenericException}{\-Generic\-Exception}
+\begin{DoxyCompactList}\small\item\em \-A generic exception class that serves as base for all exceptions in this library. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1IncompatibleSpaceException}{\-Incompatible\-Space\-Exception}
+\begin{DoxyCompactList}\small\item\em \-Exception to be thrown when encountering incompatible spaces. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1RegularityTestFailedException}{\-Regularity\-Test\-Failed\-Exception}
+\begin{DoxyCompactList}\small\item\em \-Exception to be thrown if regularity test fails. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1SingularOperatorException}{\-Singular\-Operator\-Exception}
+\begin{DoxyCompactList}\small\item\em \-Exception to be thrown if singular operators are inverted. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1Logger}{\-Logger}
+\item 
+struct \hyperlink{structSpacy_1_1IsVoid}{\-Is\-Void}
+\item 
+struct \hyperlink{structSpacy_1_1Require}{\-Require}
+\begin{DoxyCompactList}\small\item\em \-Check if \-Concept is satisfied. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space}
+\begin{DoxyCompactList}\small\item\em \-Function space $(X,\|\cdot\|)$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bfseries \-P\-R\-I\-M\-A\-L} = 0, 
+{\bfseries \-D\-U\-A\-L} = 1
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}{d1} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-A, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x)
+\begin{DoxyCompactList}\small\item\em \-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{d1} (const \hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&f, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x)
+\begin{DoxyCompactList}\small\item\em \-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{d2} (const \hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&f, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x)
+\begin{DoxyCompactList}\small\item\em \-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}{\-Linear\-Solver \hyperlink{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}{operator$^\wedge$} (const \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&\-A, int k)}\label{namespaceSpacy_ab1be097dacbf27785979de79ed5b3178}
 
-\begin{DoxyCompactList}\small\item\em Access solver via A$^\wedge$-\/1. Throws for k!=-\/1. \end{DoxyCompactList}\item 
-\hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\+Solver} \hyperlink{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}{operator$^\wedge$} (\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&\&A, int k)\hypertarget{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}{}\label{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}
+\begin{DoxyCompactList}\small\item\em \-Access solver via \-A$^\wedge$-\/1. \-Throws for k!=-\/1. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}{\-Linear\-Solver \hyperlink{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}{operator$^\wedge$} (\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&\&\-A, int k)}\label{namespaceSpacy_a6defec6ee302bf4c1054afc65c9fcb95}
 
-\begin{DoxyCompactList}\small\item\em Access solver via A$^\wedge$-\/1. Throws for k!=-\/1. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \& {\bfseries axpy} (\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \&A, double a, \hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} B)\hypertarget{namespaceSpacy_ad08055ec05275c6042d516d4726b5e8f}{}\label{namespaceSpacy_ad08055ec05275c6042d516d4726b5e8f}
+\begin{DoxyCompactList}\small\item\em \-Access solver via \-A$^\wedge$-\/1. \-Throws for k!=-\/1. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_ad08055ec05275c6042d516d4726b5e8f}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries axpy} (\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&\-A, double a, \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \-B)}\label{namespaceSpacy_ad08055ec05275c6042d516d4726b5e8f}
 
 \item 
-{\footnotesize template$<$class Arithmetic , class  = std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+arithmetic$<$\+Arithmetic$>$\+::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}{operator$\ast$} (Arithmetic a, \hyperlink{classSpacy_1_1Vector}{Vector} x)\hypertarget{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}{}\label{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}
+\hypertarget{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}{{\footnotesize template$<$class Arithmetic , class  = std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-arithmetic$<$\-Arithmetic$>$\-::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}{operator$\ast$} (\-Arithmetic a, \hyperlink{classSpacy_1_1Vector}{\-Vector} x)}\label{namespaceSpacy_ae0a1cbb3d98d6ac0a82727959038f4b4}
 
-\begin{DoxyCompactList}\small\item\em Multiplication with arithmetic types (double,float,int,...). \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Arithmetic , class  = std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+arithmetic$<$\+Arithmetic$>$\+::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}{operator$\ast$} (\hyperlink{classSpacy_1_1Vector}{Vector} x, Arithmetic a)\hypertarget{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}{}\label{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}
+\begin{DoxyCompactList}\small\item\em \-Multiplication with arithmetic types (double,float,int,...). \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}{{\footnotesize template$<$class Arithmetic , class  = std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-arithmetic$<$\-Arithmetic$>$\-::value $>$$>$ }\\\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}{operator$\ast$} (\hyperlink{classSpacy_1_1Vector}{\-Vector} x, \-Arithmetic a)}\label{namespaceSpacy_a0120fd6b1d7580a9f7b8f24e646cbc6c}
 
-\begin{DoxyCompactList}\small\item\em Multiplication with arithmetic types (double,float,int,...). \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}{operator+} (\hyperlink{classSpacy_1_1Vector}{Vector} x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\hypertarget{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}{}\label{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}
+\begin{DoxyCompactList}\small\item\em \-Multiplication with arithmetic types (double,float,int,...). \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}{operator+} (\hyperlink{classSpacy_1_1Vector}{\-Vector} x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&y)}\label{namespaceSpacy_a19486acb05af1627ec49c376b204a61c}
 
-\begin{DoxyCompactList}\small\item\em Sum of vectors $z=x+y$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}{operator-\/} (\hyperlink{classSpacy_1_1Vector}{Vector} x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\hypertarget{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}{}\label{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}
+\begin{DoxyCompactList}\small\item\em \-Sum of vectors $z=x+y$. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}{operator-\/} (\hyperlink{classSpacy_1_1Vector}{\-Vector} x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&y)}\label{namespaceSpacy_a9eaf4be1a4e8f3ee03e4c4fdafa5687d}
 
-\begin{DoxyCompactList}\small\item\em Subtract vectors $z=x-y$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}{operator$\ast$} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\hypertarget{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}{}\label{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}
+\begin{DoxyCompactList}\small\item\em \-Subtract vectors $z=x-y$. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}{operator$\ast$} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&y)}\label{namespaceSpacy_a1d84603fc2bfbefca6a020b1217519ad}
 
-\begin{DoxyCompactList}\small\item\em Compute scalar product $z=x*y=(x,y)$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)\hypertarget{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{}\label{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}
+\begin{DoxyCompactList}\small\item\em \-Compute scalar product $z=x*y=(x,y)$. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x)}\label{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}
 
-\begin{DoxyCompactList}\small\item\em Compute norm, where the norm associated with the underlying function space is used $ z = \|x\| $. \end{DoxyCompactList}\item 
-void {\bfseries check\+Dual\+Pairing} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&y)\hypertarget{namespaceSpacy_ac354f06d21282619482e3ef4a841cd76}{}\label{namespaceSpacy_ac354f06d21282619482e3ef4a841cd76}
-
-\item 
-{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Mixin\+::\+Get}$<$ T $>$ \&x, \hyperlink{classSpacy_1_1Vector}{Vector} y)\hypertarget{namespaceSpacy_a0e5e7a61e6d2996df2b3e86371d38dfa}{}\label{namespaceSpacy_a0e5e7a61e6d2996df2b3e86371d38dfa}
+\begin{DoxyCompactList}\small\item\em \-Compute norm, where the norm associated with the underlying function space is used $ z = \|x\| $. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_ac354f06d21282619482e3ef4a841cd76}{void {\bfseries check\-Dual\-Pairing} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&y)}\label{namespaceSpacy_ac354f06d21282619482e3ef4a841cd76}
 
 \item 
-{\footnotesize template$<$class T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Vector}{Vector} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Mixin_1_1Get}{Mixin\+::\+Get}$<$ T $>$ \&y)\hypertarget{namespaceSpacy_a6656b636307ec4d5552477027b724f46}{}\label{namespaceSpacy_a6656b636307ec4d5552477027b724f46}
+\hypertarget{namespaceSpacy_a0e5e7a61e6d2996df2b3e86371d38dfa}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ std\-::is\-\_\-arithmetic$<$ T $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Vector}{\-Vector} {\bfseries operator$\ast$} (const \-Mixin\-::\-Get$<$ \-T $>$ \&x, \hyperlink{classSpacy_1_1Vector}{\-Vector} y)}\label{namespaceSpacy_a0e5e7a61e6d2996df2b3e86371d38dfa}
 
 \item 
-{\footnotesize template$<$class T $>$ }\\T \& {\bfseries creator} (\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)\hypertarget{namespaceSpacy_affaca762d59da675eef594854762cdcd}{}\label{namespaceSpacy_affaca762d59da675eef594854762cdcd}
+\hypertarget{namespaceSpacy_a6656b636307ec4d5552477027b724f46}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ std\-::is\-\_\-arithmetic$<$ T $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Vector}{\-Vector} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \-Mixin\-::\-Get$<$ \-T $>$ \&y)}\label{namespaceSpacy_a6656b636307ec4d5552477027b724f46}
 
 \item 
-{\footnotesize template$<$class T $>$ }\\const T \& {\bfseries creator} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)\hypertarget{namespaceSpacy_aed55e3a3401be0e74e174a12858baffa}{}\label{namespaceSpacy_aed55e3a3401be0e74e174a12858baffa}
+\hypertarget{namespaceSpacy_a011c3af8fa33fc2da22f9667edaeba29}{\hyperlink{classSpacy_1_1Vector}{\-Vector} {\bfseries operator$\ast$} (const \-Mixin\-::\-Get$<$ \hyperlink{classSpacy_1_1Real}{\-Real} $>$ \&x, \hyperlink{classSpacy_1_1Vector}{\-Vector} y)}\label{namespaceSpacy_a011c3af8fa33fc2da22f9667edaeba29}
 
 \item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}{zero} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&space)\hypertarget{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}{}\label{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}
-
-\begin{DoxyCompactList}\small\item\em Create new vector $v=0$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{C\+G\+::\+Linear\+Solver} \hyperlink{namespaceSpacy_aafd9bf87164dd48991d2016aec8bad08}{make\+C\+G\+Solver} (\hyperlink{classSpacy_1_1Operator}{Operator} A, \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Construct conjugate gradient method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{C\+G\+::\+Linear\+Solver} \hyperlink{namespaceSpacy_af9ddae62858412fe5309d11aac7b8ed3}{make\+R\+C\+G\+Solver} (\hyperlink{classSpacy_1_1Operator}{Operator} A, \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Construct regularized conjugate gradient method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{C\+G\+::\+Linear\+Solver} \hyperlink{namespaceSpacy_a5693f62a60708a49f51cf451991b96ec}{make\+T\+C\+G\+Solver} (\hyperlink{classSpacy_1_1Operator}{Operator} A, \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Construct truncated conjugate gradient method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{C\+G\+::\+Linear\+Solver} \hyperlink{namespaceSpacy_a66f5afbc97e887274b28be9c94aa3103}{make\+T\+R\+C\+G\+Solver} (\hyperlink{classSpacy_1_1Operator}{Operator} A, \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\+Operator} P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Construct truncated regularized conjugate gradient method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} \&x, \hyperlink{classSpacy_1_1Real}{Real} y)\hypertarget{namespaceSpacy_a0194ea02f9d53e7145ac497c99eadbe0}{}\label{namespaceSpacy_a0194ea02f9d53e7145ac497c99eadbe0}
+\hypertarget{namespaceSpacy_a7ad73bdbb0377bd088f1007894a4a824}{\hyperlink{classSpacy_1_1Vector}{\-Vector} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \-Mixin\-::\-Get$<$ \hyperlink{classSpacy_1_1Real}{\-Real} $>$ \&y)}\label{namespaceSpacy_a7ad73bdbb0377bd088f1007894a4a824}
 
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator$\ast$} (\hyperlink{classSpacy_1_1Real}{Real} y, const \hyperlink{classSpacy_1_1DampingFactor}{Damping\+Factor} \&x)\hypertarget{namespaceSpacy_aa07ac831672333d541a0853dcf42a6b0}{}\label{namespaceSpacy_aa07ac831672333d541a0853dcf42a6b0}
+\hypertarget{namespaceSpacy_affaca762d59da675eef594854762cdcd}{{\footnotesize template$<$class T $>$ }\\\-T \& {\bfseries creator} (\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)}\label{namespaceSpacy_affaca762d59da675eef594854762cdcd}
 
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1LipschitzConstant}{Lipschitz\+Constant} \&x, \hyperlink{classSpacy_1_1Real}{Real} y)\hypertarget{namespaceSpacy_a81f372bdfa76c83a44edab9f33c2e8c8}{}\label{namespaceSpacy_a81f372bdfa76c83a44edab9f33c2e8c8}
+\hypertarget{namespaceSpacy_aed55e3a3401be0e74e174a12858baffa}{{\footnotesize template$<$class T $>$ }\\const \-T \& {\bfseries creator} (const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)}\label{namespaceSpacy_aed55e3a3401be0e74e174a12858baffa}
 
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} {\bfseries operator$\ast$} (\hyperlink{classSpacy_1_1Real}{Real} y, const \hyperlink{classSpacy_1_1LipschitzConstant}{Lipschitz\+Constant} \&x)\hypertarget{namespaceSpacy_a27fea9675330259cd5987d51798da16d}{}\label{namespaceSpacy_a27fea9675330259cd5987d51798da16d}
+\hypertarget{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}{zero} (const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)}\label{namespaceSpacy_ac7f0661bfdb52144b9ff0b9bbdd81f69}
+
+\begin{DoxyCompactList}\small\item\em \-Create new vector $v=0$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{\-C\-G\-::\-Linear\-Solver} \hyperlink{namespaceSpacy_a158f06b6790d44613c6533fbd3822e6a}{make\-C\-G\-Solver} (\hyperlink{classSpacy_1_1Operator}{\-Operator} \-A, \-Callable\-Operator \-P, \hyperlink{classSpacy_1_1Real}{\-Real} relative\-Accuracy=1e-\/15, Real eps=1e-\/15, bool verbose=false)
+\begin{DoxyCompactList}\small\item\em \-Construct conjugate gradient method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{\-C\-G\-::\-Linear\-Solver} \hyperlink{namespaceSpacy_af70adbdd6fafbe87bd7c79be078851d6}{make\-R\-C\-G\-Solver} (\hyperlink{classSpacy_1_1Operator}{\-Operator} \-A, \-Callable\-Operator \-P, \hyperlink{classSpacy_1_1Real}{\-Real} relative\-Accuracy=1e-\/15, Real eps=1e-\/15, bool verbose=false)
+\begin{DoxyCompactList}\small\item\em \-Construct regularized conjugate gradient method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{\-C\-G\-::\-Linear\-Solver} \hyperlink{namespaceSpacy_a8c2664d93c0a0049cd3849a3a0c973a8}{make\-T\-C\-G\-Solver} (\hyperlink{classSpacy_1_1Operator}{\-Operator} \-A, \-Callable\-Operator \-P, \hyperlink{classSpacy_1_1Real}{\-Real} relative\-Accuracy=1e-\/15, Real eps=1e-\/15, bool verbose=false)
+\begin{DoxyCompactList}\small\item\em \-Construct truncated conjugate gradient method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1CG_1_1LinearSolver}{\-C\-G\-::\-Linear\-Solver} \hyperlink{namespaceSpacy_af214c1f5a7c2e48d16370a7a386ca8df}{make\-T\-R\-C\-G\-Solver} (\hyperlink{classSpacy_1_1Operator}{\-Operator} \-A, \-Callable\-Operator \-P, \hyperlink{classSpacy_1_1Real}{\-Real} relative\-Accuracy=1e-\/15, Real eps=1e-\/15, bool verbose=false)
+\begin{DoxyCompactList}\small\item\em \-Construct truncated regularized conjugate gradient method. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a81f372bdfa76c83a44edab9f33c2e8c8}{\hyperlink{classSpacy_1_1Real}{\-Real} {\bfseries operator$\ast$} (const \hyperlink{classSpacy_1_1LipschitzConstant}{\-Lipschitz\-Constant} \&x, \hyperlink{classSpacy_1_1Real}{\-Real} y)}\label{namespaceSpacy_a81f372bdfa76c83a44edab9f33c2e8c8}
 
 \item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_ga70230bc5f8b83684e04685b584967882}{local\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}())
-\begin{DoxyCompactList}\small\item\em Local Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_gad86d75d93e7d0307c492513c98c48fed}{local\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}())
-\begin{DoxyCompactList}\small\item\em Local Newton method with default initial iterate (x0=0). \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_gad63424afc4a3a7f48368fd97d6279d56}{covariant\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}(), const std\+::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&error\+Estimator=\{\})
-\begin{DoxyCompactList}\small\item\em Affine covariant Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_ga7fd8cb9e0c213a357f5dc1add0ee2eff}{covariant\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}(), const std\+::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ \&error\+Estimator=\{\})
-\begin{DoxyCompactList}\small\item\em Affine covariant Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_ga323071fce88ea5e655bb18fb4233101c}{contravariant\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}())
-\begin{DoxyCompactList}\small\item\em Affine contravariant Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{group__NewtonGroup_ga8cde4ccdf9479141f8f8b92607f0f724}{contravariant\+Newton} (const \hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \&F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter}())
-\begin{DoxyCompactList}\small\item\em Affine contravariant Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{find\+Global\+Minimizer} (const std\+::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Real}{Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{Real} a, \hyperlink{classSpacy_1_1Real}{Real} b, \hyperlink{classSpacy_1_1Real}{Real} eps=1e-\/2)
-\begin{DoxyCompactList}\small\item\em Find global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{find\+Log\+Global\+Minimizer} (const std\+::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Real}{Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{Real} a, \hyperlink{classSpacy_1_1Real}{Real} b, \hyperlink{classSpacy_1_1Real}{Real} eps=1e-\/2)
-\begin{DoxyCompactList}\small\item\em Find log.\+global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1C1Operator}{C1\+Operator} \hyperlink{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{derivative} (\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} f)
-\begin{DoxyCompactList}\small\item\em Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. \end{DoxyCompactList}\item 
-\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \& \hyperlink{group__ProductSpaceGroup_gaa040ba5c24284687e0df19c99dd688a6}{primal\+Component} (\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&v)
-\item 
-const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \& \hyperlink{group__ProductSpaceGroup_ga88c5bcc74072f75c63ab7d9448f80a7e}{primal\+Component} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&v)
-\item 
-\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \& \hyperlink{group__ProductSpaceGroup_gafe51c084e3b03205db94e91309e834f7}{dual\+Component} (\+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&v)
-\item 
-const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \& \hyperlink{group__ProductSpaceGroup_gabe5978657aab46b1575e2521b336407d}{dual\+Component} (const \+::\hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector} \&v)
-\item 
-double {\bfseries to\+Double} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x)\hypertarget{namespaceSpacy_aa483f25537054790b8c29403999e7c11}{}\label{namespaceSpacy_aa483f25537054790b8c29403999e7c11}
+\hypertarget{namespaceSpacy_a27fea9675330259cd5987d51798da16d}{\hyperlink{classSpacy_1_1Real}{\-Real} {\bfseries operator$\ast$} (\hyperlink{classSpacy_1_1Real}{\-Real} y, const \hyperlink{classSpacy_1_1LipschitzConstant}{\-Lipschitz\-Constant} \&x)}\label{namespaceSpacy_a27fea9675330259cd5987d51798da16d}
 
 \item 
-double \& {\bfseries to\+Double} (\hyperlink{classSpacy_1_1Vector}{Vector} \&x)\hypertarget{namespaceSpacy_a18c74ced017dd754a0e23d682dbbb77a}{}\label{namespaceSpacy_a18c74ced017dd754a0e23d682dbbb77a}
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599}{local\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
+\begin{DoxyCompactList}\small\item\em \-Local \-Newton method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a}{local\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
+\begin{DoxyCompactList}\small\item\em \-Local \-Newton method with default initial iterate (x0=0). \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}{covariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}(), const std\-::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&)$>$ \&error\-Estimator=\{\})
+\begin{DoxyCompactList}\small\item\em \-Affine covariant \-Newton method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_ga2d469322482680319bf81d865ed57068}{covariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}(), const std\-::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&)$>$ \&error\-Estimator=\{\})
+\begin{DoxyCompactList}\small\item\em \-Affine covariant \-Newton method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832}{contravariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x0, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
+\begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}{contravariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
+\begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{find\-Global\-Minimizer} (const std\-::function$<$ \hyperlink{classSpacy_1_1Real}{\-Real}(const \hyperlink{classSpacy_1_1Real}{\-Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{\-Real} a, \hyperlink{classSpacy_1_1Real}{\-Real} b, \hyperlink{classSpacy_1_1Real}{\-Real} eps=1e-\/2)
+\begin{DoxyCompactList}\small\item\em \-Find global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{find\-Log\-Global\-Minimizer} (const std\-::function$<$ \hyperlink{classSpacy_1_1Real}{\-Real}(const \hyperlink{classSpacy_1_1Real}{\-Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{\-Real} a, \hyperlink{classSpacy_1_1Real}{\-Real} b, \hyperlink{classSpacy_1_1Real}{\-Real} eps=1e-\/2)
+\begin{DoxyCompactList}\small\item\em \-Find log.\-global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \hyperlink{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{derivative} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} f)
+\begin{DoxyCompactList}\small\item\em \-Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gaa040ba5c24284687e0df19c99dd688a6}{primal\-Component} (\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
+\item 
+const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_ga88c5bcc74072f75c63ab7d9448f80a7e}{primal\-Component} (const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
+\item 
+\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gafe51c084e3b03205db94e91309e834f7}{dual\-Component} (\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
+\item 
+const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gabe5978657aab46b1575e2521b336407d}{dual\-Component} (const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
+\item 
+\hypertarget{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}{abs} (\hyperlink{classSpacy_1_1Real}{\-Real} x)}\label{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}
+
+\begin{DoxyCompactList}\small\item\em \-Compute absolute value. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}{pow} (\hyperlink{classSpacy_1_1Real}{\-Real} x, double y)}\label{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}
+
+\begin{DoxyCompactList}\small\item\em \-Compute $x^y$. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}{sqrt} (\hyperlink{classSpacy_1_1Real}{\-Real} x)}\label{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}
+
+\begin{DoxyCompactList}\small\item\em \-Compute $\sqrt{x}$. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}{cbrt} (\hyperlink{classSpacy_1_1Real}{\-Real} x)}\label{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}
+
+\begin{DoxyCompactList}\small\item\em \-Compute $ x^{1/3} $. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a2408a53b27498ddeb762c52b51b71905}{\hyperlink{classSpacy_1_1Real}{\-Real} {\bfseries operator$\ast$} (const \-Mixin\-::\-Get$<$ \hyperlink{classSpacy_1_1Real}{\-Real} $>$ \&x, \hyperlink{classSpacy_1_1Real}{\-Real} y)}\label{namespaceSpacy_a2408a53b27498ddeb762c52b51b71905}
 
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}{abs} (\hyperlink{classSpacy_1_1Real}{Real} x)\hypertarget{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}{}\label{namespaceSpacy_a89ed08f6f5a05e3f35afa37fcebf4b06}
-
-\begin{DoxyCompactList}\small\item\em Compute absolute value. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_aa662ae98b86b15b68de7d6ac8fc26696}{max} (const \hyperlink{classSpacy_1_1Real}{Real} \&x, const \hyperlink{classSpacy_1_1Real}{Real} \&y)\hypertarget{namespaceSpacy_aa662ae98b86b15b68de7d6ac8fc26696}{}\label{namespaceSpacy_aa662ae98b86b15b68de7d6ac8fc26696}
-
-\begin{DoxyCompactList}\small\item\em Compute maximum. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_ab0a9ae2652cc3a2701e33c6291c4c34a}{min} (const \hyperlink{classSpacy_1_1Real}{Real} \&x, const \hyperlink{classSpacy_1_1Real}{Real} \&y)\hypertarget{namespaceSpacy_ab0a9ae2652cc3a2701e33c6291c4c34a}{}\label{namespaceSpacy_ab0a9ae2652cc3a2701e33c6291c4c34a}
-
-\begin{DoxyCompactList}\small\item\em Compute minimum. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}{pow} (\hyperlink{classSpacy_1_1Real}{Real} x, double y)\hypertarget{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}{}\label{namespaceSpacy_acffef7eb409609abe7ad87aaad28503f}
-
-\begin{DoxyCompactList}\small\item\em Compute $x^y$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}{sqrt} (\hyperlink{classSpacy_1_1Real}{Real} x)\hypertarget{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}{}\label{namespaceSpacy_aa779bb3e2bf547cd0ed9ef47b3d711a3}
-
-\begin{DoxyCompactList}\small\item\em Compute $\sqrt{x}$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}{cbrt} (\hyperlink{classSpacy_1_1Real}{Real} x)\hypertarget{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}{}\label{namespaceSpacy_a64093cc47f73b71ba92bc0dd37e9572b}
-
-\begin{DoxyCompactList}\small\item\em Compute $ x^{1/3} $. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}{make\+Real\+Space} (bool default\+Index=false)
-\begin{DoxyCompactList}\small\item\em Construct space of real numbers. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class To\+Type , class From\+Type $>$ }\\bool \hyperlink{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}{is} (const From\+Type \&x)\hypertarget{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}{}\label{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}
-
-\begin{DoxyCompactList}\small\item\em Check if x can be cast to a reference of type To\+Type. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class To\+Type , class From\+Type $>$ }\\To\+Type \& \hyperlink{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}{cast\+\_\+ref} (From\+Type \&x)\hypertarget{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}{}\label{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}
-
-\begin{DoxyCompactList}\small\item\em cast x of type \textquotesingle{}From\+Type\&\textquotesingle{} to \textquotesingle{}To\+Type\&\textquotesingle{} \end{DoxyCompactList}\item 
-{\footnotesize template$<$class To\+Type , class From\+Type $>$ }\\const To\+Type \& \hyperlink{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}{cast\+\_\+ref} (const From\+Type \&x)\hypertarget{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}{}\label{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}
-
-\begin{DoxyCompactList}\small\item\em cast x of type \textquotesingle{}const From\+Type\&\textquotesingle{} to \textquotesingle{}const To\+Type\&\textquotesingle{} \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Origin , class Target $>$ }\\void \hyperlink{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}{generic\+Copy} (const Origin \&x, Target \&y, std\+::function$<$ void(const Origin \&, Target \&)$>$ copy\+Target\+If\+Consistent)
-\begin{DoxyCompactList}\small\item\em Copy from x to y. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Func , typename Tup $>$ }\\decltype(auto) \hyperlink{namespaceSpacy_a64250818ba7ff711c207af6ab40ff986}{invoke} (Func \&\&func, Tup \&\&tup)
-\begin{DoxyCompactList}\small\item\em Invoke function with arguments contained in tup. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Type , typename Tup $>$ }\\decltype(auto) \hyperlink{namespaceSpacy_ae823c82326475d3cc3b166533deddf21}{create} (Tup \&\&tup)
-\begin{DoxyCompactList}\small\item\em Create object of type Type from elements contained in tup. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Base , class Source , class To\+Attach $>$ }\\void {\bfseries cast\+And\+Attach} (Source \&source, To\+Attach \&to\+Attach)\hypertarget{namespaceSpacy_accc9a8a0cad11b10fb4453e6bea7a7e1}{}\label{namespaceSpacy_accc9a8a0cad11b10fb4453e6bea7a7e1}
+\hypertarget{namespaceSpacy_af0d849d3130fd1252cf3a58b4f194e6b}{\hyperlink{classSpacy_1_1Real}{\-Real} {\bfseries operator$\ast$} (\hyperlink{classSpacy_1_1Real}{\-Real} x, const \-Mixin\-::\-Get$<$ \hyperlink{classSpacy_1_1Real}{\-Real} $>$ \&y)}\label{namespaceSpacy_af0d849d3130fd1252cf3a58b4f194e6b}
 
 \item 
-{\footnotesize template$<$class Base , class Source , class To\+Attach $>$ }\\void {\bfseries cast\+And\+Detach} (Source \&source, To\+Attach \&to\+Attach)\hypertarget{namespaceSpacy_a9e6018674d6169a33a2fa75a35e2fef3}{}\label{namespaceSpacy_a9e6018674d6169a33a2fa75a35e2fef3}
+\hypertarget{namespaceSpacy_a00adbd58a88f8474c28da323effbcc26}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator+} (\-T \&\&x, const \hyperlink{classSpacy_1_1Real}{\-Real} \&y)}\label{namespaceSpacy_a00adbd58a88f8474c28da323effbcc26}
 
 \item 
-\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{make\+Banach\+Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\+Vector\+Creator} \&\&creator, \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm})\hypertarget{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{}\label{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}
+\hypertarget{namespaceSpacy_af24641d6a51293d3601c760ec310a1b1}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator+} (\hyperlink{classSpacy_1_1Real}{\-Real} x, \-T \&\&y)}\label{namespaceSpacy_af24641d6a51293d3601c760ec310a1b1}
 
-\begin{DoxyCompactList}\small\item\em Construct Banach space. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \hyperlink{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{make\+Hilbert\+Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\+Vector\+Creator} \&\&creator, \hyperlink{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{Scalar\+Product} scalar\+Product, bool default\+Index=false)\hypertarget{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{}\label{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}
+\item 
+\hypertarget{namespaceSpacy_a0ce5976cd9ab32a6eecaa92fc3ea803a}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator-\/} (\-T \&\&x, const \hyperlink{classSpacy_1_1Real}{\-Real} \&y)}\label{namespaceSpacy_a0ce5976cd9ab32a6eecaa92fc3ea803a}
 
-\begin{DoxyCompactList}\small\item\em Construct Hilbert space. \end{DoxyCompactList}\item 
-void \hyperlink{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}{connect\+As\+Primal\+Dual\+Pair} (\hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&X, \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&Y)
-\begin{DoxyCompactList}\small\item\em Relate function spaces. \end{DoxyCompactList}\item 
-void \hyperlink{namespaceSpacy_aae18423491adef608743902f1c40844e}{check\+Space\+Compatibility} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&V, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \&W)
-\begin{DoxyCompactList}\small\item\em Check if V and W have the same index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceSpacy_a92fe6ff3c620feb4c8299e6ac3959a42}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator-\/} (\hyperlink{classSpacy_1_1Real}{\-Real} x, \-T \&\&y)}\label{namespaceSpacy_a92fe6ff3c620feb4c8299e6ac3959a42}
+
+\item 
+\hypertarget{namespaceSpacy_aeec0910b94a07ae8dfe79f971ea8425a}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator/} (\-T \&\&x, const \hyperlink{classSpacy_1_1Real}{\-Real} \&y)}\label{namespaceSpacy_aeec0910b94a07ae8dfe79f971ea8425a}
+
+\item 
+\hypertarget{namespaceSpacy_af180e266f73b104cb351ec67778b8cfd}{{\footnotesize template$<$class T , std\-::enable\-\_\-if\-\_\-t$<$ std\-::is\-\_\-base\-\_\-of$<$ Mixin\-::\-Get$<$ Real $>$, std\-::decay\-\_\-t$<$ T $>$ $>$\-::value $>$ $\ast$  = nullptr$>$ }\\auto {\bfseries operator/} (const \hyperlink{classSpacy_1_1Real}{\-Real} \&x, \-T \&\&y)}\label{namespaceSpacy_af180e266f73b104cb351ec67778b8cfd}
+
+\item 
+\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}{make\-Real\-Space} (bool default\-Index=false)
+\begin{DoxyCompactList}\small\item\em \-Construct space of real numbers. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}{{\footnotesize template$<$class To\-Type , class From\-Type $>$ }\\bool \hyperlink{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}{is} (const \-From\-Type \&x)}\label{namespaceSpacy_ae44bfd08fa77272bab4149665b26233a}
+
+\begin{DoxyCompactList}\small\item\em \-Check if x can be cast to a reference of type \-To\-Type. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}{{\footnotesize template$<$class To\-Type , class From\-Type $>$ }\\\-To\-Type \& \hyperlink{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}{cast\-\_\-ref} (\-From\-Type \&x)}\label{namespaceSpacy_abb0550fc1d402f00e42c165ae8eb3305}
+
+\begin{DoxyCompactList}\small\item\em cast x of type '\-From\-Type\&' to '\-To\-Type\&' \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}{{\footnotesize template$<$class To\-Type , class From\-Type $>$ }\\const \-To\-Type \& \hyperlink{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}{cast\-\_\-ref} (const \-From\-Type \&x)}\label{namespaceSpacy_a00fc9d674cd8813c4e20a05adf3aaaa4}
+
+\begin{DoxyCompactList}\small\item\em cast x of type 'const \-From\-Type\&' to 'const \-To\-Type\&' \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Origin , class Target $>$ }\\void \hyperlink{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}{generic\-Copy} (const \-Origin \&x, \-Target \&y, std\-::function$<$ void(const \-Origin \&, \-Target \&)$>$ copy\-Target\-If\-Consistent)
+\begin{DoxyCompactList}\small\item\em \-Copy from x to y. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename Tup $>$ }\\\hyperlink{namespaceSpacy_afbcee52cc294417930c5ccfc2fefb9f8}{decltype} (auto) invoke(\-Func \&\&func
+\begin{DoxyCompactList}\small\item\em \-Invoke function with arguments contained in tup. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_accc9a8a0cad11b10fb4453e6bea7a7e1}{{\footnotesize template$<$class Base , class Source , class To\-Attach $>$ }\\void {\bfseries cast\-And\-Attach} (\-Source \&source, \-To\-Attach \&to\-Attach)}\label{namespaceSpacy_accc9a8a0cad11b10fb4453e6bea7a7e1}
+
+\item 
+\hypertarget{namespaceSpacy_a9e6018674d6169a33a2fa75a35e2fef3}{{\footnotesize template$<$class Base , class Source , class To\-Attach $>$ }\\void {\bfseries cast\-And\-Detach} (\-Source \&source, \-To\-Attach \&to\-Attach)}\label{namespaceSpacy_a9e6018674d6169a33a2fa75a35e2fef3}
+
+\item 
+\hypertarget{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{make\-Banach\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{\-Zero\-Vector\-Creator} \&\&creator, \-Norm \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm})}\label{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}
+
+\begin{DoxyCompactList}\small\item\em \-Construct \-Banach space. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{make\-Hilbert\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{\-Zero\-Vector\-Creator} \&\&creator, \-Scalar\-Product scalar\-Product, bool default\-Index=false)}\label{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}
+
+\begin{DoxyCompactList}\small\item\em \-Construct \-Hilbert space. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}{connect\-As\-Primal\-Dual\-Pair} (\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\-X, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\-Y)
+\begin{DoxyCompactList}\small\item\em \-Relate function spaces. \end{DoxyCompactList}\item 
+void \hyperlink{namespaceSpacy_aae18423491adef608743902f1c40844e}{check\-Space\-Compatibility} (const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\-V, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\-W)
+\begin{DoxyCompactList}\small\item\em \-Check if \-V and \-W have the same index. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Main namespace of the Spacy library. 
+\subsection{\-Detailed \-Description}
+\-Main namespace of the \-Spacy library. \-N\-A\-M\-E\-S\-P\-A\-C\-E\-S 
 
-N\+A\+M\+E\+S\+P\+A\+C\+ES 
-
-\subsection{Typedef Documentation}
-\index{Spacy@{Spacy}!Dynamic\+Callable\+Operator@{Dynamic\+Callable\+Operator}}
-\index{Dynamic\+Callable\+Operator@{Dynamic\+Callable\+Operator}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{Dynamic\+Callable\+Operator}{DynamicCallableOperator}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::function$<$ {\bf Vector}(double, const {\bf Vector} \&) $>$ {\bf Spacy\+::\+Dynamic\+Callable\+Operator}}\hypertarget{namespaceSpacy_a052e6b83b913fc316b0c2a2cd9535431}{}\label{namespaceSpacy_a052e6b83b913fc316b0c2a2cd9535431}
-A time-\/dependent operator that does not know about domain and range spaces. \index{Spacy@{Spacy}!Callable\+Operator@{Callable\+Operator}}
-\index{Callable\+Operator@{Callable\+Operator}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{Callable\+Operator}{CallableOperator}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::function$<$ {\bf Vector}(const {\bf Vector} \&) $>$ {\bf Spacy\+::\+Callable\+Operator}}\hypertarget{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{}\label{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}
-An operator that does not know about domain and range spaces. Good enough for some algorithms (i.\+e. for Krylov-\/methods). \index{Spacy@{Spacy}!Norm@{Norm}}
-\index{Norm@{Norm}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{Norm}{Norm}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Norm} = typedef std\+::function$<${\bf Real}(const {\bf Vector}\&)$>$}\hypertarget{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{}\label{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}
-
-
-Type-\/erased norm. 
-
-The minimal signature (besides copy and/or move constructor/assignment) of a norm is\+: 
-\begin{DoxyCode}
-\textcolor{comment}{// My norm.}
-\textcolor{keyword}{class }MyNorm
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Compute ||x||.}
-  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
-\};
-\end{DoxyCode}
- \index{Spacy@{Spacy}!Scalar\+Product@{Scalar\+Product}}
-\index{Scalar\+Product@{Scalar\+Product}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{Scalar\+Product}{ScalarProduct}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\+::\+Scalar\+Product} = typedef std\+::function$<${\bf Real}(const {\bf Vector}\&, const {\bf Vector}\&)$>$}\hypertarget{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{}\label{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}
-
-
-Type-\/erased scalar product. 
-
-The minimal signature (besides copy and/or move constructor/assignment) of a scalar product is\+: 
-\begin{DoxyCode}
-\textcolor{comment}{// My scalar product.}
-\textcolor{keyword}{class }MyScalarProduct
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Compute (x,y).}
-  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x, \textcolor{keyword}{const} 
-      \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& y) \textcolor{keyword}{const};
-\};
-\end{DoxyCode}
- 
-
-\subsection{Function Documentation}
-\index{Spacy@{Spacy}!d1@{d1}}
-\index{d1@{d1}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{d1(const C1\+Operator \&\+A, const Vector \&x)}{d1(const C1Operator &A, const Vector &x)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator} Spacy\+::d1 (
+\subsection{\-Function \-Documentation}
+\hypertarget{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}{\index{\-Spacy@{\-Spacy}!d1@{d1}}
+\index{d1@{d1}!Spacy@{\-Spacy}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Linear\-Operator} {\bf \-Spacy\-::d1} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{A, }
-\item[{const {\bf Vector} \&}]{x}
+\item[{const \-C1\-Operator \&}]{\-A, }
+\item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}{}\label{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}
+)}}\label{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}
 
 
-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $. 
+\-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $. 
 
-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $.
+\-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $.
 
-Equivalent to calling A.\+linearization(x).
+\-Equivalent to calling \-A.\-linearization(x).
 
 
-\begin{DoxyParams}{Parameters}
-{\em A} & differentiable operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-A} & differentiable operator \\
 \hline
 {\em x} & point of linearization \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$A'(x)$, i.\+e. A.\+linearization(x). 
+\begin{DoxyReturn}{\-Returns}
+$A'(x)$, i.\-e. \-A.\-linearization(x). 
 \end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-C1\+Operator, Linear\+Operator 
+\begin{DoxySeeAlso}{\-See also}
+\-C1\-Operator, \-Linear\-Operator 
 \end{DoxySeeAlso}
-\index{Spacy@{Spacy}!d1@{d1}}
-\index{d1@{d1}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{d1(const C2\+Functional \&f, const Vector \&x)}{d1(const C2Functional &f, const Vector &x)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector} Spacy\+::d1 (
+\hypertarget{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{\index{\-Spacy@{\-Spacy}!d1@{d1}}
+\index{d1@{d1}!Spacy@{\-Spacy}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector} {\bf \-Spacy\-::d1} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C2\+Functional} \&}]{f, }
-\item[{const {\bf Vector} \&}]{x}
+\item[{const \-C2\-Functional \&}]{f, }
+\item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}{}\label{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}
+)}}\label{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}
 
 
-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $. 
+\-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $. 
 
-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $.
+\-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $.
 
-Equivalent to calling f.\+d1(x).
+\-Equivalent to calling f.\-d1(x).
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{\-Parameters}
 {\em f} & twice differentiable functional \\
 \hline
 {\em x} & point of linearization \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$f'(x)$, i.\+e. f.\+d1(x). 
+\begin{DoxyReturn}{\-Returns}
+$f'(x)$, i.\-e. f.\-d1(x). 
 \end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} 
 \end{DoxySeeAlso}
-\index{Spacy@{Spacy}!d2@{d2}}
-\index{d2@{d2}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{d2(const C2\+Functional \&f, const Vector \&x)}{d2(const C2Functional &f, const Vector &x)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\+Operator} Spacy\+::d2 (
+\hypertarget{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{\index{\-Spacy@{\-Spacy}!d2@{d2}}
+\index{d2@{d2}!Spacy@{\-Spacy}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Linear\-Operator} {\bf \-Spacy\-::d2} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C2\+Functional} \&}]{f, }
-\item[{const {\bf Vector} \&}]{x}
+\item[{const \-C2\-Functional \&}]{f, }
+\item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}{}\label{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}
+)}}\label{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}
 
 
-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $. 
+\-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $. 
 
-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $.
+\-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $.
 
-Equivalent to calling f.\+hessian(x).
+\-Equivalent to calling f.\-hessian(x).
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{\-Parameters}
 {\em f} & twice differentiable functional \\
 \hline
 {\em x} & point of linearization \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-$f''(x)$, i.\+e. f.\+hessian(x). 
+\begin{DoxyReturn}{\-Returns}
+$f''(x)$, i.\-e. f.\-hessian(x). 
 \end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} 
 \end{DoxySeeAlso}
-\index{Spacy@{Spacy}!make\+C\+G\+Solver@{make\+C\+G\+Solver}}
-\index{make\+C\+G\+Solver@{make\+C\+G\+Solver}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{make\+C\+G\+Solver(\+Operator A, Callable\+Operator P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)}{makeCGSolver(Operator A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+G\+::\+Linear\+Solver} Spacy\+::make\+C\+G\+Solver (
+\hypertarget{namespaceSpacy_a158f06b6790d44613c6533fbd3822e6a}{\index{\-Spacy@{\-Spacy}!make\-C\-G\-Solver@{make\-C\-G\-Solver}}
+\index{make\-C\-G\-Solver@{make\-C\-G\-Solver}!Spacy@{\-Spacy}}
+\subsubsection[{make\-C\-G\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-G\-::\-Linear\-Solver} {\bf \-Spacy\-::make\-C\-G\-Solver} (
 \begin{DoxyParamCaption}
-\item[{{\bf Operator}}]{A, }
-\item[{{\bf Callable\+Operator}}]{P, }
-\item[{double}]{relative\+Accuracy = {\ttfamily 1e-\/15}, }
-\item[{double}]{eps = {\ttfamily 1e-\/15}, }
+\item[{\-Operator}]{\-A, }
+\item[{\-Callable\-Operator}]{\-P, }
+\item[{\-Real}]{relative\-Accuracy = {\ttfamily 1e-\/15}, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/15}, }
 \item[{bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_aafd9bf87164dd48991d2016aec8bad08}{}\label{namespaceSpacy_aafd9bf87164dd48991d2016aec8bad08}
+)}}\label{namespaceSpacy_a158f06b6790d44613c6533fbd3822e6a}
 
 
-Construct conjugate gradient method. 
+\-Construct conjugate gradient method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em A} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-A} & operator \\
 \hline
-{\em P} & preconditioner \\
+{\em \-P} & preconditioner \\
 \hline
-{\em relative\+Accuracy} & relative accuracy \\
+{\em relative\-Accuracy} & relative accuracy \\
 \hline
 {\em eps} & maximal attainable accuracy \\
 \hline
 {\em verbose} & verbosity \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-C\+G\+Solver(A,P,\char`\"{}\+C\+G\char`\"{}) 
+\begin{DoxyReturn}{\-Returns}
+\-C\-G\-Solver(\-A,\-P,\char`\"{}\-C\-G\char`\"{}) 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!make\+R\+C\+G\+Solver@{make\+R\+C\+G\+Solver}}
-\index{make\+R\+C\+G\+Solver@{make\+R\+C\+G\+Solver}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{make\+R\+C\+G\+Solver(\+Operator A, Callable\+Operator P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)}{makeRCGSolver(Operator A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+G\+::\+Linear\+Solver} Spacy\+::make\+R\+C\+G\+Solver (
+\hypertarget{namespaceSpacy_af70adbdd6fafbe87bd7c79be078851d6}{\index{\-Spacy@{\-Spacy}!make\-R\-C\-G\-Solver@{make\-R\-C\-G\-Solver}}
+\index{make\-R\-C\-G\-Solver@{make\-R\-C\-G\-Solver}!Spacy@{\-Spacy}}
+\subsubsection[{make\-R\-C\-G\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-G\-::\-Linear\-Solver} {\bf \-Spacy\-::make\-R\-C\-G\-Solver} (
 \begin{DoxyParamCaption}
-\item[{{\bf Operator}}]{A, }
-\item[{{\bf Callable\+Operator}}]{P, }
-\item[{double}]{relative\+Accuracy = {\ttfamily 1e-\/15}, }
-\item[{double}]{eps = {\ttfamily 1e-\/15}, }
+\item[{\-Operator}]{\-A, }
+\item[{\-Callable\-Operator}]{\-P, }
+\item[{\-Real}]{relative\-Accuracy = {\ttfamily 1e-\/15}, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/15}, }
 \item[{bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_af9ddae62858412fe5309d11aac7b8ed3}{}\label{namespaceSpacy_af9ddae62858412fe5309d11aac7b8ed3}
+)}}\label{namespaceSpacy_af70adbdd6fafbe87bd7c79be078851d6}
 
 
-Construct regularized conjugate gradient method. 
+\-Construct regularized conjugate gradient method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em A} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-A} & operator \\
 \hline
-{\em P} & preconditioner \\
+{\em \-P} & preconditioner \\
 \hline
-{\em relative\+Accuracy} & relative accuracy \\
+{\em relative\-Accuracy} & relative accuracy \\
 \hline
 {\em eps} & maximal attainable accuracy \\
 \hline
 {\em verbose} & verbosity \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-C\+G\+Solver(A,P,\char`\"{}\+R\+C\+G\char`\"{}) 
+\begin{DoxyReturn}{\-Returns}
+\-C\-G\-Solver(\-A,\-P,\char`\"{}\-R\-C\-G\char`\"{}) 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!make\+T\+C\+G\+Solver@{make\+T\+C\+G\+Solver}}
-\index{make\+T\+C\+G\+Solver@{make\+T\+C\+G\+Solver}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{make\+T\+C\+G\+Solver(\+Operator A, Callable\+Operator P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)}{makeTCGSolver(Operator A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+G\+::\+Linear\+Solver} Spacy\+::make\+T\+C\+G\+Solver (
+\hypertarget{namespaceSpacy_a8c2664d93c0a0049cd3849a3a0c973a8}{\index{\-Spacy@{\-Spacy}!make\-T\-C\-G\-Solver@{make\-T\-C\-G\-Solver}}
+\index{make\-T\-C\-G\-Solver@{make\-T\-C\-G\-Solver}!Spacy@{\-Spacy}}
+\subsubsection[{make\-T\-C\-G\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-G\-::\-Linear\-Solver} {\bf \-Spacy\-::make\-T\-C\-G\-Solver} (
 \begin{DoxyParamCaption}
-\item[{{\bf Operator}}]{A, }
-\item[{{\bf Callable\+Operator}}]{P, }
-\item[{double}]{relative\+Accuracy = {\ttfamily 1e-\/15}, }
-\item[{double}]{eps = {\ttfamily 1e-\/15}, }
+\item[{\-Operator}]{\-A, }
+\item[{\-Callable\-Operator}]{\-P, }
+\item[{\-Real}]{relative\-Accuracy = {\ttfamily 1e-\/15}, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/15}, }
 \item[{bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a5693f62a60708a49f51cf451991b96ec}{}\label{namespaceSpacy_a5693f62a60708a49f51cf451991b96ec}
+)}}\label{namespaceSpacy_a8c2664d93c0a0049cd3849a3a0c973a8}
 
 
-Construct truncated conjugate gradient method. 
+\-Construct truncated conjugate gradient method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em A} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-A} & operator \\
 \hline
-{\em P} & preconditioner \\
+{\em \-P} & preconditioner \\
 \hline
-{\em relative\+Accuracy} & relative accuracy \\
+{\em relative\-Accuracy} & relative accuracy \\
 \hline
 {\em eps} & maximal attainable accuracy \\
 \hline
 {\em verbose} & verbosity \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-C\+G\+Solver(A,P,\char`\"{}\+T\+C\+G\char`\"{}) 
+\begin{DoxyReturn}{\-Returns}
+\-C\-G\-Solver(\-A,\-P,\char`\"{}\-T\-C\-G\char`\"{}) 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!make\+T\+R\+C\+G\+Solver@{make\+T\+R\+C\+G\+Solver}}
-\index{make\+T\+R\+C\+G\+Solver@{make\+T\+R\+C\+G\+Solver}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{make\+T\+R\+C\+G\+Solver(\+Operator A, Callable\+Operator P, double relative\+Accuracy=1e-\/15, double eps=1e-\/15, bool verbose=false)}{makeTRCGSolver(Operator A, CallableOperator P, double relativeAccuracy=1e-15, double eps=1e-15, bool verbose=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+G\+::\+Linear\+Solver} Spacy\+::make\+T\+R\+C\+G\+Solver (
+\hypertarget{namespaceSpacy_af214c1f5a7c2e48d16370a7a386ca8df}{\index{\-Spacy@{\-Spacy}!make\-T\-R\-C\-G\-Solver@{make\-T\-R\-C\-G\-Solver}}
+\index{make\-T\-R\-C\-G\-Solver@{make\-T\-R\-C\-G\-Solver}!Spacy@{\-Spacy}}
+\subsubsection[{make\-T\-R\-C\-G\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-G\-::\-Linear\-Solver} {\bf \-Spacy\-::make\-T\-R\-C\-G\-Solver} (
 \begin{DoxyParamCaption}
-\item[{{\bf Operator}}]{A, }
-\item[{{\bf Callable\+Operator}}]{P, }
-\item[{double}]{relative\+Accuracy = {\ttfamily 1e-\/15}, }
-\item[{double}]{eps = {\ttfamily 1e-\/15}, }
+\item[{\-Operator}]{\-A, }
+\item[{\-Callable\-Operator}]{\-P, }
+\item[{\-Real}]{relative\-Accuracy = {\ttfamily 1e-\/15}, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/15}, }
 \item[{bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a66f5afbc97e887274b28be9c94aa3103}{}\label{namespaceSpacy_a66f5afbc97e887274b28be9c94aa3103}
+)}}\label{namespaceSpacy_af214c1f5a7c2e48d16370a7a386ca8df}
 
 
-Construct truncated regularized conjugate gradient method. 
+\-Construct truncated regularized conjugate gradient method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em A} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-A} & operator \\
 \hline
-{\em P} & preconditioner \\
+{\em \-P} & preconditioner \\
 \hline
-{\em relative\+Accuracy} & relative accuracy \\
+{\em relative\-Accuracy} & relative accuracy \\
 \hline
 {\em eps} & maximal attainable accuracy \\
 \hline
 {\em verbose} & verbosity \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-C\+G\+Solver(A,P,\char`\"{}\+T\+R\+C\+G\char`\"{}) 
+\begin{DoxyReturn}{\-Returns}
+\-C\-G\-Solver(\-A,\-P,\char`\"{}\-T\-R\-C\-G\char`\"{}) 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!find\+Global\+Minimizer@{find\+Global\+Minimizer}}
-\index{find\+Global\+Minimizer@{find\+Global\+Minimizer}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{find\+Global\+Minimizer(const std\+::function$<$ Real(const Real)$>$ \&f, Real a, Real b, Real eps=1e-\/2)}{findGlobalMinimizer(const std::function< Real(const Real)> &f, Real a, Real b, Real eps=1e-2)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Real} Spacy\+::find\+Global\+Minimizer (
+\hypertarget{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{\index{\-Spacy@{\-Spacy}!find\-Global\-Minimizer@{find\-Global\-Minimizer}}
+\index{find\-Global\-Minimizer@{find\-Global\-Minimizer}!Spacy@{\-Spacy}}
+\subsubsection[{find\-Global\-Minimizer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Real} {\bf \-Spacy\-::find\-Global\-Minimizer} (
 \begin{DoxyParamCaption}
-\item[{const std\+::function$<$ {\bf Real}(const {\bf Real})$>$ \&}]{f, }
-\item[{{\bf Real}}]{a, }
-\item[{{\bf Real}}]{b, }
-\item[{{\bf Real}}]{eps = {\ttfamily 1e-\/2}}
+\item[{const std\-::function$<$ \-Real(const \-Real)$>$ \&}]{f, }
+\item[{\-Real}]{a, }
+\item[{\-Real}]{b, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/2}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{}\label{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}
+)}}\label{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}
 
 
-Find global minimizer of $f$ in $[a,b]$. 
+\-Find global minimizer of $f$ in $[a,b]$. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em f} & Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
+\begin{DoxyParams}{\-Parameters}
+{\em f} & \-Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
 \hline
 {\em a} & lower bound of the admissible interval \\
 \hline
@@ -573,26 +522,26 @@ Find global minimizer of $f$ in $[a,b]$.
 {\em eps} & relative accuracy \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 $ x \in \mathrm{argmin}_{[a,b]} $ 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!find\+Log\+Global\+Minimizer@{find\+Log\+Global\+Minimizer}}
-\index{find\+Log\+Global\+Minimizer@{find\+Log\+Global\+Minimizer}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{find\+Log\+Global\+Minimizer(const std\+::function$<$ Real(const Real)$>$ \&f, Real a, Real b, Real eps=1e-\/2)}{findLogGlobalMinimizer(const std::function< Real(const Real)> &f, Real a, Real b, Real eps=1e-2)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Real} Spacy\+::find\+Log\+Global\+Minimizer (
+\hypertarget{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{\index{\-Spacy@{\-Spacy}!find\-Log\-Global\-Minimizer@{find\-Log\-Global\-Minimizer}}
+\index{find\-Log\-Global\-Minimizer@{find\-Log\-Global\-Minimizer}!Spacy@{\-Spacy}}
+\subsubsection[{find\-Log\-Global\-Minimizer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Real} {\bf \-Spacy\-::find\-Log\-Global\-Minimizer} (
 \begin{DoxyParamCaption}
-\item[{const std\+::function$<$ {\bf Real}(const {\bf Real})$>$ \&}]{f, }
-\item[{{\bf Real}}]{a, }
-\item[{{\bf Real}}]{b, }
-\item[{{\bf Real}}]{eps = {\ttfamily 1e-\/2}}
+\item[{const std\-::function$<$ \-Real(const \-Real)$>$ \&}]{f, }
+\item[{\-Real}]{a, }
+\item[{\-Real}]{b, }
+\item[{\-Real}]{eps = {\ttfamily 1e-\/2}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{}\label{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}
+)}}\label{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}
 
 
-Find log.\+global minimizer of $f$ in $[a,b]$. 
+\-Find log.\-global minimizer of $f$ in $[a,b]$. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em f} & Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
+\begin{DoxyParams}{\-Parameters}
+{\em f} & \-Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
 \hline
 {\em a} & lower bound of the admissible interval \\
 \hline
@@ -601,133 +550,111 @@ Find log.\+global minimizer of $f$ in $[a,b]$.
 {\em eps} & relative accuracy \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 $ x \in \mathrm{argmin}_{[a,b]} $ 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!derivative@{derivative}}
-\index{derivative@{derivative}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{derivative(\+C2\+Functional f)}{derivative(C2Functional f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C1\+Operator} Spacy\+::derivative (
+\hypertarget{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{\index{\-Spacy@{\-Spacy}!derivative@{derivative}}
+\index{derivative@{derivative}!Spacy@{\-Spacy}}
+\subsubsection[{derivative}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C1\-Operator} {\bf \-Spacy\-::derivative} (
 \begin{DoxyParamCaption}
-\item[{{\bf C2\+Functional}}]{f}
+\item[{\-C2\-Functional}]{f}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{}\label{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}
+)}}\label{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}
 
 
-Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. 
+\-Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. 
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{\-Parameters}
 {\em f} & twice differentiable functional \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 $f'$ 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!make\+Real\+Space@{make\+Real\+Space}}
-\index{make\+Real\+Space@{make\+Real\+Space}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{make\+Real\+Space(bool default\+Index=false)}{makeRealSpace(bool defaultIndex=false)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector\+Space} Spacy\+::make\+Real\+Space (
+\hypertarget{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}{\index{\-Spacy@{\-Spacy}!make\-Real\-Space@{make\-Real\-Space}}
+\index{make\-Real\-Space@{make\-Real\-Space}!Spacy@{\-Spacy}}
+\subsubsection[{make\-Real\-Space}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Vector\-Space} {\bf \-Spacy\-::make\-Real\-Space} (
 \begin{DoxyParamCaption}
-\item[{bool}]{default\+Index = {\ttfamily false}}
+\item[{bool}]{default\-Index = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}{}\label{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}
+)}}\label{namespaceSpacy_a4f4b05902653c5fc8d6411142dcb352f}
 
 
-Construct space of real numbers. 
+\-Construct space of real numbers. 
 
-\begin{DoxyReturn}{Returns}
-\hyperlink{group__RealGroup_gaa07f743f9874ecff062c511b7126f8b6}{Real\+Space\+::make\+Hilbert\+Space()} 
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{group__FenicsGroup_ga8b67cb3d0188d2398625595b79e2fa6a}{\-Real\-Space\-::make\-Hilbert\-Space()} 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!generic\+Copy@{generic\+Copy}}
-\index{generic\+Copy@{generic\+Copy}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{generic\+Copy(const Origin \&x, Target \&y, std\+::function$<$ void(const Origin \&, Target \&)$>$ copy\+Target\+If\+Consistent)}{genericCopy(const Origin &x, Target &y, std::function< void(const Origin &, Target &)> copyTargetIfConsistent)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Origin , class Target $>$ void Spacy\+::generic\+Copy (
+\hypertarget{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}{\index{\-Spacy@{\-Spacy}!generic\-Copy@{generic\-Copy}}
+\index{generic\-Copy@{generic\-Copy}!Spacy@{\-Spacy}}
+\subsubsection[{generic\-Copy}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Origin , class Target $>$ void {\bf \-Spacy\-::generic\-Copy} (
 \begin{DoxyParamCaption}
-\item[{const Origin \&}]{x, }
-\item[{Target \&}]{y, }
-\item[{std\+::function$<$ void(const Origin \&, Target \&)$>$}]{copy\+Target\+If\+Consistent}
+\item[{const \-Origin \&}]{x, }
+\item[{\-Target \&}]{y, }
+\item[{std\-::function$<$ void(const \-Origin \&, \-Target \&)$>$}]{copy\-Target\-If\-Consistent}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}{}\label{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}
+)}}\label{namespaceSpacy_a7dd8ce352c45e326cf8966befd5159ce}
 
 
-Copy from x to y. 
+\-Copy from x to y. 
 
-One of Origin or Target is a \hyperlink{classSpacy_1_1Vector}{Spacy\+::\+Vector}, the other is some other type. This function treats (nested) product space structures and uses copy\+Target\+If\+Consistent to copy single subspaces. \index{Spacy@{Spacy}!invoke@{invoke}}
-\index{invoke@{invoke}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{invoke(\+Func \&\&func, Tup \&\&tup)}{invoke(Func &&func, Tup &&tup)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Func , typename Tup $>$ decltype(auto) Spacy\+::invoke (
+\-One of \-Origin or \-Target is a \hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector}, the other is some other type. \-This function treats (nested) product space structures and uses copy\-Target\-If\-Consistent to copy single subspaces. \hypertarget{namespaceSpacy_afbcee52cc294417930c5ccfc2fefb9f8}{\index{\-Spacy@{\-Spacy}!decltype@{decltype}}
+\index{decltype@{decltype}!Spacy@{\-Spacy}}
+\subsubsection[{decltype}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Func , typename Tup $>$ \-Tup {\bf \-Spacy\-::decltype} (
 \begin{DoxyParamCaption}
-\item[{Func \&\&}]{func, }
-\item[{Tup \&\&}]{tup}
+\item[{auto}]{}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a64250818ba7ff711c207af6ab40ff986}{}\label{namespaceSpacy_a64250818ba7ff711c207af6ab40ff986}
+)}}\label{namespaceSpacy_afbcee52cc294417930c5ccfc2fefb9f8}
 
 
-Invoke function with arguments contained in tup. 
+\-Invoke function with arguments contained in tup. 
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{\-Parameters}
 {\em func} & function to be invoked \\
 \hline
-{\em tup} & = (a0,a1,...) arguments, individual entries must be accessible with std\+::get.\\
+{\em tup} & = (a0,a1,...) arguments, individual entries must be accessible with std\-::get.\\
 \hline
 \end{DoxyParams}
-Candidates for Tup are std\+::tuple, std\+::array, std\+::pair.
+\-Candidates for \-Tup are std\-::tuple, std\-::array, std\-::pair.
 
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 func(a0,a1,...) 
 \end{DoxyReturn}
-\index{Spacy@{Spacy}!create@{create}}
-\index{create@{create}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{create(\+Tup \&\&tup)}{create(Tup &&tup)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Type , typename Tup $>$ decltype(auto) Spacy\+::create (
+\hypertarget{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}{\index{\-Spacy@{\-Spacy}!connect\-As\-Primal\-Dual\-Pair@{connect\-As\-Primal\-Dual\-Pair}}
+\index{connect\-As\-Primal\-Dual\-Pair@{connect\-As\-Primal\-Dual\-Pair}!Spacy@{\-Spacy}}
+\subsubsection[{connect\-As\-Primal\-Dual\-Pair}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::connect\-As\-Primal\-Dual\-Pair} (
 \begin{DoxyParamCaption}
-\item[{Tup \&\&}]{tup}
+\item[{\-Vector\-Space \&}]{\-X, }
+\item[{\-Vector\-Space \&}]{\-Y}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_ae823c82326475d3cc3b166533deddf21}{}\label{namespaceSpacy_ae823c82326475d3cc3b166533deddf21}
+)}}\label{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}
 
 
-Create object of type Type from elements contained in tup. 
+\-Relate function spaces. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em tup} & = (a0,a1,...) constructor arguments, individual entries must be accessible with std\+::get.\\
+\begin{DoxyParams}{\-Parameters}
+{\em \-X} & primal space \\
+\hline
+{\em \-Y} & dual space\\
 \hline
 \end{DoxyParams}
-Candidates for Tup are std\+::tuple, std\+::array, std\+::pair.
-
-\begin{DoxyReturn}{Returns}
-Type(a0,a1,...) 
-\end{DoxyReturn}
-\index{Spacy@{Spacy}!connect\+As\+Primal\+Dual\+Pair@{connect\+As\+Primal\+Dual\+Pair}}
-\index{connect\+As\+Primal\+Dual\+Pair@{connect\+As\+Primal\+Dual\+Pair}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{connect\+As\+Primal\+Dual\+Pair(\+Vector\+Space \&\+X, Vector\+Space \&\+Y)}{connectAsPrimalDualPair(VectorSpace &X, VectorSpace &Y)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::connect\+As\+Primal\+Dual\+Pair (
+\-Makes $X$ the primal space of $Y$ and makes $Y$ the dual space of $X$. \-This admits the evaluation of $y(x)$ for $x\in X$ and $y\in Y$. \hypertarget{namespaceSpacy_aae18423491adef608743902f1c40844e}{\index{\-Spacy@{\-Spacy}!check\-Space\-Compatibility@{check\-Space\-Compatibility}}
+\index{check\-Space\-Compatibility@{check\-Space\-Compatibility}!Spacy@{\-Spacy}}
+\subsubsection[{check\-Space\-Compatibility}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::check\-Space\-Compatibility} (
 \begin{DoxyParamCaption}
-\item[{{\bf Vector\+Space} \&}]{X, }
-\item[{{\bf Vector\+Space} \&}]{Y}
+\item[{const \-Vector\-Space \&}]{\-V, }
+\item[{const \-Vector\-Space \&}]{\-W}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}{}\label{namespaceSpacy_a72844d3d381380c382cd9dce912e2664}
+)}}\label{namespaceSpacy_aae18423491adef608743902f1c40844e}
 
 
-Relate function spaces. 
+\-Check if \-V and \-W have the same index. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em X} & primal space \\
-\hline
-{\em Y} & dual space\\
-\hline
-\end{DoxyParams}
-Makes $X$ the primal space of $Y$ and makes $Y$ the dual space of $X$. This admits the evaluation of $y(x)$ for $x\in X$ and $y\in Y$. \index{Spacy@{Spacy}!check\+Space\+Compatibility@{check\+Space\+Compatibility}}
-\index{check\+Space\+Compatibility@{check\+Space\+Compatibility}!Spacy@{Spacy}}
-\subsubsection[{\texorpdfstring{check\+Space\+Compatibility(const Vector\+Space \&\+V, const Vector\+Space \&\+W)}{checkSpaceCompatibility(const VectorSpace &V, const VectorSpace &W)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::check\+Space\+Compatibility (
-\begin{DoxyParamCaption}
-\item[{const {\bf Vector\+Space} \&}]{V, }
-\item[{const {\bf Vector\+Space} \&}]{W}
-\end{DoxyParamCaption}
-)}\hypertarget{namespaceSpacy_aae18423491adef608743902f1c40844e}{}\label{namespaceSpacy_aae18423491adef608743902f1c40844e}
-
-
-Check if V and W have the same index. 
-
-
-\begin{DoxyExceptions}{Exceptions}
-{\em if} & {\ttfamily V.\+index() != W.\+index()} throws \hyperlink{classSpacy_1_1IncompatibleSpaceException}{Incompatible\+Space\+Exception} \\
+\begin{DoxyExceptions}{\-Exceptions}
+{\em if} & `\-V.index() != \-W.\-index()` throws \hyperlink{classSpacy_1_1IncompatibleSpaceException}{\-Incompatible\-Space\-Exception} \\
 \hline
 \end{DoxyExceptions}

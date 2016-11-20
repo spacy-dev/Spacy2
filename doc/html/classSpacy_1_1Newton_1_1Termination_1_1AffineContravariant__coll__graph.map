@@ -1,6 +1,4 @@
-<map id="Spacy::Newton::Termination::AffineContravariant" name="Spacy::Newton::Termination::AffineContravariant">
-<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity. " alt="" coords="155,95,317,121"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="120,5,323,47"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="369,95,498,121"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="347,5,549,47"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="95,83,223,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="33,5,284,35"/>
 </map>

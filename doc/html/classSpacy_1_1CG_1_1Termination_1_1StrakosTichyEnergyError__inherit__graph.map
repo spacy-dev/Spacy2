@@ -1,6 +1,6 @@
-<map id="Spacy::CG::Termination::StrakosTichyEnergyError" name="Spacy::CG::Termination::StrakosTichyEnergyError">
-<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="272,157,401,184"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,150,208,191"/>
-<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity. " alt="" coords="256,259,417,285"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="5,251,208,293"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="97,83,225,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="5,5,256,35"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity." alt="" coords="311,83,471,112"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="280,5,563,35"/>
 </map>

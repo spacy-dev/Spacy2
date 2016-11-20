@@ -1,3 +1,5 @@
-<map id="Spacy::Kaskade::C2Functional&lt; FunctionalDefinition &gt;" name="Spacy::Kaskade::C2Functional&lt; FunctionalDefinition &gt;">
-<area shape="rect" id="node2" href="$classSpacy_1_1FunctionalBase.html" title="Base class for twice differentiable functionals . " alt="" coords="5,5,163,32"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1FunctionalBase.html" title="Spacy::FunctionalBase" alt="" coords="15,83,172,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="196,83,324,112"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="135,5,385,35"/>
 </map>

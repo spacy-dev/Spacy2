@@ -1,11 +1,11 @@
-<map id="Spacy::VectorBase" name="Spacy::VectorBase">
-<area shape="rect" id="node2" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS. " alt="" coords="191,5,397,32"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1Vector.html" title="Vector implementation for FEniCS (single space). " alt="" coords="215,56,373,83"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Generic_1_1Vector.html" title="Generic vector implementation for Rn. " alt="" coords="215,107,373,149"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7. " alt="" coords="188,172,400,228"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Kaskade_1_1Vector.html" title="Coefficient vector implementation for Kaskade 7 (single space). " alt="" coords="212,251,376,293"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1ProductSpace_1_1Vector.html" title="Product space vector. " alt="" coords="219,317,369,358"/>
-<area shape="rect" id="node8" href="$classSpacy_1_1Real.html" title="Real number. " alt="" coords="247,383,341,409"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="205,433,383,460"/>
-<area shape="rect" id="node10" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems. " alt="" coords="195,484,393,511"/>
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS." alt="" coords="375,5,580,35"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1FEniCS_1_1Vector.html" title="Vector implementation for FEniCS (single space)." alt="" coords="399,59,556,88"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Generic_1_1Vector.html" title="Generic vector implementation for Rn." alt="" coords="355,112,600,141"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7." alt="" coords="189,165,765,195"/>
+<area shape="rect" id="node11" href="$classSpacy_1_1Kaskade_1_1Vector.html" title="Coefficient vector implementation for Kaskade 7 (single space)." alt="" coords="351,219,604,248"/>
+<area shape="rect" id="node13" href="$classSpacy_1_1ProductSpace_1_1Vector.html" title="Product space vector." alt="" coords="380,272,575,301"/>
+<area shape="rect" id="node15" href="$classSpacy_1_1Real.html" title="Real number." alt="" coords="431,325,524,355"/>
+<area shape="rect" id="node17" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library." alt="" coords="389,379,565,408"/>
+<area shape="rect" id="node19" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems." alt="" coords="379,432,576,461"/>
 </map>

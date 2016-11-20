@@ -1,129 +1,137 @@
-\hypertarget{classSpacy_1_1C2Functional}{}\section{Spacy\+:\+:C2\+Functional Class Reference}
-\label{classSpacy_1_1C2Functional}\index{Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}}
+\hypertarget{classSpacy_1_1C2Functional}{\section{\-Spacy\-:\-:\-C2\-Functional \-Class \-Reference}
+\label{classSpacy_1_1C2Functional}\index{\-Spacy\-::\-C2\-Functional@{\-Spacy\-::\-C2\-Functional}}
+}
 
 
-Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $.  
+\-Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $.  
 
 
 
 
-{\ttfamily \#include $<$c2\+Functional.\+hh$>$}
+{\ttfamily \#include $<$c2\-Functional.\-hh$>$}
 
-\subsection*{Public Member Functions}
+\subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{}\label{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}
+\hypertarget{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}
 
-\begin{DoxyCompactList}\small\item\em Apply functional. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{d1} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{}\label{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}
+\begin{DoxyCompactList}\small\item\em \-Apply functional. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{d1} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}
 
-\begin{DoxyCompactList}\small\item\em Compute derivative as function space element in $X^*$, where $x\in X$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{d2} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const \hypertarget{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{}\label{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}
+\begin{DoxyCompactList}\small\item\em \-Compute derivative as function space element in $X^*$, where $x\in X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{d2} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&dx) const }\label{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}
 
-\begin{DoxyCompactList}\small\item\em Compute second derivative as function space element in $X^*$, where $x,dx\in X$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \hyperlink{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{hessian} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{}\label{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}
+\begin{DoxyCompactList}\small\item\em \-Compute second derivative as function space element in $X^*$, where $x,dx\in X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{hessian} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}
 
-\begin{DoxyCompactList}\small\item\em Access hessian as linear operator $ X \rightarrow X^* $. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{domain} () const \hypertarget{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{}\label{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}
+\begin{DoxyCompactList}\small\item\em \-Access hessian as linear operator $ X \rightarrow X^* $. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{domain} () const }\label{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}
 
-\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ C2\+Functional\+Detail\+::\+C2\+Functional\+Concept$<$ C2\+Functional, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\{\bfseries C2\+Functional} (T \&\&value)\hypertarget{classSpacy_1_1C2Functional_ab6c458ef1a423c05f4996717f3772206}{}\label{classSpacy_1_1C2Functional_ab6c458ef1a423c05f4996717f3772206}
-
-\item 
-{\bfseries C2\+Functional} (const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&other)\hypertarget{classSpacy_1_1C2Functional_afe2ea31d1e077b381663fd9533c62f5f}{}\label{classSpacy_1_1C2Functional_afe2ea31d1e077b381663fd9533c62f5f}
+\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_ab6c458ef1a423c05f4996717f3772206}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ C2\-Functional\-Detail\-::\-C2\-Functional\-Concept$<$ C2\-Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-C2\-Functional} (\-T \&\&value)}\label{classSpacy_1_1C2Functional_ab6c458ef1a423c05f4996717f3772206}
 
 \item 
-{\bfseries C2\+Functional} (\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&\&other) noexcept\hypertarget{classSpacy_1_1C2Functional_ae08eec2c178bd9f9283566f48763d30f}{}\label{classSpacy_1_1C2Functional_ae08eec2c178bd9f9283566f48763d30f}
+\hypertarget{classSpacy_1_1C2Functional_a772ab63833bfd2a491daf9d36a0ab04f}{{\bfseries type\-\_\-id\-\_\-} (typeid(typename std\-::decay$<$ \-T $>$\-::type).hash\-\_\-code())}\label{classSpacy_1_1C2Functional_a772ab63833bfd2a491daf9d36a0ab04f}
 
 \item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ C2\+Functional\+Detail\+::\+C2\+Functional\+Concept$<$ C2\+Functional, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \& {\bfseries operator=} (T \&\&value)\hypertarget{classSpacy_1_1C2Functional_ae5810a028be906128a2c982540fbbcae}{}\label{classSpacy_1_1C2Functional_ae5810a028be906128a2c982540fbbcae}
+\hypertarget{classSpacy_1_1C2Functional_a53ce875f31e18f3a8a7f4ea9b4fb35ed}{{\bfseries impl\-\_\-} (nullptr)}\label{classSpacy_1_1C2Functional_a53ce875f31e18f3a8a7f4ea9b4fb35ed}
 
 \item 
-\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&other)\hypertarget{classSpacy_1_1C2Functional_af65bf39553c61af917eed58cbe6ca7f3}{}\label{classSpacy_1_1C2Functional_af65bf39553c61af917eed58cbe6ca7f3}
+\hypertarget{classSpacy_1_1C2Functional_afe2ea31d1e077b381663fd9533c62f5f}{{\bfseries \-C2\-Functional} (const \hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&other)}\label{classSpacy_1_1C2Functional_afe2ea31d1e077b381663fd9533c62f5f}
 
 \item 
-\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1C2Functional}{C2\+Functional} \&\&other) noexcept\hypertarget{classSpacy_1_1C2Functional_a19e885aded28dcc2c2e146031b08c4c6}{}\label{classSpacy_1_1C2Functional_a19e885aded28dcc2c2e146031b08c4c6}
+\hypertarget{classSpacy_1_1C2Functional_ae08eec2c178bd9f9283566f48763d30f}{{\bfseries \-C2\-Functional} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&\&other) noexcept}\label{classSpacy_1_1C2Functional_ae08eec2c178bd9f9283566f48763d30f}
+
+\item 
+\hypertarget{classSpacy_1_1C2Functional_ae5810a028be906128a2c982540fbbcae}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ C2\-Functional\-Detail\-::\-C2\-Functional\-Concept$<$ C2\-Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1C2Functional_ae5810a028be906128a2c982540fbbcae}
+
+\item 
+\hypertarget{classSpacy_1_1C2Functional_af65bf39553c61af917eed58cbe6ca7f3}{\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&other)}\label{classSpacy_1_1C2Functional_af65bf39553c61af917eed58cbe6ca7f3}
+
+\item 
+\hypertarget{classSpacy_1_1C2Functional_a19e885aded28dcc2c2e146031b08c4c6}{\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} \&\&other) noexcept}\label{classSpacy_1_1C2Functional_a19e885aded28dcc2c2e146031b08c4c6}
 
 \item 
 \hyperlink{classSpacy_1_1C2Functional_a7305181d522d504c75c0647737fe7d15}{operator bool} () const noexcept
-\begin{DoxyCompactList}\small\item\em Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{}\label{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}
+\begin{DoxyCompactList}\small\item\em \-Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a5dad5f40836b6f43662db0a01fd32347}
 
-\begin{DoxyCompactList}\small\item\em Apply functional. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{d1} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{}\label{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}
+\begin{DoxyCompactList}\small\item\em \-Apply functional. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}{d1} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a7278ddf3337cc28d138a02d18ad44404}
 
-\begin{DoxyCompactList}\small\item\em Compute derivative as function space element in $X^*$, where $x\in X$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{d2} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const \hypertarget{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{}\label{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}
+\begin{DoxyCompactList}\small\item\em \-Compute derivative as function space element in $X^*$, where $x\in X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}{d2} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&dx) const }\label{classSpacy_1_1C2Functional_af2f8671e8ebb9079255afc39a495859d}
 
-\begin{DoxyCompactList}\small\item\em Compute second derivative as function space element in $X^*$, where $x,dx\in X$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} \hyperlink{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{hessian} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{}\label{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}
+\begin{DoxyCompactList}\small\item\em \-Compute second derivative as function space element in $X^*$, where $x,dx\in X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}{hessian} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1C2Functional_a97eeeb376ed178ea7e2f109967f99c24}
 
-\begin{DoxyCompactList}\small\item\em Access hessian as linear operator $ X \rightarrow X^* $. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{domain} () const \hypertarget{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{}\label{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}
+\begin{DoxyCompactList}\small\item\em \-Access hessian as linear operator $ X \rightarrow X^* $. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}{domain} () const }\label{classSpacy_1_1C2Functional_ac75246c876b8bf75cdd4f1264bdb49ae}
 
-\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}{target} () noexcept
-\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}{target} () const noexcept
-\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\\-T $\ast$ \hyperlink{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}{target} () noexcept
+\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ \hyperlink{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}{target} () const noexcept
+\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $. 
+\subsection{\-Detailed \-Description}
+\-Type-\/erased twice differentiable functional $f:\ X \to \mathbb{R} $. 
 
-\subsection{Member Function Documentation}
-\index{Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}!operator bool@{operator bool}}
-\index{operator bool@{operator bool}!Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}}
-\subsubsection[{\texorpdfstring{operator bool() const noexcept}{operator bool() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+C2\+Functional\+::operator bool (
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSpacy_1_1C2Functional_a7305181d522d504c75c0647737fe7d15}{\index{\-Spacy\-::\-C2\-Functional@{\-Spacy\-::\-C2\-Functional}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Spacy::C2Functional@{\-Spacy\-::\-C2\-Functional}}
+\subsubsection[{operator bool}]{\setlength{\rightskip}{0pt plus 5cm}\-Spacy\-::\-C2\-Functional\-::operator bool (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1C2Functional_a7305181d522d504c75c0647737fe7d15}{}\label{classSpacy_1_1C2Functional_a7305181d522d504c75c0647737fe7d15}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1C2Functional_a7305181d522d504c75c0647737fe7d15}
 
 
-Checks if the type-\/erased interface holds an implementation. 
+\-Checks if the type-\/erased interface holds an implementation. 
 
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 true if an implementation is stored, else false 
 \end{DoxyReturn}
-\index{Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}!target@{target}}
-\index{target@{target}!Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}}
-\subsubsection[{\texorpdfstring{target() noexcept}{target() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ Spacy\+::\+C2\+Functional\+::target (
+\hypertarget{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}{\index{\-Spacy\-::\-C2\-Functional@{\-Spacy\-::\-C2\-Functional}!target@{target}}
+\index{target@{target}!Spacy::C2Functional@{\-Spacy\-::\-C2\-Functional}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ \-T$\ast$ {\bf \-Spacy\-::\-C2\-Functional\-::target} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}{}\label{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1C2Functional_aa1b2f29e86d728629683ebafeb1aa684}
 
 
-Conversion of the stored implementation to. 
+\-Conversion of the stored implementation to. 
 
 
 \begin{DoxyCode}
-T* 
+ T* 
 \end{DoxyCode}
-. \begin{DoxyReturn}{Returns}
+. \begin{DoxyReturn}{\-Returns}
 pointer to the stored object if conversion was successful, else nullptr 
 \end{DoxyReturn}
-\index{Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}!target@{target}}
-\index{target@{target}!Spacy\+::\+C2\+Functional@{Spacy\+::\+C2\+Functional}}
-\subsubsection[{\texorpdfstring{target() const noexcept}{target() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ Spacy\+::\+C2\+Functional\+::target (
+\hypertarget{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}{\index{\-Spacy\-::\-C2\-Functional@{\-Spacy\-::\-C2\-Functional}!target@{target}}
+\index{target@{target}!Spacy::C2Functional@{\-Spacy\-::\-C2\-Functional}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const \-T$\ast$ {\bf \-Spacy\-::\-C2\-Functional\-::target} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}{}\label{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1C2Functional_a26cabef07e8fe8b678d43a98cb2b41e9}
 
 
-Conversion of the stored implementation to. 
+\-Conversion of the stored implementation to. 
 
 
 \begin{DoxyCode}
-\textcolor{keyword}{const} T* 
+ const T* 
 \end{DoxyCode}
-. \begin{DoxyReturn}{Returns}
+. \begin{DoxyReturn}{\-Returns}
 pointer to the stored object if conversion was successful, else nullptr 
 \end{DoxyReturn}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/lars/tmp/\+Spacy/\+Interfaces/c2\+Functional.\+hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/c2\-Functional.\-hh\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/c2\-Functional.\-hh\end{DoxyCompactItemize}

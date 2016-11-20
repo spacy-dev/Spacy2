@@ -1,75 +1,72 @@
-\hypertarget{group__NewtonGroup}{}\section{Newton Methods}
-\label{group__NewtonGroup}\index{Newton Methods@{Newton Methods}}
+\hypertarget{group__NewtonGroup}{\section{\-Newton \-Methods}
+\label{group__NewtonGroup}\index{\-Newton Methods@{\-Newton Methods}}
+}
 
 
-Newton methods, largely following \cite{Deuflhard2004}.  
+\-Newton methods, largely following  
 
 
-Collaboration diagram for Newton Methods\+:
+\-Collaboration diagram for \-Newton \-Methods\-:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=270pt]{group__NewtonGroup}
+\includegraphics[width=272pt]{group__NewtonGroup}
 \end{center}
 \end{figure}
-\subsection*{Namespaces}
+\subsection*{\-Classes}
 \begin{DoxyCompactItemize}
 \item 
- \hyperlink{namespaceSpacy_1_1Newton}{Spacy\+::\+Newton}
-\begin{DoxyCompactList}\small\item\em Newton methods, largely following \cite{Deuflhard2004}. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Classes}
+class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant}{\-Spacy\-::\-Newton\-::\-Damping\-::\-Affine\-Covariant}
+\begin{DoxyCompactList}\small\item\em \-Affine covariant damping strategy as described in. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant}{\-Spacy\-::\-Newton\-::\-Damping\-::\-Affine\-Contravariant}
+\begin{DoxyCompactList}\small\item\em \-Affine contravariant damping strategy as described in. \end{DoxyCompactList}\item 
+class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1None}{\-Spacy\-::\-Newton\-::\-Damping\-::\-None}
+\begin{DoxyCompactList}\small\item\em \-No damping, yields local newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant}{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Covariant}
-\begin{DoxyCompactList}\small\item\em Affine covariant damping strategy as described in \cite{Deuflhard2004} \mbox{[}Sec. 3.\+3\mbox{]}. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant}{Spacy\+::\+Newton\+::\+Damping\+::\+Affine\+Contravariant}
-\begin{DoxyCompactList}\small\item\em Affine contravariant damping strategy as described in \cite{Deuflhard2004} \mbox{[}Sec. 3.\+2\mbox{]}. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Newton_1_1Damping_1_1None}{Spacy\+::\+Newton\+::\+Damping\+::\+None}
-\begin{DoxyCompactList}\small\item\em No damping, yields local newton method. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Newton_1_1Termination_1_1AffineCovariant}{Spacy\+::\+Newton\+::\+Termination\+::\+Affine\+Covariant}
-\begin{DoxyCompactList}\small\item\em Affine covariant relative error criterion. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Newton_1_1Termination_1_1AffineContravariant}{Spacy\+::\+Newton\+::\+Termination\+::\+Affine\+Contravariant}
-\begin{DoxyCompactList}\small\item\em Affine contravariant relative error criterion. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Functions}
+namespace \hyperlink{namespaceSpacy_1_1Newton}{\-Spacy\-::\-Newton}
+\begin{DoxyCompactList}\small\item\em \-Newton methods, largely following \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Functions}
 \begin{DoxyCompactItemize}
 \item 
-Vector \hyperlink{group__NewtonGroup_ga70230bc5f8b83684e04685b584967882}{Spacy\+::local\+Newton} (const C1\+Operator \&F, const Vector \&x0, const Newton\+::\+Parameter p=Newton\+::\+Parameter())
-\begin{DoxyCompactList}\small\item\em Local Newton method. \end{DoxyCompactList}\item 
-Vector \hyperlink{group__NewtonGroup_gad86d75d93e7d0307c492513c98c48fed}{Spacy\+::local\+Newton} (const C1\+Operator \&F, const Newton\+::\+Parameter p=Newton\+::\+Parameter())
-\begin{DoxyCompactList}\small\item\em Local Newton method with default initial iterate (x0=0). \end{DoxyCompactList}\item 
-Vector \hyperlink{group__NewtonGroup_gad63424afc4a3a7f48368fd97d6279d56}{Spacy\+::covariant\+Newton} (const C1\+Operator \&F, const Vector \&x0, const Newton\+::\+Parameter p=Newton\+::\+Parameter(), const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator=\{\})
-\begin{DoxyCompactList}\small\item\em Affine covariant Newton method. \end{DoxyCompactList}\item 
-Vector \hyperlink{group__NewtonGroup_ga7fd8cb9e0c213a357f5dc1add0ee2eff}{Spacy\+::covariant\+Newton} (const C1\+Operator \&F, const Newton\+::\+Parameter p=Newton\+::\+Parameter(), const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator=\{\})
-\begin{DoxyCompactList}\small\item\em Affine covariant Newton method. \end{DoxyCompactList}\item 
-Vector \hyperlink{group__NewtonGroup_ga323071fce88ea5e655bb18fb4233101c}{Spacy\+::contravariant\+Newton} (const C1\+Operator \&F, const Vector \&x0, const Newton\+::\+Parameter p=Newton\+::\+Parameter())
-\begin{DoxyCompactList}\small\item\em Affine contravariant Newton method. \end{DoxyCompactList}\item 
-Vector \hyperlink{group__NewtonGroup_ga8cde4ccdf9479141f8f8b92607f0f724}{Spacy\+::contravariant\+Newton} (const C1\+Operator \&F, const Newton\+::\+Parameter p=Newton\+::\+Parameter())
-\begin{DoxyCompactList}\small\item\em Affine contravariant Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\-Vector \hyperlink{group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599}{\-Spacy\-::local\-Newton} (const \-C1\-Operator \&\-F, const \-Vector \&x0, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter())
+\begin{DoxyCompactList}\small\item\em \-Local \-Newton method. \end{DoxyCompactList}\item 
+\-Vector \hyperlink{group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a}{\-Spacy\-::local\-Newton} (const \-C1\-Operator \&\-F, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter())
+\begin{DoxyCompactList}\small\item\em \-Local \-Newton method with default initial iterate (x0=0). \end{DoxyCompactList}\item 
+\-Vector \hyperlink{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}{\-Spacy\-::covariant\-Newton} (const \-C1\-Operator \&\-F, const \-Vector \&x0, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter(), const std\-::function$<$ bool(const \-Vector \&, const \-Vector \&)$>$ \&error\-Estimator=\{\})
+\begin{DoxyCompactList}\small\item\em \-Affine covariant \-Newton method. \end{DoxyCompactList}\item 
+\-Vector \hyperlink{group__NewtonGroup_ga2d469322482680319bf81d865ed57068}{\-Spacy\-::covariant\-Newton} (const \-C1\-Operator \&\-F, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter(), const std\-::function$<$ bool(const \-Vector \&, const \-Vector \&)$>$ \&error\-Estimator=\{\})
+\begin{DoxyCompactList}\small\item\em \-Affine covariant \-Newton method. \end{DoxyCompactList}\item 
+\-Vector \hyperlink{group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832}{\-Spacy\-::contravariant\-Newton} (const \-C1\-Operator \&\-F, const \-Vector \&x0, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter())
+\begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
+\-Vector \hyperlink{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}{\-Spacy\-::contravariant\-Newton} (const \-C1\-Operator \&\-F, const \-Newton\-::\-Parameter \&p=\-Newton\-::\-Parameter())
+\begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Newton methods, largely following \cite{Deuflhard2004}. 
+\subsection{\-Detailed \-Description}
+\-Newton methods, largely following \cite{Deuflhard2004}.
 
-Contains a local Newton method, an affine covariant Newton method, an affine contravariant Newton method as well as a generic implementation that admits the implementation of further termination criteria and damping strategies. 
+\-Contains a local \-Newton method, an affine covariant \-Newton method, an affine contravariant \-Newton method as well as a generic implementation that admits the implementation of further termination criteria and damping strategies. 
 
-\subsection{Function Documentation}
-\index{Newton Methods@{Newton Methods}!local\+Newton@{local\+Newton}}
-\index{local\+Newton@{local\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{local\+Newton(const C1\+Operator \&\+F, const Vector \&x0, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter())}{localNewton(const C1Operator &F, const Vector &x0, const Newton::Parameter p=Newton::Parameter())}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::local\+Newton (
+\subsection{\-Function \-Documentation}
+\hypertarget{group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599}{\index{\-Newton Methods@{\-Newton Methods}!local\-Newton@{local\-Newton}}
+\index{local\-Newton@{local\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{local\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::local\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Vector} \&}]{x0, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Vector \&}]{x0, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_ga70230bc5f8b83684e04685b584967882}{}\label{group__NewtonGroup_ga70230bc5f8b83684e04685b584967882}
+)}}\label{group__NewtonGroup_ga448b8e78b2e84ed78e70c42114ea7599}
 
 
-Local Newton method. 
+\-Local \-Newton method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em x0} & initial iterate \\
 \hline
@@ -78,58 +75,57 @@ Local Newton method.
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+None
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Covariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-None
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Covariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}
-\index{Newton Methods@{Newton Methods}!local\+Newton@{local\+Newton}}
-\index{local\+Newton@{local\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{local\+Newton(const C1\+Operator \&\+F, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter())}{localNewton(const C1Operator &F, const Newton::Parameter p=Newton::Parameter())}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::local\+Newton (
+\hypertarget{group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a}{\index{\-Newton Methods@{\-Newton Methods}!local\-Newton@{local\-Newton}}
+\index{local\-Newton@{local\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{local\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::local\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_gad86d75d93e7d0307c492513c98c48fed}{}\label{group__NewtonGroup_gad86d75d93e7d0307c492513c98c48fed}
+)}}\label{group__NewtonGroup_gafbe5e25f46f7b0d237f5e9971cef998a}
 
 
-Local Newton method with default initial iterate (x0=0). 
+\-Local \-Newton method with default initial iterate (x0=0). 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em p} & parameter object holding algorithmic parameters\\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+None
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Covariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-None
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Covariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}
-\index{Newton Methods@{Newton Methods}!covariant\+Newton@{covariant\+Newton}}
-\index{covariant\+Newton@{covariant\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{covariant\+Newton(const C1\+Operator \&\+F, const Vector \&x0, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter(), const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator=\lcurly{}\rcurly{})}{covariantNewton(const C1Operator &F, const Vector &x0, const Newton::Parameter p=Newton::Parameter(), const std::function< bool(const Vector &, const Vector &)> &errorEstimator=\{\})}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::covariant\+Newton (
+\hypertarget{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}{\index{\-Newton Methods@{\-Newton Methods}!covariant\-Newton@{covariant\-Newton}}
+\index{covariant\-Newton@{covariant\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{covariant\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::covariant\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Vector} \&}]{x0, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}, }
-\item[{const std\+::function$<$ bool(const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{error\+Estimator = {\ttfamily \{\}}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Vector \&}]{x0, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_gad63424afc4a3a7f48368fd97d6279d56}{}\label{group__NewtonGroup_gad63424afc4a3a7f48368fd97d6279d56}
+)}}\label{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}
 
 
-Affine covariant Newton method. 
+\-Affine covariant \-Newton method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em x0} & initial iterate \\
 \hline
@@ -138,58 +134,57 @@ Affine covariant Newton method.
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+Affine\+Covariant
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Covariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-Affine\-Covariant
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Covariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}
-\index{Newton Methods@{Newton Methods}!covariant\+Newton@{covariant\+Newton}}
-\index{covariant\+Newton@{covariant\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{covariant\+Newton(const C1\+Operator \&\+F, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter(), const std\+::function$<$ bool(const Vector \&, const Vector \&)$>$ \&error\+Estimator=\lcurly{}\rcurly{})}{covariantNewton(const C1Operator &F, const Newton::Parameter p=Newton::Parameter(), const std::function< bool(const Vector &, const Vector &)> &errorEstimator=\{\})}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::covariant\+Newton (
+\hypertarget{group__NewtonGroup_ga2d469322482680319bf81d865ed57068}{\index{\-Newton Methods@{\-Newton Methods}!covariant\-Newton@{covariant\-Newton}}
+\index{covariant\-Newton@{covariant\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{covariant\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::covariant\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}, }
-\item[{const std\+::function$<$ bool(const {\bf Vector} \&, const {\bf Vector} \&)$>$ \&}]{error\+Estimator = {\ttfamily \{\}}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_ga7fd8cb9e0c213a357f5dc1add0ee2eff}{}\label{group__NewtonGroup_ga7fd8cb9e0c213a357f5dc1add0ee2eff}
+)}}\label{group__NewtonGroup_ga2d469322482680319bf81d865ed57068}
 
 
-Affine covariant Newton method. 
+\-Affine covariant \-Newton method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em p} & parameter object holding algorithmic parameters\\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+Affine\+Covariant
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Covariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-Affine\-Covariant
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Covariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}
-\index{Newton Methods@{Newton Methods}!contravariant\+Newton@{contravariant\+Newton}}
-\index{contravariant\+Newton@{contravariant\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{contravariant\+Newton(const C1\+Operator \&\+F, const Vector \&x0, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter())}{contravariantNewton(const C1Operator &F, const Vector &x0, const Newton::Parameter p=Newton::Parameter())}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::contravariant\+Newton (
+\hypertarget{group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832}{\index{\-Newton Methods@{\-Newton Methods}!contravariant\-Newton@{contravariant\-Newton}}
+\index{contravariant\-Newton@{contravariant\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{contravariant\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::contravariant\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Vector} \&}]{x0, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Vector \&}]{x0, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_ga323071fce88ea5e655bb18fb4233101c}{}\label{group__NewtonGroup_ga323071fce88ea5e655bb18fb4233101c}
+)}}\label{group__NewtonGroup_gaa32f667c573986b2b2721ec6532fc832}
 
 
-Affine contravariant Newton method. 
+\-Affine contravariant \-Newton method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em x0} & initial iterate \\
 \hline
@@ -198,38 +193,38 @@ Affine contravariant Newton method.
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+Affine\+Contravariant
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Contravariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-Affine\-Contravariant
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Contravariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}
-\index{Newton Methods@{Newton Methods}!contravariant\+Newton@{contravariant\+Newton}}
-\index{contravariant\+Newton@{contravariant\+Newton}!Newton Methods@{Newton Methods}}
-\subsubsection[{\texorpdfstring{contravariant\+Newton(const C1\+Operator \&\+F, const Newton\+::\+Parameter p=\+Newton\+::\+Parameter())}{contravariantNewton(const C1Operator &F, const Newton::Parameter p=Newton::Parameter())}}]{\setlength{\rightskip}{0pt plus 5cm}Vector Spacy\+::contravariant\+Newton (
+\hypertarget{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}{\index{\-Newton Methods@{\-Newton Methods}!contravariant\-Newton@{contravariant\-Newton}}
+\index{contravariant\-Newton@{contravariant\-Newton}!Newton Methods@{\-Newton Methods}}
+\subsubsection[{contravariant\-Newton}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector {\bf \-Spacy\-::contravariant\-Newton} (
 \begin{DoxyParamCaption}
-\item[{const {\bf C1\+Operator} \&}]{F, }
-\item[{const {\bf Newton\+::\+Parameter}}]{p = {\ttfamily {\bf Newton\+::\+Parameter}()}}
+\item[{const \-C1\-Operator \&}]{\-F, }
+\item[{const \-Newton\-::\-Parameter \&}]{p = {\ttfamily \-Newton\-:\-:\-Parameter()}}
 \end{DoxyParamCaption}
-)}\hypertarget{group__NewtonGroup_ga8cde4ccdf9479141f8f8b92607f0f724}{}\label{group__NewtonGroup_ga8cde4ccdf9479141f8f8b92607f0f724}
+)}}\label{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}
 
 
-Affine contravariant Newton method. 
+\-Affine contravariant \-Newton method. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em F} & operator \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-F} & operator \\
 \hline
 {\em p} & parameter object holding algorithmic parameters\\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyItemize}
-\item Damping strategy\+: Newton\+::\+Damping\+Strategy\+::\+Affine\+Contravariant
-\item Termination criterion\+: Newton\+::\+Termination\+Criterion\+::\+Affine\+Contravariant
+\item \-Damping strategy\-: \-Newton\-::\-Damping\-Strategy\-::\-Affine\-Contravariant
+\item \-Termination criterion\-: \-Newton\-::\-Termination\-Criterion\-::\-Affine\-Contravariant
 \end{DoxyItemize}
 
-\begin{DoxySeeAlso}{See also}
-\hyperlink{structSpacy_1_1Newton_1_1Parameter}{Newton\+::\+Parameter} 
+\begin{DoxySeeAlso}{\-See also}
+\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} 
 \end{DoxySeeAlso}

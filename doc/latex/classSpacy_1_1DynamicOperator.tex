@@ -1,123 +1,131 @@
-\hypertarget{classSpacy_1_1DynamicOperator}{}\section{Spacy\+:\+:Dynamic\+Operator Class Reference}
-\label{classSpacy_1_1DynamicOperator}\index{Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}}
+\hypertarget{classSpacy_1_1DynamicOperator}{\section{\-Spacy\-:\-:\-Dynamic\-Operator \-Class \-Reference}
+\label{classSpacy_1_1DynamicOperator}\index{\-Spacy\-::\-Dynamic\-Operator@{\-Spacy\-::\-Dynamic\-Operator}}
+}
 
 
-Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $.  
+\-Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $.  
 
 
 
 
-{\ttfamily \#include $<$dynamic\+Operator.\+hh$>$}
+{\ttfamily \#include $<$dynamic\-Operator.\-hh$>$}
 
-\subsection*{Public Member Functions}
+\subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{}\label{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}
+\hypertarget{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}
 
-\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} {\bfseries M} () const \hypertarget{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}{}\label{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}
-
-\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{domain} () const \hypertarget{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{}\label{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}
-
-\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{range} () const \hypertarget{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{}\label{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}
-
-\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Dynamic\+Operator\+Detail\+::\+Dynamic\+Operator\+Concept$<$ Dynamic\+Operator, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\{\bfseries Dynamic\+Operator} (T \&\&value)\hypertarget{classSpacy_1_1DynamicOperator_a5cc35e7a7c5a9711f465a11c81fdd29a}{}\label{classSpacy_1_1DynamicOperator_a5cc35e7a7c5a9711f465a11c81fdd29a}
+\begin{DoxyCompactList}\small\item\em \-Apply operator. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} {\bfseries \-M} () const }\label{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}
 
 \item 
-{\bfseries Dynamic\+Operator} (const \hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \&other)\hypertarget{classSpacy_1_1DynamicOperator_a7d1e9efe9b3bd482d813f90fac5c5fa8}{}\label{classSpacy_1_1DynamicOperator_a7d1e9efe9b3bd482d813f90fac5c5fa8}
+\hypertarget{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{domain} () const }\label{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}
+
+\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{range} () const }\label{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}
+
+\begin{DoxyCompactList}\small\item\em \-Access range space $Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_a5cc35e7a7c5a9711f465a11c81fdd29a}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Dynamic\-Operator\-Detail\-::\-Dynamic\-Operator\-Concept$<$ Dynamic\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Dynamic\-Operator} (\-T \&\&value)}\label{classSpacy_1_1DynamicOperator_a5cc35e7a7c5a9711f465a11c81fdd29a}
 
 \item 
-{\bfseries Dynamic\+Operator} (\hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \&\&other) noexcept\hypertarget{classSpacy_1_1DynamicOperator_a0496c72b7b18d413856ad008dbc3dfb1}{}\label{classSpacy_1_1DynamicOperator_a0496c72b7b18d413856ad008dbc3dfb1}
+\hypertarget{classSpacy_1_1DynamicOperator_a01db25aa408f302a1cd38e6083ea1fe5}{{\bfseries type\-\_\-id\-\_\-} (typeid(typename std\-::decay$<$ \-T $>$\-::type).hash\-\_\-code())}\label{classSpacy_1_1DynamicOperator_a01db25aa408f302a1cd38e6083ea1fe5}
 
 \item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ Dynamic\+Operator\+Detail\+::\+Dynamic\+Operator\+Concept$<$ Dynamic\+Operator, typename std\+::decay$<$ T $>$\+::type $>$\+::value $>$\+::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \& {\bfseries operator=} (T \&\&value)\hypertarget{classSpacy_1_1DynamicOperator_af03a1b856d668cbd78eaf9df83487a55}{}\label{classSpacy_1_1DynamicOperator_af03a1b856d668cbd78eaf9df83487a55}
+\hypertarget{classSpacy_1_1DynamicOperator_adb4c82f3249fc355954de212c9ae7980}{{\bfseries impl\-\_\-} (nullptr)}\label{classSpacy_1_1DynamicOperator_adb4c82f3249fc355954de212c9ae7980}
 
 \item 
-\hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \&other)\hypertarget{classSpacy_1_1DynamicOperator_a4c7e142093149504287dc0e4f2a7c9df}{}\label{classSpacy_1_1DynamicOperator_a4c7e142093149504287dc0e4f2a7c9df}
+\hypertarget{classSpacy_1_1DynamicOperator_a7d1e9efe9b3bd482d813f90fac5c5fa8}{{\bfseries \-Dynamic\-Operator} (const \hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \&other)}\label{classSpacy_1_1DynamicOperator_a7d1e9efe9b3bd482d813f90fac5c5fa8}
 
 \item 
-\hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1DynamicOperator}{Dynamic\+Operator} \&\&other) noexcept\hypertarget{classSpacy_1_1DynamicOperator_a70023d434a687589299918a4ffaf6eee}{}\label{classSpacy_1_1DynamicOperator_a70023d434a687589299918a4ffaf6eee}
+\hypertarget{classSpacy_1_1DynamicOperator_a0496c72b7b18d413856ad008dbc3dfb1}{{\bfseries \-Dynamic\-Operator} (\hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \&\&other) noexcept}\label{classSpacy_1_1DynamicOperator_a0496c72b7b18d413856ad008dbc3dfb1}
+
+\item 
+\hypertarget{classSpacy_1_1DynamicOperator_af03a1b856d668cbd78eaf9df83487a55}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Dynamic\-Operator\-Detail\-::\-Dynamic\-Operator\-Concept$<$ Dynamic\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1DynamicOperator_af03a1b856d668cbd78eaf9df83487a55}
+
+\item 
+\hypertarget{classSpacy_1_1DynamicOperator_a4c7e142093149504287dc0e4f2a7c9df}{\hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \&other)}\label{classSpacy_1_1DynamicOperator_a4c7e142093149504287dc0e4f2a7c9df}
+
+\item 
+\hypertarget{classSpacy_1_1DynamicOperator_a70023d434a687589299918a4ffaf6eee}{\hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1DynamicOperator}{\-Dynamic\-Operator} \&\&other) noexcept}\label{classSpacy_1_1DynamicOperator_a70023d434a687589299918a4ffaf6eee}
 
 \item 
 \hyperlink{classSpacy_1_1DynamicOperator_a4d7243f9e135e01d4f87a0e21fe7cbe1}{operator bool} () const noexcept
-\begin{DoxyCompactList}\small\item\em Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const \hypertarget{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{}\label{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}
+\begin{DoxyCompactList}\small\item\em \-Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicOperator_ace2c2202ca6eb3fe5f5817087d30510a}
 
-\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} {\bfseries M} () const \hypertarget{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}{}\label{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}
+\begin{DoxyCompactList}\small\item\em \-Apply operator. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} {\bfseries \-M} () const }\label{classSpacy_1_1DynamicOperator_a38c8c5337fd79a98a7e64139d0cbed38}
 
 \item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{domain} () const \hypertarget{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{}\label{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}
+\hypertarget{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}{domain} () const }\label{classSpacy_1_1DynamicOperator_ad457cb5571c721f97530895aa26af626}
 
-\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
-const \hyperlink{classSpacy_1_1VectorSpace}{Vector\+Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{range} () const \hypertarget{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{}\label{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}
+\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}{range} () const }\label{classSpacy_1_1DynamicOperator_ab760994d921fa8d9df2882f9e4cfc9c3}
 
-\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}{target} () noexcept
-\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\const T $\ast$ \hyperlink{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}{target} () const noexcept
-\begin{DoxyCompactList}\small\item\em Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Access range space $Y$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\\-T $\ast$ \hyperlink{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}{target} () noexcept
+\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ \hyperlink{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}{target} () const noexcept
+\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $. 
+\subsection{\-Detailed \-Description}
+\-Type-\/erased time-\/dependent operator $A:\ [0,T] \times X \to Y $. 
 
-\subsection{Member Function Documentation}
-\index{Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}!operator bool@{operator bool}}
-\index{operator bool@{operator bool}!Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}}
-\subsubsection[{\texorpdfstring{operator bool() const noexcept}{operator bool() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Dynamic\+Operator\+::operator bool (
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSpacy_1_1DynamicOperator_a4d7243f9e135e01d4f87a0e21fe7cbe1}{\index{\-Spacy\-::\-Dynamic\-Operator@{\-Spacy\-::\-Dynamic\-Operator}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Spacy::DynamicOperator@{\-Spacy\-::\-Dynamic\-Operator}}
+\subsubsection[{operator bool}]{\setlength{\rightskip}{0pt plus 5cm}\-Spacy\-::\-Dynamic\-Operator\-::operator bool (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1DynamicOperator_a4d7243f9e135e01d4f87a0e21fe7cbe1}{}\label{classSpacy_1_1DynamicOperator_a4d7243f9e135e01d4f87a0e21fe7cbe1}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1DynamicOperator_a4d7243f9e135e01d4f87a0e21fe7cbe1}
 
 
-Checks if the type-\/erased interface holds an implementation. 
+\-Checks if the type-\/erased interface holds an implementation. 
 
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 true if an implementation is stored, else false 
 \end{DoxyReturn}
-\index{Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}!target@{target}}
-\index{target@{target}!Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}}
-\subsubsection[{\texorpdfstring{target() noexcept}{target() noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ Spacy\+::\+Dynamic\+Operator\+::target (
+\hypertarget{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}{\index{\-Spacy\-::\-Dynamic\-Operator@{\-Spacy\-::\-Dynamic\-Operator}!target@{target}}
+\index{target@{target}!Spacy::DynamicOperator@{\-Spacy\-::\-Dynamic\-Operator}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ \-T$\ast$ {\bf \-Spacy\-::\-Dynamic\-Operator\-::target} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}{}\label{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1DynamicOperator_a6d9ebf222c06c54000c0ecb3ec3b7769}
 
 
-Conversion of the stored implementation to. 
+\-Conversion of the stored implementation to. 
 
 
 \begin{DoxyCode}
-T* 
+ T* 
 \end{DoxyCode}
-. \begin{DoxyReturn}{Returns}
+. \begin{DoxyReturn}{\-Returns}
 pointer to the stored object if conversion was successful, else nullptr 
 \end{DoxyReturn}
-\index{Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}!target@{target}}
-\index{target@{target}!Spacy\+::\+Dynamic\+Operator@{Spacy\+::\+Dynamic\+Operator}}
-\subsubsection[{\texorpdfstring{target() const noexcept}{target() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ Spacy\+::\+Dynamic\+Operator\+::target (
+\hypertarget{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}{\index{\-Spacy\-::\-Dynamic\-Operator@{\-Spacy\-::\-Dynamic\-Operator}!target@{target}}
+\index{target@{target}!Spacy::DynamicOperator@{\-Spacy\-::\-Dynamic\-Operator}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const \-T$\ast$ {\bf \-Spacy\-::\-Dynamic\-Operator\-::target} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}{}\label{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1DynamicOperator_a47418fa10f47b00a8338983195372735}
 
 
-Conversion of the stored implementation to. 
+\-Conversion of the stored implementation to. 
 
 
 \begin{DoxyCode}
-\textcolor{keyword}{const} T* 
+ const T* 
 \end{DoxyCode}
-. \begin{DoxyReturn}{Returns}
+. \begin{DoxyReturn}{\-Returns}
 pointer to the stored object if conversion was successful, else nullptr 
 \end{DoxyReturn}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/lars/tmp/\+Spacy/\+Interfaces/dynamic\+Operator.\+hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/dynamic\-Operator.\-hh\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/dynamic\-Operator.\-hh\end{DoxyCompactItemize}

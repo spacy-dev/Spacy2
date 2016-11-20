@@ -1,4 +1,4 @@
-<map id="Spacy::Rn::LinearOperatorCreator" name="Spacy::Rn::LinearOperatorCreator">
-<area shape="rect" id="node2" href="$classSpacy_1_1Generic_1_1LinearOperatorCreator.html" title="Spacy::Generic::LinearOperator\lCreator\&lt; LinearOperator \&gt;" alt="" coords="5,80,211,121"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="35,5,181,32"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1Generic_1_1LinearOperatorCreator.html" title="Spacy::Generic::LinearOperatorCreator\&lt; LinearOperator \&gt;" alt="" coords="5,83,363,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1OperatorBase.html" title="Spacy::OperatorBase" alt="" coords="111,5,257,35"/>
 </map>

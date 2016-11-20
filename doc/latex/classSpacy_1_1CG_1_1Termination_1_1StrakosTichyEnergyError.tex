@@ -1,17 +1,18 @@
-\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError}{}\section{Spacy\+:\+:CG\+:\+:Termination\+:\+:Strakos\+Tichy\+Energy\+Error Class Reference}
-\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError}\index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError}{\section{\-Spacy\-:\-:\-C\-G\-:\-:\-Termination\-:\-:\-Strakos\-Tichy\-Energy\-Error \-Class \-Reference}
+\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError}\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+}
 
 
-\hyperlink{namespaceSpacy_1_1CG_1_1Termination}{Termination} criterion for conjugate gradient methods based on an estimate of the relative energy error.  
-
-
-
-
-{\ttfamily \#include $<$termination\+Criteria.\+hh$>$}
+\hyperlink{namespaceSpacy_1_1CG_1_1Termination}{\-Termination} criterion for conjugate gradient methods based on an estimate of the relative energy error.  
 
 
 
-Inheritance diagram for Spacy\+:\+:CG\+:\+:Termination\+:\+:Strakos\+Tichy\+Energy\+Error\+:
+
+{\ttfamily \#include $<$termination\-Criteria.\-hh$>$}
+
+
+
+\-Inheritance diagram for \-Spacy\-:\-:\-C\-G\-:\-:\-Termination\-:\-:\-Strakos\-Tichy\-Energy\-Error\-:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,7 +22,7 @@ Inheritance diagram for Spacy\+:\+:CG\+:\+:Termination\+:\+:Strakos\+Tichy\+Ener
 \end{figure}
 
 
-Collaboration diagram for Spacy\+:\+:CG\+:\+:Termination\+:\+:Strakos\+Tichy\+Energy\+Error\+:
+\-Collaboration diagram for \-Spacy\-:\-:\-C\-G\-:\-:\-Termination\-:\-:\-Strakos\-Tichy\-Energy\-Error\-:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -29,165 +30,165 @@ Collaboration diagram for Spacy\+:\+:CG\+:\+:Termination\+:\+:Strakos\+Tichy\+En
 \includegraphics[width=350pt]{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}{operator()} () const \hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}{bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}{operator()} () const }\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_aac549148bdb1407e6d3f4e41cceb240b}
 
 \begin{DoxyCompactList}\small\item\em termination decision \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}{update} (double alpha, double q\+Aq, double q\+Pq, double r\+P\+I\+N\+Vr)
-\begin{DoxyCompactList}\small\item\em add\+Step\+Quantities supplies algorithmic quantities to the termination criterion \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}{vanishing\+Step} () const noexcept
+void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}{update} (double alpha, double q\-Aq, double q\-Pq, double r\-P\-I\-N\-Vr)
+\begin{DoxyCompactList}\small\item\em add\-Step\-Quantities supplies algorithmic quantities to the termination criterion \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}{vanishing\-Step} () const noexcept
 \begin{DoxyCompactList}\small\item\em check if the energy norm of the current step $\|q\|_A=\sqrt(qAq)$ is smaller than the maximal attainable accuracy multiplied with the energy norm of the iterate $\varepsilon_{max}\|x\|_A$. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}{clear} () noexcept\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}{void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}{clear} () noexcept}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ad432a8f91481780c3a7fa74743ac3256}
 
-\begin{DoxyCompactList}\small\item\em re-\/initializes the termination criterion for a new \hyperlink{namespaceSpacy_1_1CG}{CG} run \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}{set\+Look\+Ahead} (unsigned look\+Ahead) noexcept
+\begin{DoxyCompactList}\small\item\em re-\/initializes the termination criterion for a new \hyperlink{namespaceSpacy_1_1CG}{\-C\-G} run \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}{set\-Look\-Ahead} (unsigned look\-Ahead) noexcept
 \begin{DoxyCompactList}\small\item\em set requested lookahead value \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}{minimal\+Decrease\+Achieved} () const noexcept
+bool \hyperlink{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}{minimal\-Decrease\-Achieved} () const noexcept
 \begin{DoxyCompactList}\small\item\em relaxed termination decision \end{DoxyCompactList}\item 
-void {\bfseries set\+Eps} (double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps})\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}{}\label{classSpacy_1_1Mixin_1_1Eps_a1bbfd62541610d5d80f2782ab77158e4}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a6b4c38a60848c0ab665fb3a81e181786}{void {\bfseries set\-Eps} (\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{eps})}\label{classSpacy_1_1Mixin_1_1Eps_a6b4c38a60848c0ab665fb3a81e181786}
 
 \item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}{}\label{classSpacy_1_1Mixin_1_1Eps_a40e2ba8f3abd2b5370ef41238cfaaf8b}
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}
 
-\begin{DoxyCompactList}\small\item\em Access $\varepsilon$. \end{DoxyCompactList}\item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{sqrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}{}\label{classSpacy_1_1Mixin_1_1Eps_a29e8c25dc3f1fdede57b8eb06f520fe1}
+\begin{DoxyCompactList}\small\item\em \-Access $\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_abd50a47b32614a950189855775a09d05}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_abd50a47b32614a950189855775a09d05}{sqrt\-Eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_abd50a47b32614a950189855775a09d05}
 
-\begin{DoxyCompactList}\small\item\em Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
-double \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{cbrt\+Eps} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}{}\label{classSpacy_1_1Mixin_1_1Eps_a1879ebbf1b467cb4be36bcc63307018d}
+\begin{DoxyCompactList}\small\item\em \-Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a4bbca3a4afc878d1a20b6335f35e58f7}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a4bbca3a4afc878d1a20b6335f35e58f7}{cbrt\-Eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_a4bbca3a4afc878d1a20b6335f35e58f7}
 
-\begin{DoxyCompactList}\small\item\em Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{}\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+\begin{DoxyCompactList}\small\item\em \-Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{\-Eps} $\ast$changed\-Subject)}\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
 
 \begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{\-Eps} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
 
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_a51dbe0b9cc950e0f3dfd34a481f08ae4}{Eps} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+\begin{DoxyCompactList}\small\item\em \-Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{\-Eps} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
 
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+\begin{DoxyCompactList}\small\item\em \-Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
 
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{set\+Verbosity} (bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose})
-\begin{DoxyCompactList}\small\item\em Enable/disable verbosity. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}
+\begin{DoxyCompactList}\small\item\em \-Notify observers about changes. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{set\-Verbosity} (bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose})
+\begin{DoxyCompactList}\small\item\em \-Enable/disable verbosity. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{bool \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}{verbose} () const noexcept}\label{classSpacy_1_1Mixin_1_1Verbosity_ad367a7328578546938fd2a7e52ab3793}
 
-\begin{DoxyCompactList}\small\item\em Check if verbosity\+Level $>$ 0. \end{DoxyCompactList}\item 
-void {\bfseries set\+Verbosity\+Level} (unsigned level) noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}{}\label{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}
+\begin{DoxyCompactList}\small\item\em \-Check if verbosity\-Level $>$ 0. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}{void {\bfseries set\-Verbosity\-Level} (unsigned level) noexcept}\label{classSpacy_1_1Mixin_1_1Verbosity_af84a4b3c933f252a5840ab63d4a38325}
 
 \item 
-unsigned \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{get\+Verbosity\+Level} () const noexcept\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{}\label{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}
+\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{unsigned \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}{get\-Verbosity\-Level} () const noexcept}\label{classSpacy_1_1Mixin_1_1Verbosity_ae55b7493c53b3bb4c2770c99addb5ee1}
 
-\begin{DoxyCompactList}\small\item\em Access verbosity level. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} $\ast$changed\+Subject)\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}
+\begin{DoxyCompactList}\small\item\em \-Access verbosity level. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{\-Verbosity} $\ast$changed\-Subject)}\label{classSpacy_1_1Mixin_1_1Verbosity_a8cff860c587fcda2cdc86ba744302b33}
 
 \begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{\-Verbosity} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
 
-\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{Verbosity} \&observer)\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+\begin{DoxyCompactList}\small\item\em \-Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Verbosity_aefe2f237b0456c4bced001fbfa75f92e}{\-Verbosity} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
 
-\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+\begin{DoxyCompactList}\small\item\em \-Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
 
-\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-\hyperlink{namespaceSpacy_1_1CG_1_1Termination}{Termination} criterion for conjugate gradient methods based on an estimate of the relative energy error. 
+\subsection{\-Detailed \-Description}
+\hyperlink{namespaceSpacy_1_1CG_1_1Termination}{\-Termination} criterion for conjugate gradient methods based on an estimate of the relative energy error. 
 
-Relative energy error termination criterion according to \cite{Strakos2005} (see also \cite{Hestenes1952}, \cite{Arioli2004}). Requires that \hyperlink{namespaceSpacy_1_1CG}{CG} starts at $ x = 0 $. More general starting values might be used, but must be chosen such that the estimate for the energy norm of the solution stays positive (see the above mentioned paper for details). 
+\-Relative energy error termination criterion according to \cite{Strakos2005} (see also \cite{Hestenes1952}, \cite{Arioli2004}). \-Requires that \hyperlink{namespaceSpacy_1_1CG}{\-C\-G} starts at $ x = 0 $. \-More general starting values might be used, but must be chosen such that the estimate for the energy norm of the solution stays positive (see the above mentioned paper for details). 
 
-\subsection{Member Function Documentation}
-\index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}!update@{update}}
-\index{update@{update}!Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
-\subsubsection[{\texorpdfstring{update(double alpha, double q\+Aq, double q\+Pq, double r\+P\+I\+N\+Vr)}{update(double alpha, double qAq, double qPq, double rPINVr)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error\+::update (
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}{\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}!update@{update}}
+\index{update@{update}!Spacy::CG::Termination::StrakosTichyEnergyError@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error\-::update} (
 \begin{DoxyParamCaption}
 \item[{double}]{alpha, }
-\item[{double}]{q\+Aq, }
-\item[{double}]{q\+Pq, }
-\item[{double}]{r\+P\+I\+N\+Vr}
+\item[{double}]{q\-Aq, }
+\item[{double}]{q\-Pq, }
+\item[{double}]{r\-P\-I\-N\-Vr}
 \end{DoxyParamCaption}
-)}\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}
+)}}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac50987341731cbf4f97e32246099aaf9}
 
 
-add\+Step\+Quantities supplies algorithmic quantities to the termination criterion 
+add\-Step\-Quantities supplies algorithmic quantities to the termination criterion 
 
 
-\begin{DoxyParams}{Parameters}
+\begin{DoxyParams}{\-Parameters}
 {\em alpha} & scaling for the conjugate search direction $q$ \\
 \hline
-{\em q\+Aq} & squared energy norm of the conjugate search direction $q$ (here\+: unused) \\
+{\em q\-Aq} & squared energy norm of the conjugate search direction $q$ (here\-: unused) \\
 \hline
-{\em q\+Pq} & squared $P$-\/norm, i. e. the norm induced by the preconditioner, of the conjugate search direction $q$ (here\+: unused) \\
+{\em q\-Pq} & squared $P$-\/norm, i. e. the norm induced by the preconditioner, of the conjugate search direction $q$ (here\-: unused) \\
 \hline
-{\em r\+P\+I\+N\+Vr} & squared $P^{-1}$-\/norm of the residual \\
+{\em r\-P\-I\-N\-Vr} & squared $P^{-1}$-\/norm of the residual \\
 \hline
 \end{DoxyParams}
-\index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}!vanishing\+Step@{vanishing\+Step}}
-\index{vanishing\+Step@{vanishing\+Step}!Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
-\subsubsection[{\texorpdfstring{vanishing\+Step() const noexcept}{vanishingStep() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error\+::vanishing\+Step (
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}{\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}!vanishing\-Step@{vanishing\-Step}}
+\index{vanishing\-Step@{vanishing\-Step}!Spacy::CG::Termination::StrakosTichyEnergyError@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+\subsubsection[{vanishing\-Step}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error\-::vanishing\-Step} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}
+) const}}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_a1fa1f92b7caa9e9d9f929e14d70b3a7c}
 
 
 check if the energy norm of the current step $\|q\|_A=\sqrt(qAq)$ is smaller than the maximal attainable accuracy multiplied with the energy norm of the iterate $\varepsilon_{max}\|x\|_A$. 
 
-\begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{\-Returns}
 true if $\|q\|<\varepsilon_{max}\|x\|_A$, else false 
 \end{DoxyReturn}
-\index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}!set\+Look\+Ahead@{set\+Look\+Ahead}}
-\index{set\+Look\+Ahead@{set\+Look\+Ahead}!Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
-\subsubsection[{\texorpdfstring{set\+Look\+Ahead(unsigned look\+Ahead) noexcept}{setLookAhead(unsigned lookAhead) noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error\+::set\+Look\+Ahead (
+\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}{\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}!set\-Look\-Ahead@{set\-Look\-Ahead}}
+\index{set\-Look\-Ahead@{set\-Look\-Ahead}!Spacy::CG::Termination::StrakosTichyEnergyError@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+\subsubsection[{set\-Look\-Ahead}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error\-::set\-Look\-Ahead} (
 \begin{DoxyParamCaption}
-\item[{unsigned}]{look\+Ahead}
+\item[{unsigned}]{look\-Ahead}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}
+)}}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_ac40343f544b7e2bfeffa7f7927cfeac5}
 
 
 set requested lookahead value 
 
 
-\begin{DoxyParams}{Parameters}
-{\em look\+Ahead} & the requested lookahead (nonnegative)\\
+\begin{DoxyParams}{\-Parameters}
+{\em look\-Ahead} & the requested lookahead (nonnegative)\\
 \hline
 \end{DoxyParams}
-The default value is 5. \index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}!minimal\+Decrease\+Achieved@{minimal\+Decrease\+Achieved}}
-\index{minimal\+Decrease\+Achieved@{minimal\+Decrease\+Achieved}!Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
-\subsubsection[{\texorpdfstring{minimal\+Decrease\+Achieved() const noexcept}{minimalDecreaseAchieved() const noexcept}}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error\+::minimal\+Decrease\+Achieved (
+\-The default value is 5. \hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}{\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}!minimal\-Decrease\-Achieved@{minimal\-Decrease\-Achieved}}
+\index{minimal\-Decrease\-Achieved@{minimal\-Decrease\-Achieved}!Spacy::CG::Termination::StrakosTichyEnergyError@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+\subsubsection[{minimal\-Decrease\-Achieved}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error\-::minimal\-Decrease\-Achieved} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [noexcept]}}\hypertarget{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}{}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}
+) const}}\label{classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError_af13fec942d9d9ec622803e226537ffec}
 
 
 relaxed termination decision 
 
-\begin{DoxyReturn}{Returns}
-true if the iteration has reached some minimal required accuracy, possibly bigger than the desired accuracy. This method is required in the hybrid conjugate gradient method only. 
+\begin{DoxyReturn}{\-Returns}
+true if the iteration has reached some minimal required accuracy, possibly bigger than the desired accuracy. \-This method is required in the hybrid conjugate gradient method only. 
 \end{DoxyReturn}
-\index{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}!set\+Verbosity@{set\+Verbosity}}
-\index{set\+Verbosity@{set\+Verbosity}!Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error@{Spacy\+::\+C\+G\+::\+Termination\+::\+Strakos\+Tichy\+Energy\+Error}}
-\subsubsection[{\texorpdfstring{set\+Verbosity(bool verbose)}{setVerbosity(bool verbose)}}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\+::\+Mixin\+::\+Verbosity\+::set\+Verbosity (
+\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{\index{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}!set\-Verbosity@{set\-Verbosity}}
+\index{set\-Verbosity@{set\-Verbosity}!Spacy::CG::Termination::StrakosTichyEnergyError@{\-Spacy\-::\-C\-G\-::\-Termination\-::\-Strakos\-Tichy\-Energy\-Error}}
+\subsubsection[{set\-Verbosity}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::\-Mixin\-::\-Verbosity\-::set\-Verbosity} (
 \begin{DoxyParamCaption}
 \item[{bool}]{verbose}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inherited]}}\hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{}\label{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}
 
 
-Enable/disable verbosity. 
+\-Enable/disable verbosity. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em verbose} & true\+: if verbosity\+Level = 0, set verbosity\+Level = 1; false\+: if set verbosity\+Level = 0 \\
+\begin{DoxyParams}{\-Parameters}
+{\em verbose} & true\-: if verbosity\-Level = 0, set verbosity\-Level = 1; false\-: if set verbosity\-Level = 0 \\
 \hline
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/lars/tmp/\+Spacy/\+Spacy/\+Algorithm/\+C\+G/termination\+Criteria.\+hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Algorithm/\-C\-G/termination\-Criteria.\-hh\end{DoxyCompactItemize}

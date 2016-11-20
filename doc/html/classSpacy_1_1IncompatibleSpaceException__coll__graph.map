@@ -1,5 +1,5 @@
-<map id="Spacy::IncompatibleSpaceException" name="Spacy::IncompatibleSpaceException">
-<area shape="rect" id="node2" href="$classSpacy_1_1GenericException.html" title="A generic exception class that serves as base for all exceptions in this library. ..." alt="" coords="9,155,180,181"/>
-<area shape="rect" id="node3" title="STL class. " alt="" coords="33,80,157,107"/>
-<area shape="rect" id="node4" title="STL class. " alt="" coords="43,5,147,32"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1GenericException.html" title="A generic exception class that serves as base for all exceptions in this library." alt="" coords="37,160,208,189"/>
+<area shape="rect" id="node4" title="STL class." alt="" coords="61,83,184,112"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="71,5,175,35"/>
 </map>

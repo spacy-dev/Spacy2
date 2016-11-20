@@ -1,9 +1,7 @@
-<map id="Spacy::Newton::Parameter" name="Spacy::Newton::Parameter">
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="287,13,416,39"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,5,208,47"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity. " alt="" coords="271,114,432,141"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="5,107,208,148"/>
-<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1RegularityTest.html" title="Mixin class for maximal number of steps/iterations. " alt="" coords="256,215,447,242"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; RegularityTest \&gt;" alt="" coords="5,208,208,249"/>
-<area shape="rect" id="node10" href="$classSpacy_1_1Mixin_1_1Timer.html" title="Spacy::Mixin::Timer\l\&lt; std::chrono::milliseconds \&gt;" alt="" coords="256,267,447,308"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="456,5,584,35"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="36,5,287,35"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1RegularityTest.html" title="Mixin class for maximal number of steps/iterations." alt="" coords="425,59,615,88"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; RegularityTest \&gt;" alt="" coords="5,59,317,88"/>
+<area shape="rect" id="node10" href="$classSpacy_1_1Mixin_1_1Timer.html" title="Spacy::Mixin::Timer\&lt; std::chrono::milliseconds \&gt;" alt="" coords="367,112,673,141"/>
 </map>

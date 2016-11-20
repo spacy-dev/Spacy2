@@ -1,6 +1,5 @@
-<map id="Spacy::Scalar::LinearOperator" name="Spacy::Scalar::LinearOperator">
-<area shape="rect" id="node2" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="41,5,176,32"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="35,56,182,83"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1Get.html" title="Spacy::Mixin::Get\&lt;\l double \&gt;" alt="" coords="41,107,176,149"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\l\&lt; LinearOperator \&gt;" alt="" coords="5,173,212,214"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations." alt="" coords="96,5,229,35"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1OperatorBase.html" title="Spacy::OperatorBase" alt="" coords="89,59,236,88"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\&lt; LinearOperator \&gt;" alt="" coords="5,112,320,141"/>
 </map>

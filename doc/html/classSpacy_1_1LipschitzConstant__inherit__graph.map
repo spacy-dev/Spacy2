@@ -1,5 +1,4 @@
-<map id="Spacy::LipschitzConstant" name="Spacy::LipschitzConstant">
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Get.html" title="Spacy::Mixin::Get\&lt;\l double \&gt;" alt="" coords="5,95,140,136"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="164,102,293,129"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="127,5,330,47"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="67,83,195,112"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="5,5,256,35"/>
 </map>

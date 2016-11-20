@@ -1,48 +1,49 @@
-\hypertarget{classSpacy_1_1PrimalInducedScalarProduct}{}\section{Spacy\+:\+:Primal\+Induced\+Scalar\+Product Class Reference}
-\label{classSpacy_1_1PrimalInducedScalarProduct}\index{Spacy\+::\+Primal\+Induced\+Scalar\+Product@{Spacy\+::\+Primal\+Induced\+Scalar\+Product}}
+\hypertarget{classSpacy_1_1PrimalInducedScalarProduct}{\section{\-Spacy\-:\-:\-Primal\-Induced\-Scalar\-Product \-Class \-Reference}
+\label{classSpacy_1_1PrimalInducedScalarProduct}\index{\-Spacy\-::\-Primal\-Induced\-Scalar\-Product@{\-Spacy\-::\-Primal\-Induced\-Scalar\-Product}}
+}
 
 
-Induced scalar product for the primal variables (i.\+e. for constrained optimization problems).  
+\-Induced scalar product for the primal variables (i.\-e. for constrained optimization problems).  
 
 
 
 
-{\ttfamily \#include $<$induced\+Scalar\+Product.\+hh$>$}
+{\ttfamily \#include $<$induced\-Scalar\-Product.\-hh$>$}
 
-\subsection*{Public Member Functions}
+\subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}{Primal\+Induced\+Scalar\+Product} (\hyperlink{classSpacy_1_1LinearOperator}{Linear\+Operator} M)
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1PrimalInducedScalarProduct_a74ba39d9a97f3c782088493450c03a6b}{operator()} (\hyperlink{classSpacy_1_1Vector}{Vector} x, \hyperlink{classSpacy_1_1Vector}{Vector} y) const \hypertarget{classSpacy_1_1PrimalInducedScalarProduct_a74ba39d9a97f3c782088493450c03a6b}{}\label{classSpacy_1_1PrimalInducedScalarProduct_a74ba39d9a97f3c782088493450c03a6b}
+\hyperlink{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}{\-Primal\-Induced\-Scalar\-Product} (\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \-M)
+\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&y) const }\label{classSpacy_1_1PrimalInducedScalarProduct_aee0ed0c7fe70e8630cbf77702d73c97c}
 
-\begin{DoxyCompactList}\small\item\em Compute scalar product $(x,y)_M$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Compute scalar product $(x,y)_M$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-Induced scalar product for the primal variables (i.\+e. for constrained optimization problems). 
+\subsection{\-Detailed \-Description}
+\-Induced scalar product for the primal variables (i.\-e. for constrained optimization problems). 
 
-Let $ M = \left( \begin{array}{ccc} A & B^T \\ B & \end{array} \right)$. Then the primal induced scalar product is \[ (z_1,z_2)_M = (Ax_1)(x_2) + (p_1,p_2)_Q \] for $z_i = (x_i,p_i)\in X\times Q,\ i=1,2$. 
+\-Let $ M = \left( \begin{array}{ccc} A & B^T \\ B & \end{array} \right)$. \-Then the primal induced scalar product is \[ (z_1,z_2)_M = (Ax_1)(x_2) + (p_1,p_2)_Q \] for $z_i = (x_i,p_i)\in X\times Q,\ i=1,2$. 
 
-\subsection{Constructor \& Destructor Documentation}
-\index{Spacy\+::\+Primal\+Induced\+Scalar\+Product@{Spacy\+::\+Primal\+Induced\+Scalar\+Product}!Primal\+Induced\+Scalar\+Product@{Primal\+Induced\+Scalar\+Product}}
-\index{Primal\+Induced\+Scalar\+Product@{Primal\+Induced\+Scalar\+Product}!Spacy\+::\+Primal\+Induced\+Scalar\+Product@{Spacy\+::\+Primal\+Induced\+Scalar\+Product}}
-\subsubsection[{\texorpdfstring{Primal\+Induced\+Scalar\+Product(\+Linear\+Operator M)}{PrimalInducedScalarProduct(LinearOperator M)}}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\+::\+Primal\+Induced\+Scalar\+Product\+::\+Primal\+Induced\+Scalar\+Product (
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}{\index{\-Spacy\-::\-Primal\-Induced\-Scalar\-Product@{\-Spacy\-::\-Primal\-Induced\-Scalar\-Product}!\-Primal\-Induced\-Scalar\-Product@{\-Primal\-Induced\-Scalar\-Product}}
+\index{\-Primal\-Induced\-Scalar\-Product@{\-Primal\-Induced\-Scalar\-Product}!Spacy::PrimalInducedScalarProduct@{\-Spacy\-::\-Primal\-Induced\-Scalar\-Product}}
+\subsubsection[{\-Primal\-Induced\-Scalar\-Product}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Spacy\-::\-Primal\-Induced\-Scalar\-Product\-::\-Primal\-Induced\-Scalar\-Product} (
 \begin{DoxyParamCaption}
-\item[{{\bf Linear\+Operator}}]{M}
+\item[{{\bf \-Linear\-Operator}}]{\-M}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}{}\label{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1PrimalInducedScalarProduct_acfea3362a4d59ae0c689bd525870d830}
 
 
-Constructor. 
+\-Constructor. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em M} & linear operator defining the scalar product. \\
+\begin{DoxyParams}{\-Parameters}
+{\em \-M} & linear operator defining the scalar product. \\
 \hline
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/lars/tmp/\+Spacy/\+Spacy/induced\+Scalar\+Product.\+hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/induced\-Scalar\-Product.\-hh\end{DoxyCompactItemize}
