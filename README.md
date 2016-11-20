@@ -17,6 +17,14 @@ Download from gerrithub via
 Push to gerrithub via (with my-branch=master,...)
   - git push origin HEAD:refs/for/my-branch
 
+### Dependencies
+The core of Spacy does not require external dependencies.
+Depending on your use-case the following dependencies may be required:
+  - [googletest](https://github.com/google/googletest) for compiling the tests (enable with cmake .. -DBuildTest=ON),
+  - [Eigen](//http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions using namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen),
+  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) for developing algorithms with Kaskade 7 (enable with cmake .. -DKaskade=ON),
+  - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with cmake .. -DDolfin=ON).
+
 ### Installation
 Go to download folder, i.e.
   - cd Spacy
@@ -24,13 +32,14 @@ Go to download folder, i.e.
 and type
   - mkdir build
   - cd build
-  - cmake ..
+  - cmake .. (-DBuildTest=ON -DDolfin=ON -DKaskade=ON -DCoverage=ON)
   - make
+  - make install
 
 ### Examples
 Currently there are examples for
-  - simple usage without external libraries (currently a scalar example)
-  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox)
+  - simple usage without external libraries (currently a scalar example),
+  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox),
   - [FEniCS](https://fenicsproject.org).
 
 These are located in
