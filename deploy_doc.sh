@@ -37,7 +37,7 @@ fi
 
 # Add new documentation to git
 git add --all doc/*
-git commit -m"Update documentation: ${SHA}"
+git commit -m"Update documentation for commit: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
