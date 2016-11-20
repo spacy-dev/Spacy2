@@ -6,6 +6,7 @@ addons:
     - ubuntu-toolchain-r-test
 
     packages:
+    - dot
     - g++-5
     - gcc-5
     - g++-6
@@ -128,7 +129,7 @@ install:
 
   - |
     if [[ "${MAKE_DOC}" == "true" ]]; then
-      sudo apt-get install doxygen
+      sudo apt-get install doxygen graphviz
     fi
 
 script:
