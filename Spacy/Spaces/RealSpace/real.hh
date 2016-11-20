@@ -9,7 +9,7 @@ namespace Spacy
     class Vector;
     /// @endcond
 
-    /** @addtogroup RealGroup @{ */
+    /** @addtogroup ScalarGroup @{ */
 
     /// %Real number.
     class Real :

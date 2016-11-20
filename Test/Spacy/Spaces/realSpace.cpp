@@ -14,7 +14,7 @@ TEST(RealSpaceTest, DefaultIndex)
 TEST(RealSpaceTest,ElementTest)
 {
   using namespace Spacy;
-  auto R = RealSpace::makeHilbertSpace();
+  auto R = makeRealSpace();
   auto x = zero(R);
   EXPECT_DOUBLE_EQ( get(cast_ref<Real>(x)) , 0. );
 }
@@ -22,7 +22,7 @@ TEST(RealSpaceTest,ElementTest)
 TEST(RealSpaceTest,ScalarProductTest)
 {
   using namespace Spacy;
-  auto R = RealSpace::makeHilbertSpace();
+  auto R = makeRealSpace();
   auto x = zero(R);
   auto y = zero(R);
   get(cast_ref<Real>(x)) = 1;
@@ -37,7 +37,7 @@ TEST(RealSpaceTest,ScalarProductTest)
 TEST(RealSpaceTest,NormTest)
 {
   using namespace Spacy;
-  auto R = RealSpace::makeHilbertSpace();
+  auto R = makeRealSpace();
   auto x = zero(R);
   auto y = zero(R);
   get(cast_ref<Real>(x)) = 1;

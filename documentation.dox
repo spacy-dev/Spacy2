@@ -30,12 +30,6 @@
     * @ingroup AdapterGroup
     * @brief Generic implementations for vector spaces to simplify the implementation of adapters.
     */
-
-   /**
-    * @defgroup ScalarGroup Scalar
-    * @ingroup AdapterGroup
-    * @brief Operators, functionals and solvers for scalar problems.
-    */
    
 /**
  * @defgroup VectorSpaceGroup Vector Spaces
@@ -45,9 +39,14 @@
  * Contains models for one-dimensional and product spaces as well as vector spaces for FEnics and Kaskade 7.
  */
   /**
-    * @defgroup RealGroup Real Space
-    * @ingroup VectorSpaceGroup
-    * @brief A one dimensional vector space representing the space of real numbers.
+    * @defgroup ScalarGroup Scalar
+    * @ingroup VectorSpaceGroup, AdapterGroup
+    * @brief Everything required for one-dimensional problems.
+    * 
+    * Contains:
+    *   - Real numbers
+    *   - a one-dimensional vector space
+    *   - linear and nonlinear operators, functionals and solvers
     */
 
   /**

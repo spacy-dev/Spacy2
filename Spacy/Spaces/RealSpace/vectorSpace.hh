@@ -4,19 +4,19 @@
 
 namespace Spacy
 {
-  namespace RealSpace
+  namespace Scalar
   {
     /**
-     * @ingroup RealGroup
-     * @brief Construct space of real numbers.
+     * @ingroup ScalarGroup
+     * @brief Construct (Hilbert) space of real numbers.
      * @return ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( [](const Spacy* space){ return Vector{*space}; } , ScalarProduct{} )"
      */
-    VectorSpace makeHilbertSpace(bool defaultIndex = false);
+    VectorSpace makeRealSpace(bool defaultIndex = false);
   }
 
   /**
    * @brief Construct space of real numbers.
-   * @return ::RealSpace::makeHilbertSpace()
+   * @return ::Spacy::Scalar::makeRealHilbertSpace()
    */
   VectorSpace makeRealSpace(bool defaultIndex = false);
 
@@ -27,6 +27,6 @@ namespace Spacy
      *
      * This space is used by class Real if the underlying space is left unspecified.
      */
-    static VectorSpace R = RealSpace::makeHilbertSpace(true);
+    static VectorSpace R = Scalar::makeRealSpace(true);
   }
 }
