@@ -26,8 +26,6 @@ using namespace Kaskade;
 
 int main()
 {
-    SET_LOG_PRINTER(Spacy::Log::StreamPrinter());
-
     constexpr int dim = 2;
     int refinements = 6;
     int order       = 1;
@@ -48,7 +46,7 @@ int main()
     VariableSetDesc variableSetDesc(spaces,{ "u" });
 
 
-    double c = 1e-2, d = 1e2;
+    double c = 1e-1, d = 1e2;
     Dune::FieldVector<double,1> u0{0};
     Dune::FieldMatrix<double,1,dim> du0{0};
     auto integrand = FunG::heatModel(c, d, u0, du0);
@@ -57,19 +55,16 @@ int main()
 
     // compute solution
     auto domain = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( variableSetDesc );
-    auto range = Spacy::Kaskade::makeHilbertSpace<VariableSetDesc>( variableSetDesc );
-    connectAsPrimalDualPair(domain,range);
 
-    Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator( F , domain , range );
+    Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator( F , domain , domain.dualSpace() );
     domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
 
     auto p = Spacy::Newton::Parameter{};
-    p.setVerbosity(true);
     p.setRelativeAccuracy(1e-12);
 
     auto x = covariantNewton(A,p);
-    //  auto x = Spacy::contravariantNewton(f,p);
-    //  auto x = Spacy::localNewton(f,p);
+    //  auto x = Spacy::contravariantNewton(A,p);
+    //  auto x = Spacy::localNewton(A,p);
 
     //construct Galerkin representation
     writeVTK(Spacy::cast_ref< Spacy::Kaskade::Vector<VariableSetDesc> >(x), "temperature");
