@@ -2,6 +2,7 @@
 [![Coverity Status](https://scan.coverity.com/projects/10277/badge.svg)](https://scan.coverity.com/projects/spacy)
 [![Coverage Status](https://coveralls.io/repos/github/spacy-dev/Spacy/badge.svg?branch=master)](https://coveralls.io/github/spacy-dev/Spacy?branch=master)
 [![Gitter chat](https://badges.gitter.im/spacy-dev/spacy.png)](https://gitter.im/spacy-dev/Spacy)
+[![Stories in Ready](https://badge.waffle.io/spacy-dev/Spacy.svg?label=ready&title=Ready)](http://waffle.io/spacy-dev/Spacy)
 
 # Spacy - Vector Space Algorithms
 
