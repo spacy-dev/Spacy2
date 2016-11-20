@@ -23,8 +23,7 @@ cd SpacyDoc
 echo "checkout $TARGET_BRANCH"
 git checkout $TARGET_BRANCH
 echo "remove doc"
-rm -rf doc
-mkdir doc
+rm -rf doc/*
 
 # Now let's go have some fun with the cloned repo
 mv  $TRAVIS_BUILD_DIR/build/doc/* doc/
