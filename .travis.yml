@@ -167,6 +167,5 @@ after_success:
 
       # Now that we're all set up, we can push.
       echo "pushing to gh-pages"
-      REPO=`git config remote.origin.url`
-      git push ${REPO/https:\/\/github.com\//git@github.com:} gh-pages
+      git push
     fi
