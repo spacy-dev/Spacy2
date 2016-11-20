@@ -24,6 +24,7 @@ rm -rf doc/*
 
 # Add new documentation
 mv  $TRAVIS_BUILD_DIR/build/doc/* doc/
+
 # Set git user
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
