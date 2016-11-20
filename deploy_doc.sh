@@ -15,18 +15,16 @@ REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
-# Clone the existing gh-pages for this repo into out/
-# Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
-echo "clone repo"
+# Clone repository and checkout 'gh-pages'
 git clone $REPO SpacyDoc
 cd SpacyDoc
-echo "checkout $TARGET_BRANCH"
 git checkout $TARGET_BRANCH
-echo "remove doc"
+# Remove old documentation
 rm -rf doc/*
 
-# Now let's go have some fun with the cloned repo
+# Add new documentation
 mv  $TRAVIS_BUILD_DIR/build/doc/* doc/
+# Set git user
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
@@ -36,10 +34,8 @@ if [ -z `git diff --exit-code` ]; then
     exit 0
 fi
 
-# Commit the "changes", i.e. the new version.
-# The delta will show diffs between new and old versions.
-git add doc/*
-echo "SHA = ${SHA}"
+# Add new documentation to git
+git add --all doc/*
 git commit -m"Update documentation: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
@@ -52,7 +48,6 @@ chmod 600 deploy_key
 eval `ssh-agent -s`
 ssh-add deploy_key
 
-# Now that we're all set up, we can push.
-echo "pushing to gh-pages"
-git push ${REPO/https:\/\/github.com\//git@github.com:} gh-pages
+# Push new documentation
+git push ${REPO/https:\/\/github.com\//git@github.com:} $TARGET_BRANCH
 
