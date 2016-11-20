@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Spacy/Spaces/RealSpace/real.hh>
+
 namespace Spacy
 {
     /// @cond
@@ -9,6 +11,6 @@ namespace Spacy
 
     namespace Rothe
     {
-        Vector genericMethod(const DynamicC1Operator& A, double t0=0, double t1=1);
+        Vector genericMethod(const DynamicC1Operator& A, Real t0=0, Real t1=1);
     }
 }

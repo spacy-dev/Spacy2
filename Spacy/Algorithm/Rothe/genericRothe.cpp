@@ -18,10 +18,10 @@ namespace Spacy
         : M_(std::move(M)), J_(std::move(J))
       {}
 
-      LinearOperator operator()(double dt) const
+      LinearOperator operator()(Real dt) const
       {
         auto Axpy = J_;
-        Axpy *= -dt;
+        Axpy *= -get(dt);
         Axpy += M_;
         return Axpy;
 //        return axpy(M_,-dt,J_);
@@ -30,16 +30,16 @@ namespace Spacy
       LinearOperator M_, J_;
     };
 
-    Vector genericMethod(const DynamicC1Operator& A, double t0, double t1)
+    Vector genericMethod(const DynamicC1Operator& A, Real t0, Real t1)
     {
       unsigned maxSteps = 100;
 
       auto t = t0,
           dt = (t1-t0)/maxSteps;
 
-      auto integrator = [&A,&dt](double t, const Vector& x) -> Vector
+      auto integrator = [&A,&dt](Real t, const Vector& x) -> Vector
       {
-        return ( ( TimeDependentAxpy(A.linearization(t,x),A.M())(dt) )^-1 )( -A(t,x) );
+        return ( ( TimeDependentAxpy(A.linearization(get(t),x),A.M())(get(dt)) )^-1 )( -A(get(t),x) );
       };
 
       auto x = zero(A.domain());
