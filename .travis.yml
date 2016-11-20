@@ -126,6 +126,11 @@ install:
     sudo cp -r ../googletest/include/gtest /usr/local/include/
     sudo cp googlemock/gtest/lib*.a /usr/local/lib
 
+  - |
+    if [[ "${MAKE_DOC}" == "true" ]]; then
+      sudo apt-get install doxygen
+    fi
+
 script:
   - cd $TRAVIS_BUILD_DIR
   - mkdir build && cd build
@@ -147,7 +152,6 @@ after_success:
     fi
   - |
     if [[ "${MAKE_DOC}" == "true" ]]; then
-      sudo apt-get install doxygen
       cd $TRAVIS_BUILD_DIR/build
       make doc
       ../deploy_doc.sh
