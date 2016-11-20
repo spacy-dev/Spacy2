@@ -1,3 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structSpacy_1_1DynamicOperatorDetail_1_1HasMemFn__range_3_01T_00_01type__erasure__table__detail_8b86c04a3ec3e16f8393015e16ecae5d.html" title="Spacy::DynamicOperatorDetail::HasMemFn_range\&lt; T, type_erasure_table_detail::voider\&lt; TryMemFn_range\&lt; T \&gt; \&gt; \&gt;" alt="" coords="5,5,712,35"/>
+<area shape="rect" id="node1" href="$classSpacy_1_1Exception_1_1InvalidArgument.html" title="Exception to be thrown on invalid arguments." alt="" coords="5,5,232,35"/>
 </map>

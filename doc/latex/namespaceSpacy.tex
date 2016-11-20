@@ -66,10 +66,6 @@ class \hyperlink{classSpacy_1_1LipschitzConstant}{\-Lipschitz\-Constant}
 \begin{DoxyCompactList}\small\item\em \-A simple model for a \-Lipschitz constant $\omega$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1Parameter}{\-Parameter}
 \begin{DoxyCompactList}\small\item\em \-Basic parameters for simple algorithms. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Cubic}{\-Cubic}
-\begin{DoxyCompactList}\small\item\em \-A one-\/dimensional cubic function $q(t) = a + bt + ct^2 + dt^3$. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1Quadratic}{\-Quadratic}
-\begin{DoxyCompactList}\small\item\em \-A one-\/dimensional quadratic function $q(t) = a + bt + ct^2$. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1HilbertSpaceNorm}{\-Hilbert\-Space\-Norm}
 \begin{DoxyCompactList}\small\item\em $ \|\cdot\|=\sqrt{(\cdot,\cdot)} $ \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1AdaptiveInducedScalarProduct}{\-Adaptive\-Induced\-Scalar\-Product}
@@ -199,10 +195,6 @@ enum \{ {\bfseries \-P\-R\-I\-M\-A\-L} = 0,
 \begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}{contravariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
 \begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{find\-Global\-Minimizer} (const std\-::function$<$ \hyperlink{classSpacy_1_1Real}{\-Real}(const \hyperlink{classSpacy_1_1Real}{\-Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{\-Real} a, \hyperlink{classSpacy_1_1Real}{\-Real} b, \hyperlink{classSpacy_1_1Real}{\-Real} eps=1e-\/2)
-\begin{DoxyCompactList}\small\item\em \-Find global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{find\-Log\-Global\-Minimizer} (const std\-::function$<$ \hyperlink{classSpacy_1_1Real}{\-Real}(const \hyperlink{classSpacy_1_1Real}{\-Real})$>$ \&f, \hyperlink{classSpacy_1_1Real}{\-Real} a, \hyperlink{classSpacy_1_1Real}{\-Real} b, \hyperlink{classSpacy_1_1Real}{\-Real} eps=1e-\/2)
-\begin{DoxyCompactList}\small\item\em \-Find log.\-global minimizer of $f$ in $[a,b]$. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \hyperlink{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{derivative} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} f)
 \begin{DoxyCompactList}\small\item\em \-Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. \end{DoxyCompactList}\item 
 \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gaa040ba5c24284687e0df19c99dd688a6}{primal\-Component} (\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
@@ -496,62 +488,6 @@ $f''(x)$, i.\-e. f.\-hessian(x).
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
 \-C\-G\-Solver(\-A,\-P,\char`\"{}\-T\-R\-C\-G\char`\"{}) 
-\end{DoxyReturn}
-\hypertarget{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}{\index{\-Spacy@{\-Spacy}!find\-Global\-Minimizer@{find\-Global\-Minimizer}}
-\index{find\-Global\-Minimizer@{find\-Global\-Minimizer}!Spacy@{\-Spacy}}
-\subsubsection[{find\-Global\-Minimizer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Real} {\bf \-Spacy\-::find\-Global\-Minimizer} (
-\begin{DoxyParamCaption}
-\item[{const std\-::function$<$ \-Real(const \-Real)$>$ \&}]{f, }
-\item[{\-Real}]{a, }
-\item[{\-Real}]{b, }
-\item[{\-Real}]{eps = {\ttfamily 1e-\/2}}
-\end{DoxyParamCaption}
-)}}\label{namespaceSpacy_ae9be0a4a666a16ff296b87454f36956f}
-
-
-\-Find global minimizer of $f$ in $[a,b]$. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em f} & \-Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
-\hline
-{\em a} & lower bound of the admissible interval \\
-\hline
-{\em b} & upper bound of the admissible interval \\
-\hline
-{\em eps} & relative accuracy \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-$ x \in \mathrm{argmin}_{[a,b]} $ 
-\end{DoxyReturn}
-\hypertarget{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}{\index{\-Spacy@{\-Spacy}!find\-Log\-Global\-Minimizer@{find\-Log\-Global\-Minimizer}}
-\index{find\-Log\-Global\-Minimizer@{find\-Log\-Global\-Minimizer}!Spacy@{\-Spacy}}
-\subsubsection[{find\-Log\-Global\-Minimizer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Real} {\bf \-Spacy\-::find\-Log\-Global\-Minimizer} (
-\begin{DoxyParamCaption}
-\item[{const std\-::function$<$ \-Real(const \-Real)$>$ \&}]{f, }
-\item[{\-Real}]{a, }
-\item[{\-Real}]{b, }
-\item[{\-Real}]{eps = {\ttfamily 1e-\/2}}
-\end{DoxyParamCaption}
-)}}\label{namespaceSpacy_a7ab93c587f9cb9951b26a8f07209c4cf}
-
-
-\-Find log.\-global minimizer of $f$ in $[a,b]$. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em f} & \-Nonlinear function $ f: \mathbb{R}\to\mathbb{R} $ \\
-\hline
-{\em a} & lower bound of the admissible interval \\
-\hline
-{\em b} & upper bound of the admissible interval \\
-\hline
-{\em eps} & relative accuracy \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-$ x \in \mathrm{argmin}_{[a,b]} $ 
 \end{DoxyReturn}
 \hypertarget{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{\index{\-Spacy@{\-Spacy}!derivative@{derivative}}
 \index{derivative@{derivative}!Spacy@{\-Spacy}}

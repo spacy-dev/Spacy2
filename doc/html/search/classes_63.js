@@ -23,6 +23,6 @@ var searchData=
   ['coefficientstovariableset_3c_2d1_20_3e',['CoefficientsToVariableSet<-1 >',['../structSpacy_1_1Kaskade_1_1CoefficientsToVariableSet_3-1_01_4.html',1,'Spacy::Kaskade']]],
   ['compositestepfunctional',['CompositeStepFunctional',['../classSpacy_1_1Rn_1_1CompositeStepFunctional.html',1,'Spacy::Rn']]],
   ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html',1,'Spacy::Mixin']]],
-  ['cubic',['Cubic',['../classSpacy_1_1Cubic.html',1,'Spacy']]],
+  ['cubic',['Cubic',['../classSpacy_1_1Scalar_1_1Cubic.html',1,'Spacy::Scalar']]],
   ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['findglobalminimizer',['findGlobalMinimizer',['../namespaceSpacy.html#ae9be0a4a666a16ff296b87454f36956f',1,'Spacy']]],
-  ['findlogglobalminimizer',['findLogGlobalMinimizer',['../namespaceSpacy.html#a7ab93c587f9cb9951b26a8f07209c4cf',1,'Spacy']]],
+  ['findglobalminimizer',['findGlobalMinimizer',['../namespaceSpacy_1_1Scalar.html#ae3d9bbc5d6c84eafb70737dd8a96251c',1,'Spacy::Scalar']]],
+  ['findlogglobalminimizer',['findLogGlobalMinimizer',['../namespaceSpacy_1_1Scalar.html#a4692ea99ec81e957a20415d52659fd42',1,'Spacy::Scalar']]],
   ['functionalbase',['FunctionalBase',['../classSpacy_1_1FunctionalBase.html#aa655b0f2b96f02a3137dad89e3f0d2ac',1,'Spacy::FunctionalBase']]]
 ];

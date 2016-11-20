@@ -43,7 +43,7 @@ var searchData=
   ['copytocoefficientvector',['copyToCoefficientVector',['../namespaceSpacy_1_1Kaskade.html#a4d7422b0c155f9622e54b9d3503d82d8',1,'Spacy::Kaskade']]],
   ['covariantnewton',['covariantNewton',['../group__NewtonGroup.html#ga6c18ad252cb530e4f6734eb4e4fda481',1,'Spacy::covariantNewton(const C1Operator &amp;F, const Vector &amp;x0, const Newton::Parameter &amp;p=Newton::Parameter(), const std::function&lt; bool(const Vector &amp;, const Vector &amp;)&gt; &amp;errorEstimator={})'],['../group__NewtonGroup.html#ga2d469322482680319bf81d865ed57068',1,'Spacy::covariantNewton(const C1Operator &amp;F, const Newton::Parameter &amp;p=Newton::Parameter(), const std::function&lt; bool(const Vector &amp;, const Vector &amp;)&gt; &amp;errorEstimator={})']]],
   ['creator',['creator',['../classSpacy_1_1ProductSpace_1_1Vector.html#a893de5e5a2bb37d2d512c035b0ad91ea',1,'Spacy::ProductSpace::Vector']]],
-  ['cubic',['Cubic',['../classSpacy_1_1Cubic.html',1,'Spacy']]],
-  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#a4a2a99c33d52de96cfc97991d8b47654',1,'Spacy::CompositeStep::CubicModel']]],
+  ['cubic',['Cubic',['../classSpacy_1_1Scalar_1_1Cubic.html',1,'Spacy::Scalar']]],
+  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25',1,'Spacy::CompositeStep::CubicModel']]],
   ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]]
 ];

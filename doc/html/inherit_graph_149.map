@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structSpacy_1_1Generic_1_1NoData.html" title="Spacy::Generic::NoData" alt="" coords="5,5,171,35"/>
+<area shape="rect" id="node1" href="$classSpacy_1_1Generic_1_1Step.html" title="Generic step of an iterative method." alt="" coords="5,5,627,35"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1Generic_1_1IterativeMethod.html" title="Generic module for iterative methods." alt="" coords="675,5,1061,35"/>
 </map>

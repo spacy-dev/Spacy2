@@ -102,22 +102,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00015"></a>00015 
 <a name="l00017"></a>00017   <span class="keyword">namespace </span>CompositeStep
 <a name="l00018"></a>00018   {
-<a name="l00033"></a>00033     Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#a0366dfcec4d1f3f5f304eddce82bc58d" title="Constructs a quadratic model of a functional.">makeQuadraticModel</a>(DampingFactor nu,
-<a name="l00034"></a>00034                                  <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt,
-<a name="l00035"></a>00035                                  <span class="keyword">const</span> C2Functional&amp; L, <span class="keyword">const</span> Vector&amp; x);
+<a name="l00033"></a>00033     Scalar::Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#a56d3f30088fa92450ffc5f962a8bbfa8" title="Constructs a quadratic model of a functional.">makeQuadraticModel</a>(DampingFactor nu,
+<a name="l00034"></a>00034                                          <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt,
+<a name="l00035"></a>00035                                          <span class="keyword">const</span> C2Functional&amp; L, <span class="keyword">const</span> Vector&amp; x);
 <a name="l00036"></a>00036 
-<a name="l00044"></a>00044     Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#ad7e8e9200b3ebfa44c75b79d08cd7db9" title="Constructs a quadratic model for the norm of the underlying vector space.">makeQuadraticNormModel</a>(DampingFactor nu, <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt);
+<a name="l00044"></a>00044     Scalar::Quadratic <a class="code" href="namespaceSpacy_1_1CompositeStep.html#a51f121673adedc63020b2ce90041c500" title="Constructs a quadratic model for the norm of the underlying vector space.">makeQuadraticNormModel</a>(DampingFactor nu, <span class="keyword">const</span> Vector&amp; dn, <span class="keyword">const</span> Vector&amp; dt);
 <a name="l00045"></a>00045 
 <a name="l00047"></a><a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html">00047</a>     <span class="keyword">class </span><a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html" title="The cubic regularized model for the affine covariant composite step method of.">CubicModel</a>
 <a name="l00048"></a>00048     {
 <a name="l00049"></a>00049     <span class="keyword">public</span>:
-<a name="l00056"></a>00056       <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html#a4a2a99c33d52de96cfc97991d8b47654" title="Constructor.">CubicModel</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Quadratic.html" title="A one-dimensional quadratic function .">Quadratic</a>&amp; quadraticModel, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Quadratic.html" title="A one-dimensional quadratic function .">Quadratic</a>&amp; squaredNorm, <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> omega);
+<a name="l00056"></a>00056       <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25" title="Constructor.">CubicModel</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Scalar_1_1Quadratic.html" title="A one-dimensional quadratic function .">Scalar::Quadratic</a>&amp; quadraticModel, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Scalar_1_1Quadratic.html" title="A one-dimensional quadratic function .">Scalar::Quadratic</a>&amp; squaredNorm, <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> omega);
 <a name="l00057"></a>00057 
 <a name="l00063"></a>00063       <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html#a5669f387117cfdc47b5be45a29f387ce" title="Evaluate cubic model .">operator()</a>(<a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> t) <span class="keyword">const</span>;
 <a name="l00064"></a>00064 
 <a name="l00065"></a>00065     <span class="keyword">private</span>:
-<a name="l00066"></a>00066       <a class="code" href="classSpacy_1_1Quadratic.html" title="A one-dimensional quadratic function .">Quadratic</a> quadraticModel_;
-<a name="l00067"></a>00067       <a class="code" href="classSpacy_1_1Quadratic.html" title="A one-dimensional quadratic function .">Quadratic</a> squaredNorm_;
+<a name="l00066"></a>00066       <a class="code" href="classSpacy_1_1Scalar_1_1Quadratic.html" title="A one-dimensional quadratic function .">Scalar::Quadratic</a> quadraticModel_;
+<a name="l00067"></a>00067       <a class="code" href="classSpacy_1_1Scalar_1_1Quadratic.html" title="A one-dimensional quadratic function .">Scalar::Quadratic</a> squaredNorm_;
 <a name="l00068"></a>00068       <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> omega_;
 <a name="l00069"></a>00069     };
 <a name="l00070"></a>00070 
@@ -144,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 20 2016 20:44:28 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 20 2016 21:34:42 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
