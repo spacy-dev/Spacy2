@@ -1,7 +1,5 @@
 #include "lipschitzConstant.hh"
 
-#include <algorithm>
-
 namespace Spacy
 {
     LipschitzConstant::LipschitzConstant(Real initialOmega)
@@ -11,11 +9,13 @@ namespace Spacy
     LipschitzConstant& LipschitzConstant::operator=(Real newOmega)
     {
         previousOmega_ = get();
-        if( newOmega < 0 ) get() = minFactor_*previousOmega_;
-        else get() = newOmega;
+        if( newOmega < 0 )
+            get() = minFactor_*previousOmega_;
+        else
+            get() = newOmega;
 
-        get() = max(get(), eps());
-        get() = min(get(), previousOmega_*maxFactor_);
+        get() = min( max(get(), eps()),
+                     previousOmega_*maxFactor_);
         return *this;
     }
 
@@ -40,9 +40,9 @@ namespace Spacy
         return y;
     }
 
-    Real operator*(Real y, const LipschitzConstant& x)
+    Real operator*(Real x, const LipschitzConstant& y)
     {
-        y *= get(x);
-        return y;
+        x *= get(y);
+        return x;
     }
 }
