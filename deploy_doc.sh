@@ -24,9 +24,10 @@ echo "checkout $TARGET_BRANCH"
 git checkout $TARGET_BRANCH
 echo "remove doc"
 rm -rf doc
+mkdir doc
 
 # Now let's go have some fun with the cloned repo
-mv ../doc .
+mv  $TRAVIS_BUILD_DIR/build/doc/* doc/
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
