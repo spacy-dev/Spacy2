@@ -29,7 +29,7 @@ matrix:
     # LINUX
     # GCC 5
     - os: linux
-      env: COMPILER=g++-5 CCOMPILER=gcc-5 COMPUTE_COVERAGE=false MAKE_DOC=false
+      env: COMPILER=g++-5 CCOMPILER=gcc-5 COMPUTE_COVERAGE=false
       compiler: gcc
 
     # GCC 6
@@ -40,17 +40,17 @@ matrix:
     # OSX
     # Xcode 6.4
     - os: osx
-      env: COMPUTE_COVERAGE=false MAKE_DOC=false
+      env: COMPUTE_COVERAGE=false
       osx_image: xcode6.4
       
     # Xcode 7.3
     - os: osx
-      env: COMPUTE_COVERAGE=false MAKE_DOC=false
+      env: COMPUTE_COVERAGE=false
       osx_image: xcode7.3
       
     # Xcode 8
     - os: osx
-      env: COMPUTE_COVERAGE=false MAKE_DOC=false
+      env: COMPUTE_COVERAGE=false
       osx_image: xcode8
      
 install:
@@ -132,7 +132,7 @@ install:
   # Install doxygen and graphviz if documentation is generated
   ############################################################################
   - |
-    if [[ "${MAKE_DOC}" == "true" ]]; then
+    if [[ "${TRAVIS_OS_NAME}" == "linux" && "${MAKE_DOC}" == "true" ]]; then
       sudo apt-get install doxygen graphviz
     fi
 
