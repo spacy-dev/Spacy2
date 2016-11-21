@@ -12,9 +12,9 @@ var searchData=
   ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Generic_1_1LinearOperatorCreator.html',1,'Spacy::Generic']]],
   ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Kaskade_1_1LinearOperatorCreator.html',1,'Spacy::Kaskade']]],
   ['linearoperatorcreator',['LinearOperatorCreator',['../structSpacy_1_1Rn_1_1LinearOperatorCreator.html',1,'Spacy::Rn']]],
+  ['linearsolver',['LinearSolver',['../classSpacy_1_1CG_1_1LinearSolver.html',1,'Spacy::CG']]],
   ['linearsolver',['LinearSolver',['../classSpacy_1_1Scalar_1_1LinearSolver.html',1,'Spacy::Scalar']]],
   ['linearsolver',['LinearSolver',['../classSpacy_1_1Rn_1_1LinearSolver.html',1,'Spacy::Rn']]],
-  ['linearsolver',['LinearSolver',['../classSpacy_1_1CG_1_1LinearSolver.html',1,'Spacy::CG']]],
   ['lipschitzconstant',['LipschitzConstant',['../classSpacy_1_1LipschitzConstant.html',1,'Spacy']]],
   ['logger',['Logger',['../structSpacy_1_1Logger.html',1,'Spacy']]],
   ['lusolver',['LUSolver',['../classSpacy_1_1FEniCS_1_1LUSolver.html',1,'Spacy::FEniCS']]]
