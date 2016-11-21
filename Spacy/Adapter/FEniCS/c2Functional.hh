@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/operator.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
@@ -44,7 +45,7 @@ namespace Spacy
       C2Functional(const F& f, const DF& J, const DDF& H,
                  const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& domain)
         : FunctionalBase( domain ),
-          f_( f.mesh_shared_ptr() ),
+          f_( f.mesh() ),
           J_( J.function_space(0) ),
           H_( H.function_space(0) , H.function_space(1) ),
           bcs_( bcs ) ,
@@ -64,7 +65,7 @@ namespace Spacy
        */
       C2Functional(const C2Functional& g)
         : FunctionalBase( g.domain() ) ,
-          f_( g.f_.mesh_shared_ptr() ) ,
+          f_( g.f_.mesh() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
           bcs_( g.bcs_ ),
@@ -107,7 +108,7 @@ namespace Spacy
        */
       C2Functional(C2Functional&& g)
         : FunctionalBase( g.domain() ) ,
-          f_( g.f_.mesh_shared_ptr() ) ,
+          f_( g.f_.mesh() ) ,
           J_( g.J_.function_space(0) ) ,
           H_( g.H_.function_space(0) , g.H_.function_space(1) ) ,
           bcs_( g.bcs_ ),
@@ -211,8 +212,8 @@ namespace Spacy
       {
         if( valueAssembled_ && (oldX_f_ == x) ) return;
         valueAssembled_ = true;
-        auto x_ = dolfin::Function( J_.function_space(0) );
-        copy(x,x_);
+        auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
+        copy(x,*x_);
 
         assign_x_if_present(f_,x_);
         value_ = dolfin::assemble(f_);
@@ -225,13 +226,13 @@ namespace Spacy
       {
         if( b_ != nullptr && (oldX_J_==x) ) return;
 
-        auto x_ = dolfin::Function( J_.function_space(0) );
-        copy(x,x_);
+        auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
+        copy(x,*x_);
         assign_x_if_present(J_,x_);
-        b_ = x_.vector()->factory().create_vector(x_.vector()->mpi_comm());
+        b_ = x_->vector()->factory().create_vector(x_->vector()->mpi_comm());
 
         dolfin::assemble(*b_,J_);
-        for( auto& bc : bcs_) bc->apply(*b_,*x_.vector());
+        for( auto& bc : bcs_) bc->apply(*b_,*x_->vector());
 
         oldX_J_ = x;
       }
@@ -241,13 +242,13 @@ namespace Spacy
       {
         if( A_ != nullptr && (oldX_H_==x) ) return;
 
-        auto x_ = dolfin::Function( J_.function_space(0) );
-        copy(x,*x_.vector());
+        auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
+        copy(x,*x_->vector());
         assign_x_if_present(H_,x_);
-        A_ = x_.vector()->factory().create_matrix(x_.vector()->mpi_comm());
+        A_ = x_->vector()->factory().create_matrix(x_->vector()->mpi_comm());
         dolfin::assemble(*A_,H_);
 
-        for( auto& bc : bcs_) bc->apply(*A_,*x_.vector(),*x_.vector());
+        for( auto& bc : bcs_) bc->apply(*A_,*x_->vector(),*x_->vector());
 
         oldX_H_ = x;
       }
