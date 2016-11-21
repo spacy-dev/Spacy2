@@ -137,8 +137,8 @@ Collaboration diagram for Spacy::FEniCS::C1Operator&lt; ResidualForm, JacobianFo
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394">C1Operator</a> (const ResidualForm &amp;F, const JacobianForm &amp;J, const std::vector&lt; const dolfin::DirichletBC * &gt; &amp;bcs, <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct operator for FEnics.  <a href="#af23d84bd48d0902011bf80ba2f4cd394"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97">C1Operator</a> (const ResidualForm &amp;F, const JacobianForm &amp;J, const std::vector&lt; const dolfin::DirichletBC * &gt; &amp;bcs, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>, const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;<a class="el" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct operator for FEniCS.  <a href="#a3e578031e731cad3f4fa8b7364f8ec97"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af56cc1d94912742db3dc1f811cf1c99b"></a><!-- doxytag: member="Spacy::FEniCS::C1Operator::F_" ref="af56cc1d94912742db3dc1f811cf1c99b" args="(other.F_.function_space(0))" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>F_</b> (other.F_.function_space(0))</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8907d5a84e6d5558de5e63c215e1b5d6"></a><!-- doxytag: member="Spacy::FEniCS::C1Operator::J_" ref="a8907d5a84e6d5558de5e63c215e1b5d6" args="(other.J_.function_space(0), other.J_.function_space(1))" -->
@@ -178,9 +178,8 @@ class Spacy::FEniCS::C1Operator&lt; ResidualForm, JacobianForm &gt;</h3>
 
 <p>Operator interface for FEniCS. Models a differentiable operator \(A:X\rightarrow Y\). </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>In the .ufl file you have to name the argument of \(f\) by "x"! </dd></dl>
-<dl class="see"><dt><b>See also:</b></dt><dd>C1Operator, C1OperatorConcept </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af23d84bd48d0902011bf80ba2f4cd394"></a><!-- doxytag: member="Spacy::FEniCS::C1Operator::C1Operator" ref="af23d84bd48d0902011bf80ba2f4cd394" args="(const ResidualForm &amp;F, const JacobianForm &amp;J, const std::vector&lt; const dolfin::DirichletBC * &gt; &amp;bcs, VectorSpace &amp;domain, VectorSpace &amp;range)" -->
+<a class="anchor" id="a3e578031e731cad3f4fa8b7364f8ec97"></a><!-- doxytag: member="Spacy::FEniCS::C1Operator::C1Operator" ref="a3e578031e731cad3f4fa8b7364f8ec97" args="(const ResidualForm &amp;F, const JacobianForm &amp;J, const std::vector&lt; const dolfin::DirichletBC * &gt; &amp;bcs, const VectorSpace &amp;domain, const VectorSpace &amp;range)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -207,13 +206,13 @@ template&lt;class ResidualForm , class JacobianForm &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
           <td class="paramname"><em>domain</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
           <td class="paramname"><em>range</em>&#160;</td>
         </tr>
         <tr>
@@ -225,7 +224,7 @@ template&lt;class ResidualForm , class JacobianForm &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Construct operator for FEnics. </p>
+<p>Construct operator for FEniCS. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">F</td><td>Residual form for the evaluation of \(A\) </td></tr>
@@ -283,7 +282,7 @@ template&lt;class ResidualForm , class JacobianForm &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 20 2016 22:35:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2016 21:52:01 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

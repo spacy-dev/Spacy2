@@ -110,190 +110,188 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00021"></a>00021 {
 <a name="l00025"></a>00025   <span class="keyword">namespace </span>FEniCS
 <a name="l00026"></a>00026   {
-<a name="l00032"></a>00032     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
-<a name="l00033"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html">00033</a>     <span class="keyword">class </span><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>
-<a name="l00034"></a>00034     {
-<a name="l00035"></a>00035     <span class="keyword">public</span>:
-<a name="l00044"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394">00044</a>       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>(<span class="keyword">const</span> ResidualForm&amp; F, <span class="keyword">const</span> JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs,
-<a name="l00045"></a>00045                  <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
-<a name="l00046"></a>00046         : <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>( domain , range ),
-<a name="l00047"></a>00047           F_( F.function_space(0) ),
-<a name="l00048"></a>00048           J_( J.function_space(0) , J.function_space(1) ),
-<a name="l00049"></a>00049           bcs_( bcs ),
-<a name="l00050"></a>00050           operatorSpace_( std::make_shared&lt;<a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&gt;( <a class="code" href="classSpacy_1_1FEniCS_1_1LinearOperatorCreator.html">LinearOperatorCreator</a>(domain,range,J.function_space(0)) , [](const Spacy::<a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html" title="Vector implementation for FEniCS (single space).">Vector</a>&amp; v)
-<a name="l00051"></a>00051           {
-<a name="l00052"></a>00052             <span class="keywordflow">return</span> dolfin::Matrix( cast_ref&lt;LinearOperator&gt;(v).<span class="keyword">get</span>()).norm(<span class="stringliteral">&quot;frobenius&quot;</span>);
-<a name="l00053"></a>00053           } , true ) )
-<a name="l00054"></a>00054       {
-<a name="l00055"></a>00055         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(F,F_);
-<a name="l00056"></a>00056         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(J,J_);
-<a name="l00057"></a>00057       }
-<a name="l00058"></a>00058 
-<a name="l00066"></a>00066       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>(<span class="keyword">const</span> ResidualForm&amp; F, <span class="keyword">const</span> JacobianForm&amp; J, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
-<a name="l00067"></a>00067         : <a class="code" href="classSpacy_1_1C1Operator.html" title="Type-erased differentiable operator .">C1Operator</a>(F,J,{},<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>,<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
-<a name="l00068"></a>00068       {}
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>(<a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp;&amp; other)
-<a name="l00071"></a>00071         : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>( other ) ,
-<a name="l00072"></a>00072           F_( other.F_.function_space(0) ) ,
-<a name="l00073"></a>00073           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
-<a name="l00074"></a>00074           bcs_( std::move(other.bcs_) ) ,
-<a name="l00075"></a>00075           A_( std::move(other.A_) ) ,
-<a name="l00076"></a>00076           b_( std::move(other.b_) ) ,
-<a name="l00077"></a>00077           operatorSpace_( std::move(other.operatorSpace_) )
-<a name="l00078"></a>00078       {
-<a name="l00079"></a>00079         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
-<a name="l00080"></a>00080         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
-<a name="l00081"></a>00081       }
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp; other)
-<a name="l00084"></a>00084         : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>( other ) ,
-<a name="l00085"></a>00085           F_( other.F_.function_space(0) ) ,
-<a name="l00086"></a>00086           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
-<a name="l00087"></a>00087           bcs_( other.bcs_ ) ,
-<a name="l00088"></a>00088           A_( (other.A_ != nullptr) ? <span class="comment">/*other.A_-&gt;copy()*/</span>std::make_shared&lt;dolfin::Matrix&gt;(*other.A_) : nullptr ) ,
-<a name="l00089"></a>00089           b_( (other.b_ != nullptr) ? other.b_-&gt;<a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>() : nullptr ) ,
-<a name="l00090"></a>00090           operatorSpace_(other.operatorSpace_)
-<a name="l00091"></a>00091       {
-<a name="l00092"></a>00092         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
-<a name="l00093"></a>00093         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
-<a name="l00094"></a>00094       }
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp; other)
-<a name="l00097"></a>00097       {
-<a name="l00098"></a>00098         <a class="code" href="classSpacy_1_1OperatorBase.html#a561bedbbf760230dbf18c9f9aa72a4bf" title="Move assignment.">OperatorBase::operator=</a>( other );
-<a name="l00099"></a>00099         F_ = other.F_;
-<a name="l00100"></a>00100         J_ = other.J_;
-<a name="l00101"></a>00101         bcs_ = other.bcs_;
-<a name="l00102"></a>00102         A_ = (other.A_ != <span class="keyword">nullptr</span>) ? <span class="comment">/*other.A_-&gt;copy()*/</span>std::make_shared&lt;dolfin::Matrix&gt;(*other.A_) : <span class="keyword">nullptr</span>;
-<a name="l00103"></a>00103         b_ = (other.b_ != <span class="keyword">nullptr</span>) ? other.b_-&gt;copy() : <span class="keyword">nullptr</span>;
-<a name="l00104"></a>00104         operatorSpace_ = other.operatorSpace_;
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
-<a name="l00107"></a>00107         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
-<a name="l00108"></a>00108       }
-<a name="l00109"></a>00109 
-<a name="l00110"></a>00110       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp; operator=(<a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#af23d84bd48d0902011bf80ba2f4cd394" title="Construct operator for FEnics.">C1Operator</a>&amp;&amp; other)
-<a name="l00111"></a>00111       {
-<a name="l00112"></a>00112         <a class="code" href="classSpacy_1_1OperatorBase.html#a561bedbbf760230dbf18c9f9aa72a4bf" title="Move assignment.">OperatorBase::operator=</a>( other );
-<a name="l00113"></a>00113         F_ = other.F_;
-<a name="l00114"></a>00114         J_ = other.J_;
-<a name="l00115"></a>00115         bcs_ = std::move(other.bcs_);
-<a name="l00116"></a>00116         A_ = std::move(other.A_);
-<a name="l00117"></a>00117         b_ = std::move(other.b_);
-<a name="l00118"></a>00118         operatorSpace_ = std::move(other.operatorSpace_);
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
-<a name="l00121"></a>00121         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
-<a name="l00122"></a>00122       }
-<a name="l00123"></a>00123 
-<a name="l00125"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a5e2b3831a7583793f6c134eedd2be9bc">00125</a>       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a5e2b3831a7583793f6c134eedd2be9bc" title="Compute .">operator()</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
-<a name="l00126"></a>00126 <span class="keyword">      </span>{
-<a name="l00127"></a>00127         assembleOperator(x);
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129         <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
-<a name="l00130"></a>00130         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(*b_,y);
-<a name="l00131"></a>00131         <span class="keywordflow">return</span> std::move(y);
-<a name="l00132"></a>00132       }
-<a name="l00133"></a>00133 
-<a name="l00135"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a610d7a4a5daec3b512ab3ccf46a7b9e9">00135</a>       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a610d7a4a5daec3b512ab3ccf46a7b9e9" title="Compute .">d1</a>(const ::Spacy::Vector &amp;x, const ::Spacy::Vector &amp;dx)<span class="keyword"> const</span>
-<a name="l00136"></a>00136 <span class="keyword">      </span>{
-<a name="l00137"></a>00137         assembleGradient(x);
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139         <span class="keyword">auto</span> dx_ = dolfin::Function( cast_ref&lt;VectorCreator&gt;(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>().creator()).<span class="keyword">get</span>() );
-<a name="l00140"></a>00140         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(dx,dx_);
-<a name="l00141"></a>00141         <span class="keyword">auto</span> y_ = dx_.vector()-&gt;copy();
-<a name="l00142"></a>00142         A_-&gt;mult(*dx_.vector(), *y_);
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144         <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
-<a name="l00145"></a>00145         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(*y_,y);
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147         <span class="keywordflow">return</span> std::move(y);
-<a name="l00148"></a>00148       }
-<a name="l00149"></a>00149 
-<a name="l00154"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#aab603c2b35f2b710b2e646cf3fb7ee9c">00154</a>       <span class="keyword">auto</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#aab603c2b35f2b710b2e646cf3fb7ee9c" title="Access  as linear operator .">linearization</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
-<a name="l00155"></a>00155 <span class="keyword">      </span>{
-<a name="l00156"></a>00156         assembleGradient(x);
-<a name="l00157"></a>00157         assert(A_ != <span class="keyword">nullptr</span>);
-<a name="l00158"></a>00158         assert(operatorSpace_ != <span class="keyword">nullptr</span>);
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160         <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS.">LinearOperator</a>{ A_-&gt;copy() , *operatorSpace_ , J_.function_space(0) };
-<a name="l00161"></a>00161       }
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163     <span class="keyword">private</span>:
-<a name="l00165"></a>00165       <span class="keywordtype">void</span> assembleOperator(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
-<a name="l00166"></a>00166 <span class="keyword">      </span>{
-<a name="l00167"></a>00167         <span class="keywordflow">if</span>( b_ != <span class="keyword">nullptr</span> &amp;&amp; (oldX_F == x) ) <span class="keywordflow">return</span>;
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169         <span class="keyword">auto</span> x_ = std::make_shared&lt;dolfin::Function&gt;( J_.function_space(0) );
-<a name="l00170"></a>00170         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(x,*x_);
-<a name="l00171"></a>00171         <a class="code" href="namespaceSpacy_1_1FEniCS.html#a8b026331ea4b807e97cc64cb765e6a73" title="Assign T.x if t has a public member with name x. Else does nothing.">assign_x_if_present</a>(F_,x_);
-<a name="l00172"></a>00172         b_ = x_-&gt;vector()-&gt;factory().create_vector(x_-&gt;vector()-&gt;mpi_comm());
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174         dolfin::Assembler assembler;
-<a name="l00175"></a>00175         assembler.assemble(*b_, F_);
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177         <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; bc : bcs_)
-<a name="l00178"></a>00178           bc-&gt;apply( *b_ , *x_-&gt;vector() );
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180         oldX_F = x;
-<a name="l00181"></a>00181       }
-<a name="l00182"></a>00182 
-<a name="l00184"></a>00184       <span class="keywordtype">void</span> assembleGradient(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
-<a name="l00185"></a>00185 <span class="keyword">      </span>{
-<a name="l00186"></a>00186         <span class="keywordflow">if</span>( A_ != <span class="keyword">nullptr</span> &amp;&amp; ( oldX_J == x ) ) <span class="keywordflow">return</span>;
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188         <span class="keyword">auto</span> x_ = std::make_shared&lt;dolfin::Function&gt;( J_.function_space(0) );
-<a name="l00189"></a>00189         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(x,*x_);
-<a name="l00190"></a>00190         <a class="code" href="namespaceSpacy_1_1FEniCS.html#a8b026331ea4b807e97cc64cb765e6a73" title="Assign T.x if t has a public member with name x. Else does nothing.">assign_x_if_present</a>(J_,x_);
-<a name="l00191"></a>00191         <span class="keyword">auto</span> A = x_-&gt;vector()-&gt;factory().create_matrix(x_-&gt;vector()-&gt;mpi_comm());
+<a name="l00031"></a>00031     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
+<a name="l00032"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html">00032</a>     <span class="keyword">class </span><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>
+<a name="l00033"></a>00033     {
+<a name="l00034"></a>00034     <span class="keyword">public</span>:
+<a name="l00043"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97">00043</a>       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>(<span class="keyword">const</span> ResidualForm&amp; F, <span class="keyword">const</span> JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs,
+<a name="l00044"></a>00044                  <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
+<a name="l00045"></a>00045         : <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>( domain , range ),
+<a name="l00046"></a>00046           F_( F.function_space(0) ),
+<a name="l00047"></a>00047           J_( J.function_space(0) , J.function_space(1) ),
+<a name="l00048"></a>00048           bcs_( bcs ),
+<a name="l00049"></a>00049           operatorSpace_( std::make_shared&lt;<a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&gt;( <a class="code" href="classSpacy_1_1FEniCS_1_1LinearOperatorCreator.html">LinearOperatorCreator</a>(domain,range,J.function_space(0)) , [](const Spacy::<a class="code" href="classSpacy_1_1FEniCS_1_1Vector.html" title="Vector implementation for FEniCS (single space).">Vector</a>&amp; v)
+<a name="l00050"></a>00050           {
+<a name="l00051"></a>00051             <span class="keywordflow">return</span> dolfin::Matrix( cast_ref&lt;LinearOperator&gt;(v).<span class="keyword">get</span>()).norm(<span class="stringliteral">&quot;frobenius&quot;</span>);
+<a name="l00052"></a>00052           } , true ) )
+<a name="l00053"></a>00053       {
+<a name="l00054"></a>00054         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(F,F_);
+<a name="l00055"></a>00055         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(J,J_);
+<a name="l00056"></a>00056       }
+<a name="l00057"></a>00057 
+<a name="l00065"></a>00065       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>(<span class="keyword">const</span> ResidualForm&amp; F, <span class="keyword">const</span> JacobianForm&amp; J, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
+<a name="l00066"></a>00066         : <a class="code" href="classSpacy_1_1C1Operator.html" title="Type-erased differentiable operator .">C1Operator</a>(F,J,{},<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>,<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
+<a name="l00067"></a>00067       {}
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>(<a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp;&amp; other)
+<a name="l00070"></a>00070         : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>( other ) ,
+<a name="l00071"></a>00071           F_( other.F_.function_space(0) ) ,
+<a name="l00072"></a>00072           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
+<a name="l00073"></a>00073           bcs_( std::move(other.bcs_) ) ,
+<a name="l00074"></a>00074           A_( std::move(other.A_) ) ,
+<a name="l00075"></a>00075           b_( std::move(other.b_) ) ,
+<a name="l00076"></a>00076           operatorSpace_( std::move(other.operatorSpace_) )
+<a name="l00077"></a>00077       {
+<a name="l00078"></a>00078         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
+<a name="l00079"></a>00079         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
+<a name="l00080"></a>00080       }
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp; other)
+<a name="l00083"></a>00083         : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>( other ) ,
+<a name="l00084"></a>00084           F_( other.F_.function_space(0) ) ,
+<a name="l00085"></a>00085           J_( other.J_.function_space(0) , other.J_.function_space(1) ) ,
+<a name="l00086"></a>00086           bcs_( other.bcs_ ) ,
+<a name="l00087"></a>00087           A_( (other.A_ != nullptr) ? <span class="comment">/*other.A_-&gt;copy()*/</span>std::make_shared&lt;dolfin::Matrix&gt;(*other.A_) : nullptr ) ,
+<a name="l00088"></a>00088           b_( (other.b_ != nullptr) ? other.b_-&gt;<a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>() : nullptr ) ,
+<a name="l00089"></a>00089           operatorSpace_(other.operatorSpace_)
+<a name="l00090"></a>00090       {
+<a name="l00091"></a>00091         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
+<a name="l00092"></a>00092         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
+<a name="l00093"></a>00093       }
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp; other)
+<a name="l00096"></a>00096       {
+<a name="l00097"></a>00097         <a class="code" href="classSpacy_1_1OperatorBase.html#a561bedbbf760230dbf18c9f9aa72a4bf" title="Move assignment.">OperatorBase::operator=</a>( other );
+<a name="l00098"></a>00098         F_ = other.F_;
+<a name="l00099"></a>00099         J_ = other.J_;
+<a name="l00100"></a>00100         bcs_ = other.bcs_;
+<a name="l00101"></a>00101         A_ = (other.A_ != <span class="keyword">nullptr</span>) ? <span class="comment">/*other.A_-&gt;copy()*/</span>std::make_shared&lt;dolfin::Matrix&gt;(*other.A_) : <span class="keyword">nullptr</span>;
+<a name="l00102"></a>00102         b_ = (other.b_ != <span class="keyword">nullptr</span>) ? other.b_-&gt;copy() : <span class="keyword">nullptr</span>;
+<a name="l00103"></a>00103         operatorSpace_ = other.operatorSpace_;
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
+<a name="l00106"></a>00106         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
+<a name="l00107"></a>00107       }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109       <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp; operator=(<a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97" title="Construct operator for FEniCS.">C1Operator</a>&amp;&amp; other)
+<a name="l00110"></a>00110       {
+<a name="l00111"></a>00111         <a class="code" href="classSpacy_1_1OperatorBase.html#a561bedbbf760230dbf18c9f9aa72a4bf" title="Move assignment.">OperatorBase::operator=</a>( other );
+<a name="l00112"></a>00112         F_ = other.F_;
+<a name="l00113"></a>00113         J_ = other.J_;
+<a name="l00114"></a>00114         bcs_ = std::move(other.bcs_);
+<a name="l00115"></a>00115         A_ = std::move(other.A_);
+<a name="l00116"></a>00116         b_ = std::move(other.b_);
+<a name="l00117"></a>00117         operatorSpace_ = std::move(other.operatorSpace_);
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.F_,F_);
+<a name="l00120"></a>00120         <a class="code" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce" title="Copy coefficients of F to G.">copyCoefficients</a>(other.J_,J_);
+<a name="l00121"></a>00121       }
+<a name="l00122"></a>00122 
+<a name="l00124"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a5e2b3831a7583793f6c134eedd2be9bc">00124</a>       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a5e2b3831a7583793f6c134eedd2be9bc" title="Compute .">operator()</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00125"></a>00125 <span class="keyword">      </span>{
+<a name="l00126"></a>00126         assembleOperator(x);
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128         <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00129"></a>00129         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(*b_,y);
+<a name="l00130"></a>00130         <span class="keywordflow">return</span> y;
+<a name="l00131"></a>00131       }
+<a name="l00132"></a>00132 
+<a name="l00134"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a610d7a4a5daec3b512ab3ccf46a7b9e9">00134</a>       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#a610d7a4a5daec3b512ab3ccf46a7b9e9" title="Compute .">d1</a>(const ::Spacy::Vector &amp;x, const ::Spacy::Vector &amp;dx)<span class="keyword"> const</span>
+<a name="l00135"></a>00135 <span class="keyword">      </span>{
+<a name="l00136"></a>00136         assembleGradient(x);
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138         <span class="keyword">auto</span> dx_ = dolfin::Function( cast_ref&lt;VectorCreator&gt;(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>().creator()).<span class="keyword">get</span>() );
+<a name="l00139"></a>00139         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(dx,dx_);
+<a name="l00140"></a>00140         <span class="keyword">auto</span> y_ = dx_.vector()-&gt;copy();
+<a name="l00141"></a>00141         A_-&gt;mult(*dx_.vector(), *y_);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143         <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00144"></a>00144         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(*y_,y);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146         <span class="keywordflow">return</span> y;
+<a name="l00147"></a>00147       }
+<a name="l00148"></a>00148 
+<a name="l00153"></a><a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#aab603c2b35f2b710b2e646cf3fb7ee9c">00153</a>       <span class="keyword">auto</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html#aab603c2b35f2b710b2e646cf3fb7ee9c" title="Access  as linear operator .">linearization</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00154"></a>00154 <span class="keyword">      </span>{
+<a name="l00155"></a>00155         assembleGradient(x);
+<a name="l00156"></a>00156         assert(A_ != <span class="keyword">nullptr</span>);
+<a name="l00157"></a>00157         assert(operatorSpace_ != <span class="keyword">nullptr</span>);
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159         <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS.">LinearOperator</a>{ A_-&gt;copy() , *operatorSpace_ , J_.function_space(0) };
+<a name="l00160"></a>00160       }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162     <span class="keyword">private</span>:
+<a name="l00164"></a>00164       <span class="keywordtype">void</span> assembleOperator(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00165"></a>00165 <span class="keyword">      </span>{
+<a name="l00166"></a>00166         <span class="keywordflow">if</span>( b_ != <span class="keyword">nullptr</span> &amp;&amp; (oldX_F == x) ) <span class="keywordflow">return</span>;
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168         <span class="keyword">auto</span> x_ = std::make_shared&lt;dolfin::Function&gt;( J_.function_space(0) );
+<a name="l00169"></a>00169         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(x,*x_);
+<a name="l00170"></a>00170         <a class="code" href="namespaceSpacy_1_1FEniCS.html#a8b026331ea4b807e97cc64cb765e6a73" title="Assign T.x if t has a public member with name x. Else does nothing.">assign_x_if_present</a>(F_,x_);
+<a name="l00171"></a>00171         b_ = x_-&gt;vector()-&gt;factory().create_vector(x_-&gt;vector()-&gt;mpi_comm());
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173         dolfin::Assembler{}.assemble(*b_, F_);
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175         <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; bc : bcs_)
+<a name="l00176"></a>00176           bc-&gt;apply( *b_ , *x_-&gt;vector() );
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178         oldX_F = x;
+<a name="l00179"></a>00179       }
+<a name="l00180"></a>00180 
+<a name="l00182"></a>00182       <span class="keywordtype">void</span> assembleGradient(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00183"></a>00183 <span class="keyword">      </span>{
+<a name="l00184"></a>00184         <span class="keywordflow">if</span>( A_ != <span class="keyword">nullptr</span> &amp;&amp; ( oldX_J == x ) ) <span class="keywordflow">return</span>;
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186         <span class="keyword">auto</span> x_ = std::make_shared&lt;dolfin::Function&gt;( J_.function_space(0) );
+<a name="l00187"></a>00187         <a class="code" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0" title="Copy from ::Spacy::Vector to dolfin::GenericVector.">copy</a>(x,*x_);
+<a name="l00188"></a>00188         <a class="code" href="namespaceSpacy_1_1FEniCS.html#a8b026331ea4b807e97cc64cb765e6a73" title="Assign T.x if t has a public member with name x. Else does nothing.">assign_x_if_present</a>(J_,x_);
+<a name="l00189"></a>00189         <span class="keyword">auto</span> A = x_-&gt;vector()-&gt;factory().create_matrix(x_-&gt;vector()-&gt;mpi_comm());
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191         dolfin::Assembler{}.assemble(*A, J_);
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193         dolfin::Assembler assembler;
-<a name="l00194"></a>00194         assembler.assemble(*A, J_);
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196         <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; bc : bcs_)
-<a name="l00197"></a>00197           bc-&gt;apply( *A , *x_-&gt;vector() , *x_-&gt;vector() );
-<a name="l00198"></a>00198         A_ = std::make_shared&lt;dolfin::Matrix&gt;(*A);
+<a name="l00193"></a>00193         <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; bc : bcs_)
+<a name="l00194"></a>00194           bc-&gt;apply( *A , *x_-&gt;vector() , *x_-&gt;vector() );
+<a name="l00195"></a>00195         A_ = std::make_shared&lt;dolfin::Matrix&gt;(std::move(*A));
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197         oldX_J = x;
+<a name="l00198"></a>00198       }
 <a name="l00199"></a>00199 
-<a name="l00200"></a>00200         oldX_J = x;
-<a name="l00201"></a>00201       }
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203       <span class="keyword">mutable</span> ResidualForm F_;
-<a name="l00204"></a>00204       <span class="keyword">mutable</span> JacobianForm J_;
-<a name="l00205"></a>00205       std::vector&lt;const dolfin::DirichletBC*&gt; bcs_ = {};
-<a name="l00206"></a>00206       <span class="keyword">mutable</span> std::shared_ptr&lt;dolfin::Matrix&gt; A_ = <span class="keyword">nullptr</span>;
-<a name="l00207"></a>00207       <span class="keyword">mutable</span> std::shared_ptr&lt;dolfin::GenericVector&gt; b_ = <span class="keyword">nullptr</span>;
-<a name="l00208"></a>00208       mutable ::Spacy::Vector oldX_F = {}, oldX_J = {};
-<a name="l00209"></a>00209       std::shared_ptr&lt;VectorSpace&gt; operatorSpace_ = <span class="keyword">nullptr</span>;
-<a name="l00210"></a>00210     };
-<a name="l00211"></a>00211 
-<a name="l00212"></a>00212 
-<a name="l00217"></a>00217     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
-<a name="l00218"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#a5b21d39905318b5e3f36b71c1fb525e9">00218</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5b21d39905318b5e3f36b71c1fb525e9" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs,
-<a name="l00219"></a>00219                         <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; range)
-<a name="l00220"></a>00220     {
-<a name="l00221"></a>00221       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , bcs , domain , range };
-<a name="l00222"></a>00222     }
-<a name="l00223"></a>00223 
-<a name="l00228"></a>00228     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
-<a name="l00229"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#aecd46636694770dba7c8f99325341eda">00229</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5b21d39905318b5e3f36b71c1fb525e9" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; range)
-<a name="l00230"></a>00230     {
-<a name="l00231"></a>00231       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , domain , range };
-<a name="l00232"></a>00232     }
-<a name="l00233"></a>00233 
-<a name="l00238"></a>00238     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
-<a name="l00239"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#afc3de3603a9ac312096d742da2b5752b">00239</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5b21d39905318b5e3f36b71c1fb525e9" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; space)
-<a name="l00240"></a>00240     {
-<a name="l00241"></a>00241       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , bcs , space , space };
-<a name="l00242"></a>00242     }
-<a name="l00243"></a>00243 
-<a name="l00248"></a>00248     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
-<a name="l00249"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#a508af586ecdbc9f099759ffec06e99df">00249</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5b21d39905318b5e3f36b71c1fb525e9" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; space)
-<a name="l00250"></a>00250     {
-<a name="l00251"></a>00251       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , space , space };
-<a name="l00252"></a>00252     }
-<a name="l00253"></a>00253   }
-<a name="l00255"></a>00255 }
+<a name="l00200"></a>00200       <span class="keyword">mutable</span> ResidualForm F_;
+<a name="l00201"></a>00201       <span class="keyword">mutable</span> JacobianForm J_;
+<a name="l00202"></a>00202       std::vector&lt;const dolfin::DirichletBC*&gt; bcs_ = {};
+<a name="l00203"></a>00203       <span class="keyword">mutable</span> std::shared_ptr&lt;dolfin::Matrix&gt; A_ = <span class="keyword">nullptr</span>;
+<a name="l00204"></a>00204       <span class="keyword">mutable</span> std::shared_ptr&lt;dolfin::GenericVector&gt; b_ = <span class="keyword">nullptr</span>;
+<a name="l00205"></a>00205       mutable ::Spacy::Vector oldX_F = {}, oldX_J = {};
+<a name="l00206"></a>00206       std::shared_ptr&lt;VectorSpace&gt; operatorSpace_ = <span class="keyword">nullptr</span>;
+<a name="l00207"></a>00207     };
+<a name="l00208"></a>00208 
+<a name="l00209"></a>00209 
+<a name="l00214"></a>00214     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
+<a name="l00215"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#a5ff124eb62c7d5b69a5ab4aa196a2453">00215</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5ff124eb62c7d5b69a5ab4aa196a2453" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs,
+<a name="l00216"></a>00216                         <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; range)
+<a name="l00217"></a>00217     {
+<a name="l00218"></a>00218       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , bcs , domain , range };
+<a name="l00219"></a>00219     }
+<a name="l00220"></a>00220 
+<a name="l00225"></a>00225     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
+<a name="l00226"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#a8b625ee36b2bee78a517d91031572c81">00226</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5ff124eb62c7d5b69a5ab4aa196a2453" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; range)
+<a name="l00227"></a>00227     {
+<a name="l00228"></a>00228       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , domain , range };
+<a name="l00229"></a>00229     }
+<a name="l00230"></a>00230 
+<a name="l00235"></a>00235     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
+<a name="l00236"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#ac2ffc6f5956faffe26cc9e0ef59209c3">00236</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5ff124eb62c7d5b69a5ab4aa196a2453" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> std::vector&lt;const dolfin::DirichletBC*&gt;&amp; bcs, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; space)
+<a name="l00237"></a>00237     {
+<a name="l00238"></a>00238       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , bcs , space , space };
+<a name="l00239"></a>00239     }
+<a name="l00240"></a>00240 
+<a name="l00245"></a>00245     <span class="keyword">template</span> &lt;<span class="keyword">class</span> Res<span class="keywordtype">id</span>ualForm, <span class="keyword">class</span> JacobianForm&gt;
+<a name="l00246"></a><a class="code" href="namespaceSpacy_1_1FEniCS.html#a327fc1d746fab9fbc5c703efe31de13a">00246</a>     <span class="keyword">auto</span> <a class="code" href="namespaceSpacy_1_1FEniCS.html#a5ff124eb62c7d5b69a5ab4aa196a2453" title="Convenient generation of a differentiable operator  as used in FEniCS.">makeC1Operator</a>(ResidualForm&amp; F, JacobianForm&amp; J, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; space)
+<a name="l00247"></a>00247     {
+<a name="l00248"></a>00248       <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator .">C1Operator&lt;ResidualForm,JacobianForm&gt;</a>{ F , J , space , space };
+<a name="l00249"></a>00249     }
+<a name="l00250"></a>00250   }
+<a name="l00252"></a>00252 }
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -312,7 +310,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 20 2016 22:35:43 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 21 2016 21:52:00 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

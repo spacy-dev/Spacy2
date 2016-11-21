@@ -6,8 +6,6 @@ var searchData=
   ['incompatiblespaceexception',['IncompatibleSpaceException',['../classSpacy_1_1IncompatibleSpaceException.html',1,'Spacy']]],
   ['incompatiblespaceexception',['IncompatibleSpaceException',['../classSpacy_1_1IncompatibleSpaceException.html#a09e9ea3508dafaefd1eeda93ba5e5d05',1,'Spacy::IncompatibleSpaceException']]],
   ['indefinitelinearsolver',['IndefiniteLinearSolver',['../classSpacy_1_1IndefiniteLinearSolver.html',1,'Spacy']]],
-  ['indefinitelinearsolverconcept',['IndefiniteLinearSolverConcept',['../structSpacy_1_1IndefiniteLinearSolverDetail_1_1IndefiniteLinearSolverConcept.html',1,'Spacy::IndefiniteLinearSolverDetail']]],
-  ['indefinitelinearsolverconcept_3c_20impl_2c_20t_2c_20false_20_3e',['IndefiniteLinearSolverConcept< Impl, T, false >',['../structSpacy_1_1IndefiniteLinearSolverDetail_1_1IndefiniteLinearSolverConcept_3_01Impl_00_01T_00_01false_01_4.html',1,'Spacy::IndefiniteLinearSolverDetail']]],
   ['indefiniteoperator',['indefiniteOperator',['../classSpacy_1_1CG_1_1Solver.html#ae0b6c7b754e093610df6d67bf3067acf',1,'Spacy::CG::Solver']]],
   ['index',['index',['../classSpacy_1_1VectorSpace.html#a4cc04c09af8d01608c2fe2e29028c26b',1,'Spacy::VectorSpace']]],
   ['inducedscalarproduct',['InducedScalarProduct',['../classSpacy_1_1InducedScalarProduct.html',1,'Spacy']]],
@@ -22,6 +20,6 @@ var searchData=
   ['ispositivedefinite',['isPositiveDefinite',['../classSpacy_1_1CG_1_1LinearSolver.html#adec5404c595dc514a9c81c9ccc06cf41',1,'Spacy::CG::LinearSolver']]],
   ['isprimalwrt',['isPrimalWRT',['../classSpacy_1_1VectorSpace.html#aae96ebd6f5e4a1a95ab8684b49062e7d',1,'Spacy::VectorSpace']]],
   ['isvoid',['IsVoid',['../structSpacy_1_1IsVoid.html',1,'Spacy']]],
-  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html#a0bb1df2e0e4bee756a2f3e3032743a1a',1,'Spacy::Generic::IterativeMethod']]],
-  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html',1,'Spacy::Generic']]]
+  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html',1,'Spacy::Generic']]],
+  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html#a0bb1df2e0e4bee756a2f3e3032743a1a',1,'Spacy::Generic::IterativeMethod']]]
 ];

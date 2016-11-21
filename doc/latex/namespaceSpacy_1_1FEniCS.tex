@@ -33,13 +33,13 @@ class \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator}{\-Vector\-Creator}
 \hypertarget{namespaceSpacy_1_1FEniCS_a8b026331ea4b807e97cc64cb765e6a73}{{\footnotesize template$<$class T , class Arg $>$ }\\void \hyperlink{namespaceSpacy_1_1FEniCS_a8b026331ea4b807e97cc64cb765e6a73}{assign\-\_\-x\-\_\-if\-\_\-present} (\-T \&t, const \-Arg \&x)}\label{namespaceSpacy_1_1FEniCS_a8b026331ea4b807e97cc64cb765e6a73}
 
 \begin{DoxyCompactList}\small\item\em \-Assign \-T.\-x if t has a public member with name x. \-Else does nothing. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a5b21d39905318b5e3f36b71c1fb525e9}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&bcs, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&domain, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&range)
+{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a5ff124eb62c7d5b69a5ab4aa196a2453}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&bcs, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&range)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in \-F\-Eni\-C\-S. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_aecd46636694770dba7c8f99325341eda}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&domain, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&range)
+{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a8b625ee36b2bee78a517d91031572c81}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&domain, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&range)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a differentiable operator $A: X\rightarrow Y$ from \-F\-Eni\-C\-S(dolfin). \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_afc3de3603a9ac312096d742da2b5752b}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&bcs, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)
+{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_ac2ffc6f5956faffe26cc9e0ef59209c3}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&bcs, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a differentiable operator $A: X\rightarrow X$ from \-F\-Eni\-C\-S(dolfin). \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a508af586ecdbc9f099759ffec06e99df}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)
+{\footnotesize template$<$class Residual\-Form , class Jacobian\-Form $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a327fc1d746fab9fbc5c703efe31de13a}{make\-C1\-Operator} (\-Residual\-Form \&\-F, \-Jacobian\-Form \&\-J, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a differentiable operator $A: X\rightarrow X$ from \-F\-Eni\-C\-S(dolfin). \end{DoxyCompactList}\item 
 {\footnotesize template$<$class F , class D\-F , class D\-D\-F $>$ }\\auto \hyperlink{namespaceSpacy_1_1FEniCS_a78db716003d17d5f781dfcb13a183519}{make\-C2\-Functional} (const \-F \&f, const \-D\-F \&\-J, const \-D\-D\-F \&\-H, const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&bcs, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&space)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a twice differentiable functional $f: X\rightarrow \mathbb{R}$ as used in \-F\-Eni\-C\-S. \end{DoxyCompactList}\item 
@@ -73,17 +73,17 @@ void \hyperlink{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e}{copy
 \-Contains vector spaces, functionals and operators for \href{www.fenicsproject.org}{\tt \-F\-Eni\-C\-S}. 
 
 \subsection{\-Function \-Documentation}
-\hypertarget{namespaceSpacy_1_1FEniCS_a5b21d39905318b5e3f36b71c1fb525e9}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
+\hypertarget{namespaceSpacy_1_1FEniCS_a5ff124eb62c7d5b69a5ab4aa196a2453}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
 \index{make\-C1\-Operator@{make\-C1\-Operator}!Spacy::FEniCS@{\-Spacy\-::\-F\-Eni\-C\-S}}
 \subsubsection[{make\-C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\-Form , class Jacobian\-Form $>$ auto {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::make\-C1\-Operator} (
 \begin{DoxyParamCaption}
 \item[{\-Residual\-Form \&}]{\-F, }
 \item[{\-Jacobian\-Form \&}]{\-J, }
 \item[{const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&}]{bcs, }
-\item[{\-Vector\-Space \&}]{domain, }
-\item[{\-Vector\-Space \&}]{range}
+\item[{const \-Vector\-Space \&}]{domain, }
+\item[{const \-Vector\-Space \&}]{range}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_1_1FEniCS_a5b21d39905318b5e3f36b71c1fb525e9}
+)}}\label{namespaceSpacy_1_1FEniCS_a5ff124eb62c7d5b69a5ab4aa196a2453}
 
 
 \-Convenient generation of a differentiable operator $A: X\rightarrow Y$ as used in \-F\-Eni\-C\-S. 
@@ -91,16 +91,16 @@ void \hyperlink{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e}{copy
 \begin{DoxyReturn}{\-Returns}
 \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\-:\-:\-Spacy\-:\-:\-Fenics\-:\-:\-C1\-Operator$<$\-Residual\-Form,\-Jacobian\-Form$>$( \-F , \-J , bcs , domain , range )} 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1FEniCS_aecd46636694770dba7c8f99325341eda}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
+\hypertarget{namespaceSpacy_1_1FEniCS_a8b625ee36b2bee78a517d91031572c81}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
 \index{make\-C1\-Operator@{make\-C1\-Operator}!Spacy::FEniCS@{\-Spacy\-::\-F\-Eni\-C\-S}}
 \subsubsection[{make\-C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\-Form , class Jacobian\-Form $>$ auto {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::make\-C1\-Operator} (
 \begin{DoxyParamCaption}
 \item[{\-Residual\-Form \&}]{\-F, }
 \item[{\-Jacobian\-Form \&}]{\-J, }
-\item[{\-Vector\-Space \&}]{domain, }
-\item[{\-Vector\-Space \&}]{range}
+\item[{const \-Vector\-Space \&}]{domain, }
+\item[{const \-Vector\-Space \&}]{range}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_1_1FEniCS_aecd46636694770dba7c8f99325341eda}
+)}}\label{namespaceSpacy_1_1FEniCS_a8b625ee36b2bee78a517d91031572c81}
 
 
 \-Convenient generation of a differentiable operator $A: X\rightarrow Y$ from \-F\-Eni\-C\-S(dolfin). 
@@ -108,16 +108,16 @@ void \hyperlink{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e}{copy
 \begin{DoxyReturn}{\-Returns}
 \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\-:\-:\-Spacy\-:\-:\-Fenics\-:\-:\-C1\-Operator$<$\-Residual\-Form,\-Jacobian\-Form$>$( \-F , \-J , domain , range )} 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1FEniCS_afc3de3603a9ac312096d742da2b5752b}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
+\hypertarget{namespaceSpacy_1_1FEniCS_ac2ffc6f5956faffe26cc9e0ef59209c3}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
 \index{make\-C1\-Operator@{make\-C1\-Operator}!Spacy::FEniCS@{\-Spacy\-::\-F\-Eni\-C\-S}}
 \subsubsection[{make\-C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\-Form , class Jacobian\-Form $>$ auto {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::make\-C1\-Operator} (
 \begin{DoxyParamCaption}
 \item[{\-Residual\-Form \&}]{\-F, }
 \item[{\-Jacobian\-Form \&}]{\-J, }
 \item[{const std\-::vector$<$ const dolfin\-::\-Dirichlet\-B\-C $\ast$ $>$ \&}]{bcs, }
-\item[{\-Vector\-Space \&}]{space}
+\item[{const \-Vector\-Space \&}]{space}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_1_1FEniCS_afc3de3603a9ac312096d742da2b5752b}
+)}}\label{namespaceSpacy_1_1FEniCS_ac2ffc6f5956faffe26cc9e0ef59209c3}
 
 
 \-Convenient generation of a differentiable operator $A: X\rightarrow X$ from \-F\-Eni\-C\-S(dolfin). 
@@ -125,15 +125,15 @@ void \hyperlink{namespaceSpacy_1_1FEniCS_a7c4519bd0cbdc4e72b71f273bade591e}{copy
 \begin{DoxyReturn}{\-Returns}
 \hyperlink{classSpacy_1_1FEniCS_1_1C1Operator}{\-:\-:\-Spacy\-:\-:\-Fenics\-:\-:\-C1\-Operator$<$\-Residual\-Form,\-Jacobian\-Form$>$( \-F , \-J , bcs , space , space )} 
 \end{DoxyReturn}
-\hypertarget{namespaceSpacy_1_1FEniCS_a508af586ecdbc9f099759ffec06e99df}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
+\hypertarget{namespaceSpacy_1_1FEniCS_a327fc1d746fab9fbc5c703efe31de13a}{\index{\-Spacy\-::\-F\-Eni\-C\-S@{\-Spacy\-::\-F\-Eni\-C\-S}!make\-C1\-Operator@{make\-C1\-Operator}}
 \index{make\-C1\-Operator@{make\-C1\-Operator}!Spacy::FEniCS@{\-Spacy\-::\-F\-Eni\-C\-S}}
 \subsubsection[{make\-C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Residual\-Form , class Jacobian\-Form $>$ auto {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::make\-C1\-Operator} (
 \begin{DoxyParamCaption}
 \item[{\-Residual\-Form \&}]{\-F, }
 \item[{\-Jacobian\-Form \&}]{\-J, }
-\item[{\-Vector\-Space \&}]{space}
+\item[{const \-Vector\-Space \&}]{space}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_1_1FEniCS_a508af586ecdbc9f099759ffec06e99df}
+)}}\label{namespaceSpacy_1_1FEniCS_a327fc1d746fab9fbc5c703efe31de13a}
 
 
 \-Convenient generation of a differentiable operator $A: X\rightarrow X$ from \-F\-Eni\-C\-S(dolfin). 
