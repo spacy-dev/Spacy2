@@ -75,16 +75,16 @@ int main()
     Spacy::C2Functional normalStepFunctional = FEniCS::makeC2Functional( L , dL , Norm , productSpace );
 
     // composite step solve
-    CompositeStep::AffineCovariantSolver alg_cs( normalStepFunctional, lagrangeFunctional , productSpace );
-    alg_cs.setRelativeAccuracy(1e-9);
-    alg_cs.setEps(1e-12);
-    alg_cs.setMaxSteps(500);
-    alg_cs.setVerbosityLevel(2);
-    alg_cs.setIterativeRefinements(0);
+    CompositeStep::AffineCovariantSolver solver( normalStepFunctional, lagrangeFunctional , productSpace );
+    solver.setRelativeAccuracy(1e-9);
+    solver.setEps(1e-12);
+    solver.setMaxSteps(500);
+    solver.setVerbosityLevel(2);
+    solver.setIterativeRefinements(0);
 
     // solve problem
     auto startTime = high_resolution_clock::now();
-    auto sol = alg_cs();
+    auto sol = solver();
     std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now()-startTime).count() << std::endl;
 
     // copy back and display solution
