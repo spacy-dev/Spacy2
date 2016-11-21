@@ -1,7 +1,7 @@
 # The residal form F and the Jacobian (linearised) form J
 # for the nonlinear equation - div (c+d*u^2) grad u = f
 #
-# Compile this form with FFC: ffc -l dolfin Heat.ufl
+# Compile this form with FFC: ffc -l dolfin NonlinearHeat.ufl
 
 element = FiniteElement("Lagrange", triangle, 1)
 

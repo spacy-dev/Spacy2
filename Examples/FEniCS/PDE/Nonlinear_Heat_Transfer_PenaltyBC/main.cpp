@@ -1,5 +1,7 @@
 #include <dolfin.h>
 
+#include <Spacy/c1Operator.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Adapter/fenics.hh>
 #include <Spacy/Algorithm/Newton/newton.hh>
 #include <Spacy/inducedScalarProduct.hh>
@@ -23,16 +25,17 @@ int main()
 {
   // Create mesh and function space
   int n = 256;
-  UnitSquareMesh mesh(n,n);
-  NonlinearHeat::FunctionSpace V(mesh);
+  auto mesh = std::make_shared<UnitSquareMesh>(n,n);
+  auto V = std::make_shared<NonlinearHeat::FunctionSpace>(mesh);
 
   // Define variational forms
   NonlinearHeat::BilinearForm a(V, V);
   NonlinearHeat::LinearForm L(V);
 
-  Constant c(1e-2), d(1e2);
-  Source f;
-  Function u(V);
+  auto c = std::make_shared<Constant>(1e-1);
+  auto d = std::make_shared<Constant>(1e2);
+  auto f = std::make_shared<Source>();
+  auto u = std::make_shared<Function>(V);
   L.f = f;
   L.c = c;
   L.d = d;
@@ -44,31 +47,27 @@ int main()
   using namespace Spacy;
 
   // create spaces
+  std::cout << "domain" << std::endl;
   auto domain = FEniCS::makeHilbertSpace(V);
-  auto range = FEniCS::makeHilbertSpace(V);
-  connect(domain,range);
   
   // create operator
-  auto A = FEniCS::makeC1Operator( L , a , domain , range );
+  Spacy::C1Operator A = FEniCS::makeC1Operator( L , a , domain , domain.dualSpace() );
   // set scalar product for affine covariant newton method
-  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.zeroVector()) ) );
-
+  domain.setScalarProduct( InducedScalarProduct( A.linearization(zero(domain)) ) );
   // specify parameters for Newton's method
   auto p = Newton::Parameter{};
-  p.setVerbosity(true);
   p.setRelativeAccuracy(1e-12);
-
   // solve A(x)=0
   auto x = covariantNewton(A,p);
 //  auto x = contravariantNewton(A,p);
 //  auto x = localNewton(A,p);
   
-  FEniCS::copy(x,u);
+  FEniCS::copy(x,*u);
 
   
   // Save solution in VTK format
   File file("poisson.pvd");
-  file << u;
+  file << *u;
 
   // Plot solution
   plot(u);
