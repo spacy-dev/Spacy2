@@ -163,7 +163,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
-        if( b_ != nullptr && (oldX_F == x) ) return;
+        if( oldX_F && (oldX_F == x) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
@@ -181,7 +181,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( A_ != nullptr && ( oldX_J == x ) ) return;
+        if( oldX_J && ( oldX_J == x ) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
@@ -202,7 +202,7 @@ namespace Spacy
       std::vector<const dolfin::DirichletBC*> bcs_ = {};
       mutable std::shared_ptr<dolfin::Matrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-      mutable ::Spacy::Vector oldX_F = {}, oldX_J = {};
+      mutable ::Spacy::Vector oldX_F{}, oldX_J{};
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 

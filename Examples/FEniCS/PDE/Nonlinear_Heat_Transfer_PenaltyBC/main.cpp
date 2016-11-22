@@ -24,7 +24,7 @@ class Source : public Expression
 int main()
 {
   // Create mesh and function space
-  int n = 256;
+  auto n = 256;
   auto mesh = std::make_shared<UnitSquareMesh>(n,n);
   auto V = std::make_shared<NonlinearHeat::FunctionSpace>(mesh);
 
@@ -35,7 +35,6 @@ int main()
   auto c = std::make_shared<Constant>(1e-1);
   auto d = std::make_shared<Constant>(1e2);
   auto f = std::make_shared<Source>();
-  auto u = std::make_shared<Function>(V);
   L.f = f;
   L.c = c;
   L.d = d;
@@ -43,15 +42,14 @@ int main()
   a.d = d;
   
   
-  // Compute solution
+  // Compute solution with Spacy
   using namespace Spacy;
 
-  // create spaces
-  std::cout << "domain" << std::endl;
+  // create hilbert space
   auto domain = FEniCS::makeHilbertSpace(V);
   
-  // create operator
-  Spacy::C1Operator A = FEniCS::makeC1Operator( L , a , domain , domain.dualSpace() );
+  // create operator A:V -> V*
+  auto A = FEniCS::makeC1Operator( L , a , domain , domain.dualSpace() );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(zero(domain)) ) );
   // specify parameters for Newton's method
@@ -62,8 +60,9 @@ int main()
 //  auto x = contravariantNewton(A,p);
 //  auto x = localNewton(A,p);
   
-  FEniCS::copy(x,*u);
 
+  auto u = std::make_shared<Function>(V);
+  FEniCS::copy(x,*u);
   
   // Save solution in VTK format
   File file("poisson.pvd");

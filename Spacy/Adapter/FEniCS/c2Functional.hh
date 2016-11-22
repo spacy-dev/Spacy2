@@ -72,7 +72,6 @@ namespace Spacy
           A_( (g.A_!=nullptr) ? g.A_->copy() : nullptr ) ,
           b_( (g.b_!=nullptr) ? g.b_->copy() : nullptr ) ,
           value_( g.value_ ) ,
-          valueAssembled_( g.valueAssembled_ ) ,
           oldX_f_(g.oldX_f_) , oldX_J_(g.oldX_J_) , oldX_H_(g.oldX_H_) ,
           operatorSpace_(g.operatorSpace_)
       {
@@ -91,7 +90,6 @@ namespace Spacy
         A_ = (g.A_!=nullptr) ? g.A_->copy() : nullptr;
         b_ = (g.b_!=nullptr) ? g.b_->copy() : nullptr;
         value_ = g.value_;
-        valueAssembled_ = g.valueAssembled_;
         oldX_f_ = g.oldX_f_;
         oldX_J_ = g.oldX_J_;
         oldX_H_ = g.oldX_H_;
@@ -115,7 +113,6 @@ namespace Spacy
           A_( std::move(g.A_) ) ,
           b_( std::move(g.b_) ) ,
           value_( g.value_ ) ,
-          valueAssembled_( g.valueAssembled_ ) ,
           oldX_f_(std::move(g.oldX_f_)) , oldX_J_(std::move(g.oldX_J_)) , oldX_H_(std::move(g.oldX_H_)),
           operatorSpace_(std::move(g.operatorSpace_))
       {
@@ -134,7 +131,6 @@ namespace Spacy
         A_ = std::move(g.A_);
         b_ = std::move(g.b_);
         value_ = g.value_;
-        valueAssembled_ = g.valueAssembled_;
         oldX_f_ = std::move(g.oldX_f_);
         oldX_J_ = std::move(g.oldX_J_);
         oldX_H_ = std::move(g.oldX_H_);
@@ -210,8 +206,8 @@ namespace Spacy
       /// Assemble functional value \f$f(x)\f$.
       void assembleFunctional(const ::Spacy::Vector& x) const
       {
-        if( valueAssembled_ && (oldX_f_ == x) ) return;
-        valueAssembled_ = true;
+        if( oldX_f_ && (oldX_f_ == x) ) return;
+
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
 
@@ -224,7 +220,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$f'(x)\f$.
       void assembleJacobian(const ::Spacy::Vector& x) const
       {
-        if( b_ != nullptr && (oldX_J_==x) ) return;
+        if( oldX_J_ && (oldX_J_==x) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
@@ -240,7 +236,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$f''(x)\f$.
       void assembleHessian(const ::Spacy::Vector& x) const
       {
-        if( A_ != nullptr && (oldX_H_==x) ) return;
+        if( oldX_H_ && (oldX_H_==x) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_->vector());
@@ -260,7 +256,6 @@ namespace Spacy
       mutable std::shared_ptr<dolfin::GenericMatrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
       mutable double value_ = 0;
-      mutable bool valueAssembled_ = false;
       mutable ::Spacy::Vector oldX_f_ = {}, oldX_J_ = {}, oldX_H_ = {};
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };

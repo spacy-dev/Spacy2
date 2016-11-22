@@ -66,7 +66,7 @@ int main()
   auto domain = FEniCS::makeHilbertSpace(V);
   
   // create operator
-  Spacy::C1Operator A = FEniCS::makeC1Operator( L , a , bcs , domain , domain.dualSpace() );
+  auto A = FEniCS::makeC1Operator( L , a , bcs , domain , domain.dualSpace() );
   // set scalar product for affine covariant newton method
   domain.setScalarProduct( InducedScalarProduct( A.linearization(zero(domain)) ) );
 
