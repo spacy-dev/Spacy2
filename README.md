@@ -12,7 +12,7 @@ Download via
 
 ### gerrithub
 Download from gerrithub via
-  - git clone https://review.gerrithub.io/spacy-dev/Spacy
+  - git clone ssh://username@review.gerrithub.io:29418/spacy-dev/Spacy
 
 Push to gerrithub via (with my-branch=master,...)
   - git push origin HEAD:refs/for/my-branch
