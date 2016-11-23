@@ -2,7 +2,7 @@
 
 #include <Spacy/vector.hh>
 #include <Spacy/Algorithm/Newton/parameter.hh>
-#include <Spacy/Util/log.hh>
+
 #include <functional>
 
 namespace Spacy
@@ -49,10 +49,10 @@ namespace Spacy
     template <class Damping, class Terminate>
     Vector newton(const C1Operator& F, const Vector& x0, const Parameter& p, const std::function<bool(const Vector&,const Vector&)>& errorEstimator = {})
     {
-      return newton(F,x0,
+      return newton(F, x0,
                     Damping(F),
-                    Terminate(F,get(p.getRelativeAccuracy()),p.getVerbosityLevel()>1),
-                    errorEstimator,p);
+                    Terminate(F, p.getRelativeAccuracy(), p.eps()),
+                    errorEstimator, p);
     }
   }
 

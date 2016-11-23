@@ -52,9 +52,14 @@ namespace Spacy
         }
 
 
+        Logger::Logger()
+        {
+            setPrinter(StreamPrinter{});
+        }
+
         Logger& Logger::get()
         {
-            static Logger logger;
+            static Logger logger{};
             return logger;
         }
 
@@ -94,6 +99,11 @@ namespace Spacy
         void Logger::addPrinter(Printer&& printer)
         {
             printer_.emplace_back(std::move(printer));
+        }
+
+        void Logger::clear()
+        {
+            printer_.clear();
         }
 
         bool Logger::is_disabled(const char* tag) const
