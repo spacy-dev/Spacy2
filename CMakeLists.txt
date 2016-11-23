@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.1)
 
 # The version number
 set (SPACY_MAJOR_VERSION 0)
-set (SPACY_MINOR_VERSION 2)
-set (SPACY_PATCH_VERSION 0)
+set (SPACY_MINOR_VERSION 3)
+set (SPACY_PATCH_VERSION 1)
 set (SPACY_VERSION ${SPACY_MAJOR_VERSION}.${SPACY_MINOR_VERSION}.${SPACY_PATCH_VERSION})
 
 # Set path to cmake scripts
@@ -24,6 +24,18 @@ option(Dolfin "Dolfin" OFF)
 option(Logging "Logging" ON)
 if(Logging)
     add_definitions(-DSPACY_ENABLE_LOGGING)
+endif()
+
+if(Dolfin)
+  # Tell cmake where to find DOLFINConfig.cmake
+  find_package(DOLFIN CONFIG REQUIRED)
+  include_directories(${DOLFIN_INCLUDE_DIRS})
+  include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
+endif()
+
+find_package(Eigen3 CONFIG)
+if(Eigen3_FOUND)
+  include_directories(${EIGEN3_INCLUDE_DIR})
 endif()
 
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")

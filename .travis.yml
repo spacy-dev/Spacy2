@@ -34,7 +34,7 @@ matrix:
 
     # GCC 6
     - os: linux
-      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=gcov-6 COMPUTE_COVERAGE=true
+      env: COMPILER=g++-6 CCOMPILER=gcc-6 GCOV=gcov-6 COMPUTE_COVERAGE=true MAKE_DOC=true
       compiler: gcc
       
     # OSX
@@ -66,7 +66,7 @@ install:
   - if [[ "${COMPILER}" != "" ]]; then export CXX=${COMPILER}; export CC=${CCOMPILER}; fi
   
   ############################################################################
-  # Install a recent CMake (unless already installed on OS X)
+  # Install a recent CMake
   ############################################################################
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
@@ -107,24 +107,34 @@ install:
     fi
     
   ############################################################################
-  # Install gtest and, if required, lcov
+  # Install lcov
   ############################################################################
   - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
-        travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
-        sudo dpkg -i lcov_1.12-3_all.deb
-        sudo apt-add-repository ppa:brightbox/ruby-ng -y
-        sudo apt-get update -qq
-        sudo apt-get install ruby2.2 -qq
-        sudo gem install coveralls-lcov
-      fi
+    if [[ "${TRAVIS_OS_NAME}" == "linux" && "${COMPUTE_COVERAGE}" == "true" ]]; then
+      travis_retry wget --no-check-certificate --quiet http://mirrors.us.kernel.org/ubuntu//pool/universe/l/lcov/lcov_1.12-3_all.deb
+      sudo dpkg -i lcov_1.12-3_all.deb
+      sudo apt-add-repository ppa:brightbox/ruby-ng -y
+      sudo apt-get update -qq
+      sudo apt-get install ruby2.2 -qq
+      sudo gem install coveralls-lcov
     fi
+
+  ############################################################################
+  # Install gtest
+  ############################################################################
   - |
     git clone https://github.com/google/googletest.git
     cd googletest && mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
     sudo cp -r ../googletest/include/gtest /usr/local/include/
     sudo cp googlemock/gtest/lib*.a /usr/local/lib
+
+  ############################################################################
+  # Install doxygen and graphviz if documentation is generated
+  ############################################################################
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" && "${MAKE_DOC}" == "true" ]]; then
+      sudo apt-get install doxygen graphviz
+    fi
 
 script:
   - cd $TRAVIS_BUILD_DIR
@@ -139,9 +149,23 @@ script:
   - cd Test && ctest
 
 after_success:
-  - cd $TRAVIS_BUILD_DIR/build/Test
+  ############################################################################
+  # Upload coverage information to coveralls.io
+  ############################################################################
   - |
-    if [[ "${COMPUTE_COVERAGE}" == "true" ]]; then
+    if [[ "${TRAVIS_OS_NAME}" == "linux" && "${COMPUTE_COVERAGE}" == "true" ]]; then
+      cd $TRAVIS_BUILD_DIR/build/Test
       lcov --gcov-tool gcov-6 --capture --no-external --directory .. --base-directory ../../Spacy --output-file coverage.info
       coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info
     fi
+
+  ############################################################################
+  # Upload documentation to repository
+  ############################################################################
+  - |
+    if [[ "${TRAVIS_OS_NAME}" == "linux" && "${MAKE_DOC}" == "true" ]]; then
+      cd $TRAVIS_BUILD_DIR/build
+      make doc
+      ../deploy_doc.sh
+    fi
+

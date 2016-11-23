@@ -103,7 +103,7 @@ namespace Spacy
             Logger(const Logger&) = delete;
             Logger& operator=(const Logger&) = delete;
 
-            /// Access logger.
+            /// Access logger. Logs to std::cout by default.
             static Logger& get();
 
 
@@ -136,10 +136,15 @@ namespace Spacy
             /// Add printer.
             void addPrinter(Printer&& printer);
 
+            /// Remove all printers.
+            void clear();
+
         private:
+            /// @brief Default constructor, logs to std::cout.
+            Logger();
+
             bool is_disabled(const char* tag) const;
 
-            Logger() = default;
             std::vector< Printer > printer_{};
             std::unordered_map<std::string,bool> disabled_;
         };

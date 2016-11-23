@@ -27,14 +27,13 @@ namespace Spacy
     /**
      * @brief %Operator interface for %FEniCS. Models a differentiable operator \f$A:X\rightarrow Y\f$.
      * @warning In the .ufl file you have to name the argument of \f$f\f$ by "x"!
-     * @see @ref C1OperatorAnchor "C1Operator", @ref C1OperatorConceptAnchor "C1OperatorConcept"
      */
     template <class ResidualForm, class JacobianForm>
     class C1Operator : public OperatorBase
     {
     public:
       /**
-       * @brief Construct operator for FEnics.
+       * @brief Construct operator for %FEniCS.
        * @param F Residual form for the evaluation of \f$A\f$
        * @param J Jacobian form for the evaluation of \f$A'\f$
        * @param bcs Dirichlet boundary conditions
@@ -42,7 +41,7 @@ namespace Spacy
        * @param range range space \f$Y\f$
        */
       C1Operator(const ResidualForm& F, const JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                 VectorSpace& domain, VectorSpace& range)
+                 const VectorSpace& domain, const VectorSpace& range)
         : OperatorBase( domain , range ),
           F_( F.function_space(0) ),
           J_( J.function_space(0) , J.function_space(1) ),
@@ -57,13 +56,13 @@ namespace Spacy
       }
 
       /**
-       * @brief Construct operator without boundary conditions for FEnics.
+       * @brief Construct operator without boundary conditions for %FEniCS.
        * @param F Residual form for the evaluation of \f$A\f$
        * @param J Jacobian form for the evaluation of \f$A'\f$
        * @param domain domain space \f$X\f$
        * @param range range space \f$Y\f$
        */
-      C1Operator(const ResidualForm& F, const JacobianForm& J, VectorSpace& domain, VectorSpace& range)
+      C1Operator(const ResidualForm& F, const JacobianForm& J, const VectorSpace& domain, const VectorSpace& range)
         : C1Operator(F,J,{},domain,range)
       {}
 
@@ -128,7 +127,7 @@ namespace Spacy
 
         auto y = zero(range());
         copy(*b_,y);
-        return std::move(y);
+        return y;
       }
 
       /// Compute \f$A'(x)dx\f$.
@@ -144,7 +143,7 @@ namespace Spacy
         auto y = zero(range());
         copy(*y_,y);
 
-        return std::move(y);
+        return y;
       }
 
       /**
@@ -164,15 +163,14 @@ namespace Spacy
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
-        if( b_ != nullptr && (oldX_F == x) ) return;
+        if( oldX_F && (oldX_F == x) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
         assign_x_if_present(F_,x_);
         b_ = x_->vector()->factory().create_vector(x_->vector()->mpi_comm());
 
-        dolfin::Assembler assembler;
-        assembler.assemble(*b_, F_);
+        dolfin::Assembler{}.assemble(*b_, F_);
 
         for(const auto& bc : bcs_)
           bc->apply( *b_ , *x_->vector() );
@@ -183,19 +181,18 @@ namespace Spacy
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( A_ != nullptr && ( oldX_J == x ) ) return;
+        if( oldX_J && ( oldX_J == x ) ) return;
 
         auto x_ = std::make_shared<dolfin::Function>( J_.function_space(0) );
         copy(x,*x_);
         assign_x_if_present(J_,x_);
         auto A = x_->vector()->factory().create_matrix(x_->vector()->mpi_comm());
 
-        dolfin::Assembler assembler;
-        assembler.assemble(*A, J_);
+        dolfin::Assembler{}.assemble(*A, J_);
 
         for(const auto& bc : bcs_)
           bc->apply( *A , *x_->vector() , *x_->vector() );
-        A_ = std::make_shared<dolfin::Matrix>(*A);
+        A_ = std::make_shared<dolfin::Matrix>(std::move(*A));
 
         oldX_J = x;
       }
@@ -205,7 +202,7 @@ namespace Spacy
       std::vector<const dolfin::DirichletBC*> bcs_ = {};
       mutable std::shared_ptr<dolfin::Matrix> A_ = nullptr;
       mutable std::shared_ptr<dolfin::GenericVector> b_ = nullptr;
-      mutable ::Spacy::Vector oldX_F = {}, oldX_J = {};
+      mutable ::Spacy::Vector oldX_F{}, oldX_J{};
       std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
@@ -216,7 +213,7 @@ namespace Spacy
      */
     template <class ResidualForm, class JacobianForm>
     auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs,
-                        VectorSpace& domain, VectorSpace& range)
+                        const VectorSpace& domain, const VectorSpace& range)
     {
       return C1Operator<ResidualForm,JacobianForm>{ F , J , bcs , domain , range };
     }
@@ -226,7 +223,7 @@ namespace Spacy
      * @return @ref C1Operator "::Spacy::Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , domain , range )"
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, VectorSpace& domain, VectorSpace& range)
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const VectorSpace& domain, const VectorSpace& range)
     {
       return C1Operator<ResidualForm,JacobianForm>{ F , J , domain , range };
     }
@@ -236,7 +233,7 @@ namespace Spacy
      * @return @ref C1Operator "::Spacy::Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , bcs , space , space )"
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, VectorSpace& space)
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const std::vector<const dolfin::DirichletBC*>& bcs, const VectorSpace& space)
     {
       return C1Operator<ResidualForm,JacobianForm>{ F , J , bcs , space , space };
     }
@@ -246,7 +243,7 @@ namespace Spacy
      * @return @ref C1Operator "Fenics::C1Operator<ResidualForm,JacobianForm>( F , J , space , space )"
      */
     template <class ResidualForm, class JacobianForm>
-    auto makeC1Operator(ResidualForm& F, JacobianForm& J, VectorSpace& space)
+    auto makeC1Operator(ResidualForm& F, JacobianForm& J, const VectorSpace& space)
     {
       return C1Operator<ResidualForm,JacobianForm>{ F , J , space , space };
     }

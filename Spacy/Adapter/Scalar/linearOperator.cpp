@@ -10,10 +10,10 @@ namespace Spacy
 {
     namespace Scalar
     {
-        LinearOperator::LinearOperator(const VectorSpace& space, double value) :
+        LinearOperator::LinearOperator(const VectorSpace& space, Real value) :
             VectorBase(space),
             OperatorBase(Space::R,Space::R),
-            Mixin::Get<double>(value)
+            Mixin::Get<Real>(value)
         {}
 
         ::Spacy::Vector LinearOperator::operator()(const ::Spacy::Vector& dx) const

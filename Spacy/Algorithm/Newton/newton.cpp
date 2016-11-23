@@ -1,7 +1,7 @@
 #include "newton.hh"
 
 #include <Spacy/Util/Exceptions/notConvergedException.hh>
-
+#include <Spacy/Util/log.hh>
 #include <Spacy/Algorithm/Newton/dampingStrategies.hh>
 #include <Spacy/Algorithm/Newton/terminationCriteria.hh>
 
@@ -10,11 +10,13 @@
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
 
+#include <Spacy/Util/cast.hh>
+
 namespace Spacy
 {
     namespace Newton
     {
-        DEFINE_LOG_TAG( static const char* log_tag = "Newton" )
+        DEFINE_LOG_TAG( static const char* log_tag = "Newton" );
 
         Vector newton(const C1Operator& F, const Vector& x0,
                       const std::function<DampingFactor(const std::function<Vector(const Vector&)>&,const Vector&,const Vector&)>& dampingStrategy,

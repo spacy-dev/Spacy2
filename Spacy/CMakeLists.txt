@@ -1,20 +1,15 @@
 if(Dolfin)
-  # Tell cmake where to find DOLFINConfig.cmake
-  set(DOLFIN_DIR /home/lars/.hashdist/bld/dolfin/6qf3p654zczj/share/dolfin/cmake)
-  find_package(DOLFIN)
-  if(DOLFIN_FOUND)
-    include_directories(${DOLFIN_INCLUDE_DIRS})
-    include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
-    aux_source_directory(Adapter/FEniCS SRC_LIST)
-  endif()
+  aux_source_directory(Adapter/FEniCS SRC_LIST)
 endif()
-find_package(Eigen3)
-if(EIGEN3_FOUND)
-  include_directories(${EIGEN3_INCLUDE_DIR})
+
+if(Eigen3_FOUND)
   aux_source_directory(Adapter/Eigen SRC_LIST)
 endif()
 
-#add_subdirectory(Adapter)
+if(Kaskade)
+    aux_source_directory(Adapter/Kaskade SRC_LIST)
+endif()
+
 aux_source_directory(. SRC_LIST)
 aux_source_directory(Adapter/Scalar SRC_LIST)
 aux_source_directory(Adapter/Generic SRC_LIST)

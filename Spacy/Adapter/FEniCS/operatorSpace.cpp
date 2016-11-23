@@ -20,7 +20,7 @@ namespace Spacy
 
     LinearOperator LinearOperatorCreator::operator()(const VectorSpace* space) const
     {
-      return LinearOperator{ dolfin::Matrix{}.copy() , *space , dolfinSpace_ };
+//      return LinearOperator{ dolfin::Matrix{}.copy() , *space , dolfinSpace_ };
     }
 
     const VectorSpace& LinearOperatorCreator::domain() const

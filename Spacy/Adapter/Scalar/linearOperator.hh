@@ -20,17 +20,17 @@ namespace Spacy
         struct LinearOperator :
                 VectorBase ,
                 OperatorBase ,
-                Mixin::Get<double> ,
+                Mixin::Get<Real> ,
                 AddArithmeticOperators<LinearOperator>
         {
             /// Create linear operator.
-            LinearOperator(const VectorSpace& space, double value);
+            LinearOperator(const VectorSpace& space, Real value);
 
             /// Apply linear operator.
             ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
             /// Apply as dual space element.
-            ::Spacy::Real operator()(const LinearOperator& dx) const;
+            Real operator()(const LinearOperator& dx) const;
 
             /// Get additive inverse.
             LinearOperator operator-() const;

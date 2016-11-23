@@ -1,5 +1,7 @@
 #pragma once
 
+// @cond TYPE_ERASURE_DETAIL
+
 #include <cassert>
 #include <memory>
 #include <typeinfo>
@@ -137,3 +139,5 @@ namespace type_erasure_table_detail
     template < class T >
     using remove_reference_wrapper_t = typename remove_reference_wrapper< T >::type;
 }
+
+// @endcond

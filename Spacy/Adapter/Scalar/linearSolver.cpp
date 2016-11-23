@@ -6,15 +6,15 @@
 
 namespace Spacy
 {
-  namespace Scalar
-  {
-    LinearSolver::LinearSolver(double y)
-      : y_(y)
-    {}
-
-    ::Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& x) const
+    namespace Scalar
     {
-      return cast_ref<Real>(x) / y_;
+        LinearSolver::LinearSolver(Real y)
+            : y_(y)
+        {}
+
+        ::Spacy::Vector LinearSolver::operator()(const ::Spacy::Vector& x) const
+        {
+            return cast_ref<Real>(x) / y_;
+        }
     }
-  }
 }

@@ -1,5 +1,6 @@
 #include <dolfin.h>
 
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Adapter/fenics.hh>
 #include <Spacy/Algorithm/Newton/newton.hh>
 #include <Spacy/inducedScalarProduct.hh>
@@ -33,13 +34,13 @@ int main()
 {
   // Create mesh and function space
   auto n = 256u;
-  UnitSquareMesh mesh{n,n};
-  NonlinearHeat::FunctionSpace V{mesh};
-  std::cout << "degrees of freedom: " << V.dim() << std::endl;
+  auto mesh = std::make_shared<UnitSquareMesh>(n,n);
+  auto V = std::make_shared<NonlinearHeat::FunctionSpace>(mesh);
+  std::cout << "degrees of freedom: " << V->dim() << std::endl;
 
   // Define boundary condition
-  Constant u0{0.};
-  DirichletBoundary boundary;
+  auto u0 = std::make_shared<Constant>(0);
+  auto boundary = std::make_shared<DirichletBoundary>();
   DirichletBC bc{V, u0, boundary};
   std::vector<const DirichletBC*> bcs { &bc };
 
@@ -47,9 +48,10 @@ int main()
   NonlinearHeat::BilinearForm a{V, V};
   NonlinearHeat::LinearForm L{V};
   
-  Constant c(1e-2), d(1e2);
-  Source f;
-  Function u(V);
+  auto c = std::make_shared<Constant>(1e-1);
+  auto d = std::make_shared<Constant>(1e2);
+  auto f = std::make_shared<Source>();
+  auto u = std::make_shared<Function>(V);
   L.f = f;
   L.c = c;
   L.d = d;
@@ -62,17 +64,14 @@ int main()
 
   // create spaces
   auto domain = FEniCS::makeHilbertSpace(V);
-  auto range = FEniCS::makeHilbertSpace(V);
-  connect(domain,range);
   
   // create operator
-  Spacy::C1Operator A = FEniCS::makeC1Operator( L , a , bcs , domain , range );
+  auto A = FEniCS::makeC1Operator( L , a , bcs , domain , domain.dualSpace() );
   // set scalar product for affine covariant newton method
-  domain.setScalarProduct( InducedScalarProduct( A.linearization(domain.zeroVector()) ) );
+  domain.setScalarProduct( InducedScalarProduct( A.linearization(zero(domain)) ) );
 
   // specify parameters for Newton's method
   auto p = Spacy::Newton::Parameter{};
-  p.setVerbosityLevel(2);
   p.setRelativeAccuracy(1e-12);
 
   // solve A(x) = 0
@@ -80,11 +79,11 @@ int main()
 //  auto x = Spacy::contravariantNewton(A,p);
 //  auto x = Spacy::localNewton(A,p);
   
-  FEniCS::copy(x,u);
+  FEniCS::copy(x,*u);
 
   // Save solution in VTK format
   File file("poisson.pvd");
-  file << u;
+  file << *u;
 
   // Plot solution
   plot(u);

@@ -52,5 +52,5 @@ namespace Spacy
 
     Real operator*(const LipschitzConstant& x, Real y);
 
-    Real operator*(Real y, const LipschitzConstant& x);
+    Real operator*(Real x, const LipschitzConstant& y);
 }
