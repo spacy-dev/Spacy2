@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.1)
 
 # The version number
 set (SPACY_MAJOR_VERSION 0)
-set (SPACY_MINOR_VERSION 2)
-set (SPACY_PATCH_VERSION 0)
+set (SPACY_MINOR_VERSION 3)
+set (SPACY_PATCH_VERSION 1)
 set (SPACY_VERSION ${SPACY_MAJOR_VERSION}.${SPACY_MINOR_VERSION}.${SPACY_PATCH_VERSION})
 
 # Set path to cmake scripts
