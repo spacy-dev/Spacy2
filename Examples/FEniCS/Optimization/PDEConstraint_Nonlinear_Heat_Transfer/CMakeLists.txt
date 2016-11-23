@@ -1,18 +1,14 @@
-cmake_minimum_required(VERSION 2.8)
+project(Spacy-Examples-Fenics-OptimalHeatControl)
 
-set(PROJECT_NAME optimal_control)
-project(${PROJECT_NAME})
+cmake_minimum_required(VERSION 3.1)
 
-# Set verbose output while testing CMake
-#set(CMAKE_VERBOSE_MAKEFILE 1)
+find_package(DOLFIN CONFIG REQUIRED)
 
-# Set CMake behavior
-cmake_policy(SET CMP0004 OLD)
-
-# Get DOLFIN configuration data (DOLFINConfig.cmake must be in
-# DOLFIN_CMAKE_CONFIG_PATH)
-set(DOLFIN_DIR ../../../../cmake)
-find_package(DOLFIN)
+# Include directories
+include_directories(${DOLFIN_INCLUDE_DIRS})
+include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
+# Compiler definitions
+add_definitions(${DOLFIN_CXX_DEFINITIONS})
 
 # Need to get VTK config because VTK uses advanced VTK features which
 # mean it's not enough to just link to the DOLFIN target. See
@@ -25,24 +21,14 @@ if (NOT CMAKE_BUILD_TYPE)
     "Choose the type of build, options are: Debug MinSizeRel Release RelWithDebInfo." FORCE)
 endif()
 
-# Include directories
-include_directories(${DOLFIN_INCLUDE_DIRS})
-include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${DOLFIN_LIBRARIES})
-# Compiler definitions
-add_definitions(${DOLFIN_CXX_DEFINITIONS})
-
 # Include path, link path, library and compiler flags for Spacy
-find_package(Spacy REQUIRED)
-include_directories(${SPACY_INCLUDE_DIRS})
-link_directories(${SPACY_LIBRARY_DIR})
-set(LIBS ${LIBS} ${SPACY_LIBRARIES})
-# Compiler flags from Spacy, i.e. -std=c++1y
-add_compile_options(${SPACY_CXX_OPTIONS})
-
+find_package(Spacy CONFIG REQUIRED)
+include_directories(${Spacy_INCLUDE_DIR})
+add_definitions(${Spacy_CXX_FLAGS})
 
 # Executable
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(run main.cpp)
 
 # Target libraries
-target_link_libraries(${PROJECT_NAME} ${LIBS})
+target_link_libraries(run ${DOLFIN_LIBRARIES} ${Spacy_LIBRARIES})
+

@@ -18,14 +18,11 @@ aux_source_directory(Spacy/Spaces/PrimalDualProductSpace TEST_SRC_LIST)
 aux_source_directory(Spacy/Util TEST_SRC_LIST)
 aux_source_directory(Spacy/Util/Base TEST_SRC_LIST)
 aux_source_directory(Spacy/Util/Mixins TEST_SRC_LIST)
-
-find_package(Eigen3)
-if(EIGEN3_FOUND)
-  include_directories(${EIGEN3_INCLUDE_DIR})
+if(Eigen3_FOUND)
   aux_source_directory(Spacy/Adapter/Eigen TEST_SRC_LIST)
 endif()
-
 if(Kaskade)
+  aux_source_directory(Spacy/Adapter/Kaskade TEST_SRC_LIST)
   include_directories(/home/lars/Libraries/Kaskade7.3
                       /opt/acml5.3.1/gfortran64/include
                       /home/lars/Libraries/software/gcc-5.4.0/dune-2.4.0/include
@@ -35,7 +32,6 @@ if(Kaskade)
                    /opt/acml5.3.1/gfortran64/lib
                    /home/lars/Libraries/software/gcc-5.4.0/umfpack-5.4.0/lib
                    /home/lars/Libraries/software/gcc-5.4.0/dune-2.4.0/lib)
-  aux_source_directory(Spacy/Adapter/Kaskade TEST_SRC_LIST)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)

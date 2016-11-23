@@ -30,9 +30,9 @@ namespace Spacy
      *
      * @return \f$ q(t)=a+bt+ct^2\f$
      */
-    Quadratic makeQuadraticModel(DampingFactor nu,
-                                 const Vector& dn, const Vector& dt,
-                                 const C2Functional& L, const Vector& x);
+    Scalar::Quadratic makeQuadraticModel(DampingFactor nu,
+                                         const Vector& dn, const Vector& dt,
+                                         const C2Functional& L, const Vector& x);
 
     /**
      * @brief Constructs a quadratic model for the norm of the underlying vector space.
@@ -41,7 +41,7 @@ namespace Spacy
      * @param dt tangential step
      * @return \f$ q(t)=\nu^2\|dn\|^2+2\nu(dn,dt)t+\|dt\|^2t^2 \f$
      */
-    Quadratic makeQuadraticNormModel(DampingFactor nu, const Vector& dn, const Vector& dt);
+    Scalar::Quadratic makeQuadraticNormModel(DampingFactor nu, const Vector& dn, const Vector& dt);
 
     /// The cubic regularized model for the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
     class CubicModel
@@ -53,7 +53,7 @@ namespace Spacy
        * @param squaredNorm quadratic model \f$q_2\f$ of a norm (generated with makeQuadraticNormModel(...))
        * @param omega estimate of the Lipschitz constant of the second derivative of the Lagrangian
        */
-      CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega);
+      CubicModel(const Scalar::Quadratic& quadraticModel, const Scalar::Quadratic& squaredNorm, Real omega);
 
       /**
        * @brief Evaluate cubic model \f$ q(t) = q_1(t) + \frac{\omega}{6}q_2^{3/2} \f$.
@@ -63,8 +63,8 @@ namespace Spacy
       Real operator()(Real t) const;
 
     private:
-      Quadratic quadraticModel_;
-      Quadratic squaredNorm_;
+      Scalar::Quadratic quadraticModel_;
+      Scalar::Quadratic squaredNorm_;
       Real omega_;
     };
 

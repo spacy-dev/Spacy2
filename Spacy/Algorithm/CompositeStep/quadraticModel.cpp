@@ -25,15 +25,15 @@ namespace Spacy
     }
 
 
-    Quadratic makeQuadraticModel(DampingFactor nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
+    Scalar::Quadratic makeQuadraticModel(DampingFactor nu, const Vector& dn, const Vector& dt, const C2Functional &L, const Vector& x)
     {
-      return create<Quadratic>(quadraticCoefficients(nu,dn,dt,L,x));
+      return create<Scalar::Quadratic>(quadraticCoefficients(nu,dn,dt,L,x));
     }
 
 
-    Quadratic makeQuadraticNormModel(DampingFactor nu, const Vector& dn, const Vector& dt)
+    Scalar::Quadratic makeQuadraticNormModel(DampingFactor nu, const Vector& dn, const Vector& dt)
     {
-      return Quadratic( nu*nu*dn*dn , 2*nu*dn*dt , dt*dt);
+      return Scalar::Quadratic( nu*nu*dn*dn , 2*nu*dn*dt , dt*dt);
     }
 
     CubicModel makeCubicModel(DampingFactor nu, const Vector& dn, const Vector& dt,
@@ -42,7 +42,7 @@ namespace Spacy
       return CubicModel( makeQuadraticModel(nu,dn,dt,L,x), makeQuadraticNormModel(nu,dn,dt), get(omega) );
     }
 
-    CubicModel::CubicModel(const Quadratic& quadraticModel, const Quadratic& squaredNorm, Real omega)
+    CubicModel::CubicModel(const Scalar::Quadratic& quadraticModel, const Scalar::Quadratic& squaredNorm, Real omega)
       : quadraticModel_(quadraticModel), squaredNorm_(squaredNorm), omega_(omega)
     {}
 

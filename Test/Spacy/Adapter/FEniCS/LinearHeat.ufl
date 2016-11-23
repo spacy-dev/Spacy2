@@ -1,0 +1,15 @@
+# The residal form F and the Jacobian form J
+# for the linear equation - div grad u = f
+#
+# Compile this form with FFC: ffc -l dolfin LinearHeat.ufl
+
+element = FiniteElement("Lagrange", triangle, 1)
+
+f  = Coefficient(element)
+x  = Coefficient(element)
+v  = TestFunction(element)
+
+F  = inner(grad(x), grad(v))*dx - f*v*dx
+
+du = TrialFunction(element)
+J = derivative(F,x,du)

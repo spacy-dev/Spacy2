@@ -26,6 +26,18 @@ if(Logging)
     add_definitions(-DSPACY_ENABLE_LOGGING)
 endif()
 
+if(Dolfin)
+  # Tell cmake where to find DOLFINConfig.cmake
+  find_package(DOLFIN CONFIG REQUIRED)
+  include_directories(${DOLFIN_INCLUDE_DIRS})
+  include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
+endif()
+
+find_package(Eigen3 CONFIG)
+if(Eigen3_FOUND)
+  include_directories(${EIGEN3_INCLUDE_DIR})
+endif()
+
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
 
 if(Coverage)
@@ -52,8 +64,6 @@ endif()
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-add_custom_target(${CMAKE_CURRENT_BINARY_DIR} ALL
-    COMMAND ${CMAKE_COMMAND} -E make_directory doc)
 add_custom_target(doc
 ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

@@ -5,7 +5,7 @@
 #include <Spacy/Util/cast.hh>
 #include "real.hh"
 
-Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace(bool defaultIndex)
+Spacy::VectorSpace Spacy::Scalar::makeRealSpace(bool defaultIndex)
 {
   return ::Spacy::makeHilbertSpace( [](const VectorSpace* space)
                                       {
@@ -21,5 +21,5 @@ Spacy::VectorSpace Spacy::RealSpace::makeHilbertSpace(bool defaultIndex)
 
 Spacy::VectorSpace Spacy::makeRealSpace(bool defaultIndex)
 {
-  return Spacy::RealSpace::makeHilbertSpace(defaultIndex);
+  return Spacy::Scalar::makeRealSpace(defaultIndex);
 }

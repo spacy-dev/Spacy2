@@ -7,7 +7,7 @@ namespace
 {
     auto makeQuadratic(double a, double b, double c)
     {
-        return Spacy::Quadratic(a,b,c);
+        return Spacy::Scalar::Quadratic(a,b,c);
     }
 }
 
@@ -22,7 +22,7 @@ TEST(Invoke,MakeQuadratic)
 TEST(Create,CreateQuadratic)
 {
     auto args = std::make_tuple(3,2,1);
-    auto f = Spacy::create<Spacy::Quadratic>(args);
+    auto f = Spacy::create<Spacy::Scalar::Quadratic>(args);
 
     EXPECT_EQ( f(2) , 11 );
 }
