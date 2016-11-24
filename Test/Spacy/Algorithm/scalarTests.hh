@@ -3,8 +3,7 @@
 #include <gtest/gtest.h>
 
 #include <Spacy/c1Operator.hh>
-#include <Spacy/Adapter/scalar.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/realSpace.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Util/Exceptions/notConvergedException.hh>
 

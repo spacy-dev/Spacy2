@@ -2,7 +2,7 @@
 
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
 #include <Spacy/Util/Exceptions/invalidArgumentException.hh>

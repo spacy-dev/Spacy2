@@ -1,7 +1,7 @@
 #include <Test/gtest.hh>
 
 #include <Spacy/linearSolver.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Test/Mock/linearSolver.hh>
 #include <Test/Mock/vector.hh>
 

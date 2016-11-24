@@ -1,6 +1,6 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 
 #include <Test/mockSetup.hh>
 

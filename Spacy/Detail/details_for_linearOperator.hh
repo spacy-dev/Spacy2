@@ -6,7 +6,7 @@
 
 #include <memory>
 #include <functional>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 #include <Spacy/Util/table_util.hh>
 #include <Spacy/linearSolver.hh>

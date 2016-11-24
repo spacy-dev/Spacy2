@@ -5,6 +5,8 @@
 #include <Spacy/Spaces/realSpace.hh>
 #include <Spacy/Util/cast.hh>
 
+#include "linearOperator.hh"
+
 namespace Spacy
 {
     namespace Scalar

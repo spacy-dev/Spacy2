@@ -2,8 +2,8 @@
 
 #include "vectorSpace.hh"
 #include "vector.hh"
-#include <Spacy/Spaces/RealSpace/vectorSpace.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/vectorSpace.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/vector.hh>

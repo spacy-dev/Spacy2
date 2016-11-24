@@ -1,6 +1,6 @@
 #include "derivative.hh"
 
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/linearOperator.hh>
 #include <Spacy/Util/Base/operatorBase.hh>

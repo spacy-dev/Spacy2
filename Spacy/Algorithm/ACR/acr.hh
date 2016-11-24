@@ -12,7 +12,7 @@
 #include "Spacy/Algorithm/lipschitzConstant.hh"
 #include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
 #include "Spacy/Util/mixins.hh"
-#include "Spacy/Spaces/RealSpace/real.hh"
+#include "Spacy/Spaces/ScalarSpace/real.hh"
 
 namespace Spacy
 {                           

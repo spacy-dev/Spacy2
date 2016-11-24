@@ -5,7 +5,7 @@
 #include <dolfin.h>
 
 #include <Spacy/vectorSpace.hh>
-#include <Spacy/Spaces/RealSpace/vectorSpace.hh>
+#include <Spacy/Spaces/ScalarSpace/vectorSpace.hh>
 #include <Spacy/Util/Base/operatorBase.hh>
 #include <Spacy/Util/cast.hh>
 

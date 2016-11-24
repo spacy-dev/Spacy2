@@ -4,7 +4,7 @@
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 
 #include "l2Product.hh"
 #include "vector.hh"

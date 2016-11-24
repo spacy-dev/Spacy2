@@ -1,7 +1,7 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Adapter/Scalar/linearOperator.hh>
-#include <Spacy/Adapter/Scalar/linearOperatorCreator.hh>
+#include <Spacy/Spaces/ScalarSpace/linearOperator.hh>
+#include <Spacy/Spaces/ScalarSpace/linearOperatorCreator.hh>
 #include <Test/mockSetup.hh>
 
 using namespace Spacy;

@@ -20,13 +20,13 @@ namespace Spacy
         /**
          * @brief Construct real number with value x.
          * @param x initial value
-         * @param space associated function space (RealSpace)
+         * @param space associated function space (ScalarSpace)
          */
         Real(double x, const VectorSpace& space);
 
         /**
          * @brief Construct real number with initial value 0.
-         * @param space associated function space (RealSpace)
+         * @param space associated function space (ScalarSpace)
          */
         explicit Real(const VectorSpace& space);
 

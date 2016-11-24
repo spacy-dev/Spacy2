@@ -1,9 +1,9 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Spaces/RealSpace/real.hh>
 #include <Spacy/vector.hh>
-#include <Spacy/Adapter/Scalar/c1Operator.hh>
-#include <Spacy/Adapter/Scalar/linearOperator.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/c1Operator.hh>
+#include <Spacy/Spaces/ScalarSpace/linearOperator.hh>
 
 #include <Test/mockSetup.hh>
 

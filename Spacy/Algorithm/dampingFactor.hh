@@ -2,7 +2,7 @@
 
 #include <Spacy/Util/Mixins/eps.hh>
 #include <Spacy/Util/Mixins/get.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 
 namespace Spacy
 {

@@ -11,14 +11,14 @@ namespace Spacy
      * @brief Construct (Hilbert) space of real numbers.
      * @return ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( [](const Spacy* space){ return Vector{*space}; } , ScalarProduct{} )"
      */
-    VectorSpace makeRealSpace(bool defaultIndex = false);
+    VectorSpace makeScalarSpace(bool defaultIndex = false);
   }
 
   /**
    * @brief Construct space of real numbers.
    * @return ::Spacy::Scalar::makeRealHilbertSpace()
    */
-  VectorSpace makeRealSpace(bool defaultIndex = false);
+  VectorSpace makeScalarSpace(bool defaultIndex = false);
 
   namespace Space
   {
@@ -27,6 +27,6 @@ namespace Spacy
      *
      * This space is used by class Real if the underlying space is left unspecified.
      */
-    static VectorSpace R = Scalar::makeRealSpace(true);
+    static VectorSpace R = Scalar::makeScalarSpace(true);
   }
 }

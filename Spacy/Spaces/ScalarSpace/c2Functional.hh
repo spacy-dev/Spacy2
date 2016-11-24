@@ -4,7 +4,6 @@
 #include <memory>
 
 #include <Spacy/Util/Base/functionalBase.hh>
-#include <Spacy/Adapter/Scalar/linearOperator.hh>
 
 namespace Spacy
 {

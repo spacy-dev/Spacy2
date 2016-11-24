@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/Util/Mixins/accuracy.hh>
 #include <Spacy/Util/Mixins/verbosity.hh>
 #include <Spacy/Util/Mixins/eps.hh>

@@ -22,7 +22,7 @@
 //TEST(ProductSpaceTest,PurePrimalElementTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } );
 
 //  auto x = R2.vector();
@@ -34,7 +34,7 @@
 //TEST(ProductSpaceTest,PureDualElementTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
 //  auto x = R2.vector();
@@ -46,7 +46,7 @@
 //TEST(ProductSpaceTest,MixedElementTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();
@@ -58,7 +58,7 @@
 //TEST(ProductSpaceTest,PurePrimalElementSumTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
 //  auto x = R2.vector();
@@ -143,7 +143,7 @@
 //TEST(ProductSpaceTest,PureDualElementSumTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
 //  auto x = R2.vector();
@@ -224,7 +224,7 @@
 //TEST(ProductSpaceTest,MixedElementSumTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();
@@ -303,7 +303,7 @@
 //TEST(ProductSpaceTest,PurePrimalElementProductTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0,1} );
 
 //  auto x = R2.vector();
@@ -325,7 +325,7 @@
 //TEST(ProductSpaceTest,PureDualElementProductTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {} , {0,1} );
 
 //  auto x = R2.vector();
@@ -347,7 +347,7 @@
 //TEST(ProductSpaceTest,MixedElementProductTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();
@@ -369,7 +369,7 @@
 //TEST(ProductSpaceTest,MixedElementArithmeticProductTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();
@@ -410,7 +410,7 @@
 //TEST(ProductSpaceTest,ScalarProductTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();
@@ -426,7 +426,7 @@
 //TEST(ProductSpaceTest,NormTest)
 //{
 //  using namespace Spacy;
-//  auto R = std::make_shared<VectorSpace>( RealSpace::makeHilbertSpace() );
+//  auto R = std::make_shared<VectorSpace>( ScalarSpace::makeHilbertSpace() );
 //  auto R2 = ProductSpace::makeHilbertSpace( { R , R } , {0} , {1} );
 
 //  auto x = R2.vector();

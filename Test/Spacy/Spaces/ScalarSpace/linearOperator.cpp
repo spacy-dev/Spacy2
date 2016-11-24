@@ -1,6 +1,6 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Adapter/Scalar/linearOperator.hh>
+#include <Spacy/Spaces/ScalarSpace/linearOperator.hh>
 #include <Test/mockSetup.hh>
 
 using namespace Spacy;
