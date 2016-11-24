@@ -14,7 +14,7 @@ var searchData=
   ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Kaskade_1_1LinearOperatorCreator.html',1,'Spacy::Kaskade']]],
   ['linearoperatorcreator',['LinearOperatorCreator',['../classSpacy_1_1Scalar_1_1LinearOperatorCreator.html',1,'Spacy::Scalar']]],
   ['linearoperatorcreator',['LinearOperatorCreator',['../structSpacy_1_1Rn_1_1LinearOperatorCreator.html',1,'Spacy::Rn']]],
-  ['linearsolver',['LinearSolver',['../classSpacy_1_1Scalar_1_1LinearSolver.html#af7d7759b5ee27d7a16640baf1fa663d9',1,'Spacy::Scalar::LinearSolver::LinearSolver()'],['../classSpacy_1_1CG_1_1LinearSolver.html#a32f75ae5c449772649af6306b6f68497',1,'Spacy::CG::LinearSolver::LinearSolver()']]],
+  ['linearsolver',['LinearSolver',['../classSpacy_1_1CG_1_1LinearSolver.html#a32f75ae5c449772649af6306b6f68497',1,'Spacy::CG::LinearSolver::LinearSolver()'],['../classSpacy_1_1Scalar_1_1LinearSolver.html#af7d7759b5ee27d7a16640baf1fa663d9',1,'Spacy::Scalar::LinearSolver::LinearSolver()']]],
   ['linearsolver',['LinearSolver',['../classSpacy_1_1Scalar_1_1LinearSolver.html',1,'Spacy::Scalar']]],
   ['linearsolver',['LinearSolver',['../classSpacy_1_1Rn_1_1LinearSolver.html',1,'Spacy::Rn']]],
   ['linearsolver',['LinearSolver',['../classSpacy_1_1CG_1_1LinearSolver.html',1,'Spacy::CG']]],

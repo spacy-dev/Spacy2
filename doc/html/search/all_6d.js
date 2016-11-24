@@ -13,7 +13,7 @@ var searchData=
   ['makequadraticmodel',['makeQuadraticModel',['../namespaceSpacy_1_1CompositeStep.html#a56d3f30088fa92450ffc5f962a8bbfa8',1,'Spacy::CompositeStep']]],
   ['makequadraticnormmodel',['makeQuadraticNormModel',['../namespaceSpacy_1_1CompositeStep.html#a51f121673adedc63020b2ce90041c500',1,'Spacy::CompositeStep']]],
   ['makercgsolver',['makeRCGSolver',['../namespaceSpacy.html#af70adbdd6fafbe87bd7c79be078851d6',1,'Spacy']]],
-  ['makerealspace',['makeRealSpace',['../group__ScalarGroup.html#ga4aee33d5bdac18829c25077f47db44f3',1,'Spacy::Scalar::makeRealSpace()'],['../namespaceSpacy.html#a4f4b05902653c5fc8d6411142dcb352f',1,'Spacy::makeRealSpace()']]],
+  ['makescalarspace',['makeScalarSpace',['../group__ScalarGroup.html#gaddea78d9bf47f78eedce719c2776d2d4',1,'Spacy::Scalar::makeScalarSpace()'],['../namespaceSpacy.html#a3e51c65a8900b247c46021039c4c823a',1,'Spacy::makeScalarSpace()']]],
   ['maketcgsolver',['makeTCGSolver',['../namespaceSpacy.html#a8c2664d93c0a0049cd3849a3a0c973a8',1,'Spacy']]],
   ['maketrcgsolver',['makeTRCGSolver',['../namespaceSpacy.html#af214c1f5a7c2e48d16370a7a386ca8df',1,'Spacy']]],
   ['minimaldecrease',['minimalDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#aeeda8b1d9f177fe5dd532e42de09ab44',1,'Spacy::Mixin::DecreaseCondition']]],
