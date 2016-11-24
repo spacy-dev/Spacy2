@@ -26,7 +26,9 @@ aux_source_directory(Util/Base SRC_LIST)
 aux_source_directory(Util/Mixins SRC_LIST)
 aux_source_directory(Util/Exceptions SRC_LIST)
 
-file(GLOB_RECURSE HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hh)
+file(GLOB_RECURSE HEADERS_1 RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hh)
+file(GLOB_RECURSE HEADERS_2 RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
+set(HEADERS ${HEADERS_1} ${HEADERS_2})
 
 foreach(HEADER ${HEADERS})
   string(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})

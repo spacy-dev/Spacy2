@@ -1,13 +1,7 @@
 // enable logging
 #define SPACY_ENABLE_LOGGING
 
-#include <Spacy/linearOperator.hh>
-#include <Spacy/c1Operator.hh>
-#include <Spacy/Adapter/scalar.hh>
-#include <Spacy/Algorithm/Newton/newton.hh>
-#include <Spacy/Algorithm/Newton/terminationCriteria.hh>
-#include <Spacy/Util/cast.hh>
-#include <Spacy/Util/log.hh>
+#include <Spacy/spacy.h>
 
 int main()
 {
