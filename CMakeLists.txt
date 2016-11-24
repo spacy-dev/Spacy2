@@ -33,7 +33,7 @@ if(Dolfin)
   include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
 endif()
 
-find_package(Eigen3 CONFIG)
+find_package(Eigen3)
 if(Eigen3_FOUND)
   include_directories(${EIGEN3_INCLUDE_DIR})
 endif()
