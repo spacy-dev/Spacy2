@@ -39,6 +39,7 @@ namespace Spacy
         }
 
 
+
         Logger<double> logNu("nu.log");
         Logger<double> logTau("tau.log");
         Logger<double> logOmegaC("omegaC.log");
