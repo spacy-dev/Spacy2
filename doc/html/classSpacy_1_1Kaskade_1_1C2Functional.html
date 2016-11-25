@@ -193,8 +193,8 @@ const Spaces &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access boost::fusion::vector of pointers to spaces. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html#a37152b2b1413e611d229a61318b86768">onlyLowerTriangle</a> () const noexcept</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access onlyLowerTriangle flag.  <a href="#a37152b2b1413e611d229a61318b86768"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html#a3b69bdfbeec77616425096b435573094">setSolverCreator</a> (std::function&lt; LinearSolver(const <a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html">C2Functional</a> &amp;)&gt; f)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Change solver creator.  <a href="#a3b69bdfbeec77616425096b435573094"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html#ac9496fdef4f38eb466d5b5b58089be8b">setSolverCreator</a> (std::function&lt; LinearSolver(const Linearization &amp;)&gt; f)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Change solver creator.  <a href="#ac9496fdef4f38eb466d5b5b58089be8b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d3397deb9fa1ad85ed04e37a03b3aa6"></a><!-- doxytag: member="Spacy::Kaskade::C2Functional::domain" ref="a2d3397deb9fa1ad85ed04e37a03b3aa6" args="() const " -->
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1FunctionalBase.html#a2d3397deb9fa1ad85ed04e37a03b3aa6">domain</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br/></td></tr>
@@ -528,16 +528,16 @@ template&lt;class FunctionalDefinition&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3b69bdfbeec77616425096b435573094"></a><!-- doxytag: member="Spacy::Kaskade::C2Functional::setSolverCreator" ref="a3b69bdfbeec77616425096b435573094" args="(std::function&lt; LinearSolver(const C2Functional &amp;)&gt; f)" -->
+<a class="anchor" id="ac9496fdef4f38eb466d5b5b58089be8b"></a><!-- doxytag: member="Spacy::Kaskade::C2Functional::setSolverCreator" ref="ac9496fdef4f38eb466d5b5b58089be8b" args="(std::function&lt; LinearSolver(const Linearization &amp;)&gt; f)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class FunctionalDefinition&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html">Spacy::Kaskade::C2Functional</a>&lt; FunctionalDefinition &gt;::<a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html#a3b69bdfbeec77616425096b435573094">setSolverCreator</a> </td>
+          <td class="memname">void <a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html">Spacy::Kaskade::C2Functional</a>&lt; FunctionalDefinition &gt;::<a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html#ac9496fdef4f38eb466d5b5b58089be8b">setSolverCreator</a> </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; LinearSolver(const <a class="el" href="classSpacy_1_1Kaskade_1_1C2Functional.html">C2Functional</a>&lt; FunctionalDefinition &gt; &amp;)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; LinearSolver(const Linearization &amp;)&gt;&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -576,7 +576,7 @@ template&lt;class FunctionalDefinition&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 25 2016 18:25:17 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 25 2016 18:32:51 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
