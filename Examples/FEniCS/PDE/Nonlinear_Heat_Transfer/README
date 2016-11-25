@@ -1,4 +1,4 @@
-# Standard compilation and execution procedure (
+# Standard compilation and execution procedure
 
 Generate problem definition from .ufl file
  - ffc -l dolfin NonlinearHeat.ufl

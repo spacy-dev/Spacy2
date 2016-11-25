@@ -1,3 +1,5 @@
+# Standard compilation and execution procedure
+
 Generate problem definition from .ufl file
  - ffc -l dolfin NonlinearHeat.ufl
 
@@ -8,5 +10,14 @@ Compilation:
  - make
  
  Run example:
-  - ./nonlinear_heat
+  - ./run
   
+
+# Compile and execute with docker
+# Requires installation of docker.io (sudo apt-get install docker.io)
+
+Get fenics docker image (if you didn't get it yet)
+ - sudo docker pull quay.io/fenicsproject/stable:latest
+
+Run script in docker
+ - sudo docker run --rm -v instant-cache:/home/fenics/.instant -v ${pwd}:/home/fenics/shared -w /home/fenics/shared quay.io/fenicsproject/stable "./compile_and_run.sh"
