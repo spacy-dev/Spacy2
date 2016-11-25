@@ -66,7 +66,7 @@ namespace Spacy
     {
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
       unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
-      std::vector<std::shared_ptr< VectorSpace > > spaces( 1 + std::max( maxPrimalId , maxDualId ) );
+      std::vector<std::shared_ptr< VectorSpace > > spaces( 1 + std::max(maxPrimalId, maxDualId) );
       for(auto i : primalIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
