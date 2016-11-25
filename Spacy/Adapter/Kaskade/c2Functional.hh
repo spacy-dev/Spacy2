@@ -230,7 +230,7 @@ namespace Spacy
              * @brief Change solver creator.
              * @param f function/functor for the creation of a linear solver
              */
-            void setSolverCreator(std::function<LinearSolver(const C2Functional&)> f)
+            void setSolverCreator(std::function<LinearSolver(const Linearization&)> f)
             {
                 solverCreator_ = std::move(f);
             }
