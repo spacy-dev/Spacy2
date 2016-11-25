@@ -67,20 +67,23 @@ namespace Spacy
       unsigned maxPrimalId = primalIds.empty() ? 0 : *std::max_element(begin(primalIds),end(primalIds));
       unsigned maxDualId   = dualIds.empty()   ? 0 : *std::max_element(begin(dualIds),end(dualIds));
       std::vector<std::shared_ptr< VectorSpace > > spaces( 1 + std::max( maxPrimalId , maxDualId ) );
-      for(std::size_t i : primalIds)
+      for(auto i : primalIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = (*space)[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( subSpace,dofmap) );
+        spaces[i] =  std::make_shared<VectorSpace>( makeHilbertSpace(subSpace, std::move(dofmap)) );
       }
-      for(std::size_t i : dualIds)
+      for(auto i : dualIds)
       {
         std::unordered_map<std::size_t,std::size_t> dofmap;
         auto subSpace = (*space)[i]->collapse(dofmap);
-        spaces[i] =  std::make_shared< VectorSpace >( makeHilbertSpace( subSpace,dofmap ) );
+        spaces[i] =  std::make_shared<VectorSpace>( makeHilbertSpace(subSpace, std::move(dofmap)) );
       }
 
-      return ProductSpace::makeHilbertSpace( spaces , primalIds , dualIds );
+      if( dualIds.empty() )
+          return ProductSpace::makeHilbertSpace(spaces, std::move(primalIds));
+
+      return ProductSpace::makeHilbertSpace(spaces, std::move(primalIds), std::move(dualIds));
     }
   }
 }
