@@ -4,7 +4,7 @@ var searchData=
   ['variablesettocoefficients',['VariableSetToCoefficients',['../structSpacy_1_1Kaskade_1_1VariableSetToCoefficients.html',1,'Spacy::Kaskade']]],
   ['variablesettocoefficients_3c_2d1_20_3e',['VariableSetToCoefficients<-1 >',['../structSpacy_1_1Kaskade_1_1VariableSetToCoefficients_3-1_01_4.html',1,'Spacy::Kaskade']]],
   ['vector',['Vector',['../classSpacy_1_1Generic_1_1Vector.html',1,'Spacy::Generic']]],
-  ['vector',['Vector',['../classSpacy_1_1FEniCS_1_1Vector.html#ad73e826490b7b7be5588e9c0c9318cb5',1,'Spacy::FEniCS::Vector::Vector()'],['../classSpacy_1_1Generic_1_1Vector.html#a35622c4a7a184c2d6ff951bbde6a871c',1,'Spacy::Generic::Vector::Vector()'],['../classSpacy_1_1Kaskade_1_1Vector.html#a50fa434e8ca78baa9660e756eba6cfe9',1,'Spacy::Kaskade::Vector::Vector()'],['../classSpacy_1_1ProductSpace_1_1Vector.html#a1ca3c013b545d16d761bdba57a7d599b',1,'Spacy::ProductSpace::Vector::Vector()']]],
+  ['vector',['Vector',['../classSpacy_1_1FEniCS_1_1Vector.html#af6ea1ceb6c0b01cf10b3ab9caa6f1eda',1,'Spacy::FEniCS::Vector::Vector()'],['../classSpacy_1_1Generic_1_1Vector.html#a35622c4a7a184c2d6ff951bbde6a871c',1,'Spacy::Generic::Vector::Vector()'],['../classSpacy_1_1Kaskade_1_1Vector.html#a50fa434e8ca78baa9660e756eba6cfe9',1,'Spacy::Kaskade::Vector::Vector()'],['../classSpacy_1_1ProductSpace_1_1Vector.html#a1ca3c013b545d16d761bdba57a7d599b',1,'Spacy::ProductSpace::Vector::Vector()']]],
   ['vector',['Vector',['../classSpacy_1_1FEniCS_1_1Vector.html',1,'Spacy::FEniCS']]],
   ['vector',['Vector',['../classSpacy_1_1Vector.html',1,'Spacy']]],
   ['vector',['Vector',['../classSpacy_1_1Kaskade_1_1Vector.html',1,'Spacy::Kaskade']]],
