@@ -20,4 +20,4 @@ Get fenics docker image (if you didn't get it yet)
  - sudo docker pull quay.io/fenicsproject/stable:latest
 
 Run script in docker
- - sudo docker run --rm -v instant-cache:/home/fenics/.instant -v ${pwd}:/home/fenics/shared -w /home/fenics/shared quay.io/fenicsproject/stable "./compile_and_run.sh"
+ - sudo docker run --rm -v instant-cache:/home/fenics/.instant -v ${PWD}:/home/fenics/shared -w /home/fenics/shared quay.io/fenicsproject/stable "./compile_and_run.sh"
