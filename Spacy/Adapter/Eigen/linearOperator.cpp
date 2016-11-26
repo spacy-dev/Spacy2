@@ -27,6 +27,11 @@ namespace Spacy
       return x;
     }
 
+    Real LinearOperator::operator()(const LinearOperator&) const
+    {
+        return Real(0);
+    }
+
     LinearSolver LinearOperator::solver() const
     {
       return LinearSolver(get(),domain());

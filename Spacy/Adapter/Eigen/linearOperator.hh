@@ -38,6 +38,9 @@ namespace Spacy
       /// Compute \f$A(x)\f$
       ::Spacy::Vector operator()(const ::Spacy::Vector& dx) const;
 
+      /// Apply as dual element, currently not implemented.
+      Real operator()(const LinearOperator&) const;
+
       /// Access solver representing \f$A^{-1}\f$
       LinearSolver solver() const;
     };
