@@ -52,5 +52,35 @@ namespace Spacy
       std::function< ::Eigen::MatrixXd(const ::Eigen::VectorXd&) > derivative_;
       std::shared_ptr<VectorSpace> operatorSpace_;
     };
+
+    template <class FunGOperator, int variable_id = 0>
+    auto getFunGC1Operator(FunGOperator& A, const VectorSpace& domain, const VectorSpace& range)
+    {
+        auto value = [&A](const ::Eigen::VectorXd& x) -> ::Eigen::VectorXd
+        {
+            A.template update<variable_id>(x);
+            return A();
+        };
+
+        auto derivative = [&A](const ::Eigen::VectorXd& x) -> Eigen::MatrixXd
+        {
+            A.template update<variable_id>(x);
+
+            ::Eigen::MatrixXd M(x.rows(),x.rows());
+            M.fill(0);
+            auto y = x;
+            for(auto i=0; i<x.rows(); ++i)
+            {
+                y.fill(0);
+                y(i) = 1;
+                auto z = A.template d1<variable_id>(y);
+                for(auto j=0; j<x.rows(); ++j)
+                    M(i,j) = z(j);
+            }
+            return M;
+        };
+
+        return C1Operator( std::move(value), std::move(derivative), domain, range );
+    }
   }
 }
