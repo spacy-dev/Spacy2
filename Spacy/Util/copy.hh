@@ -3,10 +3,8 @@
 #include <functional>
 
 #include <Spacy/vector.hh>
-#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Spaces/ProductSpace/vector.hh>
-#include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
 
 namespace Spacy
 {
@@ -17,7 +15,6 @@ namespace Spacy
     if( !is<ProductSpace::Vector>(x) ) return;
 
     const auto& x_ = cast_ref<ProductSpace::Vector>(x);
-    const auto& creator_ = creator<ProductSpace::VectorCreator>(x.space());
 
     for(auto i=0u; i<x_.numberOfVariables(); ++i)
     {
@@ -32,7 +29,6 @@ namespace Spacy
     if( !is<ProductSpace::Vector>(y) ) return;
 
     auto& y_ = cast_ref<ProductSpace::Vector>(y);
-    const auto& creator_ = creator<ProductSpace::VectorCreator>(y.space());
 
     for(auto i=0u; i<y_.numberOfVariables(); ++i)
     {
