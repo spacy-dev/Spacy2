@@ -47,8 +47,8 @@ int main()
     auto dummy = std::make_shared<Function>(V);
     auto y_ref = std::make_shared<Source>();
     auto alpha = std::make_shared<Constant>(1e-2);
-    auto c = std::make_shared<Constant>(1);
-    auto d = std::make_shared<Constant>(0);
+    auto c = std::make_shared<Constant>(1e-1);
+    auto d = std::make_shared<Constant>(1e1);
     L.y0 = y_ref;
     L.alpha = alpha;
     L.c = c;

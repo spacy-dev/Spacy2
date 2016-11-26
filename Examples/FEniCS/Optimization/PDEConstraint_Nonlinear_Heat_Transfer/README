@@ -1,6 +1,9 @@
+# Standard compilation and execution procedure
+
 Generate problem definition from .ufl file
  - ffc -l dolfin LagrangeFunctional.ufl
  - ffc -l dolfin NormalStepFunctional.ufl
+
 
 Compilation:
  - mkdir build
@@ -9,5 +12,14 @@ Compilation:
  - make
  
  Run example:
-  - ./optimal_control
+  - ./run
   
+
+# Compile and execute with docker
+# Requires installation of docker.io (sudo apt-get install docker.io)
+
+Get fenics docker image (if you didn't get it yet)
+ - sudo docker pull quay.io/fenicsproject/stable:latest
+
+Run script in docker
+ - sudo docker run --rm -v instant-cache:/home/fenics/.instant -v ${PWD}:/home/fenics/shared -w /home/fenics/shared quay.io/fenicsproject/stable "./compile_and_run.sh"
