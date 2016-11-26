@@ -1,10 +1,7 @@
 #include <dolfin.h>
 
-#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/spacy.h>
 #include <Spacy/Adapter/fenics.hh>
-#include <Spacy/Algorithm/Newton/newton.hh>
-#include <Spacy/inducedScalarProduct.hh>
-#include <Spacy/c1Operator.hh>
 
 #include "NonlinearHeat.h"
 
@@ -51,7 +48,6 @@ int main()
   auto c = std::make_shared<Constant>(1e-1);
   auto d = std::make_shared<Constant>(1e2);
   auto f = std::make_shared<Source>();
-  auto u = std::make_shared<Function>(V);
   L.f = f;
   L.c = c;
   L.d = d;
@@ -79,15 +75,5 @@ int main()
 //  auto x = Spacy::contravariantNewton(A,p);
 //  auto x = Spacy::localNewton(A,p);
   
-  FEniCS::copy(x,*u);
-
-  // Save solution in VTK format
-  File file("poisson.pvd");
-  file << *u;
-
-  // Plot solution
-  plot(u);
-  interactive();
-
-  return 0;
+  FEniCS::writeVTK(x, "solution");
 }
