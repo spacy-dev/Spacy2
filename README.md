@@ -25,6 +25,10 @@ Depending on your use-case the following dependencies may be required:
   - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) for developing algorithms with Kaskade 7 (enable with cmake .. -DKaskade=ON),
   - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with cmake .. -DDolfin=ON).
 
+Currently there are integration tests for [Eigen](//http://eigen.tuxfamily.org/)  and [FEniCS](https://fenicsproject.org), running in a separate CI:
+[![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests.svg?branch=master)]
+(https://travis-ci.org/spacy-dev/Spacy-Integration-Tests/builds)
+
 ### Installation
 Go to download folder, i.e.
   - cd Spacy
