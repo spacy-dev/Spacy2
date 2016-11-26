@@ -30,7 +30,7 @@ namespace Spacy
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from \ref VectorAnchor "::Spacy::Vector" to dolfin::GenericVector.
+     * @brief Copy from ::Spacy::Vector to dolfin::GenericVector.
      *
      * Does consider product space structures.
      * @see ProductSpace
@@ -39,7 +39,7 @@ namespace Spacy
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from \ref VectorAnchor "::Spacy::Vector" to dolfin::Function.
+     * @brief Copy from ::Spacy::Vector to dolfin::Function.
      *
      * Does consider product space structures.
      * @see ProductSpace
@@ -48,7 +48,7 @@ namespace Spacy
 
     /**
      * @ingroup FenicsGroup
-     * @brief Copy from dolfin::GenericVector to \ref VectorAnchor "::Spacy::Vector".
+     * @brief Copy from dolfin::GenericVector to ::Spacy::Vector.
      *
      * Does consider product space structures.
      * @see ProductSpaceGroup
@@ -56,7 +56,7 @@ namespace Spacy
     void copy(const dolfin::GenericVector& y, ::Spacy::Vector& x);
 
     /**
-     * @brief Copy from dolfin::Function to \ref VectorAnchor "::Spacy::Vector".
+     * @brief Copy from dolfin::Function to ::Spacy::Vector.
      *
      * Does consider product space structures.
      * @see ProductSpaceGroup

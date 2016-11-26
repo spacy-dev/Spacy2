@@ -73,6 +73,14 @@ namespace Spacy
        */
       unsigned idMap(unsigned k) const;
 
+      /**
+       * @brief Maps local space index to global space index.
+       * @param k local space index with respect to product space
+       * @return global space index
+       */
+      unsigned inverseIdMap(unsigned k) const;
+
+
       /// Check if product space contains a subspace with global index k.
       bool hasId(unsigned k) const;
 

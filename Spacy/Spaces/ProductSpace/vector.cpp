@@ -18,9 +18,10 @@ namespace Spacy
             : VectorBase(space)
         {
             const auto& spaces = Spacy::creator<VectorCreator>(space).subSpaces();
+            components_.reserve(spaces.size());
             for (auto i=0u; i<spaces.size(); ++i)
             {
-                components_.push_back( zero(*spaces[i]) );
+                components_.emplace_back( zero(*spaces[i]) );
                 assert(components_.back());
             }
             assert(components_.size() == spaces.size());

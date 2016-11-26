@@ -7,6 +7,8 @@
 #include "vector.hh"
 #include "scalarProduct.hh"
 
+#include <cassert>
+
 namespace Spacy
 {
     namespace ProductSpace
@@ -82,6 +84,15 @@ namespace Spacy
         {
             return idMap_.find(k)->second;
         }
+
+        unsigned VectorCreator::inverseIdMap(unsigned k) const
+        {
+            auto found = std::find_if(begin(idMap_), end(idMap_),
+                                      [k](const auto& entry){ return entry.second == k; });
+            assert(found != end(idMap_));
+            return found->first;
+        }
+
 
         bool VectorCreator::hasId(unsigned k) const
         {

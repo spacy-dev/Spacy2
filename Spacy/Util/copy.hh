@@ -3,7 +3,10 @@
 #include <functional>
 
 #include <Spacy/vector.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/cast.hh>
 #include <Spacy/Spaces/ProductSpace/vector.hh>
+#include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
 
 namespace Spacy
 {
@@ -14,11 +17,12 @@ namespace Spacy
     if( !is<ProductSpace::Vector>(x) ) return;
 
     const auto& x_ = cast_ref<ProductSpace::Vector>(x);
+    const auto& creator_ = creator<ProductSpace::VectorCreator>(x.space());
 
     for(auto i=0u; i<x_.numberOfVariables(); ++i)
     {
-      copyTargetIfConsistent(x_.component(i),y);
-      copyProductSpaceVectorIfConsistent(x_.component(i),y,copyTargetIfConsistent);
+      copyTargetIfConsistent(x_.component(creator_.idMap(i)),y);
+      copyProductSpaceVectorIfConsistent(x_.component(creator_.idMap(i)),y,copyTargetIfConsistent);
     }
   }
 
@@ -28,11 +32,12 @@ namespace Spacy
     if( !is<ProductSpace::Vector>(y) ) return;
 
     auto& y_ = cast_ref<ProductSpace::Vector>(y);
+    const auto& creator_ = creator<ProductSpace::VectorCreator>(y.space());
 
     for(auto i=0u; i<y_.numberOfVariables(); ++i)
     {
-      copyTargetIfConsistent(x,y_.component(i));
-      copyProductSpaceVectorIfConsistent(x,y_.component(i),copyTargetIfConsistent);
+      copyTargetIfConsistent(x,y_.component(creator_.inverseIdMap(i)));
+      copyProductSpaceVectorIfConsistent(x,y_.component(creator_.inverseIdMap(i)),copyTargetIfConsistent);
     }
   }
   /// @endcond
