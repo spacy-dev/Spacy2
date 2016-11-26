@@ -15,7 +15,7 @@
 \item 
 \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a73b6243d0ba00d019319e66bb06784dd}{\-Vector\-Creator} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $>$ $>$ \&spaces)
 \begin{DoxyCompactList}\small\item\em \-Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}{\-Vector\-Creator} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $>$ $>$ \&spaces, const std\-::vector$<$ unsigned $>$ \&global\-Ids)
+\hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a82405d256a2689cb4984af1360cb3000}{\-Vector\-Creator} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $>$ $>$ \&spaces, const std\-::vector$<$ unsigned $>$ \&sub\-Space\-Ids)
 \begin{DoxyCompactList}\small\item\em \-Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}{const std\-::vector\*
 $<$ std\-::shared\-\_\-ptr$<$ \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $>$ $>$ \& \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}{sub\-Spaces} () const }\label{classSpacy_1_1ProductSpace_1_1VectorCreator_aa46303313c37f29cdfe54479d85cfe87}
@@ -58,14 +58,14 @@ unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_abfd2a000f770f05
 {\em spaces} & vector of spaces $\{X_k\}_k$ \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}{\index{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator@{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}!\-Vector\-Creator@{\-Vector\-Creator}}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_a82405d256a2689cb4984af1360cb3000}{\index{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator@{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}!\-Vector\-Creator@{\-Vector\-Creator}}
 \index{\-Vector\-Creator@{\-Vector\-Creator}!Spacy::ProductSpace::VectorCreator@{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}}
 \subsubsection[{\-Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Spacy\-::\-Product\-Space\-::\-Vector\-Creator\-::\-Vector\-Creator} (
 \begin{DoxyParamCaption}
 \item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ {\bf \-Vector\-Space} $>$ $>$ \&}]{spaces, }
-\item[{const std\-::vector$<$ unsigned $>$ \&}]{global\-Ids}
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{sub\-Space\-Ids}
 \end{DoxyParamCaption}
-)}}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a63b039f3e2872a0488223121ed5eceb9}
+)}}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_a82405d256a2689cb4984af1360cb3000}
 
 
 \-Construct product space $ X = \{ X_0 , X_1 , \ldots , X_n \} $. 
@@ -74,7 +74,7 @@ unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_abfd2a000f770f05
 \begin{DoxyParams}{\-Parameters}
 {\em spaces} & vector of spaces $\{X_k\}_k$ \\
 \hline
-{\em id\-Map} & map relating global space indices with the local indices $1,\ldots,n$ \\
+{\em sub\-Space\-Ids} & vector of subspace indices \\
 \hline
 \end{DoxyParams}
 

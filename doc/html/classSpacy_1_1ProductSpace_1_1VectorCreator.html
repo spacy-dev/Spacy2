@@ -125,8 +125,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#a73b6243d0ba00d019319e66bb06784dd">VectorCreator</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct product space \( X = \{ X_0 , X_1 , \ldots , X_n \} \).  <a href="#a73b6243d0ba00d019319e66bb06784dd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#a63b039f3e2872a0488223121ed5eceb9">VectorCreator</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;globalIds)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct product space \( X = \{ X_0 , X_1 , \ldots , X_n \} \).  <a href="#a63b039f3e2872a0488223121ed5eceb9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#a82405d256a2689cb4984af1360cb3000">VectorCreator</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;subSpaceIds)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct product space \( X = \{ X_0 , X_1 , \ldots , X_n \} \).  <a href="#a82405d256a2689cb4984af1360cb3000"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa46303313c37f29cdfe54479d85cfe87"></a><!-- doxytag: member="Spacy::ProductSpace::VectorCreator::subSpaces" ref="aa46303313c37f29cdfe54479d85cfe87" args="() const " -->
 const std::vector<br class="typebreak"/>
 &lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa46303313c37f29cdfe54479d85cfe87">subSpaces</a> () const </td></tr>
@@ -174,7 +174,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="a63b039f3e2872a0488223121ed5eceb9"></a><!-- doxytag: member="Spacy::ProductSpace::VectorCreator::VectorCreator" ref="a63b039f3e2872a0488223121ed5eceb9" args="(const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;globalIds)" -->
+<a class="anchor" id="a82405d256a2689cb4984af1360cb3000"></a><!-- doxytag: member="Spacy::ProductSpace::VectorCreator::VectorCreator" ref="a82405d256a2689cb4984af1360cb3000" args="(const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;subSpaceIds)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -188,7 +188,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
-          <td class="paramname"><em>globalIds</em>&#160;</td>
+          <td class="paramname"><em>subSpaceIds</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -203,7 +203,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">spaces</td><td>vector of spaces \(\{X_k\}_k\) </td></tr>
-    <tr><td class="paramname">idMap</td><td>map relating global space indices with the local indices \(1,\ldots,n\) </td></tr>
+    <tr><td class="paramname">subSpaceIds</td><td>vector of subspace indices </td></tr>
   </table>
   </dd>
 </dl>
@@ -362,7 +362,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2016 12:47:16 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2016 17:41:38 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
