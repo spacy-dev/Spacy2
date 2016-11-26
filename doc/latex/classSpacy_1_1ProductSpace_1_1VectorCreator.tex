@@ -29,6 +29,8 @@ const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{class
 \begin{DoxyCompactList}\small\item\em \-Generate product space vector. \end{DoxyCompactList}\item 
 unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_a9995b95ffd41f3a5281d8db28e95e2d8}{id\-Map} (unsigned k) const 
 \begin{DoxyCompactList}\small\item\em \-Maps global space index to local space index in the product space. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_abfd2a000f770f0511dc864c43233a534}{inverse\-Id\-Map} (unsigned k) const 
+\begin{DoxyCompactList}\small\item\em \-Maps local space index to global space index. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}{bool \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}{has\-Id} (unsigned k) const }\label{classSpacy_1_1ProductSpace_1_1VectorCreator_af548ea11a6e7f6a5c0cb78bfa7895f4a}
 
 \begin{DoxyCompactList}\small\item\em \-Check if product space contains a subspace with global index k. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -153,6 +155,25 @@ vector associated with space
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
 local space index with respect to product space 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1ProductSpace_1_1VectorCreator_abfd2a000f770f0511dc864c43233a534}{\index{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator@{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}!inverse\-Id\-Map@{inverse\-Id\-Map}}
+\index{inverse\-Id\-Map@{inverse\-Id\-Map}!Spacy::ProductSpace::VectorCreator@{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}}
+\subsubsection[{inverse\-Id\-Map}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-Spacy\-::\-Product\-Space\-::\-Vector\-Creator\-::inverse\-Id\-Map} (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+) const}}\label{classSpacy_1_1ProductSpace_1_1VectorCreator_abfd2a000f770f0511dc864c43233a534}
+
+
+\-Maps local space index to global space index. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em k} & local space index with respect to product space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+global space index 
 \end{DoxyReturn}
 
 

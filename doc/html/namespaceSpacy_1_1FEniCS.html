@@ -161,13 +161,13 @@ template&lt;class T , class Arg &gt; </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce">copyCoefficients</a> (const dolfin::Form &amp;F, dolfin::Form &amp;G)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy coefficients of F to G.  <a href="group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0">copy</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x, dolfin::GenericVector &amp;y)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from ::Spacy::Vector to dolfin::GenericVector.  <a href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> to dolfin::GenericVector.  <a href="group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#ga28fb1ebae29e07ec0256bb2331599aa7">copy</a> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x, dolfin::Function &amp;y)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from ::Spacy::Vector to dolfin::Function.  <a href="group__FenicsGroup.html#ga28fb1ebae29e07ec0256bb2331599aa7"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> to dolfin::Function.  <a href="group__FenicsGroup.html#ga28fb1ebae29e07ec0256bb2331599aa7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#ga61c5e45dbb789c155fbf86f8ec288f17">copy</a> (const dolfin::GenericVector &amp;y,::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from dolfin::GenericVector to ::Spacy::Vector.  <a href="group__FenicsGroup.html#ga61c5e45dbb789c155fbf86f8ec288f17"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from dolfin::GenericVector to <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>.  <a href="group__FenicsGroup.html#ga61c5e45dbb789c155fbf86f8ec288f17"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1FEniCS.html#a7c4519bd0cbdc4e72b71f273bade591e">copy</a> (const dolfin::Function &amp;y,::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from dolfin::Function to ::Spacy::Vector.  <a href="#a7c4519bd0cbdc4e72b71f273bade591e"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from dolfin::Function to <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>.  <a href="#a7c4519bd0cbdc4e72b71f273bade591e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#ga8b67cb3d0188d2398625595b79e2fa6a">makeHilbertSpace</a> (std::shared_ptr&lt; dolfin::FunctionSpace &gt; space)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a single vector space from dolfin::FunctionSpace.  <a href="group__FenicsGroup.html#ga8b67cb3d0188d2398625595b79e2fa6a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__FenicsGroup.html#ga135620ce224178541cae896577f438dc">makeHilbertSpace</a> (std::shared_ptr&lt; dolfin::FunctionSpace &gt; space, const std::unordered_map&lt; std::size_t, std::size_t &gt; &amp;dofmap)</td></tr>
@@ -496,7 +496,7 @@ template&lt;class F , class DF , class DDF &gt; </div>
 </div>
 <div class="memdoc">
 
-<p>Copy from dolfin::Function to ::Spacy::Vector. </p>
+<p>Copy from dolfin::Function to <a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>. </p>
 <p>Does consider product space structures. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="group__ProductSpaceGroup.html" title="A product space that supports distinction between primal and dual variables.">Product Space</a> </dd></dl>
 
@@ -520,7 +520,7 @@ template&lt;class F , class DF , class DDF &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2016 09:43:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2016 12:47:16 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

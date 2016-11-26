@@ -139,6 +139,8 @@ const std::vector<br class="typebreak"/>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate product space vector.  <a href="#a733adf12a3b60abc8b93b8a1476c5e8a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#a9995b95ffd41f3a5281d8db28e95e2d8">idMap</a> (unsigned k) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps global space index to local space index in the product space.  <a href="#a9995b95ffd41f3a5281d8db28e95e2d8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#abfd2a000f770f0511dc864c43233a534">inverseIdMap</a> (unsigned k) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps local space index to global space index.  <a href="#abfd2a000f770f0511dc864c43233a534"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af548ea11a6e7f6a5c0cb78bfa7895f4a"></a><!-- doxytag: member="Spacy::ProductSpace::VectorCreator::hasId" ref="af548ea11a6e7f6a5c0cb78bfa7895f4a" args="(unsigned k) const " -->
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#af548ea11a6e7f6a5c0cb78bfa7895f4a">hasId</a> (unsigned k) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if product space contains a subspace with global index k. <br/></td></tr>
@@ -313,6 +315,32 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<a class="anchor" id="abfd2a000f770f0511dc864c43233a534"></a><!-- doxytag: member="Spacy::ProductSpace::VectorCreator::inverseIdMap" ref="abfd2a000f770f0511dc864c43233a534" args="(unsigned k) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classSpacy_1_1ProductSpace_1_1VectorCreator.html#abfd2a000f770f0511dc864c43233a534">Spacy::ProductSpace::VectorCreator::inverseIdMap</a> </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>k</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Maps local space index to global space index. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td>local space index with respect to product space </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>global space index </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/Spaces/ProductSpace/<a class="el" href="Spaces_2ProductSpace_2vectorSpace_8hh_source.html">vectorSpace.hh</a></li>
 </ul>
@@ -334,7 +362,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2016 09:43:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 26 2016 12:47:16 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
