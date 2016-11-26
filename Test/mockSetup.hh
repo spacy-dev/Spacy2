@@ -48,10 +48,10 @@ inline auto createMockHilbertSpace()
 }
 
 
-inline auto firstGlobalId(){ return 2u; }
-inline auto secondGlobalId(){ return 1u; }
+inline auto firstGlobalId(){ return 1u; }
+inline auto secondGlobalId(){ return 0u; }
 inline auto thirdGlobalId(){ return 5u; }
-inline auto notGlobalId(){ return 0u; }
+inline auto notGlobalId(){ return 42u; }
 
 
 inline auto createGlobalIds()
@@ -104,7 +104,7 @@ inline auto makePrimalDualProductSpaceCreatorWithSpaceIndices()
     using namespace Spacy;
 
     auto primalSubSpace = std::make_shared<VectorSpace>(std::get<0>(makeProductHilbertSpaceWithMap()));
-    auto dualSubSpace = std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace({std::make_shared<VectorSpace>(createMockHilbertSpace())},{thirdGlobalId()}) );
+    auto dualSubSpace = std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace({std::make_shared<VectorSpace>(createMockHilbertSpace())}) );
     auto creator = ProductSpace::VectorCreator( { primalSubSpace, dualSubSpace } );
     return std::make_tuple( creator ,
                             Spacy::creator<ProductSpace::VectorCreator>(*primalSubSpace).subSpace(0).index() ,
@@ -119,7 +119,7 @@ inline auto makePrimalDualSpaceCreatorWithSpaceIndices()
     auto primalSubSpace = std::make_shared<VectorSpace>(createMockHilbertSpace());
     auto dualSubSpace = std::make_shared<VectorSpace>(createMockHilbertSpace());
     auto creator = ProductSpace::VectorCreator( { primalSubSpace, dualSubSpace } );
-    return std::make_tuple( creator ,
+    return std::make_tuple( creator,
                             primalSubSpace->index(),
                             dualSubSpace->index() );
 }
