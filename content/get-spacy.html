@@ -25,6 +25,25 @@ adjust the buffer size for small buffer optimization you need:
 <li>libclang with python-bindings</li>
 </ul>
 </p>
+<p>
+    The core of Spacy does not require external dependencies. Depending on your setup the following dependencies may be required:
+    <ul>
+        <li>
+            <a href='https://github.com/google/googletest'>googletest</a>
+            for computing the tests (enable with '-DBuildTest=ON'=
+        </li>
+        <li>
+            <a href='http://eigen.tuxfamily.org'>Eigen</a> for enabling finite-dimensional problem descriptions using 
+            namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen)
+        </li>
+        <li>
+            <a href='https://www.zib.de/projects/kaskade-7-finite-element-toolbox'>Kaskade7</a> (enable with '-DKaskade=ON'
+        </li>
+        <li>
+            <a href='https://fenicsproject.org'>FEniCS</a> (enable with '-DDolfin=ON')
+        </li>
+    </ul>
+</p>
 <div class="separator"></div>
 
 <h1>Installation<br></h1>
@@ -34,7 +53,7 @@ adjust the buffer size for small buffer optimization you need:
     <li>cd spacy/root/dir</li>
     <li>mkdir build</li>
     <li>cd build</li>
-    <li>cmake ..</li>
+    <li>cmake .. (-DBuildTest=ON -DDolfin=ON -DKaskade=ON -DCoverage=ON)</li>
     <li>make</li>
 </ul>
 </div>
