@@ -21,8 +21,8 @@ namespace Spacy
 
     for(auto i=0u; i<x_.numberOfVariables(); ++i)
     {
-      copyTargetIfConsistent(x_.component(creator_.idMap(i)),y);
-      copyProductSpaceVectorIfConsistent(x_.component(creator_.idMap(i)),y,copyTargetIfConsistent);
+      copyTargetIfConsistent(x_.component(i),y);
+      copyProductSpaceVectorIfConsistent(x_.component(i),y,copyTargetIfConsistent);
     }
   }
 
@@ -36,8 +36,8 @@ namespace Spacy
 
     for(auto i=0u; i<y_.numberOfVariables(); ++i)
     {
-      copyTargetIfConsistent(x,y_.component(creator_.inverseIdMap(i)));
-      copyProductSpaceVectorIfConsistent(x,y_.component(creator_.inverseIdMap(i)),copyTargetIfConsistent);
+      copyTargetIfConsistent(x,y_.component(i));
+      copyProductSpaceVectorIfConsistent(x,y_.component(i),copyTargetIfConsistent);
     }
   }
   /// @endcond

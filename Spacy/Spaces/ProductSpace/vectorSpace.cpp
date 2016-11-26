@@ -7,6 +7,7 @@
 #include "vector.hh"
 #include "scalarProduct.hh"
 
+#include <algorithm>
 #include <cassert>
 
 namespace Spacy
@@ -58,9 +59,9 @@ namespace Spacy
         {}
 
         VectorCreator::VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
-                                     const std::vector<unsigned>& globalIds)
+                                     const std::vector<unsigned>& subSpaceIds)
             : spaces_(spaces),
-              idMap_( createMap(globalIds) )
+              idMap_( createMap(subSpaceIds) )
         {}
 
 
@@ -114,15 +115,15 @@ namespace Spacy
         VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                      const std::vector<unsigned>& globalIds)
         {
-            return ::Spacy::makeHilbertSpace( VectorCreator{ spaces , globalIds } , ScalarProduct{} );
+            return ::Spacy::makeHilbertSpace( VectorCreator{ extractSubSpaces(spaces,globalIds) , globalIds } , ScalarProduct{} );
         }
 
         VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                      const std::vector<unsigned>& primalSubSpaceIds,
                                      const std::vector<unsigned>& dualSubSpaceIds)
         {
-            return ::Spacy::makeHilbertSpace( VectorCreator( { std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace( extractSubSpaces(spaces,primalSubSpaceIds) , primalSubSpaceIds ) ) ,
-                                                               std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace( extractSubSpaces(spaces,dualSubSpaceIds) , dualSubSpaceIds ) ) } ) ,
+            return ::Spacy::makeHilbertSpace( VectorCreator( { std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace( spaces, primalSubSpaceIds ) ) ,
+                                                               std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace( spaces, dualSubSpaceIds ) ) } ) ,
                                               ScalarProduct{} );
         }
     }

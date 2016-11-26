@@ -37,10 +37,10 @@ namespace Spacy
       /**
        * @brief Construct product space \f$ X = \{ X_0 , X_1 , \ldots , X_n \} \f$.
        * @param spaces vector of spaces \f$\{X_k\}_k\f$
-       * @param idMap map relating global space indices with the local indices \f$1,\ldots,n\f$
+       * @param subSpaceIds vector of subspace indices
        */
       VectorCreator(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
-                    const std::vector<unsigned>& globalIds);
+                    const std::vector<unsigned>& subSpaceIds);
 
       /// Access sub-spaces.
       const std::vector<std::shared_ptr<VectorSpace> >& subSpaces() const;

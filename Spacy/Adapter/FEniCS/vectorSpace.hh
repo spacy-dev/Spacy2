@@ -64,9 +64,7 @@ namespace Spacy
     private:
       using map = std::unordered_map<std::size_t,std::size_t>;
       map dofmap_ = map{};
-      // the following line does not compile, why?
-      //std::unordered_map<std::size_t,std::size_t> dofmap_ = std::unordered_map<std::size_t,std::size_t>{};
-      std::vector<std::size_t> inverseDofmap_ = {};
+      map inverse_dofmap_ = map{};
     };
 
     /**

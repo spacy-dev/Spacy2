@@ -24,7 +24,7 @@ namespace Spacy
       for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space().creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(x_.space());
-        y.setitem(creator.inverseDofmap(j),x_.get().getitem(j));
+        y.setitem(creator.dofmap(j),x_.get().getitem(j));
       }
       y.apply("insert");
     }
@@ -37,7 +37,7 @@ namespace Spacy
       for(auto j=0u; j<cast_ref<FEniCS::VectorCreator>(x_.space().creator()).size(); ++j)
       {
         const auto& creator = Spacy::creator<FEniCS::VectorCreator>(x_.space());
-        x_.get().setitem( j , y.getitem( creator.inverseDofmap(j) ) );
+        x_.get().setitem( j, y.getitem( creator.dofmap(j) ) );
       }
       x_.get().apply("insert");
     }
