@@ -9,42 +9,44 @@
 
 namespace Spacy
 {
-  /// @cond
-  class Real;
-  class VectorSpace;
-  /// @endcond
+    /// @cond
+    class Real;
+    class VectorSpace;
+    /// @endcond
 
-  namespace FEniCS
-  {
-    /**
-     * @ingroup FenicsGroup VectorSpaceGroup
-     * @brief %Vector implementation for %FEniCS (single space).
-     */
-    class Vector :
-        public VectorBase ,
-        public AddArithmeticOperators<Vector>
+    namespace FEniCS
     {
-    public:
-      /// Construct zero vector \f$x=0\f$ from underlying vector space.
-      explicit Vector(const VectorSpace& space);
+        /**
+         * @ingroup FenicsGroup VectorSpaceGroup
+         * @brief %Vector implementation for %FEniCS (single space).
+         */
+        class Vector :
+                public VectorBase ,
+                public AddArithmeticOperators<Vector>
+        {
+        public:
+            /// Construct zero vector \f$x=0\f$ from underlying vector space.
+            explicit Vector(const VectorSpace& V);
 
-      /// Assign from dolfin::Function.
-      Vector& operator=(const dolfin::Function& v);
+            Vector(const dolfin::Function& v, const VectorSpace& V);
 
-//      Vector& axpy(double a, const AbstractVector& y);
+            /// Assign from dolfin::Function.
+            Vector& operator=(const dolfin::Function& v);
 
-      /// Access reference to underlying coefficient vector.
-      dolfin::GenericVector& get();
+            //      Vector& axpy(double a, const AbstractVector& y);
 
-      /// Access reference to underlying coefficient vector.
-      const dolfin::GenericVector& get() const;
+            /// Access reference to underlying coefficient vector.
+            dolfin::GenericVector& get();
 
-      /// Apply as dual element.
-      Real operator()(const Vector& y) const;
+            /// Access reference to underlying coefficient vector.
+            const dolfin::GenericVector& get() const;
 
-    private:
-      friend void writeVTK(const Vector&,const std::string&);
-      dolfin::Function v_;
-    };
-  }
+            /// Apply as dual element.
+            Real operator()(const Vector& y) const;
+
+        private:
+            friend void writeVTK(const Vector&,const std::string&);
+            dolfin::Function v_;
+        };
+    }
 }

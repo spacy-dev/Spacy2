@@ -21,10 +21,14 @@ namespace Spacy
 
     namespace FEniCS
     {
-        Vector::Vector(const VectorSpace& space)
-            : VectorBase(space),
-              v_( get_creator(space) )
-//              v_( creator<VectorCreator>(space).get() )
+        Vector::Vector(const VectorSpace& V)
+            : VectorBase(V),
+              v_( get_creator(V) )
+        {}
+
+        Vector::Vector(const dolfin::Function& v, const VectorSpace& V)
+            : VectorBase(V),
+              v_(v)
         {}
 
         Vector& Vector::operator=(const dolfin::Function& v)
