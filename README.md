@@ -21,11 +21,14 @@ Push to gerrithub via (with my-branch=master,...)
 The core of Spacy does not require external dependencies.
 Depending on your use-case the following dependencies may be required:
   - [googletest](https://github.com/google/googletest) for compiling the tests (enable with cmake .. -DBuildTest=ON),
-  - [Eigen](//http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions using namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen),
+  - [Eigen](http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions using namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen),
+  - [FunG](https://lubkoll.github.io/FunG) an automatic-differentiation library that can be used for the definition of integrands for [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) and for the generation of finite-dimensional problems with [Eigen](http://eigen.tuxfamily.org/),
   - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) for developing algorithms with Kaskade 7 (enable with cmake .. -DKaskade=ON),
   - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with cmake .. -DDolfin=ON).
 
-Currently there are integration tests for [Eigen](//http://eigen.tuxfamily.org/)  and [FEniCS](https://fenicsproject.org), running in a separate CI:
+Currently there are integration tests for [Eigen](http://eigen.tuxfamily.org/), [FEniCS](https://fenicsproject.org) and 
+[FunG](https://lubkoll.github.io/FunG), running in a separate CI:
+
 [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests.svg?branch=master)]
 (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests/builds)
 
