@@ -2,7 +2,7 @@
 
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 
 namespace Spacy
 {

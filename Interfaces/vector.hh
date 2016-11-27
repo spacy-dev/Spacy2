@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
 #include <Spacy/Util/Mixins/get.hh>

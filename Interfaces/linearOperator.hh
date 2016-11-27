@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spacy/Spaces/RealSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/linearSolver.hh>

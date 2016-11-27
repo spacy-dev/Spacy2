@@ -75,7 +75,7 @@ namespace Spacy
                 y(i) = 1;
                 auto z = A.template d1<variable_id>(y);
                 for(auto j=0; j<x.rows(); ++j)
-                    M(i,j) = z(j);
+                    M(j,i) = z(j);
             }
             return M;
         };
