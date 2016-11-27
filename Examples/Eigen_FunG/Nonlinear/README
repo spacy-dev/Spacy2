@@ -1,0 +1,10 @@
+### A simple linear finite-dimensional example generated with FunG and Eigen
+
+### Compilation:
+ - mkdir build
+ - cd build
+ - cmake ..
+ - make
+ 
+### Run example:
+  - ./run
