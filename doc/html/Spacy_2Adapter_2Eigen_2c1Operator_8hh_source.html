@@ -146,7 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00075"></a>00075                 y(i) = 1;
 <a name="l00076"></a>00076                 <span class="keyword">auto</span> z = A.template d1&lt;variable_id&gt;(y);
 <a name="l00077"></a>00077                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> j=0; j&lt;x.rows(); ++j)
-<a name="l00078"></a>00078                     M(i,j) = z(j);
+<a name="l00078"></a>00078                     M(j,i) = z(j);
 <a name="l00079"></a>00079             }
 <a name="l00080"></a>00080             <span class="keywordflow">return</span> M;
 <a name="l00081"></a>00081         };
@@ -173,7 +173,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 26 2016 21:21:07 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 27 2016 11:28:43 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
