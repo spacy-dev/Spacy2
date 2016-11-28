@@ -72,7 +72,7 @@ namespace Spacy
         {};
 
         template <class T>
-        struct HasMemFn_get< T, void_t< TryMemFn_get<T> > >
+        struct HasMemFn_get< T, voider< TryMemFn_get<T> > >
                 : std::integral_constant<bool, std::is_arithmetic< std::decay_t<TryMemFn_get<T>> >::value ||
                                                HasMemFn_get< std::decay_t<TryMemFn_get<T>> >::value>
         {};

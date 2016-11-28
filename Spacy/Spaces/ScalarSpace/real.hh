@@ -5,10 +5,6 @@
 
 namespace Spacy
 {
-    /// @cond
-    class Vector;
-    /// @endcond
-
     /** @addtogroup ScalarGroup @{ */
 
     /// %Real number.
@@ -70,17 +66,8 @@ namespace Spacy
     Real cbrt(Real x);
 
     Real operator*(const Mixin::Get<Real>& x, Real y);
-    Real operator*(Real x, const Mixin::Get<Real>& y);
-//    Real operator*(const Mixin::Get<Real>& x, const Mixin::Get<Real>& y);
 
-//    bool operator<(const Mixin::Get<Real>& x, const Real& y);
-//    bool operator<(const Real& x, const Mixin::Get<Real>& y);
-//    bool operator>(const Mixin::Get<Real>& x, const Real& y);
-//    bool operator>(const Real& x, const Mixin::Get<Real>& y);
-//    bool operator<=(const Mixin::Get<Real>& x, const Real& y);
-//    bool operator<=(const Real& x, const Mixin::Get<Real>& y);
-//    bool operator>=(const Mixin::Get<Real>& x, const Real& y);
-//    bool operator>=(const Real& x, const Mixin::Get<Real>& y);
+    Real operator*(Real x, const Mixin::Get<Real>& y);
 
     template <class T,
             std::enable_if_t<std::is_base_of< Mixin::Get<Real>, std::decay_t<T> >::value>* = nullptr>
@@ -128,6 +115,5 @@ namespace Spacy
     {
         return x / get(std::forward<T>(y));
     }
-
     /** @} */
 }
