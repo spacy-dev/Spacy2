@@ -1,5 +1,4 @@
-#ifndef SPACY_ACR_HH
-#define SPACY_ACR_HH
+#pragma once
 
 #include <string>
 #include <tuple>
@@ -13,6 +12,7 @@
 #include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
 #include "Spacy/Util/mixins.hh"
 #include "Spacy/Spaces/RealSpace/real.hh"
+#include <iomanip> 
 
 namespace Spacy
 {                           
@@ -24,11 +24,11 @@ namespace Spacy
  namespace ACR
   {
     /**
-     * @brief The affine covariant step method described in @cite Lubkoll2015, @cite Lubkoll2015a for the solution of equality constraint optimization problems.
+     * @brief An ACR solver for solving unconstrained minimization problems 
      *
-     * An affine covariant composite step method for the solution of problems of the form
-     * \f[\min f(x)\quad \text{s.t.}\quad c(x)=0\f], based on the corresponding Lagrange functional
-     * \f[L(x,p) = f(x)+pc(x)\f].
+     * An ACR solver for solving problems of the form
+     * \f[\min f(x)\f], 
+     * 
      */
     class ACRSolver :
         public Mixin::RegularityTest ,
@@ -47,11 +47,9 @@ namespace Spacy
     public:
       /**
        * @brief Constructor.
-       * @param N Lagrange functional for the problem \f[\min \|\delta x_k\| \quad \text{s.t.} c'(x_k)\delta x_k + c(x_k)=0\f]
-       * @param L Lagrange functional
-       * @param domain domain space \f$X=\{Y,U,P\}\f$
+       * @param f C2Functional to minimize
        */
-      ACRSolver(C2Functional f);
+      ACRSolver(C2Functional f,  double eta1 = 0.25,  double eta2 = 0.5, double epsilon = 1e-4, double relativeAccuracy = 1e-4, double omegaMax = 1e8);
 
       /// Compute solution.
       Vector operator()();
@@ -71,30 +69,28 @@ namespace Spacy
 	         	  
 		     TrivialPreconditioner() {};
 		     
-			TrivialPreconditioner(const TrivialPreconditioner& p) {};
+			TrivialPreconditioner(const TrivialPreconditioner& p) = default;
 			//move constructor
-			TrivialPreconditioner(TrivialPreconditioner&& p) {};
+			TrivialPreconditioner(TrivialPreconditioner&& p)  = default;
 			//compute A(x)
 			Vector operator()(const Vector& x) const{ return x; };
-	  };
+      };
  
       C2Functional f_;
       const VectorSpace& domain_;
       StepMonitor stepMonitor = StepMonitor::Accepted;
       Vector computeStep(const Vector &x) const;
-      StepMonitor acceptanceTest(const Vector &x, const Vector &dx, Real lambda, const CompositeStep::CubicModel& cubicModel) const;
-      Real weightChange(Spacy::Vector dx, Spacy::Vector x, Spacy::Real omega_) const;
+      
+      StepMonitor acceptanceTest(const Vector &x, const Vector &dx, const Real & lambda, const CompositeStep::CubicModel& cubicModel);
+      Real weightChange(::Spacy::Vector dx, ::Spacy::Vector x, ::Spacy::Real omega) const;
+   
+      mutable LinearSolver preconditioner = {};
 
-      Real omega = {1e-6};
+      const double eta1_, eta2_,  epsilon_,  relativeAccuracy_,  omegaMax_;
+      Real rho_ = { 1.0 };
+      Real omega_ = { 1e-6 };
 
-      mutable IndefiniteLinearSolver tangentialSolver = {};
-
-      std::string spacing = "  ", spacing2 = "    ";
-
-		Real eta1,eta2,gamma1,gamma2,rho;
-      Real norm_dx_old = -1;
     };
   }
 }
 
-#endif // SPACY_ACR_HH
