@@ -19,6 +19,7 @@ Push to gerrithub via (with my-branch=master,...)
 
 ### Dependencies
 The core of Spacy does not require external dependencies.
+
 Depending on your use-case the following dependencies may be required:
   - [googletest](https://github.com/google/googletest) for compiling the tests (enable with cmake .. -DBuildTest=ON),
   - [Eigen](http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions using namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen),
