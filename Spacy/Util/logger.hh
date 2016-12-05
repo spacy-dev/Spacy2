@@ -1,13 +1,9 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_LOGGER_HH
-#define SPACY_UTIL_LOGGER_HH
+#pragma once
 
 #include <fstream>
 #include <string>
 
-#include "Spacy/Util/voider.hh"
+#include <Spacy/Util/voider.hh>
 
 namespace Spacy
 {
@@ -18,7 +14,7 @@ namespace Spacy
 
   /// Logger for some quantity of type T.
   template <class T,
-            class = void_t< TryInStreamOperator<T> > >
+            class = voider< TryInStreamOperator<T> > >
   struct Logger
   {
     explicit Logger(const std::string& fileName)
@@ -36,5 +32,3 @@ namespace Spacy
     char separator_ = '\n';
   };
 }
-
-#endif // SPACY_UTIL_LOGGER_HH

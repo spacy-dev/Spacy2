@@ -10,7 +10,7 @@ namespace Spacy
 
     void Verbosity::setVerbosity(bool verbose)
     {
-      verbosityLevel_ = 1;
+      verbosityLevel_ = verbose ? 1u : 0u;
       notify();
     }
 
