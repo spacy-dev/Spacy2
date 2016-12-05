@@ -1,6 +1,6 @@
 #pragma once
 
-#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/solver_cg.h>
 #include <deal.II/lac/precondition.h>
 // For boundary values
@@ -33,7 +33,7 @@ namespace Spacy
                 public Mixin::MaxSteps
         {
         public:
-            CGSolver(const dealii::SparseMatrix<double>& A,
+            CGSolver(const dealii::BlockSparseMatrix<double>& A,
                      const VectorSpace& domain,
                      const VectorSpace& range)
                 : OperatorBase(range, domain),
@@ -65,7 +65,7 @@ namespace Spacy
             {
                 auto& x_ = cast_ref<Vector>(x);
 
-                dealii::SolverControl params(get(getMaxSteps()),
+                dealii::SolverControl params(getMaxSteps(),
                                              get(getAbsoluteAccuracy()));
                 dealii::SolverCG<> solver(params);
 
@@ -79,18 +79,18 @@ namespace Spacy
                                                                   dealii::ZeroFunction<dim>(),
                                                                   boundary_values );
                 dealii::MatrixTools::apply_boundary_values (boundary_values,
-                                                            A_,
+                                                            A_.block(0,0),
                                                             get(y_),
                                                             get(x_));
 
-                solver.solve(A_, get(y_), get(x_),
+                solver.solve(A_.block(0,0), get(y_), get(x_),
                              dealii::PreconditionIdentity());
 
                 return y;
             }
 
         private:
-            mutable dealii::SparseMatrix<double> A_;
+            mutable dealii::BlockSparseMatrix<double> A_;
         };
     }
     /** @} */

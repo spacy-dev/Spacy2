@@ -47,7 +47,8 @@ namespace Spacy
   {
     void copyCoefficients(const dolfin::Form& F, dolfin::Form& G)
     {
-      for(std::size_t i=0; i<F.num_coefficients(); ++i) G.set_coefficient( i , F.coefficient(i) );
+      for(std::size_t i=0; i<F.num_coefficients(); ++i)
+          G.set_coefficient( i , F.coefficient(i) );
     }
 
 

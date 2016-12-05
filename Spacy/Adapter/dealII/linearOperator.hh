@@ -1,6 +1,6 @@
 #pragma once
 
-#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
 
 #include <Spacy/Util/Base/operatorBase.hh>
 #include <Spacy/Util/Base/vectorBase.hh>
@@ -27,16 +27,16 @@ namespace Spacy
         class LinearOperator :
                 public OperatorBase,
                 public VectorBase,
-                public Mixin::Get< dealii::SparseMatrix<double> >
+                public Mixin::Get< dealii::BlockSparseMatrix<double> >
         {
         public:
-            LinearOperator(const dealii::SparseMatrix<double>& A,
+            LinearOperator(const dealii::BlockSparseMatrix<double>& A,
                            const VectorSpace& operatorSpace,
                            const VectorSpace& domain,
                            const VectorSpace& range)
                 : OperatorBase(domain,range),
                   VectorBase(operatorSpace),
-                  Mixin::Get< dealii::SparseMatrix<double> >(A.get_sparsity_pattern())
+                  Mixin::Get< dealii::BlockSparseMatrix<double> >(A.get_sparsity_pattern())
             {
                 get().copy_from(A);
             }
@@ -44,7 +44,7 @@ namespace Spacy
             LinearOperator(const LinearOperator& other)
                 : OperatorBase(other.domain(), other.range()),
                   VectorBase(other.space()),
-                  Mixin::Get< dealii::SparseMatrix<double> >(other.get().get_sparsity_pattern())
+                  Mixin::Get< dealii::BlockSparseMatrix<double> >(other.get().get_sparsity_pattern())
             {
                 checkSpaceCompatibility(domain(), other.domain());
                 checkSpaceCompatibility(range(), other.range());
@@ -70,7 +70,7 @@ namespace Spacy
                 const auto& x_ = cast_ref<Vector>(x);
                 auto y = zero(range());
                 auto& y_ = cast_ref<Vector>(y);
-                get().vmult(y_.get(), x_.get());
+                get().block(0,0).vmult(y_.get(), x_.get());
                 return y;
             }
 

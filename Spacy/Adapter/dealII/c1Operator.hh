@@ -6,7 +6,7 @@
 #include <deal.II/fe/fe_values.h>
 #include <deal.II/lac/vector.h>
 #include <deal.II/lac/full_matrix.h>
-#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
 
 #include <Spacy/vectorSpace.hh>
@@ -44,11 +44,11 @@ namespace Spacy
         public:
             C1Operator(Implementation&& operator_impl, const VectorSpace& domain, const VectorSpace& range)
                 : OperatorBase(domain,range),
-                  A_(std::make_shared< dealii::SparseMatrix<double> >()),
+                  A_(std::make_shared< dealii::BlockSparseMatrix<double> >()),
                   operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(),
                   [](const Spacy::Vector& v)
                   {
-                      return cast_ref< LinearOperator<dim> >(v).get().frobenius_norm();
+                      return cast_ref< LinearOperator<dim> >(v).get().block(0,0).frobenius_norm();
                   } , true ) ),
                   operator_(std::move(operator_impl))
             {
@@ -73,7 +73,7 @@ namespace Spacy
                 const auto& dx_ = cast_ref<Vector>(dx);
                 auto y = zero(range());
                 auto& y_ = cast_ref<Vector>(y);
-                A_->vmult(get(y_), get(dx_));
+                A_->block(0,0).vmult(get(y_), get(dx_));
                 return y;
             }
 
@@ -162,7 +162,7 @@ namespace Spacy
 
                     for(auto i=0u; i<dofs_per_cell; ++i)
                         for(auto j=0u; j<dofs_per_cell; ++j)
-                            A_->add(local_dof_indices[i], local_dof_indices[j],
+                            A_->block(0,0).add(local_dof_indices[i], local_dof_indices[j],
                                                cell_matrix(i,j));
 
                     for (auto i=0u; i<dofs_per_cell; ++i)
@@ -172,7 +172,7 @@ namespace Spacy
                 oldX_ = x;
             }
 
-            mutable std::shared_ptr< dealii::SparseMatrix<double> > A_;
+            mutable std::shared_ptr< dealii::BlockSparseMatrix<double> > A_;
             mutable dealii::Vector<double>       dummy_;
             mutable dealii::Vector<double>       b_;
             mutable ::Spacy::Vector oldX_;
