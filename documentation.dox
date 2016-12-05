@@ -7,11 +7,16 @@
  * @brief Adapters to third-party libraries.
  */
    /**
+    * @defgroup dealIIGroup deal.II
+    * @ingroup AdapterGroup
+    * @brief %Vector spaces, functionals and operators for <a href="http://www.dealii.org">deal.II</a>.
+    */
+
+   /**
     * @defgroup FenicsGroup FEniCS
     * @ingroup AdapterGroup
     * @brief %Vector spaces, functionals and operators for <a href="http://www.fenicsproject.org">FEniCS</a>.
     */
-
     
    /**
     * @defgroup KaskadeGroup Kaskade7
@@ -83,13 +88,9 @@
    * @ingroup AlgorithmGroup
    * @brief Contains the affine covariant composite step method of \cite Lubkoll2015, \cite Lubkoll2015a.
    */
-   
-  /**
-   * @defgroup ConceptGroup Concepts
-   * @brief %Concepts for vectors, functionals, operators, ...
-   */
-
   
+
+
 /** NAMESPACES **/
    
   /**
@@ -98,7 +99,6 @@
    */
  
 
- 
    /**
    * @namespace Spacy::CG
    * @ingroup CGGroup
@@ -137,6 +137,11 @@
   /**
    * @namespace Spacy::ProductSpace
    * @brief  A product space that supports distinction between primal and dual variables.
+   */
+   
+  /**
+   * @namespace Spacy::dealII
+   * @brief Contains vector spaces, functionals and operators for <a href="www.deal.org">deal.II</a>.
    */
    
   /**

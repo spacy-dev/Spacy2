@@ -1,4 +1,8 @@
-#ifndef DEALII_HH
-#define DEALII_HH
+#pragma once
 
-#endif // DEALII_HH
+#include "dealII/c1Operator.hh"
+#include "dealII/cgSolver.hh"
+#include "dealII/linearOperator.hh"
+#include "dealII/vector.hh"
+#include "dealII/vectorSpace.hh"
+#include "dealII/writeVTK.hh"

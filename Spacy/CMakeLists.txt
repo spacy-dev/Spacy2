@@ -10,11 +10,16 @@ if(Kaskade)
     aux_source_directory(Adapter/Kaskade SRC_LIST)
 endif()
 
+
+if(dealII)
+    aux_source_directory(Adapter/dealII SRC_LIST)
+endif()
+
 aux_source_directory(. SRC_LIST)
 aux_source_directory(Adapter/Scalar SRC_LIST)
 aux_source_directory(Adapter/Generic SRC_LIST)
 aux_source_directory(Algorithm SRC_LIST)
-aux_source_directory(Algorithm/ACR SRC_LIST)
+#aux_source_directory(Algorithm/ACR SRC_LIST)
 aux_source_directory(Algorithm/CG SRC_LIST)
 aux_source_directory(Algorithm/CompositeStep SRC_LIST)
 aux_source_directory(Algorithm/Newton SRC_LIST)
@@ -37,6 +42,9 @@ foreach(HEADER ${HEADERS})
 endforeach(HEADER HEADERS)
 
 add_library(spacy ${SRC_LIST})
+if(dealII)
+    DEAL_II_SETUP_TARGET(spacy)
+endif()
 
 include(GenerateExportHeader)
 
