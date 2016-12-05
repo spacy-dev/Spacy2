@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Spacy: Spacy::IsVoid&lt; Args &gt; Struct Template Reference</title>
+<title>Spacy: Spacy::dealII::VectorCreator&lt; dim &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -101,28 +101,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespaceSpacy.html">Spacy</a>      </li>
-      <li class="navelem"><a class="el" href="structSpacy_1_1IsVoid.html">IsVoid</a>      </li>
+      <li class="navelem"><a class="el" href="namespaceSpacy_1_1dealII.html">dealII</a>      </li>
+      <li class="navelem"><a class="el" href="classSpacy_1_1dealII_1_1VectorCreator.html">VectorCreator</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy::IsVoid&lt; Args &gt; Struct Template Reference</div>  </div>
+<div class="title">Spacy::dealII::VectorCreator&lt; dim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="Spacy::IsVoid" --><table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1IsVoid_1_1apply.html">apply</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1IsVoid_1_1apply_3_01Operation_00_01void__t_3_01Operation_3_01Args_8_8_8_4_01_4_01_4.html">apply&lt; Operation, void_t&lt; Operation&lt; Args...&gt; &gt; &gt;</a></td></tr>
-</table>
-<h3>template&lt;class... Args&gt;<br/>
- struct Spacy::IsVoid&lt; Args &gt;</h3>
+<!-- doxytag: class="Spacy::dealII::VectorCreator" -->
+<p>Vector creator for the deal.II library.  
+ <a href="classSpacy_1_1dealII_1_1VectorCreator.html#details">More...</a></p>
 
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/travis/build/spacy-dev/Spacy/Spacy/Util/<a class="el" href="voider_8hh_source.html">voider.hh</a></li>
+<p><code>#include &lt;<a class="el" href="Adapter_2dealII_2vectorSpace_8hh_source.html">vectorSpace.hh</a>&gt;</code></p>
+
+<p><a href="classSpacy_1_1dealII_1_1VectorCreator-members.html">List of all members.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5afc306745f86ae52ad33a5c83884935"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::VectorCreator" ref="a5afc306745f86ae52ad33a5c83884935" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>VectorCreator</b> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4ae05c4dd528e1f4d45231e32021437"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::operator()" ref="ab4ae05c4dd528e1f4d45231e32021437" args="(const VectorSpace *space) const " -->
+::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *space) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61e5fe6c73cefe05d16140608542cbaa"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::FEOrder" ref="a61e5fe6c73cefe05d16140608542cbaa" args="() const " -->
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>FEOrder</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="affb824748540374f0fbfa4d3467d1255"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::degreesOfFreedom" ref="affb824748540374f0fbfa4d3467d1255" args="() const " -->
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>degreesOfFreedom</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae048100414798458ac093953de6475ac"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::dofHandler" ref="ae048100414798458ac093953de6475ac" args="() const " -->
+const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>dofHandler</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48104b12fa317e7a29fd531cca8a8b4f"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::finiteElement" ref="a48104b12fa317e7a29fd531cca8a8b4f" args="() const " -->
+const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>finiteElement</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08c118dd385713f3c58175947a9ac7b3"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::sparsityPattern" ref="a08c118dd385713f3c58175947a9ac7b3" args="() const " -->
+const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>sparsityPattern</b> () const </td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><h3>template&lt;int dim&gt;<br/>
+class Spacy::dealII::VectorCreator&lt; dim &gt;</h3>
+
+<p>Vector creator for the deal.II library. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/travis/build/spacy-dev/Spacy/Spacy/Adapter/dealII/<a class="el" href="Adapter_2dealII_2vectorSpace_8hh_source.html">vectorSpace.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -142,7 +164,7 @@ Classes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 1 2016 21:07:51 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2016 21:51:21 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

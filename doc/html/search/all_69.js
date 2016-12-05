@@ -20,7 +20,6 @@ var searchData=
   ['ishilbertspace',['isHilbertSpace',['../classSpacy_1_1VectorSpace.html#a12b023eff0cce202e4a5f9a754cc05c9',1,'Spacy::VectorSpace']]],
   ['ispositivedefinite',['isPositiveDefinite',['../classSpacy_1_1CG_1_1LinearSolver.html#adec5404c595dc514a9c81c9ccc06cf41',1,'Spacy::CG::LinearSolver']]],
   ['isprimalwrt',['isPrimalWRT',['../classSpacy_1_1VectorSpace.html#aae96ebd6f5e4a1a95ab8684b49062e7d',1,'Spacy::VectorSpace']]],
-  ['isvoid',['IsVoid',['../structSpacy_1_1IsVoid.html',1,'Spacy']]],
-  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html#a0bb1df2e0e4bee756a2f3e3032743a1a',1,'Spacy::Generic::IterativeMethod']]],
-  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html',1,'Spacy::Generic']]]
+  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html',1,'Spacy::Generic']]],
+  ['iterativemethod',['IterativeMethod',['../classSpacy_1_1Generic_1_1IterativeMethod.html#a0bb1df2e0e4bee756a2f3e3032743a1a',1,'Spacy::Generic::IterativeMethod']]]
 ];

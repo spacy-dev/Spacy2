@@ -6,8 +6,7 @@ var searchData=
   ['regularitytest',['RegularityTest',['../classSpacy_1_1Mixin_1_1RegularityTest.html',1,'Spacy::Mixin']]],
   ['regularitytest',['RegularityTest',['../classSpacy_1_1Mixin_1_1RegularityTest.html#a548d9d45c31c7833266bd3b20dc1aa7e',1,'Spacy::Mixin::RegularityTest']]],
   ['regularitytestfailed',['regularityTestFailed',['../classSpacy_1_1Mixin_1_1RegularityTest.html#aeb1a3b051bafc9da9be1df354c652812',1,'Spacy::Mixin::RegularityTest']]],
-  ['regularitytestfailedexception',['RegularityTestFailedException',['../classSpacy_1_1RegularityTestFailedException.html',1,'Spacy']]],
   ['regularitytestfailedexception',['RegularityTestFailedException',['../classSpacy_1_1RegularityTestFailedException.html#aef4c82a08a23582f2c3328c981c7d09d',1,'Spacy::RegularityTestFailedException']]],
-  ['regularitytestpassed',['regularityTestPassed',['../classSpacy_1_1Mixin_1_1RegularityTest.html#acb6b3e8c76ebdbded0ec610959513caf',1,'Spacy::Mixin::RegularityTest']]],
-  ['require',['Require',['../structSpacy_1_1Require.html',1,'Spacy']]]
+  ['regularitytestfailedexception',['RegularityTestFailedException',['../classSpacy_1_1RegularityTestFailedException.html',1,'Spacy']]],
+  ['regularitytestpassed',['regularityTestPassed',['../classSpacy_1_1Mixin_1_1RegularityTest.html#acb6b3e8c76ebdbded0ec610959513caf',1,'Spacy::Mixin::RegularityTest']]]
 ];

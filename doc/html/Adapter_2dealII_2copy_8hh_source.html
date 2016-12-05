@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Spacy: Todo List</title>
+<title>Spacy: /home/travis/build/spacy-dev/Spacy/Spacy/Adapter/dealII/copy.hh Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -53,11 +53,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -76,17 +76,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+    </ul>
+  </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Todo List </div>  </div>
+<div class="title">/home/travis/build/spacy-dev/Spacy/Spacy/Adapter/dealII/copy.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="reflist">
-<dt><a class="anchor" id="_todo000001"></a>Class <a class="el" href="classSpacy_1_1Generic_1_1VectorCreator.html">Spacy::Generic::VectorCreator&lt; VectorImpl &gt;</a>  </dt>
-<dd>generalize vector creation </dd>
-</dl>
-</div></div><!-- contents -->
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#pragma once</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;deal.II/lac/vector.h&gt;</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;Spacy/vector.hh&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">namespace </span>Spacy
+<a name="l00008"></a>00008 {
+<a name="l00010"></a>00010     <span class="keyword">namespace </span>dealII
+<a name="l00011"></a>00011     {
+<a name="l00012"></a>00012         <span class="keywordtype">void</span> copy(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>&amp; from, dealii::Vector&lt;double&gt;&amp; to);
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014         <span class="keywordtype">void</span> copy(<span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp; from, <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>&amp; to);
+<a name="l00015"></a>00015     }
+<a name="l00017"></a>00017 }
+</pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -104,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 1 2016 21:07:51 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2016 21:51:21 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

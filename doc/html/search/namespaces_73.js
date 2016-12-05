@@ -3,6 +3,7 @@ var searchData=
   ['cg',['CG',['../namespaceSpacy_1_1CG.html',1,'Spacy']]],
   ['compositestep',['CompositeStep',['../namespaceSpacy_1_1CompositeStep.html',1,'Spacy']]],
   ['damping',['Damping',['../namespaceSpacy_1_1Newton_1_1Damping.html',1,'Spacy::Newton']]],
+  ['dealii',['dealII',['../namespaceSpacy_1_1dealII.html',1,'Spacy']]],
   ['detail',['Detail',['../namespaceSpacy_1_1Detail.html',1,'Spacy']]],
   ['fenics',['FEniCS',['../namespaceSpacy_1_1FEniCS.html',1,'Spacy']]],
   ['generic',['Generic',['../namespaceSpacy_1_1Generic.html',1,'Spacy']]],

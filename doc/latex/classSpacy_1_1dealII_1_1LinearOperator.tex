@@ -1,0 +1,178 @@
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator}{\section{\-Spacy\-:\-:deal\-I\-I\-:\-:\-Linear\-Operator$<$ dim $>$ \-Class \-Template \-Reference}
+\label{classSpacy_1_1dealII_1_1LinearOperator}\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator$<$ dim $>$@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator$<$ dim $>$}}
+}
+
+
+\-Inheritance diagram for \-Spacy\-:\-:deal\-I\-I\-:\-:\-Linear\-Operator$<$ dim $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{classSpacy_1_1dealII_1_1LinearOperator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Spacy\-:\-:deal\-I\-I\-:\-:\-Linear\-Operator$<$ dim $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{classSpacy_1_1dealII_1_1LinearOperator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a6bd7cf0440ea448a145afbc5202ab81c}{{\bfseries \-Linear\-Operator} (const dealii\-::\-Sparse\-Matrix$<$ double $>$ \&\-A, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&operator\-Space, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range})}\label{classSpacy_1_1dealII_1_1LinearOperator_a6bd7cf0440ea448a145afbc5202ab81c}
+
+\item 
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a18a77229674a6d7be21aee1e199734a7}{{\bfseries \-Linear\-Operator} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&other)}\label{classSpacy_1_1dealII_1_1LinearOperator_a18a77229674a6d7be21aee1e199734a7}
+
+\item 
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_ae0ce5b35ba269b997f64dd483750aff9}{\hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&other)}\label{classSpacy_1_1dealII_1_1LinearOperator_ae0ce5b35ba269b997f64dd483750aff9}
+
+\item 
+\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_a5874d400fdc11be1a2f8f45d3d4969fa}{operator()} (const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em \-Compute $A(x)$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a9adc85435d04c2da0e35e41690c41c08}{\hyperlink{classSpacy_1_1Real}{\-Real} {\bfseries operator()} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&) const }\label{classSpacy_1_1dealII_1_1LinearOperator_a9adc85435d04c2da0e35e41690c41c08}
+
+\item 
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a54cb619f07f65504274d0b15947f71d7}{\-Linear\-Solver {\bfseries solver} () const }\label{classSpacy_1_1dealII_1_1LinearOperator_a54cb619f07f65504274d0b15947f71d7}
+
+\item 
+\hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \& \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_ae3cb488002c308958553cc46c5798ba1}{operator+=} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&y)
+\begin{DoxyCompactList}\small\item\em \-In-\/place summation $ x+=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \& \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_a9ba5046c851eee8478417862900abbfa}{operator-\/=} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&y)
+\begin{DoxyCompactList}\small\item\em \-In-\/place subtraction $ x-=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \& \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_aae592542ae9561d65d9e34965ee4ad5b}{operator$\ast$=} (double a)
+\begin{DoxyCompactList}\small\item\em \-In-\/place multiplication $ x*=a$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_a9a6024e12467d8c555ea7204de807e40}{operator-\/} () const 
+\begin{DoxyCompactList}\small\item\em \-Negation $ -x$. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1dealII_1_1LinearOperator_abe5eb63972cc6ee44c9e5c42f8b56b46}{operator==} (const \hyperlink{classSpacy_1_1dealII_1_1LinearOperator}{\-Linear\-Operator} \&y) const 
+\begin{DoxyCompactList}\small\item\em \-Comparison operator $ x==y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const }\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+
+\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const }\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+
+\begin{DoxyCompactList}\small\item\em \-Access range space $Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space} () const }\label{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}
+
+\begin{DoxyCompactList}\small\item\em \-Access underlying vector space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{template$<$int dim$>$ class Spacy\-::deal\-I\-I\-::\-Linear\-Operator$<$ dim $>$}
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a5874d400fdc11be1a2f8f45d3d4969fa}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ \-::{\bf \-Spacy\-::\-Vector} {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf \-Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_a5874d400fdc11be1a2f8f45d3d4969fa}
+
+
+\-Compute $A(x)$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em x} & operator argument \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_ae3cb488002c308958553cc46c5798ba1}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ {\bf \-Linear\-Operator}\& {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Linear\-Operator}$<$ dim $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_ae3cb488002c308958553cc46c5798ba1}
+
+
+\-In-\/place summation $ x+=y$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em y} & vector to add to this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+$ x+=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a9ba5046c851eee8478417862900abbfa}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ {\bf \-Linear\-Operator}\& {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Linear\-Operator}$<$ dim $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_a9ba5046c851eee8478417862900abbfa}
+
+
+\-In-\/place subtraction $ x-=y$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em y} & vector to subtract from this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+$ x-=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_aae592542ae9561d65d9e34965ee4ad5b}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ {\bf \-Linear\-Operator}\& {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{double}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_aae592542ae9561d65d9e34965ee4ad5b}
+
+
+\-In-\/place multiplication $ x*=a$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em a} & scaling factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+$ x*=a$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_a9a6024e12467d8c555ea7204de807e40}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ {\bf \-Linear\-Operator} {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_a9a6024e12467d8c555ea7204de807e40}
+
+
+\-Negation $ -x$. 
+
+\begin{DoxyReturn}{\-Returns}
+$ -x $. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1dealII_1_1LinearOperator_abe5eb63972cc6ee44c9e5c42f8b56b46}{\index{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}!operator==@{operator==}}
+\index{operator==@{operator==}!Spacy::dealII::LinearOperator@{\-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim$>$ bool {\bf \-Spacy\-::deal\-I\-I\-::\-Linear\-Operator}$<$ dim $>$\-::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Linear\-Operator}$<$ dim $>$ \&}]{y}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1dealII_1_1LinearOperator_abe5eb63972cc6ee44c9e5c42f8b56b46}
+
+
+\-Comparison operator $ x==y$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em y} & vector to compare with this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+$ x==y$. 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/deal\-I\-I/linear\-Operator.\-hh\end{DoxyCompactItemize}

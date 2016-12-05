@@ -3,6 +3,7 @@ var searchData=
   ['cg',['CG',['../namespaceSpacy_1_1CG.html',1,'Spacy']]],
   ['compositestep',['CompositeStep',['../namespaceSpacy_1_1CompositeStep.html',1,'Spacy']]],
   ['damping',['Damping',['../namespaceSpacy_1_1Newton_1_1Damping.html',1,'Spacy::Newton']]],
+  ['dealii',['dealII',['../namespaceSpacy_1_1dealII.html',1,'Spacy']]],
   ['detail',['Detail',['../namespaceSpacy_1_1Detail.html',1,'Spacy']]],
   ['fenics',['FEniCS',['../namespaceSpacy_1_1FEniCS.html',1,'Spacy']]],
   ['generic',['Generic',['../namespaceSpacy_1_1Generic.html',1,'Spacy']]],
@@ -48,6 +49,6 @@ var searchData=
   ['strakostichyenergyerror',['StrakosTichyEnergyError',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html',1,'Spacy::CG::Termination']]],
   ['subspace',['subSpace',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa61f9413eb3537879a92823dfdd0d6da',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k)'],['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#a4a74b3d51f41ba2ec1c6e755c520a5cc',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k) const ']]],
   ['subspaces',['subSpaces',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa46303313c37f29cdfe54479d85cfe87',1,'Spacy::ProductSpace::VectorCreator']]],
-  ['termination',['Termination',['../namespaceSpacy_1_1Newton_1_1Termination.html',1,'Spacy::Newton']]],
-  ['termination',['Termination',['../namespaceSpacy_1_1CG_1_1Termination.html',1,'Spacy::CG']]]
+  ['termination',['Termination',['../namespaceSpacy_1_1CG_1_1Termination.html',1,'Spacy::CG']]],
+  ['termination',['Termination',['../namespaceSpacy_1_1Newton_1_1Termination.html',1,'Spacy::Newton']]]
 ];
