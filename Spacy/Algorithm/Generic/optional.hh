@@ -1,9 +1,8 @@
-#ifndef SPACY_ALGORITHM_GENERIC_OPTIONAL_HH
-#define SPACY_ALGORITHM_GENERIC_OPTIONAL_HH
+#pragma once
 
 #include <type_traits>
 #include <utility>
-#include "Spacy/Util/voider.hh"
+#include <Spacy/Util/voider.hh>
 
 namespace Spacy
 {
@@ -43,7 +42,7 @@ namespace Spacy
       };
 
       template <class Type>
-      struct BindMemFn_MinimalDecreaseAchieved< Type , void_t< Try::MemFn_minimalDecreaseAchieved<Type> > >
+      struct BindMemFn_MinimalDecreaseAchieved< Type , voider< Try::MemFn_minimalDecreaseAchieved<Type> > >
       {
         static std::function<bool()> apply(const Type& t)
         {
@@ -59,7 +58,7 @@ namespace Spacy
       };
 
       template <class ToConnect, class Connector>
-      struct Connect< ToConnect , Connector , void_t<Try::MemFn_connect<ToConnect,Connector> > >
+      struct Connect< ToConnect , Connector , voider<Try::MemFn_connect<ToConnect,Connector> > >
       {
         static void apply(const ToConnect& toConnect, Connector& connector)
         {
@@ -78,7 +77,7 @@ namespace Spacy
       };
 
       template <class Type>
-      struct Restart< Type , void_t< Try::MemFn_restart<Type> > >
+      struct Restart< Type , voider< Try::MemFn_restart<Type> > >
       {
         static bool apply(const Type& t)
         {
@@ -97,7 +96,7 @@ namespace Spacy
       };
 
       template <class Type>
-      struct Terminate< Type , void_t< Try::MemFn_terminate<Type> > >
+      struct Terminate< Type , voider< Try::MemFn_terminate<Type> > >
       {
         static bool apply(const Type& t)
         {
@@ -145,5 +144,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_ALGORITHM_GENERIC_OPTIONAL_HH
