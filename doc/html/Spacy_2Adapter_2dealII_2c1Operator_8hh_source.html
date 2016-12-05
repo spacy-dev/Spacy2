@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;deal.II/fe/fe_values.h&gt;</span>
 <a name="l00007"></a>00007 <span class="preprocessor">#include &lt;deal.II/lac/vector.h&gt;</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;deal.II/lac/full_matrix.h&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;deal.II/lac/sparse_matrix.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;deal.II/lac/block_sparse_matrix.h&gt;</span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;deal.II/lac/dynamic_sparsity_pattern.h&gt;</span>
 <a name="l00011"></a>00011 
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;Spacy/vectorSpace.hh&gt;</span>
@@ -132,11 +132,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044         <span class="keyword">public</span>:
 <a name="l00045"></a>00045             <a class="code" href="classSpacy_1_1dealII_1_1C1Operator.html">C1Operator</a>(Implementation&amp;&amp; operator_impl, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
 <a name="l00046"></a>00046                 : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>(domain,range),
-<a name="l00047"></a>00047                   A_(std::make_shared&lt; dealii::SparseMatrix&lt;double&gt; &gt;()),
+<a name="l00047"></a>00047                   A_(std::make_shared&lt; dealii::BlockSparseMatrix&lt;double&gt; &gt;()),
 <a name="l00048"></a>00048                   operatorSpace_( std::make_shared&lt;VectorSpace&gt;( <a class="code" href="structSpacy_1_1dealII_1_1LinearOperatorCreator.html">LinearOperatorCreator</a>(),
 <a name="l00049"></a>00049                   [](<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>&amp; v)
 <a name="l00050"></a>00050                   {
-<a name="l00051"></a>00051                       <span class="keywordflow">return</span> cast_ref&lt; LinearOperator&lt;dim&gt; &gt;(v).<span class="keyword">get</span>().frobenius_norm();
+<a name="l00051"></a>00051                       <span class="keywordflow">return</span> cast_ref&lt; LinearOperator&lt;dim&gt; &gt;(v).<span class="keyword">get</span>().block(0,0).frobenius_norm();
 <a name="l00052"></a>00052                   } , true ) ),
 <a name="l00053"></a>00053                   operator_(std::move(operator_impl))
 <a name="l00054"></a>00054             {
@@ -159,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00073"></a>00073                 <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dx_ = cast_ref&lt;Vector&gt;(dx);
 <a name="l00074"></a>00074                 <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
 <a name="l00075"></a>00075                 <span class="keyword">auto</span>&amp; y_ = cast_ref&lt;Vector&gt;(y);
-<a name="l00076"></a>00076                 A_-&gt;vmult(<span class="keyword">get</span>(y_), <span class="keyword">get</span>(dx_));
+<a name="l00076"></a>00076                 A_-&gt;block(0,0).vmult(<span class="keyword">get</span>(y_), <span class="keyword">get</span>(dx_));
 <a name="l00077"></a>00077                 <span class="keywordflow">return</span> y;
 <a name="l00078"></a>00078             }
 <a name="l00079"></a>00079 
@@ -243,7 +243,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00162"></a>00162 
 <a name="l00163"></a>00163                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
 <a name="l00164"></a>00164                         <span class="keywordflow">for</span>(<span class="keyword">auto</span> j=0u; j&lt;dofs_per_cell; ++j)
-<a name="l00165"></a>00165                             A_-&gt;add(local_dof_indices[i], local_dof_indices[j],
+<a name="l00165"></a>00165                             A_-&gt;block(0,0).add(local_dof_indices[i], local_dof_indices[j],
 <a name="l00166"></a>00166                                                cell_matrix(i,j));
 <a name="l00167"></a>00167 
 <a name="l00168"></a>00168                     <span class="keywordflow">for</span> (<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
@@ -253,7 +253,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00172"></a>00172                 oldX_ = x;
 <a name="l00173"></a>00173             }
 <a name="l00174"></a>00174 
-<a name="l00175"></a>00175             <span class="keyword">mutable</span> std::shared_ptr&lt; dealii::SparseMatrix&lt;double&gt; &gt; A_;
+<a name="l00175"></a>00175             <span class="keyword">mutable</span> std::shared_ptr&lt; dealii::BlockSparseMatrix&lt;double&gt; &gt; A_;
 <a name="l00176"></a>00176             <span class="keyword">mutable</span> dealii::Vector&lt;double&gt;       dummy_;
 <a name="l00177"></a>00177             <span class="keyword">mutable</span> dealii::Vector&lt;double&gt;       b_;
 <a name="l00178"></a>00178             mutable ::Spacy::Vector oldX_;
@@ -280,7 +280,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 5 2016 21:51:21 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 5 2016 23:33:26 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
