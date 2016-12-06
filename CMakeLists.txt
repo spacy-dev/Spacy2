@@ -30,7 +30,6 @@ if(Dolfin)
   find_package(DOLFIN CONFIG REQUIRED)
   include_directories(${DOLFIN_INCLUDE_DIRS})
   include_directories(SYSTEM ${DOLFIN_3RD_PARTY_INCLUDE_DIRS})
-  find_package(VTK HINTS ${VTK_DIR} $ENV{VTK_DIR} NO_MODULE QUIET)
 endif()
 
 find_package(Eigen3)
@@ -48,7 +47,6 @@ if(dealII)
 endif()
 
 project(Spacy)
-
 
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
 
