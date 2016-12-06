@@ -130,7 +130,7 @@ namespace Spacy
          * @brief Convenient generation of a primal-dual product vector space from dealii::Triangulation<dim>.
          * @param triangulation triangulation underlying the FE-space
          * @param primal_ids global ids associated with primal variables
-         * @param dual_ids global ids associated with primal variables
+         * @param dual_ids global ids associated with dual variables
          * @param fe_order order of the finite elements
          */
         template <int dim>
