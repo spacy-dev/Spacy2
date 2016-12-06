@@ -137,8 +137,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> (const deali
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1dealII.html#a5b48ceb52102e7accfc4b65af09380c6">makeHilbertSpace</a> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a single vector space from dealii::Triangulation&lt;dim&gt;.  <a href="#a5b48ceb52102e7accfc4b65af09380c6"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1dealII.html#aa572836054091c7c907cc0c2034ac9a8">makeHilbertSpace</a> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, int number_of_variables, int fe_order)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a product vector space from dealii::Triangulation&lt;dim&gt;.  <a href="#aa572836054091c7c907cc0c2034ac9a8"></a><br/></td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1dealII.html#aa041de042d8014c090d2a4b22ef94c46">makeHilbertSpace</a> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, unsigned number_of_variables, int fe_order)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a product vector space from dealii::Triangulation&lt;dim&gt;.  <a href="#aa041de042d8014c090d2a4b22ef94c46"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1dealII.html#a1908af839cb23b2f8f6c85a641c6e578">makeHilbertSpace</a> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, const std::vector&lt; unsigned &gt; &amp;global_ids, int fe_order)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a product vector space from dealii::Triangulation&lt;dim&gt;.  <a href="#a1908af839cb23b2f8f6c85a641c6e578"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;int dim&gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1dealII.html#a87a3912bf438b7739b7e59a5f4f03dd9">makeHilbertSpace</a> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, const std::vector&lt; unsigned &gt; &amp;primal_ids, const std::vector&lt; unsigned &gt; &amp;dual_ids, int fe_order)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient generation of a primal-dual product vector space from dealii::Triangulation&lt;dim&gt;.  <a href="#a87a3912bf438b7739b7e59a5f4f03dd9"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a34ae531adba4232c22eac3ff6dc417e2"></a><!-- doxytag: member="Spacy::dealII::writeVTK" ref="a34ae531adba4232c22eac3ff6dc417e2" args="(const Vector &amp;x, const std::string &amp;fileName)" -->
 template&lt;int dim&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeVTK</b> (const Vector &amp;x, const std::string &amp;fileName)</td></tr>
@@ -185,7 +191,7 @@ template&lt;int dim&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa572836054091c7c907cc0c2034ac9a8"></a><!-- doxytag: member="Spacy::dealII::makeHilbertSpace" ref="aa572836054091c7c907cc0c2034ac9a8" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, int number_of_variables, int fe_order)" -->
+<a class="anchor" id="aa041de042d8014c090d2a4b22ef94c46"></a><!-- doxytag: member="Spacy::dealII::makeHilbertSpace" ref="aa041de042d8014c090d2a4b22ef94c46" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, unsigned number_of_variables, int fe_order)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -200,7 +206,7 @@ template&lt;int dim&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>number_of_variables</em>, </td>
         </tr>
         <tr>
@@ -226,7 +232,103 @@ template&lt;int dim&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="namespaceSpacy.html#a927756dd42df3e79c302df1f8f635b65">::Spacy::makeHilbertSpace( VectorCreator&lt;dim&gt;{triangulation, fe:order} , l2Product{} )</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1908af839cb23b2f8f6c85a641c6e578"></a><!-- doxytag: member="Spacy::dealII::makeHilbertSpace" ref="a1908af839cb23b2f8f6c85a641c6e578" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, const std::vector&lt; unsigned &gt; &amp;global_ids, int fe_order)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> <a class="el" href="namespaceSpacy_1_1dealII.html#a5b48ceb52102e7accfc4b65af09380c6">Spacy::dealII::makeHilbertSpace</a> </td>
+          <td>(</td>
+          <td class="paramtype">dealii::Triangulation&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>triangulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>global_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fe_order</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenient generation of a product vector space from dealii::Triangulation&lt;dim&gt;. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">triangulation</td><td>triangulation underlying the FE-space </td></tr>
+    <tr><td class="paramname">global_ids</td><td>global ids associated with variables (for reordering, subspace projections,...) </td></tr>
+    <tr><td class="paramname">fe_order</td><td>order of the finite elements </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a87a3912bf438b7739b7e59a5f4f03dd9"></a><!-- doxytag: member="Spacy::dealII::makeHilbertSpace" ref="a87a3912bf438b7739b7e59a5f4f03dd9" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, const std::vector&lt; unsigned &gt; &amp;primal_ids, const std::vector&lt; unsigned &gt; &amp;dual_ids, int fe_order)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int dim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> <a class="el" href="namespaceSpacy_1_1dealII.html#a5b48ceb52102e7accfc4b65af09380c6">Spacy::dealII::makeHilbertSpace</a> </td>
+          <td>(</td>
+          <td class="paramtype">dealii::Triangulation&lt; dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>triangulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>primal_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dual_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fe_order</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Convenient generation of a primal-dual product vector space from dealii::Triangulation&lt;dim&gt;. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">triangulation</td><td>triangulation underlying the FE-space </td></tr>
+    <tr><td class="paramname">primal_ids</td><td>global ids associated with primal variables </td></tr>
+    <tr><td class="paramname">dual_ids</td><td>global ids associated with primal variables </td></tr>
+    <tr><td class="paramname">fe_order</td><td>order of the finite elements </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -248,7 +350,7 @@ template&lt;int dim&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2016 11:35:36 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 16:45:32 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
