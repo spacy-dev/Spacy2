@@ -49,6 +49,7 @@ endif()
 
 project(Spacy)
 
+
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
 
 if(Coverage)
