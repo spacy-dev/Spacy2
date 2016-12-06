@@ -14,9 +14,9 @@ namespace Spacy
 
         void copy(const dealii::Vector<double>& from, Spacy::Vector& to);
 
-        void copy(const Spacy::Vector& from, dealii::BlockVector<double>& to);
+        void copy(const Spacy::Vector& from, dealii::BlockVector<double>& to, unsigned i=0);
 
-        void copy(const dealii::BlockVector<double>& from, Spacy::Vector& to);
+        void copy(const dealii::BlockVector<double>& from, Spacy::Vector& to, unsigned i=0);
     }
     /** @} */
 }

@@ -36,7 +36,7 @@ namespace Spacy
             get(cast_ref<Vector>(to)) = from;
         }
 
-        void copy(const Spacy::Vector& from, dealii::BlockVector<double>& to, unsigned i=0)
+        void copy(const Spacy::Vector& from, dealii::BlockVector<double>& to, unsigned i)
         {
             copyTodealIIVectorIfConsistent(from, to, i);
 
@@ -49,7 +49,7 @@ namespace Spacy
             }
         }
 
-        void copy(const dealii::BlockVector<double>& from, Spacy::Vector& to, unsigned i=0)
+        void copy(const dealii::BlockVector<double>& from, Spacy::Vector& to, unsigned i)
         {
             copyFromdealIIVectorIfConsistent(from, to, i);
 

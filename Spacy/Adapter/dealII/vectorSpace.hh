@@ -103,8 +103,8 @@ namespace Spacy
         {
             std::vector< std::shared_ptr<VectorSpace> > spaces;
             spaces.reserve(number_of_variables);
-            for(auto i=0; i<number_of_variables; ++i)
-                spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
+            for(auto i=0u; i<number_of_variables; ++i)
+                spaces.emplace_back(std::make_shared<VectorSpace>(makeHilbertSpace(triangulation, fe_order)));
             return ProductSpace::makeHilbertSpace(spaces);
         }
 
@@ -121,8 +121,8 @@ namespace Spacy
         {
             std::vector< std::shared_ptr<VectorSpace> > spaces;
             spaces.reserve(global_ids.size());
-            for(auto i=0; i<global_ids.size(); ++i)
-                spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
+            for(auto i=0u; i<global_ids.size(); ++i)
+                spaces.emplace_back(std::make_shared<VectorSpace>(makeHilbertSpace(triangulation, fe_order)));
             return ProductSpace::makeHilbertSpace(spaces, global_ids);
         }
 
@@ -141,8 +141,8 @@ namespace Spacy
         {
             std::vector< std::shared_ptr<VectorSpace> > spaces;
             spaces.reserve(primal_ids.size() + dual_ids.size());
-            for(auto i=0; i<primal_ids.size() + dual_ids.size(); ++i)
-                spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
+            for(auto i=0u; i<primal_ids.size() + dual_ids.size(); ++i)
+                spaces.emplace_back(std::make_shared<VectorSpace>(makeHilbertSpace(triangulation, fe_order)));
             return ProductSpace::makeHilbertSpace(spaces, primal_ids, dual_ids);
         }
     }
