@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.1)
 
+option(BuildTest "BuildTest" OFF)
+option(Coverage "Coverage" OFF)
+option(Kaskade "Kaskade" OFF)
+option(Dolfin "Dolfin" OFF)
+option(dealII "dealII" OFF)
+option(Logging "Logging" ON)
+
 # The version number
 set (SPACY_MAJOR_VERSION 0)
 set (SPACY_MINOR_VERSION 3)
@@ -15,12 +22,17 @@ set(CMAKE_MODULE_PATH
 # Do not allow in-source builds
 include(ConfigSafeGuards)
 
-option(BuildTest "BuildTest" OFF)
-option(Coverage "Coverage" OFF)
-option(Kaskade "Kaskade" OFF)
-option(Dolfin "Dolfin" OFF)
-option(dealII "dealII" OFF)
-option(Logging "Logging" ON)
+if(dealII)
+    find_package(deal.II 8.4 QUIET
+      HINTS ${deal.II_DIR} ${DEAL_II_DIR} ../ ../../ $ENV{DEAL_II_DIR}
+      )
+  include_directories(${deal.II_INCLUDE_DIRS})
+
+  DEAL_II_INITIALIZE_CACHED_VARIABLES()
+endif()
+
+project(Spacy)
+
 if(Logging)
     add_definitions(-DSPACY_ENABLE_LOGGING)
 endif()
@@ -36,17 +48,6 @@ find_package(Eigen3)
 if(Eigen3_FOUND)
   include_directories(${EIGEN3_INCLUDE_DIR})
 endif()
-
-if(dealII)
-    find_package(deal.II 8.4 QUIET
-      HINTS ${deal.II_DIR} ${DEAL_II_DIR} ../ ../../ $ENV{DEAL_II_DIR}
-      )
-  include_directories(${deal.II_INCLUDE_DIRS})
-
-  DEAL_II_INITIALIZE_CACHED_VARIABLES()
-endif()
-
-project(Spacy)
 
 set(DOC_DIR "doc" CACHE STRING "Output directory for the doxygen documentation")
 
