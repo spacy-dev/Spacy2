@@ -87,86 +87,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/travis/build/spacy-dev/Spacy/Spacy/Algorithm/ACR/acr.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SPACY_ACR_HH</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SPACY_ACR_HH</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;tuple&gt;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;Spacy/linearSolver.hh&quot;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;Spacy/functional.hh&quot;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;Spacy/c2Functional.hh&quot;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;Spacy/vector.hh&quot;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;Spacy/vectorSpace.hh&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;Spacy/Algorithm/lipschitzConstant.hh&quot;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;Spacy/Algorithm/CompositeStep/quadraticModel.hh&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;Spacy/Util/mixins.hh&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;Spacy/Spaces/ScalarSpace/real.hh&quot;</span>
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="keyword">namespace </span>Spacy
-<a name="l00018"></a>00018 {                           
-<a name="l00020"></a>00020  <span class="comment">// namespace ACR{ class CubicModel; }</span>
-<a name="l00022"></a>00022 <span class="comment"></span>  
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024  <span class="keyword">namespace </span>ACR
-<a name="l00025"></a>00025   {
-<a name="l00033"></a><a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html">00033</a>     <span class="keyword">class </span><a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html" title="The affine covariant step method described in.">ACRSolver</a> :
-<a name="l00034"></a>00034         <span class="keyword">public</span> Mixin::RegularityTest ,
-<a name="l00035"></a>00035         <span class="keyword">public</span> Mixin::Timer&lt;std::chrono::milliseconds&gt; ,
-<a name="l00036"></a>00036         <span class="keyword">public</span> Mixin::DecreaseCondition ,
-<a name="l00037"></a>00037         <span class="keyword">public</span> Mixin::Eps ,
-<a name="l00038"></a>00038         <span class="keyword">public</span> Mixin::MaxSteps ,
-<a name="l00039"></a>00039         <span class="keyword">public</span> Mixin::MinimalAccuracy ,
-<a name="l00040"></a>00040         <span class="keyword">public</span> Mixin::RelativeAccuracy ,
-<a name="l00041"></a>00041         <span class="keyword">public</span> Mixin::Verbosity ,
-<a name="l00042"></a>00042         <span class="keyword">public</span> Mixin::IterativeRefinements
-<a name="l00043"></a>00043     {
-<a name="l00044"></a>00044       <span class="keyword">enum class</span> StepMonitor { Rejected , Accepted };
-<a name="l00045"></a>00045       <span class="keyword">enum class</span> AcceptanceTest;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keyword">public</span>:
-<a name="l00054"></a>00054       <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#a18c168d468c1ad237e246805fa1ba1a4" title="Constructor.">ACRSolver</a>(<a class="code" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional .">C2Functional</a> f);
-<a name="l00055"></a>00055 
-<a name="l00057"></a>00057       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974" title="Compute solution.">operator()</a>();
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#pragma once</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &lt;chrono&gt;</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;Spacy/linearSolver.hh&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;Spacy/c2Functional.hh&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;Spacy/vector.hh&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;Spacy/vectorSpace.hh&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;Spacy/Util/mixins.hh&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;Spacy/Spaces/ScalarSpace/real.hh&gt;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">namespace </span>Spacy
+<a name="l00013"></a>00013 {
+<a name="l00015"></a>00015     <span class="keyword">namespace </span>CompositeStep { <span class="keyword">class </span>CubicModel; }
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018     <span class="keyword">namespace </span>ACR
+<a name="l00019"></a>00019     {
+<a name="l00027"></a><a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html">00027</a>         <span class="keyword">class </span><a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html" title="Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direct...">ACRSolver</a> :
+<a name="l00028"></a>00028                 <span class="keyword">public</span> Mixin::Eps,
+<a name="l00029"></a>00029                 <span class="keyword">public</span> Mixin::MaxSteps,
+<a name="l00030"></a>00030                 <span class="keyword">public</span> Mixin::RelativeAccuracy,
+<a name="l00031"></a>00031                 <span class="keyword">public</span> Mixin::Verbosity
+<a name="l00032"></a>00032         {
+<a name="l00033"></a>00033             <span class="keyword">enum class</span> StepMonitor { Rejected , Accepted };
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035         <span class="keyword">public</span>:
+<a name="l00040"></a>00040             <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#a2b442c8c3149e3d9ba866d9d60c8e014" title="Constructor.">ACRSolver</a>(<a class="code" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional .">C2Functional</a> f, <span class="keywordtype">double</span> eta1 = 0.25, <span class="keywordtype">double</span> eta2 = 0.5, <span class="keywordtype">double</span> epsilon = 1e-4, <span class="keywordtype">double</span> relativeAccuracy = 1e-4, <span class="keywordtype">double</span> omegaMax = 1e8,  <span class="keywordtype">double</span> lambdaMax = 2e-2);
+<a name="l00041"></a>00041 
+<a name="l00043"></a>00043             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974" title="Compute solution starting at .">operator()</a>();
+<a name="l00044"></a>00044 
+<a name="l00049"></a>00049             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974" title="Compute solution starting at .">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x0);
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051         <span class="keyword">private</span>:
+<a name="l00052"></a>00052             
+<a name="l00057"></a>00057             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> computeStep(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x) <span class="keyword">const</span>;
 <a name="l00058"></a>00058 
-<a name="l00063"></a>00063       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974" title="Compute solution.">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x0);
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065     <span class="keyword">private</span>:
-<a name="l00066"></a>00066  
-<a name="l00067"></a>00067       <span class="keyword">class </span>TrivialPreconditioner
-<a name="l00068"></a>00068       {
-<a name="l00069"></a>00069       <span class="keyword">public</span>:
-<a name="l00070"></a>00070       <span class="comment">// copy constructor</span>
-<a name="l00071"></a>00071               
-<a name="l00072"></a>00072          TrivialPreconditioner() {};
-<a name="l00073"></a>00073          
-<a name="l00074"></a>00074       TrivialPreconditioner(<span class="keyword">const</span> TrivialPreconditioner&amp; p) {};
-<a name="l00075"></a>00075       <span class="comment">//move constructor</span>
-<a name="l00076"></a>00076       TrivialPreconditioner(TrivialPreconditioner&amp;&amp; p) {};
-<a name="l00077"></a>00077       <span class="comment">//compute A(x)</span>
-<a name="l00078"></a>00078       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974" title="Compute solution.">operator()</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x)<span class="keyword"> const</span>{ <span class="keywordflow">return</span> x; };
-<a name="l00079"></a>00079     };
-<a name="l00080"></a>00080  
-<a name="l00081"></a>00081       <a class="code" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional .">C2Functional</a> f_;
-<a name="l00082"></a>00082       <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain_;
-<a name="l00083"></a>00083       StepMonitor stepMonitor = StepMonitor::Accepted;
-<a name="l00084"></a>00084       <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> computeStep(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> &amp;x) <span class="keyword">const</span>;
-<a name="l00085"></a>00085       StepMonitor acceptanceTest(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> &amp;x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> &amp;dx, <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> lambda, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html" title="The cubic regularized model for the affine covariant composite step method of.">CompositeStep::CubicModel</a>&amp; cubicModel) <span class="keyword">const</span>;
-<a name="l00086"></a>00086       <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> weightChange(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> dx, <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> x, <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Spacy::Real</a> omega_) <span class="keyword">const</span>;
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088       <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> omega = {1e-6};
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090       <span class="keyword">mutable</span> <a class="code" href="classSpacy_1_1IndefiniteLinearSolver.html" title="Type-erased indefinite linear solver. Additionally monitors if the underlying operator is positive de...">IndefiniteLinearSolver</a> tangentialSolver = {};
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092       std::string spacing = <span class="stringliteral">&quot;  &quot;</span>, spacing2 = <span class="stringliteral">&quot;    &quot;</span>;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094     <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> eta1,eta2,gamma1,gamma2,rho;
-<a name="l00095"></a>00095       <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> norm_dx_old = -1;
-<a name="l00096"></a>00096     };
-<a name="l00097"></a>00097   }
-<a name="l00098"></a>00098 }
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100 <span class="preprocessor">#endif // SPACY_ACR_HH</span>
+<a name="l00066"></a>00066             StepMonitor acceptanceTest(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; dx, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a>&amp; lambda, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1CompositeStep_1_1CubicModel.html" title="The cubic regularized model for the affine covariant composite step method of.">CompositeStep::CubicModel</a>&amp; cubicModel);
+<a name="l00067"></a>00067 
+<a name="l00072"></a>00072             <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> weightChange(::<a class="code" href="classSpacy_1_1Real.html" title="Real number.">Spacy::Real</a> omega) <span class="keyword">const</span>;
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074             <a class="code" href="classSpacy_1_1C2Functional.html" title="Type-erased twice differentiable functional .">C2Functional</a> f_;
+<a name="l00075"></a>00075             <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; domain_;
+<a name="l00076"></a>00076             StepMonitor stepMonitor = StepMonitor::Accepted;
+<a name="l00077"></a>00077             
+<a name="l00078"></a>00078             <span class="comment">// epsilon_ termination criterion</span>
+<a name="l00079"></a>00079             <span class="keyword">const</span> <span class="keywordtype">double</span> eta1_, eta2_, epsilon_, omegaMax_,  lambdaMax_;
+<a name="l00080"></a>00080             <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> rho_ = 1;
+<a name="l00081"></a>00081             <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> omega_ = 1e-6;
+<a name="l00082"></a>00082         };
+<a name="l00083"></a>00083     }
+<a name="l00084"></a>00084 }
+<a name="l00085"></a>00085 
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -185,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2016 19:17:27 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 19:49:53 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

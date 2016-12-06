@@ -108,14 +108,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Spacy::ACR::ACRSolver Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="Spacy::ACR::ACRSolver" --><!-- doxytag: inherits="Spacy::Mixin::RegularityTest,Timer&lt; std::chrono::milliseconds &gt;,Spacy::Mixin::DecreaseCondition,Spacy::Mixin::Eps,Spacy::Mixin::Verbosity" -->
-<p>The affine covariant step method described in.  
+<!-- doxytag: class="Spacy::ACR::ACRSolver" --><!-- doxytag: inherits="Spacy::Mixin::Eps,Spacy::Mixin::Verbosity" -->
+<p>Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direction of descent with one <a class="el" href="namespaceSpacy_1_1Newton.html" title="Newton methods, largely following">Newton</a> step Use a cubic error model to obtain acceptable corrections Solve problems of the form </p>
+<p class="formulaDsp">
+\[\min f(x).\]
+</p>
+<p>.  
  <a href="classSpacy_1_1ACR_1_1ACRSolver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="acr_8hh_source.html">acr.hh</a>&gt;</code></p>
@@ -124,68 +127,27 @@ Inheritance diagram for Spacy::ACR::ACRSolver:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSpacy_1_1ACR_1_1ACRSolver__inherit__graph.png" border="0" usemap="#Spacy_1_1ACR_1_1ACRSolver_inherit__map" alt="Inheritance graph"/></div>
 <map name="Spacy_1_1ACR_1_1ACRSolver_inherit__map" id="Spacy_1_1ACR_1_1ACRSolver_inherit__map">
-<area shape="rect" id="node2" href="classSpacy_1_1Mixin_1_1RegularityTest.html" title="Mixin class for maximal number of steps/iterations." alt="" coords="425,5,615,35"/><area shape="rect" id="node4" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; RegularityTest \&gt;" alt="" coords="5,5,317,35"/><area shape="rect" id="node6" href="classSpacy_1_1Mixin_1_1Timer.html" title="Spacy::Mixin::Timer\&lt; std::chrono::milliseconds \&gt;" alt="" coords="367,59,673,88"/><area shape="rect" id="node8" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html" title="Mixin class for accepting local models &#160;of nonlinear optimization problems ." alt="" coords="412,112,628,141"/><area shape="rect" id="node10" href="classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="456,165,584,195"/><area shape="rect" id="node12" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="36,165,287,195"/><area shape="rect" id="node14" href="classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity." alt="" coords="440,219,600,248"/><area shape="rect" id="node16" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="20,219,303,248"/></map>
+<area shape="rect" id="node2" href="classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="97,83,225,112"/><area shape="rect" id="node4" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="5,5,256,35"/><area shape="rect" id="node6" href="classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity." alt="" coords="311,83,471,112"/><area shape="rect" id="node8" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="280,5,563,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Spacy::ACR::ACRSolver:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSpacy_1_1ACR_1_1ACRSolver__coll__graph.png" border="0" usemap="#Spacy_1_1ACR_1_1ACRSolver_coll__map" alt="Collaboration graph"/></div>
 <map name="Spacy_1_1ACR_1_1ACRSolver_coll__map" id="Spacy_1_1ACR_1_1ACRSolver_coll__map">
-<area shape="rect" id="node2" href="classSpacy_1_1Mixin_1_1RegularityTest.html" title="Mixin class for maximal number of steps/iterations." alt="" coords="425,5,615,35"/><area shape="rect" id="node4" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; RegularityTest \&gt;" alt="" coords="5,5,317,35"/><area shape="rect" id="node6" href="classSpacy_1_1Mixin_1_1Timer.html" title="Spacy::Mixin::Timer\&lt; std::chrono::milliseconds \&gt;" alt="" coords="367,59,673,88"/><area shape="rect" id="node8" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html" title="Mixin class for accepting local models &#160;of nonlinear optimization problems ." alt="" coords="412,112,628,141"/><area shape="rect" id="node10" href="classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="456,165,584,195"/><area shape="rect" id="node12" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="36,165,287,195"/><area shape="rect" id="node14" href="classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity." alt="" coords="440,219,600,248"/><area shape="rect" id="node16" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="20,219,303,248"/></map>
+<area shape="rect" id="node2" href="classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="97,83,225,112"/><area shape="rect" id="node4" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="5,5,256,35"/><area shape="rect" id="node6" href="classSpacy_1_1Mixin_1_1Verbosity.html" title="Mixin class for verbosity." alt="" coords="311,83,471,112"/><area shape="rect" id="node8" href="classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="280,5,563,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classSpacy_1_1ACR_1_1ACRSolver-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>TrivialPreconditioner</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#a18c168d468c1ad237e246805fa1ba1a4">ACRSolver</a> (<a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> f)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a18c168d468c1ad237e246805fa1ba1a4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#a2b442c8c3149e3d9ba866d9d60c8e014">ACRSolver</a> (<a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> f, double eta1=0.25, double eta2=0.5, double epsilon=1e-4, double relativeAccuracy=1e-4, double omegaMax=1e8, double lambdaMax=2e-2)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a2b442c8c3149e3d9ba866d9d60c8e014"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae68748adce75b5762ac7005024e29974"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::operator()" ref="ae68748adce75b5762ac7005024e29974" args="()" -->
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#ae68748adce75b5762ac7005024e29974">operator()</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute solution. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute solution starting at \(x_0=0\). <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#ac7bc2ff6568728c4bd79f49f3596d2bc">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x0)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute solution.  <a href="#ac7bc2ff6568728c4bd79f49f3596d2bc"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a682ce022b0b5493e48f50f693ed64082"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::setLowerBound" ref="a682ce022b0b5493e48f50f693ed64082" args="(DampingFactor lowerBound)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#a682ce022b0b5493e48f50f693ed64082">setLowerBound</a> (<a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a> lowerBound)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set lower bound of regularity test for termination criteria. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a576995201badbfaee2064bf0d7749257"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::getLowerBound" ref="a576995201badbfaee2064bf0d7749257" args="() const noexcept" -->
-<a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getLowerBound</b> () const noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#acb6b3e8c76ebdbded0ec610959513caf">regularityTestPassed</a> (<a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a> nu) const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply regularity test.  <a href="#acb6b3e8c76ebdbded0ec610959513caf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#aeb1a3b051bafc9da9be1df354c652812">regularityTestFailed</a> (<a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a> nu) const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply regularity test.  <a href="#aeb1a3b051bafc9da9be1df354c652812"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a6191e20f84025cec8b10ec63ab94ac"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::update" ref="a1a6191e20f84025cec8b10ec63ab94ac" args="(RegularityTest *changedSubject)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#a1a6191e20f84025cec8b10ec63ab94ac">update</a> (<a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#a548d9d45c31c7833266bd3b20dc1aa7e">RegularityTest</a> *changedSubject)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">update function for observer pattern. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb5520ee6b22dd993d78f142939a1ed4"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::attach" ref="abb5520ee6b22dd993d78f142939a1ed4" args="(RegularityTest &amp;observer)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1MixinConnection.html#abb5520ee6b22dd993d78f142939a1ed4">attach</a> (<a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#a548d9d45c31c7833266bd3b20dc1aa7e">RegularityTest</a> &amp;observer)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach observer. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adda739590c487679c26f60e50aedb73f"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::detach" ref="adda739590c487679c26f60e50aedb73f" args="(RegularityTest &amp;observer)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1MixinConnection.html#adda739590c487679c26f60e50aedb73f">detach</a> (<a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#a548d9d45c31c7833266bd3b20dc1aa7e">RegularityTest</a> &amp;observer)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach observer. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ddeaa78a3bb4a38c2cca36d1f99fe36"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::notify" ref="a1ddeaa78a3bb4a38c2cca36d1f99fe36" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1MixinConnection.html#a1ddeaa78a3bb4a38c2cca36d1f99fe36">notify</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify observers about changes. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf3c292b6d482c7c4ded5f961be4bc4b"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::startTimer" ref="acf3c292b6d482c7c4ded5f961be4bc4b" args="() const" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>startTimer</b> () const</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab27a20d8e1e9bc90ea56cb18ff752798"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::elapsedTime" ref="ab27a20d8e1e9bc90ea56cb18ff752798" args="() const" -->
-std::chrono::high_resolution_clock::rep&#160;</td><td class="memItemRight" valign="bottom"><b>elapsedTime</b> () const</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b79b35213702118d0823f6040d5a315"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::printElapsedTime" ref="a3b79b35213702118d0823f6040d5a315" args="() const" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1Timer.html#a3b79b35213702118d0823f6040d5a315">printElapsedTime</a> () const</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Print elapsed time to std::cout. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#aabc5e2473edace0c87da7fbd9fa0ae61">setMinimalDecrease</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> decrease) noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set required minimal decrease.  <a href="#aabc5e2473edace0c87da7fbd9fa0ae61"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#aeeda8b1d9f177fe5dd532e42de09ab44">minimalDecrease</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access minimal decrease.  <a href="#aeeda8b1d9f177fe5dd532e42de09ab44"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a86d6a8c8fc683c31572fd818a102a362">setRelaxedMinimalDecrease</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> decrease) noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set relaxed minimal decrease.  <a href="#a86d6a8c8fc683c31572fd818a102a362"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a69c0c90daf14fc40461876f71c49ffc2">acceptableDecrease</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> decrease) const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Decide if measure relative decrease is acceptable.  <a href="#a69c0c90daf14fc40461876f71c49ffc2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a5ffb5bc008544db96d935a0ca34dcd24">acceptableRelaxedDecrease</a> (<a class="el" href="classSpacy_1_1Real.html">Real</a> decrease) const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition.  <a href="#a5ffb5bc008544db96d935a0ca34dcd24"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b4c38a60848c0ab665fb3a81e181786"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::setEps" ref="a6b4c38a60848c0ab665fb3a81e181786" args="(Real eps)" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setEps</b> (<a class="el" href="classSpacy_1_1Real.html">Real</a> <a class="el" href="classSpacy_1_1Mixin_1_1Eps.html#a812b99b0abc1d78a34b4114907f23f52">eps</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a812b99b0abc1d78a34b4114907f23f52"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::eps" ref="a812b99b0abc1d78a34b4114907f23f52" args="() const noexcept" -->
@@ -233,28 +195,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify observers about changes. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>The affine covariant step method described in. </p>
-<p><a class="el" href="citelist.html#CITEREF_Lubkoll2015">Lubkoll2015</a>, <a class="el" href="citelist.html#CITEREF_Lubkoll2015a">Lubkoll2015a</a> for the solution of equality constraint optimization problems.</p>
-<p>An affine covariant composite step method for the solution of problems of the form </p>
+<div class="textblock"><p>Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direction of descent with one <a class="el" href="namespaceSpacy_1_1Newton.html" title="Newton methods, largely following">Newton</a> step Use a cubic error model to obtain acceptable corrections Solve problems of the form </p>
 <p class="formulaDsp">
-\[\min f(x)\quad \text{s.t.}\quad c(x)=0\]
-</p>
-<p>, based on the corresponding Lagrange functional </p>
-<p class="formulaDsp">
-\[L(x,p) = f(x)+pc(x)\]
+\[\min f(x).\]
 </p>
 <p>. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a18c168d468c1ad237e246805fa1ba1a4"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::ACRSolver" ref="a18c168d468c1ad237e246805fa1ba1a4" args="(C2Functional f)" -->
+<a class="anchor" id="a2b442c8c3149e3d9ba866d9d60c8e014"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::ACRSolver" ref="a2b442c8c3149e3d9ba866d9d60c8e014" args="(C2Functional f, double eta1=0.25, double eta2=0.5, double epsilon=1e&#45;4, double relativeAccuracy=1e&#45;4, double omegaMax=1e8, double lambdaMax=2e&#45;2)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#a18c168d468c1ad237e246805fa1ba1a4">Spacy::ACR::ACRSolver::ACRSolver</a> </td>
+          <td class="memname"><a class="el" href="classSpacy_1_1ACR_1_1ACRSolver.html#a2b442c8c3149e3d9ba866d9d60c8e014">Spacy::ACR::ACRSolver::ACRSolver</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a>&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eta1</em> = <code>0.25</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>eta2</em> = <code>0.5</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code>1e-4</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relativeAccuracy</em> = <code>1e-4</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>omegaMax</em> = <code>1e8</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lambdaMax</em> = <code>2e-2</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -263,12 +259,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Constructor. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">N</td><td>Lagrange functional for the problem <p class="formulaDsp">
-\[\min \|\delta x_k\| \quad \text{s.t.} c&#39;(x_k)\delta x_k + c(x_k)=0\]
-</p>
- </td></tr>
-    <tr><td class="paramname">L</td><td>Lagrange functional </td></tr>
-    <tr><td class="paramname">domain</td><td>domain space \(X=\{Y,U,P\}\) </td></tr>
+    <tr><td class="paramname">f</td><td>functional to minimize </td></tr>
   </table>
   </dd>
 </dl>
@@ -295,178 +286,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">x0</td><td>initial iterate </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="acb6b3e8c76ebdbded0ec610959513caf"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::regularityTestPassed" ref="acb6b3e8c76ebdbded0ec610959513caf" args="(DampingFactor nu) const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#acb6b3e8c76ebdbded0ec610959513caf">Spacy::Mixin::RegularityTest::regularityTestPassed</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&#160;</td>
-          <td class="paramname"><em>nu</em></td><td>)</td>
-          <td> const<code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Apply regularity test. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nu</td><td>damping factor </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>\(nu &gt; lowerBound_\) </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aeb1a3b051bafc9da9be1df354c652812"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::regularityTestFailed" ref="aeb1a3b051bafc9da9be1df354c652812" args="(DampingFactor nu) const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classSpacy_1_1Mixin_1_1RegularityTest.html#aeb1a3b051bafc9da9be1df354c652812">Spacy::Mixin::RegularityTest::regularityTestFailed</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1DampingFactor.html">DampingFactor</a>&#160;</td>
-          <td class="paramname"><em>nu</em></td><td>)</td>
-          <td> const<code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Apply regularity test. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nu</td><td>damping factor </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>\(nu &lt;= lowerBound_\) </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aabc5e2473edace0c87da7fbd9fa0ae61"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::setMinimalDecrease" ref="aabc5e2473edace0c87da7fbd9fa0ae61" args="(Real decrease) noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#aabc5e2473edace0c87da7fbd9fa0ae61">Spacy::Mixin::DecreaseCondition::setMinimalDecrease</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td>
-          <td class="paramname"><em>decrease</em></td><td>)</td>
-          <td><code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set required minimal decrease. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decrease</td><td>minimal required decrease </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="aeeda8b1d9f177fe5dd532e42de09ab44"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::minimalDecrease" ref="aeeda8b1d9f177fe5dd532e42de09ab44" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSpacy_1_1Real.html">Real</a> <a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#aeeda8b1d9f177fe5dd532e42de09ab44">Spacy::Mixin::DecreaseCondition::minimalDecrease</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Access minimal decrease. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>minimal decrease </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a86d6a8c8fc683c31572fd818a102a362"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::setRelaxedMinimalDecrease" ref="a86d6a8c8fc683c31572fd818a102a362" args="(Real decrease) noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a86d6a8c8fc683c31572fd818a102a362">Spacy::Mixin::DecreaseCondition::setRelaxedMinimalDecrease</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td>
-          <td class="paramname"><em>decrease</em></td><td>)</td>
-          <td><code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set relaxed minimal decrease. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decrease</td><td>relaxed required decrease</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This is used for deciding about rejecting tangential steps in CompositeSteps::AffineCovariantSolver. </p>
-
-</div>
-</div>
-<a class="anchor" id="a69c0c90daf14fc40461876f71c49ffc2"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::acceptableDecrease" ref="a69c0c90daf14fc40461876f71c49ffc2" args="(Real decrease) const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a69c0c90daf14fc40461876f71c49ffc2">Spacy::Mixin::DecreaseCondition::acceptableDecrease</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td>
-          <td class="paramname"><em>decrease</em></td><td>)</td>
-          <td> const<code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Decide if measure relative decrease is acceptable. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decrease</td><td>measured relative decrease \(\delta m/\delta f\). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a5ffb5bc008544db96d935a0ca34dcd24"></a><!-- doxytag: member="Spacy::ACR::ACRSolver::acceptableRelaxedDecrease" ref="a5ffb5bc008544db96d935a0ca34dcd24" args="(Real decrease) const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classSpacy_1_1Mixin_1_1DecreaseCondition.html#a5ffb5bc008544db96d935a0ca34dcd24">Spacy::Mixin::DecreaseCondition::acceptableRelaxedDecrease</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td>
-          <td class="paramname"><em>decrease</em></td><td>)</td>
-          <td> const<code> [inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">decrease</td><td>measured relative decrease \(\delta m/\delta f\). </td></tr>
   </table>
   </dd>
 </dl>
@@ -519,7 +338,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 6 2016 19:17:27 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 6 2016 19:49:53 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

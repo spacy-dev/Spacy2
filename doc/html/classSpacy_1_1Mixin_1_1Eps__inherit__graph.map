@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node5" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="The affine covariant step method described in." alt="" coords="673,7,844,37"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direct..." alt="" coords="673,7,844,37"/>
 <area shape="rect" id="node7" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept." alt="" coords="676,61,841,90"/>
 <area shape="rect" id="node9" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method." alt="" coords="693,114,824,143"/>
 <area shape="rect" id="node11" href="$classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html" title="Termination criterion for conjugate gradient methods based on an estimate of the relative energy erro..." alt="" coords="600,167,917,197"/>

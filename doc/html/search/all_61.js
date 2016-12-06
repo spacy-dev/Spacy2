@@ -5,7 +5,7 @@ var searchData=
   ['acceptabledecrease',['acceptableDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#a69c0c90daf14fc40461876f71c49ffc2',1,'Spacy::Mixin::DecreaseCondition']]],
   ['acceptablerelaxeddecrease',['acceptableRelaxedDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#a5ffb5bc008544db96d935a0ca34dcd24',1,'Spacy::Mixin::DecreaseCondition']]],
   ['acrsolver',['ACRSolver',['../classSpacy_1_1ACR_1_1ACRSolver.html',1,'Spacy::ACR']]],
-  ['acrsolver',['ACRSolver',['../classSpacy_1_1ACR_1_1ACRSolver.html#a18c168d468c1ad237e246805fa1ba1a4',1,'Spacy::ACR::ACRSolver']]],
+  ['acrsolver',['ACRSolver',['../classSpacy_1_1ACR_1_1ACRSolver.html#a2b442c8c3149e3d9ba866d9d60c8e014',1,'Spacy::ACR::ACRSolver']]],
   ['adaptiveinducedscalarproduct',['AdaptiveInducedScalarProduct',['../classSpacy_1_1AdaptiveInducedScalarProduct.html',1,'Spacy']]],
   ['adaptiveinducedscalarproduct',['AdaptiveInducedScalarProduct',['../classSpacy_1_1AdaptiveInducedScalarProduct.html#ae96382f8f7287b0f64176932196bca1b',1,'Spacy::AdaptiveInducedScalarProduct']]],
   ['addarithmeticoperators',['AddArithmeticOperators',['../classSpacy_1_1AddArithmeticOperators.html',1,'Spacy']]],

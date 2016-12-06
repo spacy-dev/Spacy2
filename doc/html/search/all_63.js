@@ -2,8 +2,8 @@ var searchData=
 [
   ['c1functional',['C1Functional',['../classSpacy_1_1C1Functional.html',1,'Spacy']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Kaskade_1_1C1Operator.html',1,'Spacy::Kaskade']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1FEniCS_1_1C1Operator.html',1,'Spacy::FEniCS']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1C1Operator.html',1,'Spacy']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1FEniCS_1_1C1Operator.html',1,'Spacy::FEniCS']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Rn_1_1C1Operator.html#ace713dafa8c7422f57f0f1c0a989db12',1,'Spacy::Rn::C1Operator::C1Operator()'],['../classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97',1,'Spacy::FEniCS::C1Operator::C1Operator()'],['../classSpacy_1_1Kaskade_1_1C1Operator.html#aa31e9f54fcbb4eb6c40c1cd467d25836',1,'Spacy::Kaskade::C1Operator::C1Operator(const OperatorDefinition &amp;f, const VectorSpace &amp;domain, const VectorSpace &amp;range, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)'],['../classSpacy_1_1Kaskade_1_1C1Operator.html#af75af5b5ee04c86a776d52bc8176d56e',1,'Spacy::Kaskade::C1Operator::C1Operator(C1Operator &amp;&amp;B)']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Scalar_1_1C1Operator.html',1,'Spacy::Scalar']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1dealII_1_1C1Operator.html',1,'Spacy::dealII']]],

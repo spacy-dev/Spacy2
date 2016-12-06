@@ -3,7 +3,7 @@
 }
 
 
-\-The affine covariant step method described in.  
+\-Adaptive cubic regularization approach for solving unconstrained minimization problems \-Compute direction of descent with one \hyperlink{namespaceSpacy_1_1Newton}{\-Newton} step \-Use a cubic error model to obtain acceptable corrections \-Solve problems of the form \[\min f(x).\].  
 
 
 
@@ -30,62 +30,16 @@
 \includegraphics[width=350pt]{classSpacy_1_1ACR_1_1ACRSolver__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{\-Classes}
-\begin{DoxyCompactItemize}
-\item 
-class {\bfseries \-Trivial\-Preconditioner}
-\end{DoxyCompactItemize}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}{\-A\-C\-R\-Solver} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} f)
+\hyperlink{classSpacy_1_1ACR_1_1ACRSolver_a2b442c8c3149e3d9ba866d9d60c8e014}{\-A\-C\-R\-Solver} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} f, double eta1=0.\-25, double eta2=0.\-5, double epsilon=1e-\/4, double relative\-Accuracy=1e-\/4, double omega\-Max=1e8, double lambda\-Max=2e-\/2)
 \begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}{operator()} ()}\label{classSpacy_1_1ACR_1_1ACRSolver_ae68748adce75b5762ac7005024e29974}
 
-\begin{DoxyCompactList}\small\item\em \-Compute solution. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Compute solution starting at $x_0=0$. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1ACR_1_1ACRSolver_ac7bc2ff6568728c4bd79f49f3596d2bc}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x0)
 \begin{DoxyCompactList}\small\item\em \-Compute solution. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a682ce022b0b5493e48f50f693ed64082}{void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a682ce022b0b5493e48f50f693ed64082}{set\-Lower\-Bound} (\hyperlink{classSpacy_1_1DampingFactor}{\-Damping\-Factor} lower\-Bound)}\label{classSpacy_1_1Mixin_1_1RegularityTest_a682ce022b0b5493e48f50f693ed64082}
-
-\begin{DoxyCompactList}\small\item\em \-Set lower bound of regularity test for termination criteria. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a576995201badbfaee2064bf0d7749257}{\hyperlink{classSpacy_1_1DampingFactor}{\-Damping\-Factor} {\bfseries get\-Lower\-Bound} () const noexcept}\label{classSpacy_1_1Mixin_1_1RegularityTest_a576995201badbfaee2064bf0d7749257}
-
-\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_acb6b3e8c76ebdbded0ec610959513caf}{regularity\-Test\-Passed} (\hyperlink{classSpacy_1_1DampingFactor}{\-Damping\-Factor} nu) const noexcept
-\begin{DoxyCompactList}\small\item\em \-Apply regularity test. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_aeb1a3b051bafc9da9be1df354c652812}{regularity\-Test\-Failed} (\hyperlink{classSpacy_1_1DampingFactor}{\-Damping\-Factor} nu) const noexcept
-\begin{DoxyCompactList}\small\item\em \-Apply regularity test. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}{void \hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}{update} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a548d9d45c31c7833266bd3b20dc1aa7e}{\-Regularity\-Test} $\ast$changed\-Subject)}\label{classSpacy_1_1Mixin_1_1RegularityTest_a1a6191e20f84025cec8b10ec63ab94ac}
-
-\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a548d9d45c31c7833266bd3b20dc1aa7e}{\-Regularity\-Test} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
-
-\begin{DoxyCompactList}\small\item\em \-Attach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1RegularityTest_a548d9d45c31c7833266bd3b20dc1aa7e}{\-Regularity\-Test} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
-
-\begin{DoxyCompactList}\small\item\em \-Detach observer. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
-
-\begin{DoxyCompactList}\small\item\em \-Notify observers about changes. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Timer_acf3c292b6d482c7c4ded5f961be4bc4b}{void {\bfseries start\-Timer} () const}\label{classSpacy_1_1Mixin_1_1Timer_acf3c292b6d482c7c4ded5f961be4bc4b}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Timer_ab27a20d8e1e9bc90ea56cb18ff752798}{std\-::chrono\-::high\-\_\-resolution\-\_\-clock\-::rep {\bfseries elapsed\-Time} () const}\label{classSpacy_1_1Mixin_1_1Timer_ab27a20d8e1e9bc90ea56cb18ff752798}
-
-\item 
-\hypertarget{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}{void \hyperlink{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}{print\-Elapsed\-Time} () const}\label{classSpacy_1_1Mixin_1_1Timer_a3b79b35213702118d0823f6040d5a315}
-
-\begin{DoxyCompactList}\small\item\em \-Print elapsed time to std\-::cout. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}{set\-Minimal\-Decrease} (\hyperlink{classSpacy_1_1Real}{\-Real} decrease) noexcept
-\begin{DoxyCompactList}\small\item\em \-Set required minimal decrease. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}{minimal\-Decrease} () const noexcept
-\begin{DoxyCompactList}\small\item\em \-Access minimal decrease. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}{set\-Relaxed\-Minimal\-Decrease} (\hyperlink{classSpacy_1_1Real}{\-Real} decrease) noexcept
-\begin{DoxyCompactList}\small\item\em \-Set relaxed minimal decrease. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}{acceptable\-Decrease} (\hyperlink{classSpacy_1_1Real}{\-Real} decrease) const noexcept
-\begin{DoxyCompactList}\small\item\em \-Decide if measure relative decrease is acceptable. \end{DoxyCompactList}\item 
-bool \hyperlink{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}{acceptable\-Relaxed\-Decrease} (\hyperlink{classSpacy_1_1Real}{\-Real} decrease) const noexcept
-\begin{DoxyCompactList}\small\item\em \-Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1Mixin_1_1Eps_a6b4c38a60848c0ab665fb3a81e181786}{void {\bfseries set\-Eps} (\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{eps})}\label{classSpacy_1_1Mixin_1_1Eps_a6b4c38a60848c0ab665fb3a81e181786}
 
 \item 
@@ -136,31 +90,29 @@ void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020ae
 
 
 \subsection{\-Detailed \-Description}
-\-The affine covariant step method described in. 
-
-\cite{Lubkoll2015}, \cite{Lubkoll2015a} for the solution of equality constraint optimization problems.
-
-\-An affine covariant composite step method for the solution of problems of the form \[\min f(x)\quad \text{s.t.}\quad c(x)=0\], based on the corresponding \-Lagrange functional \[L(x,p) = f(x)+pc(x)\]. 
+\-Adaptive cubic regularization approach for solving unconstrained minimization problems \-Compute direction of descent with one \hyperlink{namespaceSpacy_1_1Newton}{\-Newton} step \-Use a cubic error model to obtain acceptable corrections \-Solve problems of the form \[\min f(x).\]. 
 
 \subsection{\-Constructor \& \-Destructor \-Documentation}
-\hypertarget{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!\-A\-C\-R\-Solver@{\-A\-C\-R\-Solver}}
+\hypertarget{classSpacy_1_1ACR_1_1ACRSolver_a2b442c8c3149e3d9ba866d9d60c8e014}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!\-A\-C\-R\-Solver@{\-A\-C\-R\-Solver}}
 \index{\-A\-C\-R\-Solver@{\-A\-C\-R\-Solver}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
 \subsubsection[{\-A\-C\-R\-Solver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver\-::\-A\-C\-R\-Solver} (
 \begin{DoxyParamCaption}
-\item[{{\bf \-C2\-Functional}}]{f}
+\item[{{\bf \-C2\-Functional}}]{f, }
+\item[{double}]{eta1 = {\ttfamily 0.25}, }
+\item[{double}]{eta2 = {\ttfamily 0.5}, }
+\item[{double}]{epsilon = {\ttfamily 1e-\/4}, }
+\item[{double}]{relative\-Accuracy = {\ttfamily 1e-\/4}, }
+\item[{double}]{omega\-Max = {\ttfamily 1e8}, }
+\item[{double}]{lambda\-Max = {\ttfamily 2e-\/2}}
 \end{DoxyParamCaption}
-)}}\label{classSpacy_1_1ACR_1_1ACRSolver_a18c168d468c1ad237e246805fa1ba1a4}
+)}}\label{classSpacy_1_1ACR_1_1ACRSolver_a2b442c8c3149e3d9ba866d9d60c8e014}
 
 
 \-Constructor. 
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em \-N} & \-Lagrange functional for the problem \[\min \|\delta x_k\| \quad \text{s.t.} c'(x_k)\delta x_k + c(x_k)=0\] \\
-\hline
-{\em \-L} & \-Lagrange functional \\
-\hline
-{\em domain} & domain space $X=\{Y,U,P\}$ \\
+{\em f} & functional to minimize \\
 \hline
 \end{DoxyParams}
 
@@ -180,122 +132,6 @@ void \hyperlink{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020ae
 
 \begin{DoxyParams}{\-Parameters}
 {\em x0} & initial iterate \\
-\hline
-\end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_acb6b3e8c76ebdbded0ec610959513caf}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!regularity\-Test\-Passed@{regularity\-Test\-Passed}}
-\index{regularity\-Test\-Passed@{regularity\-Test\-Passed}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{regularity\-Test\-Passed}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-Mixin\-::\-Regularity\-Test\-::regularity\-Test\-Passed} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Damping\-Factor}}]{nu}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1RegularityTest_acb6b3e8c76ebdbded0ec610959513caf}
-
-
-\-Apply regularity test. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nu} & damping factor \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-$nu > lowerBound_$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1RegularityTest_aeb1a3b051bafc9da9be1df354c652812}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!regularity\-Test\-Failed@{regularity\-Test\-Failed}}
-\index{regularity\-Test\-Failed@{regularity\-Test\-Failed}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{regularity\-Test\-Failed}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-Mixin\-::\-Regularity\-Test\-::regularity\-Test\-Failed} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Damping\-Factor}}]{nu}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1RegularityTest_aeb1a3b051bafc9da9be1df354c652812}
-
-
-\-Apply regularity test. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nu} & damping factor \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-$nu <= lowerBound_$ 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!set\-Minimal\-Decrease@{set\-Minimal\-Decrease}}
-\index{set\-Minimal\-Decrease@{set\-Minimal\-Decrease}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{set\-Minimal\-Decrease}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::\-Mixin\-::\-Decrease\-Condition\-::set\-Minimal\-Decrease} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Real}}]{decrease}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aabc5e2473edace0c87da7fbd9fa0ae61}
-
-
-\-Set required minimal decrease. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em decrease} & minimal required decrease \\
-\hline
-\end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!minimal\-Decrease@{minimal\-Decrease}}
-\index{minimal\-Decrease@{minimal\-Decrease}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{minimal\-Decrease}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Real} {\bf \-Spacy\-::\-Mixin\-::\-Decrease\-Condition\-::minimal\-Decrease} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_aeeda8b1d9f177fe5dd532e42de09ab44}
-
-
-\-Access minimal decrease. 
-
-\begin{DoxyReturn}{\-Returns}
-minimal decrease 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!set\-Relaxed\-Minimal\-Decrease@{set\-Relaxed\-Minimal\-Decrease}}
-\index{set\-Relaxed\-Minimal\-Decrease@{set\-Relaxed\-Minimal\-Decrease}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{set\-Relaxed\-Minimal\-Decrease}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Spacy\-::\-Mixin\-::\-Decrease\-Condition\-::set\-Relaxed\-Minimal\-Decrease} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Real}}]{decrease}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a86d6a8c8fc683c31572fd818a102a362}
-
-
-\-Set relaxed minimal decrease. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em decrease} & relaxed required decrease\\
-\hline
-\end{DoxyParams}
-\-This is used for deciding about rejecting tangential steps in \-Composite\-Steps\-::\-Affine\-Covariant\-Solver. \hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!acceptable\-Decrease@{acceptable\-Decrease}}
-\index{acceptable\-Decrease@{acceptable\-Decrease}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{acceptable\-Decrease}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-Mixin\-::\-Decrease\-Condition\-::acceptable\-Decrease} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Real}}]{decrease}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a69c0c90daf14fc40461876f71c49ffc2}
-
-
-\-Decide if measure relative decrease is acceptable. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em decrease} & measured relative decrease $\delta m/\delta f$. \\
-\hline
-\end{DoxyParams}
-\hypertarget{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!acceptable\-Relaxed\-Decrease@{acceptable\-Relaxed\-Decrease}}
-\index{acceptable\-Relaxed\-Decrease@{acceptable\-Relaxed\-Decrease}!Spacy::ACR::ACRSolver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}}
-\subsubsection[{acceptable\-Relaxed\-Decrease}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Spacy\-::\-Mixin\-::\-Decrease\-Condition\-::acceptable\-Relaxed\-Decrease} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Real}}]{decrease}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inherited\mbox{]}}}}\label{classSpacy_1_1Mixin_1_1DecreaseCondition_a5ffb5bc008544db96d935a0ca34dcd24}
-
-
-\-Decide if measure relative decrease is acceptable with respect to the relaxed decrease condition. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em decrease} & measured relative decrease $\delta m/\delta f$. \\
 \hline
 \end{DoxyParams}
 \hypertarget{classSpacy_1_1Mixin_1_1Verbosity_a0365d293ab27e27da9496c668020aefb}{\index{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver@{\-Spacy\-::\-A\-C\-R\-::\-A\-C\-R\-Solver}!set\-Verbosity@{set\-Verbosity}}

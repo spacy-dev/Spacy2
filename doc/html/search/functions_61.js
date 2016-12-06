@@ -4,7 +4,7 @@ var searchData=
   ['abs',['abs',['../namespaceSpacy.html#a89ed08f6f5a05e3f35afa37fcebf4b06',1,'Spacy']]],
   ['acceptabledecrease',['acceptableDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#a69c0c90daf14fc40461876f71c49ffc2',1,'Spacy::Mixin::DecreaseCondition']]],
   ['acceptablerelaxeddecrease',['acceptableRelaxedDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#a5ffb5bc008544db96d935a0ca34dcd24',1,'Spacy::Mixin::DecreaseCondition']]],
-  ['acrsolver',['ACRSolver',['../classSpacy_1_1ACR_1_1ACRSolver.html#a18c168d468c1ad237e246805fa1ba1a4',1,'Spacy::ACR::ACRSolver']]],
+  ['acrsolver',['ACRSolver',['../classSpacy_1_1ACR_1_1ACRSolver.html#a2b442c8c3149e3d9ba866d9d60c8e014',1,'Spacy::ACR::ACRSolver']]],
   ['adaptiveinducedscalarproduct',['AdaptiveInducedScalarProduct',['../classSpacy_1_1AdaptiveInducedScalarProduct.html#ae96382f8f7287b0f64176932196bca1b',1,'Spacy::AdaptiveInducedScalarProduct']]],
   ['adddualspace',['addDualSpace',['../classSpacy_1_1VectorSpace.html#a6477c132f76235270db33fa85b13acd9',1,'Spacy::VectorSpace']]],
   ['affinecontravariant',['AffineContravariant',['../classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html#afbb2954f22af6d8248ec9c382a5b1ccd',1,'Spacy::Newton::Damping::AffineContravariant::AffineContravariant()'],['../classSpacy_1_1Newton_1_1Termination_1_1AffineContravariant.html#a84217ee3e52e0bc40ad2e1ecc13abf9a',1,'Spacy::Newton::Termination::AffineContravariant::AffineContravariant()']]],

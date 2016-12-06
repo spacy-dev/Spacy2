@@ -2,8 +2,8 @@ var searchData=
 [
   ['c1functional',['C1Functional',['../classSpacy_1_1C1Functional.html',1,'Spacy']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Kaskade_1_1C1Operator.html',1,'Spacy::Kaskade']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1FEniCS_1_1C1Operator.html',1,'Spacy::FEniCS']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1C1Operator.html',1,'Spacy']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1FEniCS_1_1C1Operator.html',1,'Spacy::FEniCS']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Scalar_1_1C1Operator.html',1,'Spacy::Scalar']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1dealII_1_1C1Operator.html',1,'Spacy::dealII']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Rn_1_1C1Operator.html',1,'Spacy::Rn']]],

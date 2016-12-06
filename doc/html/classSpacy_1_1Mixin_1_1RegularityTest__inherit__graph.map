@@ -1,8 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node5" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="The affine covariant step method described in." alt="" coords="667,5,837,35"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in." alt="" coords="607,59,897,88"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html" title="Affine contravariant damping strategy as described in." alt="" coords="607,112,897,141"/>
-<area shape="rect" id="node11" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant.html" title="Affine covariant damping strategy as described in." alt="" coords="617,165,887,195"/>
-<area shape="rect" id="node13" href="$structSpacy_1_1Newton_1_1Parameter.html" title="Spacy::Newton::Parameter" alt="" coords="663,219,841,248"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; RegularityTest \&gt;" alt="" coords="5,112,317,141"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in." alt="" coords="607,5,897,35"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineContravariant.html" title="Affine contravariant damping strategy as described in." alt="" coords="607,59,897,88"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Newton_1_1Damping_1_1AffineCovariant.html" title="Affine covariant damping strategy as described in." alt="" coords="617,112,887,141"/>
+<area shape="rect" id="node11" href="$structSpacy_1_1Newton_1_1Parameter.html" title="Spacy::Newton::Parameter" alt="" coords="663,165,841,195"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; RegularityTest \&gt;" alt="" coords="5,85,317,115"/>
 </map>
