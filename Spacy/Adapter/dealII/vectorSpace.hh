@@ -97,16 +97,53 @@ namespace Spacy
          * @brief Convenient generation of a product vector space from dealii::Triangulation<dim>.
          * @param triangulation triangulation underlying the FE-space
          * @param fe_order order of the finite elements
-         * @return @ref ::Spacy::makeHilbertSpace() "::Spacy::makeHilbertSpace( VectorCreator<dim>{triangulation, fe:order} , l2Product{} )"
          */
         template <int dim>
-        VectorSpace makeHilbertSpace(dealii::Triangulation<dim>& triangulation, int number_of_variables, int fe_order)
+        VectorSpace makeHilbertSpace(dealii::Triangulation<dim>& triangulation, unsigned number_of_variables, int fe_order)
         {
             std::vector< std::shared_ptr<VectorSpace> > spaces;
             spaces.reserve(number_of_variables);
             for(auto i=0; i<number_of_variables; ++i)
                 spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
             return ProductSpace::makeHilbertSpace(spaces);
+        }
+
+        /**
+         * @brief Convenient generation of a product vector space from dealii::Triangulation<dim>.
+         * @param triangulation triangulation underlying the FE-space
+         * @param global_ids global ids associated with variables (for reordering, subspace projections,...)
+         * @param fe_order order of the finite elements
+         */
+        template <int dim>
+        VectorSpace makeHilbertSpace(dealii::Triangulation<dim>& triangulation,
+                                     const std::vector<unsigned>& global_ids,
+                                     int fe_order)
+        {
+            std::vector< std::shared_ptr<VectorSpace> > spaces;
+            spaces.reserve(global_ids.size());
+            for(auto i=0; i<global_ids.size(); ++i)
+                spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
+            return ProductSpace::makeHilbertSpace(spaces, global_ids);
+        }
+
+        /**
+         * @brief Convenient generation of a primal-dual product vector space from dealii::Triangulation<dim>.
+         * @param triangulation triangulation underlying the FE-space
+         * @param primal_ids global ids associated with primal variables
+         * @param dual_ids global ids associated with primal variables
+         * @param fe_order order of the finite elements
+         */
+        template <int dim>
+        VectorSpace makeHilbertSpace(dealii::Triangulation<dim>& triangulation,
+                                     const std::vector<unsigned>& primal_ids,
+                                     const std::vector<unsigned>& dual_ids,
+                                     int fe_order)
+        {
+            std::vector< std::shared_ptr<VectorSpace> > spaces;
+            spaces.reserve(primal_ids.size() + dual_ids.size());
+            for(auto i=0; i<primal_ids.size() + dual_ids.size(); ++i)
+                spaces.emplace_back(makeHilbertSpace(triangulation, fe_order));
+            return ProductSpace::makeHilbertSpace(spaces, primal_ids, dual_ids);
         }
     }
     /** @} */
