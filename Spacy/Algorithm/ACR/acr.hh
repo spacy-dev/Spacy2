@@ -1,100 +1,85 @@
-#ifndef SPACY_ACR_HH
-#define SPACY_ACR_HH
+#pragma once
 
-#include <string>
-#include <tuple>
+#include <chrono>
 
-#include "Spacy/linearSolver.hh"
-#include "Spacy/functional.hh"
-#include "Spacy/c2Functional.hh"
-#include "Spacy/vector.hh"
-#include "Spacy/vectorSpace.hh"
-#include "Spacy/Algorithm/lipschitzConstant.hh"
-#include "Spacy/Algorithm/CompositeStep/quadraticModel.hh"
-#include "Spacy/Util/mixins.hh"
-#include "Spacy/Spaces/ScalarSpace/real.hh"
+#include <Spacy/linearSolver.hh>
+#include <Spacy/c2Functional.hh>
+#include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/Util/mixins.hh>
+#include <Spacy/Spaces/ScalarSpace/real.hh>
 
 namespace Spacy
-{                           
-  /// \cond
- // namespace ACR{ class CubicModel; }
-  /// \endcond
-  
+{
+    /// @cond
+    namespace CompositeStep { class CubicModel; }
+    /// @endcond
 
- namespace ACR
-  {
-    /**
-     * @brief The affine covariant step method described in @cite Lubkoll2015, @cite Lubkoll2015a for the solution of equality constraint optimization problems.
-     *
-     * An affine covariant composite step method for the solution of problems of the form
-     * \f[\min f(x)\quad \text{s.t.}\quad c(x)=0\f], based on the corresponding Lagrange functional
-     * \f[L(x,p) = f(x)+pc(x)\f].
-     */
-    class ACRSolver :
-        public Mixin::RegularityTest ,
-        public Mixin::Timer<std::chrono::milliseconds> ,
-        public Mixin::DecreaseCondition ,
-        public Mixin::Eps ,
-        public Mixin::MaxSteps ,
-        public Mixin::MinimalAccuracy ,
-        public Mixin::RelativeAccuracy ,
-        public Mixin::Verbosity ,
-        public Mixin::IterativeRefinements
+    namespace ACR
     {
-      enum class StepMonitor { Rejected , Accepted };
-      enum class AcceptanceTest;
+        /**
+         * @brief Adaptive cubic regularization approach for solving unconstrained minimization problems
+         * Compute direction of descent with one Newton step
+         * Use a cubic error model to obtain acceptable corrections 
+         * Solve problems of the form
+         * \f[\min f(x).\f]
+         */
+        class ACRSolver :
+                public Mixin::Eps,
+                public Mixin::MaxSteps,
+                public Mixin::RelativeAccuracy,
+                public Mixin::Verbosity
+        {
+            enum class StepMonitor { Rejected , Accepted };
 
-    public:
-      /**
-       * @brief Constructor.
-       * @param N Lagrange functional for the problem \f[\min \|\delta x_k\| \quad \text{s.t.} c'(x_k)\delta x_k + c(x_k)=0\f]
-       * @param L Lagrange functional
-       * @param domain domain space \f$X=\{Y,U,P\}\f$
-       */
-      ACRSolver(C2Functional f);
+        public:
+            /**
+             * @brief Constructor.
+             * @param f functional to minimize
+             */
+            ACRSolver(C2Functional f, double eta1 = 0.25, double eta2 = 0.5, double epsilon = 1e-4, double relativeAccuracy = 1e-4, double omegaMax = 1e8,  double lambdaMax = 2e-2);
 
-      /// Compute solution.
-      Vector operator()();
+            /// Compute solution starting at \f$x_0=0\f$.
+            Vector operator()();
 
-      /**
-       * @brief Compute solution.
-       * @param x0 initial iterate
-       */
-      Vector operator()(const Vector& x0);
+            /**
+             * @brief Compute solution.
+             * @param x0 initial iterate
+             */
+            Vector operator()(const Vector& x0);
 
-    private:
- 
-      class TrivialPreconditioner
-      {
-		  public:
-		  // copy constructor
-	         	  
-		     TrivialPreconditioner() {};
-		     
-			TrivialPreconditioner(const TrivialPreconditioner& p) {};
-			//move constructor
-			TrivialPreconditioner(TrivialPreconditioner&& p) {};
-			//compute A(x)
-			Vector operator()(const Vector& x) const{ return x; };
-	  };
- 
-      C2Functional f_;
-      const VectorSpace& domain_;
-      StepMonitor stepMonitor = StepMonitor::Accepted;
-      Vector computeStep(const Vector &x) const;
-      StepMonitor acceptanceTest(const Vector &x, const Vector &dx, Real lambda, const CompositeStep::CubicModel& cubicModel) const;
-      Real weightChange(Spacy::Vector dx, Spacy::Vector x, Spacy::Real omega_) const;
+        private:
+            
+            /**
+             * @brief Compute correction dx.
+             * @param x current iterate
+             */
+            Vector computeStep(const Vector& x) const;
 
-      Real omega = {1e-6};
+            /**
+             * @brief Test if dx is an acceptable correction.
+             * @param x current iterate
+             * @param dx correction
+             * @param lambda damping factor
+             * @param cubicModel cubic model
+             */
+            StepMonitor acceptanceTest(const Vector& x, const Vector& dx, const Real& lambda, const CompositeStep::CubicModel& cubicModel);
 
-      mutable IndefiniteLinearSolver tangentialSolver = {};
+            /**
+             * @brief Update the weight Parameter of the cubic model.
+             * @param omega weight Parameter of the cubic model
+             */
+            Real weightChange(::Spacy::Real omega) const;
 
-      std::string spacing = "  ", spacing2 = "    ";
-
-		Real eta1,eta2,gamma1,gamma2,rho;
-      Real norm_dx_old = -1;
-    };
-  }
+            C2Functional f_;
+            const VectorSpace& domain_;
+            StepMonitor stepMonitor = StepMonitor::Accepted;
+            
+            // epsilon_ termination criterion
+            const double eta1_, eta2_, epsilon_, omegaMax_,  lambdaMax_;
+            Real rho_ = 1;
+            Real omega_ = 1e-6;
+        };
+    }
 }
 
-#endif // SPACY_ACR_HH
