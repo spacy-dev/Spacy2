@@ -1,13 +1,14 @@
 var searchData=
 [
   ['c1functional',['C1Functional',['../classSpacy_1_1C1Functional.html',1,'Spacy']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1Kaskade_1_1C1Operator.html',1,'Spacy::Kaskade']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1C1Operator.html',1,'Spacy']]],
+  ['c1fungoperator',['C1FunGOperator',['../classSpacy_1_1dealII_1_1C1FunGOperator.html',1,'Spacy::dealII']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1Scalar_1_1C1Operator.html',1,'Spacy::Scalar']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1Rn_1_1C1Operator.html',1,'Spacy::Rn']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1FEniCS_1_1C1Operator.html',1,'Spacy::FEniCS']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1Rn_1_1C1Operator.html#ace713dafa8c7422f57f0f1c0a989db12',1,'Spacy::Rn::C1Operator::C1Operator()'],['../classSpacy_1_1FEniCS_1_1C1Operator.html#a3e578031e731cad3f4fa8b7364f8ec97',1,'Spacy::FEniCS::C1Operator::C1Operator()'],['../classSpacy_1_1Kaskade_1_1C1Operator.html#aa31e9f54fcbb4eb6c40c1cd467d25836',1,'Spacy::Kaskade::C1Operator::C1Operator(const OperatorDefinition &amp;f, const VectorSpace &amp;domain, const VectorSpace &amp;range, int rbegin=0, int rend=OperatorDefinition::AnsatzVars::noOfVariables, int cbegin=0, int cend=OperatorDefinition::TestVars::noOfVariables)'],['../classSpacy_1_1Kaskade_1_1C1Operator.html#af75af5b5ee04c86a776d52bc8176d56e',1,'Spacy::Kaskade::C1Operator::C1Operator(C1Operator &amp;&amp;B)']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1Scalar_1_1C1Operator.html',1,'Spacy::Scalar']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1Kaskade_1_1C1Operator.html',1,'Spacy::Kaskade']]],
+  ['c1operator',['C1Operator',['../classSpacy_1_1C1Operator.html',1,'Spacy']]],
   ['c1operator',['C1Operator',['../classSpacy_1_1dealII_1_1C1Operator.html',1,'Spacy::dealII']]],
-  ['c1operator',['C1Operator',['../classSpacy_1_1Rn_1_1C1Operator.html',1,'Spacy::Rn']]],
   ['c2functional',['C2Functional',['../classSpacy_1_1FEniCS_1_1C2Functional.html',1,'Spacy::FEniCS']]],
   ['c2functional',['C2Functional',['../classSpacy_1_1Kaskade_1_1C2Functional.html',1,'Spacy::Kaskade']]],
   ['c2functional',['C2Functional',['../classSpacy_1_1Scalar_1_1C2Functional.html',1,'Spacy::Scalar']]],
@@ -30,8 +31,8 @@ var searchData=
   ['compositestepfunctional',['CompositeStepFunctional',['../classSpacy_1_1Rn_1_1CompositeStepFunctional.html',1,'Spacy::Rn']]],
   ['compute',['compute',['../classSpacy_1_1Generic_1_1Step.html#ac400c25a81a5138b4926bbb99692b343',1,'Spacy::Generic::Step']]],
   ['connectasprimaldualpair',['connectAsPrimalDualPair',['../namespaceSpacy.html#a72844d3d381380c382cd9dce912e2664',1,'Spacy']]],
-  ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7',1,'Spacy::Mixin::ContractionRate']]],
   ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html',1,'Spacy::Mixin']]],
+  ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7',1,'Spacy::Mixin::ContractionRate']]],
   ['contravariantnewton',['contravariantNewton',['../group__NewtonGroup.html#gaa32f667c573986b2b2721ec6532fc832',1,'Spacy::contravariantNewton(const C1Operator &amp;F, const Vector &amp;x0, const Newton::Parameter &amp;p=Newton::Parameter())'],['../group__NewtonGroup.html#gace045630c7f0c7a1a5a48d2d0807f608',1,'Spacy::contravariantNewton(const C1Operator &amp;F, const Newton::Parameter &amp;p=Newton::Parameter())']]],
   ['copy',['copy',['../namespaceSpacy_1_1Rn.html#a26ee11182adb7a8103aa502c4bb8a134',1,'Spacy::Rn::copy(const ::Spacy::Vector &amp;x, Eigen::VectorXd &amp;y)'],['../namespaceSpacy_1_1Rn.html#aa1b7ffd8e9af414e4e5118f39971ecc4',1,'Spacy::Rn::copy(const Eigen::VectorXd &amp;x,::Spacy::Vector &amp;y)'],['../group__FenicsGroup.html#ga7f43f0c660d0646adb031b453c536bb0',1,'Spacy::FEniCS::copy(const ::Spacy::Vector &amp;x, dolfin::GenericVector &amp;y)'],['../group__FenicsGroup.html#ga28fb1ebae29e07ec0256bb2331599aa7',1,'Spacy::FEniCS::copy(const ::Spacy::Vector &amp;x, dolfin::Function &amp;y)'],['../group__FenicsGroup.html#ga61c5e45dbb789c155fbf86f8ec288f17',1,'Spacy::FEniCS::copy(const dolfin::GenericVector &amp;y,::Spacy::Vector &amp;x)'],['../namespaceSpacy_1_1FEniCS.html#a7c4519bd0cbdc4e72b71f273bade591e',1,'Spacy::FEniCS::copy(const dolfin::Function &amp;y,::Spacy::Vector &amp;x)'],['../namespaceSpacy_1_1Kaskade.html#afbbd7e385eda54f651c45b1c074d7bf9',1,'Spacy::Kaskade::copy()']]],
   ['copycoefficients',['copyCoefficients',['../group__FenicsGroup.html#gab3d4c7c1e91a50e4e816598258b6edce',1,'Spacy::FEniCS']]],
@@ -40,6 +41,6 @@ var searchData=
   ['covariantnewton',['covariantNewton',['../group__NewtonGroup.html#ga6c18ad252cb530e4f6734eb4e4fda481',1,'Spacy::covariantNewton(const C1Operator &amp;F, const Vector &amp;x0, const Newton::Parameter &amp;p=Newton::Parameter(), const std::function&lt; bool(const Vector &amp;, const Vector &amp;)&gt; &amp;errorEstimator={})'],['../group__NewtonGroup.html#ga2d469322482680319bf81d865ed57068',1,'Spacy::covariantNewton(const C1Operator &amp;F, const Newton::Parameter &amp;p=Newton::Parameter(), const std::function&lt; bool(const Vector &amp;, const Vector &amp;)&gt; &amp;errorEstimator={})']]],
   ['creator',['creator',['../classSpacy_1_1ProductSpace_1_1Vector.html#a893de5e5a2bb37d2d512c035b0ad91ea',1,'Spacy::ProductSpace::Vector']]],
   ['cubic',['Cubic',['../classSpacy_1_1Scalar_1_1Cubic.html',1,'Spacy::Scalar']]],
-  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]],
-  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25',1,'Spacy::CompositeStep::CubicModel']]]
+  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25',1,'Spacy::CompositeStep::CubicModel']]],
+  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]]
 ];
