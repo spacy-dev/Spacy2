@@ -1,50 +1,20 @@
 #pragma once
 
-#include <deal.II/base/tensor.h>
-#include <deal.II/grid/tria.h>
-#include <deal.II/dofs/dof_handler.h>
-#include <deal.II/fe/fe_values.h>
-#include <deal.II/lac/vector.h>
-#include <deal.II/lac/full_matrix.h>
-#include <deal.II/lac/block_sparse_matrix.h>
-#include <deal.II/lac/dynamic_sparsity_pattern.h>
-
-#include <Spacy/vectorSpace.hh>
-#include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Util/Base/operatorBase.hh>
-#include <Spacy/Util/cast.hh>
-#include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
-
-#include "linearOperator.hh"
-#include "vector.hh"
-#include "vectorSpace.hh"
-
-#include <algorithm>
-#include <iostream>
-#include <map>
-#include <memory>
-#include <vector>
+#include "c1Operator.hh"
 
 namespace Spacy
 {
     /** @addtogroup dealIIGroup @{ */
     namespace dealII
     {
-        struct LinearOperatorCreator
-        {
-            Vector operator()(const VectorSpace*) const
-            {
-                throw CallOfUndefinedFunctionException("dealII::LinearOperatorCreator::operator()(const VectorSpace*)");
-            }
-        };
-
-        template <class Implementation, int dim, int n_components=1>
-        class C1Operator : public OperatorBase
+        template <class FunGOperator, int dim, int n_components=1>
+        class C1FunGOperator : public OperatorBase
         {
             using Value = std::conditional_t< n_components == 1, double, dealii::Vector<double> >;
             using Gradient = dealii::Tensor<n_components,dim>;
+
         public:
-            C1Operator(Implementation&& operator_impl, const VectorSpace& domain, const VectorSpace& range)
+            C1FunGOperator(FunGOperator&& operator_impl, const VectorSpace& domain, const VectorSpace& range)
                 : OperatorBase(domain,range),
                   A_(std::make_shared< dealii::BlockSparseMatrix<double> >()),
                   operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(),
@@ -93,30 +63,24 @@ namespace Spacy
             template <class T>
             void update_cell_matrix(T q_index, T dofs_per_cell,
                                     const dealii::FEValues<dim>& fe_values,
-                                    const std::vector<Value>& old_solution_values,
-                                    const std::vector<Gradient>& old_solution_gradients,
                                     dealii::FullMatrix<double>& cell_matrix) const
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                     for(auto j=0u; j<dofs_per_cell; ++j)
                         cell_matrix(i,j) += ( fe_values.shape_grad(i, q_index) *
-                                              operator_.d1(old_solution_gradients[q_index],
-                                                          fe_values.shape_grad(j, q_index)) *
+                                              operator_.template d1<0>(fe_values.shape_grad(j, q_index)) *
                                               fe_values.JxW(q_index) );
             }
 
             template <class T>
             void update_cell_rhs(T q_index, T dofs_per_cell,
                                  const dealii::FEValues<dim>& fe_values,
-                                 const std::vector<Value>& old_solution_values,
-                                 const std::vector<Gradient>& old_solution_gradients,
                                  dealii::Vector<double>& cell_rhs) const
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                 {
                     cell_rhs(i) += ( fe_values.shape_grad(i, q_index) *
-                                     operator_(old_solution_gradients[q_index]) *
-                                     fe_values.JxW(q_index) );
+                                     operator_() * fe_values.JxW(q_index) );
                     cell_rhs(i) -= ( fe_values.shape_value(i, q_index) *
                                      1 * fe_values.JxW (q_index) );
                 }
@@ -158,15 +122,13 @@ namespace Spacy
 
                     for(auto q_index=0u; q_index<n_q_points; ++q_index)
                     {
+                        operator_.template update<0>(std::make_tuple(old_solution_values[q_index],
+                                                                     old_solution_gradients[q_index]));
                         update_cell_matrix(q_index, dofs_per_cell,
                                            fe_values,
-                                           old_solution_values,
-                                           old_solution_gradients,
                                            cell_matrix);
                         update_cell_rhs(q_index, dofs_per_cell,
                                         fe_values,
-                                        old_solution_values,
-                                        old_solution_gradients,
                                         cell_rhs);
                     }
 
@@ -189,7 +151,7 @@ namespace Spacy
             mutable dealii::Vector<double>       b_;
             mutable ::Spacy::Vector oldX_;
             std::shared_ptr<VectorSpace> operatorSpace_;
-            Implementation operator_;
+            mutable FunGOperator operator_;
         };
     }
     /** @} */
