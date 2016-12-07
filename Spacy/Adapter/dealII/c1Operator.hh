@@ -114,11 +114,9 @@ namespace Spacy
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                 {
-                    cell_rhs(i) += ( fe_values.shape_grad(i, q_index) *
-                                     operator_(old_solution_gradients[q_index]) *
-                                     fe_values.JxW(q_index) );
-                    cell_rhs(i) -= ( fe_values.shape_value(i, q_index) *
-                                     1 * fe_values.JxW (q_index) );
+                    cell_rhs(i) += operator_(old_solution_gradients[q_index]) *
+                                   fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
+                    cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index);
                 }
             }
 

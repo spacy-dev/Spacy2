@@ -67,10 +67,9 @@ namespace Spacy
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                     for(auto j=0u; j<dofs_per_cell; ++j)
-                        cell_matrix(i,j) += ( fe_values.shape_grad(i, q_index) *
-                                              operator_.template d1<0>( std::make_tuple(fe_values.shape_value(j, q_index),
-                                                                                        fe_values.shape_grad(j, q_index)) ) *
-                                              fe_values.JxW(q_index) );
+                        cell_matrix(i,j) += operator_.template d1<0>( std::make_tuple(fe_values.shape_value(j, q_index),
+                                                                                      fe_values.shape_grad(j, q_index)) ) *
+                                            fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
             }
 
             template <class T>
@@ -80,10 +79,8 @@ namespace Spacy
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                 {
-                    cell_rhs(i) += ( fe_values.shape_grad(i, q_index) *
-                                     operator_() * fe_values.JxW(q_index) );
-                    cell_rhs(i) -= ( fe_values.shape_value(i, q_index) *
-                                     1 * fe_values.JxW (q_index) );
+                    cell_rhs(i) += operator_() * fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
+                    cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index) );
                 }
             }
 
