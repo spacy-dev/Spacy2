@@ -8,12 +8,16 @@
 #include <deal.II/lac/block_sparsity_pattern.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
 #include <deal.II/lac/vector.h>
+// For boundary values
+#include <deal.II/base/function.h>
+#include <deal.II/numerics/vector_tools.h>
 
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Spaces/ProductSpace/vectorSpace.hh>
 
 #include "vector.hh"
 
+#include <map>
 #include <memory>
 
 namespace Spacy
@@ -40,6 +44,8 @@ namespace Spacy
 
                 dealii::DoFTools::make_sparsity_pattern (*dof_handler_, dsp);
                 sparsity_pattern_->copy_from(dsp);
+                // Zero boundary. @TODO generalize
+                boundary_values_->emplace_back(dealii::types::boundary_id(0), std::make_unique< dealii::ZeroFunction<dim> >());
             }
 
             ::Spacy::Vector operator()(const VectorSpace* space) const
@@ -72,11 +78,34 @@ namespace Spacy
                 return *sparsity_pattern_;
             }
 
+            auto boundaryValues() const
+            {
+                std::map<dealii::types::global_dof_index,double> boundary_values;
+                for(const auto& value : *boundary_values_)
+                    dealii::VectorTools::interpolate_boundary_values( dofHandler(),
+                                                                      value.id,
+                                                                      *value.function,
+                                                                      boundary_values );
+                return boundary_values;
+            }
+
         private:
             int fe_order_;
-            std::shared_ptr< dealii::FE_Q<dim> >          finite_element_;
-            std::shared_ptr< dealii::DoFHandler<dim> >    dof_handler_;
-            std::shared_ptr<dealii::BlockSparsityPattern> sparsity_pattern_;
+            std::shared_ptr< dealii::FE_Q<dim> >            finite_element_;
+            std::shared_ptr< dealii::DoFHandler<dim> >      dof_handler_;
+            std::shared_ptr<dealii::BlockSparsityPattern>   sparsity_pattern_;
+            struct BoundaryPart
+            {
+                BoundaryPart(dealii::types::boundary_id boundary_id,
+                             std::unique_ptr< dealii::Function<dim, double> >&& boundary_function)
+                    : id(boundary_id),
+                      function(std::move(boundary_function))
+                {}
+
+                dealii::types::boundary_id id;
+                std::unique_ptr< dealii::Function<dim, double> > function;
+            };
+            std::shared_ptr< std::vector<BoundaryPart> > boundary_values_ = std::make_shared< std::vector<BoundaryPart> >();
         };
 
         /**

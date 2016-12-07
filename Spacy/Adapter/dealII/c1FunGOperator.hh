@@ -22,11 +22,11 @@ namespace Spacy
                   {
                       return cast_ref< LinearOperator<dim> >(v).get().block(0,0).frobenius_norm();
                   } , true ) ),
-                  operator_(std::move(operator_impl))
+                  operator_(std::move(operator_impl)),
+                  boundary_values_(zero(domain))
             {
                 const auto& dealIICreator = creator< VectorCreator<dim> >(domain);
                 A_->reinit(dealIICreator.sparsityPattern());
-                dummy_.reinit(dealIICreator.degreesOfFreedom());
                 b_.reinit(dealIICreator.degreesOfFreedom());
             }
 
@@ -42,10 +42,10 @@ namespace Spacy
             {
                 assemble(x);
 
-                const auto& dx_ = cast_ref<Vector>(dx);
                 auto y = zero(range());
-                auto& y_ = cast_ref<Vector>(y);
-                A_->block(0,0).vmult(get(y_), get(dx_));
+                A_->block(0,0).vmult(get(cast_ref<Vector>(y)),
+                                     get(cast_ref<Vector>(dx)));
+
                 return y;
             }
 
@@ -56,7 +56,7 @@ namespace Spacy
             auto linearization(const ::Spacy::Vector& x) const
             {
                 assemble(x);
-                return LinearOperator<dim>{ *A_ , *operatorSpace_ , domain(), range() };
+                return LinearOperator<dim>{ *A_ , *operatorSpace_ , boundary_values_, domain(), range() };
             }
 
         private:
@@ -68,7 +68,8 @@ namespace Spacy
                 for(auto i=0u; i<dofs_per_cell; ++i)
                     for(auto j=0u; j<dofs_per_cell; ++j)
                         cell_matrix(i,j) += ( fe_values.shape_grad(i, q_index) *
-                                              operator_.template d1<0>(fe_values.shape_grad(j, q_index)) *
+                                              operator_.template d1<0>( std::make_tuple(fe_values.shape_value(j, q_index),
+                                                                                        fe_values.shape_grad(j, q_index)) ) *
                                               fe_values.JxW(q_index) );
             }
 
@@ -143,15 +144,21 @@ namespace Spacy
                         b_(local_dof_indices[i]) += cell_rhs(i);
                 }
 
+                dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
+                                                           A_->block(0,0),
+                                                           get(cast_ref<Vector>(boundary_values_)),
+                                                           b_);
+
+
                 oldX_ = x;
             }
 
             mutable std::shared_ptr< dealii::BlockSparseMatrix<double> > A_;
-            mutable dealii::Vector<double>       dummy_;
             mutable dealii::Vector<double>       b_;
             mutable ::Spacy::Vector oldX_;
             std::shared_ptr<VectorSpace> operatorSpace_;
             mutable FunGOperator operator_;
+            mutable Spacy::Vector boundary_values_;
         };
     }
     /** @} */

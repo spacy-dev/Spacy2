@@ -6,23 +6,12 @@
 #include <deal.II/dofs/dof_handler.h>
 #include <deal.II/grid/grid_generator.h>
 
+#include <fung/fung.hh>
+#include <fung/examples/nonlinear_heat.hh>
+
 #include <iostream>
 
 const constexpr auto dim = 2;
-
-template <int dim, int n_components=1>
-struct LaplaceOperator
-{
-    decltype(auto) operator()(const dealii::Tensor<n_components,dim>& Dx) const
-    {
-        return Dx;
-    }
-
-    decltype(auto) d1(const dealii::Tensor<n_components,dim>&, const dealii::Tensor<n_components,dim>& dDx) const
-    {
-        return dDx;
-    }
-};
 
 int main()
 {
@@ -32,7 +21,14 @@ int main()
 
     const auto fe_order = 1;
     auto V = Spacy::dealII::makeHilbertSpace(triangulation, fe_order);
-    auto A = Spacy::dealII::C1Operator<LaplaceOperator<dim>, dim>(LaplaceOperator<dim>(), V, V.dualSpace());
+
+
+    double c = 1, d = 1e-1;
+//    dealii::Vector<double> u0(1);
+    double u0 = 0;
+    dealii::Tensor<1,dim> du0;
+    auto integrand = FunG::heatModel(c, d, u0, du0);
+    auto A = Spacy::dealII::C1FunGOperator< decltype(integrand), dim>(std::move(integrand), V, V.dualSpace());
 
     auto p = Spacy::Newton::Parameter{};
     p.setRelativeAccuracy(1e-12);

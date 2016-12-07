@@ -8,6 +8,8 @@
 #include <deal.II/lac/full_matrix.h>
 #include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
+// For boundary values
+#include <deal.II/numerics/matrix_tools.h>
 
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
@@ -21,7 +23,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include <map>
 #include <memory>
 #include <vector>
 
@@ -52,11 +53,11 @@ namespace Spacy
                   {
                       return cast_ref< LinearOperator<dim> >(v).get().block(0,0).frobenius_norm();
                   } , true ) ),
-                  operator_(std::move(operator_impl))
+                  operator_(std::move(operator_impl)),
+                  boundary_values_(zero(domain))
             {
                 const auto& dealIICreator = creator< VectorCreator<dim> >(domain);
                 A_->reinit(dealIICreator.sparsityPattern());
-                dummy_.reinit(dealIICreator.degreesOfFreedom());
                 b_.reinit(dealIICreator.degreesOfFreedom());
             }
 
@@ -72,10 +73,9 @@ namespace Spacy
             {
                 assemble(x);
 
-                const auto& dx_ = cast_ref<Vector>(dx);
                 auto y = zero(range());
-                auto& y_ = cast_ref<Vector>(y);
-                A_->block(0,0).vmult(get(y_), get(dx_));
+                A_->block(0,0).vmult(get(cast_ref<Vector>(y)),
+                                     get(cast_ref<Vector>(dx)));
                 return y;
             }
 
@@ -86,7 +86,7 @@ namespace Spacy
             auto linearization(const ::Spacy::Vector& x) const
             {
                 assemble(x);
-                return LinearOperator<dim>{ *A_ , *operatorSpace_ , domain(), range() };
+                return LinearOperator<dim>{ *A_ , *operatorSpace_, boundary_values_, domain(), range() };
             }
 
         private:
@@ -181,15 +181,20 @@ namespace Spacy
                         b_(local_dof_indices[i]) += cell_rhs(i);
                 }
 
+                dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
+                                                           A_->block(0,0),
+                                                           get(cast_ref<Vector>(boundary_values_)),
+                                                           b_);
+
                 oldX_ = x;
             }
 
             mutable std::shared_ptr< dealii::BlockSparseMatrix<double> > A_;
-            mutable dealii::Vector<double>       dummy_;
             mutable dealii::Vector<double>       b_;
-            mutable ::Spacy::Vector oldX_;
+            mutable Spacy::Vector oldX_;
             std::shared_ptr<VectorSpace> operatorSpace_;
             Implementation operator_;
+            mutable Spacy::Vector boundary_values_;
         };
     }
     /** @} */

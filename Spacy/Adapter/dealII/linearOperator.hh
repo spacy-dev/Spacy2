@@ -15,6 +15,7 @@
 #include <Spacy/vectorSpace.hh>
 
 #include "cgSolver.hh"
+#include "UMFPACKSolver.hh"
 #include "vector.hh"
 
 #include <algorithm>
@@ -32,11 +33,13 @@ namespace Spacy
         public:
             LinearOperator(const dealii::BlockSparseMatrix<double>& A,
                            const VectorSpace& operatorSpace,
+                           const Spacy::Vector& boundary_values,
                            const VectorSpace& domain,
                            const VectorSpace& range)
                 : OperatorBase(domain,range),
                   VectorBase(operatorSpace),
-                  Mixin::Get< dealii::BlockSparseMatrix<double> >(A.get_sparsity_pattern())
+                  Mixin::Get< dealii::BlockSparseMatrix<double> >(A.get_sparsity_pattern()),
+                  boundary_values_(boundary_values)
             {
                 get().copy_from(A);
             }
@@ -44,7 +47,8 @@ namespace Spacy
             LinearOperator(const LinearOperator& other)
                 : OperatorBase(other.domain(), other.range()),
                   VectorBase(other.space()),
-                  Mixin::Get< dealii::BlockSparseMatrix<double> >(other.get().get_sparsity_pattern())
+                  Mixin::Get< dealii::BlockSparseMatrix<double> >(other.get().get_sparsity_pattern()),
+                  boundary_values_(other.boundary_values_)
             {
                 checkSpaceCompatibility(domain(), other.domain());
                 checkSpaceCompatibility(range(), other.range());
@@ -58,6 +62,7 @@ namespace Spacy
                 checkSpaceCompatibility(range(), other.range());
 
                 get().copy_from(other.get());
+                boundary_values_ = other.boundary_values_;
                 return *this;
             }
 
@@ -81,7 +86,8 @@ namespace Spacy
 
             LinearSolver solver() const
             {
-                return CGSolver<dim>(get(), domain(), range());
+                return UMFPackSolver<dim>(get().block(0,0), boundary_values_, domain(), range());
+//                return CGSolver<dim>(get(), boundary_values_, domain(), range());
             }
 
             /**
@@ -145,6 +151,9 @@ namespace Spacy
               dx -= *this;
               return dx(dx).get() < max*y.space().eps()*y.space().eps();
             }
+
+        private:
+            Spacy::Vector boundary_values_;
         };
     }
     }
