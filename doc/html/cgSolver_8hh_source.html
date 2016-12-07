@@ -92,96 +92,84 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor">#include &lt;deal.II/lac/block_sparse_matrix.h&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;deal.II/lac/solver_cg.h&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;deal.II/lac/precondition.h&gt;</span>
-<a name="l00006"></a>00006 <span class="comment">// For boundary values</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;deal.II/base/function.h&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;deal.II/numerics/vector_tools.h&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;deal.II/numerics/matrix_tools.h&gt;</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;Spacy/vector.hh&gt;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;Spacy/vectorSpace.hh&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;Spacy/zeroVectorCreator.hh&gt;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;Spacy/Util/cast.hh&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;Spacy/Util/Base/operatorBase.hh&gt;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;Spacy/Util/Mixins/maxSteps.hh&gt;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;Spacy/Util/Mixins/accuracy.hh&gt;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;vector.hh&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;vectorSpace.hh&quot;</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="preprocessor">#include &lt;map&gt;</span>
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="keyword">namespace </span>Spacy
-<a name="l00025"></a>00025 {
-<a name="l00027"></a>00027     <span class="keyword">namespace </span>dealII
-<a name="l00028"></a>00028     {
-<a name="l00029"></a>00029         <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;
-<a name="l00030"></a><a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">00030</a>         <span class="keyword">class </span><a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a> :
-<a name="l00031"></a>00031                 <span class="keyword">public</span> <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>,
-<a name="l00032"></a>00032                 <span class="keyword">public</span> Mixin::AbsoluteAccuracy,
-<a name="l00033"></a>00033                 <span class="keyword">public</span> Mixin::MaxSteps
-<a name="l00034"></a>00034         {
-<a name="l00035"></a>00035         <span class="keyword">public</span>:
-<a name="l00036"></a>00036             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>(<span class="keyword">const</span> dealii::BlockSparseMatrix&lt;double&gt;&amp; A,
-<a name="l00037"></a>00037                      <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>,
-<a name="l00038"></a>00038                      <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
-<a name="l00039"></a>00039                 : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>(range, domain),
-<a name="l00040"></a>00040                   A_(A.get_sparsity_pattern())
-<a name="l00041"></a>00041             {
-<a name="l00042"></a>00042                 A_.copy_from(A);
-<a name="l00043"></a>00043             }
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; other)
-<a name="l00046"></a>00046                 : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>(other),
-<a name="l00047"></a>00047                   A_(other.A_.get_sparsity_pattern())
-<a name="l00048"></a>00048             {
-<a name="l00049"></a>00049                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
-<a name="l00050"></a>00050                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;Spacy/vector.hh&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;Spacy/vectorSpace.hh&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;Spacy/zeroVectorCreator.hh&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;Spacy/Util/cast.hh&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;Spacy/Util/Base/operatorBase.hh&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;Spacy/Util/Mixins/maxSteps.hh&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;Spacy/Util/Mixins/accuracy.hh&gt;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;vector.hh&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;vectorSpace.hh&quot;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="keyword">namespace </span>Spacy
+<a name="l00019"></a>00019 {
+<a name="l00021"></a>00021     <span class="keyword">namespace </span>dealII
+<a name="l00022"></a>00022     {
+<a name="l00023"></a>00023         <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;
+<a name="l00024"></a><a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">00024</a>         <span class="keyword">class </span><a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a> :
+<a name="l00025"></a>00025                 <span class="keyword">public</span> <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>,
+<a name="l00026"></a>00026                 <span class="keyword">public</span> Mixin::AbsoluteAccuracy,
+<a name="l00027"></a>00027                 <span class="keyword">public</span> Mixin::MaxSteps
+<a name="l00028"></a>00028         {
+<a name="l00029"></a>00029         <span class="keyword">public</span>:
+<a name="l00030"></a>00030             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>(<span class="keyword">const</span> dealii::BlockSparseMatrix&lt;double&gt;&amp; A,
+<a name="l00031"></a>00031                      <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>&amp; boundary_values,
+<a name="l00032"></a>00032                      <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>,
+<a name="l00033"></a>00033                      <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>)
+<a name="l00034"></a>00034                 : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>(range, domain),
+<a name="l00035"></a>00035                   A_(A.get_sparsity_pattern()),
+<a name="l00036"></a>00036                   boundary_values_(boundary_values)
+<a name="l00037"></a>00037             {
+<a name="l00038"></a>00038                 A_.copy_from(A);
+<a name="l00039"></a>00039             }
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; other)
+<a name="l00042"></a>00042                 : <a class="code" href="classSpacy_1_1OperatorBase.html#a0e61c53f3dc6088609701c022410841c" title="Constructor.">OperatorBase</a>(other),
+<a name="l00043"></a>00043                   A_(other.A_.get_sparsity_pattern()),
+<a name="l00044"></a>00044                   boundary_values_(other.boundary_values_)
+<a name="l00045"></a>00045             {
+<a name="l00046"></a>00046                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
+<a name="l00047"></a>00047                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049                 A_.copy_from(other.A_);
+<a name="l00050"></a>00050             }
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052                 A_.copy_from(other.A_);
-<a name="l00053"></a>00053             }
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; other)
-<a name="l00056"></a>00056             {
-<a name="l00057"></a>00057                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
-<a name="l00058"></a>00058                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060                 A_.copy_from(other.A_);
-<a name="l00061"></a>00061                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00062"></a>00062             }
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> operator()(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> x)<span class="keyword"> const</span>
-<a name="l00065"></a>00065 <span class="keyword">            </span>{
-<a name="l00066"></a>00066                 <span class="keyword">auto</span>&amp; x_ = cast_ref&lt;Vector&gt;(x);
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068                 dealii::SolverControl params(getMaxSteps(),
-<a name="l00069"></a>00069                                              <span class="keyword">get</span>(getAbsoluteAccuracy()));
-<a name="l00070"></a>00070                 dealii::SolverCG&lt;&gt; solver(params);
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072                 <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
-<a name="l00073"></a>00073                 <span class="keyword">auto</span>&amp; y_ = cast_ref&lt;Vector&gt;(y);
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075                 <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dealIICreator = creator&lt; VectorCreator&lt;dim&gt; &gt;(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
-<a name="l00076"></a>00076                 std::map&lt;dealii::types::global_dof_index,double&gt; boundary_values;
-<a name="l00077"></a>00077                 dealii::VectorTools::interpolate_boundary_values( dealIICreator.dofHandler(),
-<a name="l00078"></a>00078                                                                   0,
-<a name="l00079"></a>00079                                                                   dealii::ZeroFunction&lt;dim&gt;(),
-<a name="l00080"></a>00080                                                                   boundary_values );
-<a name="l00081"></a>00081                 dealii::MatrixTools::apply_boundary_values (boundary_values,
-<a name="l00082"></a>00082                                                             A_.block(0,0),
-<a name="l00083"></a>00083                                                             <span class="keyword">get</span>(y_),
-<a name="l00084"></a>00084                                                             <span class="keyword">get</span>(x_));
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086                 solver.solve(A_.block(0,0), <span class="keyword">get</span>(y_), <span class="keyword">get</span>(x_),
-<a name="l00087"></a>00087                              dealii::PreconditionIdentity());
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089                 <span class="keywordflow">return</span> y;
-<a name="l00090"></a>00090             }
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092         <span class="keyword">private</span>:
-<a name="l00093"></a>00093             <span class="keyword">mutable</span> dealii::BlockSparseMatrix&lt;double&gt; A_;
-<a name="l00094"></a>00094         };
-<a name="l00095"></a>00095     }
-<a name="l00097"></a>00097 }
+<a name="l00052"></a>00052             <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1dealII_1_1CGSolver.html">CGSolver</a>&amp; other)
+<a name="l00053"></a>00053             {
+<a name="l00054"></a>00054                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
+<a name="l00055"></a>00055                 <a class="code" href="namespaceSpacy.html#aae18423491adef608743902f1c40844e" title="Check if V and W have the same index.">checkSpaceCompatibility</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>(), other.<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057                 A_.copy_from(other.A_);
+<a name="l00058"></a>00058                 boundary_values_ = other.boundary_values_;
+<a name="l00059"></a>00059                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00060"></a>00060             }
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> operator()(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> x)<span class="keyword"> const</span>
+<a name="l00063"></a>00063 <span class="keyword">            </span>{
+<a name="l00064"></a>00064                 <span class="keyword">auto</span>&amp; x_ = cast_ref&lt;Vector&gt;(x);
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066                 dealii::SolverControl params(getMaxSteps(),
+<a name="l00067"></a>00067                                              <span class="keyword">get</span>(getAbsoluteAccuracy()));
+<a name="l00068"></a>00068                 dealii::SolverCG&lt;&gt; solver(params);
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070                 <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
+<a name="l00071"></a>00071                 <span class="keyword">auto</span>&amp; y_ = cast_ref&lt;Vector&gt;(y);
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073                 solver.solve(A_.block(0,0), <span class="keyword">get</span>(y_), <span class="keyword">get</span>(x_),
+<a name="l00074"></a>00074                              dealii::PreconditionIdentity());
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076                 <span class="keywordflow">return</span> y + boundary_values_;
+<a name="l00077"></a>00077             }
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079         <span class="keyword">private</span>:
+<a name="l00080"></a>00080             <span class="keyword">mutable</span> dealii::BlockSparseMatrix&lt;double&gt; A_;
+<a name="l00081"></a>00081             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> boundary_values_;
+<a name="l00082"></a>00082         };
+<a name="l00083"></a>00083     }
+<a name="l00085"></a>00085 }
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -200,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 7 2016 08:19:02 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 7 2016 23:01:31 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
