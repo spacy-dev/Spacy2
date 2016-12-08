@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 {
 <a name="l00008"></a>00008     <span class="keyword">namespace </span>dealII
 <a name="l00009"></a>00009     {
-<a name="l00010"></a>00010         <span class="keyword">template</span> &lt;<span class="keyword">class</span> FunGOperator, <span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> n_components=1&gt;
+<a name="l00010"></a>00010         <span class="keyword">template</span> &lt;<span class="keyword">class</span> FunGOperator, <span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> n_components=1, <span class="keywordtype">int</span> variable_<span class="keywordtype">id</span>=0&gt;
 <a name="l00011"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html">00011</a>         <span class="keyword">class </span><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html">C1FunGOperator</a> : <span class="keyword">public</span> <a class="code" href="classSpacy_1_1OperatorBase.html">OperatorBase</a>
 <a name="l00012"></a>00012         {
 <a name="l00013"></a>00013             <span class="keyword">using</span> Value = std::conditional_t&lt; n_components == 1, double, dealii::Vector&lt;double&gt; &gt;;
@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020                   operatorSpace_( std::make_shared&lt;VectorSpace&gt;( <a class="code" href="structSpacy_1_1dealII_1_1LinearOperatorCreator.html">LinearOperatorCreator</a>(),
 <a name="l00021"></a>00021                   [](<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a>&amp; v)
 <a name="l00022"></a>00022                   {
-<a name="l00023"></a>00023                       <span class="keywordflow">return</span> cast_ref&lt; LinearOperator&lt;dim&gt; &gt;(v).<span class="keyword">get</span>().block(0,0).frobenius_norm();
+<a name="l00023"></a>00023                       <span class="keywordflow">return</span> cast_ref&lt; LinearOperator&lt;dim&gt; &gt;(v).<span class="keyword">get</span>().block(variable_id,variable_id).frobenius_norm();
 <a name="l00024"></a>00024                   } , true ) ),
 <a name="l00025"></a>00025                   operator_(std::move(operator_impl)),
 <a name="l00026"></a>00026                   boundary_values_(<a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(domain))
@@ -118,24 +118,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00030"></a>00030                 b_.reinit(dealIICreator.degreesOfFreedom());
 <a name="l00031"></a>00031             }
 <a name="l00032"></a>00032 
-<a name="l00034"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a22f45eb52fe6d89516e3f63ab59af207">00034</a>             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a22f45eb52fe6d89516e3f63ab59af207" title="Compute .">operator()</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00034"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a9ac974cc0e7902429e7c934a3492eda9">00034</a>             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a9ac974cc0e7902429e7c934a3492eda9" title="Compute .">operator()</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
 <a name="l00035"></a>00035 <span class="keyword">            </span>{
 <a name="l00036"></a>00036                 assemble(x);
 <a name="l00037"></a>00037                 <span class="keywordflow">return</span> Vector(b_,<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
 <a name="l00038"></a>00038             }
 <a name="l00039"></a>00039 
-<a name="l00041"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#aaf6eca6d41b90ca1e948bd580f48575f">00041</a>             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#aaf6eca6d41b90ca1e948bd580f48575f" title="Compute .">d1</a>(const ::Spacy::Vector &amp;x, const ::Spacy::Vector &amp;dx)<span class="keyword"> const</span>
+<a name="l00041"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a641167af4009642b4266fa8c76121cf6">00041</a>             <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">::Spacy::Vector</a> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a641167af4009642b4266fa8c76121cf6" title="Compute .">d1</a>(const ::Spacy::Vector &amp;x, const ::Spacy::Vector &amp;dx)<span class="keyword"> const</span>
 <a name="l00042"></a>00042 <span class="keyword">            </span>{
 <a name="l00043"></a>00043                 assemble(x);
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045                 <span class="keyword">auto</span> y = <a class="code" href="namespaceSpacy.html#ac7f0661bfdb52144b9ff0b9bbdd81f69" title="Create new vector .">zero</a>(<a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>());
-<a name="l00046"></a>00046                 A_-&gt;block(0,0).vmult(<span class="keyword">get</span>(cast_ref&lt;Vector&gt;(y)),
-<a name="l00047"></a>00047                                      <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(dx)));
+<a name="l00046"></a>00046                 A_-&gt;block(variable_id,variable_id).vmult(<span class="keyword">get</span>(cast_ref&lt;Vector&gt;(y)),
+<a name="l00047"></a>00047                                                          <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(dx)));
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049                 <span class="keywordflow">return</span> y;
 <a name="l00050"></a>00050             }
 <a name="l00051"></a>00051 
-<a name="l00056"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#abcf7d0778ef1206a5fbc7ccf2d965227">00056</a>             <span class="keyword">auto</span> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#abcf7d0778ef1206a5fbc7ccf2d965227" title="Access  as linear operator .">linearization</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00056"></a><a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a8fabdc6f71797487de9df1ed579a74bc">00056</a>             <span class="keyword">auto</span> <a class="code" href="classSpacy_1_1dealII_1_1C1FunGOperator.html#a8fabdc6f71797487de9df1ed579a74bc" title="Access  as linear operator .">linearization</a>(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
 <a name="l00057"></a>00057 <span class="keyword">            </span>{
 <a name="l00058"></a>00058                 assemble(x);
 <a name="l00059"></a>00059                 <span class="keywordflow">return</span> <a class="code" href="classSpacy_1_1dealII_1_1LinearOperator.html">LinearOperator&lt;dim&gt;</a>{ *A_ , *operatorSpace_ , boundary_values_, domain(), <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6" title="Access range space .">range</a>() };
@@ -149,97 +149,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a>00067 <span class="keyword">            </span>{
 <a name="l00068"></a>00068                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
 <a name="l00069"></a>00069                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> j=0u; j&lt;dofs_per_cell; ++j)
-<a name="l00070"></a>00070                         cell_matrix(i,j) += operator_.template d1&lt;0&gt;( std::make_tuple(fe_values.shape_value(j, q_index),
-<a name="l00071"></a>00071                                                                                       fe_values.shape_grad(j, q_index)) ) *
-<a name="l00072"></a>00072                                             fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
-<a name="l00073"></a>00073             }
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075             <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<a name="l00076"></a>00076             <span class="keywordtype">void</span> update_cell_rhs(T q_index, T dofs_per_cell,
-<a name="l00077"></a>00077                                  <span class="keyword">const</span> dealii::FEValues&lt;dim&gt;&amp; fe_values,
-<a name="l00078"></a>00078                                  dealii::Vector&lt;double&gt;&amp; cell_rhs)<span class="keyword"> const</span>
-<a name="l00079"></a>00079 <span class="keyword">            </span>{
-<a name="l00080"></a>00080                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
-<a name="l00081"></a>00081                 {
-<a name="l00082"></a>00082                     cell_rhs(i) += operator_() * fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
-<a name="l00083"></a>00083                     cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index) );
-<a name="l00084"></a>00084                 }
-<a name="l00085"></a>00085             }
-<a name="l00086"></a>00086 
-<a name="l00088"></a>00088             <span class="keywordtype">void</span> assemble(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
-<a name="l00089"></a>00089 <span class="keyword">            </span>{
-<a name="l00090"></a>00090                 <span class="keywordflow">if</span>( oldX_ &amp;&amp; (oldX_ == x) ) <span class="keywordflow">return</span>;
-<a name="l00091"></a>00091                 *A_ = 0;
-<a name="l00092"></a>00092                 b_ = 0;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094                 <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dealIICreator = creator&lt; VectorCreator&lt;dim&gt; &gt;(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
-<a name="l00095"></a>00095                 dealii::QGauss&lt;dim&gt; quadratureFormula(2*dealIICreator.FEOrder());
-<a name="l00096"></a>00096                 dealii::FEValues&lt;dim&gt; fe_values(dealIICreator.finiteElement(),
-<a name="l00097"></a>00097                                                 quadratureFormula,
-<a name="l00098"></a>00098                                                 dealii::update_values | dealii::update_gradients | dealii::update_JxW_values);
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100                 <span class="keyword">const</span> <span class="keyword">auto</span> dofs_per_cell = dealIICreator.finiteElement().dofs_per_cell;
-<a name="l00101"></a>00101                 <span class="keyword">auto</span> n_q_points = quadratureFormula.size();
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103                 dealii::FullMatrix&lt;double&gt; cell_matrix(dofs_per_cell, dofs_per_cell);
-<a name="l00104"></a>00104                 dealii::Vector&lt;double&gt; cell_rhs(dofs_per_cell);
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106                 std::vector&lt;Value&gt; old_solution_values(n_q_points);
-<a name="l00107"></a>00107                 std::vector&lt;Gradient&gt; old_solution_gradients(n_q_points);
-<a name="l00108"></a>00108                 std::vector&lt;dealii::types::global_dof_index&gt; local_dof_indices(dofs_per_cell);
-<a name="l00109"></a>00109 
-<a name="l00110"></a>00110                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> cell = dealIICreator.dofHandler().begin_active();
-<a name="l00111"></a>00111                     cell &lt; dealIICreator.dofHandler().end();
-<a name="l00112"></a>00112                     ++cell)
-<a name="l00113"></a>00113                 {
-<a name="l00114"></a>00114                     fe_values.reinit(cell);
-<a name="l00115"></a>00115                     <span class="keyword">const</span> <span class="keyword">auto</span>&amp; x_ = <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(x));
-<a name="l00116"></a>00116                     fe_values.get_function_values(x_, old_solution_values);
-<a name="l00117"></a>00117                     fe_values.get_function_gradients(x_, old_solution_gradients);
-<a name="l00118"></a>00118                     cell_matrix = 0;
-<a name="l00119"></a>00119                     cell_rhs = 0;
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> q_index=0u; q_index&lt;n_q_points; ++q_index)
-<a name="l00122"></a>00122                     {
-<a name="l00123"></a>00123                         operator_.template update&lt;0&gt;(std::make_tuple(old_solution_values[q_index],
-<a name="l00124"></a>00124                                                                      old_solution_gradients[q_index]));
-<a name="l00125"></a>00125                         update_cell_matrix(q_index, dofs_per_cell,
-<a name="l00126"></a>00126                                            fe_values,
-<a name="l00127"></a>00127                                            cell_matrix);
-<a name="l00128"></a>00128                         update_cell_rhs(q_index, dofs_per_cell,
-<a name="l00129"></a>00129                                         fe_values,
-<a name="l00130"></a>00130                                         cell_rhs);
-<a name="l00131"></a>00131                     }
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133                     cell-&gt;get_dof_indices(local_dof_indices);
+<a name="l00070"></a>00070                         cell_matrix(i,j) += operator_.template d1&lt;variable_id&gt;(
+<a name="l00071"></a>00071                                                 std::make_tuple(fe_values.shape_value(j, q_index),
+<a name="l00072"></a>00072                                                                 fe_values.shape_grad(j, q_index))
+<a name="l00073"></a>00073                                                 ) *
+<a name="l00074"></a>00074                                             fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
+<a name="l00075"></a>00075             }
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077             <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
+<a name="l00078"></a>00078             <span class="keywordtype">void</span> update_cell_rhs(T q_index, T dofs_per_cell,
+<a name="l00079"></a>00079                                  <span class="keyword">const</span> dealii::FEValues&lt;dim&gt;&amp; fe_values,
+<a name="l00080"></a>00080                                  dealii::Vector&lt;double&gt;&amp; cell_rhs)<span class="keyword"> const</span>
+<a name="l00081"></a>00081 <span class="keyword">            </span>{
+<a name="l00082"></a>00082                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
+<a name="l00083"></a>00083                 {
+<a name="l00084"></a>00084                     cell_rhs(i) += operator_() * fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
+<a name="l00085"></a>00085                     cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index);
+<a name="l00086"></a>00086                 }
+<a name="l00087"></a>00087             }
+<a name="l00088"></a>00088 
+<a name="l00090"></a>00090             <span class="keywordtype">void</span> assemble(const ::Spacy::Vector&amp; x)<span class="keyword"> const</span>
+<a name="l00091"></a>00091 <span class="keyword">            </span>{
+<a name="l00092"></a>00092                 <span class="keywordflow">if</span>( oldX_ &amp;&amp; (oldX_ == x) ) <span class="keywordflow">return</span>;
+<a name="l00093"></a>00093                 *A_ = 0;
+<a name="l00094"></a>00094                 b_ = 0;
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096                 <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dealIICreator = creator&lt; VectorCreator&lt;dim&gt; &gt;(<a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f" title="Access domain space .">domain</a>());
+<a name="l00097"></a>00097                 dealii::QGauss&lt;dim&gt; quadratureFormula(2*dealIICreator.FEOrder());
+<a name="l00098"></a>00098                 dealii::FEValues&lt;dim&gt; fe_values(dealIICreator.finiteElement(),
+<a name="l00099"></a>00099                                                 quadratureFormula,
+<a name="l00100"></a>00100                                                 dealii::update_values | dealii::update_gradients | dealii::update_JxW_values);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102                 <span class="keyword">const</span> <span class="keyword">auto</span> dofs_per_cell = dealIICreator.finiteElement().dofs_per_cell;
+<a name="l00103"></a>00103                 <span class="keyword">auto</span> n_q_points = quadratureFormula.size();
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105                 dealii::FullMatrix&lt;double&gt; cell_matrix(dofs_per_cell, dofs_per_cell);
+<a name="l00106"></a>00106                 dealii::Vector&lt;double&gt; cell_rhs(dofs_per_cell);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108                 std::vector&lt;Value&gt; old_solution_values(n_q_points);
+<a name="l00109"></a>00109                 std::vector&lt;Gradient&gt; old_solution_gradients(n_q_points);
+<a name="l00110"></a>00110                 std::vector&lt;dealii::types::global_dof_index&gt; local_dof_indices(dofs_per_cell);
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112                 <span class="keywordflow">for</span>(<span class="keyword">auto</span> cell = dealIICreator.dofHandler().begin_active();
+<a name="l00113"></a>00113                     cell &lt; dealIICreator.dofHandler().end();
+<a name="l00114"></a>00114                     ++cell)
+<a name="l00115"></a>00115                 {
+<a name="l00116"></a>00116                     fe_values.reinit(cell);
+<a name="l00117"></a>00117                     <span class="keyword">const</span> <span class="keyword">auto</span>&amp; x_ = <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(x));
+<a name="l00118"></a>00118                     fe_values.get_function_values(x_, old_solution_values);
+<a name="l00119"></a>00119                     fe_values.get_function_gradients(x_, old_solution_gradients);
+<a name="l00120"></a>00120                     cell_matrix = 0;
+<a name="l00121"></a>00121                     cell_rhs = 0;
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> q_index=0u; q_index&lt;n_q_points; ++q_index)
+<a name="l00124"></a>00124                     {
+<a name="l00125"></a>00125                         operator_.template update&lt;0&gt;(std::make_tuple(old_solution_values[q_index],
+<a name="l00126"></a>00126                                                                      old_solution_gradients[q_index]));
+<a name="l00127"></a>00127                         update_cell_matrix(q_index, dofs_per_cell,
+<a name="l00128"></a>00128                                            fe_values,
+<a name="l00129"></a>00129                                            cell_matrix);
+<a name="l00130"></a>00130                         update_cell_rhs(q_index, dofs_per_cell,
+<a name="l00131"></a>00131                                         fe_values,
+<a name="l00132"></a>00132                                         cell_rhs);
+<a name="l00133"></a>00133                     }
 <a name="l00134"></a>00134 
-<a name="l00135"></a>00135                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
-<a name="l00136"></a>00136                         <span class="keywordflow">for</span>(<span class="keyword">auto</span> j=0u; j&lt;dofs_per_cell; ++j)
-<a name="l00137"></a>00137                             A_-&gt;block(0,0).add(local_dof_indices[i], local_dof_indices[j],
-<a name="l00138"></a>00138                                                cell_matrix(i,j));
-<a name="l00139"></a>00139 
-<a name="l00140"></a>00140                     <span class="keywordflow">for</span> (<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
-<a name="l00141"></a>00141                         b_(local_dof_indices[i]) += cell_rhs(i);
-<a name="l00142"></a>00142                 }
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144                 dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
-<a name="l00145"></a>00145                                                            A_-&gt;block(0,0),
-<a name="l00146"></a>00146                                                            <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(boundary_values_)),
-<a name="l00147"></a>00147                                                            b_);
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150                 oldX_ = x;
-<a name="l00151"></a>00151             }
+<a name="l00135"></a>00135                     cell-&gt;get_dof_indices(local_dof_indices);
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137                     <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
+<a name="l00138"></a>00138                         <span class="keywordflow">for</span>(<span class="keyword">auto</span> j=0u; j&lt;dofs_per_cell; ++j)
+<a name="l00139"></a>00139                             A_-&gt;block(variable_id,variable_id).add(local_dof_indices[i],
+<a name="l00140"></a>00140                                                                    local_dof_indices[j],
+<a name="l00141"></a>00141                                                                    cell_matrix(i,j));
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143                     <span class="keywordflow">for</span> (<span class="keyword">auto</span> i=0u; i&lt;dofs_per_cell; ++i)
+<a name="l00144"></a>00144                         b_(local_dof_indices[i]) += cell_rhs(i);
+<a name="l00145"></a>00145                 }
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147                 dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
+<a name="l00148"></a>00148                                                            A_-&gt;block(variable_id,variable_id),
+<a name="l00149"></a>00149                                                            <span class="keyword">get</span>(cast_ref&lt;Vector&gt;(boundary_values_)),
+<a name="l00150"></a>00150                                                            b_);
+<a name="l00151"></a>00151 
 <a name="l00152"></a>00152 
-<a name="l00153"></a>00153             <span class="keyword">mutable</span> std::shared_ptr&lt; dealii::BlockSparseMatrix&lt;double&gt; &gt; A_;
-<a name="l00154"></a>00154             <span class="keyword">mutable</span> dealii::Vector&lt;double&gt;       b_;
-<a name="l00155"></a>00155             mutable ::Spacy::Vector oldX_;
-<a name="l00156"></a>00156             std::shared_ptr&lt;VectorSpace&gt; operatorSpace_;
-<a name="l00157"></a>00157             <span class="keyword">mutable</span> FunGOperator operator_;
-<a name="l00158"></a>00158             <span class="keyword">mutable</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> boundary_values_;
-<a name="l00159"></a>00159         };
-<a name="l00160"></a>00160     }
-<a name="l00162"></a>00162 }
+<a name="l00153"></a>00153                 oldX_ = x;
+<a name="l00154"></a>00154             }
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156             <span class="keyword">mutable</span> std::shared_ptr&lt; dealii::BlockSparseMatrix&lt;double&gt; &gt; A_;
+<a name="l00157"></a>00157             <span class="keyword">mutable</span> dealii::Vector&lt;double&gt;       b_;
+<a name="l00158"></a>00158             mutable ::Spacy::Vector oldX_;
+<a name="l00159"></a>00159             std::shared_ptr&lt;VectorSpace&gt; operatorSpace_;
+<a name="l00160"></a>00160             <span class="keyword">mutable</span> FunGOperator operator_;
+<a name="l00161"></a>00161             <span class="keyword">mutable</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Spacy::Vector</a> boundary_values_;
+<a name="l00162"></a>00162         };
+<a name="l00163"></a>00163     }
+<a name="l00165"></a>00165 }
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -258,7 +261,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 7 2016 23:08:43 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 8 2016 12:31:33 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
