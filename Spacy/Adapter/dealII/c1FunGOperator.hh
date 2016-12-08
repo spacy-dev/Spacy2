@@ -7,7 +7,7 @@ namespace Spacy
     /** @addtogroup dealIIGroup @{ */
     namespace dealII
     {
-        template <class FunGOperator, int dim, int n_components=1>
+        template <class FunGOperator, int dim, int n_components=1, int variable_id=0>
         class C1FunGOperator : public OperatorBase
         {
             using Value = std::conditional_t< n_components == 1, double, dealii::Vector<double> >;
@@ -20,7 +20,7 @@ namespace Spacy
                   operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(),
                   [](const Spacy::Vector& v)
                   {
-                      return cast_ref< LinearOperator<dim> >(v).get().block(0,0).frobenius_norm();
+                      return cast_ref< LinearOperator<dim> >(v).get().block(variable_id,variable_id).frobenius_norm();
                   } , true ) ),
                   operator_(std::move(operator_impl)),
                   boundary_values_(zero(domain))
@@ -43,8 +43,8 @@ namespace Spacy
                 assemble(x);
 
                 auto y = zero(range());
-                A_->block(0,0).vmult(get(cast_ref<Vector>(y)),
-                                     get(cast_ref<Vector>(dx)));
+                A_->block(variable_id,variable_id).vmult(get(cast_ref<Vector>(y)),
+                                                         get(cast_ref<Vector>(dx)));
 
                 return y;
             }
@@ -67,8 +67,10 @@ namespace Spacy
             {
                 for(auto i=0u; i<dofs_per_cell; ++i)
                     for(auto j=0u; j<dofs_per_cell; ++j)
-                        cell_matrix(i,j) += operator_.template d1<0>( std::make_tuple(fe_values.shape_value(j, q_index),
-                                                                                      fe_values.shape_grad(j, q_index)) ) *
+                        cell_matrix(i,j) += operator_.template d1<variable_id>(
+                                                std::make_tuple(fe_values.shape_value(j, q_index),
+                                                                fe_values.shape_grad(j, q_index))
+                                                ) *
                                             fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
             }
 
@@ -80,7 +82,7 @@ namespace Spacy
                 for(auto i=0u; i<dofs_per_cell; ++i)
                 {
                     cell_rhs(i) += operator_() * fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
-                    cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index) );
+                    cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index);
                 }
             }
 
@@ -134,15 +136,16 @@ namespace Spacy
 
                     for(auto i=0u; i<dofs_per_cell; ++i)
                         for(auto j=0u; j<dofs_per_cell; ++j)
-                            A_->block(0,0).add(local_dof_indices[i], local_dof_indices[j],
-                                               cell_matrix(i,j));
+                            A_->block(variable_id,variable_id).add(local_dof_indices[i],
+                                                                   local_dof_indices[j],
+                                                                   cell_matrix(i,j));
 
                     for (auto i=0u; i<dofs_per_cell; ++i)
                         b_(local_dof_indices[i]) += cell_rhs(i);
                 }
 
                 dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
-                                                           A_->block(0,0),
+                                                           A_->block(variable_id,variable_id),
                                                            get(cast_ref<Vector>(boundary_values_)),
                                                            b_);
 
