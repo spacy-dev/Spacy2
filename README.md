@@ -48,8 +48,10 @@ and type
 ### Examples
 Currently there are examples for
   - simple usage without external libraries (currently a scalar example),
-  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox),
-  - [FEniCS](https://fenicsproject.org).
+  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) using [FunG](https://lubkoll.github.io/FunG),
+  - [Eigen](http://eigen.tuxfamily.org/) using [FunG](https://lubkoll.github.io/FunG),
+  - [FEniCS](https://fenicsproject.org) with and without [FunG](https://lubkoll.github.io/FunG),
+  - [deal.II](http://dealii.org)
 
 These are located in
  - Spacy/Examples/Kaskade,
