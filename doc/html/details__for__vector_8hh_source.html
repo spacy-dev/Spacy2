@@ -111,13 +111,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00022"></a>00022         {
 <a name="l00023"></a>00023             <span class="keyword">using</span> clone_function = void ( * )( <span class="keywordtype">void</span>*, std::shared_ptr&lt; void &gt;&amp; );
 <a name="l00024"></a>00024             <span class="keyword">using</span> clone_into_function = void ( * )( <span class="keywordtype">void</span>*, Buffer&amp;, std::shared_ptr&lt; void &gt;&amp; );
-<a name="l00025"></a>00025             <span class="keyword">using</span> call_const_Vector_ref_function = Real ( * )( <span class="keyword">const</span> Interface&amp;, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* x );
+<a name="l00025"></a>00025             <span class="keyword">using</span> call_const_Vector_ref_function = Real ( * )( <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* x );
 <a name="l00026"></a>00026             <span class="keyword">using</span> add_const_Vector_ref_function = Interface&amp; (*)( Interface&amp;, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* y );
 <a name="l00027"></a>00027             <span class="keyword">using</span> subtract_const_Vector_ref_function = Interface&amp; (*)( Interface&amp;, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* y );
 <a name="l00028"></a>00028             <span class="keyword">using</span> multiply_double_function = Interface&amp; (*)( Interface&amp;, <span class="keywordtype">void</span>*, <span class="keywordtype">double</span> a );
-<a name="l00029"></a>00029             <span class="keyword">using</span> negate_function = Interface ( * )( <span class="keyword">const</span> Interface&amp;, <span class="keywordtype">void</span>* );
-<a name="l00030"></a>00030             <span class="keyword">using</span> compare_const_Vector_ref_function = bool ( * )( <span class="keyword">const</span> Interface&amp;, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* y );
-<a name="l00031"></a>00031             <span class="keyword">using</span> space_function = <span class="keyword">const</span> VectorSpace&amp; (*)( <span class="keyword">const</span> Interface&amp;, <span class="keywordtype">void</span>* );
+<a name="l00029"></a>00029             <span class="keyword">using</span> negate_function = Interface ( * )( <span class="keywordtype">void</span>* );
+<a name="l00030"></a>00030             <span class="keyword">using</span> compare_const_Vector_ref_function = bool ( * )( <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>* y );
+<a name="l00031"></a>00031             <span class="keyword">using</span> space_function = <span class="keyword">const</span> VectorSpace&amp; (*)( <span class="keywordtype">void</span>* );
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033             clone_function clone;
 <a name="l00034"></a>00034             clone_into_function clone_into;
@@ -133,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044         <span class="keyword">template</span> &lt; <span class="keyword">class</span> Interface, <span class="keyword">class</span> Impl &gt;
 <a name="l00045"></a>00045         <span class="keyword">struct </span>execution_wrapper
 <a name="l00046"></a>00046         {
-<a name="l00047"></a>00047             <span class="keyword">static</span> Real call_const_Vector_ref( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* x )
+<a name="l00047"></a>00047             <span class="keyword">static</span> Real call_const_Vector_ref( <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* x )
 <a name="l00048"></a>00048             {
 <a name="l00049"></a>00049                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> <span class="keyword">const </span>Impl* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">operator</span>()( *<span class="keyword">static_cast&lt;</span> <span class="keyword">const </span>Impl* <span class="keyword">&gt;</span>( x ) );
 <a name="l00050"></a>00050             }
@@ -156,17 +156,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a>00067                 <span class="keywordflow">return</span> interface;
 <a name="l00068"></a>00068             }
 <a name="l00069"></a>00069 
-<a name="l00070"></a>00070             <span class="keyword">static</span> Interface negate( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl )
+<a name="l00070"></a>00070             <span class="keyword">static</span> Interface negate( <span class="keywordtype">void</span>* impl )
 <a name="l00071"></a>00071             {
 <a name="l00072"></a>00072                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> <span class="keyword">const </span>Impl* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">operator</span>-();
 <a name="l00073"></a>00073             }
 <a name="l00074"></a>00074 
-<a name="l00075"></a>00075             <span class="keyword">static</span> <span class="keywordtype">bool</span> compare_const_Vector_ref( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* y )
+<a name="l00075"></a>00075             <span class="keyword">static</span> <span class="keywordtype">bool</span> compare_const_Vector_ref( <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* y )
 <a name="l00076"></a>00076             {
 <a name="l00077"></a>00077                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> <span class="keyword">const </span>Impl* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">operator</span>==( *static_cast&lt; const Impl* &gt;( y ) );
 <a name="l00078"></a>00078             }
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080             <span class="keyword">static</span> <span class="keyword">const</span> VectorSpace&amp; space( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl )
+<a name="l00080"></a>00080             <span class="keyword">static</span> <span class="keyword">const</span> VectorSpace&amp; space( <span class="keywordtype">void</span>* impl )
 <a name="l00081"></a>00081             {
 <a name="l00082"></a>00082                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> <span class="keyword">const </span>Impl* <span class="keyword">&gt;</span>( impl )-&gt;space();
 <a name="l00083"></a>00083             }
@@ -175,7 +175,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00086"></a>00086         <span class="keyword">template</span> &lt; <span class="keyword">class</span> Interface, <span class="keyword">class</span> Impl &gt;
 <a name="l00087"></a>00087         <span class="keyword">struct </span>execution_wrapper&lt; Interface, std::reference_wrapper&lt; Impl &gt; &gt;
 <a name="l00088"></a>00088         {
-<a name="l00089"></a>00089             <span class="keyword">static</span> Real call_const_Vector_ref( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* x )
+<a name="l00089"></a>00089             <span class="keyword">static</span> Real call_const_Vector_ref( <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* x )
 <a name="l00090"></a>00090             {
 <a name="l00091"></a>00091                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">get</span>().operator()(
 <a name="l00092"></a>00092                     <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( x )-&gt;<span class="keyword">get</span>() );
@@ -201,18 +201,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00112"></a>00112                 <span class="keywordflow">return</span> interface;
 <a name="l00113"></a>00113             }
 <a name="l00114"></a>00114 
-<a name="l00115"></a>00115             <span class="keyword">static</span> Interface negate( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl )
+<a name="l00115"></a>00115             <span class="keyword">static</span> Interface negate( <span class="keywordtype">void</span>* impl )
 <a name="l00116"></a>00116             {
 <a name="l00117"></a>00117                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">get</span>().operator-();
 <a name="l00118"></a>00118             }
 <a name="l00119"></a>00119 
-<a name="l00120"></a>00120             <span class="keyword">static</span> <span class="keywordtype">bool</span> compare_const_Vector_ref( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* y )
+<a name="l00120"></a>00120             <span class="keyword">static</span> <span class="keywordtype">bool</span> compare_const_Vector_ref( <span class="keywordtype">void</span>* impl, <span class="keywordtype">void</span>* y )
 <a name="l00121"></a>00121             {
 <a name="l00122"></a>00122                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">get</span>().operator==(
 <a name="l00123"></a>00123                     <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( y )-&gt;<span class="keyword">get</span>() );
 <a name="l00124"></a>00124             }
 <a name="l00125"></a>00125 
-<a name="l00126"></a>00126             <span class="keyword">static</span> <span class="keyword">const</span> VectorSpace&amp; space( <span class="keyword">const</span> Interface&amp; interface, <span class="keywordtype">void</span>* impl )
+<a name="l00126"></a>00126             <span class="keyword">static</span> <span class="keyword">const</span> VectorSpace&amp; space( <span class="keywordtype">void</span>* impl )
 <a name="l00127"></a>00127             {
 <a name="l00128"></a>00128                 <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span> std::reference_wrapper&lt; Impl &gt;* <span class="keyword">&gt;</span>( impl )-&gt;<span class="keyword">get</span>().space();
 <a name="l00129"></a>00129             }
@@ -338,7 +338,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 8 2016 12:31:33 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 8 2016 16:06:08 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
