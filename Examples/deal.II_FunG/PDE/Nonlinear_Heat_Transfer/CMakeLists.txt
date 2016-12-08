@@ -25,6 +25,9 @@ if (NOT CMAKE_BUILD_TYPE)
     "Choose the type of build, options are: Debug MinSizeRel Release RelWithDebInfo." FORCE)
 endif()
 
+find_package(FunG REQUIRED)
+include_directories(${FUNG_INCLUDE_DIRS})
+
 # Include path, link path, library and compiler flags for Spacy
 find_package(Spacy CONFIG REQUIRED)
 include_directories(${Spacy_INCLUDE_DIR})

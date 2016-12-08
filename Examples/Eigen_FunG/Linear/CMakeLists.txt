@@ -2,6 +2,9 @@ project(Spacy-Examples-EigenAndFung-Example1)
 
 cmake_minimum_required(VERSION 3.1)
 
+find_package(FunG REQUIRED)
+include_directories(${FUNG_INCLUDE_DIRS})
+
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
