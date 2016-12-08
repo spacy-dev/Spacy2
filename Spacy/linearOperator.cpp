@@ -56,13 +56,13 @@ namespace Spacy
     Vector LinearOperator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     Real LinearOperator::operator()( const LinearOperator& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_LinearOperator_ref( *this, read(), x.impl_.get() );
+        return functions_.call_const_LinearOperator_ref( read(), x.impl_.get() );
     }
 
     LinearOperator& LinearOperator::operator+=( const LinearOperator& y )
@@ -86,37 +86,37 @@ namespace Spacy
     LinearOperator LinearOperator::operator-() const
     {
         assert( impl_ );
-        return functions_.negate( *this, read() );
+        return functions_.negate( read() );
     }
 
     bool LinearOperator::operator==( const LinearOperator& y ) const
     {
         assert( impl_ );
-        return functions_.compare_const_LinearOperator_ref( *this, read(), y.impl_.get() );
+        return functions_.compare_const_LinearOperator_ref( read(), y.impl_.get() );
     }
 
     std::function< Vector( const Vector& ) > LinearOperator::solver() const
     {
         assert( impl_ );
-        return functions_.solver( *this, read() );
+        return functions_.solver( read() );
     }
 
     const VectorSpace& LinearOperator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& LinearOperator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     const VectorSpace& LinearOperator::space() const
     {
         assert( impl_ );
-        return functions_.space( *this, read() );
+        return functions_.space( read() );
     }
 
     void* LinearOperator::read() const noexcept

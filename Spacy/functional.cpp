@@ -55,13 +55,13 @@ namespace Spacy
     Real Functional::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     const VectorSpace& Functional::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     void* Functional::read() const noexcept

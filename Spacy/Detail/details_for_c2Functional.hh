@@ -21,12 +21,12 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_const_Vector_ref_function = Real ( * )( const Interface&, void*, const Vector& x );
-            using d1_const_Vector_ref_function = Vector ( * )( const Interface&, void*, const Vector& x );
-            using d2_const_Vector_ref_const_Vector_ref_function = Vector ( * )( const Interface&, void*,
-                                                                                const Vector& x, const Vector& dx );
-            using hessian_const_Vector_ref_function = LinearOperator ( * )( const Interface&, void*, const Vector& x );
-            using domain_function = const VectorSpace& (*)( const Interface&, void* );
+            using call_const_Vector_ref_function = Real ( * )( void*, const Vector& x );
+            using d1_const_Vector_ref_function = Vector ( * )( void*, const Vector& x );
+            using d2_const_Vector_ref_const_Vector_ref_function = Vector ( * )( void*, const Vector& x,
+                                                                                const Vector& dx );
+            using hessian_const_Vector_ref_function = LinearOperator ( * )( void*, const Vector& x );
+            using domain_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -40,28 +40,27 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
 
-            static Vector d1_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector d1_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->d1( x );
             }
 
-            static Vector d2_const_Vector_ref_const_Vector_ref( const Interface& interface, void* impl, const Vector& x,
-                                                                const Vector& dx )
+            static Vector d2_const_Vector_ref_const_Vector_ref( void* impl, const Vector& x, const Vector& dx )
             {
                 return static_cast< const Impl* >( impl )->d2( x, dx );
             }
 
-            static LinearOperator hessian_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static LinearOperator hessian_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->hessian( x );
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< const Impl* >( impl )->domain();
             }
@@ -70,28 +69,27 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
 
-            static Vector d1_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector d1_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().d1( x );
             }
 
-            static Vector d2_const_Vector_ref_const_Vector_ref( const Interface& interface, void* impl, const Vector& x,
-                                                                const Vector& dx )
+            static Vector d2_const_Vector_ref_const_Vector_ref( void* impl, const Vector& x, const Vector& dx )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().d2( x, dx );
             }
 
-            static LinearOperator hessian_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static LinearOperator hessian_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().hessian( x );
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }

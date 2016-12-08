@@ -20,10 +20,10 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_const_Vector_ref_function = Vector ( * )( const Interface&, void*, const Vector& x );
-            using M_function = LinearOperator ( * )( const Interface&, void* );
-            using domain_function = const VectorSpace& (*)( const Interface&, void* );
-            using range_function = const VectorSpace& (*)( const Interface&, void* );
+            using call_const_Vector_ref_function = Vector ( * )( void*, const Vector& x );
+            using M_function = LinearOperator ( * )( void* );
+            using domain_function = const VectorSpace& (*)( void* );
+            using range_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -36,22 +36,22 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
 
-            static LinearOperator M( const Interface& interface, void* impl )
+            static LinearOperator M( void* impl )
             {
                 return static_cast< const Impl* >( impl )->M();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< const Impl* >( impl )->domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< const Impl* >( impl )->range();
             }
@@ -60,22 +60,22 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
 
-            static LinearOperator M( const Interface& interface, void* impl )
+            static LinearOperator M( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().M();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().range();
             }
@@ -147,17 +147,16 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_double_const_Vector_ref_function = Vector ( * )( const Interface&, void*, double t,
-                                                                        const Vector& x );
+            using call_double_const_Vector_ref_function = Vector ( * )( void*, double t, const Vector& x );
             using add_const_DynamicLinearOperator_ref_function = Interface& (*)( Interface&, void*, void* y );
             using subtract_const_DynamicLinearOperator_ref_function = Interface& (*)( Interface&, void*, void* y );
             using multiply_double_function = Interface& (*)( Interface&, void*, double a );
-            using negate_function = Interface ( * )( const Interface&, void* );
-            using compare_const_DynamicLinearOperator_ref_function = bool ( * )( const Interface&, void*, void* y );
-            using solver_function = std::function< Vector( const Vector& ) > ( * )( const Interface&, void* );
-            using domain_function = const VectorSpace& (*)( const Interface&, void* );
-            using range_function = const VectorSpace& (*)( const Interface&, void* );
-            using space_function = const VectorSpace& (*)( const Interface&, void* );
+            using negate_function = Interface ( * )( void* );
+            using compare_const_DynamicLinearOperator_ref_function = bool ( * )( void*, void* y );
+            using solver_function = std::function< Vector( const Vector& ) > ( * )( void* );
+            using domain_function = const VectorSpace& (*)( void* );
+            using range_function = const VectorSpace& (*)( void* );
+            using space_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -176,8 +175,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_double_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                        const Vector& x )
+            static Vector call_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( std::move( t ), x );
             }
@@ -200,32 +198,32 @@ namespace Spacy
                 return interface;
             }
 
-            static Interface negate( const Interface& interface, void* impl )
+            static Interface negate( void* impl )
             {
                 return static_cast< const Impl* >( impl )->operator-();
             }
 
-            static bool compare_const_DynamicLinearOperator_ref( const Interface& interface, void* impl, void* y )
+            static bool compare_const_DynamicLinearOperator_ref( void* impl, void* y )
             {
                 return static_cast< const Impl* >( impl )->operator==( *static_cast< const Impl* >( y ) );
             }
 
-            static std::function< Vector( const Vector& ) > solver( const Interface& interface, void* impl )
+            static std::function< Vector( const Vector& ) > solver( void* impl )
             {
                 return static_cast< const Impl* >( impl )->solver();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< const Impl* >( impl )->domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< const Impl* >( impl )->range();
             }
 
-            static const VectorSpace& space( const Interface& interface, void* impl )
+            static const VectorSpace& space( void* impl )
             {
                 return static_cast< const Impl* >( impl )->space();
             }
@@ -234,8 +232,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_double_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                        const Vector& x )
+            static Vector call_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( std::move( t ), x );
             }
@@ -260,33 +257,33 @@ namespace Spacy
                 return interface;
             }
 
-            static Interface negate( const Interface& interface, void* impl )
+            static Interface negate( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator-();
             }
 
-            static bool compare_const_DynamicLinearOperator_ref( const Interface& interface, void* impl, void* y )
+            static bool compare_const_DynamicLinearOperator_ref( void* impl, void* y )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator==(
                     static_cast< std::reference_wrapper< Impl >* >( y )->get() );
             }
 
-            static std::function< Vector( const Vector& ) > solver( const Interface& interface, void* impl )
+            static std::function< Vector( const Vector& ) > solver( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().solver();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().range();
             }
 
-            static const VectorSpace& space( const Interface& interface, void* impl )
+            static const VectorSpace& space( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().space();
             }
@@ -438,16 +435,14 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_double_const_Vector_ref_function = Vector ( * )( const Interface&, void*, double t,
-                                                                        const Vector& x );
-            using d1_double_const_Vector_ref_const_Vector_ref_function = Vector ( * )( const Interface&, void*,
-                                                                                       double t, const Vector& x,
+            using call_double_const_Vector_ref_function = Vector ( * )( void*, double t, const Vector& x );
+            using d1_double_const_Vector_ref_const_Vector_ref_function = Vector ( * )( void*, double t, const Vector& x,
                                                                                        const Vector& dx );
-            using linearization_double_const_Vector_ref_function = LinearOperator ( * )( const Interface&, void*,
-                                                                                         double t, const Vector& x );
-            using M_function = LinearOperator ( * )( const Interface&, void* );
-            using domain_function = const VectorSpace& (*)( const Interface&, void* );
-            using range_function = const VectorSpace& (*)( const Interface&, void* );
+            using linearization_double_const_Vector_ref_function = LinearOperator ( * )( void*, double t,
+                                                                                         const Vector& x );
+            using M_function = LinearOperator ( * )( void* );
+            using domain_function = const VectorSpace& (*)( void* );
+            using range_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -462,35 +457,33 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_double_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                        const Vector& x )
+            static Vector call_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( std::move( t ), x );
             }
 
-            static Vector d1_double_const_Vector_ref_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                                       const Vector& x, const Vector& dx )
+            static Vector d1_double_const_Vector_ref_const_Vector_ref( void* impl, double t, const Vector& x,
+                                                                       const Vector& dx )
             {
                 return static_cast< const Impl* >( impl )->d1( std::move( t ), x, dx );
             }
 
-            static LinearOperator linearization_double_const_Vector_ref( const Interface& interface, void* impl,
-                                                                         double t, const Vector& x )
+            static LinearOperator linearization_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->linearization( std::move( t ), x );
             }
 
-            static LinearOperator M( const Interface& interface, void* impl )
+            static LinearOperator M( void* impl )
             {
                 return static_cast< const Impl* >( impl )->M();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< const Impl* >( impl )->domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< const Impl* >( impl )->range();
             }
@@ -499,35 +492,33 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_double_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                        const Vector& x )
+            static Vector call_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( std::move( t ), x );
             }
 
-            static Vector d1_double_const_Vector_ref_const_Vector_ref( const Interface& interface, void* impl, double t,
-                                                                       const Vector& x, const Vector& dx )
+            static Vector d1_double_const_Vector_ref_const_Vector_ref( void* impl, double t, const Vector& x,
+                                                                       const Vector& dx )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().d1( std::move( t ), x, dx );
             }
 
-            static LinearOperator linearization_double_const_Vector_ref( const Interface& interface, void* impl,
-                                                                         double t, const Vector& x )
+            static LinearOperator linearization_double_const_Vector_ref( void* impl, double t, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().linearization( std::move( t ), x );
             }
 
-            static LinearOperator M( const Interface& interface, void* impl )
+            static LinearOperator M( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().M();
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }
 
-            static const VectorSpace& range( const Interface& interface, void* impl )
+            static const VectorSpace& range( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().range();
             }

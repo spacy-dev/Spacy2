@@ -55,7 +55,7 @@ namespace Spacy
     Real Vector::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x.impl_.get() );
+        return functions_.call_const_Vector_ref( read(), x.impl_.get() );
     }
 
     Vector& Vector::operator+=( const Vector& y )
@@ -79,19 +79,19 @@ namespace Spacy
     Vector Vector::operator-() const
     {
         assert( impl_ );
-        return functions_.negate( *this, read() );
+        return functions_.negate( read() );
     }
 
     bool Vector::operator==( const Vector& y ) const
     {
         assert( impl_ );
-        return functions_.compare_const_Vector_ref( *this, read(), y.impl_.get() );
+        return functions_.compare_const_Vector_ref( read(), y.impl_.get() );
     }
 
     const VectorSpace& Vector::space() const
     {
         assert( impl_ );
-        return functions_.space( *this, read() );
+        return functions_.space( read() );
     }
 
     void* Vector::read() const noexcept

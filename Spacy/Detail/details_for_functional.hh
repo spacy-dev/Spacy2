@@ -20,8 +20,8 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_const_Vector_ref_function = Real ( * )( const Interface&, void*, const Vector& x );
-            using domain_function = const VectorSpace& (*)( const Interface&, void* );
+            using call_const_Vector_ref_function = Real ( * )( void*, const Vector& x );
+            using domain_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -32,12 +32,12 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< const Impl* >( impl )->domain();
             }
@@ -46,12 +46,12 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Real call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
 
-            static const VectorSpace& domain( const Interface& interface, void* impl )
+            static const VectorSpace& domain( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().domain();
             }

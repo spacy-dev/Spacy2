@@ -17,8 +17,8 @@ namespace Spacy
         {
             using delete_function = void ( * )( void* );
             using clone_function = void* (*)( void* );
-            using call_const_Vector_ref_function = Vector ( * )( const Interface&, void*, const Vector& x );
-            using isPositiveDefinite_function = bool ( * )( const Interface&, void* );
+            using call_const_Vector_ref_function = Vector ( * )( void*, const Vector& x );
+            using isPositiveDefinite_function = bool ( * )( void* );
 
             delete_function del;
             clone_function clone;
@@ -29,12 +29,12 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< const Impl* >( impl )->operator()( x );
             }
 
-            static bool isPositiveDefinite( const Interface& interface, void* impl )
+            static bool isPositiveDefinite( void* impl )
             {
                 return static_cast< const Impl* >( impl )->isPositiveDefinite();
             }
@@ -43,12 +43,12 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_const_Vector_ref( const Interface& interface, void* impl, const Vector& x )
+            static Vector call_const_Vector_ref( void* impl, const Vector& x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( x );
             }
 
-            static bool isPositiveDefinite( const Interface& interface, void* impl )
+            static bool isPositiveDefinite( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().isPositiveDefinite();
             }

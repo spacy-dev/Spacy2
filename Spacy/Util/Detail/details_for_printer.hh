@@ -19,7 +19,7 @@ namespace Spacy
             {
                 using delete_function = void ( * )( void* );
                 using call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref_function =
-                    void ( * )( Interface&, void*, const char* tag, const char* name,
+                    void ( * )( void*, const char* tag, const char* name,
                                 const std::function< void( std::ostream& ) >& printable );
 
                 delete_function del;
@@ -31,7 +31,7 @@ namespace Spacy
             struct execution_wrapper
             {
                 static void call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref(
-                    Interface& interface, void* impl, const char* tag, const char* name,
+                    void* impl, const char* tag, const char* name,
                     const std::function< void( std::ostream& ) >& printable )
                 {
                     static_cast< Impl* >( impl )->operator()( tag, name, printable );
@@ -42,7 +42,7 @@ namespace Spacy
             struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
             {
                 static void call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref(
-                    Interface& interface, void* impl, const char* tag, const char* name,
+                    void* impl, const char* tag, const char* name,
                     const std::function< void( std::ostream& ) >& printable )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( tag, name, printable );

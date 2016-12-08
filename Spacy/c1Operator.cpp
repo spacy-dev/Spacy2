@@ -55,31 +55,31 @@ namespace Spacy
     Vector C1Operator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     Vector C1Operator::d1( const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d1_const_Vector_ref_const_Vector_ref( *this, read(), x, dx );
+        return functions_.d1_const_Vector_ref_const_Vector_ref( read(), x, dx );
     }
 
     LinearOperator C1Operator::linearization( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.linearization_const_Vector_ref( *this, read(), x );
+        return functions_.linearization_const_Vector_ref( read(), x );
     }
 
     const VectorSpace& C1Operator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& C1Operator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     void* C1Operator::read() const noexcept

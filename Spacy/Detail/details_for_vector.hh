@@ -22,13 +22,13 @@ namespace Spacy
         {
             using clone_function = void ( * )( void*, std::shared_ptr< void >& );
             using clone_into_function = void ( * )( void*, Buffer&, std::shared_ptr< void >& );
-            using call_const_Vector_ref_function = Real ( * )( const Interface&, void*, void* x );
+            using call_const_Vector_ref_function = Real ( * )( void*, void* x );
             using add_const_Vector_ref_function = Interface& (*)( Interface&, void*, void* y );
             using subtract_const_Vector_ref_function = Interface& (*)( Interface&, void*, void* y );
             using multiply_double_function = Interface& (*)( Interface&, void*, double a );
-            using negate_function = Interface ( * )( const Interface&, void* );
-            using compare_const_Vector_ref_function = bool ( * )( const Interface&, void*, void* y );
-            using space_function = const VectorSpace& (*)( const Interface&, void* );
+            using negate_function = Interface ( * )( void* );
+            using compare_const_Vector_ref_function = bool ( * )( void*, void* y );
+            using space_function = const VectorSpace& (*)( void* );
 
             clone_function clone;
             clone_into_function clone_into;
@@ -44,7 +44,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, void* x )
+            static Real call_const_Vector_ref( void* impl, void* x )
             {
                 return static_cast< const Impl* >( impl )->operator()( *static_cast< const Impl* >( x ) );
             }
@@ -67,17 +67,17 @@ namespace Spacy
                 return interface;
             }
 
-            static Interface negate( const Interface& interface, void* impl )
+            static Interface negate( void* impl )
             {
                 return static_cast< const Impl* >( impl )->operator-();
             }
 
-            static bool compare_const_Vector_ref( const Interface& interface, void* impl, void* y )
+            static bool compare_const_Vector_ref( void* impl, void* y )
             {
                 return static_cast< const Impl* >( impl )->operator==( *static_cast< const Impl* >( y ) );
             }
 
-            static const VectorSpace& space( const Interface& interface, void* impl )
+            static const VectorSpace& space( void* impl )
             {
                 return static_cast< const Impl* >( impl )->space();
             }
@@ -86,7 +86,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Real call_const_Vector_ref( const Interface& interface, void* impl, void* x )
+            static Real call_const_Vector_ref( void* impl, void* x )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()(
                     static_cast< std::reference_wrapper< Impl >* >( x )->get() );
@@ -112,18 +112,18 @@ namespace Spacy
                 return interface;
             }
 
-            static Interface negate( const Interface& interface, void* impl )
+            static Interface negate( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator-();
             }
 
-            static bool compare_const_Vector_ref( const Interface& interface, void* impl, void* y )
+            static bool compare_const_Vector_ref( void* impl, void* y )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator==(
                     static_cast< std::reference_wrapper< Impl >* >( y )->get() );
             }
 
-            static const VectorSpace& space( const Interface& interface, void* impl )
+            static const VectorSpace& space( void* impl )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().space();
             }

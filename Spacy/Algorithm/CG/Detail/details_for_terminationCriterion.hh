@@ -18,16 +18,16 @@ namespace Spacy
             {
                 using delete_function = void ( * )( void* );
                 using clone_function = void* (*)( void* );
-                using call_function = bool ( * )( const Interface&, void* );
-                using clear_function = void ( * )( Interface&, void* );
-                using update_double_double_double_double_function = void ( * )( Interface&, void*, double alpha,
-                                                                                double qAq, double qPq, double rPINVr );
-                using vanishingStep_function = bool ( * )( const Interface&, void* );
-                using minimalDecreaseAchieved_function = bool ( * )( const Interface&, void* );
-                using setEps_double_function = void ( * )( Interface&, void*, double eps );
-                using setAbsoluteAccuracy_double_function = void ( * )( Interface&, void*, double accuracy );
-                using setMinimalAccuracy_double_function = void ( * )( Interface&, void*, double accuracy );
-                using setRelativeAccuracy_double_function = void ( * )( Interface&, void*, double accuracy );
+                using call_function = bool ( * )( void* );
+                using clear_function = void ( * )( void* );
+                using update_double_double_double_double_function = void ( * )( void*, double alpha, double qAq,
+                                                                                double qPq, double rPINVr );
+                using vanishingStep_function = bool ( * )( void* );
+                using minimalDecreaseAchieved_function = bool ( * )( void* );
+                using setEps_double_function = void ( * )( void*, double eps );
+                using setAbsoluteAccuracy_double_function = void ( * )( void*, double accuracy );
+                using setMinimalAccuracy_double_function = void ( * )( void*, double accuracy );
+                using setRelativeAccuracy_double_function = void ( * )( void*, double accuracy );
 
                 delete_function del;
                 clone_function clone;
@@ -45,49 +45,49 @@ namespace Spacy
             template < class Interface, class Impl >
             struct execution_wrapper
             {
-                static bool call( const Interface& interface, void* impl )
+                static bool call( void* impl )
                 {
                     return static_cast< const Impl* >( impl )->operator()();
                 }
 
-                static void clear( Interface& interface, void* impl )
+                static void clear( void* impl )
                 {
                     static_cast< Impl* >( impl )->clear();
                 }
 
-                static void update_double_double_double_double( Interface& interface, void* impl, double alpha,
-                                                                double qAq, double qPq, double rPINVr )
+                static void update_double_double_double_double( void* impl, double alpha, double qAq, double qPq,
+                                                                double rPINVr )
                 {
                     static_cast< Impl* >( impl )->update( std::move( alpha ), std::move( qAq ), std::move( qPq ),
                                                           std::move( rPINVr ) );
                 }
 
-                static bool vanishingStep( const Interface& interface, void* impl )
+                static bool vanishingStep( void* impl )
                 {
                     return static_cast< const Impl* >( impl )->vanishingStep();
                 }
 
-                static bool minimalDecreaseAchieved( const Interface& interface, void* impl )
+                static bool minimalDecreaseAchieved( void* impl )
                 {
                     return static_cast< const Impl* >( impl )->minimalDecreaseAchieved();
                 }
 
-                static void setEps_double( Interface& interface, void* impl, double eps )
+                static void setEps_double( void* impl, double eps )
                 {
                     static_cast< Impl* >( impl )->setEps( std::move( eps ) );
                 }
 
-                static void setAbsoluteAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setAbsoluteAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< Impl* >( impl )->setAbsoluteAccuracy( std::move( accuracy ) );
                 }
 
-                static void setMinimalAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setMinimalAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< Impl* >( impl )->setMinimalAccuracy( std::move( accuracy ) );
                 }
 
-                static void setRelativeAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setRelativeAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< Impl* >( impl )->setRelativeAccuracy( std::move( accuracy ) );
                 }
@@ -96,51 +96,51 @@ namespace Spacy
             template < class Interface, class Impl >
             struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
             {
-                static bool call( const Interface& interface, void* impl )
+                static bool call( void* impl )
                 {
                     return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()();
                 }
 
-                static void clear( Interface& interface, void* impl )
+                static void clear( void* impl )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().clear();
                 }
 
-                static void update_double_double_double_double( Interface& interface, void* impl, double alpha,
-                                                                double qAq, double qPq, double rPINVr )
+                static void update_double_double_double_double( void* impl, double alpha, double qAq, double qPq,
+                                                                double rPINVr )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().update(
                         std::move( alpha ), std::move( qAq ), std::move( qPq ), std::move( rPINVr ) );
                 }
 
-                static bool vanishingStep( const Interface& interface, void* impl )
+                static bool vanishingStep( void* impl )
                 {
                     return static_cast< std::reference_wrapper< Impl >* >( impl )->get().vanishingStep();
                 }
 
-                static bool minimalDecreaseAchieved( const Interface& interface, void* impl )
+                static bool minimalDecreaseAchieved( void* impl )
                 {
                     return static_cast< std::reference_wrapper< Impl >* >( impl )->get().minimalDecreaseAchieved();
                 }
 
-                static void setEps_double( Interface& interface, void* impl, double eps )
+                static void setEps_double( void* impl, double eps )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().setEps( std::move( eps ) );
                 }
 
-                static void setAbsoluteAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setAbsoluteAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().setAbsoluteAccuracy(
                         std::move( accuracy ) );
                 }
 
-                static void setMinimalAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setMinimalAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().setMinimalAccuracy(
                         std::move( accuracy ) );
                 }
 
-                static void setRelativeAccuracy_double( Interface& interface, void* impl, double accuracy )
+                static void setRelativeAccuracy_double( void* impl, double accuracy )
                 {
                     static_cast< std::reference_wrapper< Impl >* >( impl )->get().setRelativeAccuracy(
                         std::move( accuracy ) );

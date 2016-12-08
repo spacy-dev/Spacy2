@@ -42,8 +42,8 @@ namespace Spacy
                                   const std::function< void( std::ostream& ) >& printable )
         {
             assert( impl_ );
-            functions_.call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref(
-                *this, impl_, tag, name, printable );
+            functions_.call_const_char_ptr_const_char_ptr_const_std_function_void_std_ostream_ref_ref( impl_, tag, name,
+                                                                                                       printable );
         }
 
         void Printer::reset() noexcept

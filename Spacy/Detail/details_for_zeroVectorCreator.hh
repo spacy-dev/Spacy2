@@ -18,7 +18,7 @@ namespace Spacy
         {
             using delete_function = void ( * )( void* );
             using clone_function = void* (*)( void* );
-            using call_const_VectorSpace_ptr_function = Vector ( * )( const Interface&, void*, const VectorSpace* V );
+            using call_const_VectorSpace_ptr_function = Vector ( * )( void*, const VectorSpace* V );
 
             delete_function del;
             clone_function clone;
@@ -28,7 +28,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Vector call_const_VectorSpace_ptr( const Interface& interface, void* impl, const VectorSpace* V )
+            static Vector call_const_VectorSpace_ptr( void* impl, const VectorSpace* V )
             {
                 return static_cast< const Impl* >( impl )->operator()( V );
             }
@@ -37,7 +37,7 @@ namespace Spacy
         template < class Interface, class Impl >
         struct execution_wrapper< Interface, std::reference_wrapper< Impl > >
         {
-            static Vector call_const_VectorSpace_ptr( const Interface& interface, void* impl, const VectorSpace* V )
+            static Vector call_const_VectorSpace_ptr( void* impl, const VectorSpace* V )
             {
                 return static_cast< std::reference_wrapper< Impl >* >( impl )->get().operator()( V );
             }

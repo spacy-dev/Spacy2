@@ -56,19 +56,19 @@ namespace Spacy
     Real C1Functional::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     Vector C1Functional::d1( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.d1_const_Vector_ref( *this, read(), x );
+        return functions_.d1_const_Vector_ref( read(), x );
     }
 
     const VectorSpace& C1Functional::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     void* C1Functional::read() const noexcept

@@ -54,7 +54,7 @@ namespace Spacy
     Vector ZeroVectorCreator::operator()( const VectorSpace* V ) const
     {
         assert( impl_ );
-        return functions_.call_const_VectorSpace_ptr( *this, impl_, V );
+        return functions_.call_const_VectorSpace_ptr( impl_, V );
     }
 
     void ZeroVectorCreator::reset() noexcept

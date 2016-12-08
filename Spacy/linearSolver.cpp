@@ -55,13 +55,13 @@ namespace Spacy
     Vector IndefiniteLinearSolver::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, impl_, x );
+        return functions_.call_const_Vector_ref( impl_, x );
     }
 
     bool IndefiniteLinearSolver::isPositiveDefinite() const
     {
         assert( impl_ );
-        return functions_.isPositiveDefinite( *this, impl_ );
+        return functions_.isPositiveDefinite( impl_ );
     }
 
     void IndefiniteLinearSolver::reset() noexcept

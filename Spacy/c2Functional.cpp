@@ -56,31 +56,31 @@ namespace Spacy
     Real C2Functional::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     Vector C2Functional::d1( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.d1_const_Vector_ref( *this, read(), x );
+        return functions_.d1_const_Vector_ref( read(), x );
     }
 
     Vector C2Functional::d2( const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d2_const_Vector_ref_const_Vector_ref( *this, read(), x, dx );
+        return functions_.d2_const_Vector_ref_const_Vector_ref( read(), x, dx );
     }
 
     LinearOperator C2Functional::hessian( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.hessian_const_Vector_ref( *this, read(), x );
+        return functions_.hessian_const_Vector_ref( read(), x );
     }
 
     const VectorSpace& C2Functional::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     void* C2Functional::read() const noexcept

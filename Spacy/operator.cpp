@@ -55,19 +55,19 @@ namespace Spacy
     Vector Operator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     const VectorSpace& Operator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& Operator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     void* Operator::read() const noexcept

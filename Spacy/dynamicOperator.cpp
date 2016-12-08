@@ -56,25 +56,25 @@ namespace Spacy
     Vector DynamicOperator::operator()( const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_const_Vector_ref( *this, read(), x );
+        return functions_.call_const_Vector_ref( read(), x );
     }
 
     LinearOperator DynamicOperator::M() const
     {
         assert( impl_ );
-        return functions_.M( *this, read() );
+        return functions_.M( read() );
     }
 
     const VectorSpace& DynamicOperator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& DynamicOperator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     void* DynamicOperator::read() const noexcept
@@ -143,7 +143,7 @@ namespace Spacy
     Vector DynamicLinearOperator::operator()( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_double_const_Vector_ref( *this, read(), std::move( t ), x );
+        return functions_.call_double_const_Vector_ref( read(), std::move( t ), x );
     }
 
     DynamicLinearOperator& DynamicLinearOperator::operator+=( const DynamicLinearOperator& y )
@@ -167,37 +167,37 @@ namespace Spacy
     DynamicLinearOperator DynamicLinearOperator::operator-() const
     {
         assert( impl_ );
-        return functions_.negate( *this, read() );
+        return functions_.negate( read() );
     }
 
     bool DynamicLinearOperator::operator==( const DynamicLinearOperator& y ) const
     {
         assert( impl_ );
-        return functions_.compare_const_DynamicLinearOperator_ref( *this, read(), y.impl_.get() );
+        return functions_.compare_const_DynamicLinearOperator_ref( read(), y.impl_.get() );
     }
 
     std::function< Vector( const Vector& ) > DynamicLinearOperator::solver() const
     {
         assert( impl_ );
-        return functions_.solver( *this, read() );
+        return functions_.solver( read() );
     }
 
     const VectorSpace& DynamicLinearOperator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& DynamicLinearOperator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     const VectorSpace& DynamicLinearOperator::space() const
     {
         assert( impl_ );
-        return functions_.space( *this, read() );
+        return functions_.space( read() );
     }
 
     void* DynamicLinearOperator::read() const noexcept
@@ -265,37 +265,37 @@ namespace Spacy
     Vector DynamicC1Operator::operator()( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.call_double_const_Vector_ref( *this, read(), std::move( t ), x );
+        return functions_.call_double_const_Vector_ref( read(), std::move( t ), x );
     }
 
     Vector DynamicC1Operator::d1( double t, const Vector& x, const Vector& dx ) const
     {
         assert( impl_ );
-        return functions_.d1_double_const_Vector_ref_const_Vector_ref( *this, read(), std::move( t ), x, dx );
+        return functions_.d1_double_const_Vector_ref_const_Vector_ref( read(), std::move( t ), x, dx );
     }
 
     LinearOperator DynamicC1Operator::linearization( double t, const Vector& x ) const
     {
         assert( impl_ );
-        return functions_.linearization_double_const_Vector_ref( *this, read(), std::move( t ), x );
+        return functions_.linearization_double_const_Vector_ref( read(), std::move( t ), x );
     }
 
     LinearOperator DynamicC1Operator::M() const
     {
         assert( impl_ );
-        return functions_.M( *this, read() );
+        return functions_.M( read() );
     }
 
     const VectorSpace& DynamicC1Operator::domain() const
     {
         assert( impl_ );
-        return functions_.domain( *this, read() );
+        return functions_.domain( read() );
     }
 
     const VectorSpace& DynamicC1Operator::range() const
     {
         assert( impl_ );
-        return functions_.range( *this, read() );
+        return functions_.range( read() );
     }
 
     void* DynamicC1Operator::read() const noexcept
