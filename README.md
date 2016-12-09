@@ -30,12 +30,15 @@ Depending on your use-case the following dependencies may be required:
 
 Currently there are integration tests for
   - [Eigen](http://eigen.tuxfamily.org/) and [FunG](https://lubkoll.github.io/FunG)
+
     [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen.svg?branch=master)]
     (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen/builds)
-  - [FEniCS](https://fenicsproject.org) and 
+  - [FEniCS](https://fenicsproject.org) 
+
     [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS.svg?branch=master)]
     (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS/builds)
   - [deal.II](http://dealii.org)
+
     [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II.svg?branch=master)]
     (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II/builds)
 
