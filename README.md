@@ -28,11 +28,16 @@ Depending on your use-case the following dependencies may be required:
   - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with cmake .. -DDolfin=ON).
   - [deal.II](http://dealii.org) for developing algorithms with deal.II (enable with cmake .. -DdealII=ON). 
 
-Currently there are integration tests for [Eigen](http://eigen.tuxfamily.org/), [FEniCS](https://fenicsproject.org) and 
-[FunG](https://lubkoll.github.io/FunG), running in a separate CI:
-
-[![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests.svg?branch=master)]
-(https://travis-ci.org/spacy-dev/Spacy-Integration-Tests/builds)
+Currently there are integration tests for
+  - [Eigen](http://eigen.tuxfamily.org/) and [FunG](https://lubkoll.github.io/FunG)
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen.svg?branch=master)]
+    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen/builds)
+  - [FEniCS](https://fenicsproject.org) and 
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS.svg?branch=master)]
+    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS/builds)
+  - [deal.II](http://dealii.org)
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II.svg?branch=master)]
+    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II/builds)
 
 ### Installation
 Go to download folder, i.e.
