@@ -1,8 +1,4 @@
-// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
-// Released under the terms of the GNU General Public License version 3 or later.
-
-#ifndef SPACY_UTIL_INVOKE_HH
-#define SPACY_UTIL_INVOKE_HH
+#pragma once
 
 #include <tuple>
 #include <utility>
@@ -61,5 +57,3 @@ namespace Spacy
                                                std::make_index_sequence<Size>{});
   }
 }
-
-#endif // SPACY_UTIL_INVOKE_HH
