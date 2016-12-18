@@ -143,16 +143,121 @@ template&lt;class SingleSpaceVector &gt; </td></tr>
 template&lt;class SingleSpaceVector &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structSpacy_1_1ProductSpace_1_1BasicComponentView.html">BasicComponentView</a>&lt; const <br class="typebreak"/>
 SingleSpaceVector &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>extractSingleComponentView</b> (const ::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;x)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gad4b421dd4563c7d575550ab4d5d3ff0d">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space.  <a href="group__ProductSpaceGroup.html#gad4b421dd4563c7d575550ab4d5d3ff0d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gaee9c55c4b0f0b9d41bb6e1eba80f829f">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;globalIds)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space.  <a href="group__ProductSpaceGroup.html#gaee9c55c4b0f0b9d41bb6e1eba80f829f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#ga5146524c4a6b3cb6f4a47b877cb2f55d">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;primalSubSpaceIds, const std::vector&lt; unsigned &gt; &amp;dualSubSpaceIds)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create primal-dual product space.  <a href="group__ProductSpaceGroup.html#ga5146524c4a6b3cb6f4a47b877cb2f55d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1ProductSpace.html#ad4b421dd4563c7d575550ab4d5d3ff0d">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space.  <a href="#ad4b421dd4563c7d575550ab4d5d3ff0d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1ProductSpace.html#aee9c55c4b0f0b9d41bb6e1eba80f829f">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;globalIds)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space.  <a href="#aee9c55c4b0f0b9d41bb6e1eba80f829f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1ProductSpace.html#a5146524c4a6b3cb6f4a47b877cb2f55d">makeHilbertSpace</a> (const std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;primalSubSpaceIds, const std::vector&lt; unsigned &gt; &amp;dualSubSpaceIds)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create primal-dual product space.  <a href="#a5146524c4a6b3cb6f4a47b877cb2f55d"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A product space that supports distinction between primal and dual variables. </p>
-</div></div><!-- contents -->
+</div><hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ad4b421dd4563c7d575550ab4d5d3ff0d"></a><!-- doxytag: member="Spacy::ProductSpace::makeHilbertSpace" ref="ad4b421dd4563c7d575550ab4d5d3ff0d" args="(const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;spaces)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> <a class="el" href="namespaceSpacy_1_1ProductSpace.html#ad4b421dd4563c7d575550ab4d5d3ff0d">Spacy::ProductSpace::makeHilbertSpace</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spaces</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create product space. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spaces</td><td>vector of sub-spaces </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aee9c55c4b0f0b9d41bb6e1eba80f829f"></a><!-- doxytag: member="Spacy::ProductSpace::makeHilbertSpace" ref="aee9c55c4b0f0b9d41bb6e1eba80f829f" args="(const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;globalIds)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> <a class="el" href="namespaceSpacy_1_1ProductSpace.html#ad4b421dd4563c7d575550ab4d5d3ff0d">Spacy::ProductSpace::makeHilbertSpace</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>globalIds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create product space. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spaces</td><td>vector of sub-spaces </td></tr>
+    <tr><td class="paramname">idMap</td><td>map relating global space indices with the local indices \(1,\ldots,n\) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5146524c4a6b3cb6f4a47b877cb2f55d"></a><!-- doxytag: member="Spacy::ProductSpace::makeHilbertSpace" ref="a5146524c4a6b3cb6f4a47b877cb2f55d" args="(const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;spaces, const std::vector&lt; unsigned &gt; &amp;primalSubSpaceIds, const std::vector&lt; unsigned &gt; &amp;dualSubSpaceIds)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> <a class="el" href="namespaceSpacy_1_1ProductSpace.html#ad4b421dd4563c7d575550ab4d5d3ff0d">Spacy::ProductSpace::makeHilbertSpace</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::shared_ptr&lt; VectorSpace &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>spaces</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>primalSubSpaceIds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dualSubSpaceIds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create primal-dual product space. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spaces</td><td>vector of spaces </td></tr>
+    <tr><td class="paramname">primalSubSpaceIds</td><td>entries of spaces that correspond to primal variables </td></tr>
+    <tr><td class="paramname">dualSubSpaceIds</td><td>entries of spaces that correspond to dual variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -170,7 +275,7 @@ SingleSpaceVector &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 16 2016 16:51:22 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 18 2016 21:49:46 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

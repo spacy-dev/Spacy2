@@ -20,9 +20,7 @@
 class \hyperlink{classSpacy_1_1ProductSpace_1_1Norm}{\-Spacy\-::\-Product\-Space\-::\-Norm}
 \begin{DoxyCompactList}\small\item\em \-Canonical norm on product spaces. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1ProductSpace_1_1ScalarProduct}{\-Spacy\-::\-Product\-Space\-::\-Scalar\-Product}
-\begin{DoxyCompactList}\small\item\em \-Canonical scalar product on product spaces. \end{DoxyCompactList}\item 
-class \hyperlink{classSpacy_1_1ProductSpace_1_1VectorCreator}{\-Spacy\-::\-Product\-Space\-::\-Vector\-Creator}
-\begin{DoxyCompactList}\small\item\em \-Creator for \hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{\-Product\-Space\-::\-Vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Canonical scalar product on product spaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -46,12 +44,9 @@ const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{gr
 \item 
 const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gabe5978657aab46b1575e2521b336407d}{\-Spacy\-::dual\-Component} (const \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
 \item 
-\-Vector\-Space \hyperlink{group__ProductSpaceGroup_gad4b421dd4563c7d575550ab4d5d3ff0d}{\-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&spaces)
-\begin{DoxyCompactList}\small\item\em \-Create product space. \end{DoxyCompactList}\item 
-\-Vector\-Space \hyperlink{group__ProductSpaceGroup_gaee9c55c4b0f0b9d41bb6e1eba80f829f}{\-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&spaces, const std\-::vector$<$ unsigned $>$ \&global\-Ids)
-\begin{DoxyCompactList}\small\item\em \-Create product space. \end{DoxyCompactList}\item 
-\-Vector\-Space \hyperlink{group__ProductSpaceGroup_ga5146524c4a6b3cb6f4a47b877cb2f55d}{\-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&spaces, const std\-::vector$<$ unsigned $>$ \&primal\-Sub\-Space\-Ids, const std\-::vector$<$ unsigned $>$ \&dual\-Sub\-Space\-Ids)
-\begin{DoxyCompactList}\small\item\em \-Create primal-\/dual product space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hypertarget{group__ProductSpaceGroup_ga6054e5c78652ac4959f5d521acadd86a}{const \-Vector\-Space \& \hyperlink{group__ProductSpaceGroup_ga6054e5c78652ac4959f5d521acadd86a}{\-Spacy\-::extract\-Sub\-Space} (const \-Vector\-Space \&space, unsigned global\-\_\-id)}\label{group__ProductSpaceGroup_ga6054e5c78652ac4959f5d521acadd86a}
+
+\begin{DoxyCompactList}\small\item\em \-Get sub-\/space associated with global id. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -98,60 +93,3 @@ cast\-\_\-ref$<$\-Product\-Space\-::\-Vector$>$(v).component(\-D\-U\-A\-L);
 \begin{DoxyReturn}{\-Returns}
 cast\-\_\-ref$<$\-Product\-Space\-::\-Vector$>$(v).component(\-D\-U\-A\-L); 
 \end{DoxyReturn}
-\hypertarget{group__ProductSpaceGroup_gad4b421dd4563c7d575550ab4d5d3ff0d}{\index{\-Product Space@{\-Product Space}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
-\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Product Space@{\-Product Space}}
-\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Space {\bf \-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (
-\begin{DoxyParamCaption}
-\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&}]{spaces}
-\end{DoxyParamCaption}
-)}}\label{group__ProductSpaceGroup_gad4b421dd4563c7d575550ab4d5d3ff0d}
-
-
-\-Create product space. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em spaces} & vector of sub-\/spaces \\
-\hline
-\end{DoxyParams}
-\hypertarget{group__ProductSpaceGroup_gaee9c55c4b0f0b9d41bb6e1eba80f829f}{\index{\-Product Space@{\-Product Space}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
-\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Product Space@{\-Product Space}}
-\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Space {\bf \-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (
-\begin{DoxyParamCaption}
-\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&}]{spaces, }
-\item[{const std\-::vector$<$ unsigned $>$ \&}]{global\-Ids}
-\end{DoxyParamCaption}
-)}}\label{group__ProductSpaceGroup_gaee9c55c4b0f0b9d41bb6e1eba80f829f}
-
-
-\-Create product space. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em spaces} & vector of sub-\/spaces \\
-\hline
-{\em id\-Map} & map relating global space indices with the local indices $1,\ldots,n$ \\
-\hline
-\end{DoxyParams}
-\hypertarget{group__ProductSpaceGroup_ga5146524c4a6b3cb6f4a47b877cb2f55d}{\index{\-Product Space@{\-Product Space}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
-\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Product Space@{\-Product Space}}
-\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}\-Vector\-Space {\bf \-Spacy\-::\-Product\-Space\-::make\-Hilbert\-Space} (
-\begin{DoxyParamCaption}
-\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ \-Vector\-Space $>$ $>$ \&}]{spaces, }
-\item[{const std\-::vector$<$ unsigned $>$ \&}]{primal\-Sub\-Space\-Ids, }
-\item[{const std\-::vector$<$ unsigned $>$ \&}]{dual\-Sub\-Space\-Ids}
-\end{DoxyParamCaption}
-)}}\label{group__ProductSpaceGroup_ga5146524c4a6b3cb6f4a47b877cb2f55d}
-
-
-\-Create primal-\/dual product space. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em spaces} & vector of spaces \\
-\hline
-{\em primal\-Sub\-Space\-Ids} & entries of spaces that correspond to primal variables \\
-\hline
-{\em dual\-Sub\-Space\-Ids} & entries of spaces that correspond to dual variables \\
-\hline
-\end{DoxyParams}
