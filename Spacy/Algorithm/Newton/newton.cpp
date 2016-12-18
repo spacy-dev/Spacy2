@@ -24,7 +24,7 @@ namespace Spacy
                       const std::function<bool(const Vector&, const Vector&)>& errorEstimator,
                       const Parameter& p)
         {
-            LOG_INFO(log_tag, "Starting iteration.")
+            LOG_SEPARATOR(log_tag);
             p.startTimer();
 
             auto x = x0;
@@ -34,7 +34,6 @@ namespace Spacy
 
             for(unsigned i = 1; i <= p.getMaxSteps(); ++i)
             {
-                LOG_BEGIN_SECTION
                 LOG(log_tag, "Iteration", i)
 
                 auto dF_inv = d1(F,x)^-1;
@@ -61,7 +60,7 @@ namespace Spacy
                     LOG(log_tag, "computation time (in ms): ", p.elapsedTime())
                     return x;
                 }
-                LOG_END_SECTION(log_tag)
+                LOG_SEPARATOR(log_tag);
             }
 
             throw Exception::NotConverged("Newton");

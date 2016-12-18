@@ -8,8 +8,7 @@
 #define DISABLE_LOG_TAG(tag)
 #define LOG_INFO(tag, text)
 #define LOG(tag, ...)
-#define LOG_BEGIN_SECTION
-#define LOG_END_SECTION(tag)
+#define LOG_SEPARATOR
 #else
 #define SET_LOG_PRINTER(printer) ::Spacy::Log::Logger::get().setPrinter(printer);
 #define ADD_LOG_PRINTER(printer) ::Spacy::Log::Logger::get().addPrinter(printer);
@@ -18,10 +17,9 @@
 #define DISABLE_LOG_TAG(tag) ::Spacy::Log::Logger::get().disable(tag);
 #define LOG_INFO(tag, text) ::Spacy::Log::log(tag, text, "");
 #define LOG(tag, ...) ::Spacy::Log::log(tag, __VA_ARGS__);
-#define LOG_BEGIN_SECTION
-#define LOG_END_SECTION(tag) ::Spacy::Log::log(tag, "", ""); \
+#define LOG_SEPARATOR(tag) ::Spacy::Log::log(tag, "", ""); \
     ::Spacy::Log::log(tag, "--------------------------------------------------", ""); \
-    ::Spacy::Log::log(tag, "", "");
+    ::Spacy::Log::log(tag, "", "")
 
 #include <functional>
 #include <fstream>

@@ -53,14 +53,13 @@ namespace Spacy
 
         Vector ACRSolver::operator()(const Vector& x0)
         {  
-            LOG_INFO(log_tag, "Starting ACR-Solver.")
-            
+            LOG_SEPARATOR(log_tag);
+
             auto x = x0;
 
             for(unsigned step = 1; step <= getMaxSteps(); ++step)
             {
                 
-                LOG_BEGIN_SECTION
                 LOG(log_tag, "Iteration", step)
                 
                 stepMonitor = StepMonitor::Accepted;
@@ -70,6 +69,7 @@ namespace Spacy
                 do
                 {
                     auto dx = computeStep(x);
+                    LOG(log_tag, "|dx|",  norm(dx) );
                     auto cubicModel = makeCubicModel(dx,f_,x,omega_);
                     LOG_INFO(log_tag, "Computing damping factor")
 
@@ -86,8 +86,10 @@ namespace Spacy
                         //  if( convergenceTest(/*TODO*/) ) return x;
                         TrivialPreconditioner trivialP;
                         // Todo: Change Norm
-                        if (f_.d1(x)(trivialP(f_.d1(x))) < epsilon_ * epsilon_)
+                        if (f_.d1(x)(trivialP(f_.d1(x))) < epsilon_ * epsilon_) {
+                            LOG_INFO(log_tag, "Converged")
                             return x;
+                        }
                     }
 
                     else LOG_INFO(log_tag, "Rejected")
@@ -100,9 +102,10 @@ namespace Spacy
                 }
                 // end iteration
                 while( stepMonitor == StepMonitor::Rejected || lambda < lambdaMax_ );
-                LOG_END_SECTION(log_tag)
+                LOG_SEPARATOR(log_tag);
             }
 
+            LOG_INFO(log_tag, "Reached maximum number of steps");
             return x;
         }
 
@@ -146,14 +149,16 @@ namespace Spacy
 
         Vector ACRSolver::computeStep(const Spacy::Vector &x) const
         {
-            LinearSolver preconditioner = {};
-            preconditioner = f_.hessian(x)^-1;
+//            LinearSolver preconditioner = {};
+//            preconditioner = f_.hessian(x)^-1;
                         
-            auto & cgSolver = cast_ref<CG::LinearSolver>(preconditioner);
-            auto tcg =  makeTCGSolver( f_.hessian(x) , cgSolver.P());
+//            auto & cgSolver = cast_ref<CG::LinearSolver>(preconditioner);
+            auto tcg =  makeTCGSolver( f_.hessian(x) , [](const Vector& x){ return x; });
 //
 //             auto tcg =  makeTCGSolver( f_.hessian(x) , f_.hessian(x).solver());
             tcg.setRelativeAccuracy(getRelativeAccuracy());
+
+            LOG(log_tag, "rhs", norm(f_.d1(x)));
 
             return tcg(-f_.d1(x));
         }
