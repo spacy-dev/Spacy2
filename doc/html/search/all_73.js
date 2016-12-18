@@ -16,6 +16,7 @@ var searchData=
   ['scalar',['Scalar',['../namespaceSpacy_1_1Scalar.html',1,'Spacy']]],
   ['scalarproduct',['ScalarProduct',['../classSpacy_1_1ProductSpace_1_1ScalarProduct.html',1,'Spacy::ProductSpace']]],
   ['scalarproduct',['scalarProduct',['../classSpacy_1_1VectorSpace.html#a6f63e2ef5afe7530cbc9480cbc37a8d7',1,'Spacy::VectorSpace']]],
+  ['set',['set',['../classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#aa36019ca1c80a230a1c45022d3cdfd9f',1,'Spacy::Algorithm::TrustRegionSolver::set(ComputeDescentDirection compute_descent_direction)'],['../classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#a9f276e949d1dbfc6f40574be638e1fff',1,'Spacy::Algorithm::TrustRegionSolver::set(UpdateTrustRegionRadius update_trust_region_radius)'],['../classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#a680c40b650a60c9e9935e0c6b0e65888',1,'Spacy::Algorithm::TrustRegionSolver::set(Norm norm)']]],
   ['setdualspace',['setDualSpace',['../classSpacy_1_1VectorSpace.html#a22d977f8e7239de59f9c5abffdaa6b3d',1,'Spacy::VectorSpace']]],
   ['setlookahead',['setLookAhead',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html#ac40343f544b7e2bfeffa7f7927cfeac5',1,'Spacy::CG::Termination::StrakosTichyEnergyError']]],
   ['setlowerbound',['setLowerBound',['../classSpacy_1_1Mixin_1_1RegularityTest.html#a682ce022b0b5493e48f50f693ed64082',1,'Spacy::Mixin::RegularityTest']]],
