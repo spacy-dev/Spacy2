@@ -3,6 +3,7 @@
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Util/cast.hh>
 
 #include "vector.hh"
 #include "scalarProduct.hh"
@@ -126,5 +127,39 @@ namespace Spacy
                                                                std::make_shared<VectorSpace>( ProductSpace::makeHilbertSpace( spaces, dualSubSpaceIds ) ) } ) ,
                                               ScalarProduct{} );
         }
+    }
+
+    std::shared_ptr<VectorSpace> extractSubSpaceImpl(const VectorSpace& space, unsigned global_id)
+    {
+        if( is<ProductSpace::VectorCreator>(space.creator()) )
+        {
+            const auto& product_space_creator = cast_ref<ProductSpace::VectorCreator>(space.creator());
+            const auto& subSpaces = product_space_creator.subSpaces();
+            std::shared_ptr<VectorSpace> result;
+            for(auto i=0u; i<subSpaces.size(); ++i)
+            {
+                if( product_space_creator.inverseIdMap(i) == global_id &&
+                        !is<ProductSpace::VectorCreator>(subSpaces[i]->creator()))
+                    return subSpaces[i];
+
+                if( is<ProductSpace::VectorCreator>(subSpaces[i]->creator()) )
+                {
+                    auto result = extractSubSpaceImpl(*subSpaces[i], global_id);
+                    if(result)
+                        return result;
+                }
+            }
+        }
+
+        return nullptr;
+    }
+
+    const VectorSpace& extractSubSpace(const VectorSpace& space, unsigned global_id)
+    {
+        auto sub_space = extractSubSpaceImpl(space, global_id);
+        if(sub_space)
+            return *sub_space;
+
+        return space;
     }
 }

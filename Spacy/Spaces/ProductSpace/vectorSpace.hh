@@ -10,15 +10,14 @@ namespace Spacy
   class VectorSpace;
   /// @endcond
 
+  /** @addtogroup ProductSpaceGroup
+   * @{
+   */
   namespace ProductSpace
   {
     /// @cond
     class Vector;
     /// @endcond
-
-    /** @addtogroup ProductSpaceGroup
-     * @{
-     */
 
     /**
      * @brief Creator for ProductSpace::Vector.
@@ -113,6 +112,11 @@ namespace Spacy
     VectorSpace makeHilbertSpace(const std::vector<std::shared_ptr<VectorSpace> >& spaces,
                                  const std::vector<unsigned>& primalSubSpaceIds,
                                  const std::vector<unsigned>& dualSubSpaceIds);
-    /** @} */
+
   }
+
+  /// Get sub-space associated with global id.
+  const VectorSpace& extractSubSpace(const VectorSpace& space, unsigned global_id);
+
+  /** @} */
 }
