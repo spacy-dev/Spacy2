@@ -59,13 +59,13 @@ Currently there are examples for
   - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) using [FunG](https://lubkoll.github.io/FunG),
   - [Eigen](http://eigen.tuxfamily.org/) using [FunG](https://lubkoll.github.io/FunG),
   - [FEniCS](https://fenicsproject.org) with and without [FunG](https://lubkoll.github.io/FunG),
-  - [deal.II](http://dealii.org)
+  - [deal.II](http://dealii.org) with and without [FunG](https://lubkoll.github.io/FunG)
 
 These are located in
  - Spacy/Examples/Kaskade,
  - Spacy/Examples/FEniCS.
 
-Paths to Kaskade, resp. FEniCs may need to be adjusted according to your setup.
+Paths to Kaskade may need to be adjusted according to your setup.
 
 
 
