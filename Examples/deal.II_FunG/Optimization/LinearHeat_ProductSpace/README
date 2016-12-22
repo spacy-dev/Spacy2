@@ -1,0 +1,4 @@
+# A quadratic functional on a product space
+
+# Compile and run with
+mkdir build && cd build && cmake .. && make && ./run

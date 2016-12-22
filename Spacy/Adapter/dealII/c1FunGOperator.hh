@@ -1,40 +1,94 @@
 #pragma once
 
-#include "c1Operator.hh"
+#include <deal.II/base/tensor.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+// For boundary values
+#include <deal.II/numerics/matrix_tools.h>
+
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
+#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
+
+#include "copy.hh"
+#include "init.hh"
+#include "util.hh"
+#include "C1FungOperatorAssembly.hh"
+#include "linearOperator.hh"
+#include "vector.hh"
+#include "vectorSpace.hh"
+
+#include <algorithm>
+#include <iostream>
+#include <memory>
+#include <vector>
 
 namespace Spacy
 {
     /** @addtogroup dealIIGroup @{ */
     namespace dealII
     {
-        template <class FunGOperator, int dim, int n_components=1, int variable_id=0>
-        class C1FunGOperator : public OperatorBase
+        template <class FunGOperator, int dim, class VariableDims = VariableDim<1> >
+        class C1FunGOperator;
+
+        template <class FunGOperator, int dim, int... variable_dims>
+        class C1FunGOperator< FunGOperator, dim, VariableDim<variable_dims...> >
+                : public OperatorBase
         {
-            using Value = std::conditional_t< n_components == 1, double, dealii::Vector<double> >;
-            using Gradient = dealii::Tensor<n_components,dim>;
+            using VariableDims = VariableDim<variable_dims...>;
+            using Value = typename Traits<VariableDims>::Vector;
+            using Gradient = typename Traits<VariableDims>::Matrix;
+            using SparsityPattern = typename Traits<VariableDims>::SparsityPattern;
 
         public:
             C1FunGOperator(FunGOperator&& operator_impl, const VectorSpace& domain, const VectorSpace& range)
                 : OperatorBase(domain,range),
-                  A_(std::make_shared< dealii::BlockSparseMatrix<double> >()),
-                  operatorSpace_( std::make_shared<VectorSpace>( LinearOperatorCreator(),
-                  [](const Spacy::Vector& v)
-                  {
-                      return cast_ref< LinearOperator<dim> >(v).get().block(variable_id,variable_id).frobenius_norm();
-                  } , true ) ),
                   operator_(std::move(operator_impl)),
-                  boundary_values_(zero(domain))
+                  boundary_values_(zero(domain)),
+                  operator_space_( std::make_shared<VectorSpace>( LinearOperatorCreator(),
+                  [](const Spacy::Vector&)
+                  {
+                      return Real(0);
+                  } , true ) ),
+                  fe_system_(std::make_shared< dealii::FESystem<dim> >(get_finite_element_system<dim,VariableDims>(domain))),
+                  dof_handler_(std::make_shared< dealii::DoFHandler<dim> >(creator< VectorCreator<dim,GetDim<0,VariableDims>::value> >(extractSubSpace(domain,0)).triangulation())),
+                  value_(VariableDims::size==1 ? GetDim<0,VariableDims>::value : VariableDims::size)
             {
-                const auto& dealIICreator = creator< VectorCreator<dim> >(domain);
-                A_->reinit(dealIICreator.sparsityPattern());
-                b_.reinit(dealIICreator.degreesOfFreedom());
+                dof_handler_->distribute_dofs(*fe_system_);
+                InitBlockVector<dim, VariableDims>::apply(domain, value_);
+                InitSparsityPattern<dim, VariableDims>::apply(domain, *dof_handler_, sparsity_pattern_);
+                gradient_.reinit(sparsity_pattern_);
+            }
+
+            C1FunGOperator(const C1FunGOperator& other)
+                : OperatorBase(other.domain(), other.range()),
+                  operator_(other.operator_),
+                  boundary_values_(other.boundary_values_),
+                  operator_space_(other.operator_space_),
+                  value_(VariableDims::size==1 ? GetDim<0,VariableDims>::value : VariableDims::size),
+                  fe_system_(other.fe_system_),
+                  dof_handler_(other.dof_handler_)
+            {
+                InitBlockVector<dim, VariableDims>::apply(domain(), value_);
+                InitSparsityPattern<dim, VariableDims>::apply(domain(), *dof_handler_, sparsity_pattern_);
+                gradient_.reinit(sparsity_pattern_);
             }
 
             /// Compute \f$A(x)\f$.
             ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
             {
                 assemble(x);
-                return Vector(b_,range());
+
+                auto y = zero(range());
+                copy(value_, y);
+                return y;
             }
 
             /// Compute \f$A'(x)dx\f$.
@@ -42,10 +96,14 @@ namespace Spacy
             {
                 assemble(x);
 
-                auto y = zero(range());
-                A_->block(variable_id,variable_id).vmult(get(cast_ref<Vector>(y)),
-                                                         get(cast_ref<Vector>(dx)));
+                auto dx_ = value_;
+                copy(dx, dx_);
 
+                auto y_ = value_;
+                gradient_.vmult(y_, dx_);
+
+                auto y = zero(range());
+                copy(y_, y);
                 return y;
             }
 
@@ -56,109 +114,64 @@ namespace Spacy
             auto linearization(const ::Spacy::Vector& x) const
             {
                 assemble(x);
-                return LinearOperator<dim>{ *A_ , *operatorSpace_ , boundary_values_, domain(), range() };
+                return LinearOperator<dim,VariableDims>{ gradient_ , *operator_space_ , boundary_values_, domain(), range() };
             }
 
         private:
-            template <class T>
-            void update_cell_matrix(T q_index, T dofs_per_cell,
-                                    const dealii::FEValues<dim>& fe_values,
-                                    dealii::FullMatrix<double>& cell_matrix) const
-            {
-                for(auto i=0u; i<dofs_per_cell; ++i)
-                    for(auto j=0u; j<dofs_per_cell; ++j)
-                        cell_matrix(i,j) += operator_.template d1<variable_id>(
-                                                std::make_tuple(fe_values.shape_value(j, q_index),
-                                                                fe_values.shape_grad(j, q_index))
-                                                ) *
-                                            fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
-            }
-
-            template <class T>
-            void update_cell_rhs(T q_index, T dofs_per_cell,
-                                 const dealii::FEValues<dim>& fe_values,
-                                 dealii::Vector<double>& cell_rhs) const
-            {
-                for(auto i=0u; i<dofs_per_cell; ++i)
-                {
-                    cell_rhs(i) += operator_() * fe_values.shape_grad(i, q_index) * fe_values.JxW(q_index);
-                    cell_rhs(i) -= 1 * fe_values.shape_value(i, q_index) * fe_values.JxW (q_index);
-                }
-            }
-
-            /// Assemble discrete representation of \f$A(x)\f$.
+            /// Assemble discrete representation of \f$A(x)\f$ and \f$A'(x)\f$.
             void assemble(const ::Spacy::Vector& x) const
             {
-                if( oldX_ && (oldX_ == x) ) return;
-                *A_ = 0;
-                b_ = 0;
+                if( oldX_ && (oldX_ == x) )
+                    return;
+                value_ = 0;
+                gradient_ = 0;
+                boundary_values_ *= 0;
 
-                const auto& dealIICreator = creator< VectorCreator<dim> >(domain());
-                dealii::QGauss<dim> quadratureFormula(2*dealIICreator.FEOrder());
-                dealii::FEValues<dim> fe_values(dealIICreator.finiteElement(),
-                                                quadratureFormula,
-                                                dealii::update_values | dealii::update_gradients | dealii::update_JxW_values);
+                auto x_ = value_;
+                copy(x, x_);
 
-                const auto dofs_per_cell = dealIICreator.finiteElement().dofs_per_cell;
-                auto n_q_points = quadratureFormula.size();
+                Detail::OperatorUpdate<dim,VariableDims> operator_update(domain(), *fe_system_);
 
-                dealii::FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
-                dealii::Vector<double> cell_rhs(dofs_per_cell);
-
-                std::vector<Value> old_solution_values(n_q_points);
-                std::vector<Gradient> old_solution_gradients(n_q_points);
-                std::vector<dealii::types::global_dof_index> local_dof_indices(dofs_per_cell);
-
-                for(auto cell = dealIICreator.dofHandler().begin_active();
-                    cell < dealIICreator.dofHandler().end();
-                    ++cell)
+                for_each(dof_handler_->begin_active(),
+                         dof_handler_->end(),
+                         [this,&x_,&operator_update]
+                         (const auto& cell)
                 {
-                    fe_values.reinit(cell);
-                    const auto& x_ = get(cast_ref<Vector>(x));
-                    fe_values.get_function_values(x_, old_solution_values);
-                    fe_values.get_function_gradients(x_, old_solution_gradients);
-                    cell_matrix = 0;
-                    cell_rhs = 0;
+                    operator_update.reinit(cell);
+                    operator_update.init_old_solution(x_);
 
-                    for(auto q_index=0u; q_index<n_q_points; ++q_index)
+                    for(auto q_index=0u; q_index<operator_update.impl_.n_q_points_; ++q_index)
                     {
-                        operator_.template update<0>(std::make_tuple(old_solution_values[q_index],
-                                                                     old_solution_gradients[q_index]));
-                        update_cell_matrix(q_index, dofs_per_cell,
-                                           fe_values,
-                                           cell_matrix);
-                        update_cell_rhs(q_index, dofs_per_cell,
-                                        fe_values,
-                                        cell_rhs);
+                        operator_update.update_functional(operator_, q_index);
+                        operator_update.update_gradient_and_hessian(operator_, q_index);
                     }
 
-                    cell->get_dof_indices(local_dof_indices);
+                    operator_update.transfer_local_data(value_, gradient_);
+                });
 
-                    for(auto i=0u; i<dofs_per_cell; ++i)
-                        for(auto j=0u; j<dofs_per_cell; ++j)
-                            A_->block(variable_id,variable_id).add(local_dof_indices[i],
-                                                                   local_dof_indices[j],
-                                                                   cell_matrix(i,j));
+                auto boundary_vals = value_;
+                boundary_vals = 0;
 
-                    for (auto i=0u; i<dofs_per_cell; ++i)
-                        b_(local_dof_indices[i]) += cell_rhs(i);
-                }
-
-                dealii::MatrixTools::apply_boundary_values(dealIICreator.boundaryValues(),
-                                                           A_->block(variable_id,variable_id),
-                                                           get(cast_ref<Vector>(boundary_values_)),
-                                                           b_);
-
+                dealii::MatrixTools::apply_boundary_values(get_boundary_map<dim, VariableDims>(domain(), *dof_handler_),
+                                                           gradient_,
+                                                           boundary_vals,
+                                                           value_);
+                copy(boundary_vals, boundary_values_);
 
                 oldX_ = x;
             }
 
-            mutable std::shared_ptr< dealii::BlockSparseMatrix<double> > A_;
-            mutable dealii::Vector<double>       b_;
-            mutable ::Spacy::Vector oldX_;
-            std::shared_ptr<VectorSpace> operatorSpace_;
             mutable FunGOperator operator_;
             mutable Spacy::Vector boundary_values_;
+            std::shared_ptr<VectorSpace> operator_space_;
+            std::shared_ptr< dealii::FESystem<dim> > fe_system_;
+            std::shared_ptr< dealii::DoFHandler<dim> > dof_handler_;
+            SparsityPattern sparsity_pattern_;
+
+            mutable Value value_ ;
+            mutable Gradient gradient_;
+
+            mutable ::Spacy::Vector oldX_;
         };
     }
     /** @} */

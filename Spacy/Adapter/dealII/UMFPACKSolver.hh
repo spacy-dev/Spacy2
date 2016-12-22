@@ -11,6 +11,7 @@
 #include <Spacy/Util/Mixins/maxSteps.hh>
 #include <Spacy/Util/Mixins/accuracy.hh>
 
+#include "util.hh"
 #include "vector.hh"
 #include "vectorSpace.hh"
 
@@ -22,14 +23,15 @@ namespace Spacy
     /** @addtogroup dealIIGroup @{ */
     namespace dealII
     {
-        template <int dim>
+        template <class VariableDims>
         class UMFPackSolver :
                 public OperatorBase,
                 public Mixin::AbsoluteAccuracy,
                 public Mixin::MaxSteps
         {
+            using Matrix = typename Traits<VariableDims>::Matrix;
         public:
-            UMFPackSolver(const dealii::SparseMatrix<double>& A,
+            UMFPackSolver(const Matrix& A,
                           const Spacy::Vector& boundary_values,
                           const VectorSpace& domain,
                           const VectorSpace& range)
@@ -78,7 +80,7 @@ namespace Spacy
             }
 
         private:
-            mutable dealii::SparseMatrix<double> A_;
+            mutable Matrix A_;
             std::shared_ptr<dealii::SparseDirectUMFPACK> solver_;
             Spacy::Vector boundary_values_;
         };

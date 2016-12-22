@@ -1,0 +1,4 @@
+# A quadratic functional
+
+# Compile and run with
+mkdir build && cd build && cmake .. && make && ./run
