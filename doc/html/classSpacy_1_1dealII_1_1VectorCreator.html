@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Spacy: Spacy::dealII::VectorCreator&lt; dim &gt; Class Template Reference</title>
+<title>Spacy: Spacy::dealII::VectorCreator&lt; dim, variable_dim &gt; Class Template Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -108,10 +108,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">Spacy::dealII::VectorCreator&lt; dim &gt; Class Template Reference</div>  </div>
+<div class="title">Spacy::dealII::VectorCreator&lt; dim, variable_dim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="Spacy::dealII::VectorCreator" -->
@@ -122,31 +122,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="classSpacy_1_1dealII_1_1VectorCreator-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>BoundaryPart</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5afc306745f86ae52ad33a5c83884935"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::VectorCreator" ref="a5afc306745f86ae52ad33a5c83884935" args="(dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>VectorCreator</b> (dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4ae05c4dd528e1f4d45231e32021437"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::operator()" ref="ab4ae05c4dd528e1f4d45231e32021437" args="(const VectorSpace *space) const " -->
-::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *space) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61e5fe6c73cefe05d16140608542cbaa"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::FEOrder" ref="a61e5fe6c73cefe05d16140608542cbaa" args="() const " -->
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>FEOrder</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="affb824748540374f0fbfa4d3467d1255"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::degreesOfFreedom" ref="affb824748540374f0fbfa4d3467d1255" args="() const " -->
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>degreesOfFreedom</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae048100414798458ac093953de6475ac"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::dofHandler" ref="ae048100414798458ac093953de6475ac" args="() const " -->
-const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>dofHandler</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48104b12fa317e7a29fd531cca8a8b4f"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::finiteElement" ref="a48104b12fa317e7a29fd531cca8a8b4f" args="() const " -->
-const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>finiteElement</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08c118dd385713f3c58175947a9ac7b3"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::sparsityPattern" ref="a08c118dd385713f3c58175947a9ac7b3" args="() const " -->
-const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>sparsityPattern</b> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1078e3e0d565a937f85c8f0b553f7861"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::boundaryValues" ref="a1078e3e0d565a937f85c8f0b553f7861" args="() const " -->
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>boundaryValues</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdbdf15ebaa767034a45e611c848e24e"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::VectorCreator" ref="acdbdf15ebaa767034a45e611c848e24e" args="(const dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order, int first_component, std::vector&lt; BoundaryPart&lt; dim &gt; &gt; &amp;&amp;boundary_values)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>VectorCreator</b> (const dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order, int first_component, std::vector&lt; <a class="el" href="structSpacy_1_1dealII_1_1BoundaryPart.html">BoundaryPart</a>&lt; dim &gt; &gt; &amp;&amp;boundary_values)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5996e34a144dd1accdab9822f2564b1"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::VectorCreator" ref="ae5996e34a144dd1accdab9822f2564b1" args="(const dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order, int first_component=0)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>VectorCreator</b> (const dealii::Triangulation&lt; dim &gt; &amp;triangulation, int fe_order, int first_component=0)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdff8fb5c5eaf08b1da5fad005e0a542"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::triangulation_" ref="afdff8fb5c5eaf08b1da5fad005e0a542" args="" -->
+std::shared_ptr<br class="typebreak"/>
+&lt; dealii::Triangulation&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>triangulation_</b> = std::make_shared&lt; dealii::Triangulation&lt;dim&gt; &gt;()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9204f6360dc4c7d40502f7d3a0d58905"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::fe_" ref="a9204f6360dc4c7d40502f7d3a0d58905" args="" -->
+std::shared_ptr&lt; dealii::FE_Q<br class="typebreak"/>
+&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fe_</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b37a1aaf90b0172552d65d1fa6f833c"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::fe_system_" ref="a9b37a1aaf90b0172552d65d1fa6f833c" args="" -->
+std::shared_ptr<br class="typebreak"/>
+&lt; dealii::FESystem&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fe_system_</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac37ae0324517815460d797847bc68abd"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::dof_handler_" ref="ac37ae0324517815460d797847bc68abd" args="" -->
+std::shared_ptr<br class="typebreak"/>
+&lt; dealii::DoFHandler&lt; dim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dof_handler_</b> = nullptr</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2e6fcd47513c33808951303f2a90a17"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::boundary_values_" ref="ac2e6fcd47513c33808951303f2a90a17" args="" -->
+std::shared_ptr&lt; std::vector<br class="typebreak"/>
+&lt; <a class="el" href="structSpacy_1_1dealII_1_1BoundaryPart.html">BoundaryPart</a>&lt; dim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>boundary_values_</b> = std::make_shared&lt; std::vector&lt; <a class="el" href="structSpacy_1_1dealII_1_1BoundaryPart.html">BoundaryPart</a>&lt;dim&gt; &gt; &gt;()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90c4f30e4c855a1c1157f1f052e8e1d3"></a><!-- doxytag: member="Spacy::dealII::VectorCreator::first_component_" ref="a90c4f30e4c855a1c1157f1f052e8e1d3" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><b>first_component_</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;int dim&gt;<br/>
-class Spacy::dealII::VectorCreator&lt; dim &gt;</h3>
+<div class="textblock"><h3>template&lt;int dim, int variable_dim&gt;<br/>
+class Spacy::dealII::VectorCreator&lt; dim, variable_dim &gt;</h3>
 
 <p>Vector creator for the deal.II library. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
@@ -170,7 +174,7 @@ class Spacy::dealII::VectorCreator&lt; dim &gt;</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 18 2016 22:46:18 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 22 2016 21:21:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

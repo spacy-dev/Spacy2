@@ -1,7 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1C2Functional.html" title="Functional interface for FEniCS. Models a twice differentiable functional ." alt="" coords="237,5,528,35"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Kaskade_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a twice differentiable functional ." alt="" coords="212,59,553,88"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1Rn_1_1C2Functional.html" title="Spacy::Rn::C2Functional" alt="" coords="299,112,467,141"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1Rn_1_1CompositeStepFunctional.html" title="Spacy::Rn::CompositeStepFunctional\&lt; role \&gt;" alt="" coords="240,165,525,195"/>
-<area shape="rect" id="node11" href="$classSpacy_1_1Scalar_1_1C2Functional.html" title="Spacy::Scalar::C2Functional" alt="" coords="288,219,477,248"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1dealII_1_1C2FunGFunctional_3_01FunGFunctional_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C2FunGFunctional\&lt; FunGFunctional, dim, VariableDim\&lt; variable_dims...\&gt; \&gt;" alt="" coords="211,5,763,35"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1FEniCS_1_1C2Functional.html" title="Functional interface for FEniCS. Models a twice differentiable functional ." alt="" coords="341,59,632,88"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Kaskade_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a twice differentiable functional ." alt="" coords="316,112,657,141"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Rn_1_1C2Functional.html" title="Spacy::Rn::C2Functional" alt="" coords="403,165,571,195"/>
+<area shape="rect" id="node11" href="$classSpacy_1_1Rn_1_1CompositeStepFunctional.html" title="Spacy::Rn::CompositeStepFunctional\&lt; role \&gt;" alt="" coords="344,219,629,248"/>
+<area shape="rect" id="node13" href="$classSpacy_1_1Scalar_1_1C2Functional.html" title="Spacy::Scalar::C2Functional" alt="" coords="392,272,581,301"/>
 </map>

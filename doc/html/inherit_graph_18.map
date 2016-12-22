@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classSpacy_1_1Functional.html" title="Type&#45;erased functional ." alt="" coords="7,5,132,35"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail::LocalAssemblyBase\&lt; dim, row, row_dim, column, column_dim \&gt;" alt="" coords="7,32,532,61"/>
+<area shape="rect" id="node3" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalDerivativeAssembly.html" title="Spacy::dealII::Detail::LocalFunGFunctionalDerivativeAssembly\&lt; dim, Components, row, column, row_dim, column_dim \&gt;" alt="" coords="581,5,1312,35"/>
+<area shape="rect" id="node5" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGOperatorAssembly.html" title="Spacy::dealII::Detail::LocalFunGOperatorAssembly\&lt; dim, Components, row, column, row_dim, column_dim \&gt;" alt="" coords="616,59,1277,88"/>
 </map>

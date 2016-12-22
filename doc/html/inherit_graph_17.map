@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classSpacy_1_1FEniCS_1_1VectorCreator.html" title="Creator for vector space elements for FEniCS." alt="" coords="5,5,208,35"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail::LocalAssemblyBase\&lt; dim, id, dim \&gt;" alt="" coords="5,5,365,35"/>
+<area shape="rect" id="node3" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalValueAssembly_3_01dim_00_01Components_00_01id_00_01dim_01_4.html" title="Spacy::dealII::Detail::LocalFunGFunctionalValueAssembly\&lt; dim, Components, id, dim \&gt;" alt="" coords="415,5,951,35"/>
 </map>

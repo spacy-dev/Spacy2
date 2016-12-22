@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classSpacy_1_1FEniCS_1_1LinearOperatorCreator.html" title="Spacy::FEniCS::LinearOperatorCreator" alt="" coords="7,5,255,35"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail::LocalAssemblyBase\&lt; dim, id, 1 \&gt;" alt="" coords="5,5,352,35"/>
+<area shape="rect" id="node3" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalValueAssembly_3_01dim_00_01Components_00_01id_00_011_01_4.html" title="Spacy::dealII::Detail::LocalFunGFunctionalValueAssembly\&lt; dim, Components, id, 1 \&gt;" alt="" coords="400,5,923,35"/>
 </map>

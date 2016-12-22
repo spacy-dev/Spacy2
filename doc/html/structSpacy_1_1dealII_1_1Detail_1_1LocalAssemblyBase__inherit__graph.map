@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalDerivativeAssembly.html" title="LocalFunGFunctionalDerivativeAssembly\&lt; dim, VariableDims, row, column \&gt;" alt="" coords="669,5,1141,35"/>
+<area shape="rect" id="node5" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGOperatorAssembly.html" title="LocalFunGOperatorAssembly\&lt; dim, VariableDims, row, column \&gt;" alt="" coords="704,59,1107,88"/>
+<area shape="rect" id="node7" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalDerivativeAssembly.html" title="Spacy::dealII::Detail::LocalFunGFunctionalDerivativeAssembly\&lt; dim, row, row_dim, column, column_dim \&gt;" alt="" coords="581,112,1229,141"/>
+<area shape="rect" id="node9" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGOperatorAssembly.html" title="Spacy::dealII::Detail::LocalFunGOperatorAssembly\&lt; dim, row, row_dim, column, column_dim \&gt;" alt="" coords="616,165,1195,195"/>
+</map>

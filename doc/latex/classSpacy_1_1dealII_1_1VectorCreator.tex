@@ -1,5 +1,5 @@
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator}{\section{\-Spacy\-:\-:deal\-I\-I\-:\-:\-Vector\-Creator$<$ dim $>$ \-Class \-Template \-Reference}
-\label{classSpacy_1_1dealII_1_1VectorCreator}\index{\-Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim $>$@{\-Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim $>$}}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator}{\section{\-Spacy\-:\-:deal\-I\-I\-:\-:\-Vector\-Creator$<$ dim, variable\-\_\-dim $>$ \-Class \-Template \-Reference}
+\label{classSpacy_1_1dealII_1_1VectorCreator}\index{\-Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim, variable\-\_\-dim $>$@{\-Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim, variable\-\_\-dim $>$}}
 }
 
 
@@ -10,42 +10,45 @@
 
 {\ttfamily \#include $<$vector\-Space.\-hh$>$}
 
-\subsection*{\-Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct {\bfseries \-Boundary\-Part}
-\end{DoxyCompactItemize}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a5afc306745f86ae52ad33a5c83884935}{{\bfseries \-Vector\-Creator} (dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, int fe\-\_\-order)}\label{classSpacy_1_1dealII_1_1VectorCreator_a5afc306745f86ae52ad33a5c83884935}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_acdbdf15ebaa767034a45e611c848e24e}{{\bfseries \-Vector\-Creator} (const dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, int fe\-\_\-order, int first\-\_\-component, std\-::vector$<$ \hyperlink{structSpacy_1_1dealII_1_1BoundaryPart}{\-Boundary\-Part}$<$ dim $>$ $>$ \&\&boundary\-\_\-values)}\label{classSpacy_1_1dealII_1_1VectorCreator_acdbdf15ebaa767034a45e611c848e24e}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_ab4ae05c4dd528e1f4d45231e32021437}{\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} {\bfseries operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $\ast$space) const }\label{classSpacy_1_1dealII_1_1VectorCreator_ab4ae05c4dd528e1f4d45231e32021437}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_ae5996e34a144dd1accdab9822f2564b1}{{\bfseries \-Vector\-Creator} (const dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, int fe\-\_\-order, int first\-\_\-component=0)}\label{classSpacy_1_1dealII_1_1VectorCreator_ae5996e34a144dd1accdab9822f2564b1}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_afdff8fb5c5eaf08b1da5fad005e0a542}{std\-::shared\-\_\-ptr\*
+$<$ dealii\-::\-Triangulation$<$ dim $>$ $>$ {\bfseries triangulation\-\_\-} = std\-::make\-\_\-shared$<$ dealii\-::\-Triangulation$<$dim$>$ $>$()}\label{classSpacy_1_1dealII_1_1VectorCreator_afdff8fb5c5eaf08b1da5fad005e0a542}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a61e5fe6c73cefe05d16140608542cbaa}{auto {\bfseries \-F\-E\-Order} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_a61e5fe6c73cefe05d16140608542cbaa}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a9204f6360dc4c7d40502f7d3a0d58905}{std\-::shared\-\_\-ptr$<$ dealii\-::\-F\-E\-\_\-\-Q\*
+$<$ dim $>$ $>$ {\bfseries fe\-\_\-}}\label{classSpacy_1_1dealII_1_1VectorCreator_a9204f6360dc4c7d40502f7d3a0d58905}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_affb824748540374f0fbfa4d3467d1255}{auto {\bfseries degrees\-Of\-Freedom} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_affb824748540374f0fbfa4d3467d1255}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a9b37a1aaf90b0172552d65d1fa6f833c}{std\-::shared\-\_\-ptr\*
+$<$ dealii\-::\-F\-E\-System$<$ dim $>$ $>$ {\bfseries fe\-\_\-system\-\_\-}}\label{classSpacy_1_1dealII_1_1VectorCreator_a9b37a1aaf90b0172552d65d1fa6f833c}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_ae048100414798458ac093953de6475ac}{const auto \& {\bfseries dof\-Handler} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_ae048100414798458ac093953de6475ac}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_ac37ae0324517815460d797847bc68abd}{std\-::shared\-\_\-ptr\*
+$<$ dealii\-::\-Do\-F\-Handler$<$ dim $>$ $>$ {\bfseries dof\-\_\-handler\-\_\-} = nullptr}\label{classSpacy_1_1dealII_1_1VectorCreator_ac37ae0324517815460d797847bc68abd}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a48104b12fa317e7a29fd531cca8a8b4f}{const auto \& {\bfseries finite\-Element} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_a48104b12fa317e7a29fd531cca8a8b4f}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_ac2e6fcd47513c33808951303f2a90a17}{std\-::shared\-\_\-ptr$<$ std\-::vector\*
+$<$ \hyperlink{structSpacy_1_1dealII_1_1BoundaryPart}{\-Boundary\-Part}$<$ dim $>$ $>$ $>$ {\bfseries boundary\-\_\-values\-\_\-} = std\-::make\-\_\-shared$<$ std\-::vector$<$ \hyperlink{structSpacy_1_1dealII_1_1BoundaryPart}{\-Boundary\-Part}$<$dim$>$ $>$ $>$()}\label{classSpacy_1_1dealII_1_1VectorCreator_ac2e6fcd47513c33808951303f2a90a17}
 
 \item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a08c118dd385713f3c58175947a9ac7b3}{const auto \& {\bfseries sparsity\-Pattern} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_a08c118dd385713f3c58175947a9ac7b3}
-
-\item 
-\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a1078e3e0d565a937f85c8f0b553f7861}{auto {\bfseries boundary\-Values} () const }\label{classSpacy_1_1dealII_1_1VectorCreator_a1078e3e0d565a937f85c8f0b553f7861}
+\hypertarget{classSpacy_1_1dealII_1_1VectorCreator_a90c4f30e4c855a1c1157f1f052e8e1d3}{int {\bfseries first\-\_\-component\-\_\-}}\label{classSpacy_1_1dealII_1_1VectorCreator_a90c4f30e4c855a1c1157f1f052e8e1d3}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
-\subsubsection*{template$<$int dim$>$class Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim $>$}
+\subsubsection*{template$<$int dim, int variable\-\_\-dim$>$class Spacy\-::deal\-I\-I\-::\-Vector\-Creator$<$ dim, variable\-\_\-dim $>$}
 
 \-Vector creator for the deal.\-I\-I library. 
 
