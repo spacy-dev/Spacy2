@@ -1,7 +1,7 @@
 #include "Real.hh"
 
 #include <Spacy/vector.hh>
-#include "vectorSpace.hh"
+#include "RealSpace.hh"
 
 #include <cmath>
 

@@ -13,7 +13,7 @@ TEST(VectorBase,Add)
   v0.get() = 1;
   v1.get() = 2;
 
-  ASSERT_EQ( (v0 += v1).get() , 3. );
+  EXPECT_EQ( (v0 += v1).get() , 3. );
 }
 
 TEST(VectorBase,Subtract)
@@ -23,7 +23,7 @@ TEST(VectorBase,Subtract)
   v0.get() = 1;
   v1.get() = 2;
 
-  ASSERT_EQ( (v0 -= v1).get() , -1. );
+  EXPECT_EQ( (v0 -= v1).get() , -1. );
 }
 
 TEST(VectorBase,Multiply)
@@ -32,7 +32,7 @@ TEST(VectorBase,Multiply)
   Real v0(space);
   v0.get() = 2;
 
-  ASSERT_EQ( (v0 *= 3).get() , 6. );
+  EXPECT_EQ( (v0 *= 3).get() , 6. );
 }
 
 TEST(VectorBase,Negation)
@@ -41,7 +41,7 @@ TEST(VectorBase,Negation)
   Real v0(space);
   v0.get() = 2;
 
-  ASSERT_EQ( (-v0).get() , -2. );
+  EXPECT_EQ( (-v0).get() , -2. );
 }
 
 TEST(VectorBase,Comparison)

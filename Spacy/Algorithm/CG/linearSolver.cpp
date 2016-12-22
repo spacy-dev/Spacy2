@@ -29,6 +29,8 @@ namespace Spacy
       Mixin::RelativeAccuracy(other.getRelativeAccuracy()),
       Mixin::Eps(other.eps()),
       Mixin::Verbosity(other.getVerbosityLevel()),
+      Mixin::IterativeRefinements (other.getIterativeRefinements()),
+      Mixin::MaxSteps (other.getMaxSteps()),
       cg(other.cg)
     {
       using namespace Mixin;

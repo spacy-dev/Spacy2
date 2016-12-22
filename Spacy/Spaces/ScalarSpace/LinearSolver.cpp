@@ -1,4 +1,4 @@
-#include "linearSolver.hh"
+#include "LinearSolver.hh"
 
 #include <Spacy/vector.hh>
 #include <Spacy/Spaces/ScalarSpace/Real.hh>

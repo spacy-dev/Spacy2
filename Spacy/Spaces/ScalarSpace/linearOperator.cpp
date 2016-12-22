@@ -4,7 +4,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/Spaces/realSpace.hh>
 #include <Spacy/Util/cast.hh>
-#include "linearSolver.hh"
+#include "LinearSolver.hh"
 
 namespace Spacy
 {

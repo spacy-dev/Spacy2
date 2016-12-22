@@ -1,6 +1,6 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Spaces/ScalarSpace/linearSolver.hh>
+#include <Spacy/Spaces/ScalarSpace/LinearSolver.hh>
 #include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/Util/cast.hh>
