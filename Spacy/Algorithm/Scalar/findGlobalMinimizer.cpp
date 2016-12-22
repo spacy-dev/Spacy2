@@ -13,7 +13,7 @@ namespace Spacy
             Real tmin = a;
             Real fmin = f(a);
 
-            while( (a+=eps) <= b)
+            while( (a+=eps) <= b )
                 if( f(a) < fmin )
                 {
                     fmin = f(a);
@@ -32,7 +32,7 @@ namespace Spacy
 
             eps = min(eps,0.5);
 
-            while( (b*=(1-eps)) >= a)
+            while( (b*=(1-eps)) >= a )
                 if( f(b) < fmin )
                 {
                     fmin = f(b);
