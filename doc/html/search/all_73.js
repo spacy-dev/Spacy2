@@ -45,7 +45,7 @@ var searchData=
   ['spaces',['spaces',['../classSpacy_1_1Kaskade_1_1C2Functional.html#ac334455723ea59d001fef33e056b1ea7',1,'Spacy::Kaskade::C2Functional']]],
   ['spacy',['Spacy',['../namespaceSpacy.html',1,'']]],
   ['sqrt',['sqrt',['../namespaceSpacy.html#aa779bb3e2bf547cd0ed9ef47b3d711a3',1,'Spacy']]],
-  ['sqrteps',['sqrtEps',['../classSpacy_1_1Mixin_1_1Eps.html#abd50a47b32614a950189855775a09d05',1,'Spacy::Mixin::Eps']]],
+  ['sqrt_5feps',['sqrt_eps',['../classSpacy_1_1Mixin_1_1Eps.html#a1c1b0ed7f14ed4967dc7da9295a136d4',1,'Spacy::Mixin::Eps']]],
   ['step',['Step',['../classSpacy_1_1Generic_1_1Step.html',1,'Spacy::Generic']]],
   ['strakostichyenergyerror',['StrakosTichyEnergyError',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html',1,'Spacy::CG::Termination']]],
   ['subspace',['subSpace',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa61f9413eb3537879a92823dfdd0d6da',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k)'],['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#a4a74b3d51f41ba2ec1c6e755c520a5cc',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k) const ']]],

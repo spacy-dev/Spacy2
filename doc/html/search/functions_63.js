@@ -5,7 +5,7 @@ var searchData=
   ['callofundefinedfunctionexception',['CallOfUndefinedFunctionException',['../classSpacy_1_1CallOfUndefinedFunctionException.html#ac27ef399db59e2e21d91df93bc84f8c2',1,'Spacy::CallOfUndefinedFunctionException']]],
   ['cast_5fref',['cast_ref',['../namespaceSpacy.html#abb0550fc1d402f00e42c165ae8eb3305',1,'Spacy::cast_ref(FromType &amp;x)'],['../namespaceSpacy.html#a00fc9d674cd8813c4e20a05adf3aaaa4',1,'Spacy::cast_ref(const FromType &amp;x)']]],
   ['cbrt',['cbrt',['../namespaceSpacy.html#a64093cc47f73b71ba92bc0dd37e9572b',1,'Spacy']]],
-  ['cbrteps',['cbrtEps',['../classSpacy_1_1Mixin_1_1Eps.html#a4bbca3a4afc878d1a20b6335f35e58f7',1,'Spacy::Mixin::Eps']]],
+  ['cbrt_5feps',['cbrt_eps',['../classSpacy_1_1Mixin_1_1Eps.html#a91dbe45e297be2bc53f1a96107a58c64',1,'Spacy::Mixin::Eps']]],
   ['cgcreator',['CGCreator',['../classSpacy_1_1Kaskade_1_1Lagrange_1_1CGCreator.html#a238054bebf7f15f35b159a3e1804839d',1,'Spacy::Kaskade::Lagrange::CGCreator']]],
   ['checkspacecompatibility',['checkSpaceCompatibility',['../namespaceSpacy.html#aae18423491adef608743902f1c40844e',1,'Spacy']]],
   ['clear',['clear',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html#ad432a8f91481780c3a7fa74743ac3256',1,'Spacy::CG::Termination::StrakosTichyEnergyError']]],
