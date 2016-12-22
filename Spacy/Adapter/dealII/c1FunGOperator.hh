@@ -13,7 +13,7 @@
 
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
 

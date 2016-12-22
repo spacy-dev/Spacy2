@@ -1,4 +1,4 @@
-#include "operatorBase.hh"
+#include "OperatorBase.hh"
 
 #include <Spacy/vectorSpace.hh>
 

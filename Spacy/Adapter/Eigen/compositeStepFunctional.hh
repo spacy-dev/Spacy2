@@ -4,7 +4,7 @@
 #include <memory>
 #include <Eigen/Dense>
 
-#include <Spacy/Util/Base/functionalBase.hh>
+#include <Spacy/Util/Base/FunctionalBase.hh>
 
 
 namespace Spacy

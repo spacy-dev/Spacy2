@@ -3,8 +3,8 @@
 #include <string>
 #include <dolfin.h>
 
-#include <Spacy/Util/Base/addArithmeticOperators.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Base/AddArithmeticOperators.hh>
+#include <Spacy/Util/Base/VectorBase.hh>
 
 
 namespace Spacy

@@ -6,7 +6,7 @@
 #include "fem/assemble.hh"
 #include "fem/istlinterface.hh"
 
-#include "Spacy/Util/Base/operatorBase.hh"
+#include "Spacy/Util/Base/OperatorBase.hh"
 #include "Spacy/Util/Mixins/numberOfThreads.hh"
 
 namespace Spacy

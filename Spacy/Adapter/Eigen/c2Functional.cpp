@@ -1,6 +1,5 @@
 #include "c2Functional.hh"
 
-#include <Spacy/Util/Base/functionalBase.hh>
 #include <Spacy/Adapter/Eigen/linearOperator.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/Util/cast.hh>

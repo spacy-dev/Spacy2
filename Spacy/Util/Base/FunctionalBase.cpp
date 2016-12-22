@@ -1,4 +1,4 @@
-#include "functionalBase.hh"
+#include "FunctionalBase.hh"
 
 #include <Spacy/vectorSpace.hh>
 

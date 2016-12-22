@@ -7,7 +7,7 @@
 #include "cg.hh"
 
 #include "Spacy/Util/mixins.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
+#include "Spacy/Util/Base/OperatorBase.hh"
 
 namespace Spacy
 {

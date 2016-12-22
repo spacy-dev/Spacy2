@@ -3,8 +3,8 @@
 #include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
 
-#include <Spacy/Util/Base/operatorBase.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
+#include <Spacy/Util/Base/VectorBase.hh>
 #include <Spacy/Util/Mixins/get.hh>
 #include <Spacy/linearSolver.hh>
 #include <Spacy/vector.hh>

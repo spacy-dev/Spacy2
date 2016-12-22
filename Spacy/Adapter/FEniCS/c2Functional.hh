@@ -7,7 +7,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/cast.hh>
-#include <Spacy/Util/Base/functionalBase.hh>
+#include <Spacy/Util/Base/FunctionalBase.hh>
 
 #include "assignXIfPresent.hh"
 #include "util.hh"

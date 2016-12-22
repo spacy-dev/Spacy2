@@ -1,4 +1,4 @@
-#include "vectorBase.hh"
+#include "VectorBase.hh"
 #include <Spacy/vectorSpace.hh>
 
 namespace Spacy

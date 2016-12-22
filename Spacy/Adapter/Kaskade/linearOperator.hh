@@ -4,8 +4,8 @@
 
 #include <Spacy/linearSolver.hh>
 #include <Spacy/vector.hh>
-#include <Spacy/Util/Base/operatorBase.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
+#include <Spacy/Util/Base/VectorBase.hh>
 
 #include "operatorSpace.hh"
 #include "directSolver.hh"

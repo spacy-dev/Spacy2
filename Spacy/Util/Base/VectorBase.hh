@@ -4,9 +4,7 @@ namespace Spacy
 {
     /// @cond
     class VectorSpace;
-    void checkSpaceCompatibility(const VectorSpace& x, const VectorSpace& y);
     /// @endcond
-
 
     /**
      * @brief Base class for vector implementations.
@@ -21,7 +19,7 @@ namespace Spacy
          * @brief Constructor.
          * @param space underlying vector space
          */
-        VectorBase( const VectorSpace& space );
+        VectorBase(const VectorSpace& space);
 
         /// Copy constructor.
         VectorBase(const VectorBase& y);

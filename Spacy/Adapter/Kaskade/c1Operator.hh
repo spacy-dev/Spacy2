@@ -7,7 +7,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 
-#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
 #include <Spacy/Util/Mixins/numberOfThreads.hh>
 
 #include "directSolver.hh"

@@ -11,7 +11,7 @@
 #include <deal.II/numerics/matrix_tools.h>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Util/Base/functionalBase.hh>
+#include <Spacy/Util/Base/FunctionalBase.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
 

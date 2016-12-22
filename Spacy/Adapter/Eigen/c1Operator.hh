@@ -3,7 +3,7 @@
 #include <functional>
 #include <memory>
 
-#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
 
 #include <Eigen/Dense>
 

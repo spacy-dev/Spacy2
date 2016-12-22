@@ -6,7 +6,7 @@
 
 #include <Spacy/vector.hh>
 #include <Spacy/Util/cast.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Base/VectorBase.hh>
 #include <Spacy/Util/Exceptions/invalidArgumentException.hh>
 
 namespace Spacy

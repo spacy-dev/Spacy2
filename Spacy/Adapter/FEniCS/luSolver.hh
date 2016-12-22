@@ -5,7 +5,7 @@
 
 #include <dolfin.h>
 
-#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
 
 namespace Spacy
 {

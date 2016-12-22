@@ -12,7 +12,7 @@
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/Mixins/eps.hh>
 #include <Spacy/Util/Mixins/numberOfThreads.hh>
-#include <Spacy/Util/Base/functionalBase.hh>
+#include <Spacy/Util/Base/FunctionalBase.hh>
 
 #include "directSolver.hh"
 #include "vectorSpace.hh"

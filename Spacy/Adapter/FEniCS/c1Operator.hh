@@ -6,7 +6,7 @@
 
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Spaces/ScalarSpace/vectorSpace.hh>
-#include <Spacy/Util/Base/operatorBase.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
 #include <Spacy/Util/cast.hh>
 
 #include "linearOperator.hh"

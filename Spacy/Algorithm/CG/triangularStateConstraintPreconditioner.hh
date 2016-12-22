@@ -8,7 +8,7 @@
 #include "Spacy/operator.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/Util/Mixins/index.hh"
-#include "Spacy/Util/Base/operatorBase.hh"
+#include "Spacy/Util/Base/OperatorBase.hh"
 
 namespace Spacy
 {

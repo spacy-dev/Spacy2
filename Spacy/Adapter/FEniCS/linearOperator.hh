@@ -5,9 +5,9 @@
 #include <utility>
 
 #include <Spacy/linearSolver.hh>
-#include <Spacy/Util/Base/addArithmeticOperators.hh>
-#include <Spacy/Util/Base/operatorBase.hh>
-#include <Spacy/Util/Base/vectorBase.hh>
+#include <Spacy/Util/Base/AddArithmeticOperators.hh>
+#include <Spacy/Util/Base/OperatorBase.hh>
+#include <Spacy/Util/Base/VectorBase.hh>
 
 #include "luSolver.hh"
 
