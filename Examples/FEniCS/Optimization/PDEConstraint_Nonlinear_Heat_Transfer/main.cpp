@@ -77,7 +77,7 @@ int main()
     // composite step solve
     CompositeStep::AffineCovariantSolver solver( normalStepFunctional, lagrangeFunctional , productSpace );
     solver.setRelativeAccuracy(1e-9);
-    solver.setEps(1e-12);
+    solver.set_eps(1e-12);
     solver.setMaxSteps(500);
     solver.setVerbosityLevel(2);
     solver.setIterativeRefinements(0);

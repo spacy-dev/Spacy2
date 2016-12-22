@@ -1,6 +1,6 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 
 #include <Test/mockSetup.hh>
 
@@ -54,17 +54,17 @@ TEST(VectorBase,Comparison)
   ASSERT_TRUE( v0 == v0 );
   ASSERT_FALSE( v0 == v1 );
 
-  space.setEps(1e-6);
+  space.set_eps(1e-6);
   ASSERT_TRUE( v0 == v0 );
   ASSERT_FALSE( v0 == v1 );
 
-  space.setEps(1e-5);
+  space.set_eps(1e-5);
   ASSERT_TRUE( v0 == v0 );
   ASSERT_TRUE( v0 == v1 );
 
   v0.get() = 10;
   v1.get() = v0.get() - 1e-6;
-  space.setEps(1e-6);
+  space.set_eps(1e-6);
   ASSERT_TRUE( v0 == v0 );
   ASSERT_TRUE( v0 == v1 );
 

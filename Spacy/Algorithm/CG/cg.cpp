@@ -22,9 +22,6 @@ namespace Spacy
       : A_(std::move(A)), P_(std::move(P)),
         terminate( CG::Termination::StrakosTichyEnergyError{} ), type_(type)
     {
-  //    attachEps(terminate);
-  //    attachAbsoluteAccuracy(terminate);
-  //    attachRelativeAccuracy(terminate);
       assert( type=="CG" || type=="RCG" || type=="TCG" || type=="TRCG" );
     }
 
@@ -34,7 +31,7 @@ namespace Spacy
       definiteness_ = DefiniteNess::PositiveDefinite;
       result = Result::Failed;
 
-      terminate.setEps(get(eps()));
+      terminate.set_eps(get(eps()));
       terminate.setRelativeAccuracy(get(getRelativeAccuracy()));
       terminate.setAbsoluteAccuracy(get(getAbsoluteAccuracy()));
 

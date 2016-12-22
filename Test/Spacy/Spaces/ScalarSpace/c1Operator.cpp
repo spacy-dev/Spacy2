@@ -1,7 +1,7 @@
 #include <Test/gtest.hh>
 
 #include <Spacy/vector.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Spaces/ScalarSpace/c1Operator.hh>
 #include <Spacy/Spaces/ScalarSpace/linearOperator.hh>
 

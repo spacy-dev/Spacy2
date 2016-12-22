@@ -7,7 +7,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/mixins.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 
 namespace Spacy
 {

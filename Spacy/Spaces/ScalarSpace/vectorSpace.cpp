@@ -3,7 +3,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/cast.hh>
-#include "real.hh"
+#include "Real.hh"
 
 Spacy::VectorSpace Spacy::Scalar::makeScalarSpace(bool defaultIndex)
 {

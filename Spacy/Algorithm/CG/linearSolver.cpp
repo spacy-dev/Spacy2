@@ -15,12 +15,12 @@ namespace Spacy
         cg(std::move(A_),std::move(P_),type)
     {
       using namespace Mixin;
-      castAndAttach<Eps>(*this,cg);
-      castAndAttach<AbsoluteAccuracy>(*this,cg);
-      castAndAttach<RelativeAccuracy>(*this,cg);
-      castAndAttach<Verbosity>(*this,cg);
-      castAndAttach<IterativeRefinements>(*this,cg);
-      castAndAttach<MaxSteps>(*this,cg);
+      cast_and_attach<Eps>(*this,cg);
+      cast_and_attach<AbsoluteAccuracy>(*this,cg);
+      cast_and_attach<RelativeAccuracy>(*this,cg);
+      cast_and_attach<Verbosity>(*this,cg);
+      cast_and_attach<IterativeRefinements>(*this,cg);
+      cast_and_attach<MaxSteps>(*this,cg);
     }
 
     LinearSolver::LinearSolver(const LinearSolver& other) :
@@ -32,12 +32,12 @@ namespace Spacy
       cg(other.cg)
     {
       using namespace Mixin;
-      castAndAttach<Eps>(*this,cg);
-      castAndAttach<AbsoluteAccuracy>(*this,cg);
-      castAndAttach<RelativeAccuracy>(*this,cg);
-      castAndAttach<Verbosity>(*this,cg);
-      castAndAttach<IterativeRefinements>(*this,cg);
-      castAndAttach<MaxSteps>(*this,cg);
+      cast_and_attach<Eps>(*this,cg);
+      cast_and_attach<AbsoluteAccuracy>(*this,cg);
+      cast_and_attach<RelativeAccuracy>(*this,cg);
+      cast_and_attach<Verbosity>(*this,cg);
+      cast_and_attach<IterativeRefinements>(*this,cg);
+      cast_and_attach<MaxSteps>(*this,cg);
     }
 
     Vector LinearSolver::operator()(const Vector& y) const
@@ -71,7 +71,7 @@ namespace Spacy
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "CG" );
     solver.setRelativeAccuracy(relativeAccuracy);
-    solver.setEps(eps);
+    solver.set_eps(eps);
     solver.setVerbosity(verbose);
     return std::move(solver);
   }
@@ -80,7 +80,7 @@ namespace Spacy
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "RCG");
     solver.setRelativeAccuracy(relativeAccuracy);
-    solver.setEps(eps);
+    solver.set_eps(eps);
     solver.setVerbosity(verbose);
     return std::move(solver);
   }
@@ -89,7 +89,7 @@ namespace Spacy
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "TCG");
     solver.setRelativeAccuracy(relativeAccuracy);
-    solver.setEps(eps);
+    solver.set_eps(eps);
     solver.setVerbosity(verbose);
     return std::move(solver);
   }
@@ -98,7 +98,7 @@ namespace Spacy
   {
     auto solver = CG::LinearSolver(std::move(A), std::move(P), "TRCG");
     solver.setRelativeAccuracy(relativeAccuracy);
-    solver.setEps(eps);
+    solver.set_eps(eps);
     solver.setVerbosity(verbose);
     return std::move(solver);
   }

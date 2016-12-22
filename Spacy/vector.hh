@@ -7,9 +7,9 @@
 #include <type_traits>
 #include <functional>
 #include "Spacy/Util/table_util.hh"
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
-#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Util/Mixins/Get.hh>
 #include <Spacy/vectorSpace.hh>
 #include "Detail/details_for_vector.hh"
 

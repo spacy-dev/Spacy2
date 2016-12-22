@@ -24,7 +24,7 @@ namespace Spacy
                                                                                 double qPq, double rPINVr );
                 using vanishingStep_function = bool ( * )( void* );
                 using minimalDecreaseAchieved_function = bool ( * )( void* );
-                using setEps_double_function = void ( * )( void*, double eps );
+                using set_eps_double_function = void ( * )( void*, double eps );
                 using setAbsoluteAccuracy_double_function = void ( * )( void*, double accuracy );
                 using setMinimalAccuracy_double_function = void ( * )( void*, double accuracy );
                 using setRelativeAccuracy_double_function = void ( * )( void*, double accuracy );
@@ -36,7 +36,7 @@ namespace Spacy
                 update_double_double_double_double_function update_double_double_double_double;
                 vanishingStep_function vanishingStep;
                 minimalDecreaseAchieved_function minimalDecreaseAchieved;
-                setEps_double_function setEps_double;
+                set_eps_double_function set_eps_double;
                 setAbsoluteAccuracy_double_function setAbsoluteAccuracy_double;
                 setMinimalAccuracy_double_function setMinimalAccuracy_double;
                 setRelativeAccuracy_double_function setRelativeAccuracy_double;
@@ -72,9 +72,9 @@ namespace Spacy
                     return static_cast< const Impl* >( impl )->minimalDecreaseAchieved();
                 }
 
-                static void setEps_double( void* impl, double eps )
+                static void set_eps_double( void* impl, double eps )
                 {
-                    static_cast< Impl* >( impl )->setEps( std::move( eps ) );
+                    static_cast< Impl* >( impl )->set_eps( std::move( eps ) );
                 }
 
                 static void setAbsoluteAccuracy_double( void* impl, double accuracy )
@@ -123,9 +123,9 @@ namespace Spacy
                     return static_cast< std::reference_wrapper< Impl >* >( impl )->get().minimalDecreaseAchieved();
                 }
 
-                static void setEps_double( void* impl, double eps )
+                static void set_eps_double( void* impl, double eps )
                 {
-                    static_cast< std::reference_wrapper< Impl >* >( impl )->get().setEps( std::move( eps ) );
+                    static_cast< std::reference_wrapper< Impl >* >( impl )->get().set_eps( std::move( eps ) );
                 }
 
                 static void setAbsoluteAccuracy_double( void* impl, double accuracy )
@@ -204,13 +204,13 @@ namespace Spacy
             {
             };
             template < class T >
-            using TryMemFn_setEps_double = decltype( std::declval< T >().setEps( std::declval< double >() ) );
+            using TryMemFn_set_eps_double = decltype( std::declval< T >().set_eps( std::declval< double >() ) );
             template < class T, class = void >
-            struct HasMemFn_setEps_double : std::false_type
+            struct HasMemFn_set_eps_double : std::false_type
             {
             };
             template < class T >
-            struct HasMemFn_setEps_double< T, type_erasure_table_detail::voider< TryMemFn_setEps_double< T > > >
+            struct HasMemFn_set_eps_double< T, type_erasure_table_detail::voider< TryMemFn_set_eps_double< T > > >
                 : std::true_type
             {
             };
@@ -253,20 +253,21 @@ namespace Spacy
 
             template < class T >
             using TerminationCriterionConceptImpl = std::integral_constant<
-                bool, HasMemFn_call< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_clear< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_update_double_double_double_double<
-                              type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_vanishingStep< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_minimalDecreaseAchieved<
-                              type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_setEps_double< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_setAbsoluteAccuracy_double<
-                              type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_setMinimalAccuracy_double<
-                              type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
-                          HasMemFn_setRelativeAccuracy_double<
-                              type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
+                bool,
+                HasMemFn_call< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_clear< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_update_double_double_double_double<
+                        type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_vanishingStep< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_minimalDecreaseAchieved<
+                        type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_set_eps_double< type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_setAbsoluteAccuracy_double<
+                        type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_setMinimalAccuracy_double<
+                        type_erasure_table_detail::remove_reference_wrapper_t< T > >::value &&
+                    HasMemFn_setRelativeAccuracy_double<
+                        type_erasure_table_detail::remove_reference_wrapper_t< T > >::value >;
 
             template < class Impl, class T, bool = std::is_same< Impl, T >::value >
             struct TerminationCriterionConcept : std::false_type

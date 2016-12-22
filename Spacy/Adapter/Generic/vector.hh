@@ -2,8 +2,8 @@
 
 #include <Spacy/Util/Base/AddArithmeticOperators.hh>
 #include <Spacy/Util/Base/VectorBase.hh>
-#include <Spacy/Util/Mixins/get.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Util/Mixins/Get.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/voider.hh>
 
 namespace Spacy

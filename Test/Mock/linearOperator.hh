@@ -2,7 +2,7 @@
 
 #include <Spacy/linearSolver.hh>
 #include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Util/Mixins/Get.hh>
 #include <Spacy/Util/Base/AddArithmeticOperators.hh>
 #include <Spacy/Util/Base/OperatorBase.hh>
 #include <Spacy/Util/Base/VectorBase.hh>

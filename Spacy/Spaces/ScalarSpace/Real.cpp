@@ -1,30 +1,9 @@
-#include "real.hh"
-
-#include <Spacy/Util/cast.hh>
-#include <Spacy/Util/Exceptions/invalidArgumentException.hh>
+#include "Real.hh"
 
 #include <Spacy/vector.hh>
 #include "vectorSpace.hh"
 
 #include <cmath>
-
-namespace
-{
-    double computePow(double x, double y)
-    {
-        return pow(x,y);
-    }
-
-    double computeSqrt(double x)
-    {
-        return sqrt(x);
-    }
-
-    double computeCbrt(double x)
-    {
-        return cbrt(x);
-    }
-}
 
 namespace Spacy
 {
@@ -106,17 +85,17 @@ namespace Spacy
 
     Real pow(Real x, double y)
     {
-        return Real(computePow(x.get(),y),x.space());
+        return Real(std::pow(x.get(),y),x.space());
     }
 
     Real sqrt(Real x)
     {
-        return Real(computeSqrt(x.get()),x.space());
+        return Real(std::sqrt(x.get()),x.space());
     }
 
     Real cbrt(Real x)
     {
-        return Real(computeCbrt(x.get()),x.space());
+        return Real(std::cbrt(x.get()),x.space());
     }
 
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/Base/AddArithmeticOperators.hh>
 #include <Spacy/Util/Base/VectorBase.hh>
 #include <Spacy/vectorSpace.hh>

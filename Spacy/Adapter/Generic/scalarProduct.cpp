@@ -1,6 +1,6 @@
 #include "scalarProduct.hh"
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/vector.hh>
 
 namespace Spacy

@@ -6,7 +6,7 @@
 
 #include <memory>
 #include <functional>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/table_util.hh>
 #include <Spacy/linearOperator.hh>
 #include <Spacy/vector.hh>

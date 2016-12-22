@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
     // algorithm and parameters
     auto cs = Spacy::CompositeStep::AffineCovariantSolver( fn , ft , domain );
     cs.setRelativeAccuracy(desiredAccuracy);
-    cs.setEps(eps);
+    cs.set_eps(eps);
     cs.setVerbosityLevel(2);
     cs.setMaxSteps(maxSteps);
     cs.setIterativeRefinements(iterativeRefinements);

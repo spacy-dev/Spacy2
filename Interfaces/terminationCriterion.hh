@@ -18,7 +18,7 @@ namespace Spacy
 
             bool minimalDecreaseAchieved() const;
 
-            void setEps(double eps);
+            void set_eps(double eps);
 
             void setAbsoluteAccuracy(double accuracy);
 

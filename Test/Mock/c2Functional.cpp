@@ -1,6 +1,6 @@
 #include "c2Functional.hh"
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include "linearOperator.hh"

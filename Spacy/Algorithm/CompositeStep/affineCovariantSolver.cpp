@@ -254,7 +254,7 @@ namespace Spacy
             //      if( is<CG::LinearSolver>(normalSolver) )
             //      {
             //        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-            //        cgSolver.setEps(eps());
+            //        cgSolver.set_eps(eps());
             //        cgSolver.setRelativeAccuracy(eps());
             //        cgSolver.setVerbosity(verbose());
             //        cgSolver.setVerbosityLevel(getVerbosityLevel());
@@ -416,9 +416,9 @@ namespace Spacy
         void AffineCovariantSolver::updateOmegaC(Real norm_x, Real norm_dx, Real norm_ds)
         {
             if( !N_ ) return;
-            if( norm_dx < sqrtEps() * norm_x ) return;
+            if( norm_dx < sqrt_eps() * norm_x ) return;
             setContraction( get(norm_ds/norm_dx) );
-            //    if( getContraction() < 0.25 && ( norm_dx < sqrtEps() * norm_x || norm_ds < eps() * norm_x ) ) return;
+            //    if( getContraction() < 0.25 && ( norm_dx <.sqrt_eps() * norm_x || norm_ds < eps() * norm_x ) ) return;
 
             if( !(normalStepMonitor == StepMonitor::Rejected && tangentialStepMonitor == StepMonitor::Rejected) || omegaC < 2*getContraction()/norm_dx )
                 omegaC = 2*getContraction()/norm_dx;
@@ -432,7 +432,7 @@ namespace Spacy
             if( !tangentialSolver ) return 1;
 
             Real eta = 1;
-            if( abs( cubic(get(tau)) - cubic(0) ) > sqrtEps()*norm_x )
+            if( abs( cubic(get(tau)) - cubic(0) ) > sqrt_eps()*norm_x )
                 eta = ( L_(primalProjection(soc)) - cubic(0) )/( cubic(get(tau)) - cubic(0) );
                       else eta = 1;
 
@@ -476,7 +476,7 @@ namespace Spacy
             auto tau = DampingFactor(1);
             if( !L_ )
                 return tau;
-            if( norm_Dt < sqrtEps() )
+            if( norm_Dt < sqrt_eps() )
                 return tau;
 
             auto maxTau = Real{1.};

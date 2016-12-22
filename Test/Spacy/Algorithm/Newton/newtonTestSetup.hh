@@ -13,7 +13,7 @@ auto createLocalNewton(C1Operator F, double relativeAccuracy, double eps, unsign
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);
-  p.setEps(eps);
+  p.set_eps(eps);
   p.setMaxSteps(maxSteps);
 
   return [F,p](const Vector& x0)
@@ -26,7 +26,7 @@ auto createCovariantNewton(C1Operator F, double relativeAccuracy, double eps, un
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);
-  p.setEps(eps);
+  p.set_eps(eps);
   p.setMaxSteps(maxSteps);
   Space::R.setScalarProduct( InducedScalarProduct(F.linearization( zero(F.domain()) )) );
 
@@ -40,7 +40,7 @@ auto createContravariantNewton(C1Operator F, double relativeAccuracy, double eps
 {
   auto p = Newton::Parameter{};
   p.setRelativeAccuracy(relativeAccuracy);
-  p.setEps(eps);
+  p.set_eps(eps);
   p.setMaxSteps(maxSteps);
 
   return [F,p](const Vector& x0)

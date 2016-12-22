@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Spacy/Util/Base/VectorBase.hh>
-#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Util/Mixins/Get.hh>
 
 namespace Spacy
 {

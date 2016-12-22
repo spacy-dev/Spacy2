@@ -2,7 +2,7 @@
 
 #include <Spacy/Algorithm/dampingFactor.hh>
 
-#include "mixinConnection.hh"
+#include "MixinConnection.hh"
 
 namespace Spacy
 {

@@ -1,7 +1,7 @@
 #include <Test/gtest.hh>
 
 #include <Spacy/vector.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Algorithm/Generic/iterativeMethod.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/Util/mixins.hh>
@@ -299,7 +299,7 @@ TEST(GenericIterativeMethod,MixinParameters)
   EXPECT_EQ( dummySolver.getTerminationCriterion().getRelativeAccuracy() , testAccuracy() );
   dummySolver.setMinimalAccuracy(testAccuracy());
   EXPECT_EQ( dummySolver.getTerminationCriterion().getMinimalAccuracy() , testAccuracy() );
-  dummySolver.setEps(testAccuracy());
+  dummySolver.set_eps(testAccuracy());
   EXPECT_EQ( dummySolver.getTerminationCriterion().eps() , testAccuracy() );
   dummySolver.setVerbosityLevel(2);
   EXPECT_EQ( dummySolver.getTerminationCriterion().getVerbosityLevel() , 2 );

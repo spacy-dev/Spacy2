@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Spacy/vector.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Algorithm/dampingFactor.hh>
-#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/Eps.hh>
 #include <Spacy/Util/Mixins/regularityTest.hh>
 
 #include <functional>

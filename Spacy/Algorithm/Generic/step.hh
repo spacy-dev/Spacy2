@@ -3,7 +3,7 @@
 
 #include "Spacy/vector.hh"
 #include "Spacy/Util/mixins.hh"
-#include "Spacy/Spaces/ScalarSpace/real.hh"
+#include "Spacy/Spaces/ScalarSpace/Real.hh"
 #include "fglue/TMP/createMissingBaseClasses.hh"
 #include "fglue/Fusion/connect.hh"
 

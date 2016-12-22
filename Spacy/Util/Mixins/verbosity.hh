@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mixinConnection.hh"
+#include "MixinConnection.hh"
 
 namespace Spacy
 {

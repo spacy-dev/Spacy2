@@ -1,5 +1,4 @@
-#ifndef SPACY_MIXINS_EQUALITY_POINTER_COMPARISON_HH
-#define SPACY_MIXINS_EQUALITY_POINTER_COMPARISON_HH
+#pragma once
 
 #include <vector>
 
@@ -43,13 +42,13 @@ namespace Spacy
   }
 
   template <class Base, class Source, class ToAttach>
-  void castAndAttach(Source& source, ToAttach& toAttach)
+  void cast_and_attach(Source& source, ToAttach& toAttach)
   {
     static_cast<Base&>(source).attach(static_cast<Base&>(toAttach));
   }
 
   template <class Base, class Source, class ToAttach>
-  void castAndDetach(Source& source, ToAttach& toAttach)
+  void cast_and_detach(Source& source, ToAttach& toAttach)
   {
     static_cast<Base&>(source).detach(static_cast<Base&>(toAttach));
   }
@@ -164,5 +163,3 @@ namespace Spacy
     }
   }
 }
-
-#endif // SPACY_MIXINS_EQUALITY_POINTER_COMPARISON_HH

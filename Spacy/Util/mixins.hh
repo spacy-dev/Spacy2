@@ -3,7 +3,7 @@
 #include "Mixins/accuracy.hh"
 #include "Mixins/contractionRate.hh"
 #include "Mixins/decreaseCondition.hh"
-#include "Mixins/eps.hh"
+#include "Mixins/Eps.hh"
 #include "Mixins/index.hh"
 #include "Mixins/iterativeRefinements.hh"
 #include "Mixins/maxSteps.hh"

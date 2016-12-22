@@ -85,10 +85,10 @@ namespace Spacy
             return functions_.minimalDecreaseAchieved( impl_ );
         }
 
-        void TerminationCriterion::setEps( double eps )
+        void TerminationCriterion::set_eps( double eps )
         {
             assert( impl_ );
-            functions_.setEps_double( impl_, std::move( eps ) );
+            functions_.set_eps_double( impl_, std::move( eps ) );
         }
 
         void TerminationCriterion::setAbsoluteAccuracy( double accuracy )

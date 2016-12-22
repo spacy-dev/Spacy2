@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/Mixins/accuracy.hh>
 #include <Spacy/Util/Mixins/verbosity.hh>
-#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/Eps.hh>
 #include <Spacy/Util/log.hh>
 
 namespace Spacy

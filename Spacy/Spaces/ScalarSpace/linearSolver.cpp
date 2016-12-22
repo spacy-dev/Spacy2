@@ -1,7 +1,7 @@
 #include "linearSolver.hh"
 
 #include <Spacy/vector.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/cast.hh>
 
 namespace Spacy

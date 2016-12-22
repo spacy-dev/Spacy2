@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 
-#include "mixinConnection.hh"
+#include "MixinConnection.hh"
 
 namespace Spacy
 {
@@ -17,16 +17,16 @@ namespace Spacy
        */
       explicit Eps(Real eps = 1e-15) noexcept;
 
-      void setEps(Real eps);
+      void set_eps(Real eps);
 
       /// Access \f$\varepsilon\f$.
       Real eps() const noexcept;
 
       ///Access \f$\sqrt\varepsilon\f$.
-      Real sqrtEps() const noexcept;
+      Real sqrt_eps() const noexcept;
 
       /// Access \f$\varepsilon^{1/3}\f$.
-      Real cbrtEps() const noexcept;
+      Real cbrt_eps() const noexcept;
 
       /// update function for observer pattern.
       void update(Eps* changedSubject);

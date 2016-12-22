@@ -36,7 +36,7 @@ namespace Spacy
                        &TerminationCriterionDetail::execution_wrapper<
                            TerminationCriterion, typename std::decay< T >::type >::minimalDecreaseAchieved,
                        &TerminationCriterionDetail::execution_wrapper< TerminationCriterion,
-                                                                       typename std::decay< T >::type >::setEps_double,
+                                                                       typename std::decay< T >::type >::set_eps_double,
                        &TerminationCriterionDetail::execution_wrapper<
                            TerminationCriterion, typename std::decay< T >::type >::setAbsoluteAccuracy_double,
                        &TerminationCriterionDetail::execution_wrapper<
@@ -82,7 +82,7 @@ namespace Spacy
 
             bool minimalDecreaseAchieved() const;
 
-            void setEps( double eps );
+            void set_eps( double eps );
 
             void setAbsoluteAccuracy( double accuracy );
 

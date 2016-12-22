@@ -16,7 +16,7 @@ TEST(LipschitzConstant,Assignment)
   EXPECT_EQ( L , 5e3 );
 
   auto eps = 1e-15;
-  L.setEps(eps);
+  L.set_eps(eps);
   L = 0.5*eps;
   EXPECT_EQ( L , eps) ;
 }

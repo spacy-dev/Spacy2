@@ -1,7 +1,7 @@
 // Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
 // Released under the terms of the GNU General Public License version 3 or later.
 
-#include "mixinConnection.hh"
+#include "MixinConnection.hh"
 
 #define GENERATE_HEADER_START(NAME) \
   namespace Spacy \

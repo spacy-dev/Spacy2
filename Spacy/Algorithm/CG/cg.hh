@@ -9,7 +9,7 @@
 
 #include "Spacy/operator.hh"
 #include "Spacy/Util/Mixins/accuracy.hh"
-#include "Spacy/Util/Mixins/eps.hh"
+#include "Spacy/Util/Mixins/Eps.hh"
 #include "Spacy/Util/Mixins/iterativeRefinements.hh"
 #include "Spacy/Util/Mixins/maxSteps.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"

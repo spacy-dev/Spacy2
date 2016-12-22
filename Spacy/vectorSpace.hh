@@ -6,7 +6,7 @@
 
 #include <Spacy/norm.hh>
 #include <Spacy/scalarProduct.hh>
-#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/Eps.hh>
 
 namespace Spacy
 {

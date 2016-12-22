@@ -1,6 +1,4 @@
-#include "eps.hh"
-
-#include <cmath>
+#include "Eps.hh"
 
 namespace Spacy
 {
@@ -11,7 +9,7 @@ namespace Spacy
       : eps_(eps)
     {}
 
-    void Eps::setEps(Real eps)
+    void Eps::set_eps(Real eps)
     {
       eps_ = eps;
       notify();
@@ -22,19 +20,19 @@ namespace Spacy
       return eps_;
     }
 
-    Real Eps::sqrtEps() const noexcept
+    Real Eps::sqrt_eps() const noexcept
     {
       return sqrt(eps_);
     }
 
-    Real Eps::cbrtEps() const noexcept
+    Real Eps::cbrt_eps() const noexcept
     {
       return cbrt(eps_);
     }
 
     void Eps::update(Eps* changedSubject)
     {
-      setEps( changedSubject->eps() );
+      set_eps( changedSubject->eps() );
     }
   }
 }

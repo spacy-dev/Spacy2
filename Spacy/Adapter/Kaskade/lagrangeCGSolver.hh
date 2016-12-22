@@ -119,7 +119,7 @@ namespace Spacy
           auto solver = ::Spacy::CG::LinearSolver(A, P, solver_);
           //~ solver.setAbsoluteAccuracy(absoluteAccuracy());
           //~ solver.setRelativeAccuracy(relativeAccuracy());
-          //~ solver.setEps(eps());
+          //~ solver.set_eps(eps());
           //~ solver.setVerbosityLevel(verbosityLevel());
           //~ solver.setIterativeRefinements(iterativeRefinements());
           //~ solver.setMaxSteps(maxSteps());

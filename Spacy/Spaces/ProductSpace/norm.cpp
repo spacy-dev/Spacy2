@@ -1,6 +1,6 @@
 #include "norm.hh"
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/cast.hh>
 #include <Spacy/norm.hh>
 #include <Spacy/vector.hh>

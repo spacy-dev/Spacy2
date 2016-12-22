@@ -1,6 +1,6 @@
 #include <Test/gtest.hh>
 
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 
 const auto two = Spacy::Real{2};
 const auto three = Spacy::Real{3};

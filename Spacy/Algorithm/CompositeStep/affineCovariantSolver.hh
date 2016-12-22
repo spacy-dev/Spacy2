@@ -10,7 +10,7 @@
 #include <Spacy/Algorithm/dampingFactor.hh>
 #include <Spacy/Algorithm/lipschitzConstant.hh>
 #include <Spacy/Util/mixins.hh>
-#include <Spacy/Spaces/ScalarSpace/real.hh>
+#include <Spacy/Spaces/ScalarSpace/Real.hh>
 
 namespace Spacy
 {

@@ -10,7 +10,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
-#include <Spacy/Util/Mixins/eps.hh>
+#include <Spacy/Util/Mixins/Eps.hh>
 #include <Spacy/Util/Mixins/numberOfThreads.hh>
 #include <Spacy/Util/Base/FunctionalBase.hh>
 

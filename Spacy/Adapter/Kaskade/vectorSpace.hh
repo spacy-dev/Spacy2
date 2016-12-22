@@ -5,7 +5,7 @@
 #include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Spaces/productSpace.hh>
-#include <Spacy/Util/Mixins/get.hh>
+#include <Spacy/Util/Mixins/Get.hh>
 
 #include "l2Product.hh"
 #include "vector.hh"

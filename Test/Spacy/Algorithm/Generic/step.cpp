@@ -25,6 +25,6 @@ TEST(GenericStep,Parameters)
   EXPECT_EQ( step.getIterativeRefinements() , 1 );
   step.setVerbosityLevel(2);
   EXPECT_EQ( step.getVerbosityLevel() , 2 );
-  step.setEps( 1e-3 );
+  step.set_eps( 1e-3 );
   EXPECT_EQ( step.eps() , 1e-3 );
 }
