@@ -96,6 +96,10 @@ class \hyperlink{classSpacy_1_1dealII_1_1VectorCreator}{\-Vector\-Creator}
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a single vector space from dealii\-::\-Triangulation$<$dim$>$. \end{DoxyCompactList}\item 
 {\footnotesize template$<$int dim, int... variable\-\_\-dims$>$ }\\\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_1_1dealII_a554fe46c7a1b93af7dae16a6628e517a}{make\-Hilbert\-Space} (const dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, const std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ \&fe\-\_\-order\-\_\-and\-\_\-first\-\_\-component)
 \begin{DoxyCompactList}\small\item\em \-Convenient generation of a product vector space from dealii\-::\-Triangulation$<$dim$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int dim, int... variable\-\_\-dims$>$ }\\\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_1_1dealII_ab50ddf339c5fdf179bb932ba63b0d4c7}{make\-Hilbert\-Space} (dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, const std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ \&fe\-\_\-order\-\_\-and\-\_\-first\-\_\-component, const std\-::vector$<$ unsigned $>$ \&global\-\_\-ids)
+\begin{DoxyCompactList}\small\item\em \-Convenient generation of a product vector space from dealii\-::\-Triangulation$<$dim$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$int dim, int... variable\-\_\-dims$>$ }\\\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \hyperlink{namespaceSpacy_1_1dealII_aa87aa4cc2ea668da33e0a353e9af8cbc}{make\-Hilbert\-Space} (dealii\-::\-Triangulation$<$ dim $>$ \&triangulation, const std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ \&fe\-\_\-order\-\_\-and\-\_\-first\-\_\-component, const std\-::vector$<$ unsigned $>$ \&primal\-\_\-ids, const std\-::vector$<$ unsigned $>$ \&dual\-\_\-ids)
+\begin{DoxyCompactList}\small\item\em \-Convenient generation of a primal-\/dual product vector space from dealii\-::\-Triangulation$<$dim$>$. \end{DoxyCompactList}\item 
 \hypertarget{namespaceSpacy_1_1dealII_a088b66c8b6ada765fb2919d4731512d3}{{\footnotesize template$<$int dim, class Variable\-Dims  = \-Variable\-Dim$<$1$>$$>$ }\\void {\bfseries write\-V\-T\-K} (const \-Vector \&x, const std\-::string \&file\-Name)}\label{namespaceSpacy_1_1dealII_a088b66c8b6ada765fb2919d4731512d3}
 
 \end{DoxyCompactItemize}
@@ -145,6 +149,53 @@ class \hyperlink{classSpacy_1_1dealII_1_1VectorCreator}{\-Vector\-Creator}
 
 \begin{DoxyParams}{\-Parameters}
 {\em triangulation} & triangulation underlying the \-F\-E-\/space \\
+\hline
+{\em fe\-\_\-order} & order of the finite elements \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceSpacy_1_1dealII_ab50ddf339c5fdf179bb932ba63b0d4c7}{\index{\-Spacy\-::deal\-I\-I@{\-Spacy\-::deal\-I\-I}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
+\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Spacy::dealII@{\-Spacy\-::deal\-I\-I}}
+\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim, int... variable\-\_\-dims$>$ {\bf \-Vector\-Space} {\bf \-Spacy\-::deal\-I\-I\-::make\-Hilbert\-Space} (
+\begin{DoxyParamCaption}
+\item[{dealii\-::\-Triangulation$<$ dim $>$ \&}]{triangulation, }
+\item[{const std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ \&}]{fe\-\_\-order\-\_\-and\-\_\-first\-\_\-component, }
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{global\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{namespaceSpacy_1_1dealII_ab50ddf339c5fdf179bb932ba63b0d4c7}
+
+
+\-Convenient generation of a product vector space from dealii\-::\-Triangulation$<$dim$>$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em triangulation} & triangulation underlying the \-F\-E-\/space \\
+\hline
+{\em global\-\_\-ids} & global ids associated with variables (for reordering, subspace projections,...) \\
+\hline
+{\em fe\-\_\-order} & order of the finite elements \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceSpacy_1_1dealII_aa87aa4cc2ea668da33e0a353e9af8cbc}{\index{\-Spacy\-::deal\-I\-I@{\-Spacy\-::deal\-I\-I}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
+\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Spacy::dealII@{\-Spacy\-::deal\-I\-I}}
+\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$int dim, int... variable\-\_\-dims$>$ {\bf \-Vector\-Space} {\bf \-Spacy\-::deal\-I\-I\-::make\-Hilbert\-Space} (
+\begin{DoxyParamCaption}
+\item[{dealii\-::\-Triangulation$<$ dim $>$ \&}]{triangulation, }
+\item[{const std\-::vector$<$ std\-::pair$<$ int, int $>$ $>$ \&}]{fe\-\_\-order\-\_\-and\-\_\-first\-\_\-component, }
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{primal\-\_\-ids, }
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{dual\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{namespaceSpacy_1_1dealII_aa87aa4cc2ea668da33e0a353e9af8cbc}
+
+
+\-Convenient generation of a primal-\/dual product vector space from dealii\-::\-Triangulation$<$dim$>$. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em triangulation} & triangulation underlying the \-F\-E-\/space \\
+\hline
+{\em primal\-\_\-ids} & global ids associated with primal variables \\
+\hline
+{\em dual\-\_\-ids} & global ids associated with dual variables \\
 \hline
 {\em fe\-\_\-order} & order of the finite elements \\
 \hline
