@@ -40,10 +40,10 @@ namespace Spacy
             Spacy::Scalar::LinearOperator hessian(const ::Spacy::Vector& x) const;
 
         private:
-            std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
             std::function<double(const double&)> value_ ;
             std::function<double(const double&)> derivative_;
             std::function<double(const double&)> secDerivative_;
+            std::shared_ptr<VectorSpace> operatorSpace_;
         };
     }
     /** @} */

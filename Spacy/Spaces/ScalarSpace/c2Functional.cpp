@@ -2,10 +2,13 @@
 
 #include <Spacy/linearOperator.hh>
 #include <Spacy/vector.hh>
+#include <Spacy/vectorSpace.hh>
+#include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Spaces/realSpace.hh>
 #include <Spacy/Util/cast.hh>
 
-#include "linearOperator.hh"
+#include "LinearOperator.hh"
+#include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
 
 namespace Spacy
 {
@@ -17,7 +20,14 @@ namespace Spacy
             Spacy::FunctionalBase(Space::R) ,
             value_(std::move(value)),
             derivative_(std::move(derivative)),
-            secDerivative_(std::move(secDerivative))
+            secDerivative_(std::move(secDerivative)),
+            operatorSpace_( std::make_shared<VectorSpace>(
+                                [](const ::Spacy::VectorSpace*) -> Spacy::Vector
+                                { throw CallOfUndefinedFunctionException("OperatorCreator::operator()(const VectorSpace*)"); },
+                              [](const ::Spacy::Vector&) -> Spacy::Real
+                              { throw CallOfUndefinedFunctionException("LinearOperatorNorm"); } ,
+                              true
+                          ) )
         {}
 
         Spacy::Real C2Functional::operator()(const ::Spacy::Vector& x) const

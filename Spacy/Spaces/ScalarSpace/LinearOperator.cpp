@@ -1,4 +1,4 @@
-#include "linearOperator.hh"
+#include "LinearOperator.hh"
 
 #include <Spacy/linearSolver.hh>
 #include <Spacy/vector.hh>

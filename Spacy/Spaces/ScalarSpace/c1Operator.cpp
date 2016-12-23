@@ -1,12 +1,13 @@
 #include "c1Operator.hh"
 
 #include <Spacy/Spaces/realSpace.hh>
+#include <Spacy/vector.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/zeroVectorCreator.hh>
 #include <Spacy/Util/cast.hh>
+#include <Spacy/Util/Exceptions/callOfUndefinedFunctionException.hh>
 
-#include "linearOperator.hh"
-#include "linearOperatorCreator.hh"
+#include "LinearOperator.hh"
 
 #include <cassert>
 
@@ -20,10 +21,10 @@ namespace Spacy
         value_(value),
         derivative_(derivative),
         operatorSpace_( std::make_shared<VectorSpace>(
-                            [](const ::Spacy::VectorSpace*) { return Real(0.); },
-//                          LinearOperatorCreator() ,
-                          [](const ::Spacy::Vector& v)
-                          { return Real(0.); } ,
+                            [](const ::Spacy::VectorSpace*) ->Spacy::Vector
+                            { throw CallOfUndefinedFunctionException("OperatorCreator::operator()(const VectorSpace*)"); },
+                          [](const ::Spacy::Vector&) -> Spacy::Real
+                          { throw CallOfUndefinedFunctionException("LinearOperatorNorm"); } ,
                           true
                       ) )
     {}
