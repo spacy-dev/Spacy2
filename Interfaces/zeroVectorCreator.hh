@@ -27,7 +27,7 @@ namespace Spacy
   }
 
   /// Create new vector \f$v=0\f$.
-  Vector zero(const VectorSpace& space)
+  inline Vector zero(const VectorSpace& space)
   {
       return space.creator()(&space);
   }

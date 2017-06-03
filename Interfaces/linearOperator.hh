@@ -41,20 +41,20 @@ namespace Spacy
   };
 
   /// Access solver via A^-1. Throws for k!=-1.
-  LinearSolver operator^(const LinearOperator& A, int k)
+  inline LinearSolver operator^(const LinearOperator& A, int k)
   {
     if( k == -1 ) return A.solver();
     throw Exception::InvalidArgument("operator^ for LinearOperator only defined for exponent: k = -1.");
   }
 
   /// Access solver via A^-1. Throws for k!=-1.
-  LinearSolver operator^(LinearOperator&& A, int k)
+  inline LinearSolver operator^(LinearOperator&& A, int k)
   {
     if( k == -1 ) return std::move(A.solver());
     throw Exception::InvalidArgument("operator^ for LinearOperator only defined for exponent: k = -1.");
   }
 
-  LinearOperator& axpy(LinearOperator& A, double a, LinearOperator B)
+  inline LinearOperator& axpy(LinearOperator& A, double a, LinearOperator B)
   {
     return A += ( B *= a );
   }

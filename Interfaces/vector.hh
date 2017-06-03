@@ -47,30 +47,30 @@ namespace Spacy
   }
 
   /// Sum of vectors \f$z=x+y\f$.
-  Vector operator+(Vector x, const Vector& y)
+  inline Vector operator+(Vector x, const Vector& y)
   {
       return x += y;
   }
 
   /// Subtract vectors \f$z=x-y\f$.
-  Vector operator-(Vector x, const Vector& y)
+  inline Vector operator-(Vector x, const Vector& y)
   {
       return x -= y;
   }
 
   /// Compute scalar product \f$z=x*y=(x,y)\f$.
-  Real operator*(const Vector& x, const Vector& y)
+  inline Real operator*(const Vector& x, const Vector& y)
   {
       return x.space().scalarProduct()(x,y);
   }
 
   /// Compute norm, where the norm associated with the underlying function space is used \f$ z = \|x\| \f$.
-  Real norm(const Vector& x)
+  inline Real norm(const Vector& x)
   {
       return x.space().norm()(x);
   }
 
-  void checkDualPairing(const Vector& x, const Vector& y)
+  inline void checkDualPairing(const Vector& x, const Vector& y)
   {
     if( !y.space().isPrimalWRT(x.space()) )
       throw IncompatibleSpaceException(x.space().index(),y.space().index());
@@ -91,12 +91,12 @@ namespace Spacy
     return y * x;
   }
 
-  Vector operator*(const Mixin::Get<Real>& x, Vector y)
+  inline Vector operator*(const Mixin::Get<Real>& x, Vector y)
   {
     return y *= get(get(x));
   }
 
-  Vector operator*(const Vector& x, const Mixin::Get<Real>& y)
+  inline Vector operator*(const Vector& x, const Mixin::Get<Real>& y)
   {
     return y * x;
   }

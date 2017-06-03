@@ -38,7 +38,7 @@ namespace Spacy
    * @return \f$f'(x)\f$, i.e. f.d1(x).
    * @see C2Functional
    */
-  Vector d1(const C2Functional& f, const Vector& x)
+  inline Vector d1(const C2Functional& f, const Vector& x)
   {
     return f.d1(x);
   }
@@ -53,7 +53,7 @@ namespace Spacy
    * @return \f$f''(x)\f$, i.e. f.hessian(x).
    * @see C2Functional
    */
-  LinearOperator d2(const C2Functional& f, const Vector& x)
+  inline LinearOperator d2(const C2Functional& f, const Vector& x)
   {
     return f.hessian(x);
   }

@@ -38,7 +38,7 @@ namespace Spacy
    * @return \f$A'(x)\f$, i.e. A.linearization(x).
    * @see @ref C1OperatorAnchor "C1Operator", @ref LinearOperatorAnchor "LinearOperator"
    */
-  LinearOperator d1(const C1Operator& A, const Vector& x)
+  inline LinearOperator d1(const C1Operator& A, const Vector& x)
   {
       return A.linearization(x);
   }
