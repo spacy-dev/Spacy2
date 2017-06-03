@@ -126,104 +126,28 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html#afb20329c56ee527505ef7390eba96870">operator()</a> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *V) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates \( 0 \in V \). <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="aa33a8160098d48aa6034497665eaa084"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::ZeroVectorCreator" ref="aa33a8160098d48aa6034497665eaa084" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; ZeroVectorCreatorDetail::ZeroVectorCreatorConcept&lt; ZeroVectorCreator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; ZeroVectorCreatorDetail::Concept&lt; ZeroVectorCreator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ZeroVectorCreator</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3922905f1512707fefaad55b5181d7ec"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::type_id_" ref="a3922905f1512707fefaad55b5181d7ec" args="(typeid(typename std::decay&lt; T &gt;::type).hash_code())" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>type_id_</b> (typeid(typename std::decay&lt; T &gt;::type).hash_code())</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5aa6a250b3c9d5915079a4c3fa36f81"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::impl_" ref="ab5aa6a250b3c9d5915079a4c3fa36f81" args="(new typename std::decay&lt; T &gt;::type(std::forward&lt; T &gt;(value)))" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (new typename std::decay&lt; T &gt;::type(std::forward&lt; T &gt;(value)))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30ae2c5e792fe3f45cbd02aa5068666a"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::ZeroVectorCreator" ref="a30ae2c5e792fe3f45cbd02aa5068666a" args="(const ZeroVectorCreator &amp;other)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>ZeroVectorCreator</b> (const <a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0476e84d16f8eef1e6b55261ef77541"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::ZeroVectorCreator" ref="ad0476e84d16f8eef1e6b55261ef77541" args="(ZeroVectorCreator &amp;&amp;other) noexcept" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>ZeroVectorCreator</b> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;other) noexcept</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd8c08e385def67aaf659572dd256be7"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::impl_" ref="afd8c08e385def67aaf659572dd256be7" args="(std::forward&lt; T &gt;(value))" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (std::forward&lt; T &gt;(value))</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a6bf1e05757880d3fdd6a1c481237d0a1"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator=" ref="a6bf1e05757880d3fdd6a1c481237d0a1" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; ZeroVectorCreatorDetail::ZeroVectorCreatorConcept&lt; ZeroVectorCreator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; ZeroVectorCreatorDetail::Concept&lt; ZeroVectorCreator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2aed3130e7dd4eefbeb8b6f21346359"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator=" ref="ab2aed3130e7dd4eefbeb8b6f21346359" args="(const ZeroVectorCreator &amp;other)" -->
-<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5924f0aa3af06b2c493540842a8f196b"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator=" ref="a5924f0aa3af06b2c493540842a8f196b" args="(ZeroVectorCreator &amp;&amp;other) noexcept" -->
-<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;other) noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html#a2a716f5d88147abcdf73e834ec349c06">operator bool</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the type-erased interface holds an implementation.  <a href="#a2a716f5d88147abcdf73e834ec349c06"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a716f5d88147abcdf73e834ec349c06"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator bool" ref="a2a716f5d88147abcdf73e834ec349c06" args="() const noexcept" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb20329c56ee527505ef7390eba96870"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator()" ref="afb20329c56ee527505ef7390eba96870" args="(const VectorSpace *V) const " -->
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html#afb20329c56ee527505ef7390eba96870">operator()</a> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> *V) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates \( 0 \in V \). <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html#ac6a6c8b0148da2ac7fc55fe1cc062321">target</a> () noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#ac6a6c8b0148da2ac7fc55fe1cc062321"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1ZeroVectorCreator.html#a49fff06a4dc43f027eef5db923d3aad4">target</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a49fff06a4dc43f027eef5db923d3aad4"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ac6a6c8b0148da2ac7fc55fe1cc062321"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::target" ref="ac6a6c8b0148da2ac7fc55fe1cc062321" args="() noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () noexcept</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a49fff06a4dc43f027eef5db923d3aad4"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::target" ref="a49fff06a4dc43f027eef5db923d3aad4" args="() const noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () const noexcept</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Each <a class="el" href="classSpacy_1_1VectorSpace.html" title="Function space .">VectorSpace</a> needs a zero-vector creator to support generation of vector space elements. </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2a716f5d88147abcdf73e834ec349c06"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::operator bool" ref="a2a716f5d88147abcdf73e834ec349c06" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Spacy::ZeroVectorCreator::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Checks if the type-erased interface holds an implementation. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if an implementation is stored, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac6a6c8b0148da2ac7fc55fe1cc062321"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::target" ref="ac6a6c8b0148da2ac7fc55fe1cc062321" args="() noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classSpacy_1_1ZeroVectorCreator.html#ac6a6c8b0148da2ac7fc55fe1cc062321">Spacy::ZeroVectorCreator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a49fff06a4dc43f027eef5db923d3aad4"></a><!-- doxytag: member="Spacy::ZeroVectorCreator::target" ref="a49fff06a4dc43f027eef5db923d3aad4" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T* <a class="el" href="classSpacy_1_1ZeroVectorCreator.html#ac6a6c8b0148da2ac7fc55fe1cc062321">Spacy::ZeroVectorCreator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Interfaces/<a class="el" href="Interfaces_2zeroVectorCreator_8hh_source.html">zeroVectorCreator.hh</a></li>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/<a class="el" href="Spacy_2zeroVectorCreator_8hh_source.html">zeroVectorCreator.hh</a></li>
 </ul>
@@ -245,7 +169,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

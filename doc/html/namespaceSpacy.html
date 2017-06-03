@@ -192,6 +192,8 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown if regularity test fails.  <a href="classSpacy_1_1RegularityTestFailedException.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1SingularOperatorException.html">SingularOperatorException</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception to be thrown if singular operators are inverted.  <a href="classSpacy_1_1SingularOperatorException.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1VariableIds.html">VariableIds</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1ForEach_3_01VariableIds_3_01id_00_01ids_8_8_8_4_01_4.html">ForEach&lt; VariableIds&lt; id, ids...&gt; &gt;</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSpacy_1_1Logger.html">Logger</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Function space \((X,\|\cdot\|)\).  <a href="classSpacy_1_1VectorSpace.html#details">More...</a><br/></td></tr>
@@ -281,6 +283,8 @@ template&lt;class T &gt; </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup.html#gaa32f667c573986b2b2721ec6532fc832"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NewtonGroup.html#gace045630c7f0c7a1a5a48d2d0807f608">contravariantNewton</a> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;F, const <a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a> &amp;p=<a class="el" href="structSpacy_1_1Newton_1_1Parameter.html">Newton::Parameter</a>())</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Affine contravariant Newton method.  <a href="group__NewtonGroup.html#gace045630c7f0c7a1a5a48d2d0807f608"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af104a29d68fb6456808d0adbb98cebeb"></a><!-- doxytag: member="Spacy::operator\f $A:X\to Y\f $, compute\f $A'\f $at\f $x\in X\f $as linear operator\f $A'" ref="af104a29d68fb6456808d0adbb98cebeb" args="(x)" -->
+brief For an&#160;</td><td class="memItemRight" valign="bottom"><b>operator\f $A:X\to Y\f $, compute\f $A'\f $at\f $x\in X\f $as linear operator\f $A'</b> (x)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">derivative</a> (<a class="el" href="classSpacy_1_1C2Functional.html">C2Functional</a> f)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the derivative of a functional \( f: X\to \mathbb{R} \) as (nonlinear) operator \( f&#39;:X\to X^* \).  <a href="#a002fe344fa6d04a6ac59a74ea25fddb6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ProductSpaceGroup.html#gaa040ba5c24284687e0df19c99dd688a6">primalComponent</a> (::<a class="el" href="classSpacy_1_1Vector.html">Spacy::Vector</a> &amp;v)</td></tr>
@@ -385,14 +389,13 @@ template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>For an operator \( A: X\to Y \), compute \(A&#39;\) at \(x\in X\) as linear operator \( A&#39;(x): X \to Y \). </p>
-<p>For an operator \( A: X\to Y \), compute \(A&#39;\) at \(x\in X\) as linear operator \( A&#39;(x): X \to Y \).</p>
 <p>Equivalent to calling A.linearization(x).</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -425,14 +428,14 @@ template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^* \). </p>
-<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^* \).</p>
+<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;\) at \(x\in X\) as dual element \( f&#39;(x) \in X^\).</p>
 <p>Equivalent to calling f.d1(x).</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -465,14 +468,14 @@ template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear operator \( f&#39;&#39;(x): X \to X^* \). </p>
-<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear operator \( f&#39;&#39;(x): X \to X^* \).</p>
+<p>For a functional \( f: X\to \mathbb{R} \), compute \(f&#39;&#39;\) at \(x\in X\) as linear operator \( f&#39;&#39;(x): X \to X^\).</p>
 <p>Equivalent to calling f.hessian(x).</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -902,7 +905,7 @@ template&lt;typename Func , typename Tup &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

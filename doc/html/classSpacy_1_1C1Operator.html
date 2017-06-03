@@ -138,25 +138,15 @@ const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a7df27427591907b13776e7ba3707bf05">range</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a9a46e9d2fb4526fa320480b832c5b71e"></a><!-- doxytag: member="Spacy::C1Operator::C1Operator" ref="a9a46e9d2fb4526fa320480b832c5b71e" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; C1OperatorDetail::C1OperatorConcept&lt; C1Operator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; C1OperatorDetail::Concept&lt; C1Operator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>C1Operator</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54abfdab254b7783053962eaa7441bd0"></a><!-- doxytag: member="Spacy::C1Operator::type_id_" ref="a54abfdab254b7783053962eaa7441bd0" args="(typeid(typename std::decay&lt; T &gt;::type).hash_code())" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>type_id_</b> (typeid(typename std::decay&lt; T &gt;::type).hash_code())</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4702285eff4b4153117a70a39c1c6f99"></a><!-- doxytag: member="Spacy::C1Operator::impl_" ref="a4702285eff4b4153117a70a39c1c6f99" args="(nullptr)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (nullptr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5524db9b344fbab2f183f7b509fb7f26"></a><!-- doxytag: member="Spacy::C1Operator::C1Operator" ref="a5524db9b344fbab2f183f7b509fb7f26" args="(const C1Operator &amp;other)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>C1Operator</b> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac75138b84319896392feea5baa7c333e"></a><!-- doxytag: member="Spacy::C1Operator::C1Operator" ref="ac75138b84319896392feea5baa7c333e" args="(C1Operator &amp;&amp;other) noexcept" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>C1Operator</b> (<a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&amp;other) noexcept</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4068d2989e5aa71b372def134afdd78"></a><!-- doxytag: member="Spacy::C1Operator::impl_" ref="ae4068d2989e5aa71b372def134afdd78" args="(std::forward&lt; T &gt;(value))" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (std::forward&lt; T &gt;(value))</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="aecfc71bf5da728a9028a586e50afbfcf"></a><!-- doxytag: member="Spacy::C1Operator::operator=" ref="aecfc71bf5da728a9028a586e50afbfcf" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; C1OperatorDetail::C1OperatorConcept&lt; C1Operator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; C1OperatorDetail::Concept&lt; C1Operator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff6bc2122b654f9df5e8a05dff4ae494"></a><!-- doxytag: member="Spacy::C1Operator::operator=" ref="aff6bc2122b654f9df5e8a05dff4ae494" args="(const C1Operator &amp;other)" -->
-<a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc661d2a55983098267ddd90bd9673eb"></a><!-- doxytag: member="Spacy::C1Operator::operator=" ref="abc661d2a55983098267ddd90bd9673eb" args="(C1Operator &amp;&amp;other) noexcept" -->
-<a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSpacy_1_1C1Operator.html">C1Operator</a> &amp;&amp;other) noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a4efdf099aac5f0b101c69cc8c9c8a48b">operator bool</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the type-erased interface holds an implementation.  <a href="#a4efdf099aac5f0b101c69cc8c9c8a48b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4efdf099aac5f0b101c69cc8c9c8a48b"></a><!-- doxytag: member="Spacy::C1Operator::operator bool" ref="a4efdf099aac5f0b101c69cc8c9c8a48b" args="() const noexcept" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a01bf08bf2b6e44955cd606aa3db91d"></a><!-- doxytag: member="Spacy::C1Operator::operator()" ref="a2a01bf08bf2b6e44955cd606aa3db91d" args="(const Vector &amp;x) const " -->
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a2a01bf08bf2b6e44955cd606aa3db91d">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply operator. <br/></td></tr>
@@ -165,89 +155,23 @@ template&lt;typename T , typename std::enable_if&lt; C1OperatorDetail::C1Operato
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute directional derivative \(A&#39;(x)\delta x\). <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71aabe09ec29a8a1bb197eef035d6672"></a><!-- doxytag: member="Spacy::C1Operator::linearization" ref="a71aabe09ec29a8a1bb197eef035d6672" args="(const Vector &amp;x) const " -->
 <a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a71aabe09ec29a8a1bb197eef035d6672">linearization</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get linearization \(A&#39;(x):\ X\to Y \). <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee0ffd5cee0b8a8df2f0b67b5aaf0ddb"></a><!-- doxytag: member="Spacy::C1Operator::domain" ref="aee0ffd5cee0b8a8df2f0b67b5aaf0ddb" args="() const " -->
-const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#aee0ffd5cee0b8a8df2f0b67b5aaf0ddb">domain</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7df27427591907b13776e7ba3707bf05"></a><!-- doxytag: member="Spacy::C1Operator::range" ref="a7df27427591907b13776e7ba3707bf05" args="() const " -->
-const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a7df27427591907b13776e7ba3707bf05">range</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#a7c515af344029cf8e60e89d45bf8fade">target</a> () noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a7c515af344029cf8e60e89d45bf8fade"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1C1Operator.html#ab8a5618949b1b861e3085aa085922884">target</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#ab8a5618949b1b861e3085aa085922884"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get linearization. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ce49bb91eee9fa9cc5d63599ab9b23c"></a><!-- doxytag: member="Spacy::C1Operator::domain" ref="a0ce49bb91eee9fa9cc5d63599ab9b23c" args="() const " -->
+Access <a class="el" href="classSpacy_1_1C1Operator.html#aee0ffd5cee0b8a8df2f0b67b5aaf0ddb">domain</a> space f $X f <br class="typebreak"/>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>domain</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1331de78c1c489b846507c3f7461dc15"></a><!-- doxytag: member="Spacy::C1Operator::range" ref="a1331de78c1c489b846507c3f7461dc15" args="() const " -->
+Access <a class="el" href="classSpacy_1_1C1Operator.html#a7df27427591907b13776e7ba3707bf05">range</a> space f $Y f <br class="typebreak"/>
+const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>range</b> () const </td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a7c515af344029cf8e60e89d45bf8fade"></a><!-- doxytag: member="Spacy::C1Operator::target" ref="a7c515af344029cf8e60e89d45bf8fade" args="() noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () noexcept</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ab8a5618949b1b861e3085aa085922884"></a><!-- doxytag: member="Spacy::C1Operator::target" ref="ab8a5618949b1b861e3085aa085922884" args="() const noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () const noexcept</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Type-erased differentiable operator \(A:\ X \to Y \). </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a4efdf099aac5f0b101c69cc8c9c8a48b"></a><!-- doxytag: member="Spacy::C1Operator::operator bool" ref="a4efdf099aac5f0b101c69cc8c9c8a48b" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Spacy::C1Operator::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Checks if the type-erased interface holds an implementation. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if an implementation is stored, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a7c515af344029cf8e60e89d45bf8fade"></a><!-- doxytag: member="Spacy::C1Operator::target" ref="a7c515af344029cf8e60e89d45bf8fade" args="() noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classSpacy_1_1C1Operator.html#a7c515af344029cf8e60e89d45bf8fade">Spacy::C1Operator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ab8a5618949b1b861e3085aa085922884"></a><!-- doxytag: member="Spacy::C1Operator::target" ref="ab8a5618949b1b861e3085aa085922884" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T* <a class="el" href="classSpacy_1_1C1Operator.html#a7c515af344029cf8e60e89d45bf8fade">Spacy::C1Operator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Interfaces/<a class="el" href="Interfaces_2c1Operator_8hh_source.html">c1Operator.hh</a></li>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/<a class="el" href="Spacy_2c1Operator_8hh_source.html">c1Operator.hh</a></li>
 </ul>
@@ -269,7 +193,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

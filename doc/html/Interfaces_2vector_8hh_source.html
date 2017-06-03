@@ -130,27 +130,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046     <span class="keywordflow">return</span> x *= a;
 <a name="l00047"></a>00047   }
 <a name="l00048"></a>00048 
-<a name="l00050"></a><a class="code" href="namespaceSpacy.html#a19486acb05af1627ec49c376b204a61c">00050</a>   <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="namespaceSpacy.html#a19486acb05af1627ec49c376b204a61c" title="Sum of vectors .">operator+</a>(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
+<a name="l00050"></a><a class="code" href="namespaceSpacy.html#a19486acb05af1627ec49c376b204a61c">00050</a>   <span class="keyword">inline</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="namespaceSpacy.html#a19486acb05af1627ec49c376b204a61c" title="Sum of vectors .">operator+</a>(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
 <a name="l00051"></a>00051   {
 <a name="l00052"></a>00052       <span class="keywordflow">return</span> x += y;
 <a name="l00053"></a>00053   }
 <a name="l00054"></a>00054 
-<a name="l00056"></a><a class="code" href="namespaceSpacy.html#a9eaf4be1a4e8f3ee03e4c4fdafa5687d">00056</a>   <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="namespaceSpacy.html#a9eaf4be1a4e8f3ee03e4c4fdafa5687d" title="Subtract vectors .">operator-</a>(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
+<a name="l00056"></a><a class="code" href="namespaceSpacy.html#a9eaf4be1a4e8f3ee03e4c4fdafa5687d">00056</a>   <span class="keyword">inline</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> <a class="code" href="namespaceSpacy.html#a9eaf4be1a4e8f3ee03e4c4fdafa5687d" title="Subtract vectors .">operator-</a>(<a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a> x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
 <a name="l00057"></a>00057   {
 <a name="l00058"></a>00058       <span class="keywordflow">return</span> x -= y;
 <a name="l00059"></a>00059   }
 <a name="l00060"></a>00060 
-<a name="l00062"></a><a class="code" href="namespaceSpacy.html#a1d84603fc2bfbefca6a020b1217519ad">00062</a>   <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
+<a name="l00062"></a><a class="code" href="namespaceSpacy.html#a1d84603fc2bfbefca6a020b1217519ad">00062</a>   <span class="keyword">inline</span> <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; y)
 <a name="l00063"></a>00063   {
 <a name="l00064"></a>00064       <span class="keywordflow">return</span> x.<a class="code" href="classSpacy_1_1Vector.html#a8a549d4ed045ddf563afca5bc942397b" title="Access underlying space.">space</a>().<a class="code" href="classSpacy_1_1VectorSpace.html#a6f63e2ef5afe7530cbc9480cbc37a8d7" title="Access scalar product.">scalarProduct</a>()(x,y);
 <a name="l00065"></a>00065   }
 <a name="l00066"></a>00066 
-<a name="l00068"></a><a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">00068</a>   <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> <a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b" title="Compute norm, where the norm associated with the underlying function space is used ...">norm</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x)
+<a name="l00068"></a><a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">00068</a>   <span class="keyword">inline</span> <a class="code" href="classSpacy_1_1Real.html" title="Real number.">Real</a> <a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b" title="Compute norm, where the norm associated with the underlying function space is used ...">norm</a>(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html" title="Type-erased vector.">Vector</a>&amp; x)
 <a name="l00069"></a>00069   {
 <a name="l00070"></a>00070       <span class="keywordflow">return</span> x.<a class="code" href="classSpacy_1_1Vector.html#a8a549d4ed045ddf563afca5bc942397b" title="Access underlying space.">space</a>().<a class="code" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c" title="Access norm.">norm</a>()(x);
 <a name="l00071"></a>00071   }
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073   <span class="keywordtype">void</span> checkDualPairing(<span class="keyword">const</span> Vector&amp; x, <span class="keyword">const</span> Vector&amp; y)
+<a name="l00073"></a>00073   <span class="keyword">inline</span> <span class="keywordtype">void</span> checkDualPairing(<span class="keyword">const</span> Vector&amp; x, <span class="keyword">const</span> Vector&amp; y)
 <a name="l00074"></a>00074   {
 <a name="l00075"></a>00075     <span class="keywordflow">if</span>( !y.space().isPrimalWRT(x.space()) )
 <a name="l00076"></a>00076       <span class="keywordflow">throw</span> IncompatibleSpaceException(x.space().index(),y.space().index());
@@ -171,12 +171,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00091"></a>00091     <span class="keywordflow">return</span> y * x;
 <a name="l00092"></a>00092   }
 <a name="l00093"></a>00093 
-<a name="l00094"></a>00094   Vector <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> Mixin::Get&lt;Real&gt;&amp; x, Vector y)
+<a name="l00094"></a>00094   <span class="keyword">inline</span> Vector <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> Mixin::Get&lt;Real&gt;&amp; x, Vector y)
 <a name="l00095"></a>00095   {
 <a name="l00096"></a>00096     <span class="keywordflow">return</span> y *= <span class="keyword">get</span>(<span class="keyword">get</span>(x));
 <a name="l00097"></a>00097   }
 <a name="l00098"></a>00098 
-<a name="l00099"></a>00099   Vector <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> Vector&amp; x, <span class="keyword">const</span> Mixin::Get&lt;Real&gt;&amp; y)
+<a name="l00099"></a>00099   <span class="keyword">inline</span> Vector <a class="code" href="namespaceSpacy.html#ae0a1cbb3d98d6ac0a82727959038f4b4" title="Multiplication with arithmetic types (double,float,int,...).">operator*</a>(<span class="keyword">const</span> Vector&amp; x, <span class="keyword">const</span> Mixin::Get&lt;Real&gt;&amp; y)
 <a name="l00100"></a>00100   {
 <a name="l00101"></a>00101     <span class="keywordflow">return</span> y * x;
 <a name="l00102"></a>00102   }
@@ -199,7 +199,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

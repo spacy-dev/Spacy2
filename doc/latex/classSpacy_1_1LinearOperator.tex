@@ -43,32 +43,18 @@
 \hypertarget{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{space} () const }\label{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}
 
 \begin{DoxyCompactList}\small\item\em \-Access underlying space of linear operators. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Linear\-Operator\-Detail\-::\-Linear\-Operator\-Concept$<$ Linear\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Linear\-Operator} (\-T \&\&value)}\label{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}
+\hypertarget{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Linear\-Operator\-Detail\-::\-Concept$<$ Linear\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Linear\-Operator} (\-T \&\&value)}\label{classSpacy_1_1LinearOperator_ac8c1647e64c14ce857def39e0148baed}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a50e8099ec09b019a95433c725cef2b84}{{\bfseries type\-\_\-id\-\_\-} (typeid(typename std\-::decay$<$ \-T $>$\-::type).hash\-\_\-code())}\label{classSpacy_1_1LinearOperator_a50e8099ec09b019a95433c725cef2b84}
+\hypertarget{classSpacy_1_1LinearOperator_a1ff1e3cfdad22ad6842bb6161dcf87a4}{{\bfseries impl\-\_\-} (std\-::forward$<$ \-T $>$(value))}\label{classSpacy_1_1LinearOperator_a1ff1e3cfdad22ad6842bb6161dcf87a4}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a7c6c42dfe282b796c522905c728e240a}{{\bfseries impl\-\_\-} (nullptr)}\label{classSpacy_1_1LinearOperator_a7c6c42dfe282b796c522905c728e240a}
+\hypertarget{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Linear\-Operator\-Detail\-::\-Concept$<$ Linear\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a23c71e4f80fc5ccb45e8de979cbfe45d}{{\bfseries \-Linear\-Operator} (const \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&other)}\label{classSpacy_1_1LinearOperator_a23c71e4f80fc5ccb45e8de979cbfe45d}
+\hypertarget{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}{{\bfseries operator bool} () const noexcept}\label{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}
 
 \item 
-\hypertarget{classSpacy_1_1LinearOperator_a54775f0b362198be4b92e13a688bb3b6}{{\bfseries \-Linear\-Operator} (\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&\&other) noexcept}\label{classSpacy_1_1LinearOperator_a54775f0b362198be4b92e13a688bb3b6}
-
-\item 
-\hypertarget{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Linear\-Operator\-Detail\-::\-Linear\-Operator\-Concept$<$ Linear\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1LinearOperator_a5028289a4b4b38067800ce0514ae34fc}
-
-\item 
-\hypertarget{classSpacy_1_1LinearOperator_a3e1ae48eb708b6130ded1aeccc7711aa}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&other)}\label{classSpacy_1_1LinearOperator_a3e1ae48eb708b6130ded1aeccc7711aa}
-
-\item 
-\hypertarget{classSpacy_1_1LinearOperator_a370ddb98c4e73cab75e648bb02edb97c}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \&\&other) noexcept}\label{classSpacy_1_1LinearOperator_a370ddb98c4e73cab75e648bb02edb97c}
-
-\item 
-\hyperlink{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}{operator bool} () const noexcept
-\begin{DoxyCompactList}\small\item\em \-Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1LinearOperator_a54d74eb77e706ee2e087a0363929e946}
 
 \begin{DoxyCompactList}\small\item\em \-Apply operator. \end{DoxyCompactList}\item 
@@ -99,10 +85,12 @@
 \hypertarget{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}{space} () const }\label{classSpacy_1_1LinearOperator_ad0116ec957dfb6bc490a4c9702929f8e}
 
 \begin{DoxyCompactList}\small\item\em \-Access underlying space of linear operators. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\\-T $\ast$ \hyperlink{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}{target} () noexcept
-\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ \hyperlink{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}{target} () const noexcept
-\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hypertarget{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}{{\footnotesize template$<$class T $>$ }\\\-T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}
+
+\item 
+\hypertarget{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}{{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}
+
+\end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -118,59 +106,6 @@
 
 \subsection{\-Detailed \-Description}
 \-Type-\/erased linear operator $A:\ X \to Y $. 
-
-\subsection{\-Member \-Function \-Documentation}
-\hypertarget{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}{\index{\-Spacy\-::\-Linear\-Operator@{\-Spacy\-::\-Linear\-Operator}!operator bool@{operator bool}}
-\index{operator bool@{operator bool}!Spacy::LinearOperator@{\-Spacy\-::\-Linear\-Operator}}
-\subsubsection[{operator bool}]{\setlength{\rightskip}{0pt plus 5cm}\-Spacy\-::\-Linear\-Operator\-::operator bool (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1LinearOperator_a48506fbca4e85aa239f80332cf6c37c1}
-
-
-\-Checks if the type-\/erased interface holds an implementation. 
-
-\begin{DoxyReturn}{\-Returns}
-true if an implementation is stored, else false 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}{\index{\-Spacy\-::\-Linear\-Operator@{\-Spacy\-::\-Linear\-Operator}!target@{target}}
-\index{target@{target}!Spacy::LinearOperator@{\-Spacy\-::\-Linear\-Operator}}
-\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ \-T$\ast$ {\bf \-Spacy\-::\-Linear\-Operator\-::target} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1LinearOperator_a74d3f8b5e058d6df4921f63c9023f01c}
-
-
-\-Conversion of the stored implementation to. 
-
-
-\begin{DoxyCode}
- T* 
-\end{DoxyCode}
-. \begin{DoxyReturn}{\-Returns}
-pointer to the stored object if conversion was successful, else nullptr 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}{\index{\-Spacy\-::\-Linear\-Operator@{\-Spacy\-::\-Linear\-Operator}!target@{target}}
-\index{target@{target}!Spacy::LinearOperator@{\-Spacy\-::\-Linear\-Operator}}
-\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const \-T$\ast$ {\bf \-Spacy\-::\-Linear\-Operator\-::target} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1LinearOperator_a275563d8e433f8d714e84022f8f130a3}
-
-
-\-Conversion of the stored implementation to. 
-
-
-\begin{DoxyCode}
- const T* 
-\end{DoxyCode}
-. \begin{DoxyReturn}{\-Returns}
-pointer to the stored object if conversion was successful, else nullptr 
-\end{DoxyReturn}
-
 
 \-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

@@ -129,107 +129,31 @@ Public Member Functions</h2></td></tr>
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#a6f4ada552c025579bcce852316a071be">domain</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a7cda76dbec505fdf667e6023c064bde9"></a><!-- doxytag: member="Spacy::Functional::Functional" ref="a7cda76dbec505fdf667e6023c064bde9" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; FunctionalDetail::FunctionalConcept&lt; Functional, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; FunctionalDetail::Concept&lt; Functional, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Functional</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c1d2d3a24c7af11947b54e1634545a3"></a><!-- doxytag: member="Spacy::Functional::type_id_" ref="a0c1d2d3a24c7af11947b54e1634545a3" args="(typeid(typename std::decay&lt; T &gt;::type).hash_code())" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>type_id_</b> (typeid(typename std::decay&lt; T &gt;::type).hash_code())</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a446ce4a4656d4feb7df4d14d7b99dbfc"></a><!-- doxytag: member="Spacy::Functional::impl_" ref="a446ce4a4656d4feb7df4d14d7b99dbfc" args="(nullptr)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (nullptr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a412ab757206e9c17a5d3be5ad119f259"></a><!-- doxytag: member="Spacy::Functional::Functional" ref="a412ab757206e9c17a5d3be5ad119f259" args="(const Functional &amp;other)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>Functional</b> (const <a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc54a58265520b36b731fceecc4a1c4c"></a><!-- doxytag: member="Spacy::Functional::Functional" ref="acc54a58265520b36b731fceecc4a1c4c" args="(Functional &amp;&amp;other) noexcept" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>Functional</b> (<a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;&amp;other) noexcept</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a286cf483d7cf2f63f022405406508e2a"></a><!-- doxytag: member="Spacy::Functional::impl_" ref="a286cf483d7cf2f63f022405406508e2a" args="(std::forward&lt; T &gt;(value))" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (std::forward&lt; T &gt;(value))</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a90fe7e1ba7e375f6bb8875b9e927a8d7"></a><!-- doxytag: member="Spacy::Functional::operator=" ref="a90fe7e1ba7e375f6bb8875b9e927a8d7" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; FunctionalDetail::FunctionalConcept&lt; Functional, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; FunctionalDetail::Concept&lt; Functional, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67ea20b009963ddd56cae82a6ddf620a"></a><!-- doxytag: member="Spacy::Functional::operator=" ref="a67ea20b009963ddd56cae82a6ddf620a" args="(const Functional &amp;other)" -->
-<a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4d6af3a14920177cbe2610a9951ad88"></a><!-- doxytag: member="Spacy::Functional::operator=" ref="ab4d6af3a14920177cbe2610a9951ad88" args="(Functional &amp;&amp;other) noexcept" -->
-<a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSpacy_1_1Functional.html">Functional</a> &amp;&amp;other) noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#a9389924b8e141796b02879a26f37d7b0">operator bool</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the type-erased interface holds an implementation.  <a href="#a9389924b8e141796b02879a26f37d7b0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9389924b8e141796b02879a26f37d7b0"></a><!-- doxytag: member="Spacy::Functional::operator bool" ref="a9389924b8e141796b02879a26f37d7b0" args="() const noexcept" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af51f903133f2fbf92cf12f790e429919"></a><!-- doxytag: member="Spacy::Functional::operator()" ref="af51f903133f2fbf92cf12f790e429919" args="(const Vector &amp;x) const " -->
 <a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#af51f903133f2fbf92cf12f790e429919">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply functional. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f4ada552c025579bcce852316a071be"></a><!-- doxytag: member="Spacy::Functional::domain" ref="a6f4ada552c025579bcce852316a071be" args="() const " -->
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#a6f4ada552c025579bcce852316a071be">domain</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access domain space \(X\). <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#a198a232d6aebbc15f7ab330b8294c8b4">target</a> () noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a198a232d6aebbc15f7ab330b8294c8b4"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1Functional.html#ab11a7ac418f216df78ff928893e10345">target</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#ab11a7ac418f216df78ff928893e10345"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a198a232d6aebbc15f7ab330b8294c8b4"></a><!-- doxytag: member="Spacy::Functional::target" ref="a198a232d6aebbc15f7ab330b8294c8b4" args="() noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () noexcept</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ab11a7ac418f216df78ff928893e10345"></a><!-- doxytag: member="Spacy::Functional::target" ref="ab11a7ac418f216df78ff928893e10345" args="() const noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () const noexcept</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Type-erased functional \(f:\ X \to \mathbb{R} \). </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9389924b8e141796b02879a26f37d7b0"></a><!-- doxytag: member="Spacy::Functional::operator bool" ref="a9389924b8e141796b02879a26f37d7b0" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Spacy::Functional::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Checks if the type-erased interface holds an implementation. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if an implementation is stored, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a198a232d6aebbc15f7ab330b8294c8b4"></a><!-- doxytag: member="Spacy::Functional::target" ref="a198a232d6aebbc15f7ab330b8294c8b4" args="() noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classSpacy_1_1Functional.html#a198a232d6aebbc15f7ab330b8294c8b4">Spacy::Functional::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ab11a7ac418f216df78ff928893e10345"></a><!-- doxytag: member="Spacy::Functional::target" ref="ab11a7ac418f216df78ff928893e10345" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T* <a class="el" href="classSpacy_1_1Functional.html#a198a232d6aebbc15f7ab330b8294c8b4">Spacy::Functional::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Interfaces/<a class="el" href="Interfaces_2functional_8hh_source.html">functional.hh</a></li>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/<a class="el" href="Spacy_2functional_8hh_source.html">functional.hh</a></li>
 </ul>
@@ -251,7 +175,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

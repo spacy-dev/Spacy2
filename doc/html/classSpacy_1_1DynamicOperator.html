@@ -134,25 +134,15 @@ const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#ab760994d921fa8d9df2882f9e4cfc9c3">range</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a5cc35e7a7c5a9711f465a11c81fdd29a"></a><!-- doxytag: member="Spacy::DynamicOperator::DynamicOperator" ref="a5cc35e7a7c5a9711f465a11c81fdd29a" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; DynamicOperatorDetail::DynamicOperatorConcept&lt; DynamicOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; DynamicOperatorDetail::Concept&lt; DynamicOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>DynamicOperator</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01db25aa408f302a1cd38e6083ea1fe5"></a><!-- doxytag: member="Spacy::DynamicOperator::type_id_" ref="a01db25aa408f302a1cd38e6083ea1fe5" args="(typeid(typename std::decay&lt; T &gt;::type).hash_code())" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>type_id_</b> (typeid(typename std::decay&lt; T &gt;::type).hash_code())</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb4c82f3249fc355954de212c9ae7980"></a><!-- doxytag: member="Spacy::DynamicOperator::impl_" ref="adb4c82f3249fc355954de212c9ae7980" args="(nullptr)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (nullptr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d1e9efe9b3bd482d813f90fac5c5fa8"></a><!-- doxytag: member="Spacy::DynamicOperator::DynamicOperator" ref="a7d1e9efe9b3bd482d813f90fac5c5fa8" args="(const DynamicOperator &amp;other)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicOperator</b> (const <a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0496c72b7b18d413856ad008dbc3dfb1"></a><!-- doxytag: member="Spacy::DynamicOperator::DynamicOperator" ref="a0496c72b7b18d413856ad008dbc3dfb1" args="(DynamicOperator &amp;&amp;other) noexcept" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>DynamicOperator</b> (<a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;&amp;other) noexcept</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d31898db1d94c20b9c93dfc88c5cecd"></a><!-- doxytag: member="Spacy::DynamicOperator::impl_" ref="a7d31898db1d94c20b9c93dfc88c5cecd" args="(std::forward&lt; T &gt;(value))" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (std::forward&lt; T &gt;(value))</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="af03a1b856d668cbd78eaf9df83487a55"></a><!-- doxytag: member="Spacy::DynamicOperator::operator=" ref="af03a1b856d668cbd78eaf9df83487a55" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; DynamicOperatorDetail::DynamicOperatorConcept&lt; DynamicOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; DynamicOperatorDetail::Concept&lt; DynamicOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c7e142093149504287dc0e4f2a7c9df"></a><!-- doxytag: member="Spacy::DynamicOperator::operator=" ref="a4c7e142093149504287dc0e4f2a7c9df" args="(const DynamicOperator &amp;other)" -->
-<a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70023d434a687589299918a4ffaf6eee"></a><!-- doxytag: member="Spacy::DynamicOperator::operator=" ref="a70023d434a687589299918a4ffaf6eee" args="(DynamicOperator &amp;&amp;other) noexcept" -->
-<a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSpacy_1_1DynamicOperator.html">DynamicOperator</a> &amp;&amp;other) noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#a4d7243f9e135e01d4f87a0e21fe7cbe1">operator bool</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the type-erased interface holds an implementation.  <a href="#a4d7243f9e135e01d4f87a0e21fe7cbe1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d7243f9e135e01d4f87a0e21fe7cbe1"></a><!-- doxytag: member="Spacy::DynamicOperator::operator bool" ref="a4d7243f9e135e01d4f87a0e21fe7cbe1" args="() const noexcept" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace2c2202ca6eb3fe5f5817087d30510a"></a><!-- doxytag: member="Spacy::DynamicOperator::operator()" ref="ace2c2202ca6eb3fe5f5817087d30510a" args="(const Vector &amp;x) const " -->
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#ace2c2202ca6eb3fe5f5817087d30510a">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply operator. <br/></td></tr>
@@ -164,82 +154,16 @@ const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab760994d921fa8d9df2882f9e4cfc9c3"></a><!-- doxytag: member="Spacy::DynamicOperator::range" ref="ab760994d921fa8d9df2882f9e4cfc9c3" args="() const " -->
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#ab760994d921fa8d9df2882f9e4cfc9c3">range</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access range space \(Y\). <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#a6d9ebf222c06c54000c0ecb3ec3b7769">target</a> () noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a6d9ebf222c06c54000c0ecb3ec3b7769"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1DynamicOperator.html#a47418fa10f47b00a8338983195372735">target</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a47418fa10f47b00a8338983195372735"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a6d9ebf222c06c54000c0ecb3ec3b7769"></a><!-- doxytag: member="Spacy::DynamicOperator::target" ref="a6d9ebf222c06c54000c0ecb3ec3b7769" args="() noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () noexcept</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a47418fa10f47b00a8338983195372735"></a><!-- doxytag: member="Spacy::DynamicOperator::target" ref="a47418fa10f47b00a8338983195372735" args="() const noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () const noexcept</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Type-erased time-dependent operator \(A:\ [0,T] \times X \to Y \). </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a4d7243f9e135e01d4f87a0e21fe7cbe1"></a><!-- doxytag: member="Spacy::DynamicOperator::operator bool" ref="a4d7243f9e135e01d4f87a0e21fe7cbe1" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Spacy::DynamicOperator::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Checks if the type-erased interface holds an implementation. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if an implementation is stored, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a6d9ebf222c06c54000c0ecb3ec3b7769"></a><!-- doxytag: member="Spacy::DynamicOperator::target" ref="a6d9ebf222c06c54000c0ecb3ec3b7769" args="() noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classSpacy_1_1DynamicOperator.html#a6d9ebf222c06c54000c0ecb3ec3b7769">Spacy::DynamicOperator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a47418fa10f47b00a8338983195372735"></a><!-- doxytag: member="Spacy::DynamicOperator::target" ref="a47418fa10f47b00a8338983195372735" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T* <a class="el" href="classSpacy_1_1DynamicOperator.html#a6d9ebf222c06c54000c0ecb3ec3b7769">Spacy::DynamicOperator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Interfaces/<a class="el" href="Interfaces_2dynamicOperator_8hh_source.html">dynamicOperator.hh</a></li>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/<a class="el" href="Spacy_2dynamicOperator_8hh_source.html">dynamicOperator.hh</a></li>
 </ul>
@@ -261,7 +185,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

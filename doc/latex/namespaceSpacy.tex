@@ -96,6 +96,10 @@ class \hyperlink{classSpacy_1_1RegularityTestFailedException}{\-Regularity\-Test
 \begin{DoxyCompactList}\small\item\em \-Exception to be thrown if regularity test fails. \end{DoxyCompactList}\item 
 class \hyperlink{classSpacy_1_1SingularOperatorException}{\-Singular\-Operator\-Exception}
 \begin{DoxyCompactList}\small\item\em \-Exception to be thrown if singular operators are inverted. \end{DoxyCompactList}\item 
+struct \hyperlink{structSpacy_1_1VariableIds}{\-Variable\-Ids}
+\item 
+struct \hyperlink{structSpacy_1_1ForEach_3_01VariableIds_3_01id_00_01ids_8_8_8_4_01_4}{\-For\-Each$<$ Variable\-Ids$<$ id, ids...$>$ $>$}
+\item 
 struct \hyperlink{structSpacy_1_1Logger}{\-Logger}
 \item 
 class \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space}
@@ -193,6 +197,9 @@ enum \{ {\bfseries \-P\-R\-I\-M\-A\-L} = 0,
 \begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
 \hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{group__NewtonGroup_gace045630c7f0c7a1a5a48d2d0807f608}{contravariant\-Newton} (const \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \&\-F, const \hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter} \&p=\hyperlink{structSpacy_1_1Newton_1_1Parameter}{\-Newton\-::\-Parameter}())
 \begin{DoxyCompactList}\small\item\em \-Affine contravariant \-Newton method. \end{DoxyCompactList}\item 
+\hypertarget{namespaceSpacy_af104a29d68fb6456808d0adbb98cebeb}{brief \-For an {\bfseries operator$\backslash$f \$\-A\-:\-X$\backslash$to Y$\backslash$f \$, compute$\backslash$f \$\-A'$\backslash$f \$at$\backslash$f \$x$\backslash$in X$\backslash$f \$as linear operator$\backslash$f \$\-A'} (x)}\label{namespaceSpacy_af104a29d68fb6456808d0adbb98cebeb}
+
+\item 
 \hyperlink{classSpacy_1_1C1Operator}{\-C1\-Operator} \hyperlink{namespaceSpacy_a002fe344fa6d04a6ac59a74ea25fddb6}{derivative} (\hyperlink{classSpacy_1_1C2Functional}{\-C2\-Functional} f)
 \begin{DoxyCompactList}\small\item\em \-Compute the derivative of a functional $ f: X\to \mathbb{R} $ as (nonlinear) operator $ f':X\to X^* $. \end{DoxyCompactList}\item 
 \-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \& \hyperlink{group__ProductSpaceGroup_gaa040ba5c24284687e0df19c99dd688a6}{primal\-Component} (\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \&v)
@@ -287,12 +294,10 @@ void \hyperlink{namespaceSpacy_aae18423491adef608743902f1c40844e}{check\-Space\-
 \item[{const \-C1\-Operator \&}]{\-A, }
 \item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{namespaceSpacy_a2205e2a2c4bb5242665bbc09929d35d2}
 
 
 \-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $. 
-
-\-For an operator $ A: X\to Y $, compute $A'$ at $x\in X$ as linear operator $ A'(x): X \to Y $.
 
 \-Equivalent to calling \-A.\-linearization(x).
 
@@ -316,12 +321,12 @@ $A'(x)$, i.\-e. \-A.\-linearization(x).
 \item[{const \-C2\-Functional \&}]{f, }
 \item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{namespaceSpacy_ab6646eb7068eb9f1369e639cf0b620a2}
 
 
 \-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $. 
 
-\-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^* $.
+\-For a functional $ f: X\to \mathbb{R} $, compute $f'$ at $x\in X$ as dual element $ f'(x) \in X^$.
 
 \-Equivalent to calling f.\-d1(x).
 
@@ -345,12 +350,12 @@ $f'(x)$, i.\-e. f.\-d1(x).
 \item[{const \-C2\-Functional \&}]{f, }
 \item[{const \-Vector \&}]{x}
 \end{DoxyParamCaption}
-)}}\label{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{namespaceSpacy_a569d8fc0b4a0e292f257dd6307a25c8f}
 
 
 \-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $. 
 
-\-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^* $.
+\-For a functional $ f: X\to \mathbb{R} $, compute $f''$ at $x\in X$ as linear operator $ f''(x): X \to X^$.
 
 \-Equivalent to calling f.\-hessian(x).
 

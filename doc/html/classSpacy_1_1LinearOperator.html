@@ -148,25 +148,15 @@ const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#ad0116ec957dfb6bc490a4c9702929f8e">space</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access underlying space of linear operators. <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ac8c1647e64c14ce857def39e0148baed"></a><!-- doxytag: member="Spacy::LinearOperator::LinearOperator" ref="ac8c1647e64c14ce857def39e0148baed" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; LinearOperatorDetail::LinearOperatorConcept&lt; LinearOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; LinearOperatorDetail::Concept&lt; LinearOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>LinearOperator</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50e8099ec09b019a95433c725cef2b84"></a><!-- doxytag: member="Spacy::LinearOperator::type_id_" ref="a50e8099ec09b019a95433c725cef2b84" args="(typeid(typename std::decay&lt; T &gt;::type).hash_code())" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>type_id_</b> (typeid(typename std::decay&lt; T &gt;::type).hash_code())</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c6c42dfe282b796c522905c728e240a"></a><!-- doxytag: member="Spacy::LinearOperator::impl_" ref="a7c6c42dfe282b796c522905c728e240a" args="(nullptr)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (nullptr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23c71e4f80fc5ccb45e8de979cbfe45d"></a><!-- doxytag: member="Spacy::LinearOperator::LinearOperator" ref="a23c71e4f80fc5ccb45e8de979cbfe45d" args="(const LinearOperator &amp;other)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>LinearOperator</b> (const <a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54775f0b362198be4b92e13a688bb3b6"></a><!-- doxytag: member="Spacy::LinearOperator::LinearOperator" ref="a54775f0b362198be4b92e13a688bb3b6" args="(LinearOperator &amp;&amp;other) noexcept" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>LinearOperator</b> (<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&amp;other) noexcept</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ff1e3cfdad22ad6842bb6161dcf87a4"></a><!-- doxytag: member="Spacy::LinearOperator::impl_" ref="a1ff1e3cfdad22ad6842bb6161dcf87a4" args="(std::forward&lt; T &gt;(value))" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>impl_</b> (std::forward&lt; T &gt;(value))</td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a5028289a4b4b38067800ce0514ae34fc"></a><!-- doxytag: member="Spacy::LinearOperator::operator=" ref="a5028289a4b4b38067800ce0514ae34fc" args="(T &amp;&amp;value)" -->
-template&lt;typename T , typename std::enable_if&lt; LinearOperatorDetail::LinearOperatorConcept&lt; LinearOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
+template&lt;class T , typename std::enable_if&lt; LinearOperatorDetail::Concept&lt; LinearOperator, typename std::decay&lt; T &gt;::type &gt;::value &gt;::type *  = nullptr&gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (T &amp;&amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e1ae48eb708b6130ded1aeccc7711aa"></a><!-- doxytag: member="Spacy::LinearOperator::operator=" ref="a3e1ae48eb708b6130ded1aeccc7711aa" args="(const LinearOperator &amp;other)" -->
-<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;other)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a370ddb98c4e73cab75e648bb02edb97c"></a><!-- doxytag: member="Spacy::LinearOperator::operator=" ref="a370ddb98c4e73cab75e648bb02edb97c" args="(LinearOperator &amp;&amp;other) noexcept" -->
-<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classSpacy_1_1LinearOperator.html">LinearOperator</a> &amp;&amp;other) noexcept</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#a48506fbca4e85aa239f80332cf6c37c1">operator bool</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the type-erased interface holds an implementation.  <a href="#a48506fbca4e85aa239f80332cf6c37c1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48506fbca4e85aa239f80332cf6c37c1"></a><!-- doxytag: member="Spacy::LinearOperator::operator bool" ref="a48506fbca4e85aa239f80332cf6c37c1" args="() const noexcept" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const noexcept</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54d74eb77e706ee2e087a0363929e946"></a><!-- doxytag: member="Spacy::LinearOperator::operator()" ref="a54d74eb77e706ee2e087a0363929e946" args="(const Vector &amp;x) const " -->
 <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#a54d74eb77e706ee2e087a0363929e946">operator()</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply operator. <br/></td></tr>
@@ -191,12 +181,12 @@ const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0116ec957dfb6bc490a4c9702929f8e"></a><!-- doxytag: member="Spacy::LinearOperator::space" ref="ad0116ec957dfb6bc490a4c9702929f8e" args="() const " -->
 const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#ad0116ec957dfb6bc490a4c9702929f8e">space</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Access underlying space of linear operators. <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#a74d3f8b5e058d6df4921f63c9023f01c">target</a> () noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a74d3f8b5e058d6df4921f63c9023f01c"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1LinearOperator.html#a275563d8e433f8d714e84022f8f130a3">target</a> () const noexcept</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion of the stored implementation to.  <a href="#a275563d8e433f8d714e84022f8f130a3"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a74d3f8b5e058d6df4921f63c9023f01c"></a><!-- doxytag: member="Spacy::LinearOperator::target" ref="a74d3f8b5e058d6df4921f63c9023f01c" args="() noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () noexcept</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a275563d8e433f8d714e84022f8f130a3"></a><!-- doxytag: member="Spacy::LinearOperator::target" ref="a275563d8e433f8d714e84022f8f130a3" args="() const noexcept" -->
+template&lt;class T &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>target</b> () const noexcept</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ff75bb0ca4fa981e292e4768e4a2cc1"></a><!-- doxytag: member="Spacy::LinearOperator::solver" ref="a8ff75bb0ca4fa981e292e4768e4a2cc1" args="() const " -->
@@ -208,73 +198,7 @@ std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(cons
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Type-erased linear operator \(A:\ X \to Y \). </p>
-</div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a48506fbca4e85aa239f80332cf6c37c1"></a><!-- doxytag: member="Spacy::LinearOperator::operator bool" ref="a48506fbca4e85aa239f80332cf6c37c1" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Spacy::LinearOperator::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [explicit]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Checks if the type-erased interface holds an implementation. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if an implementation is stored, else false </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a74d3f8b5e058d6df4921f63c9023f01c"></a><!-- doxytag: member="Spacy::LinearOperator::target" ref="a74d3f8b5e058d6df4921f63c9023f01c" args="() noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classSpacy_1_1LinearOperator.html#a74d3f8b5e058d6df4921f63c9023f01c">Spacy::LinearOperator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a275563d8e433f8d714e84022f8f130a3"></a><!-- doxytag: member="Spacy::LinearOperator::target" ref="a275563d8e433f8d714e84022f8f130a3" args="() const noexcept" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T* <a class="el" href="classSpacy_1_1LinearOperator.html#a74d3f8b5e058d6df4921f63c9023f01c">Spacy::LinearOperator::target</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Conversion of the stored implementation to. </p>
-<div class="fragment"><pre class="fragment"> <span class="keyword">const</span> T* 
-</pre></div><p>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>pointer to the stored object if conversion was successful, else nullptr </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/travis/build/spacy-dev/Spacy/Interfaces/<a class="el" href="Interfaces_2linearOperator_8hh_source.html">linearOperator.hh</a></li>
 <li>/home/travis/build/spacy-dev/Spacy/Spacy/<a class="el" href="Spacy_2linearOperator_8hh_source.html">linearOperator.hh</a></li>
 </ul>
@@ -296,7 +220,7 @@ template&lt;class T &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 3 2017 12:31:44 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 3 2017 18:17:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

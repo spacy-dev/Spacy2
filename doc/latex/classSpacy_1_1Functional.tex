@@ -19,99 +19,34 @@
 \hypertarget{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}{domain} () const }\label{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}
 
 \begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Functional_a7cda76dbec505fdf667e6023c064bde9}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Functional\-Detail\-::\-Functional\-Concept$<$ Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Functional} (\-T \&\&value)}\label{classSpacy_1_1Functional_a7cda76dbec505fdf667e6023c064bde9}
+\hypertarget{classSpacy_1_1Functional_a7cda76dbec505fdf667e6023c064bde9}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Functional\-Detail\-::\-Concept$<$ Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Functional} (\-T \&\&value)}\label{classSpacy_1_1Functional_a7cda76dbec505fdf667e6023c064bde9}
 
 \item 
-\hypertarget{classSpacy_1_1Functional_a0c1d2d3a24c7af11947b54e1634545a3}{{\bfseries type\-\_\-id\-\_\-} (typeid(typename std\-::decay$<$ \-T $>$\-::type).hash\-\_\-code())}\label{classSpacy_1_1Functional_a0c1d2d3a24c7af11947b54e1634545a3}
+\hypertarget{classSpacy_1_1Functional_a286cf483d7cf2f63f022405406508e2a}{{\bfseries impl\-\_\-} (std\-::forward$<$ \-T $>$(value))}\label{classSpacy_1_1Functional_a286cf483d7cf2f63f022405406508e2a}
 
 \item 
-\hypertarget{classSpacy_1_1Functional_a446ce4a4656d4feb7df4d14d7b99dbfc}{{\bfseries impl\-\_\-} (nullptr)}\label{classSpacy_1_1Functional_a446ce4a4656d4feb7df4d14d7b99dbfc}
+\hypertarget{classSpacy_1_1Functional_a90fe7e1ba7e375f6bb8875b9e927a8d7}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Functional\-Detail\-::\-Concept$<$ Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Functional}{\-Functional} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1Functional_a90fe7e1ba7e375f6bb8875b9e927a8d7}
 
 \item 
-\hypertarget{classSpacy_1_1Functional_a412ab757206e9c17a5d3be5ad119f259}{{\bfseries \-Functional} (const \hyperlink{classSpacy_1_1Functional}{\-Functional} \&other)}\label{classSpacy_1_1Functional_a412ab757206e9c17a5d3be5ad119f259}
+\hypertarget{classSpacy_1_1Functional_a9389924b8e141796b02879a26f37d7b0}{{\bfseries operator bool} () const noexcept}\label{classSpacy_1_1Functional_a9389924b8e141796b02879a26f37d7b0}
 
 \item 
-\hypertarget{classSpacy_1_1Functional_acc54a58265520b36b731fceecc4a1c4c}{{\bfseries \-Functional} (\hyperlink{classSpacy_1_1Functional}{\-Functional} \&\&other) noexcept}\label{classSpacy_1_1Functional_acc54a58265520b36b731fceecc4a1c4c}
-
-\item 
-\hypertarget{classSpacy_1_1Functional_a90fe7e1ba7e375f6bb8875b9e927a8d7}{{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ Functional\-Detail\-::\-Functional\-Concept$<$ Functional, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Functional}{\-Functional} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1Functional_a90fe7e1ba7e375f6bb8875b9e927a8d7}
-
-\item 
-\hypertarget{classSpacy_1_1Functional_a67ea20b009963ddd56cae82a6ddf620a}{\hyperlink{classSpacy_1_1Functional}{\-Functional} \& {\bfseries operator=} (const \hyperlink{classSpacy_1_1Functional}{\-Functional} \&other)}\label{classSpacy_1_1Functional_a67ea20b009963ddd56cae82a6ddf620a}
-
-\item 
-\hypertarget{classSpacy_1_1Functional_ab4d6af3a14920177cbe2610a9951ad88}{\hyperlink{classSpacy_1_1Functional}{\-Functional} \& {\bfseries operator=} (\hyperlink{classSpacy_1_1Functional}{\-Functional} \&\&other) noexcept}\label{classSpacy_1_1Functional_ab4d6af3a14920177cbe2610a9951ad88}
-
-\item 
-\hyperlink{classSpacy_1_1Functional_a9389924b8e141796b02879a26f37d7b0}{operator bool} () const noexcept
-\begin{DoxyCompactList}\small\item\em \-Checks if the type-\/erased interface holds an implementation. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1Functional_af51f903133f2fbf92cf12f790e429919}{\hyperlink{classSpacy_1_1Real}{\-Real} \hyperlink{classSpacy_1_1Functional_af51f903133f2fbf92cf12f790e429919}{operator()} (const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1Functional_af51f903133f2fbf92cf12f790e429919}
 
 \begin{DoxyCompactList}\small\item\em \-Apply functional. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}{domain} () const }\label{classSpacy_1_1Functional_a6f4ada552c025579bcce852316a071be}
 
 \begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\\-T $\ast$ \hyperlink{classSpacy_1_1Functional_a198a232d6aebbc15f7ab330b8294c8b4}{target} () noexcept
-\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ \hyperlink{classSpacy_1_1Functional_ab11a7ac418f216df78ff928893e10345}{target} () const noexcept
-\begin{DoxyCompactList}\small\item\em \-Conversion of the stored implementation to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hypertarget{classSpacy_1_1Functional_a198a232d6aebbc15f7ab330b8294c8b4}{{\footnotesize template$<$class T $>$ }\\\-T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1Functional_a198a232d6aebbc15f7ab330b8294c8b4}
+
+\item 
+\hypertarget{classSpacy_1_1Functional_ab11a7ac418f216df78ff928893e10345}{{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1Functional_ab11a7ac418f216df78ff928893e10345}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 \-Type-\/erased functional $f:\ X \to \mathbb{R} $. 
-
-\subsection{\-Member \-Function \-Documentation}
-\hypertarget{classSpacy_1_1Functional_a9389924b8e141796b02879a26f37d7b0}{\index{\-Spacy\-::\-Functional@{\-Spacy\-::\-Functional}!operator bool@{operator bool}}
-\index{operator bool@{operator bool}!Spacy::Functional@{\-Spacy\-::\-Functional}}
-\subsubsection[{operator bool}]{\setlength{\rightskip}{0pt plus 5cm}\-Spacy\-::\-Functional\-::operator bool (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1Functional_a9389924b8e141796b02879a26f37d7b0}
-
-
-\-Checks if the type-\/erased interface holds an implementation. 
-
-\begin{DoxyReturn}{\-Returns}
-true if an implementation is stored, else false 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Functional_a198a232d6aebbc15f7ab330b8294c8b4}{\index{\-Spacy\-::\-Functional@{\-Spacy\-::\-Functional}!target@{target}}
-\index{target@{target}!Spacy::Functional@{\-Spacy\-::\-Functional}}
-\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ \-T$\ast$ {\bf \-Spacy\-::\-Functional\-::target} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1Functional_a198a232d6aebbc15f7ab330b8294c8b4}
-
-
-\-Conversion of the stored implementation to. 
-
-
-\begin{DoxyCode}
- T* 
-\end{DoxyCode}
-. \begin{DoxyReturn}{\-Returns}
-pointer to the stored object if conversion was successful, else nullptr 
-\end{DoxyReturn}
-\hypertarget{classSpacy_1_1Functional_ab11a7ac418f216df78ff928893e10345}{\index{\-Spacy\-::\-Functional@{\-Spacy\-::\-Functional}!target@{target}}
-\index{target@{target}!Spacy::Functional@{\-Spacy\-::\-Functional}}
-\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const \-T$\ast$ {\bf \-Spacy\-::\-Functional\-::target} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1Functional_ab11a7ac418f216df78ff928893e10345}
-
-
-\-Conversion of the stored implementation to. 
-
-
-\begin{DoxyCode}
- const T* 
-\end{DoxyCode}
-. \begin{DoxyReturn}{\-Returns}
-pointer to the stored object if conversion was successful, else nullptr 
-\end{DoxyReturn}
-
 
 \-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
