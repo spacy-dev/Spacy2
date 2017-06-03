@@ -51,7 +51,7 @@ include(GenerateExportHeader)
 
 set_property(TARGET spacy PROPERTY VERSION ${SPACY_VERSION})
 set_property(TARGET spacy PROPERTY SOVERSION ${SPACY_MAJOR_VERSION})
-set_property(TARGET spacy PROPERTY INTERFACE_Spacy_MAJOR_VERSION ${SPACY_MAJOR_VERSION})
+set_property(TARGET spacy PROPERTY INTERFACE_spacy_MAJOR_VERSION ${SPACY_MAJOR_VERSION})
 set_property(TARGET spacy APPEND PROPERTY COMPATIBLE_INTERFACE_STRING spacy_MAJOR_VERSION)
 
 install (TARGETS spacy EXPORT SpacyTargets
@@ -74,7 +74,6 @@ export(EXPORT SpacyTargets
 
 configure_file(../cmake/SpacyConfig.cmake
   "${CMAKE_CURRENT_BINARY_DIR}/cmake/SpacyConfig.cmake"
-  COPYONLY
 )
 
 set(ConfigPackageLocation lib/cmake/Spacy)
@@ -88,7 +87,7 @@ install(EXPORT SpacyTargets
 )
 install(
   FILES
-    ../cmake/SpacyConfig.cmake
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake/SpacyConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake/SpacyConfigVersion.cmake"
   DESTINATION
     ${ConfigPackageLocation}

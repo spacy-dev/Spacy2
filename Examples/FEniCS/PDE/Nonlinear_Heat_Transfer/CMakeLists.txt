@@ -17,9 +17,8 @@ find_package(VTK HINTS ${VTK_DIR} $ENV{VTK_DIR} NO_MODULE QUIET)
 
 # Spacy
 find_package(Spacy CONFIG REQUIRED)
-include_directories(${Spacy_INCLUDE_DIR})
-add_definitions(${Spacy_CXX_DEFINITIONS})
-
+include_directories(${Spacy_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD ${Spacy_CXX_STANDARD})
 # Executable
 add_executable(run main.cpp)
 

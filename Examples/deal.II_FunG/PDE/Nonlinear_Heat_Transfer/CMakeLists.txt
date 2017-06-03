@@ -30,8 +30,8 @@ include_directories(${FUNG_INCLUDE_DIRS})
 
 # Include path, link path, library and compiler flags for Spacy
 find_package(Spacy CONFIG REQUIRED)
-include_directories(${Spacy_INCLUDE_DIR})
-add_definitions(${Spacy_CXX_FLAGS})
+include_directories(${Spacy_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD ${Spacy_CXX_STANDARD})
 
 
 # Executable

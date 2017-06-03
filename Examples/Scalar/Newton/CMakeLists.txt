@@ -12,8 +12,8 @@ set(CMAKE_MODULE_PATH
 include(ConfigSafeGuards)
 
 find_package(Spacy CONFIG REQUIRED)
-include_directories(${Spacy_INCLUDE_DIR})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Spacy_CXX_FLAGS}")
+include_directories(${Spacy_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD ${Spacy_CXX_STANDARD})
 
 add_executable(newton newton.cpp)
 target_link_libraries(newton ${Spacy_LIBRARIES})
