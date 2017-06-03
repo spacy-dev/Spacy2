@@ -49,7 +49,7 @@ namespace Spacy
         template <class T>
         Printable make_printable(const T& t)
         {
-            return [t](std::ostream& os) { os << t; };
+            return [&t](std::ostream& os) { os << t; };
         }
 
         /// Simple printer for std::ostream.
