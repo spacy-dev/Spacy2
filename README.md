@@ -7,10 +7,6 @@
 # Spacy - Vector Space Algorithms
 
 ### Download
-Download via
-  - git clone https://github.com/spacy-dev/Spacy.git
-
-### gerrithub
 Download from gerrithub via
   - git clone https://review.gerrithub.io/spacy-dev/Spacy && (cd Spacy && curl -kLo `git rev-parse --git-dir`/hooks/commit-msg https://review.gerrithub.io/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)
 
@@ -31,16 +27,13 @@ Depending on your use-case the following dependencies may be required:
 Currently there are integration tests for
   - [Eigen](http://eigen.tuxfamily.org/) and [FunG](https://lubkoll.github.io/FunG)
 
-    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen.svg?branch=master)]
-    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen/builds)
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-Eigen/builds)
   - [FEniCS](https://fenicsproject.org) 
 
-    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS.svg?branch=master)]
-    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS/builds)
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-FEniCS/builds)
   - [deal.II](http://dealii.org)
 
-    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II.svg?branch=master)]
-    (https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II/builds)
+    [![Build Status](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II.svg?branch=master)](https://travis-ci.org/spacy-dev/Spacy-Integration-Tests-deal.II/builds)
 
 ### Installation
 Go to download folder, i.e.
