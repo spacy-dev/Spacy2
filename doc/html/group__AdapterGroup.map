@@ -1,8 +1,8 @@
-<map id="structs" name="structs">
-<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS." alt="" coords="135,5,201,35"/>
-<area shape="rect" id="node2" href="$group__KaskadeGroup.html" title="Vector spaces, functionals and operators for Kaskade7." alt="" coords="128,59,208,88"/>
-<area shape="rect" id="node3" href="$group__EigenGroup.html" title="Vector spaces, functionals and operators for Eigen." alt="" coords="141,112,195,141"/>
-<area shape="rect" id="node4" href="$group__dealIIGroup.html" title="Vector spaces, functionals and operators for deal.II." alt="" coords="139,165,197,195"/>
-<area shape="rect" id="node5" href="$group__GenericGroup.html" title="Generic implementations for vector spaces to simplify the implementation of adapters." alt="" coords="135,219,201,248"/>
-<area shape="rect" id="node6" href="$group__ScalarGroup.html" title="Everything required for one&#45;dimensional problems." alt="" coords="139,272,197,301"/>
+<map id="Adapters" name="Adapters">
+<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS. " alt="" coords="134,5,202,32"/>
+<area shape="rect" id="node2" href="$group__KaskadeGroup.html" title="Vector spaces, functionals and operators for Kaskade7. " alt="" coords="128,56,208,83"/>
+<area shape="rect" id="node3" href="$group__EigenGroup.html" title="Vector spaces, functionals and operators for Eigen. " alt="" coords="141,107,195,133"/>
+<area shape="rect" id="node4" href="$group__dealIIGroup.html" title="Vector spaces, functionals and operators for deal.II. " alt="" coords="139,157,197,184"/>
+<area shape="rect" id="node5" href="$group__GenericGroup.html" title="Generic implementations for vector spaces to simplify the implementation of adapters. " alt="" coords="135,208,201,235"/>
+<area shape="rect" id="node6" href="$group__ScalarGroup.html" title="Everything required for one&#45;dimensional problems. " alt="" coords="139,259,197,285"/>
 </map>

@@ -1,80 +1,79 @@
-\hypertarget{classSpacy_1_1DynamicC1Operator}{\section{\-Spacy\-:\-:\-Dynamic\-C1\-Operator \-Class \-Reference}
-\label{classSpacy_1_1DynamicC1Operator}\index{\-Spacy\-::\-Dynamic\-C1\-Operator@{\-Spacy\-::\-Dynamic\-C1\-Operator}}
+\hypertarget{classSpacy_1_1DynamicC1Operator}{\section{Spacy\-:\-:Dynamic\-C1\-Operator Class Reference}
+\label{classSpacy_1_1DynamicC1Operator}\index{Spacy\-::\-Dynamic\-C1\-Operator@{Spacy\-::\-Dynamic\-C1\-Operator}}
 }
 
 
-\-Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $.  
+Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $.  
 
 
 
 
 {\ttfamily \#include $<$dynamic\-Operator.\-hh$>$}
 
-\subsection*{\-Public \-Member \-Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{operator()} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}
+\hypertarget{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{operator()} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}
 
-\begin{DoxyCompactList}\small\item\em \-Apply operator. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{d1} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&dx) const }\label{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{d1} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const }\label{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}
 
-\begin{DoxyCompactList}\small\item\em \-Compute directional derivative $A'(x)\delta x$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{linearization} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}
+\begin{DoxyCompactList}\small\item\em Compute directional derivative $A'(x)\delta x$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{\hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator} \hyperlink{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{linearization} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}
 
-\begin{DoxyCompactList}\small\item\em \-Get linearization $A'(x):\ X\to Y $. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} {\bfseries \-M} () const }\label{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}
-
-\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}{domain} () const }\label{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}
-
-\begin{DoxyCompactList}\small\item\em \-Access domain space $X$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}{const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}{range} () const }\label{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}
-
-\begin{DoxyCompactList}\small\item\em \-Access range space $Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a9eeca088eb41c043b63c4b583f56d5ff}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Dynamic\-C1\-Operator\-Detail\-::\-Concept$<$ Dynamic\-C1\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Dynamic\-C1\-Operator} (\-T \&\&value)}\label{classSpacy_1_1DynamicC1Operator_a9eeca088eb41c043b63c4b583f56d5ff}
+\begin{DoxyCompactList}\small\item\em Get linearization $A'(x):\ X\to Y $. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}{\hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator} {\bfseries M} () const }\label{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a088f10c5b17d86962d7c6be8a9708597}{{\bfseries impl\-\_\-} (std\-::forward$<$ \-T $>$(value))}\label{classSpacy_1_1DynamicC1Operator_a088f10c5b17d86962d7c6be8a9708597}
+\hypertarget{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}{domain} () const }\label{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}{range} () const }\label{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a9eeca088eb41c043b63c4b583f56d5ff}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Dynamic\-C1\-Operator\-Detail\-::\-Concept$<$ Dynamic\-C1\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries Dynamic\-C1\-Operator} (T \&\&value)}\label{classSpacy_1_1DynamicC1Operator_a9eeca088eb41c043b63c4b583f56d5ff}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a30da03500f47757230e26cd0eb5a684b}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Dynamic\-C1\-Operator\-Detail\-::\-Concept$<$ Dynamic\-C1\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1DynamicC1Operator}{\-Dynamic\-C1\-Operator} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1DynamicC1Operator_a30da03500f47757230e26cd0eb5a684b}
+\hypertarget{classSpacy_1_1DynamicC1Operator_a088f10c5b17d86962d7c6be8a9708597}{{\bfseries impl\-\_\-} (std\-::forward$<$ T $>$(value))}\label{classSpacy_1_1DynamicC1Operator_a088f10c5b17d86962d7c6be8a9708597}
+
+\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a30da03500f47757230e26cd0eb5a684b}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Dynamic\-C1\-Operator\-Detail\-::\-Concept$<$ Dynamic\-C1\-Operator, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1DynamicC1Operator}{Dynamic\-C1\-Operator} \& {\bfseries operator=} (T \&\&value)}\label{classSpacy_1_1DynamicC1Operator_a30da03500f47757230e26cd0eb5a684b}
 
 \item 
 \hypertarget{classSpacy_1_1DynamicC1Operator_a96e8e4291ea083b224d5e8efdab87ed7}{{\bfseries operator bool} () const noexcept}\label{classSpacy_1_1DynamicC1Operator_a96e8e4291ea083b224d5e8efdab87ed7}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{operator()} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}
+\hypertarget{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}{operator()} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a0859e4c204d9599769c42ca4147f1875}
 
-\begin{DoxyCompactList}\small\item\em \-Apply operator. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{\hyperlink{classSpacy_1_1Vector}{\-Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{d1} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&dx) const }\label{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{\hyperlink{classSpacy_1_1Vector}{Vector} \hyperlink{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}{d1} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x, const \hyperlink{classSpacy_1_1Vector}{Vector} \&dx) const }\label{classSpacy_1_1DynamicC1Operator_acac514b4a574321a0bf923f9b348e106}
 
-\begin{DoxyCompactList}\small\item\em \-Compute directional derivative $A'(x)\delta x$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} \hyperlink{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{linearization} (double t, const \hyperlink{classSpacy_1_1Vector}{\-Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}
+\begin{DoxyCompactList}\small\item\em Compute directional derivative $A'(x)\delta x$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{\hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator} \hyperlink{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}{linearization} (double t, const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const }\label{classSpacy_1_1DynamicC1Operator_a3beba5b0012422e11b9c989efe0e224b}
 
-\begin{DoxyCompactList}\small\item\em \-Get linearization. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}{\hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator} {\bfseries \-M} () const }\label{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}
-
-\item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_af2c63b9053e4f74acf0be073cdd59034}{\-Access \hyperlink{classSpacy_1_1DynamicC1Operator_ac8633283f219699d6a696e866f98fed6}{domain} space f \$\-X f \*
-const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& {\bfseries domain} () const }\label{classSpacy_1_1DynamicC1Operator_af2c63b9053e4f74acf0be073cdd59034}
+\begin{DoxyCompactList}\small\item\em Get linearization. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}{\hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator} {\bfseries M} () const }\label{classSpacy_1_1DynamicC1Operator_a8bef5bf8f2a8dd4e16ba39da1bda78d3}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_adce157e1ed77bc3cfae969829316102b}{\-Access \hyperlink{classSpacy_1_1DynamicC1Operator_a15daaabb27566457a0a3df02a13f9d96}{range} space f \$\-Y f \*
-const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} \& {\bfseries range} () const }\label{classSpacy_1_1DynamicC1Operator_adce157e1ed77bc3cfae969829316102b}
+\hypertarget{classSpacy_1_1DynamicC1Operator_af2c63b9053e4f74acf0be073cdd59034}{Access domain space f \$X f \\*
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& {\bfseries domain} () const }\label{classSpacy_1_1DynamicC1Operator_af2c63b9053e4f74acf0be073cdd59034}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_a2a1bdf1b5ccc6876ab2698d60318a5a6}{{\footnotesize template$<$class T $>$ }\\\-T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1DynamicC1Operator_a2a1bdf1b5ccc6876ab2698d60318a5a6}
+\hypertarget{classSpacy_1_1DynamicC1Operator_adce157e1ed77bc3cfae969829316102b}{Access range space f \$Y f \\*
+const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& {\bfseries range} () const }\label{classSpacy_1_1DynamicC1Operator_adce157e1ed77bc3cfae969829316102b}
 
 \item 
-\hypertarget{classSpacy_1_1DynamicC1Operator_ae1685f9300539256df1fece193c7fa7b}{{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1DynamicC1Operator_ae1685f9300539256df1fece193c7fa7b}
+\hypertarget{classSpacy_1_1DynamicC1Operator_a2a1bdf1b5ccc6876ab2698d60318a5a6}{{\footnotesize template$<$class T $>$ }\\T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1DynamicC1Operator_a2a1bdf1b5ccc6876ab2698d60318a5a6}
+
+\item 
+\hypertarget{classSpacy_1_1DynamicC1Operator_ae1685f9300539256df1fece193c7fa7b}{{\footnotesize template$<$class T $>$ }\\const T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1DynamicC1Operator_ae1685f9300539256df1fece193c7fa7b}
 
 \end{DoxyCompactItemize}
 
 
-\subsection{\-Detailed \-Description}
-\-Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $. 
+\subsection{Detailed Description}
+Type-\/erased time-\/dependent differentiable operator $A:\ [0,T] \times X \to Y $. 
 
-\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/dynamic\-Operator.\-hh\item 
-/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/dynamic\-Operator.\-hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/dynamic\-Operator.\-hh\end{DoxyCompactItemize}

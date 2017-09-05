@@ -1,49 +1,49 @@
-\hypertarget{classSpacy_1_1Log_1_1Printer}{\section{\-Spacy\-:\-:\-Log\-:\-:\-Printer \-Class \-Reference}
-\label{classSpacy_1_1Log_1_1Printer}\index{\-Spacy\-::\-Log\-::\-Printer@{\-Spacy\-::\-Log\-::\-Printer}}
+\hypertarget{classSpacy_1_1Log_1_1Printer}{\section{Spacy\-:\-:Log\-:\-:Printer Class Reference}
+\label{classSpacy_1_1Log_1_1Printer}\index{Spacy\-::\-Log\-::\-Printer@{Spacy\-::\-Log\-::\-Printer}}
 }
 
 
-\-Interface for logger's printers.  
+Interface for logger's printers.  
 
 
 
 
 {\ttfamily \#include $<$printer.\-hh$>$}
 
-\subsection*{\-Public \-Member \-Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{classSpacy_1_1Log_1_1Printer_a7cbc9a51fb4caf02a4fd46de907af6e9}{operator()} (const char $\ast$tag, const char $\ast$name, const std\-::function$<$ void(std\-::ostream \&)$>$ \&printable)
-\begin{DoxyCompactList}\small\item\em \-Log printable according to its level and name. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Log_1_1Printer_a808ff6fbaed9e16053d829b9ac72a052}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Printer\-Detail\-::\-Concept$<$ Printer, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries \-Printer} (\-T \&\&value)}\label{classSpacy_1_1Log_1_1Printer_a808ff6fbaed9e16053d829b9ac72a052}
+\begin{DoxyCompactList}\small\item\em Log printable according to its level and name. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Log_1_1Printer_a808ff6fbaed9e16053d829b9ac72a052}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Printer\-Detail\-::\-Concept$<$ Printer, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\{\bfseries Printer} (T \&\&value)}\label{classSpacy_1_1Log_1_1Printer_a808ff6fbaed9e16053d829b9ac72a052}
 
 \item 
-\hypertarget{classSpacy_1_1Log_1_1Printer_a2686673d32928c40bcd9db83e31a45d5}{{\bfseries impl\-\_\-} (std\-::forward$<$ \-T $>$(value))}\label{classSpacy_1_1Log_1_1Printer_a2686673d32928c40bcd9db83e31a45d5}
+\hypertarget{classSpacy_1_1Log_1_1Printer_a2686673d32928c40bcd9db83e31a45d5}{{\bfseries impl\-\_\-} (std\-::forward$<$ T $>$(value))}\label{classSpacy_1_1Log_1_1Printer_a2686673d32928c40bcd9db83e31a45d5}
 
 \item 
-\hypertarget{classSpacy_1_1Log_1_1Printer_ae357ead97367f658a1debecbd541e53f}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Printer\-Detail\-::\-Concept$<$ Printer, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Log_1_1Printer}{\-Printer} \& {\bfseries operator=} (\-T \&\&value)}\label{classSpacy_1_1Log_1_1Printer_ae357ead97367f658a1debecbd541e53f}
+\hypertarget{classSpacy_1_1Log_1_1Printer_ae357ead97367f658a1debecbd541e53f}{{\footnotesize template$<$class T , typename std\-::enable\-\_\-if$<$ Printer\-Detail\-::\-Concept$<$ Printer, typename std\-::decay$<$ T $>$\-::type $>$\-::value $>$\-::type $\ast$  = nullptr$>$ }\\\hyperlink{classSpacy_1_1Log_1_1Printer}{Printer} \& {\bfseries operator=} (T \&\&value)}\label{classSpacy_1_1Log_1_1Printer_ae357ead97367f658a1debecbd541e53f}
 
 \item 
 \hypertarget{classSpacy_1_1Log_1_1Printer_ae46d1fd573983c31df0f90638120c378}{{\bfseries operator bool} () const noexcept}\label{classSpacy_1_1Log_1_1Printer_ae46d1fd573983c31df0f90638120c378}
 
 \item 
 void \hyperlink{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{operator()} (const char $\ast$tag, const char $\ast$name, const std\-::function$<$ void(std\-::ostream \&) $>$ \&printable)
-\begin{DoxyCompactList}\small\item\em \-Log printable according to its level and name. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1Log_1_1Printer_ab109ed757887ac804faa40de8acf00c0}{{\footnotesize template$<$class T $>$ }\\\-T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1Log_1_1Printer_ab109ed757887ac804faa40de8acf00c0}
+\begin{DoxyCompactList}\small\item\em Log printable according to its level and name. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Log_1_1Printer_ab109ed757887ac804faa40de8acf00c0}{{\footnotesize template$<$class T $>$ }\\T $\ast$ {\bfseries target} () noexcept}\label{classSpacy_1_1Log_1_1Printer_ab109ed757887ac804faa40de8acf00c0}
 
 \item 
-\hypertarget{classSpacy_1_1Log_1_1Printer_ab909a33cd790ca1c4554d89322605a27}{{\footnotesize template$<$class T $>$ }\\const \-T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1Log_1_1Printer_ab909a33cd790ca1c4554d89322605a27}
+\hypertarget{classSpacy_1_1Log_1_1Printer_ab909a33cd790ca1c4554d89322605a27}{{\footnotesize template$<$class T $>$ }\\const T $\ast$ {\bfseries target} () const noexcept}\label{classSpacy_1_1Log_1_1Printer_ab909a33cd790ca1c4554d89322605a27}
 
 \end{DoxyCompactItemize}
 
 
-\subsection{\-Detailed \-Description}
-\-Interface for logger's printers. 
+\subsection{Detailed Description}
+Interface for logger's printers. 
 
-\subsection{\-Member \-Function \-Documentation}
-\hypertarget{classSpacy_1_1Log_1_1Printer_a7cbc9a51fb4caf02a4fd46de907af6e9}{\index{\-Spacy\-::\-Log\-::\-Printer@{\-Spacy\-::\-Log\-::\-Printer}!operator()@{operator()}}
-\index{operator()@{operator()}!Spacy::Log::Printer@{\-Spacy\-::\-Log\-::\-Printer}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void \-Spacy\-::\-Log\-::\-Printer\-::operator() (
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1Log_1_1Printer_a7cbc9a51fb4caf02a4fd46de907af6e9}{\index{Spacy\-::\-Log\-::\-Printer@{Spacy\-::\-Log\-::\-Printer}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::Log::Printer@{Spacy\-::\-Log\-::\-Printer}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\-::\-Log\-::\-Printer\-::operator() (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{tag, }
 \item[{const char $\ast$}]{name, }
@@ -52,10 +52,10 @@ void \hyperlink{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{
 )}}\label{classSpacy_1_1Log_1_1Printer_a7cbc9a51fb4caf02a4fd46de907af6e9}
 
 
-\-Log printable according to its level and name. 
+Log printable according to its level and name. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em tag} & specifies the algorithm/function this log originates from \\
 \hline
 {\em name} & name of the logged value \\
@@ -63,21 +63,21 @@ void \hyperlink{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{
 {\em printable} & wraps writing of the logged value to some stream \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{\index{\-Spacy\-::\-Log\-::\-Printer@{\-Spacy\-::\-Log\-::\-Printer}!operator()@{operator()}}
-\index{operator()@{operator()}!Spacy::Log::Printer@{\-Spacy\-::\-Log\-::\-Printer}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void \-Spacy\-::\-Log\-::\-Printer\-::operator() (
+\hypertarget{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{\index{Spacy\-::\-Log\-::\-Printer@{Spacy\-::\-Log\-::\-Printer}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::Log::Printer@{Spacy\-::\-Log\-::\-Printer}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\-::\-Log\-::\-Printer\-::operator() (
 \begin{DoxyParamCaption}
 \item[{const char $\ast$}]{tag, }
 \item[{const char $\ast$}]{name, }
 \item[{const std\-::function$<$ void(std\-::ostream \&) $>$ \&}]{printable}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}
 
 
-\-Log printable according to its level and name. 
+Log printable according to its level and name. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em tag} & specifies the algorithm/function this log originates from \\
 \hline
 {\em name} & name of the logged value \\
@@ -87,7 +87,6 @@ void \hyperlink{classSpacy_1_1Log_1_1Printer_aeea78f7dde3f0da8e5bdc9b1298d58b3}{
 \end{DoxyParams}
 
 
-\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/printer.\-hh\item 
-/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Util/printer.\-hh\end{DoxyCompactItemize}
+/home/travis/build/spacy-\/dev/\-Spacy/\-Interfaces/printer.\-hh\end{DoxyCompactItemize}

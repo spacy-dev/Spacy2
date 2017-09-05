@@ -1,5 +1,5 @@
-<map id="structs" name="structs">
-<area shape="rect" id="node2" href="$group__CSGroup.html" title="Contains the affine covariant composite step method of." alt="" coords="148,5,319,35"/>
-<area shape="rect" id="node3" href="$group__NewtonGroup.html" title="Newton methods, largely following" alt="" coords="173,59,293,88"/>
-<area shape="rect" id="node4" href="$group__CGGroup.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr..." alt="" coords="140,112,327,141"/>
+<map id="Algorithms" name="Algorithms">
+<area shape="rect" id="node2" href="$group__CSGroup.html" title="Contains the affine covariant composite step method of , . " alt="" coords="139,5,309,32"/>
+<area shape="rect" id="node3" href="$group__NewtonGroup.html" title="Newton methods, largely following . " alt="" coords="163,56,285,83"/>
+<area shape="rect" id="node4" href="$group__CGGroup.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr..." alt="" coords="157,107,291,149"/>
 </map>

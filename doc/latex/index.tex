@@ -1,78 +1,77 @@
-\hypertarget{index_sec_intro}{}\section{\-Introduction}\label{index_sec_intro}
-\-Vhat is a library that aims at
+\hypertarget{index_sec_intro}{}\section{Introduction}\label{index_sec_intro}
+Vhat is a library that aims at
 \begin{DoxyItemize}
 \item providing an abstraction layer for the implementation of algorithms in a vector space setting (function space oriented algorithms)
 \item providing a simple interface for sharing and comparing algorithms
 \item having fun while developing algorithms
 \item leaving you all freedom you want to implement your fancy algorithm (as long as you don't violate the mathematical structure of vector spaces)
-\end{DoxyItemize}\hypertarget{index_sec_overview}{}\section{\-Overview}\label{index_sec_overview}
-\-The basis of \-Spacy is an abstraction layer for vector space settings. \-The interface of \-Spacy essentially builds on type erasure techniques. \-C++11/14-\/features such as \href{http://en.cppreference.com/w/cpp/language/value_category}{\tt \-R-\/values} are used, so make sure to use the compiler option -\/std=c++1y.\hypertarget{index_sub_concepts}{}\subsection{\-Main concepts}\label{index_sub_concepts}
+\end{DoxyItemize}\hypertarget{index_sec_overview}{}\section{Overview}\label{index_sec_overview}
+The basis of Spacy is an abstraction layer for vector space settings. The interface of Spacy essentially builds on type erasure techniques. C++11/14-\/features such as \href{http://en.cppreference.com/w/cpp/language/value_category}{\tt R-\/values} are used, so make sure to use the compiler option -\/std=c++1y.\hypertarget{index_sub_concepts}{}\subsection{Main concepts}\label{index_sub_concepts}
 
 \begin{DoxyItemize}
-\item \-First there is a vector space class (\hyperlink{classSpacy_1_1VectorSpace}{\-Spacy\-::\-Vector\-Space}), which models a \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{\-Banach space}  (\-X,$|$$|$.$|$$|$) or a \hyperlink{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{\-Hilbert space}  (\-X,(.,.)). \-Thus, vector spaces provide access to a \-Norm and possibly a \-Scalar\-Product. \-Moreover, vector spaces can be related to each other as primal or dual spaces. \-Eventually they can generate vectors.
-\item a \hyperlink{classSpacy_1_1Vector}{\-Vector} can be any class satisfying the \-Vector\-Concept, i.\-e. vectors must be vectors in a pure mathematical sense (almost).
-\item an \hyperlink{classSpacy_1_1Operator}{\-Operator} (see \-Operator\-Concept) is a mapping vector spaces.
-\item a \hyperlink{classSpacy_1_1Functional}{\-Functional} (see \-Functional\-Concept) is a mapping from a vector spaces into the space of real numbers $ \mathbb{R} $.
-\item a \hyperlink{classSpacy_1_1LinearOperator}{\-Linear\-Operator}( see \-Linear\-Operator\-Concept) is a linear mapping between vector spaces that provides a solver for numerically evaluating its inverse. \-In addition linear operators satisfy the \-Vector\-Concept.
-\end{DoxyItemize}\hypertarget{index_sec_usage_fenics}{}\section{\-Usage with F\-Enics}\label{index_sec_usage_fenics}
-\-Examples for nonlinear \-P\-D\-Es and optimal control problems with \href{http://www.fenicsproject.org}{\tt \-F\-Eni\-C\-S} are given in \-Examples/\-F\-Eni\-C\-S.\hypertarget{index_sub_usage_fenics_pde}{}\subsection{\-Nonlinear P\-D\-Es with F\-Eni\-C\-S}\label{index_sub_usage_fenics_pde}
-\-For an operator equation $A(x)=0$, discretized with \hyperlink{namespaceSpacy_1_1FEniCS}{\-F\-Eni\-C\-S} ('\-L' denoting the residual form and 'a' the gradient form), simplest usage is as follows 
+\item First there is a vector space class (\hyperlink{classSpacy_1_1VectorSpace}{Spacy\-::\-Vector\-Space}), which models a \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{Banach space}  (X,$\vert$$\vert$.$\vert$$\vert$) or a \hyperlink{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{Hilbert space}  (X,(.,.)). Thus, vector spaces provide access to a Norm and possibly a Scalar\-Product. Moreover, vector spaces can be related to each other as primal or dual spaces. Eventually they can generate vectors.
+\item a \hyperlink{classSpacy_1_1Vector}{Vector} can be any class satisfying the Vector\-Concept, i.\-e. vectors must be vectors in a pure mathematical sense (almost).
+\item an \hyperlink{classSpacy_1_1Operator}{Operator} (see Operator\-Concept) is a mapping vector spaces.
+\item a \hyperlink{classSpacy_1_1Functional}{Functional} (see Functional\-Concept) is a mapping from a vector spaces into the space of real numbers $ \mathbb{R} $.
+\item a \hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator}( see Linear\-Operator\-Concept) is a linear mapping between vector spaces that provides a solver for numerically evaluating its inverse. In addition linear operators satisfy the Vector\-Concept.
+\end{DoxyItemize}\hypertarget{index_sec_usage_fenics}{}\section{Usage with F\-Enics}\label{index_sec_usage_fenics}
+Examples for nonlinear P\-D\-Es and optimal control problems with \href{http://www.fenicsproject.org}{\tt F\-Eni\-C\-S} are given in Examples/\-F\-Eni\-C\-S.\hypertarget{index_sub_usage_fenics_pde}{}\subsection{Nonlinear P\-D\-Es with F\-Eni\-C\-S}\label{index_sub_usage_fenics_pde}
+For an operator equation $A(x)=0$, discretized with \hyperlink{namespaceSpacy_1_1FEniCS}{F\-Eni\-C\-S} ('L' denoting the residual form and 'a' the gradient form), simplest usage is as follows 
 \begin{DoxyCode}
- ...
- MyFEniCSExample::FunctionSpace V{mesh}
- MyFEniCSExample::LinearForm L{V};
- MyFEniCSExample::BilinearForm a{V,V};
- ...
+...
+MyFEniCSExample::FunctionSpace V\{mesh\}
+MyFEniCSExample::LinearForm L\{V\};
+MyFEniCSExample::BilinearForm a\{V,V\};
+...
 
- // Create function space.
- auto domain = Spacy::FEniCS::makeHilbertSpace(V);
+\textcolor{comment}{// Create function space.}
+auto domain = \hyperlink{group__FenicsGroup_ga8b67cb3d0188d2398625595b79e2fa6a}{Spacy::FEniCS::makeHilbertSpace}(V);
 
- // Create operator mapping into the dual space of domain (which is, due to the
-       Hilbert space structure, associated with domain itself).
- // You can also specify the range space if it differs from the dual space of
-       domain
- // This is illustrated in the PDE example for Kaskade 7
- auto A = Spacy::FEniCS::makeOperator( L , a , domain );
+\textcolor{comment}{// Create operator mapping into the dual space of domain (which is, due to the Hilbert space structure,
+       associated with domain itself).}
+\textcolor{comment}{// You can also specify the range space if it differs from the dual space of domain}
+\textcolor{comment}{// This is illustrated in the PDE example for Kaskade 7}
+\textcolor{keyword}{auto} A = \hyperlink{group__KaskadeGroup_ga0e8d7d2c51e429e22561ef813fc97589}{Spacy::FEniCS::makeOperator}( L , a , domain );
 
- // Solve with covariant Newton method with initial guess x0=0.
- auto x = Spacy::covariantNewton(A);
+\textcolor{comment}{// Solve with covariant Newton method with initial guess x0=0.}
+\textcolor{keyword}{auto} x = \hyperlink{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}{Spacy::covariantNewton}(A);
 
 
- // Copy solution back to dolfin::Function.
- dolfin::Function u(V);
- Spacy::FEniCS::copy(x,u);
- ...
+\textcolor{comment}{// Copy solution back to dolfin::Function.}
+dolfin::Function u(V);
+\hyperlink{group__FenicsGroup_ga7f43f0c660d0646adb031b453c536bb0}{Spacy::FEniCS::copy}(x,u);
+...
 \end{DoxyCode}
-\hypertarget{index_sec_usage_kaskade}{}\section{\-Usage with Kaskade 7}\label{index_sec_usage_kaskade}
-\-Examples for nonlinear \-P\-D\-Es and optimal control problems with \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt \-Kaskade 7} are given in \-Examples/\-Kaskade.\hypertarget{index_sub_usage_kaskade_pde}{}\subsection{\-Nonlinear P\-D\-Es with Kaskade 7}\label{index_sub_usage_kaskade_pde}
-\-For an operator equation $A(x)=0$, discretized with \hyperlink{namespaceSpacy_1_1Kaskade}{\-Kaskade} 7 and with another scalar product, usage is as follows 
+\hypertarget{index_sec_usage_kaskade}{}\section{Usage with Kaskade 7}\label{index_sec_usage_kaskade}
+Examples for nonlinear P\-D\-Es and optimal control problems with \href{http://www.zib.de/projects/kaskade7-finite-element-toolbox}{\tt Kaskade 7} are given in Examples/\-Kaskade.\hypertarget{index_sub_usage_kaskade_pde}{}\subsection{Nonlinear P\-D\-Es with Kaskade 7}\label{index_sub_usage_kaskade_pde}
+For an operator equation $A(x)=0$, discretized with \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} 7 and with another scalar product, usage is as follows 
 \begin{DoxyCode}
- ...
- auto h1Space = Kaskade::FEFunctionSpace<
-       ContinuousLagrangeMapper<double,LeafView> >{(} gridManager , gridManager.grid().leafView() , order };
- ...
- auto variableSetDescription = VariableSetDescription{ spaces , {"x"} };
- Functional F{ ... };
- ...
+...
+auto h1Space = Kaskade::FEFunctionSpace< ContinuousLagrangeMapper<double,LeafView> >\{(\} gridManager , 
+      gridManager.grid().leafView() , order \};
+...
+auto variableSetDescription = VariableSetDescription\{ spaces , \{\textcolor{stringliteral}{"x"}\} \};
+Functional F\{ ... \};
+...
 
- // Create domain and range space.
- auto domain = Spacy::Kaskade::makeHilbertSpace( space );
- auto range  = Spacy::Kaskade::makeHilbertSpace( space );
+\textcolor{comment}{// Create domain and range space.}
+auto domain = \hyperlink{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{Spacy::Kaskade::makeHilbertSpace}( space );
+\textcolor{keyword}{auto} range  = \hyperlink{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{Spacy::Kaskade::makeHilbertSpace}( space );
 
- // Create operator
- auto A = Spacy::Kaskade::makeOperator( F , domain , range );
+\textcolor{comment}{// Create operator}
+\textcolor{keyword}{auto} A = \hyperlink{group__KaskadeGroup_ga0e8d7d2c51e429e22561ef813fc97589}{Spacy::Kaskade::makeOperator}( F , domain , range );
 
- // Set induced scalar product on domain space.
- auto x0 = domain.vector();
- domain.setScalarProduct( InducedScalarProduct( A.linearization(x0) );
+\textcolor{comment}{// Set induced scalar product on domain space.}
+\textcolor{keyword}{auto} x0 = domain.vector();
+domain.setScalarProduct( InducedScalarProduct( A.linearization(x0) );
 
- // Solve with covariant Newton method with initial guess x0=0.
- auto x = Spacy::covariantNewton( A , x0 );
+\textcolor{comment}{// Solve with covariant Newton method with initial guess x0=0.}
+\textcolor{keyword}{auto} x = \hyperlink{group__NewtonGroup_ga6c18ad252cb530e4f6734eb4e4fda481}{Spacy::covariantNewton}( A , x0 );
 
 
- // copy solution back to dolfin::Function
- typename VariableSetDescription::VariableSet u( variableSetDescription );
- Spacy::Kaskade::copy( x , u );
- ...
+\textcolor{comment}{// copy solution back to dolfin::Function}
+\textcolor{keyword}{typename} VariableSetDescription::VariableSet u( variableSetDescription );
+\hyperlink{namespaceSpacy_1_1Kaskade_afbbd7e385eda54f651c45b1c074d7bf9}{Spacy::Kaskade::copy}( x , u );
+...
 \end{DoxyCode}
  

@@ -1,10 +1,10 @@
-<map id="G" name="G">
-<area shape="rect" id="node5" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direct..." alt="" coords="737,5,908,35"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept." alt="" coords="740,59,905,88"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method." alt="" coords="757,112,888,141"/>
-<area shape="rect" id="node11" href="$classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html" title="Termination criterion for conjugate gradient methods based on an estimate of the relative energy erro..." alt="" coords="664,165,981,195"/>
-<area shape="rect" id="node13" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in." alt="" coords="677,219,968,248"/>
-<area shape="rect" id="node15" href="$classSpacy_1_1Kaskade_1_1Lagrange_1_1CGCreator.html" title="Creator for conjugate gradient solver for optimal control problems with a CG::TriangularStateConstrai..." alt="" coords="547,272,1099,301"/>
-<area shape="rect" id="node17" href="$classSpacy_1_1Parameter.html" title="Basic parameters for simple algorithms." alt="" coords="760,325,885,355"/>
-<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Verbosity \&gt;" alt="" coords="5,165,288,195"/>
+<map id="Spacy::Mixin::Verbosity" name="Spacy::Mixin::Verbosity">
+<area shape="rect" id="node3" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direct..." alt="" coords="493,5,664,32"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="495,56,662,83"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method. " alt="" coords="513,107,645,133"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html" title="Termination criterion for conjugate gradient methods based on an estimate of the relative energy erro..." alt="" coords="491,158,667,199"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="500,223,657,265"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Kaskade_1_1Lagrange_1_1CGCreator.html" title="Creator for conjugate gradient solver for optimal control problems with a CG::TriangularStateConstrai..." alt="" coords="467,288,691,344"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1Parameter.html" title="Basic parameters for simple algorithms. " alt="" coords="515,368,642,395"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Verbosity \&gt;" alt="" coords="5,158,208,199"/>
 </map>

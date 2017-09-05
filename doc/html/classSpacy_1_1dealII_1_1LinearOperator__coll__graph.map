@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Spacy::OperatorBase" alt="" coords="12,5,159,35"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations." alt="" coords="183,5,316,35"/>
+<map id="Spacy::dealII::LinearOperator&lt; dim, VariableDims &gt;" name="Spacy::dealII::LinearOperator&lt; dim, VariableDims &gt;">
+<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="28,5,175,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="34,56,169,83"/>
 </map>

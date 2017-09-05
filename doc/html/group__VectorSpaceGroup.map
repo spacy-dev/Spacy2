@@ -1,5 +1,5 @@
-<map id="structs" name="structs">
-<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS." alt="" coords="365,16,432,45"/>
-<area shape="rect" id="node2" href="$group__ProductSpaceGroup.html" title="A product space that supports distinction between primal and dual variables." alt="" coords="345,69,452,99"/>
-<area shape="rect" id="node4" href="$group__ScalarGroup.html" title="Everything required for one&#45;dimensional problems." alt="" coords="369,123,428,152"/>
+<map id="Vector Spaces" name="Vector Spaces">
+<area shape="rect" id="node1" href="$group__FenicsGroup.html" title="Vector spaces, functionals and operators for FEniCS. " alt="" coords="365,13,433,40"/>
+<area shape="rect" id="node2" href="$group__ProductSpaceGroup.html" title="A product space that supports distinction between primal and dual variables. " alt="" coords="345,64,453,91"/>
+<area shape="rect" id="node4" href="$group__ScalarGroup.html" title="Everything required for one&#45;dimensional problems. " alt="" coords="369,115,428,141"/>
 </map>

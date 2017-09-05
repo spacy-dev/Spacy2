@@ -1,7 +1,7 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail::LocalAssemblyBase\&lt; dim, id, dim \&gt;" alt="" coords="989,77,1349,107"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1VectorSpace.html" title="Function space ." alt="" coords="563,12,704,41"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy ." alt="" coords="308,12,436,41"/>
-<area shape="rect" id="node8" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\&lt; Eps \&gt;" alt="" coords="5,12,256,41"/>
-<area shape="rect" id="node10" href="$classSpacy_1_1dealII_1_1VectorCreator.html" title="Spacy::dealII::VectorCreator\&lt; dim, row_dim \&gt;" alt="" coords="488,77,779,107"/>
+<map id="Spacy::dealII::Detail::LocalFunGFunctionalValueAssembly&lt; dim, Components, id, dim &gt;" name="Spacy::dealII::Detail::LocalFunGFunctionalValueAssembly&lt; dim, Components, id, dim &gt;">
+<area shape="rect" id="node2" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail\l::LocalAssemblyBase\&lt;\l dim, id, dim \&gt;" alt="" coords="832,60,989,116"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1VectorSpace.html" title="Function space . " alt="" coords="463,15,606,41"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="259,15,389,41"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="5,7,208,49"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1dealII_1_1VectorCreator.html" title="Spacy::dealII::VectorCreator\l\&lt; dim, row_dim \&gt;" alt="" coords="441,67,629,109"/>
 </map>

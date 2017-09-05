@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations." alt="" coords="5,5,139,35"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\&lt; Vector \&gt;" alt="" coords="163,5,429,35"/>
+<map id="Spacy::FEniCS::Vector" name="Spacy::FEniCS::Vector">
+<area shape="rect" id="node2" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="5,13,139,40"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\l\&lt; Vector \&gt;" alt="" coords="163,6,369,47"/>
 </map>

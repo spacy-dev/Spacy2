@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Spacy::OperatorBase" alt="" coords="89,5,236,35"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations." alt="" coords="96,59,229,88"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\&lt; LinearOperator \&gt;" alt="" coords="5,112,320,141"/>
+<map id="Spacy::FEniCS::LinearOperator" name="Spacy::FEniCS::LinearOperator">
+<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="36,5,183,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="42,56,177,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\l\&lt; LinearOperator \&gt;" alt="" coords="6,107,213,149"/>
 </map>

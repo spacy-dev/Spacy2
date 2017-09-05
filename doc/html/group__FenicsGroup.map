@@ -1,4 +1,4 @@
-<map id="structs" name="structs">
-<area shape="rect" id="node2" href="$group__VectorSpaceGroup.html" title="Collection of available vector spaces." alt="" coords="431,25,537,55"/>
-<area shape="rect" id="node3" href="$group__AdapterGroup.html" title="Adapters to third&#45;party libraries." alt="" coords="5,25,80,55"/>
+<map id="FEniCS" name="FEniCS">
+<area shape="rect" id="node2" href="$group__VectorSpaceGroup.html" title="Collection of available vector spaces. " alt="" coords="430,21,538,48"/>
+<area shape="rect" id="node3" href="$group__AdapterGroup.html" title="Adapters to third&#45;party libraries. " alt="" coords="5,21,80,48"/>
 </map>

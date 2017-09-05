@@ -1,61 +1,81 @@
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator}{\section{\-Spacy\-:\-:\-F\-Eni\-C\-S\-:\-:\-Vector\-Creator \-Class \-Reference}
-\label{classSpacy_1_1FEniCS_1_1VectorCreator}\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator}{\section{Spacy\-:\-:F\-Eni\-C\-S\-:\-:Vector\-Creator Class Reference}
+\label{classSpacy_1_1FEniCS_1_1VectorCreator}\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
 }
 
 
-\-Creator for vector space elements for \-F\-Eni\-C\-S.  
+Creator for vector space elements for F\-Eni\-C\-S.  
 
 
 
 
 {\ttfamily \#include $<$vector\-Space.\-hh$>$}
 
-\subsection*{\-Public \-Member \-Functions}
+
+
+Inheritance diagram for Spacy\-:\-:F\-Eni\-C\-S\-:\-:Vector\-Creator\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{classSpacy_1_1FEniCS_1_1VectorCreator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:F\-Eni\-C\-S\-:\-:Vector\-Creator\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{classSpacy_1_1FEniCS_1_1VectorCreator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}{\-Vector\-Creator} (std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$ space)
-\begin{DoxyCompactList}\small\item\em \-Create from dolfin\-::\-Function\-Space. \end{DoxyCompactList}\item 
-\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_a642f907081ec0796b871a5e290b9679d}{\-Vector\-Creator} (std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$ space, const std\-::unordered\-\_\-map$<$ std\-::size\-\_\-t, std\-::size\-\_\-t $>$ \&\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}{dofmap})
-\begin{DoxyCompactList}\small\item\em \-Create from dolfin\-::\-Function\-Space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}{Vector\-Creator} (std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$ space)
+\begin{DoxyCompactList}\small\item\em Create from dolfin\-::\-Function\-Space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_a642f907081ec0796b871a5e290b9679d}{Vector\-Creator} (std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$ space, const std\-::unordered\-\_\-map$<$ std\-::size\-\_\-t, std\-::size\-\_\-t $>$ \&\hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}{dofmap})
+\begin{DoxyCompactList}\small\item\em Create from dolfin\-::\-Function\-Space. \end{DoxyCompactList}\item 
 std\-::size\-\_\-t \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}{dofmap} (std\-::size\-\_\-t i) const 
-\begin{DoxyCompactList}\small\item\em \-Map global id of a product space to local id in this single space. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Map global id of a product space to local id in this single space. \end{DoxyCompactList}\item 
 std\-::size\-\_\-t \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb722462ee0bca008eae6b2f3}{inverse\-Dofmap} (std\-::size\-\_\-t i) const 
-\begin{DoxyCompactList}\small\item\em \-Map local id this single space to the global id of a product space. \end{DoxyCompactList}\item 
-\-::\hyperlink{classSpacy_1_1Vector}{\-Spacy\-::\-Vector} \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_ab5121de05ec984b99febef9e839068dc}{operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} $\ast$space) const 
-\begin{DoxyCompactList}\small\item\em \-Generate vector for \hyperlink{namespaceSpacy_1_1FEniCS}{\-F\-Eni\-C\-S}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Map local id this single space to the global id of a product space. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_ab5121de05ec984b99febef9e839068dc}{operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} $\ast$space) const 
+\begin{DoxyCompactList}\small\item\em Generate vector for \hyperlink{namespaceSpacy_1_1FEniCS}{F\-Eni\-C\-S}. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_afb8357f953730e792e18e8bc16a585b4}{unsigned \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_afb8357f953730e792e18e8bc16a585b4}{size} () const }\label{classSpacy_1_1FEniCS_1_1VectorCreator_afb8357f953730e792e18e8bc16a585b4}
 
-\begin{DoxyCompactList}\small\item\em \-Degrees of freedom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Degrees of freedom. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{\-Detailed \-Description}
-\-Creator for vector space elements for \-F\-Eni\-C\-S. 
+\subsection{Detailed Description}
+Creator for vector space elements for F\-Eni\-C\-S. 
 
-\begin{DoxySeeAlso}{\-See also}
-\hyperlink{classSpacy_1_1VectorSpace}{\-Vector\-Space} 
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} 
 \end{DoxySeeAlso}
 
 
-\subsection{\-Constructor \& \-Destructor \-Documentation}
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}{\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!\-Vector\-Creator@{\-Vector\-Creator}}
-\index{\-Vector\-Creator@{\-Vector\-Creator}!Spacy::FEniCS::VectorCreator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
-\subsubsection[{\-Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::\-Vector\-Creator} (
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}{\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!Vector\-Creator@{Vector\-Creator}}
+\index{Vector\-Creator@{Vector\-Creator}!Spacy::FEniCS::VectorCreator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\subsubsection[{Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::\-Vector\-Creator (
 \begin{DoxyParamCaption}
 \item[{std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$}]{space}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_aadf9d699ede2e83816411523175248d8}
 
 
-\-Create from dolfin\-::\-Function\-Space. 
+Create from dolfin\-::\-Function\-Space. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em space} & single dolfin\-::\-Function\-Space (no product space) \\
 \hline
 \end{DoxyParams}
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_a642f907081ec0796b871a5e290b9679d}{\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!\-Vector\-Creator@{\-Vector\-Creator}}
-\index{\-Vector\-Creator@{\-Vector\-Creator}!Spacy::FEniCS::VectorCreator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
-\subsubsection[{\-Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::\-Vector\-Creator} (
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_a642f907081ec0796b871a5e290b9679d}{\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!Vector\-Creator@{Vector\-Creator}}
+\index{Vector\-Creator@{Vector\-Creator}!Spacy::FEniCS::VectorCreator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\subsubsection[{Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::\-Vector\-Creator (
 \begin{DoxyParamCaption}
 \item[{std\-::shared\-\_\-ptr$<$ dolfin\-::\-Function\-Space $>$}]{space, }
 \item[{const std\-::unordered\-\_\-map$<$ std\-::size\-\_\-t, std\-::size\-\_\-t $>$ \&}]{dofmap}
@@ -63,10 +83,10 @@ std\-::size\-\_\-t \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb72
 )}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_a642f907081ec0796b871a5e290b9679d}
 
 
-\-Create from dolfin\-::\-Function\-Space. 
+Create from dolfin\-::\-Function\-Space. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em space} & single dolfin\-::\-Function\-Space (no product space) \\
 \hline
 {\em dofmap} & map relating global ids of a product space to local ids in this single space \\
@@ -74,66 +94,66 @@ std\-::size\-\_\-t \hyperlink{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb72
 \end{DoxyParams}
 
 
-\subsection{\-Member \-Function \-Documentation}
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}{\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!dofmap@{dofmap}}
-\index{dofmap@{dofmap}!Spacy::FEniCS::VectorCreator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
-\subsubsection[{dofmap}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::dofmap} (
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}{\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!dofmap@{dofmap}}
+\index{dofmap@{dofmap}!Spacy::FEniCS::VectorCreator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\subsubsection[{dofmap}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::dofmap (
 \begin{DoxyParamCaption}
 \item[{std\-::size\-\_\-t}]{i}
 \end{DoxyParamCaption}
 ) const}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_ad41a34e44494e8d166f9890a8877f994}
 
 
-\-Map global id of a product space to local id in this single space. 
+Map global id of a product space to local id in this single space. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em i} & global id \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
+\begin{DoxyReturn}{Returns}
 local id 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb722462ee0bca008eae6b2f3}{\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!inverse\-Dofmap@{inverse\-Dofmap}}
-\index{inverse\-Dofmap@{inverse\-Dofmap}!Spacy::FEniCS::VectorCreator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
-\subsubsection[{inverse\-Dofmap}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t {\bf \-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::inverse\-Dofmap} (
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb722462ee0bca008eae6b2f3}{\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!inverse\-Dofmap@{inverse\-Dofmap}}
+\index{inverse\-Dofmap@{inverse\-Dofmap}!Spacy::FEniCS::VectorCreator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\subsubsection[{inverse\-Dofmap}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::inverse\-Dofmap (
 \begin{DoxyParamCaption}
 \item[{std\-::size\-\_\-t}]{i}
 \end{DoxyParamCaption}
 ) const}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_a8e369dcbb722462ee0bca008eae6b2f3}
 
 
-\-Map local id this single space to the global id of a product space. 
+Map local id this single space to the global id of a product space. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em i} & local id \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
+\begin{DoxyReturn}{Returns}
 global id 
 \end{DoxyReturn}
-\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_ab5121de05ec984b99febef9e839068dc}{\index{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!operator()@{operator()}}
-\index{operator()@{operator()}!Spacy::FEniCS::VectorCreator@{\-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}\-::{\bf \-Spacy\-::\-Vector} \-Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::operator() (
+\hypertarget{classSpacy_1_1FEniCS_1_1VectorCreator_ab5121de05ec984b99febef9e839068dc}{\index{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::FEniCS::VectorCreator@{Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}\-::{\bf Spacy\-::\-Vector} Spacy\-::\-F\-Eni\-C\-S\-::\-Vector\-Creator\-::operator() (
 \begin{DoxyParamCaption}
-\item[{const {\bf \-Vector\-Space} $\ast$}]{space}
+\item[{const {\bf Vector\-Space} $\ast$}]{space}
 \end{DoxyParamCaption}
 ) const}}\label{classSpacy_1_1FEniCS_1_1VectorCreator_ab5121de05ec984b99febef9e839068dc}
 
 
-\-Generate vector for \hyperlink{namespaceSpacy_1_1FEniCS}{\-F\-Eni\-C\-S}. 
+Generate vector for \hyperlink{namespaceSpacy_1_1FEniCS}{F\-Eni\-C\-S}. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em space} & pointer to vector space implementation \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
+\begin{DoxyReturn}{Returns}
 vector associated with space 
 \end{DoxyReturn}
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 /home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-F\-Eni\-C\-S/vector\-Space.\-hh\end{DoxyCompactItemize}
