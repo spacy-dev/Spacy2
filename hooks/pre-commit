@@ -46,7 +46,7 @@ EOF
 fi
 
 # If there are whitespace errors, print the offending file names and fail.
-exec git diff-index --check --cached $against --
+# exec git diff-index --check --cached $against --
 
 #
 # This pre-commit hook checks if any versions of clang-format
@@ -91,9 +91,7 @@ matches_extension() {
     local filename=$(basename "$1")
     local extension=".${filename##*.}"
     local ext
-
-    for ext in $FILE_EXTS; do [[ "$ext" == "$extension" ]] && return 0; done
-
+    for ext in $FILE_EXTS; do [ "$ext" = "$extension" ] && return 0; done
     return 1
 }
 
@@ -101,6 +99,7 @@ for file in `git diff-index --cached --name-only $against`
 do
     if [ -f "$file" ] && matches_extension "$file"; then
         "$format" -i "$file"
+        git add $file
     fi
 done
 
