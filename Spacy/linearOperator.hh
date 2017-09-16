@@ -159,7 +159,7 @@ namespace Spacy
 
     private:
         LinearOperatorDetail::Table< LinearOperator > function_;
-        clang::type_erasure::Storage impl_;
+        clang::type_erasure::SBOStorage< 16 > impl_;
     };
     /// Access solver via A^-1. Throws for k!=-1.
     inline LinearSolver operator^( const LinearOperator& A, int k )

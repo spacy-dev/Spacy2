@@ -104,7 +104,7 @@ namespace Spacy
 
     private:
         C2FunctionalDetail::Table< C2Functional > function_;
-        clang::type_erasure::Storage impl_;
+        clang::type_erasure::SBOStorage< 16 > impl_;
     };
     /// @brief For a functional \f$ f: X\to \mathbb{R} \f$, compute \f$f'\f$ at \f$x\in X\f$ as dual
     /// element \f$ f'(x) \in X^\f$.

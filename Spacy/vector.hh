@@ -12,6 +12,7 @@
 #include <Spacy/Util/Exceptions/incompatibleSpaceException.hh>
 #include <Spacy/Util/Mixins/Get.hh>
 #include <Spacy/vectorSpace.hh>
+
 namespace Spacy
 {
     /// Type-erased vector.
@@ -118,7 +119,7 @@ namespace Spacy
 
     private:
         VectorDetail::Table< Vector > function_;
-        clang::type_erasure::Storage impl_;
+        clang::type_erasure::SBOStorage< 16 > impl_;
     };
     /// Multiplication with arithmetic types (double,float,int,...).
     template < class Arithmetic,

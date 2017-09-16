@@ -103,7 +103,7 @@ namespace Spacy
 
     private:
         C1OperatorDetail::Table< C1Operator > function_;
-        clang::type_erasure::Storage impl_;
+        clang::type_erasure::SBOStorage< 16 > impl_;
     };
     /// @brief For an operator \f$ A: X\to Y \f$, compute \f$A'\f$ at \f$x\in X\f$ as linear
     /// operator \f$ A'(x): X \to Y \f$.

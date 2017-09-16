@@ -17,51 +17,53 @@ namespace Spacy
         template < class Interface >
         struct Table
         {
-            using call_const_Vector_ref_function = Real ( * )( const clang::type_erasure::Storage&,
-                                                               const Vector& );
+            using call_const_Vector_ref_function =
+                Real ( * )( const clang::type_erasure::SBOStorage< 16 >&, const Vector& );
             call_const_Vector_ref_function call_const_Vector_ref;
-            using d1_const_Vector_ref_function = Vector ( * )( const clang::type_erasure::Storage&,
-                                                               const Vector& );
+            using d1_const_Vector_ref_function =
+                Vector ( * )( const clang::type_erasure::SBOStorage< 16 >&, const Vector& );
             d1_const_Vector_ref_function d1_const_Vector_ref;
-            using d2_const_Vector_ref_const_Vector_ref_function =
-                Vector ( * )( const clang::type_erasure::Storage&, const Vector&, const Vector& );
+            using d2_const_Vector_ref_const_Vector_ref_function = Vector ( * )(
+                const clang::type_erasure::SBOStorage< 16 >&, const Vector&, const Vector& );
             d2_const_Vector_ref_const_Vector_ref_function d2_const_Vector_ref_const_Vector_ref;
             using hessian_const_Vector_ref_function =
-                LinearOperator ( * )( const clang::type_erasure::Storage&, const Vector& );
+                LinearOperator ( * )( const clang::type_erasure::SBOStorage< 16 >&, const Vector& );
             hessian_const_Vector_ref_function hessian_const_Vector_ref;
-            using domain_function = const VectorSpace& (*)( const clang::type_erasure::Storage& );
+            using domain_function =
+                const VectorSpace& (*)( const clang::type_erasure::SBOStorage< 16 >& );
             domain_function domain;
         };
 
         template < class Interface, class Impl >
         struct execution_wrapper
         {
-            static Real call_const_Vector_ref( const clang::type_erasure::Storage& data,
+            static Real call_const_Vector_ref( const clang::type_erasure::SBOStorage< 16 >& data,
                                                const Vector& x )
             {
                 return data.template get< Impl >().operator()( x );
             }
 
-            static Vector d1_const_Vector_ref( const clang::type_erasure::Storage& data,
+            static Vector d1_const_Vector_ref( const clang::type_erasure::SBOStorage< 16 >& data,
                                                const Vector& x )
             {
                 return data.template get< Impl >().d1( x );
             }
 
             static Vector
-            d2_const_Vector_ref_const_Vector_ref( const clang::type_erasure::Storage& data,
+            d2_const_Vector_ref_const_Vector_ref( const clang::type_erasure::SBOStorage< 16 >& data,
                                                   const Vector& x, const Vector& dx )
             {
                 return data.template get< Impl >().d2( x, dx );
             }
 
             static LinearOperator
-            hessian_const_Vector_ref( const clang::type_erasure::Storage& data, const Vector& x )
+            hessian_const_Vector_ref( const clang::type_erasure::SBOStorage< 16 >& data,
+                                      const Vector& x )
             {
                 return data.template get< Impl >().hessian( x );
             }
 
-            static const VectorSpace& domain( const clang::type_erasure::Storage& data )
+            static const VectorSpace& domain( const clang::type_erasure::SBOStorage< 16 >& data )
             {
                 return data.template get< Impl >().domain();
             }

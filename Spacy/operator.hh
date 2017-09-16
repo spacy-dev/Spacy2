@@ -85,6 +85,6 @@ namespace Spacy
 
     private:
         OperatorDetail::Table< Operator > function_;
-        clang::type_erasure::Storage impl_;
+        clang::type_erasure::SBOStorage< 16 > impl_;
     };
 }
