@@ -13,6 +13,7 @@
 #include "Spacy/Util/Mixins/iterativeRefinements.hh"
 #include "Spacy/Util/Mixins/maxSteps.hh"
 #include "Spacy/Util/Mixins/verbosity.hh"
+#include <Spacy/zeroVectorCreator.hh>
 
 #include "terminationCriterion.hh"
 
@@ -51,6 +52,8 @@ namespace Spacy
      * restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the
      * regularization are neglishible (see @cite Lubkoll2015a).
      */
+
+
     class Solver :
         public Mixin::AbsoluteAccuracy ,
         public Mixin::RelativeAccuracy ,
@@ -70,6 +73,9 @@ namespace Spacy
        * \param type conjugate gradient type ("CG", "RCG", "TCG" or "TRCG")
        */
       Solver(CallableOperator A, CallableOperator P, const std::string& type = "CG" );
+
+      Solver(CallableOperator A, CallableOperator P, MyOperator r_update, const std::string& type = "ICG" );
+      
 
       /**
        * @param x initial guess
@@ -123,9 +129,19 @@ namespace Spacy
        */
       const CallableOperator& A() const;
 
+      /**
+       * @brief Access operator.
+       * @return operator \f$Q\f$
+       */
+      const MyOperator& update_r_operator() const;
+
+
+
     private:
       /// CG Implementation.
       Vector cgLoop (Vector x, Vector r) const;
+
+      Vector icgLoop (Vector x, Vector r) const;
 
       /// Apply preconditioner.
       Vector Q(const Vector& r) const;
@@ -154,8 +170,10 @@ namespace Spacy
       /// Replace \f$r\f$ with \f$ r - \alpha\theta\Pq \f$ in regularized conjugate gradient methods.
       void adjustRegularizedResidual(Real alpha, const Vector& Pq, Vector& r) const;
 
+      Vector get_w(const ::Spacy::Vector& r, const ::Spacy::Vector& g, const Real& beta, ::Spacy::Vector w_old) const;
 
       CallableOperator A_, P_;
+      MyOperator update_r_operator_;
       mutable CG::TerminationCriterion terminate;
       mutable Result result = Result::Failed; ///< information about reason for termination
       mutable DefiniteNess definiteness_ = DefiniteNess::PositiveDefinite;

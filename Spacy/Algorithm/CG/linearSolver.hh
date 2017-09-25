@@ -33,6 +33,8 @@ namespace Spacy
        */
       LinearSolver(Operator A_, CallableOperator P_, const std::string& type );
 
+      LinearSolver(Operator A_, CallableOperator P_, MyOperator r_update, const std::string& type="ICG");
+
       LinearSolver(const LinearSolver& other);
 
       /// Apply conjugate gradient solver.
@@ -49,6 +51,9 @@ namespace Spacy
 
       /// Access operator \f$A\f$.
       const CallableOperator& A() const;
+
+      /// Access operator \f$H\f
+      const MyOperator& update_r_operator() const;
 
     private:
       mutable Solver cg;
@@ -98,8 +103,20 @@ namespace Spacy
    * @return CGSolver(A,P,"TRCG")
    */
   CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
+  
+  /**
+   * @brief Construct truncated regularized conjugate gradient method.
+   * @param A operator
+   * @param P preconditioner
+   * @param H updated operator on inexact kernel
+   * @param relativeAccuracy relative accuracy
+   * @param eps maximal attainable accuracy
+   * @param verbose verbosity
+   * @return CGSolver(A,P,H,"PPCG")
+   */
+  CG::LinearSolver makeICGSolver(Operator A, CallableOperator P, MyOperator r_update, 
+    Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
 
-  /** @} */
 }
 
 #endif // SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH
