@@ -174,7 +174,7 @@ namespace Spacy
     inline LinearSolver operator^( LinearOperator&& A, int k )
     {
         if ( k == -1 )
-            A.solver();
+            return A.solver();
         throw Exception::InvalidArgument(
             "operator^ for LinearOperator only defined for exponent: k = -1." );
     }
