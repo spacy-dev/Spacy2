@@ -6,100 +6,122 @@
 
 #include "cg.hh"
 
-#include "Spacy/Util/mixins.hh"
 #include "Spacy/Util/Base/OperatorBase.hh"
+#include "Spacy/Util/mixins.hh"
 
 namespace Spacy
 {
-  /** @addtogroup CGGroup @{ */
-  namespace CG
-  {
-    /// Conjugate gradient solver satisfying the \ref IndefiniteLinearSolverConceptAnchor "IndefiniteLinearSolverConcept"
-    class LinearSolver :
-        public OperatorBase ,
-        public Mixin::AbsoluteAccuracy,
-        public Mixin::RelativeAccuracy,
-        public Mixin::Eps,
-        public Mixin::IterativeRefinements ,
-        public Mixin::MaxSteps,
-        public Mixin::Verbosity
+    /** @addtogroup CGGroup @{ */
+    namespace CG
     {
-    public:
-      /**
-       * @brief Set up conjugate gradient solver
-       * @param A_ operator
-       * @param P_ preconditioner
-       * @param type solver type, i.e. "CG", "TCG", "RCG" or "TRCG"
-       */
-      LinearSolver(Operator A_, CallableOperator P_, const std::string& type );
+        /// Conjugate gradient solver satisfying the \ref IndefiniteLinearSolverConceptAnchor
+        /// "IndefiniteLinearSolverConcept"
+        class LinearSolver : public OperatorBase,
+                             public Mixin::AbsoluteAccuracy,
+                             public Mixin::RelativeAccuracy,
+                             public Mixin::Eps,
+                             public Mixin::IterativeRefinements,
+                             public Mixin::MaxSteps,
+                             public Mixin::Verbosity
+        {
+        public:
+            /**
+             * @brief Set up conjugate gradient solver
+             * @param A_ operator
+             * @param P_ preconditioner
+             * @param type solver type, i.e. "CG", "TCG", "RCG" or "TRCG"
+             */
+            LinearSolver( Operator A_, CallableOperator P_, const std::string& type );
 
-      LinearSolver(const LinearSolver& other);
+            LinearSolver( Operator A_, CallableOperator P_, MyOperator r_update,
+                          const std::string& type = "ICG" );
 
-      /// Apply conjugate gradient solver.
-      Vector operator()(const Vector& y) const;
+            LinearSolver( const LinearSolver& other );
 
-      /// Access conjugate gradient implementation.
-      Solver& impl();
+            /// Apply conjugate gradient solver.
+            Vector operator()( const Vector& y ) const;
 
-      /// Checks positive definiteness of \f$A\f$.
-      bool isPositiveDefinite() const;
+            /// Access conjugate gradient implementation.
+            Solver& impl();
 
-      /// Access preconditioner \f$P\f$.
-      const CallableOperator& P() const;
+            /// Checks positive definiteness of \f$A\f$.
+            bool isPositiveDefinite() const;
 
-      /// Access operator \f$A\f$.
-      const CallableOperator& A() const;
+            /// Access preconditioner \f$P\f$.
+            const CallableOperator& P() const;
 
-    private:
-      mutable Solver cg;
-    };
-  }
+            /// Access operator \f$A\f$.
+            const CallableOperator& A() const;
 
-  /**
-   * @brief Construct conjugate gradient method.
-   * @param A operator
-   * @param P preconditioner
-   * @param relativeAccuracy relative accuracy
-   * @param eps maximal attainable accuracy
-   * @param verbose verbosity
-   * @return CGSolver(A,P,"CG")
-   */
-  CG::LinearSolver makeCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
+            /// Access operator \f$H\f
+            const MyOperator& update_r_operator() const;
 
-  /**
-   * @brief Construct regularized conjugate gradient method.
-   * @param A operator
-   * @param P preconditioner
-   * @param relativeAccuracy relative accuracy
-   * @param eps maximal attainable accuracy
-   * @param verbose verbosity
-   * @return CGSolver(A,P,"RCG")
-   */
-  CG::LinearSolver makeRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
+        private:
+            mutable Solver cg;
+        };
+    }
 
-  /**
-   * @brief Construct truncated conjugate gradient method.
-   * @param A operator
-   * @param P preconditioner
-   * @param relativeAccuracy relative accuracy
-   * @param eps maximal attainable accuracy
-   * @param verbose verbosity
-   * @return CGSolver(A,P,"TCG")
-   */
-  CG::LinearSolver makeTCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
+    /**
+     * @brief Construct conjugate gradient method.
+     * @param A operator
+     * @param P preconditioner
+     * @param relativeAccuracy relative accuracy
+     * @param eps maximal attainable accuracy
+     * @param verbose verbosity
+     * @return CGSolver(A,P,"CG")
+     */
+    CG::LinearSolver makeCGSolver( Operator A, CallableOperator P, Real relativeAccuracy = 1e-15,
+                                   Real eps = 1e-15, bool verbose = false );
 
-  /**
-   * @brief Construct truncated regularized conjugate gradient method.
-   * @param A operator
-   * @param P preconditioner
-   * @param relativeAccuracy relative accuracy
-   * @param eps maximal attainable accuracy
-   * @param verbose verbosity
-   * @return CGSolver(A,P,"TRCG")
-   */
-  CG::LinearSolver makeTRCGSolver(Operator A, CallableOperator P, Real relativeAccuracy = 1e-15, Real eps = 1e-15, bool verbose = false);
+    /**
+     * @brief Construct regularized conjugate gradient method.
+     * @param A operator
+     * @param P preconditioner
+     * @param relativeAccuracy relative accuracy
+     * @param eps maximal attainable accuracy
+     * @param verbose verbosity
+     * @return CGSolver(A,P,"RCG")
+     */
+    CG::LinearSolver makeRCGSolver( Operator A, CallableOperator P, Real relativeAccuracy = 1e-15,
+                                    Real eps = 1e-15, bool verbose = false );
 
-  /** @} */
+    /**
+     * @brief Construct truncated conjugate gradient method.
+     * @param A operator
+     * @param P preconditioner
+     * @param relativeAccuracy relative accuracy
+     * @param eps maximal attainable accuracy
+     * @param verbose verbosity
+     * @return CGSolver(A,P,"TCG")
+     */
+    CG::LinearSolver makeTCGSolver( Operator A, CallableOperator P, Real relativeAccuracy = 1e-15,
+                                    Real eps = 1e-15, bool verbose = false );
+
+    /**
+     * @brief Construct truncated regularized conjugate gradient method.
+     * @param A operator
+     * @param P preconditioner
+     * @param relativeAccuracy relative accuracy
+     * @param eps maximal attainable accuracy
+     * @param verbose verbosity
+     * @return CGSolver(A,P,"TRCG")
+     */
+    CG::LinearSolver makeTRCGSolver( Operator A, CallableOperator P, Real relativeAccuracy = 1e-15,
+                                     Real eps = 1e-15, bool verbose = false );
+
+    /**
+     * @brief Construct truncated regularized conjugate gradient method.
+     * @param A operator
+     * @param P preconditioner
+     * @param r_update operator
+     * @param relativeAccuracy relative accuracy
+     * @param eps maximal attainable accuracy
+     * @param verbose verbosity
+     * @return CGSolver(A,P,H,"PPCG")
+     */
+    CG::LinearSolver makeICGSolver( Operator A, CallableOperator P, MyOperator r_update,
+                                    Real relativeAccuracy = 1e-6, Real eps = 1e-6,
+                                    bool verbose = false );
 }
 
 #endif // SPACY_CONJUGATE_GRADIENTS_CG_SOLVER_HH

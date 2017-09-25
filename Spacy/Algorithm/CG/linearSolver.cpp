@@ -12,6 +12,21 @@ namespace Spacy
     {
         LinearSolver::LinearSolver( Operator A_, CallableOperator P_, const std::string& type )
             : OperatorBase( A_.range(), A_.domain() ), cg( std::move( A_ ), std::move( P_ ), type )
+
+        {
+            using namespace Mixin;
+            cast_and_attach< Eps >( *this, cg );
+            cast_and_attach< AbsoluteAccuracy >( *this, cg );
+            cast_and_attach< RelativeAccuracy >( *this, cg );
+            cast_and_attach< Verbosity >( *this, cg );
+            cast_and_attach< IterativeRefinements >( *this, cg );
+            cast_and_attach< MaxSteps >( *this, cg );
+        }
+
+        LinearSolver::LinearSolver( Operator A_, CallableOperator P_, MyOperator r_update,
+                                    const std::string& type )
+            : OperatorBase( A_.range(), A_.domain() ),
+              cg( std::move( A_ ), std::move( P_ ), std::move( r_update ), type )
         {
             using namespace Mixin;
             cast_and_attach< Eps >( *this, cg );
@@ -62,6 +77,11 @@ namespace Spacy
         {
             return cg.A();
         }
+
+        const MyOperator& LinearSolver::update_r_operator() const
+        {
+            return cg.update_r_operator();
+        }
     }
 
     CG::LinearSolver makeCGSolver( Operator A, CallableOperator P, Real relativeAccuracy, Real eps,
@@ -98,6 +118,17 @@ namespace Spacy
                                      Real eps, bool verbose )
     {
         auto solver = CG::LinearSolver( std::move( A ), std::move( P ), "TRCG" );
+        solver.setRelativeAccuracy( relativeAccuracy );
+        solver.set_eps( eps );
+        solver.setVerbosity( verbose );
+        return solver;
+    }
+
+    CG::LinearSolver makeICGSolver( Operator A, CallableOperator P, MyOperator r_update,
+                                    Real relativeAccuracy, Real eps, bool verbose )
+    {
+        auto solver =
+            CG::LinearSolver( std::move( A ), std::move( P ), std::move( r_update ), "ICG" );
         solver.setRelativeAccuracy( relativeAccuracy );
         solver.set_eps( eps );
         solver.setVerbosity( verbose );
