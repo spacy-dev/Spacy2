@@ -326,6 +326,9 @@ namespace Spacy
                 auto trial = retractPrimal(x,dx);
                 //        std::cout << "|x| = " << norm(x) << ", |trial| = " << norm(trial) << ", norm(projected(trial)) = " << norm(primalProjection(trial)) << std::endl;
 
+                // reset acceptanceTest
+                acceptanceTest = AcceptanceTest::Failed;
+
                 if( !domain_.isAdmissible(trial) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
                 else
                 {
@@ -335,6 +338,9 @@ namespace Spacy
                     ds += ( nu - 1 ) * Dn;
                     //          std::cout << "ds1: " << norm(ds) << " vs. " << norm(primalProjection(ds)) << std::endl;
                     auto trialplus = retractPrimal(x,dx+ds);
+                    // test if dx+ds is admissible
+                    if( !domain_.isAdmissible(trialplus) ) acceptanceTest = AcceptanceTest::LeftAdmissibleDomain;
+
                     //          std::cout << "ds2: " << norm(ds) << std::endl;
                     //          std::cout << "soc: " << norm(trialplus) << std::endl;
 
