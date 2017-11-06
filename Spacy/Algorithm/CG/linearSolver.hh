@@ -50,6 +50,13 @@ namespace Spacy
       /// Access operator \f$A\f$.
       const CallableOperator& A() const;
 
+      /// Setter for Termination Criterion
+      template<class TermCrit>
+      void setTermination(TermCrit term_) const
+      {
+        return cg.setTerminationCriterion(term_);
+      }
+
     private:
       mutable Solver cg;
     };

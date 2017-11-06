@@ -18,6 +18,8 @@
 #include <iostream>
 #include <utility>
 
+#include <Spacy/Algorithm/CG/terminationCriteria.hh>
+
 namespace Spacy
 {
     namespace
@@ -214,6 +216,9 @@ namespace Spacy
             //    if( trcg == nullptr )
             auto trcg = makeTCGSolver( L_.hessian(x) , normalSolver ,
                                        get(trcgRelativeAccuracy) , eps(), verbose() );
+            trcg.setTermination(CG::Termination::AdaptiveRelativeEnergyError{});
+            trcg.setRelativeAccuracy(1e-3);
+
             //  trcg.setIterativeRefinements(iterativeRefinements());
             //  trcg.setDetailedVerbosity(verbose_detailed());
 //            trcg.setRelativeAccuracy( getRelativeAccuracy() );

@@ -7,6 +7,14 @@
 #include <Spacy/Util/Mixins/maxSteps.hh>
 #include <Spacy/Util/Mixins/verbosity.hh>
 
+
+// added for extra step termination
+#include <Spacy/vector.hh>
+#include <string>
+#include <iostream>
+#include <limits>
+#include <Spacy/Spaces/productSpace.hh>
+
 namespace Spacy
 {
   /** @addtogroup CGGroup  @{ */
@@ -76,129 +84,262 @@ namespace Spacy
         double stepLength2 = 0.;
       };
 
+      /**
+       * @brief Extra Termination criterion for conjugate gradient methods in the context of a composite step method with cg+constraint preconditioner
+       * as solver.
+       *
+       * Implements special criteria for the termination of simplified normal step and normal step computation. Needs parameters
+       * from the outer composite step algorithm, as termination decision is based on the current status of nonlinearity and convergence.
+       */
 
-      //  /**
-      //   * Relative error termination criterion based on the norm induced by the preconditioner,
-      //   * according to Strakos, Tichy: Error estimation in preconditioned conjugate gradients.
-      //   * Requires that CG starts at \f$ x = 0 \f$. More general starting values might be used, but must be chosen such that
-      //   * the estimate for the energy norm of the solution stays positive (see the above mentioned paper for details).
-      //   */
-      //  template <class R>
-      //  class StrakosTichyPTerminationCriterion: public CGTerminationCriterion<R> {
-      //  public:
-      //    typedef R double;
+      class StepTermination
+      {
+      public:
 
-      //    /**
-      //     * \brief constructor
-      //     *
-      //     * The pcg iteration is terminated as soon as either the estimated error satisfies \f$ [\epsilon] \le \mathrm{tol} \f$ or
-      //     * the number of iterations exceeds the limit maxit. Note that the estimate of the relative error requires a look ahead
-      //     * parameter L. Thus, if \f$\mathrm{maxit}\ge\mathrm{L}\f$, then the error is first estimated in the (L+1)-th iteration.
-      //     *
-      //     * \param tol the relative error tolerance for termination
-      //     * \param maxit the maximum number of iterations
-      //     * \param eps maximal attainable accuracy
-      //     */
-      //    StrakosTichyPTerminationCriterion(double tol_, int maxit_, double eps_ = 1e-12)
-      //      : tol(tol_), maxit(maxit_), eps(eps_)
-      //    {}
+        /**
+           * \brief constructor for normal step criterion
+           *
+           * \param dn0 offset from transformation of the system to a rhs with zero as dual variable
+           * \param Gamma measure for nonlinearity of constraint (2*getDesiredContraction()/omegaC)
+           * \param rho_elbow elbow space for tangential step
+           * \param eta_tau loss in tangential damping due to inaccuracy in normal step (smaller than one)
+           */
+        StepTermination(const Vector &dn0, const Real &Gamma, const Real &rho_elbow, const Real& eta_tau)
+          : dn0_(dn0), Gamma_(Gamma), rho_elbow_(rho_elbow), eta_tau_(eta_tau)
+        {  type_ = "Normal"; }
 
-      //    /**
-      //     * \brief constructor
-      //     *
-      //     * The pcg iteration is terminated as soon as either the estimated error satisfies \f$ [\epsilon] \le \mathrm{tol} \f$ or
-      //     * the number of iterations exceeds the limit maxit. Note that the estimate of the relative error requires a look ahead
-      //     * parameter L. Thus, if \f$\mathrm{maxit}\ge\mathrm{L}\f$, then the error is first estimated in the (L+1)-th iteration.
-      //     *
-      //     * \param tol the relative error tolerance for termination
-      //     * \param minTol relative error tolerance to admit truncation in the hybrid cg implementation
-      //     * \param maxit the maximum number of iterations
-      //     * \param eps maximal attainable accuracy
-      //     */
-      //    StrakosTichyPTerminationCriterion(double tol_, double minTol_, int maxit_, double eps_ = 1e-12)
-      //      : tol(tol_), maxit(maxit_), eps(eps_), minTol(minTol_)
-      //    {}
-
-      //    /**
-      //     * \brief re-initializes the termination criterion for a new CG run
-      //     */
-      //    virtual void clear()
-      //    {
-      //      scaledGamma2.clear();
-      //      energyNorm = 0;
-      //    }
-
-      //    /**
-      //     * \brief set requested relative tolerance
-      //     *
-      //     * \param tol the requested tolerance (nonnegative)
-      //     */
-      //    virtual void tolerance(double tol_) { tol = tol_; }
-
-      //    /**
-      //     * \brief set requested lookahead value
-      //     *
-      //     * \param lah the requested lookahead (nonnegative)
-      //     *
-      //     * The default value is 50.
-      //     */
-      //    virtual void lookahead(int d_) { d = d_; }
-
-      //    /**
-      //     * @brief addStepQuantities supplies algorithmic quantities to the termination criterion
-      //     * @param stepLength scaling for the conjugate search direction \f$q\f$
-      //     * @param qAq squared energy norm of the conjugate search direction \f$q\f$ (here: unused)
-      //     * @param qPq squared \f$P\f$-norm, i. e. the norm induced by the preconditioner, of the conjugate search direction \f$q\f$ (here: unused)
-      //     * @param rPINVr squared \f$P^{-1}\f$-norm of the residual
-      //     */
-      //    virtual void addStepQuantities(double alpha, double qAq, double qPq, double rPINVr)
-      //    {
-      //      scaledGamma2.push_back( alpha * rPINVr );
-      //      energyNorm += alpha * rPINVr;
-      //      steps2.push_back(qPq/qAq);
-      //      stepLength = sqrt(std::fabs(qAq));
-      //    }
-
-      //    /**
-      //     * \brief termination decision
-      //     * \return true if the iteration has reached the required accuracy
-      //     */
-      //    virtual operator bool()
-      //    {
-      //      return scaledGamma2.size() > maxit || ( scaledGamma2.size() > 2*d && relativeError() < std::max(eps,tol*tol) );
-      //    }
-
-      //    /**
-      //     * \brief returns the estimated absolute energy error
-      //     */
-      //    double relativeError()
-      //    {
-      //      if( scaledGamma2.size() < 2*d ) return std::numeric_limits<double>::max();
-
-      //      size_t j = scaledGamma2.size() - 2*d;
-      //      double tau = 0;
-      //      for(size_t i = j; i < j + d; ++i)
-      //        tau += steps2[i] * ( scaledGamma2[i] + 2 * std::accumulate(scaledGamma2.begin()+i+1, scaledGamma2.end(),0)  );
-      //      return tau;
-      //    }
-
-      //    bool minimalDecreaseAchieved() { return relativeError() < minTol; }
-
-      //    bool vanishingStep() const
-      //    {
-      //      return stepLength < eps * energyNorm;
-      //    }
+        /**
+           * \brief constructor for simplified normal step criterion
+           *
+           * \param dn0 offset from transformation of the system to a rhs with zero as dual variable
+           * \param boundNormds upper bound for norm of simp. normal step to get the fraction \f$ \frac{\|ds\|}{\|dx\|} \f$ small
+           * enough to not cause rejection of steps
+           */
+        StepTermination(const Vector &dn0, const Real &boundNormds) : dn0_(dn0), boundNormds_(boundNormds)
+        { type_ = "SimplifiedNormal"; }
 
 
-      //  private:
-      //    double tol;
-      //    int maxit;
-      //    // squared gammas
-      //    std::vector<double> scaledGamma2, steps2;
-      //    double energyNorm = 0, stepLength = 0;
-      //    int d = 50;
-      //    double eps = 1e-12, minTol = 1e-2;
-      //  };
+        /**
+           * \brief default constructor
+           */
+        StepTermination()
+        {
+          type_ = "none";
+        }
+
+
+        /**
+           * \brief termination decision
+           *
+           * \param cg_iterate current cg iterate
+           * \param SquaredErrorNormEstimate squared norm of the error estimate of the cg error estimator
+           * \param SquaredSolutionNormEstimate squared norm of the solution estimate of the cg error estimator
+           */
+        bool terminate(const Vector& cg_iterate, Real SquaredErrorNormEstimate, Real SquaredSolutionNormEstimate) const
+        {
+
+          if(type_ == "SimplifiedNormal")
+          {
+            return norm(cg_iterate + dn0_) < boundNormds_;
+          }
+
+          else if(type_ == "Normal")
+          {
+
+            bool terminate = false;
+            auto norm2_offset = norm(dn0_)*norm(dn0_);
+            auto norm2_tilde_dn_ex = SquaredSolutionNormEstimate;
+            auto norm2_dn_err = SquaredErrorNormEstimate;
+            auto GammaSquare = Gamma_ * Gamma_;
+
+            // get primal element of x=(dn,p)
+            auto w = cg_iterate;
+            auto& w_ = cast_ref<ProductSpace::Vector>(w);
+            w_.component(1) *= 0;
+            auto norm2_dn = norm(dn0_ + w) * norm(dn0_ + w); // dn = dn0 + \tilde{dn} (this is NOT in the kernel of C!!)
+
+            // assert that stopping criterion has a proper estimate
+            if(norm2_tilde_dn_ex < std::numeric_limits<double>::max() && norm2_dn_err < std::numeric_limits<double>::max())
+            {
+              if (norm2_offset <= norm2_tilde_dn_ex)// in case something is wrong as 0 < |sol|^2 = |offset|^2 - |solest|^2
+                std::cout << "OFFSET NORM <= Solution estimate!!! " << norm2_offset << " <= "
+                          << norm2_tilde_dn_ex << std::endl;
+
+              // norm of dn is small, i.e in trust region rho_elbow*Gamma
+              if ((rho_elbow_ * GammaSquare >= norm2_dn) && (norm2_offset > norm2_tilde_dn_ex)) //assert that we dont take roots of negative numbers
+              {
+                // this estimates the fraction of loss in tangential damping due to a longer normal step
+                auto taubound = min(1., sqrt(GammaSquare - norm2_dn) /
+                                    sqrt(GammaSquare - (norm2_offset - norm2_tilde_dn_ex)))
+                    - (sqrt(norm2_dn_err) /
+                       sqrt(GammaSquare - (norm2_offset - norm2_tilde_dn_ex)));
+
+                if (eta_tau_ + 1e-15 < taubound)
+                {
+                  std::cout << "terminating CG because of dn-stopping criterion: Case 1 (small norm)"<<std::endl;
+                  std::cout << "   current error estimate " << sqrt(norm2_dn_err / norm2_tilde_dn_ex)
+                            << std::endl;
+                  terminate = true;
+                }
+              }
+            }
+            else
+            {
+              auto taubound = sqrt(GammaSquare - norm2_dn) - sqrt(norm2_dn);
+              if (eta_tau_ + 1e-15 < taubound)
+              {
+                std::cout << "terminating CG because of dn-stopping criterion: Case 2 (no solution estimate)"<<std::endl;
+                std::cout << "   current error estimate " << sqrt(norm2_dn_err / norm2_tilde_dn_ex)
+                          << std::endl;
+                terminate = true;
+              }
+            }
+            return terminate;
+          }
+
+          else if(type_ == "none")
+          {
+            return false;
+          }
+
+          else
+          {
+            std::cout<< "No fitting type found in Termination Criterion! "<<std::endl;
+            return false;
+          }
+
+        }
+
+      protected:
+        std::string type_ = "none";
+
+        // For Normal Step Termination
+        // The offset performed before calling the solver
+        Vector dn0_;
+
+        //2*Theta_des/omega_c
+        Real Gamma_ = 0;
+
+        //elbow space
+        Real rho_elbow_ = 0;
+
+        //threshold for normal step
+        Real eta_tau_=0;
+
+        // FOr Simplified Normal Step Termination
+        //Contraction threshold for simpnorm step
+        Real boundNormds_ = 0;
+      };
+
+
+      /**
+       * @brief Termination criterion for conjugate gradient methods based on an estimate of the relative energy error.
+       *
+       * This error estimator provides an adaptive choice of the lookahead parameter.
+       * In the context of the composite step method, it can use the extra termination criteria given by the StepTermination class.
+       */
+      class AdaptiveRelativeEnergyError :
+          public Mixin::AbsoluteAccuracy,
+          public Mixin::RelativeAccuracy,
+          public Mixin::MinimalAccuracy,
+          public Mixin::Eps,
+          public Mixin::MaxSteps,
+          public Mixin::Verbosity
+      {
+      public:
+        /**
+           * \brief Constructor for the error estimator in the context of composite step methods
+           *
+           * \param st StepTermination with an extra termination criterion
+           */
+        AdaptiveRelativeEnergyError(StepTermination st);
+
+        /**
+           * \brief Default constructor
+           *
+           */
+        AdaptiveRelativeEnergyError();
+
+
+
+        /**
+           * \brief the termination decision function called by the cg
+           * This is the decision from the StepTermination combined with the one of the error estimator errorEstimationTerminate()
+           *
+           */
+        bool operator()() const;
+
+        /**
+           * \brief termination decision due to relative accuracy (independent of a composite step context)
+           *
+           */
+        bool errorEstimationTerminate() const;
+        /**
+           * @brief supplies algorithmic quantities to the termination criterion
+           * @param alpha scaling for the conjugate search direction \f$q\f$
+           * @param qAq squared energy norm of the conjugate search direction \f$q\f$ (here: unused)
+           * @param qPq squared \f$P\f$-norm, i. e. the norm induced by the preconditioner, of the conjugate search direction \f$q\f$ (here: unused)
+           * @param rPINVr squared \f$P^{-1}\f$-norm of the residual
+           * @param cg_iterate_ current cg_iterate
+           */
+        void update(double alpha, double qAq, double qPq, double rPINVr, const Vector& cg_iterate_);
+
+        /**
+           * @brief supplies algorithmic quantities to the termination criterion
+           * @param alpha scaling for the conjugate search direction \f$q\f$
+           * @param qAq squared energy norm of the conjugate search direction \f$q\f$ (here: unused)
+           * @param qPq squared \f$P\f$-norm, i. e. the norm induced by the preconditioner, of the conjugate search direction \f$q\f$ (here: unused)
+           * @param rPINVr squared \f$P^{-1}\f$-norm of the residual
+           */
+        void update(double alpha, double qAq, double qPq, double rPINVr);
+
+        /**
+           * \brief check if the energy norm of the current step \f$\|q\|_A=\sqrt(qAq)\f$ is smaller than the maximal attainable accuracy multiplied with the energy norm of the iterate \f$\varepsilon_{max}\|x\|_A\f$.
+           * \return true if \f$\|q\|<\varepsilon_{max}\|x\|_A\f$, else false
+           */
+        bool vanishingStep() const noexcept;
+
+        /// re-initializes the termination criterion for a new CG run
+        void clear() noexcept;
+
+        /**
+           * \brief set requested lookahead value
+           *
+           * \param lookAhead the requested lookahead (nonnegative)
+           *
+           * The default value is 5.
+           */
+        void setLookAhead(unsigned lookAhead) noexcept;
+
+        /**
+           * \brief relaxed termination decision
+           * \return true if the iteration has reached some minimal required accuracy, possibly bigger than the desired accuracy. This method is required in the hybrid conjugate gradient method only.
+           */
+        bool minimalDecreaseAchieved() const noexcept;
+
+
+      private:
+        double getSquaredErrorEstimator() const noexcept;
+        double getSquaredSolutionEstimator() const noexcept;
+        double squaredRelativeError() const noexcept;
+
+        /**
+           * \brief Standart Deviation of the lookahead as random variable
+           * \return Standart Deviation
+           */
+        double getStdDev() const noexcept;
+
+        Vector cg_iterate;
+        mutable unsigned lookAhead_ = 1;
+        std::vector<double> scaledGamma2 = std::vector<double>{};
+        double energyNorm2 = 0;
+        double stepLength2 = 0.;
+        mutable double tau;
+        const unsigned lookahead_min = 1;
+        const double desiredtau = 0.5;
+
+        StepTermination st_ = StepTermination();
+      };
     }
   }
 }

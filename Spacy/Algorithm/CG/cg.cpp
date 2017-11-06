@@ -13,6 +13,8 @@
 #include <iostream>
 #include <utility>
 
+// For new Termination stuff
+#include <Spacy/Util/cast.hh>
 
 namespace Spacy
 {
@@ -93,7 +95,15 @@ namespace Spacy
         auto alpha = sigma/qAq;
         //if( getVerbosityLevel() > 1 ) std::cout << "    " << type_ << "  sigma = " << sigma << ", alpha = " << alpha << ", qAq = " << qAq << ", qPq = " << qPq << std::endl;
 
-        terminate.update(get(alpha),get(qAq),get(qPq),get(sigma));
+        if (is<CG::Termination::AdaptiveRelativeEnergyError>(terminate))
+        {
+          auto &t = cast_ref<CG::Termination::AdaptiveRelativeEnergyError>(terminate);
+          t.update(get(alpha),get(qAq),get(qPq),get(sigma),x);
+        }
+        else
+        {
+          terminate.update(get(alpha),get(qAq),get(qPq),get(sigma));
+        }
 
         //  don't trust small numbers
         if( vanishingStep(step) )
