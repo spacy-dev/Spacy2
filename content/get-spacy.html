@@ -34,8 +34,23 @@
 </ul>
 </div>
 <p>Libraries that are build with cmake, such as <a href="http://eigen.tuxfamily.org">Eigen</a>  or <a href="http://fenicsproject.org">FEniCS</a>, should be detected by cmake. For usage with <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a> run <code>cmake -DKaskade=ON ..</code>. For building the tests you have to specify <code>cmake -DBuildTest=ON ..</code>.</p>
+<div class="separator"></div>
 
 <h1>Contributing</h1>
+<h3>Using Gerrithub</h3>
+<p>In order to contribute to Spacy you need to get the project through <a href='http://gerrithub.io'>gerrithub.io</a>:</p>
+<ul>
+    <li>Get an account at <a href='https://github.com'>github.com</a>.</li>
+    <li>Use this account to sign in at <a href='http://gerrithub.io'>gerrithub.io</a>.</li>
+    <li>Go to Projects->List and find Spacy (using the filter).</li>
+    <li>Choose 'Clone with commit-msg hook' and one of anonymous http, http or ssh and copy the shown command (<code>git clone ...</code>) to clipboard.</li>
+    <li>Execute this command in terminal from the folder in which you want to place the Spacy folder.</li>
+    <li>Check if the email-address of git matches the one registered at github/gerrithub. To retrieve the address that is locally registered in git execute <code>git config --get user.email</code>. If this address does not match the one registered at gerrithub, then you need to adjust it via <code>git config (--local or --global) user.email "email@example.com"</code>.</li>
+</ul>
+
+<div class="h3_separator"></div>
+
+<h3>Backlog</h3>
 <p>
 Spacy currently uses <a href='href='http://waffle.io/spacy-dev/Spacy'>waffle.io</a> to track tasks and bug-fixes. If you are running out of ideas and want to contribute, then check the backlog for open tasks.
 </p>
