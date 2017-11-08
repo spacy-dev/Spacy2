@@ -18,12 +18,7 @@
 
 <h1>Dependencies</h1>
 <p>Spacy itself does not require anything than a recent C++-compiler with support for C++14. For testing <a href="https://github.com/google/googletest">googletest</a> is used and will be downloaded by cmake.</p>
-<p>The interfaces in Spacy are automatically generated using <a href='https://github.com/lubkoll/friendly-type-erasure'>friendly type erasure</a>. In case you want to modify the interfaces or want to 
-adjust the buffer size for small buffer optimization you need:
-<ul>
-<li>python2</li>
-<li>libclang with python-bindings</li>
-</ul>
+<p>The interfaces in Spacy are automatically generated using a <a href='https://github.com/lubkoll/clang-type-erase'>custom clang tool</a>. 
 </p>
 <div class="separator"></div>
 
@@ -39,3 +34,27 @@ adjust the buffer size for small buffer optimization you need:
 </ul>
 </div>
 <p>Libraries that are build with cmake, such as <a href="http://eigen.tuxfamily.org">Eigen</a>  or <a href="http://fenicsproject.org">FEniCS</a>, should be detected by cmake. For usage with <a href="http://www.zib.de/projects/kaskade7-finite-element-toolbox">Kaskade7</a> run <code>cmake -DKaskade=ON ..</code>. For building the tests you have to specify <code>cmake -DBuildTest=ON ..</code>.</p>
+
+<h1>Contributing</h1>
+<p>
+Spacy currently uses <a href='href='http://waffle.io/spacy-dev/Spacy'>waffle.io</a> to track tasks and bug-fixes. If you are running out of ideas and want to contribute, then check the backlog for open tasks.
+</p>
+
+<div class="h3_separator"></div>
+
+<h3>Formatting</h3>
+<p>Formatting rules are specified in .clang-format in Spacy's root folder. To automatically format your changes install clang-format and copy the pre-commit from hooks/pre-commit to .git/hooks/.</p>
+<p>Ubuntu: </p>
+<div class="code-style boxshadow">
+<ul>
+    <li>sudo apt-get install clang-format</li>
+    <li>cd spacy/root/dir</li>
+    <li>cp hooks/pre-commit .git/hooks/</li>
+</ul>
+</div>
+<div class="h3_separator"></div>
+
+<h3>Testing</h3>
+<p>Whatever you do, make sure that everything that contains logic is tested!</p>
+
+
