@@ -30,11 +30,12 @@ generate_interface linearSolver.hh ""
 mkdir -p $INCLUDE_DIR/Spacy/$DETAIL_DIR
 generate_interfaces
 
-# generate interface for cg-termination-criteria
+# generate interface for conjugate gradient methods
 echo "for CG: generate terminationCriterion.hh"
 CG_DIR=Spacy/Algorithm/CG
 mkdir -p $INCLUDE_DIR/$CG_DIR/$DETAIL_DIR
 $COMMAND $COMMON_ARGS -target-dir=$CG_DIR terminationCriterion.hh -std=c++14
+$COMMAND $COMMON_ARGS -target-dir=$CG_DIR Regularization.hh -std=c++14
 
 # generate interface for printer of logger
 echo "for logger: generate printer.hh"
