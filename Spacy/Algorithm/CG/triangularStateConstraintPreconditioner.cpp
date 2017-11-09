@@ -46,7 +46,7 @@ namespace Spacy
         void TriangularStateConstraintPreconditioner::apply( const Vector& x, Vector& y,
                                                              Vector& q ) const
         {
-            auto& x_ = cast_ref< ProductSpace::Vector >( q );
+            auto x_ = cast_ref< ProductSpace::Vector >( x );
             auto& xp_ = cast_ref< ProductSpace::Vector >( x_.component( PRIMAL ) );
             auto& xd_ = cast_ref< ProductSpace::Vector >( x_.component( DUAL ) );
 
@@ -54,11 +54,11 @@ namespace Spacy
             auto& yp_ = cast_ref< ProductSpace::Vector >( y_.component( PRIMAL ) );
             auto& yd_ = cast_ref< ProductSpace::Vector >( y_.component( DUAL ) );
 
-            auto localAdjointIndex =
+            const auto localAdjointIndex =
                 creator< ProductSpace::VectorCreator >( yd_.space() ).idMap( getAdjointIndex() );
-            auto localControlIndex =
+            const auto localControlIndex =
                 creator< ProductSpace::VectorCreator >( yp_.space() ).idMap( getControlIndex() );
-            auto localStateIndex =
+            const auto localStateIndex =
                 creator< ProductSpace::VectorCreator >( yp_.space() ).idMap( getStateIndex() );
 
             yd_.component( localAdjointIndex ) = adjointSolver_( xp_.component( localStateIndex ) );
@@ -85,9 +85,9 @@ namespace Spacy
             auto y = zero( range() );
             auto& y_ = cast_ref< ProductSpace::Vector >( y );
             auto& yp_ = cast_ref< ProductSpace::Vector >( y_.component( PRIMAL ) );
-            auto localStateIndex =
+            const auto localStateIndex =
                 creator< ProductSpace::VectorCreator >( yp_.space() ).idMap( getStateIndex() );
-            auto localAdjointIndex =
+            const auto localAdjointIndex =
                 creator< ProductSpace::VectorCreator >( rhsd_.space() ).idMap( getAdjointIndex() );
 
             yp_.component( localStateIndex ) = stateSolver_( rhsd_.component( localAdjointIndex ) );
