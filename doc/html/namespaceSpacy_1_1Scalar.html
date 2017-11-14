@@ -128,8 +128,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:ae3d9bbc5d6c84eafb70737dd8a96251c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find global minimizer of \(f\) in \([a,b]\).  <a href="#ae3d9bbc5d6c84eafb70737dd8a96251c">More...</a><br/></td></tr>
 <tr class="separator:ae3d9bbc5d6c84eafb70737dd8a96251c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4692ea99ec81e957a20415d52659fd42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Scalar.html#a4692ea99ec81e957a20415d52659fd42">findLogGlobalMinimizer</a> (const std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Real.html">Real</a>)&gt; &amp;f, <a class="el" href="classSpacy_1_1Real.html">Real</a> a, <a class="el" href="classSpacy_1_1Real.html">Real</a> b, <a class="el" href="classSpacy_1_1Real.html">Real</a> eps=1e-2)</td></tr>
-<tr class="memdesc:a4692ea99ec81e957a20415d52659fd42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find log.global minimizer of \(f\) in \([a,b]\).  <a href="#a4692ea99ec81e957a20415d52659fd42">More...</a><br/></td></tr>
+<tr class="memdesc:a4692ea99ec81e957a20415d52659fd42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find log global minimizer of \(f\) in \([a,b]\).  <a href="#a4692ea99ec81e957a20415d52659fd42">More...</a><br/></td></tr>
 <tr class="separator:a4692ea99ec81e957a20415d52659fd42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb39f9f92f5f3186c3c2c9c5ce0eced"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Real.html">Real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy_1_1Scalar.html#aafb39f9f92f5f3186c3c2c9c5ce0eced">findLogGlobalMinimizerTangentialDamping</a> (const std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Real.html">Real</a>)&gt; &amp;f, <a class="el" href="classSpacy_1_1Real.html">Real</a> a, <a class="el" href="classSpacy_1_1Real.html">Real</a> b, const <a class="el" href="classSpacy_1_1Real.html">Real</a> normdn2, const <a class="el" href="classSpacy_1_1Real.html">Real</a> two_sp_dn_Dt, const <a class="el" href="classSpacy_1_1Real.html">Real</a> normDt2, <a class="el" href="classSpacy_1_1Real.html">Real</a> eps=1e-2)</td></tr>
+<tr class="memdesc:aafb39f9f92f5f3186c3c2c9c5ce0eced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find log global minimizer of \(f\) in \([a,b]\) for inexact composite step methods. Performs a scalar linesearch on the parameter \( x \) of \( dn+x*Dt \) such that this sum minimizes the function \( f \) It will start from the upper bound and proceed to the lower bound logarithmically, however it will stop, as soon as the norm of \( dn+x*Dt \) increases for decreasing \( x \). This is possible, if dn and Dt are not orthogonal.  <a href="#aafb39f9f92f5f3186c3c2c9c5ce0eced">More...</a><br/></td></tr>
+<tr class="separator:aafb39f9f92f5f3186c3c2c9c5ce0eced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains functionals and operators for scalar problems. </p>
@@ -220,7 +223,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Find log.global minimizer of \(f\) in \([a,b]\). </p>
+<p>Find log global minimizer of \(f\) in \([a,b]\). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Nonlinear function \( f: \mathbb{R}\to\mathbb{R} \) </td></tr>
@@ -234,10 +237,81 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aafb39f9f92f5f3186c3c2c9c5ce0eced"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1Real.html">Real</a> Spacy::Scalar::findLogGlobalMinimizerTangentialDamping </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; Real(const Real)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Real&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Real&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Real&#160;</td>
+          <td class="paramname"><em>normdn2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Real&#160;</td>
+          <td class="paramname"><em>two_sp_dn_Dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Real&#160;</td>
+          <td class="paramname"><em>normDt2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Real&#160;</td>
+          <td class="paramname"><em>eps</em> = <code>1e-2</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find log global minimizer of \(f\) in \([a,b]\) for inexact composite step methods. Performs a scalar linesearch on the parameter \( x \) of \( dn+x*Dt \) such that this sum minimizes the function \( f \) It will start from the upper bound and proceed to the lower bound logarithmically, however it will stop, as soon as the norm of \( dn+x*Dt \) increases for decreasing \( x \). This is possible, if dn and Dt are not orthogonal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Nonlinear function \( f: \mathbb{R}\to\mathbb{R} \) </td></tr>
+    <tr><td class="paramname">a</td><td>lower bound of the admissible interval </td></tr>
+    <tr><td class="paramname">b</td><td>upper bound of the admissible interval </td></tr>
+    <tr><td class="paramname">normdn2</td><td>squared norm of damped normal step </td></tr>
+    <tr><td class="paramname">two_sp_dn_Dt</td><td>twice the scalar product of dn and Dt </td></tr>
+    <tr><td class="paramname">normDt2</td><td>squared norm of undamped tangential step </td></tr>
+    <tr><td class="paramname">eps</td><td>relative accuracy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\( x \in \mathrm{argmin}_{[a,b]} \) such that it minimizes \( f(dn+x*dt) \) without increasing the norm of the dn+x*dt </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 12 2017 11:34:33 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 14 2017 11:21:45 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

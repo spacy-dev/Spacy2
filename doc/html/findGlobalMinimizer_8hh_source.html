@@ -107,14 +107,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        Real <a class="code" href="namespaceSpacy_1_1Scalar.html#ae3d9bbc5d6c84eafb70737dd8a96251c">findGlobalMinimizer</a>(<span class="keyword">const</span> std::function&lt;Real(<span class="keyword">const</span> Real)&gt;&amp; f, Real a, Real b, Real eps = 1e-2);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        Real <a class="code" href="namespaceSpacy_1_1Scalar.html#a4692ea99ec81e957a20415d52659fd42">findLogGlobalMinimizer</a>(<span class="keyword">const</span> std::function&lt;Real(<span class="keyword">const</span> Real)&gt;&amp; f, Real a, Real b, Real eps = 1e-2);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        Real <a class="code" href="namespaceSpacy_1_1Scalar.html#aafb39f9f92f5f3186c3c2c9c5ce0eced">findLogGlobalMinimizerTangentialDamping</a>(<span class="keyword">const</span> std::function&lt;Real(<span class="keyword">const</span> Real)&gt;&amp; f, Real a, Real b, <span class="keyword">const</span> Real normdn2,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                                     <span class="keyword">const</span> Real two_sp_dn_Dt, <span class="keyword">const</span> Real normDt2, Real eps = 1e-2);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="ttc" id="namespaceSpacy_1_1Scalar_html_ae3d9bbc5d6c84eafb70737dd8a96251c"><div class="ttname"><a href="namespaceSpacy_1_1Scalar.html#ae3d9bbc5d6c84eafb70737dd8a96251c">Spacy::Scalar::findGlobalMinimizer</a></div><div class="ttdeci">Real findGlobalMinimizer(const std::function&lt; Real(const Real)&gt; &amp;f, Real a, Real b, Real eps=1e-2)</div><div class="ttdoc">Find global minimizer of  in . </div></div>
-<div class="ttc" id="namespaceSpacy_1_1Scalar_html_a4692ea99ec81e957a20415d52659fd42"><div class="ttname"><a href="namespaceSpacy_1_1Scalar.html#a4692ea99ec81e957a20415d52659fd42">Spacy::Scalar::findLogGlobalMinimizer</a></div><div class="ttdeci">Real findLogGlobalMinimizer(const std::function&lt; Real(const Real)&gt; &amp;f, Real a, Real b, Real eps=1e-2)</div><div class="ttdoc">Find log.global minimizer of  in . </div></div>
+<div class="ttc" id="namespaceSpacy_1_1Scalar_html_aafb39f9f92f5f3186c3c2c9c5ce0eced"><div class="ttname"><a href="namespaceSpacy_1_1Scalar.html#aafb39f9f92f5f3186c3c2c9c5ce0eced">Spacy::Scalar::findLogGlobalMinimizerTangentialDamping</a></div><div class="ttdeci">Real findLogGlobalMinimizerTangentialDamping(const std::function&lt; Real(const Real)&gt; &amp;f, Real a, Real b, const Real normdn2, const Real two_sp_dn_Dt, const Real normDt2, Real eps=1e-2)</div><div class="ttdoc">Find log global minimizer of  in  for inexact composite step methods. Performs a scalar linesearch on...</div></div>
+<div class="ttc" id="namespaceSpacy_1_1Scalar_html_a4692ea99ec81e957a20415d52659fd42"><div class="ttname"><a href="namespaceSpacy_1_1Scalar.html#a4692ea99ec81e957a20415d52659fd42">Spacy::Scalar::findLogGlobalMinimizer</a></div><div class="ttdeci">Real findLogGlobalMinimizer(const std::function&lt; Real(const Real)&gt; &amp;f, Real a, Real b, Real eps=1e-2)</div><div class="ttdoc">Find log global minimizer of  in . </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 12 2017 11:34:31 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 14 2017 11:21:42 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
