@@ -1,5 +1,7 @@
 #pragma once
 
+#define EIGEN_INITIALIZE_MATRICES_BY_ZERO
+
 #include "Eigen/c1Operator.hh"
 #include "Eigen/c2Functional.hh"
 #include "Eigen/scalarProduct.hh"
