@@ -9,3 +9,6 @@
 //#include "KaskadeParabolic/c1Operator.hh"
 #include "KaskadeParabolic/vector.hh"
 #include "KaskadeParabolic/vectorSpace.hh"
+
+#include "KaskadeParabolic/scalprod.hh"
+#include "KaskadeParabolic/dynamicProblem.hh"

@@ -10,6 +10,7 @@
 #include "l2Product.hh"
 #include "vector.hh"
 #include "util.hh"
+#include "dynamicProblem.hh"
 
 #include "../Kaskade/vectorSpace.hh"
 #include "boost/signals2.hpp"
@@ -21,36 +22,38 @@ namespace Spacy
   namespace KaskadeParabolic
   {
     /// Creator for vector space elements for %Kaskade 7
-    template <class Description>
+    template <class VariableSetDescription>
     class VectorCreator
     {
     public:
+      using Spaces = typename VariableSetDescription::Spaces;
 
-      using Spaces = typename Description::Spaces;
-      typedef ::boost::signals2::signal<void (unsigned,VectorSpace&)> Signal;
+      typedef ::boost::signals2::signal<void (unsigned)> Signal;
       typedef Signal::slot_type OnRefimenentSlotType;
       /**
        * @ingroup VectorSpaceGroup
        * @brief Create from %Kaskade 7 function space.
        * @param space single %Kaskade 7 function space (no product space)
        */
-      VectorCreator(const std::vector<Description> descriptions, const std::vector<std::shared_ptr<Spaces> > spaces): spaces_(spaces)
+      VectorCreator(const DynamicProblem& DP)
       {
+        dpptr_ = std::make_shared<DynamicProblem>(DP);
+        auto descriptions = DP.getDescriptions();
         for(auto i = 0u ; i < descriptions.size(); i++)
-          creators_.push_back(::Spacy::Kaskade::VectorCreator<Description>(descriptions.at(i)));
+          creators_.push_back(std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(Spacy::Kaskade::VectorCreator<VariableSetDescription>(descriptions.at(i))));
 
         S_ = std::make_shared<Signal> (Signal());
       }
 
       /// Generate vector for %Kaskade 7.
-      Vector<Description> operator()(const VectorSpace* space) const
+      Vector<VariableSetDescription> operator()(const VectorSpace* space) const
       {
-        return Vector<Description>{*space};
+        return Vector<VariableSetDescription>{*space};
       }
 
-      ::Spacy::Kaskade::VectorCreator<Description> subcreator(const unsigned i) const
+      const ::Spacy::Kaskade::VectorCreator<VariableSetDescription>& getSubCreator(const unsigned i) const
       {
-        return creators_.at(i);
+        return *(creators_.at(i));
       }
 
       unsigned numberOfCreators() const
@@ -58,30 +61,34 @@ namespace Spacy
         return creators_.size();
       }
 
-      Spaces getSpace(unsigned i) const
+      const Spaces& getSpace(unsigned i) const
       {
-        return *spaces_.at(i);
+        auto spacesVec = dpptr_->getSpacesVec();
+        return *(spacesVec.at(i));
       }
 
       void refine(unsigned k)
       {
         std::cout<< "in VC refine function :"<<k<<std::endl;
         //refining the grid
-        //        auto insertedVSptr = DP_.refine(k);
 
-        //        this->creators_.insert(k,creator< VectorCreator<Description> >(*insertedVSptr));
+        std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
+        auto insertedDesc = dpptr_->refine(k);
+        auto toinsertCreator = std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(::Spacy::Kaskade::VectorCreator<VariableSetDescription>( insertedDesc));
+        this->creators_.insert(creators_.begin()+k,toinsertCreator);
+        std::cout<<"--------returning from the Grids refine function"<<std::endl;
 
         //tell the vectors
-        auto vsdum = VectorSpace();
         std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
-        this->S_->operator()(k,vsdum);
+        this->S_->operator()(k);
         std::cout<<"--------returning from the VC refine function"<<std::endl;
+
       }
       std::shared_ptr<Signal> S_;
 
     private:
-      std::vector<::Spacy::Kaskade::VectorCreator<Description> > creators_;
-      std::vector< std::shared_ptr<Spaces> > spaces_;
+      std::vector<std::shared_ptr<::Spacy::Kaskade::VectorCreator<VariableSetDescription> > > creators_;
+      std::shared_ptr< DynamicProblem > dpptr_;
     };
 
     /**
@@ -89,10 +96,10 @@ namespace Spacy
      * @brief Create single space with hilbert space structure for %Kaskade 7.
      * @param space single %Kaskade 7 function space (no product space)
      */
-    template <class Description>
-    auto makeHilbertSpace(const std::vector<Description> descriptions, const std::vector<std::shared_ptr< typename Description::Spaces> > spaces)
+    template<class VariableSetDescription>
+    auto makeHilbertSpace(const DynamicProblem& DP)
     {
-      return ::Spacy::makeHilbertSpace( KaskadeParabolic::VectorCreator<Description>(descriptions, spaces) , l2Product<Description>{} );
+      return ::Spacy::makeHilbertSpace( KaskadeParabolic::VectorCreator<VariableSetDescription> (DP) , l2Product<VariableSetDescription>{} );
     }
 
   }

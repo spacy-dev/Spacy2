@@ -52,21 +52,21 @@ namespace Spacy
         v_.reserve(c.numberOfCreators());
         for(auto i = 0u; i< c.numberOfCreators(); i++)
         {
-          variableSet_.emplace_back( (creator< VectorCreator<Description> >(space)).subcreator(i).get() );
-          description_.emplace_back( std::make_shared<Description>( creator< VectorCreator<Description> >(space).subcreator(i).get()) );
+          variableSet_.emplace_back( (creator< VectorCreator<Description> >(space)).getSubCreator(i).get() );
+          description_.emplace_back( std::make_shared<Description>( creator< VectorCreator<Description> >(space).getSubCreator(i).get()) );
           v_.emplace_back( Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(i).descriptions.spaces ));
         }
 
         //connect to Signal of Creator
         auto creator_ = creator< VectorCreator<Description> >(space);
-        this->c = creator_.S_->connect([this](unsigned index,VectorSpace& VS) { return this->refine(index,VS); });
+        this->c = creator_.S_->connect([this](unsigned index) { return this->refine(index); });
       }
 
       Vector(const Vector& v): VectorBase(v), variableSet_(v.variableSet_), description_(v.description_), v_(v.v_)
       {
 //        std::cout<<"in Copy Constructor of Vector"<<std::endl;
         auto creator_ = creator< VectorCreator<Description> >(v.space());
-        this->c = creator_.S_->connect([this](unsigned index,VectorSpace& VS) -> void { return this->refine(index,VS);});
+        this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
       }
 
       Vector& operator=(const Vector& v)
@@ -78,7 +78,7 @@ namespace Spacy
         this->v_ = v.v_;
 
         auto creator_ = creator< VectorCreator<Description> >(v.space());
-        this->c = creator_.S_->connect([this](unsigned index,VectorSpace& VS) -> void { return this->refine(index,VS);});
+        this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
 
       }
       Vector& operator=(Vector&& v)
@@ -90,7 +90,7 @@ namespace Spacy
         this->v_ = std::move(v.v_);
 
         auto creator_ = creator< VectorCreator<Description> >(v.space());
-        this->c = creator_.S_->connect([this](unsigned index,VectorSpace& VS) -> void { return this->refine(index,VS);});
+        this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
       }
       ~Vector()
       {
@@ -98,13 +98,18 @@ namespace Spacy
         c.disconnect();
       }
 
-      void refine(unsigned k,VectorSpace& insertedVS)
+      void refine(unsigned k)
       {
         std::cout<<"hallo ich bin der Vector refiner"<<std::endl;
         std::cout<<this->space().index()<<std::endl;
 
-        std::cout<<"done refining"<<std::endl;
+        auto vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto vc_k = vc.getSubCreator(k);
 
+        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
+        description_.insert(description_.begin()+k, std::make_shared<Description>(vc_k.get()));
+        v_.insert(v_.begin()+k, VectorImpl(Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(k).descriptions.spaces )));
+        std::cout<<"done refining"<<std::endl;
       }
 
 
@@ -202,6 +207,7 @@ namespace Spacy
         Real result{0.};
         auto cy = creator< VectorCreator<Description> >(y.space());
         auto cthis = creator< VectorCreator<Description> >(this->space());
+
 
         for(auto i = 0;i<this->variableSet_.size();i++)
         {
