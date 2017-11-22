@@ -78,7 +78,7 @@ namespace Spacy
             /// the system operator
             ///@param qPq \f$ qPq \f$, where \f$q\f$ is the conjugate search direction and \f$P\f$
             /// the preconditioner
-            void update( Real qAq, Real qPq ) const
+            void update( Real qAq, Real qPq )
             {
                 assert( impl_ );
                 function_.update_Real_Real( impl_, std::move( qAq ), std::move( qPq ) );

@@ -22,8 +22,8 @@ namespace Spacy
                 using apply_Real_ref_Real_function =
                     void ( * )( const clang::type_erasure::Storage&, Real&, Real );
                 apply_Real_ref_Real_function apply_Real_ref_Real;
-                using update_Real_Real_function = void ( * )( const clang::type_erasure::Storage&,
-                                                              Real, Real );
+                using update_Real_Real_function = void ( * )( clang::type_erasure::Storage&, Real,
+                                                              Real );
                 update_Real_Real_function update_Real_Real;
                 using adjustResidual_Real_const_Vector_ref_Vector_ref_function =
                     void ( * )( const clang::type_erasure::Storage&, Real, const Vector&, Vector& );
@@ -45,7 +45,7 @@ namespace Spacy
                     data.template get< Impl >().apply( qAq, std::move( qPq ) );
                 }
 
-                static void update_Real_Real( const clang::type_erasure::Storage& data, Real qAq,
+                static void update_Real_Real( clang::type_erasure::Storage& data, Real qAq,
                                               Real qPq )
                 {
                     data.template get< Impl >().update( std::move( qAq ), std::move( qPq ) );
