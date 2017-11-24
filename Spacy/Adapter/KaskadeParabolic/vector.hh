@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <boost/signals2.hpp>
+#include <boost/fusion/include/at_c.hpp>
 
 #include <Spacy/Spaces/ScalarSpace/Real.hh>
 #include <Spacy/Util/Base/AddArithmeticOperators.hh>
@@ -35,6 +36,10 @@ namespace Spacy
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
       using VariableSet = typename Description::VariableSet;
+
+//      using VYSetDescription = Detail::ExtractDescription_t<Description ,0>;
+//      using CoeffVec = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
+
 
     public:
 
@@ -116,15 +121,29 @@ namespace Spacy
 
 
       /// Access coefficient vector.
-      VariableSet& get(const unsigned i)
+      const VariableSet& get(const unsigned i) const
       {
+        if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return variableSet_.at(i);
       }
 
-      /// Access coefficient vector.
-      const VariableSet& get(const unsigned i) const
+      /// Access nonconst coefficient vector.
+      VariableSet& get_nonconst(const unsigned i)
       {
+        if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return variableSet_.at(i);
+      }
+
+      const auto& getCoeffVec(const unsigned i) const
+      {
+        if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
+        return  ::boost::fusion::at_c<0>(variableSet_.at(i).data).coefficients();
+      }
+
+      auto& getCoeffVec_nonconst(const unsigned i)
+      {
+        if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
+        return  ::boost::fusion::at_c<0>(variableSet_.at(i).data).coefficients();
       }
       /**
            * @brief In-place summation \f$ x+=y\f$.

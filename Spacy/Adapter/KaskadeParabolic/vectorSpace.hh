@@ -10,7 +10,7 @@
 #include "l2Product.hh"
 #include "vector.hh"
 #include "util.hh"
-#include "dynamicProblem.hh"
+#include "gridManager.hh"
 
 #include "../Kaskade/vectorSpace.hh"
 #include "boost/signals2.hpp"
@@ -35,10 +35,9 @@ namespace Spacy
        * @brief Create from %Kaskade 7 function space.
        * @param space single %Kaskade 7 function space (no product space)
        */
-      VectorCreator(const DynamicProblem& DP)
+      VectorCreator(GridManager<VariableSetDescription>& gm): gm_(gm)
       {
-        dpptr_ = std::make_shared<DynamicProblem>(DP);
-        auto descriptions = DP.getDescriptions();
+        auto descriptions = gm.getDescriptions();
         for(auto i = 0u ; i < descriptions.size(); i++)
           creators_.push_back(std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(Spacy::Kaskade::VectorCreator<VariableSetDescription>(descriptions.at(i))));
 
@@ -63,8 +62,12 @@ namespace Spacy
 
       const Spaces& getSpace(unsigned i) const
       {
-        auto spacesVec = dpptr_->getSpacesVec();
+        auto spacesVec = gm_.getSpacesVec();
         return *(spacesVec.at(i));
+      }
+      const GridManager<VariableSetDescription>& getGridMan() const
+      {
+        return gm_;
       }
 
       void refine(unsigned k)
@@ -73,7 +76,7 @@ namespace Spacy
         //refining the grid
 
         std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
-        auto insertedDesc = dpptr_->refine(k);
+        auto insertedDesc = gm_.refine(k);
         auto toinsertCreator = std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(::Spacy::Kaskade::VectorCreator<VariableSetDescription>( insertedDesc));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
         std::cout<<"--------returning from the Grids refine function"<<std::endl;
@@ -88,7 +91,7 @@ namespace Spacy
 
     private:
       std::vector<std::shared_ptr<::Spacy::Kaskade::VectorCreator<VariableSetDescription> > > creators_;
-      std::shared_ptr< DynamicProblem > dpptr_;
+      GridManager<VariableSetDescription>& gm_;
     };
 
     /**
@@ -97,9 +100,9 @@ namespace Spacy
      * @param space single %Kaskade 7 function space (no product space)
      */
     template<class VariableSetDescription>
-    auto makeHilbertSpace(const DynamicProblem& DP)
+    auto makeHilbertSpace(GridManager<VariableSetDescription>& gm)
     {
-      return ::Spacy::makeHilbertSpace( KaskadeParabolic::VectorCreator<VariableSetDescription> (DP) , l2Product<VariableSetDescription>{} );
+      return ::Spacy::makeHilbertSpace( KaskadeParabolic::VectorCreator<VariableSetDescription> (gm) , l2Product<VariableSetDescription>{} );
     }
 
   }

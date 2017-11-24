@@ -1,92 +1,176 @@
+
+// Copyright (C) 2015 by Lars Lubkoll. All rights reserved.
+// Released under the terms of the GNU General Public License version 3 or later.
+
 #pragma once
 
-#include <Spacy/vector.hh>
-#include <Spacy/Util/cast.hh>
-#include <Spacy/Util/Base/OperatorBase.hh>
 
-#include "util.hh"
-#include "vectorSpace.hh"
-
+#include "fem/variables.hh"
 #include "linalg/direct.hh"
+
+#include "Spacy/linearSolver.hh"
+#include "Spacy/operator.hh"
+//#include "Spacy/c2Functional.hh"
+#include "Spacy/vector.hh"
+#include "Spacy/Util/Base/OperatorBase.hh"
+#include "util.hh"
+#include <Spacy/zeroVectorCreator.hh>
+
+#include <iostream>
+
+#include "linearBlockOperator.hh"
 
 namespace Spacy
 {
-  namespace Kaskade
-  {
-    /**
-     * @ingroup KaskadeGroup
-     * @brief Direct solver interface for %Kaskade 7.
+/// \cond
+class VectorSpace;
+/// \endcond
+
+namespace KaskadeParabolic
+{
+
+    namespace PDE{
+
+        /**
+     * @brief A direct solver for time dependend problems
+     *
      */
-    template <class KaskadeOperator, class AnsatzVariableDescription, class TestVariableDescription>
-    class DirectSolver : public OperatorBase
-    {
-      using Spaces = typename AnsatzVariableDescription::Spaces;
-      using Domain = typename AnsatzVariableDescription::template CoefficientVectorRepresentation<>::type;
-      using Range = typename TestVariableDescription::template CoefficientVectorRepresentation<>::type;
-    public:
-      DirectSolver() = delete;
-      /**
-       * @brief Constructor.
-       * @param A %Kaskade operator (i.e., %AssembledGalerkinOperator or %MatrixRepresentedOperator)
-       * @param spaces boost fusion forward sequence of space pointers required to initialize temporary storage
-       * @param domain domain space of the solver
-       * @param range range space of the solver
-       * @param directSolver solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU)
-       * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
-       */
-      DirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
-                   DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
-        : OperatorBase(domain,range),
-          A_(std::move(A)),
-          spaces_( extractSpaces<AnsatzVariableDescription>(domain) ),
-          directSolver_(directSolver),
-          property_(property)
-      {}
+        template<class FunctionalDefinition>
+        class DirectSolver : public OperatorBase {
+            /// %Kaskade::VariableSetDescription
+            using VariableSetDescription = typename FunctionalDefinition::AnsatzVars;
+            /// Coefficient vector type.
+            using CoefficientVector = typename VariableSetDescription::template CoefficientVectorRepresentation<>::type;
+            /// boost::fusion::vector<const Space0*,const Space1*,...>
+            using Spaces = typename VariableSetDescription::Spaces;
+            /// Matrix type
+            using Matrix = ::Kaskade::MatrixAsTriplet<double>;
+            using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix, CoefficientVector, CoefficientVector>;
 
-      /// Compute \f$A^{-1}x\f$.
-      ::Spacy::Vector operator()(const ::Spacy::Vector& x) const
-      {
-        if( solver_ == nullptr)
-            solver_ = std::make_shared< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > >
-            ( ::Kaskade::directInverseOperator(A_, directSolver_, property_) );
+//            using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<VariableSetDescription, 0>;
+          using VYSetDescription = VariableSetDescription;
+            using CoefficientVectorY = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
+            using KaskadeOperatorYY = ::Kaskade::MatrixRepresentedOperator<Matrix, CoefficientVectorY, CoefficientVectorY>;
 
-        Range y_(TestVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
-        Domain x_(AnsatzVariableDescription::template CoefficientVectorRepresentation<>::init(spaces_));
-        copyToCoefficientVector<AnsatzVariableDescription>(x,x_);
+            using ImplVec = ::Spacy::KaskadeParabolic::Vector<VariableSetDescription>;
 
-        solver_->apply( x_ , y_ );
+            /**
+             * @brief Constructor.
+             * @param domain domain space
+             * @param range range space
+             */
 
-        auto y = zero(range());
-        copyFromCoefficientVector<TestVariableDescription>(y_,y);
+        public:
+            DirectSolver() = delete;
 
-        return y;
-      }
+            DirectSolver( const LinearBlockOperator<VariableSetDescription, VariableSetDescription> &H) :
+                    OperatorBase(H.domain(), H.range()), H_(H), spacesVec_(H.getSpacesVec()), dtVec_(H.getDtVec()) {
 
-    private:
-      KaskadeOperator A_;
-      Spaces spaces_;
-      DirectType directSolver_ = DirectType::UMFPACK3264;
-      MatrixProperties property_ = MatrixProperties::GENERAL;
-      mutable std::shared_ptr< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<Domain,Range> > > solver_ = nullptr;
-    };
+                for (auto i = 0u; i < dtVec_.size(); i++) {
+                    double dt = dtVec_.at(i);
 
-    /**
-     * @brief Convenient generation of direct solver for %Kaskade 7.
-     * @param A %Kaskade operator (i.e., AssembledGalerkinOperator or MatrixRepresentedOperator)
-     * @param spaces boost fusion forward sequence of space pointers required to initialize temporary storage
-     * @param domain domain space of the solver
-     * @param range range space of the solver
-     * @param directSolver solver type (DirectType::MUMPS (default), DirectType::UMFPACK, DirectType::UMFPACK3264 or DirectType::SUPERLU)
-     * @param property matrix property (MatrixProperties::GENERAL (default) or MatrixProperties::SYMMETRIC)
-     * @return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>( A , spaces , domain , range , directSolver , property )
-     */
-    template <class AnsatzVariableSetDescription, class TestVariableSetDescription, class KaskadeOperator>
-    auto makeDirectSolver(KaskadeOperator A, const VectorSpace& domain, const VectorSpace& range,
-                          DirectType directSolver = DirectType::UMFPACK3264, MatrixProperties property = MatrixProperties::GENERAL )
-    {
-      return DirectSolver<KaskadeOperator,AnsatzVariableSetDescription,TestVariableSetDescription>
-          ( std::move(A) , domain , range , directSolver , property );
+                    if (i != 0) {
+                        KaskadeOperatorYY currentKaskOp(H_.getKaskOp("A", i).get());
+                        currentKaskOp *= dt;
+                        currentKaskOp += H_.getKaskOp("MassY", i).get();
+                        solDiag.emplace_back(std::make_shared
+                                                     <::Kaskade::InverseLinearOperator <
+                                                      ::Kaskade::DirectSolver <
+                                                      CoefficientVectorY, CoefficientVectorY> >
+                                             > (::Kaskade::directInverseOperator(currentKaskOp,
+                                                                                 DirectType::UMFPACK3264,
+                                                                                 MatrixProperties::GENERAL)));
+                    } else {
+                        KaskadeOperatorYY currentKaskOp(H_.getKaskOp("MassY", i));
+                        solDiag.emplace_back(std::make_shared
+                                                     <::Kaskade::InverseLinearOperator <
+                                                      ::Kaskade::DirectSolver <
+                                                      CoefficientVectorY, CoefficientVectorY> >
+                                             > (::Kaskade::directInverseOperator(currentKaskOp,
+                                                                                 DirectType::UMFPACK3264,
+                                                                                 MatrixProperties::GENERAL)));
+                    }
+                }
+
+
+            }
+
+            /**
+             * @brief Apply preconditioner \f$P\f$.
+             * @param x argument
+             * @return \f$P(x)\f$
+             */
+            ::Spacy::Vector operator()(const ::Spacy::Vector &b) const {
+
+                using ::Spacy::cast_ref;
+
+                auto b_impl = cast_ref<ImplVec>(b);
+
+                std::vector<CoefficientVectorY> b_y;
+
+                //domain
+                std::vector<CoefficientVectorY> x_y;
+
+                //range
+                x_y.reserve(dtVec_.size());
+
+                for (auto i = 0u; i < dtVec_.size(); i++) {
+                    b_y.emplace_back(CoefficientVectorY(
+                            VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec_.at(i)))));
+
+                    x_y.emplace_back(CoefficientVectorY(
+                            VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec_.at(i)))));
+                    x_y.at(i) = 0;
+                }
+
+                // copy into CoefficientVectors
+                for (auto i = 0u; i < dtVec_.size(); i++) {
+                    boost::fusion::at_c<0>(b_y.at(i).data) = b_impl.getCoeffVec(i);
+                }
+
+
+                /// Solve State Equation
+                for (auto i = 0u; i < dtVec_.size(); i++) {
+                    if (verbose)
+                        std::cout << "Solving the state equation for timestep " << i << std::endl;
+
+                    double dt = dtVec_.at(i);
+
+                    solDiag.at(i)->apply(b_y.at(i), x_y.at(i));
+
+                    if (i != dtVec_.size() - 1)
+                        H_.getKaskOp("MassY", i).applyscaleadd(1., x_y.at(i), b_y.at(i + 1));
+                }
+
+                ::Spacy::Vector result = zero(domain());
+                auto& res_impl = cast_ref<ImplVec>(result);
+                for (auto i = 0u; i < dtVec_.size(); i++) {
+                    res_impl.getCoeffVec_nonconst(i) = boost::fusion::at_c<0>(x_y.at(i).data);
+                }
+
+                return result;
+
+            }
+
+        private:
+            bool verbose = 0;
+            std::vector<std::shared_ptr<Spaces> > spacesVec_;
+            std::vector<double> dtVec_;
+            LinearBlockOperator<VariableSetDescription, VariableSetDescription> H_;
+            mutable std::vector<std::shared_ptr<
+                    ::Kaskade::InverseLinearOperator <
+                    ::Kaskade::DirectSolver < CoefficientVectorY, CoefficientVectorY> > > >
+
+            solDiag{};
+        };
+
+        template <class OperatorDefinition,class VariableSetDescription>
+        auto makeDirectSolver(LinearBlockOperator<VariableSetDescription, VariableSetDescription> &H)
+        {
+            return DirectSolver<OperatorDefinition>(std::move(H));
+        }
     }
 
-  }
 }
+}
+
