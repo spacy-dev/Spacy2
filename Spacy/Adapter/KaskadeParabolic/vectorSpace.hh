@@ -72,19 +72,19 @@ namespace Spacy
 
       void refine(unsigned k)
       {
-        std::cout<< "in VC refine function :"<<k<<std::endl;
+//        std::cout<< "in VC refine function :"<<k<<std::endl;
         //refining the grid
 
-        std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
+//        std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
         auto insertedDesc = gm_.refine(k);
         auto toinsertCreator = std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(::Spacy::Kaskade::VectorCreator<VariableSetDescription>( insertedDesc));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
-        std::cout<<"--------returning from the Grids refine function"<<std::endl;
+//        std::cout<<"--------returning from the Grids refine function"<<std::endl;
 
         //tell the vectors
-        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
+//        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
         this->S_->operator()(k);
-        std::cout<<"--------returning from the VC refine function"<<std::endl;
+//        std::cout<<"--------returning from the VC refine function"<<std::endl;
 
       }
       std::shared_ptr<Signal> S_;

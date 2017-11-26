@@ -3,7 +3,6 @@
 #include <utility>
 #include <vector>
 
-
 #include <fem/assemble.hh>
 #include <fem/istlinterface.hh>
 #include <linalg/triplet.hh>
@@ -61,14 +60,10 @@ namespace Spacy
 
     public:
 
-      C1Operator(const std::vector<OperatorDefinition>& F,GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain, const VectorSpace& range)
-        : OperatorBase(domain,range),F_(F), gm_(gm)
+      C1Operator(OperatorDefinition& F,GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain, const VectorSpace& range)
+        : OperatorBase(domain,range), F_(F), gm_(gm)
       {
-        rhs_ = zero(range);
-        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
-        A_.resize(no_time_steps);
-        MassY_.resize(no_time_steps);
-        gridChanged_.resize(no_time_steps,true);
+        this->resizeMembers();
       }
 
       /**
@@ -124,7 +119,7 @@ namespace Spacy
       /// Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
       auto linearization(const ::Spacy::Vector& x) const
       {
-        gradient_updated = false;
+        gradient_updated = true;
         assembleGradient(x);
 
         if(gradient_updated || !G_ptr)
@@ -166,10 +161,27 @@ namespace Spacy
       }
 
     private:
+
+      void resizeMembers() const
+      {
+        rhs_ = zero(range());
+        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
+        A_.resize(no_time_steps);
+        MassY_.resize(no_time_steps);
+        gridChanged_.resize(no_time_steps,true);
+        FVec_.resize(no_time_steps,F_);
+        return;
+      }
+
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
         if( old_X_A_ && (old_X_A_==x) ) return;
+
+        rhs_ = zero(range());
+        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
+        MassY_.resize(no_time_steps);
+        FVec_.resize(no_time_steps,F_);
 
         if(verbose)
           std::cout<<"assembling Operator"<<std::endl;
@@ -189,7 +201,7 @@ namespace Spacy
 
           Assembler assembler(*(spacesVec.at(timeStep)));
 
-          assembler.assemble(::Kaskade::linearization(F_.at(timeStep), x_impl.get_nonconst(timeStep)), Assembler::RHS,
+          assembler.assemble(::Kaskade::linearization(FVec_.at(timeStep), x_impl.get_nonconst(timeStep)), Assembler::RHS,
                              getNumberOfThreads());
 
           rhs_impl.getCoeffVec_nonconst(timeStep) = boost::fusion::at_c<0>(CoefficientVectorY(assembler.rhs()).data);
@@ -202,7 +214,6 @@ namespace Spacy
 
           CoefficientVectorY y_curr_ (VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec.at(timeStep))));
             boost::fusion::at_c<0>(y_curr_.data) = x_impl.getCoeffVec(timeStep);
-
           CoefficientVectorY y_curr_dual(
                 VYSetDescription::template CoefficientVectorRepresentation<>::init(
                   *(spacesVec.at(timeStep))));
@@ -255,6 +266,12 @@ namespace Spacy
       {
         if( old_X_dA_ && (old_X_dA_==x) ) return;
 
+        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
+        A_.resize(no_time_steps);
+        MassY_.resize(no_time_steps);
+        gridChanged_.resize(no_time_steps,true);
+        FVec_.resize(no_time_steps,F_);
+
         if(verbose)
           std::cout<<"assembling Gradient"<<std::endl;
 
@@ -271,15 +288,8 @@ namespace Spacy
         {
           if(verbose)
             std::cout<<"assembling Gradient "<<timeStep<<std::endl;
-          std::cout<<"FSIZE "<<F_.size()<<spacesVec.size()<<A_.size()<<std::endl;
           Assembler assembler(*(spacesVec.at(timeStep)));
-          std::cout<<2<<std::endl;
-          F_.at(timeStep);
-          std::cout<<21<<std::endl;
-          x_impl.get(timeStep);
-          std::cout<<22<<std::endl;
-          assembler.assemble(::Kaskade::linearization(F_.at(timeStep),x_impl.get(timeStep)) , Assembler::MATRIX , getNumberOfThreads() );
-          std::cout<<3<<std::endl;
+          assembler.assemble(::Kaskade::linearization(FVec_.at(timeStep),x_impl.get(timeStep)) , Assembler::MATRIX , getNumberOfThreads() );
           A_.at(timeStep) = KaskadeOperator(assembler.template get<Matrix>(onlyLowerTriangle_,0,1,0,1) );
         }
 
@@ -297,11 +307,10 @@ namespace Spacy
 
         for(auto timeStep = 0u; timeStep < dtVec.size() ; timeStep++)
         {
-          if(!gridChanged_.at(timeStep)){break;}
+//          if(!gridChanged_.at(timeStep)){break;}
           if(verbose)
             std::cout<<"assembling mass matrices for timestep "<<timeStep<<std::endl;
 
-          std::cout<<spacesVec.size()<<std::endl;
           VariableSetDescription variableSet(*(spacesVec.at(timeStep)));
           typename VariableSetDescription::VariableSet x_(variableSet);
           AssemblerSP assemblersp(*(spacesVec.at(timeStep)));
@@ -337,7 +346,8 @@ namespace Spacy
       }
 
       GridManager<VariableSetDescription>& gm_;
-      std::vector<OperatorDefinition> F_;
+      OperatorDefinition F_;
+      mutable std::vector<OperatorDefinition> FVec_;
       bool verbose = true;
       mutable std::vector<bool> gridChanged_{};
       mutable bool gradient_updated;
@@ -380,7 +390,7 @@ namespace Spacy
          * a system of equation.
          */
     template <class OperatorDefinition>
-    auto makeC1Operator(const std::vector<OperatorDefinition>& F,  GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain,const VectorSpace& range)
+    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain,const VectorSpace& range)
     {
       return C1Operator<OperatorDefinition>(F,gm,domain,range);
     }

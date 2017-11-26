@@ -44,21 +44,32 @@ int main()
     Dune::FieldMatrix<double,1,dim> du0{0};
     auto integrand = FunG::heatModel(c, d, u0, du0);
     auto F = FungOperator<decltype(integrand),VariableSetDesc>(integrand);
+//    std::vector< FungOperator<decltype(integrand),VariableSetDesc> > FVec(no_time_steps, FungOperator<decltype(integrand),VariableSetDesc>(integrand));
 
-    ::Spacy::KaskadeParabolic::DynamicProblem DP(no_time_steps,dt_size);
-    auto domain = Spacy::KaskadeParabolic::makeHilbertSpace<VariableSetDesc>(DP);
 
-    Spacy::C1Operator A = Spacy::Kaskade::makeC1Operator( F , domain , domain.dualSpace() );
-//    domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
+    ::Spacy::KaskadeParabolic::GridManager<VariableSetDesc> gm (no_time_steps,dt_size,refinements,order);
+    auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm);
 
-//    auto p = Spacy::Newton::Parameter{};
-//    p.setRelativeAccuracy(1e-12);
+    auto A = Spacy::KaskadeParabolic::makeC1Operator( F,gm , domain , domain.dualSpace() );
 
-//    auto x = covariantNewton(A,p);
-//    //  auto x = Spacy::contravariantNewton(A,p);
-//    //  auto x = Spacy::localNewton(A,p);
+    auto& vc = ::Spacy::creator<::Spacy::KaskadeParabolic::VectorCreator<VariableSetDesc> >(domain);
+    vc.refine(5);
+    vc.refine(6);
+    vc.refine(1);
+    vc.refine(8);
+
+    domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
+
+
+
+    auto p = Spacy::Newton::Parameter{};
+    p.setRelativeAccuracy(1e-12);
+std::cout<<"Starting Newton "<<std::endl;
+    auto x = covariantNewton(A,p);
+    //  auto x = Spacy::contravariantNewton(A,p);
+    //  auto x = Spacy::localNewton(A,p);
 
 //    //construct Galerkin representation
-//    writeVTK(Spacy::cast_ref< Spacy::Kaskade::Vector<VariableSetDesc> >(x), "temperature");
+    writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "temperature");
     std::cout<<"returning from main"<<std::endl;
 }
