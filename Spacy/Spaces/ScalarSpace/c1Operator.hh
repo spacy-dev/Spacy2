@@ -1,42 +1,42 @@
 #pragma once
 
-#include <functional>
 #include <memory>
+#include <functional>
 
 #include <Spacy/Util/Base/OperatorBase.hh>
 
 namespace Spacy
 {
-  /// @cond
-  class LinearOperator;
-  class Real;
-  class Vector;
-  /// @endcond
-
-  /** @addtogroup ScalarGroup @{ */
-  namespace Scalar
-  {
     /// @cond
     class LinearOperator;
+    class Real;
+    class Vector;
     /// @endcond
 
-    class C1Operator : public Spacy::OperatorBase
+    /** @addtogroup ScalarGroup @{ */
+    namespace Scalar
     {
-    public:
-      C1Operator(std::function<double(double)> value,
-                 std::function<double(double)> derivative);
+        /// @cond
+        class LinearOperator;
+        /// @endcond
 
-     Spacy::Vector operator()(const ::Spacy::Vector& x) const;
+        class C1Operator : public Spacy::OperatorBase
+        {
+        public:
+            C1Operator( std::function< double( double ) > value,
+                        std::function< double( double ) > derivative );
 
-     Spacy::Vector d1(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const;
+            Spacy::Vector operator()( const ::Spacy::Vector& x ) const;
 
-     LinearOperator linearization(const ::Spacy::Vector& x) const;
+            Spacy::Vector d1( const ::Spacy::Vector& x, const ::Spacy::Vector& dx ) const;
 
-    private:
-      std::function<double(double)> value_ = [](double x) { return x*x-1;};
-      std::function<double(double)> derivative_ = [](double x) { return 2*x; };
-      std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
-    };
-  }
-  /** @} */
+            LinearOperator linearization( const ::Spacy::Vector& x ) const;
+
+        private:
+            std::function< double( double ) > value_;
+            std::function< double( double ) > derivative_;
+            std::shared_ptr< VectorSpace > operatorSpace_ = nullptr;
+        };
+    }
+    /** @} */
 }
