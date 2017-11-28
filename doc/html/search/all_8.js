@@ -10,7 +10,7 @@ var searchData=
   ['index',['index',['../classSpacy_1_1VectorSpace.html#a4cc04c09af8d01608c2fe2e29028c26b',1,'Spacy::VectorSpace']]],
   ['inducedscalarproduct',['InducedScalarProduct',['../classSpacy_1_1InducedScalarProduct.html',1,'Spacy']]],
   ['inducedscalarproduct',['InducedScalarProduct',['../classSpacy_1_1InducedScalarProduct.html#a8cf4d6c0823b6c9d59be783d3627130e',1,'Spacy::InducedScalarProduct']]],
-  ['init',['init',['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1Generic_1_1Step.html#a91469ef55abf1cb43971a91c50edc0e5',1,'Spacy::Generic::Step::init()']]],
+  ['init',['init',['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1CG_1_1RegularizeViaPreconditioner.html#a0d8a2213b04104a9fc526413b554f3d5',1,'Spacy::CG::RegularizeViaPreconditioner::init()'],['../classSpacy_1_1Generic_1_1Step.html#a91469ef55abf1cb43971a91c50edc0e5',1,'Spacy::Generic::Step::init()']]],
   ['initblocks',['InitBlocks',['../structSpacy_1_1dealII_1_1InitBlocks.html',1,'Spacy::dealII']]],
   ['initblocks_3c_20dim_2c_20variabledims_2c_20row_2c_2d1_20_3e',['InitBlocks&lt; dim, VariableDims, row,-1 &gt;',['../structSpacy_1_1dealII_1_1InitBlocks_3_01dim_00_01VariableDims_00_01row_00-1_01_4.html',1,'Spacy::dealII']]],
   ['initblockvector',['InitBlockVector',['../structSpacy_1_1dealII_1_1InitBlockVector.html',1,'Spacy::dealII']]],

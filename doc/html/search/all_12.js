@@ -1,6 +1,8 @@
 var searchData=
 [
   ['terminationcriterion',['TerminationCriterion',['../classSpacy_1_1CG_1_1TerminationCriterion.html',1,'Spacy::CG']]],
+  ['terminationcriterion',['terminationCriterion',['../classSpacy_1_1CG_1_1Solver.html#a6ef3b1242f2d867a8937c3163266e93f',1,'Spacy::CG::Solver']]],
+  ['theta',['theta',['../classSpacy_1_1CG_1_1RegularizeViaPreconditioner.html#ad961ac12b34d30c98ed04b9fa33649ec',1,'Spacy::CG::RegularizeViaPreconditioner']]],
   ['timer',['Timer',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
   ['timer_3c_20std_3a_3achrono_3a_3amilliseconds_20_3e',['Timer&lt; std::chrono::milliseconds &gt;',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
   ['traits',['Traits',['../structSpacy_1_1dealII_1_1Traits.html',1,'Spacy::dealII']]],

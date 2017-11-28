@@ -1,6 +1,6 @@
 <map id="Spacy::Mixin::Verbosity" name="Spacy::Mixin::Verbosity">
 <area shape="rect" id="node3" href="$classSpacy_1_1ACR_1_1ACRSolver.html" title="Adaptive cubic regularization approach for solving unconstrained minimization problems Compute direct..." alt="" coords="493,5,664,32"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="495,56,662,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver. " alt="" coords="495,56,662,83"/>
 <area shape="rect" id="node5" href="$classSpacy_1_1CG_1_1Solver.html" title="Conjugate gradient method. " alt="" coords="513,107,645,133"/>
 <area shape="rect" id="node6" href="$classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html" title="Termination criterion for conjugate gradient methods based on an estimate of the relative energy erro..." alt="" coords="491,158,667,199"/>
 <area shape="rect" id="node7" href="$classSpacy_1_1CompositeStep_1_1AffineCovariantSolver.html" title="The affine covariant step method described in , &#160;for the solution of equality constraint optimization..." alt="" coords="500,223,657,265"/>

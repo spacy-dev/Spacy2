@@ -123,15 +123,19 @@ Collaboration diagram for Spacy::CG::Solver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4b6e80b42da6ee9a64cbd07f85964cd5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#a4b6e80b42da6ee9a64cbd07f85964cd5">Solver</a> (<a class="el" href="namespaceSpacy.html#a022a87afa759e18781dd2aea9a80cd73">CallableOperator</a> <a class="el" href="classSpacy_1_1CG_1_1Solver.html#a9b0fa76350c42fb60b2fbeb40b343fa2">A</a>, <a class="el" href="namespaceSpacy.html#a022a87afa759e18781dd2aea9a80cd73">CallableOperator</a> <a class="el" href="classSpacy_1_1CG_1_1Solver.html#a929d2b9deecfd96ef7efb8097e567f37">P</a>, const std::string &amp;type=&quot;CG&quot;)</td></tr>
-<tr class="memdesc:a4b6e80b42da6ee9a64cbd07f85964cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up conjugate gradient solver.  <a href="#a4b6e80b42da6ee9a64cbd07f85964cd5">More...</a><br/></td></tr>
-<tr class="separator:a4b6e80b42da6ee9a64cbd07f85964cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6700dc77c85a0751476af4bbcb4fe478"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#a6700dc77c85a0751476af4bbcb4fe478">Solver</a> (<a class="el" href="namespaceSpacy.html#a022a87afa759e18781dd2aea9a80cd73">CallableOperator</a> <a class="el" href="classSpacy_1_1CG_1_1Solver.html#a9b0fa76350c42fb60b2fbeb40b343fa2">A</a>, <a class="el" href="namespaceSpacy.html#a022a87afa759e18781dd2aea9a80cd73">CallableOperator</a> <a class="el" href="classSpacy_1_1CG_1_1Solver.html#a929d2b9deecfd96ef7efb8097e567f37">P</a>, <a class="el" href="classSpacy_1_1CG_1_1Regularization.html">Regularization</a> regularization, bool truncated=false)</td></tr>
+<tr class="memdesc:a6700dc77c85a0751476af4bbcb4fe478"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up conjugate gradient solver.  <a href="#a6700dc77c85a0751476af4bbcb4fe478">More...</a><br/></td></tr>
+<tr class="separator:a6700dc77c85a0751476af4bbcb4fe478"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23770606bb41f2d8f5a6ae71d07934ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpacy_1_1Vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#a23770606bb41f2d8f5a6ae71d07934ab">solve</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;b) const </td></tr>
 <tr class="separator:a23770606bb41f2d8f5a6ae71d07934ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fe2345e859b267c86acff9f3920db3b"><td class="memTemplParams" colspan="2">template&lt;class Criterion &gt; </td></tr>
 <tr class="memitem:a7fe2345e859b267c86acff9f3920db3b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#a7fe2345e859b267c86acff9f3920db3b">setTerminationCriterion</a> (Criterion newTerminate)</td></tr>
 <tr class="memdesc:a7fe2345e859b267c86acff9f3920db3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a new termination criterion which must satisfy the TerminationCriterionConcept.  <a href="#a7fe2345e859b267c86acff9f3920db3b">More...</a><br/></td></tr>
 <tr class="separator:a7fe2345e859b267c86acff9f3920db3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef3b1242f2d867a8937c3163266e93f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ef3b1242f2d867a8937c3163266e93f"></a>
+<a class="el" href="classSpacy_1_1CG_1_1TerminationCriterion.html">CG::TerminationCriterion</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#a6ef3b1242f2d867a8937c3163266e93f">terminationCriterion</a> () noexcept</td></tr>
+<tr class="memdesc:a6ef3b1242f2d867a8937c3163266e93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the termination criterion. <br/></td></tr>
+<tr class="separator:a6ef3b1242f2d867a8937c3163266e93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0b6c7b754e093610df6d67bf3067acf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1CG_1_1Solver.html#ae0b6c7b754e093610df6d67bf3067acf">indefiniteOperator</a> () const noexcept</td></tr>
 <tr class="memdesc:ae0b6c7b754e093610df6d67bf3067acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">After solving an equation reports if the underlying operator is indefinite.  <a href="#ae0b6c7b754e093610df6d67bf3067acf">More...</a><br/></td></tr>
 <tr class="separator:ae0b6c7b754e093610df6d67bf3067acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,7 +221,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li>"TRCG": Truncated regularized preconditioned conjugate gradient method for nonconvex problems, mixing the truncated with the regularized conjugate gradient method. If a direction of negative curvature is encounted and the termination criterion indicates sufficient decrease in the used norm the iteration is stopped. Else, denoting the used operator by \(A\) and the preconditioner by \(P\), \(A\) is implicitly replaced by the regularization $ \(A+\thetaP\). Then the <a class="el" href="namespaceSpacy_1_1CG.html" title="Conjugate gradient methods for convex and nonconvex problems (CG, Truncated CG, Regularized CG and Tr...">CG</a> method is restarted for the regularized problem. The necessary quantities are available during the standard cg implementation, thus the costs for computing the regularization are neglishible (see <a class="el" href="citelist.html#CITEREF_Lubkoll2015a">Lubkoll2015a</a>). </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a4b6e80b42da6ee9a64cbd07f85964cd5"></a>
+<a class="anchor" id="a6700dc77c85a0751476af4bbcb4fe478"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -236,8 +240,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>type</em> = <code>&quot;CG&quot;</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="classSpacy_1_1CG_1_1Regularization.html">Regularization</a>&#160;</td>
+          <td class="paramname"><em>regularization</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>truncated</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -252,7 +262,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <table class="params">
     <tr><td class="paramname">A</td><td>linear operator </td></tr>
     <tr><td class="paramname">P</td><td>preconditioner </td></tr>
-    <tr><td class="paramname">type</td><td>conjugate gradient type ("CG", "RCG", "TCG" or "TRCG") </td></tr>
+    <tr><td class="paramname">regularization</td><td>regularization for the treatment of nonconvexities </td></tr>
+    <tr><td class="paramname">truncated</td><td>set to true if the algorithm should terminate on nonconvexities </td></tr>
   </table>
   </dd>
 </dl>
@@ -451,7 +462,7 @@ template&lt;class Criterion &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 28 2017 11:56:24 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 12:25:19 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

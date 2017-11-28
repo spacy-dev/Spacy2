@@ -163,8 +163,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                function_.apply_Real_ref_Real( impl_, qAq, std::move( qPq ) );</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classSpacy_1_1CG_1_1Regularization.html#aa613081282b9d2d793331b4cdc299747">   81</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1CG_1_1Regularization.html#aa613081282b9d2d793331b4cdc299747">update</a>( <a class="code" href="classSpacy_1_1Real.html">Real</a> qAq, <a class="code" href="classSpacy_1_1Real.html">Real</a> qPq )<span class="keyword"> const</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classSpacy_1_1CG_1_1Regularization.html#ae529ec998f6902bb88aea81461f72e65">   81</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1CG_1_1Regularization.html#ae529ec998f6902bb88aea81461f72e65">update</a>( <a class="code" href="classSpacy_1_1Real.html">Real</a> qAq, <a class="code" href="classSpacy_1_1Real.html">Real</a> qPq )</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                assert( impl_ );</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                function_.update_Real_Real( impl_, std::move( qAq ), std::move( qPq ) );</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
@@ -194,16 +194,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        };</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="ttc" id="classSpacy_1_1CG_1_1Regularization_html_ae529ec998f6902bb88aea81461f72e65"><div class="ttname"><a href="classSpacy_1_1CG_1_1Regularization.html#ae529ec998f6902bb88aea81461f72e65">Spacy::CG::Regularization::update</a></div><div class="ttdeci">void update(Real qAq, Real qPq)</div><div class="ttdoc">Update regularization (parameter). </div><div class="ttdef"><b>Definition:</b> Regularization.hh:81</div></div>
 <div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdoc">Type-erased vector. </div><div class="ttdef"><b>Definition:</b> vector.hh:13</div></div>
 <div class="ttc" id="classSpacy_1_1CG_1_1Regularization_html_a0a92edab4bf50bd27bc549311c736cd5"><div class="ttname"><a href="classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5">Spacy::CG::Regularization::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Initialize regularization. </div></div>
 <div class="ttc" id="classSpacy_1_1CG_1_1Regularization_html_a1e7aef0bb066f3e07022141de223b606"><div class="ttname"><a href="classSpacy_1_1CG_1_1Regularization.html#a1e7aef0bb066f3e07022141de223b606">Spacy::CG::Regularization::adjustResidual</a></div><div class="ttdeci">void adjustResidual(Real alpha, const Vector &amp;Pq, Vector &amp;r) const </div><div class="ttdoc">Adjust residual for consistency with the regularized left hand side. </div><div class="ttdef"><b>Definition:</b> Regularization.hh:92</div></div>
 <div class="ttc" id="classSpacy_1_1Real_html"><div class="ttname"><a href="classSpacy_1_1Real.html">Spacy::Real</a></div><div class="ttdoc">Real number. </div><div class="ttdef"><b>Definition:</b> Real.hh:11</div></div>
 <div class="ttc" id="classSpacy_1_1CG_1_1Regularization_html_ab55da1e68e5f25b89aa3713b95d254bd"><div class="ttname"><a href="classSpacy_1_1CG_1_1Regularization.html#ab55da1e68e5f25b89aa3713b95d254bd">Spacy::CG::Regularization::apply</a></div><div class="ttdeci">void apply(Real &amp;qAq, Real qPq) const </div><div class="ttdoc">Apply regularization to qAq, where q is the conjugate search direction. </div><div class="ttdef"><b>Definition:</b> Regularization.hh:70</div></div>
-<div class="ttc" id="classSpacy_1_1CG_1_1Regularization_html_aa613081282b9d2d793331b4cdc299747"><div class="ttname"><a href="classSpacy_1_1CG_1_1Regularization.html#aa613081282b9d2d793331b4cdc299747">Spacy::CG::Regularization::update</a></div><div class="ttdeci">void update(Real qAq, Real qPq) const </div><div class="ttdoc">Update regularization (parameter). </div><div class="ttdef"><b>Definition:</b> Regularization.hh:81</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 28 2017 11:56:24 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 28 2017 12:25:18 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

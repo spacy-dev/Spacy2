@@ -1,5 +1,5 @@
 <map id="Spacy::OperatorBase" name="Spacy::OperatorBase">
-<area shape="rect" id="node2" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver satisfying the IndefiniteLinearSolverConcept. " alt="" coords="241,5,407,32"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver. " alt="" coords="241,5,407,32"/>
 <area shape="rect" id="node3" href="$classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner.html" title="A triangular state constraint preconditioner used in . " alt="" coords="233,57,415,98"/>
 <area shape="rect" id="node4" href="$classSpacy_1_1dealII_1_1C1FunGOperator_3_01FunGOperator_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C1FunGOperator\l\&lt; FunGOperator, dim, VariableDim\l\&lt; variable_dims...\&gt; \&gt;" alt="" coords="212,121,436,177"/>
 <area shape="rect" id="node5" href="$classSpacy_1_1dealII_1_1CGSolver.html" title="Spacy::dealII::CGSolver\l\&lt; dim \&gt;" alt="" coords="242,201,406,242"/>
