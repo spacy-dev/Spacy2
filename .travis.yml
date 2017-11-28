@@ -6,6 +6,7 @@ addons:
     - ubuntu-toolchain-r-test
 
     packages:
+    - ccache
     - g++-5
     - gcc-5
     - g++-6
@@ -13,6 +14,7 @@ addons:
 
 cache:
   directories:
+    - ${HOME}/.ccache
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
@@ -146,7 +148,7 @@ script:
     else
       cmake -DBuildTest=ON -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" ..
     fi
-  - make
+  - cmake --build .
   - cd Test && ctest
 
 after_success:
