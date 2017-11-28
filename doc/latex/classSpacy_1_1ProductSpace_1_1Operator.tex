@@ -1,0 +1,84 @@
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator}{\section{Spacy\-:\-:Product\-Space\-:\-:Operator Class Reference}
+\label{classSpacy_1_1ProductSpace_1_1Operator}\index{Spacy\-::\-Product\-Space\-::\-Operator@{Spacy\-::\-Product\-Space\-::\-Operator}}
+}
+
+
+Product space operator.  
+
+
+
+
+{\ttfamily \#include $<$Operator.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Product\-Space\-:\-:Operator\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classSpacy_1_1ProductSpace_1_1Operator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Product\-Space\-:\-:Operator\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classSpacy_1_1ProductSpace_1_1Operator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator_a60e9bfb3fdb49717df0d88d1bf9e5a77}{using {\bfseries size\-\_\-type} = std\-::vector$<$ std\-::vector$<$ \hyperlink{classSpacy_1_1Operator}{Spacy\-::\-Operator} $>$ $>$\-::size\-\_\-type}\label{classSpacy_1_1ProductSpace_1_1Operator_a60e9bfb3fdb49717df0d88d1bf9e5a77}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1ProductSpace_1_1Operator_a31794ff8ff1e9349c82dc67db3725f09}{Operator} (const std\-::vector$<$ std\-::vector$<$ \hyperlink{classSpacy_1_1Operator}{Spacy\-::\-Operator} $>$ $>$ \&block\-Operators, const \hyperlink{classSpacy_1_1VectorSpace}{Spacy\-::\-Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{Spacy\-::\-Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator_a73e91a3e8d2623e1e59a7d6ca99ca6c0}{\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1ProductSpace_1_1Operator_a73e91a3e8d2623e1e59a7d6ca99ca6c0}{operator()} (const \hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const }\label{classSpacy_1_1ProductSpace_1_1Operator_a73e91a3e8d2623e1e59a7d6ca99ca6c0}
+
+\begin{DoxyCompactList}\small\item\em Compute $A(x)\in\mathbb{R}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator_a98e9c1a74ca866f09dc8af1d78b60d10}{\hyperlink{classSpacy_1_1Operator}{Spacy\-::\-Operator} \& \hyperlink{classSpacy_1_1ProductSpace_1_1Operator_a98e9c1a74ca866f09dc8af1d78b60d10}{operator()} (size\-\_\-type row, size\-\_\-type col)}\label{classSpacy_1_1ProductSpace_1_1Operator_a98e9c1a74ca866f09dc8af1d78b60d10}
+
+\begin{DoxyCompactList}\small\item\em Access $A_{row,col}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator_a4e5a24cc27ee39f0252204bb29eef12f}{const \hyperlink{classSpacy_1_1Operator}{Spacy\-::\-Operator} \& \hyperlink{classSpacy_1_1ProductSpace_1_1Operator_a4e5a24cc27ee39f0252204bb29eef12f}{operator()} (size\-\_\-type row, size\-\_\-type col) const }\label{classSpacy_1_1ProductSpace_1_1Operator_a4e5a24cc27ee39f0252204bb29eef12f}
+
+\begin{DoxyCompactList}\small\item\em Access $A_{row,col}$ (read-\/only). \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const }\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const }\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Product space operator. 
+
+The structure of this operator must be consistently defined through the (block-\/)operators and the domain and range space. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1ProductSpace_1_1Operator_a31794ff8ff1e9349c82dc67db3725f09}{\index{Spacy\-::\-Product\-Space\-::\-Operator@{Spacy\-::\-Product\-Space\-::\-Operator}!Operator@{Operator}}
+\index{Operator@{Operator}!Spacy::ProductSpace::Operator@{Spacy\-::\-Product\-Space\-::\-Operator}}
+\subsubsection[{Operator}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-Product\-Space\-::\-Operator\-::\-Operator (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ std\-::vector$<$ {\bf Spacy\-::\-Operator} $>$ $>$ \&}]{block\-Operators, }
+\item[{const {\bf Spacy\-::\-Vector\-Space} \&}]{domain, }
+\item[{const {\bf Spacy\-::\-Vector\-Space} \&}]{range}
+\end{DoxyParamCaption}
+)}}\label{classSpacy_1_1ProductSpace_1_1Operator_a31794ff8ff1e9349c82dc67db3725f09}
+
+
+Constructor. 
+
+block\-Operators and domain/range must be consistent, i.\-e. if range is a product space, then the number of components in this space (ignoring subspaces) must coincide with the size of block\-Operators. The same holds for domain wrt. each of block\-Operators\mbox{[}i\mbox{]}, i... 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Spaces/\-Product\-Space/Operator.\-hh\end{DoxyCompactItemize}
