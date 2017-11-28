@@ -27,7 +27,7 @@ generate_interface            vector.hh "$SMALL_SBO_ARGS"
 generate_interface linearSolver.hh ""
 }
 
-mkdir -p $INCLUDE_DIR/Spacy/$DETAIL_DIR
+#mkdir -p $INCLUDE_DIR/Spacy/$DETAIL_DIR
 generate_interfaces
 
 # generate interface for conjugate gradient methods

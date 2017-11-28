@@ -30,7 +30,7 @@ namespace Spacy
              * @param qPq \f$ qPq \f$, where \f$q\f$ is the conjugate search direction and \f$P\f$
              * the preconditioner
              */
-            void update( Real qAq, Real qPq ) const;
+            void update( Real qAq, Real qPq );
 
             /**
              * @brief Adjust residual for consistency with the regularized left hand side.
