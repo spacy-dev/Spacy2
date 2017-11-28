@@ -9,7 +9,6 @@ var searchData=
   ['kaskade',['Kaskade',['../namespaceSpacy_1_1Kaskade.html',1,'Spacy']]],
   ['mixin',['Mixin',['../namespaceSpacy_1_1Mixin.html',1,'Spacy']]],
   ['newton',['Newton',['../namespaceSpacy_1_1Newton.html',1,'Spacy']]],
-  ['optional',['Optional',['../namespaceSpacy_1_1Optional.html',1,'Spacy']]],
   ['productspace',['ProductSpace',['../namespaceSpacy_1_1ProductSpace.html',1,'Spacy']]],
   ['rn',['Rn',['../namespaceSpacy_1_1Rn.html',1,'Spacy']]],
   ['scalar',['Scalar',['../namespaceSpacy_1_1Scalar.html',1,'Spacy']]],
@@ -46,10 +45,9 @@ var searchData=
   ['spacy',['Spacy',['../namespaceSpacy.html',1,'']]],
   ['sqrt',['sqrt',['../namespaceSpacy.html#aa779bb3e2bf547cd0ed9ef47b3d711a3',1,'Spacy']]],
   ['sqrt_5feps',['sqrt_eps',['../classSpacy_1_1Mixin_1_1Eps.html#a1c1b0ed7f14ed4967dc7da9295a136d4',1,'Spacy::Mixin::Eps']]],
-  ['step',['Step',['../classSpacy_1_1Generic_1_1Step.html',1,'Spacy::Generic']]],
   ['strakostichyenergyerror',['StrakosTichyEnergyError',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html',1,'Spacy::CG::Termination']]],
   ['subspace',['subSpace',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa61f9413eb3537879a92823dfdd0d6da',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k)'],['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#a4a74b3d51f41ba2ec1c6e755c520a5cc',1,'Spacy::ProductSpace::VectorCreator::subSpace(unsigned k) const ']]],
   ['subspaces',['subSpaces',['../classSpacy_1_1ProductSpace_1_1VectorCreator.html#aa46303313c37f29cdfe54479d85cfe87',1,'Spacy::ProductSpace::VectorCreator']]],
-  ['termination',['Termination',['../namespaceSpacy_1_1Newton_1_1Termination.html',1,'Spacy::Newton']]],
-  ['termination',['Termination',['../namespaceSpacy_1_1CG_1_1Termination.html',1,'Spacy::CG']]]
+  ['termination',['Termination',['../namespaceSpacy_1_1CG_1_1Termination.html',1,'Spacy::CG']]],
+  ['termination',['Termination',['../namespaceSpacy_1_1Newton_1_1Termination.html',1,'Spacy::Newton']]]
 ];

@@ -2,7 +2,6 @@ var searchData=
 [
   ['dampingfactor',['DampingFactor',['../classSpacy_1_1DampingFactor.html',1,'Spacy']]],
   ['decreasecondition',['DecreaseCondition',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html',1,'Spacy::Mixin']]],
-  ['defaultinterface',['DefaultInterface',['../structSpacy_1_1Generic_1_1DefaultInterface.html',1,'Spacy::Generic']]],
   ['derivativeupdate',['DerivativeUpdate',['../structSpacy_1_1dealII_1_1Detail_1_1DerivativeUpdate.html',1,'Spacy::dealII::Detail']]],
   ['derivativeupdate_3c_20dim_2c_20variabledims_2c_20row_2c_2d1_20_3e',['DerivativeUpdate&lt; dim, VariableDims, row,-1 &gt;',['../structSpacy_1_1dealII_1_1Detail_1_1DerivativeUpdate_3_01dim_00_01VariableDims_00_01row_00-1_01_4.html',1,'Spacy::dealII::Detail']]],
   ['detach',['Detach',['../structSpacy_1_1Optional_1_1Mixin_1_1Detach.html',1,'Spacy::Optional::Mixin']]],

@@ -9,10 +9,8 @@ var searchData=
   ['getboundarymap_3c_20dim_2c_20variabledims_2c_2d1_20_3e',['GetBoundaryMap&lt; dim, VariableDims,-1 &gt;',['../structSpacy_1_1dealII_1_1GetBoundaryMap_3_01dim_00_01VariableDims_00-1_01_4.html',1,'Spacy::dealII']]],
   ['getdim',['GetDim',['../structSpacy_1_1dealII_1_1GetDim.html',1,'Spacy::dealII']]],
   ['getdim_3c_20id_2c_20components_3c_20dim_2c_20ids_2e_2e_2e_3e_2c_20id_5fin_5fcomponent_20_3e',['GetDim&lt; id, Components&lt; dim, ids...&gt;, id_in_component &gt;',['../structSpacy_1_1dealII_1_1GetDim_3_01id_00_01Components_3_01dim_00_01ids_8_8_8_4_00_01id__in__component_01_4.html',1,'Spacy::dealII']]],
-  ['getfinaliterate',['getFinalIterate',['../classSpacy_1_1Generic_1_1Step.html#a5be9a8afa47319b645b2df73b3b23acc',1,'Spacy::Generic::Step']]],
   ['getfiniteelement',['GetFiniteElement',['../structSpacy_1_1dealII_1_1GetFiniteElement.html',1,'Spacy::dealII']]],
   ['getfiniteelementsystem',['GetFiniteElementSystem',['../structSpacy_1_1dealII_1_1GetFiniteElementSystem.html',1,'Spacy::dealII']]],
   ['getfiniteelementsystem_3c_20dim_2c_20variabledim_3c_20variable_5fdims_2e_2e_2e_3e_20_3e',['GetFiniteElementSystem&lt; dim, VariableDim&lt; variable_dims...&gt; &gt;',['../structSpacy_1_1dealII_1_1GetFiniteElementSystem_3_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html',1,'Spacy::dealII']]],
-  ['getterminationcriterion',['getTerminationCriterion',['../classSpacy_1_1Generic_1_1IterativeMethod.html#a9e112dd05cb8a45a28dc601a2aff6105',1,'Spacy::Generic::IterativeMethod']]],
   ['getverbositylevel',['getVerbosityLevel',['../classSpacy_1_1Mixin_1_1Verbosity.html#ae55b7493c53b3bb4c2770c99addb5ee1',1,'Spacy::Mixin::Verbosity']]]
 ];

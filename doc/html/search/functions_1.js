@@ -10,7 +10,6 @@ var searchData=
   ['checkspacecompatibility',['checkSpaceCompatibility',['../namespaceSpacy.html#aae18423491adef608743902f1c40844e',1,'Spacy']]],
   ['clear',['clear',['../classSpacy_1_1CG_1_1Termination_1_1StrakosTichyEnergyError.html#ad432a8f91481780c3a7fa74743ac3256',1,'Spacy::CG::Termination::StrakosTichyEnergyError']]],
   ['component',['component',['../classSpacy_1_1ProductSpace_1_1Vector.html#afc232dee8726e5b2e4973bb323f96ce0',1,'Spacy::ProductSpace::Vector::component(unsigned k)'],['../classSpacy_1_1ProductSpace_1_1Vector.html#acbd9aa2a7af0724e8091e89ae818b6ee',1,'Spacy::ProductSpace::Vector::component(unsigned k) const ']]],
-  ['compute',['compute',['../classSpacy_1_1Generic_1_1Step.html#ac400c25a81a5138b4926bbb99692b343',1,'Spacy::Generic::Step']]],
   ['connectasprimaldualpair',['connectAsPrimalDualPair',['../namespaceSpacy.html#a72844d3d381380c382cd9dce912e2664',1,'Spacy']]],
   ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7',1,'Spacy::Mixin::ContractionRate']]],
   ['contravariantnewton',['contravariantNewton',['../group__NewtonGroup.html#gaa32f667c573986b2b2721ec6532fc832',1,'Spacy::contravariantNewton(const C1Operator &amp;F, const Vector &amp;x0, const Newton::Parameter &amp;p=Newton::Parameter())'],['../group__NewtonGroup.html#gace045630c7f0c7a1a5a48d2d0807f608',1,'Spacy::contravariantNewton(const C1Operator &amp;F, const Newton::Parameter &amp;p=Newton::Parameter())']]],

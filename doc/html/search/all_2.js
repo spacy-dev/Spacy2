@@ -34,7 +34,6 @@ var searchData=
   ['coefficientvector',['CoefficientVector',['../classSpacy_1_1Kaskade_1_1C2Functional.html#a7845e44764fb2913ebc32153d6d90edf',1,'Spacy::Kaskade::C2Functional']]],
   ['component',['component',['../classSpacy_1_1ProductSpace_1_1Vector.html#afc232dee8726e5b2e4973bb323f96ce0',1,'Spacy::ProductSpace::Vector::component(unsigned k)'],['../classSpacy_1_1ProductSpace_1_1Vector.html#acbd9aa2a7af0724e8091e89ae818b6ee',1,'Spacy::ProductSpace::Vector::component(unsigned k) const ']]],
   ['compositestepfunctional',['CompositeStepFunctional',['../classSpacy_1_1Rn_1_1CompositeStepFunctional.html',1,'Spacy::Rn']]],
-  ['compute',['compute',['../classSpacy_1_1Generic_1_1Step.html#ac400c25a81a5138b4926bbb99692b343',1,'Spacy::Generic::Step']]],
   ['connectasprimaldualpair',['connectAsPrimalDualPair',['../namespaceSpacy.html#a72844d3d381380c382cd9dce912e2664',1,'Spacy']]],
   ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html#a3d6b03823ce3951bafd51ceaac732bf7',1,'Spacy::Mixin::ContractionRate']]],
   ['contractionrate',['ContractionRate',['../classSpacy_1_1Mixin_1_1ContractionRate.html',1,'Spacy::Mixin']]],
@@ -53,6 +52,6 @@ var searchData=
   ['creator',['creator',['../classSpacy_1_1ProductSpace_1_1Vector.html#a893de5e5a2bb37d2d512c035b0ad91ea',1,'Spacy::ProductSpace::Vector']]],
   ['composite_20step_20methods',['Composite Step Methods',['../group__CSGroup.html',1,'']]],
   ['cubic',['Cubic',['../classSpacy_1_1Scalar_1_1Cubic.html',1,'Spacy::Scalar']]],
-  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25',1,'Spacy::CompositeStep::CubicModel']]],
-  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]]
+  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html',1,'Spacy::CompositeStep']]],
+  ['cubicmodel',['CubicModel',['../classSpacy_1_1CompositeStep_1_1CubicModel.html#aebf63b0a86934fd43bf1b2bc28821f25',1,'Spacy::CompositeStep::CubicModel']]]
 ];
