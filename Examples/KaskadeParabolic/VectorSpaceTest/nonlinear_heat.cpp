@@ -27,7 +27,7 @@ using namespace Kaskade;
 int main()
 {
     constexpr int dim = 2;
-    int refinements = 4;
+    int refinements = 6;
     int order       = 1;
     unsigned no_time_steps = 11;
     double dt_size = 0.1;
@@ -65,11 +65,16 @@ int main()
 
     auto& vc = ::Spacy::creator<::Spacy::KaskadeParabolic::VectorCreator<VariableSetDesc> >(domain);
     vc.refine(8);
+    A.informAboutRefinement(8);
     vc.refine(5);
+    A.informAboutRefinement(5);
     vc.refine(6);
+    A.informAboutRefinement(6);
     vc.refine(1);
+    A.informAboutRefinement(1);
     ::Spacy::KaskadeParabolic::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "refnonopt");
 
+    std::cout<<"setting scalar product"<<std::endl;
     domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
 
     std::cout<<"Starting Newton again"<<std::endl;

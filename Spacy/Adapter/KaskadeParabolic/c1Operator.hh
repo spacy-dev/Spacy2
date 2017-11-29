@@ -119,7 +119,7 @@ namespace Spacy
       /// Access \f$A'(x)\f$ as linear operator \f$X\rightarrow Y\f$
       auto linearization(const ::Spacy::Vector& x) const
       {
-        gradient_updated = true;
+        gradient_updated = false;
         assembleGradient(x);
 
         if(gradient_updated || !G_ptr)
@@ -128,15 +128,6 @@ namespace Spacy
         std::cout<<"returning from linearization"<<std::endl;
         return *G_ptr;
       }
-
-      //            /**
-      //             * @brief Access operator representing \f$A'(x)\f$.
-      //             */
-      //            const KaskadeOperator& A() const noexcept
-      //            {
-      //                return A_;
-      //            }
-
       /**
              * @brief Access onlyLowerTriangle flag.
              * @return true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false
@@ -164,6 +155,17 @@ namespace Spacy
       {
         verbose = verb;
       }
+
+      void informAboutRefinement(unsigned k )
+      {
+        MassY_.insert(MassY_.begin() + k,KaskadeOperator());
+        A_.insert(A_.begin() + k,KaskadeOperator());
+        FVec_.insert(FVec_.begin() + k,F_);
+        MassAssembled_.insert(MassAssembled_.begin() + k , false);
+
+        GradRefined_ = false;
+        OpRefined_ = false;
+      }
     private:
 
       void resizeMembers() const
@@ -172,7 +174,7 @@ namespace Spacy
         auto no_time_steps = gm_.getTempGrid().getDtVec().size();
         A_.resize(no_time_steps);
         MassY_.resize(no_time_steps);
-        gridChanged_.resize(no_time_steps,true);
+        MassAssembled_.resize(no_time_steps,false);
         FVec_.resize(no_time_steps,F_);
         return;
       }
@@ -180,12 +182,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
-//        if( old_X_A_ && (old_X_A_==x) ) return;
-
-        rhs_ = zero(range());
-        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
-        MassY_.resize(no_time_steps);
-        FVec_.resize(no_time_steps,F_);
+        if( old_X_A_ && (old_X_A_==x) && OpRefined_) return;
 
         if(verbose)
           std::cout<<"assembling Operator"<<std::endl;
@@ -263,18 +260,14 @@ namespace Spacy
           rhs_impl.getCoeffVec_nonconst(timeStep) += boost::fusion::at_c<0>(y_curr_dual.data);
         }
         old_X_A_ = x;
+        OpRefined_ = true;
       }
 
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-//        if( old_X_dA_ && (old_X_dA_==x) ) return;
+        if( old_X_dA_ && (old_X_dA_==x) && GradRefined_) return;
 
-        auto no_time_steps = gm_.getTempGrid().getDtVec().size();
-        A_.resize(no_time_steps);
-        MassY_.resize(no_time_steps);
-        gridChanged_.resize(no_time_steps,true);
-        FVec_.resize(no_time_steps,F_);
 
         if(verbose)
           std::cout<<"assembling Gradient"<<std::endl;
@@ -298,11 +291,13 @@ namespace Spacy
         }
 
         old_X_dA_ = x;
+        GradRefined_ = true;
       }
 
       /// Assemble the mass matrices for the transfer terms
       void assembleMassMatrices() const
       {
+
         if(verbose)
           std::cout<<" assembling mass matrices "<<std::endl;
 
@@ -311,7 +306,7 @@ namespace Spacy
 
         for(auto timeStep = 0u; timeStep < dtVec.size() ; timeStep++)
         {
-//          if(!gridChanged_.at(timeStep)){break;}
+          if(MassAssembled_.at(timeStep)){ continue;}
           if(verbose)
             std::cout<<"assembling mass matrices for timestep "<<timeStep<<std::endl;
 
@@ -324,7 +319,7 @@ namespace Spacy
 
           MassY_.at(timeStep) =  KaskadeOperator( assemblersp.template get<Matrix>(onlyLowerTriangle_) );
 
-          gridChanged_.at(timeStep) = false;
+          MassAssembled_.at(timeStep) = true;
         }
         if(verbose)
           std::cout<<" done assembling mass matrices "<<std::endl;
@@ -353,7 +348,6 @@ namespace Spacy
       OperatorDefinition F_;
       mutable std::vector<OperatorDefinition> FVec_;
       mutable bool verbose = true;
-      mutable std::vector<bool> gridChanged_{};
       mutable bool gradient_updated;
 
       mutable std::shared_ptr< PDE::LinearBlockOperator<VariableSetDescription ,VariableSetDescription> > G_ptr = nullptr;
@@ -364,6 +358,11 @@ namespace Spacy
       mutable ::Spacy::Vector old_X_A_{}, old_X_dA_{};
 
       bool onlyLowerTriangle_ = false;
+
+      mutable bool GradRefined_ = false;
+      mutable bool OpRefined_ = false;
+      mutable std::vector<bool> MassAssembled_;
+      mutable unsigned refinedIndex_;
 
       //            std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& M)
       //            {
