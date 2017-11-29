@@ -15,6 +15,7 @@ addons:
 cache:
   directories:
     - ${HOME}/.ccache
+    - ${TRAVIS_BUILD_DIR}/deps/googletest
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.6.2
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.7.1
     - ${TRAVIS_BUILD_DIR}/deps/llvm-3.8.0
@@ -124,9 +125,15 @@ install:
   ############################################################################
   # Install gtest
   ############################################################################
+  - cd ${DEPS_DIR}
   - |
-    git clone https://github.com/google/googletest.git
-    cd googletest && mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" .. && make
+    if [ -d "googletest" ]; then
+      cd googletest && git pull
+    else
+      git clone https://github.com/google/googletest.git && cd googletest
+    fi
+    mkdir -p build && cd build && cmake -G Ninja -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" ..
+    cmake --build .
     sudo cp -r ../googletest/include/gtest /usr/local/include/
     sudo cp -r ../googlemock/include/gmock /usr/local/include/
     sudo cp googlemock/gtest/lib*.a /usr/local/lib
