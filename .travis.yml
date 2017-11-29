@@ -132,11 +132,11 @@ install:
     else
       git clone https://github.com/google/googletest.git && cd googletest
     fi
-    mkdir -p build && cd build && cmake -G Ninja -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" ..
-    cmake --build .
-    sudo cp -r ../googletest/include/gtest /usr/local/include/
-    sudo cp -r ../googlemock/include/gmock /usr/local/include/
-    sudo cp googlemock/gtest/lib*.a /usr/local/lib
+  - mkdir -p build && cd build && cmake -G Ninja -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" ..
+  - cmake --build .
+  - sudo cp -r ../googletest/include/gtest /usr/local/include/
+  - sudo cp -r ../googlemock/include/gmock /usr/local/include/
+  - sudo cp googlemock/gtest/lib*.a /usr/local/lib
 
   ############################################################################
   # Install doxygen and graphviz if documentation is generated
