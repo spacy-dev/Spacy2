@@ -160,6 +160,10 @@ namespace Spacy
         return gm_;
       }
 
+      void setVerbosity(bool verb) const
+      {
+        verbose = verb;
+      }
     private:
 
       void resizeMembers() const
@@ -176,7 +180,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$A(x)\f$.
       void assembleOperator(const ::Spacy::Vector& x) const
       {
-        if( old_X_A_ && (old_X_A_==x) ) return;
+//        if( old_X_A_ && (old_X_A_==x) ) return;
 
         rhs_ = zero(range());
         auto no_time_steps = gm_.getTempGrid().getDtVec().size();
@@ -264,7 +268,7 @@ namespace Spacy
       /// Assemble discrete representation of \f$A'(x)\f$.
       void assembleGradient(const ::Spacy::Vector& x) const
       {
-        if( old_X_dA_ && (old_X_dA_==x) ) return;
+//        if( old_X_dA_ && (old_X_dA_==x) ) return;
 
         auto no_time_steps = gm_.getTempGrid().getDtVec().size();
         A_.resize(no_time_steps);
@@ -348,7 +352,7 @@ namespace Spacy
       GridManager<VariableSetDescription>& gm_;
       OperatorDefinition F_;
       mutable std::vector<OperatorDefinition> FVec_;
-      bool verbose = true;
+      mutable bool verbose = true;
       mutable std::vector<bool> gridChanged_{};
       mutable bool gradient_updated;
 

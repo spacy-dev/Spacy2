@@ -76,7 +76,7 @@ namespace Spacy
         //refining the grid
 
 //        std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
-        auto insertedDesc = gm_.refine(k);
+        const VariableSetDescription& insertedDesc = gm_.refine(k);
         auto toinsertCreator = std::make_shared<::Spacy::Kaskade::VectorCreator<VariableSetDescription> >(::Spacy::Kaskade::VectorCreator<VariableSetDescription>( insertedDesc));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
 //        std::cout<<"--------returning from the Grids refine function"<<std::endl;

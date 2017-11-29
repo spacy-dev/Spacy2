@@ -27,7 +27,7 @@ using namespace Kaskade;
 int main()
 {
     constexpr int dim = 2;
-    int refinements = 6;
+    int refinements = 4;
     int order       = 1;
     unsigned no_time_steps = 11;
     double dt_size = 0.1;
@@ -50,26 +50,31 @@ int main()
     ::Spacy::KaskadeParabolic::GridManager<VariableSetDesc> gm (no_time_steps,dt_size,refinements,order);
     auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm);
 
-    auto A = Spacy::KaskadeParabolic::makeC1Operator( F,gm , domain , domain.dualSpace() );
+    auto A = Spacy::KaskadeParabolic::makeC1Operator( F, gm , domain , domain.dualSpace() );
 
-    auto& vc = ::Spacy::creator<::Spacy::KaskadeParabolic::VectorCreator<VariableSetDesc> >(domain);
-    vc.refine(5);
-    vc.refine(6);
-    vc.refine(1);
-    vc.refine(8);
-
-    domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
-
+    A.setVerbosity(false);
 
 
     auto p = Spacy::Newton::Parameter{};
     p.setRelativeAccuracy(1e-12);
-std::cout<<"Starting Newton "<<std::endl;
-    auto x = covariantNewton(A,p);
-    //  auto x = Spacy::contravariantNewton(A,p);
-    //  auto x = Spacy::localNewton(A,p);
 
-//    //construct Galerkin representation
-    writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "temperature");
+    domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
+
+    std::cout<<"Starting Newton "<<std::endl;
+    auto x = covariantNewton(A,p);
+
+    auto& vc = ::Spacy::creator<::Spacy::KaskadeParabolic::VectorCreator<VariableSetDesc> >(domain);
+    vc.refine(8);
+    vc.refine(5);
+    vc.refine(6);
+    vc.refine(1);
+    ::Spacy::KaskadeParabolic::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "refnonopt");
+
+    domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
+
+    std::cout<<"Starting Newton again"<<std::endl;
+    auto x3 = covariantNewton(A,x,p);
+
+    ::Spacy::KaskadeParabolic::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x3), "refopt");
     std::cout<<"returning from main"<<std::endl;
 }

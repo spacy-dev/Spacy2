@@ -11,6 +11,8 @@
 #include <Spacy/Util/Mixins/Get.hh>
 #include "util.hh"
 
+#include <Spacy/Adapter/Kaskade/vectorSpace.hh>
+
 #include "io/vtk.hh"
 
 
@@ -108,10 +110,11 @@ namespace Spacy
 //        std::cout<<"hallo ich bin der Vector refiner"<<std::endl;
 //        std::cout<<this->space().index()<<std::endl;
 
-        auto vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
-        auto vc_k = vc.getSubCreator(k);
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        ::Spacy::Kaskade::VectorCreator<Description> vc_k = vc.getSubCreator(k);
 
-        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
+//        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
+        variableSet_.insert(variableSet_.begin()+k, VariableSet(::Spacy::creator<VectorCreator<Description> >(this->space()).getSubCreator(k).get()));
         description_.insert(description_.begin()+k, std::make_shared<Description>(vc_k.get()));
         v_.insert(v_.begin()+k, VectorImpl(Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(k).descriptions.spaces )));
 //        std::cout<<"done refining"<<std::endl;
