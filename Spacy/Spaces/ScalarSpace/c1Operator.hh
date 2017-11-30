@@ -26,6 +26,10 @@ namespace Spacy
             C1Operator( std::function< double( double ) > value,
                         std::function< double( double ) > derivative );
 
+            C1Operator( std::function< double( double ) > value,
+                        std::function< double( double ) > derivative, const VectorSpace& domain,
+                        const VectorSpace& range );
+
             Spacy::Vector operator()( const ::Spacy::Vector& x ) const;
 
             Spacy::Vector d1( const ::Spacy::Vector& x, const ::Spacy::Vector& dx ) const;
