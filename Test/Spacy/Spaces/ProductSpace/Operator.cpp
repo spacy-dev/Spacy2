@@ -12,7 +12,7 @@
 
 using namespace Spacy;
 
-TEST( ProductSpacyOperator, Apply_2x2 )
+TEST( ProductSpaceOperator, Apply_2x2 )
 {
     std::vector< std::shared_ptr< VectorSpace > > spaces;
     spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
@@ -36,7 +36,7 @@ TEST( ProductSpacyOperator, Apply_2x2 )
     EXPECT_THAT( cast_ref< Real >( wp.component( 1 ) ), Real( 3, *spaces[ 1 ] ) );
 }
 
-TEST( ProductSpacyOperator, Apply_1x2 )
+TEST( ProductSpaceOperator, Apply_1x2 )
 {
     std::vector< std::shared_ptr< VectorSpace > > spaces;
     spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
@@ -57,7 +57,7 @@ TEST( ProductSpacyOperator, Apply_1x2 )
     EXPECT_THAT( get( wr ), -1.0 );
 }
 
-TEST( ProductSpacyOperator, Apply_2x1 )
+TEST( ProductSpaceOperator, Apply_2x1 )
 {
     std::vector< std::shared_ptr< VectorSpace > > spaces;
     spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
