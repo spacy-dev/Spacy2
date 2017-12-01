@@ -43,8 +43,8 @@ namespace Spacy
             {
                 const auto& xp = cast_ref< Vector >( x );
                 auto& yp = cast_ref< Vector >( y );
-                for ( auto i = 0u; i < xp.numberOfVariables(); ++i )
-                    for ( auto j = 0u; j < yp.numberOfVariables(); ++j )
+                for ( auto i = 0u; i < yp.numberOfVariables(); ++i )
+                    for ( auto j = 0u; j < xp.numberOfVariables(); ++j )
                         yp.component( i ) += blockOperators_[ i ][ j ]( xp.component( j ) );
                 return y;
             }
