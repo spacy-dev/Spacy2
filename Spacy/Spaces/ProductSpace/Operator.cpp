@@ -5,6 +5,7 @@
 #include <Spacy/Util/cast.hh>
 #include <Spacy/zeroVectorCreator.hh>
 
+#include <cassert>
 #include <numeric>
 
 namespace Spacy
@@ -15,13 +16,14 @@ namespace Spacy
                             const Spacy::VectorSpace& domain, const Spacy::VectorSpace& range )
             : OperatorBase( domain, range ), blockOperators_( blockOperators )
         {
+              assert(!blockOperators_.empty());
         }
 
         Spacy::Vector Operator::operator()( const ::Spacy::Vector& x ) const
         {
             auto y = zero( range() );
-            const auto domain_is_product_space = is< Vector >( x );
-            const auto range_is_product_space = is< Vector >( y );
+            const auto domain_is_product_space = blockOperators_[0].size() > 1;
+            const auto range_is_product_space = blockOperators_.size() > 1;
 
             if ( domain_is_product_space && !range_is_product_space )
             {
@@ -43,8 +45,8 @@ namespace Spacy
             {
                 const auto& xp = cast_ref< Vector >( x );
                 auto& yp = cast_ref< Vector >( y );
-                for ( auto i = 0u; i < xp.numberOfVariables(); ++i )
-                    for ( auto j = 0u; j < yp.numberOfVariables(); ++j )
+                for ( auto i = 0u; i < yp.numberOfVariables(); ++i )
+                    for ( auto j = 0u; j < xp.numberOfVariables(); ++j )
                         yp.component( i ) += blockOperators_[ i ][ j ]( xp.component( j ) );
                 return y;
             }

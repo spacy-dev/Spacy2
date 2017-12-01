@@ -12,6 +12,35 @@
 
 using namespace Spacy;
 
+TEST( ProductSpacyOperator, Apply_2x3 )
+{
+    std::vector< std::shared_ptr< VectorSpace > > spaces;
+    spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
+    spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
+    auto V = ProductSpace::makeHilbertSpace( spaces );
+    spaces.emplace_back( std::make_shared< VectorSpace >( make_real_space() ) );
+    auto W = ProductSpace::makeHilbertSpace( spaces );
+    auto v = zero( V );
+    auto& vp = cast_ref< ProductSpace::Vector >( v );
+    cast_ref< Real >( vp.component( 0 ) ) = 1;
+    cast_ref< Real >( vp.component( 1 ) ) = 2;
+
+    Scalar::Operator A11( []( double a ) { return a; }, *spaces[ 0 ], *spaces[ 0 ] );
+    Scalar::Operator A12( []( double a ) { return -a; }, *spaces[ 1 ], *spaces[ 0 ] );
+    Scalar::Operator A21( []( double a ) { return -a; }, *spaces[ 0 ], *spaces[ 1 ] );
+    Scalar::Operator A22( []( double a ) { return 2 * a; }, *spaces[ 1 ], *spaces[ 1 ] );
+    Scalar::Operator A31( []( double a ) { return a; }, *spaces[ 0 ], *spaces[ 2 ] );
+    Scalar::Operator A32( []( double a ) { return 2 * a; }, *spaces[ 1 ], *spaces[ 2 ] );
+
+    auto A = ProductSpace::Operator( {{A11, A12}, {A21, A22}, {A31, A32}}, V, W );
+
+    auto w = A( v );
+    const auto& wp = cast_ref< ProductSpace::Vector >( w );
+    EXPECT_THAT( cast_ref< Real >( wp.component( 0 ) ), Real( -1, *spaces[ 0 ] ) );
+    EXPECT_THAT( cast_ref< Real >( wp.component( 1 ) ), Real( 3, *spaces[ 1 ] ) );
+    EXPECT_THAT( cast_ref< Real >( wp.component( 2 ) ), Real( 5, *spaces[ 2 ] ) );
+}
+
 TEST( ProductSpacyOperator, Apply_2x2 )
 {
     std::vector< std::shared_ptr< VectorSpace > > spaces;
