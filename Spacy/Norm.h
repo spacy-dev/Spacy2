@@ -23,5 +23,5 @@ namespace Spacy
      * };
      * @endcode
      */
-    using Norm = std::function<Real(const Vector&)>;
+    using Norm = std::function< Real( const Vector& ) >;
 }
