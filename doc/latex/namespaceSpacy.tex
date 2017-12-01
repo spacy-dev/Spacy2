@@ -112,8 +112,6 @@ using \hyperlink{namespaceSpacy_a052e6b83b913fc316b0c2a2cd9535431}{Dynamic\-Call
 \begin{DoxyCompactList}\small\item\em Type-\/erased linear solver. \end{DoxyCompactList}\item 
 using \hyperlink{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{Callable\-Operator} = std\-::function$<$ \hyperlink{classSpacy_1_1Vector}{Vector}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&) $>$
 \item 
-using \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} = std\-::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$
-\begin{DoxyCompactList}\small\item\em Type-\/erased norm. \end{DoxyCompactList}\item 
 using \hyperlink{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{Scalar\-Product} = std\-::function$<$ \hyperlink{classSpacy_1_1Real}{Real}(const \hyperlink{classSpacy_1_1Vector}{Vector} \&, const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$
 \begin{DoxyCompactList}\small\item\em Type-\/erased scalar product. \end{DoxyCompactList}\item 
 \hypertarget{namespaceSpacy_a104eb3859bf3e6465a7789c84e9ab1f7}{{\footnotesize template$<$class... $>$ }\\using {\bfseries voider} = void}\label{namespaceSpacy_a104eb3859bf3e6465a7789c84e9ab1f7}
@@ -287,7 +285,7 @@ const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \& \hyperlink{grou
 \hypertarget{namespaceSpacy_a8cb35e7115d5c299e260e7c196770df9}{{\footnotesize template$<$class Base , class Source , class To\-Attach $>$ }\\void {\bfseries cast\-\_\-and\-\_\-detach} (Source \&source, To\-Attach \&to\-Attach)}\label{namespaceSpacy_a8cb35e7115d5c299e260e7c196770df9}
 
 \item 
-\hypertarget{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{make\-Banach\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\-Vector\-Creator} \&\&creator, \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm})}\label{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}
+\hypertarget{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \hyperlink{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}{make\-Banach\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\-Vector\-Creator} \&\&creator, Norm \hyperlink{namespaceSpacy_a86a4fc266aa19a07b0af16388907354b}{norm})}\label{namespaceSpacy_a0b66c8f2345b693504180dc7fb187958}
 
 \begin{DoxyCompactList}\small\item\em Construct Banach space. \end{DoxyCompactList}\item 
 \hypertarget{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \hyperlink{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}{make\-Hilbert\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\-Vector\-Creator} \&\&creator, \hyperlink{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{Scalar\-Product} scalar\-Product, bool default\-Index=false)}\label{namespaceSpacy_a927756dd42df3e79c302df1f8f635b65}
@@ -313,24 +311,7 @@ A time-\/dependent operator that does not know about domain and range spaces.
 A time-\/dependent operator that does not know about domain and range spaces. \hypertarget{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}{\index{Spacy@{Spacy}!Callable\-Operator@{Callable\-Operator}}
 \index{Callable\-Operator@{Callable\-Operator}!Spacy@{Spacy}}
 \subsubsection[{Callable\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::function$<$ {\bf Vector}(const {\bf Vector} \&) $>$ {\bf Spacy\-::\-Callable\-Operator}}}\label{namespaceSpacy_a022a87afa759e18781dd2aea9a80cd73}
-An operator that does not know about domain and range spaces. Good enough for some algorithms (i.\-e. for Krylov-\/methods). \hypertarget{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{\index{Spacy@{Spacy}!Norm@{Norm}}
-\index{Norm@{Norm}!Spacy@{Spacy}}
-\subsubsection[{Norm}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\-::\-Norm} = typedef std\-::function$<${\bf Real}(const {\bf Vector}\&)$>$}}\label{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}
-
-
-Type-\/erased norm. 
-
-The minimal signature (besides copy and/or move constructor/assignment) of a norm is\-: 
-\begin{DoxyCode}
-\textcolor{comment}{// My norm.}
-\textcolor{keyword}{class }MyNorm
-\{
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// Compute ||x||.}
-  \hyperlink{classSpacy_1_1Real}{Spacy::Real} operator()(\textcolor{keyword}{const} \hyperlink{classSpacy_1_1Vector}{Spacy::Vector}& x) \textcolor{keyword}{const};
-\};
-\end{DoxyCode}
- \hypertarget{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{\index{Spacy@{Spacy}!Scalar\-Product@{Scalar\-Product}}
+An operator that does not know about domain and range spaces. Good enough for some algorithms (i.\-e. for Krylov-\/methods). \hypertarget{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}{\index{Spacy@{Spacy}!Scalar\-Product@{Scalar\-Product}}
 \index{Scalar\-Product@{Scalar\-Product}!Spacy@{Spacy}}
 \subsubsection[{Scalar\-Product}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Spacy\-::\-Scalar\-Product} = typedef std\-::function$<${\bf Real}(const {\bf Vector}\&, const {\bf Vector}\&)$>$}}\label{namespaceSpacy_aa995526aa0e3fa58aca8dd6772311cad}
 

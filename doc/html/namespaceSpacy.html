@@ -251,9 +251,6 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nam
 <tr class="separator:adcd0d78166a9c972b8a2e5a689fc2d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a022a87afa759e18781dd2aea9a80cd73"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a022a87afa759e18781dd2aea9a80cd73">CallableOperator</a> = std::function&lt; <a class="el" href="classSpacy_1_1Vector.html">Vector</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;) &gt;</td></tr>
 <tr class="separator:a022a87afa759e18781dd2aea9a80cd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dbe77a4e1282ef88017e94d50d17791"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> = std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
-<tr class="memdesc:a0dbe77a4e1282ef88017e94d50d17791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased norm.  <a href="#a0dbe77a4e1282ef88017e94d50d17791">More...</a><br/></td></tr>
-<tr class="separator:a0dbe77a4e1282ef88017e94d50d17791"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa995526aa0e3fa58aca8dd6772311cad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#aa995526aa0e3fa58aca8dd6772311cad">ScalarProduct</a> = std::function&lt; <a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;, const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;</td></tr>
 <tr class="memdesc:aa995526aa0e3fa58aca8dd6772311cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type-erased scalar product.  <a href="#aa995526aa0e3fa58aca8dd6772311cad">More...</a><br/></td></tr>
 <tr class="separator:aa995526aa0e3fa58aca8dd6772311cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -485,7 +482,7 @@ template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
 <tr class="memitem:a8cb35e7115d5c299e260e7c196770df9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cast_and_detach</b> (Source &amp;source, ToAttach &amp;toAttach)</td></tr>
 <tr class="separator:a8cb35e7115d5c299e260e7c196770df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b66c8f2345b693504180dc7fb187958"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b66c8f2345b693504180dc7fb187958"></a>
-<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a0b66c8f2345b693504180dc7fb187958">makeBanachSpace</a> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;creator, <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> <a class="el" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a>)</td></tr>
+<a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSpacy.html#a0b66c8f2345b693504180dc7fb187958">makeBanachSpace</a> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;creator, Norm <a class="el" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a>)</td></tr>
 <tr class="memdesc:a0b66c8f2345b693504180dc7fb187958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct Banach space. <br/></td></tr>
 <tr class="separator:a0b66c8f2345b693504180dc7fb187958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a927756dd42df3e79c302df1f8f635b65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a927756dd42df3e79c302df1f8f635b65"></a>
@@ -529,28 +526,6 @@ template&lt;class Base , class Source , class ToAttach &gt; </td></tr>
 </div><div class="memdoc">
 <p>An operator that does not know about domain and range spaces. Good enough for some algorithms (i.e. for Krylov-methods). </p>
 
-</div>
-</div>
-<a class="anchor" id="a0dbe77a4e1282ef88017e94d50d17791"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Spacy::Norm</a> = typedef std::function&lt;<a class="el" href="classSpacy_1_1Real.html">Real</a>(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a>&amp;)&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Type-erased norm. </p>
-<p>The minimal signature (besides copy and/or move constructor/assignment) of a norm is: </p>
-<div class="fragment"><div class="line"><span class="comment">// My norm.</span></div>
-<div class="line"><span class="keyword">class </span>MyNorm</div>
-<div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <span class="comment">// Compute ||x||.</span></div>
-<div class="line">  <a class="code" href="classSpacy_1_1Real.html">Spacy::Real</a> operator()(<span class="keyword">const</span> <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a>&amp; x) <span class="keyword">const</span>;</div>
-<div class="line">};</div>
-</div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="aa995526aa0e3fa58aca8dd6772311cad"></a>
@@ -1197,7 +1172,7 @@ template&lt;typename Type , typename Tup &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 1 2017 22:31:19 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 1 2017 23:03:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

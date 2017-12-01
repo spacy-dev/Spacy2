@@ -24,7 +24,7 @@ var searchData=
   ['setminimaldecrease',['setMinimalDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#aabc5e2473edace0c87da7fbd9fa0ae61',1,'Spacy::Mixin::DecreaseCondition']]],
   ['setnorm',['setNorm',['../classSpacy_1_1VectorSpace.html#acbd69a540d3c81606751237a94783754',1,'Spacy::VectorSpace']]],
   ['setrelaxedminimaldecrease',['setRelaxedMinimalDecrease',['../classSpacy_1_1Mixin_1_1DecreaseCondition.html#a86d6a8c8fc683c31572fd818a102a362',1,'Spacy::Mixin::DecreaseCondition']]],
-  ['setrestriction',['setRestriction',['../classSpacy_1_1VectorSpace.html#a7c5f4a8c5937f9e07592483666b20ef7',1,'Spacy::VectorSpace']]],
+  ['setrestriction',['setRestriction',['../classSpacy_1_1VectorSpace.html#aa7d27ee5688a8e4ede54dec0cc9fda57',1,'Spacy::VectorSpace']]],
   ['setscalarproduct',['setScalarProduct',['../classSpacy_1_1VectorSpace.html#aea7bc0d44dbdabe49f0f74d42290fd23',1,'Spacy::VectorSpace']]],
   ['setsolvercreator',['setSolverCreator',['../classSpacy_1_1Kaskade_1_1C1Operator.html#aa0c69955542db6b0f61807181874b4d9',1,'Spacy::Kaskade::C1Operator::setSolverCreator()'],['../classSpacy_1_1Kaskade_1_1C2Functional.html#ac9496fdef4f38eb466d5b5b58089be8b',1,'Spacy::Kaskade::C2Functional::setSolverCreator()'],['../classSpacy_1_1Kaskade_1_1DynamicC1Operator.html#a4a440be1a20133c2d7cb8c6382656172',1,'Spacy::Kaskade::DynamicC1Operator::setSolverCreator()']]],
   ['setterminationcriterion',['setTerminationCriterion',['../classSpacy_1_1CG_1_1Solver.html#a7fe2345e859b267c86acff9f3920db3b',1,'Spacy::CG::Solver']]],

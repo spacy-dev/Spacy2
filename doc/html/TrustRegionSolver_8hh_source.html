@@ -124,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#aa36019ca1c80a230a1c45022d3cdfd9f">set</a>(UpdateTrustRegionRadius update_trust_region_radius);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#aa36019ca1c80a230a1c45022d3cdfd9f">set</a>(<a class="code" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> <a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#aa36019ca1c80a230a1c45022d3cdfd9f">set</a>(Norm <a class="code" href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">norm</a>);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classSpacy_1_1Vector.html">Vector</a> <a class="code" href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#a7f72e63d2458c72aa9b0303dbe7729c6">operator()</a>(<a class="code" href="classSpacy_1_1Vector.html">Vector</a> x);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
@@ -133,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ComputeDescentDirection compute_descent_direction_;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            UpdateTrustRegionRadius update_trust_region_radius_;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> norm_;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            Norm norm_;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        };</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
@@ -146,12 +146,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="namespaceSpacy_html_a86a4fc266aa19a07b0af16388907354b"><div class="ttname"><a href="namespaceSpacy.html#a86a4fc266aa19a07b0af16388907354b">Spacy::norm</a></div><div class="ttdeci">Real norm(const Vector &amp;x)</div><div class="ttdoc">Compute norm, where the norm associated with the underlying function space is used ...</div><div class="ttdef"><b>Definition:</b> vector.hh:68</div></div>
 <div class="ttc" id="classSpacy_1_1Algorithm_1_1TrustRegionSolver_html_a0e43b97119b6dc0a25fc9f242b084d16"><div class="ttname"><a href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#a0e43b97119b6dc0a25fc9f242b084d16">Spacy::Algorithm::TrustRegionSolver::TrustRegionSolver</a></div><div class="ttdeci">TrustRegionSolver(C2Functional f)</div><div class="ttdoc">Create trust region solver to minimize f. </div></div>
 <div class="ttc" id="classSpacy_1_1Algorithm_1_1TrustRegionSolver_html_aa36019ca1c80a230a1c45022d3cdfd9f"><div class="ttname"><a href="classSpacy_1_1Algorithm_1_1TrustRegionSolver.html#aa36019ca1c80a230a1c45022d3cdfd9f">Spacy::Algorithm::TrustRegionSolver::set</a></div><div class="ttdeci">void set(ComputeDescentDirection compute_descent_direction)</div><div class="ttdoc">Set new method for the computation of the descent direction. </div></div>
-<div class="ttc" id="namespaceSpacy_html_a0dbe77a4e1282ef88017e94d50d17791"><div class="ttname"><a href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Spacy::Norm</a></div><div class="ttdeci">std::function&lt; Real(const Vector &amp;)&gt; Norm</div><div class="ttdoc">Type-erased norm. </div><div class="ttdef"><b>Definition:</b> norm.hh:26</div></div>
 <div class="ttc" id="classSpacy_1_1Mixin_1_1Eps_html"><div class="ttname"><a href="classSpacy_1_1Mixin_1_1Eps.html">Spacy::Mixin::Eps</a></div><div class="ttdoc">Mixin class for maximal attainable accuracy . </div><div class="ttdef"><b>Definition:</b> Eps.hh:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 1 2017 22:31:19 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 1 2017 23:03:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

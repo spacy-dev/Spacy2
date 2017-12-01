@@ -33,7 +33,7 @@ Collaboration diagram for Spacy\-:\-:Vector\-Space\-:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSpacy_1_1VectorSpace_aa4f30986a1b977cf7f0abc27e0c9872d}{Vector\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\-Vector\-Creator} \&\&creator, \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm}, bool default\-Index=false)
+\hyperlink{classSpacy_1_1VectorSpace_aa4f30986a1b977cf7f0abc27e0c9872d}{Vector\-Space} (\hyperlink{classSpacy_1_1ZeroVectorCreator}{Zero\-Vector\-Creator} \&\&creator, Norm \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm}, bool default\-Index=false)
 \begin{DoxyCompactList}\small\item\em Construct function space from Vector\-Creator and Norm. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1VectorSpace_a2bc6444dc35de9fe68d7a8156c03125f}{{\bfseries Vector\-Space} (\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\&V)}\label{classSpacy_1_1VectorSpace_a2bc6444dc35de9fe68d7a8156c03125f}
 
@@ -47,10 +47,10 @@ Collaboration diagram for Spacy\-:\-:Vector\-Space\-:
 \hypertarget{classSpacy_1_1VectorSpace_a30d39a339ed924a6c17c85d75f64afc4}{\hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1VectorSpace_a30d39a339ed924a6c17c85d75f64afc4}{operator=} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&)=delete}\label{classSpacy_1_1VectorSpace_a30d39a339ed924a6c17c85d75f64afc4}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{classSpacy_1_1Vector}{Vector} spaces can not copy-\/assigned. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}{void \hyperlink{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}{set\-Norm} (\hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm})}\label{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}
+\hypertarget{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}{void \hyperlink{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}{set\-Norm} (Norm \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm})}\label{classSpacy_1_1VectorSpace_acbd69a540d3c81606751237a94783754}
 
 \begin{DoxyCompactList}\small\item\em Change norm of space. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{const \hyperlink{namespaceSpacy_a0dbe77a4e1282ef88017e94d50d17791}{Norm} \& \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm} () const }\label{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}
+\hypertarget{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{const Norm \& \hyperlink{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}{norm} () const }\label{classSpacy_1_1VectorSpace_a2f26e33994544a37a83e6938a748ab8c}
 
 \begin{DoxyCompactList}\small\item\em Access norm. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1VectorSpace_a4cc04c09af8d01608c2fe2e29028c26b}{unsigned \hyperlink{classSpacy_1_1VectorSpace_a4cc04c09af8d01608c2fe2e29028c26b}{index} () const }\label{classSpacy_1_1VectorSpace_a4cc04c09af8d01608c2fe2e29028c26b}
@@ -71,13 +71,12 @@ Collaboration diagram for Spacy\-:\-:Vector\-Space\-:
 \hypertarget{classSpacy_1_1VectorSpace_a6477c132f76235270db33fa85b13acd9}{void \hyperlink{classSpacy_1_1VectorSpace_a6477c132f76235270db33fa85b13acd9}{add\-Dual\-Space} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&Y)}\label{classSpacy_1_1VectorSpace_a6477c132f76235270db33fa85b13acd9}
 
 \begin{DoxyCompactList}\small\item\em Add space $Y$ for which this space $X$ acts as primal space. This is necessary to allow evaluation of $x(y)$ for $ x\in X $ and $ y\in Y$. \end{DoxyCompactList}\item 
-\hypertarget{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}{bool \hyperlink{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}{is\-Primal\-W\-R\-T} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&Y) const }\label{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}
-
-\begin{DoxyCompactList}\small\item\em Checks whether $Y$ has been assigned as dual space with respect to this space $X$. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}{is\-Primal\-W\-R\-T} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&Y) const 
+\item 
 \hypertarget{classSpacy_1_1VectorSpace_a12b023eff0cce202e4a5f9a754cc05c9}{bool \hyperlink{classSpacy_1_1VectorSpace_a12b023eff0cce202e4a5f9a754cc05c9}{is\-Hilbert\-Space} () const }\label{classSpacy_1_1VectorSpace_a12b023eff0cce202e4a5f9a754cc05c9}
 
 \begin{DoxyCompactList}\small\item\em Checks whether this space is a hilbert space. \end{DoxyCompactList}\item 
-void \hyperlink{classSpacy_1_1VectorSpace_a7c5f4a8c5937f9e07592483666b20ef7}{set\-Restriction} (std\-::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&)$>$ f)
+void \hyperlink{classSpacy_1_1VectorSpace_aa7d27ee5688a8e4ede54dec0cc9fda57}{set\-Restriction} (std\-::function$<$ bool(const \hyperlink{classSpacy_1_1Vector}{Vector} \&) $>$ f)
 \begin{DoxyCompactList}\small\item\em Restrict vector space. \end{DoxyCompactList}\item 
 \hypertarget{classSpacy_1_1VectorSpace_a4beac78b082a364eb97e938b6c4928d2}{bool \hyperlink{classSpacy_1_1VectorSpace_a4beac78b082a364eb97e938b6c4928d2}{is\-Admissible} (const \hyperlink{classSpacy_1_1Vector}{Vector} \&x) const }\label{classSpacy_1_1VectorSpace_a4beac78b082a364eb97e938b6c4928d2}
 
@@ -130,7 +129,7 @@ Vector\-Creator.
 \subsubsection[{Vector\-Space}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-Vector\-Space\-::\-Vector\-Space (
 \begin{DoxyParamCaption}
 \item[{{\bf Zero\-Vector\-Creator} \&\&}]{creator, }
-\item[{{\bf Norm}}]{norm, }
+\item[{Norm}]{norm, }
 \item[{bool}]{default\-Index = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}}\label{classSpacy_1_1VectorSpace_aa4f30986a1b977cf7f0abc27e0c9872d}
@@ -148,13 +147,20 @@ Construct function space from Vector\-Creator and Norm.
 The default index can be used to use different locally defined function spaces together. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classSpacy_1_1VectorSpace_a7c5f4a8c5937f9e07592483666b20ef7}{\index{Spacy\-::\-Vector\-Space@{Spacy\-::\-Vector\-Space}!set\-Restriction@{set\-Restriction}}
+\hypertarget{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}{\index{Spacy\-::\-Vector\-Space@{Spacy\-::\-Vector\-Space}!is\-Primal\-W\-R\-T@{is\-Primal\-W\-R\-T}}
+\index{is\-Primal\-W\-R\-T@{is\-Primal\-W\-R\-T}!Spacy::VectorSpace@{Spacy\-::\-Vector\-Space}}
+\subsubsection[{is\-Primal\-W\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}bool Spacy\-::\-Vector\-Space\-::is\-Primal\-W\-R\-T (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\-Space} \&}]{Y}
+\end{DoxyParamCaption}
+) const}}\label{classSpacy_1_1VectorSpace_aae96ebd6f5e4a1a95ab8684b49062e7d}
+Checks whether $Y$ has been assigned as dual space with respect to this space $X$. \hypertarget{classSpacy_1_1VectorSpace_aa7d27ee5688a8e4ede54dec0cc9fda57}{\index{Spacy\-::\-Vector\-Space@{Spacy\-::\-Vector\-Space}!set\-Restriction@{set\-Restriction}}
 \index{set\-Restriction@{set\-Restriction}!Spacy::VectorSpace@{Spacy\-::\-Vector\-Space}}
 \subsubsection[{set\-Restriction}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\-::\-Vector\-Space\-::set\-Restriction (
 \begin{DoxyParamCaption}
-\item[{std\-::function$<$ bool(const {\bf Vector} \&)$>$}]{f}
+\item[{std\-::function$<$ bool(const {\bf Vector} \&) $>$}]{f}
 \end{DoxyParamCaption}
-)}}\label{classSpacy_1_1VectorSpace_a7c5f4a8c5937f9e07592483666b20ef7}
+)}}\label{classSpacy_1_1VectorSpace_aa7d27ee5688a8e4ede54dec0cc9fda57}
 
 
 Restrict vector space. 

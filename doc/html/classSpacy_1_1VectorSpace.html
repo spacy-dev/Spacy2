@@ -123,7 +123,7 @@ Collaboration diagram for Spacy::VectorSpace:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa4f30986a1b977cf7f0abc27e0c9872d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#aa4f30986a1b977cf7f0abc27e0c9872d">VectorSpace</a> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;creator, <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> <a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a>, bool defaultIndex=false)</td></tr>
+<tr class="memitem:aa4f30986a1b977cf7f0abc27e0c9872d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#aa4f30986a1b977cf7f0abc27e0c9872d">VectorSpace</a> (<a class="el" href="classSpacy_1_1ZeroVectorCreator.html">ZeroVectorCreator</a> &amp;&amp;creator, Norm <a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a>, bool defaultIndex=false)</td></tr>
 <tr class="memdesc:aa4f30986a1b977cf7f0abc27e0c9872d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct function space from VectorCreator and Norm.  <a href="#aa4f30986a1b977cf7f0abc27e0c9872d">More...</a><br/></td></tr>
 <tr class="separator:aa4f30986a1b977cf7f0abc27e0c9872d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc6444dc35de9fe68d7a8156c03125f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2bc6444dc35de9fe68d7a8156c03125f"></a>
@@ -141,11 +141,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a30d39a339ed924a6c17c85d75f64afc4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classSpacy_1_1Vector.html" title="Type-erased vector. ">Vector</a> spaces can not copy-assigned. <br/></td></tr>
 <tr class="separator:a30d39a339ed924a6c17c85d75f64afc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd69a540d3c81606751237a94783754"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbd69a540d3c81606751237a94783754"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#acbd69a540d3c81606751237a94783754">setNorm</a> (<a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> <a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a>)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#acbd69a540d3c81606751237a94783754">setNorm</a> (Norm <a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a>)</td></tr>
 <tr class="memdesc:acbd69a540d3c81606751237a94783754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change norm of space. <br/></td></tr>
 <tr class="separator:acbd69a540d3c81606751237a94783754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f26e33994544a37a83e6938a748ab8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f26e33994544a37a83e6938a748ab8c"></a>
-const <a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a> () const </td></tr>
+const Norm &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a2f26e33994544a37a83e6938a748ab8c">norm</a> () const </td></tr>
 <tr class="memdesc:a2f26e33994544a37a83e6938a748ab8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access norm. <br/></td></tr>
 <tr class="separator:a2f26e33994544a37a83e6938a748ab8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cc04c09af8d01608c2fe2e29028c26b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cc04c09af8d01608c2fe2e29028c26b"></a>
@@ -172,17 +172,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a6477c132f76235270db33fa85b13acd9">addDualSpace</a> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y)</td></tr>
 <tr class="memdesc:a6477c132f76235270db33fa85b13acd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add space \(Y\) for which this space \(X\) acts as primal space. This is necessary to allow evaluation of \(x(y)\) for \( x\in X \) and \( y\in Y\). <br/></td></tr>
 <tr class="separator:a6477c132f76235270db33fa85b13acd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae96ebd6f5e4a1a95ab8684b49062e7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae96ebd6f5e4a1a95ab8684b49062e7d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#aae96ebd6f5e4a1a95ab8684b49062e7d">isPrimalWRT</a> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y) const </td></tr>
-<tr class="memdesc:aae96ebd6f5e4a1a95ab8684b49062e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether \(Y\) has been assigned as dual space with respect to this space \(X\). <br/></td></tr>
+<tr class="memitem:aae96ebd6f5e4a1a95ab8684b49062e7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#aae96ebd6f5e4a1a95ab8684b49062e7d">isPrimalWRT</a> (const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;Y) const </td></tr>
 <tr class="separator:aae96ebd6f5e4a1a95ab8684b49062e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b023eff0cce202e4a5f9a754cc05c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12b023eff0cce202e4a5f9a754cc05c9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a12b023eff0cce202e4a5f9a754cc05c9">isHilbertSpace</a> () const </td></tr>
 <tr class="memdesc:a12b023eff0cce202e4a5f9a754cc05c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this space is a hilbert space. <br/></td></tr>
 <tr class="separator:a12b023eff0cce202e4a5f9a754cc05c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c5f4a8c5937f9e07592483666b20ef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a7c5f4a8c5937f9e07592483666b20ef7">setRestriction</a> (std::function&lt; bool(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt; f)</td></tr>
-<tr class="memdesc:a7c5f4a8c5937f9e07592483666b20ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restrict vector space.  <a href="#a7c5f4a8c5937f9e07592483666b20ef7">More...</a><br/></td></tr>
-<tr class="separator:a7c5f4a8c5937f9e07592483666b20ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d27ee5688a8e4ede54dec0cc9fda57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#aa7d27ee5688a8e4ede54dec0cc9fda57">setRestriction</a> (std::function&lt; bool(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;) &gt; f)</td></tr>
+<tr class="memdesc:aa7d27ee5688a8e4ede54dec0cc9fda57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restrict vector space.  <a href="#aa7d27ee5688a8e4ede54dec0cc9fda57">More...</a><br/></td></tr>
+<tr class="separator:aa7d27ee5688a8e4ede54dec0cc9fda57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4beac78b082a364eb97e938b6c4928d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4beac78b082a364eb97e938b6c4928d2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpacy_1_1VectorSpace.html#a4beac78b082a364eb97e938b6c4928d2">isAdmissible</a> (const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;x) const </td></tr>
 <tr class="memdesc:a4beac78b082a364eb97e938b6c4928d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if vector is admissible. Default implementation always returns true;. <br/></td></tr>
@@ -243,7 +241,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceSpacy.html#a0dbe77a4e1282ef88017e94d50d17791">Norm</a>&#160;</td>
+          <td class="paramtype">Norm&#160;</td>
           <td class="paramname"><em>norm</em>, </td>
         </tr>
         <tr>
@@ -273,14 +271,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7c5f4a8c5937f9e07592483666b20ef7"></a>
+<a class="anchor" id="aae96ebd6f5e4a1a95ab8684b49062e7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Spacy::VectorSpace::isPrimalWRT </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSpacy_1_1VectorSpace.html">VectorSpace</a> &amp;&#160;</td>
+          <td class="paramname"><em>Y</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether \(Y\) has been assigned as dual space with respect to this space \(X\). </p>
+
+</div>
+</div>
+<a class="anchor" id="aa7d27ee5688a8e4ede54dec0cc9fda57"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Spacy::VectorSpace::setRestriction </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; bool(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; bool(const <a class="el" href="classSpacy_1_1Vector.html">Vector</a> &amp;) &gt;&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
@@ -304,7 +319,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 1 2017 22:31:19 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 1 2017 23:03:55 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
