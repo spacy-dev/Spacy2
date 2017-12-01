@@ -1,4 +1,6 @@
 <map id="Spacy::Newton::Termination::AffineContravariant" name="Spacy::Newton::Termination::AffineContravariant">
-<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="155,96,284,123"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="119,6,321,47"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1Mixin_1_1Eps.html" title="Mixin class for maximal attainable accuracy . " alt="" coords="155,99,284,125"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Mixin_1_1MixinConnection.html" title="Spacy::Mixin::MixinConnection\l\&lt; Eps \&gt;" alt="" coords="89,6,292,47"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1Real.html" title="Real number. " alt="" coords="337,99,431,125"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="317,13,451,40"/>
 </map>
