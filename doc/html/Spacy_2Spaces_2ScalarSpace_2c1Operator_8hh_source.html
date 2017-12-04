@@ -118,29 +118,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="classSpacy_1_1Scalar_1_1C1Operator.html">C1Operator</a>( std::function&lt; <span class="keywordtype">double</span>( <span class="keywordtype">double</span> ) &gt; value,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                        std::function&lt; <span class="keywordtype">double</span>( <span class="keywordtype">double</span> ) &gt; <a class="code" href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">derivative</a> );</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> operator()( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x ) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> d1( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; dx ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="classSpacy_1_1Scalar_1_1C1Operator.html">C1Operator</a>( std::function&lt; <span class="keywordtype">double</span>( <span class="keywordtype">double</span> ) &gt; value,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                        std::function&lt; <span class="keywordtype">double</span>( <span class="keywordtype">double</span> ) &gt; <a class="code" href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">derivative</a>, <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">domain</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classSpacy_1_1VectorSpace.html">VectorSpace</a>&amp; <a class="code" href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">range</a> );</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <a class="code" href="structSpacy_1_1Scalar_1_1LinearOperator.html">LinearOperator</a> linearization( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> operator()( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x ) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            std::function&lt; double( double ) &gt; value_;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            std::function&lt; double( double ) &gt; derivative_;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            std::shared_ptr&lt; VectorSpace &gt; operatorSpace_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="classSpacy_1_1Vector.html">Spacy::Vector</a> d1( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x, <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; dx ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="structSpacy_1_1Scalar_1_1LinearOperator.html">LinearOperator</a> linearization( <a class="code" href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">const ::Spacy::Vector</a>&amp; x ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::function&lt; double( double ) &gt; value_;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::function&lt; double( double ) &gt; derivative_;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            std::shared_ptr&lt; VectorSpace &gt; operatorSpace_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
 <div class="ttc" id="classSpacy_1_1Vector_html"><div class="ttname"><a href="classSpacy_1_1Vector.html">Spacy::Vector</a></div><div class="ttdoc">Type-erased vector. </div><div class="ttdef"><b>Definition:</b> vector.hh:13</div></div>
+<div class="ttc" id="classSpacy_1_1OperatorBase_html_ab19d3b7a6f290b1079248f1e567e53d6"><div class="ttname"><a href="classSpacy_1_1OperatorBase.html#ab19d3b7a6f290b1079248f1e567e53d6">Spacy::OperatorBase::range</a></div><div class="ttdeci">const VectorSpace &amp; range() const </div><div class="ttdoc">Access range space . </div></div>
 <div class="ttc" id="group__VectorSpaceGroup_html_ga65d64ee5f22f492639d0f950aa931071"><div class="ttname"><a href="group__VectorSpaceGroup.html#ga65d64ee5f22f492639d0f950aa931071">Spacy::dealII::Vector</a></div><div class="ttdeci">Generic::Vector&lt; dealii::Vector&lt; double &gt; &gt; Vector</div><div class="ttdoc">Vector adapter for deal.II </div><div class="ttdef"><b>Definition:</b> vector.hh:14</div></div>
 <div class="ttc" id="namespaceSpacy_html_a002fe344fa6d04a6ac59a74ea25fddb6"><div class="ttname"><a href="namespaceSpacy.html#a002fe344fa6d04a6ac59a74ea25fddb6">Spacy::derivative</a></div><div class="ttdeci">C1Operator derivative(C2Functional f)</div><div class="ttdoc">Compute the derivative of a functional  as (nonlinear) operator . </div></div>
+<div class="ttc" id="classSpacy_1_1OperatorBase_html_a2588f9b3e0188820c4c494e63293dc6f"><div class="ttname"><a href="classSpacy_1_1OperatorBase.html#a2588f9b3e0188820c4c494e63293dc6f">Spacy::OperatorBase::domain</a></div><div class="ttdeci">const VectorSpace &amp; domain() const </div><div class="ttdoc">Access domain space . </div></div>
 <div class="ttc" id="structSpacy_1_1Scalar_1_1LinearOperator_html"><div class="ttname"><a href="structSpacy_1_1Scalar_1_1LinearOperator.html">Spacy::Scalar::LinearOperator</a></div><div class="ttdoc">Linear operator for scalar problems. </div><div class="ttdef"><b>Definition:</b> LinearOperator.hh:20</div></div>
+<div class="ttc" id="classSpacy_1_1VectorSpace_html"><div class="ttname"><a href="classSpacy_1_1VectorSpace.html">Spacy::VectorSpace</a></div><div class="ttdoc">Function space . </div><div class="ttdef"><b>Definition:</b> vectorSpace.hh:32</div></div>
 <div class="ttc" id="classSpacy_1_1OperatorBase_html"><div class="ttname"><a href="classSpacy_1_1OperatorBase.html">Spacy::OperatorBase</a></div><div class="ttdoc">Base class for operators , between function spaces  and . </div><div class="ttdef"><b>Definition:</b> OperatorBase.hh:10</div></div>
 <div class="ttc" id="classSpacy_1_1Scalar_1_1C1Operator_html"><div class="ttname"><a href="classSpacy_1_1Scalar_1_1C1Operator.html">Spacy::Scalar::C1Operator</a></div><div class="ttdef"><b>Definition:</b> c1Operator.hh:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 1 2017 23:03:54 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 4 2017 14:31:34 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
