@@ -60,7 +60,7 @@ namespace Spacy
 
     public:
 
-      C1Operator(OperatorDefinition& F,GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain, const VectorSpace& range)
+      C1Operator(OperatorDefinition& F,GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain, const VectorSpace& range)
         : OperatorBase(domain,range), F_(F), gm_(gm)
       {
         this->resizeMembers();
@@ -146,7 +146,7 @@ namespace Spacy
         solverCreator_ = std::move(f);
       }
 
-      const GridManager<VariableSetDescription>& getGridMan() const
+      const GridManager<Spaces>& getGridMan() const
       {
         return gm_;
       }
@@ -315,7 +315,7 @@ namespace Spacy
           AssemblerSP assemblersp(*(spacesVec.at(timeStep)));
 
           //assemblersp.assemble(::Kaskade::linearization(this->SP_,x_) , Assembler::MATRIX , getNumberOfThreads() );
-          assemblersp.assemble(::Kaskade::linearization(gm_.getScalProd(),x_) , Assembler::MATRIX , getNumberOfThreads() );
+          assemblersp.assemble(::Kaskade::linearization(SP_,x_) , Assembler::MATRIX , getNumberOfThreads() );
 
           MassY_.at(timeStep) =  KaskadeOperator( assemblersp.template get<Matrix>(onlyLowerTriangle_) );
 
@@ -344,8 +344,9 @@ namespace Spacy
         return;
       }
 
-      GridManager<VariableSetDescription>& gm_;
+      GridManager<Spaces>& gm_;
       OperatorDefinition F_;
+      ScalProdDefinition SP_ = ScalProdDefinition();
       mutable std::vector<OperatorDefinition> FVec_;
       mutable bool verbose = true;
       mutable bool gradient_updated;
@@ -393,7 +394,7 @@ namespace Spacy
          * a system of equation.
          */
     template <class OperatorDefinition>
-    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars>& gm, const VectorSpace& domain,const VectorSpace& range)
+    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain,const VectorSpace& range)
     {
       return C1Operator<OperatorDefinition>(F,gm,domain,range);
     }

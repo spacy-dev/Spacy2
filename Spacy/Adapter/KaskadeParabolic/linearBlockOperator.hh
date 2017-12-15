@@ -12,6 +12,7 @@
 #include "util.hh" // copy
 #include <Spacy/Util/cast.hh>
 #include "vector.hh"
+#include <Spacy/Util/Base/AddArithmeticOperators.hh>
 
 
 namespace Spacy

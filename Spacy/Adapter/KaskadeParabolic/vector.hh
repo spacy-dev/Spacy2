@@ -5,15 +5,11 @@
 #include <boost/fusion/include/at_c.hpp>
 
 #include <Spacy/Spaces/ScalarSpace/Real.hh>
-#include <Spacy/Util/Base/AddArithmeticOperators.hh>
 #include <Spacy/Util/Base/VectorBase.hh>
 #include <Spacy/vectorSpace.hh>
 #include <Spacy/Util/Mixins/Get.hh>
-#include "util.hh"
+#include <Spacy/Adapter/KaskadeParabolic/util.hh>
 
-#include <Spacy/Adapter/Kaskade/vectorSpace.hh>
-
-#include "io/vtk.hh"
 
 
 
@@ -21,9 +17,9 @@ namespace Spacy
 {
   namespace KaskadeParabolic
   {
-    /// \cond
+
     template <class> class VectorCreator;
-    /// \endcond
+    template <class> class SubCreator;
 
     /**
          * @ingroup KaskadeGroup VectorSpaceGroup
@@ -39,8 +35,7 @@ namespace Spacy
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
       using VariableSet = typename Description::VariableSet;
 
-//      using VYSetDescription = Detail::ExtractDescription_t<Description ,0>;
-//      using CoeffVec = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
+      using Spaces = typename Description::Spaces;
 
 
     public:
@@ -49,8 +44,7 @@ namespace Spacy
              * @brief Construct vector \f$x\f$ from underlying vector space.
              * @param space underlying vector space
              */
-      Vector(const VectorSpace& space)
-        : VectorBase(space)
+      Vector(const VectorSpace& space): VectorBase(space)
       {
         auto c = creator< VectorCreator<Description> >(space);
 
@@ -71,14 +65,14 @@ namespace Spacy
 
       Vector(const Vector& v): VectorBase(v), variableSet_(v.variableSet_), description_(v.description_), v_(v.v_)
       {
-//        std::cout<<"in Copy Constructor of Vector"<<std::endl;
+  //        std::cout<<"in Copy Constructor of Vector"<<std::endl;
         auto& creator_ = creator< VectorCreator<Description> >(v.space());
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
       }
 
       Vector& operator=(const Vector& v)
       {
-//        std::cout<<"in Copy Assignment of Vector"<<std::endl;
+  //        std::cout<<"in Copy Assignment of Vector"<<std::endl;
         VectorBase::operator=(v);
         this->variableSet_ = v.variableSet_;
         this->description_ = v.description_;
@@ -88,9 +82,10 @@ namespace Spacy
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
 
       }
+
       Vector& operator=(Vector&& v)
       {
-//        std::cout<<"in rvalue Copy Assigment of Vector"<<std::endl;
+  //        std::cout<<"in rvalue Copy Assigment of Vector"<<std::endl;
         VectorBase::operator=(std::move(v));
         this->variableSet_ = std::move(v.variableSet_);
         this->description_ = std::move(v.description_);
@@ -99,28 +94,56 @@ namespace Spacy
         auto& creator_ = creator< VectorCreator<Description> >(v.space());
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
       }
+
+      /**
+             * @brief Apply as dual element.
+             * @param y primal vector
+             * @return \f$x(y)\f$
+             */
+      ::Spacy::Real operator()(const Vector& y) const
+      {
+        assert(this->variableSet_.size() == y.variableSet_.size());
+        Real result{0.};
+        auto cy = creator< VectorCreator<Description> >(y.space());
+        auto cthis = creator< VectorCreator<Description> >(this->space());
+
+
+        for(auto i = 0;i<this->variableSet_.size();i++)
+        {
+          VectorImpl w( Description::template CoefficientVectorRepresentation<>::init(cy.getSpace(i)));
+          VectorImpl v( Description::template CoefficientVectorRepresentation<>::init(cthis.getSpace(i)));
+
+          variableSetToCoefficients(y.variableSet_.at(i),w);
+          variableSetToCoefficients(this->variableSet_.at(i),v);
+
+          result += v*w;
+
+        }
+
+        return result;
+      }
+
       ~Vector()
       {
-//        std::cout<<"In Destructor of Vector"<<std::endl;
+  //        std::cout<<"In Destructor of Vector"<<std::endl;
         c.disconnect();
       }
 
       void refine(unsigned k)
       {
-//        std::cout<<"hallo ich bin der Vector refiner"<<std::endl;
-//        std::cout<<this->space().index()<<std::endl;
+  //        std::cout<<"hallo ich bin der Vector refiner"<<std::endl;
+  //        std::cout<<this->space().index()<<std::endl;
 
         ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
-        ::Spacy::Kaskade::VectorCreator<Description> vc_k = vc.getSubCreator(k);
+        /*::Spacy::Kaskade::VectorCreator<SingleDesc>*/
+        ::Spacy::KaskadeParabolic::SubCreator<Description> vc_k = vc.getSubCreator(k);
 
-//        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
+  //        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
         variableSet_.insert(variableSet_.begin()+k, VariableSet(::Spacy::creator<VectorCreator<Description> >(this->space()).getSubCreator(k).get()));
         description_.insert(description_.begin()+k, std::make_shared<Description>(vc_k.get()));
         v_.insert(v_.begin()+k, VectorImpl(Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(k).descriptions.spaces )));
-//        std::cout<<"done refining"<<std::endl;
+  //        std::cout<<"done refining"<<std::endl;
       }
-
-
 
 
       /// Access coefficient vector.
@@ -153,7 +176,7 @@ namespace Spacy
            * @param y vector to add to this vector
            * @return \f$ x+=y\f$.
            */
-      Vector<Description>& operator+=(const Vector<Description>& y)
+      Vector& operator+=(const Vector& y)
       {
         checkSpaceCompatibility(this->space(),y.space());
         assert(this->variableSet_.size() == y.variableSet_.size());
@@ -167,7 +190,7 @@ namespace Spacy
            * @param y vector to subtract from this vector
            * @return \f$ x-=y\f$.
            */
-      Vector<Description>& operator-=(const Vector<Description>& y)
+      Vector& operator-=(const Vector& y)
       {
         checkSpaceCompatibility(this->space(),y.space());
         assert(this->variableSet_.size() == y.variableSet_.size());
@@ -181,7 +204,7 @@ namespace Spacy
            * @param a scaling factor
            * @return \f$ x*=a\f$.
            */
-      Vector<Description>& operator*=(double a)
+      Vector& operator*=(double a)
       {
         for(auto i = 0u;i<this->variableSet_.size();i++)
           this->variableSet_.at(i) *=a;
@@ -192,9 +215,9 @@ namespace Spacy
            * @brief Negation \f$ -x\f$.
            * @return \f$ -x \f$.
            */
-      Vector<Description> operator-() const
+      Vector operator-() const
       {
-        Vector<Description> y = *this;
+        Vector y = *this;
         for(auto i = 0u;i<y.variableSet_.size();i++)
           y.variableSet_.at(i) *=  -1;
         return y;
@@ -205,9 +228,9 @@ namespace Spacy
            * @param y vector to compare with this vector
            * @return \f$ x==y\f$.
            */
-      bool operator==(const Vector<Description>& y) const
+      bool operator==(const Vector& y) const
       {
-        const auto& this_ = static_cast<const Vector<Description>&>(*this);
+        const auto& this_ = static_cast<const Vector&>(*this);
         checkSpaceCompatibility(this_.space(),y.space());
         assert(this->variableSet_.size() == y.variableSet_.size());
         auto max = std::max(::Spacy::Mixin::get(this_(this_)), ::Spacy::Mixin::get(y(y)));
@@ -218,33 +241,6 @@ namespace Spacy
         return ::Spacy::Mixin::get(dx(dx)) < max*y.space().eps()*y.space().eps();
       }
 
-      /**
-             * @brief Apply as dual element.
-             * @param y primal vector
-             * @return \f$x(y)\f$
-             */
-      Real operator()(const Vector& y) const
-      {
-        assert(this->variableSet_.size() == y.variableSet_.size());
-        Real result{0.};
-        auto cy = creator< VectorCreator<Description> >(y.space());
-        auto cthis = creator< VectorCreator<Description> >(this->space());
-
-
-        for(auto i = 0;i<this->variableSet_.size();i++)
-        {
-          VectorImpl w( Description::template CoefficientVectorRepresentation<>::init(cy.getSpace(i)));
-          VectorImpl v( Description::template CoefficientVectorRepresentation<>::init(cthis.getSpace(i)));
-
-          variableSetToCoefficients(y.variableSet_.at(i),w);
-          variableSetToCoefficients(this->variableSet_.at(i),v);
-
-          result += v*w;
-
-        }
-
-        return result;
-      }
 
 
     private:

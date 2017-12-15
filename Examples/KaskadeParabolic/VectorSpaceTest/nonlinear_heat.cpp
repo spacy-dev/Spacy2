@@ -35,7 +35,7 @@ int main()
     using Grid = Dune::UGGrid<dim>;
     using H1Space = FEFunctionSpace<ContinuousLagrangeMapper<double,Grid::LeafGridView> >;
     using Spaces = boost::fusion::vector<H1Space const*>;
-    using VariableDescriptions = boost::fusion::vector< Variable<SpaceIndex<0>,Components<1>,VariableId<0> > >;
+    using VariableDescriptions =boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >;
     using VariableSetDesc = VariableSetDescription<Spaces,VariableDescriptions>;
 
 
@@ -47,7 +47,7 @@ int main()
 //    std::vector< FungOperator<decltype(integrand),VariableSetDesc> > FVec(no_time_steps, FungOperator<decltype(integrand),VariableSetDesc>(integrand));
 
 
-    ::Spacy::KaskadeParabolic::GridManager<VariableSetDesc> gm (no_time_steps,dt_size,refinements,order);
+    ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,dt_size,refinements,order);
     auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm);
 
     auto A = Spacy::KaskadeParabolic::makeC1Operator( F, gm , domain , domain.dualSpace() );

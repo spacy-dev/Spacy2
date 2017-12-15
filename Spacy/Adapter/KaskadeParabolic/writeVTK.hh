@@ -3,6 +3,8 @@
 #include <Spacy/vector.hh>
 
 #include "vector.hh"
+#include "io/vtk.hh"
+
 
 namespace Spacy
 {
