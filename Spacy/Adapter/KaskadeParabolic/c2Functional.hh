@@ -17,15 +17,15 @@
 #include "directSolver.hh"
 #include "vectorSpace.hh"
 #include "vector.hh"
-#include "operatorSpace.hh"
-#include "linearOperator.hh"
+#include "linearBlockOperatorSpace.hh"
+#include "linearBlockOperator.hh"
 
 namespace Spacy
 {
     /** @addtogroup KaskadeGroup
      * @{
      */
-    namespace Kaskade
+    namespace KaskadeParabolic
     {
         /**
          * @brief %Functional interface for %Kaskade 7. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
@@ -66,85 +66,38 @@ namespace Spacy
              * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
              * a system of equation.
              */
-            C2Functional(const FunctionalDefinition& f, const VectorSpace& domain,
-                         int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
-                         int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
+            C2Functional(const FunctionalDefinition& f, GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain, const VectorSpace& range)
                 : FunctionalBase(domain),
                   f_(f),
-                  spaces_( extractSpaces<VariableSetDescription>(domain) ),
-                  rhs_( zero(domain.dualSpace()) ),
-                  rbegin_(rbegin), rend_(rend), cbegin_(cbegin), cend_(cend),
-                  operatorSpace_( std::make_shared<VectorSpace>(
-                                      LinearOperatorCreator<VariableSetDescription,VariableSetDescription>(domain,domain.dualSpace()) ,
-                                      [](const ::Spacy::Vector& v)
+                  gm_(gm)
             {
-                using std::begin;
-                using std::end;
-                const auto& m = cast_ref<Linearization>(v).get();
-                auto iend = end(m);
-                auto result = 0.;
-                for(auto iter = begin(m); iter!=iend; ++iter)
-                    result += (*iter) * (*iter);
-                return Real{sqrt(result)};
-            } , true ) )
-            {}
-
-
-            /**
-             * @brief Copy constructor.
-             * @param g functional to copy from
-             */
-            C2Functional(const C2Functional& g)
-                : FunctionalBase(g.domain()),
-                  NumberOfThreads(g),
-                  f_(g.f_), spaces_(g.spaces_),
-                  A_(g.A_),
-                  value_(g.value_),
-                  old_X_f_(g.old_X_f_),
-                  old_X_df_(g.old_X_df_),
-                  old_X_ddf_(g.old_X_ddf_),
-                  rhs_(g.rhs_),
-                  onlyLowerTriangle_(g.onlyLowerTriangle_),
-                  rbegin_(g.rbegin_), rend_(g.rend_), cbegin_(g.cbegin_), cend_(g.cend_),
-                  solverCreator_(g.solverCreator_),
-                  operatorSpace_(g.operatorSpace_)
-            {}
-
-            /**
-             * @brief Copy assignment.
-             * @param g functional to copy from
-             */
-            C2Functional& operator=(const C2Functional& g)
-            {
-                setNumberOfThreads(g.getNumberOfThreads());
-                f_ = g.f_;
-                spaces_ = g.spaces_;
-                A_ = g.A_;
-                value_ = g.value_;
-                old_X_f_ = g.old_X_f_;
-                old_X_df_ = g.old_X_df_;
-                old_X_ddf_ = g.old_X_ddf_;
-                rhs_ = g.rhs_;
-                onlyLowerTriangle_ = g.onlyLowerTriangle_;
-                rbegin_ = g.rbegin_;
-                rend_ = g.rend_;
-                cbegin_ = g.cbegin_;
-                cend_ = g.cend_;
-                solverCreator_ = g.solverCreator_;
-                operatorSpace_ = g.operatorSpace_;
+              this->resizeMembers();
             }
 
             /**
-             * @brief Move constructor.
-             * @param g functional to move from
-             */
-            C2Functional(C2Functional&& g) = default;
+                   * @brief Copy constructor.
+                   * @param B object to copy from
+                   */
+            C2Functional(const C2Functional& B) = default;
 
             /**
-             * @brief Move assignment.
-             * @param g functional to move from
-             */
-            C2Functional& operator=(C2Functional&& g) = default;
+                   * @brief Copy assignment.
+                   * @param B object to copy from
+                   */
+            C2Functional& operator=(const C2Functional& B) = default;
+
+            /**
+                   * @brief Move constructor.
+                   * @param B object to move from
+                   */
+            C2Functional(C2Functional&& B) = default;
+
+            /**
+                   * @brief Move assignment.
+                   * @param B object to move from
+                   */
+            C2Functional& operator=(C2Functional&& B) = default;
+
 
             /**
              * @brief Apply functional.
@@ -180,18 +133,7 @@ namespace Spacy
              */
             ::Spacy::Vector d2(const ::Spacy::Vector& x, const ::Spacy::Vector& dx) const
             {
-                assembleHessian(x);
-
-                CoefficientVector dx_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
-                copyToCoefficientVector<VariableSetDescription>(dx,dx_);
-                CoefficientVector y_( VariableSetDescription::template CoefficientVectorRepresentation<>::init(spaces_) );
-
-                A_.apply( dx_ , y_ );
-
-                auto y = zero( domain().dualSpace() );
-                copyFromCoefficientVector<VariableSetDescription>(y_,y);
-
-                return y;
+              return hessian(x)(dx);
             }
 
             /**
@@ -201,21 +143,16 @@ namespace Spacy
              */
             auto hessian(const ::Spacy::Vector& x) const
             {
+                hessian_updated = false;
                 assembleHessian(x);
-                return Linearization{ A_ , *operatorSpace_ , solverCreator_ };
+
+                if(hessian_updated || !H_ptr)
+                  makeHessianLBOPointer();
+
+                std::cout<<"returning from hessian"<<std::endl;
+                return *H_ptr;
             }
 
-            /// Access operator representing \f$f''\f$.
-            const KaskadeOperator& A() const noexcept
-            {
-                return A_;
-            }
-
-            /// Access boost::fusion::vector of pointers to spaces.
-            const Spaces& spaces() const noexcept
-            {
-                return spaces_;
-            }
 
             /**
              * @brief Access onlyLowerTriangle flag.
@@ -235,23 +172,108 @@ namespace Spacy
                 solverCreator_ = std::move(f);
             }
 
+            const GridManager<Spaces>& getGridMan() const
+            {
+              return gm_;
+            }
+
+            void setVerbosity(bool verb) const
+            {
+              verbose = verb;
+            }
+
+            void informAboutRefinement(unsigned k )
+            {
+              MassY_.insert(MassY_.begin() + k,KaskadeOperator());
+              A_.insert(A_.begin() + k,KaskadeOperator());
+              FVec_.insert(FVec_.begin() + k,F_);
+              MassAssembled_.insert(MassAssembled_.begin() + k , false);
+
+              GradRefined_ = false;
+              OpRefined_ = false;
+            }
+
         private:
+
+            void resizeMembers() const
+            {
+              rhs_ = zero(range());
+              auto no_time_steps = gm_.getTempGrid().getDtVec().size();
+              rhs_i_.resize(no_time_steps);
+              value_i_.resize(no_time_steps);
+              gradient_updated.resize(no_time_steps);
+              A_.resize(no_time_steps);
+              B_.resize(no_time_steps);
+              A_t_.resize(no_time_steps);
+              B_t_.resize(no_time_steps);
+              My_.resize(no_time_steps);
+              Mu_.resize(no_time_steps);
+              Mass_diag_.resize(no_time_steps);
+              Mass_sd_.resize(no_time_steps);
+              MassAssembled_.resize(no_time_steps,false);
+              FVec_.resize(no_time_steps,F_);
+              old_y_f_i_resize(no_time_steps);
+              old_u_f_i_.resize(no_time_steps);
+              old_p_f_i_resize(no_time_steps);
+              old_y_ddf_i_resize(no_time_steps);
+              old_u_ddf_i_resize(no_time_steps);
+              old_p_ddf_i_resize(no_time_steps);
+              return;
+            }
             /// Assemble \f$f(x)\f$.
             void assembleFunctional(const ::Spacy::Vector& x) const
             {
-                if( old_X_f_ && old_X_f_ == x )
-                    return;
+              auto dtVec = gm_.getTempGrid().getDtVec();
+              auto spacesVec = gm_.getSpacesVec();
+              auto x_ps = ::Spacy::cast_ref<PSV>(x);
 
-                VariableSetDescription variableSet(spaces_);
-                typename VariableSetDescription::VariableSet u(variableSet);
+              auto x_y = (::Spacy::cast_ref<PSV>(x_ps(PRIMAL)))(0);
+              auto x_u = (::Spacy::cast_ref<PSV>(x_ps(PRIMAL)))(1);
+              auto x_p = x_ps(DUAL);
+              value_updated = false;
 
-                copy(x,u);
+              for(auto timeStep = 0 ; timeStep < dtVec.size() ; timeStep++)
+              {
+                if( old_y_f_i_.at(timeStep) && old_y_f_i_.at(timeStep) == y &&
+                    old_u_f_i_.at(timeStep) && old_u_f_i_.at(timeStep) == u &&
+                    old_p_f_i_.at(timeStep) && old_p_f_i_.at(timeStep) == p )
+                  continue;
 
-                Assembler assembler(spaces_);
-                assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::VALUE , getNumberOfThreads() );
-                value_ = assembler.functional();
+                space = *spacesVec.at(timeStep);
+                value_updated = true;
 
-                old_X_f_ = x;
+                // get VariableSetDescription of this Timestep
+                VariableSetDescription variableSet(space);
+                // Kaskade VariableSet for (y,u,p);
+                typename VariableSetDescription::VariableSet x(variableSet);
+
+                //Implementation on as Spacy::KaskadeParabolic::Vector
+                auto x_y_impl = cast_ref<VectorImplY>(x_y);
+                auto x_u_impl = cast_ref<VectorImplU>(x_u);
+                auto x_p_impl = cast_ref<VectorImplP>(x_p);
+
+                boost::fusion::at_c<0>(x.data) = x_y_impl.getCoeffVec(timeStep);
+                boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(timeStep);
+                boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(timeStep);
+
+                Assembler assembler(space);
+                assembler.assemble(::Kaskade::linearization(fVec_.at(timeStep),x) , Assembler::VALUE , getNumberOfThreads() );
+                value_i_.at(timeStep) = assembler.functional();
+
+                old_y_f_i_.at(timeStep) = x_y;
+                old_u_f_i_.at(timeStep) = x_u;
+                old_p_f_i_.at(timeStep) = x_p;
+              }
+
+              if(value_updated)
+              {
+                value_ = 0.;
+                for (auto i = 1u; i < dtVec_.size(); i++)
+                  value_ += dtVec.at(i) * value_i_.at(i);
+              }
+
+              if(verbose)
+                std::cout<< "assembled the functional value " << value_ <<std::endl;
             }
 
             /// Assemble discrete representation of \f$f'(x)\f$.
@@ -260,14 +282,6 @@ namespace Spacy
                 using boost::fusion::at_c;
                 if( old_X_df_ && old_X_df_ == x ) return;
 
-                VariableSetDescription variableSet(spaces_);
-                typename VariableSetDescription::VariableSet u(variableSet);
-
-                copy(x,u);
-
-                Assembler assembler(spaces_);
-                assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::RHS , getNumberOfThreads() );
-                copyFromCoefficientVector<VariableSetDescription>(CoefficientVector(assembler.rhs()),rhs_);
 
                 old_X_df_ = x;
             }
@@ -275,38 +289,169 @@ namespace Spacy
             /// Assemble discrete representation of \f$f''(x)\f$.
             void assembleHessian(const ::Spacy::Vector& x) const
             {
-                if( old_X_ddf_ && (old_X_ddf_==x) ) return;
+              auto dtVec = gm_.getTempGrid().getDtVec();
+              auto spacesVec = gm_.getSpacesVec();
+              auto x_ps = ::Spacy::cast_ref<PSV>(x);
 
-                VariableSetDescription variableSet(spaces_);
-                typename VariableSetDescription::VariableSet u(variableSet);
+              auto x_y = (::Spacy::cast_ref<PSV>(x_ps(PRIMAL)))(0);
+              auto x_u = (::Spacy::cast_ref<PSV>(x_ps(PRIMAL)))(1);
+              auto x_p = x_ps(DUAL);
 
-                copy(x,u);
+              for(auto timeStep = 0u; timeStep < dtVec.size() ; timeStep++)
+              {
+                if( old_y_ddf_i_.at(timeStep) && old_y_ddf_i_.at(timeStep) == y &&
+                    old_u_ddf_i_.at(timeStep) && old_u_ddf_i_.at(timeStep) == u &&
+                    old_p_ddf_i_.at(timeStep) && old_p_ddf_i_.at(timeStep) == p )
+                {
+                  continue;
+                }
+                auto spaces = *(spacesVec.at(timeStep));
 
-                Assembler assembler(spaces_);
-                assembler.assemble(::Kaskade::linearization(f_,u) , Assembler::MATRIX , getNumberOfThreads() );
-                A_ = KaskadeOperator( assembler.template get<Matrix>(onlyLowerTriangle_,rbegin_,rend_,cbegin_,cend_) );
+                hessian_updated = true;
 
-                old_X_ddf_ = x;
+                // Kaskade VariableSet for (y,u,p);
+                VariableSetDescription variableSet(spaces);
+                typename VariableSetDescription::VariableSet x(variableSet);
+
+                boost::fusion::at_c<0>(x.data) = x_y_impl.getCoeffVec(timeStep);
+                boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(timeStep);
+                boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(timeStep);
+
+                Assembler assembler(spaces);
+
+                assembler.assemble(::Kaskade::linearization(fVec_.at(timeStep),x) , Assembler::MATRIX , getNumberOfThreads() );
+
+                My_.at(timeStep) = Mytype( assembler.template get<Matrix>(onlyLowerTriangle_,0,1,0,1) );
+                A_t_.at(timeStep) = ATtype( assembler.template get<Matrix>(onlyLowerTriangle_,0,1,2,3) );
+                Mu_.at(timeStep) = Mutype( assembler.template get<Matrix>(onlyLowerTriangle_,1,2,1,2) );
+                B_t_.at(timeStep) = BTtype( assembler.template get<Matrix>(onlyLowerTriangle_,1,2,2,3) );
+                A_.at(timeStep) = Atype( assembler.template get<Matrix>(onlyLowerTriangle_,2,3,0,1) );
+                B_.at(timeStep) = Btype( assembler.template get<Matrix>(onlyLowerTriangle_,2,3,1,2) );
+
+                My_.at(timeStep).get_non_const().setStartToZero();
+                Mu_.at(timeStep).get_non_const().setStartToZero();
+                A_.at(timeStep).get_non_const().setStartToZero();
+                B_.at(timeStep).get_non_const().setStartToZero();
+                A_t_.at(timeStep).get_non_const().setStartToZero();
+                B_t_.at(timeStep).get_non_const().setStartToZero();
+
+                old_y_ddf_i_.at(timeStep) = x_y;
+                old_u_ddf_i_.at(timeStep) = x_u;
+                old_p_ddf_i_.at(timeStep) = x_p;
+              }
             }
 
+            /// Assemble the mass matrices for the transfer terms
+            void assembleMassMatrices() const
+            {
+              if(verbose)
+                std::cout<<" assembling mass matrices "<<std::endl;
+
+              auto dtVec = gm_.getTempGrid().getDtVec();
+              auto spacesVec = gm_.getSpacesVec();
+
+              for(auto timeStep = 0u; timeStep < dtVec.size() ; timeStep++)
+              {
+                if(MassAssembled_.at(timeStep)){ continue;}
+
+                if(verbose)
+                  std::cout<<"assembling mass matrices for timestep "<<timeStep<<std::endl;
+
+                space = *(spacesVec.at(timeStep));
+
+                VariableSetDescription variableSet(space);
+                typename VariableSetDescription::VariableSet x(variableSet);
+
+                AssemblerSP assemblersp(space);
+                assemblersp.assemble(::Kaskade::linearization(scalprod_,x) , Assembler::MATRIX , getNumberOfThreads() );
+
+                Mass_diag_.at(timeStep) = Masstype( assemblersp.template get<Matrix>(onlyLowerTriangle_,2,3,0,1) );
+                Mass_diag_.at(timeStep).get_non_const().setStartToZero();
+
+                if(timeStep != dtVec_.size()-1){
+                  Mass_sd_.at(timeStep) = Masstype( assemblersp.template get<Matrix>(onlyLowerTriangle_,2,3,0,1) );
+                  Mass_sd_.at(timeStep).get_non_const().setStartToZero();
+                }
+
+                MassAssembled_.at(timeStep) = true;
+              }
+              if(verbose)
+                std::cout<<" done assembling mass matrices "<<std::endl;
+            }
+
+            void makeHessianLBOPointer() const
+            {
+              auto normfunc = [](const ::Spacy::Vector &v) {
+                return Real{0};
+              };
+
+              if(verbose)
+                std::cout<<" Constructing the LBO Pointer "<<std::endl;
+              H_ptr = std::make_shared<OCP::LinearBlockOperator<VariableSetDescription, VariableSetDescription> >(
+                    OCP::LinearBlockOperator<VariableSetDescription, VariableSetDescription>(My_, Mu_, A_, B_, A_t_,
+                                                                                             B_t_, Mass_diag_, Mass_sd_, gm_.getTempGrid().getDtVec(), gm_.getSpacesVec(),
+                                                                                             VectorSpace(
+                                                                                               PDE::LinearBlockOperatorCreator<VariableSetDescription, VariableSetDescription>
+                                                                                               (this->domain(),
+                                                                                                this->range()),
+                                                                                               normfunc, true),solverCreator_));
+              std::cout<<"done with constructing the LBO pointer"<<std::endl;
+              return;
+            }
+
+            //Problem definition
+            GridManager<Spaces>& gm_;
             FunctionalDefinition f_;
-            Spaces spaces_;
-            mutable KaskadeOperator A_ = {};
+            ScalProdDefinition SP_ = ScalProdDefinition();
+            mutable std::vector<FunctionalDefinition> fVec_;
+
+            mutable bool verbose = true;
+            mutable bool hessian_updated;
+            mutable std::vector<bool> gradient_updated {};
+            mutable bool value_updated;
+
+            // For functional value data
             mutable double value_ = 0;
-            mutable ::Spacy::Vector old_X_f_{}, old_X_df_{}, old_X_ddf_{}, rhs_{};
+            mutable std::vector<Real> value_i_;
+
+            // For gradient data
+            mutable ::Spacy::Vector rhs_{};
+            mutable std::vector<::Spacy::Vector>rhs_i_{};
+
+            //For hessian data
+            mutable std::vector<Mytype> My_{};
+            mutable std::vector<Mutype> Mu_{};
+            mutable std::vector<Atype> A_{};
+            mutable std::vector<Btype> B_{};
+            mutable std::vector<ATtype> A_t_{};
+            mutable std::vector<BTtype> B_t_{};
+            mutable std::vector<Masstype> Mass_diag_{};
+            mutable std::vector<Masstype> Mass_sd_{};
+            //The hessian as forward operator built from the above vectors of blocks
+            mutable std::shared_ptr< OCP::LinearBlockOperator<VariableSetDescription ,VariableSetDescription> > H_ptr = nullptr;
+
+
+
+            mutable std::vector<::Spacy::Vector>
+            old_y_f_i_{}, old_u_f_i_{}, old_p_f_i_{},
+            old_y_ddf_i_{}, old_u_ddf_i_{}, old_p_ddf_i_{};
+
+            mutable bool GradRefined_ = false;
+            mutable bool OpRefined_ = false;
+            mutable std::vector<bool> MassAssembled_;
+            mutable unsigned refinedIndex_;
+
             bool onlyLowerTriangle_ = false;
-            int rbegin_=0, rend_=FunctionalDefinition::AnsatzVars::noOfVariables;
-            int cbegin_=0, cend_=FunctionalDefinition::TestVars::noOfVariables;
+
             std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& f)
             {
                 return makeDirectSolver<VariableSetDescription,VariableSetDescription>( f.A() ,
                                                                                         f.range() ,
                                                                                         f.domain() /*,
-                                                                                                                                                             DirectType::MUMPS ,
-                                                                                                                                                             MatrixProperties::GENERAL */);
+                                                                                                                                          MatrixProperties::GENERAL */);
 
             };
-            std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
+//            std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
         };
 
         /**
@@ -323,11 +468,9 @@ namespace Spacy
          * a system of equation.
          */
         template <class FunctionalDefinition>
-        auto makeC2Functional(const FunctionalDefinition& f, const VectorSpace& domain,
-                              int rbegin = 0, int rend = FunctionalDefinition::AnsatzVars::noOfVariables,
-                              int cbegin = 0, int cend = FunctionalDefinition::TestVars::noOfVariables)
+        auto makeC2Functional(FunctionalDefinition& f,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain,const VectorSpace& range)
         {
-            return C2Functional<FunctionalDefinition>( f, domain , rbegin, rend , cbegin , cend );
+          return C2Functional<FunctionalDefinition>(F,gm,domain,range);
         }
     }
     /** @} */
