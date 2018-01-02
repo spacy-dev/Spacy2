@@ -140,6 +140,9 @@ namespace Spacy
 
   //        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
         variableSet_.insert(variableSet_.begin()+k, VariableSet(::Spacy::creator<VectorCreator<Description> >(this->space()).getSubCreator(k).get()));
+        assert(variableSet_.at(k).data.coefficients().size() == variableSet_.at(k+1).data.coefficients().size());
+        boost::fusion::at_c<0>(variableSet_.at(k).data) = boost::fusion::at_c<0>(variableSet_.at(k+1).data);
+
         description_.insert(description_.begin()+k, std::make_shared<Description>(vc_k.get()));
         v_.insert(v_.begin()+k, VectorImpl(Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(k).descriptions.spaces )));
   //        std::cout<<"done refining"<<std::endl;
@@ -199,6 +202,21 @@ namespace Spacy
         return *this;
       }
 
+      Vector subtractOtherTempGrid(const Vector& y)
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+        auto vertices = tg.getVertexVec();
+        assert(this->variableSet_.size() == vertices.size());
+
+        for(auto i = 0u; i< variableSet_.size(); i++)
+        {
+          this->variableSet_.at(i) -= y.evaluate(vertices.at(i));
+        }
+        return *this;
+      }
+
       /**
            * @brief In-place multiplication \f$ x*=a\f$.
            * @param a scaling factor
@@ -240,6 +258,17 @@ namespace Spacy
         dx -= this_;
         return ::Spacy::Mixin::get(dx(dx)) < max*y.space().eps()*y.space().eps();
       }
+
+      const VariableSet& evaluate(const ::Spacy::Real t) const
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+
+        auto index = tg.getInverval(t);
+        return this->get(index);
+      }
+
 
 
 

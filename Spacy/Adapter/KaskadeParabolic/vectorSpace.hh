@@ -54,7 +54,6 @@ namespace Spacy
       /// Generate vector for %Kaskade 7.
       Vector<Description> operator()(const VectorSpace* space) const
       {
-        std::cout<<"in the creator"<<std::endl;
         return Vector<Description>{*space};
       }
 
@@ -78,7 +77,7 @@ namespace Spacy
         return gm_;
       }
 
-      void refine(unsigned k)
+       std::shared_ptr<Spaces> refine(unsigned k)
       {
 //        std::cout<< "in VC refine function :"<<k<<std::endl;
         //refining the grid
@@ -94,11 +93,12 @@ namespace Spacy
 //        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
         this->S_->operator()(k);
 //        std::cout<<"--------returning from the VC refine function"<<std::endl;
+            return insertedSpace;
       }
 
-      void refine_noGridRef(unsigned k,Spaces& insertedSpace)
+      void refine_noGridRef(unsigned k,std::shared_ptr<Spaces> insertedSpace)
       {
-//        std::cout<< "in VC refine function :"<<k<<std::endl;
+//        std::cout<< "in VC refine function without gridref :"<<k<<std::endl;
         auto toinsertCreator = std::make_shared<SubCreator<Description> >(SubCreator<Description>( Description(*insertedSpace,name_)));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
 //        std::cout<<"--------returning from the Grids refine function"<<std::endl;
@@ -106,7 +106,7 @@ namespace Spacy
         //tell the vectors
 //        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
         this->S_->operator()(k);
-//        std::cout<<"--------returning from the VC refine function"<<std::endl;
+//        std::cout<<"--------returning from the VC refine functionwithout gridref"<<std::endl;
       }
       std::shared_ptr<Signal> S_;
 
@@ -139,27 +139,30 @@ namespace Spacy
      * @param dualIds ids of dual variables
      */
     template<class Spaces>
-    auto makeHilbertSpace(GridManager<Spaces>& gm, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds = {})
+    auto makeHilbertSpace(GridManager<Spaces>& gm, const std::vector<unsigned>& primalIds, const std::vector<unsigned>& dualIds)
     {
       //assume optimal control context
       assert(primalIds.size() == 2 && dualIds.size() == 1);
 
-      unsigned n = 3;
-      std::vector<std::shared_ptr< VectorSpace > > newSpaces( n );
-      std::cout << "create space with " << n << " variables." << std::endl;
-
-      using VD = boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >;
-      using VariableSetDescription = ::Kaskade::VariableSetDescription<Spaces,VD>;
+      std::vector<std::shared_ptr< VectorSpace > > newSpaces;
 
       //State
-      newSpaces.at(0) = std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-                   ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"y"),::Spacy::KaskadeParabolic::l2Product() ) );
+      using VD = boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >;
+      using VariableSetDescription = ::Kaskade::VariableSetDescription<Spaces,VD>;
+      newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
+                   ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"y"),::Spacy::KaskadeParabolic::l2Product() ) ));
       //Cotnrol
-      newSpaces.at(1) = std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"u"),::Spacy::KaskadeParabolic::l2Product() ) );
+      using VD2 = boost::fusion::vector<::Kaskade::VariableDescription<0,1,1> >;
+      using VariableSetDescription2 = ::Kaskade::VariableSetDescription<Spaces,VD2>;
+      newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
+          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription2>(gm,"u"),::Spacy::KaskadeParabolic::l2Product() ) ));
       //Adjoint
-      newSpaces.at(2) = std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"p"),::Spacy::KaskadeParabolic::l2Product() ) );
+      using VD3 = boost::fusion::vector<::Kaskade::VariableDescription<0,1,2> >;
+      using VariableSetDescription3 = ::Kaskade::VariableSetDescription<Spaces,VD3>;
+      newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
+          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription3>(gm,"p"),::Spacy::KaskadeParabolic::l2Product() ) ));
+
+      std::cout << "create space with " << newSpaces.size() << " variables." << std::endl;
 
        return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
     }

@@ -13,6 +13,7 @@
 //#include "Spacy/c2Functional.hh"
 #include "Spacy/vector.hh"
 #include "Spacy/Util/Base/OperatorBase.hh"
+#include "Spacy/Spaces/ScalarSpace/Real.hh"
 #include "util.hh"
 #include <Spacy/zeroVectorCreator.hh>
 
@@ -28,8 +29,8 @@ class VectorSpace;
 
 namespace KaskadeParabolic
 {
-
-    namespace PDE{
+    namespace PDE
+    {
 
         /**
      * @brief A direct solver for time dependend problems
@@ -67,7 +68,7 @@ namespace KaskadeParabolic
                     OperatorBase(H.domain(), H.range()), H_(H), spacesVec_(H.getSpacesVec()), dtVec_(H.getDtVec()) {
 
                 for (auto i = 0u; i < dtVec_.size(); i++) {
-                    double dt = dtVec_.at(i);
+                    double dt = get(dtVec_.at(i));
 
                     if (i != 0) {
                         KaskadeOperatorYY currentKaskOp(H_.getKaskOp("A", i).get());
@@ -134,7 +135,7 @@ namespace KaskadeParabolic
                     if (verbose)
                         std::cout << "Solving the state equation for timestep " << i << std::endl;
 
-                    double dt = dtVec_.at(i);
+                    double dt = get(dtVec_.at(i));
 
                     solDiag.at(i)->apply(b_y.at(i), x_y.at(i));
 
@@ -155,7 +156,7 @@ namespace KaskadeParabolic
         private:
             bool verbose = 0;
             std::vector<std::shared_ptr<Spaces> > spacesVec_;
-            std::vector<double> dtVec_;
+            std::vector<Real> dtVec_;
             LinearBlockOperator<VariableSetDescription, VariableSetDescription> H_;
             mutable std::vector<std::shared_ptr<
                     ::Kaskade::InverseLinearOperator <
@@ -170,7 +171,6 @@ namespace KaskadeParabolic
             return DirectSolver<OperatorDefinition>(std::move(H));
         }
     }
-
 }
 }
 

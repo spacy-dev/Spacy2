@@ -48,7 +48,7 @@ namespace Spacy
       using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVector,CoefficientVector>;
       using Linearization = PDE::LinearBlockOperator<VariableSetDescription,VariableSetDescription>;
 
-      using ScalProdDefinition = ScalarProdFunctional<double,VariableSetDescription>;
+      using ScalProdDefinition = PDE::ScalarProdFunctional<double,VariableSetDescription>;
       using AssemblerSP = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<ScalProdDefinition> >;
 
       using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<VariableSetDescription ,0>;
@@ -207,7 +207,7 @@ namespace Spacy
 
           rhs_impl.getCoeffVec_nonconst(timeStep) = boost::fusion::at_c<0>(CoefficientVectorY(assembler.rhs()).data);
           // multiply by dt (Integration of constant function)
-          rhs_impl.get_nonconst(timeStep)*= dtVec.at(timeStep);
+          rhs_impl.get_nonconst(timeStep)*= get(dtVec.at(timeStep));
 
           // Time Transfer Terms
           if(verbose)
