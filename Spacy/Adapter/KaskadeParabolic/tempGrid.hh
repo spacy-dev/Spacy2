@@ -80,7 +80,7 @@ namespace Spacy
         auto i = 0u;
         for( ;i< vertexVec_.size(); i++)
         {
-          if(vertexVec_.at(i) + 1e-10 >= t)
+          if(vertexVec_.at(i) /*+  1e-10*/ >= t)
             return i;
         }
 

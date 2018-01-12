@@ -6,6 +6,7 @@
 #include "fem/istlinterface.hh"
 #include "linalg/triplet.hh"
 #include "io/iobase.hh"
+#include "io/vtk.hh"
 
 #include <Spacy/c1Operator.hh>
 #include <Spacy/vector.hh>
@@ -175,6 +176,73 @@ namespace Spacy
         return hessian(x)(dx);
       }
 
+
+//      ::std::vector<::Spacy::Real> getStateEqErr(::Spacy::Vector x)
+//      {
+//        if(verbose)
+//          std::cout << "computing the stateEqErr "<<std::endl;
+
+//        auto dtVec = gm_.getTempGrid().getDtVec();
+//        auto spacesVec = gm_.getSpacesVec();
+
+//        /// DOMAIN VECTOR
+//        auto x_ps = ::Spacy::cast_ref<PSV>(x);
+//        //subvectors as Spacy::Vector
+//        auto x_y = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(0);
+//        auto x_u = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(1);
+//        auto x_p = (::Spacy::cast_ref<PSV>(x_ps.component(DUAL))).component(0);
+//        //Implementation on as Spacy::KaskadeParabolic::Vector
+//        auto x_y_impl = ::Spacy::cast_ref<VectorImplY>(x_y);
+//        auto x_u_impl = ::Spacy::cast_ref<VectorImplU>(x_u);
+//        auto x_p_impl = ::Spacy::cast_ref<VectorImplP>(x_p);
+//        std::vector<CoefficientVector> spatialPart;
+//        ::std::vector<::Spacy::Real> StateEQDist(Real{0.},no_time_steps);
+//        ::std::vector<::Spacy::Real> StatCondDist(Real{0.},no_time_steps);
+//        ::std::vector<::Spacy::Real> AdjEqDist(Real{0.},no_time_steps);
+
+//        if(verbose)
+//          std::cout << "assembling the pde local part" << std::endl;
+//        for(auto i = 1u;i< dtVec.size(); i++)
+//        {
+//          auto space = *spacesVec.at(i);
+//          VariableSetDescription variableSet(space);
+//          typename VariableSetDescription::VariableSet x(variableSet);
+
+//          boost::fusion::at_c<0>(x.data) = x_y_impl.getCoeffVec(i);
+//          boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(i);
+//          boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(i);
+
+//          Assembler assembler(space);
+//          assembler.assemble(::Kaskade::linearization(fVec_.at(i),x) , Assembler::RHS , getNumberOfThreads() );
+//          spatialPart.push_back(CoefficientVector(assembler.rhs()));
+//        }
+
+//        // STATE ERROR
+//        if(verbose)
+//          std::cout << "STATE EQ ERROR " << std::endl;
+//        for(auto i = 1u;i< dtVec.size(); i++)
+//        {
+//          if(verbose)
+//            std::cout<< "computing <u_m-u_{m-1},z_m-z_{m-1}> "<<std::endl;
+//          CoefficientVectorY ydiff(
+//                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+//          boost::fusion::at_c<0>(ydiff.data) = x_y_impl.getCoeffVec(i) - x_y_impl.getCoeffVec(i-1);
+
+//          CoefficientVectorP pdiff(
+//                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+//          boost::fusion::at_c<0>(pdiff.data) = x_p_impl.getCoeffVec(i) - x_p_impl.getCoeffVec(i-1);
+
+//          auto My = ydiff;
+//          Mass_diag_.at(i).apply(ydiff,My);
+//          StateEQDist.at(i) += pdiff*My;
+
+//          if(verbose)
+//            std::cout<< "computing 0.5k_m a(y_m,u_m)(z_m-z_{m-1}) "<<std::endl;
+//          CoefficientVectorP coeff(::Kaskade::component<2>(spatialPart.at(i)));
+//          StateEQDist.at(i) += pdiff*My;
+
+//        }
+//      }
       /**
              * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
              * @param x point of linearization
@@ -284,7 +352,7 @@ namespace Spacy
         auto spaces = gm_.getSpacesVec();
         for(auto i = 0u;i<no_time_steps;i++)
         {
-          typename VariableSetDescription::VariableSet x_ref(*spaces.at(i));
+          typename VariableSetDescription::VariableSet x_ref(VariableSetDescription(*spaces.at(i),{"y","u","p"}));
 //          if(i<5)
           {
             ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
@@ -294,6 +362,16 @@ namespace Spacy
             }
             );
           }
+          if(i==0u)
+          {
+//            typename VariableSetDescription::VariableSet x0(VariableSetDescription(space,{"y","u","p"}));
+
+            ::Kaskade::IoOptions options();
+//            ::Kaskade::writeVTKFile(gm_.getKaskGridMan().at(0)->grid().leafGridView(),x_ref,"reference",options,1);
+            ::Kaskade::writeVTK(x_ref,"reference",::Kaskade::IoOptions().setOrder(1));
+
+          }
+
 //          else
 //          {
 //            ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
@@ -479,7 +557,7 @@ namespace Spacy
                                                                         ::Kaskade::makeWeakFunctionView( [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
             {
               auto x = cell.geometry().global(xLocal);
-              //return Dune::FieldVector<double,1>(1);
+//              return Dune::FieldVector<double,1>(-1);
 //              return Dune::FieldVector<double,1>(12*(1-x[1])*x[1]*(1-x[0])*x[0]);
                                     return Dune::FieldVector<double,1>(0);
             }));

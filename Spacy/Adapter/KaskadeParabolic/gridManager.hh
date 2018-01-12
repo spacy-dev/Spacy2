@@ -80,7 +80,8 @@ namespace Spacy
         /// Spatial grid generation
         gm_.reserve(N);
         for (auto i = 0u; i < N; i++) {
-          gm_.push_back(std::move(std::make_shared<::Kaskade::GridManager < Grid> > (::Kaskade::createUnitSquare<Grid>(1., false))));
+//          gm_.push_back(std::move(std::make_shared<::Kaskade::GridManager < Grid> > (::Kaskade::createUnitSquare<Grid>(1., false))));
+          gm_.push_back(std::make_shared<::Kaskade::GridManager < Grid> > (::Kaskade::createUnitSquare<Grid>(1., false)));
           gm_.at(i)->globalRefine(initialRefinements);
           gm_.at(i)->enforceConcurrentReads(true);
           std::cout << "Size of grid at timestep " << i << ": " << gm_.at(i)->grid().leafGridView().size(dim) << std::endl;

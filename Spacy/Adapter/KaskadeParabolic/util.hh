@@ -382,6 +382,34 @@ namespace Spacy
         {
             VariableSetToCoefficients<VariableSet::Descriptions::noOfVariables-1>::apply(x,y);
         }
+
+        template<class Descriptions>
+        auto getImpl(::Spacy::Vector& x)
+        {
+          using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,0>;
+          using VUSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,1>;
+          using VPSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,2>;
+          using PSV = ::Spacy::ProductSpace::Vector;
+
+          auto& x_ps = ::Spacy::cast_ref<PSV>(x);
+
+          //subvectors as Spacy::Vector
+          auto& x_y = (::Spacy::cast_ref<PSV>(x_ps.component(0))).component(0);
+          auto& x_u = (::Spacy::cast_ref<PSV>(x_ps.component(0))).component(1);
+          auto& x_p = (::Spacy::cast_ref<PSV>(x_ps.component(1))).component(0);
+
+
+          //Implementation on as Spacy::KaskadeParabolic::Vector
+          assert(Spacy::is<::Spacy::KaskadeParabolic::Vector<VYSetDescription> >(x_y));
+          auto& x_y_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<VYSetDescription>>(x_y);
+          assert(::Spacy::is<::Spacy::KaskadeParabolic::Vector<VUSetDescription>>(x_u));
+          auto& x_u_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<VUSetDescription>>(x_u);
+          assert(::Spacy::is<::Spacy::KaskadeParabolic::Vector<VPSetDescription>>(x_p));
+          auto& x_p_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<VPSetDescription>>(x_p);
+
+          return std::tie(x_y_impl,x_u_impl,x_p_impl);
+        }
+
     }
     /** @} */
 }

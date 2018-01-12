@@ -217,6 +217,21 @@ namespace Spacy
         return *this;
       }
 
+      Vector subtractOtherTempGrid_linearInterpolated(const Vector& y)
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+        auto vertices = tg.getVertexVec();
+        assert(this->variableSet_.size() == vertices.size());
+
+        for(auto i = 0u; i< variableSet_.size(); i++)
+        {
+          this->variableSet_.at(i) -= y.evaluate_linearInterpolated(vertices.at(i));
+        }
+        return *this;
+      }
+
       /**
            * @brief In-place multiplication \f$ x*=a\f$.
            * @param a scaling factor
@@ -266,7 +281,31 @@ namespace Spacy
         auto tg = gm.getTempGrid();
 
         auto index = tg.getInverval(t);
+        std::cout<<"Evaluate for time "<<t<<"yields index"<<index<<std::endl;
         return this->get(index);
+      }
+
+      VariableSet evaluate_linearInterpolated(const ::Spacy::Real t) const
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+
+        auto index = tg.getInverval(t);
+        std::cout<<"Evaluate for time "<<t<<"yields index"<<index<<std::endl;
+
+
+        VariableSet vs_right = this->get(index);
+        if(index != 0u)
+        {
+          double int_size = ::Spacy::Mixin::get(tg.getVertexVec().at(index)-tg.getVertexVec().at(index-1));
+          vs_right *= ::Spacy::Mixin::get((t - tg.getVertexVec().at(index-1)) / int_size);
+          VariableSet vs_left = this->get(index-1);
+          vs_left *= ::Spacy::Mixin::get((tg.getVertexVec().at(index)-t) / int_size);
+          vs_right += vs_left;
+        }
+
+        return vs_right;
       }
 
 
