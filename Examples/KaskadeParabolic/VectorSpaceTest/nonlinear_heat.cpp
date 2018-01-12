@@ -22,6 +22,8 @@
 #include <fung/fung.hh>
 #include <fung/examples/nonlinear_heat.hh>
 
+#include "nonlinear_heat.hh"
+
 using namespace Kaskade;
 
 int main()
@@ -39,12 +41,20 @@ int main()
     using VariableSetDesc = VariableSetDescription<Spaces,VariableDescriptions>;
 
 
-    double c = 1e-1, d = 1e2;
-    Dune::FieldVector<double,1> u0{0};
-    Dune::FieldMatrix<double,1,dim> du0{0};
-    auto integrand = FunG::heatModel(c, d, u0, du0);
-    auto F = FungOperator<decltype(integrand),VariableSetDesc>(integrand);
+    double c = 0., d = 1.;
+
+//    // With FunG (seems to be buggy though)
+//    Dune::FieldVector<double,1> u0{0};
+//    Dune::FieldMatrix<double,1,dim> du0{0};
+//    auto integrand = FunG::heatModel(c, d, u0, du0);
+//    auto F = FungOperator<decltype(integrand),VariableSetDesc>(integrand);
 //    std::vector< FungOperator<decltype(integrand),VariableSetDesc> > FVec(no_time_steps, FungOperator<decltype(integrand),VariableSetDesc>(integrand));
+
+    // WIthout FunG
+    using Functional = HeatFunctional<double,VariableSetDesc>;
+    // first argument nonlinearity, second singularity
+    Functional F(1.,1.);
+
 
 
     ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,dt_size,refinements,order);
@@ -72,7 +82,7 @@ int main()
     A.informAboutRefinement(6);
     vc.refine(1);
     A.informAboutRefinement(1);
-    ::Spacy::KaskadeParabolic::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "refnonopt");
+    ::Spacy::KaskadeParabolic::PDE::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x), "refnonopt");
 
     std::cout<<"setting scalar product"<<std::endl;
     domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
@@ -80,6 +90,6 @@ int main()
     std::cout<<"Starting Newton again"<<std::endl;
     auto x3 = covariantNewton(A,x,p);
 
-    ::Spacy::KaskadeParabolic::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x3), "refopt");
+    ::Spacy::KaskadeParabolic::PDE::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x3), "refopt");
     std::cout<<"returning from main"<<std::endl;
 }
