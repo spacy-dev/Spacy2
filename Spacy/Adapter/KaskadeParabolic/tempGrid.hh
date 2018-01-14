@@ -9,6 +9,7 @@ namespace Spacy
   namespace KaskadeParabolic
   {
 
+    /// some helper functions
     Real exp(const Real x)
     {
       return Real{std::exp(get(x))};
@@ -22,6 +23,12 @@ namespace Spacy
     {
     public:
 
+      /**
+             * @brief Construct time grid with uniform vertex distribution
+             * @param t_start lower bound of interval
+             * @param t_end upper bound of interval
+             * @param N number of timesteps
+             */
       TempGrid(Real t_start,Real t_end,unsigned N):
         ts_(t_start),te_(t_end),N_(N)
       {
@@ -37,6 +44,13 @@ namespace Spacy
         }
       }
 
+      /**
+             * @brief Construct time grid with exponential vertex distribution
+             * @param t_start lower bound of interval
+             * @param t_end upper bound of interval
+             * @param N number of timesteps
+             * @param lambda scaling factor for distribution of vertices (higher lambda -> more points at beginning)
+             */
       TempGrid(Real t_start, Real t_end, unsigned N, Real lambda):
         ts_(t_start),te_(t_end),N_(N)
       {
@@ -56,6 +70,10 @@ namespace Spacy
         }
       }
 
+      /**
+             * @brief refine time grid
+             * @param index index of time interval to be refined
+             */
       void refine(const unsigned index)
       {
         assert(index > 0);
@@ -65,17 +83,30 @@ namespace Spacy
         return;
       }
 
+      /**
+             * @brief getter for Vertices
+             * @return vertices of grid
+             */
       const std::vector<Real>& getVertexVec() const
       {
         return vertexVec_;
       }
 
+      /**
+             * @brief getter for interval size
+             * @return timestep size of grid
+             */
       const std::vector<Real>& getDtVec() const
       {
         return dtVec_;
       }
 
-      const unsigned getInverval(Real t)
+      /**
+             * @brief compute index of interval associated with time t
+             * @param timepoint t
+             * @return interval associated with t
+             */
+      unsigned getInverval(Real t)
       {
         auto i = 0u;
         for( ;i< vertexVec_.size(); i++)
@@ -88,6 +119,9 @@ namespace Spacy
         return 0;
       }
 
+      /**
+             * @brief print time grid
+             */
       void print() const
       {
         std::cout<<"Vertices  :";
@@ -107,8 +141,5 @@ namespace Spacy
       Real ts_,te_;
       unsigned N_;
     };
-
-
-
   }
 }

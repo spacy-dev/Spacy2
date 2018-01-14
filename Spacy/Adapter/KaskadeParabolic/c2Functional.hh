@@ -27,13 +27,14 @@
 
 namespace Spacy
 {
-  /** @addtogroup KaskadeGroup
+  /** @addtogroup KaskadeParabolicGroup
      * @{
      */
   namespace KaskadeParabolic
   {
     /**
-         * @brief %Functional interface for %Kaskade 7. Models a twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
+         * @brief %Functional interface for %Kaskade 7. Models a dynamical twice differentiable functional \f$f:X\rightarrow \mathbb{R}\f$.
+         *  The functional is semi discretized in time via piecewise constant functions.
          * @tparam FunctionalDefinition functional definition from %Kaskade 7
          * @see ::Spacy::C2Functional
          */
@@ -55,61 +56,55 @@ namespace Spacy
       /// Matrix type
       using Matrix = ::Kaskade::MatrixAsTriplet<double>;
       /// operator for the description of the second derivative
-      using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVector,CoefficientVector>;
-
       using Linearization = OCP::LinearBlockOperator<VariableSetDescription,VariableSetDescription>;
+
+      /// VariableSetDescriptions of the variables
       using VYSetDescription = Detail::ExtractDescription_t<VariableSetDescription,0>;
       using VUSetDescription = Detail::ExtractDescription_t<VariableSetDescription,1>;
       using VPSetDescription = Detail::ExtractDescription_t<VariableSetDescription,2>;
-      //          using VYSetDescription = ::Kaskade::VariableSetDescription<Spaces,boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >>;
-      //          using VUSetDescription = ::Kaskade::VariableSetDescription<Spaces,boost::fusion::vector<::Kaskade::VariableDescription<0,1,1> >>;
-      //          using VPSetDescription = ::Kaskade::VariableSetDescription<Spaces,boost::fusion::vector<::Kaskade::VariableDescription<0,1,2> >>;
 
-      using VectorImplY = Vector<VYSetDescription>;
-      using VectorImplU = Vector<VUSetDescription>;
-      using VectorImplP = Vector<VPSetDescription>;
-
-
+      /// Coefficient Vector type
       using CoefficientVectorY = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
       using CoefficientVectorU = typename VUSetDescription::template CoefficientVectorRepresentation<>::type;
       using CoefficientVectorP = typename VPSetDescription::template CoefficientVectorRepresentation<>::type;
 
+      /// Kaskade Types of the Operators held for every timestep
       template<class X, class Y>
       using KaskadeOperatorXY = ::Kaskade::MatrixRepresentedOperator<Matrix,X,Y>;
-
       using Mytype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorY>;
       using Mutype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorY>;
       using Atype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorP>;
       using ATtype = KaskadeOperatorXY<CoefficientVectorP,CoefficientVectorY>;
       using Btype = KaskadeOperatorXY<CoefficientVectorU,CoefficientVectorP>;
       using BTtype = KaskadeOperatorXY<CoefficientVectorP,CoefficientVectorU>;
-
       using Masstype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorP>;
 
+      /// Definition of the Scalar Product
       using ScalProdDefinition = OCP::ScalarProdFunctional<double,VariableSetDescription>;
+      /// Assembler for the scalar product
+      using AssemblerSP = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<ScalProdDefinition> >;
+
+      /// Implementation type
+      using VectorImplY = Vector<VYSetDescription>;
+      using VectorImplU = Vector<VUSetDescription>;
+      using VectorImplP = Vector<VPSetDescription>;
 
       using PSV = ::Spacy::ProductSpace::Vector;
 
-      using AssemblerSP = ::Kaskade::VariationalFunctionalAssembler< ::Kaskade::LinearizationAt<ScalProdDefinition> >;
-
       /**
-             * @brief Construct a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
-             * @param f operator definition from %Kaskade 7
+             * @brief Construct a twice differentiable dynamical functional \f$f: X\rightarrow \mathbb{R}\f$ from %Kaskade 7.
+             * @param f functional definition from %Kaskade 7
+             * @param gm Grid manager holding temporal and spatial grids
              * @param domain domain space
-             * @param rbegin first row to be considered in the definition of f
-             * @param rend one after the last row to be considered in the definition of f
-             * @param cbegin first column to be considered in the definition of f
-             * @param cend one after the last column to be considered in the definition of f
-             *
-             * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
-             * a system of equation.
              */
-      C2Functional(const std::function<FunctionalDefinition(const typename FunctionalDefinition::AnsatzVars::VariableSet)>& f, GridManager<typename FunctionalDefinition::AnsatzVars::Spaces>& gm, const VectorSpace& domain)
+      C2Functional(const std::function<FunctionalDefinition(const typename FunctionalDefinition::AnsatzVars::VariableSet)>& f,
+                   GridManager<typename FunctionalDefinition::AnsatzVars::Spaces>& gm, const VectorSpace& domain)
         : FunctionalBase(domain),
           f_(f),
           gm_(gm)
       {
-        std::cout<<"C2 functional built with "<<gm.getSpacesVec().size()<<std::endl;
+        if(verbose)
+          std::cout<<"C2 functional built with "<<gm.getSpacesVec().size()<<std::endl;
         this->resizeMembers();
       }
 
@@ -177,72 +172,72 @@ namespace Spacy
       }
 
 
-//      ::std::vector<::Spacy::Real> getStateEqErr(::Spacy::Vector x)
-//      {
-//        if(verbose)
-//          std::cout << "computing the stateEqErr "<<std::endl;
+      //      ::std::vector<::Spacy::Real> getStateEqErr(::Spacy::Vector x)
+      //      {
+      //        if(verbose)
+      //          std::cout << "computing the stateEqErr "<<std::endl;
 
-//        auto dtVec = gm_.getTempGrid().getDtVec();
-//        auto spacesVec = gm_.getSpacesVec();
+      //        auto dtVec = gm_.getTempGrid().getDtVec();
+      //        auto spacesVec = gm_.getSpacesVec();
 
-//        /// DOMAIN VECTOR
-//        auto x_ps = ::Spacy::cast_ref<PSV>(x);
-//        //subvectors as Spacy::Vector
-//        auto x_y = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(0);
-//        auto x_u = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(1);
-//        auto x_p = (::Spacy::cast_ref<PSV>(x_ps.component(DUAL))).component(0);
-//        //Implementation on as Spacy::KaskadeParabolic::Vector
-//        auto x_y_impl = ::Spacy::cast_ref<VectorImplY>(x_y);
-//        auto x_u_impl = ::Spacy::cast_ref<VectorImplU>(x_u);
-//        auto x_p_impl = ::Spacy::cast_ref<VectorImplP>(x_p);
-//        std::vector<CoefficientVector> spatialPart;
-//        ::std::vector<::Spacy::Real> StateEQDist(Real{0.},no_time_steps);
-//        ::std::vector<::Spacy::Real> StatCondDist(Real{0.},no_time_steps);
-//        ::std::vector<::Spacy::Real> AdjEqDist(Real{0.},no_time_steps);
+      //        /// DOMAIN VECTOR
+      //        auto x_ps = ::Spacy::cast_ref<PSV>(x);
+      //        //subvectors as Spacy::Vector
+      //        auto x_y = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(0);
+      //        auto x_u = (::Spacy::cast_ref<PSV>(x_ps.component(PRIMAL))).component(1);
+      //        auto x_p = (::Spacy::cast_ref<PSV>(x_ps.component(DUAL))).component(0);
+      //        //Implementation on as Spacy::KaskadeParabolic::Vector
+      //        auto x_y_impl = ::Spacy::cast_ref<VectorImplY>(x_y);
+      //        auto x_u_impl = ::Spacy::cast_ref<VectorImplU>(x_u);
+      //        auto x_p_impl = ::Spacy::cast_ref<VectorImplP>(x_p);
+      //        std::vector<CoefficientVector> spatialPart;
+      //        ::std::vector<::Spacy::Real> StateEQDist(Real{0.},no_time_steps);
+      //        ::std::vector<::Spacy::Real> StatCondDist(Real{0.},no_time_steps);
+      //        ::std::vector<::Spacy::Real> AdjEqDist(Real{0.},no_time_steps);
 
-//        if(verbose)
-//          std::cout << "assembling the pde local part" << std::endl;
-//        for(auto i = 1u;i< dtVec.size(); i++)
-//        {
-//          auto space = *spacesVec.at(i);
-//          VariableSetDescription variableSet(space);
-//          typename VariableSetDescription::VariableSet x(variableSet);
+      //        if(verbose)
+      //          std::cout << "assembling the pde local part" << std::endl;
+      //        for(auto i = 1u;i< dtVec.size(); i++)
+      //        {
+      //          auto space = *spacesVec.at(i);
+      //          VariableSetDescription variableSet(space);
+      //          typename VariableSetDescription::VariableSet x(variableSet);
 
-//          boost::fusion::at_c<0>(x.data) = x_y_impl.getCoeffVec(i);
-//          boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(i);
-//          boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(i);
+      //          boost::fusion::at_c<0>(x.data) = x_y_impl.getCoeffVec(i);
+      //          boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(i);
+      //          boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(i);
 
-//          Assembler assembler(space);
-//          assembler.assemble(::Kaskade::linearization(fVec_.at(i),x) , Assembler::RHS , getNumberOfThreads() );
-//          spatialPart.push_back(CoefficientVector(assembler.rhs()));
-//        }
+      //          Assembler assembler(space);
+      //          assembler.assemble(::Kaskade::linearization(fVec_.at(i),x) , Assembler::RHS , getNumberOfThreads() );
+      //          spatialPart.push_back(CoefficientVector(assembler.rhs()));
+      //        }
 
-//        // STATE ERROR
-//        if(verbose)
-//          std::cout << "STATE EQ ERROR " << std::endl;
-//        for(auto i = 1u;i< dtVec.size(); i++)
-//        {
-//          if(verbose)
-//            std::cout<< "computing <u_m-u_{m-1},z_m-z_{m-1}> "<<std::endl;
-//          CoefficientVectorY ydiff(
-//                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
-//          boost::fusion::at_c<0>(ydiff.data) = x_y_impl.getCoeffVec(i) - x_y_impl.getCoeffVec(i-1);
+      //        // STATE ERROR
+      //        if(verbose)
+      //          std::cout << "STATE EQ ERROR " << std::endl;
+      //        for(auto i = 1u;i< dtVec.size(); i++)
+      //        {
+      //          if(verbose)
+      //            std::cout<< "computing <u_m-u_{m-1},z_m-z_{m-1}> "<<std::endl;
+      //          CoefficientVectorY ydiff(
+      //                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+      //          boost::fusion::at_c<0>(ydiff.data) = x_y_impl.getCoeffVec(i) - x_y_impl.getCoeffVec(i-1);
 
-//          CoefficientVectorP pdiff(
-//                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
-//          boost::fusion::at_c<0>(pdiff.data) = x_p_impl.getCoeffVec(i) - x_p_impl.getCoeffVec(i-1);
+      //          CoefficientVectorP pdiff(
+      //                VYSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+      //          boost::fusion::at_c<0>(pdiff.data) = x_p_impl.getCoeffVec(i) - x_p_impl.getCoeffVec(i-1);
 
-//          auto My = ydiff;
-//          Mass_diag_.at(i).apply(ydiff,My);
-//          StateEQDist.at(i) += pdiff*My;
+      //          auto My = ydiff;
+      //          Mass_diag_.at(i).apply(ydiff,My);
+      //          StateEQDist.at(i) += pdiff*My;
 
-//          if(verbose)
-//            std::cout<< "computing 0.5k_m a(y_m,u_m)(z_m-z_{m-1}) "<<std::endl;
-//          CoefficientVectorP coeff(::Kaskade::component<2>(spatialPart.at(i)));
-//          StateEQDist.at(i) += pdiff*My;
+      //          if(verbose)
+      //            std::cout<< "computing 0.5k_m a(y_m,u_m)(z_m-z_{m-1}) "<<std::endl;
+      //          CoefficientVectorP coeff(::Kaskade::component<2>(spatialPart.at(i)));
+      //          StateEQDist.at(i) += pdiff*My;
 
-//        }
-//      }
+      //        }
+      //      }
       /**
              * @brief Access \f$f''(x)\f$ as linear operator \f$X\rightarrow X^*\f$.
              * @param x point of linearization
@@ -256,7 +251,6 @@ namespace Spacy
         if(hessian_updated || !H_ptr)
           makeHessianLBOPointer();
 
-        //                std::cout<<"returning from hessian"<<std::endl;
         return *H_ptr;
       }
 
@@ -279,16 +273,28 @@ namespace Spacy
         solverCreator_ = std::move(f);
       }
 
+      /**
+             * @brief Get the Grid manager
+             * @return Grid Manager holding spatial and temporal grid information
+             */
       const GridManager<Spaces>& getGridMan() const
       {
         return gm_;
       }
 
+      /**
+             * @brief Set Verbosity.
+             * @param verb verbosity to be set
+             */
       void setVerbosity(bool verb) const
       {
         verbose = verb;
       }
 
+      /**
+             * @brief Tell the operator about a refinement of the temporal grid (TO BE REPLACED WITH boost::signal impl)
+             * @param k number of the interval that was refined
+             */
       void informAboutRefinement(unsigned k )
       {
         A_.insert(A_.begin() + k,Atype());
@@ -317,20 +323,21 @@ namespace Spacy
           }
           );
         }
-//        else
-//        {
-//          ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
-//          {
-//            auto x = cell.geometry().global(xLocal);
-//            return Dune::FieldVector<double,1>(-1.*12*(1-x[1])*x[1]*(1-x[0])*x[0]);
-//          }
-//          );
-//        }
+        //        else
+        //        {
+        //          ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
+        //          {
+        //            auto x = cell.geometry().global(xLocal);
+        //            return Dune::FieldVector<double,1>(-1.*12*(1-x[1])*x[1]*(1-x[0])*x[0]);
+        //          }
+        //          );
+        //        }
         fVec_.insert(fVec_.begin() + k,f_(x_ref));
       }
 
     private:
 
+      /// resize the members vectors a size equal to #timesteps
       void resizeMembers() const
       {
         rhs_ = zero(domain());
@@ -353,7 +360,7 @@ namespace Spacy
         for(auto i = 0u;i<no_time_steps;i++)
         {
           typename VariableSetDescription::VariableSet x_ref(VariableSetDescription(*spaces.at(i),{"y","u","p"}));
-//          if(i<5)
+          //          if(i<5)
           {
             ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
             {
@@ -364,23 +371,23 @@ namespace Spacy
           }
           if(i==0u)
           {
-//            typename VariableSetDescription::VariableSet x0(VariableSetDescription(space,{"y","u","p"}));
+            //            typename VariableSetDescription::VariableSet x0(VariableSetDescription(space,{"y","u","p"}));
 
             ::Kaskade::IoOptions options();
-//            ::Kaskade::writeVTKFile(gm_.getKaskGridMan().at(0)->grid().leafGridView(),x_ref,"reference",options,1);
+            //            ::Kaskade::writeVTKFile(gm_.getKaskGridMan().at(0)->grid().leafGridView(),x_ref,"reference",options,1);
             ::Kaskade::writeVTK(x_ref,"reference",::Kaskade::IoOptions().setOrder(1));
 
           }
 
-//          else
-//          {
-//            ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
-//            {
-//              auto x = cell.geometry().global(xLocal);
-//              return Dune::FieldVector<double,1>(-1.*12*(1-x[1])*x[1]*(1-x[0])*x[0]);
-//            }
-//            );
-//          }
+          //          else
+          //          {
+          //            ::Kaskade::interpolateGloballyFromFunctor<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x_ref.data), [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
+          //            {
+          //              auto x = cell.geometry().global(xLocal);
+          //              return Dune::FieldVector<double,1>(-1.*12*(1-x[1])*x[1]*(1-x[0])*x[0]);
+          //            }
+          //            );
+          //          }
           fVec_.push_back(f_(x_ref));
         }
         return;
@@ -429,9 +436,9 @@ namespace Spacy
           boost::fusion::at_c<1>(x.data) = x_u_impl.getCoeffVec(timeStep);
           boost::fusion::at_c<2>(x.data) = x_p_impl.getCoeffVec(timeStep);
 
-//          std::cout<<" x data "<<boost::fusion::at_c<0>(x.data).coefficients().two_norm()<<std::endl;
-//          std::cout<<" x data "<<boost::fusion::at_c<1>(x.data).coefficients().two_norm()<<std::endl;
-//          std::cout<<" x data "<<boost::fusion::at_c<2>(x.data).coefficients().two_norm()<<std::endl;
+          //          std::cout<<" x data "<<boost::fusion::at_c<0>(x.data).coefficients().two_norm()<<std::endl;
+          //          std::cout<<" x data "<<boost::fusion::at_c<1>(x.data).coefficients().two_norm()<<std::endl;
+          //          std::cout<<" x data "<<boost::fusion::at_c<2>(x.data).coefficients().two_norm()<<std::endl;
 
           Assembler assembler(space);
           assembler.assemble(::Kaskade::linearization(fVec_.at(timeStep),x) , Assembler::VALUE , getNumberOfThreads() );
@@ -557,9 +564,9 @@ namespace Spacy
                                                                         ::Kaskade::makeWeakFunctionView( [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
             {
               auto x = cell.geometry().global(xLocal);
-//              return Dune::FieldVector<double,1>(-1);
-//              return Dune::FieldVector<double,1>(12*(1-x[1])*x[1]*(1-x[0])*x[0]);
-                                    return Dune::FieldVector<double,1>(0);
+              //              return Dune::FieldVector<double,1>(-1);
+              //              return Dune::FieldVector<double,1>(12*(1-x[1])*x[1]*(1-x[0])*x[0]);
+              return Dune::FieldVector<double,1>(0);
             }));
 
             ::Kaskade::IoOptions options;
@@ -599,8 +606,8 @@ namespace Spacy
           rhs_p_impl.getCoeffVec_nonconst(i) += boost::fusion::at_c<0>(p_part_coeff.data);
         }
 
-      old_x_df_ = x;
-      GradAssembled_ = true;
+        old_x_df_ = x;
+        GradAssembled_ = true;
       }
 
       /// Assemble discrete representation of \f$f''(x)\f$.
@@ -663,9 +670,9 @@ namespace Spacy
           A_t_.at(i).get_non_const().setStartToZero();
           B_t_.at(i).get_non_const().setStartToZero();
 
-//          old_y_ddf_i_.at(i) = x_y;
-//          old_u_ddf_i_.at(i) = x_u;
-//          old_p_ddf_i_.at(i) = x_p;
+          //          old_y_ddf_i_.at(i) = x_y;
+          //          old_u_ddf_i_.at(i) = x_u;
+          //          old_p_ddf_i_.at(i) = x_p;
         }
 
         old_x_ddf_ = x;
@@ -710,6 +717,7 @@ namespace Spacy
           std::cout<<" done assembling mass matrices "<<std::endl;
       }
 
+      /// construct a shared ptr on the LinearBlockOperator holding the hessian
       void makeHessianLBOPointer() const
       {
         auto normfunc = [](const ::Spacy::Vector &v) {
@@ -758,14 +766,9 @@ namespace Spacy
       mutable std::vector<BTtype> B_t_{};
       mutable std::vector<Masstype> Mass_diag_{};
       mutable std::vector<Masstype> Mass_sd_{};
-      //The hessian as forward operator built from the above vectors of blocks
+
+      //The hessian as operator built from the above vectors of blocks
       mutable std::shared_ptr< OCP::LinearBlockOperator<VariableSetDescription ,VariableSetDescription> > H_ptr = nullptr;
-
-
-
-//      mutable std::vector<::Spacy::Vector>
-//      old_y_f_i_{}, old_u_f_i_{}, old_p_f_i_{},
-//      old_y_ddf_i_{}, old_u_ddf_i_{}, old_p_ddf_i_{};
 
       mutable ::Spacy::Vector old_x_f_{}, old_x_df_{},old_x_ddf_{};
 
@@ -782,24 +785,18 @@ namespace Spacy
         OCP::DirectBlockPreconditioner<FunctionalDefinition> P(f);
         return ::Spacy::makeTCGSolver(f,P);
       };
-      //            std::shared_ptr<VectorSpace> operatorSpace_ = nullptr;
     };
 
     /**
-         * @brief Convenient generation of a twice differentiable functional \f$f: X\rightarrow \mathbb{R}\f$ for %Kaskade 7.
-         * @param f operator definition from %Kaskade 7
+         * @brief Convenient generation of a twice differentiable dynamicalfunctional \f$f: X\rightarrow \mathbb{R}\f$ for %Kaskade 7.
+         * @param f functional definition from %Kaskade 7
+         * @param gm Grid manager holding temporal and spatial grids
          * @param domain domain space
-         * @param rbegin first row to be considered in the definition of f
-         * @param rend one after the last row to be considered in the definition of f
-         * @param cbegin first column to be considered in the definition of f
-         * @param cend one after the last column to be considered in the definition of f
-         * @return @ref C2Functional "::Spacy::Kaskade::C2Functional<FunctionalDefinition>( f, domain, rbegin, rend, cbegin, cend )"
-         *
-         * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
-         * a system of equation.
+         * @return @ref C2Functional "::Spacy::KaskadeParabolic::C2Functional<FunctionalDefinition>( f, gm, domain) "
          */
     template <class FunctionalDefinition>
-    auto makeC2Functional(std::function<FunctionalDefinition(const typename FunctionalDefinition::AnsatzVars::VariableSet)> & f,  GridManager<typename FunctionalDefinition::AnsatzVars::Spaces>& gm, const VectorSpace& domain)
+    auto makeC2Functional(std::function<FunctionalDefinition(const typename FunctionalDefinition::AnsatzVars::VariableSet)> & f,
+                          GridManager<typename FunctionalDefinition::AnsatzVars::Spaces>& gm, const VectorSpace& domain)
     {
       return C2Functional<FunctionalDefinition>(f,gm,domain);
     }

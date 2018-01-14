@@ -11,7 +11,7 @@ namespace Spacy
   namespace KaskadeParabolic
   {
     /**
-     * @ingroup KaskadeGroup
+     * @ingroup KaskadeParabolicGroup
      * @brief Generic l2 scalar product for Kaskade7. Based on the implementation of the dual pairing.
      */
     class l2Product
@@ -25,8 +25,7 @@ namespace Spacy
        */
       ::Spacy::Real operator()(const ::Spacy::Vector& x, const ::Spacy::Vector& y) const
       {
-//        checkSpaceCompatibility(x.space(),y.space());
-//        return x(y);
+        /// We only want scalar products with mass matrices not just coefficient vector L2 norms
         std::cout<<"You did not declare a meaningful scalarproduct, returning zero"<<std::endl;
         return ::Spacy::Real{0.};
       }

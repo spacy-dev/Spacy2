@@ -23,13 +23,13 @@
 
 namespace Spacy
 {
-  /** @addtogroup KaskadeGroup
+  /** @addtogroup KaskadeParabolicGroup
      * @{
      */
   namespace KaskadeParabolic
   {
     /**
-         * @brief %Operator interface for %Kaskade 7. Models a differentiable operator \f$A:X\rightarrow Y\f$.
+         * @brief %Operator interface for %Kaskade 7. Models a dynamical differentiable operator \f$A:X\rightarrow Y\f$ semi discretized in time.
          * @see Spacy::C1Operator
          */
     template <class OperatorDefinition>
@@ -60,7 +60,16 @@ namespace Spacy
 
     public:
 
-      C1Operator(OperatorDefinition& F,GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain, const VectorSpace& range)
+      /**
+       * @brief Construct dynamical operator for %Kaskade 7 semi discretized in time.
+       * @param f operator definition from %Kaskade 7
+       * @param gm Grid manager holding temporal and spatial grids
+       * @param domain domain space
+       * @param range range space
+       *
+       */
+
+      C1Operator(OperatorDefinition& F, GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain, const VectorSpace& range)
         : OperatorBase(domain,range), F_(F), gm_(gm)
       {
         this->resizeMembers();
@@ -146,16 +155,28 @@ namespace Spacy
         solverCreator_ = std::move(f);
       }
 
+      /**
+             * @brief Get the Grid manager
+             * @return Grid Manager holding spatial and temporal grid information
+             */
       const GridManager<Spaces>& getGridMan() const
       {
         return gm_;
       }
 
+      /**
+             * @brief Set Verbosity.
+             * @param verb verbosity to be set
+             */
       void setVerbosity(bool verb) const
       {
         verbose = verb;
       }
 
+      /**
+             * @brief Tell the operator about a refinement of the temporal grid (TO BE REPLACED WITH boost::signal impl)
+             * @param k number of the interval that was refined
+             */
       void informAboutRefinement(unsigned k )
       {
         MassY_.insert(MassY_.begin() + k,KaskadeOperator());
@@ -168,6 +189,7 @@ namespace Spacy
       }
     private:
 
+      /// resize the members vectors a size equal to #timesteps
       void resizeMembers() const
       {
         rhs_ = zero(range());
@@ -214,7 +236,7 @@ namespace Spacy
             std::cout<<"assembling transfer part for timestep "<<timeStep<<std::endl;
 
           CoefficientVectorY y_curr_ (VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec.at(timeStep))));
-            boost::fusion::at_c<0>(y_curr_.data) = x_impl.getCoeffVec(timeStep);
+          boost::fusion::at_c<0>(y_curr_.data) = x_impl.getCoeffVec(timeStep);
           CoefficientVectorY y_curr_dual(
                 VYSetDescription::template CoefficientVectorRepresentation<>::init(
                   *(spacesVec.at(timeStep))));
@@ -246,7 +268,7 @@ namespace Spacy
             CoefficientVectorY y_before_(
                   VYSetDescription::template CoefficientVectorRepresentation<>::init(
                     *(spacesVec.at(timeStep-1))));
-              boost::fusion::at_c<0>(y_before_.data)  = x_impl.getCoeffVec(timeStep-1);
+            boost::fusion::at_c<0>(y_before_.data)  = x_impl.getCoeffVec(timeStep-1);
 
             CoefficientVectorY y_before_dual(
                   VYSetDescription::template CoefficientVectorRepresentation<>::init(
@@ -325,6 +347,7 @@ namespace Spacy
           std::cout<<" done assembling mass matrices "<<std::endl;
       }
 
+      /// construct a shared ptr on the LinearBlockOperator holding the derivative
       void makeGradientLBOPointer() const
       {
         auto normfunc = [](const ::Spacy::Vector &v) {
@@ -365,36 +388,24 @@ namespace Spacy
       mutable std::vector<bool> MassAssembled_;
       mutable unsigned refinedIndex_;
 
-      //            std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& M)
-      //            {
-      //
-      //                DirectBlockOperatorPreconditionerPDE<OperatorDefinition> P(M);
-      //                return ::Spacy::makeTCGSolver(M,P);
-      //            };
-
       std::function<LinearSolver(const Linearization&)> solverCreator_ = [](const Linearization& M)
       {
         return PDE::DirectSolver<OperatorDefinition>(M);
-        //return DirectBlockOperatorPreconditionerPDE<OperatorDefinition>(M);
       };
     };
 
     /**
          * @brief Convenient generation of a differentiable operator \f$A: X\rightarrow Y\f$ from %Kaskade 7.
-         * @param f operator definition from %Kaskade 7
+         * @param F operator definition from %Kaskade 7
+         * @param gm Grid manager holding temporal and spatial grids
          * @param domain domain space \f$X\f$
          * @param range range space \f$Y\f$
-         * @param rbegin first row to be considered in the definition of A
-         * @param rend one after the last row to be considered in the definition of A
-         * @param cbegin first column to be considered in the definition of A
-         * @param cend one after the last column to be considered in the definition of A
-         * @return @ref C1Operator "::Spacy::Kaskade::C1Operator<OperatorDefinition>( A , domain , range , rbegin , rend , cbegin , cend )"
+         * @return @ref C1Operator "::Spacy::KaskadeParabolic::C1Operator<OperatorDefinition>( F, gm, domain, range)"
          *
-         * The optional parameters rbegin, rend, cbegin and cend can be used to define operators that correspond to parts of
-         * a system of equation.
          */
     template <class OperatorDefinition>
-    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain,const VectorSpace& range)
+    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm,
+                        const VectorSpace& domain,const VectorSpace& range)
     {
       return C1Operator<OperatorDefinition>(F,gm,domain,range);
     }

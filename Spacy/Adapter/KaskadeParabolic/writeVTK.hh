@@ -12,6 +12,12 @@ namespace Spacy
   {
     namespace PDE
     {
+      /**
+           * @brief Write #timesteps VTK files for time dependent function
+           * @tparam Description Kaskade VariableSetDescription associated with x
+           * @param x Spacy Vector that holds the vector(i.e. function) to be written
+           * @param fileName name of file to be written
+           */
       template <class Description>
       void writeVTK(const Vector<Description>& x, const char* fileName)
       {
@@ -25,6 +31,13 @@ namespace Spacy
     }
     namespace OCP
     {
+
+      /**
+           * @brief Write #timesteps VTK files for time dependent triple
+           * @tparam VariableSetDescription Kaskade VariableSetDescription associated with x
+           * @param x Spacy Vector that holds the productspace vector to be written
+           * @param fileName name of file to be written
+           */
       template <class VariableSetDescription>
       void writeVTK(const ::Spacy::Vector& x, const char* fileName)
       {
@@ -72,8 +85,18 @@ namespace Spacy
         return;
       }
 
+      /**
+           * @brief Write text files of relative and absolute error
+           * @tparam Descriptions Kaskade VariableSetDescription associated with x
+           * @param ex Spacy Vector of a finer("exact") solution
+           * @param inex Spacy vector of perturbed("inexact") solution
+           * @param NormFunctional Functional the norm will be computed with
+           * @param gm GridManager of exact solution
+           * @param name output filename
+           */
       template<class Descriptions>
-      auto printErrorDistribution(::Spacy::Vector ex,::Spacy::Vector inex, ::Spacy::KaskadeParabolic::OCP::LinearBlockOperator<Descriptions,Descriptions> NormFunctional, ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
+      auto printErrorDistribution(::Spacy::Vector ex,::Spacy::Vector inex, ::Spacy::KaskadeParabolic::OCP::LinearBlockOperator<Descriptions,Descriptions> NormFunctional,
+                                  ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
       {
         using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,0>;
         using VUSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,1>;
@@ -88,9 +111,9 @@ namespace Spacy
         auto diff_tuple = getImpl<Descriptions>(ex_copy);
         auto inex_tuple = getImpl<Descriptions>(inex);
         // exact -= inexact
-//        std::get<0>(diff_tuple).subtractOtherTempGrid(std::get<0>(inex_tuple));
-//        std::get<1>(diff_tuple).subtractOtherTempGrid(std::get<1>(inex_tuple));
-//        std::get<2>(diff_tuple).subtractOtherTempGrid(std::get<2>(inex_tuple));
+        //        std::get<0>(diff_tuple).subtractOtherTempGrid(std::get<0>(inex_tuple));
+        //        std::get<1>(diff_tuple).subtractOtherTempGrid(std::get<1>(inex_tuple));
+        //        std::get<2>(diff_tuple).subtractOtherTempGrid(std::get<2>(inex_tuple));
 
         std::get<0>(diff_tuple).subtractOtherTempGrid_linearInterpolated(std::get<0>(inex_tuple));
         std::get<1>(diff_tuple).subtractOtherTempGrid_linearInterpolated(std::get<1>(inex_tuple));
@@ -179,10 +202,19 @@ namespace Spacy
         abserr_y.close();
         abserr_u.close();
         abserr_p.close();
-
       }
+
+      /**
+           * @brief write #timesteps text files of the norm of the solution
+           * @tparam Descriptions Kaskade VariableSetDescription associated with x
+           * @param sol Spacy Vector that holds the productspace vector to be written
+           * @param NormFunctional Functional the norm will be computed with
+           * @param gm GridManager of exact solution
+           * @param name output filename
+           */
       template<class Descriptions>
-      auto printNormSolution(::Spacy::Vector sol,::Spacy::KaskadeParabolic::OCP::LinearBlockOperator<Descriptions,Descriptions> NormFunctional, ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
+      auto printNormSolution(::Spacy::Vector sol,::Spacy::KaskadeParabolic::OCP::LinearBlockOperator<Descriptions,Descriptions> NormFunctional,
+                             ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
       {
         using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,0>;
         using VUSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<Descriptions,1>;

@@ -8,10 +8,11 @@
 
 namespace Spacy
 {
-  /** @addtogroup KaskadeGroup @{ */
+  /** @addtogroup KaskadeParabolicGroup @{ */
   namespace KaskadeParabolic
   {
-    /// Creator for vector space elements for %Kaskade 7
+    /// Creator forvector space elements for %Kaskade 7
+    /// this function is used for each timestep
     template <class Description>
     class SubCreator :
         public Mixin::Get<Description>

@@ -22,8 +22,8 @@ namespace Spacy
     template <class> class SubCreator;
 
     /**
-         * @ingroup KaskadeGroup VectorSpaceGroup
-         * @brief Coefficient vector implementation for %Kaskade 7 (single space).
+         * @ingroup KaskadeParabolicGroup VectorSpaceGroup
+         * @brief Coefficient vector implementation for time dependent vector implemented with %Kaskade 7 (single space).
          * @tparam Description %Kaskade::VariableSetDescription
          */
     template <class Description>
@@ -34,9 +34,7 @@ namespace Spacy
       using Variable = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Variables,0>::type> >;
       using Space = std::decay_t<std::remove_pointer_t<typename boost::fusion::result_of::value_at_c<typename Description::Spaces,Variable::spaceIndex>::type> >;
       using VariableSet = typename Description::VariableSet;
-
       using Spaces = typename Description::Spaces;
-
 
     public:
 
@@ -63,29 +61,26 @@ namespace Spacy
         this->c = creator_.S_->connect([this](unsigned index) { return this->refine(index); });
       }
 
+      /// Copy constructor
       Vector(const Vector& v): VectorBase(v), variableSet_(v.variableSet_), description_(v.description_), v_(v.v_)
       {
-  //        std::cout<<"in Copy Constructor of Vector"<<std::endl;
         auto& creator_ = creator< VectorCreator<Description> >(v.space());
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
       }
 
+      /// Copy assigment
       Vector& operator=(const Vector& v)
       {
-  //        std::cout<<"in Copy Assignment of Vector"<<std::endl;
         VectorBase::operator=(v);
         this->variableSet_ = v.variableSet_;
         this->description_ = v.description_;
         this->v_ = v.v_;
-
         auto& creator_ = creator< VectorCreator<Description> >(v.space());
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
-
       }
-
+      /// Move assignment
       Vector& operator=(Vector&& v)
       {
-  //        std::cout<<"in rvalue Copy Assigment of Vector"<<std::endl;
         VectorBase::operator=(std::move(v));
         this->variableSet_ = std::move(v.variableSet_);
         this->description_ = std::move(v.description_);
@@ -93,6 +88,12 @@ namespace Spacy
 
         auto& creator_ = creator< VectorCreator<Description> >(v.space());
         this->c = creator_.S_->connect([this](unsigned index) -> void { return this->refine(index);});
+      }
+
+      /// Destructor
+      ~Vector()
+      {
+        c.disconnect();
       }
 
       /**
@@ -123,57 +124,52 @@ namespace Spacy
         return result;
       }
 
-      ~Vector()
-      {
-  //        std::cout<<"In Destructor of Vector"<<std::endl;
-        c.disconnect();
-      }
-
+      /**
+             * @brief react to Grid refinement
+             * @param k index of time interval that was refined
+             */
       void refine(unsigned k)
       {
-  //        std::cout<<"hallo ich bin der Vector refiner"<<std::endl;
-  //        std::cout<<this->space().index()<<std::endl;
-
         ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
-        /*::Spacy::Kaskade::VectorCreator<SingleDesc>*/
         ::Spacy::KaskadeParabolic::SubCreator<Description> vc_k = vc.getSubCreator(k);
 
-  //        variableSet_.insert(variableSet_.begin()+k, VariableSet(vc_k.get()));
         variableSet_.insert(variableSet_.begin()+k, VariableSet(::Spacy::creator<VectorCreator<Description> >(this->space()).getSubCreator(k).get()));
         assert(variableSet_.at(k).data.coefficients().size() == variableSet_.at(k+1).data.coefficients().size());
         boost::fusion::at_c<0>(variableSet_.at(k).data) = boost::fusion::at_c<0>(variableSet_.at(k+1).data);
 
         description_.insert(description_.begin()+k, std::make_shared<Description>(vc_k.get()));
         v_.insert(v_.begin()+k, VectorImpl(Description::template CoefficientVectorRepresentation<>::init( variableSet_.at(k).descriptions.spaces )));
-  //        std::cout<<"done refining"<<std::endl;
       }
 
 
-      /// Access coefficient vector.
+      /// Access Kaskade VariableSet of time i
       const VariableSet& get(const unsigned i) const
       {
         if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return variableSet_.at(i);
       }
 
-      /// Access nonconst coefficient vector.
+      /// Access nonconst Kaskade VariableSet of time i
       VariableSet& get_nonconst(const unsigned i)
       {
         if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return variableSet_.at(i);
       }
 
+      /// Access const coefficient vector of time i
       const auto& getCoeffVec(const unsigned i) const
       {
         if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return  ::boost::fusion::at_c<0>(variableSet_.at(i).data).coefficients();
       }
 
+      /// Access nonconst coefficient vector of time i
       auto& getCoeffVec_nonconst(const unsigned i)
       {
         if(i>=variableSet_.size()) std::cout<<"err in vec"<<variableSet_.size()<<std::endl;
         return  ::boost::fusion::at_c<0>(variableSet_.at(i).data).coefficients();
       }
+
       /**
            * @brief In-place summation \f$ x+=y\f$.
            * @param y vector to add to this vector
@@ -199,36 +195,6 @@ namespace Spacy
         assert(this->variableSet_.size() == y.variableSet_.size());
         for(auto i = 0u;i<this->variableSet_.size();i++)
           this->variableSet_.at(i) -=  y.variableSet_.at(i);
-        return *this;
-      }
-
-      Vector subtractOtherTempGrid(const Vector& y)
-      {
-        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
-        auto gm = vc.getGridMan();
-        auto tg = gm.getTempGrid();
-        auto vertices = tg.getVertexVec();
-        assert(this->variableSet_.size() == vertices.size());
-
-        for(auto i = 0u; i< variableSet_.size(); i++)
-        {
-          this->variableSet_.at(i) -= y.evaluate(vertices.at(i));
-        }
-        return *this;
-      }
-
-      Vector subtractOtherTempGrid_linearInterpolated(const Vector& y)
-      {
-        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
-        auto gm = vc.getGridMan();
-        auto tg = gm.getTempGrid();
-        auto vertices = tg.getVertexVec();
-        assert(this->variableSet_.size() == vertices.size());
-
-        for(auto i = 0u; i< variableSet_.size(); i++)
-        {
-          this->variableSet_.at(i) -= y.evaluate_linearInterpolated(vertices.at(i));
-        }
         return *this;
       }
 
@@ -274,6 +240,52 @@ namespace Spacy
         return ::Spacy::Mixin::get(dx(dx)) < max*y.space().eps()*y.space().eps();
       }
 
+      /**
+           * @brief Subtract Vectors living on different time grids (vector to be subtracted piecewise constant)
+           * @param y vector to subtract from this vector
+           * @return \f$ x-=y\f$.
+           */
+      Vector subtractOtherTempGrid(const Vector& y)
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+        auto vertices = tg.getVertexVec();
+        assert(this->variableSet_.size() == vertices.size());
+
+        for(auto i = 0u; i< variableSet_.size(); i++)
+        {
+          this->variableSet_.at(i) -= y.evaluate(vertices.at(i));
+        }
+        return *this;
+      }
+
+      /**
+           * @brief Subtract Vectors living on different time grids (vector to be subtracted linearly interpolated)
+           * @param y vector to subtract from this vector
+           * @return \f$ x-=y\f$.
+           */
+      Vector subtractOtherTempGrid_linearInterpolated(const Vector& y)
+      {
+        ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
+        auto gm = vc.getGridMan();
+        auto tg = gm.getTempGrid();
+        auto vertices = tg.getVertexVec();
+        assert(this->variableSet_.size() == vertices.size());
+
+        for(auto i = 0u; i< variableSet_.size(); i++)
+        {
+          this->variableSet_.at(i) -= y.evaluate_linearInterpolated(vertices.at(i));
+        }
+        return *this;
+      }
+
+
+      /**
+           * @brief Evaluate this vector as a piecewise constant function at time t
+           * @param t timepoint
+           * @return VariableSet at time t
+           */
       const VariableSet& evaluate(const ::Spacy::Real t) const
       {
         ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
@@ -285,6 +297,11 @@ namespace Spacy
         return this->get(index);
       }
 
+      /**
+           * @brief Evaluate this vector as a piecewise linear interpolated function at time t
+           * @param t timepoint
+           * @return VariableSet at time t
+           */
       VariableSet evaluate_linearInterpolated(const ::Spacy::Real t) const
       {
         ::Spacy::KaskadeParabolic::VectorCreator<Description>  vc = ::Spacy::creator<VectorCreator<Description> >(this->space());
@@ -304,12 +321,8 @@ namespace Spacy
           vs_left *= ::Spacy::Mixin::get((tg.getVertexVec().at(index)-t) / int_size);
           vs_right += vs_left;
         }
-
         return vs_right;
       }
-
-
-
 
     private:
       template <class Desc>

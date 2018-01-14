@@ -90,7 +90,6 @@ namespace Spacy
 
         using Masstype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorP>;
 
-
       public:
         LinearBlockOperatorCreator(const VectorSpace& domain, const VectorSpace& range)
           : domain_(domain),

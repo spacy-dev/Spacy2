@@ -30,7 +30,8 @@ namespace Spacy
     namespace OCP
     {
       /**
- * @brief A Preconditioner that uses a direct solver
+ * @ingroup KaskadeGroup
+ * @brief A constraint preconditioner for optimal control problems that uses a direct solver
  *
  */
       template<class FunctionalDefinition>
@@ -46,37 +47,37 @@ namespace Spacy
         /// Matrix type
         using Matrix = ::Kaskade::MatrixAsTriplet<double>;
 
+        /// VariableSetDescriptions of the variables
         using VYSetDescription = Detail::ExtractDescription_t<VariableSetDescription,0>;
         using VUSetDescription = Detail::ExtractDescription_t<VariableSetDescription,1>;
         using VPSetDescription = Detail::ExtractDescription_t<VariableSetDescription,2>;
 
-
-        using VectorImplY = ::Spacy::KaskadeParabolic::Vector<VYSetDescription>;
-        using VectorImplU = ::Spacy::KaskadeParabolic::Vector<VUSetDescription>;
-        using VectorImplP = ::Spacy::KaskadeParabolic::Vector<VPSetDescription>;
-
+        /// Coefficient Vector type
         using CoefficientVectorY = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
         using CoefficientVectorU = typename VUSetDescription::template CoefficientVectorRepresentation<>::type;
         using CoefficientVectorP = typename VPSetDescription::template CoefficientVectorRepresentation<>::type;
 
+        /// Kaskade Types of the Operators held for every timestep
         template<class X, class Y>
         using KaskadeOperatorXY = ::Kaskade::MatrixRepresentedOperator<Matrix,X,Y>;
-
         using Mytype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorY>;
         using Mutype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorY>;
         using Atype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorP>;
         using ATtype = KaskadeOperatorXY<CoefficientVectorP,CoefficientVectorY>;
         using Btype = KaskadeOperatorXY<CoefficientVectorU,CoefficientVectorP>;
         using BTtype = KaskadeOperatorXY<CoefficientVectorP,CoefficientVectorU>;
-
         using Masstype = KaskadeOperatorXY<CoefficientVectorY,CoefficientVectorP>;
 
+        /// Implementation type
+        using VectorImplY = ::Spacy::KaskadeParabolic::Vector<VYSetDescription>;
+        using VectorImplU = ::Spacy::KaskadeParabolic::Vector<VUSetDescription>;
+        using VectorImplP = ::Spacy::KaskadeParabolic::Vector<VPSetDescription>;
 
         using PSV = ::Spacy::ProductSpace::Vector;
+
         /**
    * @brief Constructor.
-   * @param domain domain space
-   * @param range range space
+   * @param H LinearBlockOperator to which the Preconditioner corresponds
    */
         DirectBlockPreconditioner(const LinearBlockOperator<VariableSetDescription,VariableSetDescription>& H) :
           OperatorBase(H.domain(), H.range()), H_(H), spacesVec_(H.getSpacesVec()), dtVec_(H.getDtVec())
@@ -95,7 +96,7 @@ namespace Spacy
               currentKaskOp += H_.getKaskOp("Mass_yy", i).get();
               //                writeMatlab(currentKaskOp.get(),"Diagonal_0.01"+std::to_string(i));
               if(verbose)
-              std::cout<< "Factorization of diagonal Part of timestep "<<i<<" / "<<dtVec_.size()-1<<std::flush;
+                std::cout<< "Factorization of diagonal Part of timestep "<<i<<" / "<<dtVec_.size()-1<<std::flush;
               solDiag.emplace_back( std::make_shared
                                     < ::Kaskade::InverseLinearOperator<
                                     ::Kaskade::DirectSolver<CoefficientVectorY, CoefficientVectorP> >
@@ -107,7 +108,7 @@ namespace Spacy
             else{
               Atype currentKaskOp(H_.getKaskOp("Mass_yy", i));
               if(verbose)
-              std::cout<< "Factorization of diagonal Part of timestep "<<i<<" / "<<dtVec_.size()-1<<std::flush;
+                std::cout<< "Factorization of diagonal Part of timestep "<<i<<" / "<<dtVec_.size()-1<<std::flush;
               solDiag.emplace_back( std::make_shared
                                     < ::Kaskade::InverseLinearOperator<
                                     ::Kaskade::DirectSolver<CoefficientVectorY, CoefficientVectorP> >
@@ -116,16 +117,6 @@ namespace Spacy
                                                                         MatrixProperties::GENERAL)) );
               //std::cout << "." << std::endl;
             }
-
-
-            //			std::cout<< "Factorization of diagonal Part of timestep "<<i<<" / "<<dtVec_.size()-1<<std::flush;
-            //			solDiag.emplace_back( std::make_shared
-            //							< ::Kaskade::InverseLinearOperator<
-            //									::Kaskade::DirectSolver<CoefficientVectorY, CoefficientVectorP> >
-            //							> (::Kaskade::directInverseOperator(currentKaskOp,
-            //									DirectType::UMFPACK3264,
-            //									MatrixProperties::GENERAL)) );
-            //			std::cout << "." << std::endl;
 
             if(i == 0)
               solMu.emplace_back(nullptr);
@@ -145,9 +136,6 @@ namespace Spacy
                                                                      MatrixProperties::GENERAL)));
             }
           }
-
-
-
         }
 
         /**
@@ -313,12 +301,9 @@ namespace Spacy
         std::vector<Real> dtVec_;
         LinearBlockOperator<VariableSetDescription,VariableSetDescription>  H_;
         mutable std::vector< std::shared_ptr<
-        ::Kaskade::InverseLinearOperator<
-        ::Kaskade::DirectSolver<CoefficientVectorY, CoefficientVectorP> > > > solDiag{};
-        //~ mutable std::shared_ptr< ::Kaskade::InverseLinearOperator< ::Kaskade::DirectSolver<DomainP,DomainY> > > solAT = nullptr;
+        ::Kaskade::InverseLinearOperator<::Kaskade::DirectSolver<CoefficientVectorY, CoefficientVectorP> > > > solDiag{};
         mutable std::vector< std::shared_ptr<
-        ::Kaskade::InverseLinearOperator<
-        ::Kaskade::DirectSolver<CoefficientVectorU, CoefficientVectorU> > > > solMu{};
+        ::Kaskade::InverseLinearOperator<::Kaskade::DirectSolver<CoefficientVectorU, CoefficientVectorU> > > > solMu{};
 
       };
     }

@@ -7,13 +7,10 @@
 #include <Spacy/Spaces/productSpace.hh>
 #include <Spacy/Util/Mixins/Get.hh>
 
-//#include "Spacy/Adapter/KaskadeParabolic/l2Product.hh"
-#include "Spacy/Adapter/KaskadeParabolic/gridManager.hh"
-#include "Spacy/Adapter/KaskadeParabolic/vector.hh"
-//#include "Spacy/Adapter/KaskadeParabolic/util.hh"
-
-//#include "../Kaskade/vectorSpace.hh"
+#include "gridManager.hh"
+#include "vector.hh"
 #include "subCreator.hh"
+
 #include "boost/signals2.hpp"
 
 #include "fem/variables.hh"
@@ -23,22 +20,23 @@
 namespace Spacy
 {
 
-  /** @addtogroup KaskadeGroup @{ */
+  /** @addtogroup KaskadeParabolicGroup @{ */
   namespace KaskadeParabolic
   {
-    /// Creator for vector space elements for %Kaskade 7
+    /// Creator for time dependent (piecewise constant in time) vector space elements implemented with %Kaskade 7
     template <class Description>
     class VectorCreator
     {
     public:
       using Spaces = typename Description::Spaces;
+      using Signal = ::boost::signals2::signal<void (unsigned)>;
+      using OnRefimenentSlotType = Signal::slot_type;
 
-      typedef ::boost::signals2::signal<void (unsigned)> Signal;
-      typedef Signal::slot_type OnRefimenentSlotType;
       /**
        * @ingroup VectorSpaceGroup
-       * @brief Create from %Kaskade 7 function space.
-       * @param space single %Kaskade 7 function space (no product space)
+       * @brief Create from Gridmanager
+       * @param gm Spacy Gridmanager holding grid information (temporal and spatial)
+       * @param name name of variable (needed for writing paraview files)
        */
       VectorCreator(::Spacy::KaskadeParabolic::GridManager<Spaces>& gm,std::string name): gm_(gm)
       {
@@ -57,56 +55,72 @@ namespace Spacy
         return Vector<Description>{*space};
       }
 
+      /**
+           * @brief getter for creators of each timestep
+           * @param i index of requested creator
+           * @return SubCreator for time interval i
+           */
       const SubCreator<Description>& getSubCreator(const unsigned i) const
       {
         return *(creators_.at(i));
       }
 
+      /// get number of Creators
       unsigned numberOfCreators() const
       {
         return creators_.size();
       }
 
+      /// get Kaskade Space of time interval i
       const Spaces& getSpace(unsigned i) const
       {
         auto spacesVec = gm_.getSpacesVec();
         return *(spacesVec.at(i));
       }
+
+      /**
+           * @brief getter for Spacy Gridmanager
+           * @return Spacy GridManager
+           */
       const ::Spacy::KaskadeParabolic::GridManager<Spaces>& getGridMan() const
       {
         return gm_;
       }
 
-       std::shared_ptr<Spaces> refine(unsigned k)
+      /**
+           * @brief Refine the VectorSpace in time, calls the refine on GridManager and the vectors (via boost::signal)
+           * @param k index of interval to be refined
+           * @return Kaskade Space that was inserted
+           */
+      std::shared_ptr<Spaces> refine(unsigned k)
       {
-//        std::cout<< "in VC refine function :"<<k<<std::endl;
         //refining the grid
+        const std::shared_ptr<Spaces> insertedSpace = gm_.refine(k);
 
-//        std::cout<<"--------Handing over refinfo to Grids"<<std::endl;
-          const std::shared_ptr<Spaces> insertedSpace = gm_.refine(k);
-            auto toinsertCreator =
-                std::make_shared<SubCreator<Description> >(SubCreator<Description>(Description(*insertedSpace,name_)));
+        ///insert a subcreator
+        auto toinsertCreator =
+            std::make_shared<SubCreator<Description> >(SubCreator<Description>(Description(*insertedSpace,name_)));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
-//        std::cout<<"--------returning from the Grids refine function"<<std::endl;
 
-        //tell the vectors
-//        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
+        //Invoke refinement on the vectors
         this->S_->operator()(k);
-//        std::cout<<"--------returning from the VC refine function"<<std::endl;
-            return insertedSpace;
+        return insertedSpace;
       }
 
+      /**
+           * @brief Refine the VectorSpace in time, calls the refine the vectors (via boost::signal)
+           * NOT ON THE GRID!! This function assumes the grid was refined (e.g. y space was refined via refine(k), now u space refinement with this function)
+           * @param k index of interval to be refined
+           * @param insertedSpace Kaskade space that was inserted when calling the above refine(k)
+           */
       void refine_noGridRef(unsigned k,std::shared_ptr<Spaces> insertedSpace)
       {
-//        std::cout<< "in VC refine function without gridref :"<<k<<std::endl;
+        ///insert a subcreator
         auto toinsertCreator = std::make_shared<SubCreator<Description> >(SubCreator<Description>( Description(*insertedSpace,name_)));
         this->creators_.insert(creators_.begin()+k,toinsertCreator);
-//        std::cout<<"--------returning from the Grids refine function"<<std::endl;
 
-        //tell the vectors
-//        std::cout<<"--------Handing over refinfo to vectors"<<std::endl;
+        //Invoke refinement on the vectors
         this->S_->operator()(k);
-//        std::cout<<"--------returning from the VC refine functionwithout gridref"<<std::endl;
       }
       std::shared_ptr<Signal> S_;
 
@@ -118,8 +132,8 @@ namespace Spacy
 
     /**
      * @ingroup VectorSpaceGroup
-     * @brief Create single space with hilbert space structure for %Kaskade 7.
-     * @param space single %Kaskade 7 function space (no product space)
+     * @brief Create single space of piecewise constant in time functions with hilbert space structure with %Kaskade 7.
+     * @param gm Spacy Gridmanager holding grid information (temporal and spatial)
      */
     template<class Spaces>
     auto makeHilbertSpace(GridManager<Spaces>& gm)
@@ -133,8 +147,8 @@ namespace Spacy
 
     /**
      * @ingroup VectorSpaceGroup
-     * @brief Create product space with hilbert space structure for %Kaskade 7.
-     * @param spaces boost fusion forward sequence of const pointers to %Kaskade 7 function spaces
+     * @brief Create product space piecewise constant in time functions with hilbert space structure with %Kaskade 7.
+     * @param gm Spacy Gridmanager holding grid information (temporal and spatial)
      * @param primalIds ids of primal variables
      * @param dualIds ids of dual variables
      */
@@ -150,21 +164,21 @@ namespace Spacy
       using VD = boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >;
       using VariableSetDescription = ::Kaskade::VariableSetDescription<Spaces,VD>;
       newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-                   ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"y"),::Spacy::KaskadeParabolic::l2Product() ) ));
-      //Cotnrol
+                                                          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription>(gm,"y"),::Spacy::KaskadeParabolic::l2Product() ) ));
+      //Control
       using VD2 = boost::fusion::vector<::Kaskade::VariableDescription<0,1,1> >;
       using VariableSetDescription2 = ::Kaskade::VariableSetDescription<Spaces,VD2>;
       newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription2>(gm,"u"),::Spacy::KaskadeParabolic::l2Product() ) ));
+                                                          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription2>(gm,"u"),::Spacy::KaskadeParabolic::l2Product() ) ));
       //Adjoint
       using VD3 = boost::fusion::vector<::Kaskade::VariableDescription<0,1,2> >;
       using VariableSetDescription3 = ::Kaskade::VariableSetDescription<Spaces,VD3>;
       newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
-          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription3>(gm,"p"),::Spacy::KaskadeParabolic::l2Product() ) ));
+                                                          ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription3>(gm,"p"),::Spacy::KaskadeParabolic::l2Product() ) ));
 
       std::cout << "create space with " << newSpaces.size() << " variables." << std::endl;
 
-       return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
+      return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
     }
 
   }

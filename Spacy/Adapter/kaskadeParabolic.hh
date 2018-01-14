@@ -1,10 +1,7 @@
 #pragma once
 
-//#include "KaskadeParabolic/c2Functional.hh"
-//#include "KaskadeParabolic/operator.hh"
-
 #include "KaskadeParabolic/directSolver.hh"
-#include "KaskadeParabolic/scalprod.hh"
+#include "KaskadeParabolic/scalarProduct.hh"
 #include "KaskadeParabolic/l2Product.hh"
 #include "KaskadeParabolic/gridManager.hh"
 #include "KaskadeParabolic/linearBlockOperatorSpace.hh"
