@@ -106,7 +106,7 @@ namespace Spacy
                 }
 
                 auto Ax = A_( x );
-                std::cout << "qAq/xAx: " << get( qAq ) << "/" << get( Ax( x ) ) << std::endl;
+//                std::cout << "qAq/xAx: " << get( qAq ) << "/" << get( Ax( x ) ) << std::endl;
                 if ( terminateOnNonconvexity( qAq, qPq, x, q, step ) )
                     break;
 
