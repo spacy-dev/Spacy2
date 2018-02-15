@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../boundary_caches.hh"
-#include "../../traits.hh"
+#include "../boundary_caches.hh"
+#include "../traits.hh"
 
 #include <memory>
 #include <type_traits>
@@ -65,8 +65,8 @@ namespace Kaskade
                 u = at_c< Ids::control >( vars.data ).value( at_c< uSIdx >( evaluators ) );
                 p = at_c< Ids::adjoint >( vars.data ).value( at_c< pSIdx >( evaluators ) );
 
-                dy = at_c< Ids::state >( vars.data ).derivative( at_c< ySIdx >( evaluators ) );
-                dp = at_c< Ids::adjoint >( vars.data ).derivative( at_c< pSIdx >( evaluators ) );
+                dy = at_c< Ids::state >( vars.data ).gradient( at_c< ySIdx >( evaluators ) );
+                dp = at_c< Ids::adjoint >( vars.data ).gradient( at_c< pSIdx >( evaluators ) );
 
                 costFunctional_.template update< Ids::state >( y );
                 costFunctional_.template update< Ids::control >( u );

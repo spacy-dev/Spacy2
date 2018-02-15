@@ -6,6 +6,7 @@
 #include "terminationCriteria.hh"
 #include "Spacy/Util/Exceptions/singularOperatorException.hh"
 #include "Spacy/vector.hh"
+#include "Spacy/Util/cast.hh"
 
 #include <algorithm>
 #include <cassert>
@@ -13,6 +14,7 @@
 #include <iostream>
 #include <utility>
 
+#include "RegularizeViaPreconditioner.hh"
 namespace Spacy
 {
     namespace CG
@@ -23,6 +25,8 @@ namespace Spacy
               terminate_( CG::Termination::StrakosTichyEnergyError{} ), truncated_( truncated ),
               regularization_( std::move( regularization ) )
         {
+          if(!::Spacy::is<NoRegularization> (regularization_))
+            regularized_ = true;
         }
 
         Vector Solver::solve( const Vector& x, const Vector& b ) const
@@ -71,6 +75,7 @@ namespace Spacy
             terminate_.clear();
             result = Result::Failed;
 
+
             // initialization phase for conjugate gradients
             auto Ax = A_( x );
             r -= Ax;
@@ -106,7 +111,7 @@ namespace Spacy
                 }
 
                 auto Ax = A_( x );
-                std::cout << "qAq/xAx: " << get( qAq ) << "/" << get( Ax( x ) ) << std::endl;
+//                std::cout << "qAq/xAx: " << get( qAq ) << "/" << get( Ax( x ) ) << std::endl;
                 if ( terminateOnNonconvexity( qAq, qPq, x, q, step ) )
                     break;
 
@@ -173,7 +178,7 @@ namespace Spacy
                 std::cout << "    "
                           << ": Negative curvature: " << qAq << std::endl;
 
-            if ( !truncated_ && !regularization_ )
+            if ( !truncated_ && !regularized_ )
             {
                 if ( verbose() )
                 {
@@ -190,7 +195,7 @@ namespace Spacy
                 throw SingularOperatorException( "CG::terminateOnNonconvexity" );
             }
 
-            if ( truncated_ && ( !regularization_ || terminate_.minimalDecreaseAchieved() ) )
+            if ( truncated_ && ( !regularized_ || terminate_.minimalDecreaseAchieved() ) )
             {
                 // At least do something to retain a little chance to get out of the nonconvexity.
                 // If a nonconvexity is encountered in the first step something probably went wrong
