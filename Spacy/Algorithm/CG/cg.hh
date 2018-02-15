@@ -170,6 +170,8 @@ namespace Spacy
             mutable DefiniteNess definiteness_ = DefiniteNess::PositiveDefinite;
 
             bool truncated_ = false;
+            bool regularized_ = false;
+
             mutable Regularization regularization_;
         };
     }
