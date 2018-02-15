@@ -14,4 +14,7 @@
 #include "KaskadeParabolic/writeVTK.hh"
 #include "KaskadeParabolic/util.hh"
 
+#include "KaskadeParabolic/errorEstimator.hh"
+#include "KaskadeParabolic/ModelPredictiveController.hh"
+
 

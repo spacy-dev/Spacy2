@@ -103,16 +103,11 @@ namespace Spacy
             std::cout << "starting composite step solver" << std::endl;
             for(unsigned step = 1; step < getMaxSteps(); ++step)
             {
-
-
                 normalStepMonitor = tangentialStepMonitor = StepMonitor::Accepted;
 
-                domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
+                domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(x) ) );
                 //        domain_.setScalarProduct( PrimalInducedScalarProduct( N_.hessian(primalProjection(x)) ) );
 
-//                std::cout<<"TESTING "<<std::endl/*;
-//                std::cout<<"Normalstepmatrix "<<norm(primalProjection(N_.hessian(primalProjection(x))(primalProjection(x))))<<std::endl;
-//                std::cout<<"Tangentialstepmatrix "*/<<norm(primalProjection(L_.hessian(primalProjection(x))(primalProjection(x))))<<std::endl;
                 if( verbose() ) std::cout << "\nComposite Steps: Iteration " << step << ".\n";
                 if( verbose() ) std::cout << spacing << "Computing normal step." << std::endl;
                 auto Dn = computeNormalStep(x);
@@ -207,19 +202,13 @@ namespace Spacy
             if( is<CG::LinearSolver>(normalSolver) )
             {
                 const auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-//                if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-//                {
-//                    auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
-//                                                get(trcgRelativeAccuracy) , eps() , verbose() );
-//                    setParams(trcg);
-//                    return IndefiniteLinearSolver(trcg);
-//                }
-
-                auto trcg = makeTRCGSolver( L_.hessian(x) , cgSolver.P() ,
-                                           get(trcgRelativeAccuracy) , eps(), verbose() );
-                trcg.setRelativeAccuracy(1e-6);
-                return IndefiniteLinearSolver(trcg);
-
+                if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
+                {
+                    auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
+                                                get(trcgRelativeAccuracy) , eps() , verbose() );
+                    setParams(trcg);
+                    return IndefiniteLinearSolver(trcg);
+                }
             }
 
             //    if( trcg == nullptr )
@@ -259,18 +248,18 @@ namespace Spacy
 
         Vector AffineCovariantSolver::computeMinimumNormCorrection(const Vector& x) const
         {
-          auto rhs = dualProjection(-d1(L_,x));
-          std::cout << "min norm correction rhs (quatsch): " << norm(rhs) << std::endl;
-          auto dn0 = zero(chartSpace_);
-          if( is<CG::LinearSolver>(normalSolver) )
-          {
-            std::cout<<"Normal Solver is CG!!"<<std::endl;
-            auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-            cgSolver.setRelativeAccuracy(1e-2);
-            dn0 = cgSolver.P()(rhs);
-            rhs -= cgSolver.A()( dn0 );
-          }
-          return dn0 + primalProjection( normalSolver( rhs ) );
+            auto rhs = dualProjection(-d1(L_,x));
+            std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
+            auto dn0 = zero(chartSpace_);
+            if( is<CG::LinearSolver>(normalSolver) )
+            {
+              auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
+              cgSolver.setRelativeAccuracy(1e-2);
+              dn0 = cgSolver.P()(rhs);
+              rhs -= cgSolver.A()( dn0 );
+            }
+
+            return dn0 + primalProjection( normalSolver( rhs ) );
         }
 
         Vector AffineCovariantSolver::updateLagrangeMultiplier(const Vector& x) const
@@ -492,6 +481,7 @@ namespace Spacy
             if( pow(getRelaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
                 maxTau = min( 1. , sqrt( pow( 2*getRelaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
+//            return DampingFactor(Scalar::findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() ));
             return DampingFactor(Scalar::findLogGlobalMinimizer( cubic, 1e-12, maxTau , getDampingAccuracy() ));
         }
 
