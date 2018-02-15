@@ -195,6 +195,7 @@ namespace Spacy
                 else
                     solver.setAbsoluteAccuracy( eps() );
                 solver.setMaxSteps(getMaxSteps());
+                solver.setRelativeAccuracy( getRelativeAccuracy() );
             };
 
             //    std::unique_ptr<CGSolver> trcg = nullptr;
@@ -202,13 +203,11 @@ namespace Spacy
             if( is<CG::LinearSolver>(normalSolver) )
             {
                 const auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-                if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-                {
-                    auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
-                                                get(trcgRelativeAccuracy) , eps() , verbose() );
-                    setParams(trcg);
-                    return IndefiniteLinearSolver(trcg);
-                }
+
+                auto trcg = makeTRCGSolver( L_.hessian(x) , cgSolver.P() ,
+                                           get(trcgRelativeAccuracy) , eps(), verbose() );
+                setParams(trcg);
+                return IndefiniteLinearSolver(trcg);
             }
 
             //    if( trcg == nullptr )
@@ -251,22 +250,14 @@ namespace Spacy
             auto rhs = dualProjection(-d1(L_,x));
             std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
             auto dn0 = zero(chartSpace_);
-            //      if( is<CG::LinearSolver>(normalSolver) )
-            //      {
-            //        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-            //        cgSolver.set_eps(eps());
-            //        cgSolver.setRelativeAccuracy(eps());
-            //        cgSolver.setVerbosity(verbose());
-            //        cgSolver.setVerbosityLevel(getVerbosityLevel());
-            //        cgSolver.setIterativeRefinements(iterativeRefinements());
-            //        cgSolver.setMaxSteps(maxSteps());
-            //        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-            //        {
-            //          const auto& P = cast_ref<CG::TriangularStateConstraintPreconditioner>(cgSolver.P());
-            //          dn0 = P.kernelOffset(rhs);
-            //          rhs -= cgSolver.A()( dn0 );
-            //        }
-            //      }
+            if( is<CG::LinearSolver>(normalSolver) )
+            {
+              auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
+              cgSolver.setRelativeAccuracy(1e-2);
+              dn0 = cgSolver.P()(rhs);
+              rhs -= cgSolver.A()( dn0 );
+            }
+
             return dn0 + primalProjection( normalSolver( rhs ) );
         }
 

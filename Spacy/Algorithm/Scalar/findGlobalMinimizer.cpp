@@ -21,6 +21,10 @@ namespace Spacy
                     tmin = a;
                 }
 
+            //try upper bound as candidate (might not have been tested due to roundoff errors)
+            if( f(b) <  fmin)
+              tmin = b;
+
             return tmin;
         }
 
