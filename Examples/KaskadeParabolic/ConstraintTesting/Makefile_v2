@@ -1,0 +1,29 @@
+include /home/bt304726/Programme/Kaskade7.3/Makefile.Local
+include /home/bt304726/Programme/Kaskade7.3/Makefile.Rules
+
+INCLUDE = $(DUNEINC) $(UGINC) $(BOOSTINC) $(KASKADEINC) $(UMFPACKINC) -I/home/bt304726/Programme/spacy-gerrithub/Spacy -I/home/bt304726/Programme/FunG
+
+MYDEBUGFLAGS = -DDEBUG -g    
+MYOPTFLAGS = -fmessage-length=0 -funroll-loops -DNDEBUG #-O2
+COMMONFLAGS = -std=c++1y   -DHAVE_LIBAMIRA=0
+
+FLAGS = $(WFLAGS) $(MYOPTFLAGS) $(COMMONFLAGS)
+
+SPACYLIB = -L/home/bt304726/Programme/spacy-gerrithub/Spacy/build/Spacy -lspacy
+
+constraint_testing: constraint_testing.o Makefile $(KASKADE7)/libs/libkaskade.a 
+	$(CXX) $(FLAGS) $< $(KASKADE7)/libs/umfpack_solve.o $(KASKADELIB) \
+ $(DUNELIB) \
+ $(UGLIB) \
+ $(BOOSTLIB) \
+ $(UMFPACKLIB) \
+ $(BLASLIB) $(FTNLIB) $(NUMALIB) $(SPACYLIB) -o $@
+
+clean:
+	rm -f gccerr.txt constraint_testing constraint_testing.o solution.vtu *.bak
+
+depend:
+	cp Makefile.gen Makefile; /home/bt304726/Programme/Kaskade7.3/gccmakedep -f Makefile $(INCLUDE) $(MAKEDEPENDFLAGS)  constraint_testing.cpp; #/home/bt304726/Programme/Kaskade7.3/remove_install_deps Makefile
+
+# DO NOT DELETE
+

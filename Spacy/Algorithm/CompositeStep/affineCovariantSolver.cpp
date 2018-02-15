@@ -202,13 +202,11 @@ namespace Spacy
             if( is<CG::LinearSolver>(normalSolver) )
             {
                 const auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-                if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-                {
-                    auto trcg =  makeTCGSolver( L_.hessian(x) , cgSolver.P() ,
-                                                get(trcgRelativeAccuracy) , eps() , verbose() );
-                    setParams(trcg);
-                    return IndefiniteLinearSolver(trcg);
-                }
+
+                auto trcg = makeTRCGSolver( L_.hessian(x) , cgSolver.P() ,
+                                           get(trcgRelativeAccuracy) , eps(), verbose() );
+                trcg.setRelativeAccuracy(1e-6);
+                return IndefiniteLinearSolver(trcg);
             }
 
             //    if( trcg == nullptr )
@@ -251,22 +249,14 @@ namespace Spacy
             auto rhs = dualProjection(-d1(L_,x));
             std::cout << "min norm correction rhs: " << norm(rhs) << std::endl;
             auto dn0 = zero(chartSpace_);
-            //      if( is<CG::LinearSolver>(normalSolver) )
-            //      {
-            //        auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
-            //        cgSolver.set_eps(eps());
-            //        cgSolver.setRelativeAccuracy(eps());
-            //        cgSolver.setVerbosity(verbose());
-            //        cgSolver.setVerbosityLevel(getVerbosityLevel());
-            //        cgSolver.setIterativeRefinements(iterativeRefinements());
-            //        cgSolver.setMaxSteps(maxSteps());
-            //        if( is<CG::TriangularStateConstraintPreconditioner>(cgSolver.P()))
-            //        {
-            //          const auto& P = cast_ref<CG::TriangularStateConstraintPreconditioner>(cgSolver.P());
-            //          dn0 = P.kernelOffset(rhs);
-            //          rhs -= cgSolver.A()( dn0 );
-            //        }
-            //      }
+            if( is<CG::LinearSolver>(normalSolver) )
+            {
+              auto& cgSolver = cast_ref<CG::LinearSolver>(normalSolver);
+              cgSolver.setRelativeAccuracy(1e-2);
+              dn0 = cgSolver.P()(rhs);
+              rhs -= cgSolver.A()( dn0 );
+            }
+
             return dn0 + primalProjection( normalSolver( rhs ) );
         }
 
@@ -489,7 +479,8 @@ namespace Spacy
             if( pow(getRelaxedDesiredContraction()/omegaC,2) - norm_dn*norm_dn > 0)
                 maxTau = min( 1. , sqrt( pow( 2*getRelaxedDesiredContraction()/omegaC , 2 ) - norm_dn*norm_dn )/norm_Dt );
 
-            return DampingFactor(Scalar::findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() ));
+//            return DampingFactor(Scalar::findGlobalMinimizer( cubic, 0, maxTau , getDampingAccuracy() ));
+            return DampingFactor(Scalar::findLogGlobalMinimizer( cubic, 1e-12, maxTau , getDampingAccuracy() ));
         }
 
         AffineCovariantSolver::AcceptanceTest AffineCovariantSolver::acceptedSteps(Real norm_x, Real norm_Dx, Real eta)
