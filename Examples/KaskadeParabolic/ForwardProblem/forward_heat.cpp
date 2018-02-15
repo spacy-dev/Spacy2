@@ -17,12 +17,8 @@
 #include <io/vtk.hh>
 #include <utilities/gridGeneration.hh> //  createUnitSquare
 
-#include "../fung_operator.hh"
+#include "Spacy/Adapter/KaskadeParabolic/Constraints/linearModelConstraint.hh"
 
-#include <fung/fung.hh>
-#include <fung/examples/nonlinear_heat.hh>
-
-#include "nonlinear_heat.hh"
 
 using namespace Kaskade;
 
@@ -32,7 +28,7 @@ int main()
     int refinements = 6;
     int order       = 1;
     unsigned no_time_steps = 11;
-    double dt_size = 0.1;
+    double T_end = 1.;
 
     using Grid = Dune::UGGrid<dim>;
     using H1Space = FEFunctionSpace<ContinuousLagrangeMapper<double,Grid::LeafGridView> >;
@@ -41,29 +37,30 @@ int main()
     using VariableSetDesc = VariableSetDescription<Spaces,VariableDescriptions>;
 
 
-    double c = 0., d = 1.;
+    auto d = 1.;
+    auto mu = 0.;
 
-//    // With FunG (seems to be buggy though)
-//    Dune::FieldVector<double,1> u0{0};
-//    Dune::FieldMatrix<double,1,dim> du0{0};
-//    auto integrand = FunG::heatModel(c, d, u0, du0);
-//    auto F = FungOperator<decltype(integrand),VariableSetDesc>(integrand);
-//    std::vector< FungOperator<decltype(integrand),VariableSetDesc> > FVec(no_time_steps, FungOperator<decltype(integrand),VariableSetDesc>(integrand));
-
-    // WIthout FunG
-    using Functional = HeatFunctional<double,VariableSetDesc>;
-    // first argument nonlinearity, second singularity
-    Functional F(1.,1.);
+    using HeatFunctionalDefinition = LinearModelPDE<double,VariableSetDesc, VariableSetDesc>;
+    std::function<HeatFunctionalDefinition(const VariableSetDesc::VariableSet )> forwardFunctionalGenerator
+        = [&d,&mu](const VariableSetDesc::VariableSet control){
+      return HeatFunctionalDefinition(d,mu,control);
+    };
 
 
+    ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,T_end,refinements,order);
+    gm.getTempGrid().print();
+    ::Spacy::VectorSpace domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm);
 
-    ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,dt_size,refinements,order);
-    auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm);
 
-    auto A = Spacy::KaskadeParabolic::makeC1Operator( F, gm , domain , domain.dualSpace() );
+    // Source constant in time and space
+    auto source = zero(domain);
+    auto& source_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(source);
+    for(auto i = 0u ; i < no_time_steps ; i++)
+      source_impl.get_nonconst(i) = 1.;
+
+    auto A = Spacy::KaskadeParabolic::makeC1Operator( forwardFunctionalGenerator, gm , domain , domain.dualSpace(), source);
 
     A.setVerbosity(false);
-
 
     auto p = Spacy::Newton::Parameter{};
     p.setRelativeAccuracy(1e-12);
@@ -71,7 +68,7 @@ int main()
     domain.setScalarProduct( Spacy::InducedScalarProduct( A.linearization(zero(domain))) );
 
     std::cout<<"Starting Newton "<<std::endl;
-    auto x = covariantNewton(A,p);
+    auto x = ::Spacy::covariantNewton(A,p);
 
     auto& vc = ::Spacy::creator<::Spacy::KaskadeParabolic::VectorCreator<VariableSetDesc> >(domain);
     vc.refine(8);
@@ -91,5 +88,10 @@ int main()
     auto x3 = covariantNewton(A,x,p);
 
     ::Spacy::KaskadeParabolic::PDE::writeVTK(Spacy::cast_ref< ::Spacy::KaskadeParabolic::Vector<VariableSetDesc> >(x3), "refopt");
+
+    ::Spacy::KaskadeParabolic::PDE::printNormSolution(x3,A.linearization(x3),gm,"sol");
     std::cout<<"returning from main"<<std::endl;
+
+
+
 }

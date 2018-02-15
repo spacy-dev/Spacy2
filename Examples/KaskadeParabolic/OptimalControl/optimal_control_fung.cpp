@@ -19,7 +19,7 @@
 #include <utilities/gridGeneration.hh>
 
 #define NCOMPONENTS 1
-#include "dynamic_nonlinear_control.hh"
+#include "optimal_control_fung.hh"
 
 #include <fung/fung.hh>
 #include <fung/examples/nonlinear_heat.hh>
@@ -59,15 +59,14 @@ int main(int argc, char *argv[])
   int iterativeRefinements = getParameter(pt, "iterativeRefinements", 0);
   int FEorder = getParameter(pt, "FEorder", 1);
   int verbose = getParameter(pt, "verbose", 2);
-  double c = getParameter(pt, "cPara", 1e2);
-  double d = getParameter(pt, "dPara", 1e-1);
+  double c = getParameter(pt, "cPara", 1);
+  double d = getParameter(pt, "dPara", 1);
   double e = getParameter(pt, "ePara", 0.0);
   double desContr = getParameter(pt, "desiredContraction", 0.5);
   double relDesContr = getParameter(pt, "relaxedContraction", desContr+0.1);
   double maxContr = getParameter(pt, "maxContraction", 0.75);
 
   unsigned no_time_steps = 11;
-//  double dt_size = 0.1;
   double t_end = 1;
 
   using std::cout;
@@ -81,63 +80,48 @@ int main(int argc, char *argv[])
   typedef Dune::UGGrid<dim> Grid;
   typedef FEFunctionSpace<ContinuousLagrangeMapper<double,Grid::LeafGridView> > H1Space;
   typedef boost::fusion::vector<H1Space const*> Spaces;
-
-  ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,::Spacy::Real{t_end},initialRefinements,FEorder);
-  gm.getTempGrid().print();
-  auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm,{0u,1u},{2u});
-
-  std::cout<<"generating zero"<<std::endl;
-  auto x = zero(domain);
-  auto x_ps = ::Spacy::cast_ref<::Spacy::ProductSpace::Vector>(x);
-  //    std::cout<<"number of components "<<x_ps.numberOfVariables()<<std::endl;
-  auto x_primal = x_ps.component(0);
-  auto x_dual = x_ps.component(1);
-  auto x_primal_ps = ::Spacy::cast_ref<::Spacy::ProductSpace::Vector>(x_primal);
-  auto x_dual_ps = ::Spacy::cast_ref<::Spacy::ProductSpace::Vector>(x_dual);
-  //    std::cout<<"primal comp "<<x_primal_ps.numberOfVariables()<<std::endl;
-  //    std::cout<<"dual comp "<<x_dual_ps.numberOfVariables()<<std::endl;
-  //    if(::Spacy::is<::Spacy::ProductSpace::Vector>(x_dual))std::cout<<"Dual space again Product space???"<<std::endl;
-
-  Dune::FieldVector<double,1> y0{0},u0{0},y_r{1};
-  Dune::FieldMatrix<double,1,dim> dy0{0};
-  auto constraint = FunG::heatModel(c, d, y0, dy0);
-  std::function<void(const Dune::FieldVector<double,1>&)> update_reference =
-      [&y_r](const Dune::FieldVector<double,1>& ref){ y_r = ref; };
-
   using VY = VariableDescription<0,1,Ids::state>;
   using VU = VariableDescription<0,1,Ids::control>;
   using VP = VariableDescription<0,1,Ids::adjoint>;
   typedef boost::fusion::vector< VY , VU , VP > VariableDescriptions;
   typedef VariableSetDescription<Spaces,VariableDescriptions> Descriptions;
 
+  // ################## Grid Generation (SPACE AND TIME) ##################
+  ::Spacy::KaskadeParabolic::GridManager<Spaces> gm (no_time_steps,::Spacy::Real{t_end},initialRefinements,FEorder);
+  gm.getTempGrid().print();
+
+  // ################## Domain Generation ##################
+  auto domain = Spacy::KaskadeParabolic::makeHilbertSpace(gm,{0u,1u},{2u});
+
+
+  // ################## Constraint and Cost functional Generation ##################
+  Dune::FieldVector<double,1> y0{0},u0{0},y_r{1};
+  Dune::FieldMatrix<double,1,dim> dy0{0};
+  auto constraint = FunG::heatModel(c, d, y0, dy0);
+  std::function<void(const Dune::FieldVector<double,1>&)> update_reference =
+      [&y_r](const Dune::FieldVector<double,1>& ref){ y_r = ref; };
 
   auto costFunctional = tracking_type_cost_functional(alpha,y0,y_r,u0);
 
-  using NormalFunctionalDefinition = NormalStepFunctional<Ids,decltype(constraint),decltype(costFunctional),Descriptions>;
+  std::cout<<"Creating Functionals"<<std::endl;
 
+  // ################## Normal Step Functional Generation ##################
+  using NormalFunctionalDefinition = NormalStepFunctional<Ids,decltype(constraint),decltype(costFunctional),Descriptions>;
   std::function<NormalFunctionalDefinition(typename Descriptions::VariableSet)> normalFuncGenerator = [&constraint,costFunctional,update_reference](typename Descriptions::VariableSet y_ref) {
     return NormalStepFunctional<Ids,decltype(constraint),decltype(costFunctional),Descriptions>(constraint,costFunctional,y_ref,update_reference);
   };
-  std::cout<<"Creating Functionals"<<std::endl;
+
   auto n_func = Spacy::KaskadeParabolic::makeC2Functional(normalFuncGenerator,gm,domain);
-  //    n_func.setVerbosity(true);
 
-  //    std::cout<<"########################## FUNCTIONAL EVAVLUATION ##########################"<<std::endl;
-  //    auto val = n_func(x);
-  //    std::cout<<"########################## DERIVATIVE ##########################"<<std::endl;
-  //    auto res = n_func.d1(x);
-  //    std::cout<<"########################## HESSIAN ##########################"<<std::endl;
-  //    auto res2 = n_func.d2(x,x);
+  // ################## Tangential Step Functional Generation ##################
   using TangentialFunctionalDefinition = TangentialStepFunctional<Ids,decltype(constraint),decltype(costFunctional),Descriptions>;
-
   std::function<TangentialFunctionalDefinition(typename Descriptions::VariableSet)> tangentialFuncGenerator = [&constraint,costFunctional,update_reference](typename Descriptions::VariableSet y_ref) {
     return TangentialStepFunctional<Ids,decltype(constraint),decltype(costFunctional),Descriptions>(constraint,costFunctional,y_ref,update_reference);
   };
+
   auto t_func = Spacy::KaskadeParabolic::makeC2Functional(tangentialFuncGenerator,gm,domain);
 
-  //std::cout<<"Making Preconditioner "<<std::endl;
-  //  ::Spacy::KaskadeParabolic::OCP::DirectBlockPreconditioner<NormalFunctionalDefinition> P(n_func.hessian(x));
-
+  // ################## Solver Generation ##################
   cout << "set up solver" << endl;
   // algorithm and parameters
   auto cs = Spacy::CompositeStep::AffineCovariantSolver( n_func , t_func , domain );
@@ -157,8 +141,9 @@ int main(int argc, char *argv[])
   std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
 
 
+  // print solution to file
   ::Spacy::KaskadeParabolic::OCP::writeVTK<Descriptions>(result,"sol");
-  std::cout<<"returning from main"<<std::endl;
+
   return 0;
 }
 

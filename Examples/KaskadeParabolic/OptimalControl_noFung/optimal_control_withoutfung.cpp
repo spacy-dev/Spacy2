@@ -19,7 +19,7 @@
 #include <utilities/gridGeneration.hh>
 
 #define NCOMPONENTS 1
-#include "dynamic_nonlinear_control.hh"
+#include "optimal_control_withoutfung.hh"
 
 
 int main(int argc, char *argv[])
@@ -41,16 +41,13 @@ int main(int argc, char *argv[])
   int iterativeRefinements = getParameter(pt, "iterativeRefinements", 0);
   int FEorder = getParameter(pt, "FEorder", 1);
   int verbose = getParameter(pt, "verbose", 2);
-  double c = getParameter(pt, "cPara", 0.);
-  double d = getParameter(pt, "dPara", 1e-1);
+  double c = getParameter(pt, "cPara", 1);
+  double d = getParameter(pt, "dPara", 1);
   double e = getParameter(pt, "ePara", 0.0);
   double desContr = getParameter(pt, "desiredContraction", 0.5);
   double relDesContr = getParameter(pt, "relaxedContraction", desContr+0.1);
   double maxContr = getParameter(pt, "maxContraction", 0.75);
   double expgridparam = getParameter(pt, "expGrid",-0.345);
-
-  unsigned no_time_steps = 11;
-  double t_end = 1;
 
   using std::cout;
   using std::endl;
@@ -77,9 +74,6 @@ int main(int argc, char *argv[])
     return TangentialFunctionalDefinition(alpha,y_ref,c,d,e);
   };
 
-  ::Spacy::KaskadeParabolic::GridManager<Spaces> gm3 (11,::Spacy::Real{30},initialRefinements,FEorder, "exponential",expgridparam);
-  gm3.getTempGrid().print();
-//return 0;
 
   //####################### Exact SOLUTION #######################
 
@@ -109,6 +103,8 @@ int main(int argc, char *argv[])
 
   std::cout << "computation time: " << duration_cast<seconds>(high_resolution_clock::now() - startTime).count() << "s." << std::endl;
 
+  std::cout<<"Exact grid solution functional value "<<t_func1(exact_solution);
+
 
   //####################### UNIFORM GRID SOLUTION #######################
 
@@ -132,9 +128,11 @@ int main(int argc, char *argv[])
   cs2.setMaximalContraction(maxContr);
   auto uniform_solution = cs2();
 
+  std::cout<<"Uniform grid solution functional value "<<t_func2(uniform_solution)<<std::endl;
 
   //####################### EXP GRID SOLUTION #######################
 
+  ::Spacy::KaskadeParabolic::GridManager<Spaces> gm3 (11,::Spacy::Real{30},initialRefinements,FEorder, "exponential",expgridparam);
   auto domain3 = Spacy::KaskadeParabolic::makeHilbertSpace(gm3,{0u,1u},{2u});
 
   std::cout<<"Creating Functionals"<<std::endl;
@@ -153,6 +151,9 @@ int main(int argc, char *argv[])
   cs3.setRelaxedDesiredContraction(relDesContr);
   cs3.setMaximalContraction(maxContr);
   auto exp_solution = cs3();
+
+  std::cout<<"exponential grid solution functional value "<<t_func3(exp_solution)<<std::endl;
+
 
   //####################### PRINT RELATIVE ERROR AND SOLUTION NORM #######################
   auto NormFunc = n_func1.hessian(exact_solution);
