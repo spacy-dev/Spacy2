@@ -15,7 +15,7 @@ namespace Spacy
       /**
            * @brief Write #timesteps VTK files for time dependent function
            * @tparam Description Kaskade VariableSetDescription associated with x
-           * @param x Spacy Vector that holds the vector(i.e. function) to be written
+           * @param x KaskadeParabolic Vector that holds the vector(i.e. function) to be written
            * @param fileName name of file to be written
            */
       template <class Description>
@@ -28,6 +28,113 @@ namespace Spacy
           ::Kaskade::writeVTKFile(gm.at(i)->grid().leafGridView(), x.get(i) ,fileName+std::to_string(i),::Kaskade::IoOptions(),vc.getGridMan().getFEorder());
         }
       }
+
+      /**
+           * @brief Write #timesteps VTK files for time dependent function
+           * @tparam Description Kaskade VariableSetDescription associated with x
+           * @param x Spacy Vector that holds the vector(i.e. function) to be written
+           * @param fileName name of file to be written
+           */
+      template <class Description>
+      void writeVTK(const Spacy::Vector& x, const char* fileName)
+      {
+        auto x_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<Description> > (x);
+        auto vc = ::Spacy::creator<VectorCreator<Description> >(x.space());
+        auto gm = vc.getGridMan().getKaskGridMan();
+        for(auto i = 0u ; i<gm.size() ; i++)
+        {
+          ::Kaskade::writeVTKFile(gm.at(i)->grid().leafGridView(), x_impl.get(i) ,fileName+std::to_string(i),::Kaskade::IoOptions(),vc.getGridMan().getFEorder());
+        }
+      }
+
+      /**
+           * @brief write text files of the norm of the solution
+           * @tparam Descriptions Kaskade VariableSetDescription associated with x
+           * @param sol Spacy Vector that holds the productspace vector to be written
+           * @param Blockoperator Functional the norm will be computed with
+           * @param gm GridManager of exact solution
+           * @param name output filename
+           */
+      template<class Descriptions>
+      auto printNormSolution(::Spacy::Vector sol,::Spacy::KaskadeParabolic::PDE::LinearBlockOperator<Descriptions,Descriptions> Blockoperator,
+                             ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
+      {
+
+        using CoefficientVectorY = typename Descriptions::template CoefficientVectorRepresentation<>::type;
+
+        // compute norm of exact solution
+        auto timesteps = gm.getSpacesVec().size();
+        auto sol_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<Descriptions> > (sol);
+        std::vector<double> norm_y;
+
+        for(auto i = 0u; i< gm.getSpacesVec().size(); i++)
+        {
+          CoefficientVectorY ydum(
+                Descriptions::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+          boost::fusion::at_c<0>(ydum.data) = sol_impl.getCoeffVec(i);
+          auto My = ydum;
+          Blockoperator.getKaskOp("MassY", i).apply(ydum, My);
+          norm_y.push_back(std::sqrt(ydum*My));
+        }
+
+        // Print into files
+        std::ofstream norm_y_os;
+        norm_y_os.open("./data/norm_y_"+name+".txt");
+
+        auto tempgrid = gm.getTempGrid().getVertexVec();
+
+        for(auto i = 0u; i < timesteps; i++)
+        {
+          norm_y_os << tempgrid.at(i) << std::setprecision(std::numeric_limits<long double>::digits10 + 1)  << " " <<  norm_y.at(i) << std::endl;
+        }
+        norm_y_os.close();
+
+      }
+
+      /**
+           * @brief write text files of the norm of the solution
+           * @tparam Descriptions Kaskade VariableSetDescription associated with x
+           * @param sol Spacy Vector that holds the productspace vector to be written
+           * @param Blockoperator Functional the norm will be computed with
+           * @param gm GridManager of exact solution
+           * @param name output filename
+           */
+      template<class Descriptions>
+      auto printNormSolution(::Spacy::Vector sol,::Spacy::KaskadeParabolic::PDE::NormOperator<Descriptions,Descriptions> NormOperator,
+                             ::Spacy::KaskadeParabolic::GridManager<typename Descriptions::Spaces> gm, std::string name)
+      {
+
+        using CoefficientVectorY = typename Descriptions::template CoefficientVectorRepresentation<>::type;
+
+        // compute norm of exact solution
+        auto timesteps = gm.getSpacesVec().size();
+        auto sol_impl = ::Spacy::cast_ref<::Spacy::KaskadeParabolic::Vector<Descriptions> > (sol);
+        std::vector<double> norm_y;
+
+        for(auto i = 0u; i< gm.getSpacesVec().size(); i++)
+        {
+          CoefficientVectorY ydum(
+                Descriptions::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
+          boost::fusion::at_c<0>(ydum.data) = sol_impl.getCoeffVec(i);
+          auto My = ydum;
+          NormOperator.getKaskOp("MassY", i).apply(ydum, My);
+          norm_y.push_back(std::sqrt(ydum*My));
+        }
+
+        // Print into files
+        std::ofstream norm_y_os;
+        norm_y_os.open("./data/norm_y_"+name+".txt");
+
+        auto tempgrid = gm.getTempGrid().getVertexVec();
+
+        for(auto i = 0u; i < timesteps; i++)
+        {
+          norm_y_os << tempgrid.at(i) << std::setprecision(std::numeric_limits<long double>::digits10 + 1)  << " " <<  norm_y.at(i) << std::endl;
+        }
+        norm_y_os.close();
+
+      }
+
     }
     namespace OCP
     {
@@ -78,10 +185,8 @@ namespace Spacy
           ::boost::fusion::at_c<0>(v.at(i).data) = boost::fusion::at_c<0>(x_y_impl.get(i).data);
           ::boost::fusion::at_c<1>(v.at(i).data) = boost::fusion::at_c<0>(x_u_impl.get(i).data);
           ::boost::fusion::at_c<2>(v.at(i).data) = boost::fusion::at_c<0>(x_p_impl.get(i).data);
-          std::cout<<"writing vtk file "<<i<<std::endl;
           ::Kaskade::writeVTKFile(gm.at(i)->grid().leafGridView(), v.at(i) ,fileName+std::to_string(i),::Kaskade::IoOptions(),vc.getGridMan().getFEorder());
         }
-        std::cout<<"done writing"<<std::endl;
         return;
       }
 
@@ -130,21 +235,21 @@ namespace Spacy
           boost::fusion::at_c<0>(ydum.data) = std::get<0>(diff_tuple).getCoeffVec(i);
           auto My = ydum;
           NormFunctional.getKaskOp("My", i).apply(ydum, My);
-          diffnorm_y.push_back(ydum*My);
+          diffnorm_y.push_back(std::sqrt(ydum*My));
 
           CoefficientVectorU udum(
                 VUSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(udum.data) = std::get<1>(diff_tuple).getCoeffVec(i);
           auto Mu = udum;
           NormFunctional.getKaskOp("Mu", i).apply(udum, Mu);
-          diffnorm_u.push_back(udum*Mu);
+          diffnorm_u.push_back(std::sqrt(udum*Mu));
 
           CoefficientVectorP pdum(
                 VPSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(pdum.data) = std::get<2>(diff_tuple).getCoeffVec(i);
           auto Mp = pdum;
           NormFunctional.getKaskOp("My", i).apply(pdum, Mp);
-          diffnorm_p.push_back(pdum*Mp);
+          diffnorm_p.push_back(std::sqrt(pdum*Mp));
         }
 
         // compute norm of exact solution
@@ -157,21 +262,21 @@ namespace Spacy
           boost::fusion::at_c<0>(ydum.data) = std::get<0>(ex_tuple).getCoeffVec(i);
           auto My = ydum;
           NormFunctional.getKaskOp("My", i).apply(ydum, My);
-          exnorm_y.push_back(ydum*My);
+          exnorm_y.push_back(std::sqrt(ydum*My));
 
           CoefficientVectorU udum(
                 VUSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(udum.data) = std::get<1>(ex_tuple).getCoeffVec(i);
           auto Mu = udum;
           NormFunctional.getKaskOp("Mu", i).apply(udum, Mu);
-          exnorm_u.push_back(udum*Mu);
+          exnorm_u.push_back(std::sqrt(udum*Mu));
 
           CoefficientVectorP pdum(
                 VPSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(pdum.data) = std::get<2>(ex_tuple).getCoeffVec(i);
           auto Mp = pdum;
           NormFunctional.getKaskOp("My", i).apply(pdum, Mp);
-          exnorm_p.push_back(pdum*Mp);
+          exnorm_p.push_back(std::sqrt(pdum*Mp));
         }
 
         // Print into files
@@ -205,7 +310,7 @@ namespace Spacy
       }
 
       /**
-           * @brief write #timesteps text files of the norm of the solution
+           * @brief write text files of the norm of the solution
            * @tparam Descriptions Kaskade VariableSetDescription associated with x
            * @param sol Spacy Vector that holds the productspace vector to be written
            * @param NormFunctional Functional the norm will be computed with
@@ -237,21 +342,21 @@ namespace Spacy
           boost::fusion::at_c<0>(ydum.data) = std::get<0>(sol_tuple).getCoeffVec(i);
           auto My = ydum;
           NormFunctional.getKaskOp("My", i).apply(ydum, My);
-          norm_y.push_back(ydum*My);
+          norm_y.push_back(std::sqrt(ydum*My));
 
           CoefficientVectorU udum(
                 VUSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(udum.data) = std::get<1>(sol_tuple).getCoeffVec(i);
           auto Mu = udum;
           NormFunctional.getKaskOp("Mu", i).apply(udum, Mu);
-          norm_u.push_back(udum*Mu);
+          norm_u.push_back(std::sqrt(udum*Mu));
 
           CoefficientVectorP pdum(
                 VPSetDescription::template CoefficientVectorRepresentation<>::init(*gm.getSpacesVec().at(i)));
           boost::fusion::at_c<0>(pdum.data) = std::get<2>(sol_tuple).getCoeffVec(i);
           auto Mp = pdum;
           NormFunctional.getKaskOp("My", i).applyscaleaddTransposed(1.,pdum, Mp);
-          norm_p.push_back(pdum*Mp);
+          norm_p.push_back(std::sqrt(pdum*Mp));
         }
 
         // Print into files

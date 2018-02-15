@@ -59,13 +59,8 @@ namespace Spacy
         vertexVec_.push_back(ts_);
 
         Real c = 1./lambda*1./(N-1)*(exp(lambda*te_)-exp(lambda*ts_));
-
-        std::cout<< "c is "<<c<<std::endl;
         for (int i = 0 ; i < N-1; i++) {
-          std::cout<<i<<std::endl;
           vertexVec_.push_back(1./lambda*log(lambda*c + exp(lambda*vertexVec_[i])));
-          std::cout << vertexVec_[i+1] << std::endl;
-
           dtVec_.push_back(vertexVec_[i+1] - vertexVec_[i]);
         }
       }
@@ -106,7 +101,7 @@ namespace Spacy
              * @param timepoint t
              * @return interval associated with t
              */
-      unsigned getInverval(Real t)
+      unsigned getInverval(Real t) const
       {
         auto i = 0u;
         for( ;i< vertexVec_.size(); i++)

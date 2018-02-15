@@ -64,20 +64,22 @@ namespace Spacy
              * @param lambda if exponentially distributed, this gives the scaling factor (higher lambda -> more points at beginning of interval
              *
              */
-      GridManager(unsigned N, Real T, unsigned initialRefinements = 1, unsigned FEorder = 1 , ::std::string gridType = "uniform", Real lambda = Real{-0.1}):
+      GridManager(unsigned N, Real T, unsigned initialRefinements = 4, unsigned FEorder = 1 , ::std::string gridType = "uniform", Real lambda = Real{-0.1}):
         initialRefinements_(initialRefinements),FEorder_(FEorder)
       {
         /// uniform temporal grid
         if(gridType == "uniform")
         {
-          std::cout << "generating Uniform Grid with " << N <<" points on [0,"<<T<<"]" << std::endl;
+          if(verbose)
+            std::cout << "generating Uniform Grid with " << N <<" points on [0,"<<T<<"]" << std::endl;
           tgptr_ = std::make_shared<TempGrid> (TempGrid(Real{0},T,N));
         }
 
         /// exponential temporal grid
         if(gridType == "exponential")
         {
-          std::cout << "generating exponential Grid with " << N <<" points on [0,"<<T<<"]" << std::endl;
+          if(verbose)
+            std::cout << "generating exponential Grid with " << N <<" points on [0,"<<T<<"]" << std::endl;
           tgptr_ = std::make_shared<TempGrid> (TempGrid(Real{0},T,N,lambda));
 
         }
@@ -89,7 +91,7 @@ namespace Spacy
           gm_.push_back(std::make_shared<::Kaskade::GridManager < Grid> > (::Kaskade::createUnitSquare<Grid>(1., false)));
           gm_.at(i)->globalRefine(initialRefinements);
           gm_.at(i)->enforceConcurrentReads(true);
-          std::cout << "Size of grid at timestep " << i << ": " << gm_.at(i)->grid().leafGridView().size(dim) << std::endl;
+          //          std::cout << "Size of grid at timestep " << i << ": " << gm_.at(i)->grid().leafGridView().size(dim) << std::endl;
         }
 
         /// construction of function spaces
@@ -151,21 +153,21 @@ namespace Spacy
         return FEorder_;
       }
 
-//      /**
-//             * @brief Refine the time grid
-//             * @param indizes intervals to be refined
-//             */
-//      void refine(const std::vector<unsigned>& indizes)
-//      {
-//        assert(std::is_sorted(indizes.begin(),indizes.end()));
-//        unsigned refctr = 0;
-//        for(auto ind : indizes)
-//        {
-//          this->refine(ind+refctr);
-//          refctr++;
-//        }
+      //      /**
+      //             * @brief Refine the time grid
+      //             * @param indizes intervals to be refined
+      //             */
+      //      void refine(const std::vector<unsigned>& indizes)
+      //      {
+      //        assert(std::is_sorted(indizes.begin(),indizes.end()));
+      //        unsigned refctr = 0;
+      //        for(auto ind : indizes)
+      //        {
+      //          this->refine(ind+refctr);
+      //          refctr++;
+      //        }
 
-//      }
+      //      }
 
       //      const VariableSetDescription& refine(unsigned k)
       //      {
@@ -217,7 +219,7 @@ namespace Spacy
       //        return descriptionsVec_.back();
       //      }
 
-     /**
+      /**
              * @brief Refine the time grid
              * @param k index of interval to be refined
              * @return Kaskade Spaces that has been constructed for the new time grid vertex
@@ -231,7 +233,8 @@ namespace Spacy
         gm_.insert(gm_.begin()+k,std::move(std::make_shared<::Kaskade::GridManager < Grid> > (::Kaskade::createUnitSquare<Grid>(1., false))));
         gm_.at(k)->globalRefine(initialRefinements_);
         gm_.at(k)->enforceConcurrentReads(true);
-        std::cout << "Size of inserted grid at timestep " << k << ": " << gm_.at(k)->grid().leafGridView().size(dim) << std::endl;
+        if(verbose)
+          std::cout << "Size of inserted grid at timestep " << k << ": " << gm_.at(k)->grid().leafGridView().size(dim) << std::endl;
 
         /// construct new Spaces for this new timestep
         spacesVecHelper_.emplace_back(std::make_shared<H1Space> (H1Space(*gm_.at(k), gm_.at(k)->grid().leafGridView(), FEorder_)));
@@ -241,6 +244,7 @@ namespace Spacy
       }
 
     private:
+      bool verbose = false;
       std::shared_ptr<TempGrid> tgptr_ = nullptr;
       std::vector<std::shared_ptr<::Kaskade::GridManager < Grid> > > gm_{};
       std::vector<std::shared_ptr<H1Space> > spacesVecHelper_{};

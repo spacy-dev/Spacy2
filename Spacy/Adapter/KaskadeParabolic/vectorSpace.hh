@@ -141,6 +141,7 @@ namespace Spacy
 
       using VD = boost::fusion::vector<::Kaskade::VariableDescription<0,1,0> >;
       using VariableSetDescription = ::Kaskade::VariableSetDescription<Spaces,VD>;
+      std::cout<< " Creating Single Space HilbertSpace" <<std::endl;
 
       return ::Spacy::makeHilbertSpace( KaskadeParabolic::VectorCreator<VariableSetDescription> (gm,"y") , l2Product{} );
     }
@@ -176,7 +177,7 @@ namespace Spacy
       newSpaces.push_back(std::make_shared<VectorSpace>(::Spacy::makeHilbertSpace(
                                                           ::Spacy::KaskadeParabolic::VectorCreator<VariableSetDescription3>(gm,"p"),::Spacy::KaskadeParabolic::l2Product() ) ));
 
-      std::cout << "create space with " << newSpaces.size() << " variables." << std::endl;
+//      std::cout << "create space with " << newSpaces.size() << " variables." << std::endl;
 
       return ::Spacy::ProductSpace::makeHilbertSpace( newSpaces , primalIds , dualIds );
     }

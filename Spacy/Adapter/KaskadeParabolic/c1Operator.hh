@@ -58,6 +58,8 @@ namespace Spacy
       using VectorImpl_domain = Vector<VariableSetDescription>;
       using VectorImpl_range = Vector<TestVariableSetDescription>;
 
+      using VectorImpl_source = Vector<typename OperatorDefinition::SourceVars>;
+
     public:
 
       /**
@@ -69,8 +71,9 @@ namespace Spacy
        *
        */
 
-      C1Operator(OperatorDefinition& F, GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm, const VectorSpace& domain, const VectorSpace& range)
-        : OperatorBase(domain,range), F_(F), gm_(gm)
+      C1Operator(std::function<OperatorDefinition(const typename OperatorDefinition::SourceVars::VariableSet)> & F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm,
+                 const VectorSpace& domain,const VectorSpace& range, const Spacy::Vector& u)
+        : OperatorBase(domain,range), F_(F), gm_(gm),y0_(VariableSetDescription::template CoefficientVectorRepresentation<>::init(*gm_.getSpacesVec().at(0))), u_(u)
       {
         this->resizeMembers();
       }
@@ -134,8 +137,21 @@ namespace Spacy
         if(gradient_updated || !G_ptr)
           makeGradientLBOPointer();
 
-        std::cout<<"returning from linearization"<<std::endl;
+        if(verbose)
+          std::cout<<"returning from linearization"<<std::endl;
         return *G_ptr;
+      }
+
+      // make Norm Operator
+      auto massMatrix() const
+      {
+        assembleMassMatrices();
+        if(!M_ptr)
+          makeMassLBOPointer();
+
+        if(verbose)
+          std::cout<<" returning Mass LBO "<<std::endl;
+        return *M_ptr;
       }
       /**
              * @brief Access onlyLowerTriangle flag.
@@ -181,12 +197,39 @@ namespace Spacy
       {
         MassY_.insert(MassY_.begin() + k,KaskadeOperator());
         A_.insert(A_.begin() + k,KaskadeOperator());
-        FVec_.insert(FVec_.begin() + k,F_);
+
+        auto u_impl = cast_ref<VectorImpl_source>(u_);
+        auto vertices = gm_.getTempGrid().getVertexVec();
+        FVec_.insert(FVec_.begin() + k,F_(u_impl.evaluate_u(vertices.at(k))));
         MassAssembled_.insert(MassAssembled_.begin() + k , false);
 
         GradRefined_ = false;
         OpRefined_ = false;
       }
+
+
+      void setInitialCondition(auto y0_coeff)
+      {
+        boost::fusion::at_c<0>(y0_.data) = y0_coeff;
+        OpRefined_ = false;
+
+        return;
+      }
+
+      void setSource(const ::Spacy::Vector& u)
+      {
+        u_ = u;
+        OpRefined_ = false;
+        auto u_impl = cast_ref<VectorImpl_source>(u_);
+        auto vertices = gm_.getTempGrid().getVertexVec();
+        for(auto i = 0u;i<FVec_.size();i++)
+        {
+          FVec_.at(i) = (F_(u_impl.evaluate_u(vertices.at(i))));
+        }
+
+        return;
+      }
+
     private:
 
       /// resize the members vectors a size equal to #timesteps
@@ -197,7 +240,15 @@ namespace Spacy
         A_.resize(no_time_steps);
         MassY_.resize(no_time_steps);
         MassAssembled_.resize(no_time_steps,false);
-        FVec_.resize(no_time_steps,F_);
+
+        FVec_.reserve(no_time_steps);
+        auto u_impl = cast_ref<VectorImpl_source>(u_);
+
+        auto vertices = gm_.getTempGrid().getVertexVec();
+        for(auto i = 0u;i<no_time_steps;i++)
+        {
+          FVec_.push_back(F_(u_impl.evaluate_u(vertices.at(i))));
+        }
         return;
       }
 
@@ -244,22 +295,22 @@ namespace Spacy
 
           // initial Condition
           if(timeStep==0){
-            typename VariableSetDescription::VariableSet x0(VariableSetDescription(*(spacesVec.at(0)),{"y"}));
+            //            typename VariableSetDescription::VariableSet x0(VariableSetDescription(*(spacesVec.at(0)),{"y"}));
 
-            ::Kaskade::interpolateGloballyWeak<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x0.data),
-                                                                        ::Kaskade::makeWeakFunctionView( [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
-            {
-              auto x = cell.geometry().global(xLocal);
-              //return Dune::FieldVector<double,1>(1);
-              //return Dune::FieldVector<double,1>(12*(1-x[1])*x[1]*(1-x[0])*x[0]);
-              return Dune::FieldVector<double,1>(0);
-            }));
-            CoefficientVectorY y0(boost::fusion::at_c<0>(x0.data).coefficients());
+            //            ::Kaskade::interpolateGloballyWeak<::Kaskade::PlainAverage>(boost::fusion::at_c<0>(x0.data),
+            //                                                                        ::Kaskade::makeWeakFunctionView( [](auto const& cell, auto const& xLocal) -> Dune::FieldVector<double,1>
+            //            {
+            //              auto x = cell.geometry().global(xLocal);
+            //              //return Dune::FieldVector<double,1>(1);
+            //              //return Dune::FieldVector<double,1>(12*(1-x[1])*x[1]*(1-x[0])*x[0]);
+            //              return Dune::FieldVector<double,1>(0);
+            //            }));
+            //            CoefficientVectorY y0(boost::fusion::at_c<0>(x0.data).coefficients());
 
             CoefficientVectorY y0_dual(
                   VYSetDescription::template CoefficientVectorRepresentation<>::init(
                     *(spacesVec.at(timeStep))));
-            MassY_.at(timeStep).apply(y0,y0_dual);
+            MassY_.at(timeStep).apply(y0_,y0_dual);
 
             assert(y_curr_.dim() == y_curr_dual.dim());
             y_curr_dual-=y0_dual;
@@ -363,18 +414,46 @@ namespace Spacy
                                                                                          (this->domain(),
                                                                                           this->range()),
                                                                                          normfunc, true),solverCreator_));
-        std::cout<<"done with constructing the LBO pointer"<<std::endl;
+        if(verbose)
+          std::cout<<"done with constructing the Gradient LBO pointer"<<std::endl;
+        return;
+      }
+
+
+      /// construct a shared ptr on the LinearBlockOperator holding the Mass matrix
+      void makeMassLBOPointer() const
+      {
+        auto normfunc = [](const ::Spacy::Vector &v) {
+          return Real{0};
+        };
+
+        if(verbose)
+          std::cout<<" Constructing the LBO Pointer "<<std::endl;
+        M_ptr = std::make_shared<PDE::NormOperator<VariableSetDescription, VariableSetDescription> >(
+              PDE::NormOperator<VariableSetDescription, VariableSetDescription>(MassY_, gm_.getTempGrid().getDtVec(), gm_.getSpacesVec(),
+                                                                                VectorSpace(
+                                                                                  PDE::NormOperatorCreator<VariableSetDescription, VariableSetDescription>
+                                                                                  (this->domain(),
+                                                                                   this->range()),
+                                                                                  normfunc, true)));
+        if(verbose)
+          std::cout<<"done with constructing the Mass LBO pointer"<<std::endl;
         return;
       }
 
       GridManager<Spaces>& gm_;
-      OperatorDefinition F_;
+      std::function<OperatorDefinition(const typename OperatorDefinition::SourceVars::VariableSet)> F_;
       ScalProdDefinition SP_ = ScalProdDefinition();
       mutable std::vector<OperatorDefinition> FVec_;
-      mutable bool verbose = true;
+
+      CoefficientVector y0_;
+      mutable ::Spacy::Vector u_;
+
+      mutable bool verbose = false;
       mutable bool gradient_updated;
 
       mutable std::shared_ptr< PDE::LinearBlockOperator<VariableSetDescription ,VariableSetDescription> > G_ptr = nullptr;
+      mutable std::shared_ptr< PDE::NormOperator<VariableSetDescription ,VariableSetDescription> > M_ptr = nullptr;
 
       mutable std::vector<KaskadeOperator> A_{};
       mutable std::vector<KaskadeOperator> MassY_{};
@@ -404,10 +483,10 @@ namespace Spacy
          *
          */
     template <class OperatorDefinition>
-    auto makeC1Operator(OperatorDefinition& F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm,
-                        const VectorSpace& domain,const VectorSpace& range)
+    auto makeC1Operator(std::function<OperatorDefinition(const typename OperatorDefinition::SourceVars::VariableSet)> & F,  GridManager<typename OperatorDefinition::OriginVars::Spaces>& gm,
+                        const VectorSpace& domain,const VectorSpace& range, const ::Spacy::Vector& u)
     {
-      return C1Operator<OperatorDefinition>(F,gm,domain,range);
+      return C1Operator<OperatorDefinition>(F,gm,domain,range,u);
     }
   }
   /** @} */

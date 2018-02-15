@@ -256,6 +256,225 @@ namespace Spacy
         std::vector<std::shared_ptr<Spaces> > spacesVec_{};
         std::function<LinearSolver( const LinearBlockOperator&)> solverCreator_ = {};
       };
+
+      /**
+     * @brief Linear block operator for operators of parabolic PDEs in %Kaskade 7.
+     * @tparam AnsatzVariableSetDescription %Kaskade::VariableSetDescription for ansatz variables
+     * @tparam TestVariableSetDescription %Kaskade::VariableSetDescription for test variables
+     * @see ::Spacy::LinearOperator
+     */
+      template<class AnsatzVariableSetDescription, class TestVariableSetDescription>
+      class NormOperator :
+          public OperatorBase,
+          public VectorBase,
+          public AddArithmeticOperators<
+          NormOperator < AnsatzVariableSetDescription, TestVariableSetDescription>>
+      {
+        using AVD = AnsatzVariableSetDescription;
+        using TVD = TestVariableSetDescription;
+        using Spaces = typename AnsatzVariableSetDescription::Spaces;
+        using Variables = typename AnsatzVariableSetDescription::Variables;
+
+        using Domain = typename AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+        using Range = typename AnsatzVariableSetDescription::template CoefficientVectorRepresentation<>::type;
+        using Matrix = ::Kaskade::MatrixAsTriplet<double>;
+        using KaskadeOperator = ::Kaskade::MatrixRepresentedOperator<Matrix, Domain, Range>;
+
+        using BlockOperatorCreator = NormOperatorCreator<AnsatzVariableSetDescription, TestVariableSetDescription>;
+
+        using VYSetDescription = ::Spacy::KaskadeParabolic::Detail::ExtractDescription_t<AVD ,0>;
+        using CoefficientVectorY = typename VYSetDescription::template CoefficientVectorRepresentation<>::type;
+        using KaskadeOperatorYY = ::Kaskade::MatrixRepresentedOperator<Matrix,CoefficientVectorY,CoefficientVectorY>;
+
+        using ImplVec_domain = ::Spacy::KaskadeParabolic::Vector<AVD>;
+        using ImplVec_range = ::Spacy::KaskadeParabolic::Vector<TVD>;
+
+
+      public:
+
+        /**
+       * @brief Construct linear operator for %Kaskade 7.
+       * @param MassY Mass matrices for each timestep
+       * @param A stiffness matrices for each timestep
+       * @param dtVec timesteps
+       * @param spacesVec Kaskade Space for each timestep
+       * @param space OperatorSpace of this linear Operator
+       */
+        NormOperator(std::vector<KaskadeOperator> MassY,const std::vector<Real> dtVec,
+                            const std::vector<std::shared_ptr<Spaces> > &spacesVec,const VectorSpace &space)
+          :
+            dtVec_ (dtVec), spacesVec_(spacesVec),
+            OperatorBase(cast_ref<BlockOperatorCreator>(space.creator()).domain(),
+                         cast_ref<BlockOperatorCreator>(space.creator()).range()),
+            VectorBase(space)
+        {
+          for (auto i = 0u; i < dtVec.size(); i++) {
+            MassY_.emplace_back(std::move(MassY.at(i)));
+          }
+
+        }
+
+        /**
+       * @brief Construct linear operator for %Kaskade 7.
+       * @param MassY Mass matrices for each timestep
+       * @param A stiffness matrices for each timestep
+       * @param dtVec timesteps
+       * @param spacesVec Kaskade Space for each timestep
+       * @param space OperatorSpace of this linear Operator
+       * @param solverCreator Function for generation of a solver for this operator
+       */
+        NormOperator(std::vector<KaskadeOperator> MassY,const std::vector<Real> dtVec,
+                            const std::vector<std::shared_ptr<Spaces> > &spacesVec,const VectorSpace &space,
+                            std::function<LinearSolver(const NormOperator&)> solverCreator)
+          :
+            dtVec_ (dtVec), spacesVec_(spacesVec),
+            OperatorBase(cast_ref<BlockOperatorCreator>(space.creator()).domain(),
+                         cast_ref<BlockOperatorCreator>(space.creator()).range()),
+            VectorBase(space),solverCreator_(std::move(solverCreator))
+        {
+          for (auto i = 0u; i < dtVec.size(); i++) {
+            MassY_.emplace_back(std::move(MassY.at(i)));
+          }
+
+        }
+
+        /// Compute \f$A(x)\f$.
+        ::Spacy::Vector operator()(const ::Spacy::Vector &x) const
+        {
+
+          if (verbose)
+            std::cout << "In evaluation of Block Op PDE " << std::endl;
+          using ::Spacy::cast_ref;
+
+          auto x_impl = cast_ref<ImplVec_domain>(x);
+
+
+          /// Coeff Vec for argument
+          std::vector<Domain> y_d;
+          y_d.reserve(dtVec_.size());
+
+          /// Coeff Vec for output
+          std::vector<Range> y_r;
+          y_r.reserve(dtVec_.size());
+
+          for (auto i = 0u; i < dtVec_.size(); i++)
+          {
+            y_d.emplace_back(CoefficientVectorY(
+                               VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec_.at(i)))));
+            y_r.emplace_back(CoefficientVectorY(
+                               VYSetDescription::template CoefficientVectorRepresentation<>::init(*(spacesVec_.at(i)))));
+            y_r.at(i) *= 0;
+          }
+
+          // copy into CoefficientVectors
+          for (auto i = 0u; i < dtVec_.size(); i++)
+          {
+            boost::fusion::at_c<0>(y_d.at(i).data) = x_impl.getCoeffVec(i);
+
+          }
+          // Apply the assembled KaskadeOperators
+          for (auto i = 1u; i < dtVec_.size(); i++)
+          {
+            double dt = ::Spacy::Mixin::get(dtVec_.at(i));
+
+            // State Equation
+            // perform
+            // | 0                  |   |y_d(0) |
+            // |    M(1)            | * |  :    |
+            // |        ...         |   |y_d(N) |
+            // |               M(N) |
+
+            if (verbose)
+              std::cout << "State Equation of timestep " << i << std::endl;
+
+            MassY_.at(i).applyscaleadd(dt, y_d.at(i), y_r.at(i));
+          }
+
+          // cast result into Spacy Vector
+          ::Spacy::Vector result = zero(range());
+          ImplVec_range& res_impl = cast_ref<ImplVec_range>(result);
+
+          for (auto i = 0u; i < dtVec_.size(); i++)
+          {
+            res_impl.getCoeffVec_nonconst(i)= boost::fusion::at_c<0>(y_r.at(i).data);
+          }
+
+          return result;
+        }
+
+        ::Spacy::Real operator()(const NormOperator &) const
+        {
+          return Real(0);
+        }
+
+        /// Access solver representing \f$A^{-1}\f$.
+        auto solver() const
+        {
+          return solverCreator_(*this);
+        }
+
+        /// needed for interface, returns nonsense
+        auto &get()
+        {
+          std::cout << "This method returns basically nonsense " << std::endl;
+          return MassY_.at(0).get_non_const();
+        }
+
+        /// needed for interface, returns nonsense
+        const auto &get() const
+        {
+          std::cout << "This method returns basically nonsense " << std::endl;
+          return MassY_.at(0).template get<Matrix>();
+        }
+
+        /// needed for interface, returns nonsense
+        const auto &A() const {
+          std::cout << "This method returns basically nonsense " << std::endl;
+
+          return MassY_.at(0);
+        }
+
+        /**
+               * @brief getter for Kaskade Operator of a timestep
+               * @param type Operator requested (mass or stiffness)
+               * @param timeStep at which timestep
+               * @return Kaskade Operator
+               */
+        const auto getKaskOp(std::string type, int timeStep) const {
+          if (!type.compare("MassY")) {
+            if (verbose)
+              std::cout << " Returning Y Block " << std::endl;
+            return MassY_.at(timeStep);
+          }
+
+          else std::cout << " NO VALID TYPE GIVEN " << std::endl;
+          return MassY_.at(0);
+        }
+
+        /**
+               * @brief getter for Kaskade Spaces
+               * @return Kaskade Spaces for each timestep
+               */
+        const std::vector<std::shared_ptr<Spaces> > &getSpacesVec() const {
+          return spacesVec_;
+        }
+
+        /**
+               * @brief getter for temporal timesteps
+               * @return timestep sizes
+               */
+        const std::vector<Real> getDtVec() const {
+          return dtVec_;
+        }
+
+      private:
+        bool verbose = false;
+        std::vector<KaskadeOperator> MassY_{};
+
+        std::vector<Real> dtVec_{};
+        std::vector<std::shared_ptr<Spaces> > spacesVec_{};
+        std::function<LinearSolver( const NormOperator&)> solverCreator_ = {};
+      };
     }
     namespace OCP
     {
