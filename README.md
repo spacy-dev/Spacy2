@@ -7,29 +7,22 @@
 # Spacy - Vector Space Algorithms
 
 ### Download
-
 Download from gerrithub via
-
-    git clone https://review.gerrithub.io/spacy-dev/Spacy \
-    && (cd Spacy \
-    && curl -kLo `git rev-parse --git-dir`/hooks/commit-msg \
-    https://review.gerrithub.io/tools/hooks/commit-msg; \
-    chmod +x `git rev-parse --git-dir`/hooks/commit-msg)
+  - git clone https://review.gerrithub.io/spacy-dev/Spacy && (cd Spacy && curl -kLo `git rev-parse --git-dir`/hooks/commit-msg https://review.gerrithub.io/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)
 
 Push to gerrithub via (with my-branch=master,...)
-
-    git push origin HEAD:refs/for/my-branch
+  - git push origin HEAD:refs/for/my-branch
 
 ### Dependencies
 The core of Spacy does not require external dependencies.
 
 Depending on your use-case the following dependencies may be required:
-  - [googletest](https://github.com/google/googletest) for compiling the tests (enable with `cmake .. -DBuildTest=ON`),
-  - [Eigen](http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions `using namespace Spacy::Rn` (automatically enabled if cmake finds Eigen),
+  - [googletest](https://github.com/google/googletest) for compiling the tests (enable with cmake .. -DBuildTest=ON),
+  - [Eigen](http://eigen.tuxfamily.org/) for enabling finite-dimensional problem descriptions using namespace 'Spacy::Rn' (automatically enabled if cmake finds Eigen),
   - [FunG](https://lubkoll.github.io/FunG) an automatic-differentiation library that can be used for the definition of integrands for [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox), [deal.II](http://dealii.org) and for the generation of finite-dimensional problems with [Eigen](http://eigen.tuxfamily.org/),
-  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) for developing algorithms with Kaskade 7 (enable with `cmake .. -DKaskade=ON`),
-  - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with `cmake .. -DDolfin=ON`).
-  - [deal.II](http://dealii.org) for developing algorithms with deal.II (enable with `cmake .. -DdealII=ON`). 
+  - [Kaskade 7](https://www.zib.de/projects/kaskade-7-finite-element-toolbox) for developing algorithms with Kaskade 7 (enable with cmake .. -DKaskade=ON),
+  - [FEniCS](https://fenicsproject.org) for developing algorithms with FEniCS (enable with cmake .. -DDolfin=ON).
+  - [deal.II](http://dealii.org) for developing algorithms with deal.II (enable with cmake .. -DdealII=ON). 
 
 Currently there are integration tests for
   - [Eigen](http://eigen.tuxfamily.org/) and [FunG](https://lubkoll.github.io/FunG)
@@ -44,16 +37,14 @@ Currently there are integration tests for
 
 ### Installation
 Go to download folder, i.e.
-
-    cd Spacy
+  - cd Spacy
   
 and type
-
-    mkdir build
-    cd build
-    cmake .. (-DBuildTest=ON -DDolfin=ON -DKaskade=ON -DCoverage=ON)
-    make (-j n_threads)
-    make install
+  - mkdir build
+  - cd build
+  - cmake .. (-DBuildTest=ON -DDolfin=ON -DKaskade=ON -DCoverage=ON)
+  - make (-j n_threads)
+  - make install
 
 ### Examples
 Currently there are examples for
@@ -64,8 +55,8 @@ Currently there are examples for
   - [deal.II](http://dealii.org) with and without [FunG](https://lubkoll.github.io/FunG)
 
 These are located in
- - `Spacy/Examples/Kaskade`,
- - `Spacy/Examples/FEniCS`.
+ - Spacy/Examples/Kaskade,
+ - Spacy/Examples/FEniCS.
 
 Paths to Kaskade may need to be adjusted according to your setup.
 
