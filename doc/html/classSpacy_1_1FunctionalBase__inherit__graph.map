@@ -1,8 +1,9 @@
 <map id="Spacy::FunctionalBase" name="Spacy::FunctionalBase">
-<area shape="rect" id="node2" href="$classSpacy_1_1dealII_1_1C2FunGFunctional_3_01FunGFunctional_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C2FunGFunctional\l\&lt; FunGFunctional, dim, VariableDim\l\&lt; variable_dims...\&gt; \&gt;" alt="" coords="211,5,445,61"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1C2Functional.html" title="Functional interface for FEniCS. Models a twice differentiable functional . " alt="" coords="229,85,427,126"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1Kaskade_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a twice differentiable functional . " alt="" coords="227,150,429,191"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1Rn_1_1C2Functional.html" title="Spacy::Rn::C2Functional" alt="" coords="243,216,413,243"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1Rn_1_1CompositeStepFunctional.html" title="Spacy::Rn::CompositeStep\lFunctional\&lt; role \&gt;" alt="" coords="237,267,419,309"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1Scalar_1_1C2Functional.html" title="Spacy::Scalar::C2Functional" alt="" coords="233,333,423,360"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1dealII_1_1C2FunGFunctional_3_01FunGFunctional_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C2FunGFunctional\l\&lt; FunGFunctional, dim, VariableDim\l\&lt; variable_dims...\&gt; \&gt;" alt="" coords="217,5,452,61"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1FEniCS_1_1C2Functional.html" title="Functional interface for FEniCS. Models a twice differentiable functional . " alt="" coords="235,85,434,126"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1Kaskade_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a twice differentiable functional . " alt="" coords="233,150,436,191"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1KaskadeParabolic_1_1C2Functional.html" title="Functional interface for Kaskade 7. Models a dynamical twice differentiable functional ..." alt="" coords="211,215,458,257"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1Rn_1_1C2Functional.html" title="Spacy::Rn::C2Functional" alt="" coords="250,281,419,308"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1Rn_1_1CompositeStepFunctional.html" title="Spacy::Rn::CompositeStep\lFunctional\&lt; role \&gt;" alt="" coords="243,333,426,374"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1Scalar_1_1C2Functional.html" title="Spacy::Scalar::C2Functional" alt="" coords="240,399,429,425"/>
 </map>

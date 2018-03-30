@@ -43,7 +43,15 @@ using \hyperlink{group__VectorSpaceGroup_gafda42fd5aa3f7597a42b9831bf4dfd07}{Spa
 {\footnotesize template$<$class Description $>$ }\\auto \hyperlink{group__VectorSpaceGroup_ga04d45446864bbf87770d02eade7b64cf}{Spacy\-::\-Kaskade\-::make\-Hilbert\-Space} (const Description \&description)
 \begin{DoxyCompactList}\small\item\em Create single space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Description $>$ }\\auto \hyperlink{group__VectorSpaceGroup_ga221db25c41371a2a823a6b569d735ef6}{Spacy\-::\-Kaskade\-::make\-Hilbert\-Space} (const Description \&description, const std\-::vector$<$ unsigned $>$ \&primal\-Ids, const std\-::vector$<$ unsigned $>$ \&dual\-Ids=\{\})
-\begin{DoxyCompactList}\small\item\em Create product space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Create product space with hilbert space structure for Kaskade 7. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args, class  = std\-::enable\-\_\-if\-\_\-t$<$std\-::is\-\_\-constructible$<$\-Description,\-Args...$>$\-::value$>$$>$ }\\\hyperlink{group__VectorSpaceGroup_ga7071ba5e2db9acaf6a4de415cb50ae1e}{Spacy\-::\-Kaskade\-Parabolic\-::\-Sub\-Creator$<$ Description $>$\-::\-Sub\-Creator} (Args \&\&...args)
+\begin{DoxyCompactList}\small\item\em Create from Kaskade 7 function space. \end{DoxyCompactList}\item 
+\hyperlink{group__VectorSpaceGroup_ga9312a30ec070498e2364676714caf125}{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator$<$ class $>$\-::\-Vector\-Creator} (\-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$ \&gm, std\-::string name)
+\begin{DoxyCompactList}\small\item\em Create from Gridmanager. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Spaces $>$ }\\auto \hyperlink{group__VectorSpaceGroup_gad226c88b4409a3f97dce3136824edde4}{Spacy\-::\-Kaskade\-Parabolic\-::make\-Hilbert\-Space} (Grid\-Manager$<$ Spaces $>$ \&gm)
+\begin{DoxyCompactList}\small\item\em Create single space of piecewise constant in time functions with hilbert space structure with Kaskade 7. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Spaces $>$ }\\auto \hyperlink{group__VectorSpaceGroup_ga6e99f8e006f998a69274f5ba2c01f9a3}{Spacy\-::\-Kaskade\-Parabolic\-::make\-Hilbert\-Space} (Grid\-Manager$<$ Spaces $>$ \&gm, const std\-::vector$<$ unsigned $>$ \&primal\-Ids, const std\-::vector$<$ unsigned $>$ \&dual\-Ids)
+\begin{DoxyCompactList}\small\item\em Create product space piecewise constant in time functions with hilbert space structure with Kaskade 7. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -115,6 +123,79 @@ Create product space with hilbert space structure for Kaskade 7.
 
 \begin{DoxyParams}{Parameters}
 {\em spaces} & boost fusion forward sequence of const pointers to Kaskade 7 function spaces \\
+\hline
+{\em primal\-Ids} & ids of primal variables \\
+\hline
+{\em dual\-Ids} & ids of dual variables \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__VectorSpaceGroup_ga7071ba5e2db9acaf6a4de415cb50ae1e}{\index{Vector Spaces@{Vector Spaces}!Sub\-Creator@{Sub\-Creator}}
+\index{Sub\-Creator@{Sub\-Creator}!Vector Spaces@{Vector Spaces}}
+\subsubsection[{Sub\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ template$<$class... Args, class  = std\-::enable\-\_\-if\-\_\-t$<$std\-::is\-\_\-constructible$<$\-Description,\-Args...$>$\-::value$>$$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Sub\-Creator}$<$ Description $>$\-::Sub\-Creator (
+\begin{DoxyParamCaption}
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__VectorSpaceGroup_ga7071ba5e2db9acaf6a4de415cb50ae1e}
+
+
+Create from Kaskade 7 function space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & single Kaskade 7 function space (no product space) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__VectorSpaceGroup_ga9312a30ec070498e2364676714caf125}{\index{Vector Spaces@{Vector Spaces}!Vector\-Creator@{Vector\-Creator}}
+\index{Vector\-Creator@{Vector\-Creator}!Vector Spaces@{Vector Spaces}}
+\subsubsection[{Vector\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}$<$ class $>$\-::Vector\-Creator (
+\begin{DoxyParamCaption}
+\item[{\-::{\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$ \&}]{gm, }
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{group__VectorSpaceGroup_ga9312a30ec070498e2364676714caf125}
+
+
+Create from Gridmanager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gm} & \hyperlink{namespaceSpacy}{Spacy} Gridmanager holding grid information (temporal and spatial) \\
+\hline
+{\em name} & name of variable (needed for writing paraview files) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__VectorSpaceGroup_gad226c88b4409a3f97dce3136824edde4}{\index{Vector Spaces@{Vector Spaces}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
+\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Vector Spaces@{Vector Spaces}}
+\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces $>$ auto Spacy\-::\-Kaskade\-Parabolic\-::make\-Hilbert\-Space (
+\begin{DoxyParamCaption}
+\item[{Grid\-Manager$<$ Spaces $>$ \&}]{gm}
+\end{DoxyParamCaption}
+)}}\label{group__VectorSpaceGroup_gad226c88b4409a3f97dce3136824edde4}
+
+
+Create single space of piecewise constant in time functions with hilbert space structure with Kaskade 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gm} & \hyperlink{namespaceSpacy}{Spacy} Gridmanager holding grid information (temporal and spatial) \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__VectorSpaceGroup_ga6e99f8e006f998a69274f5ba2c01f9a3}{\index{Vector Spaces@{Vector Spaces}!make\-Hilbert\-Space@{make\-Hilbert\-Space}}
+\index{make\-Hilbert\-Space@{make\-Hilbert\-Space}!Vector Spaces@{Vector Spaces}}
+\subsubsection[{make\-Hilbert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces $>$ auto Spacy\-::\-Kaskade\-Parabolic\-::make\-Hilbert\-Space (
+\begin{DoxyParamCaption}
+\item[{Grid\-Manager$<$ Spaces $>$ \&}]{gm, }
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{primal\-Ids, }
+\item[{const std\-::vector$<$ unsigned $>$ \&}]{dual\-Ids}
+\end{DoxyParamCaption}
+)}}\label{group__VectorSpaceGroup_ga6e99f8e006f998a69274f5ba2c01f9a3}
+
+
+Create product space piecewise constant in time functions with hilbert space structure with Kaskade 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gm} & \hyperlink{namespaceSpacy}{Spacy} Gridmanager holding grid information (temporal and spatial) \\
 \hline
 {\em primal\-Ids} & ids of primal variables \\
 \hline

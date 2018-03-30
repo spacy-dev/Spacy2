@@ -144,6 +144,21 @@ Functions</h2></td></tr>
 <tr class="memitem:ga221db25c41371a2a823a6b569d735ef6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__VectorSpaceGroup.html#ga221db25c41371a2a823a6b569d735ef6">Spacy::Kaskade::makeHilbertSpace</a> (const Description &amp;description, const std::vector&lt; unsigned &gt; &amp;primalIds, const std::vector&lt; unsigned &gt; &amp;dualIds={})</td></tr>
 <tr class="memdesc:ga221db25c41371a2a823a6b569d735ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space with hilbert space structure for Kaskade 7.  <a href="#ga221db25c41371a2a823a6b569d735ef6">More...</a><br/></td></tr>
 <tr class="separator:ga221db25c41371a2a823a6b569d735ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7071ba5e2db9acaf6a4de415cb50ae1e"><td class="memTemplParams" colspan="2">template&lt;class... Args, class  = std::enable_if_t&lt;std::is_constructible&lt;Description,Args...&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:ga7071ba5e2db9acaf6a4de415cb50ae1e"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__VectorSpaceGroup.html#ga7071ba5e2db9acaf6a4de415cb50ae1e">Spacy::KaskadeParabolic::SubCreator&lt; Description &gt;::SubCreator</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:ga7071ba5e2db9acaf6a4de415cb50ae1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create from Kaskade 7 function space.  <a href="#ga7071ba5e2db9acaf6a4de415cb50ae1e">More...</a><br/></td></tr>
+<tr class="separator:ga7071ba5e2db9acaf6a4de415cb50ae1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9312a30ec070498e2364676714caf125"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__VectorSpaceGroup.html#ga9312a30ec070498e2364676714caf125">Spacy::KaskadeParabolic::VectorCreator&lt; class &gt;::VectorCreator</a> (::<a class="el" href="classSpacy_1_1KaskadeParabolic_1_1GridManager.html">Spacy::KaskadeParabolic::GridManager</a>&lt; Spaces &gt; &amp;gm, std::string name)</td></tr>
+<tr class="memdesc:ga9312a30ec070498e2364676714caf125"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create from Gridmanager.  <a href="#ga9312a30ec070498e2364676714caf125">More...</a><br/></td></tr>
+<tr class="separator:ga9312a30ec070498e2364676714caf125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad226c88b4409a3f97dce3136824edde4"><td class="memTemplParams" colspan="2">template&lt;class Spaces &gt; </td></tr>
+<tr class="memitem:gad226c88b4409a3f97dce3136824edde4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__VectorSpaceGroup.html#gad226c88b4409a3f97dce3136824edde4">Spacy::KaskadeParabolic::makeHilbertSpace</a> (GridManager&lt; Spaces &gt; &amp;gm)</td></tr>
+<tr class="memdesc:gad226c88b4409a3f97dce3136824edde4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create single space of piecewise constant in time functions with hilbert space structure with Kaskade 7.  <a href="#gad226c88b4409a3f97dce3136824edde4">More...</a><br/></td></tr>
+<tr class="separator:gad226c88b4409a3f97dce3136824edde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6e99f8e006f998a69274f5ba2c01f9a3"><td class="memTemplParams" colspan="2">template&lt;class Spaces &gt; </td></tr>
+<tr class="memitem:ga6e99f8e006f998a69274f5ba2c01f9a3"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__VectorSpaceGroup.html#ga6e99f8e006f998a69274f5ba2c01f9a3">Spacy::KaskadeParabolic::makeHilbertSpace</a> (GridManager&lt; Spaces &gt; &amp;gm, const std::vector&lt; unsigned &gt; &amp;primalIds, const std::vector&lt; unsigned &gt; &amp;dualIds)</td></tr>
+<tr class="memdesc:ga6e99f8e006f998a69274f5ba2c01f9a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create product space piecewise constant in time functions with hilbert space structure with Kaskade 7.  <a href="#ga6e99f8e006f998a69274f5ba2c01f9a3">More...</a><br/></td></tr>
+<tr class="separator:ga6e99f8e006f998a69274f5ba2c01f9a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Collection of available vector spaces. </p>
@@ -286,10 +301,161 @@ template&lt;class Description &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="ga7071ba5e2db9acaf6a4de415cb50ae1e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Description &gt; </div>
+<div class="memtemplate">
+template&lt;class... Args, class  = std::enable_if_t&lt;std::is_constructible&lt;Description,Args...&gt;::value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1KaskadeParabolic_1_1SubCreator.html">Spacy::KaskadeParabolic::SubCreator</a>&lt; Description &gt;::SubCreator </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create from Kaskade 7 function space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">space</td><td>single Kaskade 7 function space (no product space) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga9312a30ec070498e2364676714caf125"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpacy_1_1KaskadeParabolic_1_1VectorCreator.html">Spacy::KaskadeParabolic::VectorCreator</a>&lt; class &gt;::VectorCreator </td>
+          <td>(</td>
+          <td class="paramtype">::<a class="el" href="classSpacy_1_1KaskadeParabolic_1_1GridManager.html">Spacy::KaskadeParabolic::GridManager</a>&lt; Spaces &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create from Gridmanager. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gm</td><td><a class="el" href="namespaceSpacy.html" title="Main namespace of the Spacy library. ">Spacy</a> Gridmanager holding grid information (temporal and spatial) </td></tr>
+    <tr><td class="paramname">name</td><td>name of variable (needed for writing paraview files) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="gad226c88b4409a3f97dce3136824edde4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Spaces &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Spacy::KaskadeParabolic::makeHilbertSpace </td>
+          <td>(</td>
+          <td class="paramtype">GridManager&lt; Spaces &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create single space of piecewise constant in time functions with hilbert space structure with Kaskade 7. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gm</td><td><a class="el" href="namespaceSpacy.html" title="Main namespace of the Spacy library. ">Spacy</a> Gridmanager holding grid information (temporal and spatial) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6e99f8e006f998a69274f5ba2c01f9a3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Spaces &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Spacy::KaskadeParabolic::makeHilbertSpace </td>
+          <td>(</td>
+          <td class="paramtype">GridManager&lt; Spaces &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>primalIds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dualIds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create product space piecewise constant in time functions with hilbert space structure with Kaskade 7. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gm</td><td><a class="el" href="namespaceSpacy.html" title="Main namespace of the Spacy library. ">Spacy</a> Gridmanager holding grid information (temporal and spatial) </td></tr>
+    <tr><td class="paramname">primalIds</td><td>ids of primal variables </td></tr>
+    <tr><td class="paramname">dualIds</td><td>ids of dual variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 18 2018 13:54:15 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 30 2018 16:13:25 for Spacy by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

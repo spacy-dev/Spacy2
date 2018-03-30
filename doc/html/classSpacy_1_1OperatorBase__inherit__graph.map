@@ -1,25 +1,33 @@
 <map id="Spacy::OperatorBase" name="Spacy::OperatorBase">
-<area shape="rect" id="node2" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver. " alt="" coords="241,5,407,32"/>
-<area shape="rect" id="node3" href="$classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner.html" title="A triangular state constraint preconditioner used in . " alt="" coords="233,57,415,98"/>
-<area shape="rect" id="node4" href="$classSpacy_1_1dealII_1_1C1FunGOperator_3_01FunGOperator_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C1FunGOperator\l\&lt; FunGOperator, dim, VariableDim\l\&lt; variable_dims...\&gt; \&gt;" alt="" coords="212,121,436,177"/>
-<area shape="rect" id="node5" href="$classSpacy_1_1dealII_1_1CGSolver.html" title="Spacy::dealII::CGSolver\l\&lt; dim \&gt;" alt="" coords="242,201,406,242"/>
-<area shape="rect" id="node6" href="$classSpacy_1_1dealII_1_1LinearOperator.html" title="Spacy::dealII::LinearOperator\l\&lt; dim, VariableDims \&gt;" alt="" coords="228,266,420,307"/>
-<area shape="rect" id="node7" href="$classSpacy_1_1dealII_1_1UMFPackSolver.html" title="Spacy::dealII::UMFPackSolver\l\&lt; VariableDims \&gt;" alt="" coords="223,331,425,373"/>
-<area shape="rect" id="node8" href="$classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator . " alt="" coords="215,397,433,438"/>
-<area shape="rect" id="node9" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS. " alt="" coords="221,463,427,489"/>
-<area shape="rect" id="node10" href="$classSpacy_1_1FEniCS_1_1LUSolver.html" title="LU solver for FEniCS. " alt="" coords="237,513,411,540"/>
-<area shape="rect" id="node11" href="$classSpacy_1_1Generic_1_1LinearOperatorCreator.html" title="Spacy::Generic::LinearOperator\lCreator\&lt; LinearOperator \&gt;" alt="" coords="221,565,427,606"/>
-<area shape="rect" id="node13" href="$classSpacy_1_1Kaskade_1_1C1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="227,630,421,671"/>
-<area shape="rect" id="node14" href="$classSpacy_1_1Kaskade_1_1DirectSolver.html" title="Direct solver interface for Kaskade 7. " alt="" coords="201,695,447,751"/>
-<area shape="rect" id="node15" href="$classSpacy_1_1Kaskade_1_1DynamicC1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="227,775,421,831"/>
-<area shape="rect" id="node16" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7. " alt="" coords="218,855,430,911"/>
-<area shape="rect" id="node17" href="$classSpacy_1_1Kaskade_1_1Operator.html" title="Operator interface for Kaskade 7. Models an operator . " alt="" coords="236,934,412,975"/>
-<area shape="rect" id="node18" href="$classSpacy_1_1ProductSpace_1_1C1Operator.html" title="Product space operator. " alt="" coords="249,999,399,1041"/>
-<area shape="rect" id="node19" href="$classSpacy_1_1ProductSpace_1_1Operator.html" title="Product space operator. " alt="" coords="249,1065,399,1106"/>
-<area shape="rect" id="node20" href="$classSpacy_1_1Rn_1_1C1Operator.html" title="A differential operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="245,1131,403,1157"/>
-<area shape="rect" id="node21" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="235,1181,413,1208"/>
-<area shape="rect" id="node22" href="$classSpacy_1_1Scalar_1_1C1Operator.html" title="Spacy::Scalar::C1Operator" alt="" coords="235,1232,413,1259"/>
-<area shape="rect" id="node23" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems. " alt="" coords="225,1283,423,1309"/>
-<area shape="rect" id="node24" href="$classSpacy_1_1Scalar_1_1Operator.html" title="Operator . " alt="" coords="243,1333,405,1360"/>
-<area shape="rect" id="node12" href="$structSpacy_1_1Rn_1_1LinearOperatorCreator.html" title="VectorCreator for linear operators , based on the Eigen library. " alt="" coords="497,565,674,606"/>
+<area shape="rect" id="node2" href="$classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator.html" title="Spacy::KaskadeParabolic\l::PDE::LinearBlockOperator\l\&lt; VariableSetDescription,\l VariableSetDescription \&gt;" alt="" coords="252,5,436,75"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1KaskadeParabolic_1_1OCP_1_1LinearBlockOperator.html" title="Spacy::KaskadeParabolic\l::OCP::LinearBlockOperator\l\&lt; VariableSetDescription,\l VariableSetDescription \&gt;" alt="" coords="251,99,437,170"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1CG_1_1LinearSolver.html" title="Conjugate gradient solver. " alt="" coords="261,195,427,221"/>
+<area shape="rect" id="node5" href="$classSpacy_1_1CG_1_1TriangularStateConstraintPreconditioner.html" title="A triangular state constraint preconditioner used in . " alt="" coords="253,246,435,287"/>
+<area shape="rect" id="node6" href="$classSpacy_1_1dealII_1_1C1FunGOperator_3_01FunGOperator_00_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html" title="Spacy::dealII::C1FunGOperator\l\&lt; FunGOperator, dim, VariableDim\l\&lt; variable_dims...\&gt; \&gt;" alt="" coords="232,311,456,367"/>
+<area shape="rect" id="node7" href="$classSpacy_1_1dealII_1_1CGSolver.html" title="Spacy::dealII::CGSolver\l\&lt; dim \&gt;" alt="" coords="262,390,426,431"/>
+<area shape="rect" id="node8" href="$classSpacy_1_1dealII_1_1LinearOperator.html" title="Spacy::dealII::LinearOperator\l\&lt; dim, VariableDims \&gt;" alt="" coords="248,455,440,497"/>
+<area shape="rect" id="node9" href="$classSpacy_1_1dealII_1_1UMFPackSolver.html" title="Spacy::dealII::UMFPackSolver\l\&lt; VariableDims \&gt;" alt="" coords="243,521,445,562"/>
+<area shape="rect" id="node10" href="$classSpacy_1_1FEniCS_1_1C1Operator.html" title="Operator interface for FEniCS. Models a differentiable operator . " alt="" coords="235,586,453,627"/>
+<area shape="rect" id="node11" href="$classSpacy_1_1FEniCS_1_1LinearOperator.html" title="Linear operator interface for operators in FEniCS. " alt="" coords="241,652,447,679"/>
+<area shape="rect" id="node12" href="$classSpacy_1_1FEniCS_1_1LUSolver.html" title="LU solver for FEniCS. " alt="" coords="257,703,431,729"/>
+<area shape="rect" id="node13" href="$classSpacy_1_1Generic_1_1LinearOperatorCreator.html" title="Spacy::Generic::LinearOperator\lCreator\&lt; LinearOperator \&gt;" alt="" coords="241,754,447,795"/>
+<area shape="rect" id="node15" href="$classSpacy_1_1Kaskade_1_1C1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="247,819,441,861"/>
+<area shape="rect" id="node16" href="$classSpacy_1_1Kaskade_1_1DirectSolver.html" title="Direct solver interface for Kaskade 7. " alt="" coords="221,884,467,940"/>
+<area shape="rect" id="node17" href="$classSpacy_1_1Kaskade_1_1DynamicC1Operator.html" title="Operator interface for Kaskade 7. Models a differentiable operator . " alt="" coords="247,964,441,1020"/>
+<area shape="rect" id="node18" href="$classSpacy_1_1Kaskade_1_1LinearOperator.html" title="Linear operator interface for operators in Kaskade 7. " alt="" coords="238,1044,450,1100"/>
+<area shape="rect" id="node19" href="$classSpacy_1_1Kaskade_1_1Operator.html" title="Operator interface for Kaskade 7. Models an operator . " alt="" coords="256,1123,432,1165"/>
+<area shape="rect" id="node20" href="$classSpacy_1_1KaskadeParabolic_1_1C1Operator.html" title="Operator interface for Kaskade 7. Models a dynamical differentiable operator &#160;semi discretized in tim..." alt="" coords="231,1189,457,1230"/>
+<area shape="rect" id="node21" href="$classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner.html" title="A constraint preconditioner for optimal control problems that uses a direct solver. " alt="" coords="235,1253,453,1309"/>
+<area shape="rect" id="node22" href="$classSpacy_1_1KaskadeParabolic_1_1OCP_1_1LinearBlockOperator.html" title="Linear operator interface for operators associated with time dependent optimal control problems in Ka..." alt="" coords="238,1334,450,1405"/>
+<area shape="rect" id="node23" href="$classSpacy_1_1KaskadeParabolic_1_1PDE_1_1DirectSolver.html" title="A direct solver for the Newton system of parabolic PDE problems. " alt="" coords="244,1429,444,1485"/>
+<area shape="rect" id="node24" href="$classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator.html" title="Linear block operator for operators of parabolic PDEs in Kaskade 7. " alt="" coords="238,1510,450,1581"/>
+<area shape="rect" id="node25" href="$classSpacy_1_1KaskadeParabolic_1_1PDE_1_1NormOperator.html" title="Linear block operator for operators of parabolic PDEs in Kaskade 7. " alt="" coords="201,1605,487,1661"/>
+<area shape="rect" id="node26" href="$classSpacy_1_1ProductSpace_1_1C1Operator.html" title="Product space operator. " alt="" coords="269,1685,419,1726"/>
+<area shape="rect" id="node27" href="$classSpacy_1_1ProductSpace_1_1Operator.html" title="Product space operator. " alt="" coords="269,1750,419,1791"/>
+<area shape="rect" id="node28" href="$classSpacy_1_1Rn_1_1C1Operator.html" title="A differential operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="265,1816,423,1843"/>
+<area shape="rect" id="node29" href="$classSpacy_1_1Rn_1_1LinearOperator.html" title="A linear operator &#160;for finite&#45;dimensional problems, based on the Eigen library. " alt="" coords="255,1867,433,1893"/>
+<area shape="rect" id="node30" href="$classSpacy_1_1Scalar_1_1C1Operator.html" title="Spacy::Scalar::C1Operator" alt="" coords="255,1917,433,1944"/>
+<area shape="rect" id="node31" href="$structSpacy_1_1Scalar_1_1LinearOperator.html" title="Linear operator for scalar problems. " alt="" coords="245,1968,443,1995"/>
+<area shape="rect" id="node32" href="$classSpacy_1_1Scalar_1_1Operator.html" title="Operator . " alt="" coords="263,2019,425,2045"/>
+<area shape="rect" id="node14" href="$structSpacy_1_1Rn_1_1LinearOperatorCreator.html" title="VectorCreator for linear operators , based on the Eigen library. " alt="" coords="537,754,714,795"/>
 </map>

@@ -1,0 +1,142 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:Temp\-Grid Class Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab1d72b2c887e6d7d378f4fbfe413ca67}{Temp\-Grid} (\hyperlink{classSpacy_1_1Real}{Real} t\-\_\-start, \hyperlink{classSpacy_1_1Real}{Real} t\-\_\-end, unsigned N)
+\begin{DoxyCompactList}\small\item\em Construct time grid with uniform vertex distribution. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab0c64d5d793d66ddcc926e4c410beb93}{Temp\-Grid} (\hyperlink{classSpacy_1_1Real}{Real} t\-\_\-start, \hyperlink{classSpacy_1_1Real}{Real} t\-\_\-end, unsigned N, \hyperlink{classSpacy_1_1Real}{Real} lambda)
+\begin{DoxyCompactList}\small\item\em Construct time grid with exponential vertex distribution. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab2d4a1e6ffde7218b9625ba35403e72b}{refine} (const unsigned index)
+\begin{DoxyCompactList}\small\item\em refine time grid \end{DoxyCompactList}\item 
+const std\-::vector$<$ \hyperlink{classSpacy_1_1Real}{Real} $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_af8d34ae585aba60c90f0fc67e1b30a60}{get\-Vertex\-Vec} () const 
+\begin{DoxyCompactList}\small\item\em getter for Vertices \end{DoxyCompactList}\item 
+const std\-::vector$<$ \hyperlink{classSpacy_1_1Real}{Real} $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7e8f2491f711973f2e7288e9e352c4cf}{get\-Dt\-Vec} () const 
+\begin{DoxyCompactList}\small\item\em getter for interval size \end{DoxyCompactList}\item 
+unsigned \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_abd15398b59cf72abd646eeb5a274b0ac}{get\-Inverval} (\hyperlink{classSpacy_1_1Real}{Real} t) const 
+\begin{DoxyCompactList}\small\item\em compute index of interval associated with time t \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7fc54bdd8be51156fffd7108c9cde317}{void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7fc54bdd8be51156fffd7108c9cde317}{print} () const }\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7fc54bdd8be51156fffd7108c9cde317}
+
+\begin{DoxyCompactList}\small\item\em print time grid \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab1d72b2c887e6d7d378f4fbfe413ca67}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!Temp\-Grid@{Temp\-Grid}}
+\index{Temp\-Grid@{Temp\-Grid}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{Temp\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::\-Temp\-Grid (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{t\-\_\-start, }
+\item[{{\bf Real}}]{t\-\_\-end, }
+\item[{unsigned}]{N}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab1d72b2c887e6d7d378f4fbfe413ca67}
+
+
+Construct time grid with uniform vertex distribution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\-\_\-start} & lower bound of interval \\
+\hline
+{\em t\-\_\-end} & upper bound of interval \\
+\hline
+{\em N} & number of timesteps \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab0c64d5d793d66ddcc926e4c410beb93}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!Temp\-Grid@{Temp\-Grid}}
+\index{Temp\-Grid@{Temp\-Grid}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{Temp\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::\-Temp\-Grid (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{t\-\_\-start, }
+\item[{{\bf Real}}]{t\-\_\-end, }
+\item[{unsigned}]{N, }
+\item[{{\bf Real}}]{lambda}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab0c64d5d793d66ddcc926e4c410beb93}
+
+
+Construct time grid with exponential vertex distribution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\-\_\-start} & lower bound of interval \\
+\hline
+{\em t\-\_\-end} & upper bound of interval \\
+\hline
+{\em N} & number of timesteps \\
+\hline
+{\em lambda} & scaling factor for distribution of vertices (higher lambda -\/$>$ more points at beginning) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab2d4a1e6ffde7218b9625ba35403e72b}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!refine@{refine}}
+\index{refine@{refine}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{refine}]{\setlength{\rightskip}{0pt plus 5cm}void Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::refine (
+\begin{DoxyParamCaption}
+\item[{const unsigned}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_ab2d4a1e6ffde7218b9625ba35403e72b}
+
+
+refine time grid 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of time interval to be refined \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_af8d34ae585aba60c90f0fc67e1b30a60}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!get\-Vertex\-Vec@{get\-Vertex\-Vec}}
+\index{get\-Vertex\-Vec@{get\-Vertex\-Vec}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{get\-Vertex\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::vector$<${\bf Real}$>$\& Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::get\-Vertex\-Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_af8d34ae585aba60c90f0fc67e1b30a60}
+
+
+getter for Vertices 
+
+\begin{DoxyReturn}{Returns}
+vertices of grid 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7e8f2491f711973f2e7288e9e352c4cf}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!get\-Dt\-Vec@{get\-Dt\-Vec}}
+\index{get\-Dt\-Vec@{get\-Dt\-Vec}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{get\-Dt\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::vector$<${\bf Real}$>$\& Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::get\-Dt\-Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_a7e8f2491f711973f2e7288e9e352c4cf}
+
+
+getter for interval size 
+
+\begin{DoxyReturn}{Returns}
+timestep size of grid 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1TempGrid_abd15398b59cf72abd646eeb5a274b0ac}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}!get\-Inverval@{get\-Inverval}}
+\index{get\-Inverval@{get\-Inverval}!Spacy::KaskadeParabolic::TempGrid@{Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid}}
+\subsubsection[{get\-Inverval}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Spacy\-::\-Kaskade\-Parabolic\-::\-Temp\-Grid\-::get\-Inverval (
+\begin{DoxyParamCaption}
+\item[{{\bf Real}}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1TempGrid_abd15398b59cf72abd646eeb5a274b0ac}
+
+
+compute index of interval associated with time t 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timepoint} & t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+interval associated with t 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/temp\-Grid.\-hh\end{DoxyCompactItemize}

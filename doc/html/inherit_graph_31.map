@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1GetBoundaryMap_3_01dim_00_01VariableDims_00-1_01_4.html" title="Spacy::dealII::GetBoundary\lMap\&lt; dim, VariableDims,&#45;1 \&gt;" alt="" coords="6,5,199,46"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail\l::LocalAssemblyBase\&lt;\l dim, row, row_dim, column,\l column_dim \&gt;" alt="" coords="5,53,192,123"/>
+<area shape="rect" id="node2" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalDerivativeAssembly.html" title="Spacy::dealII::Detail\l::LocalFunGFunctionalDerivative\lAssembly\&lt; dim, Components,\l row, column, row_dim, column_dim \&gt;" alt="" coords="241,5,485,75"/>
+<area shape="rect" id="node3" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGOperatorAssembly.html" title="Spacy::dealII::Detail\l::LocalFunGOperatorAssembly\l\&lt; dim, Components, row, column,\l row_dim, column_dim \&gt;" alt="" coords="253,99,473,170"/>
 </map>

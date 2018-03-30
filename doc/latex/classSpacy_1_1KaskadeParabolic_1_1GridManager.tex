@@ -1,0 +1,194 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:Grid\-Manager$<$ Spaces $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1GridManager}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager$<$ Spaces $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager$<$ Spaces $>$}}
+}
+
+
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} for a time dependent problem on the interval \mbox{[}0,T\mbox{]}.  
+
+
+
+
+{\ttfamily \#include $<$grid\-Manager.\-hh$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a38aed766df3a6563a7683cd58adbd76b}{using {\bfseries H1\-Space\-\_\-ptr} = typename\-::boost\-::fusion\-::result\-\_\-of\-::at\-\_\-c$<$ Spaces, 0 $>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a38aed766df3a6563a7683cd58adbd76b}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_ae91d41e3c1ff0c46ca648d3eb7c7ae36}{using {\bfseries H1\-Space} = typename std\-::remove\-\_\-reference$<$ decltype($\ast$std\-::declval$<$ H1\-Space\-\_\-ptr $>$())$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_ae91d41e3c1ff0c46ca648d3eb7c7ae36}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a3b3cca79572b2f8781545934fab38369}{using {\bfseries Grid} = typename H1\-Space\-::\-Grid}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a3b3cca79572b2f8781545934fab38369}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a74aae5087a0133bf793427d6f7f356c4}{Grid\-Manager} (unsigned N, \hyperlink{classSpacy_1_1Real}{Real} T, unsigned initial\-Refinements=4, unsigned F\-Eorder=1,\-::std\-::string grid\-Type=\char`\"{}uniform\char`\"{}, Real lambda=\hyperlink{classSpacy_1_1Real}{Real}\{-\/0.\-1\})
+\begin{DoxyCompactList}\small\item\em Construct \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} for a time dependent problem on the interval \mbox{[}0,T\mbox{]}. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_ae2a817d0309a554f4af1107d716b9e21}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_ae2a817d0309a554f4af1107d716b9e21}{Grid\-Manager} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \&\&)=default}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_ae2a817d0309a554f4af1107d716b9e21}
+
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a322c9e902d350fe25581a4cb5fdedcfe}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a322c9e902d350fe25581a4cb5fdedcfe}{Grid\-Manager} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \&)=default}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a322c9e902d350fe25581a4cb5fdedcfe}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_aaf896a7a157980d7ee2465649351d595}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_aaf896a7a157980d7ee2465649351d595}{operator=} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \&\&B)=default}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_aaf896a7a157980d7ee2465649351d595}
+
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a97642eb7f1d415f78816ca05efe454c0}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a97642eb7f1d415f78816ca05efe454c0}{operator=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} \&B)=default}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a97642eb7f1d415f78816ca05efe454c0}
+
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1TempGrid}{Temp\-Grid} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a3c6cd1cacb32f9c9183085ec3eb9d723}{get\-Temp\-Grid} () const 
+\begin{DoxyCompactList}\small\item\em getter for time Grid. \end{DoxyCompactList}\item 
+const std\-::vector\\*
+$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a249e62f447d321aec148a9c9fc81c33b}{get\-Spaces\-Vec} () const 
+\begin{DoxyCompactList}\small\item\em getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces \end{DoxyCompactList}\item 
+const std\-::vector\\*
+$<$ std\-::shared\-\_\-ptr\\*
+$<$\-::Kaskade\-::\-Grid\-Manager$<$ Grid $>$ $>$ $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_ad2bc5d73c735372a609b05153b178858}{get\-Kask\-Grid\-Man} () const 
+\begin{DoxyCompactList}\small\item\em getter for spatial Grid manager \end{DoxyCompactList}\item 
+const unsigned \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a1b8f7e7f434ae7c6abd390fe041dd636}{get\-F\-Eorder} () const 
+\begin{DoxyCompactList}\small\item\em getter for Finite Element order \end{DoxyCompactList}\item 
+const std\-::shared\-\_\-ptr$<$ Spaces $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager_a4de2105e61f5b6d094f26dbb953d55c2}{refine} (unsigned k)
+\begin{DoxyCompactList}\small\item\em Refine the time grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a0dd5b25882ff8be4320a458ad41da7db}{static constexpr int {\bfseries dim} = Grid\-::dimension}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a0dd5b25882ff8be4320a458ad41da7db}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Spaces$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager$<$ Spaces $>$}
+
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} for a time dependent problem on the interval \mbox{[}0,T\mbox{]}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a74aae5087a0133bf793427d6f7f356c4}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!Grid\-Manager@{Grid\-Manager}}
+\index{Grid\-Manager@{Grid\-Manager}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{Grid\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::{\bf Grid\-Manager} (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{N, }
+\item[{{\bf Real}}]{T, }
+\item[{unsigned}]{initial\-Refinements = {\ttfamily 4}, }
+\item[{unsigned}]{F\-Eorder = {\ttfamily 1}, }
+\item[{\-::std\-::string}]{grid\-Type = {\ttfamily \char`\"{}uniform\char`\"{}}, }
+\item[{{\bf Real}}]{lambda = {\ttfamily {\bf Real}\{-\/0.1\}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a74aae5087a0133bf793427d6f7f356c4}
+
+
+Construct \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} for a time dependent problem on the interval \mbox{[}0,T\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & number of desired timesteps \\
+\hline
+{\em T} & end time of the interval (will always start 0) \\
+\hline
+{\em initial\-Refinements} & refinements of spatial grid \\
+\hline
+{\em F\-Eorder} & Finite element order \\
+\hline
+{\em grid\-Type} & type of discretization of time grid (either uniform or exponentially distributed in \mbox{[}0,T\mbox{]} \\
+\hline
+{\em lambda} & if exponentially distributed, this gives the scaling factor (higher lambda -\/$>$ more points at beginning of interval \\
+\hline
+\end{DoxyParams}
+uniform temporal grid
+
+exponential temporal grid
+
+Spatial grid generation
+
+construction of function spaces 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a3c6cd1cacb32f9c9183085ec3eb9d723}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!get\-Temp\-Grid@{get\-Temp\-Grid}}
+\index{get\-Temp\-Grid@{get\-Temp\-Grid}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{get\-Temp\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ const {\bf Temp\-Grid}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::get\-Temp\-Grid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a3c6cd1cacb32f9c9183085ec3eb9d723}
+
+
+getter for time Grid. 
+
+\begin{DoxyReturn}{Returns}
+temporal Grid 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a249e62f447d321aec148a9c9fc81c33b}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!get\-Spaces\-Vec@{get\-Spaces\-Vec}}
+\index{get\-Spaces\-Vec@{get\-Spaces\-Vec}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{get\-Spaces\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ const std\-::vector$<$std\-::shared\-\_\-ptr$<$Spaces$>$ $>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::get\-Spaces\-Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a249e62f447d321aec148a9c9fc81c33b}
+
+
+getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces 
+
+\begin{DoxyReturn}{Returns}
+Spaces information for every time step 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_ad2bc5d73c735372a609b05153b178858}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!get\-Kask\-Grid\-Man@{get\-Kask\-Grid\-Man}}
+\index{get\-Kask\-Grid\-Man@{get\-Kask\-Grid\-Man}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{get\-Kask\-Grid\-Man}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ const std\-::vector$<$std\-::shared\-\_\-ptr$<$\-::Kaskade\-::\-Grid\-Manager $<$ Grid$>$ $>$ $>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::get\-Kask\-Grid\-Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_ad2bc5d73c735372a609b05153b178858}
+
+
+getter for spatial Grid manager 
+
+\begin{DoxyReturn}{Returns}
+grid Manager for spatial grid of each timestep 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a1b8f7e7f434ae7c6abd390fe041dd636}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!get\-F\-Eorder@{get\-F\-Eorder}}
+\index{get\-F\-Eorder@{get\-F\-Eorder}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{get\-F\-Eorder}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ const unsigned {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::get\-F\-Eorder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a1b8f7e7f434ae7c6abd390fe041dd636}
+
+
+getter for Finite Element order 
+
+\begin{DoxyReturn}{Returns}
+Finite Element order (same for each timestep) 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1GridManager_a4de2105e61f5b6d094f26dbb953d55c2}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}!refine@{refine}}
+\index{refine@{refine}!Spacy::KaskadeParabolic::GridManager@{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}}
+\subsubsection[{refine}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Spaces$>$ const std\-::shared\-\_\-ptr$<$Spaces$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$\-::refine (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1GridManager_a4de2105e61f5b6d094f26dbb953d55c2}
+
+
+Refine the time grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em indizes} & intervals to be refined Refine the time grid \\
+\hline
+{\em k} & index of interval to be refined \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces that has been constructed for the new time grid vertex 
+\end{DoxyReturn}
+refine the time grid
+
+construct new \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Gridmanager for this new timestep
+
+construct new Spaces for this new timestep 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/grid\-Manager.\-hh\end{DoxyCompactItemize}

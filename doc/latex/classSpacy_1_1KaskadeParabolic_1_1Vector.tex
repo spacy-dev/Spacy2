@@ -1,0 +1,338 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:Vector$<$ Description $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1Vector}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector$<$ Description $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector$<$ Description $>$}}
+}
+
+
+Coefficient vector implementation for time dependent vector implemented with Kaskade 7 (single space).  
+
+
+
+
+{\ttfamily \#include $<$vector.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:Vector$<$ Description $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classSpacy_1_1KaskadeParabolic_1_1Vector__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:Vector$<$ Description $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classSpacy_1_1KaskadeParabolic_1_1Vector__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a46eecba677072394bfd5bf9cf6c9b7a9}{Vector} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space})
+\begin{DoxyCompactList}\small\item\em Construct vector $x$ from underlying vector space. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_ae0af6fab045de6cb776f69ab9a692ceb}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_ae0af6fab045de6cb776f69ab9a692ceb}{Vector} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&v)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_ae0af6fab045de6cb776f69ab9a692ceb}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a3cadf917f237618764d3766eb9e6022e}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a3cadf917f237618764d3766eb9e6022e}{operator=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&v)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a3cadf917f237618764d3766eb9e6022e}
+
+\begin{DoxyCompactList}\small\item\em Copy assigment. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_ad56e71916189b681ec749831385e15c0}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_ad56e71916189b681ec749831385e15c0}{operator=} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&\&v)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_ad56e71916189b681ec749831385e15c0}
+
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_af0a060ad42f2f9cf1a758b03476bb351}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_af0a060ad42f2f9cf1a758b03476bb351}{$\sim$\-Vector} ()}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_af0a060ad42f2f9cf1a758b03476bb351}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a6c520a26aa9a1b719c5a13bb1c98752d}{operator()} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y) const 
+\begin{DoxyCompactList}\small\item\em Apply as dual element. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a3f0552822824b3b5629ba27f4ed931f6}{refine} (unsigned k)
+\begin{DoxyCompactList}\small\item\em react to Grid refinement \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_aa38f1c317572a12c70588a077d0a4168}{const Variable\-Set \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_aa38f1c317572a12c70588a077d0a4168}{get} (const unsigned i) const }\label{classSpacy_1_1KaskadeParabolic_1_1Vector_aa38f1c317572a12c70588a077d0a4168}
+
+\begin{DoxyCompactList}\small\item\em Access \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Variable\-Set of time i. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_aaf80937ced2e9b630cb22b1410c66995}{Variable\-Set \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_aaf80937ced2e9b630cb22b1410c66995}{get\-\_\-nonconst} (const unsigned i)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_aaf80937ced2e9b630cb22b1410c66995}
+
+\begin{DoxyCompactList}\small\item\em Access nonconst \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Variable\-Set of time i. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a92434582f61c82bec9e682558a022a72}{const auto \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a92434582f61c82bec9e682558a022a72}{get\-Coeff\-Vec} (const unsigned i) const }\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a92434582f61c82bec9e682558a022a72}
+
+\begin{DoxyCompactList}\small\item\em Access const coefficient vector of time i. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_af7b18035926b7f8826d874405edc934a}{auto \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_af7b18035926b7f8826d874405edc934a}{get\-Coeff\-Vec\-\_\-nonconst} (const unsigned i)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_af7b18035926b7f8826d874405edc934a}
+
+\begin{DoxyCompactList}\small\item\em Access nonconst coefficient vector of time i. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a43ee5b5c32a5204827afa7ce1e6ad439}{operator+=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y)
+\begin{DoxyCompactList}\small\item\em In-\/place summation $ x+=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_acdfe83aee187f4d72a372127cdf92617}{operator-\/=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y)
+\begin{DoxyCompactList}\small\item\em In-\/place subtraction $ x-=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a4efec0b956b8e53042c6cf17ffa20af2}{operator$\ast$=} (double a)
+\begin{DoxyCompactList}\small\item\em In-\/place multiplication $ x*=a$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a527fe4a3bef0d1907fa15886fe5d3409}{operator-\/} () const 
+\begin{DoxyCompactList}\small\item\em Negation $ -x$. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a1c24c613b0b90f542735ee55da63341b}{operator==} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y) const 
+\begin{DoxyCompactList}\small\item\em Comparison operator $ x==y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a2a9023f1ef8961e7ef0bc46b78980e1f}{subtract\-Other\-Temp\-Grid} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y)
+\begin{DoxyCompactList}\small\item\em Subtract Vectors living on different time grids (vector to be subtracted piecewise constant) \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_ab740b45461f8aade1842b474d0f5660d}{subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} \&y)
+\begin{DoxyCompactList}\small\item\em Subtract Vectors living on different time grids (vector to be subtracted linearly interpolated) \end{DoxyCompactList}\item 
+const Variable\-Set \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_adb5a2d8e0aae2b00d9284e08a0f1448d}{evaluate} (const \-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} t) const 
+\begin{DoxyCompactList}\small\item\em Evaluate this vector as a piecewise constant function at time t. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a84374f259f5eb22c6301d4cb703ff94a}{const Variable\-Set \& {\bfseries evaluate\-\_\-u} (const \-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} t) const }\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a84374f259f5eb22c6301d4cb703ff94a}
+
+\item 
+Variable\-Set \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector_a63221c43f8424b19a341f76060df173d}{evaluate\-\_\-linear\-Interpolated} (const \-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} t) const 
+\begin{DoxyCompactList}\small\item\em Evaluate this vector as a piecewise linear interpolated function at time t. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a6c8b43f967acb7fa19717d07358f1ac6}{Variable\-Set {\bfseries evaluate\-\_\-linear\-Interpolated\-\_\-u} (const \-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} t) const }\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a6c8b43f967acb7fa19717d07358f1ac6}
+
+\item 
+\hypertarget{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space} () const }\label{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}
+
+\begin{DoxyCompactList}\small\item\em Access underlying vector space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_ab070e6f4e9421ddf1de249ada48c6ca8}{{\footnotesize template$<$class Desc $>$ }\\void {\bfseries write\-V\-T\-K} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector}$<$ Desc $>$ \&x, const char $\ast$file\-Name)}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_ab070e6f4e9421ddf1de249ada48c6ca8}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Description$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-Vector$<$ Description $>$}
+
+Coefficient vector implementation for time dependent vector implemented with Kaskade 7 (single space). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Description} & Kaskade\-::\-Variable\-Set\-Description \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a46eecba677072394bfd5bf9cf6c9b7a9}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{Vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::{\bf Vector} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector\-Space} \&}]{space}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a46eecba677072394bfd5bf9cf6c9b7a9}
+
+
+Construct vector $x$ from underlying vector space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space} & underlying vector space \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a6c520a26aa9a1b719c5a13bb1c98752d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ \-::{\bf Spacy\-::\-Real} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a6c520a26aa9a1b719c5a13bb1c98752d}
+
+
+Apply as dual element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & primal vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$x(y)$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a3f0552822824b3b5629ba27f4ed931f6}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!refine@{refine}}
+\index{refine@{refine}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{refine}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::refine (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a3f0552822824b3b5629ba27f4ed931f6}
+
+
+react to Grid refinement 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & index of time interval that was refined \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a43ee5b5c32a5204827afa7ce1e6ad439}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a43ee5b5c32a5204827afa7ce1e6ad439}
+
+
+In-\/place summation $ x+=y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to add to this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x+=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_acdfe83aee187f4d72a372127cdf92617}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_acdfe83aee187f4d72a372127cdf92617}
+
+
+In-\/place subtraction $ x-=y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to subtract from this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x-=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a4efec0b956b8e53042c6cf17ffa20af2}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{double}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a4efec0b956b8e53042c6cf17ffa20af2}
+
+
+In-\/place multiplication $ x*=a$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & scaling factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x*=a$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a527fe4a3bef0d1907fa15886fe5d3409}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a527fe4a3bef0d1907fa15886fe5d3409}
+
+
+Negation $ -x$. 
+
+\begin{DoxyReturn}{Returns}
+$ -x $. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a1c24c613b0b90f542735ee55da63341b}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!operator==@{operator==}}
+\index{operator==@{operator==}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ bool {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a1c24c613b0b90f542735ee55da63341b}
+
+
+Comparison operator $ x==y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to compare with this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x==y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a2a9023f1ef8961e7ef0bc46b78980e1f}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!subtract\-Other\-Temp\-Grid@{subtract\-Other\-Temp\-Grid}}
+\index{subtract\-Other\-Temp\-Grid@{subtract\-Other\-Temp\-Grid}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{subtract\-Other\-Temp\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::subtract\-Other\-Temp\-Grid (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a2a9023f1ef8961e7ef0bc46b78980e1f}
+
+
+Subtract Vectors living on different time grids (vector to be subtracted piecewise constant) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to subtract from this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x-=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_ab740b45461f8aade1842b474d0f5660d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated@{subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated}}
+\index{subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated@{subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ {\bf Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::subtract\-Other\-Temp\-Grid\-\_\-linear\-Interpolated (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector}$<$ Description $>$ \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_ab740b45461f8aade1842b474d0f5660d}
+
+
+Subtract Vectors living on different time grids (vector to be subtracted linearly interpolated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to subtract from this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x-=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_adb5a2d8e0aae2b00d9284e08a0f1448d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{evaluate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ const Variable\-Set\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::evaluate (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Real}}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_adb5a2d8e0aae2b00d9284e08a0f1448d}
+
+
+Evaluate this vector as a piecewise constant function at time t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & timepoint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Variable\-Set at time t 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1Vector_a63221c43f8424b19a341f76060df173d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}!evaluate\-\_\-linear\-Interpolated@{evaluate\-\_\-linear\-Interpolated}}
+\index{evaluate\-\_\-linear\-Interpolated@{evaluate\-\_\-linear\-Interpolated}!Spacy::KaskadeParabolic::Vector@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}}
+\subsubsection[{evaluate\-\_\-linear\-Interpolated}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Description $>$ Variable\-Set {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ Description $>$\-::evaluate\-\_\-linear\-Interpolated (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Real}}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1Vector_a63221c43f8424b19a341f76060df173d}
+
+
+Evaluate this vector as a piecewise linear interpolated function at time t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & timepoint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Variable\-Set at time t 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/vector.\-hh\end{DoxyCompactItemize}

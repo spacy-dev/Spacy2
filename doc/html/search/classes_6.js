@@ -7,5 +7,6 @@ var searchData=
   ['getdim_3c_20id_2c_20components_3c_20dim_2c_20ids_2e_2e_2e_3e_2c_20id_5fin_5fcomponent_20_3e',['GetDim&lt; id, Components&lt; dim, ids...&gt;, id_in_component &gt;',['../structSpacy_1_1dealII_1_1GetDim_3_01id_00_01Components_3_01dim_00_01ids_8_8_8_4_00_01id__in__component_01_4.html',1,'Spacy::dealII']]],
   ['getfiniteelement',['GetFiniteElement',['../structSpacy_1_1dealII_1_1GetFiniteElement.html',1,'Spacy::dealII']]],
   ['getfiniteelementsystem',['GetFiniteElementSystem',['../structSpacy_1_1dealII_1_1GetFiniteElementSystem.html',1,'Spacy::dealII']]],
-  ['getfiniteelementsystem_3c_20dim_2c_20variabledim_3c_20variable_5fdims_2e_2e_2e_3e_20_3e',['GetFiniteElementSystem&lt; dim, VariableDim&lt; variable_dims...&gt; &gt;',['../structSpacy_1_1dealII_1_1GetFiniteElementSystem_3_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html',1,'Spacy::dealII']]]
+  ['getfiniteelementsystem_3c_20dim_2c_20variabledim_3c_20variable_5fdims_2e_2e_2e_3e_20_3e',['GetFiniteElementSystem&lt; dim, VariableDim&lt; variable_dims...&gt; &gt;',['../structSpacy_1_1dealII_1_1GetFiniteElementSystem_3_01dim_00_01VariableDim_3_01variable__dims_8_8_8_4_01_4.html',1,'Spacy::dealII']]],
+  ['gridmanager',['GridManager',['../classSpacy_1_1KaskadeParabolic_1_1GridManager.html',1,'Spacy::KaskadeParabolic']]]
 ];

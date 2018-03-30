@@ -1,0 +1,453 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:C2\-Functional$<$ Functional\-Definition $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional$<$ Functional\-Definition $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional$<$ Functional\-Definition $>$}}
+}
+
+
+Functional interface for Kaskade 7. Models a dynamical twice differentiable functional $f:X\rightarrow \mathbb{R}$. The functional is semi discretized in time via piecewise constant functions.  
+
+
+
+
+{\ttfamily \#include $<$c2\-Functional.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:C2\-Functional$<$ Functional\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1KaskadeParabolic_1_1C2Functional__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:C2\-Functional$<$ Functional\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1KaskadeParabolic_1_1C2Functional__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description} = typename Functional\-Definition\-::\-Ansatz\-Vars}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variable\-Set\-Description \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ab9011412571a3ba68e20f1f44973977d}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ab9011412571a3ba68e20f1f44973977d}{Coefficient\-Vector} = typename Variable\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ab9011412571a3ba68e20f1f44973977d}
+
+\begin{DoxyCompactList}\small\item\em Coefficient vector type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aa248da3955a06276ee5feabe3533a1d7}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aa248da3955a06276ee5feabe3533a1d7}{Spaces} = typename Variable\-Set\-Description\-::\-Spaces}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aa248da3955a06276ee5feabe3533a1d7}
+
+\begin{DoxyCompactList}\small\item\em boost\-::fusion\-::vector$<$const Space0$\ast$,const Space1$\ast$,...$>$ \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a620f6e57b8eb141df225c2504a31f957}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a620f6e57b8eb141df225c2504a31f957}{Assembler} = \-::Kaskade\-::\-Variational\-Functional\-Assembler$<$ \-::Kaskade\-::\-Linearization\-At$<$ Functional\-Definition $>$ $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a620f6e57b8eb141df225c2504a31f957}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variational\-Functional\-Assembler \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6b9f4dcd6b15dbcb5fce503fbd957adc}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6b9f4dcd6b15dbcb5fce503fbd957adc}{Matrix} = \-::Kaskade\-::\-Matrix\-As\-Triplet$<$ double $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6b9f4dcd6b15dbcb5fce503fbd957adc}
+
+\begin{DoxyCompactList}\small\item\em Matrix type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a21e92f3995a97298d1e7e9788edc34dd}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a21e92f3995a97298d1e7e9788edc34dd}{Linearization} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1LinearBlockOperator}{O\-C\-P\-::\-Linear\-Block\-Operator}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a21e92f3995a97298d1e7e9788edc34dd}
+
+\begin{DoxyCompactList}\small\item\em operator for the description of the second derivative \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad82d9aa77004c74e76f8ff25cd9c0c97}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad82d9aa77004c74e76f8ff25cd9c0c97}{V\-Y\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description}, 0 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad82d9aa77004c74e76f8ff25cd9c0c97}
+
+\begin{DoxyCompactList}\small\item\em Variable\-Set\-Descriptions of the variables. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5c204db11bbd91b26b6af7c7411681db}{using {\bfseries V\-U\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description}, 1 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5c204db11bbd91b26b6af7c7411681db}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a1bd8d286b285d74be7787e1efaa47920}{using {\bfseries V\-P\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description}, 2 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a1bd8d286b285d74be7787e1efaa47920}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y} = typename V\-Y\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}
+
+\begin{DoxyCompactList}\small\item\em Coefficient \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af3047c8b144bf7adfef2b63b7844dbbd}{using {\bfseries Coefficient\-Vector\-U} = typename V\-U\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af3047c8b144bf7adfef2b63b7844dbbd}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a029093a11509fcc1790be7ad5e1145ff}{using {\bfseries Coefficient\-Vector\-P} = typename V\-P\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a029093a11509fcc1790be7ad5e1145ff}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{{\footnotesize template$<$class X , class Y $>$ }\\using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y} = \-::Kaskade\-::\-Matrix\-Represented\-Operator$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6b9f4dcd6b15dbcb5fce503fbd957adc}{Matrix}, X, Y $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Types of the Operators held for every timestep. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a2c5bd3f555aff1769c6829ba46a86071}{using {\bfseries Mytype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a2c5bd3f555aff1769c6829ba46a86071}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a473571223b378e912608069f20afb2a7}{using {\bfseries Mutype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a473571223b378e912608069f20afb2a7}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae92990ad276008fcaee03ea08df2e226}{using {\bfseries Atype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y}, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae92990ad276008fcaee03ea08df2e226}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_abfc9e14cda63f9754bc9727687ac54af}{using {\bfseries A\-Ttype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-P, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_abfc9e14cda63f9754bc9727687ac54af}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad5540b9816813dbf237d327a996447db}{using {\bfseries Btype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-U, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad5540b9816813dbf237d327a996447db}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8e5be9e61989e469caa24bd1a94cb63d}{using {\bfseries B\-Ttype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-P, Coefficient\-Vector\-U $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8e5be9e61989e469caa24bd1a94cb63d}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac61b8bb8336f84e810805242624e7bf0}{using {\bfseries Masstype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae632f4bc512edd363e605fedd8e8c230}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a9acc899e953d1de9611a01b0cb1fdb6f}{Coefficient\-Vector\-Y}, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac61b8bb8336f84e810805242624e7bf0}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a353d5c595614484c809cb847aed9ef}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a353d5c595614484c809cb847aed9ef}{Scal\-Prod\-Definition} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1ScalarProdFunctional}{O\-C\-P\-::\-Scalar\-Prod\-Functional}$<$ double, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a234ab8fa6f10a5828fd7e26af1897aa6}{Variable\-Set\-Description} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a353d5c595614484c809cb847aed9ef}
+
+\begin{DoxyCompactList}\small\item\em Definition of the \hyperlink{namespaceSpacy_1_1Scalar}{Scalar} Product. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5951fdcf4cfab9435f1fe32e1e34e50c}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5951fdcf4cfab9435f1fe32e1e34e50c}{Assembler\-S\-P} = \-::Kaskade\-::\-Variational\-Functional\-Assembler$<$ \-::Kaskade\-::\-Linearization\-At$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a353d5c595614484c809cb847aed9ef}{Scal\-Prod\-Definition} $>$ $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5951fdcf4cfab9435f1fe32e1e34e50c}
+
+\begin{DoxyCompactList}\small\item\em Assembler for the scalar product. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a00ebb0b4ef7eb7821ce8e4d59b97b496}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a00ebb0b4ef7eb7821ce8e4d59b97b496}{Vector\-Impl\-Y} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ad82d9aa77004c74e76f8ff25cd9c0c97}{V\-Y\-Set\-Description} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a00ebb0b4ef7eb7821ce8e4d59b97b496}
+
+\begin{DoxyCompactList}\small\item\em Implementation type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac0c4ca4f16833740abf40e092d936d45}{using {\bfseries Vector\-Impl\-U} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector}$<$ V\-U\-Set\-Description $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac0c4ca4f16833740abf40e092d936d45}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a736049678c9cf7871ebdd53f37a934a5}{using {\bfseries Vector\-Impl\-P} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector}$<$ V\-P\-Set\-Description $>$}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a736049678c9cf7871ebdd53f37a934a5}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a7383c8963d2265c5d81e5558685f0f7a}{using {\bfseries P\-S\-V} = \-::\hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Spacy\-::\-Product\-Space\-::\-Vector}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a7383c8963d2265c5d81e5558685f0f7a}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5404e3e95935488e457ed4b9dadb654c}{C2\-Functional} (const std\-::function$<$ Functional\-Definition(const typename Functional\-Definition\-::\-Ansatz\-Vars\-::\-Variable\-Set)$>$ \&f, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager}$<$ typename Functional\-Definition\-::\-Ansatz\-Vars\-::\-Spaces $>$ \&gm, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1FunctionalBase_a2d3397deb9fa1ad85ed04e37a03b3aa6}{domain})
+\begin{DoxyCompactList}\small\item\em Construct a twice differentiable dynamical functional $f: X\rightarrow \mathbb{R}$ from Kaskade 7. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8c31f6d9a66d87a1187616edc542b416}{C2\-Functional} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \&B)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aeb56e3eef66f1eab018badd769e7e47d}{operator=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \&B)=default
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a324d1d9c1cf00fedf60abbb233bd29}{C2\-Functional} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \&\&B)=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a2e73f22db4454cb457f3ffb911b92a41}{operator=} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional}{C2\-Functional} \&\&B)=default
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae1a74fd38f93e9a46b5df1a21156c622}{operator()} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Apply functional. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a0998b1599ea0372add52e2b4970a2fee}{d1} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Compute first directional derivative $f'(x) \in X^* $. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_afade29355a299b102c85596b9dd97636}{d2} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x, const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&dx) const 
+\begin{DoxyCompactList}\small\item\em Compute second directional derivative $f''(x)dx\in X^* $. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae70fa3f996517212fdccdba821a23353}{void {\bfseries compute\-Error\-Distribution} (\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} x)}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae70fa3f996517212fdccdba821a23353}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a85b573a942f8c44aff0e7ffbc7c97ca9}{std\-::vector$<$\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} $>$ {\bfseries get\-State\-Eq\-Error} () const }\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a85b573a942f8c44aff0e7ffbc7c97ca9}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af1271ba0540b2f19bb40bdbd1786dc29}{std\-::vector$<$\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} $>$ {\bfseries get\-Adj\-Eq\-Error} () const }\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af1271ba0540b2f19bb40bdbd1786dc29}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5e235e5353e12cde73588350b9df5d91}{std\-::vector$<$\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} $>$ {\bfseries get\-Stat\-Cond\-Error} () const }\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5e235e5353e12cde73588350b9df5d91}
+
+\item 
+auto \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f0302704e5134a6464bf100df489dc0}{hessian} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Access $f''(x)$ as linear operator $X\rightarrow X^*$. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a98069334677dc332ad5692c683b00ef3}{only\-Lower\-Triangle} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access only\-Lower\-Triangle flag. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f1d511aac55c7f413f3cf750a18e91e}{set\-Solver\-Creator} (std\-::function$<$ \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\-Solver}(const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a21e92f3995a97298d1e7e9788edc34dd}{Linearization} \&)$>$ f)
+\begin{DoxyCompactList}\small\item\em Change solver creator. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aa248da3955a06276ee5feabe3533a1d7}{Spaces} $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8618a8ae688a8303fb818c9b7358b5e9}{get\-Grid\-Man} () const 
+\begin{DoxyCompactList}\small\item\em Get the Grid manager. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6d6ad5675d76e7f9da72cd47427c6902}{set\-Verbosity} (bool verb) const 
+\begin{DoxyCompactList}\small\item\em Set Verbosity. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af8b910a58475a708c88447b08c37b255}{inform\-About\-Refinement} (unsigned k)
+\begin{DoxyCompactList}\small\item\em Tell the operator about a refinement of the temporal grid (T\-O B\-E R\-E\-P\-L\-A\-C\-E\-D W\-I\-T\-H boost\-::signal impl) \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac65943ce19e14157fd2b92fa9dd0040b}{void {\bfseries set\-Initial\-Condition} (auto y0\-\_\-coeff)}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ac65943ce19e14157fd2b92fa9dd0040b}
+
+\item 
+\hypertarget{classSpacy_1_1FunctionalBase_a2d3397deb9fa1ad85ed04e37a03b3aa6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1FunctionalBase_a2d3397deb9fa1ad85ed04e37a03b3aa6}{domain} () const }\label{classSpacy_1_1FunctionalBase_a2d3397deb9fa1ad85ed04e37a03b3aa6}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a818ab6dfab5e4eea583e1302bcc621f8}{void {\bfseries set\-\_\-eps} (\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{eps})}\label{classSpacy_1_1Mixin_1_1Eps_a818ab6dfab5e4eea583e1302bcc621f8}
+
+\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}{eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_a812b99b0abc1d78a34b4114907f23f52}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a1c1b0ed7f14ed4967dc7da9295a136d4}{\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a1c1b0ed7f14ed4967dc7da9295a136d4}{sqrt\-\_\-eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_a1c1b0ed7f14ed4967dc7da9295a136d4}
+
+\begin{DoxyCompactList}\small\item\em Access $\sqrt\varepsilon$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a91dbe45e297be2bc53f1a96107a58c64}{\hyperlink{classSpacy_1_1Real}{Real} \hyperlink{classSpacy_1_1Mixin_1_1Eps_a91dbe45e297be2bc53f1a96107a58c64}{cbrt\-\_\-eps} () const noexcept}\label{classSpacy_1_1Mixin_1_1Eps_a91dbe45e297be2bc53f1a96107a58c64}
+
+\begin{DoxyCompactList}\small\item\em Access $\varepsilon^{1/3}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{void \hyperlink{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}{update} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{Eps} $\ast$changed\-Subject)}\label{classSpacy_1_1Mixin_1_1Eps_a151216968daef3da5f5cdc0b957ce01b}
+
+\begin{DoxyCompactList}\small\item\em update function for observer pattern. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}{attach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{Eps} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_abb5520ee6b22dd993d78f142939a1ed4}
+
+\begin{DoxyCompactList}\small\item\em Attach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}{detach} (\hyperlink{classSpacy_1_1Mixin_1_1Eps_af616ae8e55a645cefd4d2d4504d6705a}{Eps} \&observer)}\label{classSpacy_1_1Mixin_1_1MixinConnection_adda739590c487679c26f60e50aedb73f}
+
+\begin{DoxyCompactList}\small\item\em Detach observer. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{void \hyperlink{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}{notify} ()}\label{classSpacy_1_1Mixin_1_1MixinConnection_a1ddeaa78a3bb4a38c2cca36d1f99fe36}
+
+\begin{DoxyCompactList}\small\item\em Notify observers about changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Functional\-Definition$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional$<$ Functional\-Definition $>$}
+
+Functional interface for Kaskade 7. Models a dynamical twice differentiable functional $f:X\rightarrow \mathbb{R}$. The functional is semi discretized in time via piecewise constant functions. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Functional\-Definition} & functional definition from Kaskade 7 \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classSpacy_1_1C2Functional}{Spacy\-::\-C2\-Functional} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5404e3e95935488e457ed4b9dadb654c}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!C2\-Functional@{C2\-Functional}}
+\index{C2\-Functional@{C2\-Functional}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{C2\-Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::{\bf C2\-Functional} (
+\begin{DoxyParamCaption}
+\item[{const std\-::function$<$ Functional\-Definition(const typename Functional\-Definition\-::\-Ansatz\-Vars\-::\-Variable\-Set)$>$ \&}]{f, }
+\item[{{\bf Grid\-Manager}$<$ typename Functional\-Definition\-::\-Ansatz\-Vars\-::\-Spaces $>$ \&}]{gm, }
+\item[{const {\bf Vector\-Space} \&}]{domain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a5404e3e95935488e457ed4b9dadb654c}
+
+
+Construct a twice differentiable dynamical functional $f: X\rightarrow \mathbb{R}$ from Kaskade 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & functional definition from Kaskade 7 \\
+\hline
+{\em gm} & Grid manager holding temporal and spatial grids \\
+\hline
+{\em domain} & domain space \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8c31f6d9a66d87a1187616edc542b416}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!C2\-Functional@{C2\-Functional}}
+\index{C2\-Functional@{C2\-Functional}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{C2\-Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::{\bf C2\-Functional} (
+\begin{DoxyParamCaption}
+\item[{const {\bf C2\-Functional}$<$ Functional\-Definition $>$ \&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8c31f6d9a66d87a1187616edc542b416}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a324d1d9c1cf00fedf60abbb233bd29}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!C2\-Functional@{C2\-Functional}}
+\index{C2\-Functional@{C2\-Functional}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{C2\-Functional}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::{\bf C2\-Functional} (
+\begin{DoxyParamCaption}
+\item[{{\bf C2\-Functional}$<$ Functional\-Definition $>$ \&\&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a4a324d1d9c1cf00fedf60abbb233bd29}
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to move from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aeb56e3eef66f1eab018badd769e7e47d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf C2\-Functional}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C2\-Functional}$<$ Functional\-Definition $>$ \&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_aeb56e3eef66f1eab018badd769e7e47d}
+
+
+Copy assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a2e73f22db4454cb457f3ffb911b92a41}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf C2\-Functional}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf C2\-Functional}$<$ Functional\-Definition $>$ \&\&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a2e73f22db4454cb457f3ffb911b92a41}
+
+
+Move assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to move from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae1a74fd38f93e9a46b5df1a21156c622}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf Real} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_ae1a74fd38f93e9a46b5df1a21156c622}
+
+
+Apply functional. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$f(x)$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a0998b1599ea0372add52e2b4970a2fee}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!d1@{d1}}
+\index{d1@{d1}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::d1 (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a0998b1599ea0372add52e2b4970a2fee}
+
+
+Compute first directional derivative $f'(x) \in X^* $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & current iterate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$f'(x)$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_afade29355a299b102c85596b9dd97636}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!d2@{d2}}
+\index{d2@{d2}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::d2 (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x, }
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{dx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_afade29355a299b102c85596b9dd97636}
+
+
+Compute second directional derivative $f''(x)dx\in X^* $. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & current iterate \\
+\hline
+{\em dx} & perturbation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$f''(x)dx$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f0302704e5134a6464bf100df489dc0}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!hessian@{hessian}}
+\index{hessian@{hessian}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{hessian}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ auto {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::hessian (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f0302704e5134a6464bf100df489dc0}
+
+
+Access $f''(x)$ as linear operator $X\rightarrow X^*$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & point of linearization \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classSpacy_1_1LinearOperator}{Linear\-Operator}, \hyperlink{classSpacy_1_1LinearOperator}{Spacy\-::\-Linear\-Operator} 
+\end{DoxySeeAlso}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a98069334677dc332ad5692c683b00ef3}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!only\-Lower\-Triangle@{only\-Lower\-Triangle}}
+\index{only\-Lower\-Triangle@{only\-Lower\-Triangle}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{only\-Lower\-Triangle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ bool {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::only\-Lower\-Triangle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a98069334677dc332ad5692c683b00ef3}
+
+
+Access only\-Lower\-Triangle flag. 
+
+\begin{DoxyReturn}{Returns}
+true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f1d511aac55c7f413f3cf750a18e91e}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!set\-Solver\-Creator@{set\-Solver\-Creator}}
+\index{set\-Solver\-Creator@{set\-Solver\-Creator}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{set\-Solver\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::set\-Solver\-Creator (
+\begin{DoxyParamCaption}
+\item[{std\-::function$<$ {\bf Linear\-Solver}(const {\bf Linearization} \&)$>$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a3f1d511aac55c7f413f3cf750a18e91e}
+
+
+Change solver creator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function/functor for the creation of a linear solver \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8618a8ae688a8303fb818c9b7358b5e9}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!get\-Grid\-Man@{get\-Grid\-Man}}
+\index{get\-Grid\-Man@{get\-Grid\-Man}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{get\-Grid\-Man}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ const {\bf Grid\-Manager}$<${\bf Spaces}$>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::get\-Grid\-Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a8618a8ae688a8303fb818c9b7358b5e9}
+
+
+Get the Grid manager. 
+
+\begin{DoxyReturn}{Returns}
+Grid Manager holding spatial and temporal grid information 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6d6ad5675d76e7f9da72cd47427c6902}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!set\-Verbosity@{set\-Verbosity}}
+\index{set\-Verbosity@{set\-Verbosity}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{set\-Verbosity}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::set\-Verbosity (
+\begin{DoxyParamCaption}
+\item[{bool}]{verb}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_a6d6ad5675d76e7f9da72cd47427c6902}
+
+
+Set Verbosity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verb} & verbosity to be set \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af8b910a58475a708c88447b08c37b255}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}!inform\-About\-Refinement@{inform\-About\-Refinement}}
+\index{inform\-About\-Refinement@{inform\-About\-Refinement}!Spacy::KaskadeParabolic::C2Functional@{Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}}
+\subsubsection[{inform\-About\-Refinement}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C2\-Functional}$<$ Functional\-Definition $>$\-::inform\-About\-Refinement (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C2Functional_af8b910a58475a708c88447b08c37b255}
+
+
+Tell the operator about a refinement of the temporal grid (T\-O B\-E R\-E\-P\-L\-A\-C\-E\-D W\-I\-T\-H boost\-::signal impl) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & number of the interval that was refined \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/c2\-Functional.\-hh\end{DoxyCompactItemize}

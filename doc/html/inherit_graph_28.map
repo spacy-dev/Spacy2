@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1OperatorUpdate.html" title="Spacy::dealII::Detail\l::OperatorUpdate\&lt; dim,\l VariableDims, row, column \&gt;" alt="" coords="5,4,200,60"/>
+<area shape="rect" id="node1" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalAssemblyBase.html" title="Spacy::dealII::Detail\l::LocalAssemblyBase\&lt;\l dim, id, 1 \&gt;" alt="" coords="5,4,163,60"/>
+<area shape="rect" id="node2" href="$structSpacy_1_1dealII_1_1Detail_1_1LocalFunGFunctionalValueAssembly_3_01dim_00_01Components_00_01id_00_011_01_4.html" title="Spacy::dealII::Detail\l::LocalFunGFunctionalValueAssembly\l\&lt; dim, Components, id, 1 \&gt;" alt="" coords="211,4,455,60"/>
 </map>

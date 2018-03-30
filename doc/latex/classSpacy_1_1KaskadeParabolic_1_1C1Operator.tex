@@ -1,0 +1,305 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:C1\-Operator$<$ Operator\-Definition $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator$<$ Operator\-Definition $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator$<$ Operator\-Definition $>$}}
+}
+
+
+Operator interface for Kaskade 7. Models a dynamical differentiable operator $A:X\rightarrow Y$ semi discretized in time.  
+
+
+
+
+{\ttfamily \#include $<$c1\-Operator.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:C1\-Operator$<$ Operator\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{classSpacy_1_1KaskadeParabolic_1_1C1Operator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:C1\-Operator$<$ Operator\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{classSpacy_1_1KaskadeParabolic_1_1C1Operator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aed6a59c7711726f83e95221c54032e98}{C1\-Operator} (std\-::function$<$ Operator\-Definition(const typename Operator\-Definition\-::\-Source\-Vars\-::\-Variable\-Set)$>$ \&F, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager}$<$ typename Operator\-Definition\-::\-Origin\-Vars\-::\-Spaces $>$ \&gm, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain}, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range}, const \hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&u)
+\begin{DoxyCompactList}\small\item\em Construct dynamical operator for Kaskade 7 semi discretized in time. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_ab10ca63c493d51761bcb9e9dd18558d3}{C1\-Operator} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \&B)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2356d1e9b49bad00defde8a47b977fda}{operator=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \&B)=default
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2af1f5c989daa9b053ed49335fd1abb8}{C1\-Operator} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \&\&B)=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9c201f25caa56cebeb851f97771cca8d}{operator=} (\hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator}{C1\-Operator} \&\&B)=default
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a735f5cf1b02a24faec5c76b039a9ed8f}{operator()} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Apply operator. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aef8fbbb0007ebb0f2ad458cb1804e1de}{d1} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x, const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&dx) const 
+\begin{DoxyCompactList}\small\item\em Compute $A'(x)dx$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_afbe261e063a26a8d40231e765cc410bc}{auto \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_afbe261e063a26a8d40231e765cc410bc}{linearization} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const }\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_afbe261e063a26a8d40231e765cc410bc}
+
+\begin{DoxyCompactList}\small\item\em Access $A'(x)$ as linear operator $X\rightarrow Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_afa858617575195bfecc5ecd1502748c3}{auto {\bfseries mass\-Matrix} () const }\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_afa858617575195bfecc5ecd1502748c3}
+
+\item 
+bool \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a427a378ab7a88427b8278182579f6674}{only\-Lower\-Triangle} () const noexcept
+\begin{DoxyCompactList}\small\item\em Access only\-Lower\-Triangle flag. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a22cb9eabdc7bee39bf77680c259d2d26}{set\-Solver\-Creator} (std\-::function$<$ \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\-Solver}(const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linearization} \&)$>$ f)
+\begin{DoxyCompactList}\small\item\em Change solver creator. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager}$<$ Spaces $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9dd8aae0f2ff67da7020a17204a66483}{get\-Grid\-Man} () const 
+\begin{DoxyCompactList}\small\item\em Get the Grid manager. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_abeabd783f5d7a66012f13aebf4a96039}{set\-Verbosity} (bool verb) const 
+\begin{DoxyCompactList}\small\item\em Set Verbosity. \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aa46e91614226bbdef768798f4f61a140}{inform\-About\-Refinement} (unsigned k)
+\begin{DoxyCompactList}\small\item\em Tell the operator about a refinement of the temporal grid (T\-O B\-E R\-E\-P\-L\-A\-C\-E\-D W\-I\-T\-H boost\-::signal impl) \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a4977849b21f3e8d41de595ebd8b2d864}{void {\bfseries set\-Initial\-Condition} (auto y0\-\_\-coeff)}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a4977849b21f3e8d41de595ebd8b2d864}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_ad0ec50bdc0afbdf35fb4a7308bdcaad6}{void {\bfseries set\-Source} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&u)}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_ad0ec50bdc0afbdf35fb4a7308bdcaad6}
+
+\item 
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const }\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const }\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Operator\-Definition$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator$<$ Operator\-Definition $>$}
+
+Operator interface for Kaskade 7. Models a dynamical differentiable operator $A:X\rightarrow Y$ semi discretized in time. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classSpacy_1_1C1Operator}{Spacy\-::\-C1\-Operator} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aed6a59c7711726f83e95221c54032e98}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!C1\-Operator@{C1\-Operator}}
+\index{C1\-Operator@{C1\-Operator}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::{\bf C1\-Operator} (
+\begin{DoxyParamCaption}
+\item[{std\-::function$<$ Operator\-Definition(const typename Operator\-Definition\-::\-Source\-Vars\-::\-Variable\-Set)$>$ \&}]{F, }
+\item[{{\bf Grid\-Manager}$<$ typename Operator\-Definition\-::\-Origin\-Vars\-::\-Spaces $>$ \&}]{gm, }
+\item[{const {\bf Vector\-Space} \&}]{domain, }
+\item[{const {\bf Vector\-Space} \&}]{range, }
+\item[{const {\bf Spacy\-::\-Vector} \&}]{u}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aed6a59c7711726f83e95221c54032e98}
+
+
+Construct dynamical operator for Kaskade 7 semi discretized in time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & operator definition from Kaskade 7 \\
+\hline
+{\em gm} & Grid manager holding temporal and spatial grids \\
+\hline
+{\em domain} & domain space \\
+\hline
+{\em range} & range space \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_ab10ca63c493d51761bcb9e9dd18558d3}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!C1\-Operator@{C1\-Operator}}
+\index{C1\-Operator@{C1\-Operator}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::{\bf C1\-Operator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf C1\-Operator}$<$ Operator\-Definition $>$ \&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_ab10ca63c493d51761bcb9e9dd18558d3}
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2af1f5c989daa9b053ed49335fd1abb8}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!C1\-Operator@{C1\-Operator}}
+\index{C1\-Operator@{C1\-Operator}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{C1\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::{\bf C1\-Operator} (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\-Operator}$<$ Operator\-Definition $>$ \&\&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2af1f5c989daa9b053ed49335fd1abb8}
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to move from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2356d1e9b49bad00defde8a47b977fda}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ {\bf C1\-Operator}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C1\-Operator}$<$ Operator\-Definition $>$ \&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a2356d1e9b49bad00defde8a47b977fda}
+
+
+Copy assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to copy from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9c201f25caa56cebeb851f97771cca8d}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!operator=@{operator=}}
+\index{operator=@{operator=}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ {\bf C1\-Operator}\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf C1\-Operator}$<$ Operator\-Definition $>$ \&\&}]{B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9c201f25caa56cebeb851f97771cca8d}
+
+
+Move assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & object to move from \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a735f5cf1b02a24faec5c76b039a9ed8f}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a735f5cf1b02a24faec5c76b039a9ed8f}
+
+
+Apply operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$A(x)$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aef8fbbb0007ebb0f2ad458cb1804e1de}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!d1@{d1}}
+\index{d1@{d1}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::d1 (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x, }
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{dx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aef8fbbb0007ebb0f2ad458cb1804e1de}
+
+
+Compute $A'(x)dx$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & current iterate \\
+\hline
+{\em dx} & correction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$A'(x)dx$ 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a427a378ab7a88427b8278182579f6674}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!only\-Lower\-Triangle@{only\-Lower\-Triangle}}
+\index{only\-Lower\-Triangle@{only\-Lower\-Triangle}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{only\-Lower\-Triangle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ bool {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::only\-Lower\-Triangle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a427a378ab7a88427b8278182579f6674}
+
+
+Access only\-Lower\-Triangle flag. 
+
+\begin{DoxyReturn}{Returns}
+true if only the lower triangle of a symmetric matrix is stored in the operator definition, else false 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a22cb9eabdc7bee39bf77680c259d2d26}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!set\-Solver\-Creator@{set\-Solver\-Creator}}
+\index{set\-Solver\-Creator@{set\-Solver\-Creator}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{set\-Solver\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::set\-Solver\-Creator (
+\begin{DoxyParamCaption}
+\item[{std\-::function$<$ {\bf Linear\-Solver}(const {\bf Linearization} \&)$>$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a22cb9eabdc7bee39bf77680c259d2d26}
+
+
+Change solver creator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function/functor for the creation of a linear solver \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9dd8aae0f2ff67da7020a17204a66483}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!get\-Grid\-Man@{get\-Grid\-Man}}
+\index{get\-Grid\-Man@{get\-Grid\-Man}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{get\-Grid\-Man}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ const {\bf Grid\-Manager}$<$Spaces$>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::get\-Grid\-Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_a9dd8aae0f2ff67da7020a17204a66483}
+
+
+Get the Grid manager. 
+
+\begin{DoxyReturn}{Returns}
+Grid Manager holding spatial and temporal grid information 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_abeabd783f5d7a66012f13aebf4a96039}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!set\-Verbosity@{set\-Verbosity}}
+\index{set\-Verbosity@{set\-Verbosity}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{set\-Verbosity}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::set\-Verbosity (
+\begin{DoxyParamCaption}
+\item[{bool}]{verb}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_abeabd783f5d7a66012f13aebf4a96039}
+
+
+Set Verbosity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verb} & verbosity to be set \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aa46e91614226bbdef768798f4f61a140}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}!inform\-About\-Refinement@{inform\-About\-Refinement}}
+\index{inform\-About\-Refinement@{inform\-About\-Refinement}!Spacy::KaskadeParabolic::C1Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}}
+\subsubsection[{inform\-About\-Refinement}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Operator\-Definition $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-C1\-Operator}$<$ Operator\-Definition $>$\-::inform\-About\-Refinement (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1C1Operator_aa46e91614226bbdef768798f4f61a140}
+
+
+Tell the operator about a refinement of the temporal grid (T\-O B\-E R\-E\-P\-L\-A\-C\-E\-D W\-I\-T\-H boost\-::signal impl) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & number of the interval that was refined \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/c1\-Operator.\-hh\end{DoxyCompactItemize}

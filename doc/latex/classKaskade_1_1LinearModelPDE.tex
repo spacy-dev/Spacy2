@@ -1,0 +1,138 @@
+\hypertarget{classKaskade_1_1LinearModelPDE}{\section{Kaskade\-:\-:Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$ Class Template Reference}
+\label{classKaskade_1_1LinearModelPDE}\index{Kaskade\-::\-Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$@{Kaskade\-::\-Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$}}
+}
+
+
+linear pde with nonconstant source  
+
+
+
+
+{\ttfamily \#include $<$linear\-Model\-Constraint.\-hh$>$}
+
+
+
+Inheritance diagram for Kaskade\-:\-:Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classKaskade_1_1LinearModelPDE__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Kaskade\-:\-:Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classKaskade_1_1LinearModelPDE__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classKaskade_1_1LinearModelPDE_1_1BoundaryCache}{Boundary\-Cache}
+\item 
+struct \hyperlink{structKaskade_1_1LinearModelPDE_1_1D1}{D1}
+\item 
+struct \hyperlink{structKaskade_1_1LinearModelPDE_1_1D2}{D2}
+\item 
+class \hyperlink{classKaskade_1_1LinearModelPDE_1_1DomainCache}{Domain\-Cache}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_aa06f55cfd5f39f0e2b8b1e99740efbfa}{using {\bfseries Scalar} = R\-Type}\label{classKaskade_1_1LinearModelPDE_aa06f55cfd5f39f0e2b8b1e99740efbfa}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_aed8385e38e93f0c76fb9af5d8ac9752d}{using {\bfseries Origin\-Vars} = Var\-Set}\label{classKaskade_1_1LinearModelPDE_aed8385e38e93f0c76fb9af5d8ac9752d}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_aa0321c14344deb87c7cf0ab8b3f7918c}{using {\bfseries Ansatz\-Vars} = Var\-Set}\label{classKaskade_1_1LinearModelPDE_aa0321c14344deb87c7cf0ab8b3f7918c}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_a79217f844c54a877335ce23b6816afa9}{using {\bfseries Test\-Vars} = Var\-Set}\label{classKaskade_1_1LinearModelPDE_a79217f844c54a877335ce23b6816afa9}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_a35a85a83a256ca8f74a199559df39406}{using {\bfseries Source\-Vars} = Description\-Control}\label{classKaskade_1_1LinearModelPDE_a35a85a83a256ca8f74a199559df39406}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKaskade_1_1LinearModelPDE_aadf33387bd0274cc8166e3468e6d5006}{Linear\-Model\-P\-D\-E} (Scalar d\-\_\-, Scalar mu\-\_\-, typename Description\-Control\-::\-Variable\-Set control)
+\begin{DoxyCompactList}\small\item\em Construct linear pde. \end{DoxyCompactList}\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_aa2e189d5980b11f99905448fe424b813}{{\footnotesize template$<$class Cell $>$ }\\int {\bfseries integration\-Order} (Cell const \&, int shape\-Function\-Order, bool boundary) const }\label{classKaskade_1_1LinearModelPDE_aa2e189d5980b11f99905448fe424b813}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_a5ac8a5faad7a6f32ea4f80b3d4f0afa3}{Scalar {\bfseries d}}\label{classKaskade_1_1LinearModelPDE_a5ac8a5faad7a6f32ea4f80b3d4f0afa3}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_a543fa1e9af6ed6ea41ede32d97a8e21a}{Scalar {\bfseries mu}}\label{classKaskade_1_1LinearModelPDE_a543fa1e9af6ed6ea41ede32d97a8e21a}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_abd838b13dd8222b8b6f342d8154c2989}{Description\-Control\-::\-Variable\-Set {\bfseries control\-\_\-}}\label{classKaskade_1_1LinearModelPDE_abd838b13dd8222b8b6f342d8154c2989}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_ac0330dc8cca2373b9f22b9114566ede5}{static constexpr int {\bfseries dim} = Ansatz\-Vars\-::\-Grid\-::dimension}\label{classKaskade_1_1LinearModelPDE_ac0330dc8cca2373b9f22b9114566ede5}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelPDE_a6804aa9cdc40a96b15923b66a351c1aa}{static constexpr int {\bfseries u\-Idx} = 0}\label{classKaskade_1_1LinearModelPDE_a6804aa9cdc40a96b15923b66a351c1aa}
+
+\item 
+static constexpr int {\bfseries u\-Space\-Idx}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class R\-Type, class Var\-Set, class Description\-Control$>$class Kaskade\-::\-Linear\-Model\-P\-D\-E$<$ R\-Type, Var\-Set, Description\-Control $>$}
+
+linear pde with nonconstant source 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classKaskade_1_1LinearModelPDE_aadf33387bd0274cc8166e3468e6d5006}{\index{Kaskade\-::\-Linear\-Model\-P\-D\-E@{Kaskade\-::\-Linear\-Model\-P\-D\-E}!Linear\-Model\-P\-D\-E@{Linear\-Model\-P\-D\-E}}
+\index{Linear\-Model\-P\-D\-E@{Linear\-Model\-P\-D\-E}!Kaskade::LinearModelPDE@{Kaskade\-::\-Linear\-Model\-P\-D\-E}}
+\subsubsection[{Linear\-Model\-P\-D\-E}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class R\-Type , class Var\-Set , class Description\-Control $>$ {\bf Kaskade\-::\-Linear\-Model\-P\-D\-E}$<$ R\-Type, Var\-Set, Description\-Control $>$\-::{\bf Linear\-Model\-P\-D\-E} (
+\begin{DoxyParamCaption}
+\item[{Scalar}]{d\-\_\-, }
+\item[{Scalar}]{mu\-\_\-, }
+\item[{typename Description\-Control\-::\-Variable\-Set}]{control}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classKaskade_1_1LinearModelPDE_aadf33387bd0274cc8166e3468e6d5006}
+
+
+Construct linear pde. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d\-\_\-} & factor before laplacian, smaller d -\/$>$ harder problem \\
+\hline
+{\em mu\-\_\-} & instability factor, mu zero -\/$>$ stable as laplace is stable, mu $>$ 0 -\/$>$ more stable , mu $<$ 0 -\/$>$ instable \\
+\hline
+{\em control\-\_\-} & source term of the pde \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classKaskade_1_1LinearModelPDE_a29f9570b92046722b7787db2ed0c90fc}{\index{Kaskade\-::\-Linear\-Model\-P\-D\-E@{Kaskade\-::\-Linear\-Model\-P\-D\-E}!u\-Space\-Idx@{u\-Space\-Idx}}
+\index{u\-Space\-Idx@{u\-Space\-Idx}!Kaskade::LinearModelPDE@{Kaskade\-::\-Linear\-Model\-P\-D\-E}}
+\subsubsection[{u\-Space\-Idx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class R\-Type , class Var\-Set , class Description\-Control $>$ constexpr int {\bf Kaskade\-::\-Linear\-Model\-P\-D\-E}$<$ R\-Type, Var\-Set, Description\-Control $>$\-::u\-Space\-Idx\hspace{0.3cm}{\ttfamily [static]}}}\label{classKaskade_1_1LinearModelPDE_a29f9570b92046722b7787db2ed0c90fc}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= boost::fusion::result\_of::value\_at\_c<\textcolor{keyword}{typename} AnsatzVars::Variables,
+                                               uIdx>::type::spaceIndex
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/\-Constraints/linear\-Model\-Constraint.\-hh\end{DoxyCompactItemize}

@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classSpacy_1_1C2Functional.html" title="Type&#45;erased twice differentiable functional . " alt="" coords="5,5,149,32"/>
+<area shape="rect" id="node2" href="$structKaskade_1_1LinearModelPDE_1_1D2.html" title="Kaskade::LinearModelPDE\l\&lt; RType, VarSet, Description\lControl \&gt;::D2\&lt; row, col \&gt;" alt="" coords="175,5,369,61"/>
+<area shape="rect" id="node3" href="$structSpacy_1_1KaskadeParabolic_1_1PDE_1_1ScalarProdFunctional_1_1D2.html" title="Spacy::KaskadeParabolic\l::PDE::ScalarProdFunctional\l\&lt; RType, AnsatzVars_, TestVars\l_, OriginVars_ \&gt;::D2\&lt; row, col \&gt;" alt="" coords="163,86,381,157"/>
 </map>

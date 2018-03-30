@@ -1,0 +1,139 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:Vector\-Creator$<$ class $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator$<$ class $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator$<$ class $>$}}
+}
+
+
+Creator for time dependent (piecewise constant in time) vector space elements implemented with Kaskade 7.  
+
+
+
+
+{\ttfamily \#include $<$vector\-Space.\-hh$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a1c178d245f485613615adebb58d5a1fc}{using {\bfseries Spaces} = typename Description\-::\-Spaces}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a1c178d245f485613615adebb58d5a1fc}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a66f24ea0ddcd3f8a707820c35efbce6e}{using {\bfseries Signal} = \-::boost\-::signals2\-::signal$<$ void(unsigned)$>$}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a66f24ea0ddcd3f8a707820c35efbce6e}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a17ab3b21d3895556d3b477b030272ab8}{using {\bfseries On\-Refimenent\-Slot\-Type} = Signal\-::slot\-\_\-type}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a17ab3b21d3895556d3b477b030272ab8}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__VectorSpaceGroup_ga9312a30ec070498e2364676714caf125}{Vector\-Creator} (\-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$ Spaces $>$ \&gm, std\-::string name)
+\begin{DoxyCompactList}\small\item\em Create from Gridmanager. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a45f48ed0e7f995aaa3e85c5755a94aeb}{\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector}$<$ Description $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a45f48ed0e7f995aaa3e85c5755a94aeb}{operator()} (const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} $\ast$space) const }\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a45f48ed0e7f995aaa3e85c5755a94aeb}
+
+\begin{DoxyCompactList}\small\item\em Generate vector for Kaskade 7. \end{DoxyCompactList}\item 
+const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1SubCreator}{Sub\-Creator}$<$ Description $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a439adcac03d88d849091aea0755a2710}{get\-Sub\-Creator} (const unsigned i) const 
+\begin{DoxyCompactList}\small\item\em getter for creators of each timestep \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a7ccc807fbce17b6018f2a80561f2eda5}{unsigned \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a7ccc807fbce17b6018f2a80561f2eda5}{number\-Of\-Creators} () const }\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a7ccc807fbce17b6018f2a80561f2eda5}
+
+\begin{DoxyCompactList}\small\item\em get number of Creators \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a68f68735b766af8d57fe09a63418836c}{const Spaces \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a68f68735b766af8d57fe09a63418836c}{get\-Space} (unsigned i) const }\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a68f68735b766af8d57fe09a63418836c}
+
+\begin{DoxyCompactList}\small\item\em get \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Space of time interval i \end{DoxyCompactList}\item 
+const \\*
+\-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}\\*
+$<$ Spaces $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_ad9c520beb552f8dd854aa4fe682c9d20}{get\-Grid\-Man} () const 
+\begin{DoxyCompactList}\small\item\em getter for \hyperlink{namespaceSpacy}{Spacy} Gridmanager \end{DoxyCompactList}\item 
+std\-::shared\-\_\-ptr$<$ Spaces $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a94b57a790f05cf8f22467e618fe041d7}{refine} (unsigned k)
+\begin{DoxyCompactList}\small\item\em Refine the \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} in time, calls the refine on \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} and the vectors (via boost\-::signal) \end{DoxyCompactList}\item 
+void \hyperlink{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a47720fd71a78ea1efd84678423670e88}{refine\-\_\-no\-Grid\-Ref} (unsigned k, std\-::shared\-\_\-ptr$<$ Spaces $>$ inserted\-Space)
+\begin{DoxyCompactList}\small\item\em Refine the \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} in time, calls the refine the vectors (via boost\-::signal) N\-O\-T O\-N T\-H\-E G\-R\-I\-D!! This function assumes the grid was refined (e.\-g. y space was refined via refine(k), now u space refinement with this function) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_ae1217b6dfd7a9cd5cc4a43f7aa9f49be}{std\-::shared\-\_\-ptr$<$ Signal $>$ {\bfseries S\-\_\-}}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_ae1217b6dfd7a9cd5cc4a43f7aa9f49be}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator$<$ class $>$}
+
+Creator for time dependent (piecewise constant in time) vector space elements implemented with Kaskade 7. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a439adcac03d88d849091aea0755a2710}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}!get\-Sub\-Creator@{get\-Sub\-Creator}}
+\index{get\-Sub\-Creator@{get\-Sub\-Creator}!Spacy::KaskadeParabolic::VectorCreator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}}
+\subsubsection[{get\-Sub\-Creator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ const {\bf Sub\-Creator}$<$Description$>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}$<$ class $>$\-::get\-Sub\-Creator (
+\begin{DoxyParamCaption}
+\item[{const unsigned}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a439adcac03d88d849091aea0755a2710}
+
+
+getter for creators of each timestep 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & index of requested creator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1SubCreator}{Sub\-Creator} for time interval i 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_ad9c520beb552f8dd854aa4fe682c9d20}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}!get\-Grid\-Man@{get\-Grid\-Man}}
+\index{get\-Grid\-Man@{get\-Grid\-Man}!Spacy::KaskadeParabolic::VectorCreator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}}
+\subsubsection[{get\-Grid\-Man}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ const \-::{\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Grid\-Manager}$<$Spaces$>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}$<$ class $>$\-::get\-Grid\-Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_ad9c520beb552f8dd854aa4fe682c9d20}
+
+
+getter for \hyperlink{namespaceSpacy}{Spacy} Gridmanager 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy}{Spacy} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a94b57a790f05cf8f22467e618fe041d7}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}!refine@{refine}}
+\index{refine@{refine}!Spacy::KaskadeParabolic::VectorCreator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}}
+\subsubsection[{refine}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ std\-::shared\-\_\-ptr$<$Spaces$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}$<$ class $>$\-::refine (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a94b57a790f05cf8f22467e618fe041d7}
+
+
+Refine the \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} in time, calls the refine on \hyperlink{classSpacy_1_1KaskadeParabolic_1_1GridManager}{Grid\-Manager} and the vectors (via boost\-::signal) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & index of interval to be refined \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Space that was inserted 
+\end{DoxyReturn}
+insert a subcreator \hypertarget{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a47720fd71a78ea1efd84678423670e88}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}!refine\-\_\-no\-Grid\-Ref@{refine\-\_\-no\-Grid\-Ref}}
+\index{refine\-\_\-no\-Grid\-Ref@{refine\-\_\-no\-Grid\-Ref}!Spacy::KaskadeParabolic::VectorCreator@{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}}
+\subsubsection[{refine\-\_\-no\-Grid\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class $>$ void {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-Vector\-Creator}$<$ class $>$\-::refine\-\_\-no\-Grid\-Ref (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{k, }
+\item[{std\-::shared\-\_\-ptr$<$ Spaces $>$}]{inserted\-Space}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1VectorCreator_a47720fd71a78ea1efd84678423670e88}
+
+
+Refine the \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} in time, calls the refine the vectors (via boost\-::signal) N\-O\-T O\-N T\-H\-E G\-R\-I\-D!! This function assumes the grid was refined (e.\-g. y space was refined via refine(k), now u space refinement with this function) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & index of interval to be refined \\
+\hline
+{\em inserted\-Space} & \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} space that was inserted when calling the above refine(k) \\
+\hline
+\end{DoxyParams}
+insert a subcreator 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/vector.\-hh\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/vector\-Space.\-hh\end{DoxyCompactItemize}

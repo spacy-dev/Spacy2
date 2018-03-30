@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['tempgrid',['TempGrid',['../classSpacy_1_1KaskadeParabolic_1_1TempGrid.html',1,'Spacy::KaskadeParabolic']]],
   ['terminationcriterion',['TerminationCriterion',['../classSpacy_1_1CG_1_1TerminationCriterion.html',1,'Spacy::CG']]],
   ['timer',['Timer',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],
   ['timer_3c_20std_3a_3achrono_3a_3amilliseconds_20_3e',['Timer&lt; std::chrono::milliseconds &gt;',['../classSpacy_1_1Mixin_1_1Timer.html',1,'Spacy::Mixin']]],

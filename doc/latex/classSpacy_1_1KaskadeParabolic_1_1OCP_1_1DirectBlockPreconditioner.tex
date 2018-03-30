@@ -1,0 +1,169 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:O\-C\-P\-:\-:Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$}}
+}
+
+
+A constraint preconditioner for optimal control problems that uses a direct solver.  
+
+
+
+
+{\ttfamily \#include $<$direct\-Block\-Preconditioner.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:O\-C\-P\-:\-:Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:O\-C\-P\-:\-:Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description} = typename Functional\-Definition\-::\-Ansatz\-Vars}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variable\-Set\-Description \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a9fa8e87d8421acc9a52472322d76bde8}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a9fa8e87d8421acc9a52472322d76bde8}{Coefficient\-Vector} = typename Variable\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a9fa8e87d8421acc9a52472322d76bde8}
+
+\begin{DoxyCompactList}\small\item\em Coefficient vector type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a2d88e1bb12a0638a7640d0bd8d8177a9}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a2d88e1bb12a0638a7640d0bd8d8177a9}{Spaces} = typename Variable\-Set\-Description\-::\-Spaces}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a2d88e1bb12a0638a7640d0bd8d8177a9}
+
+\begin{DoxyCompactList}\small\item\em boost\-::fusion\-::vector$<$const Space0$\ast$,const Space1$\ast$,...$>$ \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a73578f2e6a968974f7188d15b66aefcf}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a73578f2e6a968974f7188d15b66aefcf}{Matrix} = \-::Kaskade\-::\-Matrix\-As\-Triplet$<$ double $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a73578f2e6a968974f7188d15b66aefcf}
+
+\begin{DoxyCompactList}\small\item\em Matrix type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3ab433278449e84b4a79b208b949f7c5}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3ab433278449e84b4a79b208b949f7c5}{V\-Y\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description}, 0 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3ab433278449e84b4a79b208b949f7c5}
+
+\begin{DoxyCompactList}\small\item\em Variable\-Set\-Descriptions of the variables. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a5a08cbafac353b8db64e88515df575b8}{using {\bfseries V\-U\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description}, 1 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a5a08cbafac353b8db64e88515df575b8}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3257a2f5a9e3e3299ac66f458e8aaebc}{using {\bfseries V\-P\-Set\-Description} = Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description}, 2 $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3257a2f5a9e3e3299ac66f458e8aaebc}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y} = typename V\-Y\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}
+
+\begin{DoxyCompactList}\small\item\em Coefficient \hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Vector} type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a8ebd03f0a1b92dabdd5c3088a3cec23a}{using {\bfseries Coefficient\-Vector\-U} = typename V\-U\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a8ebd03f0a1b92dabdd5c3088a3cec23a}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a56f012444321bb8226718c0703d75a9b}{using {\bfseries Coefficient\-Vector\-P} = typename V\-P\-Set\-Description\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a56f012444321bb8226718c0703d75a9b}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{{\footnotesize template$<$class X , class Y $>$ }\\using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y} = \-::Kaskade\-::\-Matrix\-Represented\-Operator$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a73578f2e6a968974f7188d15b66aefcf}{Matrix}, X, Y $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Types of the Operators held for every timestep. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a9e0dd273826ef30a439ae7869ec65f33}{using {\bfseries Mytype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a9e0dd273826ef30a439ae7869ec65f33}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a668cd4de2375ae2490aebc84241d52f3}{using {\bfseries Mutype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a668cd4de2375ae2490aebc84241d52f3}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a0249e9d5f6dc0b2004170f494de22e07}{using {\bfseries Atype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y}, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a0249e9d5f6dc0b2004170f494de22e07}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a29a3bef3f58a43a4f93ef40902dacf6d}{using {\bfseries A\-Ttype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-P, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a29a3bef3f58a43a4f93ef40902dacf6d}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7e0fcf3f588f6773288d9ed879168e51}{using {\bfseries Btype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-U, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7e0fcf3f588f6773288d9ed879168e51}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_add29f8deb4686aec873ff9bd5412828f}{using {\bfseries B\-Ttype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ Coefficient\-Vector\-P, Coefficient\-Vector\-U $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_add29f8deb4686aec873ff9bd5412828f}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ad0004dfc096f9ca67805fcb80d61b45a}{using {\bfseries Masstype} = \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac4bc446b30094d154f3288f8551c995b}{Kaskade\-Operator\-X\-Y}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ac848a8d3baacc98f9bdbf951cdb9b64d}{Coefficient\-Vector\-Y}, Coefficient\-Vector\-P $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ad0004dfc096f9ca67805fcb80d61b45a}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3f7d475f510ddb2ba0b549b00bb034ec}{using \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3f7d475f510ddb2ba0b549b00bb034ec}{Vector\-Impl\-Y} = \-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3ab433278449e84b4a79b208b949f7c5}{V\-Y\-Set\-Description} $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a3f7d475f510ddb2ba0b549b00bb034ec}
+
+\begin{DoxyCompactList}\small\item\em Implementation type. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_aa94d0bad7e1ab08a3f5f1721f089a92e}{using {\bfseries Vector\-Impl\-U} = \-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ V\-U\-Set\-Description $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_aa94d0bad7e1ab08a3f5f1721f089a92e}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ad226534b7008fc4ef0b5224de9a69974}{using {\bfseries Vector\-Impl\-P} = \-::\hyperlink{classSpacy_1_1KaskadeParabolic_1_1Vector}{Spacy\-::\-Kaskade\-Parabolic\-::\-Vector}$<$ V\-P\-Set\-Description $>$}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_ad226534b7008fc4ef0b5224de9a69974}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a566d480deaacc04db9a6e9859b004dd4}{using {\bfseries P\-S\-V} = \-::\hyperlink{classSpacy_1_1ProductSpace_1_1Vector}{Spacy\-::\-Product\-Space\-::\-Vector}}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a566d480deaacc04db9a6e9859b004dd4}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a723ecc01ee4ab2c66bde2c8d242c23f6}{Direct\-Block\-Preconditioner} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1LinearBlockOperator}{Linear\-Block\-Operator}$<$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description}, \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a7b268f830d36a01c2390b98c9fd03b4a}{Variable\-Set\-Description} $>$ \&H)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a14ba770316ccfcbf4335c55f5f4eeaf2}{operator()} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&b) const 
+\begin{DoxyCompactList}\small\item\em Apply preconditioner $P$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const }\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const }\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Functional\-Definition$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner$<$ Functional\-Definition $>$}
+
+A constraint preconditioner for optimal control problems that uses a direct solver. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a723ecc01ee4ab2c66bde2c8d242c23f6}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner@{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}!Direct\-Block\-Preconditioner@{Direct\-Block\-Preconditioner}}
+\index{Direct\-Block\-Preconditioner@{Direct\-Block\-Preconditioner}!Spacy::KaskadeParabolic::OCP::DirectBlockPreconditioner@{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}}
+\subsubsection[{Direct\-Block\-Preconditioner}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}$<$ Functional\-Definition $>$\-::{\bf Direct\-Block\-Preconditioner} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Linear\-Block\-Operator}$<$ {\bf Variable\-Set\-Description}, {\bf Variable\-Set\-Description} $>$ \&}]{H}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a723ecc01ee4ab2c66bde2c8d242c23f6}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em H} & \hyperlink{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1LinearBlockOperator}{Linear\-Block\-Operator} to which the Preconditioner corresponds \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a14ba770316ccfcbf4335c55f5f4eeaf2}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner@{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::KaskadeParabolic::OCP::DirectBlockPreconditioner@{Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Functional\-Definition $>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-O\-C\-P\-::\-Direct\-Block\-Preconditioner}$<$ Functional\-Definition $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{b}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1OCP_1_1DirectBlockPreconditioner_a14ba770316ccfcbf4335c55f5f4eeaf2}
+
+
+Apply preconditioner $P$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$P(x)$ 
+\end{DoxyReturn}
+Solve Adjoint Equation
+
+Solve Stationarity Condition
+
+Solve State Equation 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/direct\-Block\-Preconditioner.\-hh\end{DoxyCompactItemize}

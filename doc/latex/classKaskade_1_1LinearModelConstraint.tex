@@ -1,0 +1,76 @@
+\hypertarget{classKaskade_1_1LinearModelConstraint}{\section{Kaskade\-:\-:Linear\-Model\-Constraint$<$ Ansatz\-Vars\-\_\-, state\-Id $>$ Class Template Reference}
+\label{classKaskade_1_1LinearModelConstraint}\index{Kaskade\-::\-Linear\-Model\-Constraint$<$ Ansatz\-Vars\-\_\-, state\-Id $>$@{Kaskade\-::\-Linear\-Model\-Constraint$<$ Ansatz\-Vars\-\_\-, state\-Id $>$}}
+}
+
+
+linear constraint for optimal control problems  
+
+
+
+
+{\ttfamily \#include $<$linear\-Model\-Constraint.\-hh$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_a24acd13373b4cb4671ca2f0739960c81}{typedef Ansatz\-Vars\-\_\- {\bfseries Ansatz\-Vars}}\label{classKaskade_1_1LinearModelConstraint_a24acd13373b4cb4671ca2f0739960c81}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_a2274330d90b73ae4102b67a45c85f2f4}{typedef Ansatz\-Vars\-::\-Scalar {\bfseries Scalar}}\label{classKaskade_1_1LinearModelConstraint_a2274330d90b73ae4102b67a45c85f2f4}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKaskade_1_1LinearModelConstraint_a381b39bdcc9a6efd7a8566b36e6ae5bd}{Linear\-Model\-Constraint} (Scalar d\-\_\-, Scalar mu\-\_\-)
+\begin{DoxyCompactList}\small\item\em Construct linear constraint. \end{DoxyCompactList}\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_a9107a6c060676057ee27075d6c28ed5f}{void {\bfseries evaluate\-At} (Dune\-::\-Field\-Vector$<$ Scalar, Ansatz\-Vars\-::template Components$<$ state\-Id $>$\-::m $>$ const \&y\-\_\-, Dune\-::\-Field\-Matrix$<$ Scalar, Ansatz\-Vars\-::template Components$<$ state\-Id $>$\-::m, dim $>$ const \&dy\-\_\-)}\label{classKaskade_1_1LinearModelConstraint_a9107a6c060676057ee27075d6c28ed5f}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_afc8dd6477c2f6353664d27606e158a3a}{{\footnotesize template$<$int row$>$ }\\Scalar {\bfseries d1} (Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ row $>$\-::m $>$ const \&arg) const }\label{classKaskade_1_1LinearModelConstraint_afc8dd6477c2f6353664d27606e158a3a}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_aaa6b39b59deeb6fe8e1e24ccc1510a28}{{\footnotesize template$<$int row, int col$>$ }\\Scalar {\bfseries d2} (Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ row $>$\-::m $>$ const \&arg1, Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ col $>$\-::m $>$ const \&arg2) const }\label{classKaskade_1_1LinearModelConstraint_aaa6b39b59deeb6fe8e1e24ccc1510a28}
+
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_a49c21e1ab328285958cc8c9a9ac907dd}{{\footnotesize template$<$int id1, int id2, int id3$>$ }\\Scalar {\bfseries d3} (Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ id1 $>$\-::m $>$ const \&arg1, Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ id2 $>$\-::m $>$ const \&arg2, Variational\-Arg$<$ Scalar, dim, Ansatz\-Vars\-::template Components$<$ id3 $>$\-::m $>$ const \&arg3) const }\label{classKaskade_1_1LinearModelConstraint_a49c21e1ab328285958cc8c9a9ac907dd}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classKaskade_1_1LinearModelConstraint_a109033c6a2d9a563de381a984b9cd203}{static constexpr int {\bfseries dim} = Ansatz\-Vars\-::\-Grid\-::dimension}\label{classKaskade_1_1LinearModelConstraint_a109033c6a2d9a563de381a984b9cd203}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Ansatz\-Vars\-\_\-, int state\-Id = 0$>$class Kaskade\-::\-Linear\-Model\-Constraint$<$ Ansatz\-Vars\-\_\-, state\-Id $>$}
+
+linear constraint for optimal control problems 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classKaskade_1_1LinearModelConstraint_a381b39bdcc9a6efd7a8566b36e6ae5bd}{\index{Kaskade\-::\-Linear\-Model\-Constraint@{Kaskade\-::\-Linear\-Model\-Constraint}!Linear\-Model\-Constraint@{Linear\-Model\-Constraint}}
+\index{Linear\-Model\-Constraint@{Linear\-Model\-Constraint}!Kaskade::LinearModelConstraint@{Kaskade\-::\-Linear\-Model\-Constraint}}
+\subsubsection[{Linear\-Model\-Constraint}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Vars\-\_\-, int state\-Id = 0$>$ {\bf Kaskade\-::\-Linear\-Model\-Constraint}$<$ Ansatz\-Vars\-\_\-, state\-Id $>$\-::{\bf Linear\-Model\-Constraint} (
+\begin{DoxyParamCaption}
+\item[{Scalar}]{d\-\_\-, }
+\item[{Scalar}]{mu\-\_\-}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{classKaskade_1_1LinearModelConstraint_a381b39bdcc9a6efd7a8566b36e6ae5bd}
+
+
+Construct linear constraint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & factor before laplacian, smaller d -\/$>$ harder problem \\
+\hline
+{\em mu} & instability factor, mu zero -\/$>$ stable as laplace is stable, mu $>$ 0 -\/$>$ more stable , mu $<$ 0 -\/$>$ instable \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/\-Constraints/linear\-Model\-Constraint.\-hh\end{DoxyCompactItemize}

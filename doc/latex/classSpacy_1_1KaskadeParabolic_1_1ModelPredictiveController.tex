@@ -1,0 +1,61 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1ModelPredictiveController}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:Model\-Predictive\-Controller$<$ Normal\-Step\-Functional\-Definition, Tangential\-Step\-Functional\-Definition, Forward\-Functional\-Definition $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1ModelPredictiveController}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-Model\-Predictive\-Controller$<$ Normal\-Step\-Functional\-Definition, Tangential\-Step\-Functional\-Definition, Forward\-Functional\-Definition $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-Model\-Predictive\-Controller$<$ Normal\-Step\-Functional\-Definition, Tangential\-Step\-Functional\-Definition, Forward\-Functional\-Definition $>$}}
+}
+
+
+Model Predictive controller for optimal control problems using composite step solver as inner solver solves optimal control problem, implements part of the control and solves forward problem to simulate a real world application.  
+
+
+
+
+{\ttfamily \#include $<$Model\-Predictive\-Controller.\-hh$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group__KaskadeParabolicGroup_gab8c662bd21758959d061a447fb8d12b7}{using \hyperlink{group__KaskadeParabolicGroup_gab8c662bd21758959d061a447fb8d12b7}{Descriptions} = typename Normal\-Step\-Functional\-Definition\-::\-Ansatz\-Vars}\label{group__KaskadeParabolicGroup_gab8c662bd21758959d061a447fb8d12b7}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variable\-Set\-Description of y,u and p \end{DoxyCompactList}\item 
+\hypertarget{group__KaskadeParabolicGroup_ga8a6dce9eedafe41b5af13469a559bc9f}{using {\bfseries Spaces} = typename Descriptions\-::\-Spaces}\label{group__KaskadeParabolicGroup_ga8a6dce9eedafe41b5af13469a559bc9f}
+
+\item 
+\hypertarget{group__KaskadeParabolicGroup_ga519b63b936eff2a895d9160ac95f3348}{using {\bfseries T\-F\-Generator} = std\-::function$<$ Tangential\-Step\-Functional\-Definition(const typename Descriptions\-::\-Variable\-Set)$>$}\label{group__KaskadeParabolicGroup_ga519b63b936eff2a895d9160ac95f3348}
+
+\item 
+\hypertarget{group__KaskadeParabolicGroup_gaed4e57800f1a773e33b8073e8991975d}{using {\bfseries N\-F\-Generator} = std\-::function$<$ Normal\-Step\-Functional\-Definition(const typename Descriptions\-::\-Variable\-Set)$>$}\label{group__KaskadeParabolicGroup_gaed4e57800f1a773e33b8073e8991975d}
+
+\item 
+\hypertarget{group__KaskadeParabolicGroup_ga040dd0e071b5500d2c4a49be5147cdc3}{using \hyperlink{group__KaskadeParabolicGroup_ga040dd0e071b5500d2c4a49be5147cdc3}{Descriptions\-U} = \-::Spacy\-::\-Kaskade\-Parabolic\-::\-Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{group__KaskadeParabolicGroup_gab8c662bd21758959d061a447fb8d12b7}{Descriptions}, 1 $>$}\label{group__KaskadeParabolicGroup_ga040dd0e071b5500d2c4a49be5147cdc3}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variable\-Set\-Description of control u \end{DoxyCompactList}\item 
+\hypertarget{group__KaskadeParabolicGroup_ga15c2ea1e40830aa86fe931710ec1c050}{using {\bfseries F\-F\-Generator} = std\-::function$<$ Forward\-Functional\-Definition(const typename Descriptions\-U\-::\-Variable\-Set)$>$}\label{group__KaskadeParabolicGroup_ga15c2ea1e40830aa86fe931710ec1c050}
+
+\item 
+\hypertarget{group__KaskadeParabolicGroup_ga68cff5860ecaab2ac4f6ea66c76ecb2c}{using \hyperlink{group__KaskadeParabolicGroup_ga68cff5860ecaab2ac4f6ea66c76ecb2c}{Descriptions\-Y} = \-::Spacy\-::\-Kaskade\-Parabolic\-::\-Detail\-::\-Extract\-Description\-\_\-t$<$ \hyperlink{group__KaskadeParabolicGroup_gab8c662bd21758959d061a447fb8d12b7}{Descriptions}, 0 $>$}\label{group__KaskadeParabolicGroup_ga68cff5860ecaab2ac4f6ea66c76ecb2c}
+
+\begin{DoxyCompactList}\small\item\em Kaskade\-::\-Variable\-Set\-Description of state y \end{DoxyCompactList}\item 
+\hypertarget{group__KaskadeParabolicGroup_gaf8c5e30f599791c3a9df7ca678260162}{using {\bfseries Coefficient\-Vector\-Y} = typename Descriptions\-Y\-::template Coefficient\-Vector\-Representation$<$$>$\-::type}\label{group__KaskadeParabolicGroup_gaf8c5e30f599791c3a9df7ca678260162}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group__KaskadeParabolicGroup_gaf64fe59c15ac16711e93f3d354b14d7d}{\hyperlink{group__KaskadeParabolicGroup_gaf64fe59c15ac16711e93f3d354b14d7d}{Model\-Predictive\-Controller} ()=delete}\label{group__KaskadeParabolicGroup_gaf64fe59c15ac16711e93f3d354b14d7d}
+
+\begin{DoxyCompactList}\small\item\em We do not allow default generation. \end{DoxyCompactList}\item 
+\hyperlink{group__KaskadeParabolicGroup_ga94abd500e2d7bb0711e2bd2997ac3b0c}{Model\-Predictive\-Controller} (N\-F\-Generator \&normal\-Func\-Generator, T\-F\-Generator \&tangential\-Func\-Generator, F\-F\-Generator \&forward\-Func\-Generator,\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} t\-\_\-end, unsigned N, unsigned M\-P\-C\-\_\-\-Steps,\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} tau, unsigned N\-\_\-tau\-\_\-, std\-::string gridtype=\char`\"{}uniform\char`\"{},\-::Spacy\-::\-Real expfactor=\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real}\{-\/0.\-345\})
+\begin{DoxyCompactList}\small\item\em Construct a M\-P\-C-\/ controller. \end{DoxyCompactList}\item 
+void \hyperlink{group__KaskadeParabolicGroup_ga5ec38126a42c548b1d08f0d96708bbbd}{M\-P\-Cloop} ()
+\begin{DoxyCompactList}\small\item\em Perform an M\-P\-C Feedback loop. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{group__KaskadeParabolicGroup_ga1a532fdeab463607601829afd5091a11}{solve\-Forward\-Problem} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&u)
+\begin{DoxyCompactList}\small\item\em Solve Forward problem for given source/control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Normal\-Step\-Functional\-Definition, class Tangential\-Step\-Functional\-Definition, class Forward\-Functional\-Definition$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-Model\-Predictive\-Controller$<$ Normal\-Step\-Functional\-Definition, Tangential\-Step\-Functional\-Definition, Forward\-Functional\-Definition $>$}
+
+Model Predictive controller for optimal control problems using composite step solver as inner solver solves optimal control problem, implements part of the control and solves forward problem to simulate a real world application. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/Model\-Predictive\-Controller.\-hh\end{DoxyCompactItemize}

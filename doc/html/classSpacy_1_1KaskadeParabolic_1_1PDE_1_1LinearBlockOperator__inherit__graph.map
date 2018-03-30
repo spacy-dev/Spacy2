@@ -1,0 +1,5 @@
+<map id="Spacy::KaskadeParabolic::PDE::LinearBlockOperator&lt; AnsatzVariableSetDescription, TestVariableSetDescription &gt;" name="Spacy::KaskadeParabolic::PDE::LinearBlockOperator&lt; AnsatzVariableSetDescription, TestVariableSetDescription &gt;">
+<area shape="rect" id="node2" href="$classSpacy_1_1OperatorBase.html" title="Base class for operators , between function spaces &#160;and . " alt="" coords="81,5,228,32"/>
+<area shape="rect" id="node3" href="$classSpacy_1_1VectorBase.html" title="Base class for vector implementations. " alt="" coords="87,56,222,83"/>
+<area shape="rect" id="node4" href="$classSpacy_1_1AddArithmeticOperators.html" title="Spacy::AddArithmeticOperators\l\&lt; LinearBlockOperator\&lt; AnsatzVariable\lSetDescription, TestVariableSetDescription \&gt; \&gt;" alt="" coords="5,107,304,163"/>
+</map>

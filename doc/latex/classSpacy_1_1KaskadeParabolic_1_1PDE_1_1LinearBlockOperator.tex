@@ -1,0 +1,330 @@
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{\section{Spacy\-:\-:Kaskade\-Parabolic\-:\-:P\-D\-E\-:\-:Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ Class Template Reference}
+\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$}}
+}
+
+
+Linear block operator for operators of parabolic P\-D\-Es in Kaskade 7.  
+
+
+
+
+{\ttfamily \#include $<$linear\-Block\-Operator.\-hh$>$}
+
+
+
+Inheritance diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:P\-D\-E\-:\-:Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Spacy\-:\-:Kaskade\-Parabolic\-:\-:P\-D\-E\-:\-:Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a056409a87a1ff0ab0f66ca23f4d9e843}{Linear\-Block\-Operator} (std\-::vector$<$ Kaskade\-Operator $>$ Mass\-Y, std\-::vector$<$ Kaskade\-Operator $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a69d4967d9041ca82f4cd50a40e9ce191}{A}, const std\-::vector$<$ \hyperlink{classSpacy_1_1Real}{Real} $>$ dt\-Vec, const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \&spaces\-Vec, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space})
+\begin{DoxyCompactList}\small\item\em Construct linear operator for Kaskade 7. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a965f0e0e5c64267db219bcd9c6d13988}{Linear\-Block\-Operator} (std\-::vector$<$ Kaskade\-Operator $>$ Mass\-Y, std\-::vector$<$ Kaskade\-Operator $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a69d4967d9041ca82f4cd50a40e9ce191}{A}, const std\-::vector$<$ \hyperlink{classSpacy_1_1Real}{Real} $>$ dt\-Vec, const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \&spaces\-Vec, const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \&\hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space}, std\-::function$<$ \hyperlink{namespaceSpacy_adcd0d78166a9c972b8a2e5a689fc2d03}{Linear\-Solver}(const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator} \&)$>$ solver\-Creator)
+\begin{DoxyCompactList}\small\item\em Construct linear operator for Kaskade 7. \end{DoxyCompactList}\item 
+\-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a17798ab614892c1bbb922468896b9736}{operator()} (const \-::\hyperlink{classSpacy_1_1Vector}{Spacy\-::\-Vector} \&x) const 
+\begin{DoxyCompactList}\small\item\em Compute $A(x)$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a19c28ac28635e98f2e24a74f115f5825}{\-::\hyperlink{classSpacy_1_1Real}{Spacy\-::\-Real} {\bfseries operator()} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator} \&) const }\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a19c28ac28635e98f2e24a74f115f5825}
+
+\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8cf86232d5d2de2b254b789b20ac453d}{auto \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8cf86232d5d2de2b254b789b20ac453d}{solver} () const }\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8cf86232d5d2de2b254b789b20ac453d}
+
+\begin{DoxyCompactList}\small\item\em Access solver representing $A^{-1}$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a7655a88f7c4b3fb4babf781ea3f7447b}{auto \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a7655a88f7c4b3fb4babf781ea3f7447b}{get} ()}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a7655a88f7c4b3fb4babf781ea3f7447b}
+
+\begin{DoxyCompactList}\small\item\em needed for interface, returns nonsense \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a6f9031bc81d13511847c6d8062aa164e}{const auto \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a6f9031bc81d13511847c6d8062aa164e}{get} () const }\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a6f9031bc81d13511847c6d8062aa164e}
+
+\begin{DoxyCompactList}\small\item\em needed for interface, returns nonsense \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a69d4967d9041ca82f4cd50a40e9ce191}{const auto \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a69d4967d9041ca82f4cd50a40e9ce191}{A} () const }\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a69d4967d9041ca82f4cd50a40e9ce191}
+
+\begin{DoxyCompactList}\small\item\em needed for interface, returns nonsense \end{DoxyCompactList}\item 
+const auto \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8f199319fcd1e08b7598bd2f40b6ca76}{get\-Kask\-Op} (std\-::string type, int time\-Step) const 
+\begin{DoxyCompactList}\small\item\em getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} \hyperlink{classSpacy_1_1Operator}{Operator} of a timestep \end{DoxyCompactList}\item 
+const std\-::vector\\*
+$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \& \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a2603f76f51bdb94600edb9765084c5e2}{get\-Spaces\-Vec} () const 
+\begin{DoxyCompactList}\small\item\em getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces \end{DoxyCompactList}\item 
+const std\-::vector$<$ \hyperlink{classSpacy_1_1Real}{Real} $>$ \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a75d78988049d61be45f1a0f993a4d52a}{get\-Dt\-Vec} () const 
+\begin{DoxyCompactList}\small\item\em getter for temporal timesteps \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}{domain} () const }\label{classSpacy_1_1OperatorBase_a2588f9b3e0188820c4c494e63293dc6f}
+
+\begin{DoxyCompactList}\small\item\em Access domain space $X$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}{range} () const }\label{classSpacy_1_1OperatorBase_ab19d3b7a6f290b1079248f1e567e53d6}
+
+\begin{DoxyCompactList}\small\item\em Access range space $Y$. \end{DoxyCompactList}\item 
+\hypertarget{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{const \hyperlink{classSpacy_1_1VectorSpace}{Vector\-Space} \& \hyperlink{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}{space} () const }\label{classSpacy_1_1VectorBase_aa999dbf9d679d895dfe04c10fbf9f5e9}
+
+\begin{DoxyCompactList}\small\item\em Access underlying vector space. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}\\*
+$<$ Ansatz\-Variable\-Set\-Description, \\*
+Test\-Variable\-Set\-Description $>$ \& \hyperlink{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}{operator+=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \&y)
+\begin{DoxyCompactList}\small\item\em In-\/place summation $ x+=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}\\*
+$<$ Ansatz\-Variable\-Set\-Description, \\*
+Test\-Variable\-Set\-Description $>$ \& \hyperlink{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}{operator-\/=} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \&y)
+\begin{DoxyCompactList}\small\item\em In-\/place subtraction $ x-=y$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}\\*
+$<$ Ansatz\-Variable\-Set\-Description, \\*
+Test\-Variable\-Set\-Description $>$ \& \hyperlink{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}{operator$\ast$=} (double a)
+\begin{DoxyCompactList}\small\item\em In-\/place multiplication $ x*=a$. \end{DoxyCompactList}\item 
+\hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}\\*
+$<$ Ansatz\-Variable\-Set\-Description, \\*
+Test\-Variable\-Set\-Description $>$ \hyperlink{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}{operator-\/} () const
+\begin{DoxyCompactList}\small\item\em Negation $ -x$. \end{DoxyCompactList}\item 
+bool \hyperlink{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}{operator==} (const \hyperlink{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator}{Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \&y) const
+\begin{DoxyCompactList}\small\item\em Comparison operator $ x==y$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$class Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$}
+
+Linear block operator for operators of parabolic P\-D\-Es in Kaskade 7. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Ansatz\-Variable\-Set\-Description} & Kaskade\-::\-Variable\-Set\-Description for ansatz variables \\
+\hline
+{\em Test\-Variable\-Set\-Description} & Kaskade\-::\-Variable\-Set\-Description for test variables \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classSpacy_1_1LinearOperator}{Spacy\-::\-Linear\-Operator} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a056409a87a1ff0ab0f66ca23f4d9e843}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!Linear\-Block\-Operator@{Linear\-Block\-Operator}}
+\index{Linear\-Block\-Operator@{Linear\-Block\-Operator}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{Linear\-Block\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::{\bf Linear\-Block\-Operator} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Kaskade\-Operator $>$}]{Mass\-Y, }
+\item[{std\-::vector$<$ Kaskade\-Operator $>$}]{A, }
+\item[{const std\-::vector$<$ {\bf Real} $>$}]{dt\-Vec, }
+\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \&}]{spaces\-Vec, }
+\item[{const {\bf Vector\-Space} \&}]{space}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a056409a87a1ff0ab0f66ca23f4d9e843}
+
+
+Construct linear operator for Kaskade 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mass\-Y} & Mass matrices for each timestep \\
+\hline
+{\em A} & stiffness matrices for each timestep \\
+\hline
+{\em dt\-Vec} & timesteps \\
+\hline
+{\em spaces\-Vec} & \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Space for each timestep \\
+\hline
+{\em space} & Operator\-Space of this linear \hyperlink{classSpacy_1_1Operator}{Operator} \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a965f0e0e5c64267db219bcd9c6d13988}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!Linear\-Block\-Operator@{Linear\-Block\-Operator}}
+\index{Linear\-Block\-Operator@{Linear\-Block\-Operator}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{Linear\-Block\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::{\bf Linear\-Block\-Operator} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Kaskade\-Operator $>$}]{Mass\-Y, }
+\item[{std\-::vector$<$ Kaskade\-Operator $>$}]{A, }
+\item[{const std\-::vector$<$ {\bf Real} $>$}]{dt\-Vec, }
+\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Spaces $>$ $>$ \&}]{spaces\-Vec, }
+\item[{const {\bf Vector\-Space} \&}]{space, }
+\item[{std\-::function$<$ {\bf Linear\-Solver}(const {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \&)$>$}]{solver\-Creator}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a965f0e0e5c64267db219bcd9c6d13988}
+
+
+Construct linear operator for Kaskade 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mass\-Y} & Mass matrices for each timestep \\
+\hline
+{\em A} & stiffness matrices for each timestep \\
+\hline
+{\em dt\-Vec} & timesteps \\
+\hline
+{\em spaces\-Vec} & \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Space for each timestep \\
+\hline
+{\em space} & Operator\-Space of this linear \hyperlink{classSpacy_1_1Operator}{Operator} \\
+\hline
+{\em solver\-Creator} & Function for generation of a solver for this operator \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a17798ab614892c1bbb922468896b9736}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator()@{operator()}}
+\index{operator()@{operator()}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ \-::{\bf Spacy\-::\-Vector} {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::operator() (
+\begin{DoxyParamCaption}
+\item[{const \-::{\bf Spacy\-::\-Vector} \&}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a17798ab614892c1bbb922468896b9736}
+
+
+Compute $A(x)$. 
+
+Coeff Vec for argument
+
+Coeff Vec for output \hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8f199319fcd1e08b7598bd2f40b6ca76}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!get\-Kask\-Op@{get\-Kask\-Op}}
+\index{get\-Kask\-Op@{get\-Kask\-Op}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{get\-Kask\-Op}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ const auto {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::get\-Kask\-Op (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{type, }
+\item[{int}]{time\-Step}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a8f199319fcd1e08b7598bd2f40b6ca76}
+
+
+getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} \hyperlink{classSpacy_1_1Operator}{Operator} of a timestep 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & \hyperlink{classSpacy_1_1Operator}{Operator} requested (mass or stiffness) \\
+\hline
+{\em time\-Step} & at which timestep \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} \hyperlink{classSpacy_1_1Operator}{Operator} 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a2603f76f51bdb94600edb9765084c5e2}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!get\-Spaces\-Vec@{get\-Spaces\-Vec}}
+\index{get\-Spaces\-Vec@{get\-Spaces\-Vec}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{get\-Spaces\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ const std\-::vector$<$std\-::shared\-\_\-ptr$<$Spaces$>$ $>$\& {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::get\-Spaces\-Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a2603f76f51bdb94600edb9765084c5e2}
+
+
+getter for \hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceSpacy_1_1Kaskade}{Kaskade} Spaces for each timestep 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a75d78988049d61be45f1a0f993a4d52a}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!get\-Dt\-Vec@{get\-Dt\-Vec}}
+\index{get\-Dt\-Vec@{get\-Dt\-Vec}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{get\-Dt\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ansatz\-Variable\-Set\-Description, class Test\-Variable\-Set\-Description$>$ const std\-::vector$<${\bf Real}$>$ {\bf Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$\-::get\-Dt\-Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSpacy_1_1KaskadeParabolic_1_1PDE_1_1LinearBlockOperator_a75d78988049d61be45f1a0f993a4d52a}
+
+
+getter for temporal timesteps 
+
+\begin{DoxyReturn}{Returns}
+timestep sizes 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \& {\bf Spacy\-::\-Add\-Arithmetic\-Operators}$<$ {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  $>$\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{const Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}}\label{classSpacy_1_1AddArithmeticOperators_afad1d01e1e8c6f75290ac46d9b047ea8}
+
+
+In-\/place summation $ x+=y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to add to this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x+=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \& {\bf Spacy\-::\-Add\-Arithmetic\-Operators}$<$ {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  $>$\-::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  \&}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}}\label{classSpacy_1_1AddArithmeticOperators_a9fa91e177d13203cfe8cfa991c64ca36}
+
+
+In-\/place subtraction $ x-=y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to subtract from this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x-=y$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$ \& {\bf Spacy\-::\-Add\-Arithmetic\-Operators}$<$ {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  $>$\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{double}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}}\label{classSpacy_1_1AddArithmeticOperators_a1d3db95b24fd2bc1de712c9e04c47e2f}
+
+
+In-\/place multiplication $ x*=a$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & scaling factor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x*=a$. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  {\bf Spacy\-::\-Add\-Arithmetic\-Operators}$<$ {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  $>$\-::operator-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}}\label{classSpacy_1_1AddArithmeticOperators_a5acd030bf265d130983fd6e3c5b68be5}
+
+
+Negation $ -x$. 
+
+\begin{DoxyReturn}{Returns}
+$ -x $. 
+\end{DoxyReturn}
+\hypertarget{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}{\index{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}!operator==@{operator==}}
+\index{operator==@{operator==}!Spacy::KaskadeParabolic::PDE::LinearBlockOperator@{Spacy\-::\-Kaskade\-Parabolic\-::\-P\-D\-E\-::\-Linear\-Block\-Operator}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Spacy\-::\-Add\-Arithmetic\-Operators}$<$ {\bf Linear\-Block\-Operator}$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  $>$\-::operator== (
+\begin{DoxyParamCaption}
+\item[{const Linear\-Block\-Operator$<$ Ansatz\-Variable\-Set\-Description, Test\-Variable\-Set\-Description $>$  \&}]{y}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}}\label{classSpacy_1_1AddArithmeticOperators_a5ff1909f49f4a705d69663dc2d4b6316}
+
+
+Comparison operator $ x==y$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & vector to compare with this vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$ x==y$. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/spacy-\/dev/\-Spacy/\-Spacy/\-Adapter/\-Kaskade\-Parabolic/linear\-Block\-Operator.\-hh\end{DoxyCompactItemize}

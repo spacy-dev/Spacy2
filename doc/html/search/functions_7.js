@@ -6,6 +6,7 @@ var searchData=
   ['indefiniteoperator',['indefiniteOperator',['../classSpacy_1_1CG_1_1Solver.html#ae0b6c7b754e093610df6d67bf3067acf',1,'Spacy::CG::Solver']]],
   ['index',['index',['../classSpacy_1_1VectorSpace.html#a4cc04c09af8d01608c2fe2e29028c26b',1,'Spacy::VectorSpace']]],
   ['inducedscalarproduct',['InducedScalarProduct',['../classSpacy_1_1InducedScalarProduct.html#a8cf4d6c0823b6c9d59be783d3627130e',1,'Spacy::InducedScalarProduct']]],
+  ['informaboutrefinement',['informAboutRefinement',['../classSpacy_1_1KaskadeParabolic_1_1C1Operator.html#aa46e91614226bbdef768798f4f61a140',1,'Spacy::KaskadeParabolic::C1Operator::informAboutRefinement()'],['../classSpacy_1_1KaskadeParabolic_1_1C2Functional.html#af8b910a58475a708c88447b08c37b255',1,'Spacy::KaskadeParabolic::C2Functional::informAboutRefinement()']]],
   ['init',['init',['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1CG_1_1Regularization.html#a0a92edab4bf50bd27bc549311c736cd5',1,'Spacy::CG::Regularization::init()'],['../classSpacy_1_1CG_1_1RegularizeViaPreconditioner.html#a0d8a2213b04104a9fc526413b554f3d5',1,'Spacy::CG::RegularizeViaPreconditioner::init()']]],
   ['invalidargument',['InvalidArgument',['../classSpacy_1_1Exception_1_1InvalidArgument.html#ae82799e1978a37928a446d1f316d071b',1,'Spacy::Exception::InvalidArgument']]],
   ['inversedofmap',['inverseDofmap',['../classSpacy_1_1FEniCS_1_1VectorCreator.html#a8e369dcbb722462ee0bca008eae6b2f3',1,'Spacy::FEniCS::VectorCreator']]],
